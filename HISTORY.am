@@ -4,6 +4,25 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2005-03-30: 0.97-am2c
+- fixed handling of new recordings if VDR is patched with Wareagle-Icons patch (Reported at vdrportal.de).
+
+2005-03-29:
+- fixed handling of MTWTFSS@date in timer (edit & list).
+
+2005-03-26:
+- fixed forgotten items with "vdradmin-0.96_For_vdr-1.3_StoreAutotimerChannelID_And_EventIdCheckDisable.diff".
+
+2005-03-25:
+- fixed directory handling in auto_timer:
+  -> if a "%" (variable) is found you are fully responsible for the final recording's title, e.g. you must add %Title% if you want it (other vars: %Title%, %Subtitle%, %Director%, %Date%, %Category%, %Genre%, %Year%, %Country%, %Originaltitle%, %FSK%, %Episode% and %Rating%)
+  -> all "/" will be replaced by "~" (before variable substitution)
+- Automatic programmed timers have their summary hyperlink back. (Reported by sn123py)
+- Handle "VPS" in timer listing.
+
+2005-03-23:
+- fixed French translation.
+
 2005-03-23: 0.97-am2b
 - added French template (Submitted by Trois Six)
 - fixed English/i18n.pl

@@ -97,7 +97,7 @@ $CONFIG{EPG_DIRECT}       = 1;
 $CONFIG{EPG_FILENAME}     = "/video/epg.data";
 $CONFIG{SKIN}             = 'bilder';
 
-my $VERSION               = "0.97-am2b";
+my $VERSION               = "0.97-am2c";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $VIDEODIR              = "/video";
 my $DONE                  = &DONE_Read || {};
@@ -504,7 +504,7 @@ sub get_vdrid_from_channelid {
 		for my $channel (@CHAN) {
 			if($channel->{source} eq $1 &&
 			   $channel->{nid} == $2 &&
-			   ($channel->{nid} ? $channel->{tid} : $channel->{frequency}) == $3 &&
+			   ($channel->{nid} || $channel->{tid} ? $channel->{tid} : $channel->{frequency}) == $3 &&
 			   $channel->{service_id} == $4) {
 				return($channel->{vdr_id});
 			}
@@ -1063,7 +1063,6 @@ sub AutoTimer {
 
           # Escape special characters within the search pattern
           my $atpattern = $at->{pattern};
-          #$atpattern =~ s/([\+\?\.\*\^\$\(\)\[\]\{\}\|\\])/\\\1/g;
           $atpattern =~ s/([\+\?\.\*\^\$\(\)\[\]\{\}\|\\])/\\$1/g;
 
           Log(LOG_DEBUG, sprintf("Auto Timer: Escaped pattern: \"%s\"", $atpattern));
@@ -1086,77 +1085,74 @@ sub AutoTimer {
           next if(!$fp);
         }
 
-        Log(LOG_DEBUG, sprintf("Auto Timer: Comparing pattern \"%s\" (%s - %s) with event \"%s\" (%s - %s)",
-	    $at->{pattern}, $at->{start}, $at->{stop},
-	    $event->{title}, my_strftime("%H%M", $event->{start}), my_strftime("%H%M", $event->{stop})));
+        Log(LOG_DEBUG, sprintf("Auto Timer: Comparing pattern \"%s\" (%s - %s) with event \"%s\" (%s - %s)", $at->{pattern}, $at->{start}, $at->{stop}, $event->{title}, my_strftime("%H%M", $event->{start}), my_strftime("%H%M", $event->{stop})));
         # Do we have a time slot?
-        if($at->{start}) {
-	  # We have a start time and possibly a stop time for the auto timer
+        if($at->{start}) { # We have a start time and possibly a stop time for the auto timer
           # Do we have Midnight between AT start and stop time?
           if(($at->{stop}) && ($at->{stop} < $at->{start})) {
             # The AT includes Midnight
-	    Log(LOG_DEBUG, "922: AT includes Midnight");
+	    			Log(LOG_DEBUG, "922: AT includes Midnight");
             # Do we have Midnight between Event start and stop?
-	    if(my_strftime("%H%M", $event->{stop}) < my_strftime("%H%M", $event->{start})) {
-	      # The event includes Midnight
-	      Log(LOG_DEBUG, "926: Event includes Midnight");
+						if(my_strftime("%H%M", $event->{stop}) < my_strftime("%H%M", $event->{start})) {
+							# The event includes Midnight
+							Log(LOG_DEBUG, "926: Event includes Midnight");
               if(my_strftime("%H%M", $event->{start}) < $at->{start}) {
-	        Log(LOG_DEBUG, "924: Event starts before AT start");
+								Log(LOG_DEBUG, "924: Event starts before AT start");
                 next;
               }
               if(my_strftime("%H%M", $event->{stop}) > $at->{stop}) {
-	        Log(LOG_DEBUG, "932: Event ends after AT stop");
+	        			Log(LOG_DEBUG, "932: Event ends after AT stop");
                 next;
               }
-	    } else {
-	      # Normal event not spreading over Midnight
-	      Log(LOG_DEBUG, "937: Event does not includes Midnight");
+	    			} else {
+	      			# Normal event not spreading over Midnight
+	      			Log(LOG_DEBUG, "937: Event does not includes Midnight");
               if(my_strftime("%H%M", $event->{start}) < $at->{start}) {
                 if(my_strftime("%H%M", $event->{start}) > $at->{stop}) {
-		  # The event starts before AT start and after AT stop
-	          Log(LOG_DEBUG, "941: Event starts before AT start and after AT stop");
+		  						# The event starts before AT start and after AT stop
+	          			Log(LOG_DEBUG, "941: Event starts before AT start and after AT stop");
                   next;
-		}
+								}
                 if(my_strftime("%H%M", $event->{stop}) > $at->{stop}) {
-		  # The event ends after AT stop
-	          Log(LOG_DEBUG, "946: Event ends after AT stop");
+		  						# The event ends after AT stop
+	          			Log(LOG_DEBUG, "946: Event ends after AT stop");
                   next;
-		}
+								}
               }
-	    }
+	    			}
           } else {
             # Normal auto timer, not spreading over midnight
-	    Log(LOG_DEBUG, "953: AT does not include Midnight");
-	    # Is the event spreading over midnight?
-	    if(my_strftime("%H%M", $event->{stop}) < my_strftime("%H%M", $event->{start})) {
-	      # Event spreads midnight
+	    			Log(LOG_DEBUG, "953: AT does not include Midnight");
+	    			# Is the event spreading over midnight?
+	    			if(my_strftime("%H%M", $event->{stop}) < my_strftime("%H%M", $event->{start})) {
+	      			# Event spreads midnight
               if($at->{stop}) {
-	        # We have a AT stop time defined before midnight -- no match
-	        Log(LOG_DEBUG, "959: Event includes Midnight, Autotimer not");
+	        			# We have a AT stop time defined before midnight -- no match
+	        			Log(LOG_DEBUG, "959: Event includes Midnight, Autotimer not");
                 next;
               }
-	    } else {
-	      # We have a normal event, nothing special
+	    			} else {
+	      			# We have a normal event, nothing special
               # Event must not start before AT start
               if(my_strftime("%H%M", $event->{start}) < $at->{start}) {
-	        Log(LOG_DEBUG, "963: Event starts before AT start");
+	       				Log(LOG_DEBUG, "963: Event starts before AT start");
                 next;
-	      }
+	      			}
               # Event must not end after AT stop
               if(($at->{stop}) && (my_strftime("%H%M", $event->{stop}) > $at->{stop})) {
-	        Log(LOG_DEBUG, "968: Event ends after AT stop");
+	        			Log(LOG_DEBUG, "968: Event ends after AT stop");
                 next;
-	      }
+	      			}
             }
           }
         } else {
           # We have no AT start time
           if($at->{stop}) {
             if(my_strftime("%H%M", $event->{stop}) > $at->{stop}) {
-	      Log(LOG_DEBUG, "977: Only AT stop time, Event stops after AT stop");
+	      			Log(LOG_DEBUG, "977: Only AT stop time, Event stops after AT stop");
               next;
             }
-	  }
+	  			}
         }
 
         Log(LOG_AT, sprintf("Auto Timer: Found \"%s\"", $at->{pattern}));
@@ -1166,10 +1162,15 @@ sub AutoTimer {
 #########################################################################################		
 
 	my $title = $event->{title};
+	my $directory = $at->{directory};
 	my %at_details;
 
-	if($at->{directory}) {
-		$title = $at->{directory};
+	if($directory) {
+		$directory =~ s#/#~#g;
+	}
+
+	if($directory && $directory =~ /%/) {
+		$title = $directory;
 		$at_details{'title'}		= $event->{title};
 		$at_details{'subtitle'}		= $event->{subtitle} ? $event->{subtitle} : my_strftime("%Y-%m-%d", $event->{start});
 		$at_details{'date'}		= my_strftime("%Y-%m-%d", $event->{start});
@@ -1183,8 +1184,12 @@ sub AutoTimer {
 		$at_details{'episode'}		= $1 if $event->{summary} =~ m/\|Episode: (.*?)\|/;
 		$at_details{'rating'}		= $1 if $event->{summary} =~ m/\|Rating: (.*?)\|/;
 		$title =~ s/%([\w_-]+)%/$at_details{lc($1)}/sieg;
+#		$title .= "~" . $event->{title};
 	} else {
 		$title = $event->{title};
+		if($directory) {
+			$title = $directory . "~" . $title;
+		}
 		if(($at->{episode}) && ($event->{subtitle})) {
 			$title .= "~" . $event->{subtitle};
 		}
@@ -1192,10 +1197,11 @@ sub AutoTimer {
 
 
 	# gemaess vdr.5 alle : durch | ersetzen.
-	$title =~s#:#|#g;
+	$title =~ s#:#|#g;
 
 	# sind irgendweche Tags verwendet worden, die leer waren und die doppelte Verzeichnisse erzeugten?
-	$title =~s#~+#~#g;
+	$title =~ s#~+#~#g;
+	$title =~ s#^~##;
 
 #########################################################################################		
 # 20050130: patch by macfly: parse extended EPG information provided by tvm2vdr.pl
@@ -1203,16 +1209,15 @@ sub AutoTimer {
 
         Log(LOG_AT, sprintf("AutoTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
 
-        AT_ProgTimer(0x0001, $event->{event_id}, $event->{vdr_id}, $event->{start}, $event->{stop},
+        AT_ProgTimer(0x8001, $event->{event_id}, $event->{vdr_id}, $event->{start}, $event->{stop},
           $title, $event->{summary}, $at->{prio}, $at->{lft});
 
-	if ($at->{active} == 2) {
-	  Log(LOG_AT, sprintf("AutoTimer: Disabling one-shot Timer"));
-	  $at->{active} = 0;
-	  $oneshots = 1;
-	}
-        $DONE->{$DoneStr} = $event->{stop}
-          if($at->{done});
+				if ($at->{active} == 2) {
+	  			Log(LOG_AT, sprintf("AutoTimer: Disabling one-shot Timer"));
+	  			$at->{active} = 0;
+	  			$oneshots = 1;
+				}
+        $DONE->{$DoneStr} = $event->{stop} if($at->{done});
       }
     }
   }
@@ -1450,12 +1455,10 @@ sub ParseTimer {
     $active = 1 if($active == 3);
 
     if(length($dor) == 7) { # repeating timer
-      $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2),
-				my_strftime("%d"), (my_strftime("%m") - 1), my_strftime("%Y"));
-      $stopsse  = my_mktime(substr($stop, 2, 2), substr($stop, 0, 2),
-				my_strftime("%d"), (my_strftime("%m") - 1), my_strftime("%Y"));
+      $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), my_strftime("%d"), (my_strftime("%m") - 1), my_strftime("%Y"));
+      $stopsse  = my_mktime(substr($stop, 2, 2), substr($stop, 0, 2), my_strftime("%d"), (my_strftime("%m") - 1), my_strftime("%Y"));
       if($stopsse < $startsse)  {
-        $stopsse += 86400;
+        $stopsse += 86400;	# +1day
       }
       $weekday = ((localtime(time))[6] + 6) % 7;
       $perrec = join("", substr($dor, $weekday), substr($dor, 0, $weekday));
@@ -1472,12 +1475,9 @@ sub ParseTimer {
       $stopsse += $off;
     } elsif(length($dor) == 18) { # first-day timer
       $dor =~ /.{7}\@(\d\d\d\d)-(\d\d)-(\d\d)/;
-      $startsse = my_mktime(substr($start, 2, 2),
-				substr($start, 0, 2), $3, ($2 - 1), $1);
+      $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), $3, ($2 - 1), $1);
 			# 31 + 1 = ??
-      $stopsse = my_mktime(substr($stop, 2, 2),
-        substr($stop, 0, 2), $stop > $start ? $3 : $3 + 1,
-        ($2 - 1), $1);
+      $stopsse = my_mktime(substr($stop, 2, 2), substr($stop, 0, 2), $stop > $start ? $3 : $3 + 1, ($2 - 1), $1);
     } else { # regular timer
       if ($dor =~ /(\d\d\d\d)-(\d\d)-(\d\d)/) { # vdr >= 1.3.23
         $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), $3, ($2 - 1), $1);
@@ -1495,7 +1495,7 @@ sub ParseTimer {
       }
     }
 
-    if($CONFIG{RECORDINGS} && length($dor) == 7)  { # repeating timer
+    if($CONFIG{RECORDINGS} && (length($dor) == 7 || length($dor) == 18))  { # repeating timer
       # generate repeating timer entries for up to 28 days
       $first = 1;
       for($weekday += $off / 86400, $off = 0; $off < 28; $off++)  {
@@ -2236,8 +2236,6 @@ sub timer_list {
 		if($timer->{active} & 1) {
 		  if($timer->{active} & 0x8000) {
 		    $timer->{active} = 0x8001;
-		  } else {
-		    $timer->{active} = 1;
 		  }
 		} else {
 		  $timer->{active} = 0;
@@ -2501,7 +2499,7 @@ sub timer_new_form {
   my $this_event;
   if($epg_id) { # new timer
     my $this = EPG_getEntry($vdr_id, $epg_id);
-    $this_event->{active} = 0x0001;
+    $this_event->{active} = 0x8001;
     $this_event->{event_id} = $this->{event_id};
     $this_event->{start}  = $this->{start} - ($CONFIG{TM_MARGIN_BEGIN} * 60);
     $this_event->{stop}   = $this->{stop}  + ($CONFIG{TM_MARGIN_END}  * 60);
@@ -2550,7 +2548,7 @@ sub timer_new_form {
   
   my $displaysummary = $this_event->{summary};
   $displaysummary =~ s/\|/\n/g;
-
+  
   my $template = TemplateNew("timer_new.html");
   $template->param(
     url      => $MyURL,
@@ -2560,7 +2558,7 @@ sub timer_new_form {
     startm   => my_strftime("%M", $this_event->{start}),
     stoph    => $this_event->{stop} ? my_strftime("%H", $this_event->{stop}) : "00",
     stopm    => $this_event->{stop} ? my_strftime("%M", $this_event->{stop}) : "00",
-    dor      => (length($this_event->{dor}) == 7) ? $this_event->{dor} : my_strftime("%d", $this_event->{start}),
+    dor      => (length($this_event->{dor}) == 7 || length($this_event->{dor}) == 10 || length($this_event->{dor}) == 18) ? $this_event->{dor} : my_strftime("%d", $this_event->{start}),
     prio     => $this_event->{prio} ? $this_event->{prio} : $CONFIG{TM_PRIORITY},
     lft      => $this_event->{lft}  ? $this_event->{lft}  : $CONFIG{TM_LIFETIME},
     title    => $this_event->{title},
@@ -2623,7 +2621,7 @@ sub timer_add {
 			$data->{active} |= 0x8000;
 		}
 
-		if($q->param("dor") =~ /[0-9MTWTWFSS-]+/) {
+		if($q->param("dor") =~ /[0-9MTWTFSS@-]+/) {
 			$data->{dor} = $q->param("dor");
 		}
 		
@@ -2643,7 +2641,7 @@ sub timer_add {
 		}
 
     my $dor = $data->{dor};
-    if(length($data->{dor}) == 7) {
+    if(length($data->{dor}) == 7 || length($data->{dor}) == 18) {
       # dummy
       $dor = 1;
     }
@@ -3334,9 +3332,9 @@ sub rec_list {
     my($id, $date, $time, $name) = split(/ +/, $recording, 4);
 
     #
-    if(substr($time, 5, 1) eq "*") {
+    if(length($time) > 5) {
       $new = 1;
-      $time =~ s/\*//;
+			$time = substr($time, 0, 5);
     }
 
 	  #

@@ -8,6 +8,9 @@
 	<!--
       function cTimer(idx) {
         var Timer = "";
+        var dor = document.form.dor.value;
+        var StartDay = dor.indexOf('@') > 0 ? dor.substring(dor.indexOf('@')) : "";
+        alert(StartDay + " " + document.form.dor);
         Days = new Array("M", "D", "M", "D", "F", "S", "S");
         for(var i = 0; i <= 6; i++) {
           Status = eval("document.form.D" + i + ".checked");
@@ -16,12 +19,12 @@
           } else {
             Timer = Timer + "-";
           }
-          document.form.dor.value = Timer;
+          document.form.dor.value = Timer + StartDay;
         }
       }
       
       function eCheckbox(complTimer) {
-        if(complTimer.length == 7) {
+        if(complTimer.length == 7 || complTimer.length == 18) {
           for(var i = 0; i <= 6; i++) {
             if(complTimer.substring(i, i + 1) != "-") {
               eval("document.form.D" + i + ".click();");
