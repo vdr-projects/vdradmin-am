@@ -1,0 +1,66 @@
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+	<title>VDRAdmin - Rename Recording</title>
+	<link href="style.css" rel="stylesheet" media="screen">
+</head>
+
+<body bgcolor="#f0f0f0" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
+	<form action="<tmpl_var url>" method="get" name="form">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39">
+			<tr>
+				<td valign="middle" width="200" background="bilder/nav_button_back.gif"><p class="einzug_ohnetop"><b>Rename Recording</b></p></td>
+				<td align="right" width="550" background="bilder/nav_button_back_mitte.gif">&nbsp;</td>
+				<td align="right" width="203" background="bilder/nav_button_back_mitte.gif">&nbsp;</td>
+				<td width="15"><img src="bilder/nav_button_back_end.gif" width="15"></td>
+			</tr>
+		</table>
+		<br>    
+		<div align="left">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr height="30">
+					<td width="30" height="30" background="bilder/uebersicht_oben_links.gif">&nbsp;</td>
+					<td height="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
+					<td height="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
+					<td width="30" height="30" background="bilder/uebersicht_oben_rechts.gif">&nbsp;</td>
+				</tr>
+				<tr height="25">
+					<td width="30" height="15" background="bilder/uebersicht_links.gif">&nbsp;</td>
+					<td height="15" background="bilder/uebersicht_mitte.gif">&nbsp;</td>
+					<td height="15" background="bilder/uebersicht_mitte.gif">&nbsp;</td>
+					<td width="30" height="15" background="bilder/uebersicht_rechts.gif">&nbsp;</td>
+				</tr>
+				<tr height="25">
+					<td width="30" height="25" background="bilder/uebersicht_links.gif">&nbsp;</td>
+					<td width="20%" height="25" background="bilder/uebersicht_mitte.gif">Original Name of Recording</td>
+					<td height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="title" value="<tmpl_var title>" size="55" readonly></td>
+					<td width="30" height="25" background="bilder/uebersicht_rechts.gif">&nbsp;</td>
+				</tr>
+				<tr height="25">
+					<td width="30" height="25" background="bilder/uebersicht_links.gif">&nbsp;</td>
+					<td width="20%" height="25" background="bilder/uebersicht_mitte.gif">New Name of Recording</td>
+					<td height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="nn" value="<tmpl_var title>" size="55"></td>
+					<td width="30" height="25" background="bilder/uebersicht_rechts.gif">&nbsp;</td>
+				</tr>
+				<tr height="30">
+					<td width="30" height="30" background="bilder/uebersicht_unten_links.gif">&nbsp;</td>
+					<td height="30" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+					<td height="30" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+					<td width="30" height="30" background="bilder/uebersicht_unten_rechts.gif">&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<div align="left">
+			<input type="hidden" name="aktion" value="rec_rename"> 
+			<input type="hidden" name="id" value="<tmpl_var id>"> 
+			<tmpl_if referer>
+				<input type="hidden" name="referer" value="<tmpl_var referer>">
+			</tmpl_if>
+			<input type="submit" name="save" value="Rename"><input type="submit" name="exit" value="Abort">
+		</div>
+	</form>
+</body>
+
+</html>

@@ -103,14 +103,7 @@
 					<b>Timeline: <?% date.format(akt_sekunde, '%H:%M') %?> bis <?% date.format(bis_sec, '%H:%M') %?></b>
 				</td>
 				<td align="right" background="bilder/uebersicht_oben.gif">
-					<nobr>
-<?% IF akt_stunde <= jetzt_stunde %?>
-						<img src="bilder/pfeile_nachlinks_soft.gif" border="0">
-<?% ELSE %?>
-						<a href="<?% nowurl %?>&time=<?% akt_stunde - zeitrahmen | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachlinks.gif" border="0"></a>
-<?% END %?>
-						<a href="<?% nowurl %?>&time=<?% bis_stunde | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachrechts.gif" border="0"></a>
-					</nobr>
+					<nobr><?% IF akt_stunde <= jetzt_stunde %?><img src="bilder/pfeile_nachlinks_soft.gif" border="0"><?% ELSE %?><a href="<?% nowurl %?>&time=<?% akt_stunde - zeitrahmen | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachlinks.gif" border="0"></a><?% END %?><a href="<?% nowurl %?>&time=<?% bis_stunde | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachrechts.gif" border="0"></a></nobr>
 				</td>
 				<td valign="top" width="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" height="30" width="30" border="0"></td>
 			</tr>

@@ -2,39 +2,37 @@
 
 <html>
 
-  <head>
-    <meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
-    <title>Toolbar</title>
-  </head>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+	<title>Toolbar</title>
+</head>
 
-  <body bgcolor="#ffffff">
-    <form action="<tmpl_var url>" method="get" name="FormName">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td>
-						<select name="vdr_id" size="1" onchange="window.open('<tmpl_var url>?aktion=prog_list&vdr_id=' + this.options[this.selectedIndex].value,'main')">
-							<tmpl_loop chanloop>
-								<tmpl_if current>
-									<option value="<tmpl_var vdr_id>" selected><tmpl_var name></option>
-								<tmpl_else>
-									<option value="<tmpl_var vdr_id>"><tmpl_var name></option>
-								</tmpl_if>
-							</tmpl_loop>
-						</select>&nbsp;<input type="submit" name="submit" value="Go!">
-					</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-        </tr>
-      </table>
-      <p></p>
-    </form>
-  </body>
+<body bgcolor="#ffffff">
+	<form action="<tmpl_var url>" method="get" name="FormName">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>
+					<select name="vdr_id" size="1" onchange="window.open('<tmpl_var url>?aktion=prog_list&vdr_id=' + this.options[this.selectedIndex].value,'main')">
+<tmpl_loop chanloop>
+						<option value="<tmpl_var vdr_id>" <tmpl_if current>selected</tmpl_if>><tmpl_var name></option>
+</tmpl_loop>
+					</select>
+					&nbsp;<input type="submit" name="submit" value="Go!">
+					<input type="hidden" name="aktion" value="prog_list">
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		<p></p>
+	</form>
+</body>
 
 </html>

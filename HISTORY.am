@@ -4,6 +4,13 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2005-03-22: 0.97-am2a
+- fixed Volume+ and Volume- in TV (Reported by Unimatrix0)
+- fixed missplaced channel name prog_summary (Reported by several people)
+- added updated English templates (Supplied by C.Y.M)
+- now VDRAdmin understands timers format from vdr1.3.22- and vdr1.3.23 (Supplied by Stefan Neuwirth)
+- fixed small display problem in timeline.
+
 2005-03-20: 0.97-am2
 - TV and remote templates have same remote control.
 
@@ -72,6 +79,4 @@ My own changes:
 ************************************************************
 PLEASE NOTE:
 - Streaming doesn't work for me in this release. If you get it working please let me know!
-- All the above mentioned work/patches only deal with the German templates and the default "bilder" skin.
-  This means you only get all features when using German with "bilder" skin. I don't know if the other languages still work, but I have no idea why they shouldn't.
-  The "copper" misses some images. Maybe someone wants to create them?
+- French template not patched. Volunteers wanted!

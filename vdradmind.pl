@@ -97,7 +97,7 @@ $CONFIG{EPG_DIRECT}       = 1;
 $CONFIG{EPG_FILENAME}     = "/video/epg.data";
 $CONFIG{SKIN}             = 'bilder';
 
-my $VERSION               = "0.97-am2";
+my $VERSION               = "0.97-am2a";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $VIDEODIR              = "/video";
 my $DONE                  = &DONE_Read || {};
@@ -1479,25 +1479,21 @@ sub ParseTimer {
         substr($stop, 0, 2), $stop > $start ? $3 : $3 + 1,
         ($2 - 1), $1);
     } else { # regular timer
-      $dor =~ /(\d\d\d\d)-(\d\d)-(\d\d)/;
-      $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), $3, ($2 - 1), $1);
-			
-      $stopsse = my_mktime(substr($stop, 2, 2),
-        substr($stop, 0, 2), $stop > $start ? $3 : $3 + 1, ($2 - 1), $1);
-    }
+      if ($dor =~ /(\d\d\d\d)-(\d\d)-(\d\d)/) { # vdr >= 1.3.23
+        $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), $3, ($2 - 1), $1);
+        $stopsse = my_mktime(substr($stop, 2, 2), substr($stop, 0, 2), $stop > $start ? $3 : $3 + 1, ($2 - 1), $1);
+      }
+      else { # vdr < 1.3.23
+        $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), $dor, (my_strftime("%m") - 1), my_strftime("%Y"));
+        $stopsse = my_mktime(substr($stop, 2, 2), substr($stop, 0, 2), $stop > $start ? $dor : $dor + 1, (my_strftime("%m") - 1), my_strftime("%Y"));
 
-#    vdr-1.3.23 changes day format to yyyy-mm-dd
-#    # move timers which have expired one month into the future
-#    if(length($dor) != 7 && $stopsse < time) {
-#			$startsse = my_mktime(substr($start, 2, 2),
-#        substr($start, 0, 2), $dor, (my_strftime("%m") % 12),
-#        (my_strftime("%Y") + (my_strftime("%m") == 12 ? 1 : 0)));
-#
-#      $stopsse = my_mktime(substr($stop, 2, 2),
-#        substr($stop, 0, 2), $stop > $start ? $dor : $dor + 1,
-#        (my_strftime("%m") % 12),
-#        (my_strftime("%Y") + (my_strftime("%m") == 12 ? 1 : 0)));
-#    }
+        # move timers which have expired one month into the future
+        if(length($dor) != 7 && $stopsse < time) {
+          $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), $dor, (my_strftime("%m") % 12), (my_strftime("%Y") + (my_strftime("%m") == 12 ? 1 : 0)));
+          $stopsse = my_mktime(substr($stop, 2, 2), substr($stop, 0, 2), $stop > $start ? $dor : $dor + 1, (my_strftime("%m") % 12), (my_strftime("%Y") + (my_strftime("%m") == 12 ? 1 : 0)));
+        }
+      }
+    }
 
     if($CONFIG{RECORDINGS} && length($dor) == 7)  { # repeating timer
       # generate repeating timer entries for up to 28 days

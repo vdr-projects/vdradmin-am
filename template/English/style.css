@@ -15,6 +15,10 @@ a.rec:link      { color: #c00; text-decoration: none }
 a.rec:visited    { color: #000; text-decoration: none }
 a.rec:hover     { color: #cc0000; text-decoration: underline }
 a.rec:active    { color: #000; text-decoration: underline }
+a.sort:link      { color: black; text-decoration: none; font-weight: bold }
+a.sort:visited    { color: black; text-decoration: none; font-weight: bold }
+a.sort:hover     { color: black; text-decoration: underline; font-weight: bold }
+a.sort:active    { color: black; text-decoration: underline; font-weight: bold }
 .headline   { font-weight: bold; font-size: 14px; margin-top: 20px; margin-bottom: 20px }
 .subheadline { color: #039; font-weight: bold }
 .kleine  { font-size: 10px }

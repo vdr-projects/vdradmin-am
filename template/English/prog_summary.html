@@ -2,84 +2,104 @@
 
 <html>
 
-	<head>
-		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
-		<title>VDRAdmin - Was l&auml;uft jetzt?</title>
-		<link href="style.css" rel="stylesheet" media="screen">
-    <script language="JavaScript">
-		    <!--
-		    function popup(URL) {
-			    window.open(URL, "_new", "width=440, height=250");
-		    }
+<head>
+	<meta http-equiv="refresh" content="600; URL=vdradmin.pl?aktion=prog_summary">
+	<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+	<title>VDRAdmin - What's On?</title>
+	<link href="style.css" rel="stylesheet" media="screen">
+	<script language="JavaScript" src="library.js"></script>
+</head>
 
-		    function switch_channel(url) {
-		      image = new Image();
-		      image.src = url;
-		      document.switchimage.src = image.src;
-		    }
-		    // -->
-		</script>
-	</head>
-
-	<body bgcolor="#c4cdd7" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
-		<form action="<tmpl_var url>" method="get" name="FormName">
+<body bgcolor="#c4cdd7" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
+	<form action="<tmpl_var url>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39">
 			<tr>
 				<td valign="middle" width="100" background="bilder/nav_button_back.gif">
 					<p class="einzug_ohnetop"><b><tmpl_var now></b></p>
 				</td>
-				<td align="right" background="bilder/nav_button_back_mitte.gif">What's on: <a href="<tmpl_var nowurl>">now</a> | at:&nbsp;</td>
+				<td align="right" background="bilder/nav_button_back_mitte.gif">What's On?: <a href="<tmpl_var nowurl>">now</a> | at:&nbsp;</td>
 				<td align="right" width="50" background="bilder/nav_button_back_mitte.gif">
-						<input type="text" name="time" size="5" value="<tmpl_var now>">
-						<input type="hidden" name="aktion" value="prog_summary">
+					<input type="text" name="time" size="5" value="<tmpl_var now>">
+					<input type="hidden" name="aktion" value="prog_summary">
 				</td>
 				<td width="15" background="bilder/nav_button_back_end.gif">&nbsp;</td>
 			</tr>
 		</table>
 		<br>
-		<table width="816" border="0" cellspacing="0" cellpadding="0">
-			<tmpl_loop rows>
+
+		<table border="0" cellspacing="0" cellpadding="0">
+<tmpl_loop rows>
 			<tr>
-				<tmpl_loop day>
-				<tmpl_if longdate>
+	<tmpl_loop day>
+		<tmpl_if longdate>
 				<td valign="top" width="272" background="bilder/top.gif">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td width="60%">
-                  <a name="<tmpl_var anchor>"></a>
-									<p class="einzug">
-									<a href="<tmpl_var proglink>"><b><tmpl_var progname></b></a></p>
-								</td>
-								<td align="right"><p class="einzug"><tmpl_if start><tmpl_var start>-<tmpl_var stop></tmpl_if></p></td>
-							</tr>
-						</table>
-						<div class="einzug_ohnetop">			
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr valign="middle">
+							<td width="60%">
+								<a name="<tmpl_var anchor>"></a>
+								<p class="einzug">
+									<a href="<tmpl_var proglink>"><b><tmpl_var progname></b></a>
+									&nbsp;<a href="<tmpl_var streamurl>" title='Stream ...'>[S]</a>
+								</p>
+							</td>
+							<td align="right">
+								<p class="einzug">
+									<tmpl_if start><tmpl_var start>-<tmpl_var stop></tmpl_if>
+								</p>
+							</td>
+						</tr>
+					</table>
+					
+					<div class="einzug_ohnetop">
 						<tmpl_var longdate><br>
 						<b><tmpl_var title></b><br>
-						<b><tmpl_var subtitle></b><br>
-						<tmpl_if summary><tmpl_var summary> <a href="javascript:popup('<tmpl_var infurl>');">more</a></tmpl_if>
+						<tmpl_if subtitle>
+							<i><tmpl_var subtitle></i><br>
+						</tmpl_if>
+						<br>
+						<tmpl_if summary><tmpl_var summary> &nbsp;<a href="javascript:popup('<tmpl_var infurl>');">more</a></tmpl_if>
 						<br>
 						<br>
-						</div>
+					</div>
 				</td>
-				<tmpl_else>
-				<td valign="top" width="272">
-				</td>
-				</tmpl_if>
-				</tmpl_loop>
+		<tmpl_else>
+				<td valign="top" width="272"></td>
+		</tmpl_if>
+	</tmpl_loop>
 			</tr>
 			<tr>
-			<tmpl_loop status>
-				<tmpl_if recurl>
-				<td valign="top" width="272"><a href="javascript:switch_channel('<tmpl_var switchurl>');"><img src="bilder/tv_umschalten_mitback.gif" alt="" height="38" width="161" border="0"></a><a href="<tmpl_var recurl>"><img src="bilder/rec_mitback.gif" alt="" height="38" border="0"></a></td>
-				<tmpl_else>
+	<tmpl_loop status>
+		<tmpl_if recurl>
 				<td valign="top" width="272">
+					<table width="272" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td>
+								<a href="javascript:callurl('<tmpl_var switchurl>');"><img src="bilder/auge.jpg" width="71" height="38" border="0" alt="TV - select" title="TV - select" onmouseover="window.status='TV - select';return true"></a>
+							</td>
+							<td>
+								<!-- Sendungs Titel und Subtitel -->
+								<a href="vdradmin.pl?search=<tmpl_var title>&aktion=prog_summary&submit=go11)"><img src="bilder/lupe.jpg" width="63" height="38" border="0" alt="Search for other show times" title="Search for other show times" onmouseover="window.status='Search for other show times';return true"></a>
+							</td>
+							<td>
+								<tmpl_if summary>
+									<a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info.jpg" width="64" height="38" border="0" alt="More Information" title="More Information" onmouseover="window.status='More Information';return true" ></a>
+								<tmpl_else>
+									<img src="bilder/info_disabled.jpg" width="64" height="38" border="0">
+								</tmpl_if>
+							</td>
+							<td>
+								<a href="<tmpl_var recurl>"><img src="bilder/rec.jpg" width="74" height="38" border="0" alt="Record" title="Record" onmouseover="window.status='Record';return true" ></a>
+							</td>
+						</tr>
+					</table>
 				</td>
-				</tmpl_if>
-			</tmpl_loop>
+		<tmpl_else>
+				<td valign="top" width="272"></td>
+		</tmpl_if>
+	</tmpl_loop>
 			</tr>
-			</tmpl_loop>
+</tmpl_loop>
 		</table>
-		</form>
-	</body>
+	</form>
+</body>
 </html>
