@@ -32,12 +32,16 @@
                 <td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
                 <td height="25" background="bilder/uebersicht_mitte.gif">&nbsp;Auto Timer Active:</td>
                 <td height="25" background="bilder/uebersicht_mitte.gif">
-                  <tmpl_if name="active">
-                    <input type="radio" name="active" value="1" checked>yes <input type="radio" name="active" value="0">no
+                  <tmpl_if name="oneshot">
+                    <input type="radio" name="active" value="1">yes <input type="radio" name="active" value="0">no <input type="radio" name="active" value="2" checked>one shot
+                  <tmpl_else>
+                    <tmpl_if name="active">
+                      <input type="radio" name="active" value="1" checked>yes <input type="radio" name="active" value="0">no <input type="radio" name="active" value="2">one shot
 
-                    <tmpl_else>
-                    <input type="radio" name="active" value="1">yes <input type="radio" name="active" value="0" checked>no
+                      <tmpl_else>
+                      <input type="radio" name="active" value="1">yes <input type="radio" name="active" value="0" checked>no <input type="radio" name="active" value="2">one shot
 
+                    </tmpl_if>
                   </tmpl_if>
                 </td>
                 <td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>

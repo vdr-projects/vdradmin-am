@@ -63,13 +63,8 @@
 				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
 				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif">Timer Aktiv</td>
 				<td height="25" background="bilder/uebersicht_mitte.gif">
-					<tmpl_if active>
-						<input type="radio" name="active" value="1" checked>ja
-						<input type="radio" name="active" value="0">nein
-					<tmpl_else>
-						<input type="radio" name="active" value="1">ja
-						<input type="radio" name="active" value="0" checked>nein
-					</tmpl_if>
+					<input type="radio" name="active" value="1" <tmpl_if active>checked</tmpl_if>>ja
+					<input type="radio" name="active" value="0" <tmpl_unless active>checked</tmpl_unless>>nein
 				</td>
 				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 			</tr>
@@ -90,9 +85,9 @@
 				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif">Sender</td>
 				<td height="25" background="bilder/uebersicht_mitte.gif">
 					<select name="channel" size="1">
-						<tmpl_loop name="channels">
-							<option value="<tmpl_var vdr_id>" <tmpl_if current>selected</tmpl_if>><tmpl_var name="name"></option>
-						</tmpl_loop>
+<tmpl_loop name="channels">
+						<option value="<tmpl_var vdr_id>" <tmpl_if current>selected</tmpl_if>><tmpl_var name="name"></option>
+</tmpl_loop>
 					</select>
 				</td>
 				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
@@ -159,8 +154,7 @@
 			</tr>
 			<tr height="30">
 				<td width="30" height="30"><img src="bilder/uebersicht_unten_links.gif" alt="" width="30" height="30" border="0"></td>
-				<td height="30" background="bilder/uebersicht_unten.gif"></td>
-				<td height="30" background="bilder/uebersicht_unten.gif"></td>
+				<td colspan="2" height="30" background="bilder/uebersicht_unten.gif"></td>
 				<td width="30" height="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0"></td>
 			</tr>
 		</table>

@@ -1,8 +1,9 @@
 <html>
-  <head>
-    <title>Fernseher (<tmpl_var host>)</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-		<script language="JavaScript">
+
+<head>
+	<title>Fernseher (<tmpl_var host>)</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<script language="JavaScript">
 		<!--
 		var aktiv;
 		var interval = 5;
@@ -19,16 +20,20 @@
 			NewPicUrl = "<tmpl_var url>&size=" + size + "&" + Now.getTime();
 			document.Bild.src = NewPicUrl;
 		}
+
 		function go() {
 			WebcamUpdate();
       v_Start();
 		}
+
 		function v_Start() {
 			aktiv = window.setInterval("WebcamUpdate()", interval * 1000);
 		}
+
 		function v_Stop() {
 			window.clearInterval(aktiv);
 		}
+
 		function v_changeInterval(val) {
 			interval = val;
 			v_Stop();
@@ -36,118 +41,255 @@
 			  go()
 			};
 		}
+
 		function v_changeSize(val) {
 			size = val;
 			v_Stop();
 		  go()
 		}
 		//-->
-		</script>
-		<style type="text/css" media="screen"><!--
+	</script>
+	<style type="text/css" media="screen">
+		<!--
 #Ebene1 { position: absolute; z-index: 0; top: 0px; left: 0px; width: 100px; height: 100px; visibility: visible; display: block }
 #Ebene2 { position: absolute; z-index: 10; top: 0px; left: 0px; width: 100px; height: 100px; visibility: visible; display: block }
 td      { color: #000; font-weight: normal; font-size: 11px; font-family: Verdana, Arial, Geneva, Helvetica, sans-serif }
 input, b   { font-weight: normal; font-size: 9px; font-family: Verdana, Arial, Geneva, Helvetica, sans-serif}
 select { font-weight: normal; width: 55px; height: 20px; font-size: 9px; font-family: Verdana, Arial, Geneva, Helvetica, sans-serif}
 #small  { font-weight: normal; width: 20px; height: 20px; font-size: 9px; font-family: Verdana, Arial, Geneva, Helvetica, sans-serif}
-		--></style>
-  </head>
+		-->
+	</style>
+</head>
 
-<body onLoad="go()" background="bilder/tv_bottom.gif" bgcolor="#FFFFFF" leftmargin="0" marginheight="0" marginwidth="0" topmargin="0"> 
-		<form name="liveform">
-    <table width="200" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td>
-					<img name="Bild" src="<tmpl_var url>" border="1" hspace=2 vspace=2>
+<body onLoad="go()" background="bilder/tv_bottom.gif" bgcolor="#000000" leftmargin="2" marginheight="2" marginwidth="2" topmargin="2"> 
+	<form name="liveform">
+		<table width="200" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td align="center" valign="middle"><img name="Bild" src="<tmpl_var url>" border="1" hspace=2 vspace=2></td>
+				<td><img src="bilder/spacer.gif" name="switchimage" width="2" height="1"></td>
+				<td valign="top">
+				<!-- OLD RC
+					<table border=0 cellpadding=0 cellspacing=0>
+						<tr>
+							<td colspan="3" align="right"><nobr><input type="button" onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Power')" name="menu" value="Power"></td>
+						<tr>
+						<tr>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=1')" type="button" name="1" value="1"></td>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=2')" type="button" name="2" value="2"></td>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=3')" type="button" name="3" value="3"></td>
+						</tr>
+						<tr>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=4')" type="button" name="4" value="4"></td>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=5')" type="button" name="5" value="5"></td>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=6')" type="button" name="6" value="6"></td>
+						</tr>
+						<tr>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=7')" type="button" name="7" value="7"></td>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=8')" type="button" name="8" value="8"></td>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=9')" type="button" name="9" value="9"></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=0')" type="button" name="0" value="0"></td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td colspan="3" align="center">
+								<nobr>
+									<input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Red')" type="button" name="red" value=" " style="background:red">
+									<input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Green')" type="button" name="green" value=" " style="background:green">
+									<input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Yellow')" type="button" name="yellow" value=" " style="background:yellow">
+									<input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Blue')" type="button" name="blue" value=" " style="background:blue">
+								</nobr>
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Up')" type="button" name="up" value="^"></td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Left')" type="button" name="left" value="<"></td>
+							<td align='center'><input            onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Ok')" type="button" name="ok" value="Ok"></td>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Right')" type="button" name="right" value=">"></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Down')" type="button" name="down" value="v"></td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<nobr>
+									<input type="button" onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Menu')" name="menu" value="Menu">
+									<input onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Back')" type="button" name="back" value="Back">
+								</nobr>
+							</td>
+						</tr>
+						<tr>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=VolumeMinus')" type="button" name="leiser" value="-"></td>
+							<td>&nbsp;</td>
+							<td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=VolumePlus')" type="button" name="lauter" value="+"></td>
+						</tr>
+						<tr>
+							<td colspan="3">&nbsp;</td>
+						</tr>
+						<tr valign="bottom">
+							<td colspan="3" valign="bottom">
+								<b>Intervall:</b><br>
+								<select name="Seconds" size="1" onChange="v_changeInterval(this.options[this.selectedIndex].value)">
+									<option value="0">off</option>
+									<option value="1"> 1 sec.</option>
+									<option value="2"> 2 sec.</option>
+									<option value="3"> 3 sec</option>
+									<option value="5" selected> 5 sec.</option>
+									<option value="10">10 sec.</option>
+									<option value="30">30 sec.</option>
+									<option value="60">60 sec.</option>
+								</select>
+								<input type="button" name="livebild" value='G' title="Grab the picture!" onClick="WebcamUpdate()">
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td colspan="3" valign="bottom">
+								<b>Gr&ouml;&szlig;e:</b><br>
+								<select name="Size" size="1" onChange="v_changeSize(this.options[this.selectedIndex].value)">
+									<option value="full">1:1</option>
+									<option value="half" selected>1:2</option>
+									<option value="quarter">1:4</option>
+								</select>
+								<input type="button" name="livebild" value='G' title="Grab the picture!" onClick="WebcamUpdate()">
+							</td>
+						</tr>
+					</table>
+				-->
+					<table width="200" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=power');"><img src="bilder/fern_03.jpg" alt="" height="27" width="68" border="0"></a></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=1');"><img src="bilder/fern_05.jpg" alt="" height="28" width="67" border="0"></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=2');"><img src="bilder/fern_06.jpg" alt="" height="28" width="66" border="0"></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=3');"><img src="bilder/fern_07.jpg" alt="" height="28" width="67" border="0"></a></td>
+						</tr>
+						<tr>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=4');"><img src="bilder/fern_08.jpg" alt="" height="28" width="67" border="0"></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=5');"><img src="bilder/fern_09.jpg" alt="" height="28" width="66" border="0"></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=6');"><img src="bilder/fern_10.jpg" alt="" height="28" width="67" border="0"></a></td>
+						</tr>
+						<tr>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=7');"><img src="bilder/fern_11.jpg" alt="" height="28" width="67" border="0"></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=8');"><img src="bilder/fern_12.jpg" alt="" height="28" width="66" border="0"></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=9');"><img src="bilder/fern_13.jpg" alt="" height="28" width="67" border="0"></a></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=0');"><img src="bilder/fern_15.jpg" alt="" height="28" width="66" border="0"></a></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=menu');"><img src="bilder/fern_18.jpg" alt="" height="27" width="67" border="0"></a></td>
+							<td></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=back');"><img src="bilder/fern_19.jpg" alt="" height="27" width="67" border="0"></a></td>
+						</tr>
+						<tr>
+							<td colspan="3"><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=red');"><img src="bilder/fern_22.jpg" alt="" height="28" width="50" border="0"></a><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=green');"><img src="bilder/fern_23.jpg" alt="" height="28" width="49" border="0"></a><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=yellow');"><img src="bilder/fern_24.jpg" alt="" height="28" width="51" border="0"></a><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=blue');"><img src="bilder/fern_25.jpg" alt="" height="28" width="50" border="0"></a></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=up');"><img src="bilder/fern_28.jpg" alt="" height="27" width="66" border="0"></a></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=left');"><img src="bilder/fern_31.jpg" alt="" height="27" width="67" border="0"></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=ok');"><img src="bilder/fern_32.jpg" alt="" height="27" width="66" border="0"></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=right');"><img src="bilder/fern_33.jpg" alt="" height="27" width="67" border="0"></a></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=down');"><img src="bilder/fern_36.jpg" alt="" height="27" width="66" border="0"></a></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=volminus');"><img src="bilder/fern_39.jpg" alt="" height="27" width="67" border="0"></a></td>
+							<td></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=volplus');"><img src="bilder/fern_40.jpg" alt="" height="27" width="67" border="0"></a></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td></td>
+						</tr>
+					</table>
 				</td>
-        <td>
-          <img src="bilder/spacer.gif" name="switchimage" width="2" height="1">
+			</tr>
+			<tr>
+				<td colspan="3">&nbsp;</td>
+			</tr>
+			<tr valign="middle">
+				<td valign="middle">
+					<nobr>
+						<b>Intervall:</b>
+						<select name="Seconds" size="1" onChange="v_changeInterval(this.options[this.selectedIndex].value)">
+							<option value="0">off</option>
+							<option value="1"> 1 sec.</option>
+							<option value="2"> 2 sec.</option>
+							<option value="3"> 3 sec</option>
+							<option value="5" selected> 5 sec.</option>
+							<option value="10">10 sec.</option>
+							<option value="30">30 sec.</option>
+							<option value="60">60 sec.</option>
+						</select>
+						<input type="button" name="livebild" value='G' title="Grab the picture!" onClick="WebcamUpdate()">
+						&nbsp;&nbsp;<b>Gr&ouml;&szlig;e:</b>
+						<select name="Size" size="1" onChange="v_changeSize(this.options[this.selectedIndex].value)">
+							<option value="full">1:1</option>
+							<option value="half" selected>1:2</option>
+							<option value="quarter">1:4</option>
+						</select>
+						<input type="button" name="livebild" value='G' title="Grab the picture!" onClick="WebcamUpdate()">
+					</nobr>
 				</td>
-        <td valign="top">
-          <table border=0 cellpadding=0 cellspacing=0>
-            <tr>
-              <td colspan="3" align="right"><nobr><input type="button" onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Power')" name="menu" value="Power"></td>
-            <tr>
-            <tr>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=1')" type="button" name="1" value="1"></td>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=2')" type="button" name="2" value="2"></td>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=3')" type="button" name="3" value="3"></td>
-            <tr>
-            <tr>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=4')" type="button" name="4" value="4"></td>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=5')" type="button" name="5" value="5"></td>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=6')" type="button" name="6" value="6"></td>
-            <tr>
-            <tr>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=7')" type="button" name="7" value="7"></td>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=8')" type="button" name="8" value="8"></td>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=9')" type="button" name="9" value="9"></td>
-            <tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=0')" type="button" name="0" value="0"></td>
-              <td>&nbsp;</td>
-            <tr>
-            <tr>
-              <td colspan="3" align="center"><nobr>
-                <input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Red')" type="button" name="red" value=" " style="background:red">
-                <input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Green')" type="button" name="green" value=" " style="background:green">
-                <input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Yellow')" type="button" name="yellow" value=" " style="background:yellow">
-                <input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Blue')" type="button" name="blue" value=" " style="background:blue">
-              </td>
-            <tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Up')" type="button" name="up" value="^"></td>
-              <td>&nbsp;</td>
-            <tr>
-            <tr>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Left')" type="button" name="left" value="<"></td>
-              <td align='center'><input            onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Ok')" type="button" name="ok" value="Ok"></td>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Right')" type="button" name="right" value=">"></td>
-            <tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Down')" type="button" name="down" value="v"></td>
-              <td>&nbsp;</td>
-            <tr>
-            <tr>
-              <td colspan="3"><nobr>
-              <input type="button" onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Menu')" name="menu" value="Menu">
-              <input onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=Back')" type="button" name="back" value="Back">
-              </td>
-            <tr>
-            <tr>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=VolumeMinus')" type="button" name="leiser" value="-"></td>
-              <td>&nbsp;</td>
-              <td align='center'><input id='small' onclick="switch_channel('./vdradmin.pl?aktion=rc_hitk&key=VolumePlus')" type="button" name="lauter" value="+"></td>
-            <tr>
-            <tr><td colspan+"3">&nbsp;</td></tr>
-            <tr valign="bottom">
-              <td colspan="3" valign="bottom"><b>Intervall:</b><br><select name="Seconds" size="1" onChange="v_changeInterval(this.options[this.selectedIndex].value)">
-      						<option value="0">off</option>
-      						<option value="1"> 1 sec.</option>
-      						<option value="2"> 2 sec.</option>
-      						<option value="3"> 3 sec</option>
-      						<option value="5" selected> 5 sec.</option>
-      						<option value="10">10 sec.</option>
-      						<option value="30">30 sec.</option>
-      						<option value="60">60 sec.</option>
-      					</select><input type="button" name="livebild" value='G' title="Grab the picture!" onClick="WebcamUpdate()">
-              </td>
-            </tr>
-            <tr valign="bottom">
-              <td colspan="3" valign="bottom"><b>Gr&ouml;&szlig;e:</b><br><select name="Size" size="1" onChange="v_changeSize(this.options[this.selectedIndex].value)">
-      						<option value="full">1:1</option>
-      						<option value="half" selected>1:2</option>
-      						<option value="quarter">1:4</option>
-      					</select><input type="button" name="livebild" value='G' title="Grab the picture!" onClick="WebcamUpdate()">
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-		</form>
-  </body>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+		</table>
+	</form>
+</body>
 </html>

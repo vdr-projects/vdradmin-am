@@ -2,7 +2,7 @@
 
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
-	<title></title>
+	<title><tmpl_if newtimer>Neuen Auto Timer anlegen<tmpl_else>Auto Timer editieren</tmpl_if></title>
 	<link href="style.css" rel="stylesheet" media="screen">
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 </head>
@@ -15,11 +15,11 @@
 					<p class="einzug_ohnetop"><b><tmpl_if newtimer>Neuen Auto Timer anlegen<tmpl_else>Auto Timer editieren</tmpl_if></b></p>
 				</td>
 				<td align="right" background="bilder/nav_button_back_mitte.gif">&nbsp;</td>
-				<tmpl_if name="help_url">
-					<td align="right" width="35" background="bilder/nav_button_back_mitte.gif">
-						<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" align="right" valign="top" alt="Hilfe"></a>
-					</td>
-				</tmpl_if>
+<tmpl_if name="help_url">
+				<td align="right" width="35" background="bilder/nav_button_back_mitte.gif">
+					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" align="right" valign="top" alt="Hilfe"></a>
+				</td>
+</tmpl_if>
 				<td width="15" background="bilder/nav_button_back_end.gif">&nbsp;</td>
 			</tr>
 		</table>
@@ -35,13 +35,21 @@
 				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
 				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif">Auto Timer Aktiv:</td>
 				<td height="25" background="bilder/uebersicht_mitte.gif">
-					<tmpl_if name="active">
-						<input type="radio" name="active" value="1" checked>ja
-						<input type="radio" name="active" value="0">nein
-					<tmpl_else>
-						<input type="radio" name="active" value="1">ja
-						<input type="radio" name="active" value="0" checked>nein
-					</tmpl_if>
+<tmpl_if name="oneshot">
+         	<input type="radio" name="active" value="1">ja
+         	<input type="radio" name="active" value="0">nein
+					<input type="radio" name="active" value="2" checked>einmal
+<tmpl_else>
+	<tmpl_if name="active">
+					<input type="radio" name="active" value="1" checked>ja
+					<input type="radio" name="active" value="0">nein
+					<input type="radio" name="active" value="2">einmal
+	<tmpl_else>
+					<input type="radio" name="active" value="1">ja
+					<input type="radio" name="active" value="0" checked>nein
+					<input type="radio" name="active" value="2">einmal
+	</tmpl_if>
+</tmpl_if>
 				</td>
 				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 			</tr>
@@ -69,9 +77,9 @@
 				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
 					<select name="channel" size="1">
 						<option value="0">alle Sender</option>
-						<tmpl_loop channels>
+<tmpl_loop channels>
 							<option value="<tmpl_var vdr_id>" <tmpl_if cur> selected</tmpl_if>><tmpl_var name></option>
-						</tmpl_loop>
+</tmpl_loop>
 					</select>
 				</td>
 				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
@@ -122,13 +130,13 @@
 				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
 				<td height="25" background="bilder/uebersicht_mitte.gif">Done Aktiv:</td>
 				<td height="25" background="bilder/uebersicht_mitte.gif">
-					<tmpl_if name="done">
-						<input type="radio" name="done" value="1" checked>ja
-						<input type="radio" name="done" value="0">nein
-					<tmpl_else>
-						<input type="radio" name="done" value="1">ja
-						<input type="radio" name="done" value="0" checked>nein
-					</tmpl_if>
+<tmpl_if name="done">
+					<input type="radio" name="done" value="1" checked>ja
+					<input type="radio" name="done" value="0">nein
+<tmpl_else>
+					<input type="radio" name="done" value="1">ja
+					<input type="radio" name="done" value="0" checked>nein
+</tmpl_if>
 				</td>
 				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 			</tr>
@@ -148,7 +156,10 @@
 			</tr>
 		</table>
 		<br>
-		<input type="submit" name="save" value="Speichern"><input type="submit" name="exit" value="Abbrechen"> <input type="hidden" name="aktion" value="at_timer_save"> <input type="hidden" name="id" value="<tmpl_var id>">
+		<input type="submit" name="save" value="Speichern">
+		<input type="submit" name="exit" value="Abbrechen">
+		<input type="hidden" name="aktion" value="at_timer_save">
+		<input type="hidden" name="id" value="<tmpl_var id>">
 	</form>
 </body>
 

@@ -2,94 +2,97 @@
 
 <html>
 
-	<head>
-		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
-		<title></title>
-		<link href="style.css" rel="stylesheet" media="screen">
-    <script language="JavaScript" src="library.js"></script>
-	</head>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+	<title>Programm&uuml;bersicht</title>
+	<link href="style.css" rel="stylesheet" media="screen">
+	<script language="JavaScript" src="library.js"></script>
+</head>
 
-	<body bgcolor="#c4cdd7" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
-		<form action="<tmpl_var url>" method="get" name="FormName">
+<body bgcolor="#c4cdd7" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
+	<form action="<tmpl_var url>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39">
 			<tr>
 				<td valign="left" width="200" background="bilder/nav_button_back.gif">
 					<p class="einzug_ohnetop">
-					  <a href="javascript:callurl('<tmpl_var switchurl>');"><b><tmpl_var progname></b></a>&nbsp;&nbsp;
+						<a href="javascript:callurl('<tmpl_var switchurl>');"><b><tmpl_var progname></b></a>&nbsp;&nbsp;
 						<a href="<tmpl_var streamurl>"><img src="bilder/stream.jpg" alt="" height="17" align="center" border="0"></a>
 					</p>
 				</td>
 				<td align="right" background="bilder/nav_button_back_mitte.gif">Programmauswahl:&nbsp; 
-						<select name="vdr_id" size="1" onchange="window.open('<tmpl_var url>?aktion=prog_list&vdr_id=' + this.options[this.selectedIndex].value,'main')">
-							<tmpl_loop chanloop>
-								<tmpl_if current>
-									<option value="<tmpl_var vdr_id>" selected><tmpl_var name></option>
-								<tmpl_else>
-									<option value="<tmpl_var vdr_id>"><tmpl_var name></option>
-								</tmpl_if>
-							</tmpl_loop>
-						</select>&nbsp;<input type="submit" name="submit" value="Go!">
-						<a href="javascript:toolbar('<tmpl_var toolbarurl>');" target="toolbar"><img src="bilder/spacer.gif" border="0"></a>
+					<select name="vdr_id" size="1" onchange="window.open('<tmpl_var url>?aktion=prog_list&vdr_id=' + this.options[this.selectedIndex].value,'main')">
+<tmpl_loop chanloop>
+						<option value="<tmpl_var vdr_id>" <tmpl_if current>selected</tmpl_if>><tmpl_var name></option>
+</tmpl_loop>
+					</select>
+					<input type="submit" name="submit" value="Go!">
+					<a href="javascript:toolbar('<tmpl_var toolbarurl>');" target="toolbar"><img src="bilder/spacer.gif" border="0"></a>
 				</td>
 				<td width="15" background="bilder/nav_button_back_end.gif">&nbsp;</td>
 			</tr>
 		</table>
 		<input type="hidden" name="aktion" value="prog_list">
-		</form>
-		<tmpl_loop loop>
-			<tmpl_if newd>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td valign="top" width="30">
-							<p><img src="bilder/uebersicht_oben_links.gif" alt="" height="30" width="30" border="0"></p>
-						</td>
-						<td colspan="3" background="bilder/uebersicht_oben.gif">
-							<p><b><tmpl_var title></b></p>
-						</td>
-						<td align="right" background="bilder/uebersicht_oben.gif"><tmpl_if prev_channel><a href="<tmpl_var prev_channel>"><img src="bilder/pfeile_nachlinks.gif" border="0"></a><tmpl_else><img src="bilder/pfeile_nachlinks_soft.gif" border="0"></tmpl_if><tmpl_if next_channel><a href="<tmpl_var next_channel>"><img src="bilder/pfeile_nachrechts.gif" border="0"></a><tmpl_else><img src="bilder/pfeile_nachrechts_soft.gif" border="0"></tmpl_if></td>
-						<td valign="top" width="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" height="30" width="30" border="0"></td>
-					</tr>
-					<tr>
-						<td valign="top" width="30" background="bilder/uebersicht_links.gif">&nbsp;</td>
-						<td background="bilder/uebersicht_mitte.gif">&nbsp;</td>
-						<td background="bilder/uebersicht_mitte.gif">&nbsp;</td>
-						<td background="bilder/uebersicht_mitte.gif">&nbsp;</td>
-						<td background="bilder/uebersicht_mitte.gif">&nbsp;</td>
-						<td valign="top" width="30" background="bilder/uebersicht_rechts.gif">&nbsp;</td>
-					</tr>
-			<tmpl_else>
-				<tmpl_unless endd>
-				<tr>
-					<td valign="top" width="30" background="bilder/uebersicht_links<tmpl_if __ODD__>_dark</tmpl_if>.gif"><a name="<tmpl_var anchor>"></a>&nbsp;</td>
-					<td valign="top" width="170" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
-						<p class="einzug_liste"><tmpl_var emit> - <tmpl_var duration> Uhr</p>
-					</td>
-					<td valign="top" width="652" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
-						<p class="einzug_liste"><b><tmpl_var title></b><br><tmpl_unless subtitle><br></tmpl_unless><tmpl_var subtitle> </p>
-					</td>
-					<td align="right" valign="top" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
-						<p class="einzug_liste"><tmpl_if infurl><a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info_button.gif" border="0"></a><tmpl_else><img src="bilder/info_button_disabled.gif" border="0"></tmpl_if></p>
-					</td>
-					<td align="right" valign="top" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
-						<p class="einzug_liste"><b><a class="rec" href="<tmpl_var recurl>"><img src="bilder/rec_button.gif" border="0"></a></b></p>
-					</td>
-					<td valign="top" width="30" background="bilder/uebersicht_rechts<tmpl_if __ODD__>_dark</tmpl_if>.gif">&nbsp;</td>
-				</tr>
-				</tmpl_unless>
-			</tmpl_if>
-			<tmpl_if endd>
-				<tr>
-					<td valign="top" width="30"><img src="bilder/uebersicht_unten_links.gif" alt="" height="30" width="30" border="0"></td>
-					<td background="bilder/uebersicht_unten.gif">&nbsp;</td>
-					<td background="bilder/uebersicht_unten.gif">&nbsp;</td>
-					<td background="bilder/uebersicht_unten.gif">&nbsp;</td>
-					<td background="bilder/uebersicht_unten.gif">&nbsp;</td>
-					<td valign="top" width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" height="30" width="30" border="0"></td>
-				</tr>
-			</table>
-			<br>
-			</tmpl_if>
-		</tmpl_loop>
-	</body>
+	</form>
+
+<tmpl_loop loop>
+	<tmpl_if newd>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr height="30">
+			<td valign="top" width="30">
+				<p><img src="bilder/uebersicht_oben_links.gif" alt="" height="30" width="30" border="0"></p>
+			</td>
+			<td colspan="3" background="bilder/uebersicht_oben.gif">
+				<p><b><tmpl_var title></b></p>
+			</td>
+			<td align="right" background="bilder/uebersicht_oben.gif">
+				<tmpl_if prev_channel><a href="<tmpl_var prev_channel>"><img src="bilder/pfeile_nachlinks.gif" border="0"></a><tmpl_else><img src="bilder/pfeile_nachlinks_soft.gif" border="0"></tmpl_if><tmpl_if next_channel><a href="<tmpl_var next_channel>"><img src="bilder/pfeile_nachrechts.gif" border="0"></a><tmpl_else><img src="bilder/pfeile_nachrechts_soft.gif" border="0"></tmpl_if>
+			</td>
+			<td valign="top" width="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" height="30" width="30" border="0"></td>
+		</tr>
+		<tr height="10">
+			<td valign="top" width="30" height="10" background="bilder/uebersicht_links.gif"></td>
+			<td colspan="4" height="10" background="bilder/uebersicht_mitte.gif"></td>
+			<td valign="top" width="30" height="10" background="bilder/uebersicht_rechts.gif"></td>
+		</tr>
+	<tmpl_else>
+		<tmpl_unless endd>
+		<tr>
+			<td valign="top" width="30" background="bilder/uebersicht_links<tmpl_if __ODD__>_dark</tmpl_if>.gif"><a name="<tmpl_var anchor>"></a>&nbsp;</td>
+			<td valign="top" width="170" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
+				<p class="einzug_liste"><tmpl_var emit> - <tmpl_var duration> Uhr</p>
+			</td>
+			<td valign="top" width="652" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
+				<p class="einzug_liste">
+					<b><tmpl_var title></b><br>
+					<i><tmpl_var subtitle></i><br>
+				</p>
+			</td>
+			<td align="right" valign="top" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
+				<p class="einzug_liste">
+					<tmpl_if infurl>
+						<a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info_button.gif" border="0"></a>
+					<tmpl_else>
+						<img src="bilder/info_button_disabled.gif" border="0">
+					</tmpl_if>
+				</p>
+			</td>
+			<td align="right" valign="top" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
+				<p class="einzug_liste"><a class="rec" href="<tmpl_var recurl>"><img src="bilder/rec_button.gif" border="0"></a></p>
+			</td>
+			<td valign="top" width="30" background="bilder/uebersicht_rechts<tmpl_if __ODD__>_dark</tmpl_if>.gif">&nbsp;</td>
+		</tr>
+		</tmpl_unless>
+	</tmpl_if>
+	<tmpl_if endd>
+		<tr>
+			<td valign="top" width="30"><img src="bilder/uebersicht_unten_links.gif" alt="" height="30" width="30" border="0"></td>
+			<td colspan="4" background="bilder/uebersicht_unten.gif"></td>
+			<td valign="top" width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" height="30" width="30" border="0"></td>
+		</tr>
+	</table>
+	<br>
+	</tmpl_if>
+</tmpl_loop>
+</body>
 
 </html>

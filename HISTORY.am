@@ -1,10 +1,67 @@
+Author:     Andreas Mair
+WWW:        http://andreas.vdr-developer.org
+E-Mail:     mail AT andreas DOT vdr-developer DOT org
+VDR-Portal: amair
+-----------------------------------------------------------
+
+2005-03-20: 0.97-am2
+- TV and remote templates have same remote control.
+
+Added patches:
+- fix for timers.conf of vdr1.3.23+ (Submitted by x-stefan @vdrportal.de)
+- Localnet Patch; no password request if client ip in given ip range) (Submitted by "Reiner Buehl" <reiner@buehl.net>)
+
+2005-03-19:
+Templates cleanup:
+- timer_list.html
+- timer_new.html
+- toolbar.html
+- tv_flash.html
+- tv.html
+
+2005-03-18:
+- reworked summary display of recordings
+- summary editbox preserves linefeeds while editing timers
+
+Templates cleanup:
+- prog_timeline.html
+- rc.html
+- rec_edit.html
+- rec_list.html
+
+2005-03-12: 
+- Added stream button in prog_summmary (suggested by Unimatrix0 @vdrportal.de)
+
+Templates cleanup:
+- at_new.html
+- at_timer_list.html
+- config.html
+- error.html
+- index.html
+- left.html
+- noauth.html
+- noperm.html
+- prog_details.html (TODO)
+- prog_list2.html
+- prog_list.html
+- prog_summary.html (TODO)
+
+Added patches:
+- vdradmin-0.96_For_vdr-1.3_StoreAutotimerChannelID_And_EventIdCheckDisable.diff (posted at the VDR mailinglist by "Rantanen Teemu" <teemu.rantanen@tekla.com>)
+- vdradmin-0.96_OneShot_Timers_English_Only.diff and merged it to "Deutsch" template (posted at the VDR mailinglist by "Rantanen Teemu" <teemu.rantanen@tekla.com>)
+- included changes from vdradmin-0.96-3-ctvdr-1 (see HISTORY.ct).
+
+Changes that have been forgotten while merging previous patches:
+- Fixed: timer listing now shows "VPS" instead of "Auto (alt)".
+- removed unneeded <br>. They are still used for display only.
+
 2005-03-06: 0.97-am1 "initial release"
 This is mainly the lastest vdradmin (v0.97) with different patches applied:
 - vdradmin-0.97 has been taken from linvdr-0.7.
 - xpix's BigPatch_0.9pre5 (ported from vdradmin-0.95 to vdradmin-0.97 (see HISTORY.bigpatch).
 - included changes from vdradmin-0.95-ct-10 (see HISTORY.ct).
 - included vdradmin-0.95_0.9_pre5_fb1.diff (see HISTORY.macfly).
-- included vdradmin-0.96-rename.diff which also needs an applied "vdr-aio21_svdrprename.patch" patch (don't know the author right now).
+- included vdradmin-0.96-rename.diff which also needs an applied "vdr-aio21_svdrprename.patch" patch (Author: slime @vdrportal.de).
 
 My own changes:
 - included missing "Was läuft heute?" template (found at www.vdr-portal.de).
@@ -12,6 +69,7 @@ My own changes:
 - Beautified recordings listing (at least in my eyes ;-)
 - Added "Size" selectbox to TV template.
 
+************************************************************
 PLEASE NOTE:
 - Streaming doesn't work for me in this release. If you get it working please let me know!
 - All the above mentioned work/patches only deal with the German templates and the default "bilder" skin.

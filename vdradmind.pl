@@ -32,6 +32,8 @@ BEGIN {
 	unshift(@INC, $BASENAME . "lib/");
 }
 
+require File::Temp;
+
 use CGI qw(:no_debug);
 use IO::Socket;
 use HTML::Template::Expr();
@@ -39,13 +41,15 @@ use Template;
 use Time::Local qw(timelocal);
 use POSIX ":sys_wait_h", qw(strftime mktime);
 use MIME::Base64();
+use File::Temp();
 
 $SIG{CHLD} = sub { wait };
 
 use strict;
 #use warnings;
 
-my $SEARCH_FILES_IN_SYSTEM = (-d '/usr/share/vdradmin/lib' ? 1 : 0); # for distribution
+#my $SEARCH_FILES_IN_SYSTEM = (-d '/usr/share/vdradmin/lib' ? 1 : 0); # for distribution
+my $SEARCH_FILES_IN_SYSTEM = 0;
 
 sub true           () { 1 };
 sub false          () { 0 };
@@ -68,6 +72,7 @@ $CONFIG{GUEST_ACCOUNT}    = 0;
 $CONFIG{LANGUAGE}         = "Deutsch";
 $CONFIG{LOGLEVEL}         = 81; # 32799
 $CONFIG{CACHE_TIMEOUT}    = 60;
+$CONFIG{LOCAL_NET}        = "0.0.0.0/32";
 $CONFIG{CACHE_LASTUPDATE} = 0;
 $CONFIG{AT_FUNC}          = 1;
 $CONFIG{AT_TIMEOUT}       = 120;
@@ -92,7 +97,7 @@ $CONFIG{EPG_DIRECT}       = 1;
 $CONFIG{EPG_FILENAME}     = "/video/epg.data";
 $CONFIG{SKIN}             = 'bilder';
 
-my $VERSION               = "0.97-am1";
+my $VERSION               = "0.97-am2";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $VIDEODIR              = "/video";
 my $DONE                  = &DONE_Read || {};
@@ -137,7 +142,7 @@ my $Xtemplate = Template->new($Xconfig);
 # ---- End new template section ----
 
 my $I18NFILE							= "i18n.pl";
-my $USE_SHELL_GZIP        = true; # set on false to use the gzip library
+my $USE_SHELL_GZIP        = false; # set on false to use the gzip library
 
 if($CONFIG{MOD_GZIP}) {
   # lib gzipping
@@ -316,7 +321,7 @@ while(true) {
 	}
 				
 	# authenticate
-	if($CONFIG{USERNAME} eq $username && $CONFIG{PASSWORD} eq $password) {
+	if(($CONFIG{USERNAME} eq $username && $CONFIG{PASSWORD} eq $password) || subnetcheck($peer,$CONFIG{LOCAL_NET}) ) {
 		$Guest = 0;
 	} elsif(($CONFIG{USERNAME_GUEST} eq $username && $CONFIG{PASSWORD_GUEST} eq $password) && $CONFIG{GUEST_ACCOUNT}) {
 		$Guest = 1;
@@ -509,6 +514,22 @@ sub get_vdrid_from_channelid {
 	}
 }
 
+#
+#  Used to store channelid (instead of channel number) into auto timer entries.
+#  Allows channels to be moved around without auto timer channels being messed up.
+#  Use at your own risk... tvr@iki.fi
+#
+sub get_channelid_from_vdrid {
+  my $vdr_id = shift;
+  if($vdr_id) {
+    my @C = grep($_->{vdr_id} == $vdr_id, @CHAN);
+    if(scalar(@C) == 1) {
+      my $ch = $C[0];
+      return $ch->{source} . "-" . $ch->{nid} . "-" . ($ch->{nid}||$ch->{tid}?$ch->{tid}:$ch->{frequency}) . "-" . $ch->{service_id};
+    }
+  }
+}
+
 sub get_name_from_vdrid {
   my $vdr_id = shift;
   if($vdr_id) {
@@ -598,9 +619,12 @@ sub EPG_buildTree {
 					my($event_id, $time, $duration) = ($1, $2, $3);
 					my($title, $subtitle, $summary);
 					while($_ = $SVDRP->readoneline) {
-            if(/^T (.*)/) { $title = $1;    $title =~ s/\|/<br>/sig }
-            if(/^S (.*)/) { $subtitle = $1; $subtitle =~ s/\|/<br>/sig }
-            if(/^D (.*)/) { $summary = $1;  $summary =~ s/\|/<br>/sig }
+#            if(/^T (.*)/) { $title = $1;    $title =~ s/\|/<br>/sig }
+#            if(/^S (.*)/) { $subtitle = $1; $subtitle =~ s/\|/<br>/sig }
+#            if(/^D (.*)/) { $summary = $1;  $summary =~ s/\|/<br>/sig }
+            if(/^T (.*)/) { $title = $1; }
+            if(/^S (.*)/) { $subtitle = $1; }
+            if(/^D (.*)/) { $summary = $1; }
 						if(/^e/) {
 							#
 							push(@events, {
@@ -704,7 +728,7 @@ sub headerTime {
 
 sub GZip {
 	my $content = shift;
-  my $filename = "/tmp/vdradmin." . time();
+  my $filename = new File::Temp("vdradmin-XXXXX", UNLINK => 1);
   open(PIPE, "| gzip -9 - > $filename") || die "cant open pipe to gzip ($!)";
   print PIPE $$content;
   close(PIPE);
@@ -844,6 +868,7 @@ sub AT_Read {
       chomp;
       next if($_ eq "");
       my($active, $pattern, $section, $start, $stop, $episode, $prio, $lft, $channel, $directory, $done) = split(/\:/, $_);
+      my($usechannel) = ($channel =~ /^\d+$/) ? $channel : get_vdrid_from_channelid($channel);
       push(@at, {
         active    => $active,
         pattern   => $pattern,
@@ -853,7 +878,7 @@ sub AT_Read {
         episode   => $episode,
         prio      => $prio,
         lft       => $lft,
-        channel   => $channel,
+        channel   => $usechannel,
         directory => $directory,
         done      => $done
       });
@@ -871,10 +896,17 @@ sub AT_Write {
     my $temp;
     for my $item (qw(active pattern section start stop episode prio lft channel directory done)) {
       $_->{$item} =~ s/\:/_/g;
+      my $tempitem = $_->{$item};
+      if ($item eq 'channel') {
+	my $channelnumber = get_channelid_from_vdrid($tempitem);
+	if ($channelnumber) {
+	  $tempitem = $channelnumber;
+	}
+      }
       if(length($temp) == 0) {
-        $temp = $_->{$item};
+        $temp = $tempitem;
       } else {
-        $temp .= ":" . $_->{$item};
+        $temp .= ":" . $tempitem;
       }
     }
     print AT_FILE $temp, "\n";
@@ -927,6 +959,8 @@ sub AutoTimer {
   my($search, $start, $stop) = @_;
 
   my @at = AT_Read();
+
+  my $oneshots = 0;
   $DONE  = &DONE_Read unless($DONE);
   my %blacklist = &BlackList_Read;
 
@@ -1169,14 +1203,24 @@ sub AutoTimer {
 
         Log(LOG_AT, sprintf("AutoTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
 
-        AT_ProgTimer(0x8001, $event->{event_id}, $event->{vdr_id}, $event->{start}, $event->{stop},
+        AT_ProgTimer(0x0001, $event->{event_id}, $event->{vdr_id}, $event->{start}, $event->{stop},
           $title, $event->{summary}, $at->{prio}, $at->{lft});
 
+	if ($at->{active} == 2) {
+	  Log(LOG_AT, sprintf("AutoTimer: Disabling one-shot Timer"));
+	  $at->{active} = 0;
+	  $oneshots = 1;
+	}
         $DONE->{$DoneStr} = $event->{stop}
           if($at->{done});
       }
     }
   }
+  if ($oneshots) {
+    Log(LOG_AT, sprintf("AutoTimer: saving because of one-shots triggered"));
+    AT_Write(@at);
+  }
+
   Log(LOG_AT, "Auto Timer: Done.");
   Log(LOG_AT, "Auto Timer: Search for old Done Entrys...");
   for(keys %$DONE) { delete $DONE->{$_} if(time > $DONE->{$_}) }
@@ -1435,26 +1479,25 @@ sub ParseTimer {
         substr($stop, 0, 2), $stop > $start ? $3 : $3 + 1,
         ($2 - 1), $1);
     } else { # regular timer
-      $startsse = my_mktime(substr($start, 2, 2),
-				substr($start, 0, 2), $dor, (my_strftime("%m") - 1),
-				my_strftime("%Y"));
+      $dor =~ /(\d\d\d\d)-(\d\d)-(\d\d)/;
+      $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), $3, ($2 - 1), $1);
 			
       $stopsse = my_mktime(substr($stop, 2, 2),
-        substr($stop, 0, 2), $stop > $start ? $dor : $dor + 1,
-        (my_strftime("%m") - 1), my_strftime("%Y"));
+        substr($stop, 0, 2), $stop > $start ? $3 : $3 + 1, ($2 - 1), $1);
     }
 
-    # move timers which have expired one month into the future
-    if(length($dor) != 7 && $stopsse < time) {
-			$startsse = my_mktime(substr($start, 2, 2),
-        substr($start, 0, 2), $dor, (my_strftime("%m") % 12),
-        (my_strftime("%Y") + (my_strftime("%m") == 12 ? 1 : 0)));
-
-      $stopsse = my_mktime(substr($stop, 2, 2),
-        substr($stop, 0, 2), $stop > $start ? $dor : $dor + 1,
-        (my_strftime("%m") % 12),
-        (my_strftime("%Y") + (my_strftime("%m") == 12 ? 1 : 0)));
-    }
+#    vdr-1.3.23 changes day format to yyyy-mm-dd
+#    # move timers which have expired one month into the future
+#    if(length($dor) != 7 && $stopsse < time) {
+#			$startsse = my_mktime(substr($start, 2, 2),
+#        substr($start, 0, 2), $dor, (my_strftime("%m") % 12),
+#        (my_strftime("%Y") + (my_strftime("%m") == 12 ? 1 : 0)));
+#
+#      $stopsse = my_mktime(substr($stop, 2, 2),
+#        substr($stop, 0, 2), $stop > $start ? $dor : $dor + 1,
+#        (my_strftime("%m") % 12),
+#        (my_strftime("%Y") + (my_strftime("%m") == 12 ? 1 : 0)));
+#    }
 
     if($CONFIG{RECORDINGS} && length($dor) == 7)  { # repeating timer
       # generate repeating timer entries for up to 28 days
@@ -2462,7 +2505,7 @@ sub timer_new_form {
   my $this_event;
   if($epg_id) { # new timer
     my $this = EPG_getEntry($vdr_id, $epg_id);
-    $this_event->{active} = 0x8001;
+    $this_event->{active} = 0x0001;
     $this_event->{event_id} = $this->{event_id};
     $this_event->{start}  = $this->{start} - ($CONFIG{TM_MARGIN_BEGIN} * 60);
     $this_event->{stop}   = $this->{stop}  + ($CONFIG{TM_MARGIN_END}  * 60);
@@ -2509,6 +2552,9 @@ sub timer_new_form {
     }
   }
   
+  my $displaysummary = $this_event->{summary};
+  $displaysummary =~ s/\|/\n/g;
+
   my $template = TemplateNew("timer_new.html");
   $template->param(
     url      => $MyURL,
@@ -2522,7 +2568,7 @@ sub timer_new_form {
     prio     => $this_event->{prio} ? $this_event->{prio} : $CONFIG{TM_PRIORITY},
     lft      => $this_event->{lft}  ? $this_event->{lft}  : $CONFIG{TM_LIFETIME},
     title    => $this_event->{title},
-    summary  => $this_event->{summary},
+    summary  => $displaysummary,
     timer_id => $timer_id ? $timer_id : 0,
     channels => \@channels,
     newtimer => $timer_id ? 0 : 1,
@@ -2596,7 +2642,8 @@ sub timer_add {
 		if(length($q->param("summary")) > 0) {
 			$data->{summary} = $q->param("summary");
 			$data->{summary} =~ s/\://g;
-			$data->{summary} =~ s/[\r\n]//g;
+			$data->{summary} =~ s/\r//g;
+			$data->{summary} =~ s/\n/|/g;
 		}
 
     my $dor = $data->{dor};
@@ -2674,6 +2721,7 @@ sub rec_stream {
   my $f;
   my(@tmp, $dirname, $name, $parent, @files);
   my( $date, $time, $day, $month, $hour, $minute);
+  my $c;
 
   for(SendCMD("lstr")) {
     ($i, $date, $time, $title) = split(/ +/, $_, 4);
@@ -2688,14 +2736,16 @@ sub rec_stream {
       $title =~ s/~/\//g;
       $title =~ s/\ /\_/g;
       for ( $i=0 ;$ i < length($title); $i++) {
-	  unless ( substr($title,$i,1) =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&\(\)\+,\-;=]/) {
-	      $newtitle.= sprintf( "#%02X", ord( substr($title,$i,1)));
+          $c = substr($title,$i,1);
+	  unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&\(\)\+,.\-;=~]/) {
+	      $newtitle.= sprintf( "#%02X", ord( $c ));
 	  } else {
-	      $newtitle.= substr($title,$i,1);
+	      $newtitle.= $c;
 	  }
       }
       $title=$newtitle;
-      @files= `find $VIDEODIR/$title/????-$month-$day.$hour?$minute.??.??.rec -name "???.vdr" | sort -r`;
+      $title =~ s/~/\//g;
+      @files= `find $VIDEODIR/ -regex "$VIDEODIR/$title\_*/....-$month-$day\\.$hour.$minute\\...\\...\\.rec/...\\.vdr" | sort -r`;
       foreach (@files) {
           $_ =~ s/$VIDEODIR//;
           $data= $CONFIG{ST_URL}."$_\n$data";
@@ -2864,6 +2914,7 @@ sub at_timer_edit {
     url         => $MyURL,
     prio        => $at[$id-1]->{prio} ? $at[$id-1]->{prio} : $CONFIG{AT_PRIORITY},
     lft         => $at[$id-1]->{lft} ? $at[$id-1]->{lft} : $CONFIG{AT_LIFETIME},
+    oneshot     => $at[$id-1]->{active} == 2,
     active      => $at[$id-1]->{active},
     done        => $at[$id-1]->{done},
     episode     => $at[$id-1]->{episode},
@@ -3190,6 +3241,17 @@ sub prog_summary {
 				next if(!$found);
 			}
 
+			my $displaytext = $event->{summary};
+			my $displaytitle = $event->{title};
+			my $displaysubtitle = $event->{subtitle};
+
+			$displaytext =~ s/\n/<br>\n/g;
+			$displaytext =~ s/\|/<br>\n/g;
+			$displaytitle =~ s/\n/<br>\n/g;
+			$displaytitle =~ s/\|/<br>\n/g;
+			$displaysubtitle =~ s/\n/<br>\n/g;
+			$displaysubtitle =~ s/\|/<br>\n/g;
+
       push(@show,  {
 				date     => my_strftime("%d.%m.%y", $event->{start}),
 				longdate => sprintf("%s., %s. %s %s",
@@ -3199,10 +3261,10 @@ sub prog_summary {
 					my_strftime("%Y", $event->{start})),
 				start    => my_strftime("%H:%M", $event->{start}),
 				stop     => my_strftime("%H:%M", $event->{stop}),
-				title    => $event->{title},
-				subtitle => length($event->{subtitle}) > 30 ? substr($event->{subtitle}, 0, 30) . "..." : $event->{subtitle},
+				title    => $displaytitle,
+				subtitle => length($displaysubtitle) > 30 ? substr($displaysubtitle, 0, 30) . "..." : $displaysubtitle,
 				progname => $event->{channel_name},
-				summary  => length($event->{summary}) > 120 ? substr($event->{summary}, 0, 120) . "..." : $event->{summary},
+				summary  => length($displaytext) > 120 ? substr($displaytext, 0, 120) . "..." : $displaytext,
 				vdr_id   => $event->{vdr_id},
 				proglink => sprintf("%s?aktion=prog_list&vdr_id=%s", $MyURL, $event->{vdr_id}),
 				switchurl=> sprintf("%s?aktion=prog_switch&channel=%s", $MyURL, $event->{vdr_id}),
@@ -3471,11 +3533,14 @@ sub rec_detail {
   my($result) = SendCMD("lstr $id");
   if($result !~ /No summary availab/i) {
     for(split(/\|/, $result)) {
-      if($_ ne (split(/\~/, $title))[1]) {
+      if($_ ne (split(/\~/, $title))[1] && "%" . $_ ne (split(/\~/, $title))[1] && "@" . $_ ne (split(/\~/, $title))[1]) {
         if($first && $title !~ /\~/ && length($title) < 20) {
           $title .= "~" . $_;
           $first = 0;
         } else {
+        	if($text) {
+        		$text .= "<br>";
+        	}
           $text .= "$_ ";
         }
       }
@@ -3484,7 +3549,7 @@ sub rec_detail {
 
   #
   $title =~ s/\~/ - /;
-  
+
 	my $template = TemplateNew("prog_detail.html");
   $template->param(
     text  => $text ? $text : "",
@@ -3739,7 +3804,7 @@ sub show_help {
 #############################################################################
 sub grab_picture {
 	my $size = $q->param("size");
-	my $file = "/tmp/vdr.jpg";
+	my $file = new File::Temp("vdr-XXXXX", UNLINK => 1, SUFFIX => ".jpg");
 	my $maxwidth = 768;
 	my $maxheight = 576;
 	my($width, $height);
@@ -3771,6 +3836,37 @@ sub grab_picture {
 sub force_update {
 	UptoDate(1);
 	RedirectToReferer("$MyURL?aktion=prog_summary");
+}
+
+#############################################################################
+# Authentication
+#############################################################################
+
+sub subnetcheck {
+    my $ip=$_[0];
+    my $net=$_[1];
+    my ($ip1,$ip2,$ip3,$ip4,$net_base,$net_range,$net_base1,$net_base2,
+        $net_base3,$net_base4,$bin_ip,$bin_net);
+
+    ($ip1,$ip2,$ip3,$ip4) = split(/\./,$ip);
+    ($net_base,$net_range) = split(/\//,$net);
+    ($net_base1,$net_base2,$net_base3,$net_base4) = split(/\./,$net_base);
+
+    $bin_ip  = unpack("B*", pack("C", $ip1));
+    $bin_ip .= unpack("B*", pack("C", $ip2));
+    $bin_ip .= unpack("B*", pack("C", $ip3));
+    $bin_ip .= unpack("B*", pack("C", $ip4));
+
+    $bin_net  = unpack("B*", pack("C", $net_base1));
+    $bin_net .= unpack("B*", pack("C", $net_base2));
+    $bin_net .= unpack("B*", pack("C", $net_base3));
+    $bin_net .= unpack("B*", pack("C", $net_base4));
+
+    if (substr($bin_ip,0,$net_range) eq substr($bin_net,0,$net_range)) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 #############################################################################
