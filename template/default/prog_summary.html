@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+	<meta http-equiv="refresh" content="600; URL=vdradmin.pl?aktion=prog_summary">
+	<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+	<title><?% msg.c_progname %?> - <?% msg.ps_headline %?></title>
+	<link href="style.css" rel="stylesheet" media="screen">
+	<script language="JavaScript" src="library.js"></script>
+</head>
+
+<body bgcolor="#c4cdd7" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
+	<form action="<tmpl_var url>" method="get" name="FormName">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39">
+			<tr valign="middle">
+				<td valign="middle" width="100" background="bilder/nav_button_back.gif">
+					<p class="einzug_ohnetop"><b><tmpl_var now>&nbsp;<?% msg.c_clock %?></b></p>
+				</td>
+				<td align="right" valign="middle" background="bilder/nav_button_back_mitte.gif">
+					<?% msg.c_whatson %?>&nbsp;<a href="<tmpl_var nowurl>"><?% msg.c_now %?></a>&nbsp;|<?% msg.c_at %?>&nbsp;
+					<input type="text" name="time" size="5" value="<tmpl_var now>">
+					&nbsp;<?% msg.c_clock %?>
+				</td>
+				<td width="15" background="bilder/nav_button_back_end.gif">&nbsp;</td>
+			</tr>
+		</table>
+		<input type="hidden" name="aktion" value="prog_summary">
+		<br>
+
+		<table border="0" cellspacing="0" cellpadding="0">
+<tmpl_loop rows>
+			<tr>
+	<tmpl_loop day>
+		<tmpl_if longdate>
+				<td valign="top" width="272" background="bilder/top.gif">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr valign="middle">
+							<td width="60%">
+								<a name="<tmpl_var anchor>"></a>
+								<p class="einzug">
+									<a href="<tmpl_var proglink>"><b><tmpl_var progname></b></a>
+									&nbsp;<a href="<tmpl_var streamurl>" title="<?% msg.c_stream %?>">[S]</a>
+								</p>
+							</td>
+							<td align="right">
+								<p class="einzug">
+									<tmpl_if start><tmpl_var start>-<tmpl_var stop></tmpl_if>
+								</p>
+							</td>
+						</tr>
+					</table>
+					
+					<div class="einzug_ohnetop">
+						<tmpl_var longdate><br>
+						<b><tmpl_var title></b><br>
+						<tmpl_if subtitle>
+							<i><tmpl_var subtitle></i><br>
+						</tmpl_if>
+						<br>
+						<tmpl_if summary><tmpl_var summary> &nbsp;<a href="javascript:popup('<tmpl_var infurl>');"><?% msg.ps_more %?></a></tmpl_if>
+						<br>
+						<br>
+					</div>
+				</td>
+		<tmpl_else>
+				<td valign="top" width="272"></td>
+		</tmpl_if>
+	</tmpl_loop>
+			</tr>
+			<tr>
+	<tmpl_loop status>
+		<tmpl_if recurl>
+				<td valign="top" width="272">
+					<table width="272" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td>
+								<a href="javascript:callurl('<tmpl_var switchurl>');"><img src="bilder/auge.jpg" width="71" height="38" border="0" alt="<?% msg.ps_view %?>" onmouseover="window.status='<?% msg.ps_view %?>';return true" title="<?% msg.ps_view %?>"></a>
+							</td>
+							<td>
+								<!-- Sendungs Titel und Subtitel -->
+								<a href="vdradmin.pl?search=<tmpl_var title>&aktion=prog_summary&submit=go11)"><img src="bilder/lupe.jpg" width="63" height="38" border="0" alt="<?% msg.ps_search %?>" onmouseover="window.status='<?% msg.ps_search %?>';return true" title="<?% msg.ps_search %?>"></a>
+							</td>
+							<td>
+								<tmpl_if summary>
+									<a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info.jpg" width="64" height="38" border="0" alt="<?% msg.ps_more_info %?>" onmouseover="window.status='<?% msg.ps_more_info %?>';return true" title="<?% msg.ps_more_info %?>"></a>
+								<tmpl_else>
+									<img src="bilder/info_disabled.jpg" width="64" height="38" border="0" alt="noinfo">
+								</tmpl_if>
+							</td>
+							<td>
+								<a href="<tmpl_var recurl>"><img src="bilder/rec.jpg" width="74" height="38" border="0" alt="<?% msg.ps_record %?>" onmouseover="window.status='<?% msg.ps_record %?>';return true" title="<?% msg.ps_record %?>"></a>
+							</td>
+						</tr>
+					</table>
+				</td>
+		<tmpl_else>
+				<td valign="top" width="272"></td>
+		</tmpl_if>
+	</tmpl_loop>
+			</tr>
+</tmpl_loop>
+		</table>
+	</form>
+</body>
+</html>

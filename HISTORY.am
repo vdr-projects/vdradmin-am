@@ -4,64 +4,67 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+************************************************************
+PLEASE NOTE:
+- Streaming doesn't work for me in this release. If you get it working please let me know!
+************************************************************
+
+
+2005-04-04: 0.97-am3.0
+- Reworked updating of channels and EPG from VDR.
+- Fixed displaying of repeating timers.
+- Fixed Makefile to set "$SEARCH_FILES_IN_SYSTEM = 1" on install.
+- Added Spanish i18n (Submitted by Rüdiger Jung)
+- Updated French i18n (Submitted by "Trois Six",  "map" and "lobotomise")
+- Fixed some buttons to work with long translations.
+- Extracted text from templates and moved them to i18n.pl file and moved the i18n.pl files to new folders i18n/$language, resulting in a single template with two skins (bilder & copper). Makes translations and template modification a lot more easier.
+
+Included patches submitted by Ville Skyttä:
+- vdradmin-01-req-zlib.patch: Make Compress::Zlib really optional.
+- vdradmin-02-defaultconfig.patch: Use preset values from %CONFIG as defaults in --config.
+- vdradmin-03-errstr.patch: Fix error string output.
+- vdradmin-04-spelling.patch: Various trivial spelling and phrasing improvements.
+- vdradmin-05-askconf.patch: Allow unattended "vdradmind.pl --config < /dev/null".
+- vdradmin-08-writeconfig.patch: Always write config using WriteConfig().
+- vdradmin-10-exitcodes.patch: Don't exit with status code 0 if something's wrong.
+
 2005-03-30: 0.97-am2c
-- fixed handling of new recordings if VDR is patched with Wareagle-Icons patch (Reported at vdrportal.de).
-
-2005-03-29:
-- fixed handling of MTWTFSS@date in timer (edit & list).
-
-2005-03-26:
-- fixed forgotten items with "vdradmin-0.96_For_vdr-1.3_StoreAutotimerChannelID_And_EventIdCheckDisable.diff".
-
-2005-03-25:
-- fixed directory handling in auto_timer:
-  -> if a "%" (variable) is found you are fully responsible for the final recording's title, e.g. you must add %Title% if you want it (other vars: %Title%, %Subtitle%, %Director%, %Date%, %Category%, %Genre%, %Year%, %Country%, %Originaltitle%, %FSK%, %Episode% and %Rating%)
+- Fixed handling of new recordings if VDR is patched with Wareagle-Icons patch (Reported at vdrportal.de).
+- Fixed handling of MTWTFSS@date in timer (edit & list).
+- Some smaller template fixes.
+- Fixed forgotten items with "vdradmin-0.96_For_vdr-1.3_StoreAutotimerChannelID_And_EventIdCheckDisable.diff".
+- Try harder to avoid browser's caching.
+- Fixed directory handling in auto_timer:
+  -> if a "%" (variable) is found you are fully responsible for the final recording's title, e.g. you must add %Title% if you want it (other vars: %Title%, %Subtitle%, %Director%, %Date%, %Category%, %Genre%, %Year%, %Country%, %Originaltitle%, %FSK%, %Epsiode% and %Rating%)
   -> all "/" will be replaced by "~" (before variable substitution)
 - Automatic programmed timers have their summary hyperlink back. (Reported by sn123py)
 - Handle "VPS" in timer listing.
-
-2005-03-23:
-- fixed French translation.
+- Fixed French translation.
 
 2005-03-23: 0.97-am2b
-- added French template (Submitted by Trois Six)
-- fixed English/i18n.pl
-- removed all "bilder" and "copper" folders in all templates except "Deutsch" and replaced them by links to the folders in "Deutsch".
+- Added French template (Submitted by Trois Six)
+- Fixed English/i18n.pl
+- Removed all "bilder" and "copper" folders in all templates except "Deutsch" and replaced them by links to the folders in "Deutsch".
 
 2005-03-22: 0.97-am2a
-- fixed Volume+ and Volume- in TV (Reported by Unimatrix0)
-- fixed missplaced channel name prog_summary (Reported by several people)
-- added updated English templates (Supplied by C.Y.M)
-- now VDRAdmin understands timers format from vdr1.3.22- and vdr1.3.23 (Supplied by Stefan Neuwirth)
-- fixed small display problem in timeline.
+- Fixed Volume+ and Volume- in TV (Reported by Unimatrix0)
+- Fixed missplaced channel name prog_summary (Reported by several people)
+- Added updated English templates (Supplied by C.Y.M)
+- Now VDRAdmin understands timers format from vdr1.3.22- and vdr1.3.23 (Supplied by Stefan Neuwirth)
+- Fixed small display problem in timeline.
 
 2005-03-20: 0.97-am2
 - TV and remote templates have same remote control.
+- Reworked summary display of recordings
+- Summary editbox preserves linefeeds while editing timers
+- Added stream button in prog_summmary (suggested by Unimatrix0)
 
 Added patches:
-- fix for timers.conf of vdr1.3.23+ (Submitted by Stefan Neuwirth)
+- vdradmin-0.96_For_vdr-1.3_StoreAutotimerChannelID_And_EventIdCheckDisable.diff (posted at the VDR mailinglist by Rantanen Teemu)
+- vdradmin-0.96_OneShot_Timers_English_Only.diff and merged it to "Deutsch" template (posted at the VDR mailinglist by Rantanen Teemu)
+- Included changes from vdradmin-0.96-3-ctvdr-1 (see HISTORY.ct).
+- Fix for timers.conf of vdr1.3.23+ (Submitted by Stefan Neuwirth)
 - Localnet Patch; no password request if client ip in given ip range) (Submitted by Reiner Buehl)
-
-2005-03-19:
-Templates cleanup:
-- timer_list.html
-- timer_new.html
-- toolbar.html
-- tv_flash.html
-- tv.html
-
-2005-03-18:
-- reworked summary display of recordings
-- summary editbox preserves linefeeds while editing timers
-
-Templates cleanup:
-- prog_timeline.html
-- rc.html
-- rec_edit.html
-- rec_list.html
-
-2005-03-12: 
-- Added stream button in prog_summmary (suggested by Unimatrix0)
 
 Templates cleanup:
 - at_new.html
@@ -76,30 +79,30 @@ Templates cleanup:
 - prog_list2.html
 - prog_list.html
 - prog_summary.html (TODO)
-
-Added patches:
-- vdradmin-0.96_For_vdr-1.3_StoreAutotimerChannelID_And_EventIdCheckDisable.diff (posted at the VDR mailinglist by Rantanen Teemu)
-- vdradmin-0.96_OneShot_Timers_English_Only.diff and merged it to "Deutsch" template (posted at the VDR mailinglist by Rantanen Teemu)
-- included changes from vdradmin-0.96-3-ctvdr-1 (see HISTORY.ct).
+- prog_timeline.html
+- rc.html
+- rec_edit.html
+- rec_list.html
+- timer_list.html
+- timer_new.html
+- toolbar.html
+- tv_flash.html
+- tv.html
 
 Changes that have been forgotten while merging previous patches:
 - Fixed: timer listing now shows "VPS" instead of "Auto (alt)".
-- removed unneeded <br>. They are still used for display only.
+- Removed unneeded <br>. They are still used for display only.
 
 2005-03-06: 0.97-am1 "initial release"
 This is mainly the lastest vdradmin (v0.97) with different patches applied:
 - vdradmin-0.97 has been taken from linvdr-0.7.
 - xpix's BigPatch_0.9pre5 (ported from vdradmin-0.95 to vdradmin-0.97 (see HISTORY.bigpatch).
-- included changes from vdradmin-0.95-ct-10 (see HISTORY.ct).
-- included vdradmin-0.95_0.9_pre5_fb1.diff (see HISTORY.macfly).
-- included vdradmin-0.96-rename.diff which also needs an applied "vdr-aio21_svdrprename.patch" patch (Author: slime).
+- Included changes from vdradmin-0.95-ct-10 (see HISTORY.ct).
+- Included vdradmin-0.95_0.9_pre5_fb1.diff (see HISTORY.macfly).
+- Included vdradmin-0.96-rename.diff which also needs an applied "vdr-aio21_svdrprename.patch" or enAIO-v2.2 patch (Author: slime).
 
 My own changes:
-- included missing "Was läuft heute?" template (found at www.vdr-portal.de).
-- fixed some rendering problems with "New Timer" and "New Autotimer" on KDE's Konqueror.
+- Included missing "Was läuft heute?" template (found at www.vdr-portal.de).
+- Fixed some rendering problems with "New Timer" and "New Autotimer" on KDE's Konqueror.
 - Beautified recordings listing (at least in my eyes ;-)
 - Added "Size" selectbox to TV template.
-
-************************************************************
-PLEASE NOTE:
-- Streaming doesn't work for me in this release. If you get it working please let me know!

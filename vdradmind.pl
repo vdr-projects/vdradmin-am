@@ -28,6 +28,7 @@ my $BASENAME;
 BEGIN {
 	$0 =~ /(^.*\/)/;
 	$BASENAME = $1;
+	#TODO: $0 = "vdradmind"; # does this harm any external script that depend on vdradmind.pl?
 	unshift(@INC, "/usr/share/vdradmin/lib");
 	unshift(@INC, $BASENAME . "lib/");
 }
@@ -69,6 +70,7 @@ $CONFIG{VDR_PORT}         = 2001;
 $CONFIG{USERNAME}         = "linvdr";
 $CONFIG{PASSWORD}         = "linvdr";
 $CONFIG{GUEST_ACCOUNT}    = 0;
+$CONFIG{TEMPLATE}         = "default";
 $CONFIG{LANGUAGE}         = "Deutsch";
 $CONFIG{LOGLEVEL}         = 81; # 32799
 $CONFIG{CACHE_TIMEOUT}    = 60;
@@ -89,6 +91,7 @@ $CONFIG{LOGGING}          = 0;
 $CONFIG{MOD_GZIP}         = 0;
 #
 $CONFIG{LOGFILE}          = "vdradmind.log";
+$CONFIG{SERVERHOST}       = "localhost";
 $CONFIG{SERVERPORT}       = 8001;
 $CONFIG{RECORDINGS}       = 1;
 $CONFIG{ZEITRAHMEN}       = 1;
@@ -97,30 +100,33 @@ $CONFIG{EPG_DIRECT}       = 1;
 $CONFIG{EPG_FILENAME}     = "/video/epg.data";
 $CONFIG{SKIN}             = 'bilder';
 
-my $VERSION               = "0.97-am2c";
+my $VERSION               = "0.97-am3.0";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $VIDEODIR              = "/video";
 my $DONE                  = &DONE_Read || {};
 
-my($TEMPLATEDIR, $CONFFILE, $LOGFILE, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME);
+my($TEMPLATEDIR, $I18NDIR, $CONFFILE, $LOGFILE, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME);
 if(!$SEARCH_FILES_IN_SYSTEM) {
 	$TEMPLATEDIR           = "${BASENAME}template";
+	$I18NDIR               = "${BASENAME}i18n";
 	$CONFFILE              = "${BASENAME}vdradmind.conf";
 	$LOGFILE               = "${BASENAME}$CONFIG{LOGFILE}";
 	$PIDFILE               = "${BASENAME}vdradmind.pid";
 	$AT_FILENAME           = "${BASENAME}vdradmind.at";
 	$DONE_FILENAME         = "${BASENAME}vdradmind.done";
-	$BL_FILENAME         = "${BASENAME}vdradmind.bl";
+	$BL_FILENAME           = "${BASENAME}vdradmind.bl";
 } else {
 	$TEMPLATEDIR           = "/usr/share/vdradmin/template";
+	$I18NDIR               = "/usr/share/vdradmin/i18n";
 	$CONFFILE              = "/etc/vdradmin/vdradmind.conf";
 	$LOGFILE               = "/var/log/$CONFIG{LOGFILE}";
 	$PIDFILE               = "/var/run/vdradmind.pid";
 	$AT_FILENAME           = "/etc/vdradmin/vdradmind.at";
 	$DONE_FILENAME         = "/etc/vdradmin/vdradmind.done";
-	$BL_FILENAME         = "/etc/vdradmin/vdradmind.bl";
+	$BL_FILENAME           = "/etc/vdradmin/vdradmind.bl";
 }
 
+#use Template::Constants qw( :debug );
 # IMHO a better Template Modul ;-)
 # some useful options (see below for full list)
 my $Xconfig = {
@@ -134,7 +140,6 @@ my $Xconfig = {
   CACHE_SIZE   => 10000,           # Tuning for Templates
   COMPILE_EXT  => 'cache',         # Tuning for Templates 
   COMPILE_DIR  => '/tmp',          # Tuning for Templates
-
 };
 
 # create Template object
@@ -146,7 +151,7 @@ my $USE_SHELL_GZIP        = false; # set on false to use the gzip library
 
 if($CONFIG{MOD_GZIP}) {
   # lib gzipping
-  use Compress::Zlib;
+  require Compress::Zlib;
 }
 
 my($DEBUG) = 0;
@@ -178,35 +183,31 @@ for(my $i = 0; $i < scalar(@ARGV); $i++) {
     print("A perl client for the Linux Video Disk Recorder.\n\n");
     print("  -nf  --nofork   don't fork\n");
     print("  -c   --config   run configuration dialog\n");
-    print("  -k   --kill     kill a fork'ed vdradmin\n");
-    print("  -h   --help     this here\n");
+    print("  -k   --kill     kill a forked vdradmin\n");
+    print("  -h   --help     this message\n");
     print("\nReport bugs to <vdradmin\@linvdr.org>.\n");
     exit(0);
   }
   if(/--nofork|-nf/) { $DAEMON = 0; last; }
   if(/--config|-c/) {
-    $CONFIG{VDR_HOST} = Question("What's your VDR hostname (e.g video.intra.net)?", "localhost");
-    $CONFIG{VDR_PORT} = Question("What's the port VDR listen to SVDRP query's?", "2001");
-    $CONFIG{SERVERHOST} = Question("On which address should vdradmin listen (0.0.0.0 for any)?", "0.0.0.0");
-    $CONFIG{SERVERPORT} = Question("On which port should vdradmin answer?", "8001");
-    $CONFIG{USERNAME} = Question("Username?", "linvdr");
-    $CONFIG{PASSWORD} = Question("Password?", "linvdr");
-    $CONFIG{EPG_FILENAME} = Question("Where is your epg.data?", "/video/epg.data");
+    $CONFIG{VDR_HOST} = Question("What's your VDR hostname (e.g video.intra.net)?", $CONFIG{VDR_HOST});
+		$CONFIG{VDR_PORT} = Question("On which port does VDR listen to SVDRP queries?", $CONFIG{VDR_PORT});
+		$CONFIG{SERVERHOST} = Question("On which address should vdradmin listen (0.0.0.0 for any)?", $CONFIG{SERVERHOST});
+		$CONFIG{SERVERPORT} = Question("On which port should vdradmin listen?", $CONFIG{SERVERPORT});
+		$CONFIG{USERNAME} = Question("Username?", $CONFIG{USERNAME});
+		$CONFIG{PASSWORD} = Question("Password?", $CONFIG{PASSWORD});
+		$CONFIG{EPG_FILENAME} = Question("Where is your epg.data?", $CONFIG{EPG_FILENAME});
     $CONFIG{EPG_DIRECT} = ($CONFIG{EPG_FILENAME} and -e $CONFIG{EPG_FILENAME} ? 1 : 0);
 
-    open(CONF, ">$CONFFILE") || die "Cannot open $CONFFILE: $!\n";
-    for(keys(%CONFIG)) {
-      print(CONF "$_ = $CONFIG{$_}\n");
-    }
-    close(CONF);
+		WriteConfig();
 
-    print("Config file sucessfull written.\n");
+    print("Config file written successfully.\n");
     exit(0);
   }
   if(/--kill|-k/) {
-    kill(2, getPID($PIDFILE));
+		my $killed = kill(2, getPID($PIDFILE));
     unlink($PIDFILE);
-    exit(0);
+    exit($killed > 0 ? 0 : 1);
   }
   if(/--displaycall|-i/) {
     for(my $z = 0; $z < 5; $z++) {
@@ -227,9 +228,9 @@ ReadConfig();
 
 
 if(-e "$PIDFILE") {
-	print "There's already an copy of this program running! (pid: " . getPID($PIDFILE) . ")\n";
-	print "If you feel this is a error, remove $PIDFILE!\n";
-	exit(0);
+	print "There's already a copy of this program running! (pid: " . getPID($PIDFILE) . ")\n";
+	print "If you feel this is an error, remove $PIDFILE!\n";
+	exit(1);
 }
 
 if($DAEMON) {
@@ -254,11 +255,8 @@ $Socket->timeout($CONFIG{AT_TIMEOUT} * 60) if($CONFIG{AT_FUNC});
 $CONFIG{CACHE_LASTUPDATE} = 0;
 
 #
-my(@I18N_Days, @I18N_Month, %ERRORMESSAGE, %COMMONMESSAGE,
-	@LOGINPAGES_DESCRIPTION, %HELP);
+my(@I18N_Days, @I18N_Month, %ERRORMESSAGE, %COMMONMESSAGE, @LOGINPAGES_DESCRIPTION, %HELP, %MESSAGES);
 LoadTranslation();
-
-UptoDate();
 
 ##
 # Mainloop
@@ -293,7 +291,7 @@ while(true) {
   if($raw_request =~ /^GET (\/[\w\.\/-\:]*)([\?[\w=&\.\+\%-\:\!]*]*)[\#\d ]+HTTP\/1.\d$/) {
 		($Request, $Query) = ($1, $2 ? substr($2, 1, length($2)) : undef);
 	} else {
-    Error("404", "Not Found", "The requested URL /bad_request was not found on this server.");
+    Error("404", $MESSAGES{err_notfound}, $MESSAGES{err_notfound_long});
     close($Client);
 		next;
 	}
@@ -350,12 +348,14 @@ while(true) {
 			eval("(\$http_status, \$bytes_transfered) = $aktion();");
 		} else {
 			# XXX redirect to no access template 
-      Error("403", "Forbidden", "You don't have permission to access this function.");
+      Error("403", $MESSAGES{err_forbidden}, $MESSAGES{err_forbidden_long});
 			next;
 		}
 	} elsif($Request eq "/") {
 		$MyURL = "./vdradmin.pl";
 		($http_status, $bytes_transfered) = show_index();
+	} elsif($Request eq "/left.html") {
+		($http_status, $bytes_transfered) = show_navi();
 	} else {
     ($http_status, $bytes_transfered) = SendFile($Request);
 	}
@@ -398,7 +398,7 @@ sub ReadFile {
   my $file = shift;
   return if(!$file);
 
-  open(I18N, $file) || HTMLError("Cannot open $file!");
+  open(I18N, $file) || HTMLError(sprintf($MESSAGES{err_cant_open}, $file));
 	my $buf = join("", <I18N>);
 	close(I18N);
   return($buf);
@@ -429,9 +429,11 @@ sub EURL {
 
 sub HTMLError {
   my $error = join("", @_);
-  my $template = HTML::Template->new(
-    filename => "$TEMPLATEDIR/$CONFIG{LANGUAGE}/error.html");
-  $template->param(error => $error);
+  my $template = HTML::Template->new(filename => "$TEMPLATEDIR/$CONFIG{TEMPLATE}/error.html");
+  $template->param(
+  	title => $MESSAGES{err_error},
+  	error => $error
+  );
 	$CONFIG{CACHE_LASTUPDATE} = 0;
   return(header("200", "text/html", $template->output));
 }
@@ -729,11 +731,11 @@ sub headerTime {
 sub GZip {
 	my $content = shift;
   my $filename = new File::Temp("vdradmin-XXXXX", UNLINK => 1);
-  open(PIPE, "| gzip -9 - > $filename") || die "cant open pipe to gzip ($!)";
+  open(PIPE, "| gzip -9 - > $filename") || die "Can't open pipe to gzip ($!)";
   print PIPE $$content;
   close(PIPE);
 
-  open(FILE, $filename) || die "cant open $filename ($1)";
+  open(FILE, $filename) || die "Can't open $filename ($!)";
   my $result = join("", <FILE>);
   close(FILE);
 
@@ -773,8 +775,11 @@ sub header {
   PrintToClient("HTTP/1.0 $status$status_text", CRLF);
   PrintToClient("Date: ", headerTime(), CRLF);
 	if(!$caching) {
-		PrintToClient("Expires: Mon, 26 Jul 1997 05:00:00 GMT", CRLF);
-		PrintToClient("Cache-Control: max-age=0", CRLF);
+#		PrintToClient("Expires: Mon, 26 Jul 1997 05:00:00 GMT", CRLF);
+#		PrintToClient("Cache-Control: max-age=0", CRLF);
+  	PrintToClient("Cache-Control: private", CRLF);
+  	PrintToClient("Pragma: no-cache", CRLF);
+  	PrintToClient("Expires: -1", CRLF);
 	} else {
 		PrintToClient("Expires: ", headerTime(time() + 3600), CRLF);
 		PrintToClient("Cache-Control: max-age=3600", CRLF);
@@ -801,7 +806,13 @@ sub headerForward {
 
 sub headerNoAuth {
   my $template = TemplateNew("noauth.html");
-	my $data = $template->output;
+  my $vars = {
+  	msg => \%MESSAGES
+  };
+  $template->param($vars);
+  my $data;
+	my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$data);
   PrintToClient("HTTP/1.0 401 Authorization Required", CRLF);
   PrintToClient("Date: ", headerTime(), CRLF);
   PrintToClient("Server: $SERVERVERSION", CRLF);
@@ -814,10 +825,9 @@ sub headerNoAuth {
 }
 
 sub Error {
-	my $template = HTML::Template->new(
-		filename => "$TEMPLATEDIR/$CONFIG{LANGUAGE}/noperm.html");
+	my $template = HTML::Template->new(filename => "$TEMPLATEDIR/$CONFIG{TEMPLATE}/noperm.html");
 	$template->param(
-		title => $_[0],
+		title => $_[0] . " - " . $_[1],
 		h1    => $_[1],
 		error => $_[2],
 	);
@@ -834,12 +844,12 @@ sub SendFile {
 #	my $FileWithPath = sprintf("%s/%s/%s/%s",
 #		$BASENAME,
 		$TEMPLATEDIR,
-		$CONFIG{LANGUAGE},
+		$CONFIG{TEMPLATE},
 		$File);
 
   # Skin css file
-  $FileWithPath = sprintf('%s/%s/%s/%s', $TEMPLATEDIR, $CONFIG{LANGUAGE}, $CONFIG{SKIN}, $File)
-    if((split('[/\.]',$File))[-1] eq 'css' and -e sprintf('%s/%s/%s/%s', $TEMPLATEDIR, $CONFIG{LANGUAGE}, $CONFIG{SKIN}, $File));
+  $FileWithPath = sprintf('%s/%s/%s/%s', $TEMPLATEDIR, $CONFIG{TEMPLATE}, $CONFIG{SKIN}, $File)
+    if((split('[/\.]',$File))[-1] eq 'css' and -e sprintf('%s/%s/%s/%s', $TEMPLATEDIR, $CONFIG{TEMPLATE}, $CONFIG{SKIN}, $File));
 
   if(-e $FileWithPath) {
     if(-r $FileWithPath) {
@@ -849,10 +859,10 @@ sub SendFile {
       if(!$mimehash{$2}) { die("can't find mime-type \'$2\'\n"); }
       return(header("200", $mimehash{$2}, $buf, 1));
     } else {
-      Error("403", "Forbidden", "You don't have permission to access /$File on this server.");
+      Error("403", $MESSAGES{err_forbidden}, sprintf($MESSAGES{err_forbidden_file}, $File));
     }
   } else {
-    Error("404", "Not Found", "The requested URL /$File was not found on this server.");
+    Error("404", $MESSAGES{err_notfound}, sprintf($MESSAGES{err_notfound_file}, $File));
   }
 }
 
@@ -863,7 +873,7 @@ sub AT_Read {
   my(@at);
   if(-e $AT_FILENAME) {
     open(AT_FILE, $AT_FILENAME) ||
-      HTMLError("Cant open $AT_FILENAME!");
+      HTMLError(sprintf($MESSAGES{err_cant_open}, $AT_FILENAME));
     while(<AT_FILE>) {
       chomp;
       next if($_ eq "");
@@ -891,7 +901,7 @@ sub AT_Read {
 sub AT_Write {
   my @at = @_;
   open(AT_FILE, ">" . $AT_FILENAME) ||
-    HTMLError("Cant open $AT_FILENAME!");
+    HTMLError(sprintf($MESSAGES{err_cant_open}, $AT_FILENAME));
   for(@at) {
     my $temp;
     for my $item (qw(active pattern section start stop episode prio lft channel directory done)) {
@@ -916,7 +926,7 @@ sub AT_Write {
 
 sub DONE_Write {
     my $done = shift || return;
-    open(DONE_FILE, ">" . $DONE_FILENAME) || HTMLError("Cant open $DONE_FILENAME!");
+    open(DONE_FILE, ">" . $DONE_FILENAME) || HTMLError(sprintf($MESSAGES{err_cant_open}, $DONE_FILENAME));
     foreach my $n (sort keys %$done) { 
         printf DONE_FILE "%s::%d::%s\n", $n, $done->{$n}, scalar localtime($done->{$n}); 
     };
@@ -926,7 +936,7 @@ sub DONE_Write {
 sub DONE_Read {
     my $done;
     if(-e $DONE_FILENAME) {
-        open(DONE_FILE, $DONE_FILENAME) || HTMLError("Cant open $AT_FILENAME!");
+        open(DONE_FILE, $DONE_FILENAME) || HTMLError(sprintf($MESSAGES{err_cant_open}, $AT_FILENAME));
         while(<DONE_FILE>) {
             chomp;
             next if($_ eq "");
@@ -941,7 +951,7 @@ sub DONE_Read {
 sub BlackList_Read {
     my %blacklist;
     if(-e $BL_FILENAME) {
-        open(BL_FILE, $BL_FILENAME) || HTMLError("Cant open $BL_FILENAME!");
+        open(BL_FILE, $BL_FILENAME) || HTMLError(sprintf($MESSAGES{err_cant_open}, $BL_FILENAME));
         while(<BL_FILE>) {
             chomp;
             next if($_ eq "");
@@ -1495,7 +1505,7 @@ sub ParseTimer {
       }
     }
 
-    if($CONFIG{RECORDINGS} && (length($dor) == 7 || length($dor) == 18))  { # repeating timer
+    if($CONFIG{RECORDINGS} && length($dor) == 7)  { # repeating timer
       # generate repeating timer entries for up to 28 days
       $first = 1;
       for($weekday += $off / 86400, $off = 0; $off < 28; $off++)  {
@@ -1576,11 +1586,12 @@ sub DisplayMessage {
 sub LoadTranslation {
   undef @I18N_Days;
   undef @I18N_Month;
+  undef %MESSAGES;
   undef %ERRORMESSAGE;
   undef %COMMONMESSAGE;
   undef %HELP;
   undef @LOGINPAGES_DESCRIPTION;
-  include("$TEMPLATEDIR/$CONFIG{LANGUAGE}/$I18NFILE");
+  include("$I18NDIR/$CONFIG{LANGUAGE}/$I18NFILE");
 }
 
 sub HelpURL {
@@ -1678,12 +1689,16 @@ sub UptoDate {
 	my $force = shift;
   if(((time() - $CONFIG{CACHE_LASTUPDATE}) >= ($CONFIG{CACHE_TIMEOUT} * 60)) || $force) {
 		OpenSocket();
-    ChanTree();
-    EPG_buildTree();
-    CheckTimers();
-    AutoTimer();
-    CloseSocket();
-    $CONFIG{CACHE_LASTUPDATE} = time();
+	  ChanTree();
+	  if (@CHAN) {
+    	EPG_buildTree();
+   		CheckTimers();
+	  	AutoTimer();
+    	CloseSocket();
+   		$CONFIG{CACHE_LASTUPDATE} = time();
+   	} else {
+  		return;
+  	}
   }
   return(0);
 }
@@ -1707,15 +1722,17 @@ sub Log {
 
 sub TemplateNew {
   my $file = shift;
-  $CONFIG{LANGUAGE} = "English" if(!$CONFIG{LANGUAGE});
-  $file = "$TEMPLATEDIR/$CONFIG{LANGUAGE}/$file";
+  $CONFIG{TEMPLATE} = "default" if(!$CONFIG{TEMPLATE});
+  $file = "$TEMPLATEDIR/$CONFIG{TEMPLATE}/$file";
   if(!-e $file) {
     Log(LOG_FATALERROR, "Fatal! Can't find $file!");
   }
   my $template = HTML::Template::Expr->new(
     die_on_bad_params => 0,
     loop_context_vars => 1,
-    filename => $file);
+		#DEBUG        => DEBUG_ALL,
+    filename => $file
+    );
   return $template;
 }
 
@@ -1794,7 +1811,7 @@ sub ReadConfig {
     close(CONF);
   } else {
     print "$CONFFILE doesn't exist. Please run \"$0 --config\"\n";
-    print "Exitting!\n";
+    print "Exiting!\n";
     exit(1);
     #open(CONF, ">$CONFFILE");
     #for(keys(%CONFIG)) {
@@ -1810,8 +1827,8 @@ sub Question {
   my($quest, $default) = @_;
   print("$quest [$default]: ");
   my($answer);
-  $answer = <STDIN>;
-  if($answer eq "\n") {
+  chomp($answer = <STDIN>);
+  if($answer eq "") {
     return($default);
   } else {
     return($answer);
@@ -1899,12 +1916,29 @@ sub show_index {
 	} else {
 		$page = $LOGINPAGES[0];
 	}
-	$template->param(
+	my $vars = {
     loginpage => "$MyURL?aktion=$page",
     version   => $VERSION,
     host      => $CONFIG{VDR_HOST},
-  );
-	return(header("200", "text/html", $template->output));
+    msg       => \%MESSAGES
+  };
+	$template->param($vars);
+	my $output;
+	my $out = $template->output;
+	$Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+	return(header("200", "text/html", $output));
+}
+
+sub show_navi {
+	my $template = TemplateNew("left.html");
+	my $vars = {
+    msg       => \%MESSAGES
+  };
+	$template->param($vars);
+	my $output;
+	my $out = $template->output;
+	$Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+	return(header("200", "text/html", $output));
 }
 
 sub toolbar {
@@ -1991,7 +2025,7 @@ sub prog_detail {
   $displaysubtitle =~ s/\|/<br>\n/g;
 
 	my $template = TemplateNew("prog_detail.html");
-  $template->param(
+  my $vars = {
     title        => $displaytitle ? $displaytitle : undef,
     recurl       => sprintf("%s?aktion=timer_new_form&epg_id=%s&vdr_id=%s", $MyURL, $epg_id, $vdr_id),
     switchurl    => sprintf("%s?aktion=prog_switch&channel=%s", $MyURL, $vdr_id),
@@ -2000,9 +2034,14 @@ sub prog_detail {
 		start        => $start,
 		stop         => $stop,
     text         => $displaytext ? $displaytext : undef,
-		date         => $date
-  );
-  return(header("200", "text/html", $template->output));
+		date         => $date,
+		msg          => \%MESSAGES
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 
@@ -2087,16 +2126,21 @@ sub prog_list {
 	
   # 
   my($template) = TemplateNew("prog_list.html");
-  $template->param(
+  my $vars = {
     url        => $MyURL,
     loop       => \@show,
     chanloop   => \@channel,
     progname   => GetChannelDescByNumber($vdr_id),
 		switchurl  => "$MyURL?aktion=prog_switch&channel=" . $vdr_id,
 		streamurl  => "$MyURL?aktion=live_stream&channel=" . $vdr_id,
-		toolbarurl => "$MyURL?aktion=toolbar"
-  );
-  return(header("200", "text/html", $template->output));
+		toolbarurl => "$MyURL?aktion=toolbar",
+		msg        => \%MESSAGES
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 
@@ -2195,15 +2239,20 @@ sub prog_list2 {
 	
   # 
   my($template) = TemplateNew("prog_list2.html");
-  $template->param(
-    url      => $MyURL,
-    loop     => \@show,
-    chanloop => \@channel,
-    progname => GetChannelDescByNumber($vdr_id),
-		switchurl=> "$MyURL?aktion=prog_switch&channel=" . $vdr_id,
-		toolbarurl => "$MyURL?aktion=toolbar"
-  );
-  return(header("200", "text/html", $template->output));
+  my $vars = {
+    url        => $MyURL,
+    loop       => \@show,
+    chanloop   => \@channel,
+    progname   => GetChannelDescByNumber($vdr_id),
+		switchurl  => "$MyURL?aktion=prog_switch&channel=" . $vdr_id,
+		toolbarurl => "$MyURL?aktion=toolbar",
+		msg        => \%MESSAGES
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 
@@ -2468,15 +2517,13 @@ sub timer_list {
     help_url           => HelpURL("timer_list"),
     current            => $current,
     title              => $title,
+    msg                => \%MESSAGES
   };
 
-  $template->param( $vars  );
-  # New Template
+  $template->param($vars);
   my $output;
   my $out = $template->output;
-  $Xtemplate->process(\$out, $vars, \$output)
-  || return(header("200", "text/html", $Xtemplate->error()));
-
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
   return(header("200", "text/html", $output));
 }
 
@@ -2548,9 +2595,8 @@ sub timer_new_form {
   
   my $displaysummary = $this_event->{summary};
   $displaysummary =~ s/\|/\n/g;
-  
-  my $template = TemplateNew("timer_new.html");
-  $template->param(
+
+	my $vars = {
     url      => $MyURL,
     active   => $this_event->{active} & 1,
     event_id => ($this_event->{event_id} << 1) + (($this_event->{active} & 0x8000) >> 15),
@@ -2568,8 +2614,16 @@ sub timer_new_form {
     newtimer => $timer_id ? 0 : 1,
     referer  => Encode_Referer($ref),
     help_url => HelpURL("timer_new"),
-  );
-  return(header("200", "text/html", $template->output));
+    msg      => \%MESSAGES,
+  };
+  
+  my $template = TemplateNew("timer_new.html");
+  $template->param($vars);
+
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 sub timer_add {
@@ -2844,9 +2898,8 @@ sub at_timer_list {
 	}
 	$desc ? ($desc = 0) : ($desc = 1);
 
-	#
 	my $template = TemplateNew("at_timer_list.html");
-  $template->param(
+  my $vars = {
     sortbychannelurl   => "$MyURL?aktion=at_timer_list&sortby=channel&desc=$desc",
     sortbypatternurl   => "$MyURL?aktion=at_timer_list&sortby=pattern&desc=$desc",
     sortbyactiveurl    => "$MyURL?aktion=at_timer_list&sortby=active&desc=$desc",
@@ -2864,8 +2917,13 @@ sub at_timer_list {
     url			    			 => $MyURL,
 		force_update_url   => "$MyURL?aktion=force_update",
     help_url           => HelpURL("at_timer_list"), 
-  );
-  return(header("200", "text/html", $template->output));
+    msg                => \%MESSAGES
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 sub at_timer_toggle {
@@ -2900,9 +2958,9 @@ sub at_timer_edit {
       push(@chans, $chan);
     }
   }
-  
+
   my $template = TemplateNew("at_new.html");
-  $template->param(
+  my $vars = {
     channels    => \@chans,
     id          => $id,
     url         => $MyURL,
@@ -2922,14 +2980,20 @@ sub at_timer_edit {
     description => ($at[$id-1]->{section} & 4) ? 1 : 0,
     directory   => $at[$id-1]->{directory},
 		newtimer    => 0,
-    help_url    => HelpURL("at_timer_new")
-  );
-  return(header("200", "text/html", $template->output));
+    help_url    => HelpURL("at_timer_new"),
+    msg         => \%MESSAGES
+  };
+
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 sub at_timer_new {
 	my $template = TemplateNew("at_new.html");
-  $template->param(
+  my $vars = {
     url      => $MyURL,
     active   => $q->param("active"),
     done     => $q->param("done"),
@@ -2939,8 +3003,13 @@ sub at_timer_new {
     lft      => $CONFIG{AT_LIFETIME},
 		newtimer => 1,
     help_url => HelpURL("at_timer_new"),
-  );
-  return(header("200", "text/html", $template->output));
+    msg      => \%MESSAGES
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 sub at_timer_save {
@@ -3139,25 +3208,22 @@ sub prog_timeline {
     shows  	=> $shows,
     now_sec	=> $event_time,
     now    	=> strftime("%H:%M", localtime($event_time)),
-    datum	=> sprintf("%s., %s. %s %s",
-    substr(FullDay(my_strftime("%w", time), time), 0, 2),
-    my_strftime("%d", time),
-    FullMonth(my_strftime("%m", time)),
-    my_strftime("%Y", time)),
+    datum	  => sprintf("%s., %s. %s %s",
+                       substr(FullDay(my_strftime("%w", time), time), 0, 2),
+                       my_strftime("%d", time),
+                       FullMonth(my_strftime("%m", time)),
+                       my_strftime("%Y", time)),
     nowurl 	=> $MyURL . "?aktion=prog_timeline",
     url    	=> $MyURL,
     config 	=> \%CONFIG,
+    msg     => \%MESSAGES
   };
 
   my $template = TemplateNew("prog_timeline.html");
-  $template->param( $vars  );
-
-  # New Template
+  $template->param($vars);
   my $output;
   my $out = $template->output;
-  $Xtemplate->process(\$out, $vars, \$output)
-    || return(header("500", "text/html", $Xtemplate->error()));
-
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
   return(header("200", "text/html", $output));
 }
 
@@ -3290,13 +3356,18 @@ sub prog_summary {
 
   #
 	my $template = TemplateNew("prog_summary.html");
-  $template->param(
+  my $vars = {
     rows   => \@shows,
     now    => strftime("%H:%M", localtime($event_time)),
     nowurl => $MyURL . "?aktion=prog_summary",
-    url    => $MyURL
-  );
-  return(header("200", "text/html", $template->output));
+    url    => $MyURL,
+    msg    => \%MESSAGES
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 
@@ -3334,7 +3405,7 @@ sub rec_list {
     #
     if(length($time) > 5) {
       $new = 1;
-			$time = substr($time, 0, 5);
+      $time = substr($time, 0, 5);
     }
 
 	  #
@@ -3490,7 +3561,7 @@ sub rec_list {
 
 
 	my $template = TemplateNew("rec_list.html");
-  $template->param(
+	my $vars = {
     recloop         => \@recordings,
     sortbydateurl   => "$MyURL?aktion=rec_list&parent=$parent&sortby=date&desc=$desc&parent=$parent",
     sortbytimeurl   => "$MyURL?aktion=rec_list&parent=$parent&sortby=time&desc=$desc&parent=$parent",
@@ -3507,8 +3578,13 @@ sub rec_list {
 		path            => \@path,
 		url             => $MyURL,
     help_url        => HelpURL("rec_list"),
-  );
-  return(header("200", "text/html", $template->output));
+    msg             => \%MESSAGES
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 sub rec_detail {
@@ -3545,11 +3621,16 @@ sub rec_detail {
   $title =~ s/\~/ - /;
 
 	my $template = TemplateNew("prog_detail.html");
-  $template->param(
+	my $vars = {
     text  => $text ? $text : "",
-    title => $title
-  );
-  return(header("200", "text/html", $template->output));	
+    title => $title,
+    msg   => \%MESSAGES
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));	
 }
 
 sub rec_delete {
@@ -3579,12 +3660,17 @@ sub rec_edit {
   chomp($title);
   
   my $template = TemplateNew("rec_edit.html");
-  $template->param(
-    url      => $MyURL,
-    title    => $title,
-    id       => $id,
-  );
-  return(header("200", "text/html", $template->output));
+  my $vars = {
+    url   => $MyURL,
+    title => $title,
+    id    => $id,
+    msg   => \%MESSAGES
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 sub rec_rename {
@@ -3656,8 +3742,22 @@ sub conf_list {
 	}
 
   #
-  my @lang;
+  my @template;
   for my $dir (<$TEMPLATEDIR/*>) {
+    next if(!-d $dir);
+    $dir =~ s/.*\///g;
+    my $found = 0;
+    for(@template) { ($found = 1) if($1 && ($_->{name} eq $1)); }
+    if(!$found) {
+      push(@template, {
+				name   => $dir,
+				aktemplate => ($CONFIG{TEMPLATE} eq $dir) ? 1 : 0,
+      });
+    }
+  }
+  #
+  my @lang;
+  for my $dir (<$I18NDIR/*>) {
     next if(!-d $dir);
     $dir =~ s/.*\///g;
     my $found = 0;
@@ -3694,7 +3794,7 @@ sub conf_list {
   }
 
   my @skinlist;
-  foreach my $file (glob(sprintf("%s/%s/*",$TEMPLATEDIR, $CONFIG{LANGUAGE}))) {
+  foreach my $file (glob(sprintf("%s/%s/*",$TEMPLATEDIR, $CONFIG{TEMPLATE}))) {
     my $name = (split('\/', $file))[-1];
     push(@skinlist,{
       name => $name,
@@ -3703,17 +3803,23 @@ sub conf_list {
   }
 
   my $template = TemplateNew("config.html");
-  $template->param(
+  my $vars = {
     %CONFIG,
     LANGLIST          => \@lang,
+    TEMPLATELIST      => \@template,
     ALL_CHANNELS      => \@all_channels,
     SELECTED_CHANNELS => \@selected_channels,
 		LOGINPAGES        => \@loginpages,
     SKINLIST          => \@skinlist,
     url               => $MyURL,
-    help_url          => HelpURL("help_url"),
-  );
-  return(header("200", "text/html", $template->output));
+    help_url          => HelpURL("conf_list"),
+    msg               => \%MESSAGES
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 #############################################################################
@@ -3721,41 +3827,16 @@ sub conf_list {
 #############################################################################
 sub rc_show {
 	my $template = TemplateNew("rc.html");
-  $template->param(
-    surl_0         => $MyURL . "?aktion=rc_hitk&key=0",
-    surl_1         => $MyURL . "?aktion=rc_hitk&key=1",
-    surl_2         => $MyURL . "?aktion=rc_hitk&key=2",
-    surl_3         => $MyURL . "?aktion=rc_hitk&key=3",
-    surl_4         => $MyURL . "?aktion=rc_hitk&key=4",
-    surl_5         => $MyURL . "?aktion=rc_hitk&key=5",
-    surl_6         => $MyURL . "?aktion=rc_hitk&key=6",
-    surl_7         => $MyURL . "?aktion=rc_hitk&key=7",
-    surl_8         => $MyURL . "?aktion=rc_hitk&key=8",
-    surl_9         => $MyURL . "?aktion=rc_hitk&key=9",
-
-    surl_power     => $MyURL . "?aktion=rc_hitk&key=Power",
-
-    surl_ok        => $MyURL . "?aktion=rc_hitk&key=Ok",
-
-    surl_menu      => $MyURL . "?aktion=rc_hitk&key=Menu",
-    surl_back      => $MyURL . "?aktion=rc_hitk&key=Back",
-
-    surl_up        => $MyURL . "?aktion=rc_hitk&key=Up",
-    surl_down      => $MyURL . "?aktion=rc_hitk&key=Down",
-    surl_left      => $MyURL . "?aktion=rc_hitk&key=Left",
-    surl_right     => $MyURL . "?aktion=rc_hitk&key=Right",
-
-    surl_red       => $MyURL . "?aktion=rc_hitk&key=Red",
-    surl_green     => $MyURL . "?aktion=rc_hitk&key=Green",
-    surl_blue      => $MyURL . "?aktion=rc_hitk&key=Blue",
-    surl_yellow    => $MyURL . "?aktion=rc_hitk&key=Yellow",
-
-    surl_volplus   => $MyURL . "?aktion=rc_hitk&key=VolumePlus",
-    surl_volminus  => $MyURL . "?aktion=rc_hitk&key=VolumeMinus",
-		url            => sprintf("%s?aktion=grab_picture", $MyURL),
-    host           => $CONFIG{VDR_HOST}
-  );
-  return(header("200", "text/html", $template->output));
+	my $vars = {
+		url  => sprintf("%s?aktion=grab_picture", $MyURL),
+    host => $CONFIG{VDR_HOST},
+    msg  => \%MESSAGES
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 sub rc_hitk {
@@ -3773,11 +3854,16 @@ sub rc_hitk {
 
 sub tv_show {
 	my $template = TemplateNew("tv.html");
-  $template->param(
-		url => sprintf("%s?aktion=grab_picture", $MyURL),
-    host => $CONFIG{VDR_HOST}
-  );
-  return(header("200", "text/html", $template->output));
+	my $vars = {
+		url  => sprintf("%s?aktion=grab_picture", $MyURL),
+    host => $CONFIG{VDR_HOST},
+    msg  => \%MESSAGES
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 sub show_help {
@@ -3789,8 +3875,15 @@ sub show_help {
     $text = $HELP{$area};
   }
   my $template = TemplateNew("prog_detail.html"); # XXX eigenes Template?
-  $template->param(text => $text);
-  return(header("200", "text/html", $template->output));
+  my $vars = {
+  	text => $text,
+  	msg  => \%MESSAGES
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
 }
 
 #############################################################################
@@ -3888,9 +3981,9 @@ sub new {
 
 sub myconnect {
 	my $this = shift;
-	if ( $epg && $CONFIG{EPG_DIRECT}) {
+	if ($epg && $CONFIG{EPG_DIRECT}) {
 	  main::Log(LOG_VDRCOM, "LOG_VDRCOM: open EPG $CONFIG{EPG_FILENAME}");
-	  open($EPGSOCKET,$CONFIG{EPG_FILENAME}) || main::HTMLError(sprintf("Failed to open %s", $CONFIG{EPG_FILENAME}));
+	  open($EPGSOCKET,$CONFIG{EPG_FILENAME}) || main::HTMLError(sprintf($MESSAGES{err_cant_open}, $CONFIG{EPG_FILENAME}));
 	  return;
 	}
 	main::Log(LOG_VDRCOM, "LOG_VDRCOM: connect to $CONFIG{VDR_HOST}:$CONFIG{VDR_PORT}");
