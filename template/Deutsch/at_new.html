@@ -1,0 +1,155 @@
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+	<title></title>
+	<link href="style.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
+</head>
+
+<body bgcolor="#f0f0f0" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
+	<form action="<tmpl_var url>" method="get" name="FormName">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39">
+			<tr>
+				<td valign="middle" width="500" background="bilder/nav_button_back.gif">
+					<p class="einzug_ohnetop"><b><tmpl_if newtimer>Neuen Auto Timer anlegen<tmpl_else>Auto Timer editieren</tmpl_if></b></p>
+				</td>
+				<td align="right" background="bilder/nav_button_back_mitte.gif">&nbsp;</td>
+				<tmpl_if name="help_url">
+					<td align="right" width="35" background="bilder/nav_button_back_mitte.gif">
+						<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" align="right" valign="top" alt="Hilfe"></a>
+					</td>
+				</tmpl_if>
+				<td width="15" background="bilder/nav_button_back_end.gif">&nbsp;</td>
+			</tr>
+		</table>
+		<br>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr height="30">
+				<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0"></td>
+				<td height="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
+				<td height="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
+				<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0"></td>
+			</tr>
+			<tr height="25">
+				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
+				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif">Auto Timer Aktiv:</td>
+				<td height="25" background="bilder/uebersicht_mitte.gif">
+					<tmpl_if name="active">
+						<input type="radio" name="active" value="1" checked>ja
+						<input type="radio" name="active" value="0">nein
+					<tmpl_else>
+						<input type="radio" name="active" value="1">ja
+						<input type="radio" name="active" value="0" checked>nein
+					</tmpl_if>
+				</td>
+				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
+			</tr>
+			<tr height="25">
+				<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
+				<td height="25" background="bilder/uebersicht_mitte_dark.gif">Suchbegriffe:</td>
+				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
+					<input type="text" name="pattern" value="<tmpl_var pattern>" size="40">
+				</td>
+				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
+			</tr>
+			<tr height="25">
+				<td valign="top" width="30" height="25" background="bilder/uebersicht_links.gif"></td>
+				<td height="25" background="bilder/uebersicht_mitte.gif">zu suchen in:</td>
+				<td height="25" background="bilder/uebersicht_mitte.gif">
+					<input type="checkbox" name="title" value="1" <tmpl_if title>checked</tmpl_if>> Title
+					<input type="checkbox" name="subtitle" value="1" <tmpl_if subtitle>checked</tmpl_if>> Subtitle
+					<input type="checkbox" name="description" value="1" <tmpl_if description>checked</tmpl_if>> Beschreibung
+        </td>
+				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
+			</tr>
+			<tr height="25">
+				<td valign="top" width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
+				<td height="25" background="bilder/uebersicht_mitte_dark.gif">Sender:</td>
+				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
+					<select name="channel" size="1">
+						<option value="0">alle Sender</option>
+						<tmpl_loop channels>
+							<option value="<tmpl_var vdr_id>" <tmpl_if cur> selected</tmpl_if>><tmpl_var name></option>
+						</tmpl_loop>
+					</select>
+				</td>
+				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
+			</tr>
+			<tr height="25">
+				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
+				<td height="25" background="bilder/uebersicht_mitte.gif">Beginnt fr&uuml;hestens:</td>
+				<td height="25" background="bilder/uebersicht_mitte.gif">
+					<input type="text" name="starth" value="<tmpl_var starth>" size="2" maxlength="2">:
+					<input type="text" name="startm" value="<tmpl_var startm>" size="2" maxlength="2"> Uhr
+				</td>
+				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
+			</tr>
+			<tr height="25">
+				<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
+				<td height="25" background="bilder/uebersicht_mitte_dark.gif">Endet sp&auml;testens:</td>
+				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
+					<input type="text" name="stoph" value="<tmpl_var stoph>" size="2" maxlength="2">:
+					<input type="text" name="stopm" value="<tmpl_var stopm>" size="2" maxlength="2"> Uhr
+				</td>
+				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
+			</tr>
+			<tr height="25">
+				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
+				<td height="25" background="bilder/uebersicht_mitte.gif">Priorit&auml;t:</td>
+				<td height="25" background="bilder/uebersicht_mitte.gif">
+					<input type="text" name="prio" value="<tmpl_var prio>" size="2" maxlength="2">
+				</td>
+				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
+			</tr>
+			<tr height="25">
+				<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
+				<td height="25" background="bilder/uebersicht_mitte_dark.gif">Lifetime:</td>
+				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
+					<input type="text" name="lft" value="<tmpl_var lft>" size="2" maxlength="2">
+				</td>
+				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
+			</tr>
+			<tr height="25">
+				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
+				<td height="25" background="bilder/uebersicht_mitte.gif">Serie:</td>
+				<td height="25" background="bilder/uebersicht_mitte.gif">
+					<input type="checkbox" name="episode" value="1" <tmpl_if episode>checked</tmpl_if>>
+				</td>
+				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
+			</tr>
+			<tr height="25">
+				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
+				<td height="25" background="bilder/uebersicht_mitte.gif">Done Aktiv:</td>
+				<td height="25" background="bilder/uebersicht_mitte.gif">
+					<tmpl_if name="done">
+						<input type="radio" name="done" value="1" checked>ja
+						<input type="radio" name="done" value="0">nein
+					<tmpl_else>
+						<input type="radio" name="done" value="1">ja
+						<input type="radio" name="done" value="0" checked>nein
+					</tmpl_if>
+				</td>
+				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
+			</tr>
+			<tr height="25">
+				<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
+				<td height="25" background="bilder/uebersicht_mitte_dark.gif">Ordner:</td>
+				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
+					<input type="text" name="directory" value="<tmpl_var directory>" size="40">
+				</td>
+				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
+			</tr>
+			<tr height="30">
+				<td width="30" height="30"><img src="bilder/uebersicht_unten_links.gif" alt="" width="30" height="30" border="0"></td>
+				<td height="30" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+				<td height="30" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+				<td width="30" height="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0"></td>
+			</tr>
+		</table>
+		<br>
+		<input type="submit" name="save" value="Speichern"><input type="submit" name="exit" value="Abbrechen"> <input type="hidden" name="aktion" value="at_timer_save"> <input type="hidden" name="id" value="<tmpl_var id>">
+	</form>
+</body>
+
+</html>

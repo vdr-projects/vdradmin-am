@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<title></title>
+		<link href="style.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
+	</head>
+
+	<body background="bilder/cback.png" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39">
+			<tr>
+				<td valign="middle" width="300" background="bilder/nav_button_back.gif">
+					<p class="einzug_ohnetop"><b>Aufnahmen</b></p>
+				</td>
+        <td colspan="2" align="right" background="bilder/nav_button_back_mitte.gif">&nbsp;
+          <tmpl_if disk_total>
+            Total: 
+            <tmpl_var minutes_total>
+             (
+            <tmpl_var disk_total>
+            ) | Frei: 
+            <tmpl_var minutes_free>
+             (
+            <tmpl_var disk_free>
+            )
+          </tmpl_if>&nbsp;</td>
+				<tmpl_if name="help_url"><td align="right" width="35" background="bilder/nav_button_back_mitte.gif">
+        <a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" valign="top" alt="Hilfe"></a></td></tmpl_if>
+				<td width="15" background="bilder/nav_button_back_end.gif">&nbsp;</td>
+      </tr>
+		</table>
+		<br>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>&nbsp;<tmpl_loop path> &gt;&gt; <tmpl_if url><a href="<tmpl_var url>"><tmpl_var name></a><tmpl_else><tmpl_var name></tmpl_if></tmpl_loop></td>
+      </tr>
+    </table>
+    <br>
+    <form action="<tmpl_var url>" method="get" name="FormName">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td valign="top" width="30">
+					<p><img src="bilder/uebersicht_oben_links.gif" alt="" height="30" width="30" border="0"></p>
+				</td>
+				<td colspan="2" background="bilder/uebersicht_oben<tmpl_if sortbydate>_selected</tmpl_if>.gif"><p class="einzug_liste_headlines"><tmpl_if sortbydate><tmpl_if desc><img src="bilder/sortiert_desc.gif" alt="" width="9" height="11" border="0">&nbsp;<tmpl_else><img src="bilder/sortiert_asc.gif" alt="" width="9" height="11" border="0">&nbsp;</tmpl_if></tmpl_if><a href="<tmpl_var sortbydateurl>"><font color="black"><b>Datum</b></font></a></td>
+					<td colspan="2" background="bilder/uebersicht_oben<tmpl_if sortbytime>_selected</tmpl_if>.gif"><p class="einzug_liste_headlines"><tmpl_if sortbytime><tmpl_if desc><img src="bilder/sortiert_desc.gif" alt="" width="9" height="11" border="0">&nbsp;<tmpl_else><img src="bilder/sortiert_asc.gif" alt="" width="9" height="11" border="0">&nbsp;</tmpl_if></tmpl_if><a href="<tmpl_var sortbytimeurl>"><font color="black"><b>Uhrzeit</b></font></a></td>
+					<td background="bilder/uebersicht_oben<tmpl_if sortbyname>_selected</tmpl_if>.gif"><p class="einzug_liste_headlines"><tmpl_if sortbyname><tmpl_if desc><img src="bilder/sortiert_desc.gif" alt="" width="9" height="11" border="0">&nbsp;<tmpl_else><img src="bilder/sortiert_asc.gif" alt="" width="9" height="11" border="0">&nbsp;</tmpl_if></tmpl_if><a href="<tmpl_var sortbynameurl>"><font color="black"><b>Name</b></font></a></p> 
+				</td>
+					<td width="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
+					<td width="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
+					<td align="right" width="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
+					<td align="right" width="70" background="bilder/uebersicht_oben.gif">&nbsp;</td>
+				<td valign="top" width="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" height="30" width="30" border="0"></td>
+			</tr>
+			<tmpl_loop recloop>
+			<tr height="25">
+					<td valign="top" width="30" height="22" background="bilder/uebersicht_links<tmpl_if __ODD__>_dark</tmpl_if>.gif">&nbsp;</td>
+					<td valign="top" align="right" width="30" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbydate>_selected</tmpl_if>.gif">
+						<p class="einzug_liste"><tmpl_var date></p>
+					</td>
+					<td valign="top" align="left" width="10" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbydate>_selected</tmpl_if>.gif">
+						<p class="einzug_liste"><tmpl_if isfolder> Gesamt</tmpl_if></p>
+					</td>
+					<td valign="top" align="right" width="30" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbytime>_selected</tmpl_if>.gif">
+						<p class="einzug_liste"><tmpl_var time></p>
+					</td>
+					<td valign="top" width="10" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbytime>_selected</tmpl_if>.gif">
+						<p class="einzug_liste"><tmpl_if isfolder> Neu</tmpl_if><tmpl_if new>    Neu</tmpl_if></p>
+					</td>
+					<td valign="top" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbyname>_selected</tmpl_if>.gif">
+						<p class="einzug_liste"><tmpl_if isfolder><img align="absmiddle" src="bilder/folder.gif" border="0">&nbsp;<a href="<tmpl_var infurl>"><b><font color="black"><tmpl_var name></font></b></a><tmpl_else><a href="javascript:popup('<tmpl_var infurl>');"><b><tmpl_var name></b></a></tmpl_if></p>
+					</td>
+					<td align="center" valign="top" width="30" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
+						<p class="einzug_liste"><tmpl_unless isfolder><a href="<tmpl_var editurl>"><img src="bilder/edit.gif" alt="" height="17" width="17" border="0"></a></tmpl_unless></p>
+					</td>
+					
+					<td align="center" valign="top" width="30" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
+						<p class="einzug_liste"><tmpl_unless isfolder><a href="javascript:del('<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="" height="17" width="17" border="0"></a></tmpl_unless></p>
+					</td>
+					<td align="center" valign="top" width="30" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
+						<p class="einzug_liste"><tmpl_unless isfolder><input type="checkbox" name="xxxx_<tmpl_var id>"></tmpl_unless></p>
+					</td>
+					<td align="center" valign="top" width="70" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
+					        <p class="einzug_liste"><tmpl_unless isfolder><a href="<tmpl_var streamurl>"> <img src="bilder/stream.jpg" alt="" height="17" border="0"></a></tmpl_unless></p>
+					</td>
+				<td valign="top" width="30" background="bilder/uebersicht_rechts<tmpl_if __ODD__>_dark</tmpl_if>.gif">&nbsp;</td>
+			</tr>
+			</tmpl_loop>
+			<tr>
+				<td valign="top" width="30"><img src="bilder/uebersicht_unten_links.gif" alt="" height="30" width="30" border="0"></td>
+				<td background="bilder/uebersicht_unten.gif">&nbsp;</td>
+					<td background="bilder/uebersicht_unten.gif">&nbsp;</td>
+					<td background="bilder/uebersicht_unten.gif">&nbsp;&nbsp;</td>
+					<td background="bilder/uebersicht_unten.gif">&nbsp;&nbsp;</td>
+					<td background="bilder/uebersicht_unten.gif">&nbsp;&nbsp;</td>
+					<td width="30" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+					<td width="30" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+					<td width="30" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+					<td width="70" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+				<td valign="top" width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" height="30" width="30" border="0"></td>
+			</tr>
+				<tr>
+					<td valign="top" width="30">&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td colspan="5" align="right"><br>
+						<table width="280" border="0" cellspacing="0" cellpadding="0">
+							<tr height="20">
+								<td width="12" height="20" background="bilder/gbutton_left.gif"></td>
+								<td align="center" height="20" background="bilder/gbutton_middle.gif">
+									
+										<a href="javascript:mdel();"><div class="gbutton">Ausgew&auml;hlte Aufnahmen l&ouml;schen</div></a>
+
+								</td>
+								<td width="12" height="20" background="bilder/gbutton_right.gif"></td>
+							</tr>
+						</table>
+						</td>
+					<td valign="top" width="30">&nbsp;</td>
+				</tr>
+			</table>
+			<input type="hidden" name="aktion" value="rec_delete">
+			</form>
+		<br>
+	</body>
+
+</html>

@@ -1,0 +1,15 @@
+diff -uHr vdr-1.2.0.patched/svdrp.c vdr-1.2.0/svdrp.c
+--- vdr-1.2.0.patched/svdrp.c	2003-04-27 16:21:07.000000000 +0200
++++ vdr-1.2.0/svdrp.c	2003-06-06 21:34:03.000000000 +0200
+@@ -726,7 +726,10 @@
+   else if (recordings) {
+      cRecording *recording = Recordings.First();
+      while (recording) {
+-           Reply(recording == Recordings.Last() ? 250 : -250, "%d %s", recording->Index() + 1, recording->Title(' ', true));
++					 cIndexFile *oIndex = new cIndexFile(recording->FileName(), false);
++					 const char *sTime = IndexToHMSF(oIndex->Last());
++					 Reply(recording == Recordings.Last() ? 250 : -250, "%d %s\t<%s>", recording->Index() + 1, recording->Title(' ', true), sTime);
++					 delete oIndex;
+            recording = Recordings.Next(recording);
+            }
+      }

@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<title></title>
+		<link href="style.css" rel="stylesheet" media="screen">
+    <script language="JavaScript">
+			<!--
+			function del(suffix) {
+				check=confirm("Delete Auto Timer?");
+				if(check) window.location.href=suffix;
+			}
+			function change(suffix) {
+				check=confirm("Change timer state?");
+				if(check) window.location.href=suffix;
+			}
+			function mdel() {
+				check=confirm("Delete selected timers?");
+				if(check) document.FormName.submit();
+			}
+			// -->
+    </script>
+
+	</head>
+
+	<body bgcolor="#c4cdd7" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39">
+			<tr>
+				<td valign="middle" width="200" background="bilder/nav_button_back.gif">
+					<p class="einzug_ohnetop"><b>Programme automatique</b></p>
+				</td>
+				<td align="right" background="bilder/nav_button_back_mitte.gif">&nbsp;</td>
+				<td align="right" width="203" background="bilder/nav_button_back_mitte.gif">
+				<table width="180" border="0" cellspacing="0" cellpadding="0">
+            <tr height="20">
+              <td width="12" height="20" background="bilder/gbutton_left.gif"></td>
+              <td align="center" height="20" background="bilder/gbutton_middle.gif">
+                
+                  <a href="<tmpl_var naturl>"><div class="gbutton">Nouveau prog auto</div></a>
+
+              </td>
+              <td width="12" height="20" background="bilder/gbutton_right.gif"></td>
+            </tr>
+          </table>
+				</td>
+				<td width="15" background="bilder/nav_button_back_end.gif">&nbsp;</td>
+			</tr>
+		</table>
+		<br>
+		<form action="<tmpl_var url>" method="get" name="FormName">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td valign="top" width="30">
+					<p><img src="bilder/uebersicht_oben_links.gif" alt="" height="30" width="30" border="0"></p>
+				</td>
+				<td width="70" background="bilder/uebersicht_oben<tmpl_if sortbyactive>_selected</tmpl_if>.gif">
+						<p class="einzug_liste_headlines"><tmpl_if sortbyactive><tmpl_if desc><img src="bilder/sortiert_desc.gif" alt="" width="9" height="11" border="0">&nbsp;<tmpl_else><img src="bilder/sortiert_asc.gif" alt="" width="9" height="11" border="0">&nbsp;</tmpl_if></tmpl_if><a href="<tmpl_var sortbyactiveurl>"><font color="black"><b>Actif</b></font></a></p>
+					</td>
+          <td width="15%" background="bilder/uebersicht_oben<tmpl_if sortbychannel>_selected</tmpl_if>.gif">
+						<p class="einzug_liste_headlines"><tmpl_if sortbychannel><tmpl_if desc><img src="bilder/sortiert_desc.gif" alt="" width="9" height="11" border="0">&nbsp;<tmpl_else><img src="bilder/sortiert_asc.gif" alt="" width="9" height="11" border="0">&nbsp;</tmpl_if></tmpl_if><a href="<tmpl_var sortbychannelurl>"><font color="black"><b>Chaîne</b></font></a></p>
+					</td>
+          <td width="15%" background="bilder/uebersicht_oben<tmpl_if sortbystart>_selected</tmpl_if>.gif">
+						<p class="einzug_liste_headlines"><tmpl_if sortbystart><tmpl_if desc><img src="bilder/sortiert_desc.gif" alt="" width="9" height="11" border="0">&nbsp;<tmpl_else><img src="bilder/sortiert_asc.gif" alt="" width="9" height="11" border="0">&nbsp;</tmpl_if></tmpl_if><a href="<tmpl_var sortbystarturl>"><font color="black"><b>Début</b></font></a></p>
+					</td>
+          <td width="15%" background="bilder/uebersicht_oben<tmpl_if sortbystop>_selected</tmpl_if>.gif">
+						<p class="einzug_liste_headlines"><tmpl_if sortbystop><tmpl_if desc><img src="bilder/sortiert_desc.gif" alt="" width="9" height="11" border="0">&nbsp;<tmpl_else><img src="bilder/sortiert_asc.gif" alt="" width="9" height="11" border="0">&nbsp;</tmpl_if></tmpl_if><a href="<tmpl_var sortbystopurl>"><font color="black"><b>Fin</b></font></a></p>
+					</td>
+				<td background="bilder/uebersicht_oben<tmpl_if sortbypattern>_selected</tmpl_if>.gif">
+					<p class="einzug_liste_headlines"><tmpl_if sortbypattern><tmpl_if desc><img src="bilder/sortiert_desc.gif" alt="" width="9" height="11" border="0">&nbsp;<tmpl_else><img src="bilder/sortiert_asc.gif" alt="" width="9" height="11" border="0">&nbsp;</tmpl_if></tmpl_if><a href="<tmpl_var sortbypatternurl>"><font color="black"><b>Nom</b></font></a></p>
+				</td>
+				<td width="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
+				<td width="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
+				<td align="right" width="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
+				<td valign="top" width="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" height="30" width="30" border="0"></td>
+			</tr>
+			<tmpl_loop at_timer_loop>
+			<tr>
+				<td valign="top" width="30" background="bilder/uebersicht_links<tmpl_if __ODD__>_dark</tmpl_if>.gif">&nbsp;</td>
+				<td valign="top" width="70" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbyactive>_selected</tmpl_if>.gif">
+						<p class="einzug_liste">
+							&nbsp;<tmpl_if active><img src="bilder/poempl_gruen.gif" alt="" width="19" height="19" align="absmiddle" border="0"> <a href="<tmpl_var toggleurl>"><font color="black">Oui</font></a><tmpl_else><img src="bilder/poempl_rot.gif" alt="" width="19" height="19" align="absmiddle" border="0"> <a href="<tmpl_var toggleurl>"><font color="black">Non</font></a></tmpl_if>
+						</p>
+					</td>
+            <td valign="top" width="15%" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbychannel>_selected</tmpl_if>.gif">
+						<p class="einzug_liste">
+							<tmpl_if channel>
+								<tmpl_var channel>
+							<tmpl_else>
+								-
+							</tmpl_if></p>
+					</td>
+            <td valign="top" width="15%" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbystart>_selected</tmpl_if>.gif">
+						<p class="einzug_liste">
+                <tmpl_if start>
+                  <tmpl_var start>
+                  <tmpl_else>
+                  -
+                </tmpl_if>
+						</p>
+					</td>
+            <td valign="top" width="15%" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbystop>_selected</tmpl_if>.gif">
+						<p class="einzug_liste">
+                <tmpl_if stop>
+                  <tmpl_var stop>
+                  <tmpl_else>
+                  -
+                </tmpl_if>
+						</p>
+					</td>
+				<td valign="top" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbypattern>_selected</tmpl_if>.gif">
+						<p class="einzug_liste"><tmpl_var pattern></p>
+					</td>
+				<td align="center" valign="top" width="30" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
+						<p class="einzug_liste"><a href="<tmpl_var modurl>"><img src="bilder/edit.gif" alt="" height="17" width="17" border="0"></a></p>
+					</td>
+				<td align="center" valign="top" width="30" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
+						<p class="einzug_liste"><a href="javascript:del('<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="" height="17" width="17" border="0"></a></p>
+					</td>
+				<td align="center" valign="top" width="30" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif">
+						<p class="einzug_liste"><input type="checkbox" name="xxxx_<tmpl_var id>"></p>
+					</td>
+				<td valign="top" width="30" background="bilder/uebersicht_rechts<tmpl_if __ODD__>_dark</tmpl_if>.gif">&nbsp;</td>
+			</tr>
+			</tmpl_loop>
+			<tr>
+				<td valign="top" width="30"><img src="bilder/uebersicht_unten_links.gif" alt="" height="30" width="30" border="0"></td>
+				<td width="50" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+          <td width="15%" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+          <td width="15%" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+          <td width="15%" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+				<td background="bilder/uebersicht_unten.gif">&nbsp;&nbsp;</td>
+				<td width="30" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+				<td width="30" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+				<td width="30" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+				<td valign="top" width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" height="30" width="30" border="0"></td>
+			</tr>
+				<tr>
+          <td colspan="5" valign="top">
+						<table width="150" border="0" cellspacing="0" cellpadding="0">
+							<br>
+							<tr height="20">
+								<td width="12" height="20" background="bilder/gbutton_left.gif"></td>
+								<td align="center" height="20" background="bilder/gbutton_middle.gif">
+									
+										<a href="<tmpl_var force_update_url>"><div class="gbutton">Forcer la MAJ</div></a>
+
+								</td>
+								<td width="12" height="20" background="bilder/gbutton_right.gif"></td>
+							</tr>
+						</table></td>
+          <td colspan="4" align="right"><br>
+						<table width="260" border="0" cellspacing="0" cellpadding="0">
+							<tr height="20">
+								<td width="12" height="20" background="bilder/gbutton_left.gif"></td>
+								<td align="center" height="20" background="bilder/gbutton_middle.gif">
+									
+										<a href="javascript:mdel();"><div class="gbutton">Suppr les prog auto sélectionnés</div></a>
+
+								</td>
+								<td width="12" height="20" background="bilder/gbutton_right.gif"></td>
+							</tr>
+						</table>
+						</td>
+          <td valign="top" width="30"></td>
+				</tr>
+			</table>
+      <input type="hidden" name="aktion" value="at_timer_delete">
+      </form>
+	</body>
+
+</html>

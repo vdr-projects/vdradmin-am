@@ -1,0 +1,34 @@
+since i don' know if vdradmin will be maintained in the future, i took the
+best version i knew of (the one from xpix) and fixed some issues. This is
+the reason, i have my very own HISTORY-File.
+
+macfly-001	- macfly	04.02.2005
+	- added Template, which was missing
+	- fixed disabled timers in the timeline of timer_list to be grey
+	- fixed disabled timers in the listing of timer_list to be grey
+	- included the patch for handling extended EPG provided by tvm2vdr:
+	  if you use autotimer, you can use the following special Tags in
+	  the directory-field. They will be replaced with the information 
+	  from the EPG of the EPG-event:
+		%Title%		will become the title of the event
+		%Subtitle%	will become the subtitle of the event
+		%Director%	will become the director of the event
+		%Date%		will become the date of the recording
+		%Category%	will become the category of the Event (Spielfilm/Serie/...) 
+		%Genre%		will become the genre of the Event (Drama/Krimi/..) 
+		%Year%		will become the year of production
+		%Country% 	will become the country of production
+		%Originaltitle%	will become the original title of the event
+		%FSK%		will become the FSK from the event
+		%Epsiode%	will become the episode of the event
+		%Rating%	will become the rating of the event from the EPG-Provider
+
+	- made the inputfield of the directory for autotimers i little bit larger
+	- fixed enabling/disabling a timer 
+	- added a blacklistfunction. Enter any title into the file vdradmind.bl, 
+	  one event into one line. If this string is found either(!!) in title or
+	  in title~subtitle, this event will not be programmed by autotimer. So you 
+	  can disable complete episodes (for example when using "Enterprise" as 
+	  Blacklist-string) or only one (when using "Enterprise~Azati Prime" as
+	  Blacklist-string).
+	- removed the <br> from the events. They are still used for display only.

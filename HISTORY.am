@@ -1,0 +1,19 @@
+2005-03-06: 0.97-am1 "initial release"
+This is mainly the lastest vdradmin (v0.97) with different patches applied:
+- vdradmin-0.97 has been taken from linvdr-0.7.
+- xpix's BigPatch_0.9pre5 (ported from vdradmin-0.95 to vdradmin-0.97 (see HISTORY.bigpatch).
+- included changes from vdradmin-0.95-ct-10 (see HISTORY.ct).
+- included vdradmin-0.95_0.9_pre5_fb1.diff (see HISTORY.macfly).
+- included vdradmin-0.96-rename.diff which also needs an applied "vdr-aio21_svdrprename.patch" patch (don't know the author right now).
+
+My own changes:
+- included missing "Was läuft heute?" template (found at www.vdr-portal.de).
+- fixed some rendering problems with "New Timer" and "New Autotimer" on KDE's Konqueror.
+- Beautified recordings listing (at least in my eyes ;-)
+- Added "Size" selectbox to TV template.
+
+PLEASE NOTE:
+- Streaming doesn't work for me in this release. If you get it working please let me know!
+- All the above mentioned work/patches only deal with the German templates and the default "bilder" skin.
+  This means you only get all features when using German with "bilder" skin. I don't know if the other languages still work, but I have no idea why they shouldn't.
+  The "copper" misses some images. Maybe someone wants to create them?

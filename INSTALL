@@ -1,0 +1,50 @@
+
+Installation:
+
+  Unpack the archive somewhere:
+  $ tar xvf vdradmin-x.y.tar.gz
+  $ cd vdradmin-x.y
+  $ ./vdradmind.pl --config
+
+  Some questions about the configuration will asked.
+
+  After this, point your browser to the given parameters.
+
+  (e.g. http://localhost:8001)
+
+
+Hide vdradmin behind apache:
+
+  you will need apache with mod_proxy and these lines in httpd.conf:
+
+  <IfModule mod_proxy.c>
+    ProxyRequests Off
+    ProxyPass /vdradmin/ http://127.0.0.1:8001/
+  </IfModule>
+
+Hint from Martin Neuditschko for apache2 (untested):
+
+  I have summarized the needed changes for my Apache (Apache2, SuSE 8.2):
+  Following modules have to be activated additionally:
+  proxy, html_proxy, rewrite
+
+  Following has to be added to the httpd.conf:
+  <VirtualHost *>
+    RewriteEngine On
+    RewriteRule ^/vdradmin(.*) http://localhost:8001$1 [P,L]
+  </VirtualHost>
+
+See who's calling (you need an ISDN card for this):
+
+  Insert this in your isdn.conf:
+
+  [MSN]
+  NUMBER = <yourmsn>
+  START = {
+    [FLAG]
+    FLAGS = I|O|R
+    PROGRAM = /path/to/vdradmind.pl --displaycall "Call from \$2"
+  }
+
+  Restart isdnlog.
+

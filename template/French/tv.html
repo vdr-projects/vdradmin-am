@@ -1,0 +1,75 @@
+<html>
+
+  <head>
+    <title>TV (<tmpl_var host>)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<script language="JavaScript">
+		<!--
+		var aktiv;
+		var interval = 5;
+		function switch_channel(url) {
+			Now = new Date();
+			document.switchimage.src = url + "&" + Now.getTime();
+		}
+		function WebcamUpdate() {
+			Now = new Date();
+			NewPicUrl = "<tmpl_var url>&" + Now.getTime();
+			document.Bild.src = NewPicUrl;
+		}
+		function go() {
+			//alert(document.liveform.livebild.checked);
+			if(document.liveform.livebild.checked == true)
+				v_Start();
+			else
+				v_Stop();
+		}
+		function v_Start() {
+			aktiv = window.setInterval("WebcamUpdate()", interval * 1000);
+		}
+		function v_Stop() {
+			window.clearInterval(aktiv);
+		}
+		function v_changeInterval(val) {
+			interval = val;
+			v_Stop();
+			go();
+			//v_Start();
+		}
+			
+		//-->
+		</script>
+		<style type="text/css" media="screen"><!--
+#Ebene1 { position: absolute; z-index: 0; top: 0px; left: 0px; width: 100px; height: 100px; visibility: visible; display: block }
+#Ebene2 { position: absolute; z-index: 10; top: 0px; left: 0px; width: 100px; height: 100px; visibility: visible; display: block }
+td         { color: #000; font-weight: normal; font-size: 11px; font-family: Verdana, Arial, Geneva, Helvetica, sans-serif }
+		--></style>
+  </head>
+
+	 <body background="bilder/tv_bottom.gif" bgcolor="#FFFFFF" leftmargin="0" marginheight="0" marginwidth="0" topmargin="0"> 
+		<form name="liveform">
+    <table width="200" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+					<img name="Bild" height="288" src="<tmpl_var url>" border="0">
+					<div id="Ebene2"><img src="bilder/framed.gif" alt="" border="0"></div>
+				</td>
+      </tr>
+      <tr>
+        <td>
+          <img src="bilder/spacer.gif" name="switchimage" width="1" height="1">
+					Photo <input type="checkbox" name="livebild" onClick="go()">
+					Intervale <select name="Seconds" size="1" onChange="v_changeInterval(this.options[this.selectedIndex].value)">
+						<option value="1">un</option>
+						<option value="2">deux</option>
+						<option value="3">trois</option>
+						<option value="5" selected>cinq</option>
+						<option value="10">10</option>
+						<option value="30">30</option>
+						<option value="60">60</option>
+					</select>
+				</td>
+      </tr>
+    </table>
+		</form>
+  </body>
+</html>

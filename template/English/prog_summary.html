@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<title>VDRAdmin - Was l&auml;uft jetzt?</title>
+		<link href="style.css" rel="stylesheet" media="screen">
+    <script language="JavaScript">
+		    <!--
+		    function popup(URL) {
+			    window.open(URL, "_new", "width=440, height=250");
+		    }
+
+		    function switch_channel(url) {
+		      image = new Image();
+		      image.src = url;
+		      document.switchimage.src = image.src;
+		    }
+		    // -->
+		</script>
+	</head>
+
+	<body bgcolor="#c4cdd7" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
+		<form action="<tmpl_var url>" method="get" name="FormName">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39">
+			<tr>
+				<td valign="middle" width="100" background="bilder/nav_button_back.gif">
+					<p class="einzug_ohnetop"><b><tmpl_var now></b></p>
+				</td>
+				<td align="right" background="bilder/nav_button_back_mitte.gif">What's on: <a href="<tmpl_var nowurl>">now</a> | at:&nbsp;</td>
+				<td align="right" width="50" background="bilder/nav_button_back_mitte.gif">
+						<input type="text" name="time" size="5" value="<tmpl_var now>">
+						<input type="hidden" name="aktion" value="prog_summary">
+				</td>
+				<td width="15" background="bilder/nav_button_back_end.gif">&nbsp;</td>
+			</tr>
+		</table>
+		<br>
+		<table width="816" border="0" cellspacing="0" cellpadding="0">
+			<tmpl_loop rows>
+			<tr>
+				<tmpl_loop day>
+				<tmpl_if longdate>
+				<td valign="top" width="272" background="bilder/top.gif">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="60%">
+                  <a name="<tmpl_var anchor>"></a>
+									<p class="einzug">
+									<a href="<tmpl_var proglink>"><b><tmpl_var progname></b></a></p>
+								</td>
+								<td align="right"><p class="einzug"><tmpl_if start><tmpl_var start>-<tmpl_var stop></tmpl_if></p></td>
+							</tr>
+						</table>
+						<div class="einzug_ohnetop">			
+						<tmpl_var longdate><br>
+						<b><tmpl_var title></b><br>
+						<b><tmpl_var subtitle></b><br>
+						<tmpl_if summary><tmpl_var summary> <a href="javascript:popup('<tmpl_var infurl>');">more</a></tmpl_if>
+						<br>
+						<br>
+						</div>
+				</td>
+				<tmpl_else>
+				<td valign="top" width="272">
+				</td>
+				</tmpl_if>
+				</tmpl_loop>
+			</tr>
+			<tr>
+			<tmpl_loop status>
+				<tmpl_if recurl>
+				<td valign="top" width="272"><a href="javascript:switch_channel('<tmpl_var switchurl>');"><img src="bilder/tv_umschalten_mitback.gif" alt="" height="38" width="161" border="0"></a><a href="<tmpl_var recurl>"><img src="bilder/rec_mitback.gif" alt="" height="38" border="0"></a></td>
+				<tmpl_else>
+				<td valign="top" width="272">
+				</td>
+				</tmpl_if>
+			</tmpl_loop>
+			</tr>
+			</tmpl_loop>
+		</table>
+		</form>
+	</body>
+</html>
