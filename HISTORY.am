@@ -4,6 +4,11 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2005-03-23: 0.97-am2b
+- added French template (Submitted by Trois Six)
+- fixed English/i18n.pl
+- removed all "bilder" and "copper" folders in all templates except "Deutsch" and replaced them by links to the folders in "Deutsch".
+
 2005-03-22: 0.97-am2a
 - fixed Volume+ and Volume- in TV (Reported by Unimatrix0)
 - fixed missplaced channel name prog_summary (Reported by several people)
@@ -15,8 +20,8 @@ VDR-Portal: amair
 - TV and remote templates have same remote control.
 
 Added patches:
-- fix for timers.conf of vdr1.3.23+ (Submitted by x-stefan @vdrportal.de)
-- Localnet Patch; no password request if client ip in given ip range) (Submitted by "Reiner Buehl" <reiner@buehl.net>)
+- fix for timers.conf of vdr1.3.23+ (Submitted by Stefan Neuwirth)
+- Localnet Patch; no password request if client ip in given ip range) (Submitted by Reiner Buehl)
 
 2005-03-19:
 Templates cleanup:
@@ -37,7 +42,7 @@ Templates cleanup:
 - rec_list.html
 
 2005-03-12: 
-- Added stream button in prog_summmary (suggested by Unimatrix0 @vdrportal.de)
+- Added stream button in prog_summmary (suggested by Unimatrix0)
 
 Templates cleanup:
 - at_new.html
@@ -54,8 +59,8 @@ Templates cleanup:
 - prog_summary.html (TODO)
 
 Added patches:
-- vdradmin-0.96_For_vdr-1.3_StoreAutotimerChannelID_And_EventIdCheckDisable.diff (posted at the VDR mailinglist by "Rantanen Teemu" <teemu.rantanen@tekla.com>)
-- vdradmin-0.96_OneShot_Timers_English_Only.diff and merged it to "Deutsch" template (posted at the VDR mailinglist by "Rantanen Teemu" <teemu.rantanen@tekla.com>)
+- vdradmin-0.96_For_vdr-1.3_StoreAutotimerChannelID_And_EventIdCheckDisable.diff (posted at the VDR mailinglist by Rantanen Teemu)
+- vdradmin-0.96_OneShot_Timers_English_Only.diff and merged it to "Deutsch" template (posted at the VDR mailinglist by Rantanen Teemu)
 - included changes from vdradmin-0.96-3-ctvdr-1 (see HISTORY.ct).
 
 Changes that have been forgotten while merging previous patches:
@@ -68,7 +73,7 @@ This is mainly the lastest vdradmin (v0.97) with different patches applied:
 - xpix's BigPatch_0.9pre5 (ported from vdradmin-0.95 to vdradmin-0.97 (see HISTORY.bigpatch).
 - included changes from vdradmin-0.95-ct-10 (see HISTORY.ct).
 - included vdradmin-0.95_0.9_pre5_fb1.diff (see HISTORY.macfly).
-- included vdradmin-0.96-rename.diff which also needs an applied "vdr-aio21_svdrprename.patch" patch (Author: slime @vdrportal.de).
+- included vdradmin-0.96-rename.diff which also needs an applied "vdr-aio21_svdrprename.patch" patch (Author: slime).
 
 My own changes:
 - included missing "Was läuft heute?" template (found at www.vdr-portal.de).
@@ -79,4 +84,3 @@ My own changes:
 ************************************************************
 PLEASE NOTE:
 - Streaming doesn't work for me in this release. If you get it working please let me know!
-- French template not patched. Volunteers wanted!

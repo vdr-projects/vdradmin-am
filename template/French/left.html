@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+	<title>VDRAdmin</title>
+	<link href="navi.css" rel="stylesheet" media="screen">
+
+	<script>
+		<!--
+			function rc_open() {
+				//window.open("./vdradmin.pl?aktion=rc_show", "_blank", "width=200, height=640, resizable=no, scrollbars=no, status=no, toolbar=no");
+				window.open("./vdradmin.pl?aktion=rc_show", "_blank", "width=213, height=510, resizable=no, scrollbars=no, status=no, toolbar=no");
+			}
+			function tv_open() {
+				window.open("./vdradmin.pl?aktion=tv_show", "_blank", "width=615, height=548, resizable=yes, scrollbars=no, status=no, toolbar=no");
+			}
+		// -->
+	</script>
+</head>
+
+<body background="bilder/back.gif" bgcolor="#ffffff" leftmargin="0" marginheight="0" marginwidth="0" topmargin="0">
+	<form action="vdradmin.pl" method="get" name="FormName" target="main">
+		<table width="150" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>
+					<br>
+					<a href="./" target="_top"><img src="bilder/linvdr.gif" alt="" height="50" width="150" border="0"></a>
+				</td>
+			</tr>
+			<tr><td>&nbsp;</td></tr>
+			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="25">
+				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=prog_summary" target="main">Maintenant ?</a></span></td>
+			</tr>
+			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="25">
+				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=prog_list2" target="main">Aujourd'hui ?</a></span></td>
+			</tr>
+			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="25">
+				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=prog_timeline" target="main">Echelle de Temps</a></span></td>
+			</tr>
+			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="25">
+				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=prog_list" target="main">Programmes Cha&icirc;ne</a></span></td>
+			</tr>
+			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="25">
+				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=timer_list" target="main">Programmation</a></span></td>
+			</tr>
+			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="25">
+				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=at_timer_list" target="main">Programmation Automatique</a></span></td>
+			</tr>
+			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="25">
+				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=rec_list" target="main">Enregistrements</a></span></td>
+			</tr>
+			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="25">
+				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=conf_list" target="main">Configuration</a></span></td>
+			</tr>
+			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="25">
+				<td height="25"><span class="navi">&nbsp;<a href="javascript:rc_open();">T&eacute;l&eacute;commande</a></span></td>
+			</tr>
+			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="25">
+				<td height="25"><span class="navi">&nbsp;<a href="javascript:tv_open();">Fen&ecirc;tre TV</a></span></td>
+			</tr>
+			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr><td>&nbsp;</td></tr>
+			<tr>
+				<td>
+					&nbsp;<b><input type="text" name="search" size="15"></b><br>
+					&nbsp;<input type="submit" name="submit" value="Rechercher">
+					<input type="hidden" name="aktion" value="prog_summary">
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+
+</html>

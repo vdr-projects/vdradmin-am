@@ -97,7 +97,7 @@ $CONFIG{EPG_DIRECT}       = 1;
 $CONFIG{EPG_FILENAME}     = "/video/epg.data";
 $CONFIG{SKIN}             = 'bilder';
 
-my $VERSION               = "0.97-am2a";
+my $VERSION               = "0.97-am2b";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $VIDEODIR              = "/video";
 my $DONE                  = &DONE_Read || {};
