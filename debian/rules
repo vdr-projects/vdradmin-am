@@ -1,0 +1,52 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# GNU copyright 1997 to 1999 by Joey Hess.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# include dpatch stuff
+include /usr/share/dpatch/dpatch.make
+
+clean: clean-patched unpatch
+
+clean-patched:
+	dh_testdir
+	dh_testroot
+	dh_clean
+
+build: patch-stamp
+	# Nothing to build here
+	# 
+	# Note: all files are installed using dh_install 
+
+install:
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+
+	dh_installdirs
+	
+# Build architecture-independent files here.
+binary-indep: install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs HISTORY.am 
+	dh_installdocs
+	dh_installexamples debian/vdradmind.conf
+	dh_install
+	dh_installinit
+	dh_installman
+	dh_link
+	dh_compress
+	dh_fixperms
+	dh_perl
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep
+.PHONY: build clean binary-indep install patch unpatch

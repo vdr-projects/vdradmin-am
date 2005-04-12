@@ -22,11 +22,15 @@
 #
 # 08.10.2001
 #
-
+#
+# VDRAdmin-AM by Andreas Mair <mail@andreas.vdr-developer.org>
+#
 
 my $BASENAME;
+my $EXENAME;
 BEGIN {
 	$0 =~ /(^.*\/)/;
+	$EXENAME = $0;
 	$BASENAME = $1;
 	#TODO: $0 = "vdradmind"; # does this harm any external script that depend on vdradmind.pl?
 	unshift(@INC, "/usr/share/vdradmin/lib");
@@ -43,6 +47,7 @@ use Time::Local qw(timelocal);
 use POSIX ":sys_wait_h", qw(strftime mktime);
 use MIME::Base64();
 use File::Temp();
+use Shell qw(ps);
 
 $SIG{CHLD} = sub { wait };
 
@@ -71,7 +76,7 @@ $CONFIG{USERNAME}         = "linvdr";
 $CONFIG{PASSWORD}         = "linvdr";
 $CONFIG{GUEST_ACCOUNT}    = 0;
 $CONFIG{TEMPLATE}         = "default";
-$CONFIG{LANGUAGE}         = "Deutsch";
+$CONFIG{LANGUAGE}         = "English";
 $CONFIG{LOGLEVEL}         = 81; # 32799
 $CONFIG{CACHE_TIMEOUT}    = 60;
 $CONFIG{LOCAL_NET}        = "0.0.0.0/32";
@@ -91,19 +96,24 @@ $CONFIG{LOGGING}          = 0;
 $CONFIG{MOD_GZIP}         = 0;
 #
 $CONFIG{LOGFILE}          = "vdradmind.log";
-$CONFIG{SERVERHOST}       = "localhost";
+$CONFIG{SERVERHOST}       = "0.0.0.0";
 $CONFIG{SERVERPORT}       = 8001;
 $CONFIG{RECORDINGS}       = 1;
 $CONFIG{ZEITRAHMEN}       = 1;
-$CONFIG{TIMES}       	    = '18:00, 20:00, 21:00, 22:00';
-$CONFIG{EPG_DIRECT}       = 1;
+$CONFIG{TIMES}       	    = "18:00, 20:00, 21:00, 22:00";
+$CONFIG{EPG_DIRECT}       = 0;
 $CONFIG{EPG_FILENAME}     = "/video/epg.data";
-$CONFIG{SKIN}             = 'bilder';
+$CONFIG{EPG_PRUNE}        = 0;
+$CONFIG{SKIN}             = "bilder";
+$CONFIG{AT_SENDMAIL}      = 0;	# set to 1 and set the all "MAIL_" things if you want email notification on new autotimers.
+$CONFIG{MAIL_PROG}        = "./sendEmail";
+$CONFIG{MAIL_FROMDOMAIN}  = "fromaddress.tld";
+$CONFIG{MAIL_TO}          = "your\@email.address";
+$CONFIG{MAIL_SERVER}      = "your.email.server";
 
-my $VERSION               = "0.97-am3.0";
+my $VERSION               = "0.97-am3.1";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $VIDEODIR              = "/video";
-my $DONE                  = &DONE_Read || {};
 
 my($TEMPLATEDIR, $I18NDIR, $CONFFILE, $LOGFILE, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME);
 if(!$SEARCH_FILES_IN_SYSTEM) {
@@ -125,21 +135,22 @@ if(!$SEARCH_FILES_IN_SYSTEM) {
 	$DONE_FILENAME         = "/etc/vdradmin/vdradmind.done";
 	$BL_FILENAME           = "/etc/vdradmin/vdradmind.bl";
 }
+my $DONE                  = &DONE_Read || {};
 
 #use Template::Constants qw( :debug );
 # IMHO a better Template Modul ;-)
 # some useful options (see below for full list)
 my $Xconfig = {
-  START_TAG    => '\<\?\%',		 # Tagstyle
-  END_TAG      => '\%\?\>',		 # Tagstyle
-  INCLUDE_PATH => $TEMPLATEDIR,  	 # or list ref
-  INTERPOLATE  => 1,               # expand "$var" in plain text
-  PRE_CHOMP    => 1,               # cleanup whitespace
-  POST_CHOMP   => 1,               # cleanup whitespace
-  EVAL_PERL    => 1,               # evaluate Perl code blocks
-  CACHE_SIZE   => 10000,           # Tuning for Templates
-  COMPILE_EXT  => 'cache',         # Tuning for Templates 
-  COMPILE_DIR  => '/tmp',          # Tuning for Templates
+	START_TAG    => '\<\?\%',		 # Tagstyle
+	END_TAG      => '\%\?\>',		 # Tagstyle
+	INCLUDE_PATH => $TEMPLATEDIR,  	 # or list ref
+	INTERPOLATE  => 1,               # expand "$var" in plain text
+	PRE_CHOMP    => 1,               # cleanup whitespace
+	POST_CHOMP   => 1,               # cleanup whitespace
+	EVAL_PERL    => 1,               # evaluate Perl code blocks
+	CACHE_SIZE   => 10000,           # Tuning for Templates
+	COMPILE_EXT  => 'cache',         # Tuning for Templates 
+	COMPILE_DIR  => '/tmp',          # Tuning for Templates
 };
 
 # create Template object
@@ -149,22 +160,17 @@ my $Xtemplate = Template->new($Xconfig);
 my $I18NFILE							= "i18n.pl";
 my $USE_SHELL_GZIP        = false; # set on false to use the gzip library
 
-if($CONFIG{MOD_GZIP}) {
-  # lib gzipping
-  require Compress::Zlib;
-}
-
 my($DEBUG) = 0;
-my(%EPG, @CHAN, $q, $ACCEPT_GZIP, $SVDRP, $HOST);
+my(%EPG, @CHAN, $q, $ACCEPT_GZIP, $SVDRP, $HOST, $low_time);
 my(%mimehash) = (
-  html => "text/html",
-  png  => "image/png",
-  gif  => "image/gif",
-  jpg  => "image/jpeg",
+	html => "text/html",
+	png  => "image/png",
+	gif  => "image/gif",
+	jpg  => "image/jpeg",
 	css  => "text/css",
-  ico  => "image/x-icon",
-  js   => "application/x-javascript",
-  swf  => "application/x-shockwave-flash"
+	ico  => "image/x-icon",
+	js   => "application/x-javascript",
+	swf  => "application/x-shockwave-flash"
 );
 my @LOGINPAGES = qw(prog_list prog_list2 prog_summary prog_timeline timer_list rec_list);
 
@@ -177,78 +183,93 @@ $SIG{PIPE} = 'IGNORE';
 #
 my $DAEMON = 1;
 for(my $i = 0; $i < scalar(@ARGV); $i++) {
-  $_ = $ARGV[$i];
-  if(/-h|--help/) {
-    print("Usage $0 [OPTION]...\n");
-    print("A perl client for the Linux Video Disk Recorder.\n\n");
-    print("  -nf  --nofork   don't fork\n");
-    print("  -c   --config   run configuration dialog\n");
-    print("  -k   --kill     kill a forked vdradmin\n");
-    print("  -h   --help     this message\n");
-    print("\nReport bugs to <vdradmin\@linvdr.org>.\n");
-    exit(0);
-  }
-  if(/--nofork|-nf/) { $DAEMON = 0; last; }
-  if(/--config|-c/) {
-    $CONFIG{VDR_HOST} = Question("What's your VDR hostname (e.g video.intra.net)?", $CONFIG{VDR_HOST});
+	$_ = $ARGV[$i];
+	if(/-h|--help/) {
+		print("Usage $0 [OPTION]...\n");
+		print("A perl client for the Linux Video Disk Recorder.\n\n");
+		print("  -nf  --nofork   don't fork\n");
+		print("  -c   --config   run configuration dialog\n");
+		print("  -k   --kill     kill a forked vdradmind\n");
+		print("  -h   --help     this message\n");
+		print("\nReport bugs to <mail\@andreas.vdr-developer.org>.\n");
+		exit(0);
+	}
+	if(/--nofork|-nf/) { $DAEMON = 0; last; }
+	if(/--config|-c/) {
+		$CONFIG{VDR_HOST} = Question("What's your VDR hostname (e.g video.intra.net)?", $CONFIG{VDR_HOST});
 		$CONFIG{VDR_PORT} = Question("On which port does VDR listen to SVDRP queries?", $CONFIG{VDR_PORT});
 		$CONFIG{SERVERHOST} = Question("On which address should vdradmin listen (0.0.0.0 for any)?", $CONFIG{SERVERHOST});
 		$CONFIG{SERVERPORT} = Question("On which port should vdradmin listen?", $CONFIG{SERVERPORT});
 		$CONFIG{USERNAME} = Question("Username?", $CONFIG{USERNAME});
 		$CONFIG{PASSWORD} = Question("Password?", $CONFIG{PASSWORD});
 		$CONFIG{EPG_FILENAME} = Question("Where is your epg.data?", $CONFIG{EPG_FILENAME});
-    $CONFIG{EPG_DIRECT} = ($CONFIG{EPG_FILENAME} and -e $CONFIG{EPG_FILENAME} ? 1 : 0);
+		$CONFIG{EPG_DIRECT} = ($CONFIG{EPG_FILENAME} and -e $CONFIG{EPG_FILENAME} ? 1 : 0);
 
 		WriteConfig();
 
-    print("Config file written successfully.\n");
-    exit(0);
-  }
-  if(/--kill|-k/) {
+		print("Config file written successfully.\n");
+		exit(0);
+	}
+	if(/--kill|-k/) {
 		my $killed = kill(2, getPID($PIDFILE));
-    unlink($PIDFILE);
-    exit($killed > 0 ? 0 : 1);
-  }
-  if(/--displaycall|-i/) {
-    for(my $z = 0; $z < 5; $z++) {
-      DisplayMessage($ARGV[$i+1]);
-      sleep(3);
-    }
-    CloseSocket();
-    exit(0);
-  }
-  if(/--message|-m/) {
-    DisplayMessage($ARGV[$i+1]);
-    CloseSocket();
-    exit(0);
-  }
+		unlink($PIDFILE);
+		exit($killed > 0 ? 0 : 1);
+	}
+	if(/--displaycall|-i/) {
+		for(my $z = 0; $z < 5; $z++) {
+			DisplayMessage($ARGV[$i+1]);
+			sleep(3);
+		}
+		CloseSocket();
+		exit(0);
+	}
+	if(/--message|-m/) {
+		DisplayMessage($ARGV[$i+1]);
+		CloseSocket();
+		exit(0);
+	}
 }
 
 ReadConfig();
+if ($CONFIG{EPG_DIRECT}) {
+	print("!!! YOU REQUESTED EPG_DIRECT !!!\nBut there seems to be a bug in it, so that timers with certain summaries don't get added.\nIf you have problems and don't want to debug them, please set EPG_DIRECT to 0.\n\n");
+}
+if ($CONFIG{LANGUAGE} eq "Español") {
+	# i18n/Español has been renamed to i18n/Spanish
+	$CONFIG{LANGUAGE} = "Spanish";
+}
 
+if($CONFIG{MOD_GZIP}) {
+	# lib gzipping
+	require Compress::Zlib;
+}
 
 if(-e "$PIDFILE") {
-	print "There's already a copy of this program running! (pid: " . getPID($PIDFILE) . ")\n";
-	print "If you feel this is an error, remove $PIDFILE!\n";
-	exit(1);
+	my $pid = getPID($PIDFILE);
+	print "There's already a copy of this program running! (pid: $pid)\n";
+	$_ = ps("ax");
+	if (/\n($pid) [!\n]*( |\/)$EXENAME/) {
+		print "If you feel this is an error, remove $PIDFILE!\n";
+		exit(1);
+	}
+	print "The pid $pid is not a running $EXENAME process, so I'll start anyway.\n"
 }
 
 if($DAEMON) {
-  my($pid) = fork;
-  if($pid != 0) {
-    print("vdradmind.pl $VERSION started with pid $pid.\n");
-    writePID($pid);
-    exit(0);
-  }
+	my($pid) = fork;
+	if($pid != 0) {
+		print("vdradmind.pl $VERSION started with pid $pid.\n");
+		writePID($pid);
+		exit(0);
+	}
 }
 
-
 my($Socket) = IO::Socket::INET->new(
-  Proto => 'tcp',
-  LocalPort => $CONFIG{SERVERPORT},
-  LocalAddr => $CONFIG{SERVERHOST},
-  Listen => 10,
-  Reuse => 1
+	Proto => 'tcp',
+	LocalPort => $CONFIG{SERVERPORT},
+	LocalAddr => $CONFIG{SERVERHOST},
+	Listen => 10,
+	Reuse => 1
 );
 die("can't start server: $!\n") if (!$Socket);
 $Socket->timeout($CONFIG{AT_TIMEOUT} * 60) if($CONFIG{AT_FUNC});
@@ -265,8 +286,8 @@ my($Client, $MyURL, $Referer, $Request, $Query, $Guest);
 my @GUEST_USER = qw(prog_detail prog_list prog_list2 prog_timeline timer_list at_timer_list
 	prog_summary rec_list rec_detail show_top toolbar show_help);
 my @TRUSTED_USER = (@GUEST_USER, qw(at_timer_edit at_timer_new at_timer_save
-  at_timer_delete timer_new_form timer_add timer_delete timer_toggle rec_delete rec_rename rec_edit
-  conf_list prog_switch rc_show rc_hitk grab_picture at_timer_toggle tv_show
+	at_timer_delete timer_new_form timer_add timer_delete timer_toggle rec_delete rec_rename rec_edit
+	conf_list prog_switch rc_show rc_hitk grab_picture at_timer_toggle tv_show
 	live_stream rec_stream force_update));
 
 # Force Update at start
@@ -274,7 +295,7 @@ UptoDate(1);
 
 
 while(true) {
-  $Client = $Socket->accept();
+	$Client = $Socket->accept();
 	
 	#
 	if(!$Client) {
@@ -288,11 +309,11 @@ while(true) {
 	
 	$ACCEPT_GZIP = 0;
 	
-  if($raw_request =~ /^GET (\/[\w\.\/-\:]*)([\?[\w=&\.\+\%-\:\!]*]*)[\#\d ]+HTTP\/1.\d$/) {
+	if($raw_request =~ /^GET (\/[\w\.\/-\:]*)([\?[\w=&\.\+\%-\:\!]*]*)[\#\d ]+HTTP\/1.\d$/) {
 		($Request, $Query) = ($1, $2 ? substr($2, 1, length($2)) : undef);
 	} else {
-    Error("404", $MESSAGES{err_notfound}, $MESSAGES{err_notfound_long});
-    close($Client);
+		Error("404", $MESSAGES{err_notfound}, $MESSAGES{err_notfound_long});
+		close($Client);
 		next;
 	}
 	
@@ -325,7 +346,7 @@ while(true) {
 		$Guest = 1;
 	} else {
 		headerNoAuth();
-    close($Client);
+		close($Client);
 		next;
 	}
 		
@@ -348,7 +369,7 @@ while(true) {
 			eval("(\$http_status, \$bytes_transfered) = $aktion();");
 		} else {
 			# XXX redirect to no access template 
-      Error("403", $MESSAGES{err_forbidden}, $MESSAGES{err_forbidden_long});
+			Error("403", $MESSAGES{err_forbidden}, $MESSAGES{err_forbidden_long});
 			next;
 		}
 	} elsif($Request eq "/") {
@@ -357,34 +378,34 @@ while(true) {
 	} elsif($Request eq "/left.html") {
 		($http_status, $bytes_transfered) = show_navi();
 	} else {
-    ($http_status, $bytes_transfered) = SendFile($Request);
+		($http_status, $bytes_transfered) = SendFile($Request);
 	}
-  Log(LOG_ACCESS, access_log($Client->peerhost, $username, time(), $raw_request, 
-    $http_status, $bytes_transfered, $Request, $http_useragent));
-  close($Client);
-  $SVDRP->close;
+	Log(LOG_ACCESS, access_log($Client->peerhost, $username, time(), $raw_request, 
+		$http_status, $bytes_transfered, $Request, $http_useragent));
+	close($Client);
+	$SVDRP->close;
 }
 
 #############################################################################
 #############################################################################
 sub GetChannelDesc {
-  my(%hash);
-  for(@CHAN) {
-    $hash{$_->{id}} = $_->{name};
-  }
-  return(%hash);
+	my(%hash);
+	for(@CHAN) {
+		$hash{$_->{id}} = $_->{name};
+	}
+	return(%hash);
 }
 
 sub GetChannelDescByNumber {
-  my $vdr_id = shift;
+	my $vdr_id = shift;
 
-  if($vdr_id) {
-    for(@CHAN) {
-      if($_->{vdr_id} == $vdr_id) {
+	if($vdr_id) {
+		for(@CHAN) {
+			if($_->{vdr_id} == $vdr_id) {
 				return($_->{name});
-      }
-    }
-  } else { return(0); }
+			}
+		}
+	} else { return(0); }
 }
 
 sub include {
@@ -395,10 +416,10 @@ sub include {
 }
 
 sub ReadFile {
-  my $file = shift;
-  return if(!$file);
+	my $file = shift;
+	return if(!$file);
 
-  open(I18N, $file) || HTMLError(sprintf($MESSAGES{err_cant_open}, $file));
+	open(I18N, $file) || HTMLError(sprintf($MESSAGES{err_cant_open}, $file));
 	my $buf = join("", <I18N>);
 	close(I18N);
   return($buf);
@@ -608,58 +629,68 @@ sub EPG_buildTree {
 	$SVDRP->command("lste");
   my($i, @events);
 	my($id, $bc) = (1, 0);
+	$low_time = time;
   undef(%EPG);
 	while($_ = $SVDRP->readoneline) {
     chomp;
     if(/^C ([^ ]+) *(.*)/) {
-      $bc++;
       undef(@events);
       my($channel_id, $channel_name) = ($1, $2);
 			my $vdr_id = get_vdrid_from_channelid($channel_id);
-			while($_ = $SVDRP->readoneline) {
-				if(/^E (.*) (.*) (.*) (.*)/ || /^E (.*) (.*) (.*)/) {
-					my($event_id, $time, $duration) = ($1, $2, $3);
-					my($title, $subtitle, $summary);
-					while($_ = $SVDRP->readoneline) {
+			if($CONFIG{EPG_PRUNE}>0 && $vdr_id >= $CONFIG{EPG_PRUNE}) {
+				# diesen channel nicht einlesen
+				while($_ = $SVDRP->readoneline) {
+					last if(/^c/)
+				}
+			}
+			else {
+				$bc++;
+				while($_ = $SVDRP->readoneline) {
+					if(/^E (.*) (.*) (.*) (.*)/ || /^E (.*) (.*) (.*)/) {
+						my($event_id, $time, $duration) = ($1, $2, $3);
+						my($title, $subtitle, $summary);
+						while($_ = $SVDRP->readoneline) {
 #            if(/^T (.*)/) { $title = $1;    $title =~ s/\|/<br>/sig }
 #            if(/^S (.*)/) { $subtitle = $1; $subtitle =~ s/\|/<br>/sig }
 #            if(/^D (.*)/) { $summary = $1;  $summary =~ s/\|/<br>/sig }
-            if(/^T (.*)/) { $title = $1; }
-            if(/^S (.*)/) { $subtitle = $1; }
-            if(/^D (.*)/) { $summary = $1; }
-						if(/^e/) {
-							#
-							push(@events, {
-								channel_name => $channel_name,
-								start        => $time,
-								stop         => $time + $duration,
-								duration     => $duration,
-								title        => $title,
-								subtitle     => $subtitle,
-								summary      => $summary,
-								id           => $id,
-								vdr_id       => $vdr_id,
-								event_id     => $event_id
-							});
-							$id++;
-							last;
+            	if(/^T (.*)/) { $title = $1; }
+            	if(/^S (.*)/) { $subtitle = $1; }
+            	if(/^D (.*)/) { $summary = $1; }
+							if(/^e/) {
+								#
+								$low_time = $time if($time < $low_time);
+								push(@events, {
+									channel_name => $channel_name,
+									start        => $time,
+									stop         => $time + $duration,
+									duration     => $duration,
+									title        => $title,
+									subtitle     => $subtitle,
+									summary      => $summary,
+									id           => $id,
+									vdr_id       => $vdr_id,
+									event_id     => $event_id
+								});
+								$id++;
+								last;
+							}
 						}
+					} elsif(/^c/) {
+						my($last) = 0;
+						my(@temp);
+						for(sort({ $a->{start} <=> $b->{start} } @events)) {
+							next if($last == $_->{start});
+							push(@temp, $_);
+							$last = $_->{start};
+						}
+						$EPG{$vdr_id} = [ @temp ];
+						last;
 					}
-				} elsif(/^c/) {
-					my($last) = 0;
-					my(@temp);
-					for(sort({ $a->{start} <=> $b->{start} } @events)) {
-						next if($last == $_->{start});
-						push(@temp, $_);
-						$last = $_->{start};
-					}
-					$EPG{$vdr_id} = [ @temp ];
-					last;
 				}
 			}
     }
   }
-  Log(LOG_STATS, "EPGTree: $id events, $bc broadcasters");
+  Log(LOG_STATS, "EPGTree: $id events, $bc broadcasters (lowtime $low_time)");
 }
 
 
@@ -993,10 +1024,6 @@ sub AutoTimer {
 
   for my $sender (keys(%EPG)) {
     for my $event (@{$EPG{$sender}}) {
-      for my $at (@at) {
-        if(!$at->{active}) {
-          next;
-        }
 
         # Ein Timer der schon programmmiert wurde kann
         # ignoriert werden
@@ -1008,15 +1035,11 @@ sub AutoTimer {
           next unless defined $wanted->{ $event->{vdr_id} };
         }
 
-        if($at->{channel}) {
-          if($at->{channel} != $event->{vdr_id}) {
-            next;
-          }
-        }
 
         # Hamwa schon gehabt?
-        my $DoneStr = sprintf('%s~%s', 
-          $event->{title}, 
+        my $DoneStr = sprintf('%s~%d~%s', 
+          $event->{title},
+					$event->{event_id},
           ($event->{subtitle} ? $event->{subtitle} : ''),
           );
 	
@@ -1034,7 +1057,9 @@ sub AutoTimer {
 		next;
 		}
 
-
+			for my $at (@at) {
+				next if(!$at->{active});
+				next if(($at->{channel}) && ($at->{channel} != $event->{vdr_id}));
 
         my $SearchStr;
         if($at->{section} & 1) {
@@ -1179,7 +1204,7 @@ sub AutoTimer {
 		$directory =~ s#/#~#g;
 	}
 
-	if($directory && $directory =~ /%/) {
+	if($directory && $directory =~ /\%.*\%/) {
 		$title = $directory;
 		$at_details{'title'}		= $event->{title};
 		$at_details{'subtitle'}		= $event->{subtitle} ? $event->{subtitle} : my_strftime("%Y-%m-%d", $event->{start});
@@ -1209,7 +1234,7 @@ sub AutoTimer {
 	# gemaess vdr.5 alle : durch | ersetzen.
 	$title =~ s#:#|#g;
 
-	# sind irgendweche Tags verwendet worden, die leer waren und die doppelte Verzeichnisse erzeugten?
+	# sind irgendwelche Tags verwendet worden, die leer waren und die doppelte Verzeichnisse erzeugten?
 	$title =~ s#~+#~#g;
 	$title =~ s#^~##;
 
@@ -1218,6 +1243,30 @@ sub AutoTimer {
 #########################################################################################		
 
         Log(LOG_AT, sprintf("AutoTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
+
+        # AUTOTIMER-Notification patch start
+				if ($CONFIG{AT_SENDMAIL} == 1) {
+        	my $mail = "";
+        	my $sum  = "";
+        	my $strt = "";
+        	my $end  = "";
+        	my $dat  = "";
+        	$sum = $event->{summary};
+        	# remove all HTML-Tags from text
+        	$sum =~ s/\<[^\>]+\>/ /g;
+        	$dat = strftime("%Y/%m/%d", localtime($event->{start}));
+        	$strt= strftime("%H:%M", localtime($event->{start}));
+        	$end = strftime("%H:%M", localtime($event->{stop}));
+        	$mail = sprintf("Created AUTOTIMER for $event->{title}\n===========================================================================\n$dat,$strt-$end\n\nSummary:\n--------\n$sum");
+ 
+        	#
+        	# the "sendEmail" tool (written by "caspian at dotconf.net") is available from [URL]http://caspian.dotconf.net/menu/Software/SendEmail/[/URL]
+        	#
+        	open (MAIL, "|$CONFIG{MAIL_PROG} -q -f autotimer\@$CONFIG{MAIL_FROMDOMAIN} -t $CONFIG{MAIL_TO} -u \"AUTOTIMER: New timer created for $event->{title}\" -s $CONFIG{MAIL_SERVER}");
+        	print MAIL $mail;
+        	close(MAIL);
+				}
+        # AUTOTIMER-Notification patch end
 
         AT_ProgTimer(0x8001, $event->{event_id}, $event->{vdr_id}, $event->{start}, $event->{stop},
           $title, $event->{summary}, $at->{prio}, $at->{lft});
@@ -1237,8 +1286,8 @@ sub AutoTimer {
   }
 
   Log(LOG_AT, "Auto Timer: Done.");
-  Log(LOG_AT, "Auto Timer: Search for old Done Entrys...");
-  for(keys %$DONE) { delete $DONE->{$_} if(time > $DONE->{$_}) }
+  Log(LOG_AT, "Auto Timer: Purging done list... (lowtime $low_time)");
+  for(keys %$DONE) { delete $DONE->{$_} if($low_time > $DONE->{$_}) }
   Log(LOG_AT, "Auto Timer: Save done list...");
   &DONE_Write($DONE) if($DONE);
   Log(LOG_AT, "Auto Timer: Done.");
@@ -1464,6 +1513,9 @@ sub ParseTimer {
     # direct recording (menu, red)
     $active = 1 if($active == 3);
 
+		# replace "|" by ":" in timer's title (man vdr.5)
+		$title =~ s/\|/\:/g;
+
     if(length($dor) == 7) { # repeating timer
       $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), my_strftime("%d"), (my_strftime("%m") - 1), my_strftime("%Y"));
       $stopsse  = my_mktime(substr($stop, 2, 2), substr($stop, 0, 2), my_strftime("%d"), (my_strftime("%m") - 1), my_strftime("%Y"));
@@ -1603,7 +1655,7 @@ sub ProgTimer {
   # $start and $stop are expected as seconds since 00:00:00 1970-01-01 UTC.
   my($timer_id, $active, $event_id, $channel, $start, $stop, $prio, $lft, $title, $summary, $dor) = @_;
 
-  $title =~ s/\://g;
+  $title =~ s/\:/|/g;	# replace ":" by "|" in timer's title (man vdr.5)
 
   if(($CONFIG{NO_EVENTID} == 1) && ($event_id > 0)) {
     $event_id = 0;
@@ -1632,7 +1684,7 @@ sub ProgTimer {
       $lft,
       $title,
       $summary
-    )
+		)
   );
 
   return $return;
@@ -2689,13 +2741,13 @@ sub timer_add {
 
 		if(length($q->param("summary")) > 0) {
 			$data->{summary} = $q->param("summary");
-			$data->{summary} =~ s/\://g;
+#			$data->{summary} =~ s/\://g;	# summary may have colons (man vdr.5)
 			$data->{summary} =~ s/\r//g;
 			$data->{summary} =~ s/\n/|/g;
 		}
 
     my $dor = $data->{dor};
-    if(length($data->{dor}) == 7 || length($data->{dor}) == 18) {
+    if(length($data->{dor}) == 7 || length($data->{dor}) == 10 || length($data->{dor}) == 18) {
       # dummy
       $dor = 1;
     }
@@ -2817,7 +2869,7 @@ sub live_stream {
   } else {
       $ip= $CONFIG{VDR_HOST};
   }
-  $data="http://$ip:3000/$channel";
+  $data="http://$ip:$CONFIG{ST_STREAMDEV_PORT}/$channel";
   return(header("200", "audio/x-mpegurl", $data));
 }
 

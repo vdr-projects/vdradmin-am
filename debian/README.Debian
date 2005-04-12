@@ -1,0 +1,23 @@
+vdradmin for Debian
+-------------------
+
+This package provides a working config-file under /var/lib/vdradmin/vdradmind.conf, 
+this files uses a standard-username and standard-password (linvdr/linvdr), you 
+should change this before you enable the vdradmin-service in 
+/etc/default/vdradmin, alternatively you can generate a new config with:
+
+vdradmin.pl --config
+
+ -- Thomas Schmidt <thomas.schmidt@in.stud.tu-ilmenau.de>, Fri,  6 Aug 2004 22:57:28 +0200
+ 
+
+To hide vdradmin behind apache:
+
+  you will need apache with mod_proxy and these lines in httpd.conf:
+
+  <IfModule mod_proxy.c>
+    ProxyRequests Off
+    ProxyPass /vdradmin/ http://127.0.0.1:8001/
+  </IfModule>
+
+ -- Thomas Schmidt <thomas.schmidt@in.stud.tu-ilmenau.de>, Wed,  1 Oct 2003 21:07:47 +0200

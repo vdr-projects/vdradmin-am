@@ -1,22 +1,47 @@
-
-Installation:
+***********************************************************
+*** Installation                                        ***
+***********************************************************
 
   Unpack the archive somewhere:
-  $ tar xvf vdradmin-x.y.tar.gz
-  $ cd vdradmin-x.y
+  $ tar xvf vdradmin-VERSION.tar.bz2
+  $ cd vdradmin-VERSION
+
+	Now you have to deside wether you want to run vdradmin locally
+	in this directory or install it into your system.
+
+a) run locally
+	First you have to configure vdradmin. This only has to be done once.
   $ ./vdradmind.pl --config
 
   Some questions about the configuration will asked.
 
-	Run vdradmin:
+	Now you're done and you can run vdradmin:
 	$ ./vdradmind.pl
 
-  After this, point your browser to the given parameters.
+b) install into system
+	$ make install
+	
+	Now you have to configure vdradmin:
+  $ vdradmind.pl --config
 
-  (e.g. http://localhost:8001)
+  Some questions about the configuration will asked.
+
+	Now you're done and you can run vdradmin:
+	$ vdradmind.pl
+
+	If you want vdradmin to run automatically on system boot, you have
+	to add a startup script to the wanted runlevel. Please consult your
+	Linux distribution's documentation. Maybe you'll also find some help
+	in vdradmin's "contrib" directory.
 
 
-Hide vdradmin behind apache:
+	No matter how you run vdradmin, you now can point your browser to
+	the given parameters (e.g. http://localhost:8001).
+
+
+***********************************************************
+*** Hide vdradmin behind apache                         ***
+***********************************************************
 
   you will need apache with mod_proxy and these lines in httpd.conf:
 
@@ -25,7 +50,9 @@ Hide vdradmin behind apache:
     ProxyPass /vdradmin/ http://127.0.0.1:8001/
   </IfModule>
 
-Hint from Martin Neuditschko for apache2 (untested):
+***********************************************************
+*** Hint from Martin Neuditschko for apache2 (untested) ***
+***********************************************************
 
   I have summarized the needed changes for my Apache (Apache2, SuSE 8.2):
   Following modules have to be activated additionally:
@@ -37,7 +64,9 @@ Hint from Martin Neuditschko for apache2 (untested):
     RewriteRule ^/vdradmin(.*) http://localhost:8001$1 [P,L]
   </VirtualHost>
 
-See who's calling (you need an ISDN card for this):
+***********************************************************
+*** See who's calling (you need an ISDN card for this)  ***
+***********************************************************
 
   Insert this in your isdn.conf:
 

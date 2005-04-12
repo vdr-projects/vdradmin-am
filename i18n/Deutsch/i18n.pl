@@ -40,45 +40,46 @@
 
 %MESSAGES = (
 # common
-	c_progname      => "VDRAdmin",
-	c_monday        => $I18N_Days[1],
-	c_tuesday       => $I18N_Days[2],
-	c_wednesday     => $I18N_Days[3],
-	c_thursday      => $I18N_Days[4],
-	c_friday        => $I18N_Days[5],
-	c_saturday      => $I18N_Days[6],
-	c_sunday        => $I18N_Days[0],
-	c_help          => "Hilfe",
-	c_yes           => "Ja",
-	c_no            => "Nein",
-	c_minutes       => "Minuten",
-	c_hours_short   => "h",
-	c_sec           => "sek",
-	c_off           => "aus",
-	c_channel       => "Sender",
-	c_time          => "Uhrzeit",
-	c_clock         => "Uhr",
-	c_priority      => "Priorit&auml;t:",
-	c_lifetime      => "Lebenszeit:",
-	c_buffer_before => "Zeitpuffer Anfang:",
-	c_buffer_after  => "Zeitpuffer Ende:",
-	c_title         => "Titel",
-	c_subtitle      => "Untertitel",
-	c_description   => "Beschreibung",
-	c_summary       => "Zusammenfassung:",
-	c_save          => "Speichern",
-	c_apply         => "Anwenden",
-	c_cancel        => "Abbrechen",
-	c_once          => "einmal",
-	c_all           => "alle",
-	c_directory     => "Ordner:",
-	c_edit          => "Bearbeiten",
-	c_delete        => "L&ouml;schen",
-	c_whatson       => "Was l&auml;uft:",
-	c_now           => "jetzt",
-	c_at            => "um:",
-	c_go            => "Go!",
-	c_stream        => "Stream",
+	c_progname       => "VDRAdmin",
+	c_monday         => $I18N_Days[1],
+	c_tuesday        => $I18N_Days[2],
+	c_wednesday      => $I18N_Days[3],
+	c_thursday       => $I18N_Days[4],
+	c_friday         => $I18N_Days[5],
+	c_saturday       => $I18N_Days[6],
+	c_sunday         => $I18N_Days[0],
+	c_help           => "Hilfe",
+	c_yes            => "Ja",
+	c_no             => "Nein",
+	c_minutes        => "Minuten",
+	c_hours_short    => "h",
+	c_sec            => "sek",
+	c_off            => "aus",
+	c_channel        => "Sender",
+	c_time           => "Uhrzeit",
+	c_clock          => "Uhr",
+	c_priority       => "Priorit&auml;t:",
+	c_lifetime       => "Lebenszeit:",
+	c_buffer_before  => "Zeitpuffer Anfang:",
+	c_buffer_after   => "Zeitpuffer Ende:",
+	c_title          => "Titel",
+	c_subtitle       => "Untertitel",
+	c_description    => "Beschreibung",
+	c_summary        => "Zusammenfassung:",
+	c_save           => "Speichern",
+	c_apply          => "Anwenden",
+	c_cancel         => "Abbrechen",
+	c_once           => "einmal",
+	c_all            => "alle",
+	c_directory      => "Ordner:",
+	c_edit           => "Bearbeiten",
+	c_delete         => "L&ouml;schen",
+	c_whatson        => "Was l&auml;uft:",
+	c_now            => "jetzt",
+	c_at             => "um:",
+	c_go             => "Go!",
+	c_stream         => "Stream",
+	c_select_allnone => "Alle/keine ausw&auml;hlen",
 
 # JavaScript
 	js_del_timer          => "Timer l&ouml;schen?",
@@ -138,6 +139,8 @@
 	co_str_port          => "HTTP-Port von Streamdev (auch m&ouml;glich 3000/ts):",
 	co_str_bandwidth     => "Bandbreite des Streams:",
 	co_str_rec_path      => "Pfad der Aufnahmen:",
+	co_str_do_live       => "Live Streaming?",
+	co_str_do_rec        => "Aufnahmen streamen?",
 	co_hl_channels       => "Selektive Senderauswahl",
 	co_ch_use_summary    => "Bei &quot;Programm&uuml;bersicht&quot;?",
 	co_ch_use_whatsonnow => "Bei &quot;Was l&auml;uft jetzt&quot;?",
@@ -176,6 +179,7 @@
 	pd_view   => "umschalten",
 	pd_record => "aufnehmen",
 	pd_search => "Wiederholungen",
+	pd_imdb   => "Film in der Internet-Movie-Database (IMDb) suchen",
 
 # prog_list2.html
 	pl2_headline => "Was l&auml;uft heute?",
@@ -272,38 +276,49 @@
 <p>Zun&auml;chst einmal spielt Gro&szlig;-Kleinschreibung keine Rolle, die Suchbegriffe \"Akte X\" liefern genau die selben Treffer wie \"akte x\". Mehrere Suchbegriffe werden mit Leerzeichen getrennt, und es m&uuml;ssen stets alle angegebenen Suchbegriffe bei der gleichen Sendung gefunden werden.</p>
 <p>So finden die Suchbegriffe \"Akte X\" die Sendungen \"Akte X - Die unheimlichen F&auml;lle des FBI\" genauso wie \"Aktenzeichen XY ungel&ouml;st\" und \"Extrem Aktiv\", jedoch nicht die Sendung \"Die Akte Jane\" (dort ist kein \"X\" enthalten).</p>
 <p>Sie sollten m&ouml;glichst nur Buchstaben und Zahlen als Suchbegriffe verwenden, erfahrungsgem&auml;&szlig; fehlen im elektronischen Programmf&uuml;hrer (EPG) gerne mal ein Punkt, Klammern oder sonstige Zeichen.</p>
-<p>Es ist auch m&ouml;glich, regul&auml;re Ausdr&uuml;cke zu verwenden &#150; Experten m&ouml;gen doch bitte die n&ouml;tigen Infos dem Quelltext entnehmen (undocumented feature).</p>",
+<p>Es ist auch m&ouml;glich, regul&auml;re Ausdr&uuml;cke zu verwenden &#150; Experten m&ouml;gen doch bitte die n&ouml;tigen Infos dem Quelltext entnehmen (undocumented feature).
+</p>",
 
   timer_list     =>
 "<b>Timer</b>
 <p>&Uuml;bersicht &uuml;ber alle Timer im VDR.</p>
-<p>Ein Mausklick auf  |<img src=\"bilder/poempl_gruen.gif\" alt=\"on\" valign=\"center\"> <i>Ja</i> | oder |<img src=\"bilder/poempl_rot.gif\" alt=\"off\" valign=\"center\"> <i>Nein</i> | in der Spalte <i>Aktiv</i>, schaltet den jeweiligen Timer an oder aus.<br>
+<p>Ein Mausklick auf  |<img src=\"bilder/poempl_gruen.gif\" alt=\"on\" valign=\"center\"> <i>Ja</i> | oder |<img src=\"bilder/poempl_grau.gif\" alt=\"off\" valign=\"center\"> <i>Nein</i> | in der Spalte <i>Aktiv</i>, schaltet den jeweiligen Timer an oder aus.<br>
 <img src=\"bilder/poempl_gelb.gif\" alt=\"problem\" valign=\"center\"> zeigt an, da&szlig; es eine &Uuml;berschneidung gibt. Das ist unkritisch, solange es f&uuml;r jeden Timer eine Karte gibt, um die Aufnahme durchzuf&uuml;hren.<br>
-Um einen Eintrag zu bearbeiten, klicken Sie auf das Symbol <img src=\"bilder/edit.gif\" alt=\"Stift\" valign=\"center\">, zum L&ouml;schen auf <img src=\"bilder/delete.gif\" alt=\"Radiergummi\" valign=\"center\">. Wenn Sie mehrere Auto-Timer-Eintr&auml;ge auf einmal l&ouml;schen m&ouml;chten, Aktivieren Sie die K&auml;stchen (<input type=\"checkbox\" checked>) rechts neben den gew&uuml;nschten Eintr&auml;gen und klicken Sie abschlie&szlig;end auf <i>Ausgew&auml;hlte Timer l&ouml;schen</i> am Ende der Liste.</p>",
+Um einen Eintrag zu bearbeiten, klicken Sie auf das Symbol <img src=\"bilder/edit.gif\" alt=\"Stift\" valign=\"center\">, zum L&ouml;schen auf <img src=\"bilder/delete.gif\" alt=\"Radiergummi\" valign=\"center\">. Wenn Sie mehrere Auto-Timer-Eintr&auml;ge auf einmal l&ouml;schen m&ouml;chten, Aktivieren Sie die K&auml;stchen (<input type=\"checkbox\" checked>) rechts neben den gew&uuml;nschten Eintr&auml;gen und klicken Sie abschlie&szlig;end auf <i>Ausgew&auml;hlte Timer l&ouml;schen</i> am Ende der Liste.
+</p>",
 
   conf_list      =>
 "<b>Allgemeine Einstellungen:</b>
-<p>Hier kann man die Sprache, die Startseite, das Aussehen, sowie die Anzahl der DVB-Karten einstellen. Au&szlig;erdem die Grundeinstellungen f&uuml;r Timer, AutoTimer,  Kanalselektionen und Streaming Parameter</p>
+<p>Hier kann man die allgemeinen Einstellungen vornehmen. Au&szlig;erdem die Grundeinstellungen f&uuml;r Timer, AutoTimer, Kanalselektionen und Streaming Parameter
+</p>
+<b>Allgemeine Einstellungen:</b>
+<p>Hier kann man die Sprache, die Startseite, das Aussehen, sowie die Anzahl der DVB-Karten einstellen. Au&szlig;erdem die Grundeinstellungen f&uuml;r Timer, AutoTimer, Kanalselektionen und Streaming Parameter
+</p>
 <b>Identifikationen:</b>
-<p>Ein Mausklick auf  |<input type=\"radio\"> <i>ja</i> | oder |<input type=\"radio\" checked> <i>Nein</i> | aktiviert oder deaktiviert den <i>Gast-Zugang</i>. Die Passw&ouml;rter sollten f&uuml;r beide Konten ge&auml;ndert werden, wenn eine Verbindung zum Internet besteht</p>
+<p>Ein Mausklick auf  |<input type=\"radio\"> <i>ja</i> | oder |<input type=\"radio\" checked> <i>Nein</i> | aktiviert oder deaktiviert den <i>Gast-Zugang</i>. Die Passw&ouml;rter sollten f&uuml;r beide Konten ge&auml;ndert werden, wenn eine Verbindung zum Internet besteht
+</p>
 <b>Zeitleiste:</b>
-<p>Hier bekommt man eine Balkenansicht der Sender pr&auml;sentiert, wobei man den Zeitumfang einstellen kann.<br>
-In den Balken sieht man die Titel der jeweiligen Sendung. Der Zeitbalken beginnt in der vollen halben Stunde vor &quot;Jetzt&quot;. Ein feiner roter Strich zeigt die aktuelle Zeitposition an.<br>Programmierte Sendungen werden au&szlig;erdem farblich hervorgehoben.</p>
+<p>Hier bekommt man eine Balkenansicht der Sender pr&auml;sentiert, wobei man den sichtbaren Zeitumfang einstellen kann.<br>
+In den Balken sieht man die Titel der jeweiligen Sendung. Der Zeitbalken beginnt in der vollen halben Stunde vor &quot;Jetzt&quot;. Ein feiner roter Strich zeigt die aktuelle Zeitposition an.<br>Programmierte Sendungen werden au&szlig;erdem farblich hervorgehoben.
+</p>
 <b>Einstellungen f&uuml;r AutoTimer:</b>
 <p>Ein Mausklick auf  |<input type=\"radio\"> <i>Ja</i> | oder |<input type=\"radio\" checked> <i>Nein</i> | aktiviert oder deaktiviert die AutoTimer-Funktion. Hier bestimmt man auch wie oft der AutorTimer in den EPG-Daten nach den <i>Suchbegriffen</i> Ausschau halten soll.<br>
 Die Lebenszeit einer Aufnahme bestimmt man indem ein Wert zwischen 0 und 99 eingetr&auml;gt (99 verf&auml;llt nie). Der Wert bezieht sich dann auf den Tag, an dem die Aufnahme gemacht wurde. Sind die angegebenen Tage bereits verfallen, wenn beim VDR eine Aufnahme ansteht, so kann im Falle von Speicherknappheit die betreffende Aufnahme vom VDR gel&ouml;scht werden. Die am l&auml;ngsten abgelaufene Aufnahme wird zuerst gel&ouml;scht. Man bestimmt hier also, mit welcher Lebenszeitangabe der AutoTimer sp&auml;ter eine Aufnahme macht.<br>
 Die Priorit&auml;t bestimmt, wer im Falle eines Zeitkonfliktes den Vorrang bekommt. Die h&ouml;here Priorit&auml;t kommt dann zur Ausf&uuml;hrung. <br>
 Ein AutoTimer sollte also einen h&ouml;heren Wert zugewiesen bekommen, als die normalen Aufnahmen. Schlie&szlig;lich sucht der AutoTimer in der Regel nach Sendungen, die einem wichtig sind.</p>
 <b>Einstellungen f&uuml;r Timer:</b>
-<p>Priorit&auml;t und Lebenszeit haben die gleiche Bedeutung, wie vorher bei den AutoTimern beschrieben, gelten aber eben f&uuml;r die von Hand erstellten Timer.</p>
+<p>Priorit&auml;t und Lebenszeit haben die gleiche Bedeutung, wie vorher bei den AutoTimern beschrieben, gelten aber eben f&uuml;r die von Hand erstellten Timer.
+</p>
 
 <b>Einstellungen f&uuml;r das Streamdevice:</b>
-<p>Neben Port und Bandbreite, mu&szlig; hier auch das Videoverzeichnis von VDR eingetragen werden.</p>
+<p>Neben Port und Bandbreite, mu&szlig; hier auch das Videoverzeichnis von VDR eingetragen werden.
+</p>
 
 <b>Die selektive Kanalwahl:</b>
 <p>Ein Mausklick auf  |<input type=\"radio\"> <i>Ja</i> | oder |<input type=\"radio\" checked> <i>Nein</i> | rechts neben den gew&uuml;nschten Eintr&auml;gen, aktiviert oder deaktiviert die &quot;selektiven&quot; Kan&auml;le f&uuml;r das jeweilige Hauptfenster.<br>
 So kann man die genannten Einzelansichten auf die gew&auml;hlten Kan&auml;le beschr&auml;nken, was &Uuml;bersichtlichkeit und Seitenaufbau g&uuml;nstig beeinflu&szlig;t.<br>
-Die Auswahl der Kan&auml;le erfolgt nach Auswahl eines oder mehrerer Kan&auml;le im linken Fenster (STRG-Taste gedr&uuml;ckt halten und alle Kan&auml;le die man hinzuf&uuml;gen will anklicken), durch &Uuml;bertragung in das rechte Fenster. <br>Mit den Kn&ouml;pfen sind beide Richtungen m&ouml;glich.</p>
+Die Auswahl der Kan&auml;le erfolgt nach Auswahl eines oder mehrerer Kan&auml;le im linken Fenster (STRG-Taste gedr&uuml;ckt halten und alle Kan&auml;le die man hinzuf&uuml;gen will anklicken), durch &Uuml;bertragung in das rechte Fenster. <br>Mit den Kn&ouml;pfen sind beide Richtungen m&ouml;glich.
+</p>
 ",
 
   ENOHELPMSG        => "Bisher keine Hilfe vorhanden. Zum Hinzuf&uuml;gen oder &Auml;ndern eines Textes bitte an mail\@andreas.vdr-developer.org wenden."

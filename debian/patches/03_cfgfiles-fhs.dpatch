@@ -1,0 +1,28 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 03_cfgfiles-fhs.dpatch by Thomas Schmidt <thomas.schmidt@in.stud.tu-ilmenau.de>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Change the path to the cfgfile and autotime-file to comply
+## DP: with the FHS (vdradmin changes these files at runtime)
+
+@DPATCH@
+diff -urNad vdradmin-0.96/vdradmind.pl /tmp/dpep.0DtdZt/vdradmin-0.96/vdradmind.pl
+--- vdradmin-0.96/vdradmind.pl	2005-01-23 21:41:19.000000000 +0100
++++ /tmp/dpep.0DtdZt/vdradmin-0.96/vdradmind.pl	2005-01-23 21:42:53.000000000 +0100
+@@ -94,10 +94,10 @@
+ } else {
+ 	$TEMPLATEDIR           = "/usr/share/vdradmin/template";
+	$I18NDIR               = "/usr/share/vdradmin/i18n";
+-	$CONFFILE              = "/etc/vdradmin/vdradmind.conf";
++	$CONFFILE              = "/var/lib/vdradmin/vdradmind.conf";
+ 	$LOGFILE               = "/var/log/$CONFIG{LOGFILE}";
+ 	$PIDFILE               = "/var/run/vdradmind.pid";
+-	$AT_FILENAME           = "/etc/vdradmin/vdradmind.at";
++	$AT_FILENAME           = "/var/lib/vdradmin/vdradmind.at";
+-	$DONE_FILENAME         = "/etc/vdradmin/vdradmind.done";
++	$DONE_FILENAME         = "/var/lib/vdradmin/vdradmind.done";
+-	$BL_FILENAME           = "/etc/vdradmin/vdradmind.bl";
++	$BL_FILENAME           = "/var/lib/vdradmin/vdradmind.bl";
+ }
+ my $DONE                  = &DONE_Read || {};
+

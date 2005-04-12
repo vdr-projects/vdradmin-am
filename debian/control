@@ -1,0 +1,18 @@
+Source: vdradmin
+Section: web
+Priority: optional
+Maintainer: Peter Siering <ps@ctmagazin.de>
+Origin: ctvdr
+Bugs: mailto:pkg-vdr-dvb-devel@lists.alioth.debian.org
+Build-Depends-Indep: debhelper (>= 4.0.0), dpatch (>= 2.0.9)
+Standards-Version: 3.6.1
+
+Package: vdradmin
+Architecture: all
+Depends: perl, libcompress-zlib-perl, libhtml-template-perl, libparse-recdescent-perl
+Suggests: vdr
+Description: VDRadmin is a web frontend to VDR
+ VDRadmin is a web frontend to Klaus Schmidingers
+ Video Disk Recorder. Beside that it adds some extras
+ to VDR like auto timers; that are some kind of
+ search lists to the electronic program guide (EPG).

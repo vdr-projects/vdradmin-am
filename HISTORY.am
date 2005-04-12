@@ -6,9 +6,29 @@ VDR-Portal: amair
 
 ************************************************************
 PLEASE NOTE:
-- Streaming doesn't work for me in this release. If you get it working please let me know!
+- Streaming recordings is not implemented. If you have some code that works, please let me know!
 ************************************************************
 
+2005-04-12: 0.97-am3.1
+- Updated Spanish i18n (Thanks to Ruediger Jung).
+- Added VDR Admin man-page (Thanks to Thomas Schmidt).
+- Improved detection of another running vdradmind.pl at startup (if vdradmind.pid is found but pid is not a vdradmind.pl vdradmin will start anyway).
+- Added IMDb lookup button in prog_detail (Suggested by Marcus).
+- Use configured Streamdev port for live streaming.
+- Added warning when using EPG_DIRECT.
+- Updated INSTALL file.
+- Renamed i18n Español to Spanish (Requested by Ruediger Jung).
+- Fixed ":" & "|" handling in timer's title and summary (Thanks to Der_Pit for pointing me to that).
+- Added "Select all" to timer/autotimer/recordings list.
+- Exchanged priority and lifetime textfields in config.html to match order used at other places (Requested by Ruediger Jung).
+- Added vdradmin-0.95-0.9pre5-email.diff (Author: blafasel) patch: send email on timers added by AutoTimer (needs sendEmail available here: http://caspian.dotconf.net/menu/Software/SendEmail/).
+- Fixed timer add/edit where date got set wrong in case it has been entered as "yyyy-mm-dd".
+- Fixed problems when using MOD_GZIP (Thanks Ville Skyttä).
+- Fixed Makefile once again (Thanks Zzam for pointing me to this).
+- Added patches submitted by stefan.h (Thanks!):
+  -> New config option EPG_PRUNE. You can set a channel number up to which VDRAdmin will read EPG. Might reduce memory usage and read-in time. Set to "0" to read all channels.
+	-> Optimizations and bug fixes.
+- Added install files for Debian (Thanks to Steffen Oberle for requesting and troubleshooting).
 
 2005-04-04: 0.97-am3.0
 - Reworked updating of channels and EPG from VDR.
@@ -35,7 +55,7 @@ Included patches submitted by Ville Skyttä:
 - Fixed forgotten items with "vdradmin-0.96_For_vdr-1.3_StoreAutotimerChannelID_And_EventIdCheckDisable.diff".
 - Try harder to avoid browser's caching.
 - Fixed directory handling in auto_timer:
-  -> if a "%" (variable) is found you are fully responsible for the final recording's title, e.g. you must add %Title% if you want it (other vars: %Title%, %Subtitle%, %Director%, %Date%, %Category%, %Genre%, %Year%, %Country%, %Originaltitle%, %FSK%, %Epsiode% and %Rating%)
+  -> if a "%" (variable) is found you are fully responsible for the final recording's title, e.g. you must add %Title% if you want it (other vars: %Title%, %Subtitle%, %Director%, %Date%, %Category%, %Genre%, %Year%, %Country%, %Originaltitle%, %FSK%, %Episode% and %Rating%)
   -> all "/" will be replaced by "~" (before variable substitution)
 - Automatic programmed timers have their summary hyperlink back. (Reported by sn123py)
 - Handle "VPS" in timer listing.

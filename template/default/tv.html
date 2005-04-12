@@ -38,14 +38,19 @@
 			interval = val;
 			v_Stop();
 			if(interval > 0) {
-			  go()
+			  go();
 			};
 		}
 
 		function v_changeSize(val) {
 			size = val;
 			v_Stop();
-		  go()
+			if(interval > 0) {
+		  	go();
+			}
+			else {
+				WebcamUpdate();
+			};
 		}
 		//-->
 	</script>

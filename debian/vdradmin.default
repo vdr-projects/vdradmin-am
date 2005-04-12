@@ -1,0 +1,20 @@
+# Defaults for vdradmin initscript
+# sourced by /etc/init.d/vdradmin
+# installed at /etc/default/vdradmin by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# Should vdradmin's init-script be enabled?
+
+#################################################################
+# ATTENTION! YOU SHOULD MODIFY /var/lib/vdradmin/vdradmind.conf #
+# before enabling this, because the default config uses a       #
+# really simple default username/password (linvdr/linvdr)       #
+#################################################################
+
+ENABLED="1"
+
+# Additional options that are passed to the Daemon.
+DAEMON_OPTS=""

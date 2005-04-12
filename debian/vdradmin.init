@@ -1,0 +1,91 @@
+#! /bin/sh
+#
+#
+# Init-script for vdradmin, created by Thomas Schmidt <thomas.schmidt@in.stud.tu-ilmenau.de>
+#
+#
+
+# Default Settings:
+
+# Username vdradmin should run as:
+USER=vdradmin
+
+# Group under which vdradmin should run:
+GROUP=vdradmin
+
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/usr/bin/vdradmind.pl
+NAME=vdradmin
+DESC="VDR Webadministration interface"
+
+test -x $DAEMON || exit 0
+
+# Include vdradmin defaults if available
+if [ -f /etc/default/vdradmin ] ; then
+	. /etc/default/vdradmin
+fi
+
+test "$ENABLED" != "0" || exit 0
+
+set -e
+
+# Create Temporary Directory
+create_temp () 
+{
+	TEMPDIR=`mktemp -d -p /tmp vdradmin-XXXXXX`
+	
+   	# Check if the group vdr exists and make vdr 
+	# the owner of the temporary directory
+	if getent group | grep -q "^vdr:" ; then
+	   chown vdr $TEMPDIR
+        fi
+	
+	chgrp vdradmin $TEMPDIR
+	chmod 2770 $TEMPDIR
+}
+
+# Check if the logfile exists allready, if not, create it and set 
+# group and owner to $USER:$GROUP
+create_logfile ()
+{
+    LOGFILE="/var/log/vdradmind.log"
+    if [ ! -e $LOGFILE ] ; then
+        touch $LOGFILE 
+        chown $USER:$GROUP $LOGFILE
+    fi
+}
+
+case "$1" in
+  start)
+	echo -n "Starting $DESC: "
+		create_temp
+		create_logfile
+		TEMPDIR=$TEMPDIR start-stop-daemon --start \
+		-c $USER:$GROUP -b -m --pidfile /var/run/vdradmin.pid \
+		--exec /usr/bin/vdradmind.pl -- -nf
+	echo "$NAME."
+	;;
+  stop)
+	echo -n "Stopping $DESC: "
+		start-stop-daemon --stop -q -o --pidfile /var/run/vdradmin.pid
+	echo "$NAME."
+	;;
+  restart|force-reload)
+	echo -n "Restarting $DESC: "
+		create_temp
+		create_logfile
+		start-stop-daemon --stop -q -o --pidfile /var/run/vdradmin.pid
+		TEMPDIR=$TEMPDIR start-stop-daemon --start \
+		-c $USER:$GROUP -b -m --pidfile /var/run/vdradmin.pid \
+		--exec /usr/bin/vdradmind.pl -- -nf
+	echo "$NAME."
+	;;
+  *)
+	N=/etc/init.d/$NAME
+	echo "Usage: $N {start|stop|restart|force-reload}" >&2
+	exit 1
+	;;
+esac
+
+exit 0

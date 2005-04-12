@@ -32,3 +32,12 @@ function popup(URL) {
 function toolbar(URL) {
 	window.open(URL, '_new', 'width=200, height=50');
 }
+
+function AllMessages(myform)
+{
+	for (var x = 0; x < myform.elements.length; x++) {
+		var y = myform.elements[x];
+		if (y.name != 'SELALL')
+				y.checked = myform.SELALL.checked;
+	}
+}
