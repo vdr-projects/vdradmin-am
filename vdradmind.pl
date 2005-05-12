@@ -23,7 +23,7 @@
 # 08.10.2001
 #
 #
-# VDRAdmin-AM by Andreas Mair <mail@andreas.vdr-developer.org>
+# VDRAdmin-AM 2005 by Andreas Mair <mail@andreas.vdr-developer.org>
 #
 
 my $BASENAME;
@@ -44,17 +44,17 @@ use IO::Socket;
 use HTML::Template::Expr();
 use Template;
 use Time::Local qw(timelocal);
-use POSIX ":sys_wait_h", qw(strftime mktime);
+use POSIX ":sys_wait_h", qw(strftime mktime locale_h);
 use MIME::Base64();
-use File::Temp();
+use File::Temp qw(tempfile);
 use Shell qw(ps);
+use Locale::gettext;
 
 $SIG{CHLD} = sub { wait };
 
 use strict;
 #use warnings;
 
-#my $SEARCH_FILES_IN_SYSTEM = (-d '/usr/share/vdradmin/lib' ? 1 : 0); # for distribution
 my $SEARCH_FILES_IN_SYSTEM = 0;
 
 sub true           () { 1 };
@@ -70,64 +70,80 @@ sub LOG_FATALERROR () { 64 };
 sub LOG_DEBUG      () { 32768 };
 
 my %CONFIG;
+$CONFIG{LOGLEVEL}         = 81; # 32799
+$CONFIG{LOGGING}          = 0;
+$CONFIG{LOGFILE}          = "vdradmind.log";
+$CONFIG{MOD_GZIP}         = 0;
+$CONFIG{CACHE_TIMEOUT}    = 60;
+$CONFIG{CACHE_LASTUPDATE} = 0;
+#
 $CONFIG{VDR_HOST}         = "localhost";
 $CONFIG{VDR_PORT}         = 2001;
+$CONFIG{SERVERHOST}       = "0.0.0.0";
+$CONFIG{SERVERPORT}       = 8001;
+$CONFIG{LOCAL_NET}        = "0.0.0.0/32";
+$CONFIG{VIDEODIR}         = "/video";
+$CONFIG{VDRCONFDIR}       = "$CONFIG{VIDEODIR}";
+#
+$CONFIG{TEMPLATE}         = "default";
+$CONFIG{SKIN}             = "bilder";
+$CONFIG{LOGINPAGE}        = 0;
+$CONFIG{RECORDINGS}       = 1;
+#
 $CONFIG{USERNAME}         = "linvdr";
 $CONFIG{PASSWORD}         = "linvdr";
 $CONFIG{GUEST_ACCOUNT}    = 0;
-$CONFIG{TEMPLATE}         = "default";
-$CONFIG{LANGUAGE}         = "English";
-$CONFIG{LOGLEVEL}         = 81; # 32799
-$CONFIG{CACHE_TIMEOUT}    = 60;
-$CONFIG{LOCAL_NET}        = "0.0.0.0/32";
-$CONFIG{CACHE_LASTUPDATE} = 0;
+$CONFIG{USERNAME_GUEST}   = "guest";
+$CONFIG{PASSWORD_GUEST}   = "guest";
+#
+$CONFIG{ZEITRAHMEN}       = 1;
+$CONFIG{TIMES}       	    = "18:00, 20:00, 21:00, 22:00";
+#
 $CONFIG{AT_FUNC}          = 1;
 $CONFIG{AT_TIMEOUT}       = 120;
 $CONFIG{AT_LIFETIME}      = 99;
 $CONFIG{AT_PRIORITY}      = 99;
+$CONFIG{AT_MARGIN_BEGIN}  = 10;
+$CONFIG{AT_MARGIN_END}    = 10;
+#
 $CONFIG{TM_LIFETIME}      = 99;
 $CONFIG{TM_PRIORITY}      = 99;
 $CONFIG{TM_MARGIN_BEGIN}  = 10;
 $CONFIG{TM_MARGIN_END}    = 10;
-$CONFIG{ST_FUNC}          = 1;
-$CONFIG{ST_URL}           = "";
-$CONFIG{LOGINPAGE}        = 0;
-$CONFIG{LOGGING}          = 0;
-$CONFIG{MOD_GZIP}         = 0;
 #
-$CONFIG{LOGFILE}          = "vdradmind.log";
-$CONFIG{SERVERHOST}       = "0.0.0.0";
-$CONFIG{SERVERPORT}       = 8001;
-$CONFIG{RECORDINGS}       = 1;
-$CONFIG{ZEITRAHMEN}       = 1;
-$CONFIG{TIMES}       	    = "18:00, 20:00, 21:00, 22:00";
+$CONFIG{ST_FUNC}          = 1;
+$CONFIG{ST_REC_ON}        = 0;
+$CONFIG{ST_LIVE_ON}       = 1;
+$CONFIG{ST_URL}           = "";
+$CONFIG{ST_STREAMDEV_PORT}= 3000;
+$CONFIG{ST_VIDEODIR}      = "";
+#
 $CONFIG{EPG_DIRECT}       = 0;
-$CONFIG{EPG_FILENAME}     = "/video/epg.data";
+$CONFIG{EPG_FILENAME}     = "$CONFIG{VIDEODIR}/epg.data";
 $CONFIG{EPG_PRUNE}        = 0;
-$CONFIG{SKIN}             = "bilder";
+#
 $CONFIG{AT_SENDMAIL}      = 0;	# set to 1 and set the all "MAIL_" things if you want email notification on new autotimers.
 $CONFIG{MAIL_PROG}        = "./sendEmail";
 $CONFIG{MAIL_FROMDOMAIN}  = "fromaddress.tld";
 $CONFIG{MAIL_TO}          = "your\@email.address";
 $CONFIG{MAIL_SERVER}      = "your.email.server";
 
-my $VERSION               = "0.97-am3.1";
+my $VERSION               = "0.97-am3.2";
 my $SERVERVERSION         = "vdradmind/$VERSION";
-my $VIDEODIR              = "/video";
+my $LINVDR                = isLinVDR();
 
-my($TEMPLATEDIR, $I18NDIR, $CONFFILE, $LOGFILE, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME);
+my($TEMPLATEDIR, $CONFFILE, $LOGFILE, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME);
 if(!$SEARCH_FILES_IN_SYSTEM) {
 	$TEMPLATEDIR           = "${BASENAME}template";
-	$I18NDIR               = "${BASENAME}i18n";
 	$CONFFILE              = "${BASENAME}vdradmind.conf";
 	$LOGFILE               = "${BASENAME}$CONFIG{LOGFILE}";
 	$PIDFILE               = "${BASENAME}vdradmind.pid";
 	$AT_FILENAME           = "${BASENAME}vdradmind.at";
 	$DONE_FILENAME         = "${BASENAME}vdradmind.done";
 	$BL_FILENAME           = "${BASENAME}vdradmind.bl";
+	bindtextdomain("vdradmin", "${BASENAME}locale");
 } else {
 	$TEMPLATEDIR           = "/usr/share/vdradmin/template";
-	$I18NDIR               = "/usr/share/vdradmin/i18n";
 	$CONFFILE              = "/etc/vdradmin/vdradmind.conf";
 	$LOGFILE               = "/var/log/$CONFIG{LOGFILE}";
 	$PIDFILE               = "/var/run/vdradmind.pid";
@@ -136,6 +152,8 @@ if(!$SEARCH_FILES_IN_SYSTEM) {
 	$BL_FILENAME           = "/etc/vdradmin/vdradmind.bl";
 }
 my $DONE                  = &DONE_Read || {};
+
+textdomain("vdradmin");
 
 #use Template::Constants qw( :debug );
 # IMHO a better Template Modul ;-)
@@ -181,6 +199,10 @@ $SIG{HUP} = \&HupSignal;
 $SIG{PIPE} = 'IGNORE';
 
 #
+my(@I18N_Days, @I18N_Month, %ERROR_MESSAGE, %MESSAGE, @LOGINPAGES_DESCRIPTION, %HELP);
+LoadTranslation();
+
+#
 my $DAEMON = 1;
 for(my $i = 0; $i < scalar(@ARGV); $i++) {
 	$_ = $ARGV[$i];
@@ -189,25 +211,27 @@ for(my $i = 0; $i < scalar(@ARGV); $i++) {
 		print("A perl client for the Linux Video Disk Recorder.\n\n");
 		print("  -nf  --nofork   don't fork\n");
 		print("  -c   --config   run configuration dialog\n");
-		print("  -k   --kill     kill a forked vdradmind\n");
+		print("  -k   --kill     kill a forked vdradmind.pl\n");
 		print("  -h   --help     this message\n");
 		print("\nReport bugs to <mail\@andreas.vdr-developer.org>.\n");
 		exit(0);
 	}
 	if(/--nofork|-nf/) { $DAEMON = 0; last; }
 	if(/--config|-c/) {
-		$CONFIG{VDR_HOST} = Question("What's your VDR hostname (e.g video.intra.net)?", $CONFIG{VDR_HOST});
-		$CONFIG{VDR_PORT} = Question("On which port does VDR listen to SVDRP queries?", $CONFIG{VDR_PORT});
-		$CONFIG{SERVERHOST} = Question("On which address should vdradmin listen (0.0.0.0 for any)?", $CONFIG{SERVERHOST});
-		$CONFIG{SERVERPORT} = Question("On which port should vdradmin listen?", $CONFIG{SERVERPORT});
-		$CONFIG{USERNAME} = Question("Username?", $CONFIG{USERNAME});
-		$CONFIG{PASSWORD} = Question("Password?", $CONFIG{PASSWORD});
-		$CONFIG{EPG_FILENAME} = Question("Where is your epg.data?", $CONFIG{EPG_FILENAME});
-		$CONFIG{EPG_DIRECT} = ($CONFIG{EPG_FILENAME} and -e $CONFIG{EPG_FILENAME} ? 1 : 0);
+		$CONFIG{VDR_HOST} = Question(gettext("What's your VDR hostname (e.g video.intra.net)?"), $CONFIG{VDR_HOST});
+		$CONFIG{VDR_PORT} = Question(gettext("On which port does VDR listen to SVDRP queries?"), $CONFIG{VDR_PORT});
+		$CONFIG{SERVERHOST} = Question(gettext("On which address should VDRAdmin listen (0.0.0.0 for any)?"), $CONFIG{SERVERHOST});
+		$CONFIG{SERVERPORT} = Question(gettext("On which port should VDRAdmin listen?"), $CONFIG{SERVERPORT});
+		$CONFIG{USERNAME} = Question(gettext("Username?"), $CONFIG{USERNAME});
+		$CONFIG{PASSWORD} = Question(gettext("Password?"), $CONFIG{PASSWORD});
+		$CONFIG{VIDEODIR} = Question(gettext("Where are your recordings stored?"), $CONFIG{VIDEODIR});
+		$CONFIG{VDRCONFDIR} = Question(gettext("Where are your VDR's configuration files located?"), $CONFIG{VDRCONFDIR});
+#		$CONFIG{EPG_FILENAME} = Question(gettext("Where is your epg.data?"), $CONFIG{EPG_FILENAME});
+#		$CONFIG{EPG_DIRECT} = ($CONFIG{EPG_FILENAME} and -e $CONFIG{EPG_FILENAME} ? 1 : 0);
 
 		WriteConfig();
 
-		print("Config file written successfully.\n");
+		print(gettext("Config file written successfully.") . "\n");
 		exit(0);
 	}
 	if(/--kill|-k/) {
@@ -233,10 +257,7 @@ for(my $i = 0; $i < scalar(@ARGV); $i++) {
 ReadConfig();
 if ($CONFIG{EPG_DIRECT}) {
 	print("!!! YOU REQUESTED EPG_DIRECT !!!\nBut there seems to be a bug in it, so that timers with certain summaries don't get added.\nIf you have problems and don't want to debug them, please set EPG_DIRECT to 0.\n\n");
-}
-if ($CONFIG{LANGUAGE} eq "Español") {
-	# i18n/Español has been renamed to i18n/Spanish
-	$CONFIG{LANGUAGE} = "Spanish";
+#	$CONFIG{EPG_DIRECT} = 0;
 }
 
 if($CONFIG{MOD_GZIP}) {
@@ -246,23 +267,27 @@ if($CONFIG{MOD_GZIP}) {
 
 if(-e "$PIDFILE") {
 	my $pid = getPID($PIDFILE);
-	print "There's already a copy of this program running! (pid: $pid)\n";
+	print("There's already a copy of this program running! (pid: $pid)\n");
 	$_ = ps("ax");
 	if (/\n($pid) [!\n]*( |\/)$EXENAME/) {
-		print "If you feel this is an error, remove $PIDFILE!\n";
+		print("If you feel this is an error, remove $PIDFILE!\n");
 		exit(1);
 	}
-	print "The pid $pid is not a running $EXENAME process, so I'll start anyway.\n"
+	print("The pid $pid is not a running $EXENAME process, so I'll start anyway.\n");
 }
 
 if($DAEMON) {
 	my($pid) = fork;
 	if($pid != 0) {
-		print("vdradmind.pl $VERSION started with pid $pid.\n");
+		printf(gettext("vdradmind.pl %s started with pid %d.") . "\n", $VERSION, $pid);
 		writePID($pid);
 		exit(0);
 	}
 }
+$SIG{__DIE__} = \&Shutdown;
+
+my @reccmds;
+loadRecCmds();
 
 my($Socket) = IO::Socket::INET->new(
 	Proto => 'tcp',
@@ -274,10 +299,6 @@ my($Socket) = IO::Socket::INET->new(
 die("can't start server: $!\n") if (!$Socket);
 $Socket->timeout($CONFIG{AT_TIMEOUT} * 60) if($CONFIG{AT_FUNC});
 $CONFIG{CACHE_LASTUPDATE} = 0;
-
-#
-my(@I18N_Days, @I18N_Month, %ERRORMESSAGE, %COMMONMESSAGE, @LOGINPAGES_DESCRIPTION, %HELP, %MESSAGES);
-LoadTranslation();
 
 ##
 # Mainloop
@@ -312,7 +333,7 @@ while(true) {
 	if($raw_request =~ /^GET (\/[\w\.\/-\:]*)([\?[\w=&\.\+\%-\:\!]*]*)[\#\d ]+HTTP\/1.\d$/) {
 		($Request, $Query) = ($1, $2 ? substr($2, 1, length($2)) : undef);
 	} else {
-		Error("404", $MESSAGES{err_notfound}, $MESSAGES{err_notfound_long});
+		Error("404", $ERROR_MESSAGE{notfound}, $ERROR_MESSAGE{notfound_long});
 		close($Client);
 		next;
 	}
@@ -320,6 +341,7 @@ while(true) {
 	# parse header
 	my($username, $password, $http_useragent);
 	for my $line (@Request) {
+#		print(">" . $line . "\n");
 		if($line =~ /Referer: (.*)/) {
 			$Referer = $1;
 		}
@@ -369,7 +391,7 @@ while(true) {
 			eval("(\$http_status, \$bytes_transfered) = $aktion();");
 		} else {
 			# XXX redirect to no access template 
-			Error("403", $MESSAGES{err_forbidden}, $MESSAGES{err_forbidden_long});
+			Error("403", $ERROR_MESSAGE{forbidden}, $ERROR_MESSAGE{forbidden_long});
 			next;
 		}
 	} elsif($Request eq "/") {
@@ -419,7 +441,7 @@ sub ReadFile {
 	my $file = shift;
 	return if(!$file);
 
-	open(I18N, $file) || HTMLError(sprintf($MESSAGES{err_cant_open}, $file));
+	open(I18N, $file) || HTMLError(sprintf($ERROR_MESSAGE{cant_open}, $file));
 	my $buf = join("", <I18N>);
 	close(I18N);
   return($buf);
@@ -452,7 +474,6 @@ sub HTMLError {
   my $error = join("", @_);
   my $template = HTML::Template->new(filename => "$TEMPLATEDIR/$CONFIG{TEMPLATE}/error.html");
   $template->param(
-  	title => $MESSAGES{err_error},
   	error => $error
   );
 	$CONFIG{CACHE_LASTUPDATE} = 0;
@@ -837,10 +858,7 @@ sub headerForward {
 
 sub headerNoAuth {
   my $template = TemplateNew("noauth.html");
-  my $vars = {
-  	msg => \%MESSAGES
-  };
-  $template->param($vars);
+	my $vars;
   my $data;
 	my $out = $template->output;
   $Xtemplate->process(\$out, $vars, \$data);
@@ -890,10 +908,10 @@ sub SendFile {
       if(!$mimehash{$2}) { die("can't find mime-type \'$2\'\n"); }
       return(header("200", $mimehash{$2}, $buf, 1));
     } else {
-      Error("403", $MESSAGES{err_forbidden}, sprintf($MESSAGES{err_forbidden_file}, $File));
+      Error("403", $ERROR_MESSAGE{forbidden}, sprintf($ERROR_MESSAGE{forbidden_file}, $File));
     }
   } else {
-    Error("404", $MESSAGES{err_notfound}, sprintf($MESSAGES{err_notfound_file}, $File));
+    Error("404", $ERROR_MESSAGE{notfound}, sprintf($ERROR_MESSAGE{notfound_file}, $File));
   }
 }
 
@@ -904,11 +922,13 @@ sub AT_Read {
   my(@at);
   if(-e $AT_FILENAME) {
     open(AT_FILE, $AT_FILENAME) ||
-      HTMLError(sprintf($MESSAGES{err_cant_open}, $AT_FILENAME));
+      HTMLError(sprintf($ERROR_MESSAGE{cant_open}, $AT_FILENAME));
     while(<AT_FILE>) {
       chomp;
       next if($_ eq "");
-      my($active, $pattern, $section, $start, $stop, $episode, $prio, $lft, $channel, $directory, $done) = split(/\:/, $_);
+      my($active, $pattern, $section, $start, $stop, $episode, $prio, $lft, $channel, $directory, $done, $weekday) = split(/\:/, $_);
+			$pattern =~ s/\|/\:/g;
+      $directory =~ s/\|/\:/g;
       my($usechannel) = ($channel =~ /^\d+$/) ? $channel : get_vdrid_from_channelid($channel);
       push(@at, {
         active    => $active,
@@ -921,7 +941,14 @@ sub AT_Read {
         lft       => $lft,
         channel   => $usechannel,
         directory => $directory,
-        done      => $done
+        done      => $done,
+				# Be compatible with older formats, so search on weekdays default to yes
+        (weekdays => 
+					{map {$_->[0] => defined $weekday ? substr($weekday,$_->[1],1) : 1} 
+					     (['wday_mon',0],['wday_tue',1],['wday_wed',2],['wday_thu',3], ['wday_fri',4],['wday_sat',5],['wday_sun',6])
+					}
+				)
+
       });
     }
     close(AT_FILE);
@@ -932,12 +959,12 @@ sub AT_Read {
 sub AT_Write {
   my @at = @_;
   open(AT_FILE, ">" . $AT_FILENAME) ||
-    HTMLError(sprintf($MESSAGES{err_cant_open}, $AT_FILENAME));
-  for(@at) {
+    HTMLError(sprintf($ERROR_MESSAGE{cant_open}, $AT_FILENAME));
+  foreach my $auto_timer (@at) {
     my $temp;
     for my $item (qw(active pattern section start stop episode prio lft channel directory done)) {
-      $_->{$item} =~ s/\:/_/g;
-      my $tempitem = $_->{$item};
+      $auto_timer->{$item} =~ s/\:/\|/g;
+      my $tempitem = $auto_timer->{$item};
       if ($item eq 'channel') {
 	my $channelnumber = get_channelid_from_vdrid($tempitem);
 	if ($channelnumber) {
@@ -950,6 +977,12 @@ sub AT_Write {
         $temp .= ":" . $tempitem;
       }
     }
+		# Create weekday string, starting with monday, 1=yes=search this day, e.g. 0011001
+		my $search_weekday='';
+		map {$search_weekday.=$auto_timer->{weekdays}->{$_}} (qw (wday_mon wday_tue wday_wed wday_thu wday_fri wday_sat wday_sun));
+		$temp.=":$search_weekday";
+
+		# Finally write the auto timer entry
     print AT_FILE $temp, "\n";
   }
   close(AT_FILE);
@@ -957,7 +990,7 @@ sub AT_Write {
 
 sub DONE_Write {
     my $done = shift || return;
-    open(DONE_FILE, ">" . $DONE_FILENAME) || HTMLError(sprintf($MESSAGES{err_cant_open}, $DONE_FILENAME));
+    open(DONE_FILE, ">" . $DONE_FILENAME) || HTMLError(sprintf($ERROR_MESSAGE{cant_open}, $DONE_FILENAME));
     foreach my $n (sort keys %$done) { 
         printf DONE_FILE "%s::%d::%s\n", $n, $done->{$n}, scalar localtime($done->{$n}); 
     };
@@ -967,7 +1000,7 @@ sub DONE_Write {
 sub DONE_Read {
     my $done;
     if(-e $DONE_FILENAME) {
-        open(DONE_FILE, $DONE_FILENAME) || HTMLError(sprintf($MESSAGES{err_cant_open}, $AT_FILENAME));
+        open(DONE_FILE, $DONE_FILENAME) || HTMLError(sprintf($ERROR_MESSAGE{cant_open}, $AT_FILENAME));
         while(<DONE_FILE>) {
             chomp;
             next if($_ eq "");
@@ -982,7 +1015,7 @@ sub DONE_Read {
 sub BlackList_Read {
     my %blacklist;
     if(-e $BL_FILENAME) {
-        open(BL_FILE, $BL_FILENAME) || HTMLError(sprintf($MESSAGES{err_cant_open}, $BL_FILENAME));
+        open(BL_FILE, $BL_FILENAME) || HTMLError(sprintf($ERROR_MESSAGE{cant_open}, $BL_FILENAME));
         while(<BL_FILE>) {
             chomp;
             next if($_ eq "");
@@ -1141,7 +1174,7 @@ sub AutoTimer {
               }
 	    			} else {
 	      			# Normal event not spreading over Midnight
-	      			Log(LOG_DEBUG, "937: Event does not includes Midnight");
+	      			Log(LOG_DEBUG, "937: Event does not include Midnight");
               if(my_strftime("%H%M", $event->{start}) < $at->{start}) {
                 if(my_strftime("%H%M", $event->{start}) > $at->{stop}) {
 		  						# The event starts before AT start and after AT stop
@@ -1189,6 +1222,14 @@ sub AutoTimer {
             }
 	  			}
         }
+
+				# Check if we should schedule any timers on this weekday
+				my %weekdays_map = (1=>'wday_mon', 2=>'wday_tue', 3=>'wday_wed', 4=>'wday_thu',
+					5=>'wday_fri', 6=>'wday_sat', 7=>'wday_sun');
+				unless ($at->{weekdays}->{$weekdays_map{my_strftime ("%u",$event->{start})}}) {
+					Log(LOG_DEBUG, "Event not valid for this weekday");
+					next;
+				}
 
         Log(LOG_AT, sprintf("Auto Timer: Found \"%s\"", $at->{pattern}));
 
@@ -1297,7 +1338,7 @@ sub AutoTimer {
 sub AT_ProgTimer {
   my($active, $event_id, $channel, $start, $stop, $title, $summary, $prio, $lft) = @_;
 
-  $title =~ s/\:/ /g;
+  $title =~ s/\|/\:/g;
 
   $start -= ($CONFIG{TM_MARGIN_BEGIN} * 60);
   $stop += ($CONFIG{TM_MARGIN_END} * 60);
@@ -1511,7 +1552,7 @@ sub ParseTimer {
     $event_id = UnpackEvent_id($tmstatus);
 
     # direct recording (menu, red)
-    $active = 1 if($active == 3);
+    $active = 1 if($active == 3 || $active == 8);
 
 		# replace "|" by ":" in timer's title (man vdr.5)
 		$title =~ s/\|/\:/g;
@@ -1586,7 +1627,8 @@ sub ParseTimer {
           summary   => $summary,
           collision => 0,
           critical  => 0,
-          first     => $first
+          first     => $first,
+					proglink  => sprintf("%s?aktion=prog_list&vdr_id=%s", $MyURL, $vdr_id)
         });
         $first = 0;
       }
@@ -1610,7 +1652,8 @@ sub ParseTimer {
         summary   => $summary,
         collision => 0,
         critical  => 0,
-        first     => -1
+        first     => -1,
+				proglink  => sprintf("%s?aktion=prog_list&vdr_id=%s", $MyURL, $vdr_id)
       });
     }
 
@@ -1638,12 +1681,13 @@ sub DisplayMessage {
 sub LoadTranslation {
   undef @I18N_Days;
   undef @I18N_Month;
-  undef %MESSAGES;
-  undef %ERRORMESSAGE;
-  undef %COMMONMESSAGE;
+  undef %ERROR_MESSAGE;
+  undef %MESSAGE;
   undef %HELP;
   undef @LOGINPAGES_DESCRIPTION;
-  include("$I18NDIR/$CONFIG{LANGUAGE}/$I18NFILE");
+
+	setlocale(LC_MESSAGES, "");
+  include("$TEMPLATEDIR/$I18NFILE");
 }
 
 sub HelpURL {
@@ -1774,6 +1818,12 @@ sub Log {
 
 sub TemplateNew {
   my $file = shift;
+
+	my $translation_filter = sub {
+		my $text_ref = shift;
+		$$text_ref =~ s/<%! (.*?) !%>/gettext($1)/ge;
+	};
+
   $CONFIG{TEMPLATE} = "default" if(!$CONFIG{TEMPLATE});
   $file = "$TEMPLATEDIR/$CONFIG{TEMPLATE}/$file";
   if(!-e $file) {
@@ -1783,6 +1833,7 @@ sub TemplateNew {
     die_on_bad_params => 0,
     loop_context_vars => 1,
 		#DEBUG        => DEBUG_ALL,
+		filter => $translation_filter,
     filename => $file
     );
   return $template;
@@ -1971,8 +2022,7 @@ sub show_index {
 	my $vars = {
     loginpage => "$MyURL?aktion=$page",
     version   => $VERSION,
-    host      => $CONFIG{VDR_HOST},
-    msg       => \%MESSAGES
+    host      => $CONFIG{VDR_HOST}
   };
 	$template->param($vars);
 	my $output;
@@ -1984,7 +2034,7 @@ sub show_index {
 sub show_navi {
 	my $template = TemplateNew("left.html");
 	my $vars = {
-    msg       => \%MESSAGES
+		linvdr =>  $LINVDR
   };
 	$template->param($vars);
 	my $output;
@@ -2086,8 +2136,7 @@ sub prog_detail {
 		start        => $start,
 		stop         => $stop,
     text         => $displaytext ? $displaytext : undef,
-		date         => $date,
-		msg          => \%MESSAGES
+		date         => $date
   };
   $template->param($vars);
   my $output;
@@ -2148,9 +2197,10 @@ sub prog_list {
       # new day
 			push(@show, { endd => 1 }) if(scalar(@show) > 0);
       push(@show, {
-				title  => $event->{channel_name} . " | " .
-					FullDay(my_strftime("%w", $event->{start})) . ", " .
-					my_strftime("%d.%m.%Y", $event->{start}),
+				title     => $event->{channel_name} . " | " . my_strftime("%A, %x", $event->{start}),
+#				title  => $event->{channel_name} . " | " .
+#					FullDay(my_strftime("%w", $event->{start})) . ", " .
+#					my_strftime("%d.%m.%Y", $event->{start}),
 				newd   => 1,
 				next_channel => $next_channel ? "$MyURL?aktion=prog_list&vdr_id=$next_channel" : undef,
 				prev_channel => $prev_channel ? "$MyURL?aktion=prog_list&vdr_id=$prev_channel" : undef,
@@ -2179,14 +2229,14 @@ sub prog_list {
   # 
   my($template) = TemplateNew("prog_list.html");
   my $vars = {
-    url        => $MyURL,
-    loop       => \@show,
-    chanloop   => \@channel,
-    progname   => GetChannelDescByNumber($vdr_id),
-		switchurl  => "$MyURL?aktion=prog_switch&channel=" . $vdr_id,
-		streamurl  => "$MyURL?aktion=live_stream&channel=" . $vdr_id,
-		toolbarurl => "$MyURL?aktion=toolbar",
-		msg        => \%MESSAGES
+    url            => $MyURL,
+    loop           => \@show,
+    chanloop       => \@channel,
+    progname       => GetChannelDescByNumber($vdr_id),
+		switchurl      => "$MyURL?aktion=prog_switch&channel=" . $vdr_id,
+		streamurl      => "$MyURL?aktion=live_stream&channel=" . $vdr_id,
+		stream_live_on => $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
+		toolbarurl     => "$MyURL?aktion=toolbar"
   };
   $template->param($vars);
   my $output;
@@ -2258,10 +2308,12 @@ sub prog_list2 {
 
        if($dayflag == 1) {
 	       push(@show, {
-				   title  => $event->{channel_name} . " | " . 
-					   FullDay(my_strftime("%w", $event->{start})) . ", " . 
-					   my_strftime("%d.%m.%Y", $event->{start}),
-				   newd   => 1,
+				   title     => $event->{channel_name} . " | " . my_strftime("%A, %x", $event->{start}),
+#				   title     => $event->{channel_name} . " | " . 
+#					              FullDay(my_strftime("%w", $event->{start})) . ", " . 
+#					              my_strftime("%d.%m.%Y", $event->{start}),
+				   newd      => 1,
+					 streamurl => "$MyURL?aktion=live_stream&channel=" . $event->{vdr_id},
 				   undef,
 				   undef,
 	       });
@@ -2292,13 +2344,13 @@ sub prog_list2 {
   # 
   my($template) = TemplateNew("prog_list2.html");
   my $vars = {
-    url        => $MyURL,
-    loop       => \@show,
-    chanloop   => \@channel,
-    progname   => GetChannelDescByNumber($vdr_id),
-		switchurl  => "$MyURL?aktion=prog_switch&channel=" . $vdr_id,
-		toolbarurl => "$MyURL?aktion=toolbar",
-		msg        => \%MESSAGES
+    url            => $MyURL,
+    loop           => \@show,
+    chanloop       => \@channel,
+    progname       => GetChannelDescByNumber($vdr_id),
+		switchurl      => "$MyURL?aktion=prog_switch&channel=" . $vdr_id,
+		stream_live_on => $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
+		toolbarurl     => "$MyURL?aktion=toolbar"
   };
   $template->param($vars);
   my $output;
@@ -2344,7 +2396,7 @@ sub timer_list {
     $timer->{delurl} = $MyURL . "?aktion=timer_delete&timer_id=" . $timer->{id},
     $timer->{modurl} = $MyURL . "?aktion=timer_new_form&timer_id=" . $timer->{id},
 		$timer->{toggleurl} = sprintf("%s?aktion=timer_toggle&active=%s&id=%s", $MyURL, ($timer->{active} & 1) ? 0 : 1, $timer->{id}),
-		$timer->{dor} = my_strftime("%d.%m", $timer->{startsse});
+		$timer->{dor} = my_strftime("%a %d.%m", $timer->{startsse});
 
     $TagAnfang=my_mktime(0,0,my_strftime("%d", $timer->{start}),my_strftime("%m", $timer->{start}),my_strftime("%Y", $timer->{start}));
     $TagEnde=my_mktime(0,0,my_strftime("%d", $timer->{stop}),my_strftime("%m", $timer->{stop}),my_strftime("%Y", $timer->{stop}));
@@ -2568,8 +2620,7 @@ sub timer_list {
     url			    			 => $MyURL,
     help_url           => HelpURL("timer_list"),
     current            => $current,
-    title              => $title,
-    msg                => \%MESSAGES
+    title              => $title
   };
 
   $template->param($vars);
@@ -2665,8 +2716,7 @@ sub timer_new_form {
     channels => \@channels,
     newtimer => $timer_id ? 0 : 1,
     referer  => Encode_Referer($ref),
-    help_url => HelpURL("timer_new"),
-    msg      => \%MESSAGES,
+    help_url => HelpURL("timer_new")
   };
   
   my $template = TemplateNew("timer_new.html");
@@ -2845,9 +2895,9 @@ sub rec_stream {
       }
       $title=$newtitle;
       $title =~ s/~/\//g;
-      @files= `find $VIDEODIR/ -regex "$VIDEODIR/$title\_*/....-$month-$day\\.$hour.$minute\\...\\...\\.rec/...\\.vdr" | sort -r`;
+      @files= `find $CONFIG{VIDEODIR}/ -regex "$CONFIG{VIDEODIR}/$title\_*/....-$month-$day\\.$hour.$minute\\...\\...\\.rec/...\\.vdr" | sort -r`;
       foreach (@files) {
-          $_ =~ s/$VIDEODIR//;
+          $_ =~ s/$CONFIG{VIDEODIR}/$CONFIG{ST_VIDEODIR}/;
           $data= $CONFIG{ST_URL}."$_\n$data";
       }
   }
@@ -2905,6 +2955,7 @@ sub at_timer_list {
     $_->{prio} = $_->{prio} ? $_->{prio} : $CONFIG{AT_PRIORITY};
     $_->{lft} = $_->{lft} ? $_->{lft} : $CONFIG{AT_LIFETIME};
     $_->{id} = $id;
+		$_->{proglink} = sprintf("%s?aktion=prog_list&vdr_id=%s", $MyURL, $_->{channel});
     $_->{channel} = GetChannelDescByNumber($_->{channel}); 
 		$_->{sortbyactive} = 1 if($sortby eq "active");
 		$_->{sortbychannel} = 1 if($sortby eq "channel");
@@ -2968,8 +3019,7 @@ sub at_timer_list {
     #naturl	    			 => $MyURL . "?aktion=at_timer_new&active=1",
     url			    			 => $MyURL,
 		force_update_url   => "$MyURL?aktion=force_update",
-    help_url           => HelpURL("at_timer_list"), 
-    msg                => \%MESSAGES
+    help_url           => HelpURL("at_timer_list") 
   };
   $template->param($vars);
   my $output;
@@ -3032,8 +3082,8 @@ sub at_timer_edit {
     description => ($at[$id-1]->{section} & 4) ? 1 : 0,
     directory   => $at[$id-1]->{directory},
 		newtimer    => 0,
-    help_url    => HelpURL("at_timer_new"),
-    msg         => \%MESSAGES
+		(map {$_=>$at[$id-1]->{weekdays}->{$_}} qw (wday_mon wday_tue wday_wed wday_thu wday_fri wday_sat wday_sun)),
+    help_url    => HelpURL("at_timer_new")
   };
 
   $template->param($vars);
@@ -3050,12 +3100,12 @@ sub at_timer_new {
     active   => $q->param("active"),
     done     => $q->param("done"),
     title    => 1,
+		wday_mon => 1, wday_tue=>1, wday_wed=>1, wday_thu=>1, wday_fri=>1, wday_sat=>1, wday_sun=>1,
     channels => \@CHAN,
     prio     => $CONFIG{AT_PRIORITY},
     lft      => $CONFIG{AT_LIFETIME},
 		newtimer => 1,
-    help_url => HelpURL("at_timer_new"),
-    msg      => \%MESSAGES
+    help_url => HelpURL("at_timer_new")
   };
   $template->param($vars);
   my $output;
@@ -3066,6 +3116,15 @@ sub at_timer_new {
 
 sub at_timer_save {
   my $id = $q->param("id");
+
+	my $start;
+	my $stop;
+	if (length($q->param("starth")) > 0 || length($q->param("startm")) > 0) {
+		$start = sprintf("%02s%02s", $q->param("starth"), $q->param("startm"));
+	}
+	if (length($q->param("stoph")) > 0 || length($q->param("stopm")) > 0) {
+		$stop = sprintf("%02s%02s", $q->param("stoph"), $q->param("stopm"));
+	}
 
   if($q->param("save")) {
     if(!$id) {
@@ -3080,12 +3139,13 @@ sub at_timer_save {
         done      => $q->param("done"),
 				pattern   => $q->param("pattern"),
 				section   => $section,
-				start     => $q->param("starth") . $q->param("startm"),
-				stop      => $q->param("stoph") . $q->param("stopm"),
+				start     => $start,
+				stop      => $stop,
 				prio      => $q->param("prio"),
 				lft       => $q->param("lft"),
 				channel   => $q->param("channel"),
-        directory => $q->param("directory")
+        directory => $q->param("directory"),
+				weekdays  => {map {$_=>$q->param($_)?$q->param($_):0} (qw (wday_mon wday_tue wday_wed wday_thu wday_fri wday_sat wday_sun))}
       });
       AT_Write(@at);
     } else {
@@ -3106,12 +3166,13 @@ sub at_timer_save {
             done      => $q->param("done"),
 						pattern   => $q->param("pattern"),
 						section   => $section,
-						start     => $q->param("starth") . $q->param("startm"),
-						stop      => $q->param("stoph") . $q->param("stopm"),
+						start     => $start,
+						stop      => $stop,
 						prio      => $q->param("prio"),
 						lft       => $q->param("lft"),
 						channel   => $q->param("channel"),
-            directory => $q->param("directory")
+            directory => $q->param("directory"),
+						weekdays  => {map {$_=>$q->param($_)?$q->param($_):0} (qw (wday_mon wday_tue wday_wed wday_thu wday_fri wday_sat wday_sun))}
 					});
 				}
       }
@@ -3218,12 +3279,27 @@ sub prog_timeline {
   my(@show, @shows, @temp);
   my $shows;
 
-  my @epgChannels = split(/\,/, $CONFIG{CHANNELS_WANTED});
+	my @epgChannels;
+  for my $channel (@CHAN) { 
+    # if its wished, display only wanted channels
+    if($CONFIG{CHANNELS_WANTED_TIMELINE}) {
+      my $found = 0;
+      for my $n (split(",", $CONFIG{CHANNELS_WANTED})) {
+				($found = 1) if($n eq $channel->{vdr_id});
+      }
+      next if(!$found);
+    } 
+    
+    # skip channels without EPG data
+		if(ChannelHasEPG($channel->{vdr_id})) {
+			push(@epgChannels, $channel->{vdr_id});
+    }
+  }
+
   @epgChannels = keys(%EPG) 
     unless scalar @epgChannels;
 
   foreach(@epgChannels) {	# Sender durchgehen
-    next unless(ChannelHasEPG($_));
     foreach my $event (sort {$a->{start} <=> $b->{start} } @{$EPG{$_}}) { # Events durchgehen
       next if($event->{stop} < $event_time or $event->{start} > $event_time_to );
 
@@ -3267,8 +3343,7 @@ sub prog_timeline {
                        my_strftime("%Y", time)),
     nowurl 	=> $MyURL . "?aktion=prog_timeline",
     url    	=> $MyURL,
-    config 	=> \%CONFIG,
-    msg     => \%MESSAGES
+    config 	=> \%CONFIG
   };
 
   my $template = TemplateNew("prog_timeline.html");
@@ -3365,25 +3440,28 @@ sub prog_summary {
 			$displaysubtitle =~ s/\|/<br>\n/g;
 
       push(@show,  {
-				date     => my_strftime("%d.%m.%y", $event->{start}),
-				longdate => sprintf("%s., %s. %s %s",
-					substr(FullDay(my_strftime("%w", $event->{start}), $event->{start}), 0, 2),
-					my_strftime("%d", $event->{start}),
-					FullMonth(my_strftime("%m", $event->{start})),
-					my_strftime("%Y", $event->{start})),
-				start    => my_strftime("%H:%M", $event->{start}),
-				stop     => my_strftime("%H:%M", $event->{stop}),
-				title    => $displaytitle,
-				subtitle => length($displaysubtitle) > 30 ? substr($displaysubtitle, 0, 30) . "..." : $displaysubtitle,
-				progname => $event->{channel_name},
-				summary  => length($displaytext) > 120 ? substr($displaytext, 0, 120) . "..." : $displaytext,
-				vdr_id   => $event->{vdr_id},
-				proglink => sprintf("%s?aktion=prog_list&vdr_id=%s", $MyURL, $event->{vdr_id}),
-				switchurl=> sprintf("%s?aktion=prog_switch&channel=%s", $MyURL, $event->{vdr_id}),
-				streamurl=> sprintf("%s?aktion=live_stream&channel=%s", $MyURL, $event->{vdr_id}),
-				infurl   => $event->{summary} ? sprintf("%s?aktion=prog_detail&epg_id=%s&vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}) : undef,
-				recurl   => sprintf("%s?aktion=timer_new_form&epg_id=%s&vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
-        anchor   => $event->{event_id}
+#				date           => my_strftime("%x", $event->{start}),
+#				longdate       => my_strftime("%a, %x", $event->{start}),
+				date           => my_strftime("%d.%m.%y", $event->{start}),
+				longdate       => sprintf("%s., %s. %s %s",
+					                        substr(FullDay(my_strftime("%w", $event->{start}), $event->{start}), 0, 2),
+					                        my_strftime("%d", $event->{start}),
+					                        FullMonth(my_strftime("%m", $event->{start})),
+					                        my_strftime("%Y", $event->{start})),
+				start          => my_strftime("%H:%M", $event->{start}),
+				stop           => my_strftime("%H:%M", $event->{stop}),
+				title          => $displaytitle,
+				subtitle       => length($displaysubtitle) > 30 ? substr($displaysubtitle, 0, 30) . "..." : $displaysubtitle,
+				progname       => $event->{channel_name},
+				summary        => length($displaytext) > 120 ? substr($displaytext, 0, 120) . "..." : $displaytext,
+				vdr_id         => $event->{vdr_id},
+				proglink       => sprintf("%s?aktion=prog_list&vdr_id=%s", $MyURL, $event->{vdr_id}),
+				switchurl      => sprintf("%s?aktion=prog_switch&channel=%s", $MyURL, $event->{vdr_id}),
+				streamurl      => sprintf("%s?aktion=live_stream&channel=%s", $MyURL, $event->{vdr_id}),
+				stream_live_on => $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
+				infurl         => $event->{summary} ? sprintf("%s?aktion=prog_detail&epg_id=%s&vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}) : undef,
+				recurl         => sprintf("%s?aktion=timer_new_form&epg_id=%s&vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
+        anchor         => $event->{event_id}
       });
       last if(!$search);
     }
@@ -3412,8 +3490,7 @@ sub prog_summary {
     rows   => \@shows,
     now    => strftime("%H:%M", localtime($event_time)),
     nowurl => $MyURL . "?aktion=prog_summary",
-    url    => $MyURL,
-    msg    => \%MESSAGES
+    url    => $MyURL
   };
   $template->param($vars);
   my $output;
@@ -3430,7 +3507,7 @@ sub rec_list {
   my(@all_recordings, @recordings);
 
 	#
-  my $ffserver = `ps -ef | grep ffserver | wc -l`; 
+	#my $ffserver = `ps -ef | grep ffserver | wc -l`; 
 	my $desc;
 	if(!defined($q->param("desc"))) {
 		$desc = 1;
@@ -3534,7 +3611,8 @@ sub rec_list {
       delurl     => $MyURL . "?aktion=rec_delete&id=$id",
       editurl    => $MyURL . "?aktion=rec_edit&id=$id",
       infurl     => $MyURL . "?aktion=rec_detail&id=$id",
-      streamurl  => $MyURL . "?aktion=rec_stream&id=$id"
+      streamurl  => $MyURL . "?aktion=rec_stream&id=$id",
+			stream_rec_on   => $CONFIG{ST_FUNC} && $CONFIG{ST_REC_ON}
     });
   }
 
@@ -3569,7 +3647,7 @@ sub rec_list {
 		last if($fuse > 100);
 	}
 	push(@path, {
-		name => $COMMONMESSAGE{OVERVIEW},
+		name => $MESSAGE{overview},
 		url  => ($parent ne 0) ?
 			sprintf("%s?aktion=rec_list&parent=%s", $MyURL, 0) : "" });
 	@path = reverse(@path);
@@ -3630,7 +3708,8 @@ sub rec_list {
 		path            => \@path,
 		url             => $MyURL,
     help_url        => HelpURL("rec_list"),
-    msg             => \%MESSAGES
+		reccmds         => \@reccmds,
+		stream_rec_on   => $CONFIG{ST_FUNC} && $CONFIG{ST_REC_ON}
   };
   $template->param($vars);
   my $output;
@@ -3675,8 +3754,7 @@ sub rec_detail {
 	my $template = TemplateNew("prog_detail.html");
 	my $vars = {
     text  => $text ? $text : "",
-    title => $title,
-    msg   => \%MESSAGES
+    title => $title
   };
   $template->param($vars);
   my $output;
@@ -3686,18 +3764,68 @@ sub rec_detail {
 }
 
 sub rec_delete {
-  my($id) = $q->param('id');
-  if($id) {
-    SendCMD("delr $id");
-  } else {
-    for($q->param) {
-      if(/xxxx_(.*)/) {
-				SendCMD("delr $1");
-      }
-    }
-  }
-  CloseSocket();
-  return(headerForward(RedirectToReferer("$MyURL?aktion=rec_list")));
+	my($id) = $q->param('id');
+
+	if ($q->param("rec_delete")) {
+		if ($id) {
+			SendCMD("delr $id");
+		} else {
+			for ($q->param) {
+				if (/xxxx_(.*)/) {
+					SendCMD("delr $1");
+				}
+			}
+		}
+		CloseSocket();
+	} elsif ($q->param("rec_runcmd")) {
+		if ($id) {
+			recRunCmd($q->param("rec_cmd"), $id);
+		}	else {
+			for ($q->param) {
+				if (/xxxx_(.*)/) {
+					recRunCmd($q->param("rec_cmd"), $1);
+				}
+			}
+		}
+	}
+	return(headerForward(RedirectToReferer("$MyURL?aktion=rec_list")));
+}
+
+sub recRunCmd {
+	my ($cmdID, $id) = @_;
+	my $cmd = ${reccmds}[$cmdID]{cmd};
+	my ($rec_id, $date, $time, $title);
+	my ($day, $month, $hour, $minute, $newtitle, $c, $folder);
+
+	for(SendCMD("lstr")) {
+		($rec_id, $date, $time, $title) = split(/ +/, $_, 4);
+		last if($rec_id == $id);
+	}
+
+	$time = substr($time, 0, 5); # needed for wareagel-patch  
+	if ($rec_id == $id) {
+		chomp($title);
+		($day, $month)= split( /\./, $date);
+		($hour, $minute)= split( /:/, $time);
+		# escape characters
+		$title =~ s/~/\//g;
+		$title =~ s/\ /\_/g;
+		for ( my $i=0 ; $i < length($title); $i++) {
+			$c = substr($title,$i,1);
+			unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&\(\)\+,.\-;=~]/) {
+				$newtitle.= sprintf( "#%02X", ord( $c ));
+			} else {
+				$newtitle.= $c;
+			}
+		}
+		$title=$newtitle;
+		$title =~ s/~/\//g;
+		$folder = `find $CONFIG{VIDEODIR}/$title -regex "$CONFIG{VIDEODIR}/$title/....-$month-$day\\.$hour.$minute\\...\\...\\.rec"`;
+	
+		if ($folder) {
+			`$cmd $folder`;
+		}
+	}
 }
 
 sub rec_edit {
@@ -3715,8 +3843,7 @@ sub rec_edit {
   my $vars = {
     url   => $MyURL,
     title => $title,
-    id    => $id,
-    msg   => \%MESSAGES
+    id    => $id
   };
   $template->param($vars);
   my $output;
@@ -3753,8 +3880,6 @@ sub conf_list {
 				$CONFIG{$_} = $q->param($_);
       }
     }
-    #
-    LoadTranslation();
   }
 
 	sub WriteConfig {
@@ -3807,20 +3932,6 @@ sub conf_list {
       });
     }
   }
-  #
-  my @lang;
-  for my $dir (<$I18NDIR/*>) {
-    next if(!-d $dir);
-    $dir =~ s/.*\///g;
-    my $found = 0;
-    for(@lang) { ($found = 1) if($1 && ($_->{name} eq $1)); }
-    if(!$found) {
-      push(@lang, {
-				name   => $dir,
-				aklang => ($CONFIG{LANGUAGE} eq $dir) ? 1 : 0,
-      });
-    }
-  }
 
   #
   my (@all_channels, @selected_channels);
@@ -3857,15 +3968,13 @@ sub conf_list {
   my $template = TemplateNew("config.html");
   my $vars = {
     %CONFIG,
-    LANGLIST          => \@lang,
     TEMPLATELIST      => \@template,
     ALL_CHANNELS      => \@all_channels,
     SELECTED_CHANNELS => \@selected_channels,
 		LOGINPAGES        => \@loginpages,
     SKINLIST          => \@skinlist,
     url               => $MyURL,
-    help_url          => HelpURL("conf_list"),
-    msg               => \%MESSAGES
+    help_url          => HelpURL("conf_list")
   };
   $template->param($vars);
   my $output;
@@ -3881,8 +3990,7 @@ sub rc_show {
 	my $template = TemplateNew("rc.html");
 	my $vars = {
 		url  => sprintf("%s?aktion=grab_picture", $MyURL),
-    host => $CONFIG{VDR_HOST},
-    msg  => \%MESSAGES
+    host => $CONFIG{VDR_HOST}
   };
   $template->param($vars);
   my $output;
@@ -3908,8 +4016,7 @@ sub tv_show {
 	my $template = TemplateNew("tv.html");
 	my $vars = {
 		url  => sprintf("%s?aktion=grab_picture", $MyURL),
-    host => $CONFIG{VDR_HOST},
-    msg  => \%MESSAGES
+    host => $CONFIG{VDR_HOST}
   };
   $template->param($vars);
   my $output;
@@ -3928,8 +4035,7 @@ sub show_help {
   }
   my $template = TemplateNew("prog_detail.html"); # XXX eigenes Template?
   my $vars = {
-  	text => $text,
-  	msg  => \%MESSAGES
+  	text => $text
   };
   $template->param($vars);
   my $output;
@@ -3975,6 +4081,35 @@ sub grab_picture {
 sub force_update {
 	UptoDate(1);
 	RedirectToReferer("$MyURL?aktion=prog_summary");
+}
+
+sub isLinVDR {
+  my $file = "/etc/linvdr-release";
+  my $content;
+  if(-e $file) {
+    open(FILE, $file);
+    $content = <FILE>;
+    close(FILE);
+  }
+  chomp($content);
+  return($content);
+}
+
+sub loadRecCmds {
+	my $id = 0;
+	if(-e "$CONFIG{VDRCONFDIR}/reccmds.conf" and my $text = open(FH, "$CONFIG{VDRCONFDIR}/reccmds.conf")) {
+		while(<FH>) {
+			chomp;
+			s/#.*//;
+			s/^\s+//;
+			s/\s+$//;
+			next unless length;
+			my ($title, $cmd) = split(":", $_);
+			push(@reccmds, {title => $title, cmd => $cmd, id => $id});
+			$id = $id + 1;
+		}
+		close(FH);
+	}
 }
 
 #############################################################################
@@ -4035,7 +4170,7 @@ sub myconnect {
 	my $this = shift;
 	if ($epg && $CONFIG{EPG_DIRECT}) {
 	  main::Log(LOG_VDRCOM, "LOG_VDRCOM: open EPG $CONFIG{EPG_FILENAME}");
-	  open($EPGSOCKET,$CONFIG{EPG_FILENAME}) || main::HTMLError(sprintf($MESSAGES{err_cant_open}, $CONFIG{EPG_FILENAME}));
+	  open($EPGSOCKET,$CONFIG{EPG_FILENAME}) || main::HTMLError(sprintf($ERROR_MESSAGE{cant_open}, $CONFIG{EPG_FILENAME}));
 	  return;
 	}
 	main::Log(LOG_VDRCOM, "LOG_VDRCOM: connect to $CONFIG{VDR_HOST}:$CONFIG{VDR_PORT}");
@@ -4044,7 +4179,7 @@ sub myconnect {
 		PeerAddr => $CONFIG{VDR_HOST}, 
 		PeerPort => $CONFIG{VDR_PORT}, 
 		Proto => 'tcp'
-	) || main::HTMLError(sprintf($ERRORMESSAGE{CONNECT_FAILED}, $CONFIG{VDR_HOST}));
+	) || main::HTMLError(sprintf($ERROR_MESSAGE{connect_failed}, $CONFIG{VDR_HOST}));
 
 	my $line;
 	$line = <$SOCKET>;
@@ -4091,7 +4226,7 @@ sub command {
 	if($SOCKET) {
 		my $result = send($SOCKET, $cmd, 0);
 		if($result != length($cmd)) {
-			main::HTMLError($ERRORMESSAGE{SEND_COMMAND}, $CONFIG{VDR_HOST});
+			main::HTMLError($ERROR_MESSAGE{send_command}, $CONFIG{VDR_HOST});
 		} else {
 			$query = true;
 		}

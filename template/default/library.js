@@ -26,7 +26,7 @@ function callurl( url ) {
 }
 
 function popup(URL) {
-	window.open(URL, '_new', 'width=450, height=250, scrollbars=auto, resizable=yes');
+	window.open(URL, '_new', 'width=500, height=250, scrollbars=auto, resizable=yes');
 }
 
 function toolbar(URL) {

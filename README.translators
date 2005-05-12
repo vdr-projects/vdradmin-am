@@ -1,0 +1,82 @@
+VDRAdmin-am translators guide
+==============================
+
+Since vdradmin-0.97-am3.2 almost every text has been extracted from the
+scripts and templates. This makes it much easier for anybody, who wants to
+translate VDRAdmin to another language.
+
+All you need to do is to let me (mail AT andreas DOT vdr-developer DOT org)
+know, that you plan to add a new language, so that I can tell you if anybody
+else is already working on that language. After my OK you can start your work.
+
+
+Howto
+-----
+
+We've decided to use GNU gettext for translating the user interface to
+different languages. GNU gettext is widely used among Linux programs of all
+kind. It comes with a lot of tools and with support for most programming
+languages.
+
+The translations are stored in plain text files with a *.po file extension.
+Each language has its own file (e.g. de.po, fi.po, ...). You may edit these
+po-files with any text editor, but we recommend to use a po-editor like
+poedit [1], kbabel [2] or gtranslator [3].
+
+You must have installed the "gettext" package of your distribution to compile
+the plain text translations to the binary files needed by VDRAdmin.
+
+The basic work flow for a translation looks like this:
+
+1) Copy po/vdradmin.pot to po/<language code>.po. See [4] for a list of
+   available language codes.
+   
+2) Open the file in your favorit po-editor. Make sure you set the correct
+   encoding and fill in your email and language in the corresponding header
+   fields. poedit makes this pretty easy - just go to catalog/options and
+   fill out the form.
+   
+3) Now you can start translating. Each message is commented to give you a hint,
+   where it came from. Keep in mind, that if you translate a message, you should
+	 use html entities [5], [6] for special characters. Any text that origins from
+	 vdradmind.pl must not have html entities.
+   Beside the help texts, you will not need any formating tags.
+   
+   Messages marked as "fuzzy" indicate, that they may have been derived from
+   similar messages and it's not sure, that the translation is correct. Check
+   these translations and correct them if needed or simply mark them as not
+   fuzzy (poedit: edit/mark as fuzzy)
+   
+4) To check how your translated texts look like, you have to compile them
+   first to *.mo-files. To do so, you edit the "Makefile" first and append
+   your  <language code> to the "LANGS=" line. Running "make" will then create
+   a new *.mo-file from your changed *.po-file.
+   
+   Please note, that you have to restart vdradmind.pl after any changes you 
+   make to the translation. In order to allow vdradmin to select your language,
+   you must have the appropriate locales installed on your system (see 
+   `locale -a`). You should make sure, that the correct locale is selected
+   with the LANG and LC_* environemt variables.
+   
+5) If you are done, send the *.po-file to me:
+
+   mail AT andreas DOT vdr-developer DOT org
+   
+6) When changes have been made to vdradmin-am, that cause some messages to
+   change, the *.po-files will by modified and we will send them to the
+   translators. The process then starts with 2) again and we will include your 
+   new translation with the next release.
+
+
+If you have any further questions, please don't hesitate to contact me.
+
+
+--- 2005-04-22, Andreas Mair ---
+
+
+[1] http://www.poedit.org (available for Windows and Linux)
+[2] http://i18n.kde.org/tools/kbabel/ (KDE)
+[3] http://gtranslator.sourceforge.net/ (GNOME)
+[4] http://www.gnu.org/software/gettext/manual/html_chapter/gettext_15.html
+[5] http://www.w3.org/TR/WD-entities-961125 (English)
+[6] http://de.selfhtml.org/html/referenz/zeichen.htm (German).

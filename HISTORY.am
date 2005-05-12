@@ -4,10 +4,25 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
-************************************************************
-PLEASE NOTE:
-- Streaming recordings is not implemented. If you have some code that works, please let me know!
-************************************************************
+2005-05-12: 0.97-am3.2
+- Added "make uninstall" to remove VDRAdmin from your system if you have installed it using "make install". Please always use this before you install a new release!
+- Fixed programming of repeating timers when day is "D" (Thanks to "maxkr" for reporting this).
+- Print date in prog_list & prog_list2 in system's locale. Please comment!
+- More transparent "selected channels" usage.
+- Added reccmds.conf content to rec_list (needs valid VDRCONFDIR in vdradmind.conf)
+- AutoTimers can now be limited to certain weekdays (Patch submitted by Magnus Schmidt).
+- Streaming can be turn on/off for live viewing and recordings viewing (Based on code submitted by Tobias Grimm).
+- Added streaming button to prog_list2.
+- Fixed handling of incorrect start/stop times in AutoTimer.
+- Changed localisation to use gettext() (Thanks to Tobias Grimm for doing most of the needed work).
+- Language can no longer be set in VDRAdmin, it's taken from your system's setting. Issue "export LC_MESSAGES=<language code>" if you need to change it, where <language code> is one of "de_DE", "en_EN", "es_ES", "fi_FI" or "fr_FR".
+- Added Finnish i18n (Submitted by Rolf Ahrenberg).
+- Fixed ":" & "|" handling in timer's directory (Thanks "vejoun").
+- Added links to prog_list on channels in at_timer_list and timer_list.
+- Added IMDb lookup button to recording's detail view.
+- Added "Priority" and "Lifetime" tooltip to at_timer_list and timer_list (point mouse to timer's name).
+- Small changes for streaming recordings: Please update your vdradmind.conf (VIDEODIR & ST_VIDEODIR)!
+- Non-LinVDR logo on non-LinVDR machines (Posted by Unimatrix0 at vdrportal.de).
 
 2005-04-12: 0.97-am3.1
 - Updated Spanish i18n (Thanks to Ruediger Jung).

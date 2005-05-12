@@ -1,8 +1,11 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 
 <head>
-	<title><?% msg.c_progname %?> - <?% msg.tv_headline %?> (<tmpl_var host>)</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>VDRAdmin - <%! TV !%> (<tmpl_var host>)</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<script language="JavaScript">
 		<!--
 		var aktiv;
@@ -70,101 +73,101 @@ select { font-weight: normal; width: 55px; height: 20px; font-size: 9px; font-fa
 	<form name="liveform">
 		<table width="200" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<td align="center" valign="middle"><img name="Bild" src="<tmpl_var url>" border="1" hspace=2 vspace=2></td>
-				<td><img src="bilder/spacer.gif" name="switchimage" width="2" height="1"></td>
+				<td align="center" valign="middle"><img name="Bild" src="<tmpl_var url>" border="1" hspace="2" vspace="2" /></td>
+				<td><img src="bilder/spacer.gif" name="switchimage" width="2" height="1" /></td>
 				<td valign="top">
 					<table width="200" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td></td>
-							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0" /></td>
 							<td></td>
 						</tr>
 						<tr>
 							<td></td>
 							<td></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=power');"><img src="bilder/fern_03.jpg" alt="" height="27" width="68" border="0"></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=power');"><img src="bilder/fern_03.jpg" alt="" height="27" width="68" border="0" /></a></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0" /></td>
 							<td></td>
 						</tr>
 						<tr>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=1');"><img src="bilder/fern_05.jpg" alt="" height="28" width="67" border="0"></a></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=2');"><img src="bilder/fern_06.jpg" alt="" height="28" width="66" border="0"></a></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=3');"><img src="bilder/fern_07.jpg" alt="" height="28" width="67" border="0"></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=1');"><img src="bilder/fern_05.jpg" alt="" height="28" width="67" border="0" /></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=2');"><img src="bilder/fern_06.jpg" alt="" height="28" width="66" border="0" /></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=3');"><img src="bilder/fern_07.jpg" alt="" height="28" width="67" border="0" /></a></td>
 						</tr>
 						<tr>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=4');"><img src="bilder/fern_08.jpg" alt="" height="28" width="67" border="0"></a></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=5');"><img src="bilder/fern_09.jpg" alt="" height="28" width="66" border="0"></a></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=6');"><img src="bilder/fern_10.jpg" alt="" height="28" width="67" border="0"></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=4');"><img src="bilder/fern_08.jpg" alt="" height="28" width="67" border="0" /></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=5');"><img src="bilder/fern_09.jpg" alt="" height="28" width="66" border="0" /></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=6');"><img src="bilder/fern_10.jpg" alt="" height="28" width="67" border="0" /></a></td>
 						</tr>
 						<tr>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=7');"><img src="bilder/fern_11.jpg" alt="" height="28" width="67" border="0"></a></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=8');"><img src="bilder/fern_12.jpg" alt="" height="28" width="66" border="0"></a></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=9');"><img src="bilder/fern_13.jpg" alt="" height="28" width="67" border="0"></a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=0');"><img src="bilder/fern_15.jpg" alt="" height="28" width="66" border="0"></a></td>
-							<td></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=7');"><img src="bilder/fern_11.jpg" alt="" height="28" width="67" border="0" /></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=8');"><img src="bilder/fern_12.jpg" alt="" height="28" width="66" border="0" /></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=9');"><img src="bilder/fern_13.jpg" alt="" height="28" width="67" border="0" /></a></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=menu');"><img src="bilder/fern_18.jpg" alt="" height="27" width="67" border="0"></a></td>
-							<td></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=back');"><img src="bilder/fern_19.jpg" alt="" height="27" width="67" border="0"></a></td>
-						</tr>
-						<tr>
-							<td colspan="3"><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=red');"><img src="bilder/fern_22.jpg" alt="" height="28" width="50" border="0"></a><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=green');"><img src="bilder/fern_23.jpg" alt="" height="28" width="49" border="0"></a><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=yellow');"><img src="bilder/fern_24.jpg" alt="" height="28" width="51" border="0"></a><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=blue');"><img src="bilder/fern_25.jpg" alt="" height="28" width="50" border="0"></a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=0');"><img src="bilder/fern_15.jpg" alt="" height="28" width="66" border="0" /></a></td>
 							<td></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=up');"><img src="bilder/fern_28.jpg" alt="" height="27" width="66" border="0"></a></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0" /></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=menu');"><img src="bilder/fern_18.jpg" alt="" height="27" width="67" border="0" /></a></td>
+							<td></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=back');"><img src="bilder/fern_19.jpg" alt="" height="27" width="67" border="0" /></a></td>
+						</tr>
+						<tr>
+							<td colspan="3"><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=red');"><img src="bilder/fern_22.jpg" alt="" height="28" width="50" border="0" /></a><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=green');"><img src="bilder/fern_23.jpg" alt="" height="28" width="49" border="0" /></a><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=yellow');"><img src="bilder/fern_24.jpg" alt="" height="28" width="51" border="0" /></a><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=blue');"><img src="bilder/fern_25.jpg" alt="" height="28" width="50" border="0" /></a></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0" /></td>
 							<td></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=left');"><img src="bilder/fern_31.jpg" alt="" height="27" width="67" border="0"></a></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=ok');"><img src="bilder/fern_32.jpg" alt="" height="27" width="66" border="0"></a></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=right');"><img src="bilder/fern_33.jpg" alt="" height="27" width="67" border="0"></a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=up');"><img src="bilder/fern_28.jpg" alt="" height="27" width="66" border="0" /></a></td>
 							<td></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=down');"><img src="bilder/fern_36.jpg" alt="" height="27" width="66" border="0"></a></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0" /></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=left');"><img src="bilder/fern_31.jpg" alt="" height="27" width="67" border="0" /></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=ok');"><img src="bilder/fern_32.jpg" alt="" height="27" width="66" border="0" /></a></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=right');"><img src="bilder/fern_33.jpg" alt="" height="27" width="67" border="0" /></a></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0" /></td>
 							<td></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=down');"><img src="bilder/fern_36.jpg" alt="" height="27" width="66" border="0" /></a></td>
 							<td></td>
 						</tr>
 						<tr>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=VolumeMinus');"><img src="bilder/fern_39.jpg" alt="" height="27" width="67" border="0"></a></td>
 							<td></td>
-							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=VolumePlus');"><img src="bilder/fern_40.jpg" alt="" height="27" width="67" border="0"></a></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0" /></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=VolumeMinus');"><img src="bilder/fern_39.jpg" alt="" height="27" width="67" border="0" /></a></td>
+							<td></td>
+							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&key=VolumePlus');"><img src="bilder/fern_40.jpg" alt="" height="27" width="67" border="0" /></a></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0"></td>
+							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0" /></td>
 							<td></td>
 						</tr>
 					</table>
@@ -176,25 +179,25 @@ select { font-weight: normal; width: 55px; height: 20px; font-size: 9px; font-fa
 			<tr valign="middle">
 				<td valign="middle">
 					<nobr>
-						<b><?% msg.tv_interval %?></b>
+						<b><%! Interval: !%></b>
 						<select name="Seconds" size="1" onChange="v_changeInterval(this.options[this.selectedIndex].value)">
-							<option value="0"><?% msg.c_off %?></option>
-							<option value="1"> 1 <?% msg.c_sec %?></option>
-							<option value="2"> 2 <?% msg.c_sec %?></option>
-							<option value="3"> 3 <?% msg.c_sec %?></option>
-							<option value="5" selected> 5 <?% msg.c_sec %?></option>
-							<option value="10">10 <?% msg.c_sec %?></option>
-							<option value="30">30 <?% msg.c_sec %?></option>
-							<option value="60">60 <?% msg.c_sec %?></option>
+							<option value="0"><%! off !%></option>
+							<option value="1"> 1 <%! sec. !%></option>
+							<option value="2"> 2 <%! sec. !%></option>
+							<option value="3"> 3 <%! sec. !%></option>
+							<option value="5" selected> 5 <%! sec. !%></option>
+							<option value="10">10 <%! sec. !%></option>
+							<option value="30">30 <%! sec. !%></option>
+							<option value="60">60 <%! sec. !%></option>
 						</select>
-						<input type="button" name="livebild" value='<?% msg.tv_g %?>' title="<?% msg.tv_grab %?>" onClick="WebcamUpdate()">
-						&nbsp;&nbsp;<b><?% msg.tv_size %?></b>
+						<input type="button" name="livebild" value='<%! G !%>' title="<%! Grab the picture! !%>" onClick="WebcamUpdate()" />
+						&nbsp;&nbsp;<b><%! Size: !%></b>
 						<select name="Size" size="1" onChange="v_changeSize(this.options[this.selectedIndex].value)">
 							<option value="full">1:1</option>
 							<option value="half" selected>1:2</option>
 							<option value="quarter">1:4</option>
 						</select>
-						<input type="button" name="livebild" value='<?% msg.tv_g %?>' title="<?% msg.tv_grab %?>" onClick="WebcamUpdate()">
+						<input type="button" name="livebild" value='<%! G !%>' title="<%! Grab the picture! !%>" onClick="WebcamUpdate()" />
 					</nobr>
 				</td>
 				<td colspan="2">&nbsp;</td>

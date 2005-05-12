@@ -2,45 +2,53 @@
 *** Installation                                        ***
 ***********************************************************
 
-  Unpack the archive somewhere:
-  $ tar xvf vdradmin-VERSION.tar.bz2
-  $ cd vdradmin-VERSION
+1)  Unpack the archive somewhere:
+    $ tar xvf vdradmin-VERSION.tar.bz2
+    $ cd vdradmin-VERSION
 
-	Now you have to deside wether you want to run vdradmin locally
-	in this directory or install it into your system.
+2)  If you want to run VDRAdmin using a language other than set on
+    our system, then before running it you have to issue:
+    $ export LANG="<language code>"
 
-a) run locally
-	First you have to configure vdradmin. This only has to be done once.
-  $ ./vdradmind.pl --config
+    Where <language code> has to be one of: de_DE, es_ES, fi_FI or fr_FR
+    (en_GB is default).
 
-  Some questions about the configuration will asked.
+3)  Now you have to deside wether you want to run VDRAdmin locally (3a)
+    in this directory or install it into your system (3b).
 
-	Now you're done and you can run vdradmin:
-	$ ./vdradmind.pl
+3a) run locally
+    First you have to configure VDRAdmin. This only has to be done once.
+    $ ./vdradmind.pl --config
 
-b) install into system
-	$ make install
-	
-	Now you have to configure vdradmin:
-  $ vdradmind.pl --config
+    Some questions about the configuration will be asked.
 
-  Some questions about the configuration will asked.
+    Now you're done and you can run VDRAdmin:
+    $ ./vdradmind.pl
 
-	Now you're done and you can run vdradmin:
-	$ vdradmind.pl
+3b) install into system
+    $ make install
 
-	If you want vdradmin to run automatically on system boot, you have
-	to add a startup script to the wanted runlevel. Please consult your
-	Linux distribution's documentation. Maybe you'll also find some help
-	in vdradmin's "contrib" directory.
+    Now you have to configure VDRAdmin:
+    $ vdradmind.pl --config
 
+    Some questions about the configuration will asked.
 
-	No matter how you run vdradmin, you now can point your browser to
-	the given parameters (e.g. http://localhost:8001).
+    Now you're done and you can run VDRAdmin:
+    $ vdradmind.pl
+
+4)  If you want VDRAdmin to run automatically on system boot, you have
+    to add a startup script to the wanted runlevel. Please consult your
+    Linux distribution's documentation. Maybe you'll also find some help
+    in VDRAdmin's "contrib" directory.
+    Please also note that you might have to set the wanted language in
+    that startup as shown in (2).
+
+5)  No matter how you run VDRAdmin, you now can point your browser to
+    the given parameters (e.g. http://localhost:8001).
 
 
 ***********************************************************
-*** Hide vdradmin behind apache                         ***
+*** Hide VDRAdmin behind apache                         ***
 ***********************************************************
 
   you will need apache with mod_proxy and these lines in httpd.conf:
@@ -49,6 +57,7 @@ b) install into system
     ProxyRequests Off
     ProxyPass /vdradmin/ http://127.0.0.1:8001/
   </IfModule>
+
 
 ***********************************************************
 *** Hint from Martin Neuditschko for apache2 (untested) ***
@@ -63,6 +72,7 @@ b) install into system
     RewriteEngine On
     RewriteRule ^/vdradmin(.*) http://localhost:8001$1 [P,L]
   </VirtualHost>
+
 
 ***********************************************************
 *** See who's calling (you need an ISDN card for this)  ***

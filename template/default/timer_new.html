@@ -1,8 +1,10 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-	<title><?% msg.c_progname %?> - <tmpl_if newtimer><?%msg.tn_new_timer %?><tmpl_else><?% msg.tn_edit_timer %?></tmpl_if></title>
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1" />
+	<title>VDRAdmin - <tmpl_if newtimer><%! Create New Timer !%><tmpl_else><%! Edit Timer !%></tmpl_if></title>
+	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<script type="text/javascript" language="JavaScript1.2">
 	<!--
@@ -10,7 +12,7 @@
         var Timer = "";
         var dor = document.form.dor.value;
         var StartDay = dor.indexOf('@') > 0 ? dor.substring(dor.indexOf('@')) : "";
-        Days = new Array("M", "D", "M", "D", "F", "S", "S");
+        Days = new Array("M", "T", "W", "T", "F", "S", "S");
         for(var i = 0; i <= 6; i++) {
           Status = eval("document.form.D" + i + ".checked");
           if(Status == true) {
@@ -33,7 +35,6 @@
       }
     //--> 
 	</script>
-	<link href="style.css" rel="stylesheet" media="screen">
 </head>
 
 <body onload='eCheckbox("<tmpl_var dor>")' bgcolor="#f0f0f0" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
@@ -41,50 +42,50 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39">
 		<tr>
 			<td valign="middle" width="500" background="bilder/nav_button_back.gif">
-				<p class="einzug_ohnetop"><b><tmpl_if newtimer><?% msg.tn_new_timer %?><tmpl_else><?% msg.tn_edit_timer %?></tmpl_if></b></p>
+				<p class="einzug_ohnetop"><b><tmpl_if newtimer><%! Create New Timer !%><tmpl_else><%! Edit Timer !%></tmpl_if></b></p>
 			</td>
 			<td background="bilder/nav_button_back_mitte.gif">&nbsp;</td>
 			<td width="35" background="bilder/nav_button_back_mitte.gif">
 				<tmpl_if name="help_url"><a href="javascript:open_help('<tmpl_var help_url>');">
-					<img src="bilder/help.gif" border="0" align="right" valign="top" alt="help" title="<?% msg.c_help %?>"></a>
+					<img src="bilder/help.gif" border="0" align="right" valign="top" alt="help" title="<%! Help !%>" /></a>
 				</tmpl_if>
 			</td>
 			<td width="15" background="bilder/nav_button_back_end.gif">&nbsp;</td>
 		</tr>
 	</table>
-	<br>    
+	<br />    
 	<div align="left">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr height="30">
-				<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0"></td>
+				<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
 				<td height="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
 				<td height="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
-				<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0"></td>
+				<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 			</tr>
 			<tr height="25">
 				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif"><?% msg.tn_timer_active %?></td>
+				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif"><%! Timer Active: !%></td>
 				<td height="25" background="bilder/uebersicht_mitte.gif">
-					<input type="radio" name="active" value="1" <tmpl_if active>checked</tmpl_if>><?% msg.c_yes %?>
-					<input type="radio" name="active" value="0" <tmpl_unless active>checked</tmpl_unless>><?% msg.c_no %?>
+					<input type="radio" name="active" value="1" <tmpl_if active>checked</tmpl_if> /> <%! Yes !%>
+					<input type="radio" name="active" value="0" <tmpl_unless active>checked</tmpl_unless> /> <%! No !%>
 				</td>
 				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 			</tr>
 			<tr height="25">
 				<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-				<td width="20%" height="25" background="bilder/uebersicht_mitte_dark.gif"><?% msg.tn_autotimer_checking %?></td>
+				<td width="20%" height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Auto Timer Checking: !%></td>
 				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
 					<tmpl_if expr="event_id > 1">
-						<input type="radio" name="event_id" value="<tmpl_var event_id>" checked><?% msg.tn_transmission_id %?>
+						<input type="radio" name="event_id" value="<tmpl_var event_id>" checked /> <%! Transmission Identification !%>
 					</tmpl_if>
-					<input type="radio" name="event_id" value="1" <tmpl_if expr="event_id == 1">checked</tmpl_if>><?% msg.c_time %?>
-					<input type="radio" name="event_id" value="0" <tmpl_if expr="event_id == 0">checked</tmpl_if>><?% msg.c_off %?>
+					<input type="radio" name="event_id" value="1" <tmpl_if expr="event_id == 1">checked</tmpl_if> /> <%! Time !%>
+					<input type="radio" name="event_id" value="0" <tmpl_if expr="event_id == 0">checked</tmpl_if> /> <%! off !%>
 				</td>
 				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 			</tr>
 			<tr height="25">
 				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif"><?% msg.c_channel %?></td>
+				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif"><%! Channel: !%></td>
 				<td height="25" background="bilder/uebersicht_mitte.gif">
 					<select name="channel" size="1">
 <tmpl_loop name="channels">
@@ -96,84 +97,85 @@
 			</tr>
 			<tr height="25">
 				<td valign="top" width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-				<td valign="top" width="20%" height="25" background="bilder/uebersicht_mitte_dark.gif"><?% msg.tn_day_of_rec %?></td>
+				<td valign="top" width="20%" height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Day Of Recording: !%></td>
 				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
-					<input type="text" name="dor" value="<tmpl_var dor>" size="20">
-					<br>
-					<input onclick="cTimer(1)" type="checkbox" name="D0" value="1"><?% msg.c_monday %?>
-					<input onclick="cTimer(2)" type="checkbox" name="D1" value="1"><?% msg.c_tuesday %?>
-					<input onclick="cTimer(3)" type="checkbox" name="D2" value="radioValue"><?% msg.c_wednesday %?>
-					<input onclick="cTimer(4)" type="checkbox" name="D3" value="radioValue"><?% msg.c_thursday %?>
-					<input onclick="cTimer(5)" type="checkbox" name="D4" value="radioValue"><?% msg.c_friday %?>
-					<input onclick="cTimer(6)" type="checkbox" name="D5" value="radioValue"><?% msg.c_saturday %?>
-					<input onclick="cTimer(7)" type="checkbox" name="D6" value="radioValue"><?% msg.c_sunday %?>
+					<input type="text" name="dor" value="<tmpl_var dor>" size="20" />
+					<br />
+					<input onclick="cTimer(1)" type="checkbox" name="D0" value="1" /> <%! Monday !%>
+					<input onclick="cTimer(2)" type="checkbox" name="D1" value="1" /> <%! Tuesday !%>
+					<input onclick="cTimer(3)" type="checkbox" name="D2" value="radioValue" /> <%! Wednesday !%>
+					<input onclick="cTimer(4)" type="checkbox" name="D3" value="radioValue" /> <%! Thursday !%>
+					<input onclick="cTimer(5)" type="checkbox" name="D4" value="radioValue" /> <%! Friday !%>
+					<input onclick="cTimer(6)" type="checkbox" name="D5" value="radioValue" /> <%! Saturday !%>
+					<input onclick="cTimer(7)" type="checkbox" name="D6" value="radioValue" /> <%! Sunday !%>
 				</td>
 				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 			</tr>
 			<tr height="25">
 				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif"><?% msg.tn_time_start %?></td>
+				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif"><%! Start Time: !%></td>
 				<td height="25" background="bilder/uebersicht_mitte.gif">
-					<input type="text" name="starth" value="<tmpl_var starth>" size="2" maxlength="2">
+					<input type="text" name="starth" value="<tmpl_var starth>" size="2" maxlength="2" />
 					<b>&nbsp;:&nbsp;</b>
-					<input type="text" name="startm" value="<tmpl_var startm>" size="2" maxlength="2">
-					&nbsp;<?% msg.c_clock %?>
+					<input type="text" name="startm" value="<tmpl_var startm>" size="2" maxlength="2" />
+					&nbsp;<%! o'clock !%>
 				</td>
 				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 			</tr>
 			<tr height="25">
 				<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-				<td width="20%" height="25" background="bilder/uebersicht_mitte_dark.gif"><?% msg.tn_time_stop %?></td>
+				<td width="20%" height="25" background="bilder/uebersicht_mitte_dark.gif"><%! End Time: !%></td>
 				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
-					<input type="text" name="stoph" value="<tmpl_var stoph>" size="2" maxlength="2">
+					<input type="text" name="stoph" value="<tmpl_var stoph>" size="2" maxlength="2" />
 					<b>&nbsp;:&nbsp;</b>
-					<input type="text" name="stopm" value="<tmpl_var stopm>" size="2" maxlength="2">
-					&nbsp;<?% msg.c_clock %?>
+					<input type="text" name="stopm" value="<tmpl_var stopm>" size="2" maxlength="2" />
+					&nbsp;<%! o'clock !%>
 				</td>
 				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 			</tr>
 			<tr height="25">
 				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif"><?% msg.c_priority %?></td>
-				<td height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="prio" value="<tmpl_var prio>" size="2" maxlength="2"></td>
+				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif"><%! Priority: !%></td>
+				<td height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="prio" value="<tmpl_var prio>" size="2" maxlength="2" /></td>
 				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 			</tr>
 			<tr height="25">
 				<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-				<td width="20%" height="25" background="bilder/uebersicht_mitte_dark.gif"><?% msg.c_lifetime %?></td>
-				<td height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="lft" value="<tmpl_var lft>" size="2" maxlength="2"></td>
+				<td width="20%" height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Lifetime: !%></td>
+				<td height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="lft" value="<tmpl_var lft>" size="2" maxlength="2" /></td>
 				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 			</tr>
 			<tr height="25">
 				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif"><?% msg.tn_rec_title %?></td>
-				<td height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="title" value="<tmpl_var title>" size="80"></td>
+				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif"><%! Title of Recording: !%></td>
+				<td height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="title" value="<tmpl_var title>" size="80" /></td>
 				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 			</tr>
 			<tr>
 				<td valign="top" width="30" background="bilder/uebersicht_links_dark.gif"></td>
-				<td valign="top" width="20%" background="bilder/uebersicht_mitte_dark.gif"><?% msg.c_summary %?></td>
+				<td valign="top" width="20%" background="bilder/uebersicht_mitte_dark.gif"><%! Summary: !%></td>
 				<td background="bilder/uebersicht_mitte_dark.gif"><textarea name="summary" rows="6" cols="80"><tmpl_var summary></textarea></td>
 				<td width="30" background="bilder/uebersicht_rechts_dark.gif"></td>
 			</tr>
 			<tr height="30">
-				<td width="30" height="30"><img src="bilder/uebersicht_unten_links.gif" alt="" width="30" height="30" border="0"></td>
+				<td width="30" height="30"><img src="bilder/uebersicht_unten_links.gif" alt="" width="30" height="30" border="0" /></td>
 				<td colspan="2" height="30" background="bilder/uebersicht_unten.gif"></td>
-				<td width="30" height="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0"></td>
+				<td width="30" height="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 			</tr>
 		</table>
 	</div>
-	<br>
+	<br />
 	<div align="left">
-		<input type="submit" name="save" value="<?% msg.c_save %?>">
-		<input type="submit" name="exit" value="<?% msg.c_cancel %?>"></div>
-		<input type="hidden" name="aktion" value="timer_add"> 
-		<tmpl_if referer>
-			<input type="hidden" name="referer" value="<tmpl_var referer>">
-		</tmpl_if>
-		<tmpl_if timer_id>
-			<input type="hidden" name="timer_id" value="<tmpl_var timer_id>"> 
-		</tmpl_if>
+		<input type="submit" name="save" value="<%! Save !%>" />
+		<input type="submit" name="exit" value="<%! Cancel !%>" />
+	</div>
+	<input type="hidden" name="aktion" value="timer_add" /> 
+	<tmpl_if referer>
+		<input type="hidden" name="referer" value="<tmpl_var referer>" />
+	</tmpl_if>
+	<tmpl_if timer_id>
+		<input type="hidden" name="timer_id" value="<tmpl_var timer_id>" /> 
+	</tmpl_if>
 	</form>
 </body>
 
