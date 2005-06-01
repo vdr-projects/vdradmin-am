@@ -13,10 +13,14 @@
     Where <language code> has to be one of: de_DE, es_ES, fi_FI or fr_FR
     (en_GB is default).
 
-3)  Now you have to deside wether you want to run VDRAdmin locally (3a)
+3)  Check if your system provides all requirements and optionally install
+    the missing Perl modules:
+    $ ./install.sh -p
+
+4)  Now you have to deside wether you want to run VDRAdmin locally (3a)
     in this directory or install it into your system (3b).
 
-3a) run locally
+4a) run locally (=no installation)
     First you have to configure VDRAdmin. This only has to be done once.
     $ ./vdradmind.pl --config
 
@@ -25,8 +29,8 @@
     Now you're done and you can run VDRAdmin:
     $ ./vdradmind.pl
 
-3b) install into system
-    $ make install
+4b) install into system
+    $ ./install.sh
 
     Now you have to configure VDRAdmin:
     $ vdradmind.pl --config
@@ -36,15 +40,43 @@
     Now you're done and you can run VDRAdmin:
     $ vdradmind.pl
 
-4)  If you want VDRAdmin to run automatically on system boot, you have
+5)  If you want VDRAdmin to run automatically on system boot, you have
     to add a startup script to the wanted runlevel. Please consult your
     Linux distribution's documentation. Maybe you'll also find some help
     in VDRAdmin's "contrib" directory.
     Please also note that you might have to set the wanted language in
     that startup as shown in (2).
 
-5)  No matter how you run VDRAdmin, you now can point your browser to
+6)  No matter how you run VDRAdmin, you now can point your browser to
     the given parameters (e.g. http://localhost:8001).
+
+
+***********************************************************
+*** Removing VDRAdmin from your system                  ***
+***********************************************************
+
+1)  Uninstall depends on the kind of installation you did:
+
+1a) run locally (=no installation)
+    There is not much to do.
+    Simply remove to folder VDRAdmin has been created while unpacking:
+    $ rm -rf vdradmin-VERSION.tar.bz2
+
+1b) installed to your system
+    You need the unpacked VDRAdmin archive. Enter it and run uninstall.sh:
+    $ cd vdradmin-VERSION.tar.bz2
+    $ ./uninstall.sh
+
+    You might want to delete your VDRAdmin's configuration files:
+    $ rm -rf /etc/vdradmin
+
+    This of course only works if you didn't change the default install
+    locations! If you've change them you must call uninstall.sh with those
+    locations.
+    If you don't know what I'm talking about, you probably didn't change
+    the default values ;)
+
+2)  You're done!
 
 
 ***********************************************************

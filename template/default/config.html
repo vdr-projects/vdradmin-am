@@ -1,47 +1,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" />
+	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
 	<title>VDRAdmin - <%! Configuration !%></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 </head>
 
-<body bgcolor="#c4cdd7" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
+<body id="config">
 	<form action="<tmpl_var url>" method="get" name="FormName">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39" id="heading">
 			<tr>
-				<td valign="middle" width="200" background="bilder/nav_button_back.gif">
-					<p class="einzug_ohnetop"><b><%! Configuration !%></b></p>
+				<td valign="middle" width="300" background="bilder/nav_button_back.gif">
+					<h1><%! Configuration !%></h1>
 				</td>
-				<td align="right" background="bilder/nav_button_back_mitte.gif">&nbsp;</td>
-				<td align="right" width="35" background="bilder/nav_button_back_mitte.gif">
+				<td colspan="2" align="right" background="bilder/nav_button_back_mitte.gif"></td>
 <tmpl_if name="help_url">
-					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" alt="help" title="<%! Help !%>" /></a>
-</tmpl_if>
+				<td align="right" width="35" background="bilder/nav_button_back_mitte.gif">
+					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" align="right" valign="top" alt="help" title="<%! Help !%>" /></a>
 				</td>
-				<td width="15" background="bilder/nav_button_back_end.gif">&nbsp;</td>
+</tmpl_if>
+				<td width="15" background="bilder/nav_button_back_end.gif"></td>
 			</tr>
 		</table>
-		<br />
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td></td>
-				<td width="10"></td>
-				<td></td>
-			</tr>
+
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content">
 			<tr>
 				<td valign="top">
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 						<tr height="30">
 							<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
-							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><b><%! General Settings !%></b></td>
+							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><h2><%! General Settings !%></h2></td>
 							<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 						</tr>
 <!-- Only one template, so no need to chose
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte.gif"><%! Template: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Template: !%></h5></td>
 							<td width="40%" height="25" background="bilder/uebersicht_mitte.gif">
 								<select name="TEMPLATE" size="1">
 <tmpl_loop name="TEMPLATELIST">
@@ -54,7 +49,7 @@
 -->
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte.gif"><%! Skin: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Skin: !%></h5></td>
 							<td width="40%" height="25" background="bilder/uebersicht_mitte.gif">
 								<select name="SKIN" size="1">
 <tmpl_loop name="SKINLIST">
@@ -66,7 +61,7 @@
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Login Page: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Login Page: !%></h5></td>
 							<td width="40%" height="25" background="bilder/uebersicht_mitte_dark.gif">
 								<select name="LOGINPAGE" size="1">
 <tmpl_loop name="LOGINPAGES">
@@ -76,10 +71,47 @@
 							</td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 						</tr>
+						<tr height="25" title="<%! Gets active after restarting VDRAdmin !%>">
+							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Number of channels to use: !%></h5></td>
+							<td width="30%" height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="EPG_PRUNE" value="<tmpl_var EPG_PRUNE>" size="5" maxlength="25" /></td>
+							<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
+						</tr>
+						<tr height="25">
+							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Local net (no login required): !%></h5></td>
+							<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="LOCAL_NET" value="<tmpl_var LOCAL_NET>" size="20" maxlength="50" /></td>
+							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
+						</tr>
+						<tr>
+							<td width="30"><img src="bilder/uebersicht_unten_links.gif" alt="" width="30" height="30" border="0" /></td>
+							<td colspan="2" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+							<td width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0" /></td>
+						</tr>
+					</table>
+
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
+						<tr height="30">
+							<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
+							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><h2><%! VDR !%></h2></td>
+							<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0" /></td>
+						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte.gif"><%! Number of DVB Cards: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Number of DVB Cards: !%></h5></td>
 							<td width="40%" height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="RECORDINGS" value="<tmpl_var RECORDINGS>" size="2" /></td>
+							<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
+						</tr>
+						<tr height="25">
+							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Path to recordings: !%></h5></td>
+							<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="VIDEODIR" value="<tmpl_var VIDEODIR>" size="20" maxlength="256" /></td>
+							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
+						</tr>
+						<tr height="25">
+							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Path to configuration files: !%></h5></td>
+							<td width="30%" height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="VDRCONFDIR" value="<tmpl_var VDRCONFDIR>" size="20" maxlength="256" /></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 						</tr>
 						<tr>
@@ -88,28 +120,28 @@
 							<td width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 						</tr>
 					</table>
-					<br />
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 						<tr height="30">
 							<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
-							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><b><%! Identification !%></b></td>
+							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><h2><%! Identification !%></h2></td>
 							<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte.gif"><%! Username: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Username: !%></h5></td>
 							<td width="40%" height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="USERNAME" value="<tmpl_var USERNAME>" size="12" /></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Password: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Password: !%></h5></td>
 							<td width="40%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="password" name="PASSWORD" value="<tmpl_var PASSWORD>" size="12" /></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte.gif"><%! Guest Account: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Guest Account: !%></h5></td>
 							<td width="40%" height="25" background="bilder/uebersicht_mitte.gif">
 								<input type="radio" name="GUEST_ACCOUNT" value="1" <tmpl_if guest_account>checked</tmpl_if> /> <%! Yes !%>
 								<input type="radio" name="GUEST_ACCOUNT" value="0" <tmpl_unless guest_account>checked</tmpl_unless> /> <%! No !%>
@@ -118,13 +150,13 @@
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Guest Username: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Guest Username: !%></h5></td>
 							<td width="40%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="USERNAME_GUEST" value="<tmpl_var USERNAME_GUEST>" size="12" /></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte.gif"><%! Guest Password: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Guest Password: !%></h5></td>
 							<td width="40%" height="25" background="bilder/uebersicht_mitte.gif"><input type="password" name="PASSWORD_GUEST" value="<tmpl_var PASSWORD_GUEST>" size="12" /></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 						</tr>
@@ -134,23 +166,23 @@
 							<td width="30" height="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 						</tr>
 					</table>
-					<br />
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 						<tr height="30">
 							<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
-							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><b><%! Timeline !%></b></td>
+							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><h2><%! Timeline !%></h2></td>
 							<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte.gif"><%! Hours: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Hours: !%></h5></td>
 							<td width="40%" height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="ZEITRAHMEN" value="<tmpl_var ZEITRAHMEN>" size="2" /></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Times: !%></td>
-							<td width="40%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="TIMES" value="<tmpl_var TIMES>" size="16" /></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Times: !%></h5></td>
+							<td width="40%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="TIMES" value="<tmpl_var TIMES>" size="20" /></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 						</tr>
 						<tr height="30">
@@ -160,17 +192,17 @@
 						</tr>
 					</table>
 				</td>
-				<td valign="top" width="10"></td>
+				<td width="10"></td>
 				<td valign="top">
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 						<tr height="30">
 							<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
-							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><b><%! Auto Timer !%></b></td>
+							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><h2><%! AutoTimer !%></h2></td>
 							<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links.gif">&nbsp;</td>
-							<td height="25" background="bilder/uebersicht_mitte.gif"><%! Active: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Active: !%></h5></td>
 							<td width="30%" height="25" background="bilder/uebersicht_mitte.gif">
 								<input type="radio" name="AT_FUNC" value="1" <tmpl_if at_func>checked</tmpl_if> /> <%! Yes !%>
 								<input type="radio" name="AT_FUNC" value="0" <tmpl_unless at_func>checked</tmpl_unless> /> <%! No !%>
@@ -179,32 +211,32 @@
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Timeout: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Timeout: !%></h5></td>
 							<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="AT_TIMEOUT" value="<tmpl_var AT_TIMEOUT>" size="4" /> <%! minutes !%></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte.gif"><%! Priority: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Priority: !%></h5></td>
 							<td width="30%" height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="AT_PRIORITY" value="<tmpl_var AT_PRIORITY>" size="2" maxlength="2" /></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Lifetime: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Lifetime: !%></h5></td>
 							<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="AT_LIFETIME" value="<tmpl_var AT_LIFETIME>" size="2" maxlength="2" /></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 						</tr>
 <!--
 									<tr height="25">
 										<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-										<td height="25" background="bilder/uebersicht_mitte.gif"><%! Time Margin at Start: !%></td>
+										<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Time Margin at Start: !%></h5></td>
 										<td width="30%" height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="AT_MARGIN_BEGIN" value="<tmpl_var AT_MARGIN_BEGIN>" size="2" maxlength="2" /></td>
 										<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 									</tr>
 									<tr height="25">
 										<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-										<td height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Time Margin at Stop: !%></td>
+										<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Time Margin at Stop: !%></h5></td>
 										<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="AT_MARGIN_END" value="<tmpl_var AT_MARGIN_END>" size="2" maxlength="2" /></td>
 										<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 									</tr>
@@ -215,34 +247,34 @@
 							<td width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 						</tr>
 					</table>
-					<br />
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 						<tr height="30">
 							<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
-							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><b><%! Timer !%></b></td>
+							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><h2><%! Timer !%></h2></td>
 							<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte.gif"><%! Lifetime: !%></td>
-							<td width="30%" height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="TM_LIFETIME" value="<tmpl_var TM_LIFETIME>" size="2" maxlength="2" /></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Priority: !%></h5></td>
+							<td width="30%" height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="TM_PRIORITY" value="<tmpl_var TM_PRIORITY>" size="2" maxlength="2" /></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Priority: !%></td>
-							<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="TM_PRIORITY" value="<tmpl_var TM_PRIORITY>" size="2" maxlength="2" /></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Lifetime: !%></h5></td>
+							<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="TM_LIFETIME" value="<tmpl_var TM_LIFETIME>" size="2" maxlength="2" /></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte.gif"><%! Time Margin at Start: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Time Margin at Start: !%></h5></td>
 							<td width="30%" height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="TM_MARGIN_BEGIN" value="<tmpl_var TM_MARGIN_BEGIN>" size="3" /> <%! minutes !%></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Time Margin at Stop: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Time Margin at Stop: !%></h5></td>
 							<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="TM_MARGIN_END" value="<tmpl_var TM_MARGIN_END>" size="3" /> <%! minutes !%></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 						</tr>
@@ -252,17 +284,17 @@
 							<td width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 						</tr>
 					</table>
+
 <tmpl_if ST_FUNC>
-					<br />
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 						<tr height="30">
 							<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
-							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><b><%! Streaming !%></b></td>
+							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><h2><%! Streaming !%></h2></td>
 							<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte.gif"><%! Live Streaming !%></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Live Streaming: !%></h5></td>
 							<td width="30%" height="25" background="bilder/uebersicht_mitte.gif">
 								<input type="radio" name="ST_LIVE_ON" value="1" <tmpl_if ST_LIVE_ON>checked</tmpl_if> /> <%! Yes !%>
 								<input type="radio" name="ST_LIVE_ON" value="0" <tmpl_unless ST_LIVE_ON>checked</tmpl_unless> /> <%! No !%>
@@ -271,29 +303,29 @@
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Recordings Streaming !%></td>
-							<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif">
-								<input type="radio" name="ST_REC_ON" value="1" <tmpl_if ST_REC_ON>checked</tmpl_if> /> <%! Yes !%>
-								<input type="radio" name="ST_REC_ON" value="0" <tmpl_unless ST_REC_ON>checked</tmpl_unless> /> <%! No !%>
-							</td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! HTTP Port of Streamdev (also possible 3000/ts): !%></h5></td>
+							<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="ST_STREAMDEV_PORT" value="<tmpl_var ST_STREAMDEV_PORT>" size="10" /></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte.gif"><%! HTTP Port of Streamdev (also possible 3000/ts): !%></td>
-							<td width="30%" height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="ST_STREAMDEV_PORT" value="<tmpl_var ST_STREAMDEV_PORT>" size="10" /></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Recordings Streaming: !%></h5></td>
+							<td width="30%" height="25" background="bilder/uebersicht_mitte.gif">
+								<input type="radio" name="ST_REC_ON" value="1" <tmpl_if ST_REC_ON>checked</tmpl_if> /> <%! Yes !%>
+								<input type="radio" name="ST_REC_ON" value="0" <tmpl_unless ST_REC_ON>checked</tmpl_unless> /> <%! No !%>
+							</td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
 						</tr>
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Path to VDR Recordings: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Path to VDR Recordings on your workstation: !%></h5></td>
 							<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="ST_VIDEODIR" value="<tmpl_var ST_VIDEODIR>" size="20" maxlength="256" /></td>
 							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
 						</tr>
 <!-- not (yet?) supported 
 						<tr height="25">
 							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><%! Bandwidth of Streams: !%></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Bandwidth of Streams: !%></h5></td>
 							<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif">
 								<select name="STREAMTYPE" size="1">
 <tmpl_loop name="STREAMTYPELIST">
@@ -311,61 +343,100 @@
 						</tr>
 					</table>
 </tmpl_if>
+
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
+						<tr height="30">
+							<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
+							<td colspan="2" height="30" background="bilder/uebersicht_oben.gif"><h2><%! Expert !%></h2></td>
+							<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0" /></td>
+						</tr>
+						<tr height="25" title="<%! Gets active after restarting VDRAdmin !%>">
+							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Read EPG directly using epg.data: !%></h5></td>
+							<td width="30%" height="25" background="bilder/uebersicht_mitte.gif">
+								<input type="radio" name="EPG_DIRECT" value="1" <tmpl_if EPG_DIRECT>checked</tmpl_if> /> <%! Yes !%>
+								<input type="radio" name="EPG_DIRECT" value="0" <tmpl_unless EPG_DIRECT>checked</tmpl_unless> /> <%! No !%>
+							</td>
+							<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
+						</tr>
+						<tr height="25">
+							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! epg.data filename: !%></h5></td>
+							<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif"><input type="text" name="EPG_FILENAME" value="<tmpl_var EPG_FILENAME>" size="20" maxlength="256" /></td>
+							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
+						</tr>
+						<tr height="25">
+							<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
+							<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Number of columns in "What's On Now": !%></h5></td>
+							<td width="30%" height="25" background="bilder/uebersicht_mitte.gif"><input type="text" name="PROG_SUMMARY_COLS" value="<tmpl_var PROG_SUMMARY_COLS>" size="3" maxlength="2" /></td>
+							<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
+						</tr>
+						<tr height="25">
+							<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
+							<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! VFAT: !%></h5></td>
+							<td width="30%" height="25" background="bilder/uebersicht_mitte_dark.gif">
+								<input type="radio" name="VDRVFAT" value="1" <tmpl_if VDRVFAT>checked</tmpl_if> /> <%! Yes !%>
+								<input type="radio" name="VDRVFAT" value="0" <tmpl_unless VDRVFAT>checked</tmpl_unless> /> <%! No !%>
+							</td>
+							<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
+						</tr>
+						<tr>
+							<td width="30"><img src="bilder/uebersicht_unten_links.gif" alt="" width="30" height="30" border="0" /></td>
+							<td colspan="2" background="bilder/uebersicht_unten.gif">&nbsp;</td>
+							<td width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0" /></td>
+						</tr>
+					</table>
 				</td>
 			</tr>
+
 			<tr>
 				<td colspan="3">                  
-					<br />
-					<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="black">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 						<tr height="30">
 							<td width="30" height="30" background="bilder/uebersicht_oben.gif"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
-							<td width="40%" height="30" background="bilder/uebersicht_oben.gif">
-								<div align="left"><b><%! Channel Selections !%></b></div>
-							</td>
-							<td bgcolor="#c6c6c6" height="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
-							<td bgcolor="#c6c6c6" width="45%" height="30" background="bilder/uebersicht_oben.gif">
-								<div align="center"></div>
-							</td>
-							<td bgcolor="#c6c6c6" width="30" height="30" background="bilder/uebersicht_oben.gif"><img src="bilder/uebersicht_oben_rechts.gif" alt="" height="30" width="30" border="0" /></td>
+							<td width="40%" height="30" background="bilder/uebersicht_oben.gif"><h2><%! Channel Selections !%></h2></td>
+							<td height="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
+							<td width="45%" height="30" background="bilder/uebersicht_oben.gif">&nbsp;</td>
+							<td width="30" height="30" background="bilder/uebersicht_oben.gif"><img src="bilder/uebersicht_oben_rechts.gif" alt="" height="30" width="30" border="0" /></td>
 						</tr>
 						<tr height="30">
-							<td width="30" height="30" background="bilder/uebersicht_links_dark.gif"></td>
-							<td width="40%" height="30" background="bilder/uebersicht_mitte_dark.gif"><%! In &quot;Timeline&quot;? !%></td>
-							<td colspan="2" bgcolor="#c6c6c6" height="30" background="bilder/uebersicht_mitte_dark.gif">
+							<td width="30" height="30" background="bilder/uebersicht_links.gif"></td>
+							<td width="40%" height="30" background="bilder/uebersicht_mitte.gif"><h5><%! In "Timeline"? !%></h5></td>
+							<td colspan="2" height="30" background="bilder/uebersicht_mitte.gif">
 								<input type="radio" name="CHANNELS_WANTED_TIMELINE" value="1" <tmpl_if CHANNELS_WANTED_TIMELINE>checked</tmpl_if> /> <%! Yes !%>
 								<input type="radio" name="CHANNELS_WANTED_TIMELINE" value="0" <tmpl_unless CHANNELS_WANTED_TIMELINE>checked</tmpl_unless> /> <%! No !%>
 							</td>
-							<td bgcolor="#c6c6c6" width="30" height="30" background="bilder/uebersicht_rechts_dark.gif"></td>
-						</tr>
-						<tr height="30">
-							<td width="30" height="30" background="bilder/uebersicht_links.gif"></td>
-							<td width="40%" height="30" background="bilder/uebersicht_mitte.gif"><%! In &quot;Channels&quot; / &quot;Playing Today&quot;? !%></td>
-							<td colspan="2" bgcolor="#c6c6c6" height="30" background="bilder/uebersicht_mitte.gif">
-								<input type="radio" name="CHANNELS_WANTED_PRG" value="1" <tmpl_if CHANNELS_WANTED_PRG>checked</tmpl_if> /> <%! Yes !%>
-								<input type="radio" name="CHANNELS_WANTED_PRG" value="0" <tmpl_unless CHANNELS_WANTED_PRG>checked</tmpl_unless> /> <%! No !%> 
-							</td>
-							<td bgcolor="#c6c6c6" width="30" height="30" background="bilder/uebersicht_rechts.gif"></td>
+							<td width="30" height="30" background="bilder/uebersicht_rechts.gif"></td>
 						</tr>
 						<tr height="30">
 							<td width="30" height="30" background="bilder/uebersicht_links_dark.gif"></td>
-							<td width="40%" height="30" background="bilder/uebersicht_mitte_dark.gif"><%! In &quot;What's On Now&quot;? !%></td>
-							<td colspan="2" bgcolor="#c6c6c6" height="30" background="bilder/uebersicht_mitte_dark.gif">
-								<input type="radio" name="CHANNELS_WANTED_SUMMARY" value="1" <tmpl_if CHANNELS_WANTED_SUMMARY>checked</tmpl_if> /> <%! Yes !%>
-								<input type="radio" name="CHANNELS_WANTED_SUMMARY" value="0" <tmpl_unless CHANNELS_WANTED_SUMMARY>checked</tmpl_unless> /> <%! No !%>
+							<td width="40%" height="30" background="bilder/uebersicht_mitte_dark.gif"><h5><%! In "Channels" / "Playing Today"? !%></h5></td>
+							<td colspan="2" height="30" background="bilder/uebersicht_mitte_dark.gif">
+								<input type="radio" name="CHANNELS_WANTED_PRG" value="1" <tmpl_if CHANNELS_WANTED_PRG>checked</tmpl_if> /> <%! Yes !%>
+								<input type="radio" name="CHANNELS_WANTED_PRG" value="0" <tmpl_unless CHANNELS_WANTED_PRG>checked</tmpl_unless> /> <%! No !%> 
 							</td>
-							<td bgcolor="#c6c6c6" width="30" height="30" background="bilder/uebersicht_rechts_dark.gif"></td>
+							<td width="30" height="30" background="bilder/uebersicht_rechts_dark.gif"></td>
 						</tr>
 						<tr height="30">
 							<td width="30" height="30" background="bilder/uebersicht_links.gif"></td>
-							<td width="40%" height="30" background="bilder/uebersicht_mitte.gif"><%! In &quot;Auto Timer&quot;? !%></td>
-							<td colspan="2" bgcolor="#c6c6c6" height="30" background="bilder/uebersicht_mitte.gif">
+							<td width="40%" height="30" background="bilder/uebersicht_mitte.gif"><h5><%! In "What's On Now"? !%></h5></td>
+							<td colspan="2" height="30" background="bilder/uebersicht_mitte.gif">
+								<input type="radio" name="CHANNELS_WANTED_SUMMARY" value="1" <tmpl_if CHANNELS_WANTED_SUMMARY>checked</tmpl_if> /> <%! Yes !%>
+								<input type="radio" name="CHANNELS_WANTED_SUMMARY" value="0" <tmpl_unless CHANNELS_WANTED_SUMMARY>checked</tmpl_unless> /> <%! No !%>
+							</td>
+							<td width="30" height="30" background="bilder/uebersicht_rechts.gif"></td>
+						</tr>
+						<tr height="30">
+							<td width="30" height="30" background="bilder/uebersicht_links_dark.gif"></td>
+							<td width="40%" height="30" background="bilder/uebersicht_mitte_dark.gif"><h5><%! In "AutoTimer"? !%><h5></td>
+							<td colspan="2" height="30" background="bilder/uebersicht_mitte_dark.gif">
 								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="1" <tmpl_if CHANNELS_WANTED_AUTOTIMER>checked</tmpl_if> /> <%! Yes !%>
 								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="0" <tmpl_unless CHANNELS_WANTED_AUTOTIMER>checked</tmpl_unless> /> <%! No !%>
 							</td>
-							<td bgcolor="#c6c6c6" width="30" height="30" background="bilder/uebersicht_rechts.gif"></td>
+							<td width="30" height="30" background="bilder/uebersicht_rechts_dark.gif"></td>
 						</tr>
 						<tr>
-							<td bgcolor="#dfdcdc" width="30" background="bilder/uebersicht_links.gif"></td>
+							<td width="30" background="bilder/uebersicht_links.gif"></td>
 							<td width="40%" align="center" background="bilder/uebersicht_mitte.gif">
 								<br />
 								<select name="all_channels" size="8" multiple>
@@ -375,8 +446,8 @@
 								</select>
 							</td>
 							<td align="center" valign="middle" background="bilder/uebersicht_mitte.gif">
-									<input type="submit" name="submit" value="&gt;&gt;&gt;&gt;&gt;" /><br />
-									<input type="submit" name="submit" value="&lt;&lt;&lt;&lt;&lt;" />
+									<input type="submit" class="submit" name="submit" value="&gt;&gt;&gt;&gt;&gt;" /><br />
+									<input type="submit" class="submit" name="submit" value="&lt;&lt;&lt;&lt;&lt;" />
 							</td>
 							<td width="45%" align="center" background="bilder/uebersicht_mitte.gif">
 								<br />
@@ -386,23 +457,24 @@
 </tmpl_loop>
 								</select>
 							</td>
-							<td bgcolor="#dfdcdc" width="30" background="bilder/uebersicht_rechts.gif"></td>
+							<td width="30" background="bilder/uebersicht_rechts.gif"></td>
 						</tr>
 						<tr height="30">
-							<td bgcolor="#dfdcdc" width="30" height="30" background="bilder/uebersicht_links.gif"><img src="bilder/uebersicht_unten_links.gif" alt="" height="30" width="30" border="0" /></td>
+							<td width="30" height="30" background="bilder/uebersicht_links.gif"><img src="bilder/uebersicht_unten_links.gif" alt="" height="30" width="30" border="0" /></td>
 							<td width="40%" height="30" background="bilder/uebersicht_unten.gif"></td>
 							<td height="30" background="bilder/uebersicht_unten.gif"></td>
 							<td width="45%" height="30" background="bilder/uebersicht_unten.gif"></td>
-							<td bgcolor="#dfdcdc" width="30" height="30" background="bilder/uebersicht_rechts.gif"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0" /></td>
+							<td width="30" height="30" background="bilder/uebersicht_rechts.gif"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 		</table>
-		<br />
-		<input type="submit" name="save" value="<%! Save !%>" />
-		<input type="submit" name="apply" value="<%! Apply !%>" />
-		<input type="hidden" name="aktion" value="conf_list" />
+		<div id="buttons">
+			<input type="submit" class="submit" name="save" value="<%! Save !%>" />
+			<input type="submit" class="submit" name="apply" value="<%! Apply !%>" />
+		</div>
+		<input type="hidden" name="aktion" value="config" />
 	</form>
 </body>
 

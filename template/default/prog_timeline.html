@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="refresh" content="600; URL=vdradmin.pl?aktion=prog_timeline" />
-	<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" />
+	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
 	<title>VDRAdmin - <%! What's On Now? !%></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
@@ -39,11 +39,11 @@
 -%?>
 
 	<style type="text/css">
-		#prgtable { border-left-width:1px; border-left-color:#c4cdd7; border-left-style:solid; border-bottom-width:1px; border-bottom-color:#c4cdd7; border-bottom-style:solid; padding:2px; }
-		#timertable { background:red; border-left-width:1px; border-left-color:#ffcdd7; border-left-style:solid; border-bottom-width:1px; border-bottom-color:#ffcdd7; border-bottom-style:solid; padding:2px; }
+		#prgtable { border-left-width:1px; border-left-style:solid; border-bottom-width:1px; border-bottom-style:solid; padding:2px; }
+		#timertable { border-left-width:1px; border-left-style:solid; border-bottom-width:1px; border-bottom-style:solid; padding:2px; }
 
 		<?% IF jetzt_stunde >= akt_stunde && jetzt_stunde < akt_stunde + zeitrahmen %?>
-		#zeitleiste { position:absolute; filter:Alpha(opacity=50); top:150px; left:<?% left + seite + (einheit * diff_minute) + 30 %?>px; width:1px; height:<?% shows.keys.size * 21 + 2 %?>px; z-index:10; background:red; z-index:2; }
+		#timeline { position:absolute; filter:Alpha(opacity=50); top:150px; left:<?% left + seite + (einheit * diff_minute) + 30 %?>px; width:1px; height:<?% shows.keys.size * 21 + 2 %?>px; z-index:10; z-index:2; }
 		<?% END %?>
 
 		#bigtable { position:absolute; top:100px; left: <?% left %?>px; z-index: 1; }
@@ -63,12 +63,12 @@
 	</script>
 </head>
 
-<body bgcolor="#c4cdd7" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
+<body id="prog_timeline">
 	<form action="<?% nowurl %?>" method="get" name="FormName">
-		<table width="<?% breite + seite + 80 %?>" border="0" cellspacing="0" cellpadding="0" height="39" style="position:absolute; left:<?% left %?>; top: 20px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39">
 			<tr>
 				<td valign="middle" background="bilder/nav_button_back.gif">
-					<nobr><p class="einzug_ohnetop"><b><?% now %?>&nbsp;<%! o'clock !%></b></p></nobr>
+					<h1><?% now %?>&nbsp;<%! o'clock !%></h1>
 				</td>
 				<td align="right" valign="middle" background="bilder/nav_button_back_mitte.gif">
 					<%! What's on: !%>&nbsp;
@@ -84,13 +84,12 @@
 					&nbsp;<%! o'clock !%>
 					<input type="hidden" name="aktion" value="prog_timeline" />
 				</td>
-				<td width="15" background="bilder/nav_button_back_end.gif">&nbsp;</td>
+				<td width="15" background="bilder/nav_button_back_end.gif"></td>
 			</tr>
 		</table>
-		<br />
 
 		<!-- Vertikal ansicht TOP -->
-		<span id="zeitleiste" class="zeitleiste"><img src="bilder/spacer.gif" width="1" height="1" border="0" /></span>
+		<span id="timeline" class="timeline"><img src="bilder/spacer.gif" width="1" height="1" border="0" /></span>
 
 		<!-- Zeitleiste -->
 		<table width="<?% breite + seite + 40 %?>" border="0" cellspacing="0" cellpadding="0"  name="bigtable" id="bigtable">
@@ -100,22 +99,19 @@
 				<td align="right" background="bilder/uebersicht_oben.gif"><nobr><?% IF akt_stunde <= jetzt_stunde %?><img src="bilder/pfeile_nachlinks_soft.gif" border="0" width="28" height="30" /><?% ELSE %?><a href="<?% nowurl %?>&time=<?% akt_stunde - zeitrahmen | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachlinks.gif" border="0" width="28" height="30" /></a><?% END %?><a href="<?% nowurl %?>&time=<?% bis_stunde | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachrechts.gif" border="0" width="29" height="30" /></a></nobr></td>
 				<td valign="top" width="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" height="30" width="30" border="0" /></td>
 			</tr>
-			<tr>
-				<td valign="top" width="30" background="bilder/uebersicht_links.gif">&nbsp;</td>
-				<td background="bilder/uebersicht_mitte.gif">&nbsp;</td>
-				<td background="bilder/uebersicht_mitte.gif">&nbsp;</td>
-				<td background="bilder/uebersicht_mitte.gif">&nbsp;</td>
-				<td background="bilder/uebersicht_mitte.gif">&nbsp;</td>
-				<td valign="top" width="30" background="bilder/uebersicht_rechts.gif">&nbsp;</td>
+			<tr height="20">
+				<td width="30" height="20" background="bilder/uebersicht_links.gif"></td>
+				<td colspan="4" background="bilder/uebersicht_mitte.gif"></td>
+				<td width="30" background="bilder/uebersicht_rechts.gif"></td>
 			</tr>
 			<tr>
-				<td valign="top" width="30" background="bilder/uebersicht_links.gif">&nbsp;</td>
+				<td valign="top" width="30" background="bilder/uebersicht_links.gif"></td>
 				<td colspan="4">
 					<table border="0" cellpadding="0" cellspacing="0" width="1">
 						<tr>
-							<td bgcolor="#e6eff9"><img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br /></td>
+							<td class="color1"><img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br /></td>
 <?% WHILE minute < bis %?>
-							<td colspan="6" bgcolor='<?% minute % 60 ? "#e6eff9" : "#d5dee8" %?>'>
+							<td colspan="6" class='<?% minute % 60 ? "color1" : "color2" %?>'>
 								<img src="bilder/spacer.gif" width="<?% einheit * 30 %?>" height="1" border="0" /><br />
 	<?% zeit = akt_sekunde + (minute * 60) %?>
 								<b><?% date.format(zeit, '%H:%M') %?></b>
@@ -125,9 +121,9 @@
 						</tr>
 <?% minute = 0 %?>
 						<tr>
-							<td bgcolor="#e6eff9"><img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br /></td>
+							<td class="color1"><img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br /></td>
 <?% WHILE minute < bis %?>
-							<td  width="1%" align="left" valign="bottom" bgcolor="<?% minute % 10 ? '#e6eff9' : '#d5dee8' %?>">
+							<td  width="1%" align="left" valign="bottom" class=<?% minute % 10 ? "color1" : "color2" %?>>
 	<?% IF minute % 15 %?>
 								<img src="bilder/pixel.gif" width="1" height="5" border="0" />
 	<?% ELSE %?>
@@ -147,12 +143,12 @@
 		chars = seite / 10 | format('%i');
 		b = b + 1 %?>
 						<tr>
-							<td valign="top" bgcolor="<?% b % 2 ? '#d5dee8' : '#e6eff9' %?>">
+							<td valign="top" class=<?% b % 2 ? "color2" : "color1" %?>>
 								<img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br />
 								<a href="<?% shows.${name}.first.proglink %?>"><b><?% shows.${name}.first.progname | truncate(chars) %?></b></a>
 							</td>
 							<!-- Programm -->
-							<td colspan="<?% (bis / 5) %?>" bgcolor="<?% b % 2 ? '#d5dee8' : '#e6eff9' %?>">
+							<td colspan="<?% (bis / 5) %?>" class=<?% b % 2 ? "color2" : "color1" %?>>
 								<nobr>
 <?%
 		z = 0;
@@ -194,15 +190,15 @@
 			<?% diff = (start_minute - old_stop_minute - 1) * einheit %?> 
 								<img title="DiffMinute: <?% start_minute - old_stop_minute - 1 %?>" src="bilder/spacer.gif" width="<?% diff %?>" height="8" border="0" align="left" hspace="0" />
 		<?% END %?>
-		<?% bg_color = date.now > show.start && date.now < show.stop ? "#f7fffA" : "#e6eee9";
-				bg_color = show.timer ? "#ffeee9" : bg_color %?>
-								<table border="0" align="left" cellpadding="0" cellspacing="0" id="<?% show.timer ? 'timertable' : 'prgtable' %?>">
+		<?% td_class = date.now > show.start && date.now < show.stop ? "col_broadcast" : "col_current";
+				td_class = show.timer ? "col_timer" : td_class %?>
+								<table border="0" align="left" cellpadding="0" cellspacing="0" id=<?% show.timer ? "timertable" : "prgtable" %?>>
 									<tr>
-										<td width="1" bgcolor="<?% bg_color %?>">
+										<td width="1" class="<?% td_class %?>">
 											<img src="bilder/spacer.gif" width="<?% laenge_pix %?>" height="1" border="0" hspace="0" /><br />
 											<nobr>
 												<?% IF show.summary %?><a href="javascript:popup('./vdradmin.pl?aktion=prog_detail&epg_id=<?% show.anchor %?>&vdr_id=<?% show.vdr_id %?>');"><?% END %?>
-												<span title="<?% show.title %?>">
+												<span title="<?% show.title %?> (<?% date.format(show.start, '%H:%M') %?> - <?% date.format(show.stop, '%H:%M') %?>, <?% (show.stop - show.start) / 60 %?><%! min !%>)">
 												<?% IF laenge_chars > 2 %?>
 													<?% show.title | truncate( laenge_chars ) %?>
 												<?% ELSE %?>
@@ -226,16 +222,13 @@
 <?% END %?>
 					</table>
 				</td>
-<!-- Vertikal ansicht END -->
 
-				<td valign="top" width="30" background="bilder/uebersicht_rechts.gif">&nbsp;</td>
+<!-- Vertikal ansicht END -->
+				<td valign="top" width="30" background="bilder/uebersicht_rechts.gif"></td>
 			</tr>
 			<tr>
 				<td valign="top" width="30"><img src="bilder/uebersicht_unten_links.gif" alt="" height="30" width="30" border="0" /></td>
-				<td background="bilder/uebersicht_unten.gif">&nbsp;</td>
-				<td background="bilder/uebersicht_unten.gif">&nbsp;</td>
-				<td background="bilder/uebersicht_unten.gif">&nbsp;</td>
-				<td background="bilder/uebersicht_unten.gif">&nbsp;</td>
+				<td colspan="4" background="bilder/uebersicht_unten.gif"></td>
 				<td valign="top" width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" height="30" width="30" border="0" /></td>
 			</tr>
 		</table>

@@ -2,7 +2,7 @@
 // this is part of VDR Admin
 //
 function open_help(url) {
-	window.open(url, "_blank", "width=500, height=460, resizable=yes, scrollbars=yes, status=no, toolbar=no");
+	window.open(url, "_blank", "width=580, height=480, resizable=yes, scrollbars=yes, status=no, toolbar=no");
 }
 
 function del(message, suffix) {
@@ -26,7 +26,7 @@ function callurl( url ) {
 }
 
 function popup(URL) {
-	window.open(URL, '_new', 'width=500, height=250, scrollbars=auto, resizable=yes');
+	window.open(URL, '_new', 'width=500, height=250, scrollbars=yes, resizable=yes, toolbar=no, status=no');
 }
 
 function toolbar(URL) {

@@ -4,6 +4,26 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2005-06-01: 0.97-am3.3pre
+- Allow browsers to cache all files VDRAdmin sends, except "text/html". This should speed up VDRAdmin but changing the skin or css needs a "shift reload".
+- Added support for VDR v1.3.25's recording info (Submitted by vejoun).
+- New config option for the number of columns to display in prog_summary.
+- Use localized date formates.
+- Now using "video/x-mpegurl" MIME type instead of "audio/x-mpegurl" for streaming (Suggested by stefan.h).
+- Added patches supplied by stefan.h:
+  -> using EPG's subtitle when found for AutoTimer else " " (thaht's the VDR way).
+  -> New config option VDRVFAT to find recordings if VDR has been compiled with or without VFAT define.
+- Fixed calling reccmds on recordings in subdirs, manual recordings (@rectitle) and repeating timer's recordings without episode title.
+- Fixed streaming of manual recordings (@rectitle) and repeating timer's recordings without episode title.
+- VDRAdmin-AM now uses the required charsets setting in templates, so no need to write "&xyz;" things in .po files.
+- Reworked templates to make better use of CSS (for example: timeline colours can be set by style.css).
+- EPG_PRUNE now is the number of channels to fetch from VDR (had been one too less before).
+- Added "install.sh" and "uninstall.sh" ("./install.sh -h" for help) (Requested by several people).
+- Made "name" columns in lists wrapping again (Reported by vejoun).
+- Deleting a single recording works again (Reported by vejoun).
+- Fixed streaming of recordings in subdirs (Reported by vejoun).
+- Added missing gray sign on deactivated AutoTimers (Reported by vejoun).
+
 2005-05-12: 0.97-am3.2
 - Added "make uninstall" to remove VDRAdmin from your system if you have installed it using "make install". Please always use this before you install a new release!
 - Fixed programming of repeating timers when day is "D" (Thanks to "maxkr" for reporting this).
@@ -15,7 +35,7 @@ VDR-Portal: amair
 - Added streaming button to prog_list2.
 - Fixed handling of incorrect start/stop times in AutoTimer.
 - Changed localisation to use gettext() (Thanks to Tobias Grimm for doing most of the needed work).
-- Language can no longer be set in VDRAdmin, it's taken from your system's setting. Issue "export LC_MESSAGES=<language code>" if you need to change it, where <language code> is one of "de_DE", "en_EN", "es_ES", "fi_FI" or "fr_FR".
+- Language can no longer be set in VDRAdmin, it's taken from your system's setting. Issue "export LANG=<language code>" if you need to change it, where <language code> is one of "de_DE", "en_EN", "es_ES", "fi_FI" or "fr_FR".
 - Added Finnish i18n (Submitted by Rolf Ahrenberg).
 - Fixed ":" & "|" handling in timer's directory (Thanks "vejoun").
 - Added links to prog_list on channels in at_timer_list and timer_list.
@@ -99,7 +119,7 @@ Added patches:
 - vdradmin-0.96_OneShot_Timers_English_Only.diff and merged it to "Deutsch" template (posted at the VDR mailinglist by Rantanen Teemu)
 - Included changes from vdradmin-0.96-3-ctvdr-1 (see HISTORY.ct).
 - Fix for timers.conf of vdr1.3.23+ (Submitted by Stefan Neuwirth)
-- Localnet Patch; no password request if client ip in given ip range) (Submitted by Reiner Buehl)
+- Localnet Patch; no password request if client ip in given ip range) (Author: Roland Behme / Submitted by Reiner Buehl)
 
 Templates cleanup:
 - at_new.html

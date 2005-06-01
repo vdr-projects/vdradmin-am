@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" />
+	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
 	<title>VDRAdmin</title>
 	<link href="navi.css" rel="stylesheet" media="screen" />
 
@@ -19,7 +19,7 @@
 	</script>
 </head>
 
-<body background="bilder/back.gif" bgcolor="#ffffff" leftmargin="0" marginheight="0" marginwidth="0" topmargin="0">
+<body background="bilder/back.gif" leftmargin="0" marginheight="0" marginwidth="0" topmargin="0" id="navigation">
 	<form action="vdradmin.pl" method="get" name="FormName" target="main">
 		<table width="150" border="0" cellspacing="0" cellpadding="0">
 			<tr>
@@ -29,53 +29,55 @@
 				</td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
-			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="2"><td height="2" background="bilder/separator.png"></td></tr>
 			<tr height="25">
-				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=prog_summary" target="main"><%! What's On Now? !%></a></span></td>
+				<td height="25"><div class="navi"><a href="vdradmin.pl?aktion=prog_summary" target="main"><%! What's On Now? !%></a></div></td>
 			</tr>
-			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="2"><td height="2" background="bilder/separator.png"></td></tr>
 			<tr height="25">
-				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=prog_list2" target="main"><%! Playing Today !%></a></span></td>
+				<td height="25"><div class="navi"><a href="vdradmin.pl?aktion=prog_list2" target="main"><%! Playing Today !%></a></div></td>
 			</tr>
-			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="2"><td height="2" background="bilder/separator.png"></td></tr>
 			<tr height="25">
-				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=prog_timeline" target="main"><%! Timeline !%></a></span></td>
+				<td height="25"><div class="navi"><a href="vdradmin.pl?aktion=prog_timeline" target="main"><%! Timeline !%></a></div></td>
 			</tr>
-			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="2"><td height="2" background="bilder/separator.png"></td></tr>
 			<tr height="25">
-				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=prog_list" target="main"><%! Channels !%></a></span></td>
+				<td height="25"><div class="navi"><a href="vdradmin.pl?aktion=prog_list" target="main"><%! Channels !%></a></div></td>
 			</tr>
-			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="2"><td height="2" background="bilder/separator.png"></td></tr>
 			<tr height="25">
-				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=timer_list" target="main"><%! Timer !%></a></span></td>
+				<td height="25"><div class="navi"><a href="vdradmin.pl?aktion=timer_list" target="main"><%! Timer !%></a></div></td>
 			</tr>
-			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="2"><td height="2" background="bilder/separator.png"></td></tr>
 			<tr height="25">
-				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=at_timer_list" target="main"><%! Auto Timer !%></a></span></td>
+				<td height="25"><div class="navi"><a href="vdradmin.pl?aktion=at_timer_list" target="main"><%! AutoTimer !%></a></div></td>
 			</tr>
-			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="2"><td height="2" background="bilder/separator.png"></td></tr>
 			<tr height="25">
-				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=rec_list" target="main"><%! Recordings !%></a></span></td>
+				<td height="25"><div class="navi"><a href="vdradmin.pl?aktion=rec_list" target="main"><%! Recordings !%></a></div></td>
 			</tr>
-			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="2"><td height="2" background="bilder/separator.png"></td></tr>
 			<tr height="25">
-				<td height="25"><span class="navi">&nbsp;<a href="vdradmin.pl?aktion=conf_list" target="main"><%! Configuration !%></a></span></td>
+				<td height="25"><div class="navi"><a href="vdradmin.pl?aktion=config" target="main"><%! Configuration !%></a></div></td>
 			</tr>
-			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="2"><td height="2" background="bilder/separator.png"></td></tr>
 			<tr height="25">
-				<td height="25"><span class="navi">&nbsp;<a href="javascript:rc_open();"><%! Remote Control !%></a></span></td>
+				<td height="25"><div class="navi"><a href="javascript:rc_open();"><%! Remote Control !%></a></div></td>
 			</tr>
-			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="2"><td height="2" background="bilder/separator.png"></td></tr>
 			<tr height="25">
-				<td height="25"><span class="navi">&nbsp;<a href="javascript:tv_open();"><%! Watch TV !%></a></span></td>
+				<td height="25"><div class="navi"><a href="javascript:tv_open();"><%! Watch TV !%></a></div></td>
 			</tr>
-			<tr height="2"><td bgcolor="white" height="2" background="bilder/separator.png"></td></tr>
+			<tr height="2"><td height="2" background="bilder/separator.png"></td></tr>
 			<tr><td>&nbsp;</td></tr>      
 			<tr>
 				<td>
-					&nbsp;<b><input type="text" name="search" size="15" /></b><br />
-					&nbsp;<input type="submit" name="submit" value="<%! Search !%>" />
-					<input type="hidden" name="aktion" value="prog_summary" />
+					<div class="navi">
+						<input type="text" name="search" size="15" />
+						<input type="submit" name="submit" value="<%! Search !%>" />
+						<input type="hidden" name="aktion" value="prog_summary" />
+					</div>
 				</td>
 			</tr>
 		</table>

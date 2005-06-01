@@ -3,18 +3,18 @@
 
 <head>
 	<meta http-equiv="refresh" content="600; URL=vdradmin.pl?aktion=prog_summary" />
-	<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" />
+	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
 	<title>VDRAdmin - <%! What's On Now? !%></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<script language="JavaScript" src="library.js"></script>
 </head>
 
-<body bgcolor="#c4cdd7" leftmargin="3" marginheight="20" marginwidth="3" topmargin="20">
+<body id="prog_summary">
 	<form action="<tmpl_var url>" method="get" name="FormName">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39" id="heading">
 			<tr valign="middle">
 				<td valign="middle" width="100" background="bilder/nav_button_back.gif">
-					<p class="einzug_ohnetop"><b><tmpl_var now>&nbsp;<%! o'clock !%></b></p>
+					<h1><tmpl_var now>&nbsp;<%! o'clock !%></h1>
 				</td>
 				<td align="right" valign="middle" background="bilder/nav_button_back_mitte.gif">
 					<%! What's on: !%>&nbsp;<a href="<tmpl_var nowurl>"><%! now !%></a>&nbsp;|<%! at: !%>&nbsp;
@@ -25,47 +25,48 @@
 			</tr>
 		</table>
 		<input type="hidden" name="aktion" value="prog_summary" />
-		<br />
 
-		<table border="0" cellspacing="0" cellpadding="0">
+		<table border="0" cellspacing="0" cellpadding="0" id="content">
 <tmpl_loop rows>
 			<tr>
 	<tmpl_loop day>
 		<tmpl_if longdate>
 				<td valign="top" width="272" background="bilder/top.gif">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						<tr valign="middle">
+						<tr valign="middle" class="heading">
 							<td width="60%">
-								<a name="<tmpl_var anchor>"></a>
-								<p class="einzug">
-									<a href="<tmpl_var proglink>"><b><tmpl_var progname></b></a>
-<tmpl_if stream_live_on>
-									&nbsp;<a href="<tmpl_var streamurl>" title="<%! Stream !%>">[S]</a>
-</tmpl_if>
-									</p>
+								<div class="channel">
+									<a name="<tmpl_var anchor>"></a>
+									<h2><a href="<tmpl_var proglink>"><tmpl_var progname></a></h2>
+									<tmpl_if stream_live_on>
+										&nbsp;<a href="<tmpl_var streamurl>" title="<%! Stream !%>">[S]</a>
+									</tmpl_if>
+								</div>
 							</td>
 							<td align="right">
-								<p class="einzug">
+								<div class="duration">
 									<tmpl_if start><tmpl_var start>-<tmpl_var stop></tmpl_if>
-								</p>
+								</div>
 							</td>
 						</tr>
 					</table>
 					
-					<div class="einzug_ohnetop">
-						<tmpl_var longdate><br />
-						<b><tmpl_var title></b><br />
+					<div class="content">
+						<div class="date"><tmpl_var longdate></div>
+						<h3><tmpl_var title></h3>
 						<tmpl_if subtitle>
-							<i><tmpl_var subtitle></i><br />
+							<h4><tmpl_var subtitle></h4>
 						</tmpl_if>
 						<br />
-						<tmpl_if summary><tmpl_var summary> &nbsp;<a href="javascript:popup('<tmpl_var infurl>');"><%! more !%></a></tmpl_if>
+						<div class="summary">
+							<tmpl_if summary><tmpl_var summary> &nbsp;<a href="javascript:popup('<tmpl_var infurl>');">[<%! more !%>]</a></tmpl_if>
+						</div>
 						<br />
 						<br />
 					</div>
 				</td>
 		<tmpl_else>
-				<td valign="top" width="272"></td>
+				<td width="272"></td>
 		</tmpl_if>
 	</tmpl_loop>
 			</tr>
@@ -96,7 +97,7 @@
 					</table>
 				</td>
 		<tmpl_else>
-				<td valign="top" width="272"></td>
+				<td width="272"></td>
 		</tmpl_if>
 	</tmpl_loop>
 			</tr>

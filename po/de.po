@@ -13,262 +13,262 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-0.97-AM3.2\n"
+"Project-Id-Version: VDRAdmin-0.97-AM3.3pre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-05-09 12:52+0200\n"
+"POT-Creation-Date: 2005-06-01 12:56+0200\n"
 "PO-Revision-Date: 2005-05-10 12:49+0100\n"
-"Last-Translator: rudibert <r_jung@web.de>\n"
-"Language-Team: Rudi <LL.org>\n"
+"Last-Translator: Andreas Mair <mail@andreas.vdr-developer.org>\n"
+"Language-Team: <LL.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: ../template/default/noperm.html:4 ../template/default/index.html:5
+#: ../template/default/timer_new.html:5 ../template/default/left.html:5
+#: ../template/default/toolbar.html:5 ../template/default/rc.html:5
+#: ../template/default/noauth.html:4 ../template/default/at_timer_list.html:5
+#: ../template/default/prog_summary.html:6 ../template/default/config.html:4
+#: ../template/default/timer_list.html:5 ../template/default/prog_list.html:5
+#: ../template/default/error.html:5 ../template/default/tv.html:6
+#: ../template/default/prog_detail.html:5 ../template/default/rec_list.html:5
+#: ../template/default/tv_flash.html:5
+#: ../template/default/prog_timeline.html:6
+#: ../template/default/prog_list2.html:5 ../template/default/rec_edit.html:5
+#: ../template/default/help_timer_list.html:5
+#: ../template/default/help_timer_new.html:8
+#: ../template/default/help_at_timer_list.html:5
+#: ../template/default/help_at_timer_new.html:11
+#: ../template/default/help_rec_list.html:5
+#: ../template/default/help_config.html:8
+#: ../template/default/at_timer_new.html:5
+msgid "charset=ISO-8859-1"
+msgstr "charset=ISO-8859-1"
+
 #: ../template/default/index.html:18
 msgid "Your Browser does not support frames!"
-msgstr "Ihr Browser unterst&uuml;tzt keine Frames!"
+msgstr "Ihr Browser unterstützt keine Frames!"
 
-#: ../template/default/timer_new.html:6
-#: ../template/default/timer_new.html:45
+#: ../template/default/timer_new.html:6 ../template/default/timer_new.html:45
 msgid "Create New Timer"
 msgstr "Neuen Timer anlegen"
 
-#: ../template/default/timer_new.html:6
-#: ../template/default/timer_new.html:45
+#: ../template/default/timer_new.html:6 ../template/default/timer_new.html:45
+#: ../template/default/help_timer_new.html:9
+#: ../template/default/help_timer_new.html:19
 msgid "Edit Timer"
 msgstr "Timer editieren"
 
 #: ../template/default/timer_new.html:50
-#: ../template/default/at_new.html:20
-#: ../template/default/at_timer_list.html:31
-#: ../template/default/config.html:20
-#: ../template/default/timer_list.html:46
+#: ../template/default/at_timer_list.html:30
+#: ../template/default/config.html:20 ../template/default/timer_list.html:40
 #: ../template/default/rec_list.html:26
+#: ../template/default/at_timer_new.html:20
 msgid "Help"
 msgstr "Hilfe"
 
-#: ../template/default/timer_new.html:67
+#: ../template/default/timer_new.html:66
 msgid "Timer Active:"
 msgstr "Timer aktiv:"
 
-#: ../template/default/timer_new.html:69
-#: ../template/default/at_new.html:39
-#: ../template/default/at_new.html:43
-#: ../template/default/at_new.html:145
-#: ../template/default/at_timer_list.html:110
-#: ../template/default/config.html:114
-#: ../template/default/config.html:175
-#: ../template/default/config.html:267
-#: ../template/default/config.html:276
-#: ../template/default/config.html:335
-#: ../template/default/config.html:344
-#: ../template/default/config.html:353
-#: ../template/default/config.html:362
-#: ../template/default/timer_list.html:295
+#: ../template/default/timer_new.html:68
+#: ../template/default/at_timer_list.html:109
+#: ../template/default/config.html:146 ../template/default/config.html:207
+#: ../template/default/config.html:299 ../template/default/config.html:314
+#: ../template/default/config.html:357 ../template/default/config.html:378
+#: ../template/default/config.html:406 ../template/default/config.html:415
+#: ../template/default/config.html:424 ../template/default/config.html:433
+#: ../template/default/timer_list.html:284
+#: ../template/default/at_timer_new.html:39
+#: ../template/default/at_timer_new.html:43
+#: ../template/default/at_timer_new.html:145
 msgid "Yes"
 msgstr "Ja"
 
-#: ../template/default/timer_new.html:70
-#: ../template/default/at_new.html:40
-#: ../template/default/at_new.html:44
-#: ../template/default/at_new.html:146
-#: ../template/default/at_timer_list.html:113
-#: ../template/default/config.html:115
-#: ../template/default/config.html:176
-#: ../template/default/config.html:268
-#: ../template/default/config.html:277
-#: ../template/default/config.html:336
-#: ../template/default/config.html:345
-#: ../template/default/config.html:354
-#: ../template/default/config.html:363
-#: ../template/default/timer_list.html:296
+#: ../template/default/timer_new.html:69
+#: ../template/default/at_timer_list.html:112
+#: ../template/default/config.html:147 ../template/default/config.html:208
+#: ../template/default/config.html:300 ../template/default/config.html:315
+#: ../template/default/config.html:358 ../template/default/config.html:379
+#: ../template/default/config.html:407 ../template/default/config.html:416
+#: ../template/default/config.html:425 ../template/default/config.html:434
+#: ../template/default/timer_list.html:285
+#: ../template/default/at_timer_new.html:40
+#: ../template/default/at_timer_new.html:44
+#: ../template/default/at_timer_new.html:146
 msgid "No"
 msgstr "Nein"
 
-#: ../template/default/timer_new.html:76
-msgid "Auto Timer Checking:"
-msgstr "Automatische Timer-&Uuml;berwachung:"
+#: ../template/default/timer_new.html:75
+msgid "AutoTimer Checking:"
+msgstr "Automatische Timer-Überwachung:"
 
-#: ../template/default/timer_new.html:79
+#: ../template/default/timer_new.html:78
 msgid "Transmission Identification"
 msgstr "Sendungskennung"
 
-#: ../template/default/timer_new.html:81
-#: ../template/default/rec_list.html:63
+#: ../template/default/timer_new.html:80 ../template/default/rec_list.html:61
 msgid "Time"
 msgstr "Uhrzeit"
 
-#: ../template/default/timer_new.html:82
-#: ../template/default/tv.html:184
+#: ../template/default/timer_new.html:81 ../template/default/tv.html:174
 msgid "off"
 msgstr "aus"
 
-#: ../template/default/timer_new.html:88
-#: ../template/default/at_new.html:84
-#: ../template/default/prog_list.html:23
+#: ../template/default/timer_new.html:87 ../template/default/prog_list.html:23
 #: ../template/default/prog_list2.html:29
+#: ../template/default/at_timer_new.html:84
 msgid "Channel:"
-msgstr "Sender"
+msgstr "Sender:"
 
-#: ../template/default/timer_new.html:100
+#: ../template/default/timer_new.html:99
 msgid "Day Of Recording:"
 msgstr "Tag der Aufnahme:"
 
-#: ../template/default/timer_new.html:104
-#: ../template/default/at_new.html:72
-#: ../template/i18n.pl:3
+#: ../template/default/timer_new.html:103
+#: ../template/default/at_timer_new.html:72
 msgid "Monday"
 msgstr "Montag"
 
-#: ../template/default/timer_new.html:105
-#: ../template/default/at_new.html:73
-#: ../template/i18n.pl:4
+#: ../template/default/timer_new.html:104
+#: ../template/default/at_timer_new.html:73
 msgid "Tuesday"
 msgstr "Dienstag"
 
-#: ../template/default/timer_new.html:106
-#: ../template/default/at_new.html:74
-#: ../template/i18n.pl:5
+#: ../template/default/timer_new.html:105
+#: ../template/default/at_timer_new.html:74
 msgid "Wednesday"
 msgstr "Mittwoch"
 
-#: ../template/default/timer_new.html:107
-#: ../template/default/at_new.html:75
-#: ../template/i18n.pl:6
+#: ../template/default/timer_new.html:106
+#: ../template/default/at_timer_new.html:75
 msgid "Thursday"
 msgstr "Donnerstag"
 
-#: ../template/default/timer_new.html:108
-#: ../template/default/at_new.html:76
-#: ../template/i18n.pl:7
+#: ../template/default/timer_new.html:107
+#: ../template/default/at_timer_new.html:76
 msgid "Friday"
 msgstr "Freitag"
 
-#: ../template/default/timer_new.html:109
-#: ../template/default/at_new.html:77
-#: ../template/i18n.pl:8
+#: ../template/default/timer_new.html:108
+#: ../template/default/at_timer_new.html:77
 msgid "Saturday"
 msgstr "Samstag"
 
-#: ../template/default/timer_new.html:110
-#: ../template/default/at_new.html:78
-#: ../template/i18n.pl:2
+#: ../template/default/timer_new.html:109
+#: ../template/default/at_timer_new.html:78
 msgid "Sunday"
 msgstr "Sonntag"
 
-#: ../template/default/timer_new.html:116
+#: ../template/default/timer_new.html:115
 msgid "Start Time:"
 msgstr "Startzeit:"
 
-#: ../template/default/timer_new.html:121
-#: ../template/default/timer_new.html:132
-#: ../template/default/at_new.html:102
-#: ../template/default/at_new.html:113
+#: ../template/default/timer_new.html:120
+#: ../template/default/timer_new.html:131
 #: ../template/default/prog_summary.html:17
 #: ../template/default/prog_summary.html:22
-#: ../template/default/prog_list.html:61
+#: ../template/default/prog_list.html:62
 #: ../template/default/prog_timeline.html:71
 #: ../template/default/prog_timeline.html:84
-#: ../template/default/prog_timeline.html:99
-#: ../template/default/prog_list2.html:71
+#: ../template/default/prog_timeline.html:98
+#: ../template/default/prog_list2.html:69
+#: ../template/default/at_timer_new.html:102
+#: ../template/default/at_timer_new.html:113
 msgid "o'clock"
 msgstr "Uhr"
 
-#: ../template/default/timer_new.html:127
+#: ../template/default/timer_new.html:126
 msgid "End Time:"
 msgstr "Endzeit:"
 
-#: ../template/default/timer_new.html:138
-#: ../template/default/at_new.html:119
-#: ../template/default/at_timer_list.html:133
-#: ../template/default/config.html:188
-#: ../template/default/config.html:233
-#: ../template/default/timer_list.html:316
+#: ../template/default/timer_new.html:137
+#: ../template/default/at_timer_list.html:131
+#: ../template/default/config.html:220 ../template/default/config.html:259
+#: ../template/default/timer_list.html:143
+#: ../template/default/timer_list.html:148
+#: ../template/default/timer_list.html:304
+#: ../template/default/at_timer_new.html:119
 msgid "Priority:"
-msgstr "Priorit&auml;t:"
+msgstr "Priorität:"
 
-#: ../template/default/timer_new.html:144
-#: ../template/default/at_new.html:127
-#: ../template/default/at_timer_list.html:133
-#: ../template/default/config.html:194
-#: ../template/default/config.html:227
-#: ../template/default/timer_list.html:316
+#: ../template/default/timer_new.html:143
+#: ../template/default/at_timer_list.html:131
+#: ../template/default/config.html:226 ../template/default/config.html:265
+#: ../template/default/timer_list.html:143
+#: ../template/default/timer_list.html:148
+#: ../template/default/timer_list.html:304
+#: ../template/default/at_timer_new.html:127
 msgid "Lifetime:"
 msgstr "Lebenszeit:"
 
-#: ../template/default/timer_new.html:150
+#: ../template/default/timer_new.html:149
 msgid "Title of Recording:"
 msgstr "Titel der Aufnahme:"
 
-#: ../template/default/timer_new.html:156
+#: ../template/default/timer_new.html:155
 msgid "Summary:"
 msgstr "Zusammenfassung:"
 
-#: ../template/default/timer_new.html:169
-#: ../template/default/at_new.html:166
-#: ../template/default/config.html:403
+#: ../template/default/timer_new.html:167 ../template/default/config.html:474
+#: ../template/default/at_timer_new.html:166
 msgid "Save"
 msgstr "Speichern"
 
-#: ../template/default/timer_new.html:170
-#: ../template/default/at_new.html:167
-#: ../template/default/rec_edit.html:64
+#: ../template/default/timer_new.html:168 ../template/default/rec_edit.html:59
+#: ../template/default/at_timer_new.html:167
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../template/default/left.html:34
-#: ../template/default/prog_summary.html:7
-#: ../template/default/prog_timeline.html:7
-#: ../template/i18n.pl:27
+#: ../template/default/left.html:34 ../template/default/prog_summary.html:7
+#: ../template/default/prog_timeline.html:7 ../template/i18n.pl:2
 msgid "What's On Now?"
-msgstr "Was l&auml;uft jetzt?"
+msgstr "Was läuft jetzt?"
 
-#: ../template/default/left.html:38
-#: ../template/default/prog_list2.html:6
+#: ../template/default/left.html:38 ../template/default/prog_list2.html:6
 #: ../template/default/prog_list2.html:25
 msgid "Playing Today"
-msgstr "Was l&auml;uft heute?"
+msgstr "Was läuft heute?"
 
-#: ../template/default/left.html:42
-#: ../template/default/config.html:141
-#: ../template/i18n.pl:29
+#: ../template/default/left.html:42 ../template/default/config.html:173
+#: ../template/i18n.pl:4
 msgid "Timeline"
 msgstr "Zeitleiste"
 
-#: ../template/default/left.html:46
-#: ../template/default/prog_list.html:6
-#: ../template/i18n.pl:30
+#: ../template/default/left.html:46 ../template/default/prog_list.html:6
+#: ../template/i18n.pl:5
 msgid "Channels"
-msgstr "Programm&uuml;bersicht"
+msgstr "Programmübersicht"
 
-#: ../template/default/left.html:50
-#: ../template/default/config.html:222
+#: ../template/default/left.html:50 ../template/default/config.html:254
 #: ../template/default/timer_list.html:6
-#: ../template/default/timer_list.html:30
+#: ../template/default/timer_list.html:25
+#: ../template/default/help_timer_list.html:6
+#: ../template/default/help_timer_list.html:16
 msgid "Timer"
 msgstr "Timer"
 
-#: ../template/default/left.html:54
-#: ../template/default/at_timer_list.html:6
+#: ../template/default/left.html:54 ../template/default/at_timer_list.html:6
 #: ../template/default/at_timer_list.html:15
-#: ../template/default/config.html:168
-msgid "Auto Timer"
+#: ../template/default/config.html:200
+#: ../template/default/help_at_timer_list.html:6
+#: ../template/default/help_at_timer_list.html:16
+msgid "AutoTimer"
 msgstr "AutoTimer"
 
-#: ../template/default/left.html:58
-#: ../template/default/rec_list.html:6
+#: ../template/default/left.html:58 ../template/default/rec_list.html:6
 #: ../template/default/rec_list.html:15
-#: ../template/i18n.pl:32
+#: ../template/default/help_rec_list.html:6
+#: ../template/default/help_rec_list.html:16 ../template/i18n.pl:7
 msgid "Recordings"
 msgstr "Aufnahmen"
 
-#: ../template/default/left.html:62
-#: ../template/default/config.html:5
-#: ../template/default/config.html:15
+#: ../template/default/left.html:62 ../template/default/config.html:5
+#: ../template/default/config.html:15 ../template/default/help_config.html:9
+#: ../template/default/help_config.html:19
 msgid "Configuration"
 msgstr "Konfiguration"
 
-#: ../template/default/left.html:66
-#: ../template/default/rc.html:6
+#: ../template/default/left.html:66 ../template/default/rc.html:6
 msgid "Remote Control"
 msgstr "Fernbedienung"
 
@@ -276,155 +276,94 @@ msgstr "Fernbedienung"
 msgid "Watch TV"
 msgstr "Fernseher"
 
-#: ../template/default/left.html:77
+#: ../template/default/left.html:78
 msgid "Search"
 msgstr "Suchen"
 
-#: ../template/default/at_new.html:6
-#: ../template/default/at_new.html:16
-msgid "Add New Auto Timer"
-msgstr "Neuen AutoTimer anlegen"
-
-#: ../template/default/at_new.html:6
-#: ../template/default/at_new.html:16
-msgid "Edit Auto Timer"
-msgstr "AutoTimer editieren"
-
-#: ../template/default/at_new.html:36
-msgid "Auto Timer Active:"
-msgstr "AutoTimer aktiv:"
-
-#: ../template/default/at_new.html:41
-#: ../template/default/at_new.html:45
-msgid "oneshot"
-msgstr "einmal"
-
-#: ../template/default/at_new.html:52
-msgid "Search Patterns:"
-msgstr "Suchbegriffe:"
-
-#: ../template/default/at_new.html:60
-msgid "Search in:"
-msgstr "zu suchen in:"
-
-#: ../template/default/at_new.html:62
-msgid "Title"
-msgstr "Titel"
-
-#: ../template/default/at_new.html:63
-msgid "Subtitle"
-msgstr "Untertitel"
-
-#: ../template/default/at_new.html:64
-msgid "Description"
-msgstr "Beschreibung"
-
-#: ../template/default/at_new.html:70
-msgid "Search only on these days:"
-msgstr "Nur an diesen Tagen suchen:"
-
-#: ../template/default/at_new.html:87
-msgid "all"
-msgstr "alle"
-
-#: ../template/default/at_new.html:97
-msgid "Starts Before:"
-msgstr "Beginnt fr&uuml;hestens:"
-
-#: ../template/default/at_new.html:108
-msgid "Ends Before:"
-msgstr "Endet sp&auml;testens:"
-
-#: ../template/default/at_new.html:135
-msgid "Episode:"
-msgstr "Serie:"
-
-#: ../template/default/at_new.html:143
-msgid "Remember programmed timers:"
-msgstr "Programmierte Timer merken:"
-
-#: ../template/default/at_new.html:152
-msgid "Directory:"
-msgstr "Ordner:"
-
-#: ../template/default/noauth.html:5
-#: ../template/default/noauth.html:11
+#: ../template/default/noauth.html:5 ../template/default/noauth.html:11
 msgid "Authorization Required"
 msgstr "Autorisierung erforderlich"
 
 #: ../template/default/noauth.html:12
-msgid "This server could not verify that you are authorized to access the document requested. Either you supplied the wrong credentials (e.g. bad password), or your browser doesn't understand how to supply the credentials required."
-msgstr "Dieser Server kann nicht best&auml;tigen, dass Sie berechtigt sind, auf das angeforderte Dokument zuzugreifen. Entweder haben Sie falsche Anmeldedaten angegeben (z.B. falsches Passwort) oder Ihr Browser kann die Anmeldedaten nicht &uuml;bermitteln."
+msgid ""
+"This server could not verify that you are authorized to access the document "
+"requested. Either you supplied the wrong credentials (e.g. bad password), or "
+"your browser doesn't understand how to supply the credentials required."
+msgstr ""
+"Dieser Server kann nicht bestätigen, dass Sie berechtigt sind, auf das "
+"angeforderte Dokument zuzugreifen. Entweder haben Sie falsche Anmeldedaten "
+"angegeben (z.B. falsches Passwort) oder Ihr Browser kann die Anmeldedaten "
+"nicht übermitteln."
 
 #: ../template/default/at_timer_list.html:22
-msgid "New Auto Timer"
+msgid "New AutoTimer"
 msgstr "Neuer AutoTimer"
 
-#: ../template/default/at_timer_list.html:44
-#: ../template/default/timer_list.html:202
+#: ../template/default/at_timer_list.html:43
+#: ../template/default/timer_list.html:193
 msgid "Active"
 msgstr "Aktiv"
 
-#: ../template/default/at_timer_list.html:55
-#: ../template/default/timer_list.html:213
+#: ../template/default/at_timer_list.html:54
+#: ../template/default/timer_list.html:204
 msgid "Channel"
 msgstr "Sender"
 
-#: ../template/default/at_timer_list.html:66
-#: ../template/default/timer_list.html:235
+#: ../template/default/at_timer_list.html:65
+#: ../template/default/timer_list.html:226
 msgid "Start"
 msgstr "Beginn"
 
-#: ../template/default/at_timer_list.html:77
-#: ../template/default/timer_list.html:246
+#: ../template/default/at_timer_list.html:76
+#: ../template/default/timer_list.html:237
 msgid "Stop"
 msgstr "Ende"
 
-#: ../template/default/at_timer_list.html:88
-#: ../template/default/timer_list.html:257
-#: ../template/default/rec_list.html:74
+#: ../template/default/at_timer_list.html:87
+#: ../template/default/timer_list.html:248
+#: ../template/default/rec_list.html:72
 msgid "Name"
 msgstr "Name"
 
-#: ../template/default/at_timer_list.html:99
-#: ../template/default/timer_list.html:268
-#: ../template/default/rec_list.html:85
+#: ../template/default/at_timer_list.html:98
+#: ../template/default/timer_list.html:259
+#: ../template/default/rec_list.html:83
 msgid "Select all/none"
-msgstr "Alle/keine ausw&auml;hlen"
+msgstr "Alle/keine auswählen"
 
-#: ../template/default/at_timer_list.html:139
-#: ../template/default/timer_list.html:326
+#: ../template/default/at_timer_list.html:138
+#: ../template/default/timer_list.html:314
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: ../template/default/at_timer_list.html:144
-#: ../template/default/timer_list.html:329
+#: ../template/default/at_timer_list.html:143
+#: ../template/default/timer_list.html:317
 msgid "Delete timer?"
-msgstr "Timer l&ouml;schen?"
+msgstr "Timer löschen?"
 
-#: ../template/default/at_timer_list.html:144
-#: ../template/default/timer_list.html:329
-#: ../template/default/rec_list.html:137
+#: ../template/default/at_timer_list.html:143
+#: ../template/default/timer_list.html:317
+#: ../template/default/rec_list.html:135
 msgid "Delete"
-msgstr "L&ouml;schen"
+msgstr "Löschen"
 
-#: ../template/default/at_timer_list.html:166
+#: ../template/default/at_timer_list.html:169
 msgid "Force Update"
 msgstr "Manuelles Update"
 
-#: ../template/default/at_timer_list.html:178
-#: ../template/default/timer_list.html:350
+#: ../template/default/at_timer_list.html:180
+#: ../template/default/timer_list.html:340
 msgid "Delete all selected timers?"
-msgstr "Ausgew&auml;hlte Timer wirklich l&ouml;schen?"
+msgstr "Ausgewählte Timer wirklich löschen?"
 
-#: ../template/default/at_timer_list.html:178
-msgid "Delete Selected Auto Timers"
-msgstr "Ausgew&auml;hlte AutoTimer l&ouml;schen"
+#: ../template/default/at_timer_list.html:180
+msgid "Delete Selected AutoTimers"
+msgstr "Ausgewählte AutoTimer löschen"
 
 #: ../template/default/prog_summary.html:20
 #: ../template/default/prog_timeline.html:74
 msgid "What's on:"
-msgstr "Was l&auml;uft:"
+msgstr "Was läuft:"
 
 #: ../template/default/prog_summary.html:20
 #: ../template/default/prog_timeline.html:76
@@ -436,10 +375,9 @@ msgstr "jetzt"
 msgid "at:"
 msgstr "um:"
 
-#: ../template/default/prog_summary.html:43
-#: ../template/default/prog_list.html:19
-#: ../template/default/rec_list.html:150
-#: ../template/default/prog_list2.html:52
+#: ../template/default/prog_summary.html:42
+#: ../template/default/prog_list.html:19 ../template/default/rec_list.html:148
+#: ../template/default/prog_list2.html:53
 msgid "Stream"
 msgstr "Stream"
 
@@ -447,186 +385,238 @@ msgstr "Stream"
 msgid "more"
 msgstr "mehr"
 
-#: ../template/default/prog_summary.html:79
+#: ../template/default/prog_summary.html:80
 msgid "TV select"
 msgstr "TV umschalten"
 
-#: ../template/default/prog_summary.html:83
+#: ../template/default/prog_summary.html:84
 msgid "Search for other show times"
 msgstr "Nach Wiederholungen suchen"
 
-#: ../template/default/prog_summary.html:87
+#: ../template/default/prog_summary.html:88
 msgid "More Information"
 msgstr "mehr Infos"
 
-#: ../template/default/prog_summary.html:93
+#: ../template/default/prog_summary.html:94
 msgid "Record"
 msgstr "Sendung aufnehmen"
 
-#: ../template/default/config.html:38
+#: ../template/default/config.html:33
 msgid "General Settings"
 msgstr "Allgemeine Einstellungen"
 
-#: ../template/default/config.html:44
+#: ../template/default/config.html:39
 msgid "Template:"
 msgstr "Template:"
 
-#: ../template/default/config.html:57
+#: ../template/default/config.html:52
 msgid "Skin:"
 msgstr "Skin:"
 
-#: ../template/default/config.html:69
+#: ../template/default/config.html:64
 msgid "Login Page:"
 msgstr "Startseite:"
 
-#: ../template/default/config.html:81
+#: ../template/default/config.html:74 ../template/default/config.html:353
+msgid "Gets active after restarting VDRAdmin"
+msgstr "Wird erst nach einem Neustart von VDRAdmin aktiv"
+
+#: ../template/default/config.html:76
+msgid "Number of channels to use:"
+msgstr "Anzahl der zu verwendenden Kanäle:"
+
+#: ../template/default/config.html:82
+msgid "Local net (no login required):"
+msgstr "Lokales Netz (kein Login notwendig):"
+
+#: ../template/default/config.html:96
+msgid "VDR"
+msgstr "VDR"
+
+#: ../template/default/config.html:101
 msgid "Number of DVB Cards:"
 msgstr "Anzahl der DVB-Karten:"
 
-#: ../template/default/config.html:95
+#: ../template/default/config.html:107
+msgid "Path to recordings:"
+msgstr "Pfad der Aufnahmen:"
+
+#: ../template/default/config.html:113
+msgid "Path to configuration files:"
+msgstr "Pfad zu den Konfigurationsdateien:"
+
+#: ../template/default/config.html:127
 msgid "Identification"
 msgstr "Identifikation"
 
-#: ../template/default/config.html:100
+#: ../template/default/config.html:132
 msgid "Username:"
 msgstr "Benutzername:"
 
-#: ../template/default/config.html:106
+#: ../template/default/config.html:138
 msgid "Password:"
 msgstr "Passwort:"
 
-#: ../template/default/config.html:112
+#: ../template/default/config.html:144
 msgid "Guest Account:"
 msgstr "Gast-Zugang:"
 
-#: ../template/default/config.html:121
+#: ../template/default/config.html:153
 msgid "Guest Username:"
 msgstr "Gast Benutzername:"
 
-#: ../template/default/config.html:127
+#: ../template/default/config.html:159
 msgid "Guest Password:"
 msgstr "Gast Passwort:"
 
-#: ../template/default/config.html:146
+#: ../template/default/config.html:178
 msgid "Hours:"
 msgstr "Stunden:"
 
-#: ../template/default/config.html:152
+#: ../template/default/config.html:184
 msgid "Times:"
 msgstr "Zeiten:"
 
-#: ../template/default/config.html:173
+#: ../template/default/config.html:205
 msgid "Active:"
 msgstr "Aktiv:"
 
-#: ../template/default/config.html:182
+#: ../template/default/config.html:214
 msgid "Timeout:"
 msgstr "Timeout:"
 
-#: ../template/default/config.html:183
-#: ../template/default/config.html:240
-#: ../template/default/config.html:246
+#: ../template/default/config.html:215 ../template/default/config.html:272
+#: ../template/default/config.html:278
 msgid "minutes"
 msgstr "Minuten"
 
-#: ../template/default/config.html:201
-#: ../template/default/config.html:239
+#: ../template/default/config.html:233 ../template/default/config.html:271
 msgid "Time Margin at Start:"
 msgstr "Zeitpuffer Anfang:"
 
-#: ../template/default/config.html:207
-#: ../template/default/config.html:245
+#: ../template/default/config.html:239 ../template/default/config.html:277
 msgid "Time Margin at Stop:"
 msgstr "Zeitpuffer Ende:"
 
-#: ../template/default/config.html:260
+#: ../template/default/config.html:292
 msgid "Streaming"
 msgstr "Streaming"
 
-#: ../template/default/config.html:265
-msgid "Live Streaming"
-msgstr "LiveTV streamen"
+#: ../template/default/config.html:297
+msgid "Live Streaming:"
+msgstr "LiveTV streamen:"
 
-#: ../template/default/config.html:274
-msgid "Recordings Streaming"
-msgstr "Aufnahmen streamen"
-
-#: ../template/default/config.html:283
+#: ../template/default/config.html:306
 msgid "HTTP Port of Streamdev (also possible 3000/ts):"
-msgstr "HTTP-Port von Streamdev (auch m&ouml;glich 3000/ts):"
+msgstr "HTTP-Port von Streamdev (auch möglich 3000/ts):"
 
-#: ../template/default/config.html:289
-msgid "Path to VDR Recordings:"
-msgstr "Pfad der Aufnahmen:"
+#: ../template/default/config.html:312
+msgid "Recordings Streaming:"
+msgstr "Aufnahmen streamen:"
 
-#: ../template/default/config.html:296
+#: ../template/default/config.html:321
+msgid "Path to VDR Recordings on your workstation:"
+msgstr "Pfad zu den VDR-Aufnahmen auf Ihrem PC:"
+
+#: ../template/default/config.html:328
 msgid "Bandwidth of Streams:"
 msgstr "Bandbreite des Streams:"
 
-#: ../template/default/config.html:323
+#: ../template/default/config.html:350
+msgid "Expert"
+msgstr "Expertenmodus"
+
+#: ../template/default/config.html:355
+msgid "Read EPG directly using epg.data:"
+msgstr "EPG direkt aus der epg.data lesen:"
+
+#: ../template/default/config.html:364
+msgid "epg.data filename:"
+msgstr "Dateiname der epg.data:"
+
+#: ../template/default/config.html:370
+msgid "Number of columns in \"What's On Now\":"
+msgstr "Anzahl der Spalten bei \"Was läuft jetzt\"?"
+
+#: ../template/default/config.html:376
+msgid "VFAT:"
+msgstr "VFAT:"
+
+#: ../template/default/config.html:397
 msgid "Channel Selections"
 msgstr "Selektive Senderauswahl"
 
-#: ../template/default/config.html:333
-msgid "In &quot;Timeline&quot;?"
-msgstr "In der &quot;Zeitleiste&quot;?"
-
-#: ../template/default/config.html:342
-msgid "In &quot;Channels&quot; / &quot;Playing Today&quot;?"
-msgstr "Bei &quot;Programm&uuml;bersicht&quot; / &quot;Was l&auml;uft heute&quot;?"
-
-#: ../template/default/config.html:351
-msgid "In &quot;What's On Now&quot;?"
-msgstr "Bei &quot;Was l&auml;uft jetzt&quot;?"
-
-#: ../template/default/config.html:360
-msgid "In &quot;Auto Timer&quot;?"
-msgstr "Bei &quot;AutoTimer&quot;?"
-
 #: ../template/default/config.html:404
+msgid "In \"Timeline\"?"
+msgstr "In der \"Zeitleiste\"?"
+
+#: ../template/default/config.html:413
+msgid "In \"Channels\" / \"Playing Today\"?"
+msgstr "Bei \"Programmübersicht\" / \"Was läuft heute\"?"
+
+#: ../template/default/config.html:422
+msgid "In \"What's On Now\"?"
+msgstr "Bei \"Was läuft jetzt\"?"
+
+#: ../template/default/config.html:431
+msgid "In \"AutoTimer\"?"
+msgstr "Bei \"AutoTimer\"?"
+
+#: ../template/default/config.html:475
 msgid "Apply"
 msgstr "Anwenden"
 
-#: ../template/default/timer_list.html:38
+#: ../template/default/timer_list.html:32
 msgid "New Timer"
 msgstr "Neuer Timer"
 
-#: ../template/default/timer_list.html:224
-#: ../template/default/rec_list.html:52
+#: ../template/default/timer_list.html:143
+#: ../template/default/timer_list.html:148
+msgid "Duration:"
+msgstr "Dauer:"
+
+#: ../template/default/timer_list.html:143
+#: ../template/default/timer_list.html:148
+#: ../template/default/prog_timeline.html:201
+msgid "min"
+msgstr "min"
+
+#: ../template/default/timer_list.html:215
+#: ../template/default/rec_list.html:50
 msgid "Date"
 msgstr "Datum"
 
-#: ../template/default/timer_list.html:278
+#: ../template/default/timer_list.html:269
 msgid "This timer is inactive!"
 msgstr "Diese Aufnahme ist deaktiviert!"
 
-#: ../template/default/timer_list.html:281
+#: ../template/default/timer_list.html:272
 msgid "This timer is impossible!"
-msgstr "Diese Aufnahme ist nicht m&ouml;glich!"
+msgstr "Diese Aufnahme ist nicht möglich!"
 
-#: ../template/default/timer_list.html:284
-msgid "No more timers possible!"
-msgstr "Keine weiteren Aufnahmen mehr m&ouml;glich!"
+#: ../template/default/timer_list.html:275
+msgid "No more timers on other transponders possible!"
+msgstr "Keine weiteren Aufnahmen auf anderen Transpondern mehr möglich!"
 
-#: ../template/default/timer_list.html:287
+#: ../template/default/timer_list.html:278
 msgid "Timer OK."
-msgstr "Diese Aufnahme ist m&ouml;glich."
+msgstr "Diese Aufnahme ist möglich."
 
-#: ../template/default/timer_list.html:293
+#: ../template/default/timer_list.html:283
 msgid "Edit timer status?"
-msgstr "Timerstatus &auml;ndern?"
+msgstr "Timerstatus ändern?"
 
-#: ../template/default/timer_list.html:297
+#: ../template/default/timer_list.html:286
 msgid "VPS"
 msgstr "VPS"
 
-#: ../template/default/timer_list.html:298
+#: ../template/default/timer_list.html:287
 msgid "Auto"
 msgstr "Auto"
 
-#: ../template/default/timer_list.html:350
+#: ../template/default/timer_list.html:340
 msgid "Delete Selected Timers"
-msgstr "Ausgew&auml;hlte Timer l&ouml;schen"
+msgstr "Ausgewählte Timer löschen"
 
 #: ../template/default/prog_list.html:29
 #: ../template/default/prog_list2.html:34
@@ -637,42 +627,36 @@ msgstr "Go!"
 msgid "Error!"
 msgstr "Fehler!"
 
-#: ../template/default/tv.html:5
-#: ../template/default/tv_flash.html:4
+#: ../template/default/tv.html:5 ../template/default/tv_flash.html:4
 msgid "TV"
 msgstr "Fernseher"
 
-#: ../template/default/tv.html:182
+#: ../template/default/tv.html:172
 msgid "Interval:"
 msgstr "Intervall:"
 
-#: ../template/default/tv.html:185
-#: ../template/default/tv.html:186
-#: ../template/default/tv.html:187
-#: ../template/default/tv.html:188
-#: ../template/default/tv.html:189
-#: ../template/default/tv.html:190
-#: ../template/default/tv.html:191
+#: ../template/default/tv.html:175 ../template/default/tv.html:176
+#: ../template/default/tv.html:177 ../template/default/tv.html:178
+#: ../template/default/tv.html:179 ../template/default/tv.html:180
+#: ../template/default/tv.html:181
 msgid "sec."
 msgstr "sek"
 
-#: ../template/default/tv.html:193
-#: ../template/default/tv.html:200
+#: ../template/default/tv.html:183 ../template/default/tv.html:190
 msgid "G"
 msgstr "G"
 
-#: ../template/default/tv.html:193
-#: ../template/default/tv.html:200
+#: ../template/default/tv.html:183 ../template/default/tv.html:190
 msgid "Grab the picture!"
 msgstr "Hole das Bild!"
 
-#: ../template/default/tv.html:194
+#: ../template/default/tv.html:184
 msgid "Size:"
-msgstr "Gr&ouml;&szlig;e:"
+msgstr "Größe:"
 
 #: ../template/default/prog_detail.html:28
 msgid "close"
-msgstr "schlie&szlig;en"
+msgstr "schließen"
 
 #: ../template/default/prog_detail.html:30
 msgid "view"
@@ -686,7 +670,7 @@ msgstr "aufnehmen"
 msgid "search"
 msgstr "Wiederholungen"
 
-#: ../template/default/prog_detail.html:34
+#: ../template/default/prog_detail.html:35
 msgid "Lookup movie in the Internet-Movie-Database (IMDb)"
 msgstr "Film in der Internet-Movie-Database (IMDb) suchen"
 
@@ -694,8 +678,7 @@ msgstr "Film in der Internet-Movie-Database (IMDb) suchen"
 msgid "Total:"
 msgstr "Total:"
 
-#: ../template/default/rec_list.html:19
-#: ../template/default/rec_list.html:20
+#: ../template/default/rec_list.html:19 ../template/default/rec_list.html:20
 msgid "h"
 msgstr "h"
 
@@ -703,301 +686,262 @@ msgstr "h"
 msgid "Free:"
 msgstr "Frei:"
 
-#: ../template/default/rec_list.html:100
+#: ../template/default/rec_list.html:98
 msgid "Total"
 msgstr "Gesamt"
 
-#: ../template/default/rec_list.html:109
-#: ../template/default/rec_list.html:112
+#: ../template/default/rec_list.html:107 ../template/default/rec_list.html:110
 msgid "New"
 msgstr "neu"
 
-#: ../template/default/rec_list.html:130
-#: ../template/default/rec_edit.html:63
+#: ../template/default/rec_list.html:128 ../template/default/rec_edit.html:58
 msgid "Rename"
 msgstr "Umbenennen"
 
-#: ../template/default/rec_list.html:137
+#: ../template/default/rec_list.html:135
 msgid "Delete recording?"
-msgstr "Aufnahme l&ouml;schen?"
+msgstr "Aufnahme löschen?"
 
-#: ../template/default/rec_list.html:168
+#: ../template/default/rec_list.html:166
 msgid "Commands:"
-msgstr "Befehle"
+msgstr "Befehle:"
 
-#: ../template/default/rec_list.html:174
+#: ../template/default/rec_list.html:172
 msgid "Run"
-msgstr "Ausf&uuml;hren"
+msgstr "Ausführen"
 
-#: ../template/default/rec_list.html:174
+#: ../template/default/rec_list.html:172
 msgid "Really run this command?"
 msgstr "Diesen Befehl wirklich ausführen?"
 
-#: ../template/default/rec_list.html:181
-#: ../template/default/rec_list.html:187
+#: ../template/default/rec_list.html:179 ../template/default/rec_list.html:185
 msgid "Delete all selected recordings?"
-msgstr "Ausgew&auml;hlte Aufnahmen wirklich l&ouml;schen?"
+msgstr "Ausgewählte Aufnahmen wirklich löschen?"
 
-#: ../template/default/rec_list.html:181
-#: ../template/default/rec_list.html:187
+#: ../template/default/rec_list.html:179 ../template/default/rec_list.html:185
 msgid "Delete Selected Recordings"
-msgstr "Ausgew&auml;hlte Aufnahmen l&ouml;schen"
+msgstr "Ausgewählte Aufnahmen löschen"
 
-#: ../template/default/prog_timeline.html:99
+#: ../template/default/prog_timeline.html:98
 msgid "Timeline:"
 msgstr "Zeitleiste:"
 
-#: ../template/default/prog_timeline.html:99
+#: ../template/default/prog_timeline.html:98
 msgid "to"
 msgstr "bis"
 
-#: ../template/default/rec_edit.html:6
-#: ../template/default/rec_edit.html:15
+#: ../template/default/rec_edit.html:6 ../template/default/rec_edit.html:16
 msgid "Rename Recording"
 msgstr "Aufnahme umbenennen"
 
-#: ../template/default/rec_edit.html:38
+#: ../template/default/rec_edit.html:39
 msgid "Original Name of Recording:"
 msgstr "Alter Titel der Aufnahme:"
 
-#: ../template/default/rec_edit.html:44
+#: ../template/default/rec_edit.html:45
 msgid "New Name of Recording:"
 msgstr "Neuer Titel der Aufnahme:"
 
-#: ../vdradmind.pl:222
+#: ../template/default/help_at_timer_new.html:12
+#: ../template/default/help_at_timer_new.html:22
+#: ../template/default/at_timer_new.html:6
+#: ../template/default/at_timer_new.html:16
+msgid "Edit AutoTimer"
+msgstr "AutoTimer editieren"
+
+#: ../template/default/at_timer_new.html:6
+#: ../template/default/at_timer_new.html:16
+msgid "Add New AutoTimer"
+msgstr "Neuen AutoTimer anlegen"
+
+#: ../template/default/at_timer_new.html:36
+msgid "AutoTimer Active:"
+msgstr "AutoTimer aktiv:"
+
+#: ../template/default/at_timer_new.html:41
+#: ../template/default/at_timer_new.html:45
+msgid "oneshot"
+msgstr "einmal"
+
+#: ../template/default/at_timer_new.html:52
+msgid "Search Patterns:"
+msgstr "Suchbegriffe:"
+
+#: ../template/default/at_timer_new.html:60
+msgid "Search in:"
+msgstr "zu suchen in:"
+
+#: ../template/default/at_timer_new.html:62
+msgid "Title"
+msgstr "Titel"
+
+#: ../template/default/at_timer_new.html:63
+msgid "Subtitle"
+msgstr "Untertitel"
+
+#: ../template/default/at_timer_new.html:64
+msgid "Description"
+msgstr "Beschreibung"
+
+#: ../template/default/at_timer_new.html:70
+msgid "Search only on these days:"
+msgstr "Nur an diesen Tagen suchen:"
+
+#: ../template/default/at_timer_new.html:87
+msgid "all"
+msgstr "alle"
+
+#: ../template/default/at_timer_new.html:97
+msgid "Starts After:"
+msgstr "Beginnt frühestens:"
+
+#: ../template/default/at_timer_new.html:108
+msgid "Ends Before:"
+msgstr "Endet spätestens:"
+
+#: ../template/default/at_timer_new.html:135
+msgid "Episode:"
+msgstr "Serie:"
+
+#: ../template/default/at_timer_new.html:143
+msgid "Remember programmed timers:"
+msgstr "Programmierte Timer merken:"
+
+#: ../template/default/at_timer_new.html:152
+msgid "Directory:"
+msgstr "Ordner:"
+
+#: ../vdradmind.pl:234
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Wie lautet der Hostname des VDR (z.B. video.intra.net)?"
 
-#: ../vdradmind.pl:223
+#: ../vdradmind.pl:235
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Auf welchem Port hört der VDR auf SVDRP-Anfragen?"
 
-#: ../vdradmind.pl:224
+#: ../vdradmind.pl:236
 msgid "On which address should VDRAdmin listen (0.0.0.0 for any)?"
-msgstr "An welcher Adresse soll VDRAdmin auf Verbindungen warten (0.0.0.0 für alle)?"
+msgstr ""
+"An welcher Adresse soll VDRAdmin auf Verbindungen warten (0.0.0.0 für alle)?"
 
-#: ../vdradmind.pl:225
+#: ../vdradmind.pl:237
 msgid "On which port should VDRAdmin listen?"
 msgstr "Auf welchem Port soll VDRAdmin hören?"
 
-#: ../vdradmind.pl:226
+#: ../vdradmind.pl:238
 msgid "Username?"
 msgstr "Benutzername?"
 
-#: ../vdradmind.pl:227
+#: ../vdradmind.pl:239
 msgid "Password?"
 msgstr "Passwort?"
 
-#: ../vdradmind.pl:228
+#: ../vdradmind.pl:240
 msgid "Where are your recordings stored?"
 msgstr "Wo befinden sich die Aufnahmen?"
 
-#: ../vdradmind.pl:229
+#: ../vdradmind.pl:241
 msgid "Where are your VDR's configuration files located?"
 msgstr "Wo befinden sich die Konfigurationsdateien des VDR?"
 
-#: ../vdradmind.pl:235
+#: ../vdradmind.pl:247
 msgid "Config file written successfully."
 msgstr "Konfigurationsdatei wurde erfolgreich geschrieben."
 
-#: ../vdradmind.pl:282
+#: ../vdradmind.pl:295
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s wurde mit der Prozeß-ID %d gestartet."
 
-#: ../template/i18n.pl:12
-msgid "January"
-msgstr "Januar"
-
-#: ../template/i18n.pl:13
-msgid "February"
-msgstr "Februar"
-
-#: ../template/i18n.pl:14
-msgid "March"
-msgstr "M&auml;rz"
-
-#: ../template/i18n.pl:15
-msgid "April"
-msgstr "April"
-
-#: ../template/i18n.pl:16
-msgid "May"
-msgstr "Mai"
-
-#: ../template/i18n.pl:17
-msgid "June"
-msgstr "Juni"
-
-#: ../template/i18n.pl:18
-msgid "July"
-msgstr "Juli"
-
-#: ../template/i18n.pl:19
-msgid "August"
-msgstr "August"
-
-#: ../template/i18n.pl:20
-msgid "September"
-msgstr "September"
-
-#: ../template/i18n.pl:21
-msgid "October"
-msgstr "Oktober"
-
-#: ../template/i18n.pl:22
-msgid "November"
-msgstr "November"
-
-#: ../template/i18n.pl:23
-msgid "December"
-msgstr "Dezember"
-
-#: ../template/i18n.pl:28
+#: ../template/i18n.pl:3
 msgid "Playing Today?"
-msgstr "Was l&auml;uft heute?"
+msgstr "Was läuft heute?"
 
-#: ../template/i18n.pl:31
+#: ../template/i18n.pl:6
 msgid "Timers"
 msgstr "Timer"
 
-#: ../template/i18n.pl:36
+#: ../template/i18n.pl:11
 msgid "Not found"
 msgstr "Nicht gefunden"
 
-#: ../template/i18n.pl:37
+#: ../template/i18n.pl:12
 msgid "The requested URL was not found on this server!"
 msgstr "Die angeforderte URL konnte auf dem Server nicht gefunden werden!"
 
-#: ../template/i18n.pl:38
+#: ../template/i18n.pl:13
 #, perl-format
-msgid "The URL &quot;%s&quot; was not found on this server!"
-msgstr "Die URL &quot;%s&quot; wurde auf dem Server nicht gefunden!"
+msgid "The URL \"%s\" was not found on this server!"
+msgstr "Die URL \"%s\" wurde auf dem Server nicht gefunden!"
 
-#: ../template/i18n.pl:39
+#: ../template/i18n.pl:14
 msgid "Forbidden"
 msgstr "Verboten"
 
-#: ../template/i18n.pl:40
+#: ../template/i18n.pl:15
 msgid "You don't have permission to access this function!"
 msgstr "Sie haben nicht die Erlaubnis diese Funktion aufzurufen!"
 
-#: ../template/i18n.pl:41
+#: ../template/i18n.pl:16
 #, perl-format
-msgid "Access to file &quot;%s&quot; denied!"
-msgstr "Zugriff auf Datei &quot;%s&quot; verweigert!"
+msgid "Access to file \"%s\" denied!"
+msgstr "Zugriff auf Datei \"%s\" verweigert!"
 
-#: ../template/i18n.pl:42
+#: ../template/i18n.pl:17
 #, perl-format
-msgid "Can't open file &quot;%s&quot;!"
-msgstr "Kann Datei &quot;%s&quot; nicht &ouml;ffnen!"
+msgid "Can't open file \"%s\"!"
+msgstr "Kann Datei \"%s\" nicht öffnen!"
 
-#: ../template/i18n.pl:43
+#: ../template/i18n.pl:18
 #, perl-format
 msgid "Can't connect to VDR at %s!"
 msgstr "Konnte Verbindung zu %s nicht aufbauen!"
 
-#: ../template/i18n.pl:44
+#: ../template/i18n.pl:19
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Fehler beim Senden eines Kommandos zu %s"
 
-#: ../template/i18n.pl:48
+#: ../template/i18n.pl:23
 msgid "Schedule"
-msgstr "&Uuml;bersicht"
+msgstr "Übersicht"
 
-#: ../template/i18n.pl:53
-msgid ""
-"<b>Timer</b>\n"
-"<p>VDR timer overview.</p>\n"
-"<p>Clicking on |<img src=\"bilder/poempl_gruen.gif\" alt=\"on\" valign=\"center\"> <i>Yes</i> | or |<img src=\"bilder/poempl_grau.gif\" alt=\"off\" valign=\"center\"> <i>No</i> | in the column <i>Active</i>, switches the timer on or off.<br>\n"
-"<img src=\"bilder/poempl_gelb.gif\" alt=\"problem\" valign=\"center\"> indicates overlapping timers. That's uncritical, as long as you have enough DVB cards for the parallel recordings.<br>\n"
-"To edit an entry, click on <img src=\"bilder/edit.gif\" alt=\"Stift\" valign=\"center\">, to delete a timer use <img src=\"bilder/delete.gif\" alt=\"Radiergummi\" valign=\"center\">. To delete more than one timer at once, select them using the checkboxes (<input type=\"checkbox\" checked>) and click on <i>Delete selected timers</i> at the end of the list.\n"
-"</p>"
-msgstr ""
-"<b>Timer</b>\n"
-"<p>&Uuml;bersicht &uuml;ber alle Timer im VDR.</p>\n"
-"<p>Ein Mausklick auf  |<img src=\"bilder/poempl_gruen.gif\" alt=\"on\" valign=\"center\"> <i>Ja</i> | oder |<img src=\"bilder/poempl_grau.gif\" alt=\"off\" valign=\"center\"> <i>Nein</i> | in der Spalte <i>Aktiv</i>, schaltet den jeweiligen Timer an oder aus.<br>\n"
-"<img src=\"bilder/poempl_gelb.gif\" alt=\"problem\" valign=\"center\"> zeigt an, da&szlig; es eine &Uuml;berschneidung gibt. Das ist unkritisch, solange es f&uuml;r jeden Timer eine Karte gibt, um die Aufnahme durchzuf&uuml;hren.<br>\n"
-"Um einen Eintrag zu bearbeiten, klicken Sie auf das Symbol <img src=\"bilder/edit.gif\" alt=\"Stift\" valign=\"center\">, zum L&ouml;schen auf <img src=\"bilder/delete.gif\" alt=\"Radiergummi\" valign=\"center\">. Wenn Sie mehrere Auto-Timer-Eintr&auml;ge auf einmal l&ouml;schen m&ouml;chten, Aktivieren Sie die K&auml;stchen (<input type=\"checkbox\" checked>) rechts neben den gew&uuml;nschten Eintr&auml;gen und klicken Sie abschlie&szlig;end auf <i>Ausgew&auml;hlte Timer l&ouml;schen</i> am Ende der Liste.\n"
-"</p>"
-
-#: ../template/i18n.pl:61
-msgid ""
-"<p>No help available for <b>Add Timer:</b> yet. For adding text please contact mail@andreas.vdr-developer.org.\t\n"
-"</p>"
-msgstr ""
-"<b>Neuer Timer:</b>\n"
-"<p>Dazu m&uuml;&szlig;en die ensprechenden Felder ausgef&uuml;llt werden. Wichtig ist auch nach der Programmierung einen Blick auf alle Timer zu werfen, um evtl. auftretende &Uuml;berschneidungen oder andere Probleme zu vermeiden.</p>"
-
-#: ../template/i18n.pl:65
-msgid ""
-"<b>Auto Timer:</b><br>\n"
-"<p>An overview of all Auto Timers</p>\n"
-"<p>Click <i>Yes</i> or <i>No</i> in the <i>Active</i> column to (de-)activate that Auto Timer.</p>\n"
-"<p>Use <img src=\"bilder/edit.gif\" alt=\"pen\" valign=\"center\"> for editing and <img src=\"bilder/delete.gif\" alt=\"Rubber\" valign=\"center\"> for deleting an Auto Timer. If you want to delete multiple Auto Timers all at once, you have to check the boxes (<input type=\"checkbox\" checked>) on the right and finally click <i>Delete selected Auto Timers</i>.</p>"
-msgstr ""
-"<b>Auto Timer:</b><br>\n"
-"<p>Eine &Uuml;bersicht aller Auto-Timer-Eintr&auml;ge.</p>\n"
-"<p>Ein Mausklick auf  |<img src=\"bilder/poempl_gruen.gif\" alt=\"on\" valign=\"center\"> <i>Ja</i> | oder |<img src=\"bilder/poempl_rot.gif\" alt=\"off\" valign=\"center\"> <i>Nein</i> | in der Spalte <i>Aktiv</i>, schaltet den jeweiligen Eintrag an oder aus.</p>\n"
-"<p>Um einen Eintrag zu bearbeiten, klicken Sie auf das Symbol <img src=\"bilder/edit.gif\" alt=\"Stift\" valign=\"center\">, zum L&ouml;schen auf <img src=\"bilder/delete.gif\" alt=\"Radiergummi\" valign=\"center\">. Wenn Sie mehrere Auto-Timer-Eintr&auml;ge auf einmal l&ouml;schen m&ouml;chten, Aktivieren Sie die K&auml;stchen (<input type=\"checkbox\" checked>) rechts neben den gew&uuml;nschten Eintr&auml;gen und klicken Sie abschlie&szlig;end auf <i>Ausgew&auml;hlte Auto Timer l&ouml;schen</i> am Ende der Liste.</p>"
-
-#: ../template/i18n.pl:71
-msgid ""
-"<b>Edit Auto Timer:</b><br>\n"
-"<p>Auto Timer is a key feature of VDRAdmin. An Auto Timer consists of one or more search terms and some other settings, that are looked for regularly in the Electronic Program Guide (EPG). On match Auto Timer adds a timer in VDR automatically for that broadcast. That's very comfortable for irregularly broadcasted series or movies you don't want to miss.</p>\n"
-"<p>Here you can set an Auto Timer. It's required to specify at least one search item. Please have a look at <i>Search Items</i> if you need more information on how to find reasonable search items and how to avoid unwanted recordings.</p>\n"
-"<b>Auto Timer Active:</b><br>\n"
-"<p><i>Yes</i> activates and <i>No</i> deactivates this Auto Timer. Please note that VDR timers already added by VDRAdmin are not deleted if you deactivate this Auto Timer.</p>\n"
-"<b>Search Items:</b><br>\n"
-"<p>Choosing the right search items decides whether only the wanted broadcast or broadcast having similar names or nothing gets recorded.</p>\n"
-"<p>Case doesn't matter, &quot;X-Files&quot; matches anything &quot;x-files&quot; will match. You can set multiple search items by separating them with spaces. Only broadcasts will match if they contain all items.</p>\n"
-"<p>You'd better only use letters and numbers for search items, as EPGs often miss colons, brackets and other characters.</p>\n"
-"<p>Experts can also use regular expressions, but you have get needed information from the VDRAdmin sources (undocumented feature).</p>"
-msgstr ""
-"<b>Neuen Auto Timer anlegen/bearbeiten:</b><br>\n"
-"<p>Der Auto Timer ist eine der zentralen Funktionen VDR Admins. Ein Auto-Timer-Eintrag besteht haupts&auml;chlich aus einem oder mehreren Suchbegriffen, nach denen in regelm&auml;&szlig;igen Abst&auml;nden der elektronische Programmf&uuml;hrer (EPG) durchsucht wird. Bei &Uuml;bereinstimmung der Suchbegriffe (und &uuml;brigen Parameter wie Uhrzeit und Kanal) programmiert Auto Timer selbst&auml;ndig eine Aufnahme (Timer) f&uuml;r die gefundene Sendung &#150; das ist besonders f&uuml;r (un)regelm&auml;&szlig;ig gesendete Serien interessant, oder aber f&uuml;r Filme, die Sie keinesfalls verpassen wollen.</p>\n"
-"<p>In dieser Maske k&ouml;nnen Sie einen neuen Auto-Timer-Eintrag anlegen. Sie m&uuml;ssen in jedem Fall einen oder mehrere Suchbegriffe angeben, damit es &uuml;berhaupt zu &Uuml;bereinstimmungen kommen kann. Details, welche Suchbegriffe Sie w&auml;hlen sollten und wie Sie unsinnige Aufnahmen vermeiden, finden Sie in der Hilfe zu <i>Suchbegriffe</i>.</p>\n"
-"<b>Auto Timer Aktiv:</b><br>\n"
-"<p>Mit <i>ja</i> schalten Sie den Auto Timer scharf, der elektronische Programmf&uuml;hrer (EPG) wird dann regelm&auml;&szlig;ig nach <i>Suchbegriffe</i> durchsucht und ein neuer Timer-Eintrag programmiert, wenn es eine &Uuml;bereinstimmung mit <i>Suchbegriffe</i> sowie den &uuml;brigen Parametern gibt.</p>\n"
-"<p>Mit <i>nein</i> schalten Sie den Auto-Timer-Eintrag ab, ohne ihn zu l&ouml;schen. Dies l&auml;sst bereits automatisch programmierte Aufnahmen (Timer) jedoch unangetastet &#150; sie m&uuml;ssen gegebenenfalls von Hand im <i>Timer</i>-Men&uuml; gel&ouml;scht werden.</p>\n"
-"<b>Suchbegriffe:</b><br>\n"
-"<p>Die Wahl der Suchbegriffe hat entscheidenden Einfluss darauf, ob nur die gew&uuml;nschte Sendung, alle mit &auml;hnlichem Namen oder gar nichts programmiert wird.</p>\n"
-"<p>Zun&auml;chst einmal spielt Gro&szlig;-Kleinschreibung keine Rolle, die Suchbegriffe \"Akte X\" liefern genau die selben Treffer wie \"akte x\". Mehrere Suchbegriffe werden mit Leerzeichen getrennt, und es m&uuml;ssen stets alle angegebenen Suchbegriffe bei der gleichen Sendung gefunden werden.</p>\n"
-"<p>So finden die Suchbegriffe \"Akte X\" die Sendungen \"Akte X - Die unheimlichen F&auml;lle des FBI\" genauso wie \"Aktenzeichen XY ungel&ouml;st\" und \"Extrem Aktiv\", jedoch nicht die Sendung \"Die Akte Jane\" (dort ist kein \"X\" enthalten).</p>\n"
-"<p>Sie sollten m&ouml;glichst nur Buchstaben und Zahlen als Suchbegriffe verwenden, erfahrungsgem&auml;&szlig; fehlen im elektronischen Programmf&uuml;hrer (EPG) gerne mal ein Punkt, Klammern oder sonstige Zeichen.</p>\n"
-"<p>Es ist auch m&ouml;glich, regul&auml;re Ausdr&uuml;cke zu verwenden &#150; Experten m&ouml;gen doch bitte die n&ouml;tigen Infos dem Quelltext entnehmen (undocumented feature).\n"
-"</p>"
-
-#: ../template/i18n.pl:83
-msgid ""
-"<p>No help available for <b>Recordings:</b>. For adding text please contact mail@andreas.vdr-developer.org.\t\n"
-"</p>"
-msgstr ""
-"<b>Aufnahmen:</b>\n"
-"<p>Auf dieser Seite sieht man alle Aufnahmen, die sich auf dem angeschlossenen VDR-Rechner befinden. Hier kann man Namen und Verzeichnis der Aufnahmen &auml;ndern (<img src=\"bilder/edit.gif\" alt=\"pen\" valign=\"center\">) oder Aufnahmen l&ouml;schen (<img src=\"bilder/delete.gif\" alt=\"Rubber\" valign=\"center\">).</p>"
-
-#: ../template/i18n.pl:87
+#: ../template/i18n.pl:28
 msgid ""
 "<b>Configuration:</b>\n"
-"<p>Here you can change general settings and base settings for timers, auto timers, channel selection and streaming parameters.\n"
+"<p>Here you can change general settings and base settings for timers, "
+"autotimers, channel selection and streaming parameters.\n"
 "</p>\n"
 "<b>General Settings:</b>\n"
-"<p>Here you can change the languge, the start page, the look, and the number of DVB cards. Besides this the base settings for timers, auto timers, the channel selection and streaming parameters can be configured here.\n"
+"<p>Here you can change the languge, the start page, the look, and the number "
+"of DVB cards. Besides this the base settings for timers, autotimers, the "
+"channel selection and streaming parameters can be configured here.\n"
 "</p>\n"
 "<b>Identification:</b>\n"
-"<p>Clicking on |<input type=\"radio\"> <i>yes</i> | or |<input type=\"radio\" checked> <i>no</i> | activates or deactivates the <i>guest account</i>. The default passwords for both accounts should be changed when VDRAdmin is accessible over the Internet.\n"
+"<p>Clicking on |<input type=\"radio\"> <i>yes</i> | or |<input type=\"radio"
+"\" checked> <i>no</i> | activates or deactivates the <i>guest account</i>. "
+"The default passwords for both accounts should be changed when VDRAdmin is "
+"accessible over the Internet.\n"
 "</p>\n"
 "<b>Time Line:</b>\n"
-"<p>Here you can see a time line of the channels, where you can select the displayed time span.<br>\n"
-"The bars show the titles of each show. A time bar starts half an hour before now. A thin red line indicates the current position.<br>Programmed timers are shown in different colors.\n"
+"<p>Here you can see a time line of the channels, where you can select the "
+"displayed time span.<br>\n"
+"The bars show the titles of each show. A time bar starts half an hour before "
+"now. A thin red line indicates the current position.<br>Programmed timers "
+"are shown in different colors.\n"
 "</p>\n"
-"<b>Settings for auto timers:</b>\n"
-"<p>Clicking on |<input type=\"radio\"> <i>Yes</i> | or |<input type=\"radio\" checked> <i>No</i> | activates or deactivates the auto timer function. You can also specify the interval, the the epg data is checked for updating the auto timers.<br>\n"
-"The life time of a recording can be set from 0 to 99 (99=live forever). This value relates to the day, the recording was made. After the given life time, a recording may be deleted to make room for new ones.<br>\n"
+"<b>Settings for autotimers:</b>\n"
+"<p>Clicking on |<input type=\"radio\"> <i>Yes</i> | or |<input type=\"radio"
+"\" checked> <i>No</i> | activates or deactivates the autotimer function. You "
+"can also specify the interval, the the epg data is checked for updating the "
+"autotimers.<br>\n"
+"The life time of a recording can be set from 0 to 99 (99=live forever). This "
+"value relates to the day, the recording was made. After the given life time, "
+"a recording may be deleted to make room for new ones.<br>\n"
 "The Priority indicates, what timer is prefered in case of a conflict.<br>\n"
 "<b>Timer settings:</b>\n"
-"<p>These are the same settings as for the auto timers, but apply to the manually created timers.\n"
+"<p>These are the same settings as for the autotimers, but apply to the "
+"manually created timers.\n"
 "</p>\n"
 "\n"
 "<b>Streaming settings:</b>\n"
@@ -1005,42 +949,271 @@ msgid ""
 "</p>\n"
 "\n"
 "<b>Channel Selection:</b>\n"
-"<p>Clicking on |<input type=\"radio\"> <i>Yes</i> | or |<input type=\"radio\" checked> <i>No</i> | activates or deactivates the channel selection for a specific view.<br>\n"
+"<p>Clicking on |<input type=\"radio\"> <i>Yes</i> | or |<input type=\"radio"
+"\" checked> <i>No</i> | activates or deactivates the channel selection for a "
+"specific view.<br>\n"
 "</p>\n"
 msgstr ""
 "<b>Konfiguration:</b>\n"
-"<p>Hier kann man die allgemeinen Einstellungen vornehmen. Au&szlig;erdem die Grundeinstellungen f&uuml;r Timer, AutoTimer, Kanalselektionen und Streaming Parameter\n"
+"<p>Hier kann man die allgemeinen Einstellungen vornehmen. Außerdem die "
+"Grundeinstellungen für Timer, AutoTimer, Kanalselektionen und Streaming "
+"Parameter\n"
 "</p>\n"
 "<b>Allgemeine Einstellungen:</b>\n"
-"<p>Hier kann man die Sprache, die Startseite, das Aussehen, sowie die Anzahl der DVB-Karten einstellen. Au&szlig;erdem die Grundeinstellungen f&uuml;r Timer, AutoTimer, Kanalselektionen und Streaming Parameter\n"
+"<p>Hier kann man die Sprache, die Startseite, das Aussehen, sowie die Anzahl "
+"der DVB-Karten einstellen. Außerdem die Grundeinstellungen für Timer, "
+"AutoTimer, Kanalselektionen und Streaming Parameter\n"
 "</p>\n"
 "<b>Identifikationen:</b>\n"
-"<p>Ein Mausklick auf  |<input type=\"radio\"> <i>ja</i> | oder |<input type=\"radio\" checked> <i>Nein</i> | aktiviert oder deaktiviert den <i>Gast-Zugang</i>. Die Passw&ouml;rter sollten f&uuml;r beide Konten ge&auml;ndert werden, wenn eine Verbindung zum Internet besteht\n"
+"<p>Ein Mausklick auf  |<input type=\"radio\"> <i>ja</i> | oder |<input type="
+"\"radio\" checked> <i>Nein</i> | aktiviert oder deaktiviert den <i>Gast-"
+"Zugang</i>. Die Passwörter sollten für beide Konten geändert werden, wenn "
+"eine Verbindung zum Internet besteht\n"
 "</p>\n"
 "<b>Zeitleiste:</b>\n"
-"<p>Hier bekommt man eine Balkenansicht der Sender pr&auml;sentiert, wobei man den sichtbaren Zeitumfang einstellen kann.<br>\n"
-"In den Balken sieht man die Titel der jeweiligen Sendung. Der Zeitbalken beginnt in der vollen halben Stunde vor &quot;Jetzt&quot;. Ein feiner roter Strich zeigt die aktuelle Zeitposition an.<br>Programmierte Sendungen werden au&szlig;erdem farblich hervorgehoben.\n"
+"<p>Hier bekommt man eine Balkenansicht der Sender präsentiert, wobei man den "
+"sichtbaren Zeitumfang einstellen kann.<br>\n"
+"In den Balken sieht man die Titel der jeweiligen Sendung. Der Zeitbalken "
+"beginnt in der vollen halben Stunde vor \"Jetzt\". Ein feiner roter Strich "
+"zeigt die aktuelle Zeitposition an.<br>Programmierte Sendungen werden "
+"außerdem farblich hervorgehoben.\n"
 "</p>\n"
-"<b>Einstellungen f&uuml;r AutoTimer:</b>\n"
-"<p>Ein Mausklick auf  |<input type=\"radio\"> <i>Ja</i> | oder |<input type=\"radio\" checked> <i>Nein</i> | aktiviert oder deaktiviert die AutoTimer-Funktion. Hier bestimmt man auch wie oft der AutorTimer in den EPG-Daten nach den <i>Suchbegriffen</i> Ausschau halten soll.<br>\n"
-"Die Lebenszeit einer Aufnahme bestimmt man indem ein Wert zwischen 0 und 99 eingetr&auml;gt (99 verf&auml;llt nie). Der Wert bezieht sich dann auf den Tag, an dem die Aufnahme gemacht wurde. Sind die angegebenen Tage bereits verfallen, wenn beim VDR eine Aufnahme ansteht, so kann im Falle von Speicherknappheit die betreffende Aufnahme vom VDR gel&ouml;scht werden. Die am l&auml;ngsten abgelaufene Aufnahme wird zuerst gel&ouml;scht. Man bestimmt hier also, mit welcher Lebenszeitangabe der AutoTimer sp&auml;ter eine Aufnahme macht.<br>\n"
-"Die Priorit&auml;t bestimmt, wer im Falle eines Zeitkonfliktes den Vorrang bekommt. Die h&ouml;here Priorit&auml;t kommt dann zur Ausf&uuml;hrung. <br>\n"
-"Ein AutoTimer sollte also einen h&ouml;heren Wert zugewiesen bekommen, als die normalen Aufnahmen. Schlie&szlig;lich sucht der AutoTimer in der Regel nach Sendungen, die einem wichtig sind.</p>\n"
-"<b>Einstellungen f&uuml;r Timer:</b>\n"
-"<p>Priorit&auml;t und Lebenszeit haben die gleiche Bedeutung, wie vorher bei den AutoTimern beschrieben, gelten aber eben f&uuml;r die von Hand erstellten Timer.\n"
+"<b>Einstellungen für AutoTimer:</b>\n"
+"<p>Ein Mausklick auf  |<input type=\"radio\"> <i>Ja</i> | oder |<input type="
+"\"radio\" checked> <i>Nein</i> | aktiviert oder deaktiviert die AutoTimer-"
+"Funktion. Hier bestimmt man auch wie oft der AutorTimer in den EPG-Daten "
+"nach den <i>Suchbegriffen</i> Ausschau halten soll.<br>\n"
+"Die Lebenszeit einer Aufnahme bestimmt man indem ein Wert zwischen 0 und 99 "
+"eingeträgt (99 verfällt nie). Der Wert bezieht sich dann auf den Tag, an dem "
+"die Aufnahme gemacht wurde. Sind die angegebenen Tage bereits verfallen, "
+"wenn beim VDR eine Aufnahme ansteht, so kann im Falle von Speicherknappheit "
+"die betreffende Aufnahme vom VDR gelöscht werden. Die am längsten "
+"abgelaufene Aufnahme wird zuerst gelöscht. Man bestimmt hier also, mit "
+"welcher Lebenszeitangabe der AutoTimer später eine Aufnahme macht.<br>\n"
+"Die Priorität bestimmt, wer im Falle eines Zeitkonfliktes den Vorrang "
+"bekommt. Die höhere Priorität kommt dann zur Ausführung. <br>\n"
+"Ein AutoTimer sollte also einen höheren Wert zugewiesen bekommen, als die "
+"normalen Aufnahmen. Schließlich sucht der AutoTimer in der Regel nach "
+"Sendungen, die einem wichtig sind.</p>\n"
+"<b>Einstellungen für Timer:</b>\n"
+"<p>Priorität und Lebenszeit haben die gleiche Bedeutung, wie vorher bei den "
+"AutoTimern beschrieben, gelten aber eben für die von Hand erstellten Timer.\n"
 "</p>\n"
 "\n"
-"<b>Einstellungen f&uuml;r das Streamdevice:</b>\n"
-"<p>Neben Port und Bandbreite, mu&szlig; hier auch das Videoverzeichnis von VDR eingetragen werden.\n"
+"<b>Einstellungen für das Streamdevice:</b>\n"
+"<p>Neben Port und Bandbreite, muß hier auch das Videoverzeichnis von VDR "
+"eingetragen werden.\n"
 "</p>\n"
 "\n"
 "<b>Die selektive Kanalwahl:</b>\n"
-"<p>Ein Mausklick auf  |<input type=\"radio\"> <i>Ja</i> | oder |<input type=\"radio\" checked> <i>Nein</i> | rechts neben den gew&uuml;nschten Eintr&auml;gen, aktiviert oder deaktiviert die &quot;selektiven&quot; Kan&auml;le f&uuml;r das jeweilige Hauptfenster.<br>\n"
-"So kann man die genannten Einzelansichten auf die gew&auml;hlten Kan&auml;le beschr&auml;nken, was &Uuml;bersichtlichkeit und Seitenaufbau g&uuml;nstig beeinflu&szlig;t.<br>\n"
-"Die Auswahl der Kan&auml;le erfolgt nach Auswahl eines oder mehrerer Kan&auml;le im linken Fenster (STRG-Taste gedr&uuml;ckt halten und alle Kan&auml;le die man hinzuf&uuml;gen will anklicken), durch &Uuml;bertragung in das rechte Fenster. <br>Mit den Kn&ouml;pfen sind beide Richtungen m&ouml;glich.\n"
+"<p>Ein Mausklick auf  |<input type=\"radio\"> <i>Ja</i> | oder |<input type="
+"\"radio\" checked> <i>Nein</i> | rechts neben den gewünschten Einträgen, "
+"aktiviert oder deaktiviert die \"selektiven\" Kanäle für das jeweilige "
+"Hauptfenster.<br>\n"
+"So kann man die genannten Einzelansichten auf die gewählten Kanäle "
+"beschränken, was Übersichtlichkeit und Seitenaufbau günstig beeinflußt.<br>\n"
+"Die Auswahl der Kanäle erfolgt nach Auswahl eines oder mehrerer Kanäle im "
+"linken Fenster (STRG-Taste gedrückt halten und alle Kanäle die man "
+"hinzufügen will anklicken), durch Übertragung in das rechte Fenster. <br>Mit "
+"den Knöpfen sind beide Richtungen möglich.\n"
 "</p>\n"
 
-#: ../template/i18n.pl:117
-msgid "No help available yet. For adding or changing text please contact mail@andreas.vdr-developer.org."
-msgstr "Bisher keine Hilfe vorhanden. Zum Hinzuf&uuml;gen oder &Auml;ndern eines Textes bitte an mail@andreas.vdr-developer.org wenden."
+#: ../template/i18n.pl:58
+msgid ""
+"No help available yet. For adding or changing text please contact "
+"mail@andreas.vdr-developer.org."
+msgstr ""
+"Bisher keine Hilfe vorhanden. Zum Hinzufügen oder Ändern eines Textes bitte "
+"an mail@andreas.vdr-developer.org wenden."
 
+#~ msgid "January"
+#~ msgstr "Januar"
+
+#~ msgid "February"
+#~ msgstr "Februar"
+
+#~ msgid "March"
+#~ msgstr "März"
+
+#~ msgid "April"
+#~ msgstr "April"
+
+#~ msgid "May"
+#~ msgstr "Mai"
+
+#~ msgid "June"
+#~ msgstr "Juni"
+
+#~ msgid "July"
+#~ msgstr "Juli"
+
+#~ msgid "August"
+#~ msgstr "August"
+
+#~ msgid "September"
+#~ msgstr "September"
+
+#~ msgid "October"
+#~ msgstr "Oktober"
+
+#~ msgid "November"
+#~ msgstr "November"
+
+#~ msgid "December"
+#~ msgstr "Dezember"
+
+#~ msgid ""
+#~ "<b>Timer</b>\n"
+#~ "<p>VDR timer overview.</p>\n"
+#~ "<p>Clicking on |<img src=\"bilder/poempl_gruen.gif\" alt=\"on\" valign="
+#~ "\"center\"> <i>Yes</i> | or |<img src=\"bilder/poempl_grau.gif\" alt=\"off"
+#~ "\" valign=\"center\"> <i>No</i> | in the column <i>Active</i>, switches "
+#~ "the timer on or off.<br>\n"
+#~ "<img src=\"bilder/poempl_gelb.gif\" alt=\"problem\" valign=\"center\"> "
+#~ "indicates overlapping timers. That's uncritical, as long as you have "
+#~ "enough DVB cards for the parallel recordings.<br>\n"
+#~ "To edit an entry, click on <img src=\"bilder/edit.gif\" alt=\"Stift\" "
+#~ "valign=\"center\">, to delete a timer use <img src=\"bilder/delete.gif\" "
+#~ "alt=\"Radiergummi\" valign=\"center\">. To delete more than one timer at "
+#~ "once, select them using the checkboxes (<input type=\"checkbox\" "
+#~ "checked>) and click on <i>Delete selected timers</i> at the end of the "
+#~ "list.\n"
+#~ "</p>"
+#~ msgstr ""
+#~ "<b>Timer</b>\n"
+#~ "<p>Übersicht über alle Timer im VDR.</p>\n"
+#~ "<p>Ein Mausklick auf  |<img src=\"bilder/poempl_gruen.gif\" alt=\"on\" "
+#~ "valign=\"center\"> <i>Ja</i> | oder |<img src=\"bilder/poempl_grau.gif\" "
+#~ "alt=\"off\" valign=\"center\"> <i>Nein</i> | in der Spalte <i>Aktiv</i>, "
+#~ "schaltet den jeweiligen Timer an oder aus.<br>\n"
+#~ "<img src=\"bilder/poempl_gelb.gif\" alt=\"problem\" valign=\"center\"> "
+#~ "zeigt an, daß es eine Überschneidung gibt. Das ist unkritisch, solange es "
+#~ "für jeden Timer eine Karte gibt, um die Aufnahme durchzuführen.<br>\n"
+#~ "Um einen Eintrag zu bearbeiten, klicken Sie auf das Symbol <img src="
+#~ "\"bilder/edit.gif\" alt=\"Stift\" valign=\"center\">, zum Löschen auf "
+#~ "<img src=\"bilder/delete.gif\" alt=\"Radiergummi\" valign=\"center\">. "
+#~ "Wenn Sie mehrere Auto-Timer-Einträge auf einmal löschen möchten, "
+#~ "Aktivieren Sie die Kästchen (<input type=\"checkbox\" checked>) rechts "
+#~ "neben den gewünschten Einträgen und klicken Sie abschließend auf "
+#~ "<i>Ausgewählte Timer löschen</i> am Ende der Liste.\n"
+#~ "</p>"
+
+#~ msgid ""
+#~ "<p>No help available for <b>Add Timer:</b> yet. For adding text please "
+#~ "contact mail@andreas.vdr-developer.org.\t\n"
+#~ "</p>"
+#~ msgstr ""
+#~ "<b>Neuer Timer:</b>\n"
+#~ "<p>Dazu müßen die ensprechenden Felder ausgefüllt werden. Wichtig ist "
+#~ "auch nach der Programmierung einen Blick auf alle Timer zu werfen, um "
+#~ "evtl. auftretende Überschneidungen oder andere Probleme zu vermeiden.</p>"
+
+#~ msgid ""
+#~ "<b>AutoTimer:</b><br>\n"
+#~ "<p>An overview of all AutoTimers</p>\n"
+#~ "<p>Click <i>Yes</i> or <i>No</i> in the <i>Active</i> column to (de-)"
+#~ "activate that AutoTimer.</p>\n"
+#~ "<p>Use <img src=\"bilder/edit.gif\" alt=\"pen\" valign=\"center\"> for "
+#~ "editing and <img src=\"bilder/delete.gif\" alt=\"Rubber\" valign=\"center"
+#~ "\"> for deleting an AutoTimer. If you want to delete multiple AutoTimers "
+#~ "all at once, you have to check the boxes (<input type=\"checkbox\" "
+#~ "checked>) on the right and finally click <i>Delete selected AutoTimers</"
+#~ "i>.</p>"
+#~ msgstr ""
+#~ "<b>AutoTimer:</b><br>\n"
+#~ "<p>Eine Übersicht aller Auto-Timer-Einträge.</p>\n"
+#~ "<p>Ein Mausklick auf  |<img src=\"bilder/poempl_gruen.gif\" alt=\"on\" "
+#~ "valign=\"center\"> <i>Ja</i> | oder |<img src=\"bilder/poempl_rot.gif\" "
+#~ "alt=\"off\" valign=\"center\"> <i>Nein</i> | in der Spalte <i>Aktiv</i>, "
+#~ "schaltet den jeweiligen Eintrag an oder aus.</p>\n"
+#~ "<p>Um einen Eintrag zu bearbeiten, klicken Sie auf das Symbol <img src="
+#~ "\"bilder/edit.gif\" alt=\"Stift\" valign=\"center\">, zum Löschen auf "
+#~ "<img src=\"bilder/delete.gif\" alt=\"Radiergummi\" valign=\"center\">. "
+#~ "Wenn Sie mehrere Auto-Timer-Einträge auf einmal löschen möchten, "
+#~ "Aktivieren Sie die Kästchen (<input type=\"checkbox\" checked>) rechts "
+#~ "neben den gewünschten Einträgen und klicken Sie abschließend auf "
+#~ "<i>Ausgewählte AutoTimer löschen</i> am Ende der Liste.</p>"
+
+#~ msgid ""
+#~ "<b>Edit AutoTimer:</b><br>\n"
+#~ "<p>AutoTimer is a key feature of VDRAdmin. An AutoTimer consists of one "
+#~ "or more search terms and some other settings, that are looked for "
+#~ "regularly in the Electronic Program Guide (EPG). On match AutoTimer adds "
+#~ "a timer in VDR automatically for that broadcast. That's very comfortable "
+#~ "for irregularly broadcasted series or movies you don't want to miss.</p>\n"
+#~ "<p>Here you can set an AutoTimer. It's required to specify at least one "
+#~ "search item. Please have a look at <i>Search Items</i> if you need more "
+#~ "information on how to find reasonable search items and how to avoid "
+#~ "unwanted recordings.</p>\n"
+#~ "<b>AutoTimer Active:</b><br>\n"
+#~ "<p><i>Yes</i> activates and <i>No</i> deactivates this AutoTimer. Please "
+#~ "note that VDR timers already added by VDRAdmin are not deleted if you "
+#~ "deactivate this AutoTimer.</p>\n"
+#~ "<b>Search Items:</b><br>\n"
+#~ "<p>Choosing the right search items decides whether only the wanted "
+#~ "broadcast or broadcast having similar names or nothing gets recorded.</"
+#~ "p>\n"
+#~ "<p>Case doesn't matter, \"X-Files\" matches anything \"x-files\" will "
+#~ "match. You can set multiple search items by separating them with spaces. "
+#~ "Only broadcasts will match if they contain all items.</p>\n"
+#~ "<p>You'd better only use letters and numbers for search items, as EPGs "
+#~ "often miss colons, brackets and other characters.</p>\n"
+#~ "<p>Experts can also use regular expressions, but you have get needed "
+#~ "information from the VDRAdmin sources (undocumented feature).</p>"
+#~ msgstr ""
+#~ "<b>Neuen AutoTimer anlegen/bearbeiten:</b><br>\n"
+#~ "<p>Der AutoTimer ist eine der zentralen Funktionen VDR Admins. Ein Auto-"
+#~ "Timer-Eintrag besteht hauptsächlich aus einem oder mehreren "
+#~ "Suchbegriffen, nach denen in regelmäßigen Abständen der elektronische "
+#~ "Programmführer (EPG) durchsucht wird. Bei Übereinstimmung der "
+#~ "Suchbegriffe (und übrigen Parameter wie Uhrzeit und Kanal) programmiert "
+#~ "AutoTimer selbständig eine Aufnahme (Timer) für die gefundene Sendung "
+#~ "&#150; das ist besonders für (un)regelmäßig gesendete Serien interessant, "
+#~ "oder aber für Filme, die Sie keinesfalls verpassen wollen.</p>\n"
+#~ "<p>In dieser Maske können Sie einen neuen Auto-Timer-Eintrag anlegen. Sie "
+#~ "müssen in jedem Fall einen oder mehrere Suchbegriffe angeben, damit es "
+#~ "überhaupt zu Übereinstimmungen kommen kann. Details, welche Suchbegriffe "
+#~ "Sie wählen sollten und wie Sie unsinnige Aufnahmen vermeiden, finden Sie "
+#~ "in der Hilfe zu <i>Suchbegriffe</i>.</p>\n"
+#~ "<b>AutoTimer Aktiv:</b><br>\n"
+#~ "<p>Mit <i>ja</i> schalten Sie den AutoTimer scharf, der elektronische "
+#~ "Programmführer (EPG) wird dann regelmäßig nach <i>Suchbegriffe</i> "
+#~ "durchsucht und ein neuer Timer-Eintrag programmiert, wenn es eine "
+#~ "Übereinstimmung mit <i>Suchbegriffe</i> sowie den übrigen Parametern gibt."
+#~ "</p>\n"
+#~ "<p>Mit <i>nein</i> schalten Sie den Auto-Timer-Eintrag ab, ohne ihn zu "
+#~ "löschen. Dies lässt bereits automatisch programmierte Aufnahmen (Timer) "
+#~ "jedoch unangetastet &#150; sie müssen gegebenenfalls von Hand im "
+#~ "<i>Timer</i>-Menü gelöscht werden.</p>\n"
+#~ "<b>Suchbegriffe:</b><br>\n"
+#~ "<p>Die Wahl der Suchbegriffe hat entscheidenden Einfluss darauf, ob nur "
+#~ "die gewünschte Sendung, alle mit ähnlichem Namen oder gar nichts "
+#~ "programmiert wird.</p>\n"
+#~ "<p>Zunächst einmal spielt Groß-Kleinschreibung keine Rolle, die "
+#~ "Suchbegriffe \"Akte X\" liefern genau die selben Treffer wie \"akte x\". "
+#~ "Mehrere Suchbegriffe werden mit Leerzeichen getrennt, und es müssen stets "
+#~ "alle angegebenen Suchbegriffe bei der gleichen Sendung gefunden werden.</"
+#~ "p>\n"
+#~ "<p>So finden die Suchbegriffe \"Akte X\" die Sendungen \"Akte X - Die "
+#~ "unheimlichen Fälle des FBI\" genauso wie \"Aktenzeichen XY ungelöst\" und "
+#~ "\"Extrem Aktiv\", jedoch nicht die Sendung \"Die Akte Jane\" (dort ist "
+#~ "kein \"X\" enthalten).</p>\n"
+#~ "<p>Sie sollten möglichst nur Buchstaben und Zahlen als Suchbegriffe "
+#~ "verwenden, erfahrungsgemäß fehlen im elektronischen Programmführer (EPG) "
+#~ "gerne mal ein Punkt, Klammern oder sonstige Zeichen.</p>\n"
+#~ "<p>Es ist auch möglich, reguläre Ausdrücke zu verwenden &#150; Experten "
+#~ "mögen doch bitte die nötigen Infos dem Quelltext entnehmen (undocumented "
+#~ "feature).\n"
+#~ "</p>"
+
+#~ msgid ""
+#~ "<p>No help available for <b>Recordings:</b>. For adding text please "
+#~ "contact mail@andreas.vdr-developer.org.\t\n"
+#~ "</p>"
+#~ msgstr ""
+#~ "<b>Aufnahmen:</b>\n"
+#~ "<p>Auf dieser Seite sieht man alle Aufnahmen, die sich auf dem "
+#~ "angeschlossenen VDR-Rechner befinden. Hier kann man Namen und Verzeichnis "
+#~ "der Aufnahmen ändern (<img src=\"bilder/edit.gif\" alt=\"pen\" valign="
+#~ "\"center\">) oder Aufnahmen löschen (<img src=\"bilder/delete.gif\" alt="
+#~ "\"Rubber\" valign=\"center\">).</p>"

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
+	<title><%! Timer !%></title>
+	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
+	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+</head>
+
+<body id="timer_list">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="help">
+		<tr height="30">
+			<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
+			<td height="30" valign="middle" background="bilder/uebersicht_oben.gif">
+				<h2><%! Timer !%></h2>
+			</td>
+			<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0" /></td>
+		</tr>
+		<tr>
+			<td width="30" background="bilder/uebersicht_links.gif"></td>
+			<td background="bilder/uebersicht_mitte.gif">
+				<p>Here you will find a listing of timers known to VDR.</p>
+				<p>On top you will find a chart showing a day's timers graphically. This provides an quick overview on what's going on at the specified day and helps you in finding conflicting timers. Moving the mouse cursor above any timer box will display a tooltip containing the timer's title, priority, lifetime and duration.</p>
+				<p>Below the chart you'll find the timers list showing you some information on the timers. You can change the list's sorting by clicking the columns heading.</p>
+				<p>For each timer you have the following options:
+					<dl>
+						<dt>Set its state</dt>
+						<dd>By clicking on "Yes", "No", "VPS" or "Auto" in the "Active" column.</dd>
+						<dt>Quickly view its priority and lifetime</dt>
+						<dd>By pointing the mouse cursor to the timer's title.</dd>
+						<dt>View its EPG entry</dt>
+						<dd>Timers that use "AutoTimer Checking=Transmission Identification" will show you the corresponding EPG entry if you click on the timer's title.</dd>
+						<dt>Edit the timer</dt>
+						<dd>You can edit a timer by clicking <img src="bilder/edit.gif" alt="Stift" />.</dd>
+						<dt>Delete the timer</dt>
+						<dd>To delete a timer you click <img src="bilder/delete.gif" alt="Radiergummi" />.</dd>
+					</dl>
+				</p>
+				<p>Each timer's state is indicated by differently coloured boxes (in the chart view) or images (in the list view):<br />
+					<span class="col_ok">&nbsp;&nbsp;&nbsp;</span> / <img src="bilder/poempl_gruen.gif" alt="on" align="absmiddle" /> Timer is OK and will record.<br />
+					<span class="col_collision">&nbsp;&nbsp;&nbsp;</span> / <img src="bilder/poempl_gelb.gif" alt="problem" align="absmiddle" /> Timer conflicts with other timers. That's not critical, as long as you have enough DVB cards for the parallel recordings.<br />
+					<span class="col_conflict">&nbsp;&nbsp;&nbsp;</span> / <img src="bilder/poempl_rot.gif" alt="impossible" align="absmiddle" /> Timer is critical and will most likely <b>not</b> record.<br />
+					<span class="col_inactive">&nbsp;&nbsp;&nbsp;</span> / <img src="bilder/poempl_grau.gif" alt="inactive" align="absmiddle" /> Timer is not active.
+				</p>
+				<p>In addition to these functions you can add a new timer by clicking "New Timer" at the top and you can delete a number of timers at once by checking the box in the last column of those timers and clicking "Delete Selected Timers".</p>
+			</td>
+			<td width="30" background="bilder/uebersicht_rechts.gif"></td>
+		</tr>
+		<tr>
+			<td width="30"><img src="bilder/uebersicht_unten_links.gif" alt="" width="30" height="30" border="0" /></td>
+			<td background="bilder/uebersicht_unten.gif"></td>
+			<td width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0" /></td>
+		</tr>
+	</table>
+</body>
+
+</html>

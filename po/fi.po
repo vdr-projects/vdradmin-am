@@ -15,211 +15,255 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-0.97-AM3.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-05-09 12:52+0200\n"
+"POT-Creation-Date: 2005-06-01 12:56+0200\n"
 "Last-Translator: FULL NAME <EMAIL>\n"
 "Language-Team: LANGUAGE <LL.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: ../template/default/noperm.html:4 ../template/default/index.html:5
+#: ../template/default/timer_new.html:5 ../template/default/left.html:5
+#: ../template/default/toolbar.html:5 ../template/default/rc.html:5
+#: ../template/default/noauth.html:4 ../template/default/at_timer_list.html:5
+#: ../template/default/prog_summary.html:6 ../template/default/config.html:4
+#: ../template/default/timer_list.html:5 ../template/default/prog_list.html:5
+#: ../template/default/error.html:5 ../template/default/tv.html:6
+#: ../template/default/prog_detail.html:5 ../template/default/rec_list.html:5
+#: ../template/default/tv_flash.html:5
+#: ../template/default/prog_timeline.html:6
+#: ../template/default/prog_list2.html:5 ../template/default/rec_edit.html:5
+#: ../template/default/help_timer_list.html:5
+#: ../template/default/help_timer_new.html:8
+#: ../template/default/help_at_timer_list.html:5
+#: ../template/default/help_at_timer_new.html:11
+#: ../template/default/help_rec_list.html:5
+#: ../template/default/help_config.html:8
+#: ../template/default/at_timer_new.html:5
+msgid "charset=ISO-8859-1"
+msgstr "charset=ISO-8859-1"
+
 #: ../template/default/index.html:18
 msgid "Your Browser does not support frames!"
-msgstr "Selaimesi ei tue kehyksi&auml;!"
+msgstr "Selaimesi ei tue kehyksiä!"
 
 #: ../template/default/timer_new.html:6 ../template/default/timer_new.html:45
 msgid "Create New Timer"
 msgstr "Luo uusi ajastin"
 
 #: ../template/default/timer_new.html:6 ../template/default/timer_new.html:45
+#: ../template/default/help_timer_new.html:9
+#: ../template/default/help_timer_new.html:19
 msgid "Edit Timer"
 msgstr "Muokkaa ajastinta"
 
-#: ../template/default/timer_new.html:50 ../template/default/at_new.html:20
-#: ../template/default/at_timer_list.html:31
-#: ../template/default/config.html:20 ../template/default/timer_list.html:46
+#: ../template/default/timer_new.html:50
+#: ../template/default/at_timer_list.html:30
+#: ../template/default/config.html:20 ../template/default/timer_list.html:40
 #: ../template/default/rec_list.html:26
+#: ../template/default/at_timer_new.html:20
 msgid "Help"
 msgstr "Opaste"
 
-#: ../template/default/timer_new.html:67
+#: ../template/default/timer_new.html:66
 msgid "Timer Active:"
 msgstr "Aktiivinen:"
 
-#: ../template/default/timer_new.html:69 ../template/default/at_new.html:39
-#: ../template/default/at_new.html:43 ../template/default/at_new.html:145
-#: ../template/default/at_timer_list.html:110
-#: ../template/default/config.html:114 ../template/default/config.html:175
-#: ../template/default/config.html:267 ../template/default/config.html:276
-#: ../template/default/config.html:335 ../template/default/config.html:344
-#: ../template/default/config.html:353 ../template/default/config.html:362
-#: ../template/default/timer_list.html:295
+#: ../template/default/timer_new.html:68
+#: ../template/default/at_timer_list.html:109
+#: ../template/default/config.html:146 ../template/default/config.html:207
+#: ../template/default/config.html:299 ../template/default/config.html:314
+#: ../template/default/config.html:357 ../template/default/config.html:378
+#: ../template/default/config.html:406 ../template/default/config.html:415
+#: ../template/default/config.html:424 ../template/default/config.html:433
+#: ../template/default/timer_list.html:284
+#: ../template/default/at_timer_new.html:39
+#: ../template/default/at_timer_new.html:43
+#: ../template/default/at_timer_new.html:145
 msgid "Yes"
-msgstr "Kyll&auml;"
+msgstr "Kyllä"
 
-#: ../template/default/timer_new.html:70 ../template/default/at_new.html:40
-#: ../template/default/at_new.html:44 ../template/default/at_new.html:146
-#: ../template/default/at_timer_list.html:113
-#: ../template/default/config.html:115 ../template/default/config.html:176
-#: ../template/default/config.html:268 ../template/default/config.html:277
-#: ../template/default/config.html:336 ../template/default/config.html:345
-#: ../template/default/config.html:354 ../template/default/config.html:363
-#: ../template/default/timer_list.html:296
+#: ../template/default/timer_new.html:69
+#: ../template/default/at_timer_list.html:112
+#: ../template/default/config.html:147 ../template/default/config.html:208
+#: ../template/default/config.html:300 ../template/default/config.html:315
+#: ../template/default/config.html:358 ../template/default/config.html:379
+#: ../template/default/config.html:407 ../template/default/config.html:416
+#: ../template/default/config.html:425 ../template/default/config.html:434
+#: ../template/default/timer_list.html:285
+#: ../template/default/at_timer_new.html:40
+#: ../template/default/at_timer_new.html:44
+#: ../template/default/at_timer_new.html:146
 msgid "No"
 msgstr "Ei"
 
-#: ../template/default/timer_new.html:76
-msgid "Auto Timer Checking:"
+#: ../template/default/timer_new.html:75
+msgid "AutoTimer Checking:"
 msgstr "Automaattisen ajastimen tarkistus:"
 
-#: ../template/default/timer_new.html:79
+#: ../template/default/timer_new.html:78
 msgid "Transmission Identification"
-msgstr "L&auml;hetteen tunniste"
+msgstr "Lähetteen tunniste"
 
-#: ../template/default/timer_new.html:81 ../template/default/rec_list.html:63
+#: ../template/default/timer_new.html:80 ../template/default/rec_list.html:61
 msgid "Time"
 msgstr "Aika"
 
-#: ../template/default/timer_new.html:82 ../template/default/tv.html:184
+#: ../template/default/timer_new.html:81 ../template/default/tv.html:174
 msgid "off"
 msgstr "Pois"
 
-#: ../template/default/timer_new.html:88 ../template/default/at_new.html:84
-#: ../template/default/prog_list.html:23
+#: ../template/default/timer_new.html:87 ../template/default/prog_list.html:23
 #: ../template/default/prog_list2.html:29
+#: ../template/default/at_timer_new.html:84
 msgid "Channel:"
 msgstr "Kanava:"
 
-#: ../template/default/timer_new.html:100
+#: ../template/default/timer_new.html:99
 msgid "Day Of Recording:"
-msgstr "P&auml;iv&auml;:"
+msgstr "Päivä:"
 
-#: ../template/default/timer_new.html:104 ../template/default/at_new.html:72
-#: ../template/i18n.pl:3
+#: ../template/default/timer_new.html:103
+#: ../template/default/at_timer_new.html:72
 msgid "Monday"
 msgstr "Maanantai"
 
-#: ../template/default/timer_new.html:105 ../template/default/at_new.html:73
-#: ../template/i18n.pl:4
+#: ../template/default/timer_new.html:104
+#: ../template/default/at_timer_new.html:73
 msgid "Tuesday"
 msgstr "Tiistai"
 
-#: ../template/default/timer_new.html:106 ../template/default/at_new.html:74
-#: ../template/i18n.pl:5
+#: ../template/default/timer_new.html:105
+#: ../template/default/at_timer_new.html:74
 msgid "Wednesday"
 msgstr "Keskiviikko"
 
-#: ../template/default/timer_new.html:107 ../template/default/at_new.html:75
-#: ../template/i18n.pl:6
+#: ../template/default/timer_new.html:106
+#: ../template/default/at_timer_new.html:75
 msgid "Thursday"
 msgstr "Torstai"
 
-#: ../template/default/timer_new.html:108 ../template/default/at_new.html:76
-#: ../template/i18n.pl:7
+#: ../template/default/timer_new.html:107
+#: ../template/default/at_timer_new.html:76
 msgid "Friday"
 msgstr "Perjantai"
 
-#: ../template/default/timer_new.html:109 ../template/default/at_new.html:77
-#: ../template/i18n.pl:8
+#: ../template/default/timer_new.html:108
+#: ../template/default/at_timer_new.html:77
 msgid "Saturday"
 msgstr "Lauantai"
 
-#: ../template/default/timer_new.html:110 ../template/default/at_new.html:78
-#: ../template/i18n.pl:2
+#: ../template/default/timer_new.html:109
+#: ../template/default/at_timer_new.html:78
 msgid "Sunday"
 msgstr "Sunnuntai"
 
-#: ../template/default/timer_new.html:116
+#: ../template/default/timer_new.html:115
 msgid "Start Time:"
 msgstr "Aloitusaika:"
 
-#: ../template/default/timer_new.html:121
-#: ../template/default/timer_new.html:132 ../template/default/at_new.html:102
-#: ../template/default/at_new.html:113
+#: ../template/default/timer_new.html:120
+#: ../template/default/timer_new.html:131
 #: ../template/default/prog_summary.html:17
 #: ../template/default/prog_summary.html:22
-#: ../template/default/prog_list.html:61
+#: ../template/default/prog_list.html:62
 #: ../template/default/prog_timeline.html:71
 #: ../template/default/prog_timeline.html:84
-#: ../template/default/prog_timeline.html:99
-#: ../template/default/prog_list2.html:71
+#: ../template/default/prog_timeline.html:98
+#: ../template/default/prog_list2.html:69
+#: ../template/default/at_timer_new.html:102
+#: ../template/default/at_timer_new.html:113
 msgid "o'clock"
 msgstr " "
 
-#: ../template/default/timer_new.html:127
+#: ../template/default/timer_new.html:126
 msgid "End Time:"
 msgstr "Lopetusaika:"
 
-#: ../template/default/timer_new.html:138 ../template/default/at_new.html:119
-#: ../template/default/at_timer_list.html:133
-#: ../template/default/config.html:188 ../template/default/config.html:233
-#: ../template/default/timer_list.html:316
+#: ../template/default/timer_new.html:137
+#: ../template/default/at_timer_list.html:131
+#: ../template/default/config.html:220 ../template/default/config.html:259
+#: ../template/default/timer_list.html:143
+#: ../template/default/timer_list.html:148
+#: ../template/default/timer_list.html:304
+#: ../template/default/at_timer_new.html:119
 msgid "Priority:"
 msgstr "Prioriteetti:"
 
-#: ../template/default/timer_new.html:144 ../template/default/at_new.html:127
-#: ../template/default/at_timer_list.html:133
-#: ../template/default/config.html:194 ../template/default/config.html:227
-#: ../template/default/timer_list.html:316
+#: ../template/default/timer_new.html:143
+#: ../template/default/at_timer_list.html:131
+#: ../template/default/config.html:226 ../template/default/config.html:265
+#: ../template/default/timer_list.html:143
+#: ../template/default/timer_list.html:148
+#: ../template/default/timer_list.html:304
+#: ../template/default/at_timer_new.html:127
 msgid "Lifetime:"
 msgstr "Elinaika:"
 
-#: ../template/default/timer_new.html:150
+#: ../template/default/timer_new.html:149
 msgid "Title of Recording:"
 msgstr "Tallenteen nimi:"
 
-#: ../template/default/timer_new.html:156
+#: ../template/default/timer_new.html:155
 msgid "Summary:"
 msgstr "Tallenteen kuvaus:"
 
-#: ../template/default/timer_new.html:169 ../template/default/at_new.html:166
-#: ../template/default/config.html:403
+#: ../template/default/timer_new.html:167 ../template/default/config.html:474
+#: ../template/default/at_timer_new.html:166
 msgid "Save"
 msgstr "Tallenna"
 
-#: ../template/default/timer_new.html:170 ../template/default/at_new.html:167
-#: ../template/default/rec_edit.html:64
+#: ../template/default/timer_new.html:168 ../template/default/rec_edit.html:59
+#: ../template/default/at_timer_new.html:167
 msgid "Cancel"
 msgstr "Peru"
 
 #: ../template/default/left.html:34 ../template/default/prog_summary.html:7
-#: ../template/default/prog_timeline.html:7 ../template/i18n.pl:27
+#: ../template/default/prog_timeline.html:7 ../template/i18n.pl:2
 msgid "What's On Now?"
 msgstr "Menossa nyt"
 
 #: ../template/default/left.html:38 ../template/default/prog_list2.html:6
 #: ../template/default/prog_list2.html:25
 msgid "Playing Today"
-msgstr "Ohjelmisto t&auml;n&auml;&auml;n"
+msgstr "Ohjelmisto tänään"
 
-#: ../template/default/left.html:42 ../template/default/config.html:141
-#: ../template/i18n.pl:29
+#: ../template/default/left.html:42 ../template/default/config.html:173
+#: ../template/i18n.pl:4
 msgid "Timeline"
 msgstr "Aikajana"
 
 #: ../template/default/left.html:46 ../template/default/prog_list.html:6
-#: ../template/i18n.pl:30
+#: ../template/i18n.pl:5
 msgid "Channels"
 msgstr "Kanavat"
 
-#: ../template/default/left.html:50 ../template/default/config.html:222
+#: ../template/default/left.html:50 ../template/default/config.html:254
 #: ../template/default/timer_list.html:6
-#: ../template/default/timer_list.html:30
+#: ../template/default/timer_list.html:25
+#: ../template/default/help_timer_list.html:6
+#: ../template/default/help_timer_list.html:16
 msgid "Timer"
 msgstr "Ajastimet"
 
 #: ../template/default/left.html:54 ../template/default/at_timer_list.html:6
 #: ../template/default/at_timer_list.html:15
-#: ../template/default/config.html:168
-msgid "Auto Timer"
+#: ../template/default/config.html:200
+#: ../template/default/help_at_timer_list.html:6
+#: ../template/default/help_at_timer_list.html:16
+msgid "AutoTimer"
 msgstr "Automaattiset ajastimet"
 
 #: ../template/default/left.html:58 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:15 ../template/i18n.pl:32
+#: ../template/default/rec_list.html:15
+#: ../template/default/help_rec_list.html:6
+#: ../template/default/help_rec_list.html:16 ../template/i18n.pl:7
 msgid "Recordings"
 msgstr "Tallenteet"
 
 #: ../template/default/left.html:62 ../template/default/config.html:5
-#: ../template/default/config.html:15
+#: ../template/default/config.html:15 ../template/default/help_config.html:9
+#: ../template/default/help_config.html:19
 msgid "Configuration"
 msgstr "Asetukset"
 
@@ -229,79 +273,15 @@ msgstr "Kauko-ohjain"
 
 #: ../template/default/left.html:70
 msgid "Watch TV"
-msgstr "Katso TV:t&auml;"
+msgstr "Katso TV:tä"
 
-#: ../template/default/left.html:77
+#: ../template/default/left.html:78
 msgid "Search"
 msgstr "Etsi"
 
-#: ../template/default/at_new.html:6 ../template/default/at_new.html:16
-msgid "Add New Auto Timer"
-msgstr "Lis&auml;&auml; uusi automaattinen ajastin"
-
-#: ../template/default/at_new.html:6 ../template/default/at_new.html:16
-msgid "Edit Auto Timer"
-msgstr "Muokkaa automaattista ajastinta"
-
-#: ../template/default/at_new.html:36
-msgid "Auto Timer Active:"
-msgstr "Aktiivinen:"
-
-#: ../template/default/at_new.html:41 ../template/default/at_new.html:45
-msgid "oneshot"
-msgstr "Kerran"
-
-#: ../template/default/at_new.html:52
-msgid "Search Patterns:"
-msgstr "Hakuehto:"
-
-#: ../template/default/at_new.html:60
-msgid "Search in:"
-msgstr "Hakukent&auml;t:"
-
-#: ../template/default/at_new.html:62
-msgid "Title"
-msgstr "Otsikko"
-
-#: ../template/default/at_new.html:63
-msgid "Subtitle"
-msgstr "Lyhyt kuvaus"
-
-#: ../template/default/at_new.html:64
-msgid "Description"
-msgstr "Kuvaus"
-
-#: ../template/default/at_new.html:70
-msgid "Search only on these days:"
-msgstr "Etsi valittuina p&auml;ivin&auml;:"
-
-#: ../template/default/at_new.html:87
-msgid "all"
-msgstr "Kaikki"
-
-#: ../template/default/at_new.html:97
-msgid "Starts Before:"
-msgstr "Alkaa ennen:"
-
-#: ../template/default/at_new.html:108
-msgid "Ends Before:"
-msgstr "Loppuu ennen:"
-
-#: ../template/default/at_new.html:135
-msgid "Episode:"
-msgstr "Sarjatallennus:"
-
-#: ../template/default/at_new.html:143
-msgid "Remember programmed timers:"
-msgstr "Muista ohjelmoidut ajastimet:"
-
-#: ../template/default/at_new.html:152
-msgid "Directory:"
-msgstr "Hakemisto:"
-
 #: ../template/default/noauth.html:5 ../template/default/noauth.html:11
 msgid "Authorization Required"
-msgstr "K&auml;ytt&auml;j&auml;tunnistus puutteellinen"
+msgstr "Käyttäjätunnistus puutteellinen"
 
 #: ../template/default/noauth.html:12
 msgid ""
@@ -309,72 +289,71 @@ msgid ""
 "requested. Either you supplied the wrong credentials (e.g. bad password), or "
 "your browser doesn't understand how to supply the credentials required."
 msgstr ""
-"K&auml;ytt&auml;j&auml;tunnistus ei onnistu! Tarkista sy&ouml;tt&auml;m&auml;"
-"si k&auml;ytt&auml;j&auml;tunnus/salasana."
+"Käyttäjätunnistus ei onnistu! Tarkista syöttämäsi käyttäjätunnus/salasana."
 
 #: ../template/default/at_timer_list.html:22
-msgid "New Auto Timer"
+msgid "New AutoTimer"
 msgstr "Uusi automaattinen ajastin"
 
-#: ../template/default/at_timer_list.html:44
-#: ../template/default/timer_list.html:202
+#: ../template/default/at_timer_list.html:43
+#: ../template/default/timer_list.html:193
 msgid "Active"
 msgstr "Aktiivinen"
 
-#: ../template/default/at_timer_list.html:55
-#: ../template/default/timer_list.html:213
+#: ../template/default/at_timer_list.html:54
+#: ../template/default/timer_list.html:204
 msgid "Channel"
 msgstr "Kanava"
 
-#: ../template/default/at_timer_list.html:66
-#: ../template/default/timer_list.html:235
+#: ../template/default/at_timer_list.html:65
+#: ../template/default/timer_list.html:226
 msgid "Start"
 msgstr "Aloitus"
 
-#: ../template/default/at_timer_list.html:77
-#: ../template/default/timer_list.html:246
+#: ../template/default/at_timer_list.html:76
+#: ../template/default/timer_list.html:237
 msgid "Stop"
 msgstr "Lopetus"
 
-#: ../template/default/at_timer_list.html:88
-#: ../template/default/timer_list.html:257
-#: ../template/default/rec_list.html:74
+#: ../template/default/at_timer_list.html:87
+#: ../template/default/timer_list.html:248
+#: ../template/default/rec_list.html:72
 msgid "Name"
 msgstr "Nimi"
 
-#: ../template/default/at_timer_list.html:99
-#: ../template/default/timer_list.html:268
-#: ../template/default/rec_list.html:85
+#: ../template/default/at_timer_list.html:98
+#: ../template/default/timer_list.html:259
+#: ../template/default/rec_list.html:83
 msgid "Select all/none"
-msgstr "Valitse kaikki/ei yht&auml;&auml;n"
+msgstr "Valitse kaikki/ei yhtään"
 
-#: ../template/default/at_timer_list.html:139
-#: ../template/default/timer_list.html:326
+#: ../template/default/at_timer_list.html:138
+#: ../template/default/timer_list.html:314
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: ../template/default/at_timer_list.html:144
-#: ../template/default/timer_list.html:329
+#: ../template/default/at_timer_list.html:143
+#: ../template/default/timer_list.html:317
 msgid "Delete timer?"
 msgstr "Poistetaanko ajastin?"
 
-#: ../template/default/at_timer_list.html:144
-#: ../template/default/timer_list.html:329
-#: ../template/default/rec_list.html:137
+#: ../template/default/at_timer_list.html:143
+#: ../template/default/timer_list.html:317
+#: ../template/default/rec_list.html:135
 msgid "Delete"
 msgstr "Poista"
 
-#: ../template/default/at_timer_list.html:166
+#: ../template/default/at_timer_list.html:169
 msgid "Force Update"
-msgstr "P&auml;ivit&auml;"
+msgstr "Päivitä"
 
-#: ../template/default/at_timer_list.html:178
-#: ../template/default/timer_list.html:350
+#: ../template/default/at_timer_list.html:180
+#: ../template/default/timer_list.html:340
 msgid "Delete all selected timers?"
 msgstr "Poistetaanko valitut ajastimet?"
 
-#: ../template/default/at_timer_list.html:178
-msgid "Delete Selected Auto Timers"
+#: ../template/default/at_timer_list.html:180
+msgid "Delete Selected AutoTimers"
 msgstr "Poista valitut automaattiset ajastimet"
 
 #: ../template/default/prog_summary.html:20
@@ -392,194 +371,253 @@ msgstr "nyt"
 msgid "at:"
 msgstr "kello:"
 
-#: ../template/default/prog_summary.html:43
-#: ../template/default/prog_list.html:19 ../template/default/rec_list.html:150
-#: ../template/default/prog_list2.html:52
+#: ../template/default/prog_summary.html:42
+#: ../template/default/prog_list.html:19 ../template/default/rec_list.html:148
+#: ../template/default/prog_list2.html:53
 msgid "Stream"
 msgstr "Toista"
 
 #: ../template/default/prog_summary.html:62
 msgid "more"
-msgstr "lis&auml;&auml;"
+msgstr "lisää"
 
-#: ../template/default/prog_summary.html:79
+#: ../template/default/prog_summary.html:80
 msgid "TV select"
 msgstr "katso"
 
-#: ../template/default/prog_summary.html:83
+#: ../template/default/prog_summary.html:84
 msgid "Search for other show times"
 msgstr "etsi vaihtoehtoisia esitysaikoja"
 
-#: ../template/default/prog_summary.html:87
+#: ../template/default/prog_summary.html:88
 msgid "More Information"
-msgstr "lis&auml;tietoja"
+msgstr "lisätietoja"
 
-#: ../template/default/prog_summary.html:93
+#: ../template/default/prog_summary.html:94
 msgid "Record"
 msgstr "tallenna"
 
-#: ../template/default/config.html:38
+#: ../template/default/config.html:33
 msgid "General Settings"
 msgstr "Yleiset asetukset"
 
-#: ../template/default/config.html:44
+#: ../template/default/config.html:39
 msgid "Template:"
 msgstr "Pohja:"
 
-#: ../template/default/config.html:57
+#: ../template/default/config.html:52
 msgid "Skin:"
 msgstr "Ulkoasu:"
 
-#: ../template/default/config.html:69
+#: ../template/default/config.html:64
 msgid "Login Page:"
 msgstr "Aloitussivu:"
 
-#: ../template/default/config.html:81
+#: ../template/default/config.html:74 ../template/default/config.html:353
+msgid "Gets active after restarting VDRAdmin"
+msgstr ""
+
+#: ../template/default/config.html:76
+msgid "Number of channels to use:"
+msgstr ""
+
+#: ../template/default/config.html:82
+msgid "Local net (no login required):"
+msgstr ""
+
+#: ../template/default/config.html:96
+msgid "VDR"
+msgstr ""
+
+#: ../template/default/config.html:101
 msgid "Number of DVB Cards:"
-msgstr "DVB-korttien lukum&auml;&auml;r&auml;:"
+msgstr "DVB-korttien lukumäärä:"
 
-#: ../template/default/config.html:95
+#: ../template/default/config.html:107
+#, fuzzy
+msgid "Path to recordings:"
+msgstr "VDR-tallenteiden polku:"
+
+#: ../template/default/config.html:113
+msgid "Path to configuration files:"
+msgstr ""
+
+#: ../template/default/config.html:127
 msgid "Identification"
-msgstr "K&auml;ytt&auml;j&auml;tunnistus"
+msgstr "Käyttäjätunnistus"
 
-#: ../template/default/config.html:100
+#: ../template/default/config.html:132
 msgid "Username:"
-msgstr "K&auml;ytt&auml;j&auml;tunnus:"
+msgstr "Käyttäjätunnus:"
 
-#: ../template/default/config.html:106
+#: ../template/default/config.html:138
 msgid "Password:"
 msgstr "Salasana:"
 
-#: ../template/default/config.html:112
+#: ../template/default/config.html:144
 msgid "Guest Account:"
 msgstr "Sallitaanko vierailija:"
 
-#: ../template/default/config.html:121
+#: ../template/default/config.html:153
 msgid "Guest Username:"
-msgstr "Vierailijan k&auml;ytt&auml;j&auml;tunnus:"
+msgstr "Vierailijan käyttäjätunnus:"
 
-#: ../template/default/config.html:127
+#: ../template/default/config.html:159
 msgid "Guest Password:"
 msgstr "Vierailijan salasana:"
 
-#: ../template/default/config.html:146
+#: ../template/default/config.html:178
 msgid "Hours:"
 msgstr "Pituus tunteina:"
 
-#: ../template/default/config.html:152
+#: ../template/default/config.html:184
 msgid "Times:"
 msgstr "Ajankohdat:"
 
-#: ../template/default/config.html:173
+#: ../template/default/config.html:205
 msgid "Active:"
-msgstr "K&auml;yt&ouml;ss&auml;:"
+msgstr "Käytössä:"
 
-#: ../template/default/config.html:182
+#: ../template/default/config.html:214
 msgid "Timeout:"
 msgstr "Odotusaika:"
 
-#: ../template/default/config.html:183 ../template/default/config.html:240
-#: ../template/default/config.html:246
+#: ../template/default/config.html:215 ../template/default/config.html:272
+#: ../template/default/config.html:278
 msgid "minutes"
 msgstr "minuuttia"
 
-#: ../template/default/config.html:201 ../template/default/config.html:239
+#: ../template/default/config.html:233 ../template/default/config.html:271
 msgid "Time Margin at Start:"
 msgstr "Aloitusmarginaali:"
 
-#: ../template/default/config.html:207 ../template/default/config.html:245
+#: ../template/default/config.html:239 ../template/default/config.html:277
 msgid "Time Margin at Stop:"
 msgstr "Lopetusmarginaali:"
 
-#: ../template/default/config.html:260
+#: ../template/default/config.html:292
 msgid "Streaming"
 msgstr "Suoratoisto"
 
-#: ../template/default/config.html:265
-msgid "Live Streaming"
+#: ../template/default/config.html:297
+#, fuzzy
+msgid "Live Streaming:"
 msgstr "Live-kuvan suoratoisto"
 
-#: ../template/default/config.html:274
-msgid "Recordings Streaming"
-msgstr "Tallenteiden suoratoisto"
-
-#: ../template/default/config.html:283
+#: ../template/default/config.html:306
 msgid "HTTP Port of Streamdev (also possible 3000/ts):"
 msgstr "Streamdev-laajennoksen HTTP-portti (esim. 3000/ts):"
 
-#: ../template/default/config.html:289
-msgid "Path to VDR Recordings:"
-msgstr "VDR-tallenteiden polku:"
+#: ../template/default/config.html:312
+#, fuzzy
+msgid "Recordings Streaming:"
+msgstr "Tallenteiden suoratoisto"
 
-#: ../template/default/config.html:296
+#: ../template/default/config.html:321
+msgid "Path to VDR Recordings on your workstation:"
+msgstr ""
+
+#: ../template/default/config.html:328
 msgid "Bandwidth of Streams:"
 msgstr "Kaistanleveys:"
 
-#: ../template/default/config.html:323
+#: ../template/default/config.html:350
+msgid "Expert"
+msgstr ""
+
+#: ../template/default/config.html:355
+msgid "Read EPG directly using epg.data:"
+msgstr ""
+
+#: ../template/default/config.html:364
+msgid "epg.data filename:"
+msgstr ""
+
+#: ../template/default/config.html:370
+#, fuzzy
+msgid "Number of columns in \"What's On Now\":"
+msgstr ""
+#msgstr "Käytä kanavavalintoja \"Menossa nyt\"-sivulla"
+
+#: ../template/default/config.html:376
+msgid "VFAT:"
+msgstr ""
+
+#: ../template/default/config.html:397
 msgid "Channel Selections"
 msgstr "Kanavavalinnat"
 
-#: ../template/default/config.html:333
-msgid "In &quot;Timeline&quot;?"
-msgstr "K&auml;yt&auml; kanavavalintoja &quot;Aikajana&quot;-sivulla"
-
-#: ../template/default/config.html:342
-msgid "In &quot;Channels&quot; / &quot;Playing Today&quot;?"
-msgstr ""
-"K&auml;yt&auml; kanavavalintoja &quot;Kanavat&quot;- ja &quot;Ohjelmisto "
-"t&auml;n&auml;&auml;n&quot;-sivuilla"
-
-#: ../template/default/config.html:351
-msgid "In &quot;What's On Now&quot;?"
-msgstr "K&auml;yt&auml; kanavavalintoja &quot;Menossa nyt&quot;-sivulla"
-
-#: ../template/default/config.html:360
-msgid "In &quot;Auto Timer&quot;?"
-msgstr ""
-"K&auml;yt&auml; kanavavalintoja &quot;Automaattiset ajastimet&quot;-sivulla"
-
 #: ../template/default/config.html:404
-msgid "Apply"
-msgstr "K&auml;yt&auml;"
+msgid "In \"Timeline\"?"
+msgstr "Käytä kanavavalintoja \"Aikajana\"-sivulla"
 
-#: ../template/default/timer_list.html:38
+#: ../template/default/config.html:413
+msgid "In \"Channels\" / \"Playing Today\"?"
+msgstr "Käytä kanavavalintoja \"Kanavat\"- ja \"Ohjelmisto tänään\"-sivuilla"
+
+#: ../template/default/config.html:422
+msgid "In \"What's On Now\"?"
+msgstr "Käytä kanavavalintoja \"Menossa nyt\"-sivulla"
+
+#: ../template/default/config.html:431
+msgid "In \"AutoTimer\"?"
+msgstr "Käytä kanavavalintoja \"Automaattiset ajastimet\"-sivulla"
+
+#: ../template/default/config.html:475
+msgid "Apply"
+msgstr "Käytä"
+
+#: ../template/default/timer_list.html:32
 msgid "New Timer"
 msgstr "Uusi ajastin"
 
-#: ../template/default/timer_list.html:224
-#: ../template/default/rec_list.html:52
-msgid "Date"
-msgstr "P&auml;iv&auml;m&auml;&auml;r&auml;"
+#: ../template/default/timer_list.html:143
+#: ../template/default/timer_list.html:148
+#, fuzzy
+msgid "Duration:"
+msgstr "Asetukset"
 
-#: ../template/default/timer_list.html:278
+#: ../template/default/timer_list.html:143
+#: ../template/default/timer_list.html:148
+#: ../template/default/prog_timeline.html:201
+msgid "min"
+msgstr ""
+
+#: ../template/default/timer_list.html:215
+#: ../template/default/rec_list.html:50
+msgid "Date"
+msgstr "Päivämäärä"
+
+#: ../template/default/timer_list.html:269
 msgid "This timer is inactive!"
 msgstr "Ajastin ei ole aktiivinen!"
 
-#: ../template/default/timer_list.html:281
+#: ../template/default/timer_list.html:272
 msgid "This timer is impossible!"
 msgstr "Ajastin ei ole mahdollinen!"
 
-#: ../template/default/timer_list.html:284
-msgid "No more timers possible!"
-msgstr "Maksimim&auml;&auml;r&auml; ajastimia k&auml;yt&ouml;ss&auml;!"
+#: ../template/default/timer_list.html:275
+#, fuzzy
+msgid "No more timers on other transponders possible!"
+msgstr "Maksimimäärä ajastimia käytössä!"
 
-#: ../template/default/timer_list.html:287
+#: ../template/default/timer_list.html:278
 msgid "Timer OK."
 msgstr "Ajastin OK."
 
-#: ../template/default/timer_list.html:293
+#: ../template/default/timer_list.html:283
 msgid "Edit timer status?"
 msgstr "Muokataanko ajastinta?"
 
-#: ../template/default/timer_list.html:297
+#: ../template/default/timer_list.html:286
 msgid "VPS"
 msgstr "VPS"
 
-#: ../template/default/timer_list.html:298
+#: ../template/default/timer_list.html:287
 msgid "Auto"
 msgstr "Automaattinen"
 
-#: ../template/default/timer_list.html:350
+#: ../template/default/timer_list.html:340
 msgid "Delete Selected Timers"
 msgstr "Poista valitut ajastimet"
 
@@ -596,26 +634,26 @@ msgstr "Virhe!"
 msgid "TV"
 msgstr "TV"
 
-#: ../template/default/tv.html:182
+#: ../template/default/tv.html:172
 msgid "Interval:"
-msgstr "P&auml;ivitysv&auml;li:"
+msgstr "Päivitysväli:"
 
-#: ../template/default/tv.html:185 ../template/default/tv.html:186
-#: ../template/default/tv.html:187 ../template/default/tv.html:188
-#: ../template/default/tv.html:189 ../template/default/tv.html:190
-#: ../template/default/tv.html:191
+#: ../template/default/tv.html:175 ../template/default/tv.html:176
+#: ../template/default/tv.html:177 ../template/default/tv.html:178
+#: ../template/default/tv.html:179 ../template/default/tv.html:180
+#: ../template/default/tv.html:181
 msgid "sec."
 msgstr "s"
 
-#: ../template/default/tv.html:193 ../template/default/tv.html:200
+#: ../template/default/tv.html:183 ../template/default/tv.html:190
 msgid "G"
 msgstr "K"
 
-#: ../template/default/tv.html:193 ../template/default/tv.html:200
+#: ../template/default/tv.html:183 ../template/default/tv.html:190
 msgid "Grab the picture!"
 msgstr "Kuvankaappaus"
 
-#: ../template/default/tv.html:194
+#: ../template/default/tv.html:184
 msgid "Size:"
 msgstr "Koko:"
 
@@ -635,13 +673,13 @@ msgstr "tallenna"
 msgid "search"
 msgstr "etsi"
 
-#: ../template/default/prog_detail.html:34
+#: ../template/default/prog_detail.html:35
 msgid "Lookup movie in the Internet-Movie-Database (IMDb)"
-msgstr "etsi IMBD:st&auml;"
+msgstr "etsi IMBD:stä"
 
 #: ../template/default/rec_list.html:19
 msgid "Total:"
-msgstr "K&auml;yt&ouml;ss&auml;:"
+msgstr "Käytössä:"
 
 #: ../template/default/rec_list.html:19 ../template/default/rec_list.html:20
 msgid "h"
@@ -651,356 +689,236 @@ msgstr "h"
 msgid "Free:"
 msgstr "Vapaana:"
 
-#: ../template/default/rec_list.html:100
+#: ../template/default/rec_list.html:98
 msgid "Total"
-msgstr "K&auml;yt&ouml;ss&auml;"
+msgstr "Käytössä"
 
-#: ../template/default/rec_list.html:109 ../template/default/rec_list.html:112
+#: ../template/default/rec_list.html:107 ../template/default/rec_list.html:110
 msgid "New"
 msgstr "Uusi"
 
-#: ../template/default/rec_list.html:130 ../template/default/rec_edit.html:63
+#: ../template/default/rec_list.html:128 ../template/default/rec_edit.html:58
 msgid "Rename"
-msgstr "Nime&auml;"
+msgstr "Nimeä"
 
-#: ../template/default/rec_list.html:137
+#: ../template/default/rec_list.html:135
 msgid "Delete recording?"
 msgstr "Poistetaanko tallenne?"
 
-#: ../template/default/rec_list.html:168
+#: ../template/default/rec_list.html:166
 msgid "Commands:"
 msgstr "Komennot:"
 
-#: ../template/default/rec_list.html:174
+#: ../template/default/rec_list.html:172
 msgid "Run"
 msgstr "Suorita"
 
-#: ../template/default/rec_list.html:174
+#: ../template/default/rec_list.html:172
 msgid "Really run this command?"
 msgstr "Suoritetaanko komento?"
 
-#: ../template/default/rec_list.html:181 ../template/default/rec_list.html:187
+#: ../template/default/rec_list.html:179 ../template/default/rec_list.html:185
 msgid "Delete all selected recordings?"
 msgstr "Poistetaanko valitut tallenteet?"
 
-#: ../template/default/rec_list.html:181 ../template/default/rec_list.html:187
+#: ../template/default/rec_list.html:179 ../template/default/rec_list.html:185
 msgid "Delete Selected Recordings"
 msgstr "Poista valitut tallenteet"
 
-#: ../template/default/prog_timeline.html:99
+#: ../template/default/prog_timeline.html:98
 msgid "Timeline:"
 msgstr "Aikajana:"
 
-#: ../template/default/prog_timeline.html:99
+#: ../template/default/prog_timeline.html:98
 msgid "to"
 msgstr "-"
 
-#: ../template/default/rec_edit.html:6 ../template/default/rec_edit.html:15
+#: ../template/default/rec_edit.html:6 ../template/default/rec_edit.html:16
 msgid "Rename Recording"
-msgstr "Nime&auml; tallenne"
+msgstr "Nimeä tallenne"
 
-#: ../template/default/rec_edit.html:38
+#: ../template/default/rec_edit.html:39
 msgid "Original Name of Recording:"
-msgstr "Tallenteen alkuper&auml;inen nimi:"
+msgstr "Tallenteen alkuperäinen nimi:"
 
-#: ../template/default/rec_edit.html:44
+#: ../template/default/rec_edit.html:45
 msgid "New Name of Recording:"
 msgstr "Tallenteen uusi nimi:"
 
-#: ../vdradmind.pl:222
+#: ../template/default/help_at_timer_new.html:12
+#: ../template/default/help_at_timer_new.html:22
+#: ../template/default/at_timer_new.html:6
+#: ../template/default/at_timer_new.html:16
+msgid "Edit AutoTimer"
+msgstr "Muokkaa automaattista ajastinta"
+
+#: ../template/default/at_timer_new.html:6
+#: ../template/default/at_timer_new.html:16
+msgid "Add New AutoTimer"
+msgstr "Lisää uusi automaattinen ajastin"
+
+#: ../template/default/at_timer_new.html:36
+msgid "AutoTimer Active:"
+msgstr "Aktiivinen:"
+
+#: ../template/default/at_timer_new.html:41
+#: ../template/default/at_timer_new.html:45
+msgid "oneshot"
+msgstr "Kerran"
+
+#: ../template/default/at_timer_new.html:52
+msgid "Search Patterns:"
+msgstr "Hakuehto:"
+
+#: ../template/default/at_timer_new.html:60
+msgid "Search in:"
+msgstr "Hakukentät:"
+
+#: ../template/default/at_timer_new.html:62
+msgid "Title"
+msgstr "Otsikko"
+
+#: ../template/default/at_timer_new.html:63
+msgid "Subtitle"
+msgstr "Lyhyt kuvaus"
+
+#: ../template/default/at_timer_new.html:64
+msgid "Description"
+msgstr "Kuvaus"
+
+#: ../template/default/at_timer_new.html:70
+msgid "Search only on these days:"
+msgstr "Etsi valittuina päivinä:"
+
+#: ../template/default/at_timer_new.html:87
+msgid "all"
+msgstr "Kaikki"
+
+#: ../template/default/at_timer_new.html:97
+#, fuzzy
+msgid "Starts After:"
+msgstr "Alkaa ennen:"
+
+#: ../template/default/at_timer_new.html:108
+msgid "Ends Before:"
+msgstr "Loppuu ennen:"
+
+#: ../template/default/at_timer_new.html:135
+msgid "Episode:"
+msgstr "Sarjatallennus:"
+
+#: ../template/default/at_timer_new.html:143
+msgid "Remember programmed timers:"
+msgstr "Muista ohjelmoidut ajastimet:"
+
+#: ../template/default/at_timer_new.html:152
+msgid "Directory:"
+msgstr "Hakemisto:"
+
+#: ../vdradmind.pl:234
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Anna VDR-koneesi nimi (esim. video.intra.net):"
 
-#: ../vdradmind.pl:223
+#: ../vdradmind.pl:235
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Anna VDR-koneesi käyttämä SVDRP-portti:"
 
-#: ../vdradmind.pl:224
+#: ../vdradmind.pl:236
 msgid "On which address should VDRAdmin listen (0.0.0.0 for any)?"
 msgstr "Anna VDRAdminin käyttämä osoiteavaruus (0.0.0.0 ei rajoituksia):"
 
-#: ../vdradmind.pl:225
+#: ../vdradmind.pl:237
 msgid "On which port should VDRAdmin listen?"
 msgstr "Anna VDRAdminin käyttämä portti:"
 
-#: ../vdradmind.pl:226
+#: ../vdradmind.pl:238
 msgid "Username?"
 msgstr "Anna käyttäjätunnus VDRAdminia varten:"
 
-#: ../vdradmind.pl:227
+#: ../vdradmind.pl:239
 msgid "Password?"
 msgstr "Anna salasana VDRAdminia varten:"
 
-#: ../vdradmind.pl:228
+#: ../vdradmind.pl:240
 msgid "Where are your recordings stored?"
 msgstr "Anna VDR-koneesi tallennehakemiston polku:"
 
-#: ../vdradmind.pl:229
+#: ../vdradmind.pl:241
 msgid "Where are your VDR's configuration files located?"
 msgstr "Anna VDR-koneesi konfigurointihakemiston polku:"
 
-#: ../vdradmind.pl:235
+#: ../vdradmind.pl:247
 msgid "Config file written successfully."
 msgstr "VDRAdminin konfigurointitiedosto muodostettu."
 
-#: ../vdradmind.pl:282
+#: ../vdradmind.pl:295
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s käynnistetty prosessitunnisteella %d."
 
-#: ../template/i18n.pl:12
-msgid "January"
-msgstr "Tammikuu"
-
-#: ../template/i18n.pl:13
-msgid "February"
-msgstr "Helmikuu"
-
-#: ../template/i18n.pl:14
-msgid "March"
-msgstr "Maaliskuu"
-
-#: ../template/i18n.pl:15
-msgid "April"
-msgstr "Huhtikuu"
-
-#: ../template/i18n.pl:16
-msgid "May"
-msgstr "Toukokuu"
-
-#: ../template/i18n.pl:17
-msgid "June"
-msgstr "Kes&auml;kuu"
-
-#: ../template/i18n.pl:18
-msgid "July"
-msgstr "Hein&auml;kuu"
-
-#: ../template/i18n.pl:19
-msgid "August"
-msgstr "Elokuu"
-
-#: ../template/i18n.pl:20
-msgid "September"
-msgstr "Syyskuu"
-
-#: ../template/i18n.pl:21
-msgid "October"
-msgstr "Lokakuu"
-
-#: ../template/i18n.pl:22
-msgid "November"
-msgstr "Marraskuu"
-
-#: ../template/i18n.pl:23
-msgid "December"
-msgstr "Joulukuu"
-
-#: ../template/i18n.pl:28
+#: ../template/i18n.pl:3
 msgid "Playing Today?"
-msgstr "T&auml;n&auml;&auml;n"
+msgstr "Tänään"
 
-#: ../template/i18n.pl:31
+#: ../template/i18n.pl:6
 msgid "Timers"
 msgstr "Ajastimet"
 
-#: ../template/i18n.pl:36
+#: ../template/i18n.pl:11
 msgid "Not found"
-msgstr "Ei l&ouml;ydy"
+msgstr "Ei löydy"
 
-#: ../template/i18n.pl:37
+#: ../template/i18n.pl:12
 msgid "The requested URL was not found on this server!"
-msgstr "URL:ia ei l&ouml;ydy palvelimelta!"
+msgstr "URL:ia ei löydy palvelimelta!"
 
-#: ../template/i18n.pl:38
+#: ../template/i18n.pl:13
 #, perl-format
-msgid "The URL &quot;%s&quot; was not found on this server!"
-msgstr "URL:ia &quot;%s&quot; ei l&ouml;ydy palvelimelta!"
+msgid "The URL \"%s\" was not found on this server!"
+msgstr "URL:ia \"%s\" ei löydy palvelimelta!"
 
-#: ../template/i18n.pl:39
+#: ../template/i18n.pl:14
 msgid "Forbidden"
 msgstr "Kielletty"
 
-#: ../template/i18n.pl:40
+#: ../template/i18n.pl:15
 msgid "You don't have permission to access this function!"
-msgstr "Puutteelliset k&auml;ytt&auml;j&auml;oikeudet haluttuun toimintoon!"
+msgstr "Puutteelliset käyttäjäoikeudet haluttuun toimintoon!"
 
-#: ../template/i18n.pl:41
+#: ../template/i18n.pl:16
 #, perl-format
-msgid "Access to file &quot;%s&quot; denied!"
-msgstr "P&auml;&auml;sy tiedostoon &quot;%s&quot; ev&auml;tty!"
+msgid "Access to file \"%s\" denied!"
+msgstr "Pääsy tiedostoon \"%s\" evätty!"
 
-#: ../template/i18n.pl:42
+#: ../template/i18n.pl:17
 #, perl-format
-msgid "Can't open file &quot;%s&quot;!"
-msgstr "Tiedostoa &quot;%s&quot; ei pystyt&auml; avaamaan!"
+msgid "Can't open file \"%s\"!"
+msgstr "Tiedostoa \"%s\" ei pystytä avaamaan!"
 
-#: ../template/i18n.pl:43
+#: ../template/i18n.pl:18
 #, perl-format
 msgid "Can't connect to VDR at %s!"
-msgstr "VDR:&auml;&auml;n ei saada yhteytt&auml; (%s)"
+msgstr "VDR:ään ei saada yhteyttä (%s)"
 
-#: ../template/i18n.pl:44
+#: ../template/i18n.pl:19
 #, perl-format
 msgid "Error while sending command to VDR at %s"
-msgstr "Komennon l&auml;hetys VDR:lle ep&auml;onnistui (%s)"
+msgstr "Komennon lähetys VDR:lle epäonnistui (%s)"
 
-#: ../template/i18n.pl:48
+#: ../template/i18n.pl:23
 msgid "Schedule"
 msgstr "Ohjelmisto"
 
-#: ../template/i18n.pl:53
-msgid ""
-"<b>Timer</b>\n"
-"<p>VDR timer overview.</p>\n"
-"<p>Clicking on |<img src=\"bilder/poempl_gruen.gif\" alt=\"on\" valign="
-"\"center\"> <i>Yes</i> | or |<img src=\"bilder/poempl_grau.gif\" alt=\"off\" "
-"valign=\"center\"> <i>No</i> | in the column <i>Active</i>, switches the "
-"timer on or off.<br>\n"
-"<img src=\"bilder/poempl_gelb.gif\" alt=\"problem\" valign=\"center\"> "
-"indicates overlapping timers. That's uncritical, as long as you have enough "
-"DVB cards for the parallel recordings.<br>\n"
-"To edit an entry, click on <img src=\"bilder/edit.gif\" alt=\"Stift\" valign="
-"\"center\">, to delete a timer use <img src=\"bilder/delete.gif\" alt="
-"\"Radiergummi\" valign=\"center\">. To delete more than one timer at once, "
-"select them using the checkboxes (<input type=\"checkbox\" checked>) and "
-"click on <i>Delete selected timers</i> at the end of the list.\n"
-"</p>"
-msgstr ""
-"<b>Ajastimet</b>\n"
-"<p>Ajastimen saat p&auml;&auml;lle/pois valitsemalla <img src=\"bilder/"
-"poempl_gruen.gif\" alt=\"p&auml;&auml;ll&auml;\" valign=\"center\"> "
-"<i>Kyll&auml;</i> tai <img src=\"bilder/poempl_grau.gif\" alt=\"pois\" "
-"valign=\"center\"> <i>Ei</i> -vaihtoehdon <i>Aktiivinen</i>-sarakkeesta."
-"<br>\n"
-"<img src=\"bilder/poempl_gelb.gif\" alt=\"ongelma\" valign=\"center\"> -"
-"kuvake ilmaisee p&auml;&auml;llekk&auml;iset ajastimet. P&auml;&auml;"
-"llekk&auml;isist&auml; ajastimista aiheutuu ongelmia vain, jos sinulla ei "
-"ole tarpeeksi DVB-kortteja rinnakkaisiin tallennuksiin.<br>\n"
-"<p>Valitse <img src=\"bilder/edit.gif\" alt=\"kyn&auml;\" valign=\"center\"> "
-"muokataksesi ja <img src=\"bilder/delete.gif\" alt=\"pyyhekumi\" valign="
-"\"center\"> poistaaksesi ajastimen. Jos haluat poistaa useita ajastimia "
-"kerralla, merkitse halutut ajastimet poistettaviksi (<input type=\"checkbox"
-"\" checked>) ja k&auml;yt&auml; <i>Poista valitut ajastimet</i> -"
-"painiketta.\n"
-"</p>"
-
-#: ../template/i18n.pl:61
+#: ../template/i18n.pl:28
 #, fuzzy
-msgid ""
-"<p>No help available for <b>Add Timer:</b> yet. For adding text please "
-"contact mail@andreas.vdr-developer.org.\t\n"
-"</p>"
-msgstr ""
-"Valittua opastetta ei ole saatavilla. Jos haluat lis&auml;t&auml; tai "
-"muokata opastetta, ota yhteytt&auml; s&auml;hk&ouml;postitse: mail@andreas."
-"vdr-developer.org."
-
-#: ../template/i18n.pl:65
-msgid ""
-"<b>Auto Timer:</b><br>\n"
-"<p>An overview of all Auto Timers</p>\n"
-"<p>Click <i>Yes</i> or <i>No</i> in the <i>Active</i> column to (de-)"
-"activate that Auto Timer.</p>\n"
-"<p>Use <img src=\"bilder/edit.gif\" alt=\"pen\" valign=\"center\"> for "
-"editing and <img src=\"bilder/delete.gif\" alt=\"Rubber\" valign=\"center\"> "
-"for deleting an Auto Timer. If you want to delete multiple Auto Timers all "
-"at once, you have to check the boxes (<input type=\"checkbox\" checked>) on "
-"the right and finally click <i>Delete selected Auto Timers</i>.</p>"
-msgstr ""
-"<b>Automaattiset ajastimet</b><br>\n"
-"<p>Automaattisen ajastimen saat asetettua p&auml;&auml;lle/pois valitsemalla "
-"<i>Kyll&auml;</i>- tai <i>Ei</i>-vaihtoehdon <i>Aktiivinen</i>-sarakkeesta.</"
-"p>\n"
-"<p>Valitse <img src=\"bilder/edit.gif\" alt=\"kyn&auml;\" valign=\"center\"> "
-"muokataksesi ja <img src=\"bilder/delete.gif\" alt=\"pyyhekumi\" valign="
-"\"center\"> poistaaksesi automaattisen ajastimen. Jos haluat poistaa useita "
-"automaattisia ajastimia kerralla, merkitse halutut ajastimet poistettaviksi "
-"(<input type=\"checkbox\" checked>) ja k&auml;yt&auml; <i>Poista valitut "
-"automaattiset tallenteet</i>-painiketta.</p>"
-
-#: ../template/i18n.pl:71
-msgid ""
-"<b>Edit Auto Timer:</b><br>\n"
-"<p>Auto Timer is a key feature of VDRAdmin. An Auto Timer consists of one or "
-"more search terms and some other settings, that are looked for regularly in "
-"the Electronic Program Guide (EPG). On match Auto Timer adds a timer in VDR "
-"automatically for that broadcast. That's very comfortable for irregularly "
-"broadcasted series or movies you don't want to miss.</p>\n"
-"<p>Here you can set an Auto Timer. It's required to specify at least one "
-"search item. Please have a look at <i>Search Items</i> if you need more "
-"information on how to find reasonable search items and how to avoid unwanted "
-"recordings.</p>\n"
-"<b>Auto Timer Active:</b><br>\n"
-"<p><i>Yes</i> activates and <i>No</i> deactivates this Auto Timer. Please "
-"note that VDR timers already added by VDRAdmin are not deleted if you "
-"deactivate this Auto Timer.</p>\n"
-"<b>Search Items:</b><br>\n"
-"<p>Choosing the right search items decides whether only the wanted broadcast "
-"or broadcast having similar names or nothing gets recorded.</p>\n"
-"<p>Case doesn't matter, &quot;X-Files&quot; matches anything &quot;x-"
-"files&quot; will match. You can set multiple search items by separating them "
-"with spaces. Only broadcasts will match if they contain all items.</p>\n"
-"<p>You'd better only use letters and numbers for search items, as EPGs often "
-"miss colons, brackets and other characters.</p>\n"
-"<p>Experts can also use regular expressions, but you have get needed "
-"information from the VDRAdmin sources (undocumented feature).</p>"
-msgstr ""
-"<b>Automaattisen ajastimen muokkaus</b><br>\n"
-"<p>Automaattiset ajastimet ovat olennainen osa VDRAdminia. Ne koostuvat "
-"yhdest&auml; tai useammasta hakuehdosta, joita etsit&auml;&auml;n s&auml;"
-"&auml;nn&ouml;llisesti s&auml;hk&ouml;isest&auml; ohjelmaoppaasta (EPG). "
-"Ajastin lis&auml;t&auml;&auml;n automaattisesti VDR:&auml;&auml;n "
-"asetettujen hakuehtojen l&ouml;ydytty&auml;. Automaattiset ajastimet ovat "
-"eritt&auml;in k&auml;tevi&auml;, jos tallennettavien ohjelmien l&auml;"
-"hetysajat sattuvat olemaan ep&auml;s&auml;&auml;nn&ouml;lliset.</p>\n"
-"<p>Automaattiset ajastimet tarvitsevat v&auml;hint&auml;&auml;n yhden "
-"hakuehdon. <i>Automaattisen ajastimen hakuehdot</i>-kohdasta l&ouml;ytyy "
-"lis&auml;tietoja, kuinka muodostetaan kunnolliset hakuehdot ja siten v&auml;"
-"ltyt&auml;&auml;n turhilta ajastuksilta.</p>\n"
-"<b>Automaattisen ajastimen aktivointi</b><br>\n"
-"<p>Automaattinen ajastin asetetaan p&auml;&auml;lle/pois valitsemalla "
-"<i>Kyll&auml;</i>- tai <i>Ei</i>-vaihtoehto. VDRAdminin tekemi&auml; "
-"ajastimia ei poisteta VDR:n ajastinlistalta, jos automaattinen ajastin "
-"asetetaan my&ouml;hemmin pois p&auml;&auml;lt&auml;.</p>\n"
-"<b>Automaattiset ajastimen hakuehdot</b><br>\n"
-"<p>Sopivilla hakuehdoilla voidaan luoda helposti ajastimia tietyille "
-"ohjelmille tai samankaltaisille ohjelmille. Hakuehtoja kirjoitettaessa "
-"kannattaa kuitenkin olla tarkkana, koska pienikin virhe voi aiheuttaa sen, "
-"ett&auml; haluttua ohjelmaa ei tallenneta koskaan.</p>\n"
-"<p>Kirjainkokoa ei huomioida, joten termit &quot;X-Files&quot; ja &quot;x-"
-"files&quot; tuottavat saman hakutuloksen. Jos halutaan useampia "
-"hakutermej&auml;, ne voidaan erottaa toisistaan v&auml;lily&ouml;"
-"nnill&auml;. T&auml;ll&ouml;in ajastin luodaan, jos kaikki hakutermit l&ouml;"
-"ytyv&auml;t.</p>\n"
-"<p>Hakuehdossa kannattaa k&auml;ytt&auml;&auml; pelk&auml;st&auml;&auml;n "
-"kirjaimia tai numeroita, koska s&auml;hk&ouml;isess&auml; ohjelmaoppaassa "
-"(EPG) ei v&auml;ltt&auml;m&auml;tt&auml; k&auml;ytet&auml; "
-"erikoismerkkej&auml;.</p>\n"
-"<p>My&ouml;s s&auml;&auml;nn&ouml;llisi&auml; lausekkeita voidaan k&auml;"
-"ytt&auml;&auml; hakuehdossa. Lis&auml;tietoja t&auml;st&auml; l&ouml;ytyy "
-"VDRAdminin l&auml;hdekoodista.</p>"
-
-#: ../template/i18n.pl:83
-#, fuzzy
-msgid ""
-"<p>No help available for <b>Recordings:</b>. For adding text please contact "
-"mail@andreas.vdr-developer.org.\t\n"
-"</p>"
-msgstr ""
-"Valittua opastetta ei ole saatavilla. Jos haluat lis&auml;t&auml; tai "
-"muokata opastetta, ota yhteytt&auml; s&auml;hk&ouml;postitse: mail@andreas."
-"vdr-developer.org."
-
-#: ../template/i18n.pl:87
 msgid ""
 "<b>Configuration:</b>\n"
-"<p>Here you can change general settings and base settings for timers, auto "
-"timers, channel selection and streaming parameters.\n"
+"<p>Here you can change general settings and base settings for timers, "
+"autotimers, channel selection and streaming parameters.\n"
 "</p>\n"
 "<b>General Settings:</b>\n"
 "<p>Here you can change the languge, the start page, the look, and the number "
-"of DVB cards. Besides this the base settings for timers, auto timers, the "
+"of DVB cards. Besides this the base settings for timers, autotimers, the "
 "channel selection and streaming parameters can be configured here.\n"
 "</p>\n"
 "<b>Identification:</b>\n"
@@ -1016,17 +934,17 @@ msgid ""
 "now. A thin red line indicates the current position.<br>Programmed timers "
 "are shown in different colors.\n"
 "</p>\n"
-"<b>Settings for auto timers:</b>\n"
+"<b>Settings for autotimers:</b>\n"
 "<p>Clicking on |<input type=\"radio\"> <i>Yes</i> | or |<input type=\"radio"
-"\" checked> <i>No</i> | activates or deactivates the auto timer function. "
-"You can also specify the interval, the the epg data is checked for updating "
-"the auto timers.<br>\n"
+"\" checked> <i>No</i> | activates or deactivates the autotimer function. You "
+"can also specify the interval, the the epg data is checked for updating the "
+"autotimers.<br>\n"
 "The life time of a recording can be set from 0 to 99 (99=live forever). This "
 "value relates to the day, the recording was made. After the given life time, "
 "a recording may be deleted to make room for new ones.<br>\n"
 "The Priority indicates, what timer is prefered in case of a conflict.<br>\n"
 "<b>Timer settings:</b>\n"
-"<p>These are the same settings as for the auto timers, but apply to the "
+"<p>These are the same settings as for the autotimers, but apply to the "
 "manually created timers.\n"
 "</p>\n"
 "\n"
@@ -1041,67 +959,231 @@ msgid ""
 "</p>\n"
 msgstr ""
 "<b>Asetukset</b>\n"
-"<p>Yleisiss&auml; asetuksissa voit muokata mm. aloitussivua ja DVB-korttien "
-"lukum&auml;&auml;r&auml;&auml;. Lis&auml;ksi voidaan m&auml;&auml;"
-"ritell&auml; oletusasetukset ajastimille, automaattisille ajastimille, "
-"kanavien valinnalle sek&auml; suoratoistolle.\n"
+"<p>Yleisissä asetuksissa voit muokata mm. aloitussivua ja DVB-korttien "
+"lukumäärää. Lisäksi voidaan määritellä oletusasetukset ajastimille, "
+"automaattisille ajastimille, kanavien valinnalle sekä suoratoistolle.\n"
 "</p>\n"
 "\n"
-"<b>K&auml;ytt&auml;j&auml;tunnistus</b>\n"
-"<p>Voit sallia/est&auml;&auml; <i>vierailijan k&auml;ytt&auml;j&auml;"
-"tunnuksen</i> valitsemalla <input type=\"radio\"> <i>Kyll&auml;</i> tai "
-"<input type=\"radio\" checked> <i>Ei</i> -vaihtoehdon. <b>Muista vaihtaa "
-"oletussalasanat!</b>\n"
+"<b>Käyttäjätunnistus</b>\n"
+"<p>Voit sallia/estää <i>vierailijan käyttäjätunnuksen</i> valitsemalla "
+"<input type=\"radio\"> <i>Kyllä</i> tai <input type=\"radio\" checked> "
+"<i>Ei</i> -vaihtoehdon. <b>Muista vaihtaa oletussalasanat!</b>\n"
 "</p>\n"
 "\n"
 "<b>Aikajana</b>\n"
-"<p>Aikajana n&auml;ytt&auml;&auml; kanavien ohjelmiston valittuna "
-"ajankohtana.<br>\n"
-"Punainen viiva osoittaa nykyhetken ja olemassa olevat ajastimet n&auml;"
-"ytet&auml;&auml;n v&auml;rillisin&auml;.\n"
+"<p>Aikajana näyttää kanavien ohjelmiston valittuna ajankohtana.<br>\n"
+"Punainen viiva osoittaa nykyhetken ja olemassa olevat ajastimet näytetään "
+"värillisinä.\n"
 "</p>\n"
 "\n"
 "<b>Automaattiset ajastimet</b>\n"
-"<p>Voit ottaa k&auml;ytt&ouml;&ouml;n automaattiset ajastimet valitsemalla "
-"<input type=\"radio\"> <i>Kyll&auml;</i> tai <input type=\"radio\" checked> "
-"<i>Ei</i> -vaihtoehdon.\n"
-"Voit my&ouml;s m&auml;&auml;ritell&auml; p&auml;ivitysv&auml;lin "
-"automaattisille ajastimille.<p>\n"
-"Tallenteen elinaika p&auml;ivin&auml; tallennusp&auml;iv&auml;m&auml;&auml;"
-"r&auml;st&auml; voidaan asettaa v&auml;lill&auml; 0 ja 99 (99=&auml;&auml;"
-"ret&ouml;n). M&auml;&auml;ritellyn elinajan loputtua tallenne tuhotaan "
-"automaattisesti uusien tallenteiden tielt&auml;. P&auml;&auml;llekk&auml;"
-"isten ajastimien sattuessa keskin&auml;inen tallennusj&auml;rjestys m&auml;"
-"&auml;ritell&auml;&auml;n prioriteettiasetuksella.<br>\n"
+"<p>Voit ottaa käyttöön automaattiset ajastimet valitsemalla <input type="
+"\"radio\"> <i>Kyllä</i> tai <input type=\"radio\" checked> <i>Ei</i> -"
+"vaihtoehdon.\n"
+"Voit myös määritellä päivitysvälin automaattisille ajastimille.<p>\n"
+"Tallenteen elinaika päivinä tallennuspäivämäärästä voidaan asettaa välillä 0 "
+"ja 99 (99=ääretön). Määritellyn elinajan loputtua tallenne tuhotaan "
+"automaattisesti uusien tallenteiden tieltä. Päällekkäisten ajastimien "
+"sattuessa keskinäinen tallennusjärjestys määritellään "
+"prioriteettiasetuksella.<br>\n"
 "</p>\n"
 "\n"
 "<b>Ajastimet</b>\n"
-"<p>N&auml;m&auml; yksitellen luotavien ajastimien asetukset ovat vastaavat "
-"kuin automaattisilla ajastimilla.\n"
+"<p>Nämä yksitellen luotavien ajastimien asetukset ovat vastaavat kuin "
+"automaattisilla ajastimilla.\n"
 "</p>\n"
 "\n"
 "<b>Suoratoisto</b>\n"
-"<p>M&auml;&auml;rittele k&auml;ytt&auml;m&auml;si portti, kaistanleveys "
-"sek&auml; VDR:n tallennehakemisto.\n"
+"<p>Määrittele käyttämäsi portti, kaistanleveys sekä VDR:n "
+"tallennehakemisto.\n"
 "</p>\n"
 "\n"
 "<b>Kanavavalinnat</b>\n"
-"<p>Voit asettaa sivukohtaiset kanavavalinnat p&auml;&auml;lle/pois "
-"valitsemalla <input type=\"radio\"> <i>Kyll&auml;</i> tai <input type=\"radio"
-"\" checked> <i>Ei</i> -vaihtoehdon.<br>\n"
+"<p>Voit asettaa sivukohtaiset kanavavalinnat päälle/pois valitsemalla <input "
+"type=\"radio\"> <i>Kyllä</i> tai <input type=\"radio\" checked> <i>Ei</i> -"
+"vaihtoehdon.<br>\n"
 "</p>\n"
 
-#: ../template/i18n.pl:117
+#: ../template/i18n.pl:58
 msgid ""
 "No help available yet. For adding or changing text please contact "
 "mail@andreas.vdr-developer.org."
 msgstr ""
-"Valittua opastetta ei ole saatavilla. Jos haluat lis&auml;t&auml; tai "
-"muokata opastetta, ota yhteytt&auml; s&auml;hk&ouml;postitse: mail@andreas."
-"vdr-developer.org."
+"Valittua opastetta ei ole saatavilla. Jos haluat lisätä tai muokata "
+"opastetta, ota yhteyttä sähköpostitse: mail@andreas.vdr-developer.org."
+
+#~ msgid "January"
+#~ msgstr "Tammikuu"
+
+#~ msgid "February"
+#~ msgstr "Helmikuu"
+
+#~ msgid "March"
+#~ msgstr "Maaliskuu"
+
+#~ msgid "April"
+#~ msgstr "Huhtikuu"
+
+#~ msgid "May"
+#~ msgstr "Toukokuu"
+
+#~ msgid "June"
+#~ msgstr "Kesäkuu"
+
+#~ msgid "July"
+#~ msgstr "Heinäkuu"
+
+#~ msgid "August"
+#~ msgstr "Elokuu"
+
+#~ msgid "September"
+#~ msgstr "Syyskuu"
+
+#~ msgid "October"
+#~ msgstr "Lokakuu"
+
+#~ msgid "November"
+#~ msgstr "Marraskuu"
+
+#~ msgid "December"
+#~ msgstr "Joulukuu"
+
+#~ msgid ""
+#~ "<b>Timer</b>\n"
+#~ "<p>VDR timer overview.</p>\n"
+#~ "<p>Clicking on |<img src=\"bilder/poempl_gruen.gif\" alt=\"on\" valign="
+#~ "\"center\"> <i>Yes</i> | or |<img src=\"bilder/poempl_grau.gif\" alt=\"off"
+#~ "\" valign=\"center\"> <i>No</i> | in the column <i>Active</i>, switches "
+#~ "the timer on or off.<br>\n"
+#~ "<img src=\"bilder/poempl_gelb.gif\" alt=\"problem\" valign=\"center\"> "
+#~ "indicates overlapping timers. That's uncritical, as long as you have "
+#~ "enough DVB cards for the parallel recordings.<br>\n"
+#~ "To edit an entry, click on <img src=\"bilder/edit.gif\" alt=\"Stift\" "
+#~ "valign=\"center\">, to delete a timer use <img src=\"bilder/delete.gif\" "
+#~ "alt=\"Radiergummi\" valign=\"center\">. To delete more than one timer at "
+#~ "once, select them using the checkboxes (<input type=\"checkbox\" "
+#~ "checked>) and click on <i>Delete selected timers</i> at the end of the "
+#~ "list.\n"
+#~ "</p>"
+#~ msgstr ""
+#~ "<b>Ajastimet</b>\n"
+#~ "<p>Ajastimen saat päälle/pois valitsemalla <img src=\"bilder/poempl_gruen."
+#~ "gif\" alt=\"päällä\" valign=\"center\"> <i>Kyllä</i> tai <img src="
+#~ "\"bilder/poempl_grau.gif\" alt=\"pois\" valign=\"center\"> <i>Ei</i> -"
+#~ "vaihtoehdon <i>Aktiivinen</i>-sarakkeesta.<br>\n"
+#~ "<img src=\"bilder/poempl_gelb.gif\" alt=\"ongelma\" valign=\"center\"> -"
+#~ "kuvake ilmaisee päällekkäiset ajastimet. Päällekkäisistä ajastimista "
+#~ "aiheutuu ongelmia vain, jos sinulla ei ole tarpeeksi DVB-kortteja "
+#~ "rinnakkaisiin tallennuksiin.<br>\n"
+#~ "<p>Valitse <img src=\"bilder/edit.gif\" alt=\"kynä\" valign=\"center\"> "
+#~ "muokataksesi ja <img src=\"bilder/delete.gif\" alt=\"pyyhekumi\" valign="
+#~ "\"center\"> poistaaksesi ajastimen. Jos haluat poistaa useita ajastimia "
+#~ "kerralla, merkitse halutut ajastimet poistettaviksi (<input type="
+#~ "\"checkbox\" checked>) ja käytä <i>Poista valitut ajastimet</i> -"
+#~ "painiketta.\n"
+#~ "</p>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<p>No help available for <b>Add Timer:</b> yet. For adding text please "
+#~ "contact mail@andreas.vdr-developer.org.\t\n"
+#~ "</p>"
+#~ msgstr ""
+#~ "Valittua opastetta ei ole saatavilla. Jos haluat lisätä tai muokata "
+#~ "opastetta, ota yhteyttä sähköpostitse: mail@andreas.vdr-developer.org."
+
+#~ msgid ""
+#~ "<b>AutoTimer:</b><br>\n"
+#~ "<p>An overview of all AutoTimers</p>\n"
+#~ "<p>Click <i>Yes</i> or <i>No</i> in the <i>Active</i> column to (de-)"
+#~ "activate that AutoTimer.</p>\n"
+#~ "<p>Use <img src=\"bilder/edit.gif\" alt=\"pen\" valign=\"center\"> for "
+#~ "editing and <img src=\"bilder/delete.gif\" alt=\"Rubber\" valign=\"center"
+#~ "\"> for deleting an AutoTimer. If you want to delete multiple AutoTimers "
+#~ "all at once, you have to check the boxes (<input type=\"checkbox\" "
+#~ "checked>) on the right and finally click <i>Delete selected AutoTimers</"
+#~ "i>.</p>"
+#~ msgstr ""
+#~ "<b>Automaattiset ajastimet</b><br>\n"
+#~ "<p>Automaattisen ajastimen saat asetettua päälle/pois valitsemalla "
+#~ "<i>Kyllä</i>- tai <i>Ei</i>-vaihtoehdon <i>Aktiivinen</i>-sarakkeesta.</"
+#~ "p>\n"
+#~ "<p>Valitse <img src=\"bilder/edit.gif\" alt=\"kynä\" valign=\"center\"> "
+#~ "muokataksesi ja <img src=\"bilder/delete.gif\" alt=\"pyyhekumi\" valign="
+#~ "\"center\"> poistaaksesi automaattisen ajastimen. Jos haluat poistaa "
+#~ "useita automaattisia ajastimia kerralla, merkitse halutut ajastimet "
+#~ "poistettaviksi (<input type=\"checkbox\" checked>) ja käytä <i>Poista "
+#~ "valitut automaattiset tallenteet</i>-painiketta.</p>"
+
+#~ msgid ""
+#~ "<b>Edit AutoTimer:</b><br>\n"
+#~ "<p>AutoTimer is a key feature of VDRAdmin. An AutoTimer consists of one "
+#~ "or more search terms and some other settings, that are looked for "
+#~ "regularly in the Electronic Program Guide (EPG). On match AutoTimer adds "
+#~ "a timer in VDR automatically for that broadcast. That's very comfortable "
+#~ "for irregularly broadcasted series or movies you don't want to miss.</p>\n"
+#~ "<p>Here you can set an AutoTimer. It's required to specify at least one "
+#~ "search item. Please have a look at <i>Search Items</i> if you need more "
+#~ "information on how to find reasonable search items and how to avoid "
+#~ "unwanted recordings.</p>\n"
+#~ "<b>AutoTimer Active:</b><br>\n"
+#~ "<p><i>Yes</i> activates and <i>No</i> deactivates this AutoTimer. Please "
+#~ "note that VDR timers already added by VDRAdmin are not deleted if you "
+#~ "deactivate this AutoTimer.</p>\n"
+#~ "<b>Search Items:</b><br>\n"
+#~ "<p>Choosing the right search items decides whether only the wanted "
+#~ "broadcast or broadcast having similar names or nothing gets recorded.</"
+#~ "p>\n"
+#~ "<p>Case doesn't matter, \"X-Files\" matches anything \"x-files\" will "
+#~ "match. You can set multiple search items by separating them with spaces. "
+#~ "Only broadcasts will match if they contain all items.</p>\n"
+#~ "<p>You'd better only use letters and numbers for search items, as EPGs "
+#~ "often miss colons, brackets and other characters.</p>\n"
+#~ "<p>Experts can also use regular expressions, but you have get needed "
+#~ "information from the VDRAdmin sources (undocumented feature).</p>"
+#~ msgstr ""
+#~ "<b>Automaattisen ajastimen muokkaus</b><br>\n"
+#~ "<p>Automaattiset ajastimet ovat olennainen osa VDRAdminia. Ne koostuvat "
+#~ "yhdestä tai useammasta hakuehdosta, joita etsitään säännöllisesti "
+#~ "sähköisestä ohjelmaoppaasta (EPG). Ajastin lisätään automaattisesti VDR:"
+#~ "ään asetettujen hakuehtojen löydyttyä. Automaattiset ajastimet ovat "
+#~ "erittäin käteviä, jos tallennettavien ohjelmien lähetysajat sattuvat "
+#~ "olemaan epäsäännölliset.</p>\n"
+#~ "<p>Automaattiset ajastimet tarvitsevat vähintään yhden hakuehdon. "
+#~ "<i>Automaattisen ajastimen hakuehdot</i>-kohdasta löytyy lisätietoja, "
+#~ "kuinka muodostetaan kunnolliset hakuehdot ja siten vältytään turhilta "
+#~ "ajastuksilta.</p>\n"
+#~ "<b>Automaattisen ajastimen aktivointi</b><br>\n"
+#~ "<p>Automaattinen ajastin asetetaan päälle/pois valitsemalla <i>Kyllä</i>- "
+#~ "tai <i>Ei</i>-vaihtoehto. VDRAdminin tekemiä ajastimia ei poisteta VDR:n "
+#~ "ajastinlistalta, jos automaattinen ajastin asetetaan myöhemmin pois "
+#~ "päältä.</p>\n"
+#~ "<b>Automaattiset ajastimen hakuehdot</b><br>\n"
+#~ "<p>Sopivilla hakuehdoilla voidaan luoda helposti ajastimia tietyille "
+#~ "ohjelmille tai samankaltaisille ohjelmille. Hakuehtoja kirjoitettaessa "
+#~ "kannattaa kuitenkin olla tarkkana, koska pienikin virhe voi aiheuttaa "
+#~ "sen, että haluttua ohjelmaa ei tallenneta koskaan.</p>\n"
+#~ "<p>Kirjainkokoa ei huomioida, joten termit \"X-Files\" ja \"x-files\" "
+#~ "tuottavat saman hakutuloksen. Jos halutaan useampia hakutermejä, ne "
+#~ "voidaan erottaa toisistaan välilyönnillä. Tällöin ajastin luodaan, jos "
+#~ "kaikki hakutermit löytyvät.</p>\n"
+#~ "<p>Hakuehdossa kannattaa käyttää pelkästään kirjaimia tai numeroita, "
+#~ "koska sähköisessä ohjelmaoppaassa (EPG) ei välttämättä käytetä "
+#~ "erikoismerkkejä.</p>\n"
+#~ "<p>Myös säännöllisiä lausekkeita voidaan käyttää hakuehdossa. Lisätietoja "
+#~ "tästä löytyy VDRAdminin lähdekoodista.</p>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<p>No help available for <b>Recordings:</b>. For adding text please "
+#~ "contact mail@andreas.vdr-developer.org.\t\n"
+#~ "</p>"
+#~ msgstr ""
+#~ "Valittua opastetta ei ole saatavilla. Jos haluat lisätä tai muokata "
+#~ "opastetta, ota yhteyttä sähköpostitse: mail@andreas.vdr-developer.org."
 
 #~ msgid "Done Active:"
-#~ msgstr "K&auml;yt&auml; ajastinlokia:"
+#~ msgstr "Käytä ajastinlokia:"
 
 #~ msgid "Language:"
 #~ msgstr "Kieli:"

@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- This help is partly taken from
+      * the VDR man page, Copyright (c) by Klaus Schmidinger
+      * the HISTORY of macfly's patch
+-->
+
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
+	<title><%! Edit AutoTimer !%></title>
+	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
+	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+</head>
+
+<body id="at_new">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="help">
+		<tr height="30">
+			<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
+			<td height="30" valign="middle" background="bilder/uebersicht_oben.gif">
+				<h2><%! Edit AutoTimer !%></h2>
+			</td>
+			<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0" /></td>
+		</tr>
+		<tr>
+			<td width="30" background="bilder/uebersicht_links.gif"></td>
+			<td background="bilder/uebersicht_mitte.gif">
+				<p>Here you can edit an automatic timer's settings.</p>
+				<p>AutoTimer is a key feature of VDRAdmin. An AutoTimer consists of one or more search terms and some other settings, that are looked for regularly in the Electronic Program Guide (EPG). On match AutoTimer adds a timer in VDR automatically for that broadcast. That's very comfortable for irregularly broadcasted series or movies you don't want to miss.</p>
+				<dl>
+					<dt>AutoTimer Active:</dt>
+					<dd>Activate or deactivate this automatic timer. Deactivated automatic timers are still stored in the AutoTimer list so that they can be activated again, but they do not record anything meanwhile. Above that you can set this to "Oneshot" so this AutoTimer only programs the (one!) next matching broadcast.</dd>
+					<dt>Search Pattern:</dt>
+					<dd>Choosing the right search items decides whether only the wanted broadcasts or broadcasts having similar names or even nothing gets recorded.<br />Case doesn't matter, "X-Files" matches anything "x-files" will match. You can set multiple search items by separating them with spaces. Only broadcasts will match if they contain <b>all</b> items.<br />You'd better only use letters and numbers for search items, as the EPG often miss colons, brackets and other characters.<br />Experts can also use regular expressions, but you have to get needed information from the VDRAdmin sources (undocumented feature).<br /><br />You can exclude broadcasts so that they don't get recorded even if they would match an AutoTimer. Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, one event a line. This file must be located in your VDRAdmin's configuration folder. If this string is found either in the EPG's <u>title</u> or in <u>title~subtitle</u>, this event will not be programmed by AutoTimer. So you can disable complete episodes (for example when using "Enterprise" as Blacklist-string) or only one episode (when using "Enterprise~Azati Prime" as Blacklist-string).</dd>
+					<dt>Search in:</dt>
+					<dd>Here you can define the EPG sections where VDRAdmin should look for the search pattern.</dd>
+					<dt>Search only on these days:</dt>
+					<dd>Use these checkboxes to limit searching for matching broadcasts to a set of weekdays.</dd>
+					<dt>Channel:</dt>
+					<dd>The channel to look for matching broadcasts or "all" to search in all known or wanted channels. You can define the wanted channels for AutoTimer in "Configuration".</dd>
+					<dt>Starts After:</dt>
+					<dd>A broadcast must start after the time entered here to match. The first text field is for "hour", the second for "minute".
+					<dt>Ends Before:</dt>
+					<dd>A broadcast must end before the time entered here to match. The first text field is for "hour", the second for "minute".
+					<dt>Priority:</dt>
+					<dd>An integer in the range <b>0...99</b>, defining the <b>priority</b> of this timer and of recordings created by this timer. <b>0</b> represents the lowest value, <b>99</b> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <b>start</b> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <b>lifetime</b>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording.</dd>
+					<dt>Lifetime:</dt>
+					<dd>The <b>guaranteed</b> lifetime (in days) of a recording created by this timer. <b>0</b> means that this recording may be automatically deleted at any time by a new recording with higher priority. <b>99</b> means that this recording will never be automatically deleted. Any number in the range <b>1...98</b> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <b>start</b> time of the recording has passed by.</dd>
+					<dt>Episode:</dt>
+					<dd>Check this box if you want VDRAdmin to append the broadcast's EPG subtitle to the recording's file name.</dd>
+					<dt>Remember programmed timers:</dt>
+					<dd>If you enable this VDRAdmin will track timers it has already programmed automatically. This is useful if want to deactivate or delete timers that have been programmed automatically in the timers listing.</dd>
+					<dt>Directory:</dt>
+					<dd>
+						The directory this AutoTimer will place the recordings in. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br />VDRAdmin will append the matching broadcast's title and subtitle (if the "Episode" checkbox is marked) to the directory given here.<br /><br />
+						You can also use the following keywords that are replaced in the final file name by the values supplied by for example <a href="http://tvmovie2vdr.vdr-developer.org">tvm2vdr</a>:
+						<ul>
+							<li>%Title% -  will become the title of the event.</li>
+							<li>%Subtitle% - will become the subtitle of the event.</li>
+							<li>%Director% - will become the director of the event.</li>
+							<li>%Date% - will become the date of the recording.</li>
+							<li>%Category% - will become the category of the Event (Spielfilm/Serie/...).</li>
+							<li>%Genre% - will become the genre of the Event (Drama/Krimi/..).</li>
+							<li>%Year% - will become the year of production.</li>
+							<li>%Country% - will become the country of production.</li>
+							<li>%Originaltitle% - will become the original title of the event.</li>
+							<li>%FSK% - will become the FSK from the event.</li>
+							<li>%Episode% - will become the episode's title of the event.</li>
+							<li>%Rating% - will become the rating of the event from the EPG provider.</li>
+						</ul>
+						<b>Note:</b><br />
+						If you use the above keywords it's in your own responsibility to supply the complete <b>file name</b> for the recordings! VDRAdmin will not append anything to the resulting string.
+				</dl>
+			</td>
+			<td width="30" background="bilder/uebersicht_rechts.gif"></td>
+		</tr>
+		<tr>
+			<td width="30"><img src="bilder/uebersicht_unten_links.gif" alt="" width="30" height="30" border="0" /></td>
+			<td background="bilder/uebersicht_unten.gif"></td>
+			<td width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0" /></td>
+		</tr>
+	</table>
+</body>
+</html>

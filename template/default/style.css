@@ -1,32 +1,56 @@
-body { background: #c4cdd7 url(bilder/background.gif) repeat-x }
-td         { color: #000; font-weight: normal; font-size: 11px; font-family: Verdana, Arial, Geneva, Helvetica, sans-serif }
-.rec { font-size: 11px; font-family: Verdana, Arial, Geneva, Helvetica, sans-serif }
-div  { color: #000; font-weight: normal; font-size: 11px; font-family: Verdana, Arial, Geneva, Helvetica, sans-serif }
-input  { color: #000; font-weight: normal; font-size: 11px; font-family: Verdana, Arial, Geneva, Helvetica, sans-serif }
-textarea { color: #000; font-weight: normal; font-size: 11px; font-family: Verdana, Arial, Geneva, Helvetica, sans-serif }
-select { color: #000; font-weight: normal; font-size: 11px; font-family: Verdana, Arial, Geneva, Helvetica, sans-serif }
-b   { font-weight: bold }
-i  { font-style: italic }
-a     { color: #039; text-decoration: none }
-a:visited    { color: #039; text-decoration: none }
-a:hover     { color: #cc0000; text-decoration: underline }
-a:active    { color: #000; text-decoration: underline }
-a.rec:link      { color: #c00; text-decoration: none }
-a.rec:visited    { color: #000; text-decoration: none }
-a.rec:hover     { color: #cc0000; text-decoration: underline }
-a.rec:active    { color: #000; text-decoration: underline }
-a.sort:link      { color: black; text-decoration: none; font-weight: bold }
-a.sort:visited    { color: black; text-decoration: none; font-weight: bold }
-a.sort:hover     { color: black; text-decoration: underline; font-weight: bold }
-a.sort:active    { color: black; text-decoration: underline; font-weight: bold }
-.headline   { font-weight: bold; font-size: 14px; margin-top: 20px; margin-bottom: 20px }
-.subheadline { color: #039; font-weight: bold }
-.kleine  { font-size: 10px }
-.mini { font-size: 9px }
-.rechts { text-align: right}
-.einzug      { margin: 10px 12px }
-.einzug_ohnetop { margin-right: 12px; margin-left: 12px }
-.einzug_liste  { margin: 3px 5px 0px 5px; white-space: nowrap; }
-.einzug_liste_headlines { margin-right: 5px; margin-left: 6px }
-.einzugklein          { color: #000; font-weight: normal; font-size: 10px; font-family: Verdana, Arial, Geneva, Helvetica, sans-serif; margin-right: 7px; margin-left: 7px }
-.gbutton          { color: black; font-weight: bold }
+* { font-family: Verdana, Arial, Geneva, Helvetica, sans-serif; }
+#rc, #tv { background-color: black; margin: 0px; }
+body { background-color: #c4cdd7; margin: 3px; }
+form { margin: 0px; }
+td { color: black; font-weight: normal; font-size: 11px; }
+input { color: black; font-weight: normal; font-size: 11px; }
+textarea { color: black; font-weight: normal; font-size: 11px; }
+select { color: black; font-weight: normal; font-size: 11px; }
+b { font-weight: bold }
+i { font-style: italic }
+.gbutton { color: black; font-weight: bold }
+
+h1 { margin-right: 12px; margin-left: 12px; font-size: 13px; font-weight: bold; color: black; display: inline; }
+h2 { margin: 0px; font-size: 11px; font-weight: bold; color: black; }
+h3 { margin: 0px 0px; font-size: 11px; font-weight: bold; color: black; }
+h4 { margin: 0px 0px; font-size: 11px; font-weight: normal; font-style: italic; color: black; }
+h5 { margin: 1px 5px; font-size: 11px; font-weight: normal; color: black; text-align: right; }
+
+a, a:visited, a:active { color: black; text-decoration: none; }
+a:hover { color: gray; text-decoration: none; }
+
+#tv input, #tv select, #tv h5 { font-weight: normal; font-size: 9px; display: inline; }
+#prog_list h2 { display: inline; }
+#prog_summary .heading div { margin: 10px 12px; }
+#prog_summary .content { margin-right: 12px; margin-left: 12px }
+#prog_summary h2 { display: inline; }
+#rec_list .list_row .name div { font-weight: bold; }
+#prog_timeline a , #prog_timeline a:visited, #prog_timeline a:active { color: blue; }
+
+#error h2 { font-size: 11px; color: red; }
+
+.list_heading h2 { margin-right: 5px; margin-left: 6px; white-space: nowrap; }
+.list_row td div { margin: 3px 5px 0px 5px; white-space: nowrap; }
+.list_row td.name div { margin: 3px 5px 0px 5px; white-space: normal; }
+
+.color1 { background-color: #e6eff9; }
+.color2 { background-color: #d5dee8; }
+#prog_timeline #prgtable { border-left-color:#c4cdd7; border-bottom-color:#c4cdd7; }
+#prog_timeline #timertable { background:red; border-left-color:#ffcdd7; border-bottom-color:#ffcdd7; }
+#prog_timeline #timeline { background:red; }
+#prog_timeline .col_current { background-color: #e6eee9; }
+#prog_timeline .col_broadcast { background-color: #f7fffa; }
+#prog_timeline .col_timer { background-color: #ffeee9; }
+#rec_list #path { margin: 1em 0px; }
+#timer_list .col_ok { background-color: #00a317; }
+#timer_list .col_conflict { background-color: #a11917; }
+#timer_list .col_collision { background-color: #ffde62; }
+#timer_list .col_inactive { background-color: #858585; }
+#timer_list #prgtable { border-left-color:#000000; border-right-color:#000000; }
+
+#content { margin-top: 1em; }
+.group { margin-top: 0.5em; }
+#buttons { margin-top: 0.5em; }
+
+#help dd dl dt { margin-top: 0.3em; font-weight: normal; font-style: italic; }
+#help dt { margin-top: 0.6em; font-weight: bold; font-style: italic; }

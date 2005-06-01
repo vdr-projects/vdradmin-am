@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- This help is partly taken from the VDR man page, Copyright (c) by Klaus Schmidinger -->
+      
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
+	<title><%! Configuration !%></title>
+	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
+	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+</head>
+
+<body id="config">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="help">
+		<tr height="30">
+			<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
+			<td height="30" valign="middle" background="bilder/uebersicht_oben.gif">
+				<h2><a name="top"></a><%! Configuration !%></h2>
+			</td>
+			<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0" /></td>
+		</tr>
+		<tr>
+			<td width="30" background="bilder/uebersicht_links.gif"></td>
+			<td background="bilder/uebersicht_mitte.gif">
+				<p>Here you can change general settings and base settings for timers, AutoTimers, channel selection and streaming parameters.</p>
+				<p>
+					<hr />
+					[<a href="#general">General Settings</a>] [<a href="#vdr">VDR</a>] [<a href="#identification">Identification</a>] [<a href="#timeline">Timeline</a>] [<a href="#autotimer">AutoTimer</a>] [<a href="#timer">Timer</a>] [<a href="#streaming">Streaming</a>] [<a href="#expert">Expert</a>] [<a href="#channels">Channel Selections</a>]
+					<hr />
+				</p>
+				<p>
+					<dl>
+						<dt><a name="general"></a>General Settings</dt>
+						<dd>
+							<dl>
+								<dt>Skin:</dt>
+								<dd>The skin you want to use.</dd>
+								<dt>Login Page:</dt>
+								<dd>The page you want to see at first connect to VDRAdmin.</dd>
+								<dt>Number of channels to use:</dt>
+								<dd>VDRAdmin will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin will read so that you can use this to reduce VDRAdmin's memory consumption and increase its performance. <b>0</b> turns this feature off and VDRAdmin will use all available channels. <u>Note:</u> Changes are not populated immediately. You have to either wait until VDRAdmin reconnects to VDR to update its EPG information or force this update manually in the "AutoTimer" menu or restart VDRAdmin.</dd>
+								<dt>Local net (no login required):</dt>
+								<dd>Here you can specify an IP address or range that can login without providing login information. For example: "192.168.0.0/24" will include any IP starting with "192.168.0", "192.168.0.123/32" will only match "192.168.0.123".</dd>
+							</dl>
+							<div align="right">[<a href="#top">Top</a>]</div>
+							<hr />
+						</dd>
+						
+						<dt><a name="vdr"/>VDR</dt>
+						<dd>
+							<dl>
+								<dt>Number of DVB cards:</dt>
+								<dd>The number of DVB card VDR can access. Depending on this value VDRAdmin will calculate conflicting timers in the "Timers" menu.</dd>
+								<dt>Path to recordings:</dt>
+								<dd>The path to VDR's recordings. It's used so that VDRAdmin can locate the recordings when using "Recordings Streaming" and "reccmds.conf" in the "Recordings" menu.</dd>
+								<dt>Path to configuration files:</dt>
+								<dd>The path where VDR's configuration files are located. If this directory contains the file <u>reccmds.conf</u> its content is shown in a selectbox in the "Recordings" menu.</dd>
+							</dl>
+							<div align="right">[<a href="#top">Top</a>]</div>
+							<hr />
+						</dd>
+
+						<dt><a name="identification"></a>Identification</dt>
+						<dd>
+							<dl>
+								<dt>Username:</dt>
+								<dd>The username for the main user, i.e. the user having the most privileges.</dd>
+								<dt>Password:</dt>
+								<dd>The main user's password.</dd>
+								<dt>Guest Account:</dt>
+								<dd>If you want an user account having only limited privileges, this is for you. The guest user cannot modify anything, it's only allowed to view the EPG, timers, AutoTimers and recordings listings.
+								<dt>Guest Username:</dt>
+								<dd>The username for the guest user.</dd>
+								<dt>Guest Password:</dt>
+								<dd>The guest user's password.</dd>
+							</dl>
+							<div align="right">[<a href="#top">Top</a>]</div>
+							<hr />
+						</dd>
+
+						<dt><a name="timeline"></a>Timeline</dt>
+						<dd>
+							<dl>
+								<dt>Hours:</dt>
+								<dd>The number of hours to show in the timeline.</dd>
+								<dt>Times:</dt>
+								<dd>A comma separated list of times in hh:mm format that appear in the selectbox placed at the top.</dd>
+							</dl>
+							<div align="right">[<a href="#top">Top</a>]</div>
+							<hr />
+						</dd>
+
+						<dt><a name="autotimer"></a>AutoTimer</dt>
+						<dd>
+							<dl>
+								<dt>Active:</dt>
+								<dd>Activate or deactivate the AutoTimer function.</dd>
+								<dt>Timeout:</dt>
+								<dd>The interval, the the EPG data is checked for updating the AutoTimers.</dd>
+								<dt>Priority:</dt>
+								<dd>An integer in the range <b>0...99</b>, defining the <b>priority</b> of this timer and of recordings created by this timer. <b>0</b> represents the lowest value, <b>99</b> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <b>start</b> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <b>lifetime</b>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording.</dd>
+								<dt>Lifetime:</dt>
+								<dd>The <b>guaranteed</b> lifetime (in days) of a recording created by this timer. <b>0</b> means that this recording may be automatically deleted at any time by a new recording with higher priority. <b>99</b> means that this recording will never be automatically deleted. Any number in the range <b>1...98</b> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <b>start</b> time of the recording has passed by.</dd>
+							</dl>
+							<div align="right">[<a href="#top">Top</a>]</div>
+							<hr />
+						</dd>
+
+						<dt><a name="timer"></a>Timer</dt>
+						<dd>
+							<dl>
+								<dt>Priority:</dt>
+								<dd>An integer in the range <b>0...99</b>, defining the <b>priority</b> of this timer and of recordings created by this timer. <b>0</b> represents the lowest value, <b>99</b> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <b>start</b> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <b>lifetime</b>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording.</dd>
+								<dt>Lifetime:</dt>
+								<dt>Time Margin at Start:</dt>
+								<dd>The number of minutes VDRAdmin subtracts from the broadcasts start time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view.</dd>
+								<dt>Time Margin at Stop:</dt>
+								<dd>The number of minutes VDRAdmin adds to the broadcasts stop time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view.</dd>
+							</dl>
+							<div align="right">[<a href="#top">Top</a>]</div>
+							<hr />
+						</dd>
+
+						<dt><a name="streaming"></a>Streaming</dt>
+						<dd>
+							<dl>
+								<dt>Life Streaming:</dt>
+								<dd>Enable or disable Life Streaming using the <a href="http://www.magoa.net/linux/">streamdev plugin</a>. You also have to set the correct "HTTP Port for Streamdev" below.</dd>
+								<dt>HTTP Port of Streamdev (also possible 3000/ts):</dt>
+								<dd>Here you have to set the port number your VDR's streamdev-server listens for connections. Additionally you can also provide the stream type you like to use.</dd>
+								<dt>Recordings Streaming:</dt>
+								<dd>Enable or disable Recordings Streaming.<br />Well actually this is no real "streaming", but you have to setup your workstation so that it can access VDR's recordings. You can use for example Samba or NFS for this. VDRAdmin simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation's display.</dd>
+								<dt>Path to VDR Recordings on your workstation:</dt>
+								<dd>This is the path where your workstation can access VDR's recordings. This depends on your VDR and workstation setup, for example "\\vdr\videos" or "V:\" (on Windows) or "/mnt/videos" (on Linux).</dd>
+							</dl>
+							<div align="right">[<a href="#top">Top</a>]</div>
+							<hr />
+						</dd>
+
+						<dt><a name="expert"></a>Expert</dt>
+						<dd>
+							This section is for experts <b>only</b>, i.e. you know what you are doing!
+							<dl>
+								<dt>Read EPG directly using epg.data:</dt>
+								<dd>Accessing VDR's EPG through VDR's SVDRPort seems to block VDR for some time. If this option is activated VDRAdmin will read the epg.data file directly so that VDR doesn't get blocked.<br /><br /><u>Note:</u><br />There seems to be a bug somewhere. If you enable this option there's the rare(?) possibility, that some timers can't be programmed due to their summaries. If you experience this bug it would be very helpful if you could send the timer's information to <a href="mailto:mail@andreas.vdr-developer.org">me</a>.</dd>
+								<dt>epg.data filename:</dt>
+								<dd>If you've enabled the option above you need to tell VDRAdmin where the epg.data file is located.</dd>
+							</dl>
+							<dt>Number of columns in "What's On Now":</dt>
+							<dd>Change the number of columns displayed in "What's On Now" with this option.</dt>
+							<dt>VFAT:</dt>
+							<dd>If you have compiled VDR with the VFAT define you have to enable this option. If this option is set to the wrong value, you may have problems with certain recordings if you want to stream them or run reccmds on them.</dd>
+							<div align="right">[<a href="#top">Top</a>]</div>
+							<hr />
+						</dd>
+
+						<dt><a name="channels"></a>Channel Selections:</dt>
+						<dd>
+							If you want to limit the number of channels used in some parts of VDRAdmin, this is for you!
+							<p>Use the radio buttons to activate or deactivate the wanted channels in the named menu.</p>
+							<p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click "&gt;&gt;&gt;&gt;&gt;". If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click "&lt;&lt;&lt;&lt;&lt;".</p>
+							<div align="right">[<a href="#top">Top</a>]</div>
+						</dd>
+					</dl>
+				</p>
+			</td>
+			<td width="30" background="bilder/uebersicht_rechts.gif"></td>
+		</tr>
+		<tr>
+			<td width="30"><img src="bilder/uebersicht_unten_links.gif" alt="" width="30" height="30" border="0" /></td>
+			<td background="bilder/uebersicht_unten.gif"></td>
+			<td width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0" /></td>
+		</tr>
+	</table>
+</body>
+
+</html>

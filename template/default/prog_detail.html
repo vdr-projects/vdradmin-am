@@ -2,27 +2,27 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" />
+	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
 	<title><tmpl_var title></title>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 </head>
 
-<body bgcolor="#c4cdd7">
+<body id="prog_detail">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr height="30">
 			<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0" /></td>
 			<td height="30" valign="middle" background="bilder/uebersicht_oben.gif">
-				<b><tmpl_var channel_name><tmpl_if date> | <tmpl_var date>   <tmpl_var start> - <tmpl_var stop></tmpl_if></b>
+				<h2><tmpl_var channel_name><tmpl_if date>&nbsp;|&nbsp;<tmpl_var date>&nbsp;&nbsp;&nbsp;<tmpl_var start>&nbsp;-&nbsp;<tmpl_var stop></tmpl_if></h2>
 			</td>
 			<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0" /></td>
 		</tr>
 		<tr>
 			<td width="30" background="bilder/uebersicht_links.gif">&nbsp;</td>
-			<td bgcolor="#c4cdd7" background="bilder/uebersicht_mitte.gif">
-				<b><tmpl_var title></b><br />
+			<td background="bilder/uebersicht_mitte.gif">
+				<h3><tmpl_var title></h3>
 				<tmpl_if subtitle>
-					<i><nobr><tmpl_var subtitle></nobr></i><br /><br />
+					<h4><tmpl_var subtitle></h4><br />
 				</tmpl_if>
 				<tmpl_var text><br /><br />
 				&nbsp;<a href="javascript:window.close()">[<%! close !%>]</a>
