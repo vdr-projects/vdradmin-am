@@ -6,11 +6,14 @@
 	<title>VDRAdmin <tmpl_var version> (<tmpl_var host>)</title>
 	<link href="bilder/favicon.ico" rel="shortcut icon" />
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+	<tmpl_if usercss>
+		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
+	</tmpl_if>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 </head>
 
-<frameset border="0" cols="165,*" frameborder="no" framespacing="0">
-	<frame name="nav" noresize src="left.html" />
+<frameset border="0" cols="155,*" frameborder="no" framespacing="0">
+	<frame name="nav" noresize src="navigation.html" />
 	<frame name="main" noresize src="<tmpl_var loginpage>" />
 
 	<noframes>

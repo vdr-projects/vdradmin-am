@@ -5,163 +5,173 @@
 	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>"/>
 	<title>VDRAdmin - <tmpl_if newtimer><%! Add New AutoTimer !%><tmpl_else><%! Edit AutoTimer !%></tmpl_if></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css"/>
+	<tmpl_if usercss>
+		<link href="user.css" rel="stylesheet" media="screen" type="text/css"/>
+	</tmpl_if>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 </head>
 
 <body id="at_new">
 	<form action="<tmpl_var url>" method="get" name="FormName">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39" id="heading">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
-				<td valign="middle" width="500" background="bilder/nav_button_back.gif">
+				<td class="col_left"></td>
+				<td class="col_title">
 					<h1><tmpl_if newtimer><%! Add New AutoTimer !%><tmpl_else><%! Edit AutoTimer !%></tmpl_if></h1>
 				</td>
 <tmpl_if name="help_url">
-				<td align="right" background="bilder/nav_button_back_mitte.gif">
-					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" align="right" valign="top" alt="help" title="<%! Help !%>"/></a>
+				<td class="col_help">
+					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" alt="help" title="<%! Help !%>"/></a>
 				</td>
 </tmpl_if>
-				<td width="15" background="bilder/nav_button_back_end.gif"></td>
+				<td class="col_right"></td>
 			</tr>
 		</table>
 
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content">
-			<tr height="30">
-				<td width="30" height="30"><img src="bilder/uebersicht_oben_links.gif" alt="" width="30" height="30" border="0"/></td>
-				<td height="30" background="bilder/uebersicht_oben.gif"></td>
-				<td height="30" background="bilder/uebersicht_oben.gif"></td>
-				<td width="30" height="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" width="30" height="30" border="0"/></td>
-			</tr>
-			<tr height="25">
-				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-				<td width="20%" height="25" background="bilder/uebersicht_mitte.gif"><h5><%! AutoTimer Active: !%></h5></td>
-				<td height="25" background="bilder/uebersicht_mitte.gif">
+		<div id="content">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
+				<tr class="heading">
+					<td class="col_left"></td>
+					<td colspan="2"></td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_spacer">
+					<td class="col_left"></td>
+					<td colspan="2"></td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_even">
+					<td class="col_left"></td>
+					<td class="col_label"><h5><%! AutoTimer Active: !%></h5></td>
+					<td class="col_value">
 <tmpl_if name="oneshot">
-         	<input type="radio" name="active" value="1" /> <%! Yes !%>
-         	<input type="radio" name="active" value="0" /> <%! No !%>
-					<input type="radio" name="active" value="2" checked /> <%! oneshot !%>
+	         	<input type="radio" name="active" value="1" id="active_yes" /><label for="active_yes"><%! Yes !%></label>
+ 	        	<input type="radio" name="active" value="0" id="active_no" /><label for="active_no"><%! No !%></label>
+						<input type="radio" name="active" value="2" id="active_oneshot" checked /><label for="active_oneshot"><%! oneshot !%></label>
 <tmpl_else>
-					<input type="radio" name="active" value="1" <tmpl_if active>checked</tmpl_if> /> <%! Yes !%>
-					<input type="radio" name="active" value="0" <tmpl_unless active>checked</tmpl_unless> /> <%! No !%>
-					<input type="radio" name="active" value="2" /> <%! oneshot !%>
+						<input type="radio" name="active" value="1" id="active_yes" <tmpl_if active>checked</tmpl_if> /><label for="active_yes"><%! Yes !%></label>
+						<input type="radio" name="active" value="0" id="active_no" <tmpl_unless active>checked</tmpl_unless> /><label for="active_no"><%! No !%></label>
+						<input type="radio" name="active" value="2" id="active_oneshot" /><label for="active_oneshot"><%! oneshot !%></label>
 </tmpl_if>
-				</td>
-				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
-			</tr>
-			<tr height="25">
-				<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-				<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Search Patterns: !%></h5></td>
-				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
-					<input type="text" name="pattern" value="<tmpl_var pattern>" size="40" />
-				</td>
-				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
-			</tr>
-			<tr height="25">
-				<td valign="top" width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-				<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Search in: !%></h5></td>
-				<td height="25" background="bilder/uebersicht_mitte.gif">
-					<input type="checkbox" name="title" value="1" <tmpl_if title>checked</tmpl_if> /> <%! Title !%>
-					<input type="checkbox" name="subtitle" value="1" <tmpl_if subtitle>checked</tmpl_if> /> <%! Subtitle !%>
-					<input type="checkbox" name="description" value="1" <tmpl_if description>checked</tmpl_if> /> <%! Description !%>
-        </td>
-				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
-			</tr>
-			<tr height="25">
-				<td valign="top" width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-				<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Search only on these days: !%></h5></td>
-				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
-					<input type="checkbox" name="wday_mon" value="1" <tmpl_if wday_mon>checked</tmpl_if> /> <%! Monday !%>
-					<input type="checkbox" name="wday_tue" value="1" <tmpl_if wday_tue>checked</tmpl_if> /> <%! Tuesday !%>
-					<input type="checkbox" name="wday_wed" value="1" <tmpl_if wday_wed>checked</tmpl_if> /> <%! Wednesday !%>
-					<input type="checkbox" name="wday_thu" value="1" <tmpl_if wday_thu>checked</tmpl_if> /> <%! Thursday !%>
-					<input type="checkbox" name="wday_fri" value="1" <tmpl_if wday_fri>checked</tmpl_if> /> <%! Friday !%>
-					<input type="checkbox" name="wday_sat" value="1" <tmpl_if wday_sat>checked</tmpl_if> /> <%! Saturday !%>
-					<input type="checkbox" name="wday_sun" value="1" <tmpl_if wday_sun>checked</tmpl_if> /> <%! Sunday !%>
-        </td>
-				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
-			</tr>
-			<tr height="25">
-				<td valign="top" width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-				<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Channel: !%></h5></td>
-				<td height="25" background="bilder/uebersicht_mitte.gif">
-					<select name="channel" size="1">
-						<option value="0"><%! all !%></option>
+					</td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_odd">
+					<td class="col_left"></td>
+					<td class="col_label"><h5><%! Search Patterns: !%></h5></td>
+					<td class="col_value">
+						<input type="text" name="pattern" value="<tmpl_var pattern>" size="40" />
+					</td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_even">
+					<td class="col_left"></td>
+					<td class="col_label"><h5><%! Search in: !%></h5></td>
+					<td class="col_value">
+						<input type="checkbox" name="title" value="1" id="searchin_title" <tmpl_if title>checked</tmpl_if> /><label for="searchin_title"><%! Title !%></label>
+						<input type="checkbox" name="subtitle" value="1" id="searchin_subtitle" <tmpl_if subtitle>checked</tmpl_if> /><label for="searchin_subtitle"><%! Subtitle !%></label>
+						<input type="checkbox" name="description" value="1" id="searchin_description" <tmpl_if description>checked</tmpl_if> /><label for="searchin_description"><%! Description !%></label>
+ 	       </td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_odd">
+					<td class="col_left"></td>
+					<td class="col_label"><h5><%! Search only on these days: !%></h5></td>
+					<td class="col_value">
+						<input type="checkbox" name="wday_mon" value="1" id="wday_mon" <tmpl_if wday_mon>checked</tmpl_if> /><label for="wday_mon"><%! Monday !%></label>
+						<input type="checkbox" name="wday_tue" value="1" id="wday_tue" <tmpl_if wday_tue>checked</tmpl_if> /><label for="wday_tue"><%! Tuesday !%></label>
+						<input type="checkbox" name="wday_wed" value="1" id="wday_wed" <tmpl_if wday_wed>checked</tmpl_if> /><label for="wday_wed"><%! Wednesday !%></label>
+						<input type="checkbox" name="wday_thu" value="1" id="wday_thu" <tmpl_if wday_thu>checked</tmpl_if> /><label for="wday_thu"><%! Thursday !%></label>
+						<input type="checkbox" name="wday_fri" value="1" id="wday_fri" <tmpl_if wday_fri>checked</tmpl_if> /><label for="wday_fri"><%! Friday !%></label>
+						<input type="checkbox" name="wday_sat" value="1" id="wday_sat" <tmpl_if wday_sat>checked</tmpl_if> /><label for="wday_sat"><%! Saturday !%></label>
+						<input type="checkbox" name="wday_sun" value="1" id="wday_sun" <tmpl_if wday_sun>checked</tmpl_if> /><label for="wday_sun"><%! Sunday !%></label>
+ 	       </td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_even">
+					<td class="col_left"></td>
+					<td class="col_label"><h5><%! Channel: !%></h5></td>
+					<td class="col_value">
+						<select class="submit" name="channel">
+							<option value="0"><%! all !%></option>
 <tmpl_loop channels>
-							<option value="<tmpl_var vdr_id>" <tmpl_if cur> selected</tmpl_if>><tmpl_var name></option>
+								<option value="<tmpl_var vdr_id>" <tmpl_if cur> selected</tmpl_if>><tmpl_var name></option>
 </tmpl_loop>
-					</select>
-				</td>
-				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
-			</tr>
-			<tr height="25">
-				<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-				<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Starts After: !%></h5></td>
-				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
-					<input type="text" name="starth" value="<tmpl_var starth>" size="2" maxlength="2" />
-					<b>&nbsp;:&nbsp;</b>
-					<input type="text" name="startm" value="<tmpl_var startm>" size="2" maxlength="2" />
-					&nbsp;<%! o'clock !%>
-				</td>
-				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
-			</tr>
-			<tr height="25">
-				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-				<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Ends Before: !%></h5></td>
-				<td height="25" background="bilder/uebersicht_mitte.gif">
-					<input type="text" name="stoph" value="<tmpl_var stoph>" size="2" maxlength="2" />
-					<b>&nbsp;:&nbsp;</b>
-					<input type="text" name="stopm" value="<tmpl_var stopm>" size="2" maxlength="2" />
-					&nbsp;<%! o'clock !%>
-				</td>
-				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
-			</tr>
-			<tr height="25">
-				<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-				<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Priority: !%></h5></td>
-				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
-					<input type="text" name="prio" value="<tmpl_var prio>" size="2" maxlength="2" />
-				</td>
-				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
-			</tr>
-			<tr height="25">
-				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-				<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Lifetime: !%></h5></td>
-				<td height="25" background="bilder/uebersicht_mitte.gif">
-					<input type="text" name="lft" value="<tmpl_var lft>" size="2" maxlength="2" />
-				</td>
-				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
-			</tr>
-			<tr height="25">
-				<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-				<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Episode: !%></h5></td>
-				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
-					<input type="checkbox" name="episode" value="1" <tmpl_if episode>checked</tmpl_if> />
-				</td>
-				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
-			</tr>
-			<tr height="25">
-				<td width="30" height="25" background="bilder/uebersicht_links.gif"></td>
-				<td height="25" background="bilder/uebersicht_mitte.gif"><h5><%! Remember programmed timers: !%></h5></td>
-				<td height="25" background="bilder/uebersicht_mitte.gif">
-					<input type="radio" name="done" value="1" <tmpl_if done>checked</tmpl_if> /> <%! Yes !%>
-					<input type="radio" name="done" value="0" <tmpl_unless done>checked</tmpl_unless> /> <%! No !%>
-				</td>
-				<td width="30" height="25" background="bilder/uebersicht_rechts.gif"></td>
-			</tr>
-			<tr height="25">
-				<td width="30" height="25" background="bilder/uebersicht_links_dark.gif"></td>
-				<td height="25" background="bilder/uebersicht_mitte_dark.gif"><h5><%! Directory: !%></h5></td>
-				<td height="25" background="bilder/uebersicht_mitte_dark.gif">
-					<input type="text" name="directory" value="<tmpl_var directory>" size="40" />
-				</td>
-				<td width="30" height="25" background="bilder/uebersicht_rechts_dark.gif"></td>
-			</tr>
-			<tr height="30">
-				<td width="30" height="30"><img src="bilder/uebersicht_unten_links.gif" alt="" width="30" height="30" border="0"/></td>
-				<td height="30" background="bilder/uebersicht_unten.gif"></td>
-				<td height="30" background="bilder/uebersicht_unten.gif"></td>
-				<td width="30" height="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" width="30" height="30" border="0"/></td>
-			</tr>
-		</table>
+						</select>
+					</td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_odd">
+					<td class="col_left"></td>
+					<td class="col_label"><h5><%! Starts After: !%></h5></td>
+					<td class="col_value">
+						<input type="text" name="starth" value="<tmpl_var starth>" size="2" maxlength="2" />
+						<b>&nbsp;:&nbsp;</b>
+						<input type="text" name="startm" value="<tmpl_var startm>" size="2" maxlength="2" />
+						&nbsp;<%! o'clock !%>
+					</td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_even">
+					<td class="col_left"></td>
+					<td class="col_label"><h5><%! Ends Before: !%></h5></td>
+					<td class="col_value">
+						<input type="text" name="stoph" value="<tmpl_var stoph>" size="2" maxlength="2" />
+						<b>&nbsp;:&nbsp;</b>
+						<input type="text" name="stopm" value="<tmpl_var stopm>" size="2" maxlength="2" />
+						&nbsp;<%! o'clock !%>
+					</td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_odd">
+					<td class="col_left"></td>
+					<td class="col_label"><h5><%! Priority: !%></h5></td>
+					<td class="col_value">
+						<input type="text" name="prio" value="<tmpl_var prio>" size="2" maxlength="2" />
+					</td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_even">
+					<td class="col_left"></td>
+					<td class="col_label"><h5><%! Lifetime: !%></h5></td>
+					<td class="col_value">
+						<input type="text" name="lft" value="<tmpl_var lft>" size="2" maxlength="2" />
+					</td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_odd">
+					<td class="col_left"></td>
+					<td class="col_label"><h5><label for="episode"><%! Episode: !%></label></h5></td>
+					<td class="col_value">
+						<input type="checkbox" name="episode" value="1" id="episode" <tmpl_if episode>checked</tmpl_if> />
+					</td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_even">
+					<td class="col_left"></td>
+					<td class="col_label"><h5><%! Remember programmed timers: !%></h5></td>
+					<td class="col_value">
+						<input type="radio" name="done" value="1" id="rem_yes" <tmpl_if done>checked</tmpl_if> /><label for="rem_yes"><%! Yes !%></label>
+						<input type="radio" name="done" value="0" id="rem_no" <tmpl_unless done>checked</tmpl_unless> /><label for="rem_no"><%! No !%></label>
+					</td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_odd">
+					<td class="col_left"></td>
+					<td class="col_label"><h5><%! Directory: !%></h5></td>
+					<td class="col_value">
+						<input type="text" name="directory" value="<tmpl_var directory>" size="40" />
+					</td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="footer">
+					<td class="col_left"></td>
+					<td colspan="2"></td>
+					<td class="col_right"></td>
+				</tr>
+			</table>
+		</div>
+
 		<div id="buttons">
 			<input type="submit" class="submit" name="save" value="<%! Save !%>" />
 			<input type="submit" class="submit" name="exit" value="<%! Cancel !%>" />

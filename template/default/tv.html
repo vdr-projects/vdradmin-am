@@ -5,6 +5,9 @@
 	<title>VDRAdmin - <%! TV !%> (<tmpl_var host>)</title>
 	<meta http-equiv="Content-Type" content="text/html; <%! charset=ISO-8859-1 !%>" />
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+	<tmpl_if usercss>
+		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
+	</tmpl_if>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<script language="JavaScript">
 		<!--
@@ -164,13 +167,13 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3">&nbsp;</td>
+				<td colspan="3"></td>
 			</tr>
 			<tr valign="middle">
 				<td valign="middle">
 					<nobr>
 						<h5><%! Interval: !%></h5>
-						<select name="Seconds" size="1" onChange="v_changeInterval(this.options[this.selectedIndex].value)">
+						<select name="Seconds" class="submit" onChange="v_changeInterval(this.options[this.selectedIndex].value)">
 							<option value="0"><%! off !%></option>
 							<option value="1"> 1 <%! sec. !%></option>
 							<option value="2"> 2 <%! sec. !%></option>
@@ -182,7 +185,7 @@
 						</select>
 						<input type="button" class="submit" name="livebild" value='<%! G !%>' title="<%! Grab the picture! !%>" onClick="WebcamUpdate()" />
 						&nbsp;&nbsp;<h5><%! Size: !%></h5>
-						<select name="Size" size="1" onChange="v_changeSize(this.options[this.selectedIndex].value)">
+						<select name="Size" class="submit" onChange="v_changeSize(this.options[this.selectedIndex].value)">
 							<option value="full">1:1</option>
 							<option value="half" selected>1:2</option>
 							<option value="quarter">1:4</option>
@@ -190,10 +193,10 @@
 						<input type="button" class="submit" name="livebild" value='<%! G !%>' title="<%! Grab the picture! !%>" onClick="WebcamUpdate()" />
 					</nobr>
 				</td>
-				<td colspan="2">&nbsp;</td>
+				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td colspan="3">&nbsp;</td>
+				<td colspan="3"></td>
 			</tr>
 		</table>
 	</form>

@@ -4,6 +4,10 @@
 <head>
 	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
 	<title>VDRAdmin - <%! Remote Control !%> (<tmpl_var host>)</title>
+	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+	<tmpl_if usercss>
+		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
+	</tmpl_if>
 	<script language="JavaScript">
 		<!--
     	function switch_channel(url) {
@@ -14,7 +18,7 @@
 	</script>
 </head>
 
-<body bgcolor="black" id="rc">
+<body id="rc">
 	<table width="200" border="0" cellspacing="0" cellpadding="0" background="bilder/fern_back.jpg">
 		<tr>
 			<td></td>

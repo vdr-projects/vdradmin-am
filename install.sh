@@ -17,6 +17,7 @@ LOGDIR=${LOGDIR:-$DESTDIR/var/log}
 PIDFILE=${PIDFILE:-$DESTDIR/var/run/vdradmind.pid}
 VIDEODIR=${VIDEODIR:-/video}
 VDRCONF=${VDRCONF:-$VIDEODIR}
+EPGDATA=${EPGDATA:-$VIDEODIR/epg.data}
 
 LANGS="de es fr fi"
 
@@ -96,7 +97,7 @@ function doInstall()
 
 	[ ! -e $DOCDIR ] && mkdir -p $DOCDIR
 	if [ -d $DOCDIR ]; then
-  	cp -r contrib COPYING HISTORY* INSTALL README* $DOCDIR
+  	cp -r contrib COPYING HISTORY INSTALL README $DOCDIR
 	else
 		echo "$DOCDIR exists but is no directory!"
 		echo "Aborting..."
@@ -144,8 +145,9 @@ function doInstall()
   	    -e "s:/etc/vdradmin/vdradmind.at:${ETCDIR}/vdradmind.at:" \
   	    -e "s:/etc/vdradmin/vdradmind.bl:${ETCDIR}/vdradmind.bl:" \
   	    -e "s:/usr/share/locale:${LOCDIR}:" \
-  	    -e "s:$CONFIG{VIDEODIR} *= "/video";:${VIDEODIR}:" \
-				-e "s:$CONFIG{VDRCONFDIR} *= "$CONFIG{VIDEODIR}";:${VDRCONF}:"
+  	    -e "s:\(\$CONFIG{VIDEODIR} *= \)\"/video\";:\1\"${VIDEODIR}\";:" \
+				-e "s:\(\$CONFIG{VDRCONFDIR} *= \)\"\$CONFIG{VIDEODIR}\";:\1\"${VDRCONF}\";:" \
+				-e "s:\(\$CONFIG{EPG_FILENAME} *= \)\"\$CONFIG{VIDEODIR}/epg.data\";:\1\"${EPGDATA}\";:"
 
 		chmod a+x  $BINDIR/vdradmind.pl
 

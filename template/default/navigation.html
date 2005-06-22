@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
+	<title>VDRAdmin</title>
+	<link href="style.css" rel="stylesheet" media="screen" />
+	<tmpl_if usercss>
+		<link href="user.css" rel="stylesheet" media="screen" />
+	</tmpl_if>
+
+	<script>
+		<!--
+			function rc_open() {
+				//window.open("./vdradmin.pl?aktion=rc_show", "_blank", "width=200, height=640, resizable=no, scrollbars=no, status=no, toolbar=no");
+				window.open("./vdradmin.pl?aktion=rc_show", "_blank", "width=213, height=510, resizable=no, scrollbars=no, status=no, toolbar=no");
+			}
+			function tv_open() {
+				window.open("./vdradmin.pl?aktion=tv_show", "_blank", "width=615, height=548, resizable=yes, scrollbars=no, status=no, toolbar=no");
+			}
+		// -->
+	</script>
+</head>
+
+<body id="navigation">
+	<form action="vdradmin.pl" method="get" name="FormName" target="main">
+		<table width="150" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="logo">
+					<a href="./" target="_top"><tmpl_if linvdr><img src="bilder/logo_linvdr.gif" alt="" height="50" width="150" border="0" /><tmpl_else><img src="bilder/logo_other.gif" alt="" height="50" width="150" border="0" /></tmpl_if></a>
+				</td>
+			</tr>
+			<tr><td class="separator"></td></tr>
+			<tr>
+				<td class="navi"><a href="vdradmin.pl?aktion=prog_summary" target="main"><%! What's On Now? !%></a></td>
+			</tr>
+			<tr><td class="separator"></td></tr>
+			<tr>
+				<td class="navi"><a href="vdradmin.pl?aktion=prog_list2" target="main"><%! Playing Today !%></a></td>
+			</tr>
+			<tr><td class="separator"></td></tr>
+			<tr>
+				<td class="navi"><a href="vdradmin.pl?aktion=prog_timeline" target="main"><%! Timeline !%></a></td>
+			</tr>
+			<tr><td class="separator"></td></tr>
+			<tr>
+				<td class="navi"><a href="vdradmin.pl?aktion=prog_list" target="main"><%! Channels !%></a></td>
+			</tr>
+			<tr><td class="separator"></td></tr>
+			<tr>
+				<td class="navi"><a href="vdradmin.pl?aktion=timer_list" target="main"><%! Timer !%></a></td>
+			</tr>
+			<tr><td class="separator"></td></tr>
+			<tr>
+				<td class="navi"><a href="vdradmin.pl?aktion=at_timer_list" target="main"><%! AutoTimer !%></a></td>
+			</tr>
+			<tr><td class="separator"></td></tr>
+			<tr>
+				<td class="navi"><a href="vdradmin.pl?aktion=rec_list" target="main"><%! Recordings !%></a></td>
+			</tr>
+			<tr><td class="separator"></td></tr>
+			<tr>
+				<td class="navi"><a href="vdradmin.pl?aktion=config" target="main"><%! Configuration !%></a></td>
+			</tr>
+			<tr><td class="separator"></td></tr>
+			<tr>
+				<td class="navi"><a href="javascript:rc_open();"><%! Remote Control !%></a></td>
+			</tr>
+			<tr><td class="separator"></td></tr>
+			<tr>
+				<td class="navi"><a href="javascript:tv_open();"><%! Watch TV !%></a></td>
+			</tr>
+			<tr><td class="separator"></td></tr>
+			<tr>
+				<td class="search">
+					<input type="text" name="search" size="15" />
+					<input type="submit" name="submit" value="<%! Search !%>" />
+					<input type="hidden" name="aktion" value="prog_summary" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+
+</html>

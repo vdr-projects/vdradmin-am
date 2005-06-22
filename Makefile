@@ -5,6 +5,11 @@ DOCDIR=/usr/share/doc/vdradmin
 BINDIR=/usr/bin
 LOCDIR=/usr/share/locale/
 MANDIR=/usr/share/man/man1/
+LOGDIR=/var/log
+PIDFILE=/var/run/vdradmind.pid
+VIDEODIR=/video
+VDRCONF=$(VIDEODIR)
+EPGDATA=$(VIDEODIR)/epg.data
 
 LANGS=de es fr fi
 

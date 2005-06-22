@@ -6,6 +6,9 @@
 	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
 	<title>VDRAdmin - <%! What's On Now? !%></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+	<tmpl_if usercss>
+		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
+	</tmpl_if>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 
 <?%- 
@@ -65,14 +68,15 @@
 
 <body id="prog_timeline">
 	<form action="<?% nowurl %?>" method="get" name="FormName">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
-				<td valign="middle" background="bilder/nav_button_back.gif">
+				<td class="col_left"></td>
+				<td class="col_title">
 					<h1><?% now %?>&nbsp;<%! o'clock !%></h1>
 				</td>
-				<td align="right" valign="middle" background="bilder/nav_button_back_mitte.gif">
+				<td class="col_other">
 					<%! What's on: !%>&nbsp;
-					<select size="1" name="Auswahl" onChange="Go(this.form.Auswahl.options[this.form.Auswahl.options.selectedIndex].value)" style="width:100px" width="100">
+					<select name="Auswahl" class="submit" onChange="Go(this.form.Auswahl.options[this.form.Auswahl.options.selectedIndex].value)" style="width:100px" width="100">
 						<option value="<?% nowurl %?>"><%! now !%></option>
 <?% FOREACH timer = times %?>
 	<?% timer_o_dopp = timer | replace('\:', '') %?>
@@ -84,72 +88,84 @@
 					&nbsp;<%! o'clock !%>
 					<input type="hidden" name="aktion" value="prog_timeline" />
 				</td>
-				<td width="15" background="bilder/nav_button_back_end.gif"></td>
+				<td class="col_right"></td>
 			</tr>
 		</table>
 
 		<!-- Vertikal ansicht TOP -->
 		<span id="timeline" class="timeline"><img src="bilder/spacer.gif" width="1" height="1" border="0" /></span>
 
-		<!-- Zeitleiste -->
-		<table width="<?% breite + seite + 40 %?>" border="0" cellspacing="0" cellpadding="0"  name="bigtable" id="bigtable">
-			<tr>
-				<td valign="top" width="30"><img src="bilder/uebersicht_oben_links.gif" alt="" height="30" width="30" border="0" /></td>
-				<td colspan="3" width='<?% breite + seite %?>' background="bilder/uebersicht_oben.gif"><b><%! Timeline: !%>&nbsp;<?% date.format(akt_sekunde, '%H:%M') %?>&nbsp;<%! o'clock !%>&nbsp;<%! to !%>&nbsp;<?% date.format(bis_sec, '%H:%M') %?>&nbsp;<%! o'clock !%></b></td>
-				<td align="right" background="bilder/uebersicht_oben.gif"><nobr><?% IF akt_stunde <= jetzt_stunde %?><img src="bilder/pfeile_nachlinks_soft.gif" border="0" width="28" height="30" /><?% ELSE %?><a href="<?% nowurl %?>&time=<?% akt_stunde - zeitrahmen | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachlinks.gif" border="0" width="28" height="30" /></a><?% END %?><a href="<?% nowurl %?>&time=<?% bis_stunde | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachrechts.gif" border="0" width="29" height="30" /></a></nobr></td>
-				<td valign="top" width="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" height="30" width="30" border="0" /></td>
-			</tr>
-			<tr height="20">
-				<td width="30" height="20" background="bilder/uebersicht_links.gif"></td>
-				<td colspan="4" background="bilder/uebersicht_mitte.gif"></td>
-				<td width="30" background="bilder/uebersicht_rechts.gif"></td>
-			</tr>
-			<tr>
-				<td valign="top" width="30" background="bilder/uebersicht_links.gif"></td>
-				<td colspan="4">
-					<table border="0" cellpadding="0" cellspacing="0" width="1">
-						<tr>
-							<td class="color1"><img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br /></td>
+		<div id="content">
+			<!-- Zeitleiste -->
+			<table width="<?% breite + seite + 60 %?>" border="0" cellspacing="0" cellpadding="0" id="bigtable" class="list">
+				<tr class="heading">
+					<td class="col_left"></td>
+					<td colspan="3" width='<?% breite + seite %?>'><h2><%! Timeline: !%>&nbsp;<?% date.format(akt_sekunde, '%H:%M') %?>&nbsp;<%! o'clock !%>&nbsp;<%! to !%>&nbsp;<?% date.format(bis_sec, '%H:%M') %?>&nbsp;<%! o'clock !%></h2></td>
+					<td class="col_navi">
+						<?% IF akt_stunde <= jetzt_stunde %?>
+							<img src="bilder/pfeile_nachlinks_soft.gif" border="0" width="28" height="17" />
+						<?% ELSE %?>
+							<a href="<?% nowurl %?>&time=<?% akt_stunde - zeitrahmen | format('%02d') %?><?% akt_minute | format('%02d') %?>">
+								<img src="bilder/pfeile_nachlinks.gif" border="0" width="28" height="17" />
+							</a>
+						<?% END %?>
+						<a href="<?% nowurl %?>&time=<?% bis_stunde | format('%02d') %?><?% akt_minute | format('%02d') %?>">
+							<img src="bilder/pfeile_nachrechts.gif" border="0" width="29" height="17" />
+						</a>
+					</td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_spacer">
+					<td class="col_left"></td>
+					<td colspan="4"></td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_odd">
+					<td class="col_left"></td>
+					<td colspan="4">
+						<table border="0" cellpadding="0" cellspacing="0" width="1">
+							<tr>
+								<td class="color1"><img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br /></td>
 <?% WHILE minute < bis %?>
-							<td colspan="6" class='<?% minute % 60 ? "color1" : "color2" %?>'>
-								<img src="bilder/spacer.gif" width="<?% einheit * 30 %?>" height="1" border="0" /><br />
+								<td colspan="6" class='<?% minute % 60 ? "color1" : "color2" %?>'>
+									<img src="bilder/spacer.gif" width="<?% einheit * 30 %?>" height="1" border="0" /><br />
 	<?% zeit = akt_sekunde + (minute * 60) %?>
-								<b><?% date.format(zeit, '%H:%M') %?></b>
-							</td>
+									<b><?% date.format(zeit, '%H:%M') %?></b>
+								</td>
 	<?% minute = minute + 30 %?> 
 <?% END %?>
-						</tr>
+							</tr>
 <?% minute = 0 %?>
-						<tr>
-							<td class="color1"><img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br /></td>
+							<tr>
+								<td class="color1"><img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br /></td>
 <?% WHILE minute < bis %?>
-							<td  width="1%" align="left" valign="bottom" class=<?% minute % 10 ? "color1" : "color2" %?>>
+								<td  width="1%" align="left" valign="bottom" class=<?% minute % 10 ? "color1" : "color2" %?>>
 	<?% IF minute % 15 %?>
-								<img src="bilder/pixel.gif" width="1" height="5" border="0" />
+									<img src="bilder/pixel.gif" width="1" height="5" border="0" />
 	<?% ELSE %?>
-								<img src="bilder/pixel.gif" width="1" height="10" border="0" />
+									<img src="bilder/pixel.gif" width="1" height="10" border="0" />
 	<?% END %?>
-							</td>
+								</td>
 	<?% minute = minute + 5 %?> 
 <?% END %?>
-						</tr>
-					</table>
+							</tr>
+						</table>
 
-					<table border="0" cellpadding="0" cellspacing="0" width="1">
+						<table border="0" cellpadding="0" cellspacing="0" width="1">
 <!-- Sendernamen -->
 <?% b = 0;
 	FOREACH name = shows.keys.nsort; 
 		old_stop_minute = -1;
 		chars = seite / 10 | format('%i');
 		b = b + 1 %?>
-						<tr>
-							<td valign="top" class=<?% b % 2 ? "color2" : "color1" %?>>
-								<img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br />
-								<a href="<?% shows.${name}.first.proglink %?>"><b><?% shows.${name}.first.progname | truncate(chars) %?></b></a>
-							</td>
-							<!-- Programm -->
-							<td colspan="<?% (bis / 5) %?>" class=<?% b % 2 ? "color2" : "color1" %?>>
-								<nobr>
+							<tr>
+								<td valign="top" class=<?% b % 2 ? "color2" : "color1" %?>>
+									<img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br />
+									<a href="<?% shows.${name}.first.proglink %?>"><b><?% shows.${name}.first.progname | truncate(chars) %?></b></a>
+								</td>
+								<!-- Programm -->
+								<td colspan="<?% (bis / 5) %?>" class=<?% b % 2 ? "color2" : "color1" %?>>
+									<nobr>
 <?%
 		z = 0;
 		FOREACH show = shows.${name}; 
@@ -177,61 +193,62 @@
 
 		<?% IF start_minute > akt_minute && ! z %?>
 			<?% diff = (start_minute - akt_minute) * einheit %?> 
-								<table border="0" align="left" cellpadding="0" cellspacing="0">
-									<tr>
-										<td width="1">
-											<img src="bilder/spacer.gif" width="<?% diff %?>" height="8" border="0" align="left" hspace="0" />
-										</td>
-									</tr>
-								</table>
+									<table border="0" align="left" cellpadding="0" cellspacing="0">
+										<tr>
+											<td width="1">
+												<img src="bilder/spacer.gif" width="<?% diff %?>" height="8" border="0" align="left" hspace="0" />
+											</td>
+										</tr>
+									</table>
 		<?% END %?>
 
 		<?% IF old_stop_minute + 1 < start_minute && z %?>
 			<?% diff = (start_minute - old_stop_minute - 1) * einheit %?> 
-								<img title="DiffMinute: <?% start_minute - old_stop_minute - 1 %?>" src="bilder/spacer.gif" width="<?% diff %?>" height="8" border="0" align="left" hspace="0" />
+									<img title="DiffMinute: <?% start_minute - old_stop_minute - 1 %?>" src="bilder/spacer.gif" width="<?% diff %?>" height="8" border="0" align="left" hspace="0" />
 		<?% END %?>
-		<?% td_class = date.now > show.start && date.now < show.stop ? "col_broadcast" : "col_current";
-				td_class = show.timer ? "col_timer" : td_class %?>
-								<table border="0" align="left" cellpadding="0" cellspacing="0" id=<?% show.timer ? "timertable" : "prgtable" %?>>
-									<tr>
-										<td width="1" class="<?% td_class %?>">
-											<img src="bilder/spacer.gif" width="<?% laenge_pix %?>" height="1" border="0" hspace="0" /><br />
-											<nobr>
-												<?% IF show.summary %?><a href="javascript:popup('./vdradmin.pl?aktion=prog_detail&epg_id=<?% show.anchor %?>&vdr_id=<?% show.vdr_id %?>');"><?% END %?>
-												<span title="<?% show.title %?> (<?% date.format(show.start, '%H:%M') %?> - <?% date.format(show.stop, '%H:%M') %?>, <?% (show.stop - show.start) / 60 %?><%! min !%>)">
-												<?% IF laenge_chars > 2 %?>
-													<?% show.title | truncate( laenge_chars ) %?>
-												<?% ELSE %?>
-													<img src="bilder/spacer.gif" width="<?% laenge_pix %?>" height="8" border="0" hspace="0" />
-												<?% END %?>
-												</span>
-												<?% IF show.summary %?></a><?% END %?>
-											</nobr>
-										</td>
-									</tr>
-								</table>
+		<?% td_class = date.now > show.start && date.now < show.stop ? "color_current" : "color_broadcast";
+				td_class = show.timer ? "color_timer" : td_class %?>
+									<table border="0" align="left" cellpadding="0" cellspacing="0" id=<?% show.timer ? "timertable" : "prgtable" %?>>
+										<tr>
+											<td width="1" class="<?% td_class %?>">
+												<img src="bilder/spacer.gif" width="<?% laenge_pix %?>" height="1" border="0" hspace="0" /><br />
+												<nobr>
+													<?% IF show.summary %?><a href="javascript:popup('./vdradmin.pl?aktion=prog_detail&epg_id=<?% show.anchor %?>&vdr_id=<?% show.vdr_id %?>');"><?% END %?>
+													<span title="<?% show.title %?> (<?% date.format(show.start, '%H:%M') %?> - <?% date.format(show.stop, '%H:%M') %?>, <?% (show.stop - show.start) / 60 %?><%! min !%>)">
+													<?% IF laenge_chars > 2 %?>
+														<?% show.title | truncate( laenge_chars ) %?>
+													<?% ELSE %?>
+														<img src="bilder/spacer.gif" width="<?% laenge_pix %?>" height="8" border="0" hspace="0" />
+													<?% END %?>
+													</span>
+													<?% IF show.summary %?></a><?% END %?>
+												</nobr>
+											</td>
+										</tr>
+									</table>
 	<?% 
 		END;
 		z = z + 1; 
 		old_start_minute = start_minute;
 		old_stop_minute = stop_minute;
 		END %?>
-								</nobr>
-							</td>
-						</tr>
+									</nobr>
+								</td>
+							</tr>
 <?% END %?>
-					</table>
-				</td>
+						</table>
+					</td>
 
 <!-- Vertikal ansicht END -->
-				<td valign="top" width="30" background="bilder/uebersicht_rechts.gif"></td>
-			</tr>
-			<tr>
-				<td valign="top" width="30"><img src="bilder/uebersicht_unten_links.gif" alt="" height="30" width="30" border="0" /></td>
-				<td colspan="4" background="bilder/uebersicht_unten.gif"></td>
-				<td valign="top" width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" height="30" width="30" border="0" /></td>
-			</tr>
-		</table>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="footer">
+					<td class="col_left"></td>
+					<td colspan="4"></td>
+					<td class="col_right"></td>
+				</tr>
+			</table>
+		</div>
 	</form>
 </body>
 </html>

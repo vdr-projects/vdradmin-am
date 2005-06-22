@@ -5,13 +5,31 @@
 	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
 	<title>VDRAdmin - <%! Timer !%></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+	<tmpl_if usercss>
+		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
+	</tmpl_if>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
+	<script type="text/javascript" language="JavaScript1.2" src="infobox.js"></script>
 	<style type="text/css">
 		#prgtable { border-left-width:1px; border-left-style:solid; border-right-width:1px; border-right-style:solid; }
 	</style>
 </head>
 
 <body id="timer_list">
+<div id="infodiv" style="position:absolute; visibility:hidden; z-index:20; top:0px; left:0px;"></div>
+<script language="JavaScript" type="text/javascript">
+<?%
+	sender="";
+	FOREACH timer = timers2;
+		IF timer.cdesc != sender && timer.starttime <= current && timer.stoptime >= current;
+			sender=timer.cdesc;
+%?>
+	maketip('VDR-<?% timer.vdr_id %?>', '<?% timer.title %?>', '<%! Priority: !%> <?% timer.prio %?><br /><%! Lifetime: !%> <?% timer.lft %?><br /><%! Duration: !%> (<?% timer.start %?> - <?% timer.stop %?>, <?% timer.duration %?><%! min !%>)' );
+<?%
+		END;
+  END;
+%?>
+</script>
 
 <?%
 	datumold="";
@@ -19,55 +37,58 @@
 	faktor=2.2;
 %?>
 
-	<table width="100%" border="0" cellspacing="0" cellpadding="0" height="39" id="heading">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 		<tr>
-			<td valign="middle" width="200" background="bilder/nav_button_back.gif">
-				<h1><%! Timer !%></h1>
-			</td>
-			<td align="right" background="bilder/nav_button_back_mitte.gif">
-				<table border="0" cellspacing="0" cellpadding="0">
-					<tr height="20">
-						<td width="12" height="20" background="bilder/gbutton_left.gif"></td>
-						<td align="center" height="20" background="bilder/gbutton_middle.gif">
-							<a href="<tmpl_var nturl>"><div class="gbutton"><%! New Timer !%></div></a>
-						</td>
-						<td width="12" height="20" background="bilder/gbutton_right.gif"></td>
-					</tr>
-				</table>
+			<td class="col_left"></td>
+			<td class="col_title"><h1><%! Timer !%></h1></td>
+			<td class="col_other">
+				<span>
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr height="20">
+							<td width="12" height="20" background="bilder/gbutton_left.gif"></td>
+							<td align="center" height="20" background="bilder/gbutton_middle.gif">
+								<a href="<tmpl_var nturl>"><div class="gbutton"><%! New Timer !%></div></a>
+							</td>
+							<td width="12" height="20" background="bilder/gbutton_right.gif"></td>
+						</tr>
+					</table>
+				</span>
 			</td>
 <tmpl_if help_url> 
-			<td align="right" width="35" background="bilder/nav_button_back_mitte.gif">
-				<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" align="right" valign="top" alt="help" title="<%! Help !%>" /></a>
+			<td class="col_help">
+				<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" alt="help" title="<%! Help !%>" /></a>
 			</td>
 </tmpl_if>
-			<td width="15" background="bilder/nav_button_back_end.gif"></td>
+			<td class="col_right"></td>
 		</tr>
 	</table>
 
 	<div id="content">
-	<form action="<tmpl_var url>" method="get" name="FormName1" class="group">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td valign="top" width="30"><img src="bilder/uebersicht_oben_links.gif" alt="" height="30" width="30" border="0" /></td>
-				<td background="bilder/uebersicht_oben.gif">
-					<h2><tmpl_var title></h2>
-				</td>
-				<td background="bilder/uebersicht_oben.gif" align="right">
-					<select name="vdr_id" size="1" onchange="window.open('<tmpl_var url>?aktion=timer_list&timer=' + this.options[this.selectedIndex].value,'main')">
+		<form action="<tmpl_var url>" method="get" name="FormName1">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
+				<tr class="heading">
+					<td class="col_left"></td>
+					<td><h2><tmpl_var title></h2></td>
+					<td align="right">
+						<select name="vdr_id" class="submit" onchange="window.open('<tmpl_var url>?aktion=timer_list&timer=' + this.options[this.selectedIndex].value,'main')">
 <tmpl_loop day_loop>
-						<option value="<tmpl_var sortfield>" <tmpl_if current>selected</tmpl_if>><tmpl_var day></option>
+							<option value="<tmpl_var sortfield>" <tmpl_if current>selected</tmpl_if>><tmpl_var day></option>
 </tmpl_loop>
-					</select>
-				</td>
-				<td valign="top" width="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" height="30" width="30" border="0" /></td>
-			</tr>
-			<tr>
-				<td width="30" background="bilder/uebersicht_links.gif"></td>
-				<td colspan="2" background="bilder/uebersicht_mitte.gif">
-					<br />
-					<table cellspacing="0" cellpadding="0" border="0">
-						<tr>
-							<td class="color1" height=20 width=100><img src="bilder/spacer.gif" width="100" height="1" border="0" /><br />&nbsp;</td>
+						</select>
+					</td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_spacer">
+					<td class="col_left"></td>
+					<td colspan="2"></td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_odd">
+					<td class="col_left"></td>
+					<td colspan="2" align="center">
+						<table cellspacing="0" cellpadding="0" border="0">
+							<tr>
+								<td class="color1" height="20" width="100"><img src="bilder/spacer.gif" width="100" height="1" border="0" /><br />&nbsp;</td>
 <?%
 	stunde=0;
 	pos=0;
@@ -76,13 +97,13 @@
 		ende=((stunde * 60 / faktor) +0.5 ) | format('%i');
 %?>
 
-							<td class=<?% (stunde % 2) == 1 ? "color2" : "color1" %?> align="center"><img src="bilder/spacer.gif" width="<?% ende-pos %?>" height="1" border="0" /><br /><?% stunde - 1 %?></td>
+								<td class=<?% (stunde % 2) == 1 ? "color2" : "color1" %?> align="center"><img src="bilder/spacer.gif" width="<?% ende-pos %?>" height="1" border="0" /><br /><?% stunde - 1 %?></td>
 <?%
 		pos=ende;
 	END;
 %?>
-						</tr>
-					</table>
+							</tr>
+						</table>
 
 <?%
 	programm=0;
@@ -92,30 +113,30 @@
 		IF timer.cdesc != sender && timer.starttime <= current && timer.stoptime >= current;
 			sender=timer.cdesc;
 %?>
-					<table cellspacing="0" cellpadding="0" border="0">
-						<tr>
-							<td bgcolor="#000000" height="1"><img src="bilder/spacer.gif" width="<?% tablaenge + 100 %?>" height="1" border="0" /></td>
-						</tr>
-					</table>
+						<table cellspacing="0" cellpadding="0" border="0">
+							<tr>
+								<td bgcolor="#000000" height="1"><img src="bilder/spacer.gif" width="<?% tablaenge + 100 %?>" height="1" border="0" /></td>
+							</tr>
+						</table>
 
-					<table cellspacing="0" cellpadding="0" border="0">
-						<tr>
-							<td class="<?% (programm % 2) == 0 ? color2 : color1 %?>" height="20" width="100"><img src="bilder/spacer.gif" width="100" height="1" border="0" /><br /><b><?% sender | truncate(11) %?></b></td>
+						<table cellspacing="0" cellpadding="0" border="0">
+							<tr>
+								<td class="<?% (programm % 2) == 0 ? color2 : color1 %?>" height="20" width="100"><img src="bilder/spacer.gif" width="100" height="1" border="0" /><br /><b><?% sender | truncate(11) %?></b></td>
 
 <?%
 			pos=0;
 			FOREACH sendung = timers;
 				IF sendung.cdesc == sender && sendung.starttime <= current && sendung.stoptime >= current;
 					IF sendung.active == 0 || sendung.active == 32768;
-						td_class="col_inactive";
+						td_class="color_inactive";
 					ELSE;
 						IF sendung.critical == 1;
-							td_class="col_conflict";
+							td_class="color_conflict";
 						ELSE;
 							IF sendung.collision == 1;
-								td_class="col_collision";
+								td_class="color_collision";
 							ELSE;
-								td_class="col_ok";
+								td_class="color_ok";
 							END;
 						END;
 					END;
@@ -133,19 +154,19 @@
 
 					IF start>pos;
 %?>
-							<td class="<?% (programm % 2) == 0 ? color2 : color1 %?>"><img src="bilder/spacer.gif" width="<?% start-pos %?>" height="1" border="0" /><br /></td>
+								<td class="<?% (programm % 2) == 0 ? color2 : color1 %?>"><img src="bilder/spacer.gif" width="<?% start-pos %?>" height="1" border="0" /><br /></td>
 
 <?%
 						pos=start;
 					END;
 					IF ende - pos < 2;
 %?>
-							<td class="<?% td_class %?>"><span title="<?% sendung.title %?> / <%! Priority: !%> <?% timer.prio %?> / <%! Lifetime: !%> <?% timer.lft %?> / <%! Duration: !%> (<?% date.format(timer.start, '%H:%M') %?> - <?% timer.stop %?>, <?% timer.duration %?><%! min !%>)"><img src="bilder/spacer.gif" width="<?% ende - pos %?>" height="20" border="0" /></span></td>
+								<td class="<?% td_class %?>"><span onMouseOver="tip('VDR-<?% timer.vdr_id %?>'); return true;" onMouseOut="untip(); return true;" xtitle="<?% sendung.title %?> / <%! Priority: !%> <?% timer.prio %?> / <%! Lifetime: !%> <?% timer.lft %?> / <%! Duration: !%> (<?% timer.start %?> - <?% timer.stop %?>, <?% timer.duration %?><%! min !%>)"><img src="bilder/spacer.gif" width="<?% ende - pos %?>" height="20" border="0" /></span></td>
 
 <?%
 					ELSE;
 %?>
-							<td class="<?% td_class %?>" id="prgtable"><span title="<?% sendung.title %?> / <%! Priority: !%> <?% timer.prio %?> / <%! Lifetime: !%> <?% timer.lft %?> / <%! Duration: !%> (<?% timer.start %?> - <?% timer.stop %?>, <?% timer.duration %?><%! min !%>)"><img src="bilder/spacer.gif" width="<?% ende - pos - 2 %?>" height="20" border="0" /></span></td>
+								<td class="<?% td_class %?>" id="prgtable"><span onMouseOver="tip('VDR-<?% timer.vdr_id %?>'); return true;" onMouseOut="untip(); return true;" xtitle="<?% sendung.title %?> / <%! Priority: !%> <?% timer.prio %?> / <%! Lifetime: !%> <?% timer.lft %?> / <%! Duration: !%> (<?% timer.start %?> - <?% timer.stop %?>, <?% timer.duration %?><%! min !%>)"><img src="bilder/spacer.gif" width="<?% ende - pos - 2 %?>" height="20" border="0" /></span></td>
 
 <?%
 					END;
@@ -154,197 +175,203 @@
 			END;
 			IF pos<tablaenge;
 %?>
-							<td class="<?% (programm % 2) == 0 ? color2 : color1 %?>"><img src="bilder/spacer.gif" width="<?% tablaenge - pos %?>" height="1" border="0" /><br /></td>
+								<td class="<?% (programm % 2) == 0 ? color2 : color1 %?>"><img src="bilder/spacer.gif" width="<?% tablaenge - pos %?>" height="1" border="0" /><br /></td>
 
 <?%
 			END;
 %?>
-						</tr>
-					</table>
+							</tr>
+						</table>
 <?%
 			programm=programm+1;
 		END;
   END;
 %?>
 
-					<table cellspacing="0" cellpadding="0" border="0">
-						<tr>
-							<td bgcolor="#000000" height="1"><img src="bilder/spacer.gif" width="<?% tablaenge + 100 %?>" height="1" border="0" /></td>
-						</tr>
-					</table>
-				</td>
-				<td width="30" background="bilder/uebersicht_rechts.gif"></td>
-			</tr>
-			<tr>
-				<td valign="top" width="30"><img src="bilder/uebersicht_unten_links.gif" alt="" height="30" width="30" border="0" /></td>
-				<td colspan="2" background="bilder/uebersicht_unten.gif"></td>
-				<td valign="top" width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" height="30" width="30" border="0" /></td>
-			</tr>
-		</table>
-		<input type="hidden" name="aktion" value="timer_list" />
-	</form>
+						<table cellspacing="0" cellpadding="0" border="0">
+							<tr>
+								<td bgcolor="#000000" height="1"><img src="bilder/spacer.gif" width="<?% tablaenge + 100 %?>" height="1" border="0" /></td>
+							</tr>
+						</table>
+					</td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="footer">
+					<td class="col_left"></td>
+					<td colspan="2"></td>
+					<td class="col_right"></td>
+				</tr>
+			</table>
+			<input type="hidden" name="aktion" value="timer_list" />
+		</form>
 
-	<form action="<tmpl_var url>" method="get" name="FormName">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
-			<tr class="list_heading">
-				<td valign="top" width="30"><img src="bilder/uebersicht_oben_links.gif" alt="" height="30" width="30" border="0" /></td>
-				<td width="70" background="bilder/uebersicht_oben<tmpl_if sortbyactive>_selected</tmpl_if>.gif">
-					<h2>
-						<a href="<tmpl_var sortbyactiveurl>"><%! Active !%>
-							<tmpl_if sortbyactive>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td width="10%" background="bilder/uebersicht_oben<tmpl_if sortbychannel>_selected</tmpl_if>.gif">
-					<h2>
-						<a href="<tmpl_var sortbychannelurl>"><%! Channel !%>
-							<tmpl_if sortbychannel>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td width="40" background="bilder/uebersicht_oben<tmpl_if sortbyday>_selected</tmpl_if>.gif">
-					<h2>
-						<a href="<tmpl_var sortbydayurl>"><%! Date !%>
-							<tmpl_if sortbyday>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td width="40" background="bilder/uebersicht_oben<tmpl_if sortbystart>_selected</tmpl_if>.gif">
-					<h2>
-						<a href="<tmpl_var sortbystarturl>"><%! Start !%>
-							<tmpl_if sortbystart>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td width="40" background="bilder/uebersicht_oben<tmpl_if sortbystop>_selected</tmpl_if>.gif">
-					<h2>
-						<a href="<tmpl_var sortbystopurl>"><%! Stop !%>
-							<tmpl_if sortbystop>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td background="bilder/uebersicht_oben<tmpl_if sortbyname>_selected</tmpl_if>.gif">
-					<h2>
-						<a href="<tmpl_var sortbynameurl>"><%! Name !%>
-							<tmpl_if sortbyname>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td width="30" background="bilder/uebersicht_oben.gif"></td>
-				<td width="30" background="bilder/uebersicht_oben.gif"></td>
-				<td width="30" align="center" background="bilder/uebersicht_oben.gif"><input type="checkbox" name="SELALL" value="SELALL" onclick="AllMessages(this.form);" title="<%! Select all/none !%>" /></td>
-				<td valign="top" width="30"><img src="bilder/uebersicht_oben_rechts.gif" alt="" height="30" width="30" border="0" /></td>
-			</tr>
+		<form action="<tmpl_var url>" method="get" name="FormName">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
+				<tr class="heading">
+					<td class="col_left"></td>
+					<td class="col_active" <tmpl_if sortbyactive>selected="yes"</tmpl_if>>
+						<h2>
+							<a href="<tmpl_var sortbyactiveurl>"><%! Active !%>
+								<tmpl_if sortbyactive>
+									<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
+								<tmpl_else>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								</tmpl_if>
+							</a>
+						</h2>
+					</td>
+					<td class="col_channel" <tmpl_if sortbychannel>selected="yes"</tmpl_if>>
+						<h2>
+							<a href="<tmpl_var sortbychannelurl>"><%! Channel !%>
+								<tmpl_if sortbychannel>
+									<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
+								<tmpl_else>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								</tmpl_if>
+							</a>
+						</h2>
+					</td>
+					<td class="col_date" <tmpl_if sortbyday>selected="yes"</tmpl_if>>
+						<h2>
+							<a href="<tmpl_var sortbydayurl>"><%! Date !%>
+								<tmpl_if sortbyday>
+									<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
+								<tmpl_else>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								</tmpl_if>
+							</a>
+						</h2>
+					</td>
+					<td class="col_start" <tmpl_if sortbystart>selected="yes"</tmpl_if>>
+						<h2>
+							<a href="<tmpl_var sortbystarturl>"><%! Start !%>
+								<tmpl_if sortbystart>
+									<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
+								<tmpl_else>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								</tmpl_if>
+							</a>
+						</h2>
+					</td>
+					<td class="col_stop" <tmpl_if sortbystop>selected="yes"</tmpl_if>>
+						<h2>
+							<a href="<tmpl_var sortbystopurl>"><%! Stop !%>
+								<tmpl_if sortbystop>
+									<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
+								<tmpl_else>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								</tmpl_if>
+							</a>
+						</h2>
+					</td>
+					<td class="col_name" <tmpl_if sortbyname>selected="yes"</tmpl_if>>
+						<h2>
+							<a href="<tmpl_var sortbynameurl>"><%! Name !%>
+								<tmpl_if sortbyname>
+									<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
+								<tmpl_else>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								</tmpl_if>
+							</a>
+						</h2>
+					</td>
+					<td class="col_edit"></td>
+					<td class="col_delete"></td>
+					<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL" onclick="AllMessages(this.form);" title="<%! Select all/none !%>" /></td>
+					<td class="col_right"></td>
+				</tr>
+				<tr class="row_spacer">
+					<td class="col_left"></td>
+					<td class="col_active" <tmpl_if sortbyactive>selected="yes"</tmpl_if>></td>
+					<td class="col_channel" <tmpl_if sortbychannel>selected="yes"</tmpl_if>></td>
+					<td class="col_date" <tmpl_if sortbyday>selected="yes"</tmpl_if>></td>
+					<td class="col_start" <tmpl_if sortbystart>selected="yes"</tmpl_if>></td>
+					<td class="col_stop" <tmpl_if sortbystop>selected="yes"</tmpl_if>></td>
+					<td class="col_name" <tmpl_if sortbyname>selected="yes"</tmpl_if>></td>
+					<td colspan="3"></td>
+					<td class="col_right"></td>
+				</tr>
 
 <tmpl_loop timer_loop>
-			<tr class="list_row">
-				<td width="30" background="bilder/uebersicht_links<tmpl_if __ODD__>_dark</tmpl_if>.gif"></td>
-				<td valign="top" width="70" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbyactive>_selected</tmpl_if>.gif" class="active">
-					<div>
-						<tmpl_if expr="(active%32768) == 0">
-							<img src="bilder/poempl_grau.gif" alt="inactive" title="<%! This timer is inactive! !%>" width="19" height="19" align="absmiddle" border="0" />
-						<tmpl_else>
-							<tmpl_if critical>
-								<img src="bilder/poempl_rot.gif" alt="impossible" title="<%! This timer is impossible! !%>" width="19" height="19" align="absmiddle" border="0" />
+				<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
+					<td class="col_left"></td>
+					<td class="col_active" <tmpl_if sortbyactive>selected="yes"</tmpl_if>>
+						<div>
+							<tmpl_if expr="(active%32768) == 0">
+								<img src="bilder/poempl_grau.gif" alt="inactive" title="<%! This timer is inactive! !%>" width="19" height="19" align="absmiddle" border="0" />
 							<tmpl_else>
-								<tmpl_if collision>
-									<img src="bilder/poempl_gelb.gif" alt="nomore" title="<%! No more timers on other transponders possible! !%>" width="19" height="19" align="absmiddle" border="0" />
+								<tmpl_if critical>
+									<img src="bilder/poempl_rot.gif" alt="impossible" title="<%! This timer is impossible! !%>" width="19" height="19" align="absmiddle" border="0" />
 								<tmpl_else>
-									<tmpl_if active>
-										<img src="bilder/poempl_gruen.gif" alt="possible" title="<%! Timer OK. !%>" width="19" height="19" align="absmiddle" border="0" />
+									<tmpl_if collision>
+										<img src="bilder/poempl_gelb.gif" alt="nomore" title="<%! No more timers on other transponders possible! !%>" width="19" height="19" align="absmiddle" border="0" />
+									<tmpl_else>
+										<tmpl_if active>
+											<img src="bilder/poempl_gruen.gif" alt="possible" title="<%! Timer OK. !%>" width="19" height="19" align="absmiddle" border="0" />
+										</tmpl_if>
 									</tmpl_if>
 								</tmpl_if>
 							</tmpl_if>
-						</tmpl_if>
-						<a href="javascript:change('<%! Edit timer status? !%>','<tmpl_var toggleurl>&timer=<?% current %?>');">
-							<tmpl_if expr="active == 1"><%! Yes !%></tmpl_if>
-							<tmpl_if expr="(active%32768) == 0"><%! No !%></tmpl_if>
-							<tmpl_if expr="active == 5"><%! VPS !%></tmpl_if>
-							<tmpl_if expr="active == 32769"><%! Auto !%></tmpl_if>
-						</a>
-					</div>
-				</td>
-				<td valign="top" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbychannel>_selected</tmpl_if>.gif" class="channel">
-					<div><a href="<tmpl_var proglink>"><tmpl_var cdesc></a></div>
-				</td>
-				<td valign="top" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbyday>_selected</tmpl_if>.gif" class="date">
-					<div><tmpl_var dor></div>
-				</td>
-				<td valign="top" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbystart>_selected</tmpl_if>.gif" class="start">
-					<div><tmpl_var start></div>
-				</td>
-				<td valign="top" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbystop>_selected</tmpl_if>.gif" class="stop">
-					<div><tmpl_var stop></div>
-				</td>
-				<td valign="top" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if><tmpl_if sortbyname>_selected</tmpl_if>.gif" class="name">
-					<div title="<%! Priority: !%> <tmpl_var prio> / <%! Lifetime: !%> <tmpl_var lft>">
-						<tmpl_if recording><img align="absmiddle" src="bilder/rec.gif" border="0" />&nbsp;</tmpl_if>
-						<tmpl_if infurl>
-							<a href="javascript:popup('<tmpl_var infurl>');"><tmpl_var title></a>
-						<tmpl_else>
-							<tmpl_var title>
-						</tmpl_if>
-					</div>
-				</td>
-				<td align="center" valign="top" width="30" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif" class="edit">
-					<div><a href="<tmpl_var modurl>"><img src="bilder/edit.gif" alt="edit" title="<%! Edit !%>" height="17" width="17" border="0" /></a></div>
-				</td>
-				<td align="center" valign="top" width="30" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif" class="delete">
-					<div><a href="javascript:del('<%! Delete timer? !%>','<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" title="<%! Delete !%>" height="17" width="17" border="0" /></a></div>
-				</td>
-				<td align="center" valign="top" width="30" background="bilder/uebersicht_mitte<tmpl_if __ODD__>_dark</tmpl_if>.gif" class="checkbox">
-					<div><input type="checkbox" name="xxxx_<tmpl_var id>" /></div>
-				</td>
-				<td width="30" background="bilder/uebersicht_rechts<tmpl_if __ODD__>_dark</tmpl_if>.gif"></td>
-			</tr>
+							<a href="javascript:change('<%! Edit timer status? !%>','<tmpl_var toggleurl>&timer=<?% current %?>');">
+								<tmpl_if expr="active == 1"><%! Yes !%></tmpl_if>
+								<tmpl_if expr="(active%32768) == 0"><%! No !%></tmpl_if>
+								<tmpl_if expr="active == 5"><%! VPS !%></tmpl_if>
+								<tmpl_if expr="active == 32769"><%! Auto !%></tmpl_if>
+							</a>
+						</div>
+					</td>
+					<td class="col_channel" <tmpl_if sortbychannel>selected="yes"</tmpl_if>>
+						<div><a href="<tmpl_var proglink>"><tmpl_var cdesc></a></div>
+					</td>
+					<td class="col_date" <tmpl_if sortbyday>selected="yes"</tmpl_if>>
+						<div><tmpl_var dor></div>
+					</td>
+					<td class="col_start" <tmpl_if sortbystart>selected="yes"</tmpl_if>>
+						<div><tmpl_var start></div>
+					</td>
+					<td class="col_stop" <tmpl_if sortbystop>selected="yes"</tmpl_if>>
+						<div><tmpl_var stop></div>
+					</td>
+					<td class="col_name" <tmpl_if sortbyname>selected="yes"</tmpl_if>>
+						<div title="<%! Priority: !%> <tmpl_var prio> / <%! Lifetime: !%> <tmpl_var lft>">
+							<tmpl_if recording><img align="absmiddle" src="bilder/rec.gif" border="0" />&nbsp;</tmpl_if>
+							<tmpl_if infurl>
+								<a href="javascript:popup('<tmpl_var infurl>');"><tmpl_var title></a>
+							<tmpl_else>
+								<tmpl_var title>
+							</tmpl_if>
+						</div>
+					</td>
+					<td class="col_edit">
+						<div><a href="<tmpl_var modurl>"><img src="bilder/edit.gif" alt="edit" title="<%! Edit !%>" height="17" width="17" border="0" /></a></div>
+					</td>
+					<td class="col_delete">
+						<div><a href="javascript:del('<%! Delete timer? !%>','<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" title="<%! Delete !%>" height="17" width="17" border="0" /></a></div>
+					</td>
+					<td class="col_checkbox">
+						<div><input type="checkbox" name="xxxx_<tmpl_var id>" /></div>
+					</td>
+					<td class="col_right"></td>
+				</tr>
 </tmpl_loop>
 
-			<tr>
-				<td valign="top" width="30"><img src="bilder/uebersicht_unten_links.gif" alt="" height="30" width="30" border="0" /></td>
-				<td colspan="9" background="bilder/uebersicht_unten.gif"></td>
-				<td valign="top" width="30"><img src="bilder/uebersicht_unten_rechts.gif" alt="" height="30" width="30" border="0" /></td>
-			</tr>
-		</table>
+				<tr class="footer">
+					<td class="col_left"></td>
+					<td class="col_active" <tmpl_if sortbyactive>selected="yes"</tmpl_if>></td>
+					<td class="col_channel" <tmpl_if sortbychannel>selected="yes"</tmpl_if>></td>
+					<td class="col_date" <tmpl_if sortbyday>selected="yes"</tmpl_if>></td>
+					<td class="col_start" <tmpl_if sortbystart>selected="yes"</tmpl_if>></td>
+					<td class="col_stop" <tmpl_if sortbystop>selected="yes"</tmpl_if>></td>
+					<td class="col_name" <tmpl_if sortbyname>selected="yes"</tmpl_if>></td>
+					<td colspan="3"></td>
+					<td class="col_right"></td>
+				</tr>
+			</table>
+		</div>
 
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
-			<tr>
-				<td align="right">
-					<table border="0" cellspacing="0" cellpadding="0">
-						<tr height="20">
-							<td width="12" height="20" background="bilder/gbutton_left.gif"></td>
-							<td align="center" height="20" background="bilder/gbutton_middle.gif">
-								<a href="javascript:mdel('<%! Delete all selected timers? !%>');"><div class="gbutton"><%! Delete Selected Timers !%></div></a>
-							</td>
-							<td width="12" height="20" background="bilder/gbutton_right.gif"></td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
+		<div id="buttons">
+			<input type="submit" class="submit" name="timer_delete" value="<%! Delete Selected Timers !%>" onclick="return mdel('<%! Delete all selected timers? !%>');" />
+		</div>
 		<input type="hidden" name="aktion" value="timer_delete" />
 	</form>
 	</div>

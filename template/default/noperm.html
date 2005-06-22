@@ -4,10 +4,13 @@
 	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
 	<title><tmpl_var title></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css"/>
+	<tmpl_if usercss>
+		<link href="user.css" rel="stylesheet" media="screen" type="text/css"/>
+	</tmpl_if>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 </head>
 
-<body class="noperm">
+<body id="noperm">
 	<h1><tmpl_var h1></h1>
 	<p><tmpl_var error></p>
 </body>
