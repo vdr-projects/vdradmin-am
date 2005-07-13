@@ -66,16 +66,16 @@
 			<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
 				<td class="col_left"><a name="<tmpl_var anchor>">&nbsp;</a></td>
 				<td class="col_duration">
-					<div><tmpl_var emit> - <tmpl_var duration> <%! o'clock !%></div>
+					<tmpl_var emit> - <tmpl_var duration>
 				</td>
 				<td class="col_title">
-					<div><h3><tmpl_var title></h3><tmpl_unless subtitle><br /></tmpl_unless><h4><tmpl_var subtitle></h4></div>
+					<h3><tmpl_var title></h3><tmpl_unless subtitle><br /></tmpl_unless><h4><tmpl_var subtitle></h4>
 				</td>
 				<td class="col_info">
-					<div><tmpl_if infurl><a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info_button.gif" border="0" /></a><tmpl_else><img src="bilder/info_button_disabled.gif" border="0" /></tmpl_if></div>
+					<tmpl_if infurl><a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info_button.gif" border="0" /></a><tmpl_else><img src="bilder/info_button_disabled.gif" border="0" /></tmpl_if>
 				</td>
 				<td class="col_record">
-					<div><a href="<tmpl_var recurl>"><img src="bilder/rec_button.gif" border="0" /></a></div>
+					<a href="<tmpl_var recurl>"><img src="bilder/rec_button.gif" border="0" /></a>
 				</td>
 				<td class="col_right"></td>
 			</tr>

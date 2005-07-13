@@ -41,7 +41,7 @@ function gettip(name){return (document.layers&&document.layers[name])?document.l
 
 // Prepare tip boxes, but don't show them yet
 function maketip(name,title,text){
- if(hascss()) document.write('<div id="'+name+'" name="'+name+'" style="position:absolute; visibility:hidden; z-index:20; top:0'+px+'; left:0'+px+';"><table width='+IWIDTH+' border=0 cellpadding=2 cellspacing=0 bgcolor="#333399"><tr><td class="tiptd"><table width="100%" border=0 cellpadding=0 cellspacing=0><tr><th><span class="ptt"><b><font color="#FFFFFF">'+title+'</font></b></span></th></tr></table><table width="100%" border=0 cellpadding=2 cellspacing=0 bgcolor="#CCCCFF"><tr><td><span class="pst"><font color="#000000">'+text+'</font></span></td></tr></table></td></tr></table></div>'+"\n");
+ if(hascss()) document.write('<div id="'+name+'" name="'+name+'" style="position:absolute; visibility:hidden; z-index:20; top:0'+px+'; left:0'+px+';"><table border="0" cellpadding="0" cellspacing="0" class="tt_table"><tr><th class="tt_th">'+title+'</th></tr><tr><td class="tt_td">'+text+'</td></tr></table></div>'+"\n");
 }
 
 function tip(name){

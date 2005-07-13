@@ -44,9 +44,7 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 			<tr class="heading">
 				<td class="col_left"></td>
-				<td colspan="3">
-					<h2><tmpl_var title></h2>
-				</td>
+				<td colspan="3"><h2><tmpl_var title></h2></td>
 				<td class="col_navi">
 					<tmpl_if prev_channel><a href="<tmpl_var prev_channel>"><img src="bilder/pfeile_nachlinks.gif" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachlinks_soft.gif" border="0" /></tmpl_if><tmpl_if next_channel><a href="<tmpl_var next_channel>"><img src="bilder/pfeile_nachrechts.gif" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachrechts_soft.gif" border="0" /></tmpl_if>
 				</td>
@@ -62,26 +60,22 @@
 			<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
 				<td class="col_left"><a name="<tmpl_var anchor>">&nbsp;</a></td>
 				<td class="col_duration">
-					<div><tmpl_var emit> - <tmpl_var duration> <%! o'clock !%></div>
+					<tmpl_var emit> - <tmpl_var duration>
 				</td>
 				<td class="col_title">
-					<div>
-						<h3><tmpl_var title></h3>
-						<tmpl_unless subtitle><br /></tmpl_unless>
-						<h4><tmpl_var subtitle></h4>
-					</div>
+					<h3><tmpl_var title></h3>
+					<tmpl_unless subtitle><br /></tmpl_unless>
+					<h4><tmpl_var subtitle></h4>
 				</td>
 				<td class="col_info">
-					<div>
-						<tmpl_if infurl>
-							<a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info_button.gif" border="0" alt="info" /></a>
-						<tmpl_else>
-							<img src="bilder/info_button_disabled.gif" border="0" alt="noinfo" />
-						</tmpl_if>
-					</div>
+					<tmpl_if infurl>
+						<a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info_button.gif" border="0" alt="info" /></a>
+					<tmpl_else>
+						<img src="bilder/info_button_disabled.gif" border="0" alt="noinfo" />
+					</tmpl_if>
 				</td>
 				<td class="col_record">
-					<div><a href="<tmpl_var recurl>"><img src="bilder/rec_button.gif" border="0" alt="record" /></a></div>
+					<a href="<tmpl_var recurl>"><img src="bilder/rec_button.gif" border="0" alt="record" /></a>
 				</td>
 				<td class="col_right"></td>
 			</tr>

@@ -25,13 +25,14 @@
 			<td></td>
 			<td class="col_right"></td>
 		</tr>
-		<tr class="row_odd">
+		<tr class="row_even">
 			<td class="col_left"></td>
 			<td>
 				<h3><tmpl_var title></h3>
 				<tmpl_if subtitle>
-					<h4><tmpl_var subtitle></h4><br />
+					<h4><tmpl_var subtitle></h4>
 				</tmpl_if>
+				<br />
 				<tmpl_var text><br /><br />
 				&nbsp;<a href="javascript:window.close()">[<%! close !%>]</a>
 				<tmpl_if date>

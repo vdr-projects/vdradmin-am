@@ -37,6 +37,16 @@ BEGIN {
 	unshift(@INC, $BASENAME . "lib/");
 }
 
+my $localemod;
+if (eval { require Locale::gettext }) {
+	$localemod = 'Locale::gettext';
+} elsif (eval { require Locale::Messages }) {
+	$localemod = 'Locale::Messages';
+} else {
+	die("Locale::gettext or Locale::Messages is required!\n");
+}
+$localemod->import(qw(gettext bindtextdomain textdomain));
+
 require File::Temp;
 
 use CGI qw(:no_debug);
@@ -48,7 +58,6 @@ use POSIX ":sys_wait_h", qw(strftime mktime locale_h);
 use MIME::Base64();
 use File::Temp ();
 use Shell qw(ps);
-use Locale::gettext;
 
 $SIG{CHLD} = sub { wait };
 
@@ -139,13 +148,14 @@ $CONFIG{CHANNELS_WANTED_SUMMARY}   = "";
 #
 $CONFIG{PROG_SUMMARY_COLS} = 3;
 
-my $VERSION               = "0.97-am3.3rc";
+my $VERSION               = "0.97-am3.3";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0;
 
-my($TEMPLATEDIR, $CONFFILE, $LOGFILE, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME);
+my($TEMPLATEDIR, $CONFFILE, $LOGFILE, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME, $ETCDIR, $USER_CSS);
 if(!$SEARCH_FILES_IN_SYSTEM) {
+	$ETCDIR                = "${BASENAME}";
 	$TEMPLATEDIR           = "${BASENAME}template";
 	$CONFFILE              = "${BASENAME}vdradmind.conf";
 	$LOGFILE               = "${BASENAME}$CONFIG{LOGFILE}";
@@ -153,15 +163,18 @@ if(!$SEARCH_FILES_IN_SYSTEM) {
 	$AT_FILENAME           = "${BASENAME}vdradmind.at";
 	$DONE_FILENAME         = "${BASENAME}vdradmind.done";
 	$BL_FILENAME           = "${BASENAME}vdradmind.bl";
+	$USER_CSS              = "${BASENAME}user.css";
 	bindtextdomain("vdradmin", "${BASENAME}locale");
 } else {
+	$ETCDIR                = "/etc/vdradmin";
 	$TEMPLATEDIR           = "/usr/share/vdradmin/template";
-	$CONFFILE              = "/etc/vdradmin/vdradmind.conf";
 	$LOGFILE               = "/var/log/$CONFIG{LOGFILE}";
 	$PIDFILE               = "/var/run/vdradmind.pid";
-	$AT_FILENAME           = "/etc/vdradmin/vdradmind.at";
-	$DONE_FILENAME         = "/etc/vdradmin/vdradmind.done";
-	$BL_FILENAME           = "/etc/vdradmin/vdradmind.bl";
+	$CONFFILE              = "${ETCDIR}/vdradmind.conf";
+	$AT_FILENAME           = "${ETCDIR}/vdradmind.at";
+	$DONE_FILENAME         = "${ETCDIR}/vdradmind.done";
+	$BL_FILENAME           = "${ETCDIR}/vdradmind.bl";
+	$USER_CSS              = "${ETCDIR}/user.css";
 	bindtextdomain("vdradmin", "/usr/share/locale");
 }
 my $DONE                  = &DONE_Read || {};
@@ -175,7 +188,7 @@ my $Xconfig = {
 	START_TAG    => '\<\?\%',		 # Tagstyle
 	END_TAG      => '\%\?\>',		 # Tagstyle
 	INCLUDE_PATH => $TEMPLATEDIR,  	 # or list ref
-	INTERPOLATE  => 1,               # expand "$var" in plain text
+	INTERPOLATE  => 0,               # expand "$var" in plain text
 	PRE_CHOMP    => 1,               # cleanup whitespace
 	POST_CHOMP   => 1,               # cleanup whitespace
 	EVAL_PERL    => 1,               # evaluate Perl code blocks
@@ -216,7 +229,7 @@ my(%ERROR_MESSAGE, %MESSAGE, @LOGINPAGES_DESCRIPTION, %HELP);
 LoadTranslation();
 
 my $UserCSS;
-$UserCSS = "user.css" if(-e "/etc/vdradmin/user.css");
+$UserCSS = "user.css" if(-e "$USER_CSS");
 
 #
 my $DAEMON = 1;
@@ -234,6 +247,7 @@ for(my $i = 0; $i < scalar(@ARGV); $i++) {
 	}
 	if(/--nofork|-nf/) { $DAEMON = 0; last; }
 	if(/--config|-c/) {
+		ReadConfig() if(-e $CONFFILE);
 		$CONFIG{VDR_HOST} = Question(gettext("What's your VDR hostname (e.g video.intra.net)?"), $CONFIG{VDR_HOST});
 		$CONFIG{VDR_PORT} = Question(gettext("On which port does VDR listen to SVDRP queries?"), $CONFIG{VDR_PORT});
 		$CONFIG{SERVERHOST} = Question(gettext("On which address should VDRAdmin listen (0.0.0.0 for any)?"), $CONFIG{SERVERHOST});
@@ -267,6 +281,10 @@ for(my $i = 0; $i < scalar(@ARGV); $i++) {
 		DisplayMessage($ARGV[$i+1]);
 		CloseSocket();
 		exit(0);
+	}
+	if(/-u/) {
+		# Don't use user.css
+		$UserCSS = undef;
 	}
 }
 
@@ -341,8 +359,7 @@ while(true) {
 	my $raw_request = $Request[0];	
 	
 	$ACCEPT_GZIP = 0;
-	
-	if($raw_request =~ /^GET (\/[\w\.\/-\:]*)([\?[\w=&\.\+\%-\:\!]*]*)[\#\d ]+HTTP\/1.\d$/) {
+	if($raw_request =~ /^GET (\/[\w\.\/-\:]*)([\?[\w=&\.\+\%-\:\!\@]*]*)[\#\d ]+HTTP\/1.\d$/) {
 		($Request, $Query) = ($1, $2 ? substr($2, 1, length($2)) : undef);
 	} else {
 		Error("404", $ERROR_MESSAGE{notfound}, $ERROR_MESSAGE{notfound_long});
@@ -901,19 +918,10 @@ sub SendFile {
 		$File);
 
   # Skin css file
-#  $FileWithPath = sprintf('%s/%s/%s/%s', $TEMPLATEDIR, $CONFIG{TEMPLATE}, $CONFIG{SKIN}, $File)
-#    if((split('[/\.]',$File))[-1] eq 'css' and -e sprintf('%s/%s/%s/%s', $TEMPLATEDIR, $CONFIG{TEMPLATE}, $CONFIG{SKIN}, $File));
-#	if($File eq "style.css") {
-#		if( -e "/etc/vdradmin/style.css" ) {
-#			$FileWithPath = "/etc/vdradmin/style.css";
-#		} elsif(-e sprintf('%s/%s/%s/%s', $TEMPLATEDIR, $CONFIG{TEMPLATE}, $CONFIG{SKIN}, $File)) {
-#			$FileWithPath = sprintf('%s/%s/%s/%s', $TEMPLATEDIR, $CONFIG{TEMPLATE}, $CONFIG{SKIN}, $File);
-#		}
-#	}
 	if($File eq "style.css" and -e sprintf('%s/%s/%s/%s', $TEMPLATEDIR, $CONFIG{TEMPLATE}, $CONFIG{SKIN}, $File)) {
 		$FileWithPath = sprintf('%s/%s/%s/%s', $TEMPLATEDIR, $CONFIG{TEMPLATE}, $CONFIG{SKIN}, $File);
-	} elsif($File eq "user.css" and -e "/etc/vdradmin/user.css") {
-		$FileWithPath = "/etc/vdradmin/user.css";
+	} elsif($File eq "user.css" and -e "$USER_CSS") {
+		$FileWithPath = "$USER_CSS";
 	}
 
   if(-e $FileWithPath) {
@@ -3006,6 +3014,7 @@ sub at_timer_list {
     if($_->{stop}) {
       $_->{stop} = substr($_->{stop}, 0, 2) . ":" . substr($_->{stop}, 2, 5);
     }
+    $_->{pattern} =~ s/"/\&quot;/g;
     $_->{modurl} = $MyURL . "?aktion=at_timer_edit&id=$id";
     $_->{delurl} = $MyURL . "?aktion=at_timer_delete&id=$id";
     $_->{prio} = $_->{prio} ? $_->{prio} : $CONFIG{AT_PRIORITY};
@@ -3072,6 +3081,7 @@ sub at_timer_list {
 		sortbystop         => ($sortby eq "stop") ? 1 : 0,
 		desc               => $desc,
     at_timer_loop      => \@timer,
+    at_timer_loop2     => \@timer,
     naturl	    			 => $MyURL . "?aktion=at_timer_new",
     #naturl	    			 => $MyURL . "?aktion=at_timer_new&active=1",
     url			    			 => $MyURL,
@@ -3118,6 +3128,8 @@ sub at_timer_edit {
     }
   }
 
+  my $pattern = $at[$id-1]->{pattern};
+  $pattern =~ s/"/\&quot;/g,
   my $template = TemplateNew("at_timer_new.html");
   my $vars = {
 		usercss     => $UserCSS,
@@ -3130,7 +3142,7 @@ sub at_timer_edit {
     active      => $at[$id-1]->{active},
     done        => $at[$id-1]->{done},
     episode     => $at[$id-1]->{episode},
-    pattern     => $at[$id-1]->{pattern},
+    pattern     => $pattern,
     starth      => (length($at[$id-1]->{start}) >= 4) ? substr($at[$id-1]->{start}, 0, 2) : undef,
     startm      => (length($at[$id-1]->{start}) >= 4) ? substr($at[$id-1]->{start}, 2, 5) : undef,
     stoph       => (length($at[$id-1]->{stop}) >= 4) ? substr($at[$id-1]->{stop}, 0, 2) : undef,
@@ -3362,10 +3374,12 @@ sub prog_timeline {
     foreach my $event (sort {$a->{start} <=> $b->{start} } @{$EPG{$_}}) { # Events durchgehen
       next if($event->{stop} < $event_time or $event->{start} > $event_time_to );
 
+			my $title = $event->{title};
+			$title =~ s/"/\&quot;/g;
       push(@show,  {
         start    => $event->{start},
         stop     => $event->{stop},
-        title    => $event->{title},
+        title    => $title,
         subtitle => (length($event->{subtitle}) > 30 ? substr($event->{subtitle}, 0, 30) . "..." : $event->{subtitle}),
         progname => $event->{channel_name},
         summary  => $event->{summary},
@@ -3388,6 +3402,7 @@ sub prog_timeline {
   my $vars = {
 		usercss => $UserCSS,
     shows  	=> $shows,
+    shows2 	=> $shows,
     now_sec	=> $event_time,
     now    	=> strftime("%H:%M", localtime($event_time)),
     datum   => my_strftime("%A, %x", time),
@@ -3896,7 +3911,7 @@ sub recRunCmd {
       if( $CONFIG{VDRVFAT} > 0 ) {
           for ( my $i=0 ;$ i < length($title); $i++) {
               $c = substr($title,$i,1);
-       unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@$%&()+,.\-;=~]/) {
+       unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&()+,.\-;=~]/) {
            $newtitle.= sprintf( "#%02X", ord( $c ));
        } else {
            $newtitle.= $c;
@@ -4116,6 +4131,7 @@ sub tv_show {
 	my $template = TemplateNew("tv.html");
 	my $vars = {
 		usercss => $UserCSS,
+		new_win => $q->param("new_win") eq "1" ? "1" : undef,
 		url     => sprintf("%s?aktion=grab_picture", $MyURL),
     host    => $CONFIG{VDR_HOST}
   };

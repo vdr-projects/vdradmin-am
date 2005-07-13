@@ -4,11 +4,12 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
-2005-06-22: 0.97-am3.3rc
+2005-07-12: 0.97-am3.3
+- Fixed problems with "$" in templates (Reported by All-Ex).
 - Updated all help messages.
-- Added beautified tooltips in timer_list. PLEASE COMMENT!!!
+- Added beautified tooltips in at_timer_list, timer_list and prog_timeline.
 - Changed saving of AutoTimer patterns: ":" -> "|" and "|" -> "\|".
-- Added support for user.css for overwriting style.css (Must be located in /etc/vdradmin/). See user.css.example. PLEASE COMMENT ON THIS!!!
+- Added support for user.css for overwriting style.css (Must be located in same folder as vdradmind.conf). See user.css.example.
 - Removed obsolete files (e.g. images).
 - Merged style.css and navi.css.
 - Reworked templates so that they use a lot of CSS (Tested using Konqueror 3.3.2 and Firefox 1.0.4).
@@ -30,6 +31,7 @@ VDR-Portal: amair
 - Deleting a single recording works again (Reported by vejoun).
 - Fixed streaming of recordings in subdirs (Reported by vejoun).
 - Added missing gray sign on deactivated AutoTimers (Reported by vejoun).
+- Various other minor fixes.
 
 2005-05-12: 0.97-am3.2
 - Added "make uninstall" to remove VDRAdmin from your system if you have installed it using "make install". Please always use this before you install a new release!

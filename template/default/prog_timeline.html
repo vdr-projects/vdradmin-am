@@ -64,9 +64,25 @@
 			}
 		}
 	</script>
+	<script type="text/javascript" language="JavaScript1.2" src="infobox.js"></script>
 </head>
 
 <body id="prog_timeline">
+<div id="infodiv" style="position:absolute; visibility:hidden; z-index:20; top:0px; left:0px;"></div>
+<script language="JavaScript" type="text/javascript">
+<?%
+	FOREACH name = shows2.keys.nsort;
+		counter = 0;
+		FOREACH show = shows2.${name};
+%?>
+			maketip("VDR-<?% show.vdr_id %?>-<?% counter %?>", "<?% show.title %?>", "<%! Duration: !%> <?% date.format(show.start, '%H:%M') %?> - <?% date.format(show.stop, '%H:%M') %?> (<?% (show.stop - show.start) / 60 %?><%! min !%>)" );
+<?%
+			counter = counter + 1;
+		END;
+	END;
+%?>
+</script>
+
 	<form action="<?% nowurl %?>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
@@ -101,18 +117,7 @@
 				<tr class="heading">
 					<td class="col_left"></td>
 					<td colspan="3" width='<?% breite + seite %?>'><h2><%! Timeline: !%>&nbsp;<?% date.format(akt_sekunde, '%H:%M') %?>&nbsp;<%! o'clock !%>&nbsp;<%! to !%>&nbsp;<?% date.format(bis_sec, '%H:%M') %?>&nbsp;<%! o'clock !%></h2></td>
-					<td class="col_navi">
-						<?% IF akt_stunde <= jetzt_stunde %?>
-							<img src="bilder/pfeile_nachlinks_soft.gif" border="0" width="28" height="17" />
-						<?% ELSE %?>
-							<a href="<?% nowurl %?>&time=<?% akt_stunde - zeitrahmen | format('%02d') %?><?% akt_minute | format('%02d') %?>">
-								<img src="bilder/pfeile_nachlinks.gif" border="0" width="28" height="17" />
-							</a>
-						<?% END %?>
-						<a href="<?% nowurl %?>&time=<?% bis_stunde | format('%02d') %?><?% akt_minute | format('%02d') %?>">
-							<img src="bilder/pfeile_nachrechts.gif" border="0" width="29" height="17" />
-						</a>
-					</td>
+					<td class="col_navi"><?% IF akt_stunde <= jetzt_stunde %?><img src="bilder/pfeile_nachlinks_soft.gif" border="0" width="28" height="17" /><?% ELSE %?><a href="<?% nowurl %?>&time=<?% akt_stunde - zeitrahmen | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachlinks.gif" border="0" width="28" height="17" /></a><?% END %?><a href="<?% nowurl %?>&time=<?% bis_stunde | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachrechts.gif" border="0" width="29" height="17" /></a></td>
 					<td class="col_right"></td>
 				</tr>
 				<tr class="row_spacer">
@@ -120,7 +125,7 @@
 					<td colspan="4"></td>
 					<td class="col_right"></td>
 				</tr>
-				<tr class="row_odd">
+				<tr class="row_even">
 					<td class="col_left"></td>
 					<td colspan="4">
 						<table border="0" cellpadding="0" cellspacing="0" width="1">
@@ -139,7 +144,7 @@
 							<tr>
 								<td class="color1"><img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br /></td>
 <?% WHILE minute < bis %?>
-								<td  width="1%" align="left" valign="bottom" class=<?% minute % 10 ? "color1" : "color2" %?>>
+								<td  width="1%" height="10px" align="left" valign="bottom" class=<?% minute % 10 ? "color1" : "color2" %?>>
 	<?% IF minute % 15 %?>
 									<img src="bilder/pixel.gif" width="1" height="5" border="0" />
 	<?% ELSE %?>
@@ -168,6 +173,7 @@
 									<nobr>
 <?%
 		z = 0;
+		counter = 0;
 		FOREACH show = shows.${name}; 
 			start_stunde = date.format(show.start, '%H') - akt_stunde;
 #			start_stunde = (start_stunde < 0 ? 0 : start_stunde);
@@ -210,23 +216,22 @@
 				td_class = show.timer ? "color_timer" : td_class %?>
 									<table border="0" align="left" cellpadding="0" cellspacing="0" id=<?% show.timer ? "timertable" : "prgtable" %?>>
 										<tr>
-											<td width="1" class="<?% td_class %?>">
+											<td width="1" class="<?% td_class %?>" onMouseOver="tip('VDR-<?% show.vdr_id %?>-<?% counter %?>'); return true;" onMouseOut="untip(); return true;">
 												<img src="bilder/spacer.gif" width="<?% laenge_pix %?>" height="1" border="0" hspace="0" /><br />
 												<nobr>
 													<?% IF show.summary %?><a href="javascript:popup('./vdradmin.pl?aktion=prog_detail&epg_id=<?% show.anchor %?>&vdr_id=<?% show.vdr_id %?>');"><?% END %?>
-													<span title="<?% show.title %?> (<?% date.format(show.start, '%H:%M') %?> - <?% date.format(show.stop, '%H:%M') %?>, <?% (show.stop - show.start) / 60 %?><%! min !%>)">
 													<?% IF laenge_chars > 2 %?>
 														<?% show.title | truncate( laenge_chars ) %?>
 													<?% ELSE %?>
 														<img src="bilder/spacer.gif" width="<?% laenge_pix %?>" height="8" border="0" hspace="0" />
 													<?% END %?>
-													</span>
 													<?% IF show.summary %?></a><?% END %?>
 												</nobr>
 											</td>
 										</tr>
 									</table>
 	<?% 
+		counter = counter +1 ;
 		END;
 		z = z + 1; 
 		old_start_minute = start_minute;

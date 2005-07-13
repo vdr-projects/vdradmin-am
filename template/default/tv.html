@@ -58,6 +58,10 @@
 				WebcamUpdate();
 			};
 		}
+
+		function tv_open() {
+	 		window.open("./vdradmin.pl?aktion=tv_show&new_win=1", "_blank", "width=615, height=548, resizable=yes, scrollbars=no, status=no, toolbar=no");
+		}
 		//-->
 	</script>
 </head>
@@ -193,7 +197,7 @@
 						<input type="button" class="submit" name="livebild" value='<%! G !%>' title="<%! Grab the picture! !%>" onClick="WebcamUpdate()" />
 					</nobr>
 				</td>
-				<td colspan="2"></td>
+				<td colspan="2" align="right"><tmpl_unless new_win><a href="javascript:tv_open();"><%! Open in separate window !%></a>&nbsp;&nbsp;</tmpl_unless></td>
 			</tr>
 			<tr>
 				<td colspan="3"></td>

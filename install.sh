@@ -77,6 +77,27 @@ function perlModules()
 	checkPerlModule Locale::gettext
 }
 
+function makeDir()
+{
+	[ -z "$1" ] && return 1
+	local DIR=$1
+	if [ ! -e "$DIR" ]; then
+		mkdir -p "$DIR"
+		if [ $? -ne 0 ]; then
+			echo "Failed to create directory $DIR!"
+			echo "Aborting..."
+			return 1
+		fi
+	fi
+	if [ ! -d "$DIR" ]; then
+		echo "$DIR exists but is no directory!"
+		echo "Aborting..."
+		return 1
+	fi
+
+	return 0
+}
+
 function doInstall()
 {
 	echo ""
@@ -85,45 +106,14 @@ function doInstall()
 
 	perlModules
 
-	[ ! -e $LIBDIR ] && mkdir -p $LIBDIR
-	if [ -d $LIBDIR ]; then
-  	cp -r template $LIBDIR
-  	cp -r lib $LIBDIR
-	else
-		echo "$LIBDIR exists but is no directory!"
-		echo "Aborting..."
-		exit 1
-	fi
-
-	[ ! -e $DOCDIR ] && mkdir -p $DOCDIR
-	if [ -d $DOCDIR ]; then
-  	cp -r contrib COPYING HISTORY INSTALL README $DOCDIR
-	else
-		echo "$DOCDIR exists but is no directory!"
-		echo "Aborting..."
-		exit 1
-	fi
-
-	[ ! -e $MANDIR ] && mkdir -p $MANDIR
-	if [ -d $MANDIR ]; then
-		cp vdradmind.pl.1 $MANDIR
-	else
-		echo "$MANDIR exists but is no directory!"
-		echo "Aborting..."
-		exit 1
-	fi
-
-	[ ! -e $ETCDIR ] && mkdir -p $ETCDIR
-	if [ ! -d $ETCDIR ]; then
-		echo "$ETCDIR exists but is no directory!"
-		echo "Aborting..."
-		exit 1
-	fi
+	makeDir $LIBDIR && cp -r template lib $LIBDIR || exit 1
+  makeDir $DOCDIR && cp -r contrib COPYING CREDITS HISTORY INSTALL README $DOCDIR || exit 1
+	makeDir $MANDIR && cp vdradmind.pl.1 $MANDIR || exit 1
+	makeDir $ETCDIR || exit 1
 
 	for lang in $LANGS
 	do
-		[ ! -e $LOCDIR/$lang/LC_MESSAGES/ ] && mkdir -p $LOCDIR/$lang/LC_MESSAGES/
-		install -m 644 locale/$lang/LC_MESSAGES/vdradmin.mo $LOCDIR/$lang/LC_MESSAGES/vdradmin.mo
+		makeDir $LOCDIR/$lang/LC_MESSAGES/ && install -m 644 locale/$lang/LC_MESSAGES/vdradmin.mo $LOCDIR/$lang/LC_MESSAGES/vdradmin.mo || exit 1
 	done
 
 	local RESTART=
@@ -138,12 +128,9 @@ function doInstall()
   	    -e "s/^my \$SEARCH_FILES_IN_SYSTEM = 0;/my \$SEARCH_FILES_IN_SYSTEM = 1;/" \
   	    -e "s:/usr/share/vdradmin/lib:${LIBDIR}/lib:" \
   	    -e "s:/usr/share/vdradmin/template:${LIBDIR}/template:" \
-  	    -e "s:/etc/vdradmin/vdradmind.conf:${ETCDIR}/vdradmind.conf:" \
   	    -e "s:/var/log/\$CONFIG{LOGFILE}:${LOGDIR}/\$CONFIG{LOGFILE}:" \
   	    -e "s:/var/run/vdradmind.pid:${PIDFILE}:" \
-  	    -e "s:/etc/vdradmin/vdradmind.done:${ETCDIR}/vdradmind.done:" \
-  	    -e "s:/etc/vdradmin/vdradmind.at:${ETCDIR}/vdradmind.at:" \
-  	    -e "s:/etc/vdradmin/vdradmind.bl:${ETCDIR}/vdradmind.bl:" \
+  	    -e "s:\(\$ETCDIR *= \)\"/etc/vdradmin\";:\1\"${ETCDIR}\";:" \
   	    -e "s:/usr/share/locale:${LOCDIR}:" \
   	    -e "s:\(\$CONFIG{VIDEODIR} *= \)\"/video\";:\1\"${VIDEODIR}\";:" \
 				-e "s:\(\$CONFIG{VDRCONFDIR} *= \)\"\$CONFIG{VIDEODIR}\";:\1\"${VDRCONF}\";:" \
