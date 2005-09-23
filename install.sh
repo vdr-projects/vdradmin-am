@@ -52,15 +52,22 @@ function checkPerlModule()
 	[ -z "$1" ] && return 1
 
 	local MODULE=$1
+	local ALT_MODULE=$2
+	local ALT_MESSAGE=
+	[ "$ALT_MODULE" ] && ALT_MESSAGE=" or $ALT_MODULE"
 
-	echo -n "Checking for Perl module $MODULE... "
+	echo -n "Checking for Perl module $MODULE$ALT_MESSAGE... "
 	perl -ce 'BEGIN{$0 =~ /(^.*\/)/; $BASENAME = $1; unshift(@INC, $BASENAME . "lib/");} use '$MODULE >/dev/null 2>&1
 	if [ $? -eq 2 ]; then
-		echo "MISSING"
-		read -p "Do you want to install it? [y/N]"
-		[ $REPLY = "y" -o $REPLY = "Y" ] && su -c "perl -MCPAN -e 'install Locale::gettext'"
+		if [ "$ALT_MODULE" ]; then
+			perl -ce 'BEGIN{$0 =~ /(^.*\/)/; $BASENAME = $1; unshift(@INC, $BASENAME . "lib/");} use '$ALT_MODULE >/dev/null 2>&1
+			[ $? -eq 0 ] && echo " $ALT_MODULE found" && return 0
+		fi
+		echo " MISSING"
+		read -p "Do you want to install $MODULE? [y/N]"
+		[ "$REPLY" = "y" -o "$REPLY" = "Y" ] && su -c "perl -MCPAN -e 'install '$MODULE"
 	else
-		echo "found"
+		echo " found"
 	fi
 
 }
@@ -74,7 +81,8 @@ function perlModules()
 	checkPerlModule Time::Local
 	checkPerlModule MIME::Base64
 	checkPerlModule File::Temp
-	checkPerlModule Locale::gettext
+	checkPerlModule Locale::gettext Locale::Messages
+	checkPerlModule URI::Escape
 }
 
 function makeDir()
@@ -162,6 +170,9 @@ function doInstall()
 		echo ""
 	fi
 	echo "NOTE:"
+	echo "If you want to run VDRAdmin-AM in a different language you must set the LANG environment variable (see README)."
+	echo ""
+	echo "NOTE2:"
 	echo "If you would like VDRAdmin-AM to start at system's boot, please modify your system's init scripts."
 	exit 0
 }

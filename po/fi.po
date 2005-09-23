@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-0.97-AM3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-12 13:18+0200\n"
+"POT-Creation-Date: 2005-09-23 10:28+0200\n"
 "PO-Revision-Date: 2005-06-17 12:36+0200\n"
 "Last-Translator: Rofa\n"
 "Language-Team: Suomi\n"
@@ -51,8 +51,8 @@ msgid "Edit Timer"
 msgstr "Muokkaa ajastinta"
 
 #: ../template/default/timer_new.html:53
-#: ../template/default/at_timer_list.html:47
-#: ../template/default/config.html:23 ../template/default/timer_list.html:55
+#: ../template/default/at_timer_list.html:39
+#: ../template/default/config.html:23 ../template/default/timer_list.html:47
 #: ../template/default/rec_list.html:27
 #: ../template/default/at_timer_new.html:24
 msgid "Help"
@@ -64,13 +64,13 @@ msgid "Timer Active:"
 msgstr "Aktiivinen:"
 
 #: ../template/default/timer_new.html:75
-#: ../template/default/at_timer_list.html:135
-#: ../template/default/config.html:164 ../template/default/config.html:235
-#: ../template/default/config.html:337 ../template/default/config.html:352
-#: ../template/default/config.html:400 ../template/default/config.html:415
-#: ../template/default/config.html:446 ../template/default/config.html:455
-#: ../template/default/config.html:464 ../template/default/config.html:473
-#: ../template/default/timer_list.html:325
+#: ../template/default/at_timer_list.html:128
+#: ../template/default/config.html:170 ../template/default/config.html:241
+#: ../template/default/config.html:343 ../template/default/config.html:358
+#: ../template/default/config.html:406 ../template/default/config.html:421
+#: ../template/default/config.html:452 ../template/default/config.html:461
+#: ../template/default/config.html:470 ../template/default/config.html:479
+#: ../template/default/config.html:488 ../template/default/timer_list.html:318
 #: ../template/default/at_timer_new.html:48
 #: ../template/default/at_timer_new.html:52
 #: ../template/default/at_timer_new.html:154
@@ -78,13 +78,13 @@ msgid "Yes"
 msgstr "Kyllä"
 
 #: ../template/default/timer_new.html:76
-#: ../template/default/at_timer_list.html:137
-#: ../template/default/config.html:165 ../template/default/config.html:236
-#: ../template/default/config.html:338 ../template/default/config.html:353
-#: ../template/default/config.html:401 ../template/default/config.html:416
-#: ../template/default/config.html:447 ../template/default/config.html:456
-#: ../template/default/config.html:465 ../template/default/config.html:474
-#: ../template/default/timer_list.html:326
+#: ../template/default/at_timer_list.html:130
+#: ../template/default/config.html:171 ../template/default/config.html:242
+#: ../template/default/config.html:344 ../template/default/config.html:359
+#: ../template/default/config.html:407 ../template/default/config.html:422
+#: ../template/default/config.html:453 ../template/default/config.html:462
+#: ../template/default/config.html:471 ../template/default/config.html:480
+#: ../template/default/config.html:489 ../template/default/timer_list.html:319
 #: ../template/default/at_timer_new.html:49
 #: ../template/default/at_timer_new.html:53
 #: ../template/default/at_timer_new.html:155
@@ -106,13 +106,12 @@ msgstr "Lähetteen tunniste"
 msgid "Time"
 msgstr "Aika"
 
-#: ../template/default/timer_new.html:88 ../template/default/tv.html:181
+#: ../template/default/timer_new.html:88 ../template/default/tv.html:180
 #: ../template/default/help_timer_new.html:43
 msgid "off"
 msgstr "Pois"
 
 #: ../template/default/timer_new.html:94 ../template/default/prog_list.html:27
-#: ../template/default/prog_list2.html:30
 #: ../template/default/help_timer_new.html:47
 #: ../template/default/help_at_timer_new.html:46
 #: ../template/default/at_timer_new.html:93
@@ -183,10 +182,10 @@ msgstr "Lopetusaika:"
 
 #: ../template/default/timer_new.html:144
 #: ../template/default/at_timer_list.html:21
-#: ../template/default/config.html:248 ../template/default/config.html:292
+#: ../template/default/config.html:254 ../template/default/config.html:298
 #: ../template/default/timer_list.html:24
-#: ../template/default/help_config.html:94
-#: ../template/default/help_config.html:104
+#: ../template/default/help_config.html:100
+#: ../template/default/help_config.html:110
 #: ../template/default/help_timer_new.html:61
 #: ../template/default/help_at_timer_new.html:52
 #: ../template/default/at_timer_new.html:128
@@ -195,10 +194,10 @@ msgstr "Prioriteetti:"
 
 #: ../template/default/timer_new.html:150
 #: ../template/default/at_timer_list.html:21
-#: ../template/default/config.html:254 ../template/default/config.html:298
+#: ../template/default/config.html:260 ../template/default/config.html:304
 #: ../template/default/timer_list.html:24
-#: ../template/default/help_config.html:96
-#: ../template/default/help_config.html:106
+#: ../template/default/help_config.html:102
+#: ../template/default/help_config.html:112
 #: ../template/default/help_timer_new.html:63
 #: ../template/default/help_at_timer_new.html:54
 #: ../template/default/at_timer_new.html:136
@@ -215,7 +214,7 @@ msgstr "Tallenteen nimi:"
 msgid "Summary:"
 msgstr "Tallenteen kuvaus:"
 
-#: ../template/default/timer_new.html:174 ../template/default/config.html:511
+#: ../template/default/timer_new.html:174 ../template/default/config.html:526
 #: ../template/default/at_timer_new.html:176
 msgid "Save"
 msgstr "Tallenna"
@@ -256,79 +255,79 @@ msgstr ""
 "Käyttäjätunnistus ei onnistu! Tarkista syöttämäsi käyttäjätunnus/salasana."
 
 #: ../template/default/at_timer_list.html:6
-#: ../template/default/at_timer_list.html:30
-#: ../template/default/config.html:223 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:88
+#: ../template/default/at_timer_list.html:31
+#: ../template/default/config.html:229 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:94
 #: ../template/default/help_at_timer_list.html:6
-#: ../template/default/help_at_timer_list.html:18
+#: ../template/default/help_at_timer_list.html:22
 #: ../template/default/navigation.html:49
 msgid "AutoTimer"
 msgstr "Automaattiset ajastimet"
 
-#: ../template/default/at_timer_list.html:38
+#: ../template/default/at_timer_list.html:34
 msgid "New AutoTimer"
 msgstr "Uusi automaattinen ajastin"
 
-#: ../template/default/at_timer_list.html:60
-#: ../template/default/timer_list.html:223
+#: ../template/default/at_timer_list.html:53
+#: ../template/default/timer_list.html:216
 msgid "Active"
 msgstr "Aktiivinen"
 
-#: ../template/default/at_timer_list.html:71
-#: ../template/default/timer_list.html:234
+#: ../template/default/at_timer_list.html:64
+#: ../template/default/timer_list.html:227
 msgid "Channel"
 msgstr "Kanava"
 
-#: ../template/default/at_timer_list.html:82
-#: ../template/default/timer_list.html:256
+#: ../template/default/at_timer_list.html:75
+#: ../template/default/timer_list.html:249
 msgid "Start"
 msgstr "Aloitus"
 
-#: ../template/default/at_timer_list.html:93
-#: ../template/default/timer_list.html:267
+#: ../template/default/at_timer_list.html:86
+#: ../template/default/timer_list.html:260
 msgid "Stop"
 msgstr "Lopetus"
 
-#: ../template/default/at_timer_list.html:104
-#: ../template/default/timer_list.html:278
+#: ../template/default/at_timer_list.html:97
+#: ../template/default/timer_list.html:271
 #: ../template/default/rec_list.html:81
 msgid "Name"
 msgstr "Nimi"
 
-#: ../template/default/at_timer_list.html:115
-#: ../template/default/timer_list.html:289
+#: ../template/default/at_timer_list.html:108
+#: ../template/default/timer_list.html:282
 #: ../template/default/rec_list.html:92
 msgid "Select all/none"
 msgstr "Valitse kaikki/ei yhtään"
 
-#: ../template/default/at_timer_list.html:163
-#: ../template/default/timer_list.html:355
+#: ../template/default/at_timer_list.html:156
+#: ../template/default/timer_list.html:348
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: ../template/default/at_timer_list.html:168
-#: ../template/default/timer_list.html:358
+#: ../template/default/at_timer_list.html:161
+#: ../template/default/timer_list.html:351
 msgid "Delete timer?"
 msgstr "Poistetaanko ajastin?"
 
-#: ../template/default/at_timer_list.html:168
-#: ../template/default/timer_list.html:358
+#: ../template/default/at_timer_list.html:161
+#: ../template/default/timer_list.html:351
 #: ../template/default/rec_list.html:140
 msgid "Delete"
 msgstr "Poista"
 
-#: ../template/default/at_timer_list.html:199
+#: ../template/default/at_timer_list.html:188
 msgid "Force Update"
 msgstr "Päivitä"
 
-#: ../template/default/at_timer_list.html:210
-#: ../template/default/timer_list.html:382
-msgid "Delete all selected timers?"
-msgstr "Poistetaanko valitut ajastimet?"
-
-#: ../template/default/at_timer_list.html:210
+#: ../template/default/at_timer_list.html:191
 msgid "Delete Selected AutoTimers"
 msgstr "Poista valitut automaattiset ajastimet"
+
+#: ../template/default/at_timer_list.html:191
+#: ../template/default/timer_list.html:374
+msgid "Delete all selected timers?"
+msgstr "Poistetaanko valitut ajastimet?"
 
 #: ../template/default/prog_summary.html:7
 #: ../template/default/prog_timeline.html:7
@@ -353,7 +352,7 @@ msgstr "kello:"
 
 #: ../template/default/prog_summary.html:43
 #: ../template/default/prog_list.html:23 ../template/default/rec_list.html:149
-#: ../template/default/prog_list2.html:54
+#: ../template/default/prog_list2.html:56
 msgid "Stream"
 msgstr "Toista"
 
@@ -375,13 +374,13 @@ msgstr "tallenna"
 
 #: ../template/default/config.html:5 ../template/default/config.html:19
 #: ../template/default/help_config.html:9
-#: ../template/default/help_config.html:21
+#: ../template/default/help_config.html:25
 #: ../template/default/navigation.html:57
 msgid "Configuration"
 msgstr "Asetukset"
 
-#: ../template/default/config.html:36 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:36
+#: ../template/default/config.html:36 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:40
 msgid "General Settings"
 msgstr "Yleiset"
 
@@ -389,186 +388,194 @@ msgstr "Yleiset"
 msgid "Template:"
 msgstr "Pohja:"
 
-#: ../template/default/config.html:60 ../template/default/help_config.html:38
+#: ../template/default/config.html:60 ../template/default/help_config.html:42
 msgid "Skin:"
 msgstr "Ulkoasu:"
 
-#: ../template/default/config.html:72 ../template/default/help_config.html:40
+#: ../template/default/config.html:72 ../template/default/help_config.html:44
 msgid "Login Page:"
 msgstr "Aloitussivu:"
 
-#: ../template/default/config.html:82 ../template/default/config.html:396
+#: ../template/default/config.html:82 ../template/default/config.html:402
 msgid "Gets active after restarting VDRAdmin"
 msgstr "Aktivoituu VDRAdminin uudelleen käynnistyksellä"
 
-#: ../template/default/config.html:84 ../template/default/help_config.html:42
+#: ../template/default/config.html:84 ../template/default/help_config.html:46
 msgid "Number of channels to use:"
 msgstr "Kanavien lukumäärä:"
 
-#: ../template/default/config.html:90 ../template/default/help_config.html:44
+#: ../template/default/config.html:90 ../template/default/help_config.html:48
 msgid "Local net (no login required):"
 msgstr "Käyttäjätunnukseton osoiteavaruus:"
 
-#: ../template/default/config.html:104 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:50
+#: ../template/default/config.html:104 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:54
 msgid "VDR"
 msgstr "VDR"
 
-#: ../template/default/config.html:114 ../template/default/help_config.html:52
+#: ../template/default/config.html:114 ../template/default/help_config.html:56
 msgid "Number of DVB cards:"
 msgstr "DVB-korttien lukumäärä:"
 
-#: ../template/default/config.html:120 ../template/default/help_config.html:54
+#: ../template/default/config.html:120 ../template/default/help_config.html:58
 msgid "Path to recordings:"
 msgstr "VDR-tallenteiden polku:"
 
-#: ../template/default/config.html:126 ../template/default/help_config.html:56
+#: ../template/default/config.html:126 ../template/default/help_config.html:60
 msgid "Path to configuration files:"
 msgstr "Konfigurointitiedostojen polku:"
 
-#: ../template/default/config.html:140 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:62
+#: ../template/default/config.html:132 ../template/default/help_config.html:62
+msgid "Path to EPG images:"
+msgstr ""
+
+#: ../template/default/config.html:146 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:68
 msgid "Identification"
 msgstr "Käyttäjätunnistus"
 
-#: ../template/default/config.html:150 ../template/default/help_config.html:64
+#: ../template/default/config.html:156 ../template/default/help_config.html:70
 msgid "Username:"
 msgstr "Käyttäjätunnus:"
 
-#: ../template/default/config.html:156 ../template/default/help_config.html:66
+#: ../template/default/config.html:162 ../template/default/help_config.html:72
 msgid "Password:"
 msgstr "Salasana:"
 
-#: ../template/default/config.html:162 ../template/default/help_config.html:68
+#: ../template/default/config.html:168 ../template/default/help_config.html:74
 msgid "Guest Account:"
 msgstr "Sallitaanko vierailija:"
 
-#: ../template/default/config.html:171 ../template/default/help_config.html:70
+#: ../template/default/config.html:177 ../template/default/help_config.html:76
 msgid "Guest Username:"
 msgstr "Vierailijan käyttäjätunnus:"
 
-#: ../template/default/config.html:177 ../template/default/help_config.html:72
+#: ../template/default/config.html:183 ../template/default/help_config.html:78
 msgid "Guest Password:"
 msgstr "Vierailijan salasana:"
 
-#: ../template/default/config.html:191 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:78
+#: ../template/default/config.html:197 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:84
 #: ../template/default/navigation.html:37 ../template/i18n.pl:4
 msgid "Timeline"
 msgstr "Aikajana"
 
-#: ../template/default/config.html:201 ../template/default/help_config.html:80
+#: ../template/default/config.html:207 ../template/default/help_config.html:86
 msgid "Hours:"
 msgstr "Pituus tunteina:"
 
-#: ../template/default/config.html:207 ../template/default/help_config.html:82
+#: ../template/default/config.html:213 ../template/default/help_config.html:88
 msgid "Times:"
 msgstr "Ajankohdat:"
 
-#: ../template/default/config.html:233 ../template/default/help_config.html:90
+#: ../template/default/config.html:239 ../template/default/help_config.html:96
 msgid "Active:"
 msgstr "Käytössä:"
 
-#: ../template/default/config.html:242 ../template/default/help_config.html:92
+#: ../template/default/config.html:248 ../template/default/help_config.html:98
 msgid "Timeout:"
 msgstr "Odotusaika:"
 
-#: ../template/default/config.html:243 ../template/default/config.html:305
-#: ../template/default/config.html:311
+#: ../template/default/config.html:249 ../template/default/config.html:311
+#: ../template/default/config.html:317
 msgid "minutes"
 msgstr "minuuttia"
 
-#: ../template/default/config.html:261 ../template/default/config.html:304
-#: ../template/default/help_config.html:108
+#: ../template/default/config.html:267 ../template/default/config.html:310
+#: ../template/default/help_config.html:114
 msgid "Time Margin at Start:"
 msgstr "Aloitusmarginaali:"
 
-#: ../template/default/config.html:267 ../template/default/config.html:310
-#: ../template/default/help_config.html:110
+#: ../template/default/config.html:273 ../template/default/config.html:316
+#: ../template/default/help_config.html:116
 msgid "Time Margin at Stop:"
 msgstr "Lopetusmarginaali:"
 
-#: ../template/default/config.html:282 ../template/default/timer_list.html:6
-#: ../template/default/timer_list.html:39
-#: ../template/default/help_config.html:34
-#: ../template/default/help_config.html:102
+#: ../template/default/config.html:288 ../template/default/timer_list.html:6
+#: ../template/default/timer_list.html:40
+#: ../template/default/help_config.html:38
+#: ../template/default/help_config.html:108
 #: ../template/default/help_timer_list.html:6
-#: ../template/default/help_timer_list.html:18
+#: ../template/default/help_timer_list.html:22
 #: ../template/default/navigation.html:45
 msgid "Timer"
 msgstr "Ajastimet"
 
-#: ../template/default/config.html:325 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:116
+#: ../template/default/config.html:331 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:122
 msgid "Streaming"
 msgstr "Suoratoisto"
 
-#: ../template/default/config.html:335
-#: ../template/default/help_config.html:118
+#: ../template/default/config.html:341
+#: ../template/default/help_config.html:124
 msgid "Live Streaming:"
 msgstr "Live-kuvan suoratoisto:"
 
-#: ../template/default/config.html:344
-#: ../template/default/help_config.html:120
+#: ../template/default/config.html:350
+#: ../template/default/help_config.html:126
 msgid "HTTP Port of Streamdev (also possible 3000/ts):"
 msgstr "Streamdev-laajennoksen HTTP-portti (esim. 3000/ts):"
 
-#: ../template/default/config.html:350
-#: ../template/default/help_config.html:122
+#: ../template/default/config.html:356
+#: ../template/default/help_config.html:128
 msgid "Recordings Streaming:"
 msgstr "Tallenteiden suoratoisto:"
 
-#: ../template/default/config.html:359
-#: ../template/default/help_config.html:124
+#: ../template/default/config.html:365
+#: ../template/default/help_config.html:130
 msgid "Path to VDR Recordings on your workstation:"
 msgstr "VDR-tallenteiden polku työasemallasi:"
 
-#: ../template/default/config.html:366
+#: ../template/default/config.html:372
 msgid "Bandwidth of Streams:"
 msgstr "Kaistanleveys:"
 
-#: ../template/default/config.html:388 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:130
+#: ../template/default/config.html:394 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:136
 msgid "Expert"
 msgstr "Guru-käyttäjä"
 
-#: ../template/default/config.html:398
-#: ../template/default/help_config.html:133
+#: ../template/default/config.html:404
+#: ../template/default/help_config.html:139
 msgid "Read EPG directly using epg.data:"
 msgstr "Lue ohjelmatiedot suoraan tiedostosta:"
 
-#: ../template/default/config.html:407
-#: ../template/default/help_config.html:135
+#: ../template/default/config.html:413
+#: ../template/default/help_config.html:141
 msgid "epg.data filename:"
 msgstr "Tiedosto ohjelmatiedoille:"
 
-#: ../template/default/config.html:413
-#: ../template/default/help_config.html:137
+#: ../template/default/config.html:419
+#: ../template/default/help_config.html:143
 msgid "VFAT:"
 msgstr "VFAT-tuki:"
 
-#: ../template/default/config.html:434 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:143
+#: ../template/default/config.html:440 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:149
 msgid "Channel Selections"
 msgstr "Kanavavalinnat"
 
-#: ../template/default/config.html:444
+#: ../template/default/config.html:450
 msgid "In \"Timeline\"?"
 msgstr "Käytä kanavavalintoja \"Aikajana\"-sivulla"
 
-#: ../template/default/config.html:453
-msgid "In \"Channels\" / \"Playing Today\"?"
-msgstr "Käytä kanavavalintoja \"Kanavat\"- ja \"Ohjelmisto tänään\"-sivuilla"
+#: ../template/default/config.html:459
+msgid "In \"Channels\"?"
+msgstr ""
 
-#: ../template/default/config.html:462
+#: ../template/default/config.html:468
+msgid "In \"Playing Today\"?"
+msgstr ""
+
+#: ../template/default/config.html:477
 msgid "In \"What's On Now\"?"
 msgstr "Käytä kanavavalintoja \"Menossa nyt\"-sivulla"
 
-#: ../template/default/config.html:471
+#: ../template/default/config.html:486
 msgid "In \"AutoTimer\"?"
 msgstr "Käytä kanavavalintoja \"Automaattiset ajastimet\"-sivulla"
 
-#: ../template/default/config.html:512
+#: ../template/default/config.html:527
 msgid "Apply"
 msgstr "Käytä"
 
@@ -582,44 +589,44 @@ msgstr "Kesto:"
 msgid "min"
 msgstr "min"
 
-#: ../template/default/timer_list.html:46
+#: ../template/default/timer_list.html:42
 msgid "New Timer"
 msgstr "Uusi ajastin"
 
-#: ../template/default/timer_list.html:245
+#: ../template/default/timer_list.html:238
 #: ../template/default/rec_list.html:59
 msgid "Date"
 msgstr "Päivämäärä"
 
-#: ../template/default/timer_list.html:310
+#: ../template/default/timer_list.html:303
 msgid "This timer is inactive!"
 msgstr "Ajastin ei ole aktiivinen!"
 
-#: ../template/default/timer_list.html:313
+#: ../template/default/timer_list.html:306
 msgid "This timer is impossible!"
 msgstr "Ajastin ei ole mahdollinen!"
 
-#: ../template/default/timer_list.html:316
+#: ../template/default/timer_list.html:309
 msgid "No more timers on other transponders possible!"
 msgstr "Maksimimäärä ajastimia käytössä!"
 
-#: ../template/default/timer_list.html:319
+#: ../template/default/timer_list.html:312
 msgid "Timer OK."
 msgstr "Ajastin kunnossa."
 
-#: ../template/default/timer_list.html:324
+#: ../template/default/timer_list.html:317
 msgid "Edit timer status?"
 msgstr "Muokataanko ajastinta?"
 
-#: ../template/default/timer_list.html:327
+#: ../template/default/timer_list.html:320
 msgid "VPS"
 msgstr "VPS"
 
-#: ../template/default/timer_list.html:328
+#: ../template/default/timer_list.html:321
 msgid "Auto"
 msgstr "Automaattinen"
 
-#: ../template/default/timer_list.html:382
+#: ../template/default/timer_list.html:374
 msgid "Delete Selected Timers"
 msgstr "Poista valitut ajastimet"
 
@@ -629,7 +636,6 @@ msgid "Channels"
 msgstr "Kanavat"
 
 #: ../template/default/prog_list.html:33
-#: ../template/default/prog_list2.html:35
 msgid "Go!"
 msgstr "Siirry"
 
@@ -641,50 +647,50 @@ msgstr "Virhe!"
 msgid "TV"
 msgstr "TV"
 
-#: ../template/default/tv.html:179
+#: ../template/default/tv.html:178
 msgid "Interval:"
 msgstr "Päivitysväli:"
 
-#: ../template/default/tv.html:182 ../template/default/tv.html:183
-#: ../template/default/tv.html:184 ../template/default/tv.html:185
-#: ../template/default/tv.html:186 ../template/default/tv.html:187
-#: ../template/default/tv.html:188
+#: ../template/default/tv.html:181 ../template/default/tv.html:182
+#: ../template/default/tv.html:183 ../template/default/tv.html:184
+#: ../template/default/tv.html:185 ../template/default/tv.html:186
+#: ../template/default/tv.html:187
 msgid "sec."
 msgstr "s"
 
-#: ../template/default/tv.html:190 ../template/default/tv.html:197
+#: ../template/default/tv.html:189 ../template/default/tv.html:196
 msgid "G"
 msgstr "K"
 
-#: ../template/default/tv.html:190 ../template/default/tv.html:197
+#: ../template/default/tv.html:189 ../template/default/tv.html:196
 msgid "Grab the picture!"
 msgstr "Kuvankaappaus"
 
-#: ../template/default/tv.html:191
+#: ../template/default/tv.html:190
 msgid "Size:"
 msgstr "Koko:"
 
-#: ../template/default/tv.html:200
+#: ../template/default/tv.html:198
 msgid "Open in separate window"
 msgstr "Avaa omaan ikkunaan"
 
-#: ../template/default/prog_detail.html:37
+#: ../template/default/prog_detail.html:43
 msgid "close"
 msgstr "sulje"
 
-#: ../template/default/prog_detail.html:39
+#: ../template/default/prog_detail.html:45
 msgid "view"
 msgstr "katso"
 
-#: ../template/default/prog_detail.html:40
+#: ../template/default/prog_detail.html:46
 msgid "record"
 msgstr "tallenna"
 
-#: ../template/default/prog_detail.html:41
+#: ../template/default/prog_detail.html:47
 msgid "search"
 msgstr "etsi"
 
-#: ../template/default/prog_detail.html:44
+#: ../template/default/prog_detail.html:50
 msgid "Lookup movie in the Internet-Movie-Database (IMDb)"
 msgstr "etsi IMDB:stä"
 
@@ -743,21 +749,21 @@ msgstr "Poista valitut tallenteet"
 msgid "Delete all selected recordings?"
 msgstr "Poistetaanko valitut tallenteet?"
 
-#: ../template/default/help_config.html:32
+#: ../template/default/help_config.html:36
 msgid ""
 "<p>Here you can change general settings and base settings for timers, "
 "AutoTimers, channel selection and streaming parameters.</p>"
 msgstr ""
 
-#: ../template/default/help_config.html:39
+#: ../template/default/help_config.html:43
 msgid "The skin you want to use."
 msgstr ""
 
-#: ../template/default/help_config.html:41
+#: ../template/default/help_config.html:45
 msgid "The page you want to see at first connect to VDRAdmin."
 msgstr ""
 
-#: ../template/default/help_config.html:43
+#: ../template/default/help_config.html:47
 msgid ""
 "VDRAdmin will load the given number of channels from VDR and present only "
 "those in any fields where channels can be selected. This also limits the EPG "
@@ -770,7 +776,7 @@ msgid ""
 "restart VDRAdmin."
 msgstr ""
 
-#: ../template/default/help_config.html:45
+#: ../template/default/help_config.html:49
 msgid ""
 "Here you can specify an IP address or range that can login without providing "
 "login information. For example: \"192.168.0.0/24\" will include any IP "
@@ -778,26 +784,26 @@ msgid ""
 "\"192.168.0.123\"."
 msgstr ""
 
-#: ../template/default/help_config.html:47
-#: ../template/default/help_config.html:59
-#: ../template/default/help_config.html:75
-#: ../template/default/help_config.html:85
-#: ../template/default/help_config.html:99
-#: ../template/default/help_config.html:113
-#: ../template/default/help_config.html:127
-#: ../template/default/help_config.html:140
-#: ../template/default/help_config.html:147
+#: ../template/default/help_config.html:51
+#: ../template/default/help_config.html:65
+#: ../template/default/help_config.html:81
+#: ../template/default/help_config.html:91
+#: ../template/default/help_config.html:105
+#: ../template/default/help_config.html:119
+#: ../template/default/help_config.html:133
+#: ../template/default/help_config.html:146
+#: ../template/default/help_config.html:153
 msgid "Top"
 msgstr "Alkuun"
 
-#: ../template/default/help_config.html:53
+#: ../template/default/help_config.html:57
 msgid ""
 "The number of DVB cards VDR can access. Depending on this value VDRAdmin "
 "will calculate critical timers in the <span class=\"ref_menu\">Timer</span> "
 "menu."
 msgstr ""
 
-#: ../template/default/help_config.html:55
+#: ../template/default/help_config.html:59
 msgid ""
 "The path to VDR's recordings. It's used so that VDRAdmin can locate the "
 "recordings when using <span class=\"ref_label\">Recordings Streaming</span> "
@@ -805,7 +811,7 @@ msgid ""
 "\"ref_menu\">Recordings</span> menu."
 msgstr ""
 
-#: ../template/default/help_config.html:57
+#: ../template/default/help_config.html:61
 msgid ""
 "The path where VDR's configuration files are located. If this directory "
 "contains the file <span class=\"ref_file\">reccmds.conf</span> its content "
@@ -813,50 +819,54 @@ msgid ""
 "menu."
 msgstr ""
 
-#: ../template/default/help_config.html:65
+#: ../template/default/help_config.html:63
+msgid "The path where the EPG images are stored."
+msgstr ""
+
+#: ../template/default/help_config.html:71
 msgid ""
 "The username for the main user, i.e. the user having the most privileges."
 msgstr ""
 
-#: ../template/default/help_config.html:67
+#: ../template/default/help_config.html:73
 msgid "The main user's password."
 msgstr ""
 
-#: ../template/default/help_config.html:69
+#: ../template/default/help_config.html:75
 msgid ""
 "If you want an user account having only limited privileges, this is for you. "
 "The guest user cannot modify anything, it's only allowed to view the EPG, "
 "timers, AutoTimers and recordings listings."
 msgstr ""
 
-#: ../template/default/help_config.html:71
+#: ../template/default/help_config.html:77
 msgid "The username for the guest user."
 msgstr ""
 
-#: ../template/default/help_config.html:73
+#: ../template/default/help_config.html:79
 msgid "The guest user's password."
 msgstr ""
 
-#: ../template/default/help_config.html:81
+#: ../template/default/help_config.html:87
 msgid "The number of hours to show in the timeline."
 msgstr ""
 
-#: ../template/default/help_config.html:83
+#: ../template/default/help_config.html:89
 msgid ""
 "A comma separated list of times in <strong>hh:mm</strong> format that appear "
 "in the selectbox placed at the top."
 msgstr ""
 
-#: ../template/default/help_config.html:91
+#: ../template/default/help_config.html:97
 msgid "Activate or deactivate the AutoTimer function."
 msgstr ""
 
-#: ../template/default/help_config.html:93
+#: ../template/default/help_config.html:99
 msgid "The interval, the the EPG data is checked for updating the AutoTimers."
 msgstr ""
 
-#: ../template/default/help_config.html:95
-#: ../template/default/help_config.html:105
+#: ../template/default/help_config.html:101
+#: ../template/default/help_config.html:111
 #: ../template/default/help_timer_new.html:62
 #: ../template/default/help_at_timer_new.html:53
 msgid ""
@@ -876,8 +886,8 @@ msgid ""
 "recording."
 msgstr ""
 
-#: ../template/default/help_config.html:97
-#: ../template/default/help_config.html:107
+#: ../template/default/help_config.html:103
+#: ../template/default/help_config.html:113
 #: ../template/default/help_timer_new.html:64
 #: ../template/default/help_at_timer_new.html:55
 msgid ""
@@ -891,35 +901,35 @@ msgid ""
 "recording has passed by."
 msgstr ""
 
-#: ../template/default/help_config.html:109
+#: ../template/default/help_config.html:115
 msgid ""
 "The number of minutes VDRAdmin subtracts from the broadcasts start time "
 "found in the EPG. This value is used for timers programmed by AutoTimer and "
 "timers manually programmed when pressing \"Record\" in any EPG view."
 msgstr ""
 
-#: ../template/default/help_config.html:111
+#: ../template/default/help_config.html:117
 msgid ""
 "The number of minutes VDRAdmin adds to the broadcasts stop time found in the "
 "EPG. This value is used for timers programmed by AutoTimer and timers "
 "manually programmed when pressing \"Record\" in any EPG view."
 msgstr ""
 
-#: ../template/default/help_config.html:119
+#: ../template/default/help_config.html:125
 msgid ""
 "Enable or disable live streaming using the <a href=\"http://www.magoa.net/"
 "linux/\">streamdev plugin</a>. You also have to set the correct <span class="
 "\"ref_label\">HTTP Port for Streamdev</span> below."
 msgstr ""
 
-#: ../template/default/help_config.html:121
+#: ../template/default/help_config.html:127
 msgid ""
 "Here you have to set the port number your VDR's streamdev server listens for "
 "connections. Additionally you can also provide the stream type you like to "
 "use."
 msgstr ""
 
-#: ../template/default/help_config.html:123
+#: ../template/default/help_config.html:129
 msgid ""
 "Enable or disable streaming of recordings.<br />Well actually this is no "
 "real \"streaming\", but you have to setup your workstation so that it can "
@@ -930,49 +940,49 @@ msgid ""
 "display."
 msgstr ""
 
-#: ../template/default/help_config.html:125
+#: ../template/default/help_config.html:131
 msgid ""
 "This is the path where your workstation can access VDR's recordings. This "
 "depends on your VDR and workstation setup, for example \"\\\\vdr\\videos\" "
 "or \"V:\\\" (on Windows) or \"/mnt/videos\" (on Linux)."
 msgstr ""
 
-#: ../template/default/help_config.html:131
+#: ../template/default/help_config.html:137
 msgid ""
 "<p>This section is for experts <strong>only</strong>, i.e. you know what you "
 "are doing!</p>"
 msgstr ""
 
-#: ../template/default/help_config.html:134
+#: ../template/default/help_config.html:140
 msgid ""
 "Accessing VDR's EPG through VDR's SVDRPort seems to block VDR for some time. "
 "If this option is activated VDRAdmin will read the <span class=\"ref_file"
 "\">epg.data</span> file directly so that VDR doesn't get blocked."
 msgstr ""
 
-#: ../template/default/help_config.html:136
+#: ../template/default/help_config.html:142
 msgid ""
 "If you've enabled the option above you need to tell VDRAdmin where the <span "
 "class=\"ref_file\">epg.data</span> file is located."
 msgstr ""
 
-#: ../template/default/help_config.html:138
+#: ../template/default/help_config.html:144
 msgid ""
 "If you have compiled VDR with the VFAT define you have to enable this "
 "option. If this option is set to the wrong value, you may have problems with "
 "certain recordings if you want to stream them or run reccmds on them."
 msgstr ""
 
-#: ../template/default/help_config.html:144
+#: ../template/default/help_config.html:150
 msgid ""
 "<p>If you want to limit the number of channels used in some parts of "
 "VDRAdmin, this is for you!</p><p>Use the radio buttons to activate or "
 "deactivate the wanted channels in the named menu.</p><p>To add channels to "
 "the list of wanted channels you have to select them in the left side "
-"selectbox and click <span class=\"submit\">&gt;&gt;&gt;&gt;&gt;</span>. If "
-"you want to remove channels from the list of wanted channels you have to "
-"select them in the right side selectbox and click <span class=\"submit\">&lt;"
-"&lt;&lt;&lt;&lt;</span>.</p>"
+"selectbox and click <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;"
+"&gt;&gt;&gt;\"/>. If you want to remove channels from the list of wanted "
+"channels you have to select them in the right side selectbox and click "
+"<input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
 msgstr ""
 
 #: ../template/default/prog_timeline.html:119
@@ -984,8 +994,7 @@ msgid "to"
 msgstr "-"
 
 #: ../template/default/prog_list2.html:6
-#: ../template/default/prog_list2.html:28
-#: ../template/default/navigation.html:33
+#: ../template/default/navigation.html:33 ../vdradmind.pl:2432
 msgid "Playing Today"
 msgstr "Ohjelmisto tänään"
 
@@ -1001,7 +1010,7 @@ msgstr "Tallenteen alkuperäinen nimi:"
 msgid "New Name of Recording:"
 msgstr "Tallenteen uusi nimi:"
 
-#: ../template/default/help_timer_list.html:29
+#: ../template/default/help_timer_list.html:33
 msgid ""
 "<p>Here you will find a listing of timers known to VDR.</p><p>On top you "
 "will find a chart showing a day's timers graphically. This provides an quick "
@@ -1033,10 +1042,10 @@ msgid ""
 "record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img "
 "src=\"bilder/poempl_grau.gif\" alt=\"inactive\" align=\"absmiddle\" /> Timer "
 "is not active.</p><p>In addition to these functions you can add a new timer "
-"by clicking <span class=\"submit\">New Timer</span> at the top and you can "
-"delete a number of timers at once by checking the box in the last column of "
-"those timers and clicking <span class=\"submit\">Delete Selected Timers</"
-"span>.</p>"
+"by clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at "
+"the top and you can delete a number of timers at once by checking the box in "
+"the last column of those timers and clicking <input type=\"submit\"  class="
+"\"submit\" value=\"Delete Selected Timers\"/>.</p>"
 msgstr ""
 
 #: ../template/default/help_timer_new.html:32
@@ -1118,7 +1127,7 @@ msgid ""
 "file of the recording."
 msgstr ""
 
-#: ../template/default/help_at_timer_list.html:29
+#: ../template/default/help_at_timer_list.html:33
 msgid ""
 "<p>Here you will find a listing of automatic timers (AutoTimer) known to "
 "VDRAdmin.</p><p>The list shows some information on AutoTimers. You can "
@@ -1135,11 +1144,12 @@ msgid ""
 "AutoTimer is OK and will automatically program matching broadcasts.<br /"
 "><img src=\"bilder/poempl_grau.gif\" alt=\"inactive\" align=\"absmiddle\" /> "
 "AutoTimer is not active.</p><p>In addition to these functions you can add a "
-"new AutoTimer by clicking <span class=\"submit\">New AutoTimer</span> at the "
-"top and you can delete a number of AutoTimers at once by checking the box in "
-"the last column of those timers and clicking <span class=\"submit\">Delete "
-"Selected AutoTimers</span>.</p><p>Click <span class=\"submit\">Force Update</"
-"span> to force VDRAdmin to reconnect to VDR, fetch the current EPG and check "
+"new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value="
+"\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at "
+"once by checking the box in the last column of those timers and clicking "
+"<input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/"
+">.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update"
+"\"/> to force VDRAdmin to reconnect to VDR, fetch the current EPG and check "
 "for matching AutoTimers.</p>"
 msgstr ""
 
@@ -1329,13 +1339,13 @@ msgid ""
 "\">Configuration</span> menu. You can watch the recording at your "
 "workstation.</dd></dl></p><p>In addition to these functions you can delete a "
 "number of recordings at once by checking the box in the last but one column "
-"of those recordings and clicking <span class=\"submit\">Delete Selected "
-"Recordings</span>.</p><p>If you've set the path the VDR's configuration "
-"files and have entries in VDR's <span class=\"ref_file\">reccmds.conf</span> "
-"you can run those commands for the selected recording by selecting the "
-"wanted command in the select box locate next to <span class=\"ref_label"
-"\">Commands:</span> and pressing the <span class=\"submit\">Run</span> "
-"button.</p>"
+"of those recordings and clicking <input type=\"submit\" class=\"submit\" "
+"value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the "
+"VDR's configuration files and have entries in VDR's <span class=\"ref_file"
+"\">reccmds.conf</span> you can run those commands for the selected recording "
+"by selecting the wanted command in the select box locate next to <span class="
+"\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class="
+"\"submit\" value=\"Run\"/> button.</p>"
 msgstr ""
 
 #: ../template/default/at_timer_new.html:6
@@ -1372,46 +1382,55 @@ msgstr "Katso TV:tä"
 msgid "Search"
 msgstr "Etsi"
 
-#: ../vdradmind.pl:251
+#: ../vdradmind.pl:265
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Anna VDR-koneesi nimi (esim. video.intra.net):"
 
-#: ../vdradmind.pl:252
+#: ../vdradmind.pl:266
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Anna VDR-koneesi käyttämä SVDRP-portti:"
 
-#: ../vdradmind.pl:253
+#: ../vdradmind.pl:267
 msgid "On which address should VDRAdmin listen (0.0.0.0 for any)?"
 msgstr "Anna VDRAdminin käyttämä osoiteavaruus (0.0.0.0 ei rajoituksia):"
 
-#: ../vdradmind.pl:254
+#: ../vdradmind.pl:268
 msgid "On which port should VDRAdmin listen?"
 msgstr "Anna VDRAdminin käyttämä portti:"
 
-#: ../vdradmind.pl:255
+#: ../vdradmind.pl:269
 msgid "Username?"
 msgstr "Anna käyttäjätunnus VDRAdminia varten:"
 
-#: ../vdradmind.pl:256
+#: ../vdradmind.pl:270
 msgid "Password?"
 msgstr "Anna salasana VDRAdminia varten:"
 
-#: ../vdradmind.pl:257
+#: ../vdradmind.pl:271
 msgid "Where are your recordings stored?"
 msgstr "Anna VDR-koneesi tallennehakemiston polku:"
 
-#: ../vdradmind.pl:258
+#: ../vdradmind.pl:272
 msgid "Where are your VDR's configuration files located?"
 msgstr "Anna VDR-koneesi konfigurointihakemiston polku:"
 
-#: ../vdradmind.pl:264
+#: ../vdradmind.pl:278
 msgid "Config file written successfully."
 msgstr "VDRAdminin konfigurointitiedosto muodostettu."
 
-#: ../vdradmind.pl:312
+#: ../vdradmind.pl:326
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s käynnistetty prosessitunnisteella %d."
+
+#: ../vdradmind.pl:2432
+msgid "Playing Tomorrow"
+msgstr ""
+
+#: ../vdradmind.pl:2432
+#, perl-format
+msgid "Playing on the %d."
+msgstr ""
 
 #: ../template/i18n.pl:3
 msgid "Playing Today?"
@@ -1465,3 +1484,7 @@ msgstr "Komennon lähetys VDR:lle epäonnistui (%s)"
 #: ../template/i18n.pl:23
 msgid "Schedule"
 msgstr "Ohjelmisto"
+
+#~ msgid "In \"Channels\" / \"Playing Today\"?"
+#~ msgstr ""
+#~ "Käytä kanavavalintoja \"Kanavat\"- ja \"Ohjelmisto tänään\"-sivuilla"

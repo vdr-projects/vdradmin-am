@@ -23,39 +23,32 @@
 	END
 %?>
 </script>
-	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
-		<tr>
-			<td class="col_left">
-			<td class="col_title">
-				<h1><%! AutoTimer !%></h1>
-			</td>
-			<td class="col_other">
-				<span>
-					<table border="0" cellspacing="0" cellpadding="0">
-						<tr height="20">
-							<td width="12" height="20" background="bilder/gbutton_left.gif"></td>
-							<td align="center" height="20" background="bilder/gbutton_middle.gif">
-								<a href="<tmpl_var naturl>"><div class="gbutton"><%! New AutoTimer !%></div></a>
-							</td>
-							<td width="12" height="20" background="bilder/gbutton_right.gif"></td>
-						</tr>
-					</table>
-				</span>
-			</td>
+	<form action="<tmpl_var url>" method="get" name="FormName0">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
+			<tr>
+				<td class="col_left">
+				<td class="col_title">
+					<h1><%! AutoTimer !%></h1>
+				</td>
+				<td class="col_other">
+					<input type="submit" class="submit" name="new_at" value="<%! New AutoTimer !%>" />
+					<input type="hidden" name="aktion" value="at_timer_new" />
+				</td>
 <tmpl_if name="help_url">
-			<td class="col_help">
-				<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" alt="help" title="<%! Help !%>"/></a>
-			</td>
+				<td class="col_help">
+					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" alt="help" title="<%! Help !%>"/></a>
+				</td>
 </tmpl_if>
-			<td class="col_right"></td>
-		</tr>
-	</table>
+				<td class="col_right"></td>
+			</tr>
+		</table>
+	</form>
 
 	<form action="<tmpl_var url>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="list">
 			<tr class="heading">
 				<td class="col_left"></td>
-				<td class="col_active" <tmpl_if sortbyactive>selected="yes"</tmpl_if>>
+				<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>">
 					<h2>
 						<a href="<tmpl_var sortbyactiveurl>"><%! Active !%>
 							<tmpl_if sortbyactive>
@@ -66,7 +59,7 @@
 						</a>
 					</h2>
 				</td>
-				<td class="col_channel" <tmpl_if sortbychannel>selected="yes"</tmpl_if>>
+				<td class="col_channel <tmpl_if sortbychannel>selected</tmpl_if>">
 					<h2>
 						<a href="<tmpl_var sortbychannelurl>"><%! Channel !%>
 							<tmpl_if sortbychannel>
@@ -77,7 +70,7 @@
 						</a>
 					</h2>
 				</td>
-				<td class="col_start" <tmpl_if sortbystart>selected="yes"</tmpl_if>>
+				<td class="col_start <tmpl_if sortbystart>selected</tmpl_if>">
 					<h2>
 						<a href="<tmpl_var sortbystarturl>"><%! Start !%>
 							<tmpl_if sortbystart>
@@ -88,7 +81,7 @@
 						</a>
 					</h2>
 				</td>
-				<td class="col_stop" <tmpl_if sortbystop>selected="yes"</tmpl_if>>
+				<td class="col_stop <tmpl_if sortbystop>selected</tmpl_if>">
 					<h2>
 						<a href="<tmpl_var sortbystopurl>"><%! Stop !%>
 							<tmpl_if sortbystop>
@@ -99,7 +92,7 @@
 						</a>
 					</h2>
 				</td>
-				<td class="col_name" <tmpl_if sortbypattern>selected="yes"</tmpl_if>>
+				<td class="col_name <tmpl_if sortbypattern>selected</tmpl_if>">
 					<h2>
 						<a href="<tmpl_var sortbypatternurl>"><%! Name !%>
 							<tmpl_if sortbypattern>
@@ -117,11 +110,11 @@
 			</tr>
 			<tr class="row_spacer">
 				<td class="col_left"></td>
-				<td class="col_active" <tmpl_if sortbyactive>selected="yes"</tmpl_if>></td>
-				<td class="col_channel" <tmpl_if sortbychannel>selected="yes"</tmpl_if>></td>
-				<td class="col_start" <tmpl_if sortbystart>selected="yes"</tmpl_if>></td>
-				<td class="col_stop" <tmpl_if sortbystop>selected="yes"</tmpl_if>></td>
-				<td class="col_name" <tmpl_if sortbypattern>selected="yes"</tmpl_if>></td>
+				<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>"></td>
+				<td class="col_channel <tmpl_if sortbychannel>selected</tmpl_if>"></td>
+				<td class="col_start <tmpl_if sortbystart>selected</tmpl_if>"></td>
+				<td class="col_stop <tmpl_if sortbystop>selected</tmpl_if>"></td>
+				<td class="col_name <tmpl_if sortbypattern>selected</tmpl_if>"></td>
 				<td colspan="3"></td>
 				<td class="col_right"></td>
 			</tr>
@@ -129,31 +122,31 @@
 <tmpl_loop at_timer_loop>
 			<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
 				<td class="col_left"></td>
-				<td class="col_active" <tmpl_if sortbyactive>selected="yes"</tmpl_if>>
+				<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>">
 					<div>
 						<tmpl_if active>
-							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_gruen.gif" alt="" width="19" height="19" align="absmiddle" border="0"/> <%! Yes !%></a>
+							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_gruen.gif" alt="" width="19" height="19" align="middle" border="0"/> <%! Yes !%></a>
 						<tmpl_else>
-							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_grau.gif" alt="" width="19" height="19" align="absmiddle" border="0"/> <%! No !%></a>
+							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_grau.gif" alt="" width="19" height="19" align="middle" border="0"/> <%! No !%></a>
 						</tmpl_if>
 					</div>
 				</td>
-				<td class="col_channel" <tmpl_if sortbychannel>selected="yes"</tmpl_if>>
+				<td class="col_channel <tmpl_if sortbychannel>selected</tmpl_if>">
 					<div>
 						<tmpl_if channel><a href="<tmpl_var proglink>"><tmpl_var channel></a><tmpl_else>-</tmpl_if>
 					</div>
 				</td>
-				<td class="col_start" <tmpl_if sortbystart>selected="yes"</tmpl_if>>
+				<td class="col_start <tmpl_if sortbystart>selected</tmpl_if>">
 					<div>
 						<tmpl_if start><tmpl_var start><tmpl_else>-</tmpl_if>
 					</div>
 				</td>
-				<td class="col_stop" <tmpl_if sortbystop>selected="yes"</tmpl_if>>
+				<td class="col_stop <tmpl_if sortbystop>selected</tmpl_if>">
 					<div>
 						<tmpl_if stop><tmpl_var stop><tmpl_else>-</tmpl_if>
 					</div>
 				</td>
-				<td class="col_name" onMouseOver="tip('VDR-<tmpl_var id>'); return true;" onMouseOut="untip(); return true;" <tmpl_if sortbypattern>selected="yes"</tmpl_if>>
+				<td class="col_name <tmpl_if sortbypattern>selected</tmpl_if>" onMouseOver="tip('VDR-<tmpl_var id>'); return true;" onMouseOut="untip(); return true;">
 					<div>
 						<tmpl_var pattern>
 					</div>
@@ -165,7 +158,7 @@
 				</td>
 				<td class="col_delete">
 					<div>
-						<a href="javascript:del('<%! Delete timer? !%>', '<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" height="17" width="17" border="0" title="<%! Delete !%>"/></a>
+						<a href="javascript:del('<%! Delete timer? !%>\n\n&quot;<tmpl_var pattern>&quot;', '<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" height="17" width="17" border="0" title="<%! Delete !%>"/></a>
 					</div>
 				</td>
 				<td class="col_checkbox">
@@ -179,11 +172,11 @@
 
 			<tr class="footer">
 				<td class="col_left"></td>
-				<td class="col_active" <tmpl_if sortbyactive>selected="yes"</tmpl_if>></td>
-				<td class="col_channel" <tmpl_if sortbychannel>selected="yes"</tmpl_if>></td>
-				<td class="col_start" <tmpl_if sortbystart>selected="yes"</tmpl_if>></td>
-				<td class="col_stop" <tmpl_if sortbystop>selected="yes"</tmpl_if>></td>
-				<td class="col_name" <tmpl_if sortbypattern>selected="yes"</tmpl_if>></td>
+				<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>"></td>
+				<td class="col_channel <tmpl_if sortbychannel>selected</tmpl_if>"></td>
+				<td class="col_start <tmpl_if sortbystart>selected</tmpl_if>"></td>
+				<td class="col_stop <tmpl_if sortbystop>selected</tmpl_if>"></td>
+				<td class="col_name <tmpl_if sortbypattern>selected</tmpl_if>"></td>
 				<td colspan="3"></td>
 				<td class="col_right"></td>
 			</tr>
@@ -192,30 +185,14 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
 			<tr>
 				<td align="left">
-					<table border="0" cellspacing="0" cellpadding="0">
-						<tr height="20">
-							<td width="12" height="20" background="bilder/gbutton_left.gif"></td>
-							<td align="center" height="20" background="bilder/gbutton_middle.gif">
-								<a href="<tmpl_var force_update_url>"><div class="gbutton"><%! Force Update !%></div></a>
-							</td>
-							<td width="12" height="20" background="bilder/gbutton_right.gif"></td>
-						</tr>
-					</table>
+					<input type="submit" class="submit" name="at_force" value="<%! Force Update !%>" />
 				</td>
 				<td align="right">
-					<table border="0" cellspacing="0" cellpadding="0">
-						<tr height="20">
-							<td width="12" height="20" background="bilder/gbutton_left.gif"></td>
-							<td align="center" height="20" background="bilder/gbutton_middle.gif">
-								<a href="javascript:mdel_old('<%! Delete all selected timers? !%>');"><div class="gbutton"><%! Delete Selected AutoTimers !%></div></a>
-							</td>
-							<td width="12" height="20" background="bilder/gbutton_right.gif"></td>
-						</tr>
-					</table>
+					<input type="submit" class="submit" name="at_delete" value="<%! Delete Selected AutoTimers !%>" onclick="return mdel_old('<%! Delete all selected timers? !%>');" />
 				</td>
 			</tr>
 		</table>
-		<input type="hidden" name="aktion" value="at_timer_delete"/>
+		<input type="hidden" name="aktion" value="at_timer_aktion"/>
 	</form>
 </body>
 

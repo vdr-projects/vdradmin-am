@@ -60,6 +60,8 @@ function tip(name){
 }
 
 function showtip(){
+  if (isNaN(x))	return;
+
   idiv.left=(((x+260)<winW)?x+12:x-255)+px; idiv.top=(((y+90)<winH)?y+12:y-90)+px;
   idiv.visibility=ns4?"show":"visible";
 //  window.status="idiv="+idiv+"X:"+(idiv.left?idiv.left:"NAN")+", Y:"+(idiv.top?idiv.top:"NAN")+", x:"+x+", y:"+y;

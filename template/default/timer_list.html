@@ -33,31 +33,24 @@
 	faktor=2.2;
 %?>
 
-	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
-		<tr>
-			<td class="col_left"></td>
-			<td class="col_title"><h1><%! Timer !%></h1></td>
-			<td class="col_other">
-				<span>
-					<table border="0" cellspacing="0" cellpadding="0">
-						<tr height="20">
-							<td width="12" height="20" background="bilder/gbutton_left.gif"></td>
-							<td align="center" height="20" background="bilder/gbutton_middle.gif">
-								<a href="<tmpl_var nturl>"><div class="gbutton"><%! New Timer !%></div></a>
-							</td>
-							<td width="12" height="20" background="bilder/gbutton_right.gif"></td>
-						</tr>
-					</table>
-				</span>
-			</td>
+	<form action="<tmpl_var url>" method="get" name="FormName0">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
+			<tr>
+				<td class="col_left"></td>
+				<td class="col_title"><h1><%! Timer !%></h1></td>
+				<td class="col_other">
+					<input type="submit" class="submit" value="<%! New Timer !%>" name="new_timer"/>
+					<input type="hidden" name="aktion" value="timer_new_form"/>
+				</td>
 <tmpl_if help_url> 
-			<td class="col_help">
-				<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" alt="help" title="<%! Help !%>" /></a>
-			</td>
+				<td class="col_help">
+					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" alt="help" title="<%! Help !%>" /></a>
+				</td>
 </tmpl_if>
-			<td class="col_right"></td>
-		</tr>
-	</table>
+				<td class="col_right"></td>
+			</tr>
+		</table>
+	</form>
 
 	<div id="content">
 		<form action="<tmpl_var url>" method="get" name="FormName1">
@@ -66,7 +59,7 @@
 					<td class="col_left"></td>
 					<td><h2><tmpl_var title></h2></td>
 					<td align="right">
-						<select name="vdr_id" class="submit" onchange="window.open('<tmpl_var url>?aktion=timer_list&timer=' + this.options[this.selectedIndex].value,'main')">
+						<select name="vdr_id" class="submit" onchange="window.open('<tmpl_var url>?aktion=timer_list&amp;timer=' + this.options[this.selectedIndex].value,'main')">
 <tmpl_loop day_loop>
 							<option value="<tmpl_var sortfield>" <tmpl_if current>selected</tmpl_if>><tmpl_var day></option>
 </tmpl_loop>
@@ -211,14 +204,14 @@
 					<col class="col_start"/>
 					<col class="col_stop"/>
 					<col class="col_name"/>
-					<col class0"col_edit"/>
+					<col class="col_edit"/>
 					<col class="col_delete"/>
 					<col class="col_checkbox"/>
 					<col class="col_right"/>
 				</colgroup>
 				<tr class="heading">
 					<td class="col_left"></td>
-					<td class="col_active" <tmpl_if sortbyactive>selected="yes"</tmpl_if>>
+					<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>">
 						<h2>
 							<a href="<tmpl_var sortbyactiveurl>"><%! Active !%>
 								<tmpl_if sortbyactive>
@@ -229,7 +222,7 @@
 							</a>
 						</h2>
 					</td>
-					<td class="col_channel" <tmpl_if sortbychannel>selected="yes"</tmpl_if>>
+					<td class="col_channel <tmpl_if sortbychannel>selected</tmpl_if>">
 						<h2>
 							<a href="<tmpl_var sortbychannelurl>"><%! Channel !%>
 								<tmpl_if sortbychannel>
@@ -240,7 +233,7 @@
 							</a>
 						</h2>
 					</td>
-					<td class="col_date" <tmpl_if sortbyday>selected="yes"</tmpl_if>>
+					<td class="col_date <tmpl_if sortbyday>selected</tmpl_if>">
 						<h2>
 							<a href="<tmpl_var sortbydayurl>"><%! Date !%>
 								<tmpl_if sortbyday>
@@ -251,7 +244,7 @@
 							</a>
 						</h2>
 					</td>
-					<td class="col_start" <tmpl_if sortbystart>selected="yes"</tmpl_if>>
+					<td class="col_start <tmpl_if sortbystart>selected</tmpl_if>">
 						<h2>
 							<a href="<tmpl_var sortbystarturl>"><%! Start !%>
 								<tmpl_if sortbystart>
@@ -262,7 +255,7 @@
 							</a>
 						</h2>
 					</td>
-					<td class="col_stop" <tmpl_if sortbystop>selected="yes"</tmpl_if>>
+					<td class="col_stop <tmpl_if sortbystop>selected</tmpl_if>">
 						<h2>
 							<a href="<tmpl_var sortbystopurl>"><%! Stop !%>
 								<tmpl_if sortbystop>
@@ -273,7 +266,7 @@
 							</a>
 						</h2>
 					</td>
-					<td class="col_name" <tmpl_if sortbyname>selected="yes"</tmpl_if>>
+					<td class="col_name <tmpl_if sortbyname>selected</tmpl_if>">
 						<h2>
 							<a href="<tmpl_var sortbynameurl>"><%! Name !%>
 								<tmpl_if sortbyname>
@@ -291,12 +284,12 @@
 				</tr>
 				<tr class="row_spacer">
 					<td class="col_left"></td>
-					<td class="col_active" <tmpl_if sortbyactive>selected="yes"</tmpl_if>></td>
-					<td class="col_channel" <tmpl_if sortbychannel>selected="yes"</tmpl_if>></td>
-					<td class="col_date" <tmpl_if sortbyday>selected="yes"</tmpl_if>></td>
-					<td class="col_start" <tmpl_if sortbystart>selected="yes"</tmpl_if>></td>
-					<td class="col_stop" <tmpl_if sortbystop>selected="yes"</tmpl_if>></td>
-					<td class="col_name" <tmpl_if sortbyname>selected="yes"</tmpl_if>></td>
+					<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>"></td>
+					<td class="col_channel <tmpl_if sortbychannel>selected</tmpl_if>"></td>
+					<td class="col_date <tmpl_if sortbyday>selected</tmpl_if>"></td>
+					<td class="col_start <tmpl_if sortbystart>selected</tmpl_if>"></td>
+					<td class="col_stop <tmpl_if sortbystop>selected</tmpl_if>"></td>
+					<td class="col_name <tmpl_if sortbyname>selected</tmpl_if>"></td>
 					<td colspan="3"></td>
 					<td class="col_right"></td>
 				</tr>
@@ -304,24 +297,24 @@
 <tmpl_loop timer_loop>
 				<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
 					<td class="col_left"></td>
-					<td class="col_active" <tmpl_if sortbyactive>selected="yes"</tmpl_if>>
+					<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>">
 						<div>
 							<tmpl_if expr="(active%32768) == 0">
-								<img src="bilder/poempl_grau.gif" alt="inactive" title="<%! This timer is inactive! !%>" width="19" height="19" align="absmiddle" border="0" />
+								<img src="bilder/poempl_grau.gif" alt="inactive" title="<%! This timer is inactive! !%>" width="19" height="19" align="middle" border="0" />
 							<tmpl_else>
 								<tmpl_if critical>
-									<img src="bilder/poempl_rot.gif" alt="impossible" title="<%! This timer is impossible! !%>" width="19" height="19" align="absmiddle" border="0" />
+									<img src="bilder/poempl_rot.gif" alt="impossible" title="<%! This timer is impossible! !%>" width="19" height="19" align="middle" border="0" />
 								<tmpl_else>
 									<tmpl_if collision>
-										<img src="bilder/poempl_gelb.gif" alt="nomore" title="<%! No more timers on other transponders possible! !%>" width="19" height="19" align="absmiddle" border="0" />
+										<img src="bilder/poempl_gelb.gif" alt="nomore" title="<%! No more timers on other transponders possible! !%>" width="19" height="19" align="middle" border="0" />
 									<tmpl_else>
 										<tmpl_if active>
-											<img src="bilder/poempl_gruen.gif" alt="possible" title="<%! Timer OK. !%>" width="19" height="19" align="absmiddle" border="0" />
+											<img src="bilder/poempl_gruen.gif" alt="possible" title="<%! Timer OK. !%>" width="19" height="19" align="middle" border="0" />
 										</tmpl_if>
 									</tmpl_if>
 								</tmpl_if>
 							</tmpl_if>
-							<a href="javascript:change('<%! Edit timer status? !%>','<tmpl_var toggleurl>&timer=<?% current %?>');">
+							<a href="javascript:change('<%! Edit timer status? !%>','<tmpl_var toggleurl>&amp;timer=<?% current %?>');">
 								<tmpl_if expr="active == 1"><%! Yes !%></tmpl_if>
 								<tmpl_if expr="(active%32768) == 0"><%! No !%></tmpl_if>
 								<tmpl_if expr="active == 5"><%! VPS !%></tmpl_if>
@@ -329,21 +322,21 @@
 							</a>
 						</div>
 					</td>
-					<td class="col_channel" <tmpl_if sortbychannel>selected="yes"</tmpl_if>>
+					<td class="col_channel <tmpl_if sortbychannel>selected</tmpl_if>">
 						<div><a href="<tmpl_var proglink>"><tmpl_var cdesc></a></div>
 					</td>
-					<td class="col_date" <tmpl_if sortbyday>selected="yes"</tmpl_if>>
+					<td class="col_date <tmpl_if sortbyday>selected</tmpl_if>">
 						<div><tmpl_var dor></div>
 					</td>
-					<td class="col_start" <tmpl_if sortbystart>selected="yes"</tmpl_if>>
+					<td class="col_start <tmpl_if sortbystart>selected</tmpl_if>">
 						<div><tmpl_var start></div>
 					</td>
-					<td class="col_stop" <tmpl_if sortbystop>selected="yes"</tmpl_if>>
+					<td class="col_stop <tmpl_if sortbystop>selected</tmpl_if>">
 						<div><tmpl_var stop></div>
 					</td>
-					<td class="col_name" <tmpl_if sortbyname>selected="yes"</tmpl_if>>
+					<td class="col_name <tmpl_if sortbyname>selected</tmpl_if>">
 						<div onMouseOver="tip('VDR-<tmpl_var id>'); return true;" onMouseOut="untip(); return true;">
-							<tmpl_if recording><img align="absmiddle" src="bilder/rec.gif" border="0" />&nbsp;</tmpl_if>
+							<tmpl_if recording><img align="middle" src="bilder/rec.gif" border="0" />&nbsp;</tmpl_if>
 							<tmpl_if infurl>
 								<a href="javascript:popup('<tmpl_var infurl>');"><tmpl_var title></a>
 							<tmpl_else>
@@ -355,7 +348,7 @@
 						<div><a href="<tmpl_var modurl>"><img src="bilder/edit.gif" alt="edit" title="<%! Edit !%>" height="17" width="17" border="0" /></a></div>
 					</td>
 					<td class="col_delete">
-						<div><a href="javascript:del('<%! Delete timer? !%>','<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" title="<%! Delete !%>" height="17" width="17" border="0" /></a></div>
+						<div><a href="javascript:del('<%! Delete timer? !%>\n\n&quot;<tmpl_var title>&quot;','<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" title="<%! Delete !%>" height="17" width="17" border="0" /></a></div>
 					</td>
 					<td class="col_checkbox">
 						<div><input type="checkbox" name="xxxx_<tmpl_var id>" /></div>
@@ -366,23 +359,22 @@
 
 				<tr class="footer">
 					<td class="col_left"></td>
-					<td class="col_active" <tmpl_if sortbyactive>selected="yes"</tmpl_if>></td>
-					<td class="col_channel" <tmpl_if sortbychannel>selected="yes"</tmpl_if>></td>
-					<td class="col_date" <tmpl_if sortbyday>selected="yes"</tmpl_if>></td>
-					<td class="col_start" <tmpl_if sortbystart>selected="yes"</tmpl_if>></td>
-					<td class="col_stop" <tmpl_if sortbystop>selected="yes"</tmpl_if>></td>
-					<td class="col_name" <tmpl_if sortbyname>selected="yes"</tmpl_if>></td>
+					<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>"></td>
+					<td class="col_channel <tmpl_if sortbychannel>selected</tmpl_if>"></td>
+					<td class="col_date <tmpl_if sortbyday>selected</tmpl_if>"></td>
+					<td class="col_start <tmpl_if sortbystart>selected</tmpl_if>"></td>
+					<td class="col_stop <tmpl_if sortbystop>selected</tmpl_if>"></td>
+					<td class="col_name <tmpl_if sortbyname>selected</tmpl_if>"></td>
 					<td colspan="3"></td>
 					<td class="col_right"></td>
 				</tr>
 			</table>
-		</div>
 
-		<div id="buttons">
-			<input type="submit" class="submit" name="timer_delete" value="<%! Delete Selected Timers !%>" onclick="return mdel('<%! Delete all selected timers? !%>');" />
-		</div>
-		<input type="hidden" name="aktion" value="timer_delete" />
-	</form>
+			<div id="buttons">
+				<input type="submit" class="submit" name="timer_delete" value="<%! Delete Selected Timers !%>" onclick="return mdel('<%! Delete all selected timers? !%>');" />
+			</div>
+			<input type="hidden" name="aktion" value="timer_delete" />
+		</form>
 	</div>
 </body>
 </html>

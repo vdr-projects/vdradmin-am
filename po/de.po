@@ -13,14 +13,14 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-0.97-AM3.3\n"
+"Project-Id-Version: VDRAdmin-0.97-AM3.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-12 13:18+0200\n"
-"PO-Revision-Date: 2005-07-10 12:49+0100\n"
+"POT-Creation-Date: 2005-09-23 10:28+0200\n"
+"PO-Revision-Date: 2005-09-23 12:49+0100\n"
 "Last-Translator: Andreas Mair <mail@andreas.vdr-developer.org>\n"
 "Language-Team: <LL.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../template/default/noperm.html:4 ../template/default/index.html:5
@@ -46,7 +46,7 @@ msgstr "charset=ISO-8859-1"
 
 #: ../template/default/index.html:21
 msgid "Your Browser does not support frames!"
-msgstr "Ihr Browser unterstützt keine Frames!"
+msgstr "Ihr Browser unterstÃ¼tzt keine Frames!"
 
 #: ../template/default/timer_new.html:6 ../template/default/timer_new.html:49
 msgid "Create New Timer"
@@ -59,8 +59,8 @@ msgid "Edit Timer"
 msgstr "Timer editieren"
 
 #: ../template/default/timer_new.html:53
-#: ../template/default/at_timer_list.html:47
-#: ../template/default/config.html:23 ../template/default/timer_list.html:55
+#: ../template/default/at_timer_list.html:39
+#: ../template/default/config.html:23 ../template/default/timer_list.html:47
 #: ../template/default/rec_list.html:27
 #: ../template/default/at_timer_new.html:24
 msgid "Help"
@@ -72,13 +72,13 @@ msgid "Timer Active:"
 msgstr "Timer aktiv:"
 
 #: ../template/default/timer_new.html:75
-#: ../template/default/at_timer_list.html:135
-#: ../template/default/config.html:164 ../template/default/config.html:235
-#: ../template/default/config.html:337 ../template/default/config.html:352
-#: ../template/default/config.html:400 ../template/default/config.html:415
-#: ../template/default/config.html:446 ../template/default/config.html:455
-#: ../template/default/config.html:464 ../template/default/config.html:473
-#: ../template/default/timer_list.html:325
+#: ../template/default/at_timer_list.html:128
+#: ../template/default/config.html:170 ../template/default/config.html:241
+#: ../template/default/config.html:343 ../template/default/config.html:358
+#: ../template/default/config.html:406 ../template/default/config.html:421
+#: ../template/default/config.html:452 ../template/default/config.html:461
+#: ../template/default/config.html:470 ../template/default/config.html:479
+#: ../template/default/config.html:488 ../template/default/timer_list.html:318
 #: ../template/default/at_timer_new.html:48
 #: ../template/default/at_timer_new.html:52
 #: ../template/default/at_timer_new.html:154
@@ -86,13 +86,13 @@ msgid "Yes"
 msgstr "Ja"
 
 #: ../template/default/timer_new.html:76
-#: ../template/default/at_timer_list.html:137
-#: ../template/default/config.html:165 ../template/default/config.html:236
-#: ../template/default/config.html:338 ../template/default/config.html:353
-#: ../template/default/config.html:401 ../template/default/config.html:416
-#: ../template/default/config.html:447 ../template/default/config.html:456
-#: ../template/default/config.html:465 ../template/default/config.html:474
-#: ../template/default/timer_list.html:326
+#: ../template/default/at_timer_list.html:130
+#: ../template/default/config.html:171 ../template/default/config.html:242
+#: ../template/default/config.html:344 ../template/default/config.html:359
+#: ../template/default/config.html:407 ../template/default/config.html:422
+#: ../template/default/config.html:453 ../template/default/config.html:462
+#: ../template/default/config.html:471 ../template/default/config.html:480
+#: ../template/default/config.html:489 ../template/default/timer_list.html:319
 #: ../template/default/at_timer_new.html:49
 #: ../template/default/at_timer_new.html:53
 #: ../template/default/at_timer_new.html:155
@@ -102,7 +102,7 @@ msgstr "Nein"
 #: ../template/default/timer_new.html:82
 #: ../template/default/help_timer_new.html:36
 msgid "AutoTimer Checking:"
-msgstr "Automatische Timer-Überwachung:"
+msgstr "Automatische Timer-Ãœberwachung:"
 
 #: ../template/default/timer_new.html:85
 #: ../template/default/help_timer_new.html:39
@@ -114,13 +114,12 @@ msgstr "Sendungskennung"
 msgid "Time"
 msgstr "Uhrzeit"
 
-#: ../template/default/timer_new.html:88 ../template/default/tv.html:181
+#: ../template/default/timer_new.html:88 ../template/default/tv.html:180
 #: ../template/default/help_timer_new.html:43
 msgid "off"
 msgstr "aus"
 
 #: ../template/default/timer_new.html:94 ../template/default/prog_list.html:27
-#: ../template/default/prog_list2.html:30
 #: ../template/default/help_timer_new.html:47
 #: ../template/default/help_at_timer_new.html:46
 #: ../template/default/at_timer_new.html:93
@@ -191,22 +190,22 @@ msgstr "Endzeit:"
 
 #: ../template/default/timer_new.html:144
 #: ../template/default/at_timer_list.html:21
-#: ../template/default/config.html:248 ../template/default/config.html:292
+#: ../template/default/config.html:254 ../template/default/config.html:298
 #: ../template/default/timer_list.html:24
-#: ../template/default/help_config.html:94
-#: ../template/default/help_config.html:104
+#: ../template/default/help_config.html:100
+#: ../template/default/help_config.html:110
 #: ../template/default/help_timer_new.html:61
 #: ../template/default/help_at_timer_new.html:52
 #: ../template/default/at_timer_new.html:128
 msgid "Priority:"
-msgstr "Priorität:"
+msgstr "PrioritÃ¤t:"
 
 #: ../template/default/timer_new.html:150
 #: ../template/default/at_timer_list.html:21
-#: ../template/default/config.html:254 ../template/default/config.html:298
+#: ../template/default/config.html:260 ../template/default/config.html:304
 #: ../template/default/timer_list.html:24
-#: ../template/default/help_config.html:96
-#: ../template/default/help_config.html:106
+#: ../template/default/help_config.html:102
+#: ../template/default/help_config.html:112
 #: ../template/default/help_timer_new.html:63
 #: ../template/default/help_at_timer_new.html:54
 #: ../template/default/at_timer_new.html:136
@@ -223,7 +222,7 @@ msgstr "Titel der Aufnahme:"
 msgid "Summary:"
 msgstr "Zusammenfassung:"
 
-#: ../template/default/timer_new.html:174 ../template/default/config.html:511
+#: ../template/default/timer_new.html:174 ../template/default/config.html:526
 #: ../template/default/at_timer_new.html:176
 msgid "Save"
 msgstr "Speichern"
@@ -235,7 +234,7 @@ msgstr "Abbrechen"
 
 #: ../template/default/help_no.html:6 ../template/default/help_no.html:18
 msgid "No Help Available"
-msgstr "Keine Hilfe verfügbar"
+msgstr "Keine Hilfe verfÃ¼gbar"
 
 #: ../template/default/help_no.html:29
 msgid ""
@@ -243,7 +242,7 @@ msgid ""
 "\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>."
 "</p>"
 msgstr ""
-"Bisher keine Hilfe vorhanden. Zum Hinzufügen oder Ändern eines Textes bitte "
+"Bisher keine Hilfe vorhanden. Zum HinzufÃ¼gen oder Ã„ndern eines Textes bitte "
 "an <a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-"
 "developer.org</a> wenden."
 
@@ -261,96 +260,96 @@ msgid ""
 "requested. Either you supplied the wrong credentials (e.g. bad password), or "
 "your browser doesn't understand how to supply the credentials required."
 msgstr ""
-"Dieser Server kann nicht bestätigen, dass Sie berechtigt sind, auf das "
+"Dieser Server kann nicht bestÃ¤tigen, dass Sie berechtigt sind, auf das "
 "angeforderte Dokument zuzugreifen. Entweder haben Sie falsche Anmeldedaten "
 "angegeben (z.B. falsches Passwort) oder Ihr Browser kann die Anmeldedaten "
-"nicht übermitteln."
+"nicht Ã¼bermitteln."
 
 #: ../template/default/at_timer_list.html:6
-#: ../template/default/at_timer_list.html:30
-#: ../template/default/config.html:223 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:88
+#: ../template/default/at_timer_list.html:31
+#: ../template/default/config.html:229 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:94
 #: ../template/default/help_at_timer_list.html:6
-#: ../template/default/help_at_timer_list.html:18
+#: ../template/default/help_at_timer_list.html:22
 #: ../template/default/navigation.html:49
 msgid "AutoTimer"
 msgstr "AutoTimer"
 
-#: ../template/default/at_timer_list.html:38
+#: ../template/default/at_timer_list.html:34
 msgid "New AutoTimer"
 msgstr "Neuer AutoTimer"
 
-#: ../template/default/at_timer_list.html:60
-#: ../template/default/timer_list.html:223
+#: ../template/default/at_timer_list.html:53
+#: ../template/default/timer_list.html:216
 msgid "Active"
 msgstr "Aktiv"
 
-#: ../template/default/at_timer_list.html:71
-#: ../template/default/timer_list.html:234
+#: ../template/default/at_timer_list.html:64
+#: ../template/default/timer_list.html:227
 msgid "Channel"
 msgstr "Sender"
 
-#: ../template/default/at_timer_list.html:82
-#: ../template/default/timer_list.html:256
+#: ../template/default/at_timer_list.html:75
+#: ../template/default/timer_list.html:249
 msgid "Start"
 msgstr "Beginn"
 
-#: ../template/default/at_timer_list.html:93
-#: ../template/default/timer_list.html:267
+#: ../template/default/at_timer_list.html:86
+#: ../template/default/timer_list.html:260
 msgid "Stop"
 msgstr "Ende"
 
-#: ../template/default/at_timer_list.html:104
-#: ../template/default/timer_list.html:278
+#: ../template/default/at_timer_list.html:97
+#: ../template/default/timer_list.html:271
 #: ../template/default/rec_list.html:81
 msgid "Name"
 msgstr "Name"
 
-#: ../template/default/at_timer_list.html:115
-#: ../template/default/timer_list.html:289
+#: ../template/default/at_timer_list.html:108
+#: ../template/default/timer_list.html:282
 #: ../template/default/rec_list.html:92
 msgid "Select all/none"
-msgstr "Alle/keine auswählen"
+msgstr "Alle/keine auswÃ¤hlen"
 
-#: ../template/default/at_timer_list.html:163
-#: ../template/default/timer_list.html:355
+#: ../template/default/at_timer_list.html:156
+#: ../template/default/timer_list.html:348
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: ../template/default/at_timer_list.html:168
-#: ../template/default/timer_list.html:358
+#: ../template/default/at_timer_list.html:161
+#: ../template/default/timer_list.html:351
 msgid "Delete timer?"
-msgstr "Timer löschen?"
+msgstr "Timer lÃ¶schen?"
 
-#: ../template/default/at_timer_list.html:168
-#: ../template/default/timer_list.html:358
+#: ../template/default/at_timer_list.html:161
+#: ../template/default/timer_list.html:351
 #: ../template/default/rec_list.html:140
 msgid "Delete"
-msgstr "Löschen"
+msgstr "LÃ¶schen"
 
-#: ../template/default/at_timer_list.html:199
+#: ../template/default/at_timer_list.html:188
 msgid "Force Update"
 msgstr "Manuelles Update"
 
-#: ../template/default/at_timer_list.html:210
-#: ../template/default/timer_list.html:382
-msgid "Delete all selected timers?"
-msgstr "Ausgewählte Timer wirklich löschen?"
-
-#: ../template/default/at_timer_list.html:210
+#: ../template/default/at_timer_list.html:191
 msgid "Delete Selected AutoTimers"
-msgstr "Ausgewählte AutoTimer löschen"
+msgstr "AusgewÃ¤hlte AutoTimer lÃ¶schen"
+
+#: ../template/default/at_timer_list.html:191
+#: ../template/default/timer_list.html:374
+msgid "Delete all selected timers?"
+msgstr "AusgewÃ¤hlte Timer wirklich lÃ¶schen?"
 
 #: ../template/default/prog_summary.html:7
 #: ../template/default/prog_timeline.html:7
 #: ../template/default/navigation.html:29 ../template/i18n.pl:2
 msgid "What's On Now?"
-msgstr "Was läuft jetzt?"
+msgstr "Was lÃ¤uft jetzt?"
 
 #: ../template/default/prog_summary.html:24
 #: ../template/default/prog_timeline.html:94
 msgid "What's on:"
-msgstr "Was läuft:"
+msgstr "Was lÃ¤uft:"
 
 #: ../template/default/prog_summary.html:24
 #: ../template/default/prog_timeline.html:96
@@ -364,7 +363,7 @@ msgstr "um:"
 
 #: ../template/default/prog_summary.html:43
 #: ../template/default/prog_list.html:23 ../template/default/rec_list.html:149
-#: ../template/default/prog_list2.html:54
+#: ../template/default/prog_list2.html:56
 msgid "Stream"
 msgstr "Stream"
 
@@ -386,13 +385,13 @@ msgstr "Sendung aufnehmen"
 
 #: ../template/default/config.html:5 ../template/default/config.html:19
 #: ../template/default/help_config.html:9
-#: ../template/default/help_config.html:21
+#: ../template/default/help_config.html:25
 #: ../template/default/navigation.html:57
 msgid "Configuration"
 msgstr "Konfiguration"
 
-#: ../template/default/config.html:36 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:36
+#: ../template/default/config.html:36 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:40
 msgid "General Settings"
 msgstr "Allgemeine Einstellungen"
 
@@ -400,186 +399,194 @@ msgstr "Allgemeine Einstellungen"
 msgid "Template:"
 msgstr "Template:"
 
-#: ../template/default/config.html:60 ../template/default/help_config.html:38
+#: ../template/default/config.html:60 ../template/default/help_config.html:42
 msgid "Skin:"
 msgstr "Skin:"
 
-#: ../template/default/config.html:72 ../template/default/help_config.html:40
+#: ../template/default/config.html:72 ../template/default/help_config.html:44
 msgid "Login Page:"
 msgstr "Startseite:"
 
-#: ../template/default/config.html:82 ../template/default/config.html:396
+#: ../template/default/config.html:82 ../template/default/config.html:402
 msgid "Gets active after restarting VDRAdmin"
 msgstr "Wird erst nach einem Neustart von VDRAdmin aktiv"
 
-#: ../template/default/config.html:84 ../template/default/help_config.html:42
+#: ../template/default/config.html:84 ../template/default/help_config.html:46
 msgid "Number of channels to use:"
-msgstr "Anzahl der zu verwendenden Kanäle:"
+msgstr "Anzahl der zu verwendenden KanÃ¤le:"
 
-#: ../template/default/config.html:90 ../template/default/help_config.html:44
+#: ../template/default/config.html:90 ../template/default/help_config.html:48
 msgid "Local net (no login required):"
 msgstr "Lokales Netz (kein Login notwendig):"
 
-#: ../template/default/config.html:104 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:50
+#: ../template/default/config.html:104 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:54
 msgid "VDR"
 msgstr "VDR"
 
-#: ../template/default/config.html:114 ../template/default/help_config.html:52
+#: ../template/default/config.html:114 ../template/default/help_config.html:56
 msgid "Number of DVB cards:"
 msgstr "Anzahl der DVB-Karten:"
 
-#: ../template/default/config.html:120 ../template/default/help_config.html:54
+#: ../template/default/config.html:120 ../template/default/help_config.html:58
 msgid "Path to recordings:"
 msgstr "Pfad der Aufnahmen:"
 
-#: ../template/default/config.html:126 ../template/default/help_config.html:56
+#: ../template/default/config.html:126 ../template/default/help_config.html:60
 msgid "Path to configuration files:"
 msgstr "Pfad zu den Konfigurationsdateien:"
 
-#: ../template/default/config.html:140 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:62
+#: ../template/default/config.html:132 ../template/default/help_config.html:62
+msgid "Path to EPG images:"
+msgstr "Pfad zu den EPG-Bildern:"
+
+#: ../template/default/config.html:146 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:68
 msgid "Identification"
 msgstr "Identifikation"
 
-#: ../template/default/config.html:150 ../template/default/help_config.html:64
+#: ../template/default/config.html:156 ../template/default/help_config.html:70
 msgid "Username:"
 msgstr "Benutzername:"
 
-#: ../template/default/config.html:156 ../template/default/help_config.html:66
+#: ../template/default/config.html:162 ../template/default/help_config.html:72
 msgid "Password:"
 msgstr "Passwort:"
 
-#: ../template/default/config.html:162 ../template/default/help_config.html:68
+#: ../template/default/config.html:168 ../template/default/help_config.html:74
 msgid "Guest Account:"
 msgstr "Gast-Zugang:"
 
-#: ../template/default/config.html:171 ../template/default/help_config.html:70
+#: ../template/default/config.html:177 ../template/default/help_config.html:76
 msgid "Guest Username:"
 msgstr "Gast Benutzername:"
 
-#: ../template/default/config.html:177 ../template/default/help_config.html:72
+#: ../template/default/config.html:183 ../template/default/help_config.html:78
 msgid "Guest Password:"
 msgstr "Gast Passwort:"
 
-#: ../template/default/config.html:191 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:78
+#: ../template/default/config.html:197 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:84
 #: ../template/default/navigation.html:37 ../template/i18n.pl:4
 msgid "Timeline"
 msgstr "Zeitleiste"
 
-#: ../template/default/config.html:201 ../template/default/help_config.html:80
+#: ../template/default/config.html:207 ../template/default/help_config.html:86
 msgid "Hours:"
 msgstr "Stunden:"
 
-#: ../template/default/config.html:207 ../template/default/help_config.html:82
+#: ../template/default/config.html:213 ../template/default/help_config.html:88
 msgid "Times:"
 msgstr "Zeiten:"
 
-#: ../template/default/config.html:233 ../template/default/help_config.html:90
+#: ../template/default/config.html:239 ../template/default/help_config.html:96
 msgid "Active:"
 msgstr "Aktiv:"
 
-#: ../template/default/config.html:242 ../template/default/help_config.html:92
+#: ../template/default/config.html:248 ../template/default/help_config.html:98
 msgid "Timeout:"
 msgstr "Timeout:"
 
-#: ../template/default/config.html:243 ../template/default/config.html:305
-#: ../template/default/config.html:311
+#: ../template/default/config.html:249 ../template/default/config.html:311
+#: ../template/default/config.html:317
 msgid "minutes"
 msgstr "Minuten"
 
-#: ../template/default/config.html:261 ../template/default/config.html:304
-#: ../template/default/help_config.html:108
+#: ../template/default/config.html:267 ../template/default/config.html:310
+#: ../template/default/help_config.html:114
 msgid "Time Margin at Start:"
 msgstr "Zeitpuffer Anfang:"
 
-#: ../template/default/config.html:267 ../template/default/config.html:310
-#: ../template/default/help_config.html:110
+#: ../template/default/config.html:273 ../template/default/config.html:316
+#: ../template/default/help_config.html:116
 msgid "Time Margin at Stop:"
 msgstr "Zeitpuffer Ende:"
 
-#: ../template/default/config.html:282 ../template/default/timer_list.html:6
-#: ../template/default/timer_list.html:39
-#: ../template/default/help_config.html:34
-#: ../template/default/help_config.html:102
+#: ../template/default/config.html:288 ../template/default/timer_list.html:6
+#: ../template/default/timer_list.html:40
+#: ../template/default/help_config.html:38
+#: ../template/default/help_config.html:108
 #: ../template/default/help_timer_list.html:6
-#: ../template/default/help_timer_list.html:18
+#: ../template/default/help_timer_list.html:22
 #: ../template/default/navigation.html:45
 msgid "Timer"
 msgstr "Timer"
 
-#: ../template/default/config.html:325 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:116
+#: ../template/default/config.html:331 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:122
 msgid "Streaming"
 msgstr "Streaming"
 
-#: ../template/default/config.html:335
-#: ../template/default/help_config.html:118
+#: ../template/default/config.html:341
+#: ../template/default/help_config.html:124
 msgid "Live Streaming:"
 msgstr "LiveTV streamen:"
 
-#: ../template/default/config.html:344
-#: ../template/default/help_config.html:120
-msgid "HTTP Port of Streamdev (also possible 3000/ts):"
-msgstr "HTTP-Port von Streamdev (auch möglich 3000/ts):"
-
 #: ../template/default/config.html:350
-#: ../template/default/help_config.html:122
+#: ../template/default/help_config.html:126
+msgid "HTTP Port of Streamdev (also possible 3000/ts):"
+msgstr "HTTP-Port von Streamdev (auch mÃ¶glich 3000/ts):"
+
+#: ../template/default/config.html:356
+#: ../template/default/help_config.html:128
 msgid "Recordings Streaming:"
 msgstr "Aufnahmen streamen:"
 
-#: ../template/default/config.html:359
-#: ../template/default/help_config.html:124
+#: ../template/default/config.html:365
+#: ../template/default/help_config.html:130
 msgid "Path to VDR Recordings on your workstation:"
 msgstr "Pfad zu den VDR-Aufnahmen auf Ihrem PC:"
 
-#: ../template/default/config.html:366
+#: ../template/default/config.html:372
 msgid "Bandwidth of Streams:"
 msgstr "Bandbreite des Streams:"
 
-#: ../template/default/config.html:388 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:130
+#: ../template/default/config.html:394 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:136
 msgid "Expert"
 msgstr "Expertenmodus"
 
-#: ../template/default/config.html:398
-#: ../template/default/help_config.html:133
+#: ../template/default/config.html:404
+#: ../template/default/help_config.html:139
 msgid "Read EPG directly using epg.data:"
 msgstr "EPG direkt aus der epg.data lesen:"
 
-#: ../template/default/config.html:407
-#: ../template/default/help_config.html:135
+#: ../template/default/config.html:413
+#: ../template/default/help_config.html:141
 msgid "epg.data filename:"
 msgstr "Dateiname der epg.data:"
 
-#: ../template/default/config.html:413
-#: ../template/default/help_config.html:137
+#: ../template/default/config.html:419
+#: ../template/default/help_config.html:143
 msgid "VFAT:"
 msgstr "VFAT:"
 
-#: ../template/default/config.html:434 ../template/default/help_config.html:34
-#: ../template/default/help_config.html:143
+#: ../template/default/config.html:440 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:149
 msgid "Channel Selections"
 msgstr "Selektive Senderauswahl"
 
-#: ../template/default/config.html:444
+#: ../template/default/config.html:450
 msgid "In \"Timeline\"?"
 msgstr "In der \"Zeitleiste\"?"
 
-#: ../template/default/config.html:453
-msgid "In \"Channels\" / \"Playing Today\"?"
-msgstr "Bei \"Programmübersicht\" / \"Was läuft heute\"?"
+#: ../template/default/config.html:459
+msgid "In \"Channels\"?"
+msgstr "In der \"ProgrammÃ¼bersicht\"?"
 
-#: ../template/default/config.html:462
+#: ../template/default/config.html:468
+msgid "In \"Playing Today\"?"
+msgstr "Bei \"Was lÃ¤uft heute\"?"
+
+#: ../template/default/config.html:477
 msgid "In \"What's On Now\"?"
-msgstr "Bei \"Was läuft jetzt\"?"
+msgstr "Bei \"Was lÃ¤uft jetzt\"?"
 
-#: ../template/default/config.html:471
+#: ../template/default/config.html:486
 msgid "In \"AutoTimer\"?"
 msgstr "Bei \"AutoTimer\"?"
 
-#: ../template/default/config.html:512
+#: ../template/default/config.html:527
 msgid "Apply"
 msgstr "Anwenden"
 
@@ -593,54 +600,53 @@ msgstr "Dauer:"
 msgid "min"
 msgstr "min"
 
-#: ../template/default/timer_list.html:46
+#: ../template/default/timer_list.html:42
 msgid "New Timer"
 msgstr "Neuer Timer"
 
-#: ../template/default/timer_list.html:245
+#: ../template/default/timer_list.html:238
 #: ../template/default/rec_list.html:59
 msgid "Date"
 msgstr "Datum"
 
-#: ../template/default/timer_list.html:310
+#: ../template/default/timer_list.html:303
 msgid "This timer is inactive!"
 msgstr "Diese Aufnahme ist deaktiviert!"
 
-#: ../template/default/timer_list.html:313
+#: ../template/default/timer_list.html:306
 msgid "This timer is impossible!"
-msgstr "Diese Aufnahme ist nicht möglich!"
+msgstr "Diese Aufnahme ist nicht mÃ¶glich!"
 
-#: ../template/default/timer_list.html:316
+#: ../template/default/timer_list.html:309
 msgid "No more timers on other transponders possible!"
-msgstr "Keine weiteren Aufnahmen auf anderen Transpondern mehr möglich!"
+msgstr "Keine weiteren Aufnahmen auf anderen Transpondern mehr mÃ¶glich!"
 
-#: ../template/default/timer_list.html:319
+#: ../template/default/timer_list.html:312
 msgid "Timer OK."
-msgstr "Diese Aufnahme ist möglich."
+msgstr "Diese Aufnahme ist mÃ¶glich."
 
-#: ../template/default/timer_list.html:324
+#: ../template/default/timer_list.html:317
 msgid "Edit timer status?"
-msgstr "Timerstatus ändern?"
+msgstr "Timerstatus Ã¤ndern?"
 
-#: ../template/default/timer_list.html:327
+#: ../template/default/timer_list.html:320
 msgid "VPS"
 msgstr "VPS"
 
-#: ../template/default/timer_list.html:328
+#: ../template/default/timer_list.html:321
 msgid "Auto"
 msgstr "Auto"
 
-#: ../template/default/timer_list.html:382
+#: ../template/default/timer_list.html:374
 msgid "Delete Selected Timers"
-msgstr "Ausgewählte Timer löschen"
+msgstr "AusgewÃ¤hlte Timer lÃ¶schen"
 
 #: ../template/default/prog_list.html:6 ../template/default/navigation.html:41
 #: ../template/i18n.pl:5
 msgid "Channels"
-msgstr "Programmübersicht"
+msgstr "ProgrammÃ¼bersicht"
 
 #: ../template/default/prog_list.html:33
-#: ../template/default/prog_list2.html:35
 msgid "Go!"
 msgstr "Go!"
 
@@ -652,50 +658,50 @@ msgstr "Fehler!"
 msgid "TV"
 msgstr "Fernseher"
 
-#: ../template/default/tv.html:179
+#: ../template/default/tv.html:178
 msgid "Interval:"
 msgstr "Intervall:"
 
-#: ../template/default/tv.html:182 ../template/default/tv.html:183
-#: ../template/default/tv.html:184 ../template/default/tv.html:185
-#: ../template/default/tv.html:186 ../template/default/tv.html:187
-#: ../template/default/tv.html:188
+#: ../template/default/tv.html:181 ../template/default/tv.html:182
+#: ../template/default/tv.html:183 ../template/default/tv.html:184
+#: ../template/default/tv.html:185 ../template/default/tv.html:186
+#: ../template/default/tv.html:187
 msgid "sec."
 msgstr "sek"
 
-#: ../template/default/tv.html:190 ../template/default/tv.html:197
+#: ../template/default/tv.html:189 ../template/default/tv.html:196
 msgid "G"
 msgstr "G"
 
-#: ../template/default/tv.html:190 ../template/default/tv.html:197
+#: ../template/default/tv.html:189 ../template/default/tv.html:196
 msgid "Grab the picture!"
 msgstr "Hole das Bild!"
 
-#: ../template/default/tv.html:191
+#: ../template/default/tv.html:190
 msgid "Size:"
-msgstr "Größe:"
+msgstr "GrÃ¶ÃŸe:"
 
-#: ../template/default/tv.html:200
+#: ../template/default/tv.html:198
 msgid "Open in separate window"
-msgstr "Öffne eigenes Fenster"
+msgstr "Ã–ffne eigenes Fenster"
 
-#: ../template/default/prog_detail.html:37
+#: ../template/default/prog_detail.html:43
 msgid "close"
-msgstr "schließen"
+msgstr "schlieÃŸen"
 
-#: ../template/default/prog_detail.html:39
+#: ../template/default/prog_detail.html:45
 msgid "view"
 msgstr "umschalten"
 
-#: ../template/default/prog_detail.html:40
+#: ../template/default/prog_detail.html:46
 msgid "record"
 msgstr "aufnehmen"
 
-#: ../template/default/prog_detail.html:41
+#: ../template/default/prog_detail.html:47
 msgid "search"
 msgstr "Wiederholungen"
 
-#: ../template/default/prog_detail.html:44
+#: ../template/default/prog_detail.html:50
 msgid "Lookup movie in the Internet-Movie-Database (IMDb)"
 msgstr "Film in der Internet-Movie-Database (IMDb) suchen"
 
@@ -732,7 +738,7 @@ msgstr "Umbenennen"
 
 #: ../template/default/rec_list.html:140
 msgid "Delete recording?"
-msgstr "Aufnahme löschen?"
+msgstr "Aufnahme lÃ¶schen?"
 
 #: ../template/default/rec_list.html:169
 msgid "Commands:"
@@ -740,40 +746,40 @@ msgstr "Befehle:"
 
 #: ../template/default/rec_list.html:175
 msgid "Run"
-msgstr "Ausführen"
+msgstr "AusfÃ¼hren"
 
 #: ../template/default/rec_list.html:175
 msgid "Really run this command?"
-msgstr "Diesen Befehl wirklich ausführen?"
+msgstr "Diesen Befehl wirklich ausfÃ¼hren?"
 
 #: ../template/default/rec_list.html:177
 msgid "Delete Selected Recordings"
-msgstr "Ausgewählte Aufnahmen löschen"
+msgstr "AusgewÃ¤hlte Aufnahmen lÃ¶schen"
 
 #: ../template/default/rec_list.html:177
 msgid "Delete all selected recordings?"
-msgstr "Ausgewählte Aufnahmen wirklich löschen?"
+msgstr "AusgewÃ¤hlte Aufnahmen wirklich lÃ¶schen?"
 
-#: ../template/default/help_config.html:32
+#: ../template/default/help_config.html:36
 msgid ""
 "<p>Here you can change general settings and base settings for timers, "
 "AutoTimers, channel selection and streaming parameters.</p>"
 msgstr ""
-"<p>Hier können Sie allgemeine Einstellungen und Grundeinstellungen für Timer "
+"<p>Hier kÃ¶nnen Sie allgemeine Einstellungen und Grundeinstellungen fÃ¼r Timer "
 "und AutoTimer, sowie die Senderauswahl und die Streaming Einstellungen "
 "vornehmen.</p>"
 
-#: ../template/default/help_config.html:39
+#: ../template/default/help_config.html:43
 msgid "The skin you want to use."
-msgstr "Der zu verwendende Skin (=grafische Oberflächenrepräsentation)."
+msgstr "Der zu verwendende Skin (=grafische OberflÃ¤chenreprÃ¤sentation)."
 
-#: ../template/default/help_config.html:41
+#: ../template/default/help_config.html:45
 msgid "The page you want to see at first connect to VDRAdmin."
 msgstr ""
 "Die Seite, die angezeigt werden soll, wenn Sie sich das erste Mal mit "
-"VDRAdmin verbinden.</p>"
+"VDRAdmin verbinden."
 
-#: ../template/default/help_config.html:43
+#: ../template/default/help_config.html:47
 msgid ""
 "VDRAdmin will load the given number of channels from VDR and present only "
 "those in any fields where channels can be selected. This also limits the EPG "
@@ -787,16 +793,17 @@ msgid ""
 msgstr ""
 "VDRAdmin wird nur die hier eingestellte Anzahl an Sendern vom VDR laden und "
 "nur diese an allen Stellen, die die Sender anzeigen, anbieten. Dies "
-"beschränkt auch die EPG Informationen, die VDRAdmin lesen wird und "
-"vermindert somit auch den Speicherbedarf von VDRAdmin und erhöht seine "
+"beschrÃ¤nkt auch die EPG Informationen, die VDRAdmin lesen wird und "
+"vermindert somit auch den Speicherbedarf von VDRAdmin und erhÃ¶ht seine "
 "Verarbeitungsgeschwindigkeit. <strong>0</strong> schaltet diese Funktion ab "
-"und VDRAdmin wird alle verfügbaren Sender verwenden. <h4>Achtung:</h4> Diese "
-"Änderung wird nicht sofort aktiv, sondern erst, wenn sich VDRAdmin erneut "
-"mit dem VDR verbindet um die EPG Informationen aufzufrischen. Sie können "
-"dies auch über die Schaltfläche <span class=\"submit\">Manuelles Update</"
-"span> auf der <span class=\"ref_menu\">AutoTimer</span> Seite erzwingen."
+"und VDRAdmin wird alle verfÃ¼gbaren Sender verwenden. <h4>Achtung:</h4> Diese "
+"Ã„nderung wird nicht sofort aktiv, sondern erst, wenn sich VDRAdmin erneut "
+"mit dem VDR verbindet um die EPG Informationen aufzufrischen. Sie kÃ¶nnen "
+"dies auch Ã¼ber die SchaltflÃ¤che <input type=\"submit\" class=\"submit\" "
+"value=\"Manuelles Update\"/> auf der <span class=\"ref_menu\">AutoTimer</"
+"span> Seite erzwingen."
 
-#: ../template/default/help_config.html:45
+#: ../template/default/help_config.html:49
 msgid ""
 "Here you can specify an IP address or range that can login without providing "
 "login information. For example: \"192.168.0.0/24\" will include any IP "
@@ -804,33 +811,33 @@ msgid ""
 "\"192.168.0.123\"."
 msgstr ""
 "Hier geben Sie die IP-Adresse oder den IP-Bereich an von dem aus man sich "
-"anmelden kann, ohne dass Login-Informationen eingegeben werden müssen. Z.B. "
+"anmelden kann, ohne dass Login-Informationen eingegeben werden mÃ¼ssen. Z.B. "
 "\"192.168.0.0/24\" beinhaltet jede IP, die mit \"192.168.0\" beginnt. "
 "\"192.168.0.123/32\" beinhaltet nur die IP \"192.168.0.123\"."
 
-#: ../template/default/help_config.html:47
-#: ../template/default/help_config.html:59
-#: ../template/default/help_config.html:75
-#: ../template/default/help_config.html:85
-#: ../template/default/help_config.html:99
-#: ../template/default/help_config.html:113
-#: ../template/default/help_config.html:127
-#: ../template/default/help_config.html:140
-#: ../template/default/help_config.html:147
+#: ../template/default/help_config.html:51
+#: ../template/default/help_config.html:65
+#: ../template/default/help_config.html:81
+#: ../template/default/help_config.html:91
+#: ../template/default/help_config.html:105
+#: ../template/default/help_config.html:119
+#: ../template/default/help_config.html:133
+#: ../template/default/help_config.html:146
+#: ../template/default/help_config.html:153
 msgid "Top"
 msgstr "nach oben"
 
-#: ../template/default/help_config.html:53
+#: ../template/default/help_config.html:57
 msgid ""
 "The number of DVB cards VDR can access. Depending on this value VDRAdmin "
 "will calculate critical timers in the <span class=\"ref_menu\">Timer</span> "
 "menu."
 msgstr ""
-"Die Anzahl der DVB-Karten, die der VDR ansprechen kann. In Abhängigkeit von "
+"Die Anzahl der DVB-Karten, die der VDR ansprechen kann. In AbhÃ¤ngigkeit von "
 "diesem Wert berechnet VDRAdmin die kritischen Timer auf der <span class="
 "\"ref_menu\">Timer</span> Seite"
 
-#: ../template/default/help_config.html:55
+#: ../template/default/help_config.html:59
 msgid ""
 "The path to VDR's recordings. It's used so that VDRAdmin can locate the "
 "recordings when using <span class=\"ref_label\">Recordings Streaming</span> "
@@ -842,7 +849,7 @@ msgstr ""
 "span> und <span class=\"ref_file\">reccmds.conf</span> auf der <span class="
 "\"ref_menu\">Aufnahmen</span> Seite verwendet werden."
 
-#: ../template/default/help_config.html:57
+#: ../template/default/help_config.html:61
 msgid ""
 "The path where VDR's configuration files are located. If this directory "
 "contains the file <span class=\"ref_file\">reccmds.conf</span> its content "
@@ -850,44 +857,48 @@ msgid ""
 "menu."
 msgstr ""
 "Der Pfad zu den Konfigurationsdateien des VDR. Wenn dieses Verzeichnis die "
-"Datei <span class=\"ref_file\">reccmds.conf</span> enthält wird der Inhalt "
+"Datei <span class=\"ref_file\">reccmds.conf</span> enthÃ¤lt wird der Inhalt "
 "dieser Datei auf der <span class=\"ref_menu\">Aufnahmen</span> Seite zur "
 "Auswahl angezeigt."
 
-#: ../template/default/help_config.html:65
+#: ../template/default/help_config.html:63
+msgid "The path where the EPG images are stored."
+msgstr "Der Pfad, wo die EPG Bilder abgelegt sind."
+
+#: ../template/default/help_config.html:71
 msgid ""
 "The username for the main user, i.e. the user having the most privileges."
 msgstr ""
-"Der Benutzername für den Hauptbenutzer, d.h. dem Benutzer mit den meisten "
+"Der Benutzername fÃ¼r den Hauptbenutzer, d.h. dem Benutzer mit den meisten "
 "Rechten."
 
-#: ../template/default/help_config.html:67
+#: ../template/default/help_config.html:73
 msgid "The main user's password."
 msgstr "Das Passwort des Hauptbenutzers."
 
-#: ../template/default/help_config.html:69
+#: ../template/default/help_config.html:75
 msgid ""
 "If you want an user account having only limited privileges, this is for you. "
 "The guest user cannot modify anything, it's only allowed to view the EPG, "
 "timers, AutoTimers and recordings listings."
 msgstr ""
-"Wenn Sie einen Benutzer wünschen, der nur eingeschränkte Rechte besitzt, "
-"dann aktivieren Sie diese Option. Der Gastbenutzer kann nichts ändern, es "
+"Wenn Sie einen Benutzer wÃ¼nschen, der nur eingeschrÃ¤nkte Rechte besitzt, "
+"dann aktivieren Sie diese Option. Der Gastbenutzer kann nichts Ã¤ndern, es "
 "ist nur erlaubt den EPG, die Timer, AutoTimer und Aufnahmen aufzulisten."
 
-#: ../template/default/help_config.html:71
+#: ../template/default/help_config.html:77
 msgid "The username for the guest user."
-msgstr "Der Benutzername für den Gastbenutzer."
+msgstr "Der Benutzername fÃ¼r den Gastbenutzer."
 
-#: ../template/default/help_config.html:73
+#: ../template/default/help_config.html:79
 msgid "The guest user's password."
 msgstr "Das Passwort des Gastbenutzers."
 
-#: ../template/default/help_config.html:81
+#: ../template/default/help_config.html:87
 msgid "The number of hours to show in the timeline."
 msgstr "Die Anzahl der Stunden, die in der Zeitleiste angezeigt wird."
 
-#: ../template/default/help_config.html:83
+#: ../template/default/help_config.html:89
 msgid ""
 "A comma separated list of times in <strong>hh:mm</strong> format that appear "
 "in the selectbox placed at the top."
@@ -895,18 +906,18 @@ msgstr ""
 "Eine durch Kommas getrennte Liste von Uhrzeiten im Format <strong>hh:mm</"
 "strong>, die in der Auswahlliste am Seitenanfang angezeigt wird."
 
-#: ../template/default/help_config.html:91
+#: ../template/default/help_config.html:97
 msgid "Activate or deactivate the AutoTimer function."
-msgstr "Die AutoTimer-Funktionalität aktivieren oder deaktivieren."
+msgstr "Die AutoTimer-FunktionalitÃ¤t aktivieren oder deaktivieren."
 
-#: ../template/default/help_config.html:93
+#: ../template/default/help_config.html:99
 msgid "The interval, the the EPG data is checked for updating the AutoTimers."
 msgstr ""
 "Das Intervall indem die EPG Daten aktualisiert werden und nach neuen "
 "AutoTimern gesucht wird."
 
-#: ../template/default/help_config.html:95
-#: ../template/default/help_config.html:105
+#: ../template/default/help_config.html:101
+#: ../template/default/help_config.html:111
 #: ../template/default/help_timer_new.html:62
 #: ../template/default/help_at_timer_new.html:53
 msgid ""
@@ -925,24 +936,24 @@ msgid ""
 "will interrupt the timer with the lowest priority in order to start "
 "recording."
 msgstr ""
-"Eine Zahl im Bereich <strong>0...99</strong>, die die <strong>Priorität</"
+"Eine Zahl im Bereich <strong>0...99</strong>, die die <strong>PrioritÃ¤t</"
 "strong> dieses Timers und der von ihm programmierten Aufnahmen angibt. "
-"<strong>0</strong> ist die geringste Priorität und <strong>99</strong> die "
-"höchste. Die Priorität wird verwendet um zu entscheiden, welcher Timer "
-"gestartet werden soll für den Fall, dass zwei oder mehr Timer mit exakt der "
+"<strong>0</strong> ist die geringste PrioritÃ¤t und <strong>99</strong> die "
+"hÃ¶chste. Die PrioritÃ¤t wird verwendet um zu entscheiden, welcher Timer "
+"gestartet werden soll fÃ¼r den Fall, dass zwei oder mehr Timer mit exakt der "
 "gleichen <strong>Startzeit</strong> existieren. Der erste Timer in der Liste "
-"mit den höchsten Prioritäten wird verwendet.<br /><br />Dieser Wert wird "
-"ebenso zusammen mit der Aufnahme gespeichert und wird später verwendet um zu "
-"entscheiden, welche Aufnahme gelöscht werden soll, für den Fall, dass kein "
-"Pattenplatz mehr für eine neue Aufnahme ist. Wenn die Platte voll läuft und "
-"eine Aufnahme mehr Plattenplatz benötigt, wird eine existierende Aufnahme "
-"mit der geringsten Priorität (und deren garantierte <strong>Lebenszeit</"
-"strong> überschritten wurde) gelöscht. <br /><br />Wenn alle verfügbaren DVB-"
-"Karten belegt sind unterbricht ein Timer mit einer höheren Priorität den "
-"Timer mit der niedrigsten Priorität um die Aufnahme zu starten."
+"mit den hÃ¶chsten PrioritÃ¤ten wird verwendet.<br /><br />Dieser Wert wird "
+"ebenso zusammen mit der Aufnahme gespeichert und wird spÃ¤ter verwendet um zu "
+"entscheiden, welche Aufnahme gelÃ¶scht werden soll, fÃ¼r den Fall, dass kein "
+"Pattenplatz mehr fÃ¼r eine neue Aufnahme ist. Wenn die Platte voll lÃ¤uft und "
+"eine Aufnahme mehr Plattenplatz benÃ¶tigt, wird eine existierende Aufnahme "
+"mit der geringsten PrioritÃ¤t (und deren garantierte <strong>Lebenszeit</"
+"strong> Ã¼berschritten wurde) gelÃ¶scht. <br /><br />Wenn alle verfÃ¼gbaren DVB-"
+"Karten belegt sind unterbricht ein Timer mit einer hÃ¶heren PrioritÃ¤t den "
+"Timer mit der niedrigsten PrioritÃ¤t um die Aufnahme zu starten."
 
-#: ../template/default/help_config.html:97
-#: ../template/default/help_config.html:107
+#: ../template/default/help_config.html:103
+#: ../template/default/help_config.html:113
 #: ../template/default/help_timer_new.html:64
 #: ../template/default/help_at_timer_new.html:55
 msgid ""
@@ -957,56 +968,56 @@ msgid ""
 msgstr ""
 "Die <strong>garantierte</strong> Lebenszeit (in Tagen) einer Aufnahme, die "
 "von diesem Timer erstellt wurde. <strong>0</strong> bedeutet, dass diese "
-"Aufnahme jederzeit von einer Aufnahme mit höherer Priorität automatisch "
-"gelöscht werden kann. <strong>99</strong> heißt. dass diese Aufnahme nie "
-"automatisch gelöscht wird. Eine Zahl im Bereich <strong>1...98</strong> gibt "
-"an, dass die Aufnahme automatisch gelöscht werden kann, wenn die angegebene "
+"Aufnahme jederzeit von einer Aufnahme mit hÃ¶herer PrioritÃ¤t automatisch "
+"gelÃ¶scht werden kann. <strong>99</strong> heiÃŸt. dass diese Aufnahme nie "
+"automatisch gelÃ¶scht wird. Eine Zahl im Bereich <strong>1...98</strong> gibt "
+"an, dass die Aufnahme automatisch gelÃ¶scht werden kann, wenn die angegebene "
 "Anzahl von Tagen seit der <strong>Startzeit</strong> abgelaufen ist und "
-"Plattenplatz für eine neue Aufnahme benötigt wird."
+"Plattenplatz fÃ¼r eine neue Aufnahme benÃ¶tigt wird."
 
-#: ../template/default/help_config.html:109
+#: ../template/default/help_config.html:115
 msgid ""
 "The number of minutes VDRAdmin subtracts from the broadcasts start time "
 "found in the EPG. This value is used for timers programmed by AutoTimer and "
 "timers manually programmed when pressing \"Record\" in any EPG view."
 msgstr ""
 "Die Anzahl von Minuten, die VDRAdmin von der Startzeit der Sendung im EPG "
-"abzieht. Dies wird jedoch nur für Timer verwendet, die vom AutoTimer oder "
+"abzieht. Dies wird jedoch nur fÃ¼r Timer verwendet, die vom AutoTimer oder "
 "manuell durch Klicken von \"Aufnehmen\" in einer beliebigen EPG-Ansicht "
 "programmiert werden."
 
-#: ../template/default/help_config.html:111
+#: ../template/default/help_config.html:117
 msgid ""
 "The number of minutes VDRAdmin adds to the broadcasts stop time found in the "
 "EPG. This value is used for timers programmed by AutoTimer and timers "
 "manually programmed when pressing \"Record\" in any EPG view."
 msgstr ""
 "Die Anzahl von Minuten, die VDRAdmin zur Stoppzeit der Sendung im EPG "
-"addiert. Dies wird jedoch nur für Timer verwendet, die vom AutoTimer oder "
+"addiert. Dies wird jedoch nur fÃ¼r Timer verwendet, die vom AutoTimer oder "
 "manuell durch Klicken von \"Aufnehmen\" in einer beliebigen EPG-Ansicht "
 "programmiert werden."
 
-#: ../template/default/help_config.html:119
+#: ../template/default/help_config.html:125
 msgid ""
 "Enable or disable live streaming using the <a href=\"http://www.magoa.net/"
 "linux/\">streamdev plugin</a>. You also have to set the correct <span class="
 "\"ref_label\">HTTP Port for Streamdev</span> below."
 msgstr ""
-"Aktivieren oder deaktivieren des Streamens vom LiveTV. Dazu benötigen Sie "
-"das <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. Außerdem "
+"Aktivieren oder deaktivieren des Streamens vom LiveTV. Dazu benÃ¶tigen Sie "
+"das <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. AuÃŸerdem "
 "muss noch der <span class=\"ref_label\">HTTP-Port von Streamdev</span> "
 "korrekt gesetzt sein."
 
-#: ../template/default/help_config.html:121
+#: ../template/default/help_config.html:127
 msgid ""
 "Here you have to set the port number your VDR's streamdev server listens for "
 "connections. Additionally you can also provide the stream type you like to "
 "use."
 msgstr ""
-"Hier geben Sie die Portnummer des Streamdev-Servers im VDR an. Sie können "
+"Hier geben Sie die Portnummer des Streamdev-Servers im VDR an. Sie kÃ¶nnen "
 "auch den zu verwendenden Streamtyp angeben."
 
-#: ../template/default/help_config.html:123
+#: ../template/default/help_config.html:129
 msgid ""
 "Enable or disable streaming of recordings.<br />Well actually this is no "
 "real \"streaming\", but you have to setup your workstation so that it can "
@@ -1017,83 +1028,84 @@ msgid ""
 "display."
 msgstr ""
 "Streamen von Aufnahmen aktivieren oder deaktivieren.<br />Es ist eigentlich "
-"kein richtiges \"Streamen\", Sie müssen nämlich Ihren PC so konfigurieren, "
-"dass dieser auf die Aufnahmen des VDR zugreifen kann. Sie können dies z.B. "
+"kein richtiges \"Streamen\", Sie mÃ¼ssen nÃ¤mlich Ihren PC so konfigurieren, "
+"dass dieser auf die Aufnahmen des VDR zugreifen kann. Sie kÃ¶nnen dies z.B. "
 "mit Samba oder NFS erreichen. VDRAdmin erstellt eine Abspielliste "
-"(Playlist), die alle Teile der ausgewählten Aufnahme enthält, und sendet "
+"(Playlist), die alle Teile der ausgewÃ¤hlten Aufnahme enthÃ¤lt, und sendet "
 "diese dann zum Browser. Wenn nun der Browser und das Medienabspielprogramm "
 "korrekt konfiguriert sind wird die Aufnahme am PC abgespielt."
 
-#: ../template/default/help_config.html:125
+#: ../template/default/help_config.html:131
 msgid ""
 "This is the path where your workstation can access VDR's recordings. This "
 "depends on your VDR and workstation setup, for example \"\\\\vdr\\videos\" "
 "or \"V:\\\" (on Windows) or \"/mnt/videos\" (on Linux)."
 msgstr ""
-"Der Pfad, über den Ihr PC auf die Aufnahmen des VDR zugreifen kann. Dieser "
-"ist abhängig von der Konfiguration des VDR und des PC und kann z.B. \"\\\\vdr"
+"Der Pfad, Ã¼ber den Ihr PC auf die Aufnahmen des VDR zugreifen kann. Dieser "
+"ist abhÃ¤ngig von der Konfiguration des VDR und des PC und kann z.B. \"\\\\vdr"
 "\\videos\" oder \"V:\\\" (unter Windows) oder \"/mnt/videos\" (unter Linux) "
 "sein."
 
-#: ../template/default/help_config.html:131
+#: ../template/default/help_config.html:137
 msgid ""
 "<p>This section is for experts <strong>only</strong>, i.e. you know what you "
 "are doing!</p>"
 msgstr ""
-"<p>Dieser Bereich ist <strong>nur</strong> für Experten, d.h. Sie wissen was "
+"<p>Dieser Bereich ist <strong>nur</strong> fÃ¼r Experten, d.h. Sie wissen was "
 "Sie tun!</p>"
 
-#: ../template/default/help_config.html:134
+#: ../template/default/help_config.html:140
 msgid ""
 "Accessing VDR's EPG through VDR's SVDRPort seems to block VDR for some time. "
 "If this option is activated VDRAdmin will read the <span class=\"ref_file"
 "\">epg.data</span> file directly so that VDR doesn't get blocked."
 msgstr ""
-"Das Holen des EPG über den SVDRPort scheint den VDR für einige Zeit zu "
+"Das Holen des EPG Ã¼ber den SVDRPort scheint den VDR fÃ¼r einige Zeit zu "
 "blockieren. Wenn Sie diese Option aktivieren liest VDRAdmin direkt die Datei "
 "<span class=\"ref_file\">epg.data</span>, so dass der VDR nicht blockiert "
 "wird."
 
-#: ../template/default/help_config.html:136
+#: ../template/default/help_config.html:142
 msgid ""
 "If you've enabled the option above you need to tell VDRAdmin where the <span "
 "class=\"ref_file\">epg.data</span> file is located."
 msgstr ""
-"Wenn Sie die Option oberhalb aktiviert haben, dann müssen Sie VDRAdmin den "
+"Wenn Sie die Option oberhalb aktiviert haben, dann mÃ¼ssen Sie VDRAdmin den "
 "Dateinamen inklusive komplettem Pfad zur Datei <span class=\"ref_file\">epg."
 "data</span> bekannt geben."
 
-#: ../template/default/help_config.html:138
+#: ../template/default/help_config.html:144
 msgid ""
 "If you have compiled VDR with the VFAT define you have to enable this "
 "option. If this option is set to the wrong value, you may have problems with "
 "certain recordings if you want to stream them or run reccmds on them."
 msgstr ""
-"Wenn Sie den VDR mit dem VFAT Define kompiliert haben, dann müssen Sie diese "
+"Wenn Sie den VDR mit dem VFAT Define kompiliert haben, dann mÃ¼ssen Sie diese "
 "Option aktivieren. Wenn diese Option falsch gesetzt ist, werden Sie Probleme "
 "mit bestimmten Aufnahmen haben, wenn Sie diese Streamen oder einen <span "
-"class=\"ref_file\">reccmd.conf</span> Befehl darauf ausführen lassen wollen."
+"class=\"ref_file\">reccmd.conf</span> Befehl darauf ausfÃ¼hren lassen wollen."
 
-#: ../template/default/help_config.html:144
+#: ../template/default/help_config.html:150
 msgid ""
 "<p>If you want to limit the number of channels used in some parts of "
 "VDRAdmin, this is for you!</p><p>Use the radio buttons to activate or "
 "deactivate the wanted channels in the named menu.</p><p>To add channels to "
 "the list of wanted channels you have to select them in the left side "
-"selectbox and click <span class=\"submit\">&gt;&gt;&gt;&gt;&gt;</span>. If "
-"you want to remove channels from the list of wanted channels you have to "
-"select them in the right side selectbox and click <span class=\"submit\">&lt;"
-"&lt;&lt;&lt;&lt;</span>.</p>"
+"selectbox and click <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;"
+"&gt;&gt;&gt;\"/>. If you want to remove channels from the list of wanted "
+"channels you have to select them in the right side selectbox and click "
+"<input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
 msgstr ""
-"<p>Hiermit können Sie die Anzahl der Sender für einige Teilbereiche von "
-"VDRAdmin einschränken.</p><p>Verwenden Sie die \"Ja\"/\"Nein\"-Knöpfe um die "
-"Senderauswahl für das angegebene Menü zu aktivieren oder deaktivieren.</"
-"p><p>Zum Hinzufügen von Sendern zu der Liste der ausgewählten Sender müssen "
-"Sie die gewünschten Sender im linken Auswahlfeld markieren und die "
-"Schaltfläche <span class=\"submit\">&gt;&gt;&gt;&gt;&gt;</span> anklicken. "
-"Um Sender aus dieser Liste wieder zu entfernen müssen diese im rechten "
-"Auswahlfeld markiert werden und danach die Schaltfläche <span class=\"submit"
-"\">&lt;&lt;&lt;&lt;&lt;</span> angeklickt werden.</p>"
+"<p>Hiermit kÃ¶nnen Sie die Anzahl der Sender fÃ¼r einige Teilbereiche von "
+"VDRAdmin einschrÃ¤nken.</p><p>Verwenden Sie die \"Ja\"/\"Nein\"-KnÃ¶pfe um die "
+"Senderauswahl fÃ¼r das angegebene MenÃ¼ zu aktivieren oder deaktivieren.</"
+"p><p>Zum HinzufÃ¼gen von Sendern zu der Liste der ausgewÃ¤hlten Sender mÃ¼ssen "
+"Sie die gewÃ¼nschten Sender im linken Auswahlfeld markieren und die "
+"SchaltflÃ¤che <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;&gt;"
+"&gt;\"/> anklicken. Um Sender aus dieser Liste wieder zu entfernen mÃ¼ssen "
+"diese im rechten Auswahlfeld markiert werden und danach die SchaltflÃ¤che "
+"<input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/> "
+"angeklickt werden.</p>"
 
 #: ../template/default/prog_timeline.html:119
 msgid "Timeline:"
@@ -1104,10 +1116,9 @@ msgid "to"
 msgstr "bis"
 
 #: ../template/default/prog_list2.html:6
-#: ../template/default/prog_list2.html:28
-#: ../template/default/navigation.html:33
+#: ../template/default/navigation.html:33 ../vdradmind.pl:2432
 msgid "Playing Today"
-msgstr "Was läuft heute?"
+msgstr "Was lÃ¤uft heute?"
 
 #: ../template/default/rec_edit.html:6 ../template/default/rec_edit.html:20
 msgid "Rename Recording"
@@ -1121,7 +1132,7 @@ msgstr "Alter Titel der Aufnahme:"
 msgid "New Name of Recording:"
 msgstr "Neuer Titel der Aufnahme:"
 
-#: ../template/default/help_timer_list.html:29
+#: ../template/default/help_timer_list.html:33
 msgid ""
 "<p>Here you will find a listing of timers known to VDR.</p><p>On top you "
 "will find a chart showing a day's timers graphically. This provides an quick "
@@ -1153,54 +1164,55 @@ msgid ""
 "record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img "
 "src=\"bilder/poempl_grau.gif\" alt=\"inactive\" align=\"absmiddle\" /> Timer "
 "is not active.</p><p>In addition to these functions you can add a new timer "
-"by clicking <span class=\"submit\">New Timer</span> at the top and you can "
-"delete a number of timers at once by checking the box in the last column of "
-"those timers and clicking <span class=\"submit\">Delete Selected Timers</"
-"span>.</p>"
+"by clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at "
+"the top and you can delete a number of timers at once by checking the box in "
+"the last column of those timers and clicking <input type=\"submit\"  class="
+"\"submit\" value=\"Delete Selected Timers\"/>.</p>"
 msgstr ""
 "<p>Hier finden Sie eine Liste von allen Timern, die VDR kennt.</p><p>Im "
-"oberen Bereich finden Sie eine grafische Repräsentation der Timer für einen "
-"Tag. Dies vermittelt Ihnen einen schnellen Überblick darüber, was an einem "
-"Tag programmiert wurde und hilft Ihnen beim Erkennen von überschneidenden "
-"Timern. Wenn Sie den Mauszeiger über einen farbigen Bereich bewegen erfahren "
-"Sie seinen Namen, die Priorität und Lebenszeit sowie seine Dauer.</"
-"p>Unterhalb der grafischen Anzeige sehen Sie eine Liste der programmierten "
-"Timer. Sie können die Sortierung der Liste ändern indem Sie auf die "
-"gewünschte Spaltenüberschrift klicken.</p>Für jeden Timer haben Sie die "
-"folgenden Möglichkeiten:<dl><dt>Setzen seines Zustands</dt><dd>Dies erfolgt "
-"durch Anklicken von \"Ja\", \"Nein\", \"VPS\" oder \"Auto\" in der \"Aktiv\" "
-"Spalte.</dd><dt>Schnellanzeige seiner Priorität und Lebenszeit</dt><dd>Der "
-"Mauszeiger muss dazu über den Namen des Timers bewegt werden.</"
+"oberen Bereich finden Sie eine grafische ReprÃ¤sentation der Timer fÃ¼r einen "
+"Tag. Dies vermittelt Ihnen einen schnellen Ãœberblick darÃ¼ber, was an einem "
+"Tag programmiert wurde und hilft Ihnen beim Erkennen von Ã¼berschneidenden "
+"Timern. Wenn Sie den Mauszeiger Ã¼ber einen farbigen Bereich bewegen erfahren "
+"Sie seinen Namen, die PrioritÃ¤t und Lebenszeit sowie seine Dauer.</"
+"p><p>Unterhalb der grafischen Anzeige sehen Sie eine Liste der "
+"programmierten Timer. Sie kÃ¶nnen die Sortierung der Liste Ã¤ndern indem Sie "
+"auf die gewÃ¼nschte SpaltenÃ¼berschrift klicken.</p><p>FÃ¼r jeden Timer haben "
+"Sie die folgenden MÃ¶glichkeiten:<dl><dt>Setzen seines Zustands</dt><dd>Dies "
+"erfolgt durch Anklicken von \"Ja\", \"Nein\", \"VPS\" oder \"Auto\" in der "
+"\"Aktiv\" Spalte.</dd><dt>Schnellanzeige seiner PrioritÃ¤t und Lebenszeit</"
+"dt><dd>Der Mauszeiger muss dazu Ã¼ber den Namen des Timers bewegt werden.</"
 "dd><dt>Anzeigen seinen EPG Eintrags</dt><dd>Bei Timern, bei denen die Option "
-"<span class=\"ref_label\">Automatische Timer-Überwachung</span> auf "
+"<span class=\"ref_label\">Automatische Timer-Ãœberwachung</span> auf "
 "\"Sendungskennung\" gesetzt ist, kann durch Anklicken des Timernamens der "
-"zugehörige EPG Eintrag angezeigt werden.</dd><dt>Bearbeiten eines Timers</"
-"dt><dd>Sie können einen Timer bearbeiten indem Sie auf <img src=\"bilder/"
-"edit.gif\" alt=\"edit\" /> klicken.</dd><dt>Löschen eines Timers</dt><dd>Um "
-"einen Timer zu löschen klicken Sie bitte auf <img src=\"bilder/delete.gif\" "
+"zugehÃ¶rige EPG Eintrag angezeigt werden.</dd><dt>Bearbeiten eines Timers</"
+"dt><dd>Sie kÃ¶nnen einen Timer bearbeiten indem Sie auf <img src=\"bilder/"
+"edit.gif\" alt=\"edit\" /> klicken.</dd><dt>LÃ¶schen eines Timers</dt><dd>Um "
+"einen Timer zu lÃ¶schen klicken Sie bitte auf <img src=\"bilder/delete.gif\" "
 "alt=\"delete\" />.</dd></dl></p><p>Der Status eines jeden Timers wird durch "
 "eine bestimmte Farbe angezeigt:<br /><span class=\"col_ok\">&nbsp;&nbsp;"
 "&nbsp;</span> / <img src=\"bilder/poempl_gruen.gif\" alt=\"on\" align="
 "\"absmiddle\" /> Der Timer ist OK und wird aufnehmen.<br /><span class="
 "\"col_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb."
-"gif\" alt=\"problem\" align=\"absmiddle\" /> Der Timer überschneidet sich "
-"mit anderen Timern. Das ist nicht kritisch, wenn genügend DVB-Karten für die "
+"gif\" alt=\"problem\" align=\"absmiddle\" /> Der Timer Ã¼berschneidet sich "
+"mit anderen Timern. Das ist nicht kritisch, wenn genÃ¼gend DVB-Karten fÃ¼r die "
 "parallelen Aufnahmen vorhanden sind.<br /><span class=\"col_conflict\">&nbsp;"
 "&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.gif\" alt=\"impossible\" "
-"align=\"absmiddle\" /> Der Timer ist kritisch und wird höchst wahrscheinlich "
+"align=\"absmiddle\" /> Der Timer ist kritisch und wird hÃ¶chst wahrscheinlich "
 "<strong>nicht</strong> aufnehmen.<br /><span class=\"col_inactive\">&nbsp;"
 "&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.gif\" alt=\"inactive\" "
 "align=\"absmiddle\" /> Der Timer ist nicht aktiv.\n"
-"</p><p>Zusätzlich zu diesen Funktionen können Sie einen neuen Timer "
-"programmieren indem Sie die Schaltfläche <span class=\"submit\">Neuer Timer</"
-"span> am oberen Bildschirmrand anklicken. Am unteren Bildschirmrand finden "
-"Sie die Schaltfläche <span class=\"submit\">Ausgewählte Timer löschen</"
-"span>, mit der Sie alle Timer, die Sie in der Liste in der letzten Spalte "
-"mit einem Haken versehen haben, auf einmal löschen können.</p>"
+"</p><p>ZusÃ¤tzlich zu diesen Funktionen kÃ¶nnen Sie einen neuen Timer "
+"programmieren indem Sie die SchaltflÃ¤che <input type=\"submit\" class="
+"\"submit\" value=\"Neuer Timer\"/>am oberen Bildschirmrand anklicken. Am "
+"unteren Bildschirmrand finden Sie die SchaltflÃ¤che <input type=\"submit\" "
+"class=\"submit\" value=\"AusgewÃ¤hlte Timer lÃ¶schen\"/>, mit der Sie alle "
+"Timer, die Sie in der Liste in der letzten Spalte mit einem Haken versehen "
+"haben, auf einmal lÃ¶schen kÃ¶nnen.</p>"
 
 #: ../template/default/help_timer_new.html:32
 msgid "<p>Here you can edit a timer's settings.</p>"
-msgstr "<p>Hier können Sie die Einstellungen eines Timers bearbeiten.</p>"
+msgstr "<p>Hier kÃ¶nnen Sie die Einstellungen eines Timers bearbeiten.</p>"
 
 #: ../template/default/help_timer_new.html:35
 msgid ""
@@ -1209,15 +1221,15 @@ msgid ""
 "anything meanwhile."
 msgstr ""
 "Aktivieren bzw. Deaktivieren des Timers. Deaktivierte Timer werden weiterhin "
-"in der Liste der verfügbaren Timer geführt, so dass sie später wieder "
-"aktiviert werden können. In der Zwischenzeit nehmen Sie dann aber nichts auf."
+"in der Liste der verfÃ¼gbaren Timer gefÃ¼hrt, so dass sie spÃ¤ter wieder "
+"aktiviert werden kÃ¶nnen. In der Zwischenzeit nehmen Sie dann aber nichts auf."
 
 #: ../template/default/help_timer_new.html:37
 msgid ""
 "Depending on how this timer has been programmed you have up to three "
 "possible settings:"
 msgstr ""
-"Die möglichen Optionen sind abhängig davon, wie der Timer programmiert wurde:"
+"Die mÃ¶glichen Optionen sind abhÃ¤ngig davon, wie der Timer programmiert wurde:"
 
 #: ../template/default/help_timer_new.html:40
 msgid ""
@@ -1225,18 +1237,18 @@ msgid ""
 "that this only works if the provided identification is a fix and unique "
 "value! This option is not available with timers programmed in VDR."
 msgstr ""
-"Der Timer wird anhand der Identifikation, die die zugehörige Sendung im EPG "
-"besitzt, überwacht. Bitte beachten Sie, dass dies nur funktioniert, wenn die "
+"Der Timer wird anhand der Identifikation, die die zugehÃ¶rige Sendung im EPG "
+"besitzt, Ã¼berwacht. Bitte beachten Sie, dass dies nur funktioniert, wenn die "
 "Identifikation im EPG fest und eindeutig ist! Diese Option ist nicht "
-"verfügbar, wenn der Timer im VDR programmiert wurde."
+"verfÃ¼gbar, wenn der Timer im VDR programmiert wurde."
 
 #: ../template/default/help_timer_new.html:42
 msgid "Monitor this timer using the start and stop time."
-msgstr "Der Timer wird anhand seiner Start- und Stoppzeit überwacht."
+msgstr "Der Timer wird anhand seiner Start- und Stoppzeit Ã¼berwacht."
 
 #: ../template/default/help_timer_new.html:44
 msgid "Do not monitor this timer."
-msgstr "Der Timer wird nicht überwacht."
+msgstr "Der Timer wird nicht Ã¼berwacht."
 
 #: ../template/default/help_timer_new.html:48
 msgid "The channel to record."
@@ -1253,10 +1265,10 @@ msgid ""
 msgstr ""
 "Der Tag an dem der Timer aktiv werden soll. Der Tag kann in zwei Formaten "
 "eingegeben werden:<ul><li>Zwei Ziffern (TT). Es wird der aktuelle Monat und "
-"das aktuelle Jahr verwendet.</li><li>ISO-Norm (JJJJ-MM-TT). Damit können Sie "
-"Timer soweit in der Zukunft programmieren wie Sie wollen.</li></ul>Für den "
-"Fall, dass Sie wiederkehrende Timer programmieren wollen, können Sie die "
-"sieben Schaltflächen unterhalb des Textfeldes verwenden. Markieren Sie "
+"das aktuelle Jahr verwendet.</li><li>ISO-Norm (JJJJ-MM-TT). Damit kÃ¶nnen Sie "
+"Timer soweit in der Zukunft programmieren wie Sie wollen.</li></ul>FÃ¼r den "
+"Fall, dass Sie wiederkehrende Timer programmieren wollen, kÃ¶nnen Sie die "
+"sieben SchaltflÃ¤chen unterhalb des Textfeldes verwenden. Markieren Sie "
 "einfach das Feld des Tages an dem der Timer aktiv werden soll."
 
 #: ../template/default/help_timer_new.html:58
@@ -1264,8 +1276,8 @@ msgid ""
 "This is the time when the timer should start recording. The first text field "
 "is for \"hour\", the second for \"minute\"."
 msgstr ""
-"Dies ist die Startzeit der Aufnahme. Das erste Textfeld ist für die Stunde, "
-"das zweite für die Minuten."
+"Dies ist die Startzeit der Aufnahme. Das erste Textfeld ist fÃ¼r die Stunde, "
+"das zweite fÃ¼r die Minuten."
 
 #: ../template/default/help_timer_new.html:60
 msgid ""
@@ -1273,7 +1285,7 @@ msgid ""
 "is for \"hour\", the second for \"minute\"."
 msgstr ""
 "Die Uhrzeit zu der die Aufnahme gestoppt werden soll. Das erste Textfeld ist "
-"für die Stunde, das zweite für die Minuten."
+"fÃ¼r die Stunde, das zweite fÃ¼r die Minuten."
 
 #: ../template/default/help_timer_new.html:66
 msgid ""
@@ -1288,13 +1300,13 @@ msgid ""
 "blank."
 msgstr ""
 "Der <strong>Dateiname</strong> den dieser Timer der Aufnahme geben wird. "
-"Sollen Unterverzeichnisse angegeben werden, so müssen diese mit '~' getrennt "
-"werden, da '/' auch Teil eines regulären Programmnamens sein kann.<br /><br /"
-">Die Schlüsselwörter <strong>TITLE</strong> und <strong>EPISODE</strong> "
+"Sollen Unterverzeichnisse angegeben werden, so mÃ¼ssen diese mit '~' getrennt "
+"werden, da '/' auch Teil eines regulÃ¤ren Programmnamens sein kann.<br /><br /"
+">Die SchlÃ¼sselwÃ¶rter <strong>TITLE</strong> und <strong>EPISODE</strong> "
 "werden, falls vorhanden, mit der Titel- bzw. Untertitel-Information aus dem "
 "EPG zur Zeit der Aufnahme ersetzt, wenn diese Daten im EPG vorhanden sind. "
-"Sollten diese Informationen nicht verfügbar sein, so wird für <strong>TITLE</"
-"strong> der Sendername und für <strong>EPISODE</strong> ein Leerzeichen "
+"Sollten diese Informationen nicht verfÃ¼gbar sein, so wird fÃ¼r <strong>TITLE</"
+"strong> der Sendername und fÃ¼r <strong>EPISODE</strong> ein Leerzeichen "
 "verwendet."
 
 #: ../template/default/help_timer_new.html:68
@@ -1309,7 +1321,7 @@ msgstr ""
 "\">summary.vdr</span> bzw. <span class=\"ref_file\">info.vdr</span> der "
 "Aufnahme geschrieben."
 
-#: ../template/default/help_at_timer_list.html:29
+#: ../template/default/help_at_timer_list.html:33
 msgid ""
 "<p>Here you will find a listing of automatic timers (AutoTimer) known to "
 "VDRAdmin.</p><p>The list shows some information on AutoTimers. You can "
@@ -1326,39 +1338,41 @@ msgid ""
 "AutoTimer is OK and will automatically program matching broadcasts.<br /"
 "><img src=\"bilder/poempl_grau.gif\" alt=\"inactive\" align=\"absmiddle\" /> "
 "AutoTimer is not active.</p><p>In addition to these functions you can add a "
-"new AutoTimer by clicking <span class=\"submit\">New AutoTimer</span> at the "
-"top and you can delete a number of AutoTimers at once by checking the box in "
-"the last column of those timers and clicking <span class=\"submit\">Delete "
-"Selected AutoTimers</span>.</p><p>Click <span class=\"submit\">Force Update</"
-"span> to force VDRAdmin to reconnect to VDR, fetch the current EPG and check "
+"new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value="
+"\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at "
+"once by checking the box in the last column of those timers and clicking "
+"<input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/"
+">.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update"
+"\"/> to force VDRAdmin to reconnect to VDR, fetch the current EPG and check "
 "for matching AutoTimers.</p>"
 msgstr ""
 "<p>Hier finden Sie eine Liste aller AutoTimer, die VDRAdmin kennt.</p><p>Die "
-"Liste zeigt Ihnen einige Informationen zu den AutoTimern. Sie können die "
-"Sortierung dieser Liste ändern indem Sie auf die Spaltenüberschriften "
-"klicken.</p><p>Für jeden AutoTimer haben Sie die folgenden Möglichkeiten:"
+"Liste zeigt Ihnen einige Informationen zu den AutoTimern. Sie kÃ¶nnen die "
+"Sortierung dieser Liste Ã¤ndern indem Sie auf die SpaltenÃ¼berschriften "
+"klicken.</p><p>FÃ¼r jeden AutoTimer haben Sie die folgenden MÃ¶glichkeiten:"
 "<dl><dt>Setzen seines Zustands</dt><dd>Durch klicken auf \"Ja\" oder \"Nein"
-"\" in der \"Aktiv\" Spalte können Sie den AutoTimer aktivieren bzw. "
-"deaktivieren.</dd><dt>Schnellanzeige seiner Priorität und Lebenszeit</"
-"dt><dd>Der Mauszeiger muss dazu über den Namen des AutoTimers bewegt werden."
-"</dd><dt>Bearbeiten eines AutoTimers</dt><dd>Sie können einen AutoTimer "
+"\" in der \"Aktiv\" Spalte kÃ¶nnen Sie den AutoTimer aktivieren bzw. "
+"deaktivieren.</dd><dt>Schnellanzeige seiner PrioritÃ¤t und Lebenszeit</"
+"dt><dd>Der Mauszeiger muss dazu Ã¼ber den Namen des AutoTimers bewegt werden."
+"</dd><dt>Bearbeiten eines AutoTimers</dt><dd>Sie kÃ¶nnen einen AutoTimer "
 "bearbeiten indem Sie auf <img src=\"bilder/edit.gif\" alt=\"edit\" /> "
-"klicken.</dd><dt>Löschen eines AutoTimers</dt><dd>Um einen Timer zu löschen "
+"klicken.</dd><dt>LÃ¶schen eines AutoTimers</dt><dd>Um einen Timer zu lÃ¶schen "
 "klicken Sie bitte auf <img src=\"bilder/delete.gif\" alt=\"delete\" />.</"
 "dd></dl></p><p>Der Status eines jeden AutoTimers wird durch eine bestimmte "
 "Farbe angezeigt:<br /><img src=\"bilder/poempl_gruen.gif\" alt=\"on\" align="
-"\"absmiddle\" /> Der AutoTimer ist OK und wird automatisch übereinstimmende "
+"\"absmiddle\" /> Der AutoTimer ist OK und wird automatisch Ã¼bereinstimmende "
 "Sendungen programmieren.<br /><img src=\"bilder/poempl_grau.gif\" alt="
 "\"inactive\" align=\"absmiddle\" /> Der AutoTimer ist nicht aktiv.</"
-"p><p>Zusätzlich zu diesen Funktionen können Sie einen neuen AutoTimer "
-"anlegen indem Sie die Schaltfläche <span class=\"submit\">Neuer AutoTimer</"
-"span> am oberen Rand anklicken. Am unteren Bildschirmrand finden Sie die "
-"Schaltfläche <span class=\"submit\">Ausgewählte AutoTimer löschen</span>, "
-"mit der Sie alle AutoTimer, die Sie in der Liste in der letzten Spalte mit "
-"einem Haken versehen haben, auf einmal löschen können.</p><p>Mit der "
-"Schaltfläche <span class=\"submit\">Manuelles Update</span> können Sie "
+"p><p>ZusÃ¤tzlich zu diesen Funktionen kÃ¶nnen Sie einen neuen AutoTimer "
+"anlegen indem Sie die SchaltflÃ¤che <input type=\"submit\" class=\"submit\" "
+"value=\"Neuer AutoTimer\"/> am oberen Rand anklicken. Am unteren "
+"Bildschirmrand finden Sie die SchaltflÃ¤che <input type=\"submit\" class="
+"\"submit\" value=\"AusgewÃ¤hlte AutoTimer lÃ¶schen\"/>, mit der Sie alle "
+"AutoTimer, die Sie in der Liste in der letzten Spalte mit einem Haken "
+"versehen haben, auf einmal lÃ¶schen kÃ¶nnen.</p><p>Mit der SchaltflÃ¤che <input "
+"type=\"submit\" class=\"submit\" value=\"Manuelles Update\"/> kÃ¶nnen Sie "
 "VDRAdmin veranlassen sich mit dem VDR zu verbinden, die aktuellen EPG Daten "
-"zu holen und anschliessend nach übereinstimmenden AutoTimern zu suchen.</p>"
+"zu holen und anschliessend nach Ã¼bereinstimmenden AutoTimern zu suchen.</p>"
 
 #: ../template/default/help_at_timer_new.html:12
 #: ../template/default/help_at_timer_new.html:24
@@ -1376,13 +1390,13 @@ msgid ""
 "automatically for that broadcast. That's very comfortable for irregularly "
 "broadcasted series or movies you don't want to miss.</p>"
 msgstr ""
-"<p>Hier können Sie die Einstellungen der automatischen Timer (AutoTimer) "
-"bearbeiten.</p><p>Die AutoTimer sind eine Schlüsselfunktion des VDRAdmin. "
+"<p>Hier kÃ¶nnen Sie die Einstellungen der automatischen Timer (AutoTimer) "
+"bearbeiten.</p><p>Die AutoTimer sind eine SchlÃ¼sselfunktion des VDRAdmin. "
 "Ein AutoTimer besteht aus einem oder mehreren Suchbegriffen und einigen "
-"anderen Einstellungen, die regelmäßig im Electronic Program Guide (EPG, "
-"elektronischer Programmführer) gesucht werden. Bei einer Übereinstimmung "
-"legt AutoTimer automatisch einen neuen Timer für diese Sendung im VDR an. "
-"Das ist sehr komfortable für unregelmäßig ausgestrahlte Serien oder "
+"anderen Einstellungen, die regelmÃ¤ÃŸig im Electronic Program Guide (EPG, "
+"elektronischer ProgrammfÃ¼hrer) gesucht werden. Bei einer Ãœbereinstimmung "
+"legt AutoTimer automatisch einen neuen Timer fÃ¼r diese Sendung im VDR an. "
+"Das ist sehr komfortable fÃ¼r unregelmÃ¤ÃŸig ausgestrahlte Serien oder "
 "Spielfilmen, die Sie nicht vermissen wollen.</p>"
 
 #: ../template/default/help_at_timer_new.html:38
@@ -1398,10 +1412,10 @@ msgid ""
 "so this AutoTimer only programs the (one!) next matching broadcast."
 msgstr ""
 "Diesen AutoTimer aktivieren oder deaktivieren. Deaktivierte AutoTimer werden "
-"weiterhin in der Liste der verfügbaren AutoTimer geführt, so dass sie später "
-"wieder aktiviert werden können. In der Zwischenzeit nehmen Sie dann aber "
-"nichts auf. Darüberhinaus können Sie dies auch auf \"einmal\" setzen, so "
-"dass dieser AutoTimer nur die als nächstes übereinstimmende Sendung (eine "
+"weiterhin in der Liste der verfÃ¼gbaren AutoTimer gefÃ¼hrt, so dass sie spÃ¤ter "
+"wieder aktiviert werden kÃ¶nnen. In der Zwischenzeit nehmen Sie dann aber "
+"nichts auf. DarÃ¼berhinaus kÃ¶nnen Sie dies auch auf \"einmal\" setzen, so "
+"dass dieser AutoTimer nur die als nÃ¤chstes Ã¼bereinstimmende Sendung (eine "
 "einzige!) programmiert."
 
 #: ../template/default/help_at_timer_new.html:40
@@ -1429,23 +1443,23 @@ msgid ""
 "Blacklist-string) or only one episode (when using \"Enterprise~Azati Prime\" "
 "as Blacklist-string)."
 msgstr ""
-"Die Auswahl der richtigen Suchbegriffe entscheidet darüber ob nur die "
-"gewünschten Sendungen oder Sendungen mit ähnlichen Namen oder überhaupt "
-"nichts aufgenommen wird.<br />Groß-/Kleinschreibung spielt keine Rolle, d.h. "
-"\"Akte X\" findet das gleiche wie \"akte x\". Sie können mehrere "
-"Suchbegriffe durch Leerzeichen getrennt angeben. Diese müssen dann "
-"<strong>alle</strong> in den gewünschten Feldern der Sendung enthalten sein, "
+"Die Auswahl der richtigen Suchbegriffe entscheidet darÃ¼ber ob nur die "
+"gewÃ¼nschten Sendungen oder Sendungen mit Ã¤hnlichen Namen oder Ã¼berhaupt "
+"nichts aufgenommen wird.<br />GroÃŸ-/Kleinschreibung spielt keine Rolle, d.h. "
+"\"Akte X\" findet das gleiche wie \"akte x\". Sie kÃ¶nnen mehrere "
+"Suchbegriffe durch Leerzeichen getrennt angeben. Diese mÃ¼ssen dann "
+"<strong>alle</strong> in den gewÃ¼nschten Feldern der Sendung enthalten sein, "
 "um gefunden zu werden.<br />Es empfiehlt sich nur Buchstaben und Zahlen in "
 "den Suchbegriffen zu verwenden, da im EPG oft Doppelpunkte, Klammern und "
-"andere Zeichen fehlen.<br />Experten können auch \"regular expressions\" "
-"verwenden. Zu deren Einsatz müssen Sie jedoch einen Blick in den Quelltext "
-"von VDRAdmin werfen (nicht dokumentierte Funktion).<br /><br />Sie können "
-"auch Sendungen, die eigentlich passen würden, ausschliessen indem Sie diese "
-"Titel der Datei <i>vdradmind.bl</i> hinzufügen, pro Zeile eine Sendung. "
+"andere Zeichen fehlen.<br />Experten kÃ¶nnen auch \"regular expressions\" "
+"verwenden. Zu deren Einsatz mÃ¼ssen Sie jedoch einen Blick in den Quelltext "
+"von VDRAdmin werfen (nicht dokumentierte Funktion).<br /><br />Sie kÃ¶nnen "
+"auch Sendungen, die eigentlich passen wÃ¼rden, ausschliessen indem Sie diese "
+"Titel der Datei <i>vdradmind.bl</i> hinzufÃ¼gen, pro Zeile eine Sendung. "
 "Diese Datei muss sich im Konfigurationsverzeichnis von VDRAdmin befinden. "
 "Wenn eine Zeile entweder auf <u>title</u> oder <u>title~subtitle</u> aus dem "
-"EPG der Sendung paßt, so wird diese Sendung nicht automatisch programmiert. "
-"Somit können Sie eine komplette Serie (z.B. mit \"Enterprise\" als Blacklist-"
+"EPG der Sendung paÃŸt, so wird diese Sendung nicht automatisch programmiert. "
+"Somit kÃ¶nnen Sie eine komplette Serie (z.B. mit \"Enterprise\" als Blacklist-"
 "Eintrag) oder nur eine bestimmte Episode (z.B. \"Enterprise~Azati Prime\") "
 "ausschliessen."
 
@@ -1479,35 +1493,35 @@ msgid ""
 "known or wanted channels. You can define the wanted channels for AutoTimer "
 "in \"Configuration\"."
 msgstr ""
-"Der Sender, der auf übereinstimmende Sendungen durchsucht werden soll. Mit "
-"\"alle\" werden alle bekannten oder erwünschten Sender durchsucht. Die "
-"erwünschten Sender für den AutoTimer können auf der \"Konfiguration\" Seite "
+"Der Sender, der auf Ã¼bereinstimmende Sendungen durchsucht werden soll. Mit "
+"\"alle\" werden alle bekannten oder erwÃ¼nschten Sender durchsucht. Die "
+"erwÃ¼nschten Sender fÃ¼r den AutoTimer kÃ¶nnen auf der \"Konfiguration\" Seite "
 "eingestellt werden."
 
 #: ../template/default/help_at_timer_new.html:48
 #: ../template/default/at_timer_new.html:106
 msgid "Starts After:"
-msgstr "Beginnt frühestens:"
+msgstr "Beginnt frÃ¼hestens:"
 
 #: ../template/default/help_at_timer_new.html:49
 msgid ""
 "A broadcast must start after the time entered here to match. The first text "
 "field is for \"hour\", the second for \"minute\"."
 msgstr ""
-"Eine Sendung darf frühestens zu der hier eingestellten Uhrzeit beginnen. Das "
+"Eine Sendung darf frÃ¼hestens zu der hier eingestellten Uhrzeit beginnen. Das "
 "erste Textfeld gibt die Stunden, das zweite die Minuten an."
 
 #: ../template/default/help_at_timer_new.html:50
 #: ../template/default/at_timer_new.html:117
 msgid "Ends Before:"
-msgstr "Endet spätestens:"
+msgstr "Endet spÃ¤testens:"
 
 #: ../template/default/help_at_timer_new.html:51
 msgid ""
 "A broadcast must end before the time entered here to match. The first text "
 "field is for \"hour\", the second for \"minute\"."
 msgstr ""
-"Eine Sendung darf spätestens zu der hier eingestellten Uhrzeit aufhören. Das "
+"Eine Sendung darf spÃ¤testens zu der hier eingestellten Uhrzeit aufhÃ¶ren. Das "
 "erste Textfeld gibt die Stunden, das zweite die Minuten an."
 
 #: ../template/default/help_at_timer_new.html:56
@@ -1521,7 +1535,7 @@ msgid ""
 "to the recording's file name."
 msgstr ""
 "Aktivieren Sie diese Option, wenn Sie wollen, dass VDRAdmin den Untertitel "
-"der Sendung aus dem EPG an den Namen der Aufnahme anhängt."
+"der Sendung aus dem EPG an den Namen der Aufnahme anhÃ¤ngt."
 
 #: ../template/default/help_at_timer_new.html:58
 #: ../template/default/at_timer_new.html:152
@@ -1535,8 +1549,8 @@ msgid ""
 "have been programmed automatically in the timers listing."
 msgstr ""
 "Wenn Sie diese Option aktivieren merkt sich VDRAdmin die Timer, die er "
-"bereits automatisch programmiert hat. Dies ist nützlich, wenn automatisch "
-"programmierte Timer in der Timerliste deaktiviert oder gelöscht werden "
+"bereits automatisch programmiert hat. Dies ist nÃ¼tzlich, wenn automatisch "
+"programmierte Timer in der Timerliste deaktiviert oder gelÃ¶scht werden "
 "sollen."
 
 #: ../template/default/help_at_timer_new.html:60
@@ -1569,11 +1583,11 @@ msgid ""
 "resulting string."
 msgstr ""
 "Hier geben Sie das Verzeichnis an, in dem dieser AutoTimer die Aufnahmen "
-"ablegen soll. Sollen Unterverzeichnisse angegeben werden, dann müssen diese "
+"ablegen soll. Sollen Unterverzeichnisse angegeben werden, dann mÃ¼ssen diese "
 "mit '~' getrennt werden (da '/' auch Teil des Programmnamens sein kann).<br /"
-">VDRAdmin wird automatisch den Titel un den Untertitel (wenn das Häkchen bei "
-"\"Serie\" gesetzt ist) anhängen.<br /><br />Sie können auch die folgenden "
-"Schlüsselwörter verwenden, die dann im endgültigen Dateinamen mit den Werten "
+">VDRAdmin wird automatisch den Titel un den Untertitel (wenn das HÃ¤kchen bei "
+"\"Serie\" gesetzt ist) anhÃ¤ngen.<br /><br />Sie kÃ¶nnen auch die folgenden "
+"SchlÃ¼sselwÃ¶rter verwenden, die dann im endgÃ¼ltigen Dateinamen mit den Werten "
 "ersetzt werden, die z.B. von <a href=\"http://tvmovie2vdr.vdr-developer.org"
 "\">tvm2vdr</a> bereitgestellt wurden:<ul><li>%Title% - der Titel der Sendung."
 "</li><li>%Subtitle% - der Untertitel der Sendung.</li><li>%Director% - der "
@@ -1584,10 +1598,10 @@ msgstr ""
 "Originaltitle% - der Originaltitel der Sendung.</li><li>%FSK% - die FSK-"
 "Freigabe der Sendung.</li><li>%Episode% - der Titel der Episode einer Serie."
 "</li><li>%Rating% - die Bewertung der Sendung vom Bereitsteller des EPG.</"
-"li></ul><h4>Achtung:</h4>Wenn Sie die oben genannten Schlüsselwörter "
+"li></ul><h4>Achtung:</h4>Wenn Sie die oben genannten SchlÃ¼sselwÃ¶rter "
 "verwenden, liegt es in Ihrer Verantwortung den <strong>kompletten "
 "Dateinamen</strong> der Aufnahme anzugeben! VDRAdmin wird nichts mehr "
-"anhängen."
+"anhÃ¤ngen."
 
 #: ../template/default/help_rec_list.html:29
 msgid ""
@@ -1615,21 +1629,21 @@ msgid ""
 "\">Configuration</span> menu. You can watch the recording at your "
 "workstation.</dd></dl></p><p>In addition to these functions you can delete a "
 "number of recordings at once by checking the box in the last but one column "
-"of those recordings and clicking <span class=\"submit\">Delete Selected "
-"Recordings</span>.</p><p>If you've set the path the VDR's configuration "
-"files and have entries in VDR's <span class=\"ref_file\">reccmds.conf</span> "
-"you can run those commands for the selected recording by selecting the "
-"wanted command in the select box locate next to <span class=\"ref_label"
-"\">Commands:</span> and pressing the <span class=\"submit\">Run</span> "
-"button.</p>"
+"of those recordings and clicking <input type=\"submit\" class=\"submit\" "
+"value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the "
+"VDR's configuration files and have entries in VDR's <span class=\"ref_file"
+"\">reccmds.conf</span> you can run those commands for the selected recording "
+"by selecting the wanted command in the select box locate next to <span class="
+"\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class="
+"\"submit\" value=\"Run\"/> button.</p>"
 msgstr ""
 "<p>Hier sehen Sie eine Liste aller Aufnahmen, die auf dem VDR bereit stehen. "
-"In der Kopfzeile können Sie den gesamten und den freien Plattenplatz des VDR "
+"In der Kopfzeile kÃ¶nnen Sie den gesamten und den freien Plattenplatz des VDR "
 "ablesen.</p><p>Dies Liste zeigt Ihnen einige Informationen zu den Aufnahmen. "
-"Sie können die Sortierung ändern indem Sie auf die Spaltenüberschriften "
-"klicken. Über der Liste sehen Sie den Navigationspfad. Wenn Sie den Inhalt "
+"Sie kÃ¶nnen die Sortierung Ã¤ndern indem Sie auf die SpaltenÃ¼berschriften "
+"klicken. Ãœber der Liste sehen Sie den Navigationspfad. Wenn Sie den Inhalt "
 "eines zuvor besuchten Verzeichnisses sehen wollen, dann klicken Sie einfach "
-"auf den Namen des Verzeichnisses in diesem Pfad.</p><p>Jede Zeile enthält "
+"auf den Namen des Verzeichnisses in diesem Pfad.</p><p>Jede Zeile enthÃ¤lt "
 "folgende Information:<dl><dt>Datum</dt><dd>Das Datum an dem die Aufnahme "
 "stattgefunden hat. Im Falle eines Verzeichnisses wird hier die Anzahl der "
 "enthaltenen Aufnahmen angezeigt.</dd><dt>Uhrzeit</dt><dd>Die Uhrzeit zu der "
@@ -1641,24 +1655,24 @@ msgstr ""
 "alt=\"edit\" />)</dt><dd>Umbenennen einer Aufnahme.<br /><h4>Achtung:</"
 "h4>Dies funktioniert nur, wenn der VDR das <u>RENR</u> SVDRPort Kommando "
 "versteht. Dieses ist nicht im Standard-VDR enthalten sondern kann durch "
-"einen Patch hinzugefügt werden. <span class=\"ref_file\">vdr-"
+"einen Patch hinzugefÃ¼gt werden. <span class=\"ref_file\">vdr-"
 "aio21_svdrprename.patch</span> und <span class=\"ref_file\">enAIO-v2.2+</"
-"span> bieten dieses Kommando.</dd><dt>Löschen (<img src=\"bilder/delete.gif"
-"\" alt=\"delete\" />)</dt><dd>Löschen einer Aufnahme.</dd><dt>Streamen (<img "
+"span> bieten dieses Kommando.</dd><dt>LÃ¶schen (<img src=\"bilder/delete.gif"
+"\" alt=\"delete\" />)</dt><dd>LÃ¶schen einer Aufnahme.</dd><dt>Streamen (<img "
 "src=\"bilder/stream.jpg\" alt=\"stream\" />)</dt><dd>Diese Spalte wird nur "
 "angezeigt, wenn Sie auf der <span class=\"ref_menu\">Konfiguration</span> "
 "Seite <span class=\"ref_label\">Aufnahmen streamen</span> aktiviert und "
-"konfiguriert haben. Sie können dann die Aufnahme auf Ihrem PC anschauen.</"
-"dd></dl></p><p>Zusätzlich zu diesen Funktionen können Sie mehrere Aufnahmen "
-"auf einmal löschen, indem Sie ein Häkchen in der vorletzten Spalte dieser "
-"Aufnahmen setzen und dann die Schaltfläche <span class=\"submit"
-"\">Ausgewählte Aufnahmen löschen</span> anklicken.</p><p>Wenn Sie den Pfad "
-"zu den VDR Konfigurationsdateien eingestellt haben und es dort die Datei "
-"<span class=\"ref_file\">reccmds.conf</span> gibt, können Sie die darin "
-"enthaltenen Befehle für die ausgewählten Aufnahmen ausführen. Dazu wählen "
-"Sie den gewünschten Befehl in der Schaltfläche neben <span class=\"ref_label"
-"\">Befehle:</span> aus und klicken dann auf <span class=\"submit"
-"\">Ausführen</span>.</p>"
+"konfiguriert haben. Sie kÃ¶nnen dann die Aufnahme auf Ihrem PC anschauen.</"
+"dd></dl></p><p>ZusÃ¤tzlich zu diesen Funktionen kÃ¶nnen Sie mehrere Aufnahmen "
+"auf einmal lÃ¶schen, indem Sie ein HÃ¤kchen in der vorletzten Spalte dieser "
+"Aufnahmen setzen und dann die SchaltflÃ¤che <input type=\"submit\" class="
+"\"submit\" value=\"AusgewÃ¤hlte Aufnahmen lÃ¶schen\"/> anklicken.</p><p>Wenn "
+"Sie den Pfad zu den VDR Konfigurationsdateien eingestellt haben und es dort "
+"die Datei <span class=\"ref_file\">reccmds.conf</span> gibt, kÃ¶nnen Sie die "
+"darin enthaltenen Befehle fÃ¼r die ausgewÃ¤hlten Aufnahmen ausfÃ¼hren. Dazu "
+"wÃ¤hlen Sie den gewÃ¼nschten Befehl in der SchaltflÃ¤che neben <span class="
+"\"ref_label\">Befehle:</span> aus und klicken dann auf <input type=\"submit"
+"\" class=\"submit\" value=\"AusfÃ¼hren\"/>.</p>"
 
 #: ../template/default/at_timer_new.html:6
 #: ../template/default/at_timer_new.html:20
@@ -1694,51 +1708,60 @@ msgstr "Fernseher"
 msgid "Search"
 msgstr "Suchen"
 
-#: ../vdradmind.pl:251
+#: ../vdradmind.pl:265
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Wie lautet der Hostname des VDR (z.B. video.intra.net)?"
 
-#: ../vdradmind.pl:252
+#: ../vdradmind.pl:266
 msgid "On which port does VDR listen to SVDRP queries?"
-msgstr "Auf welchem Port hört der VDR auf SVDRP-Anfragen?"
+msgstr "Auf welchem Port hÃ¶rt der VDR auf SVDRP-Anfragen?"
 
-#: ../vdradmind.pl:253
+#: ../vdradmind.pl:267
 msgid "On which address should VDRAdmin listen (0.0.0.0 for any)?"
 msgstr ""
-"An welcher Adresse soll VDRAdmin auf Verbindungen warten (0.0.0.0 für alle)?"
+"An welcher Adresse soll VDRAdmin auf Verbindungen warten (0.0.0.0 fÃ¼r alle)?"
 
-#: ../vdradmind.pl:254
+#: ../vdradmind.pl:268
 msgid "On which port should VDRAdmin listen?"
-msgstr "Auf welchem Port soll VDRAdmin hören?"
+msgstr "Auf welchem Port soll VDRAdmin hÃ¶ren?"
 
-#: ../vdradmind.pl:255
+#: ../vdradmind.pl:269
 msgid "Username?"
 msgstr "Benutzername?"
 
-#: ../vdradmind.pl:256
+#: ../vdradmind.pl:270
 msgid "Password?"
 msgstr "Passwort?"
 
-#: ../vdradmind.pl:257
+#: ../vdradmind.pl:271
 msgid "Where are your recordings stored?"
 msgstr "Wo befinden sich die Aufnahmen?"
 
-#: ../vdradmind.pl:258
+#: ../vdradmind.pl:272
 msgid "Where are your VDR's configuration files located?"
 msgstr "Wo befinden sich die Konfigurationsdateien des VDR?"
 
-#: ../vdradmind.pl:264
+#: ../vdradmind.pl:278
 msgid "Config file written successfully."
 msgstr "Konfigurationsdatei wurde erfolgreich geschrieben."
 
-#: ../vdradmind.pl:312
+#: ../vdradmind.pl:326
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
-msgstr "vdradmind.pl %s wurde mit der Prozeß-ID %d gestartet."
+msgstr "vdradmind.pl %s wurde mit der ProzeÃŸ-ID %d gestartet."
+
+#: ../vdradmind.pl:2432
+msgid "Playing Tomorrow"
+msgstr "Was lÃ¤uft morgen"
+
+#: ../vdradmind.pl:2432
+#, perl-format
+msgid "Playing on the %d."
+msgstr "Was lÃ¤uft am %d."
 
 #: ../template/i18n.pl:3
 msgid "Playing Today?"
-msgstr "Was läuft heute?"
+msgstr "Was lÃ¤uft heute?"
 
 #: ../template/i18n.pl:6
 msgid "Timers"
@@ -1773,7 +1796,7 @@ msgstr "Zugriff auf Datei \"%s\" verweigert!"
 #: ../template/i18n.pl:17
 #, perl-format
 msgid "Can't open file \"%s\"!"
-msgstr "Kann Datei \"%s\" nicht öffnen!"
+msgstr "Kann Datei \"%s\" nicht Ã¶ffnen!"
 
 #: ../template/i18n.pl:18
 #, perl-format
@@ -1787,17 +1810,20 @@ msgstr "Fehler beim Senden eines Kommandos zu %s"
 
 #: ../template/i18n.pl:23
 msgid "Schedule"
-msgstr "Übersicht"
+msgstr "Ãœbersicht"
+
+#~ msgid "In \"Channels\" / \"Playing Today\"?"
+#~ msgstr "Bei \"ProgrammÃ¼bersicht\" / \"Was lÃ¤uft heute\"?"
 
 #~ msgid ""
 #~ "Change the number of columns displayed in <span class=\"ref_menu\">What's "
 #~ "On Now</span> with this option."
 #~ msgstr ""
 #~ "Hier kann die Anzahl der Spalten, die bei <span class=\"ref_menu\">Was "
-#~ "läuft jetzt</span> angezeigt werden, eingestellt werden."
+#~ "lÃ¤uft jetzt</span> angezeigt werden, eingestellt werden."
 
 #~ msgid "Number of columns in \"What's On Now\":"
-#~ msgstr "Anzahl der Spalten bei \"Was läuft jetzt\"?"
+#~ msgstr "Anzahl der Spalten bei \"Was lÃ¤uft jetzt\"?"
 
 #~ msgid "more"
 #~ msgstr "mehr"

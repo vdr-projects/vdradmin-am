@@ -4,6 +4,23 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2005-09-23: 0.97-am3.4
+- Send valid "Expires" header (Submitted by Ville Skyttä).
+- Open failure of vdradmind.done reported wrong filename (Submitted by Ville Skyttä).
+- Deliver validated HTML (Reported by Ville Skyttä).
+- Display name of recordings/timers... that will be deleted (Requested by Richard Lithvall).
+- Channels list in AutoTimer only shows selected channels if selective channels are active for AT.
+- Added "chmod" for grabbed images of TV so that everyone can read/write the file (Submitted by Udo Richter).
+- Added "-d" argument to set the configuration folder (Submitted by Rene Bredlau).
+- Fixed handling for recording on February, 29th for VDR >=1.3.26 (Submitted by Rene Bredlau).
+- Alternativly use Locale::Messages if Locale::gettext not found (Submitted by Ville Skyttä).
+- Fixed "send command" error message (Submitted by Ville Skyttä).
+- Display free disk size as float instead of integer (Submitted by Hardy Flor).
+- Step forward/backward a day in "Playing today" (Requested by Tüddelkopp)
+- Enable/disable selective channels in "Playing today" (Requested by Reiner Buehl)
+- Added images in prog_detail; needs external tool that provides these images; must be configured first! (Requested by several people)
+- Fixed display of login page (Reported by DrSat)
+
 2005-07-12: 0.97-am3.3
 - Fixed problems with "$" in templates (Reported by All-Ex).
 - Updated all help messages.

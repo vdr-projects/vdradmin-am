@@ -7,7 +7,7 @@
     $ cd vdradmin-VERSION
 
 2)  If you want to run VDRAdmin using a language other than set on
-    our system, then before running it you have to issue:
+    your system, then before running it you have to issue:
     $ export LANG="<language code>"
 
     Where <language code> has to be one of: de_DE, es_ES, fi_FI or fr_FR
@@ -17,8 +17,8 @@
     the missing Perl modules:
     $ ./install.sh -p
 
-4)  Now you have to deside wether you want to run VDRAdmin locally (3a)
-    in this directory or install it into your system (3b).
+4)  Now you have to deside wether you want to run VDRAdmin locally (4a)
+    in this directory or install it into your system (4b).
 
 4a) run locally (=no installation)
     First you have to configure VDRAdmin. This only has to be done once.

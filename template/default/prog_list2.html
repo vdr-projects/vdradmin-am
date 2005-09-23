@@ -25,17 +25,19 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_left"></td>
-				<td class="col_title"><h1><%! Playing Today !%></h1></td>
-<!-- TODO: really need this?
-				<td class="col_other"><%! Channel: !%>&nbsp;
-					<select name="vdr_id" class="submit" onchange="window.open('<tmpl_var url>?aktion=prog_list&vdr_id=' + this.options[this.selectedIndex].value,'main')">
-<tmpl_loop chanloop>
-						<option value="<tmpl_var vdr_id>" <tmpl_if current>selected</tmpl_if>><tmpl_var name></option>
-</tmpl_loop>
-					</select>&nbsp;<input type="submit" name="submit" value="<%! Go! !%>" />
-					<a href="javascript:toolbar('<tmpl_var toolbarurl>');" target="toolbar"><img src="bilder/spacer.gif" border="0" /></a>
+				<td class="col_title"><h1><tmpl_var title></h1></td>
+				<td class="col_other">
+					<tmpl_if prevdayurl>
+						<a href="<tmpl_var prevdayurl>"><img src="bilder/pfeile_nachlinks.gif" border="0" width="28" height="17" /></a>
+					<tmpl_else>
+						<img src="bilder/pfeile_nachlinks_soft.gif" border="0" width="28" height="17" />
+					</tmpl_if>
+					<tmpl_if nextdayurl>
+						<a href="<tmpl_var nextdayurl>"><img src="bilder/pfeile_nachrechts.gif" border="0" width="29" height="17" /></a>
+					<tmpl_else>
+						<img src="bilder/pfeile_nachrechts_soft.gif" border="0" width="29" height="17" />
+					</tmpl_if>
 				</td>
--->
 				<td class="col_right"></td>
 			</tr>
 		</table>
@@ -64,12 +66,17 @@
 	<tmpl_else>
 		<tmpl_unless endd>
 			<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
-				<td class="col_left"><a name="<tmpl_var anchor>">&nbsp;</a></td>
+				<td class="col_left"><a id="<tmpl_var anchor>" name="<tmpl_var anchor>">&nbsp;</a></td>
 				<td class="col_duration">
 					<tmpl_var emit> - <tmpl_var duration>
 				</td>
 				<td class="col_title">
-					<h3><tmpl_var title></h3><tmpl_unless subtitle><br /></tmpl_unless><h4><tmpl_var subtitle></h4>
+					<h3><tmpl_var title></h3>
+					<tmpl_if subtitle>
+						<h4><tmpl_var subtitle></h4>
+					<tmpl_else>
+						<br />
+					</tmpl_if>
 				</td>
 				<td class="col_info">
 					<tmpl_if infurl><a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info_button.gif" border="0" /></a><tmpl_else><img src="bilder/info_button_disabled.gif" border="0" /></tmpl_if>

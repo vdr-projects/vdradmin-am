@@ -15,10 +15,14 @@
 </head>
 
 <body id="config">
+<form onsubmit="return false;">
+	<input type="hidden" name="aktion" value="show_help"/>
+	<input type="hidden" name="area" value="<tmpl_var area>"/>
+
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="help" class="group">
 		<tr class="heading">
 			<td class="col_left"></td>
-			<td><h2><a name="top"></a><%! Configuration !%></h2></td>
+			<td><h2><a id="top" name="top"></a><%! Configuration !%></h2></td>
 			<td class="col_right"></td>
 		</tr>
 		<tr class="row_spacer">
@@ -33,7 +37,7 @@
 				<div class="links">
 					[<a href="#general"><%! General Settings !%></a>] [<a href="#vdr"><%! VDR !%></a>] [<a href="#identification"><%! Identification !%></a>] [<a href="#timeline"><%! Timeline !%></a>] [<a href="#autotimer"><%! AutoTimer !%></a>] [<a href="#timer"><%! Timer !%></a>] [<a href="#streaming"><%! Streaming !%></a>] [<a href="#expert"><%! Expert !%></a>] [<a href="#channels"><%! Channel Selections !%></a>]
 				</div>
-				<div class="group"><a name="general"></a><h3><%! General Settings !%></h3>
+				<div class="group"><a id="general" name="general"></a><h3><%! General Settings !%></h3>
 					<dl>
 						<dt><%! Skin: !%></dt>
 						<dd><%! The skin you want to use. !%></dd>
@@ -47,7 +51,7 @@
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
 
-				<div class="group"><a name="vdr"></a><h3><%! VDR !%></h3>
+				<div class="group"><a id="vdr" name="vdr"></a><h3><%! VDR !%></h3>
 					<dl>
 						<dt><%! Number of DVB cards: !%></dt>
 						<dd><%! The number of DVB cards VDR can access. Depending on this value VDRAdmin will calculate critical timers in the <span class="ref_menu">Timer</span> menu. !%></dd>
@@ -55,11 +59,13 @@
 						<dd><%! The path to VDR's recordings. It's used so that VDRAdmin can locate the recordings when using <span class="ref_label">Recordings Streaming</span> and <span class="ref_file">reccmds.conf</span> in the <span class="ref_menu">Recordings</span> menu. !%></dd>
 						<dt><%! Path to configuration files: !%></dt>
 						<dd><%! The path where VDR's configuration files are located. If this directory contains the file <span class="ref_file">reccmds.conf</span> its content is shown in a selectbox in the <span class="ref_menu">Recordings</span> menu. !%></dd>
+						<dt><%! Path to EPG images: !%></dt>
+						<dd><%! The path where the EPG images are stored. !%></dd>
 					</dl>
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
 
-				<div class="group"><a name="identification"></a><h3><%! Identification !%></h3>
+				<div class="group"><a id="identification" name="identification"></a><h3><%! Identification !%></h3>
 					<dl>
 						<dt><%! Username: !%></dt>
 						<dd><%! The username for the main user, i.e. the user having the most privileges. !%></dd>
@@ -75,7 +81,7 @@
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
 
-				<div class="group"><a name="timeline"></a><h3><%! Timeline !%></h3>
+				<div class="group"><a id="timeline" name="timeline"></a><h3><%! Timeline !%></h3>
 					<dl>
 						<dt><%! Hours: !%></dt>
 						<dd><%! The number of hours to show in the timeline. !%></dd>
@@ -85,7 +91,7 @@
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
 
-				<div class="group"><a name="autotimer"></a><h3><%! AutoTimer !%></h3>
+				<div class="group"><a id="autotimer" name="autotimer"></a><h3><%! AutoTimer !%></h3>
 					<dl>
 						<dt><%! Active: !%></dt>
 						<dd><%! Activate or deactivate the AutoTimer function. !%></dd>
@@ -99,7 +105,7 @@
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
 
-				<div class="group"><a name="timer"></a><h3><%! Timer !%></h3>
+				<div class="group"><a id="timer" name="timer"></a><h3><%! Timer !%></h3>
 					<dl>
 						<dt><%! Priority: !%></dt>
 						<dd><%! An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording. !%></dd>
@@ -113,7 +119,7 @@
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
 
-				<div class="group"><a name="streaming"></a><h3><%! Streaming !%></h3>
+				<div class="group"><a id="streaming" name="streaming"></a><h3><%! Streaming !%></h3>
 					<dl>
 						<dt><%! Live Streaming: !%></dt>
 						<dd><%! Enable or disable live streaming using the <a href="http://www.magoa.net/linux/">streamdev plugin</a>. You also have to set the correct <span class="ref_label">HTTP Port for Streamdev</span> below. !%></dd>
@@ -127,7 +133,7 @@
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
 
-				<div class="group"><a name="expert"></a><h3><%! Expert !%></h3>
+				<div class="group"><a id="expert" name="expert"></a><h3><%! Expert !%></h3>
 					<%! <p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p> !%>
 					<dl>
 						<dt><%! Read EPG directly using epg.data: !%></dt>
@@ -140,10 +146,10 @@
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
 
-				<div class="group"><a name="channels"></a><h3><%! Channel Selections !%></h3>
+				<div class="group"><a id="channels" name="channels"></a><h3><%! Channel Selections !%></h3>
 					<%! <p>If you want to limit the number of channels used in some parts of VDRAdmin, this is for you!</p>
 					<p>Use the radio buttons to activate or deactivate the wanted channels in the named menu.</p>
-					<p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click <span class="submit">&gt;&gt;&gt;&gt;&gt;</span>. If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click <span class="submit">&lt;&lt;&lt;&lt;&lt;</span>.</p> !%>
+					<p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click <input type="submit" class="submit" value="&gt;&gt;&gt;&gt;&gt;"/>. If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click <input type="submit" class="submit" value="&lt;&lt;&lt;&lt;&lt;"/>.</p> !%>
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
 			</td>
@@ -155,6 +161,7 @@
 			<td class="col_right"></td>
 		</tr>
 	</table>
+</form>
 </body>
 
 </html>

@@ -52,7 +52,7 @@
 		#bigtable { position:absolute; top:100px; left: <?% left %?>px; z-index: 1; }
 	</style>
 
-	<script language="JavaScript">
+	<script type="text/javascript" language="JavaScript">
 		function Go(x) {
 			if(x =="nothing") {
 				document.forms[0].reset();
@@ -96,7 +96,7 @@
 						<option value="<?% nowurl %?>"><%! now !%></option>
 <?% FOREACH timer = times %?>
 	<?% timer_o_dopp = timer | replace('\:', '') %?>
-						<option value="<?% nowurl %?>&time=<?% timer_o_dopp %?>" <?% "selected" IF now == timer %?>><?% timer %?></option>
+						<option value="<?% nowurl %?>&amp;time=<?% timer_o_dopp %?>" <?% "selected" IF now == timer %?>><?% timer %?></option>
 <?% END %?>
 					</select>
 					&nbsp;|&nbsp;<%! at: !%>&nbsp;
@@ -117,7 +117,7 @@
 				<tr class="heading">
 					<td class="col_left"></td>
 					<td colspan="3" width='<?% breite + seite %?>'><h2><%! Timeline: !%>&nbsp;<?% date.format(akt_sekunde, '%H:%M') %?>&nbsp;<%! o'clock !%>&nbsp;<%! to !%>&nbsp;<?% date.format(bis_sec, '%H:%M') %?>&nbsp;<%! o'clock !%></h2></td>
-					<td class="col_navi"><?% IF akt_stunde <= jetzt_stunde %?><img src="bilder/pfeile_nachlinks_soft.gif" border="0" width="28" height="17" /><?% ELSE %?><a href="<?% nowurl %?>&time=<?% akt_stunde - zeitrahmen | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachlinks.gif" border="0" width="28" height="17" /></a><?% END %?><a href="<?% nowurl %?>&time=<?% bis_stunde | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachrechts.gif" border="0" width="29" height="17" /></a></td>
+					<td class="col_navi"><?% IF akt_stunde <= jetzt_stunde %?><img src="bilder/pfeile_nachlinks_soft.gif" border="0" width="28" height="17" /><?% ELSE %?><a href="<?% nowurl %?>&amp;time=<?% akt_stunde - zeitrahmen | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachlinks.gif" border="0" width="28" height="17" /></a><?% END %?><a href="<?% nowurl %?>&amp;time=<?% bis_stunde | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachrechts.gif" border="0" width="29" height="17" /></a></td>
 					<td class="col_right"></td>
 				</tr>
 				<tr class="row_spacer">
@@ -219,7 +219,7 @@
 											<td width="1" class="<?% td_class %?>" onMouseOver="tip('VDR-<?% show.vdr_id %?>-<?% counter %?>'); return true;" onMouseOut="untip(); return true;">
 												<img src="bilder/spacer.gif" width="<?% laenge_pix %?>" height="1" border="0" hspace="0" /><br />
 												<nobr>
-													<?% IF show.summary %?><a href="javascript:popup('./vdradmin.pl?aktion=prog_detail&epg_id=<?% show.anchor %?>&vdr_id=<?% show.vdr_id %?>');"><?% END %?>
+													<?% IF show.summary %?><a href="javascript:popup('./vdradmin.pl?aktion=prog_detail&amp;epg_id=<?% show.anchor %?>&amp;vdr_id=<?% show.vdr_id %?>');"><?% END %?>
 													<?% IF laenge_chars > 2 %?>
 														<?% show.title | truncate( laenge_chars ) %?>
 													<?% ELSE %?>

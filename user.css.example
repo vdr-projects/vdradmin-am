@@ -1,17 +1,17 @@
 /* The user.css is mainly an example to demonstrate the possibilities */
 
 /* don't want background images */
-td, .heading td, .footer td, .heading td[selected], .footer td[selected], #prog_summary .heading td, #prog_summary .footer td, .row_even td[selected], .row_even td, .row_odd td[selected], .row_odd td { background-image: none; background-repeat: no-repeat; }
+td, .heading td, .footer td, .heading td.selected, .footer td.selected, #prog_summary .heading td, #prog_summary .footer td, .row_even td.selected, .row_even td, .row_odd td.selected, .row_odd td { background-image: none; background-repeat: no-repeat; }
 tr { height: 17px; }
 .heading { height: 17px; }
-.row_spacer, .row_spacer td, .row_spacer td[selected], .footer, .footer td, .footer td[selected], .col_left, .col_right { display: none; }
+.row_spacer, .row_spacer td, .row_spacer td.selected, .footer, .footer td, .footer td.selected, .col_left, .col_right { display: none; }
 
 tr.heading { height: 17px; }
-.heading td[selected] { background-color: #aab0aa; height: 17px; }
+.heading td.selected { background-color: #aab0aa; height: 17px; }
 .heading td { background-color: #838183; height: 17px; }
-.row_even td[selected] { background-color: #dee6f6; }
+.row_even td.selected { background-color: #dee6f6; }
 .row_even td { background-color: #eeeeff; }
-.row_odd td[selected] { background-color: #d5def6; }
+.row_odd td.selected { background-color: #d5def6; }
 .row_odd td { background-color: #f6faff; }
 
 td.col_navi { text-align: right; background-color: #f6faff; white-space: nowrap; height: 17px; }
@@ -30,7 +30,6 @@ td.col_navi { text-align: right; background-color: #f6faff; white-space: nowrap;
 /* Dirty hack, must find other solution */
 td[bgcolor] { background-color: black; }
 
-.gbutton { border: 1px solid black; padding: 5px 10px 2px 10px; height: 20px; background-color: #eeeeff; border-radius: 10px; -moz-border-radius: 10px; }
 #prog_summary .heading a { font-weight: bold; font-style: italic; letter-spacing: 0.1em; color: white; padding: 2px 2px; }
 #prog_summary .group { margin: 3px; display: inline; float: left; }
 #prog_summary tr.footer { display: table-row; background-image: none; background-color: #f6faff; margin: 0px; padding: 0px; }

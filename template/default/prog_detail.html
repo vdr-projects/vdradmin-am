@@ -34,14 +34,20 @@
 				</tmpl_if>
 				<br />
 				<tmpl_var text><br /><br />
+				<tmpl_if epgimages>
+					<tmpl_loop epgimages>
+						<img src="<tmpl_var image>"/>
+					</tmpl_loop>
+					<br /><br />
+				</tmpl_if>
 				&nbsp;<a href="javascript:window.close()">[<%! close !%>]</a>
 				<tmpl_if date>
 					&nbsp;<a href="javascript:callurl('<tmpl_var switchurl>')">[<%! view !%>]</a>
 					&nbsp;<a href="javascript:window.close();opener.location.href='<tmpl_var recurl>'">[<%! record !%>]</a>
-					&nbsp;<a href="vdradmin.pl?search=<tmpl_var title>&aktion=prog_summary&submit=go11)"  target="main">[<%! search !%>]</a>
+					&nbsp;<a href="vdradmin.pl?search=<tmpl_var find_title>&amp;aktion=prog_summary&amp;submit=go11)"  target="main">[<%! search !%>]</a>
 				</tmpl_if>
-				<tmpl_if title>
-					&nbsp;<a href="http://akas.imdb.com/Tsearch?title=<tmpl_var	title>" target="_blank" title="<%! Lookup movie in the Internet-Movie-Database (IMDb) !%>">[IMDb]</a>
+				<tmpl_if imdburl>
+					&nbsp;<a href="http://akas.imdb.com/Tsearch?title=<tmpl_var find_title>" target="_blank" title="<%! Lookup movie in the Internet-Movie-Database (IMDb) !%>">[IMDb]</a>
 				</tmpl_if>
 			</td>
 			<td class="col_right"></td>

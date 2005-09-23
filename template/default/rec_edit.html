@@ -25,7 +25,7 @@
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
 			<tr class="heading">
-				<td class="col_left"/td>
+				<td class="col_left"</td>
 				<td colspan="2"></td>
 				<td class="col_right"></td>
 			</tr>
@@ -37,13 +37,13 @@
 			<tr class="row_odd">
 				<td class="col_left"></td>
 				<td class="col_label"><h5><%! Original Name of Recording: !%></h5></td>
-				<td class="col_value"><input type="text" name="title" value="<tmpl_var title>" size="55" readonly /></td>
+				<td class="col_value"><input type="text" name="title" value="<tmpl_var title escape="HTML">" size="55" readonly /></td>
 				<td class="col_right"></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_left"></td>
 				<td class="col_label"><h5><%! New Name of Recording: !%></h5></td>
-				<td class="col_value"><input type="text" name="nn" value="<tmpl_var title>" size="55" /></td>
+				<td class="col_value"><input type="text" name="nn" value="<tmpl_var title escape="HTML">" size="55" /></td>
 				<td class="col_right"></td>
 			</tr>
 			<tr class="footer">

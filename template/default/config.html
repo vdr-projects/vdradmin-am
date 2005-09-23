@@ -127,6 +127,12 @@
 							<td class="col_value"><input type="text" name="VDRCONFDIR" value="<tmpl_var VDRCONFDIR>" size="20" maxlength="256" /></td>
 							<td class="col_right"></td>
 						</tr>
+						<tr class="row_even">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! Path to EPG images: !%></h5></td>
+							<td class="col_value"><input type="text" name="EPGIMAGES" value="<tmpl_var EPGIMAGES>" size="20" maxlength="256" /></td>
+							<td class="col_right"></td>
+						</tr>
 						<tr class="footer">
 							<td class="col_left"></td>
 							<td colspan="2"></td>
@@ -450,7 +456,7 @@
 						</tr>
 						<tr class="row_even">
 							<td class="col_left"></td>
-							<td class="col_label"><h5><%! In "Channels" / "Playing Today"? !%></h5></td>
+							<td class="col_label"><h5><%! In "Channels"? !%></h5></td>
 							<td class="col_value" colspan="2">
 								<input type="radio" name="CHANNELS_WANTED_PRG" value="1" id="prg_yes" <tmpl_if CHANNELS_WANTED_PRG>checked</tmpl_if> /><label for="prg_yes"><%! Yes !%></label>
 								<input type="radio" name="CHANNELS_WANTED_PRG" value="0" id="prg_no"<tmpl_unless CHANNELS_WANTED_PRG>checked</tmpl_unless> /><label for="prg_no"><%! No !%> </label>
@@ -459,6 +465,15 @@
 						</tr>
 						<tr class="row_odd">
 							<td class="col_left"></td>
+							<td class="col_label"><h5><%! In "Playing Today"? !%></h5></td>
+							<td class="col_value" colspan="2">
+								<input type="radio" name="CHANNELS_WANTED_PRG2" value="1" id="prg2_yes" <tmpl_if CHANNELS_WANTED_PRG2>checked</tmpl_if> /><label for="prg2_yes"><%! Yes !%></label>
+								<input type="radio" name="CHANNELS_WANTED_PRG2" value="0" id="prg2_no"<tmpl_unless CHANNELS_WANTED_PRG2>checked</tmpl_unless> /><label for="prg2_no"><%! No !%> </label>
+							</td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_even">
+							<td class="col_left"></td>
 							<td class="col_label"><h5><%! In "What's On Now"? !%></h5></td>
 							<td class="col_value" colspan="2">
 								<input type="radio" name="CHANNELS_WANTED_SUMMARY" value="1" id="sum_yes" <tmpl_if CHANNELS_WANTED_SUMMARY>checked</tmpl_if> /><label for="sum_yes"><%! Yes !%></label>
@@ -466,16 +481,16 @@
 							</td>
 							<td class="col_right"></td>
 						</tr>
-						<tr class="row_even">
+						<tr class="row_odd">
 							<td class="col_left"></td>
-							<td class="col_label"><h5><%! In "AutoTimer"? !%><h5></td>
+							<td class="col_label"><h5><%! In "AutoTimer"? !%></h5></td>
 							<td class="col_value" colspan="2">
 								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="1" id="wat_yes" <tmpl_if CHANNELS_WANTED_AUTOTIMER>checked</tmpl_if> /><label for="wat_yes"><%! Yes !%></label>
 								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="0" id="wat_no" <tmpl_unless CHANNELS_WANTED_AUTOTIMER>checked</tmpl_unless> /><label for="wat_no"><%! No !%></label>
 							</td>
 							<td class="col_right"></td>
 						</tr>
-						<tr class="row_odd">
+						<tr class="row_even">
 							<td class="col_left"></td>
 							<td class="col_channels">
 								<select name="all_channels" size="8" multiple>
