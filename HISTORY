@@ -4,6 +4,17 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2005-10-04: 0.97-am3.4.1
+- Fixed some bugs:
+  -> Selected channel is remembered when editing AutoTimers (Reported by Scorp).
+  -> Recording streaming didn't work in some cases (Reported by several people @vdr-portal.de).
+  -> Recording commands didn't work in some cases (Reported by several people @vdr-portal.de).
+  -> Watch TV and remote control didn't work (Reported by several people @vdr-portal.de).
+	-> INFO button in prog_list2 didn't work.
+	-> Getting back from timer_new to prog_summary/prog_list/prog_list2 again scrolls to line with previously selected item (Reported by Scorp).
+- Updated translations
+- Fixed some more HTMLtidy warnings.
+
 2005-09-23: 0.97-am3.4
 - Send valid "Expires" header (Submitted by Ville Skyttä).
 - Open failure of vdradmind.done reported wrong filename (Submitted by Ville Skyttä).

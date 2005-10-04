@@ -495,7 +495,7 @@
 							<td class="col_channels">
 								<select name="all_channels" size="8" multiple>
 <tmpl_loop name="ALL_CHANNELS">
-									<option value="<tmpl_var vdr_id>"><tmpl_var name></option>
+									<option value="<tmpl_var vdr_id>"><tmpl_var name escape="html"></option>
 </tmpl_loop>
 								</select>
 							</td>
@@ -506,7 +506,7 @@
 							<td class="col_wanted_channels">
 								<select name="selected_channels" size="8" multiple>
 <tmpl_loop name="SELECTED_CHANNELS">
-									<option value="<tmpl_var vdr_id>"><tmpl_var name></option>
+									<option value="<tmpl_var vdr_id>"><tmpl_var name escape="html"></option>
 </tmpl_loop>
 								</select>
 							</td>

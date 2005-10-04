@@ -151,7 +151,7 @@ $CONFIG{CHANNELS_WANTED_SUMMARY}   = "";
 #
 $CONFIG{PROG_SUMMARY_COLS} = 3;
 
-my $VERSION               = "0.97-am3.4";
+my $VERSION               = "0.97-am3.4.1";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0;
@@ -1966,7 +1966,7 @@ sub access_log {
 	return sprintf("%s - %s [%s +0100] \"%s\" %s %s \"%s\" \"%s\"",
 		$ip,
 		$username,
-		my_strftime("%d/%b/%Y:%H:%M:%S", $time),	#TODO
+		my_strftime("%d/%b/%Y:%H:%M:%S", $time),
 		$rawrequest,
 		$http_status,
 		$bytes_transfered,
@@ -2174,12 +2174,12 @@ sub prog_detail {
 		for(@{$EPG{$vdr_id}}) {
 			#if($_->{id} == $epg_id) { #XXX
       if($_->{event_id} == $epg_id) {
-				$channel_name = $_->{channel_name};
-				$title        = $_->{title};
-				$subtitle     = $_->{subtitle};
+				$channel_name = CGI::escapeHTML($_->{channel_name});
+				$title        = CGI::escapeHTML($_->{title});
+				$subtitle     = CGI::escapeHTML($_->{subtitle});
 				$start        = my_strftime("%H:%M", $_->{start});
 				$stop         = my_strftime("%H:%M", $_->{stop});
-				$text         = $_->{summary};
+				$text         = CGI::escapeHTML($_->{summary});
 				$date         = my_strftime("%A, %x", $_->{start});
 
 				# find epgimages
@@ -2488,6 +2488,7 @@ sub timer_list {
 		$timer->{dor} = my_strftime("%a %d.%m", $timer->{startsse}); #TODO
 
 		$timer->{title} =~ s/"/\&quot;/g;
+		$timer->{title} = CGI::escapeHTML($timer->{title});
     $TagAnfang=my_mktime(0,0,my_strftime("%d", $timer->{start}),my_strftime("%m", $timer->{start}),my_strftime("%Y", $timer->{start}));
     $TagEnde=my_mktime(0,0,my_strftime("%d", $timer->{stop}),my_strftime("%m", $timer->{stop}),my_strftime("%Y", $timer->{stop}));
 
@@ -2768,9 +2769,9 @@ sub timer_new_form {
   my $ref;
   if(defined($epg_id)) {
     if($Referer =~ /(.*)\#\d+$/) {
-      $ref = sprintf("%s#%s", $1, $epg_id);
+      $ref = sprintf("%s#id%s", $1, $epg_id);
     } else {
-      $ref = sprintf("%s#%s", $Referer, $epg_id);
+      $ref = sprintf("%s#id%s", $Referer, $epg_id);
     }
   }
   
@@ -2981,7 +2982,7 @@ sub rec_stream {
       if( $CONFIG{VDRVFAT} > 0 ) {
           for ( $i=0 ;$ i < length($title); $i++) {
               $c = substr($title,$i,1);
-       unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&()+,.\-;=~]/) {
+       unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&()+,.\-;=~ ]/) {
            $newtitle.= sprintf( "#%02X", ord( $c ));
        } else {
            $newtitle.= $c;
@@ -3061,6 +3062,7 @@ sub at_timer_list {
       $_->{stop} = substr($_->{stop}, 0, 2) . ":" . substr($_->{stop}, 2, 5);
     }
     $_->{pattern} =~ s/"/\&quot;/g;
+    $_->{pattern} = CGI::escapeHTML($_->{pattern});
     $_->{modurl} = $MyURL . "?aktion=at_timer_edit&amp;id=$id";
     $_->{delurl} = $MyURL . "?aktion=at_timer_delete&amp;id=$id";
     $_->{prio} = $_->{prio} ? $_->{prio} : $CONFIG{AT_PRIORITY};
@@ -3171,11 +3173,10 @@ sub at_timer_edit {
   			($found = 1) if($n eq $chan->{vdr_id});
   		}
   		next if(!$found);
+    	if($chan->{vdr_id}) {
+ 	    	$chan->{cur} = ($chan->{vdr_id} == $at[$id-1]->{channel}) ? 1 : 0;
+			}
    	  push(@chans, $chan);
-#    if($chan->{vdr_id}) {
-# 	    $chan->{cur} = ($chan->{vdr_id} == $at[$id-1]->{channel}) ? 1 : 0;
-#   	  push(@chans, $chan);
-#   	}
     }
   }
 
@@ -3451,7 +3452,7 @@ sub prog_timeline {
         switchurl=> sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $event->{vdr_id}),
         infurl   => ($event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}) : undef),
         recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
-        anchor   => "id" . $event->{event_id},
+        anchor   => $event->{event_id},
         timer    => ( defined $TIM->{ $event->{title} } && $TIM->{ $event->{title} }->{vdr_id} == $event->{vdr_id} ? 1 : 0 ),
       });
     }
@@ -3566,7 +3567,6 @@ sub prog_summary {
 			$displaytitle =~ s/\|/<br \/>\n/g;
 			$displaysubtitle =~ s/\n/<br \/>\n/g;
 			$displaysubtitle =~ s/\|/<br \/>\n/g;
-
       push(@show,  {
 				date           => my_strftime("%x", $event->{start}),
 				longdate       => my_strftime("%A, %x", $event->{start}),
@@ -3574,7 +3574,7 @@ sub prog_summary {
 				stop           => my_strftime("%H:%M", $event->{stop}),
 				title          => $displaytitle,
 				subtitle       => $displaysubtitle,
-				progname       => $event->{channel_name},
+				progname       => CGI::escapeHTML($event->{channel_name}),
 				summary        => $displaytext,
 				vdr_id         => $event->{vdr_id},
 				proglink       => sprintf("%s?aktion=prog_list&amp;vdr_id=%s", $MyURL, $event->{vdr_id}),
@@ -3585,29 +3585,29 @@ sub prog_summary {
 				recurl         => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
 				find_title     => uri_escape($event->{title}),
         anchor         => "id" . $event->{event_id}
-      });
-      last if(!$search);
-    }
-  }
+				});
+				last if(!$search);
+			}
+		}
 
-	# needed for vdr 1.0.x, dunno why
-  @show = sort({ $a->{vdr_id} <=> $b->{vdr_id} } @show);
+		# needed for vdr 1.0.x, dunno why
+		@show = sort({ $a->{vdr_id} <=> $b->{vdr_id} } @show);
 
-	#
-	my @status;
-  for(my $i = 0; $i <= $#show; $i++) {
-    undef(@temp);
-		undef(@status);
-    for(my $z = 0; $z < $CONFIG{PROG_SUMMARY_COLS}; $i++, $z++) {
-      push(@temp, $show[$i]);
-      push(@status, $show[$i]);
-    }
-    $i--;
-    push(@shows, { day => [ @temp ], status => [ @status ] });
-  }
+		#
+		my @status;
+		for(my $i = 0; $i <= $#show; $i++) {
+			undef(@temp);
+			undef(@status);
+			for(my $z = 0; $z < $CONFIG{PROG_SUMMARY_COLS}; $i++, $z++) {
+				push(@temp, $show[$i]);
+				push(@status, $show[$i]);
+			}
+			$i--;
+			push(@shows, { day => [ @temp ], status => [ @status ] });
+		}
 
-  #
-	my $template = TemplateNew("prog_summary.html");
+		#
+		my $template = TemplateNew("prog_summary.html");
   my $vars = {
 		usercss => $UserCSS,
     rows    => \@shows,
@@ -3887,9 +3887,9 @@ sub rec_detail {
 			if(/^D (.*)/) { $text = $1; }
 		}
 
-		my $displaytext = $text;
-		my $displaytitle = $title;
-		my $displaysubtitle = $subtitle;
+		my $displaytext = CGI::escapeHTML($text);
+		my $displaytitle = CGI::escapeHTML($title);
+		my $displaysubtitle = CGI::escapeHTML($subtitle);
 		my $imdb_title = $title;
 
 		$displaytext =~ s/\n/<br \/>\n/g;
@@ -3901,6 +3901,7 @@ sub rec_detail {
 		$imdb_title =~ s/^.*~\([^~]*\)/\1/;
 
 		$vars = {
+			usercss => $UserCSS,
 			text    => $displaytext ? $displaytext : undef,
 			title   => $displaytitle ? $displaytitle : undef,
 			subtitle  => $displaysubtitle ? $displaysubtitle : undef,
@@ -3925,16 +3926,14 @@ sub rec_detail {
 			}
 		}
 
-printf("TITLE: $title\n");
 		my $imdb_title = $title;
 		$imdb_title =~ s/^.*\~//;
 		$title =~ s/\~/ - /g;
-printf("IMDBTITLE: " . $imdb_title . "\n");
 		$vars = {
 			usercss => $UserCSS,
-			text    => $text ? $text : "",
+			text    => $text ? CGI::escapeHTML($text) : "",
 			imdburl => "http://akas.imdb.com/Tsearch?title=" . $imdb_title,
-			title   => $title
+			title   => CGI::escapeHTML($title)
 		};
 	}
 
@@ -3994,7 +3993,7 @@ sub recRunCmd {
       if( $CONFIG{VDRVFAT} > 0 ) {
           for ( my $i=0 ;$ i < length($title); $i++) {
               $c = substr($title,$i,1);
-       unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&()+,.\-;=~]/) {
+       unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&()+,.\-;=~ ]/) {
            $newtitle.= sprintf( "#%02X", ord( $c ));
        } else {
            $newtitle.= $c;

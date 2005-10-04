@@ -12,7 +12,7 @@
 </head>
 
 <body id="at_timer_list">
-<form onsubmit="return false;">
+<form onsubmit="return false;" action="help_at_timer_list.html">
 	<input type="hidden" name="aktion" value="show_help"/>
 	<input type="hidden" name="area" value="<tmpl_var area>"/>
 
@@ -45,8 +45,8 @@
 					</dl>
 				</p>
 				<p>Each AutoTimer's state is indicated by differently coloured images:<br />
-					<img src="bilder/poempl_gruen.gif" alt="on" align="absmiddle" /> AutoTimer is OK and will automatically program matching broadcasts.<br />
-					<img src="bilder/poempl_grau.gif" alt="inactive" align="absmiddle" /> AutoTimer is not active.
+					<img src="bilder/poempl_gruen.gif" alt="on" align="middle" /> AutoTimer is OK and will automatically program matching broadcasts.<br />
+					<img src="bilder/poempl_grau.gif" alt="inactive" align="middle" /> AutoTimer is not active.
 				</p>
 				<p>In addition to these functions you can add a new AutoTimer by clicking <input type="submit" class="submit" value="New AutoTimer"/> at the top and you can delete a number of AutoTimers at once by checking the box in the last column of those timers and clicking <input type="submit" class="submit" value="Delete Selected AutoTimers"/>.</p>
 				<p>Click <input type="submit" class="submit" value="Force Update"/> to force VDRAdmin to reconnect to VDR, fetch the current EPG and check for matching AutoTimers.</p> !%>

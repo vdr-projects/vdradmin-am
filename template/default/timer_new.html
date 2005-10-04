@@ -95,7 +95,7 @@
 				<td class="col_value">
 					<select name="channel" class="submit">
 <tmpl_loop name="channels">
-						<option value="<tmpl_var vdr_id>" <tmpl_if current>selected</tmpl_if>><tmpl_var name="name"></option>
+						<option value="<tmpl_var vdr_id>" <tmpl_if current>selected</tmpl_if>><tmpl_var name="name" escape="html"></option>
 </tmpl_loop>
 					</select>
 				</td>
