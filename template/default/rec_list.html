@@ -46,10 +46,10 @@
 				<col class="col_name"/>
 				<col class="col_edit"/>
 				<col class="col_delete"/>
-				<col class="col_checkbox"/>
 <tmpl_if stream_rec_on>
 				<col class="col_stream"/>
 </tmpL_if>
+				<col class="col_checkbox"/>
 				<col class="col_right"/>
 			</colgroup>
 			<tr class="heading">
@@ -89,10 +89,10 @@
 				</td>
 				<td class="col_edit"></td>
 				<td class="col_delete"></td>
-				<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL" onclick="AllMessages(this.form);" title="<%! Select all/none !%>" /></td>
 <tmpl_if stream_rec_on>
 				<td class="col_stream"></td>
 </tmpl_if>
+				<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL" onclick="AllMessages(this.form);" title="<%! Select all/none !%>" /></td>
 				<td class="col_right"></td>
 			</tr>
 			<tr class="row_spacer">
@@ -140,16 +140,16 @@
 						<a href="javascript:del('<%! Delete recording? !%>\n\n&quot;<tmpl_var name>&quot;', '<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" title="<%! Delete !%>" height="17" width="17" border="0" /></a>
 					</tmpl_unless>
 				</td>
-				<td class="col_checkbox">
-					<tmpl_unless isfolder><input type="checkbox" name="xxxx_<tmpl_var id>" /></tmpl_unless>
-				</td>
 <tmpl_if stream_rec_on>
 				<td class="col_stream">
 					<tmpl_unless isfolder>
-						<a href="<tmpl_var streamurl>"><img src="bilder/stream.jpg" alt="stream" title="<%! Stream !%>" height="17" border="0" /></a>
+						<a href="<tmpl_var streamurl>"><img src="bilder/stream.gif" alt="stream" title="<%! Stream !%>" height="17" border="0" /></a>
 					</tmpl_unless>
 				</td>
 </tmpl_if>
+				<td class="col_checkbox">
+					<tmpl_unless isfolder><input type="checkbox" name="xxxx_<tmpl_var id>" /></tmpl_unless>
+				</td>
 				<td class="col_right"></td>
 			</tr>
 </tmpl_loop>

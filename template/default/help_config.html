@@ -14,7 +14,7 @@
 	</tmpl_if>
 </head>
 
-<body id="config">
+<body id="config" class="help" onload="window.focus()">
 <form onsubmit="return false;" action="help_config.html">
 	<input type="hidden" name="aktion" value="show_help"/>
 	<input type="hidden" name="area" value="<tmpl_var area>"/>
@@ -44,9 +44,11 @@
 						<dt><%! Login Page: !%></dt>
 						<dd><%! The page you want to see at first connect to VDRAdmin. !%></dd>
 						<dt><%! Number of channels to use: !%></dt>
-						<dd><%! VDRAdmin will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin will read so that you can use this to reduce VDRAdmin's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin will use all available channels. <h4>Note:</h4> Changes are not populated immediately. You have to either wait until VDRAdmin reconnects to VDR to update its EPG information or force this update manually in the <span class="ref_menu">AutoTimer</span> menu or restart VDRAdmin. !%></dd>
+						<dd><%! VDRAdmin will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin will read so that you can use this to reduce VDRAdmin's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin will use all available channels. !%></dd>
 						<dt><%! Local net (no login required): !%></dt>
 						<dd><%! Here you can specify an IP address or range that can login without providing login information. For example: "192.168.0.0/24" will include any IP starting with "192.168.0", "192.168.0.123/32" will only match "192.168.0.123". !%></dd>
+						<dt><%! Language: !%></dt>
+						<dd><%! Here you can set the localization VDRAdmin should use. !%></dd>
 					</dl>
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
@@ -87,6 +89,8 @@
 						<dd><%! The number of hours to show in the timeline. !%></dd>
 						<dt><%! Times: !%></dt>
 						<dd><%! A comma separated list of times in <strong>hh:mm</strong> format that appear in the selectbox placed at the top. !%></dd>
+						<dt><%! Tooltips: !%></dt>
+						<dd><%! Here you can (de-)activate the tooltips. !%></dd>
 					</dl>
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
@@ -101,6 +105,8 @@
 						<dd><%! An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording. !%></dd>
 						<dt><%! Lifetime: !%></dt>
 						<dd><%! The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by. !%></dd>
+						<dt><%! Tooltips: !%></dt>
+						<dd><%! Here you can (de-)activate the tooltips. !%></dd>
 					</dl>
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
@@ -115,6 +121,10 @@
 						<dd><%! The number of minutes VDRAdmin subtracts from the broadcasts start time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view. !%></dd>
 						<dt><%! Time Margin at Stop: !%></dt>
 						<dd><%! The number of minutes VDRAdmin adds to the broadcasts stop time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view. !%></dd>
+						<dt><%! Tooltips in timeline: !%></dt>
+						<dd><%! Here you can (de-)activate the tooltips in the timeline. !%></dd>
+						<dt><%! Tooltips in list: !%></dt>
+						<dd><%! Here you can (de-)activate the tooltips in the list. !%></dd>
 					</dl>
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>

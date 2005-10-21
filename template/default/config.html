@@ -79,7 +79,7 @@
 							</td>
 							<td class="col_right"></td>
 						</tr>
-						<tr class="row_odd" title="<%! Gets active after restarting VDRAdmin !%>">
+						<tr class="row_odd">
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Number of channels to use: !%></h5></td>
 							<td class="col_value"><input type="text" name="EPG_PRUNE" value="<tmpl_var EPG_PRUNE>" size="5" maxlength="25" /></td>
@@ -89,6 +89,18 @@
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Local net (no login required): !%></h5></td>
 							<td class="col_value"><input type="text" name="LOCAL_NET" value="<tmpl_var LOCAL_NET>" size="20" maxlength="50" /></td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_odd">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! Language: !%></h5></td>
+							<td class="col_value">
+								<select class="submit" name="LANG">
+<tmpl_loop name="MY_LOCALES">
+									<option value="<tmpl_var id>" <tmpl_if cur>selected</tmpl_if>><tmpl_var name></option>
+</tmpl_loop>
+								</select>
+							</td>
 							<td class="col_right"></td>
 						</tr>
 						<tr class="footer">
@@ -214,6 +226,15 @@
 							<td class="col_value"><input type="text" name="TIMES" value="<tmpl_var TIMES>" size="20" /></td>
 							<td class="col_right"></td>
 						</tr>
+						<tr class="row_odd">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! Tooltips: !%></h5></td>
+							<td class="col_value">
+								<input type="radio" name="TL_TOOLTIP" value="1" id="tl_tooltip_yes" <tmpl_if tl_tooltip>checked</tmpl_if> /><label for="tl_tooltip_yes"><%! Yes !%></label>
+								<input type="radio" name="TL_TOOLTIP" value="0" id="tl_tooltip_no" <tmpl_unless tl_tooltip>checked</tmpl_unless> /><label for="tl_tooltip_no"><%! No !%></label>
+							</td>
+							<td class="col_right"></td>
+						</tr>
 						<tr class="footer">
 							<td class="col_left"></td>
 							<td colspan="2"></td>
@@ -275,6 +296,15 @@
 							<td class="col_right"></td>
 						</tr>
 -->
+						<tr class="row_even">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! Tooltips: !%></h5></td>
+							<td class="col_value">
+								<input type="radio" name="AT_TOOLTIP" value="1" id="at_tooltip_yes" <tmpl_if at_tooltip>checked</tmpl_if> /><label for="at_tooltip_yes"><%! Yes !%></label>
+								<input type="radio" name="AT_TOOLTIP" value="0" id="at_tooltip_no" <tmpl_unless at_tooltip>checked</tmpl_unless> /><label for="at_tooltip_no"><%! No !%></label>
+							</td>
+							<td class="col_right"></td>
+						</tr>
 						<tr class="footer">
 							<td class="col_left"></td>
 							<td colspan="2"></td>
@@ -315,6 +345,24 @@
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Time Margin at Stop: !%></h5></td>
 							<td class="col_value"><input type="text" name="TM_MARGIN_END" value="<tmpl_var TM_MARGIN_END>" size="3" /> <%! minutes !%></td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_odd">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! Tooltips in timeline: !%></h5></td>
+							<td class="col_value">
+								<input type="radio" name="TM_TT_TIMELINE" value="1" id="tm_tl_timeline_yes" <tmpl_if tm_tt_timeline>checked</tmpl_if> /><label for="tm_tl_timeline_yes"><%! Yes !%></label>
+								<input type="radio" name="TM_TT_TIMELINE" value="0" id="tm_tl_timeline_no" <tmpl_unless tm_tt_timeline>checked</tmpl_unless> /><label for="tm_tl_timeline_no"><%! No !%></label>
+							</td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_even">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! Tooltips in list: !%></h5></td>
+							<td class="col_value">
+								<input type="radio" name="TM_TT_LIST" value="1" id="tm_tl_list_yes" <tmpl_if tm_tt_list>checked</tmpl_if> /><label for="tm_tl_list_yes"><%! Yes !%></label>
+								<input type="radio" name="TM_TT_LIST" value="0" id="tm_tl_list_no" <tmpl_unless tm_tt_list>checked</tmpl_unless> /><label for="tm_tl_list_no"><%! No !%></label>
+							</td>
 							<td class="col_right"></td>
 						</tr>
 						<tr class="footer">
@@ -399,7 +447,7 @@
 							<td colspan="2"></td>
 							<td class="col_right"></td>
 						</tr>
-						<tr class="row_odd" title="<%! Gets active after restarting VDRAdmin !%>">
+						<tr class="row_odd">
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Read EPG directly using epg.data: !%></h5></td>
 							<td class="col_value">
@@ -487,6 +535,15 @@
 							<td class="col_value" colspan="2">
 								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="1" id="wat_yes" <tmpl_if CHANNELS_WANTED_AUTOTIMER>checked</tmpl_if> /><label for="wat_yes"><%! Yes !%></label>
 								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="0" id="wat_no" <tmpl_unless CHANNELS_WANTED_AUTOTIMER>checked</tmpl_unless> /><label for="wat_no"><%! No !%></label>
+							</td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_odd">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! In "Watch TV"? !%></h5></td>
+							<td class="col_value" colspan="2">
+								<input type="radio" name="CHANNELS_WANTED_WATCHTV" value="1" id="wtv_yes" <tmpl_if CHANNELS_WANTED_WATCHTV>checked</tmpl_if> /><label for="wtv_yes"><%! Yes !%></label>
+								<input type="radio" name="CHANNELS_WANTED_WATCHTV" value="0" id="wtv_no" <tmpl_unless CHANNELS_WANTED_WATCHTV>checked</tmpl_unless> /><label for="wtv_no"><%! No !%></label>
 							</td>
 							<td class="col_right"></td>
 						</tr>

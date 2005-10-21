@@ -31,6 +31,7 @@ label + input { margin-left: 1em; }
 .heading { height: 30px; }
 .heading h2 { padding-left: 3px; padding-right: 3px; white-space: nowrap; }
 .col_label, .col_value, .col_active, .col_channel, .col_start, .col_stop, .col_date, .col_time { padding-left: 3px; padding-right: 3px; white-space: nowrap; }
+.col_value { white-space: normal; }
 .row_spacer td { height: 10px; }
 .row_odd, .row_even { height: 25px; }
 .col_left, .col_right { min-width: 30px; max-width: 30px; width: 30px; height: 25px; }
@@ -129,7 +130,6 @@ label + input { margin-left: 1em; }
 #help .ref_menu { font-style: italic; }
 #help .ref_file { text-decoration: underline; }
 #help .ref_label { font-style: italic; }
-#help .submit { border: 1px solid black; white-space: nowrap;  }
 #help .links { padding: 5px; background-color: silver; text-align: justify; }
 #help .links a { white-space: nowrap; }
 #help .group { margin-top: 0.6em; border: 1px solid black; white-space: normal; }

@@ -37,13 +37,25 @@
 			<tr class="row_odd">
 				<td class="col_left"></td>
 				<td class="col_label"><h5><%! Original Name of Recording: !%></h5></td>
-				<td class="col_value"><input type="text" name="title" value="<tmpl_var title escape="HTML">" size="55" readonly /></td>
+				<td class="col_value"><tmpl_var title></td>
 				<td class="col_right"></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_left"></td>
 				<td class="col_label"><h5><%! New Name of Recording: !%></h5></td>
-				<td class="col_value"><input type="text" name="nn" value="<tmpl_var title escape="HTML">" size="55" /></td>
+				<td class="col_value"><input type="text" name="nn" value="<tmpl_var title>" size="55" /></td>
+				<td class="col_right"></td>
+			</tr>
+			<tr class="row_odd">
+				<td class="col_left"></td>
+				<td class="col_label"><tmpl_if subtitle><h5><%! Subtitle: !%></h5></tmpl_if></td>
+				<td class="col_value"><tmpl_if subtitle><tmpl_var subtitle></tmpl_if></td>
+				<td class="col_right"></td>
+			</tr>
+			<tr class="row_even">
+				<td class="col_left"></td>
+				<td class="col_label" valign="top"><h5><%! Summary: !%></h5></td>
+				<td class="col_value"><tmpl_var text></td>
 				<td class="col_right"></td>
 			</tr>
 			<tr class="footer">

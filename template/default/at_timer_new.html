@@ -44,15 +44,15 @@
 					<td class="col_left"></td>
 					<td class="col_label"><h5><%! AutoTimer Active: !%></h5></td>
 					<td class="col_value">
-<tmpl_if name="oneshot">
+<?% IF active == 2 %?>
 	         	<input type="radio" name="active" value="1" id="active_yes" /><label for="active_yes"><%! Yes !%></label>
  	        	<input type="radio" name="active" value="0" id="active_no" /><label for="active_no"><%! No !%></label>
 						<input type="radio" name="active" value="2" id="active_oneshot" checked /><label for="active_oneshot"><%! oneshot !%></label>
-<tmpl_else>
+<?% ELSE %?>
 						<input type="radio" name="active" value="1" id="active_yes" <tmpl_if active>checked</tmpl_if> /><label for="active_yes"><%! Yes !%></label>
 						<input type="radio" name="active" value="0" id="active_no" <tmpl_unless active>checked</tmpl_unless> /><label for="active_no"><%! No !%></label>
 						<input type="radio" name="active" value="2" id="active_oneshot" /><label for="active_oneshot"><%! oneshot !%></label>
-</tmpl_if>
+<?% END %?>
 					</td>
 					<td class="col_right"></td>
 				</tr>
@@ -174,11 +174,45 @@
 
 		<div id="buttons">
 			<input type="submit" class="submit" name="save" value="<%! Save !%>" />
+			<input type="submit" class="submit" name="test" value="<%! Test !%>" />
 			<input type="submit" class="submit" name="exit" value="<%! Cancel !%>" />
 		</div>
-		<input type="hidden" name="aktion" value="at_timer_save" />
+		<input type="hidden" name="aktion" value="at_timer_aktion" />
 		<input type="hidden" name="id" value="<tmpl_var id>" />
 	</form>
+
+<tmpl_if at_test>
+	<br />
+	<tmpl_if matches>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
+			<tr class="heading">
+				<td class="col_left"></h2></td>
+				<td><h2><%! Title !%></h2></td>
+				<td><h2><%! Subtitle !%></h2></td>
+				<td><h2><%! Broadcasted !%></h2></td>
+				<td><h2><%! Stored in !%></h2></td>
+				<td class="col_right"></td>
+			</tr>
+		<tmpl_loop matches>
+			<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
+				<td class="col_left"></td>
+				<td><tmpl_var otitle></td>
+				<td><tmpl_var subtitle></td>
+				<td><tmpl_var weekday>, <tmpl_var start> - <tmpl_var stop> (<tmpl_var channel>)</td>
+				<td><tmpl_var title></td>
+				<td class="col_right"></td>
+			</tr>
+		</tmpl_loop>
+			<tr class="footer">
+				<td class="col_left"></td>
+				<td colspan="4"></td>
+				<td class="col_right"></td>
+			</tr>
+		</table>
+	<tmpl_else>
+		<div class="warning"><%! No matches found! !%></div>
+	</tmpl_if>
+</tmpl_if>
 </body>
 
 </html>

@@ -11,10 +11,10 @@
 	<script type="text/javascript">
 		<!--
 			function rc_open() {
-				window.open("./vdradmin.pl?aktion=rc_show", "_blank", "width=213, height=510, resizable=no, scrollbars=no, status=no, toolbar=no");
+				window.open("./vdradmin.pl?aktion=rc_show", "vdradminRC", "width=213, height=510, resizable=no, scrollbars=no, status=no, toolbar=no");
 			}
 			function tv_open() {
-				window.open("./vdradmin.pl?aktion=tv_show", "_blank", "width=615, height=548, resizable=yes, scrollbars=no, status=no, toolbar=no");
+				window.open("./vdradmin.pl?aktion=tv_show", "vdradminTV", "width=615, height=548, resizable=yes, scrollbars=no, status=no, toolbar=no");
 			}
 		// -->
 	</script>
@@ -24,50 +24,52 @@
 	<div class="logo">
 		<a href="./" target="_top"><tmpl_if linvdr><img src="bilder/logo_linvdr.gif" alt="" height="50px" width="150px" border="0" /><tmpl_else><img src="bilder/logo_other.gif" alt="" height="50" width="150" border="0" /></tmpl_if></a>
 	</div>
-	<div class="separator"></div>
-	<div class="navi">
-		<a href="vdradmin.pl?aktion=prog_summary" target="main"><%! What's On Now? !%></a>
+	<div class="nav_bar">
+		<div class="separator"></div>
+		<div class="navi">
+			<a href="vdradmin.pl?aktion=prog_summary" target="main"><%! What's On Now? !%></a>
+		</div>
+		<div class="separator"></div>
+		<div class="navi">
+			<a href="vdradmin.pl?aktion=prog_list2" target="main"><%! Playing Today !%></a>
+		</div>
+		<div class="separator"></div>
+		<div class="navi">
+			<a href="vdradmin.pl?aktion=prog_timeline" target="main"><%! Timeline !%></a>
+		</div>
+		<div class="separator"></div>
+		<div class="navi">
+			<a href="vdradmin.pl?aktion=prog_list" target="main"><%! Channels !%></a>
+		</div>
+		<div class="separator"></div>
+		<div class="navi">
+			<a href="vdradmin.pl?aktion=timer_list" target="main"><%! Timer !%></a>
+		</div>
+		<div class="separator"></div>
+		<div class="navi">
+			<a href="vdradmin.pl?aktion=at_timer_list" target="main"><%! AutoTimer !%></a>
+		</div>
+		<div class="separator"></div>
+		<div class="navi">
+			<a href="vdradmin.pl?aktion=rec_list" target="main"><%! Recordings !%></a>
+		</div>
+		<div class="separator"></div>
+		<div class="navi">
+			<a href="vdradmin.pl?aktion=config" target="main"><%! Configuration !%></a>
+		</div>
+		<div class="separator"></div>
+		<div class="navi">
+			<a href="javascript:rc_open();"><%! Remote Control !%></a>
+		</div>
+		<div class="separator"></div>
+		<div class="navi">
+			<a href="vdradmin.pl?aktion=tv_show" target="main"><%! Watch TV !%></a>
+		</div>
+		<form action="vdradmin.pl" method="get" name="FormName" target="main" class="search">
+			<input type="text" name="search" /><br />
+			<input type="submit" name="submit" value="<%! Search !%>" />
+			<input type="hidden" name="aktion" value="prog_summary" />
+		</form>
 	</div>
-	<div class="separator"></div>
-	<div class="navi">
-		<a href="vdradmin.pl?aktion=prog_list2" target="main"><%! Playing Today !%></a>
-	</div>
-	<div class="separator"></div>
-	<div class="navi">
-		<a href="vdradmin.pl?aktion=prog_timeline" target="main"><%! Timeline !%></a>
-	</div>
-	<div class="separator"></div>
-	<div class="navi">
-		<a href="vdradmin.pl?aktion=prog_list" target="main"><%! Channels !%></a>
-	</div>
-	<div class="separator"></div>
-	<div class="navi">
-		<a href="vdradmin.pl?aktion=timer_list" target="main"><%! Timer !%></a>
-	</div>
-	<div class="separator"></div>
-	<div class="navi">
-		<a href="vdradmin.pl?aktion=at_timer_list" target="main"><%! AutoTimer !%></a>
-	</div>
-	<div class="separator"></div>
-	<div class="navi">
-		<a href="vdradmin.pl?aktion=rec_list" target="main"><%! Recordings !%></a>
-	</div>
-	<div class="separator"></div>
-	<div class="navi">
-		<a href="vdradmin.pl?aktion=config" target="main"><%! Configuration !%></a>
-	</div>
-	<div class="separator"></div>
-	<div class="navi">
-		<a href="javascript:rc_open();"><%! Remote Control !%></a>
-	</div>
-	<div class="separator"></div>
-	<div class="navi">
-		<a href="vdradmin.pl?aktion=tv_show" target="main"><%! Watch TV !%></a>
-	</div>
-	<form action="vdradmin.pl" method="get" name="FormName" target="main" class="search">
-		<input type="text" name="search" />
-		<input type="submit" name="submit" value="<%! Search !%>" />
-		<input type="hidden" name="aktion" value="prog_summary" />
-	</form>
 </body>
 </html>

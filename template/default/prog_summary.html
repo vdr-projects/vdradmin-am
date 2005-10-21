@@ -36,7 +36,7 @@
 		<table border="0" cellspacing="0" cellpadding="0" class="group">
 			<tr class="heading">
 				<td class="col_left"></td>
-				<td>
+				<td class="col_center">
 					<a id="<tmpl_var anchor>" name="<tmpl_var anchor>"></a>
 					<h2><a href="<tmpl_var proglink>"><tmpl_var progname></a></h2>
 					<tmpl_if stream_live_on>
@@ -47,7 +47,7 @@
 			</tr>
 			<tr class="row_odd">
 				<td class="col_left"></td>
-				<td>
+				<td class="col_center">
 					<div class="date"><tmpl_var longdate></div>
 					<div class="duration">
 						<tmpl_if start><tmpl_var start>-<tmpl_var stop></tmpl_if>
@@ -68,7 +68,7 @@
 			</tr>
 			<tr class="footer">
 				<td class="col_left"></td>
-				<td>
+				<td class="col_center">
 					<tmpl_if recurl>
 						<a href="javascript:callurl('<tmpl_var switchurl>');"><img src="bilder/sum_view.gif" width="58" height="22" border="0" alt="<%! TV select !%>" onmouseover="window.status='<%! TV select !%>';return true" title="<%! TV select !%>" /></a>
 						<a href="vdradmin.pl?search=<tmpl_var find_title>&amp;aktion=prog_summary&amp;submit=go11)"><img src="bilder/sum_find.gif" width="58" height="22" border="0" alt="<%! Search for other show times !%>" onmouseover="window.status='<%! Search for other show times !%>';return true" title="<%! Search for other show times !%>" /></a>

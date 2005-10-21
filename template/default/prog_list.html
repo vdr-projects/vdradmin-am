@@ -20,7 +20,7 @@
 					<h1>
 						<a href="javascript:callurl('<tmpl_var switchurl>');"><tmpl_var progname></a>&nbsp;&nbsp;
 <tmpl_if stream_live_on>
-						<a href="<tmpl_var streamurl>"><img src="bilder/stream.jpg" alt="stream" title="<%! Stream !%>" height="17" align="middle" border="0" /></a>
+						<a href="<tmpl_var streamurl>" title="<%! Stream !%>">[S]<!--<img src="bilder/stream.gif" alt="stream" title="<%! Stream !%>" height="17" align="middle" border="0" />--></a>
 </tmpl_if>
 					</h1>
 				</td>
@@ -63,12 +63,18 @@
 					<tmpl_var emit> - <tmpl_var duration>
 				</td>
 				<td class="col_title">
+<!--					<tmpl_if infurl>
+						<a href="javascript:popup('<tmpl_var infurl>');">
+					</tmpl_if>-->
 					<h3><tmpl_var title></h3>
 					<tmpl_if subtitle>
 						<h4><tmpl_var subtitle></h4>
 					<tmpl_else>
 						<br />
 					</tmpl_if>
+<!--					<tmpl_if infurl>
+						</a>
+					</tmpl_if>-->
 				</td>
 				<td class="col_info">
 					<tmpl_if infurl>

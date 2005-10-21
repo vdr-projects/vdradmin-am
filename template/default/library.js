@@ -2,7 +2,7 @@
 // this is part of VDR Admin
 //
 function open_help(url) {
-	window.open(url, "_blank", "width=580, height=480, resizable=yes, scrollbars=yes, status=no, toolbar=no");
+	window.open(url, "VDRAdminHELP", "width=580, height=480, resizable=yes, scrollbars=yes, status=no, toolbar=no");
 }
 
 function del(message, suffix) {

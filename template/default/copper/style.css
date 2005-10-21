@@ -2,13 +2,12 @@
 #rc, #tv { background-color: black; margin: 0px; }
 body { background-color: #d9cdc1; margin: 3px; }
 form { margin: 0px; }
-td { color: black; font-weight: normal; font-size: 11px; }
+td, div { color: black; font-weight: normal; font-size: 11px; }
 input { background-color: #f9f7f6; color: black; font-weight: normal; font-size: 11px; }
 textarea { background-color: #f9f7f6; color: black; font-weight: normal; font-size: 11px; }
 select { background-color: #f9f7f6; color: black; font-weight: normal; font-size: 11px; }
 b { font-weight: bold }
 i { font-style: italic }
-.gbutton { color: black; font-weight: bold; }
 .submit { height: 20px; }
 
 h1 { margin-right: 12px; margin-left: 12px; font-size: 13px; font-weight: bold; color: black; display: inline; }
@@ -31,6 +30,7 @@ label + input { margin-left: 1em; }
 .heading { height: 30px; }
 .heading h2 { padding-left: 3px; padding-right: 3px; white-space: nowrap; }
 .col_label, .col_value, .col_active, .col_channel, .col_start, .col_stop, .col_date, .col_time { padding-left: 3px; padding-right: 3px; white-space: nowrap; }
+.col_value { white-space: normal; }
 .row_spacer td { height: 10px; }
 .row_odd, .row_even { height: 25px; }
 .col_left, .col_right { min-width: 30px; max-width: 30px; width: 30px; height: 25px; }
@@ -38,20 +38,19 @@ label + input { margin-left: 1em; }
 .col_wanted_channels { text-align: left; padding: 10px; width: 40%; }
 .col_navi { text-align: right; white-space: nowrap; }
 
-.heading td[selected] { background-image: url("bilder/uebersicht_oben_selected.gif"); }
+.heading td.selected { background-image: url("bilder/uebersicht_oben_selected.gif"); }
 .heading td { background-image: url("bilder/uebersicht_oben.gif"); }
-#prog_summary .heading td { background-image: none; }
 .heading .col_left { background-image: url("bilder/uebersicht_oben_links.gif"); }
 .heading .col_right { background-image: url("bilder/uebersicht_oben_rechts.gif"); }
-.row_odd td[selected] { background-image: url("bilder/uebersicht_mitte_dark_selected.gif"); }
+.row_odd td.selected { background-image: url("bilder/uebersicht_mitte_dark_selected.gif"); }
 .row_odd td { background-image: url("bilder/uebersicht_mitte_dark.gif"); }
 .row_odd .col_left { background-image: url("bilder/uebersicht_links_dark.gif"); }
 .row_odd .col_right { background-image: url("bilder/uebersicht_rechts_dark.gif"); }
-.row_even td[selected], .row_spacer td[selected] { background-image: url("bilder/uebersicht_mitte_selected.gif"); }
+.row_even td.selected, .row_spacer td.selected { background-image: url("bilder/uebersicht_mitte_selected.gif"); }
 .row_even td, .row_spacer td { background-image: url("bilder/uebersicht_mitte.gif"); }
 .row_even .col_left, .row_spacer .col_left { background-image: url("bilder/uebersicht_links.gif"); }
 .row_even .col_right, .row_spacer .col_right { background-image: url("bilder/uebersicht_rechts.gif"); }
-.footer td[selected] { height: 30px; background-image: url("bilder/uebersicht_unten_selected.gif"); }
+.footer td.selected { height: 30px; background-image: url("bilder/uebersicht_unten_selected.gif"); }
 .footer td { height: 30px; background-image: url("bilder/uebersicht_unten.gif"); }
 .footer .col_left { background-image: url("bilder/uebersicht_unten_links.gif"); }
 .footer .col_right { background-image: url("bilder/uebersicht_unten_rechts.gif"); }
@@ -70,7 +69,7 @@ label + input { margin-left: 1em; }
 #heading .col_left { min-width: 15px; width: 15px; background-image: url("bilder/nav_button_back_start.gif"); }
 #heading .col_title { background-image: url("bilder/nav_button_back_mitte.gif"); }
 #heading .col_other { text-align: right; background-image: url("bilder/nav_button_back_mitte.gif"); }
-#heading .col_other span { float: right; }
+#heading .col_other table { display: inline; }
 #heading .col_help { text-align: center; width: 45px; background-image: url("bilder/nav_button_back_mitte.gif"); }
 #heading .col_right { min-width: 15px; width: 15px; background-image: url("bilder/nav_button_back_end.gif"); }
 
@@ -110,10 +109,10 @@ label + input { margin-left: 1em; }
 #prog_summary .footer td { height: 38px; width: 246px; background-image: url("bilder/sum_bottom_mid.gif"); text-align: center; vertical-align: middle; }
 #prog_summary .footer .col_left { min-width: 12px; width: 12px; height: 38px; background-image: url("bilder/sum_bottom_left.gif"); }
 #prog_summary .footer .col_right { min-width: 12px; width: 12px; height: 38px; background-image: url("bilder/sum_bottom_right.gif"); }
-#prog_summary .date { text-align: right; margin-top: 1em; float: left; }
-#prog_summary .duration { text-align: right; margin-top: 1em; }
+#prog_summary .date { text-align: right; margin-top: 3px; float: left; }
+#prog_summary .duration { text-align: right; margin-top: 3px; }
 #prog_summary .title { margin-top: 1em; width: 246px; overflow: hidden; white-space: nowrap; }
-#prog_summary .summary { margin-top: 1em; margin-bottom: 1em; width: 240px; height: 100px; overflow: hidden; white-space: normal; }
+#prog_summary .summary { margin-top: 1em; margin-bottom: 3px; width: 240px; height: 124px; overflow: hidden; white-space: normal; }
 
 /* Tooltips */
 .tt_table { width: 250px; border: 2px solid #333399; background-color: #ccccff; }
@@ -130,7 +129,6 @@ label + input { margin-left: 1em; }
 #help .ref_menu { font-style: italic; }
 #help .ref_file { text-decoration: underline; }
 #help .ref_label { font-style: italic; }
-#help .submit { border: 1px solid black; white-space: nowrap;  }
 #help .links { padding: 5px; background-color: silver; text-align: justify; }
 #help .links a { white-space: nowrap; }
 #help .group { margin-top: 0.6em; border: 1px solid black; white-space: normal; }

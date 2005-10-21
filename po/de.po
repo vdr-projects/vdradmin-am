@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-0.97-AM3.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-03 10:15+0200\n"
+"POT-Creation-Date: 2005-10-20 14:08+0200\n"
 "PO-Revision-Date: 2005-09-23 12:49+0100\n"
 "Last-Translator: Andreas Mair <mail@andreas.vdr-developer.org>\n"
 "Language-Team: <LL.org>\n"
@@ -59,8 +59,8 @@ msgid "Edit Timer"
 msgstr "Timer editieren"
 
 #: ../template/default/timer_new.html:53
-#: ../template/default/at_timer_list.html:39
-#: ../template/default/config.html:23 ../template/default/timer_list.html:47
+#: ../template/default/at_timer_list.html:44
+#: ../template/default/config.html:23 ../template/default/timer_list.html:51
 #: ../template/default/rec_list.html:27
 #: ../template/default/at_timer_new.html:24
 msgid "Help"
@@ -72,13 +72,16 @@ msgid "Timer Active:"
 msgstr "Timer aktiv:"
 
 #: ../template/default/timer_new.html:75
-#: ../template/default/at_timer_list.html:128
-#: ../template/default/config.html:170 ../template/default/config.html:241
-#: ../template/default/config.html:343 ../template/default/config.html:358
-#: ../template/default/config.html:406 ../template/default/config.html:421
-#: ../template/default/config.html:452 ../template/default/config.html:461
-#: ../template/default/config.html:470 ../template/default/config.html:479
-#: ../template/default/config.html:488 ../template/default/timer_list.html:318
+#: ../template/default/at_timer_list.html:133
+#: ../template/default/config.html:182 ../template/default/config.html:233
+#: ../template/default/config.html:262 ../template/default/config.html:303
+#: ../template/default/config.html:354 ../template/default/config.html:363
+#: ../template/default/config.html:391 ../template/default/config.html:406
+#: ../template/default/config.html:454 ../template/default/config.html:469
+#: ../template/default/config.html:500 ../template/default/config.html:509
+#: ../template/default/config.html:518 ../template/default/config.html:527
+#: ../template/default/config.html:536 ../template/default/config.html:545
+#: ../template/default/timer_list.html:322
 #: ../template/default/at_timer_new.html:48
 #: ../template/default/at_timer_new.html:52
 #: ../template/default/at_timer_new.html:154
@@ -86,13 +89,16 @@ msgid "Yes"
 msgstr "Ja"
 
 #: ../template/default/timer_new.html:76
-#: ../template/default/at_timer_list.html:130
-#: ../template/default/config.html:171 ../template/default/config.html:242
-#: ../template/default/config.html:344 ../template/default/config.html:359
-#: ../template/default/config.html:407 ../template/default/config.html:422
-#: ../template/default/config.html:453 ../template/default/config.html:462
-#: ../template/default/config.html:471 ../template/default/config.html:480
-#: ../template/default/config.html:489 ../template/default/timer_list.html:319
+#: ../template/default/at_timer_list.html:135
+#: ../template/default/config.html:183 ../template/default/config.html:234
+#: ../template/default/config.html:263 ../template/default/config.html:304
+#: ../template/default/config.html:355 ../template/default/config.html:364
+#: ../template/default/config.html:392 ../template/default/config.html:407
+#: ../template/default/config.html:455 ../template/default/config.html:470
+#: ../template/default/config.html:501 ../template/default/config.html:510
+#: ../template/default/config.html:519 ../template/default/config.html:528
+#: ../template/default/config.html:537 ../template/default/config.html:546
+#: ../template/default/timer_list.html:323
 #: ../template/default/at_timer_new.html:49
 #: ../template/default/at_timer_new.html:53
 #: ../template/default/at_timer_new.html:155
@@ -114,7 +120,7 @@ msgstr "Sendungskennung"
 msgid "Time"
 msgstr "Uhrzeit"
 
-#: ../template/default/timer_new.html:88 ../template/default/tv.html:180
+#: ../template/default/timer_new.html:88 ../template/default/tv.html:197
 #: ../template/default/help_timer_new.html:43
 msgid "off"
 msgstr "aus"
@@ -175,9 +181,9 @@ msgstr "Startzeit:"
 #: ../template/default/timer_new.html:138
 #: ../template/default/prog_summary.html:21
 #: ../template/default/prog_summary.html:26
-#: ../template/default/prog_timeline.html:91
-#: ../template/default/prog_timeline.html:104
-#: ../template/default/prog_timeline.html:119
+#: ../template/default/prog_timeline.html:95
+#: ../template/default/prog_timeline.html:108
+#: ../template/default/prog_timeline.html:123
 #: ../template/default/at_timer_new.html:111
 #: ../template/default/at_timer_new.html:122
 msgid "o'clock"
@@ -189,11 +195,11 @@ msgid "End Time:"
 msgstr "Endzeit:"
 
 #: ../template/default/timer_new.html:144
-#: ../template/default/at_timer_list.html:21
-#: ../template/default/config.html:254 ../template/default/config.html:298
-#: ../template/default/timer_list.html:24
-#: ../template/default/help_config.html:100
-#: ../template/default/help_config.html:110
+#: ../template/default/at_timer_list.html:24
+#: ../template/default/config.html:275 ../template/default/config.html:328
+#: ../template/default/timer_list.html:27
+#: ../template/default/help_config.html:104
+#: ../template/default/help_config.html:116
 #: ../template/default/help_timer_new.html:61
 #: ../template/default/help_at_timer_new.html:52
 #: ../template/default/at_timer_new.html:128
@@ -201,11 +207,11 @@ msgid "Priority:"
 msgstr "Priorität:"
 
 #: ../template/default/timer_new.html:150
-#: ../template/default/at_timer_list.html:21
-#: ../template/default/config.html:260 ../template/default/config.html:304
-#: ../template/default/timer_list.html:24
-#: ../template/default/help_config.html:102
-#: ../template/default/help_config.html:112
+#: ../template/default/at_timer_list.html:24
+#: ../template/default/config.html:281 ../template/default/config.html:334
+#: ../template/default/timer_list.html:27
+#: ../template/default/help_config.html:106
+#: ../template/default/help_config.html:118
 #: ../template/default/help_timer_new.html:63
 #: ../template/default/help_at_timer_new.html:54
 #: ../template/default/at_timer_new.html:136
@@ -217,18 +223,18 @@ msgstr "Lebenszeit:"
 msgid "Title of Recording:"
 msgstr "Titel der Aufnahme:"
 
-#: ../template/default/timer_new.html:162
+#: ../template/default/timer_new.html:162 ../template/default/rec_edit.html:57
 #: ../template/default/help_timer_new.html:67
 msgid "Summary:"
 msgstr "Zusammenfassung:"
 
-#: ../template/default/timer_new.html:174 ../template/default/config.html:526
+#: ../template/default/timer_new.html:174 ../template/default/config.html:583
 #: ../template/default/at_timer_new.html:176
 msgid "Save"
 msgstr "Speichern"
 
-#: ../template/default/timer_new.html:175 ../template/default/rec_edit.html:58
-#: ../template/default/at_timer_new.html:177
+#: ../template/default/timer_new.html:175 ../template/default/rec_edit.html:70
+#: ../template/default/at_timer_new.html:178
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -246,7 +252,7 @@ msgstr ""
 "an <a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-"
 "developer.org</a> wenden."
 
-#: ../template/default/rc.html:6 ../template/default/navigation.html:61
+#: ../template/default/rc.html:6 ../template/default/navigation.html:62
 msgid "Remote Control"
 msgstr "Fernbedienung"
 
@@ -266,103 +272,103 @@ msgstr ""
 "nicht übermitteln."
 
 #: ../template/default/at_timer_list.html:6
-#: ../template/default/at_timer_list.html:31
-#: ../template/default/config.html:229 ../template/default/help_config.html:38
-#: ../template/default/help_config.html:94
+#: ../template/default/at_timer_list.html:36
+#: ../template/default/config.html:250 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:98
 #: ../template/default/help_at_timer_list.html:6
 #: ../template/default/help_at_timer_list.html:22
-#: ../template/default/navigation.html:49
+#: ../template/default/navigation.html:50
 msgid "AutoTimer"
 msgstr "AutoTimer"
 
-#: ../template/default/at_timer_list.html:34
+#: ../template/default/at_timer_list.html:39
 msgid "New AutoTimer"
 msgstr "Neuer AutoTimer"
 
-#: ../template/default/at_timer_list.html:53
-#: ../template/default/timer_list.html:216
+#: ../template/default/at_timer_list.html:58
+#: ../template/default/timer_list.html:220
 msgid "Active"
 msgstr "Aktiv"
 
-#: ../template/default/at_timer_list.html:64
-#: ../template/default/timer_list.html:227
+#: ../template/default/at_timer_list.html:69
+#: ../template/default/timer_list.html:231
 msgid "Channel"
 msgstr "Sender"
 
-#: ../template/default/at_timer_list.html:75
-#: ../template/default/timer_list.html:249
+#: ../template/default/at_timer_list.html:80
+#: ../template/default/timer_list.html:253
 msgid "Start"
 msgstr "Beginn"
 
-#: ../template/default/at_timer_list.html:86
-#: ../template/default/timer_list.html:260
+#: ../template/default/at_timer_list.html:91
+#: ../template/default/timer_list.html:264
 msgid "Stop"
 msgstr "Ende"
 
-#: ../template/default/at_timer_list.html:97
-#: ../template/default/timer_list.html:271
+#: ../template/default/at_timer_list.html:102
+#: ../template/default/timer_list.html:275
 #: ../template/default/rec_list.html:81
 msgid "Name"
 msgstr "Name"
 
-#: ../template/default/at_timer_list.html:108
-#: ../template/default/timer_list.html:282
-#: ../template/default/rec_list.html:92
+#: ../template/default/at_timer_list.html:113
+#: ../template/default/timer_list.html:286
+#: ../template/default/rec_list.html:95
 msgid "Select all/none"
 msgstr "Alle/keine auswählen"
 
-#: ../template/default/at_timer_list.html:156
-#: ../template/default/timer_list.html:348
+#: ../template/default/at_timer_list.html:161
+#: ../template/default/timer_list.html:352
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: ../template/default/at_timer_list.html:161
-#: ../template/default/timer_list.html:351
+#: ../template/default/at_timer_list.html:166
+#: ../template/default/timer_list.html:355
 msgid "Delete timer?"
 msgstr "Timer löschen?"
 
-#: ../template/default/at_timer_list.html:161
-#: ../template/default/timer_list.html:351
+#: ../template/default/at_timer_list.html:166
+#: ../template/default/timer_list.html:355
 #: ../template/default/rec_list.html:140
 msgid "Delete"
 msgstr "Löschen"
 
-#: ../template/default/at_timer_list.html:188
+#: ../template/default/at_timer_list.html:193
 msgid "Force Update"
 msgstr "Manuelles Update"
 
-#: ../template/default/at_timer_list.html:191
+#: ../template/default/at_timer_list.html:196
 msgid "Delete Selected AutoTimers"
 msgstr "Ausgewählte AutoTimer löschen"
 
-#: ../template/default/at_timer_list.html:191
-#: ../template/default/timer_list.html:374
+#: ../template/default/at_timer_list.html:196
+#: ../template/default/timer_list.html:378
 msgid "Delete all selected timers?"
 msgstr "Ausgewählte Timer wirklich löschen?"
 
 #: ../template/default/prog_summary.html:7
 #: ../template/default/prog_timeline.html:7
-#: ../template/default/navigation.html:29 ../template/i18n.pl:2
+#: ../template/default/navigation.html:30 ../template/i18n.pl:2
 msgid "What's On Now?"
 msgstr "Was läuft jetzt?"
 
 #: ../template/default/prog_summary.html:24
-#: ../template/default/prog_timeline.html:94
+#: ../template/default/prog_timeline.html:98
 msgid "What's on:"
 msgstr "Was läuft:"
 
 #: ../template/default/prog_summary.html:24
-#: ../template/default/prog_timeline.html:96
+#: ../template/default/prog_timeline.html:100
 msgid "now"
 msgstr "jetzt"
 
 #: ../template/default/prog_summary.html:24
-#: ../template/default/prog_timeline.html:102
+#: ../template/default/prog_timeline.html:106
 msgid "at:"
 msgstr "um:"
 
 #: ../template/default/prog_summary.html:43
-#: ../template/default/prog_list.html:23 ../template/default/rec_list.html:149
+#: ../template/default/prog_list.html:23 ../template/default/rec_list.html:146
 #: ../template/default/prog_list2.html:56
 msgid "Stream"
 msgstr "Stream"
@@ -386,7 +392,7 @@ msgstr "Sendung aufnehmen"
 #: ../template/default/config.html:5 ../template/default/config.html:19
 #: ../template/default/help_config.html:9
 #: ../template/default/help_config.html:25
-#: ../template/default/navigation.html:57
+#: ../template/default/navigation.html:58
 msgid "Configuration"
 msgstr "Konfiguration"
 
@@ -407,10 +413,6 @@ msgstr "Skin:"
 msgid "Login Page:"
 msgstr "Startseite:"
 
-#: ../template/default/config.html:82 ../template/default/config.html:402
-msgid "Gets active after restarting VDRAdmin"
-msgstr "Wird erst nach einem Neustart von VDRAdmin aktiv"
-
 #: ../template/default/config.html:84 ../template/default/help_config.html:46
 msgid "Number of channels to use:"
 msgstr "Anzahl der zu verwendenden Kanäle:"
@@ -419,229 +421,263 @@ msgstr "Anzahl der zu verwendenden Kanäle:"
 msgid "Local net (no login required):"
 msgstr "Lokales Netz (kein Login notwendig):"
 
-#: ../template/default/config.html:104 ../template/default/help_config.html:38
-#: ../template/default/help_config.html:54
+#: ../template/default/config.html:96 ../template/default/help_config.html:50
+msgid "Language:"
+msgstr "Sprache:"
+
+#: ../template/default/config.html:116 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:56
 msgid "VDR"
 msgstr "VDR"
 
-#: ../template/default/config.html:114 ../template/default/help_config.html:56
+#: ../template/default/config.html:126 ../template/default/help_config.html:58
 msgid "Number of DVB cards:"
 msgstr "Anzahl der DVB-Karten:"
 
-#: ../template/default/config.html:120 ../template/default/help_config.html:58
+#: ../template/default/config.html:132 ../template/default/help_config.html:60
 msgid "Path to recordings:"
 msgstr "Pfad der Aufnahmen:"
 
-#: ../template/default/config.html:126 ../template/default/help_config.html:60
+#: ../template/default/config.html:138 ../template/default/help_config.html:62
 msgid "Path to configuration files:"
 msgstr "Pfad zu den Konfigurationsdateien:"
 
-#: ../template/default/config.html:132 ../template/default/help_config.html:62
+#: ../template/default/config.html:144 ../template/default/help_config.html:64
 msgid "Path to EPG images:"
 msgstr "Pfad zu den EPG-Bildern:"
 
-#: ../template/default/config.html:146 ../template/default/help_config.html:38
-#: ../template/default/help_config.html:68
+#: ../template/default/config.html:158 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:70
 msgid "Identification"
 msgstr "Identifikation"
 
-#: ../template/default/config.html:156 ../template/default/help_config.html:70
+#: ../template/default/config.html:168 ../template/default/help_config.html:72
 msgid "Username:"
 msgstr "Benutzername:"
 
-#: ../template/default/config.html:162 ../template/default/help_config.html:72
+#: ../template/default/config.html:174 ../template/default/help_config.html:74
 msgid "Password:"
 msgstr "Passwort:"
 
-#: ../template/default/config.html:168 ../template/default/help_config.html:74
+#: ../template/default/config.html:180 ../template/default/help_config.html:76
 msgid "Guest Account:"
 msgstr "Gast-Zugang:"
 
-#: ../template/default/config.html:177 ../template/default/help_config.html:76
+#: ../template/default/config.html:189 ../template/default/help_config.html:78
 msgid "Guest Username:"
 msgstr "Gast Benutzername:"
 
-#: ../template/default/config.html:183 ../template/default/help_config.html:78
+#: ../template/default/config.html:195 ../template/default/help_config.html:80
 msgid "Guest Password:"
 msgstr "Gast Passwort:"
 
-#: ../template/default/config.html:197 ../template/default/help_config.html:38
-#: ../template/default/help_config.html:84
-#: ../template/default/navigation.html:37 ../template/i18n.pl:4
+#: ../template/default/config.html:209 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:86
+#: ../template/default/navigation.html:38 ../template/i18n.pl:4
 msgid "Timeline"
 msgstr "Zeitleiste"
 
-#: ../template/default/config.html:207 ../template/default/help_config.html:86
+#: ../template/default/config.html:219 ../template/default/help_config.html:88
 msgid "Hours:"
 msgstr "Stunden:"
 
-#: ../template/default/config.html:213 ../template/default/help_config.html:88
+#: ../template/default/config.html:225 ../template/default/help_config.html:90
 msgid "Times:"
 msgstr "Zeiten:"
 
-#: ../template/default/config.html:239 ../template/default/help_config.html:96
+#: ../template/default/config.html:231 ../template/default/config.html:301
+#: ../template/default/help_config.html:92
+#: ../template/default/help_config.html:108
+msgid "Tooltips:"
+msgstr "Tooltips:"
+
+#: ../template/default/config.html:260
+#: ../template/default/help_config.html:100
 msgid "Active:"
 msgstr "Aktiv:"
 
-#: ../template/default/config.html:248 ../template/default/help_config.html:98
+#: ../template/default/config.html:269
+#: ../template/default/help_config.html:102
 msgid "Timeout:"
 msgstr "Timeout:"
 
-#: ../template/default/config.html:249 ../template/default/config.html:311
-#: ../template/default/config.html:317
+#: ../template/default/config.html:270 ../template/default/config.html:341
+#: ../template/default/config.html:347
 msgid "minutes"
 msgstr "Minuten"
 
-#: ../template/default/config.html:267 ../template/default/config.html:310
-#: ../template/default/help_config.html:114
+#: ../template/default/config.html:288 ../template/default/config.html:340
+#: ../template/default/help_config.html:120
 msgid "Time Margin at Start:"
 msgstr "Zeitpuffer Anfang:"
 
-#: ../template/default/config.html:273 ../template/default/config.html:316
-#: ../template/default/help_config.html:116
+#: ../template/default/config.html:294 ../template/default/config.html:346
+#: ../template/default/help_config.html:122
 msgid "Time Margin at Stop:"
 msgstr "Zeitpuffer Ende:"
 
-#: ../template/default/config.html:288 ../template/default/timer_list.html:6
-#: ../template/default/timer_list.html:40
+#: ../template/default/config.html:318 ../template/default/timer_list.html:6
+#: ../template/default/timer_list.html:44
 #: ../template/default/help_config.html:38
-#: ../template/default/help_config.html:108
+#: ../template/default/help_config.html:114
 #: ../template/default/help_timer_list.html:6
 #: ../template/default/help_timer_list.html:22
-#: ../template/default/navigation.html:45
+#: ../template/default/navigation.html:46
 msgid "Timer"
 msgstr "Timer"
 
-#: ../template/default/config.html:331 ../template/default/help_config.html:38
-#: ../template/default/help_config.html:122
+#: ../template/default/config.html:352
+#: ../template/default/help_config.html:124
+msgid "Tooltips in timeline:"
+msgstr "Tooltips in der Zeitleiste:"
+
+#: ../template/default/config.html:361
+#: ../template/default/help_config.html:126
+msgid "Tooltips in list:"
+msgstr "Tooltips in der Liste:"
+
+#: ../template/default/config.html:379 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:132
 msgid "Streaming"
 msgstr "Streaming"
 
-#: ../template/default/config.html:341
-#: ../template/default/help_config.html:124
+#: ../template/default/config.html:389
+#: ../template/default/help_config.html:134
 msgid "Live Streaming:"
 msgstr "LiveTV streamen:"
 
-#: ../template/default/config.html:350
-#: ../template/default/help_config.html:126
+#: ../template/default/config.html:398
+#: ../template/default/help_config.html:136
 msgid "HTTP Port of Streamdev (also possible 3000/ts):"
 msgstr "HTTP-Port von Streamdev (auch möglich 3000/ts):"
 
-#: ../template/default/config.html:356
-#: ../template/default/help_config.html:128
+#: ../template/default/config.html:404
+#: ../template/default/help_config.html:138
 msgid "Recordings Streaming:"
 msgstr "Aufnahmen streamen:"
 
-#: ../template/default/config.html:365
-#: ../template/default/help_config.html:130
+#: ../template/default/config.html:413
+#: ../template/default/help_config.html:140
 msgid "Path to VDR Recordings on your workstation:"
 msgstr "Pfad zu den VDR-Aufnahmen auf Ihrem PC:"
 
-#: ../template/default/config.html:372
+#: ../template/default/config.html:420
 msgid "Bandwidth of Streams:"
 msgstr "Bandbreite des Streams:"
 
-#: ../template/default/config.html:394 ../template/default/help_config.html:38
-#: ../template/default/help_config.html:136
+#: ../template/default/config.html:442 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:146
 msgid "Expert"
 msgstr "Expertenmodus"
 
-#: ../template/default/config.html:404
-#: ../template/default/help_config.html:139
+#: ../template/default/config.html:452
+#: ../template/default/help_config.html:149
 msgid "Read EPG directly using epg.data:"
 msgstr "EPG direkt aus der epg.data lesen:"
 
-#: ../template/default/config.html:413
-#: ../template/default/help_config.html:141
+#: ../template/default/config.html:461
+#: ../template/default/help_config.html:151
 msgid "epg.data filename:"
 msgstr "Dateiname der epg.data:"
 
-#: ../template/default/config.html:419
-#: ../template/default/help_config.html:143
+#: ../template/default/config.html:467
+#: ../template/default/help_config.html:153
 msgid "VFAT:"
 msgstr "VFAT:"
 
-#: ../template/default/config.html:440 ../template/default/help_config.html:38
-#: ../template/default/help_config.html:149
+#: ../template/default/config.html:488 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:159
 msgid "Channel Selections"
 msgstr "Selektive Senderauswahl"
 
-#: ../template/default/config.html:450
+#: ../template/default/config.html:498
 msgid "In \"Timeline\"?"
 msgstr "In der \"Zeitleiste\"?"
 
-#: ../template/default/config.html:459
+#: ../template/default/config.html:507
 msgid "In \"Channels\"?"
 msgstr "In der \"Programmübersicht\"?"
 
-#: ../template/default/config.html:468
+#: ../template/default/config.html:516
 msgid "In \"Playing Today\"?"
 msgstr "Bei \"Was läuft heute\"?"
 
-#: ../template/default/config.html:477
+#: ../template/default/config.html:525
 msgid "In \"What's On Now\"?"
 msgstr "Bei \"Was läuft jetzt\"?"
 
-#: ../template/default/config.html:486
+#: ../template/default/config.html:534
 msgid "In \"AutoTimer\"?"
 msgstr "Bei \"AutoTimer\"?"
 
-#: ../template/default/config.html:527
+#: ../template/default/config.html:543
+msgid "In \"Watch TV\"?"
+msgstr "In \"Fernseher\"?"
+
+#: ../template/default/config.html:584
 msgid "Apply"
 msgstr "Anwenden"
 
-#: ../template/default/timer_list.html:24
-#: ../template/default/prog_timeline.html:78
+#: ../template/default/timer_list.html:27
+#: ../template/default/prog_timeline.html:81
 msgid "Duration:"
 msgstr "Dauer:"
 
-#: ../template/default/timer_list.html:24
-#: ../template/default/prog_timeline.html:78
+#: ../template/default/timer_list.html:27
+#: ../template/default/prog_timeline.html:81
 msgid "min"
 msgstr "min"
 
-#: ../template/default/timer_list.html:42
+#: ../template/default/timer_list.html:27
+msgid "Transponder:"
+msgstr "Transponder:"
+
+#: ../template/default/timer_list.html:27
+msgid "CA-System:"
+msgstr "CA-System:"
+
+#: ../template/default/timer_list.html:46
 msgid "New Timer"
 msgstr "Neuer Timer"
 
-#: ../template/default/timer_list.html:238
+#: ../template/default/timer_list.html:242
 #: ../template/default/rec_list.html:59
 msgid "Date"
 msgstr "Datum"
 
-#: ../template/default/timer_list.html:303
+#: ../template/default/timer_list.html:307
 msgid "This timer is inactive!"
 msgstr "Diese Aufnahme ist deaktiviert!"
 
-#: ../template/default/timer_list.html:306
+#: ../template/default/timer_list.html:310
 msgid "This timer is impossible!"
 msgstr "Diese Aufnahme ist nicht möglich!"
 
-#: ../template/default/timer_list.html:309
+#: ../template/default/timer_list.html:313
 msgid "No more timers on other transponders possible!"
 msgstr "Keine weiteren Aufnahmen auf anderen Transpondern mehr möglich!"
 
-#: ../template/default/timer_list.html:312
+#: ../template/default/timer_list.html:316
 msgid "Timer OK."
 msgstr "Diese Aufnahme ist möglich."
 
-#: ../template/default/timer_list.html:317
+#: ../template/default/timer_list.html:321
 msgid "Edit timer status?"
 msgstr "Timerstatus ändern?"
 
-#: ../template/default/timer_list.html:320
+#: ../template/default/timer_list.html:324
 msgid "VPS"
 msgstr "VPS"
 
-#: ../template/default/timer_list.html:321
+#: ../template/default/timer_list.html:325
 msgid "Auto"
 msgstr "Auto"
 
-#: ../template/default/timer_list.html:374
+#: ../template/default/timer_list.html:378
 msgid "Delete Selected Timers"
 msgstr "Ausgewählte Timer löschen"
 
-#: ../template/default/prog_list.html:6 ../template/default/navigation.html:41
+#: ../template/default/prog_list.html:6 ../template/default/navigation.html:42
 #: ../template/i18n.pl:5
 msgid "Channels"
 msgstr "Programmübersicht"
@@ -658,30 +694,30 @@ msgstr "Fehler!"
 msgid "TV"
 msgstr "Fernseher"
 
-#: ../template/default/tv.html:178
+#: ../template/default/tv.html:195
 msgid "Interval:"
 msgstr "Intervall:"
 
-#: ../template/default/tv.html:181 ../template/default/tv.html:182
-#: ../template/default/tv.html:183 ../template/default/tv.html:184
-#: ../template/default/tv.html:185 ../template/default/tv.html:186
-#: ../template/default/tv.html:187
+#: ../template/default/tv.html:198 ../template/default/tv.html:199
+#: ../template/default/tv.html:200 ../template/default/tv.html:201
+#: ../template/default/tv.html:202 ../template/default/tv.html:203
+#: ../template/default/tv.html:204
 msgid "sec."
 msgstr "sek"
 
-#: ../template/default/tv.html:189 ../template/default/tv.html:196
+#: ../template/default/tv.html:206 ../template/default/tv.html:213
 msgid "G"
 msgstr "G"
 
-#: ../template/default/tv.html:189 ../template/default/tv.html:196
+#: ../template/default/tv.html:206 ../template/default/tv.html:213
 msgid "Grab the picture!"
 msgstr "Hole das Bild!"
 
-#: ../template/default/tv.html:190
+#: ../template/default/tv.html:207
 msgid "Size:"
 msgstr "Größe:"
 
-#: ../template/default/tv.html:198
+#: ../template/default/tv.html:215
 msgid "Open in separate window"
 msgstr "Öffne eigenes Fenster"
 
@@ -708,7 +744,7 @@ msgstr "Film in der Internet-Movie-Database (IMDb) suchen"
 #: ../template/default/rec_list.html:6 ../template/default/rec_list.html:18
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:18
-#: ../template/default/navigation.html:53 ../template/i18n.pl:7
+#: ../template/default/navigation.html:54 ../template/i18n.pl:7
 msgid "Recordings"
 msgstr "Aufnahmen"
 
@@ -732,7 +768,7 @@ msgstr "Gesamt"
 msgid "New"
 msgstr "neu"
 
-#: ../template/default/rec_list.html:135 ../template/default/rec_edit.html:57
+#: ../template/default/rec_list.html:135 ../template/default/rec_edit.html:69
 msgid "Rename"
 msgstr "Umbenennen"
 
@@ -785,23 +821,14 @@ msgid ""
 "those in any fields where channels can be selected. This also limits the EPG "
 "information VDRAdmin will read so that you can use this to reduce VDRAdmin's "
 "memory consumption and increase its performance. <strong>0</strong> turns "
-"this feature off and VDRAdmin will use all available channels. <h4>Note:</"
-"h4> Changes are not populated immediately. You have to either wait until "
-"VDRAdmin reconnects to VDR to update its EPG information or force this "
-"update manually in the <span class=\"ref_menu\">AutoTimer</span> menu or "
-"restart VDRAdmin."
+"this feature off and VDRAdmin will use all available channels."
 msgstr ""
 "VDRAdmin wird nur die hier eingestellte Anzahl an Sendern vom VDR laden und "
 "nur diese an allen Stellen, die die Sender anzeigen, anbieten. Dies "
 "beschränkt auch die EPG Informationen, die VDRAdmin lesen wird und "
 "vermindert somit auch den Speicherbedarf von VDRAdmin und erhöht seine "
 "Verarbeitungsgeschwindigkeit. <strong>0</strong> schaltet diese Funktion ab "
-"und VDRAdmin wird alle verfügbaren Sender verwenden. <h4>Achtung:</h4> Diese "
-"Änderung wird nicht sofort aktiv, sondern erst, wenn sich VDRAdmin erneut "
-"mit dem VDR verbindet um die EPG Informationen aufzufrischen. Sie können "
-"dies auch über die Schaltfläche <input type=\"submit\" class=\"submit\" "
-"value=\"Manuelles Update\"/> auf der <span class=\"ref_menu\">AutoTimer</"
-"span> Seite erzwingen."
+"und VDRAdmin wird alle verfügbaren Sender verwenden."
 
 #: ../template/default/help_config.html:49
 msgid ""
@@ -816,18 +843,22 @@ msgstr ""
 "\"192.168.0.123/32\" beinhaltet nur die IP \"192.168.0.123\"."
 
 #: ../template/default/help_config.html:51
-#: ../template/default/help_config.html:65
-#: ../template/default/help_config.html:81
-#: ../template/default/help_config.html:91
-#: ../template/default/help_config.html:105
-#: ../template/default/help_config.html:119
-#: ../template/default/help_config.html:133
-#: ../template/default/help_config.html:146
-#: ../template/default/help_config.html:153
+msgid "Here you can set the localization VDRAdmin should use."
+msgstr "Hier stellen Sie die Lokalisierung ein, die VDRAdmin verwenden soll."
+
+#: ../template/default/help_config.html:53
+#: ../template/default/help_config.html:67
+#: ../template/default/help_config.html:83
+#: ../template/default/help_config.html:95
+#: ../template/default/help_config.html:111
+#: ../template/default/help_config.html:129
+#: ../template/default/help_config.html:143
+#: ../template/default/help_config.html:156
+#: ../template/default/help_config.html:163
 msgid "Top"
 msgstr "nach oben"
 
-#: ../template/default/help_config.html:57
+#: ../template/default/help_config.html:59
 msgid ""
 "The number of DVB cards VDR can access. Depending on this value VDRAdmin "
 "will calculate critical timers in the <span class=\"ref_menu\">Timer</span> "
@@ -837,7 +868,7 @@ msgstr ""
 "diesem Wert berechnet VDRAdmin die kritischen Timer auf der <span class="
 "\"ref_menu\">Timer</span> Seite"
 
-#: ../template/default/help_config.html:59
+#: ../template/default/help_config.html:61
 msgid ""
 "The path to VDR's recordings. It's used so that VDRAdmin can locate the "
 "recordings when using <span class=\"ref_label\">Recordings Streaming</span> "
@@ -849,7 +880,7 @@ msgstr ""
 "span> und <span class=\"ref_file\">reccmds.conf</span> auf der <span class="
 "\"ref_menu\">Aufnahmen</span> Seite verwendet werden."
 
-#: ../template/default/help_config.html:61
+#: ../template/default/help_config.html:63
 msgid ""
 "The path where VDR's configuration files are located. If this directory "
 "contains the file <span class=\"ref_file\">reccmds.conf</span> its content "
@@ -861,22 +892,22 @@ msgstr ""
 "dieser Datei auf der <span class=\"ref_menu\">Aufnahmen</span> Seite zur "
 "Auswahl angezeigt."
 
-#: ../template/default/help_config.html:63
+#: ../template/default/help_config.html:65
 msgid "The path where the EPG images are stored."
 msgstr "Der Pfad, wo die EPG Bilder abgelegt sind."
 
-#: ../template/default/help_config.html:71
+#: ../template/default/help_config.html:73
 msgid ""
 "The username for the main user, i.e. the user having the most privileges."
 msgstr ""
 "Der Benutzername für den Hauptbenutzer, d.h. dem Benutzer mit den meisten "
 "Rechten."
 
-#: ../template/default/help_config.html:73
+#: ../template/default/help_config.html:75
 msgid "The main user's password."
 msgstr "Das Passwort des Hauptbenutzers."
 
-#: ../template/default/help_config.html:75
+#: ../template/default/help_config.html:77
 msgid ""
 "If you want an user account having only limited privileges, this is for you. "
 "The guest user cannot modify anything, it's only allowed to view the EPG, "
@@ -886,19 +917,19 @@ msgstr ""
 "dann aktivieren Sie diese Option. Der Gastbenutzer kann nichts ändern, es "
 "ist nur erlaubt den EPG, die Timer, AutoTimer und Aufnahmen aufzulisten."
 
-#: ../template/default/help_config.html:77
+#: ../template/default/help_config.html:79
 msgid "The username for the guest user."
 msgstr "Der Benutzername für den Gastbenutzer."
 
-#: ../template/default/help_config.html:79
+#: ../template/default/help_config.html:81
 msgid "The guest user's password."
 msgstr "Das Passwort des Gastbenutzers."
 
-#: ../template/default/help_config.html:87
+#: ../template/default/help_config.html:89
 msgid "The number of hours to show in the timeline."
 msgstr "Die Anzahl der Stunden, die in der Zeitleiste angezeigt wird."
 
-#: ../template/default/help_config.html:89
+#: ../template/default/help_config.html:91
 msgid ""
 "A comma separated list of times in <strong>hh:mm</strong> format that appear "
 "in the selectbox placed at the top."
@@ -906,18 +937,23 @@ msgstr ""
 "Eine durch Kommas getrennte Liste von Uhrzeiten im Format <strong>hh:mm</"
 "strong>, die in der Auswahlliste am Seitenanfang angezeigt wird."
 
-#: ../template/default/help_config.html:97
+#: ../template/default/help_config.html:93
+#: ../template/default/help_config.html:109
+msgid "Here you can (de-)activate the tooltips."
+msgstr "Hier können Sie die Tooltips ein- oder ausschalten."
+
+#: ../template/default/help_config.html:101
 msgid "Activate or deactivate the AutoTimer function."
 msgstr "Die AutoTimer-Funktionalität aktivieren oder deaktivieren."
 
-#: ../template/default/help_config.html:99
+#: ../template/default/help_config.html:103
 msgid "The interval, the the EPG data is checked for updating the AutoTimers."
 msgstr ""
 "Das Intervall indem die EPG Daten aktualisiert werden und nach neuen "
 "AutoTimern gesucht wird."
 
-#: ../template/default/help_config.html:101
-#: ../template/default/help_config.html:111
+#: ../template/default/help_config.html:105
+#: ../template/default/help_config.html:117
 #: ../template/default/help_timer_new.html:62
 #: ../template/default/help_at_timer_new.html:53
 msgid ""
@@ -952,8 +988,8 @@ msgstr ""
 "Karten belegt sind unterbricht ein Timer mit einer höheren Priorität den "
 "Timer mit der niedrigsten Priorität um die Aufnahme zu starten."
 
-#: ../template/default/help_config.html:103
-#: ../template/default/help_config.html:113
+#: ../template/default/help_config.html:107
+#: ../template/default/help_config.html:119
 #: ../template/default/help_timer_new.html:64
 #: ../template/default/help_at_timer_new.html:55
 msgid ""
@@ -975,7 +1011,7 @@ msgstr ""
 "Anzahl von Tagen seit der <strong>Startzeit</strong> abgelaufen ist und "
 "Plattenplatz für eine neue Aufnahme benötigt wird."
 
-#: ../template/default/help_config.html:115
+#: ../template/default/help_config.html:121
 msgid ""
 "The number of minutes VDRAdmin subtracts from the broadcasts start time "
 "found in the EPG. This value is used for timers programmed by AutoTimer and "
@@ -986,7 +1022,7 @@ msgstr ""
 "manuell durch Klicken von \"Aufnehmen\" in einer beliebigen EPG-Ansicht "
 "programmiert werden."
 
-#: ../template/default/help_config.html:117
+#: ../template/default/help_config.html:123
 msgid ""
 "The number of minutes VDRAdmin adds to the broadcasts stop time found in the "
 "EPG. This value is used for timers programmed by AutoTimer and timers "
@@ -998,6 +1034,14 @@ msgstr ""
 "programmiert werden."
 
 #: ../template/default/help_config.html:125
+msgid "Here you can (de-)activate the tooltips in the timeline."
+msgstr "Hier können Sie die Tooltips in der Zeitleiste ein- oder ausschalten."
+
+#: ../template/default/help_config.html:127
+msgid "Here you can (de-)activate the tooltips in the list."
+msgstr "Hier können Sie die Tooltips in der Liste ein- oder ausschalten."
+
+#: ../template/default/help_config.html:135
 msgid ""
 "Enable or disable live streaming using the <a href=\"http://www.magoa.net/"
 "linux/\">streamdev plugin</a>. You also have to set the correct <span class="
@@ -1008,7 +1052,7 @@ msgstr ""
 "muss noch der <span class=\"ref_label\">HTTP-Port von Streamdev</span> "
 "korrekt gesetzt sein."
 
-#: ../template/default/help_config.html:127
+#: ../template/default/help_config.html:137
 msgid ""
 "Here you have to set the port number your VDR's streamdev server listens for "
 "connections. Additionally you can also provide the stream type you like to "
@@ -1017,7 +1061,7 @@ msgstr ""
 "Hier geben Sie die Portnummer des Streamdev-Servers im VDR an. Sie können "
 "auch den zu verwendenden Streamtyp angeben."
 
-#: ../template/default/help_config.html:129
+#: ../template/default/help_config.html:139
 msgid ""
 "Enable or disable streaming of recordings.<br />Well actually this is no "
 "real \"streaming\", but you have to setup your workstation so that it can "
@@ -1035,7 +1079,7 @@ msgstr ""
 "diese dann zum Browser. Wenn nun der Browser und das Medienabspielprogramm "
 "korrekt konfiguriert sind wird die Aufnahme am PC abgespielt."
 
-#: ../template/default/help_config.html:131
+#: ../template/default/help_config.html:141
 msgid ""
 "This is the path where your workstation can access VDR's recordings. This "
 "depends on your VDR and workstation setup, for example \"\\\\vdr\\videos\" "
@@ -1046,7 +1090,7 @@ msgstr ""
 "\\videos\" oder \"V:\\\" (unter Windows) oder \"/mnt/videos\" (unter Linux) "
 "sein."
 
-#: ../template/default/help_config.html:137
+#: ../template/default/help_config.html:147
 msgid ""
 "<p>This section is for experts <strong>only</strong>, i.e. you know what you "
 "are doing!</p>"
@@ -1054,7 +1098,7 @@ msgstr ""
 "<p>Dieser Bereich ist <strong>nur</strong> für Experten, d.h. Sie wissen was "
 "Sie tun!</p>"
 
-#: ../template/default/help_config.html:140
+#: ../template/default/help_config.html:150
 msgid ""
 "Accessing VDR's EPG through VDR's SVDRPort seems to block VDR for some time. "
 "If this option is activated VDRAdmin will read the <span class=\"ref_file"
@@ -1065,7 +1109,7 @@ msgstr ""
 "<span class=\"ref_file\">epg.data</span>, so dass der VDR nicht blockiert "
 "wird."
 
-#: ../template/default/help_config.html:142
+#: ../template/default/help_config.html:152
 msgid ""
 "If you've enabled the option above you need to tell VDRAdmin where the <span "
 "class=\"ref_file\">epg.data</span> file is located."
@@ -1074,7 +1118,7 @@ msgstr ""
 "Dateinamen inklusive komplettem Pfad zur Datei <span class=\"ref_file\">epg."
 "data</span> bekannt geben."
 
-#: ../template/default/help_config.html:144
+#: ../template/default/help_config.html:154
 msgid ""
 "If you have compiled VDR with the VFAT define you have to enable this "
 "option. If this option is set to the wrong value, you may have problems with "
@@ -1085,7 +1129,7 @@ msgstr ""
 "mit bestimmten Aufnahmen haben, wenn Sie diese Streamen oder einen <span "
 "class=\"ref_file\">reccmd.conf</span> Befehl darauf ausführen lassen wollen."
 
-#: ../template/default/help_config.html:150
+#: ../template/default/help_config.html:160
 msgid ""
 "<p>If you want to limit the number of channels used in some parts of "
 "VDRAdmin, this is for you!</p><p>Use the radio buttons to activate or "
@@ -1107,16 +1151,16 @@ msgstr ""
 "<input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/> "
 "angeklickt werden.</p>"
 
-#: ../template/default/prog_timeline.html:119
+#: ../template/default/prog_timeline.html:123
 msgid "Timeline:"
 msgstr "Zeitleiste:"
 
-#: ../template/default/prog_timeline.html:119
+#: ../template/default/prog_timeline.html:123
 msgid "to"
 msgstr "bis"
 
 #: ../template/default/prog_list2.html:6
-#: ../template/default/navigation.html:33 ../vdradmind.pl:2432
+#: ../template/default/navigation.html:34 ../vdradmind.pl:2472
 msgid "Playing Today"
 msgstr "Was läuft heute?"
 
@@ -1131,6 +1175,10 @@ msgstr "Alter Titel der Aufnahme:"
 #: ../template/default/rec_edit.html:45
 msgid "New Name of Recording:"
 msgstr "Neuer Titel der Aufnahme:"
+
+#: ../template/default/rec_edit.html:51
+msgid "Subtitle:"
+msgstr "Untertitel:"
 
 #: ../template/default/help_timer_list.html:33
 msgid ""
@@ -1623,7 +1671,7 @@ msgid ""
 "patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span "
 "class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete "
 "(<img src=\"bilder/delete.gif\" alt=\"delete\" />)</dt><dd>Delete a "
-"recording.</dd><dt>Stream (<img src=\"bilder/stream.jpg\" alt=\"stream\" />)"
+"recording.</dd><dt>Stream (<img src=\"bilder/stream.gif\" alt=\"stream\" />)"
 "</dt><dd>This column is only shown if you activated and configured <span "
 "class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu"
 "\">Configuration</span> menu. You can watch the recording at your "
@@ -1659,7 +1707,7 @@ msgstr ""
 "aio21_svdrprename.patch</span> und <span class=\"ref_file\">enAIO-v2.2+</"
 "span> bieten dieses Kommando.</dd><dt>Löschen (<img src=\"bilder/delete.gif"
 "\" alt=\"delete\" />)</dt><dd>Löschen einer Aufnahme.</dd><dt>Streamen (<img "
-"src=\"bilder/stream.jpg\" alt=\"stream\" />)</dt><dd>Diese Spalte wird nur "
+"src=\"bilder/stream.gif\" alt=\"stream\" />)</dt><dd>Diese Spalte wird nur "
 "angezeigt, wenn Sie auf der <span class=\"ref_menu\">Konfiguration</span> "
 "Seite <span class=\"ref_label\">Aufnahmen streamen</span> aktiviert und "
 "konfiguriert haben. Sie können dann die Aufnahme auf Ihrem PC anschauen.</"
@@ -1685,10 +1733,12 @@ msgid "oneshot"
 msgstr "einmal"
 
 #: ../template/default/at_timer_new.html:71
+#: ../template/default/at_timer_new.html:190
 msgid "Title"
 msgstr "Titel"
 
 #: ../template/default/at_timer_new.html:72
+#: ../template/default/at_timer_new.html:191
 msgid "Subtitle"
 msgstr "Untertitel"
 
@@ -1700,64 +1750,84 @@ msgstr "Beschreibung"
 msgid "all"
 msgstr "alle"
 
-#: ../template/default/navigation.html:65
+#: ../template/default/at_timer_new.html:177
+msgid "Test"
+msgstr "Testen"
+
+#: ../template/default/at_timer_new.html:192
+msgid "Broadcasted"
+msgstr "Ausgestrahlt"
+
+#: ../template/default/at_timer_new.html:193
+msgid "Stored in"
+msgstr "Abgelegt in"
+
+#: ../template/default/at_timer_new.html:213
+msgid "No matches found!"
+msgstr "Nicht gefunden"
+
+#: ../template/default/navigation.html:66
 msgid "Watch TV"
 msgstr "Fernseher"
 
-#: ../template/default/navigation.html:69
+#: ../template/default/navigation.html:70
 msgid "Search"
 msgstr "Suchen"
 
-#: ../vdradmind.pl:265
+#: ../vdradmind.pl:274
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Wie lautet der Hostname des VDR (z.B. video.intra.net)?"
 
-#: ../vdradmind.pl:266
+#: ../vdradmind.pl:275
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Auf welchem Port hört der VDR auf SVDRP-Anfragen?"
 
-#: ../vdradmind.pl:267
+#: ../vdradmind.pl:276
 msgid "On which address should VDRAdmin listen (0.0.0.0 for any)?"
 msgstr ""
 "An welcher Adresse soll VDRAdmin auf Verbindungen warten (0.0.0.0 für alle)?"
 
-#: ../vdradmind.pl:268
+#: ../vdradmind.pl:277
 msgid "On which port should VDRAdmin listen?"
 msgstr "Auf welchem Port soll VDRAdmin hören?"
 
-#: ../vdradmind.pl:269
+#: ../vdradmind.pl:278
 msgid "Username?"
 msgstr "Benutzername?"
 
-#: ../vdradmind.pl:270
+#: ../vdradmind.pl:279
 msgid "Password?"
 msgstr "Passwort?"
 
-#: ../vdradmind.pl:271
+#: ../vdradmind.pl:280
 msgid "Where are your recordings stored?"
 msgstr "Wo befinden sich die Aufnahmen?"
 
-#: ../vdradmind.pl:272
+#: ../vdradmind.pl:281
 msgid "Where are your VDR's configuration files located?"
 msgstr "Wo befinden sich die Konfigurationsdateien des VDR?"
 
-#: ../vdradmind.pl:278
+#: ../vdradmind.pl:287
 msgid "Config file written successfully."
 msgstr "Konfigurationsdatei wurde erfolgreich geschrieben."
 
-#: ../vdradmind.pl:326
+#: ../vdradmind.pl:336
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s wurde mit der Prozeß-ID %d gestartet."
 
-#: ../vdradmind.pl:2432
+#: ../vdradmind.pl:2472
 msgid "Playing Tomorrow"
 msgstr "Was läuft morgen"
 
-#: ../vdradmind.pl:2432
+#: ../vdradmind.pl:2472
 #, perl-format
 msgid "Playing on the %d."
 msgstr "Was läuft am %d."
+
+#: ../vdradmind.pl:4284
+msgid "System default"
+msgstr "Systemstandard"
 
 #: ../template/i18n.pl:3
 msgid "Playing Today?"
@@ -1811,6 +1881,12 @@ msgstr "Fehler beim Senden eines Kommandos zu %s"
 #: ../template/i18n.pl:23
 msgid "Schedule"
 msgstr "Übersicht"
+
+#~ msgid "Switch"
+#~ msgstr "Umschalten"
+
+#~ msgid "Gets active after restarting VDRAdmin"
+#~ msgstr "Wird erst nach einem Neustart von VDRAdmin aktiv"
 
 #~ msgid "In \"Channels\" / \"Playing Today\"?"
 #~ msgstr "Bei \"Programmübersicht\" / \"Was läuft heute\"?"

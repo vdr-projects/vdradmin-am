@@ -16,6 +16,7 @@ MANDIR=${MANDIR:-$DESTDIR/usr/share/man/man1}
 LOGDIR=${LOGDIR:-$DESTDIR/var/log}
 PIDFILE=${PIDFILE:-$DESTDIR/var/run/vdradmind.pid}
 VIDEODIR=${VIDEODIR:-/video}
+EPGIMAGES=${EPGIMAGES:-$VIDEODIR/epgimages}
 VDRCONF=${VDRCONF:-$VIDEODIR}
 EPGDATA=${EPGDATA:-$VIDEODIR/epg.data}
 
@@ -141,6 +142,7 @@ function doInstall()
   	    -e "s:\(\$ETCDIR *= \)\"/etc/vdradmin\";:\1\"${ETCDIR}\";:" \
   	    -e "s:/usr/share/locale:${LOCDIR}:" \
   	    -e "s:\(\$CONFIG{VIDEODIR} *= \)\"/video\";:\1\"${VIDEODIR}\";:" \
+  	    -e "s:\(\$CONFIG{EPGIMAGES} *= \)\"\$CONFIG{VIDEODIR}/epgimages\";:\1\"${EPGIMAGES}\";:" \
 				-e "s:\(\$CONFIG{VDRCONFDIR} *= \)\"\$CONFIG{VIDEODIR}\";:\1\"${VDRCONF}\";:" \
 				-e "s:\(\$CONFIG{EPG_FILENAME} *= \)\"\$CONFIG{VIDEODIR}/epg.data\";:\1\"${EPGDATA}\";:"
 

@@ -9,20 +9,25 @@
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css"/>
 	</tmpl_if>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
-	<script type="text/javascript" language="JavaScript1.2" src="infobox.js"></script>
+	<?% IF config.AT_TOOLTIP %?>
+		<script type="text/javascript" language="JavaScript1.2" src="infobox.js"></script>
+	<?% END %?>
 </head>
 
 <body id="at_timer_list">
-<div id="infodiv" style="position:absolute; visibility:hidden; z-index:20; top:0px; left:0px;"></div>
-<script language="JavaScript" type="text/javascript">
+<?% IF config.AT_TOOLTIP %?>
+	<div id="infodiv" style="position:absolute; visibility:hidden; z-index:20; top:0px; left:0px;"></div>
+		<script language="JavaScript" type="text/javascript">
 <?%
 	FOREACH timer = at_timer_loop2;
 %?>
-		maketip("VDR-<?% timer.id %?>", "<?% timer.pattern %?>", "<%! Priority: !%> <?% timer.prio %?><br /><%! Lifetime: !%> <?% timer.lft %?>");
+			maketip("VDR-<?% timer.id %?>", "<?% timer.pattern %?>", "<%! Priority: !%> <?% timer.prio %?><br /><%! Lifetime: !%> <?% timer.lft %?>");
 <?%
 	END
 %?>
-</script>
+	</script>
+<?% END %?>
+
 	<form action="<tmpl_var url>" method="get" name="FormName0">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
@@ -146,7 +151,7 @@
 						<tmpl_if stop><tmpl_var stop><tmpl_else>-</tmpl_if>
 					</div>
 				</td>
-				<td class="col_name <tmpl_if sortbypattern>selected</tmpl_if>" onMouseOver="tip('VDR-<tmpl_var id>'); return true;" onMouseOut="untip(); return true;">
+				<td class="col_name <tmpl_if sortbypattern>selected</tmpl_if>" <?% IF config.AT_TOOLTIP %?>onMouseOver="tip('VDR-<tmpl_var id>'); return true;" onMouseOut="untip(); return true;"<?% END %?>>
 					<div>
 						<tmpl_var pattern>
 					</div>

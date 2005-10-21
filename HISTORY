@@ -4,6 +4,24 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2005-10-21: 0.97-am3.4.2rc
+- Hopefully fixed browsing in "recordings" menu (if there are folders having the same name).
+- Added new skin "default".
+- Removed i18n.pl.
+- Localization can be set in configuration again.
+- Added "Transponder" and "CA-System" to tooltips in timer_list.
+- Show recording's summary and subtitle in rec_edit (Requested by BigDiSt).
+- Check for and shorten too long summary when programming timer.
+- Check for too long commands sent to SVDRPort.
+- Channel select box in TV.
+- "Test" button in AutoTimer edit for showing results of current settings (Requested by Hardy Flor).
+- Link from channel name in prog_list2 and timer_list to prog_list.
+- Bring popups to the front (e.g. help, prog_detail...) (Based on a patch submitted by Ville Skyttä).
+- Reuse existing TV, RC and help windows (Based on a patch submitted by Ville Skyttä).
+- Send vdradmin.m3u when streaming.
+- Tooltips in timer_list, prog_timeline and at_timer_list can be deactivated (Requested by Hardy Flor).
+- Fixed wrong HTML tags in rec_detail (Reported by foobar42).
+
 2005-10-04: 0.97-am3.4.1
 - Fixed some bugs:
   -> Selected channel is remembered when editing AutoTimers (Reported by Scorp).

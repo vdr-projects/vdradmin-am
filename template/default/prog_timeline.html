@@ -64,24 +64,28 @@
 			}
 		}
 	</script>
+<?% IF config.TL_TOOLTIP %?>
 	<script type="text/javascript" language="JavaScript1.2" src="infobox.js"></script>
+<?% END %?>
 </head>
 
 <body id="prog_timeline">
-<div id="infodiv" style="position:absolute; visibility:hidden; z-index:20; top:0px; left:0px;"></div>
-<script language="JavaScript" type="text/javascript">
-<?%
-	FOREACH name = shows2.keys.nsort;
-		counter = 0;
-		FOREACH show = shows2.${name};
-%?>
-			maketip("VDR-<?% show.vdr_id %?>-<?% counter %?>", "<?% show.title %?>", "<%! Duration: !%> <?% date.format(show.start, '%H:%M') %?> - <?% date.format(show.stop, '%H:%M') %?> (<?% (show.stop - show.start) / 60 %?><%! min !%>)" );
-<?%
-			counter = counter + 1;
+<?% IF config.TL_TOOLTIP %?>
+	<div id="infodiv" style="position:absolute; visibility:hidden; z-index:20; top:0px; left:0px;"></div>
+	<script language="JavaScript" type="text/javascript">
+	<?%
+		FOREACH name = shows2.keys.nsort;
+			counter = 0;
+			FOREACH show = shows2.${name};
+	%?>
+				maketip("VDR-<?% show.vdr_id %?>-<?% counter %?>", "<?% show.title %?>", "<%! Duration: !%> <?% date.format(show.start, '%H:%M') %?> - <?% date.format(show.stop, '%H:%M') %?> (<?% (show.stop - show.start) / 60 %?><%! min !%>)" );
+	<?%
+				counter = counter + 1;
+			END;
 		END;
-	END;
-%?>
-</script>
+	%?>
+	</script>
+<?% END %?>
 
 	<form action="<?% nowurl %?>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
@@ -146,9 +150,9 @@
 <?% WHILE minute < bis %?>
 								<td  width="1%" height="10px" align="left" valign="bottom" class=<?% minute % 10 ? "color1" : "color2" %?>>
 	<?% IF minute % 15 %?>
-									<img src="bilder/pixel.gif" width="1" height="5" border="0" />
+									<img src="bilder/spacer.gif" width="1" height="5" border="0" />
 	<?% ELSE %?>
-									<img src="bilder/pixel.gif" width="1" height="10" border="0" />
+									<img src="bilder/spacer.gif" width="1" height="10" border="0" />
 	<?% END %?>
 								</td>
 	<?% minute = minute + 5 %?> 
@@ -216,7 +220,7 @@
 				td_class = show.timer ? "color_timer" : td_class %?>
 									<table border="0" align="left" cellpadding="0" cellspacing="0" id=<?% show.timer ? "timertable" : "prgtable" %?>>
 										<tr>
-											<td width="1" class="<?% td_class %?>" onMouseOver="tip('VDR-<?% show.vdr_id %?>-<?% counter %?>'); return true;" onMouseOut="untip(); return true;">
+											<td width="1" class="<?% td_class %?>" <?% IF config.TL_TOOLTIP %?>onMouseOver="tip('VDR-<?% show.vdr_id %?>-<?% counter %?>'); return true;" onMouseOut="untip(); return true;"<?% END %?>>
 												<img src="bilder/spacer.gif" width="<?% laenge_pix %?>" height="1" border="0" hspace="0" /><br />
 												<nobr>
 													<?% IF show.summary %?><a href="javascript:popup('./vdradmin.pl?aktion=prog_detail&amp;epg_id=<?% show.anchor %?>&amp;vdr_id=<?% show.vdr_id %?>');"><?% END %?>

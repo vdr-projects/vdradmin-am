@@ -8,6 +8,7 @@ MANDIR=/usr/share/man/man1/
 LOGDIR=/var/log
 PIDFILE=/var/run/vdradmind.pid
 VIDEODIR=/video
+EPGIMAGES=$(VIDEODIR)/epgimages
 VDRCONF=$(VIDEODIR)
 EPGDATA=$(VIDEODIR)/epg.data
 
