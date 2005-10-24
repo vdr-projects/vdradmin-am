@@ -100,7 +100,7 @@ msgstr "Ei"
 #: ../template/default/timer_new.html:82
 #: ../template/default/help_timer_new.html:36
 msgid "AutoTimer Checking:"
-msgstr "Automaattisen ajastimen tarkistus:"
+msgstr "Hakuajastimen tarkistus:"
 
 #: ../template/default/timer_new.html:85
 #: ../template/default/help_timer_new.html:39
@@ -268,11 +268,11 @@ msgstr ""
 #: ../template/default/help_at_timer_list.html:22
 #: ../template/default/navigation.html:50
 msgid "AutoTimer"
-msgstr "Automaattiset ajastimet"
+msgstr "Hakuajastimet"
 
 #: ../template/default/at_timer_list.html:39
 msgid "New AutoTimer"
-msgstr "Uusi automaattinen ajastin"
+msgstr "Uusi hakuajastin"
 
 #: ../template/default/at_timer_list.html:58
 #: ../template/default/timer_list.html:220
@@ -328,7 +328,7 @@ msgstr "Päivitä"
 
 #: ../template/default/at_timer_list.html:196
 msgid "Delete Selected AutoTimers"
-msgstr "Poista valitut automaattiset ajastimet"
+msgstr "Poista valitut hakuajastimet"
 
 #: ../template/default/at_timer_list.html:196
 #: ../template/default/timer_list.html:378
@@ -412,7 +412,7 @@ msgstr "Käyttäjätunnukseton osoiteavaruus:"
 
 #: ../template/default/config.html:96 ../template/default/help_config.html:50
 msgid "Language:"
-msgstr ""
+msgstr "Kieli:"
 
 #: ../template/default/config.html:116 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:56
@@ -433,7 +433,7 @@ msgstr "Konfigurointitiedostojen polku:"
 
 #: ../template/default/config.html:144 ../template/default/help_config.html:64
 msgid "Path to EPG images:"
-msgstr "Ohjelmisto-oppaan kuvien polku:"
+msgstr "Ohjelmisto-oppaan kuvapolku:"
 
 #: ../template/default/config.html:158 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:70
@@ -478,7 +478,7 @@ msgstr "Ajankohdat:"
 #: ../template/default/help_config.html:92
 #: ../template/default/help_config.html:108
 msgid "Tooltips:"
-msgstr ""
+msgstr "Lisätietolaatikot:"
 
 #: ../template/default/config.html:260
 #: ../template/default/help_config.html:100
@@ -518,12 +518,12 @@ msgstr "Ajastimet"
 #: ../template/default/config.html:352
 #: ../template/default/help_config.html:124
 msgid "Tooltips in timeline:"
-msgstr ""
+msgstr "Lisätietolaatikot \"Aikajana\"-sivulla:"
 
 #: ../template/default/config.html:361
 #: ../template/default/help_config.html:126
 msgid "Tooltips in list:"
-msgstr ""
+msgstr "Lisätietolaatikot \"Ajastimet\"-sivulla:"
 
 #: ../template/default/config.html:379 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:132
@@ -597,12 +597,11 @@ msgstr "Käytä kanavavalintoja \"Menossa nyt\"-sivulla"
 
 #: ../template/default/config.html:534
 msgid "In \"AutoTimer\"?"
-msgstr "Käytä kanavavalintoja \"Automaattiset ajastimet\"-sivulla"
+msgstr "Käytä kanavavalintoja \"Hakuajastimet\"-sivulla"
 
 #: ../template/default/config.html:543
-#, fuzzy
 msgid "In \"Watch TV\"?"
-msgstr "Katso TV:tä"
+msgstr "Käytä kanavavalintoja \"Katso TV:tä\"-sivulla"
 
 #: ../template/default/config.html:584
 msgid "Apply"
@@ -620,11 +619,11 @@ msgstr "min"
 
 #: ../template/default/timer_list.html:27
 msgid "Transponder:"
-msgstr ""
+msgstr "Transponderi:"
 
 #: ../template/default/timer_list.html:27
 msgid "CA-System:"
-msgstr ""
+msgstr "Salaus:"
 
 #: ../template/default/timer_list.html:46
 msgid "New Timer"
@@ -1061,7 +1060,6 @@ msgid "New Name of Recording:"
 msgstr "Tallenteen uusi nimi:"
 
 #: ../template/default/rec_edit.html:51
-#, fuzzy
 msgid "Subtitle:"
 msgstr "Lyhyt kuvaus"
 
@@ -1213,7 +1211,7 @@ msgstr ""
 #: ../template/default/at_timer_new.html:6
 #: ../template/default/at_timer_new.html:20
 msgid "Edit AutoTimer"
-msgstr "Muokkaa automaattista ajastinta"
+msgstr "Muokkaa hakuajastinta"
 
 #: ../template/default/help_at_timer_new.html:35
 msgid ""
@@ -1406,7 +1404,7 @@ msgstr ""
 #: ../template/default/at_timer_new.html:6
 #: ../template/default/at_timer_new.html:20
 msgid "Add New AutoTimer"
-msgstr "Lisää uusi automaattinen ajastin"
+msgstr "Lisää uusi hakuajastin"
 
 #: ../template/default/at_timer_new.html:50
 #: ../template/default/at_timer_new.html:54
@@ -1433,21 +1431,19 @@ msgstr "Kaikki"
 
 #: ../template/default/at_timer_new.html:177
 msgid "Test"
-msgstr ""
+msgstr "Hae"
 
 #: ../template/default/at_timer_new.html:192
 msgid "Broadcasted"
-msgstr ""
+msgstr "Lähetysaika"
 
 #: ../template/default/at_timer_new.html:193
-#, fuzzy
 msgid "Stored in"
-msgstr "Suoratoisto"
+msgstr "Tallennehakemisto"
 
 #: ../template/default/at_timer_new.html:213
-#, fuzzy
 msgid "No matches found!"
-msgstr "Ei löydy"
+msgstr "Ei löytynyt yhtään hakutulosta!"
 
 #: ../template/default/navigation.html:66
 msgid "Watch TV"
@@ -1509,7 +1505,7 @@ msgstr "Ohjelmisto %d. päivä"
 
 #: ../vdradmind.pl:4284
 msgid "System default"
-msgstr ""
+msgstr "Oletus"
 
 #: ../template/i18n.pl:3
 msgid "Playing Today?"

@@ -130,9 +130,9 @@ label + input {
 .footer td.selected,
 .col_left,
 .col_right,
-#timer_new .heading,
-#at_timer_new .heading,
-#rec_edit .heading {
+#timer_new .group .heading,
+#at_timer_new .group .heading,
+#rec_edit .group .heading {
 	display: none;
 }
 body.help .heading {
@@ -316,7 +316,6 @@ body.help .heading {
 }
 .col_active {
 	width: 70px;
-	max-width: 70px;
 }
 .col_channel {
 	width: 120px;

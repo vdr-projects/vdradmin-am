@@ -66,7 +66,7 @@ use strict;
 #use warnings;
 
 my $SEARCH_FILES_IN_SYSTEM = 0;
-my $VDR_MAX_SVDRP_LENGTH = 10218;	# validate this value
+my $VDR_MAX_SVDRP_LENGTH = 10000;	# validate this value
 my $SUPPORTED_LOCALE_PREFIXES = "^(de|en|es|fi|fr)_";
 
 sub true           () { 1 };
@@ -159,7 +159,7 @@ $CONFIG{CHANNELS_WANTED_WATCHTV}   = "";
 #
 $CONFIG{PROG_SUMMARY_COLS} = 3;
 
-my $VERSION               = "0.97-am3.4.2rc";
+my $VERSION               = "0.97-am3.4.2rc2";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0;
@@ -1367,30 +1367,6 @@ sub AutoTimer {
 				} else {
         Log(LOG_AT, sprintf("AutoTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
 
-        # AUTOTIMER-Notification patch start
-				if ($CONFIG{AT_SENDMAIL} == 1) {
-        	my $mail = "";
-        	my $sum  = "";
-        	my $strt = "";
-        	my $end  = "";
-        	my $dat  = "";
-        	$sum = $event->{summary};
-        	# remove all HTML-Tags from text
-        	$sum =~ s/\<[^\>]+\>/ /g;
-        	$dat = strftime("%x", localtime($event->{start}));
-        	$strt= strftime("%H:%M", localtime($event->{start}));
-        	$end = strftime("%H:%M", localtime($event->{stop}));
-        	$mail = sprintf("Created AUTOTIMER for $event->{title}\n===========================================================================\n$dat,$strt-$end\n\nSummary:\n--------\n$sum");
- 
-        	#
-        	# the "sendEmail" tool (written by "caspian at dotconf.net") is available from [URL]http://caspian.dotconf.net/menu/Software/SendEmail/[/URL]
-        	#
-        	open (MAIL, "|$CONFIG{MAIL_PROG} -q -f autotimer\@$CONFIG{MAIL_FROMDOMAIN} -t $CONFIG{MAIL_TO} -u \"AUTOTIMER: New timer created for $event->{title}\" -s $CONFIG{MAIL_SERVER}");
-        	print MAIL $mail;
-        	close(MAIL);
-				}
-        # AUTOTIMER-Notification patch end
-
         AT_ProgTimer(0x8001, $event->{event_id}, $event->{vdr_id}, $event->{start}, $event->{stop}, $title, $event->{summary}, $at->{prio}, $at->{lft});
 
 				if ($at->{active} == 2) {
@@ -1446,6 +1422,28 @@ sub AT_ProgTimer {
   # we will only programm new timers, CheckTimers is responsible for
   # updating existing timers
   if (!$found) {
+		if ($CONFIG{AT_SENDMAIL} == 1) {
+     	my $mail = "";
+     	my $sum  = "";
+     	my $strt = "";
+     	my $end  = "";
+     	my $dat  = "";
+     	$sum = $summary;
+     	# remove all HTML-Tags from text
+     	$sum =~ s/\<[^\>]+\>/ /g;
+     	$dat = strftime("%x", localtime($start));
+     	$strt= strftime("%H:%M", localtime($start));
+     	$end = strftime("%H:%M", localtime($stop));
+     	$mail = sprintf("Created AUTOTIMER for $title\n===========================================================================\n$dat,$strt-$end\n\nSummary:\n--------\n$sum");
+ 
+     	#
+     	# the "sendEmail" tool (written by "caspian at dotconf.net") is available from [URL]http://caspian.dotconf.net/menu/Software/SendEmail/[/URL]
+     	#
+     	open (MAIL, "|$CONFIG{MAIL_PROG} -q -f autotimer\@$CONFIG{MAIL_FROMDOMAIN} -t $CONFIG{MAIL_TO} -u \"AUTOTIMER: New timer created for $title\" -s $CONFIG{MAIL_SERVER}");
+     	print MAIL $mail;
+     	close(MAIL);
+		}
+
     Log(LOG_AT, sprintf("AT_ProgTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event_id, strftime("%Y%m%d-%H%M", localtime($start)), strftime("%Y%m%d-%H%M", localtime($stop))));
     ProgTimer(
       0,
@@ -1648,8 +1646,10 @@ sub ParseTimer {
     $active = UnpackActive($tmstatus);
     $event_id = UnpackEvent_id($tmstatus);
 
-    # direct recording (menu, red)
-    $active = 1 if($active == 3 || $active == 9);
+		# VDR > 1.3.24 sets a bit if it's currently recording
+		my $recording = 0;
+    $recording = 1 if(($active & 8) == 8);
+    $active = 1 if(($active & 1) == 1);
 
 		# replace "|" by ":" in timer's title (man vdr.5)
 		$title =~ s/\|/\:/g;
@@ -1713,6 +1713,7 @@ sub ParseTimer {
           startsse  => $startsse + $off * 86400,
           stopsse   => $stopsse + $off * 86400,
           active    => $active,
+          recording => $recording,
           event_id  => $event_id,
           cdesc     => get_name_from_vdrid($vdr_id),
           transponder => get_transponder_from_vdrid($vdr_id),
@@ -1738,6 +1739,7 @@ sub ParseTimer {
         startsse  => $startsse,
         stopsse   => $stopsse,
         active    => $active,
+        recording => $recording,
         event_id  => $event_id,
         cdesc     => get_name_from_vdrid($vdr_id),
         transponder => get_transponder_from_vdrid($vdr_id),
@@ -2513,7 +2515,8 @@ sub timer_list {
 
   my ($TagAnfang, $TagEnde);
   for my $timer (ParseTimer(0)) {
-		if($timer->{startsse} < time() && $timer->{stopsse} > time() && ($timer->{active} & 1)) {
+  	# VDR >= 1.3.24 reports if it's recording, so don't overwrite it here
+		if($VDRVERSION < 10324 && $timer->{recording} == 0 && $timer->{startsse} < time() && $timer->{stopsse} > time() && ($timer->{active} & 1)) {
 			$timer->{recording} = 1;
 		}
 		if($timer->{active} & 1) {
@@ -2528,7 +2531,6 @@ sub timer_list {
 		$timer->{toggleurl} = sprintf("%s?aktion=timer_toggle&amp;active=%s&amp;id=%s", $MyURL, ($timer->{active} & 1) ? 0 : 1, $timer->{id}),
 		$timer->{dor} = my_strftime("%a %d.%m", $timer->{startsse}); #TODO
 
-		$timer->{title} =~ s/"/\&quot;/g;
 		$timer->{title} = CGI::escapeHTML($timer->{title});
     $TagAnfang=my_mktime(0,0,my_strftime("%d", $timer->{start}),my_strftime("%m", $timer->{start}),my_strftime("%Y", $timer->{start}));
     $TagEnde=my_mktime(0,0,my_strftime("%d", $timer->{stop}),my_strftime("%m", $timer->{stop}),my_strftime("%Y", $timer->{stop}));
@@ -3106,7 +3108,6 @@ sub at_timer_list {
     if($_->{stop}) {
       $_->{stop} = substr($_->{stop}, 0, 2) . ":" . substr($_->{stop}, 2, 5);
     }
-    $_->{pattern} =~ s/"/\&quot;/g;
     $_->{pattern} = CGI::escapeHTML($_->{pattern});
     $_->{modurl} = $MyURL . "?aktion=at_timer_edit&amp;id=$id";
     $_->{delurl} = $MyURL . "?aktion=at_timer_delete&amp;id=$id";
@@ -4042,7 +4043,7 @@ sub getRecInfo {
 						if($text) {
 							$text .= "<br \/>";
 						}
-						$text .= "$_ ";
+						$text .= CGI::escapeHTML("$_ ");
 					}
 				}
 			}
@@ -4052,7 +4053,7 @@ sub getRecInfo {
 		$title =~ s/\~/ - /g;
 		$vars = {
 			usercss => $UserCSS,
-			text    => $text ? CGI::escapeHTML($text) : "",
+			text    => $text ? $text : "",
 			imdburl => "http://akas.imdb.com/Tsearch?title=" . $imdb_title,
 			title   => CGI::escapeHTML($title),
 			id      => $id
@@ -4290,14 +4291,16 @@ sub config {
   }
 
 	my @my_locales;
-	push(@my_locales, {id => "", name => gettext("System default"), cur => 0});
-	foreach my $loc (locale("-a")) {
-		chomp $loc;
-		push(@my_locales, {
-			id => $loc,
-			name => $loc,
-			cur => ($loc eq $CONFIG{LANG} ? 1 : 0)
-		}) if ($loc =~ $SUPPORTED_LOCALE_PREFIXES);
+	if( -e "/usr/bin/locale" ) {
+		push(@my_locales, {id => "", name => gettext("System default"), cur => 0});
+		foreach my $loc (locale("-a")) {
+			chomp $loc;
+			push(@my_locales, {
+				id => $loc,
+				name => $loc,
+				cur => ($loc eq $CONFIG{LANG} ? 1 : 0)
+			}) if ($loc =~ $SUPPORTED_LOCALE_PREFIXES);
+		}
 	}
 
   my $template = TemplateNew("config.html");

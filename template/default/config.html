@@ -95,11 +95,15 @@
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Language: !%></h5></td>
 							<td class="col_value">
+<tmpl_if name="MY_LOCALES">
 								<select class="submit" name="LANG">
-<tmpl_loop name="MY_LOCALES">
+	<tmpl_loop name="MY_LOCALES">
 									<option value="<tmpl_var id>" <tmpl_if cur>selected</tmpl_if>><tmpl_var name></option>
-</tmpl_loop>
+	</tmpl_loop>
 								</select>
+<tmpl_else>
+								<input type="text" name="LANG" value="<tmpl_var LANG>" size="20" maxlength="50" />
+</tmpl_if>
 							</td>
 							<td class="col_right"></td>
 						</tr>
