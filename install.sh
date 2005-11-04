@@ -90,6 +90,7 @@ function makeDir()
 {
 	[ -z "$1" ] && return 1
 	local DIR=$1
+	local MUST_CREATE=${2:-0}
 	if [ ! -e "$DIR" ]; then
 		mkdir -p "$DIR"
 		if [ $? -ne 0 ]; then
@@ -102,6 +103,9 @@ function makeDir()
 		echo "$DIR exists but is no directory!"
 		echo "Aborting..."
 		return 1
+	elif [ -d $DIR -a $MUST_CREATE = 1 ]; then
+		echo "$DIR exists. Please remove it before calling install.sh!"
+		echo "Aborting..."
 	fi
 
 	return 0
@@ -115,8 +119,8 @@ function doInstall()
 
 	perlModules
 
-	makeDir $LIBDIR && cp -r template lib $LIBDIR || exit 1
-  makeDir $DOCDIR && cp -r contrib COPYING CREDITS HISTORY INSTALL README $DOCDIR || exit 1
+	makeDir $LIBDIR 1 && cp -r template lib $LIBDIR || exit 1
+  makeDir $DOCDIR && cp -r contrib COPYING CREDITS HISTORY INSTALL README* REQUIREMENTS FAQ $DOCDIR || exit 1
 	makeDir $MANDIR && cp vdradmind.pl.1 $MANDIR || exit 1
 	makeDir $ETCDIR || exit 1
 

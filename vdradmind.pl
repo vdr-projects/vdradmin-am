@@ -26,6 +26,8 @@
 # VDRAdmin-AM 2005 by Andreas Mair <mail@andreas.vdr-developer.org>
 #
 
+require 5.004;
+
 my $BASENAME;
 my $EXENAME;
 BEGIN {
@@ -49,6 +51,8 @@ $localemod->import(qw(gettext bindtextdomain textdomain));
 
 require File::Temp;
 
+use locale;
+use Env qw(@PATH LANGUAGE);
 use CGI qw(:no_debug);
 use IO::Socket;
 use HTML::Template::Expr();
@@ -59,6 +63,10 @@ use MIME::Base64();
 use File::Temp ();
 use Shell qw(ps locale);
 use URI::Escape;
+
+# Some users have problems if the LANGUAGE env variable is set
+# so it's cleared here.
+$LANGUAGE="";
 
 $SIG{CHLD} = sub { wait };
 
@@ -82,12 +90,14 @@ sub LOG_FATALERROR () { 64 };
 sub LOG_DEBUG      () { 32768 };
 
 my %CONFIG;
-$CONFIG{LOGLEVEL}         = 81; # 32799
-$CONFIG{LOGGING}          = 0;
-$CONFIG{LOGFILE}          = "vdradmind.log";
-$CONFIG{MOD_GZIP}         = 0;
-$CONFIG{CACHE_TIMEOUT}    = 60;
-$CONFIG{CACHE_LASTUPDATE} = 0;
+$CONFIG{LOGLEVEL}             = 81; # 32799
+$CONFIG{LOGGING}              = 0;
+$CONFIG{LOGFILE}              = "vdradmind.log";
+$CONFIG{MOD_GZIP}             = 0;
+$CONFIG{CACHE_TIMEOUT}        = 60;
+$CONFIG{CACHE_LASTUPDATE}     = 0;
+$CONFIG{CACHE_REC_TIMEOUT}    = 60;
+$CONFIG{CACHE_REC_LASTUPDATE} = 0;
 #
 $CONFIG{VDR_HOST}         = "localhost";
 $CONFIG{VDR_PORT}         = 2001;
@@ -129,6 +139,7 @@ $CONFIG{TM_MARGIN_BEGIN}  = 10;
 $CONFIG{TM_MARGIN_END}    = 10;
 $CONFIG{TM_TT_TIMELINE}   = 1;
 $CONFIG{TM_TT_LIST}       = 1;
+$CONFIG{TM_ADD_SUMMARY}   = 0;
 #
 $CONFIG{ST_FUNC}          = 1;
 $CONFIG{ST_REC_ON}        = 0;
@@ -144,7 +155,7 @@ $CONFIG{NO_EVENTID}       = 0;
 $CONFIG{NO_EVENTID_ON}    = "";
 #
 $CONFIG{AT_SENDMAIL}      = 0;	# set to 1 and set all the "MAIL_" things if you want email notification on new autotimers.
-$CONFIG{MAIL_PROG}        = "./sendEmail";
+$CONFIG{MAIL_PROG}        = "/usr/bin/sendEmail";
 $CONFIG{MAIL_FROMDOMAIN}  = "fromaddress.tld";
 $CONFIG{MAIL_TO}          = "your\@email.address";
 $CONFIG{MAIL_SERVER}      = "your.email.server";
@@ -159,7 +170,7 @@ $CONFIG{CHANNELS_WANTED_WATCHTV}   = "";
 #
 $CONFIG{PROG_SUMMARY_COLS} = 3;
 
-my $VERSION               = "0.97-am3.4.2rc2";
+my $VERSION               = "0.97-am3.4.2rc3";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0;
@@ -217,7 +228,7 @@ my $Xtemplate = Template->new($Xconfig);
 my $USE_SHELL_GZIP        = false; # set on false to use the gzip library
 
 my($DEBUG) = 0;
-my(%EPG, @CHAN, $q, $ACCEPT_GZIP, $SVDRP, $HOST, $low_time);
+my(%EPG, @CHAN, $q, $ACCEPT_GZIP, $SVDRP, $HOST, $low_time, @RECORDINGS);
 my(%mimehash) = (
 	html => "text/html",
 	png  => "image/png",
@@ -229,7 +240,6 @@ my(%mimehash) = (
 	swf  => "application/x-shockwave-flash"
 );
 my @LOGINPAGES = qw(prog_summary prog_list2 prog_timeline prog_list timer_list rec_list);
-
 
 $SIG{INT} = \&Shutdown;
 $SIG{TERM} = \&Shutdown;
@@ -309,6 +319,7 @@ for(my $i = 0; $i < scalar(@ARGV); $i++) {
 
 ReadConfig();
 LoadTranslation();
+findSendEmail();
 
 if($CONFIG{MOD_GZIP}) {
 	# lib gzipping
@@ -318,8 +329,11 @@ if($CONFIG{MOD_GZIP}) {
 if(-e "$PIDFILE") {
 	my $pid = getPID($PIDFILE);
 	print("There's already a copy of this program running! (pid: $pid)\n");
-	$_ = ps("ax");
-	if (/\n($pid) [!\n]*( |\/)$EXENAME/) {	#TODO
+	my $found;
+	foreach (ps("ax")) {
+		$found = 1 if(/$pid\s.*(\s|\/)$EXENAME.*/);
+	}
+	if ($found) {
 		print("If you feel this is an error, remove $PIDFILE!\n");
 		exit(1);
 	}
@@ -334,7 +348,7 @@ if($DAEMON) {
 		exit(0);
 	}
 }
-printf("\nThis release includes a new skin named \"default\". You can set it in \"Configuration\" menu...\n\n");
+print("\nThis release includes a new skin named \"default\". You can set it in \"Configuration\" menu...\n\n");
 $SIG{__DIE__} = \&Shutdown;
 
 my @reccmds;
@@ -380,7 +394,8 @@ while(true) {
 	my $raw_request = $Request[0];	
 	
 	$ACCEPT_GZIP = 0;
-	if($raw_request =~ /^GET (\/[\w\.\/-\:]*)([\?[\w=&\.\+\%-\:\!\@]*]*)[\#\d ]+HTTP\/1.\d$/) {
+#	print("REQUEST: $raw_request\n");
+	if($raw_request =~ /^GET (\/[\w\.\/-\:]*)([\?[\w=&\.\+\%-\:\!\@\~]*]*)[\#\d ]+HTTP\/1.\d$/) {
 		($Request, $Query) = ($1, $2 ? substr($2, 1, length($2)) : undef);
 	} else {
 		Error("404", gettext("Not found"), gettext("The requested URL was not found on this server!"));
@@ -432,10 +447,10 @@ while(true) {
 		my $aktion;
 		my $real_aktion = $q->param("aktion");
 		if ($real_aktion eq "at_timer_aktion") {
+			$aktion = "at_timer_save";
 			$aktion = "at_timer_delete" if ($q->param("at_delete"));
 			$aktion = "force_update" if ($q->param("at_force"));
 			$aktion = "at_timer_test" if ($q->param("test"));
-			$aktion = "at_timer_save" if ($q->param("save"));
 		}
 		
 		my @ALLOWED_FUNCTIONS;
@@ -881,8 +896,7 @@ sub header {
   PrintToClient("HTTP/1.0 $status$status_text", CRLF);
   PrintToClient("Date: ", headerTime(), CRLF);
 	if(!$caching || $ContentType =~ /text\/html/) {
-#		PrintToClient("Expires: Mon, 26 Jul 1997 05:00:00 GMT", CRLF);
-#		PrintToClient("Cache-Control: max-age=0", CRLF);
+		PrintToClient("Cache-Control: max-age=0", CRLF);
   	PrintToClient("Cache-Control: private", CRLF);
   	PrintToClient("Pragma: no-cache", CRLF);
   	PrintToClient("Expires: Thu, 01 Jan 1970 00:00:00 GMT", CRLF);
@@ -910,7 +924,7 @@ sub headerForward {
 	return(302, 0);
 }
 
-sub headerNoAuth { #TODO
+sub headerNoAuth { #TODO?
   my $template = TemplateNew("noauth.html");
 	my $vars;
   my $data;
@@ -968,11 +982,11 @@ sub SendFile {
       if(!$mimehash{$2}) { die("can't find mime-type \'$2\'\n"); }
       return(header("200", $mimehash{$2}, $buf, 1));
     } else {
-			printf("File not found: $File\n");
+			print("File not found: $File\n");
       Error("403", gettext("Forbidden"), sprintf(gettext("Access to file \"%s\" denied!"), $File));
     }
   } else {
-		printf("File not found: $File\n");
+		print("File not found: $File\n");
     Error("404", gettext("Not found"), sprintf(gettext("The URL \"%s\" was not found on this server!"), $File));
   }
 }
@@ -1165,7 +1179,7 @@ sub AutoTimer {
 			for my $at (@at) {
 				next if(!$at->{active} && !$dry_run);
 				next if(($at->{channel}) && ($at->{channel} != $event->{vdr_id}));
-#printf("AT: " . $at->{channel} . " - " . $at->{pattern} . " --- " . $event->{vdr_id} . " - " . $event->{title} . "\n");
+#print("AT: " . $at->{channel} . " - " . $at->{pattern} . " --- " . $event->{vdr_id} . " - " . $event->{title} . "\n");
 
         my $SearchStr;
         if($at->{section} & 1) {
@@ -1226,8 +1240,9 @@ sub AutoTimer {
           next if(!$fp);
         }
 
-				#TODO: speed this up and don't always call my_strftime.
-        Log(LOG_DEBUG, sprintf("Auto Timer: Comparing pattern \"%s\" (%s - %s) with event \"%s\" (%s - %s)", $at->{pattern}, $at->{start}, $at->{stop}, $event->{title}, my_strftime("%H%M", $event->{start}), my_strftime("%H%M", $event->{stop})));
+				my $event_start = my_strftime("%H%M", $event->{start});
+				my $event_stop = my_strftime("%H%M", $event->{stop});
+        Log(LOG_DEBUG, sprintf("Auto Timer: Comparing pattern \"%s\" (%s - %s) with event \"%s\" (%s - %s)", $at->{pattern}, $at->{start}, $at->{stop}, $event->{title}, $event_start, $event_stop));
         # Do we have a time slot?
         if($at->{start}) { # We have a start time and possibly a stop time for the auto timer
           # Do we have Midnight between AT start and stop time?
@@ -1235,27 +1250,27 @@ sub AutoTimer {
             # The AT includes Midnight
 	    			Log(LOG_DEBUG, "922: AT includes Midnight");
             # Do we have Midnight between Event start and stop?
-						if(my_strftime("%H%M", $event->{stop}) < my_strftime("%H%M", $event->{start})) {
+						if($event_stop < $event_start) {
 							# The event includes Midnight
 							Log(LOG_DEBUG, "926: Event includes Midnight");
-              if(my_strftime("%H%M", $event->{start}) < $at->{start}) {
+              if($event_start < $at->{start}) {
 								Log(LOG_DEBUG, "924: Event starts before AT start");
                 next;
               }
-              if(my_strftime("%H%M", $event->{stop}) > $at->{stop}) {
+              if($event_stop > $at->{stop}) {
 	        			Log(LOG_DEBUG, "932: Event ends after AT stop");
                 next;
               }
 	    			} else {
 	      			# Normal event not spreading over Midnight
 	      			Log(LOG_DEBUG, "937: Event does not include Midnight");
-              if(my_strftime("%H%M", $event->{start}) < $at->{start}) {
-                if(my_strftime("%H%M", $event->{start}) > $at->{stop}) {
+              if($event_start < $at->{start}) {
+                if($event_start > $at->{stop}) {
 		  						# The event starts before AT start and after AT stop
 	          			Log(LOG_DEBUG, "941: Event starts before AT start and after AT stop");
                   next;
 								}
-                if(my_strftime("%H%M", $event->{stop}) > $at->{stop}) {
+                if($event_stop > $at->{stop}) {
 		  						# The event ends after AT stop
 	          			Log(LOG_DEBUG, "946: Event ends after AT stop");
                   next;
@@ -1266,7 +1281,7 @@ sub AutoTimer {
             # Normal auto timer, not spreading over midnight
 	    			Log(LOG_DEBUG, "953: AT does not include Midnight");
 	    			# Is the event spreading over midnight?
-	    			if(my_strftime("%H%M", $event->{stop}) < my_strftime("%H%M", $event->{start})) {
+	    			if($event_stop < $event_start) {
 	      			# Event spreads midnight
               if($at->{stop}) {
 	        			# We have a AT stop time defined before midnight -- no match
@@ -1276,12 +1291,12 @@ sub AutoTimer {
 	    			} else {
 	      			# We have a normal event, nothing special
               # Event must not start before AT start
-              if(my_strftime("%H%M", $event->{start}) < $at->{start}) {
+              if($event_start < $at->{start}) {
 	       				Log(LOG_DEBUG, "963: Event starts before AT start");
                 next;
 	      			}
               # Event must not end after AT stop
-              if(($at->{stop}) && (my_strftime("%H%M", $event->{stop}) > $at->{stop})) {
+              if(($at->{stop}) && ($event_stop > $at->{stop})) {
 	        			Log(LOG_DEBUG, "968: Event ends after AT stop");
                 next;
 	      			}
@@ -1290,7 +1305,7 @@ sub AutoTimer {
         } else {
           # We have no AT start time
           if($at->{stop}) {
-            if(my_strftime("%H%M", $event->{stop}) > $at->{stop}) {
+            if($event_stop > $at->{stop}) {
 	      			Log(LOG_DEBUG, "977: Only AT stop time, Event stops after AT stop");
               next;
             }
@@ -1298,8 +1313,7 @@ sub AutoTimer {
         }
 
 				# Check if we should schedule any timers on this weekday
-				my %weekdays_map = (1=>'wday_mon', 2=>'wday_tue', 3=>'wday_wed', 4=>'wday_thu',
-					5=>'wday_fri', 6=>'wday_sat', 7=>'wday_sun');
+				my %weekdays_map = (1=>'wday_mon', 2=>'wday_tue', 3=>'wday_wed', 4=>'wday_thu', 5=>'wday_fri', 6=>'wday_sat', 7=>'wday_sun');
 				unless ($at->{weekdays}->{$weekdays_map{my_strftime ("%u",$event->{start})}}) {
 					Log(LOG_DEBUG, "Event not valid for this weekday");
 					next;
@@ -1363,7 +1377,7 @@ sub AutoTimer {
 
 				if ($dry_run) {
 #					printf("AT found: (%s) (%s) (%s) (%s) (%s) (%s)\n", $event->{title}, $title, $event->{subtitle}, $directory, $event->{start}, $event->{stop});
-					push(@at_matches, {	otitle => $event->{title}, title => $title, subtitle => $event->{subtitle}, directory => $directory,	start => strftime("%H:%M", localtime($event->{start})), stop => strftime("%H:%M", localtime($event->{stop})), weekday => my_strftime("%A",$event->{start}), channel => GetChannelDescByNumber($event->{vdr_id})});
+					push(@at_matches, {	otitle => $event->{title}, title => $title, subtitle => $event->{subtitle}, directory => $directory,	start => $event_start, stop => $event_stop, date => my_strftime("%A, %x",$event->{start}), channel => GetChannelDescByNumber($event->{vdr_id})});
 				} else {
         Log(LOG_AT, sprintf("AutoTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
 
@@ -1422,7 +1436,7 @@ sub AT_ProgTimer {
   # we will only programm new timers, CheckTimers is responsible for
   # updating existing timers
   if (!$found) {
-		if ($CONFIG{AT_SENDMAIL} == 1) {
+		if ($CONFIG{AT_SENDMAIL} == 1 && -x $CONFIG{MAIL_PROG}) {
      	my $mail = "";
      	my $sum  = "";
      	my $strt = "";
@@ -1455,7 +1469,7 @@ sub AT_ProgTimer {
       $prio,
       $lft,
       $title,
-      $summary
+      $CONFIG{TM_ADD_SUMMARY} ? $summary : ""
     );
   }
 }
@@ -2528,8 +2542,8 @@ sub timer_list {
 		}
     $timer->{delurl} = $MyURL . "?aktion=timer_delete&amp;timer_id=" . $timer->{id},
     $timer->{modurl} = $MyURL . "?aktion=timer_new_form&amp;timer_id=" . $timer->{id},
-		$timer->{toggleurl} = sprintf("%s?aktion=timer_toggle&amp;active=%s&amp;id=%s", $MyURL, ($timer->{active} & 1) ? 0 : 1, $timer->{id}),
-		$timer->{dor} = my_strftime("%a %d.%m", $timer->{startsse}); #TODO
+		$timer->{toggleurl} = sprintf("%s?aktion=timer_toggle&amp;active=%s&amp;id=%s&amp;sortby=%s&amp;desc=%s", $MyURL, ($timer->{active} & 1) ? 0 : 1, $timer->{id}, $sortby, $desc),
+		$timer->{dor} = my_strftime("%a %d.%m", $timer->{startsse}); #TODO: localize date
 
 		$timer->{title} = CGI::escapeHTML($timer->{title});
     $TagAnfang=my_mktime(0,0,my_strftime("%d", $timer->{start}),my_strftime("%m", $timer->{start}),my_strftime("%Y", $timer->{start}));
@@ -2774,9 +2788,11 @@ sub timer_toggle {
 	UptoDate();
 	my $active = $q->param("active");
 	my $id     = $q->param("id");
+	my $sortby = $q->param("sortby");
+	my $desc   = $q->param("desc");
 	# XXX check return 
 	SendCMD(sprintf("modt %s %s", $id, $active ? "on" : "off"));
-	return(headerForward(RedirectToReferer("$MyURL?aktion=timer_list")));
+	return(headerForward(RedirectToReferer("$MyURL?aktion=timer_list&sortby=$sortby&desc=$desc")));
 }
 
 sub timer_new_form {
@@ -2795,7 +2811,7 @@ sub timer_new_form {
     $this_event->{stop}   = $this->{stop}  + ($CONFIG{TM_MARGIN_END}  * 60);
 		$this_event->{dor}    = $this->{dor};
 		$this_event->{title}  = $this->{title};
-		$this_event->{summary}= $this->{summary};
+		$this_event->{summary}= $CONFIG{TM_ADD_SUMMARY} ? $this->{summary} : "";
 		$this_event->{vdr_id} = $this->{vdr_id};
   } elsif($timer_id) { # edit existing timer
     $this_event = ParseTimer(0, $timer_id);
@@ -3049,9 +3065,11 @@ sub rec_stream {
       $title=$newtitle;
       $title =~ s/ /_/g;
       $title =~ s/~/\//g;
-			printf("REC: find $CONFIG{VIDEODIR}/ -regex \"$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec/...\\.vdr\"\n");
+			print("REC: find $CONFIG{VIDEODIR}/ -regex \"$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec/...\\.vdr\"\n");
       @files= `find $CONFIG{VIDEODIR}/ -regex "$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec/...\\.vdr" | sort -r`;
       foreach (@files) {
+      		chomp;
+      		print("FOUND: ($_)\n");
           $_ =~ s/$CONFIG{VIDEODIR}/$CONFIG{ST_VIDEODIR}/;
           $_ =~ s/\n//g;
           $data= $CONFIG{ST_URL}."$_\n$data";
@@ -3121,7 +3139,7 @@ sub at_timer_list {
 		$_->{sortbypattern} = 1 if($sortby eq "pattern");
 		$_->{sortbystart} = 1 if($sortby eq "start");
 		$_->{sortbystop} = 1 if($sortby eq "stop");
-		$_->{toggleurl} = sprintf("%s?aktion=at_timer_toggle&amp;active=%s&amp;id=%s", $MyURL, ($_->{active} & 1) ? 0 : 1, $_->{id}),
+		$_->{toggleurl} = sprintf("%s?aktion=at_timer_toggle&amp;active=%s&amp;id=%s&amp;sortby=%s&amp;desc=%s", $MyURL, ($_->{active} & 1) ? 0 : 1, $_->{id}, $sortby, $desc),
     push(@at, $_);
   }
   my @timer = sort({ lc($a->{pattern}) cmp lc($b->{pattern}) } @at);
@@ -3191,6 +3209,8 @@ sub at_timer_toggle {
 	UptoDate();
 	my $active = $q->param("active");
 	my $id     = $q->param("id");
+	my $sortby = $q->param("sortby");
+	my $desc   = $q->param("desc");
 
 	my(@at, $z);
 
@@ -3203,7 +3223,7 @@ sub at_timer_toggle {
 	}
 	AT_Write(@at);
 
-	return(headerForward(RedirectToReferer("$MyURL?aktion=at_timer_list")));
+	return(headerForward(RedirectToReferer("$MyURL?aktion=at_timer_list&sortby=$sortby&desc=$desc")));
 }
 
 sub at_timer_edit {
@@ -3695,7 +3715,7 @@ sub prog_summary {
 				vdr_id         => $event->{vdr_id},
 				proglink       => sprintf("%s?aktion=prog_list&amp;vdr_id=%s", $MyURL, $event->{vdr_id}),
 				switchurl      => sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $event->{vdr_id}),
-				streamurl      => sprintf("%s?aktion=live_stream&amp;channel=%s", $MyURL, $event->{vdr_id}),
+				streamurl      => sprintf("%s?aktion=live_stream&amp;channel=%s", $MyStreamURL, $event->{vdr_id}),
 				stream_live_on => $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
 				infurl         => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}) : undef,
 				recurl         => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
@@ -3743,10 +3763,8 @@ sub prog_summary {
 # recordings
 #############################################################################
 sub rec_list {
-	my(@all_recordings, @recordings);
+	my @recordings;
 
-	#
-	#my $ffserver = `ps -ef | grep ffserver | wc -l`; 
 	my $desc;
 	if(!defined($q->param("desc"))) {
 		$desc = 1;
@@ -3756,158 +3774,24 @@ sub rec_list {
 	my $sortby = $q->param("sortby");
 	($sortby = "name") if(!$sortby);
 	my $parent = $q->param("parent");
+	my $parent2;
 	if(!$parent) {
 		$parent = 0;
-	}
-	$parent = uri_escape($parent);
-
-	for my $recording (SendCMD("lstr")) {
-		chomp($recording);
-		next if(length($recording) == 0);
-		if($recording =~ /^No recordings available/) {
-			last;
-		}
-		my($new);
-		my($id, $date, $time, $name) = split(/ +/, $recording, 4);
-# move this to "sub ParseRecordings"
-#    my($id, $temp) = split(/ /, $recording, 2);
-#    my($date, $time, $name);
-#    print("R: $temp\n");
-#    if ($temp =~ /(\d\d\.\d\d) (\d\d:\d\d)\*? .*/ ) {
-#    	print("FORMAT1\n");
-#    	($date, $time, $name) = split(/ +/, $temp, 3);
-#		} elsif ($temp =~ /(\d\d\.\d\d)\*? .*/ ) {
-#			print("FORMAT2\n");
-#			($date, $name) = split(/ +/, $temp, 2);
-#		} elsif ($temp =~ /(\d\d:\d\d)\*? .*/ ) {
-#			print("FORMAT3\n");
-#			($time, $name) = split(/ +/, $temp, 2);
-#		} elsif ($temp =~ /\*? (\d)+. .*/) {
-#			print("FORMAT4\n");
-#			($new, $time, $name) = split(/ +/, $temp, 3);
-#		} else {
-#			print("FORMAT5\n");
-#			$name = $temp;
-#		}
-		#
-		if(length($time) > 5) {
-			$new = 1;
-			$time = substr($time, 0, 5);
-		}
-
-		#
-		my(@tmp, @tmp2, $serie, $episode, $parent, $dirname, $dirname1);
-		if($name =~ /~/) {
-			@tmp2 = split(" ", $name, 2);
-			if(scalar(@tmp2) > 1) {
-				if(ord(substr($tmp2[0], length($tmp2[0])-1, 1)) == 180) {
-					@tmp = split("~", $tmp2[1]);
-					$name = "$tmp2[0] $tmp[scalar(@tmp) - 1]";
-				} else {
-					@tmp = split("~", $name);
-					$name = $tmp[scalar(@tmp) - 1];
-				}
-			} else {
-				@tmp = split("~", $name);
-				$name = $tmp[scalar(@tmp) - 1];
-			}
-#			$dirname = $tmp[scalar(@tmp) - 2];
-#			$parent  = crypt($dirname, salt($dirname));
-			$dirname = "@tmp[0, scalar(@tmp) - 2]";
-#			printf("DIR: ($dirname) (@tmp)\n");
-			$parent  = uri_escape(MIME::Base64::encode_base64($dirname));
-		}
-		$parent = 0 if(!$parent);
-
-		# create subfolders
-		for(my $i = 0; $i < scalar(@tmp) - 1; $i++) {
-#			my $recording_id = crypt($tmp[$i], salt($tmp[$i]));
-			my $recording_id = uri_escape(MIME::Base64::encode_base64("@tmp[0, $i]"));
-			my $parent;
-			if($i != 0) {
-#				$parent = crypt($tmp[$i - 1], salt($tmp[$i - 1]));
-				$parent = uri_escape(MIME::Base64::encode_base64("@tmp[0, $i - 1]"));
-			} else {
-				$parent = 0;
-			}
-
-			my $found = 0;
-			for my $recording (@all_recordings) {
-				next if(!$recording->{isfolder});
-				if($recording->{recording_id} eq $recording_id && $recording->{parent} eq $parent) {
-#				printf("RECLIST %s: (%s) (%s) (%s) (%s)\n",$recording->{name}, $recording->{recording_id}, $recording_id, $recording->{parent}, $parent);
-					$found = 1;
-				}
-			}
-			if(!$found) {
-				push(@all_recordings, {
-					name         => CGI::escapeHTML($tmp[$i]),
-					recording_id => $recording_id,
-					parent       => $parent,
-					isfolder     => 1,
-					date         => 0,
-					time         => 0,
-					sortbydate   => ($sortby eq "date") ? 1 : 0,
-					sortbytime   => ($sortby eq "time") ? 1 : 0,
-					sortbyname   => ($sortby eq "name") ? 1 : 0,
-					infurl       => sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, $recording_id)
-				});
-			}
-		}
-
-		#
-		my $yearofrecording;
-		if ( $VDRVERSION >= 10326 ) {
-			$yearofrecording = "20".substr($date,6,2);
-		} else {
-			# old way of vdradmin to handle the date while vdr did not report the year
-			# current year was assumed.
-			# This will fail for example for a recording on the 29.2. if the current
-			# year does not have this date
-			$yearofrecording = my_strftime("%Y");
-		} # endif
-
-		push(@all_recordings, {
-			sse        => timelocal(undef, substr($time, 3, 2), substr($time, 0, 2), substr($date, 0, 2), (substr($date, 3, 2)- 1), $yearofrecording),
-			date       => $date,
-			time       => $time,
-			name       => CGI::escapeHTML($name),
-			serie      => $serie,
-			episode    => $episode,
-			parent     => $parent,
-			new        => $new,
-			id         => $id,
-			sortbydate => ($sortby eq "date") ? 1 : 0,
-			sortbytime => ($sortby eq "time") ? 1 : 0,
-			sortbyname => ($sortby eq "name") ? 1 : 0,
-			delurl     => $MyURL . "?aktion=rec_delete&amp;rec_delete=y&amp;id=$id",
-			editurl    => $MyURL . "?aktion=rec_edit&amp;id=$id",
-			infurl     => $MyURL . "?aktion=rec_detail&amp;id=$id",
-			streamurl  => $MyStreamURL . "?aktion=rec_stream&amp;id=$id",
-			stream_rec_on   => $CONFIG{ST_FUNC} && $CONFIG{ST_REC_ON}
-		});
+	} else {
+		$parent = uri_escape($parent);
 	}
 
-	# XXX doesn't count subsub-folders
-	for(@all_recordings) {
-		if($_->{parent} eq $parent && $_->{isfolder}) {
-			for my $recording (@all_recordings) {
-				if($recording->{parent} eq $_->{recording_id}) {
-					$_->{date}++;
-					$_->{time}++ if($recording->{new});
-				}
-			}
-		}
-	}
+	ParseRecordings($parent, $sortby);
 
 	# create path array
 	my @path; my $fuse = 0;
 	my $rparent = $parent;
+#	printf("PATH: (%s)\n", $parent);
 	while($rparent) {
-		for my $recording (@all_recordings) {
+		for my $recording (@RECORDINGS) {
 			if($recording->{recording_id} eq $rparent) {
 				push(@path, {
-					name => CGI::escapeHTML($recording->{name}),
+					name => $recording->{name},
 					url  => ($recording->{recording_id} ne $parent) ? sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, $recording->{recording_id}) : "" 
 				});
 				$rparent = $recording->{parent};
@@ -3925,13 +3809,13 @@ sub rec_list {
 
 	# filter
 	if(defined($parent)) {
-		for my $recording (@all_recordings) {
+		for my $recording (@RECORDINGS) {
 			if($recording->{parent} eq $parent) {
 				push(@recordings, $recording);
 			}
 		}
 	} else {
-		@recordings = @all_recordings;
+		@recordings = @RECORDINGS;
 	}
   
 	#
@@ -3986,6 +3870,172 @@ sub rec_list {
 	my $out = $template->output;
 	$Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
 	return(header("200", "text/html", $output));
+}
+
+sub ParseRecordings {
+	my $parent = shift;
+	my $sortby = shift;
+
+	return if((time() - $CONFIG{CACHE_REC_LASTUPDATE}) < ($CONFIG{CACHE_REC_TIMEOUT} * 60));
+
+	undef @RECORDINGS;
+	for my $recording (SendCMD("lstr")) {
+		chomp($recording);
+		next if(length($recording) == 0);
+		last if($recording =~ /^No recordings available/);
+	
+		my($new);
+		my($id, $date, $time, $name) = split(/ +/, $recording, 4);
+# TODO: support different listing formats of patched VDR 1.2.6
+#    my($id, $temp) = split(/ /, $recording, 2);
+#    my($date, $time, $name);
+#    print("R: $temp\n");
+#    if ($temp =~ /(\d\d\.\d\d) (\d\d:\d\d)\*? .*/ ) {
+#    	print("FORMAT1\n");
+#    	($date, $time, $name) = split(/ +/, $temp, 3);
+#		} elsif ($temp =~ /(\d\d\.\d\d)\*? .*/ ) {
+#			print("FORMAT2\n");
+#			($date, $name) = split(/ +/, $temp, 2);
+#		} elsif ($temp =~ /(\d\d:\d\d)\*? .*/ ) {
+#			print("FORMAT3\n");
+#			($time, $name) = split(/ +/, $temp, 2);
+#		} elsif ($temp =~ /\*? (\d)+. .*/) {
+#			print("FORMAT4\n");
+#			($new, $time, $name) = split(/ +/, $temp, 3);
+#		} else {
+#			print("FORMAT5\n");
+#			$name = $temp;
+#		}
+		#
+		if(length($time) > 5) {
+			$new = 1;
+			$time = substr($time, 0, 5);
+		}
+
+		#
+		my(@tmp, @tmp2, $serie, $episode, $parent);
+		@tmp = split("~", $name);
+		@tmp2 = @tmp;
+#		if($name =~ /~/) {
+#			@tmp2 = split(" ", $name, 2);
+#			if(scalar(@tmp2) > 1) {
+#				if(ord(substr($tmp2[0], length($tmp2[0])-1, 1)) == 180) {
+#					@tmp = split("~", $tmp2[1]);
+#					$name = "$tmp2[0] $tmp[scalar(@tmp) - 1]";
+#				} else {
+#					@tmp = split("~", $name);
+#					$name = $tmp[scalar(@tmp) - 1];
+#				}
+#			} else {
+#				@tmp = split("~", $name);
+#				$name = $tmp[scalar(@tmp) - 1];
+#			}
+#			$parent  = uri_escape(join("~",@tmp[0, scalar(@tmp) - 2]));
+#		}
+		$name = pop(@tmp);
+		if (@tmp) {
+			$parent = uri_escape(join("~", @tmp));
+		} else {
+			$parent = 0;
+		}
+#		printf("PARENT: (%s) (%s) (%s)\n", scalar(@tmp), $parent, $name);
+
+		# create subfolders
+		pop(@tmp2);	# don't want the recording's name
+		while (@tmp2) {
+			my $recording_id = uri_escape(join("~",@tmp2));
+			my $recording_name = pop(@tmp2);
+			my $parent;
+			if (@tmp2) {
+				$parent = uri_escape(join("~",@tmp2));
+			} else {
+				$parent = 0;
+			}
+#			printf("SUB: (%s) (%s) (%s)\n", $recording_name, $recording_id, $parent);
+#		}
+#		for(my $i = 0; $i < scalar(@tmp) - 1; $i++) {
+#			my $recording_id;
+#			my $recording_name = $tmp[$i];
+#			my $parent;
+#			printf("REC: (%s) (%s) (%s)\n", $i, join("~",@tmp[0, $i]), join("~",@tmp[0, $i - 1]));
+#			$recording_id = uri_escape(join("~",@tmp[0, $i]));
+#			$parent;
+#			if($i != 0) {
+#				$parent = uri_escape(join("~",@tmp[0, $i - 1]));
+#			} else {
+#				$parent = 0;
+#			}
+
+			my $found = 0;
+			for my $recording (@RECORDINGS) {
+				next if(!$recording->{isfolder});
+				if($recording->{recording_id} eq $recording_id && $recording->{parent} eq $parent) {
+					$found = 1;
+				}
+			}
+			if(!$found) {
+#				printf("RECLIST %s: (%s) (%s)\n",$recording_name, $recording_id, $parent);
+				push(@RECORDINGS, {
+					name         => CGI::escapeHTML($recording_name),
+					recording_id => $recording_id,
+					parent       => $parent,
+					isfolder     => 1,
+					date         => 0,
+					time         => 0,
+					sortbydate   => ($sortby eq "date") ? 1 : 0,
+					sortbytime   => ($sortby eq "time") ? 1 : 0,
+					sortbyname   => ($sortby eq "name") ? 1 : 0,
+					infurl       => sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, $recording_id)
+				});
+			}
+		}
+
+		#
+		my $yearofrecording;
+		if ( $VDRVERSION >= 10326 ) {
+			$yearofrecording = "20".substr($date,6,2);
+		} else {
+			# old way of vdradmin to handle the date while vdr did not report the year
+			# current year was assumed.
+			# This will fail for example for a recording on the 29.2. if the current
+			# year does not have this date
+			$yearofrecording = my_strftime("%Y");
+		} # endif
+
+		push(@RECORDINGS, {
+			sse        => timelocal(undef, substr($time, 3, 2), substr($time, 0, 2), substr($date, 0, 2), (substr($date, 3, 2)- 1), $yearofrecording),
+			date       => $date,
+			time       => $time,
+			name       => CGI::escapeHTML($name),
+			serie      => $serie,
+			episode    => $episode,
+			parent     => $parent,
+			new        => $new,
+			id         => $id,
+			sortbydate => ($sortby eq "date") ? 1 : 0,
+			sortbytime => ($sortby eq "time") ? 1 : 0,
+			sortbyname => ($sortby eq "name") ? 1 : 0,
+			delurl     => $MyURL . "?aktion=rec_delete&amp;rec_delete=y&amp;id=$id",
+			editurl    => $MyURL . "?aktion=rec_edit&amp;id=$id",
+			infurl     => $MyURL . "?aktion=rec_detail&amp;id=$id",
+			streamurl  => $MyStreamURL . "?aktion=rec_stream&amp;id=$id",
+			stream_rec_on   => $CONFIG{ST_FUNC} && $CONFIG{ST_REC_ON}
+		});
+	}
+
+	# XXX doesn't count subsub-folders
+	for(@RECORDINGS) {
+		if($_->{parent} eq $parent && $_->{isfolder}) {
+			for my $recording (@RECORDINGS) {
+				if($recording->{parent} eq $_->{recording_id}) {
+					$_->{date}++;
+					$_->{time}++ if($recording->{new});
+				}
+			}
+		}
+	}
+
+	$CONFIG{CACHE_REC_LASTUPDATE} = time();
 }
 
 sub getRecInfo {
@@ -4144,8 +4194,11 @@ sub recRunCmd {
 		$title =~ s/ /_/g;
 		$title =~ s/~/\//g;
 		$folder = `find $CONFIG{VIDEODIR}/ -regex "$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec"`;
+		print("CMD: find $CONFIG{VIDEODIR}/ -regex \"$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec\"\n");
 	
 		if ($folder) {
+			chomp($folder);
+			print("FOUND: $folder\n");
 			`$cmd $folder`;
 		}
 	}
@@ -4188,6 +4241,7 @@ sub config {
 		my $old_epgprune = $CONFIG{EPG_PRUNE};
 		my $old_epgdirect = $CONFIG{EPG_DIRECT};
 		my $old_epgfile = $CONFIG{EPG_FILENAME};
+		my $old_vdrconfdir = $CONFIG{VDRCONFDIR};
 
     for($q->param) {
       if(/[A-Z]+/) {
@@ -4197,6 +4251,7 @@ sub config {
 
 		LoadTranslation() if($old_lang ne $CONFIG{LANG});
 		UptoDate(1) if($old_epgprune != $CONFIG{EPG_PRUNE} || $old_epgdirect != $CONFIG{EPG_DIRECT} || $old_epgfile ne $CONFIG{EPG_FILENAME});
+		loadRecCmds() if($old_vdrconfdir ne $CONFIG{VDRCONFDIR});
   }
 
 	sub WriteConfig {
@@ -4367,11 +4422,11 @@ sub tv_show {
   			($found = 1) if($n eq $chan->{vdr_id});
   		}
   		next if(!$found);
-    	if($chan->{vdr_id}) {
- 	    	$chan->{cur} = ($chan->{vdr_id} == $cur_channel_id) ? 1 : 0;
-			}
-  	  push(@chans, $chan);
     }
+    if($chan->{vdr_id}) {
+ 	   	$chan->{cur} = ($chan->{vdr_id} == $cur_channel_id) ? 1 : 0;
+		}
+  	push(@chans, $chan);
   }
 
 	my $template = TemplateNew("tv.html");
@@ -4468,6 +4523,7 @@ sub isLinVDR {
 }
 
 sub loadRecCmds {
+	undef @reccmds;
 	my $id = 0;
 	if(-e "$CONFIG{VDRCONFDIR}/reccmds.conf" and my $text = open(FH, "$CONFIG{VDRCONFDIR}/reccmds.conf")) {
 		while(<FH>) {
@@ -4482,6 +4538,20 @@ sub loadRecCmds {
 		}
 		close(FH);
 	}
+}
+
+sub findSendEmail {
+	return if($CONFIG{AT_SENDMAIL} != "1");
+	return if(-x $CONFIG{MAIL_PROG});
+	foreach my $path (@PATH) {
+		if(-x $path . "/sendEmail") {
+			$CONFIG{MAIL_PROG} = $path . "/sendEmail";
+			WriteConfig();
+			print("Found & using $CONFIG{MAIL_PROG}\n");
+			last;
+		}
+	}
+	print("ERROR: Didn't find the sendEmail program!\n") if(! -x $CONFIG{MAIL_PROG});
 }
 
 #############################################################################

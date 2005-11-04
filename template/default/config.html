@@ -302,6 +302,33 @@
 -->
 						<tr class="row_even">
 							<td class="col_left"></td>
+							<td class="col_label"><h5><%! Send email after programming timer: !%></h5></td>
+							<td class="col_value">
+								<input type="radio" name="AT_SENDMAIL" value="1" id="at_sendmail_yes" <tmpl_if at_sendmail>checked</tmpl_if> /><label for="at_sendmail_yes"><%! Yes !%></label>
+								<input type="radio" name="AT_SENDMAIL" value="0" id="at_sendmail_no" <tmpl_unless at_sendmail>checked</tmpl_unless> /><label for="at_sendmail_no"><%! No !%></label>
+							</td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_odd">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! Send email as: !%></h5></td>
+							<td class="col_value">autotimer@<input type="text" name="MAIL_FROMDOMAIN" value="<tmpl_var MAIL_FROMDOMAIN>" size="20" maxlength="100" /></td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_even">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! Send email to: !%></h5></td>
+							<td class="col_value"><input type="text" name="MAIL_TO" value="<tmpl_var MAIL_TO>" size="20" maxlength="100" /></td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_odd">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! Mail server: !%></h5></td>
+							<td class="col_value"><input type="text" name="MAIL_SERVER" value="<tmpl_var MAIL_SERVER>" size="20" maxlength="100" /></td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_even">
+							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Tooltips: !%></h5></td>
 							<td class="col_value">
 								<input type="radio" name="AT_TOOLTIP" value="1" id="at_tooltip_yes" <tmpl_if at_tooltip>checked</tmpl_if> /><label for="at_tooltip_yes"><%! Yes !%></label>
@@ -366,6 +393,15 @@
 							<td class="col_value">
 								<input type="radio" name="TM_TT_LIST" value="1" id="tm_tl_list_yes" <tmpl_if tm_tt_list>checked</tmpl_if> /><label for="tm_tl_list_yes"><%! Yes !%></label>
 								<input type="radio" name="TM_TT_LIST" value="0" id="tm_tl_list_no" <tmpl_unless tm_tt_list>checked</tmpl_unless> /><label for="tm_tl_list_no"><%! No !%></label>
+							</td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_odd">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! Add summary to new timers: !%></h5></td>
+							<td class="col_value">
+								<input type="radio" name="TM_ADD_SUMMARY" value="1" id="tm_add_summary_yes" <tmpl_if tm_add_summary>checked</tmpl_if> /><label for="tm_add_summary_yes"><%! Yes !%></label>
+								<input type="radio" name="TM_ADD_SUMMARY" value="0" id="tm_add_summary_no" <tmpl_unless tm_add_summary>checked</tmpl_unless> /><label for="tm_add_summary_no"><%! No !%></label>
 							</td>
 							<td class="col_right"></td>
 						</tr>

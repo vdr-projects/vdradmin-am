@@ -105,6 +105,14 @@
 						<dd><%! An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording. !%></dd>
 						<dt><%! Lifetime: !%></dt>
 						<dd><%! The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by. !%></dd>
+						<dt><%! Send email after programming timer: !%></dt>
+						<dd><%! VDRAdmin will send an email whenever an event matches an AutoTimer and a timer has been programmed if you enable this feature. This requires that you have the sendEmail programm (which you will find <a target="_new" href="http://caspian.dotconf.net/menu/Software/SendEmail/">here</a>) located in PATH. !%></dd>
+						<dt><%! Send email as: !%></dt>
+						<dd><%! Here you set the sending domain of the generated email. !%></dd>
+						<dt><%! Send email to: !%></dt>
+						<dd><%! The email address the email is sent to. !%></dd>
+						<dt><%! Mail server: !%></dt>
+						<dd><%! The outgoing mail server. !%></dd>
 						<dt><%! Tooltips: !%></dt>
 						<dd><%! Here you can (de-)activate the tooltips. !%></dd>
 					</dl>
@@ -125,6 +133,8 @@
 						<dd><%! Here you can (de-)activate the tooltips in the timeline. !%></dd>
 						<dt><%! Tooltips in list: !%></dt>
 						<dd><%! Here you can (de-)activate the tooltips in the list. !%></dd>
+						<dt><%! Add summary to new timers: !%></dt>
+						<dd><%! If you don't want VDRAdmin to add the summary taken from EPG to new timers you can switch it off here. !%></dd>
 					</dl>
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
