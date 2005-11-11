@@ -63,7 +63,7 @@
 					<td class="col_left"></td>
 					<td><h2><tmpl_var title></h2></td>
 					<td align="right">
-						<select name="vdr_id" class="submit" onchange="window.open('<tmpl_var url>?aktion=timer_list&amp;timer=' + this.options[this.selectedIndex].value,'main')">
+						<select name="vdr_id" class="submit" onchange="window.open('<tmpl_var url>?aktion=timer_list&amp;sortby=<tmpl_var sortby>&amp;desc=<tmpl_var cur_desc>&amp;timer=' + this.options[this.selectedIndex].value,'main')">
 <tmpl_loop day_loop>
 							<option value="<tmpl_var sortfield>" <tmpl_if current>selected</tmpl_if>><tmpl_var day></option>
 </tmpl_loop>
@@ -352,7 +352,7 @@
 						<div><a href="<tmpl_var modurl>"><img src="bilder/edit.gif" alt="edit" title="<%! Edit !%>" height="17" width="17" border="0" /></a></div>
 					</td>
 					<td class="col_delete">
-						<div><a href="javascript:del('<%! Delete timer? !%>\n\n&quot;<tmpl_var title>&quot;','<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" title="<%! Delete !%>" height="17" width="17" border="0" /></a></div>
+						<div><a href="javascript:del('<%! Delete timer? !%>\n\n&quot;<tmpl_var title_js>&quot;','<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" title="<%! Delete !%>" height="17" width="17" border="0" /></a></div>
 					</td>
 					<td class="col_checkbox">
 						<div><input type="checkbox" name="xxxx_<tmpl_var id>" /></div>
@@ -374,10 +374,19 @@
 				</tr>
 			</table>
 
-			<div id="buttons">
-				<input type="submit" class="submit" name="timer_delete" value="<%! Delete Selected Timers !%>" onclick="return mdel('<%! Delete all selected timers? !%>');" />
-			</div>
-			<input type="hidden" name="aktion" value="timer_delete" />
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
+				<tr>
+					<td align="left">
+						<input type="submit" class="submit" name="timer_active" value="<%! activate !%>" onclick="return confirm('<%! Edit timer status? !%>');" />
+						<input type="submit" class="submit" name="timer_inactive" value="<%! inactivate !%>" onclick="return confirm('<%! Edit timer status? !%>');" />
+						<%! selected timers !%>
+					</td>
+					<td align="right">
+						<input type="submit" class="submit" name="timer_delete" value="<%! Delete Selected Timers !%>" onclick="return mdel('<%! Delete all selected timers? !%>');" />
+					</td>
+				</tr>
+			</table>
+			<input type="hidden" name="aktion" value="timer_aktion" />
 		</form>
 	</div>
 </body>

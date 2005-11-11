@@ -91,6 +91,15 @@ function makeDir()
 	[ -z "$1" ] && return 1
 	local DIR=$1
 	local MUST_CREATE=${2:-0}
+	if [ -e "$DIR" -a ! -d "$DIR" ]; then
+		echo "$DIR exists but is no directory!"
+		echo "Aborting..."
+		return 1
+	elif [ -d $DIR -a $MUST_CREATE = 1 ]; then
+		echo "$DIR exists. Please remove it before calling install.sh!"
+		echo "Aborting..."
+		return 1
+	fi
 	if [ ! -e "$DIR" ]; then
 		mkdir -p "$DIR"
 		if [ $? -ne 0 ]; then
@@ -98,14 +107,6 @@ function makeDir()
 			echo "Aborting..."
 			return 1
 		fi
-	fi
-	if [ ! -d "$DIR" ]; then
-		echo "$DIR exists but is no directory!"
-		echo "Aborting..."
-		return 1
-	elif [ -d $DIR -a $MUST_CREATE = 1 ]; then
-		echo "$DIR exists. Please remove it before calling install.sh!"
-		echo "Aborting..."
 	fi
 
 	return 0

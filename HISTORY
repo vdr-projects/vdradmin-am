@@ -4,6 +4,16 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2005-11-11: 0.97-am3.4.2rc4
+- Updated Template-Toolkit to v2.13.
+- Reworked sorting in rec_list/timer_list/at_timer_list.
+- Activate/Inactivate selected timers in timers_list (Requested by Atti).
+- Event's title in prog_summary/prog_list/prog_list2 links to prog_detail (Requested by Scorp).
+- Added "Refresh" button in rec_list to refresh the cache of the list of recordings.
+- Fixed popup if deleting timers/recordings/autotimers containing a "'" (Reported by Saxman2k).
+- Remember sorting after deleteing or editing timer or autotimer (Reported by Atti).
+- Improved re-connect to VDR if VDRAdmin crashes.
+
 2005-11-04: 0.97-am3.4.2rc3
 - Set "LANGUAGE" environment variable to "" on startup, so it causes no problems with language setting in VDRAdmin.
 - Added caching of listing of recordings. Can be adjusted by "CACHE_REC_TIMEOUT=number of minutes" in vdradmind.conf. Defaults to "60", "0" disables caching.

@@ -53,7 +53,15 @@
 						<tmpl_if start><tmpl_var start>-<tmpl_var stop></tmpl_if>
 					</div>
 					<div class="title">
-						<h3><tmpl_var title></h3>
+						<h3>
+							<tmpl_if summary>
+								<a href="javascript:popup('<tmpl_var infurl>');">
+							</tmpl_if>
+							<tmpl_var title>
+							<tmpl_if summary>
+								</a>
+							</tmpl_if>
+						</h3>
 						<tmpl_if subtitle>
 							<h4><tmpl_var subtitle></h4>
 						<tmpl_else>

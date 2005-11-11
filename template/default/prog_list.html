@@ -63,18 +63,20 @@
 					<tmpl_var emit> - <tmpl_var duration>
 				</td>
 				<td class="col_title">
-<!--					<tmpl_if infurl>
+					<h3>
+					<tmpl_if infurl>
 						<a href="javascript:popup('<tmpl_var infurl>');">
-					</tmpl_if>-->
-					<h3><tmpl_var title></h3>
+					</tmpl_if>
+					<tmpl_var title>
+					<tmpl_if infurl>
+						</a>
+					</tmpl_if>
+					</h3>
 					<tmpl_if subtitle>
 						<h4><tmpl_var subtitle></h4>
 					<tmpl_else>
 						<br />
 					</tmpl_if>
-<!--					<tmpl_if infurl>
-						</a>
-					</tmpl_if>-->
 				</td>
 				<td class="col_info">
 					<tmpl_if infurl>

@@ -125,19 +125,19 @@
 				</td>
 				<td class="col_name <tmpl_if sortbyname>selected</tmpl_if>">
 					<tmpl_if isfolder>
-						<a href="<tmpl_var infurl>"><img align="middle" src="bilder/folder_video.gif" border="0" />&nbsp;<tmpl_var name></a>
+						<a href="<tmpl_var infurl><tmpl_var cur_sorting>"><img align="middle" src="bilder/folder_video.gif" border="0" />&nbsp;<tmpl_var name></a>
 					<tmpl_else>
 						<a href="javascript:popup('<tmpl_var infurl>');"><img align="middle" src="bilder/aktion.gif" border="0" />&nbsp;<tmpl_var name></a>
 					</tmpl_if>
 				</td>
 				<td class="col_edit">
 					<tmpl_unless isfolder>
-						<a href="<tmpl_var editurl>"><img src="bilder/edit.gif" alt="rename" title="<%! Rename !%>" height="17" width="17" border="0" /></a>
+						<a href="<tmpl_var editurl><tmpl_var cur_sorting>"><img src="bilder/edit.gif" alt="rename" title="<%! Rename !%>" height="17" width="17" border="0" /></a>
 					</tmpl_unless>
 				</td>
 				<td  class="col_delete">
 					<tmpl_unless isfolder>
-						<a href="javascript:del('<%! Delete recording? !%>\n\n&quot;<tmpl_var name>&quot;', '<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" title="<%! Delete !%>" height="17" width="17" border="0" /></a>
+						<a href="javascript:del('<%! Delete recording? !%>\n\n&quot;<tmpl_var name_js>&quot;', '<tmpl_var delurl><tmpl_var cur_sorting>');"><img src="bilder/delete.gif" alt="delete" title="<%! Delete !%>" height="17" width="17" border="0" /></a>
 					</tmpl_unless>
 				</td>
 <tmpl_if stream_rec_on>
@@ -164,8 +164,13 @@
 			</tr>
 		</table>
 
-		<div id="buttons">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
+			<tr>
+				<td align="left">
+					<input type="submit" class="submit" name="rec_update" value="<%! Refresh !%>" />
+				</td>
 <tmpl_if reccmds>
+				<td align="center">
 					<%! Commands: !%>
 					<select name="rec_cmd" class="submit">
 	<tmpl_loop reccmds>
@@ -173,9 +178,12 @@
 	</tmpl_loop>				
 					</select>
 					<input type="submit" class="submit" name="rec_runcmd" value="<%! Run !%>" onclick="return confirm('<%! Really run this command? !%>')" />
+				</td>
 </tmpl_if>
+				<td align="right">
 					<input type="submit" class="submit" name="rec_delete" value="<%! Delete Selected Recordings !%>" onclick="return mdel('<%! Delete all selected recordings? !%>');" />
-		</div>
+				</td>
+		</table>
 		<input type="hidden" name="aktion" value="rec_delete" />
 	</form>
 </body>

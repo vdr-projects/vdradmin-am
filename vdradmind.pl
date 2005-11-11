@@ -170,7 +170,7 @@ $CONFIG{CHANNELS_WANTED_WATCHTV}   = "";
 #
 $CONFIG{PROG_SUMMARY_COLS} = 3;
 
-my $VERSION               = "0.97-am3.4.2rc3";
+my $VERSION               = "0.97-am3.4.2rc4";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0;
@@ -447,10 +447,13 @@ while(true) {
 		my $aktion;
 		my $real_aktion = $q->param("aktion");
 		if ($real_aktion eq "at_timer_aktion") {
-			$aktion = "at_timer_save";
-			$aktion = "at_timer_delete" if ($q->param("at_delete"));
-			$aktion = "force_update" if ($q->param("at_force"));
-			$aktion = "at_timer_test" if ($q->param("test"));
+			$real_aktion = "at_timer_save";
+			$real_aktion = "at_timer_delete" if ($q->param("at_delete"));
+			$real_aktion = "force_update" if ($q->param("at_force"));
+			$real_aktion = "at_timer_test" if ($q->param("test"));
+		} elsif ($real_aktion eq "timer_aktion") {
+			$real_aktion = "timer_delete" if ($q->param("timer_delete"));
+			$real_aktion = "timer_toggle" if ($q->param("timer_active") || $q->param("timer_inactive"));
 		}
 		
 		my @ALLOWED_FUNCTIONS;
@@ -811,7 +814,7 @@ sub OpenSocket {
 sub SendCMD {
   my $cmd = join("", @_);
 
-	if (length($cmd) > $VDR_MAX_SVDRP_LENGTH ) {
+	if (($VDRVERSION < 10336) && (length($cmd) > $VDR_MAX_SVDRP_LENGTH)) {
 		Log(LOG_FATALERROR, "SendCMD(): command is too long(" . length($cmd) . "): " . substr($cmd, 0, 10));
 		return;
 	}
@@ -1140,9 +1143,12 @@ sub AutoTimer {
     );
     $timer->{$key} = $t;
   }
-
+	my $date_now = localtime();
   for my $sender (keys(%EPG)) {
     for my $event (@{$EPG{$sender}}) {
+
+				# Timer in the past?
+				next if(localtime($event->{stop}) < $date_now);
 
         # Ein Timer der schon programmmiert wurde kann
         # ignoriert werden
@@ -1377,7 +1383,7 @@ sub AutoTimer {
 
 				if ($dry_run) {
 #					printf("AT found: (%s) (%s) (%s) (%s) (%s) (%s)\n", $event->{title}, $title, $event->{subtitle}, $directory, $event->{start}, $event->{stop});
-					push(@at_matches, {	otitle => $event->{title}, title => $title, subtitle => $event->{subtitle}, directory => $directory,	start => $event_start, stop => $event_stop, date => my_strftime("%A, %x",$event->{start}), channel => GetChannelDescByNumber($event->{vdr_id})});
+					push(@at_matches, {	otitle => $event->{title}, title => $title, subtitle => $event->{subtitle}, directory => $directory,	start => my_strftime("%H:%M", $event->{start}), stop => my_strftime("%H:%M", $event->{stop}), date => my_strftime("%A, %x",$event->{start}), channel => GetChannelDescByNumber($event->{vdr_id})});
 				} else {
         Log(LOG_AT, sprintf("AutoTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
 
@@ -1667,6 +1673,8 @@ sub ParseTimer {
 
 		# replace "|" by ":" in timer's title (man vdr.5)
 		$title =~ s/\|/\:/g;
+		my $title_js = $title;
+		$title_js =~ s/\'/\\\'/g;
 
     if(length($dor) == 7) { # repeating timer
       $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), my_strftime("%d"), (my_strftime("%m") - 1), my_strftime("%Y"));
@@ -1727,7 +1735,7 @@ sub ParseTimer {
           startsse  => $startsse + $off * 86400,
           stopsse   => $stopsse + $off * 86400,
           active    => $active,
-          recording => $recording,
+          recording => $first ? $recording : 0, # only the first might record
           event_id  => $event_id,
           cdesc     => get_name_from_vdrid($vdr_id),
           transponder => get_transponder_from_vdrid($vdr_id),
@@ -1736,6 +1744,7 @@ sub ParseTimer {
           prio      => $prio,
           lft       => $lft,
           title     => $title,
+          title_js  => $title_js,
           summary   => $summary,
           collision => 0,
           critical  => 0,
@@ -1762,6 +1771,7 @@ sub ParseTimer {
         prio      => $prio,
         lft       => $lft,
         title     => $title,
+        title_js  => $title_js,
         summary   => $summary,
         collision => 0,
         critical  => 0,
@@ -1837,7 +1847,7 @@ sub ProgTimer {
 	my $send_cmd = $timer_id ? "modt $timer_id" : "newt";
 	my $send_active = $active & 0x8000 ? PackStatus($active, $event_id) : $active;
 	my $send_dor = $dor ? $dor : RemoveLeadingZero(strftime("%d", localtime($start)));
-	my $send_summary = substr($summary, 0, $VDR_MAX_SVDRP_LENGTH - 9 - length($send_cmd) - length($send_active) - length($channel) - length($send_dor) - 8 - length($prio) - length($lft) - length($title));
+	my $send_summary = ($VDRVERSION >= 10336) ? $summary : substr($summary, 0, $VDR_MAX_SVDRP_LENGTH - 9 - length($send_cmd) - length($send_active) - length($channel) - length($send_dor) - 8 - length($prio) - length($lft) - length($title));
   my $return = SendCMD(
     sprintf("%s %s:%s:%s:%s:%s:%s:%s:%s:%s",
       $send_cmd,
@@ -1882,6 +1892,7 @@ sub salt {
 }
 
 sub Shutdown {
+	CloseSocket();
 	unlink($PIDFILE);
 	exit(0)
 };
@@ -2540,8 +2551,8 @@ sub timer_list {
 		} else {
 		  $timer->{active} = 0;
 		}
-    $timer->{delurl} = $MyURL . "?aktion=timer_delete&amp;timer_id=" . $timer->{id},
-    $timer->{modurl} = $MyURL . "?aktion=timer_new_form&amp;timer_id=" . $timer->{id},
+    $timer->{delurl} = $MyURL . "?aktion=timer_delete&amp;timer_id=" . $timer->{id} . "&amp;sortby=" . $sortby . "&amp;desc=" . $desc,
+    $timer->{modurl} = $MyURL . "?aktion=timer_new_form&amp;timer_id=" . $timer->{id} . "&amp;sortby=" . $sortby . "&amp;desc=" . $desc,
 		$timer->{toggleurl} = sprintf("%s?aktion=timer_toggle&amp;active=%s&amp;id=%s&amp;sortby=%s&amp;desc=%s", $MyURL, ($timer->{active} & 1) ? 0 : 1, $timer->{id}, $sortby, $desc),
 		$timer->{dor} = my_strftime("%a %d.%m", $timer->{startsse}); #TODO: localize date
 
@@ -2746,25 +2757,28 @@ sub timer_list {
 			@timer = sort({ $a->{startsse} <=> $b->{startsse} } @timer);
 		}
   }
+	my $cur_desc = $desc;
 	$desc ? ($desc = 0) : ($desc = 1);
   @timer2=@timer;
   @timer2=sort({ lc($a->{sortfield}) cmp lc($b->{sortfield}) } @timer2);
 
 	my $template = TemplateNew("timer_list.html");
   my $vars = {
-    sortbydayurl       => "$MyURL?aktion=timer_list&amp;sortby=day&amp;desc=$desc",
-    sortbychannelurl   => "$MyURL?aktion=timer_list&amp;sortby=channel&amp;desc=$desc",
-    sortbynameurl      => "$MyURL?aktion=timer_list&amp;sortby=name&amp;desc=$desc",
-    sortbyactiveurl    => "$MyURL?aktion=timer_list&amp;sortby=active&amp;desc=$desc",
-    sortbystarturl     => "$MyURL?aktion=timer_list&amp;sortby=start&amp;desc=$desc",
-    sortbystopurl      => "$MyURL?aktion=timer_list&amp;sortby=stop&amp;desc=$desc",
+    sortbydayurl       => "$MyURL?aktion=timer_list&amp;sortby=day&amp;desc=" . (($sortby eq "day") ? $desc : $cur_desc),
+    sortbychannelurl   => "$MyURL?aktion=timer_list&amp;sortby=channel&amp;desc=" . (($sortby eq "channel") ? $desc : $cur_desc),
+    sortbynameurl      => "$MyURL?aktion=timer_list&amp;sortby=name&amp;desc=" . (($sortby eq "name") ? $desc : $cur_desc),
+    sortbyactiveurl    => "$MyURL?aktion=timer_list&amp;sortby=active&amp;desc=" . (($sortby eq "active") ? $desc : $cur_desc),
+    sortbystarturl     => "$MyURL?aktion=timer_list&amp;sortby=start&amp;desc=" . (($sortby eq "start") ? $desc : $cur_desc),
+    sortbystopurl      => "$MyURL?aktion=timer_list&amp;sortby=stop&amp;desc=" . (($sortby eq "stop") ? $desc : $cur_desc),
 		sortbyday          => ($sortby eq "day") ? 1 : 0,
 		sortbychannel      => ($sortby eq "channel") ? 1 : 0,
 		sortbyname         => ($sortby eq "name") ? 1 : 0,
 		sortbyactive       => ($sortby eq "active") ? 1 : 0,
 		sortbystart        => ($sortby eq "start") ? 1 : 0,
 		sortbystop         => ($sortby eq "stop") ? 1 : 0,
+		sortby             => $sortby,
 		desc               => $desc,
+		cur_desc           => $cur_desc,
     timer_loop			   => \@timer,
     timers  	         => \@timer2,
     timers2  	         => \@timer2,
@@ -2774,6 +2788,8 @@ sub timer_list {
     current            => $current,
     title              => $title,
 		usercss            => $UserCSS,
+		activateurl        => sprintf("%s?aktion=timer_toggle&amp;active=1&amp;sortby=%s&amp;desc=%s", $MyURL, ,$sortby, $cur_desc),
+		inactivateurl      => sprintf("%s?aktion=timer_toggle&amp;active=0&amp;sortby=%s&amp;desc=%s", $MyURL, ,$sortby, $cur_desc),
     config 	           => \%CONFIG
   };
 
@@ -2786,12 +2802,32 @@ sub timer_list {
 
 sub timer_toggle {
 	UptoDate();
-	my $active = $q->param("active");
 	my $id     = $q->param("id");
 	my $sortby = $q->param("sortby");
 	my $desc   = $q->param("desc");
-	# XXX check return 
-	SendCMD(sprintf("modt %s %s", $id, $active ? "on" : "off"));
+  if($id) {
+		my $active = $q->param("active");
+		SendCMD(sprintf("modt %s %s", $id, $active ? "on" : "off"));
+		# XXX check return 
+  } else {
+		my $active;
+		$active = "on" if($q->param("timer_active"));
+		$active = "off" if($q->param("timer_inactive"));
+		if($active) {
+	    my @sorted;
+  	  for($q->param) {
+    	 if(/xxxx_(.*)/) {
+					push(@sorted, $1);
+	      }
+  	  }
+    	@sorted = sort({ $b <=> $a } @sorted);
+	    for my $t (@sorted) {
+				SendCMD(sprintf("modt %s %s", $t, $active));
+				# XXX check return 
+	  	}
+    	CloseSocket();
+		}
+  }
 	return(headerForward(RedirectToReferer("$MyURL?aktion=timer_list&sortby=$sortby&desc=$desc")));
 }
 
@@ -3126,9 +3162,11 @@ sub at_timer_list {
     if($_->{stop}) {
       $_->{stop} = substr($_->{stop}, 0, 2) . ":" . substr($_->{stop}, 2, 5);
     }
+    $_->{pattern_js} = $_->{pattern};
     $_->{pattern} = CGI::escapeHTML($_->{pattern});
-    $_->{modurl} = $MyURL . "?aktion=at_timer_edit&amp;id=$id";
-    $_->{delurl} = $MyURL . "?aktion=at_timer_delete&amp;id=$id";
+		$_->{pattern_js} =~ s/\'/\\\'/g;
+    $_->{modurl} = $MyURL . "?aktion=at_timer_edit&amp;id=$id&amp;sortby=$sortby&amp;desc=$desc";
+    $_->{delurl} = $MyURL . "?aktion=at_timer_delete&amp;id=$id&amp;sortby=$sortby&amp;desc=$desc";
     $_->{prio} = $_->{prio} ? $_->{prio} : $CONFIG{AT_PRIORITY};
     $_->{lft} = $_->{lft} ? $_->{lft} : $CONFIG{AT_LIFETIME};
     $_->{id} = $id;
@@ -3176,16 +3214,17 @@ sub at_timer_list {
 			@timer = sort({ $a->{stop} <=> $b->{stop} } @timer);
 		}
 	}
+	my $cur_desc = $desc;
 	$desc ? ($desc = 0) : ($desc = 1);
 
 	my $template = TemplateNew("at_timer_list.html");
   my $vars = {
 		usercss            => $UserCSS,
-    sortbychannelurl   => "$MyURL?aktion=at_timer_list&amp;sortby=channel&amp;desc=$desc",
-    sortbypatternurl   => "$MyURL?aktion=at_timer_list&amp;sortby=pattern&amp;desc=$desc",
-    sortbyactiveurl    => "$MyURL?aktion=at_timer_list&amp;sortby=active&amp;desc=$desc",
-    sortbystarturl     => "$MyURL?aktion=at_timer_list&amp;sortby=start&amp;desc=$desc",
-    sortbystopurl      => "$MyURL?aktion=at_timer_list&amp;sortby=stop&amp;desc=$desc",
+    sortbychannelurl   => "$MyURL?aktion=at_timer_list&amp;sortby=channel&amp;desc=" . (($sortby eq "channel") ? $desc : $cur_desc),
+    sortbypatternurl   => "$MyURL?aktion=at_timer_list&amp;sortby=pattern&amp;desc=" . (($sortby eq "pattern") ? $desc : $cur_desc),
+    sortbyactiveurl    => "$MyURL?aktion=at_timer_list&amp;sortby=active&amp;desc=" . (($sortby eq "active") ? $desc : $cur_desc),
+    sortbystarturl     => "$MyURL?aktion=at_timer_list&amp;sortby=start&amp;desc=" . (($sortby eq "start") ? $desc : $cur_desc),
+    sortbystopurl      => "$MyURL?aktion=at_timer_list&amp;sortby=stop&amp;desc=" . (($sortby eq "stop") ? $desc : $cur_desc),
 		sortbychannel      => ($sortby eq "channel") ? 1 : 0,
 		sortbypattern      => ($sortby eq "pattern") ? 1 : 0,
 		sortbyactive       => ($sortby eq "active") ? 1 : 0,
@@ -3781,7 +3820,7 @@ sub rec_list {
 		$parent = uri_escape($parent);
 	}
 
-	ParseRecordings($parent, $sortby);
+	ParseRecordings($parent, $sortby, $desc);
 
 	# create path array
 	my @path; my $fuse = 0;
@@ -3838,6 +3877,7 @@ sub rec_list {
 			@recordings = sort({ $b->{sse} <=> $a->{sse} } @recordings);
 		}
 	}
+	my $cur_desc = $desc;
 	$desc ? ($desc = 0) : ($desc = 1);
 
 	#
@@ -3847,13 +3887,14 @@ sub rec_list {
 	my $vars = {
 		usercss         => $UserCSS,
 		recloop         => \@recordings,
-		sortbydateurl   => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=date&amp;desc=$desc&amp;parent=$parent",
-		sortbytimeurl   => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=time&amp;desc=$desc&amp;parent=$parent",
-		sortbynameurl   => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=name&amp;desc=$desc&amp;parent=$parent",
+		sortbydateurl   => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=date&amp;parent=$parent&amp;desc=" . (($sortby eq "date") ? $desc : $cur_desc),
+		sortbytimeurl   => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=time&amp;parent=$parent&amp;desc=" . (($sortby eq "time") ? $desc : $cur_desc),
+		sortbynameurl   => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=name&amp;parent=$parent&amp;desc=" . (($sortby eq "name") ? $desc : $cur_desc),
 		sortbydate      => ($sortby eq "date") ? 1 : 0,
 		sortbytime      => ($sortby eq "time") ? 1 : 0,
 		sortbyname      => ($sortby eq "name") ? 1 : 0,
 		desc            => $desc,
+		cur_sorting     => "&amp;sortby=$sortby&amp;desc=$cur_desc",
 		disk_total      => $total,
 		disk_free       => $free,
 		disk_percent    => $percent,
@@ -3875,6 +3916,7 @@ sub rec_list {
 sub ParseRecordings {
 	my $parent = shift;
 	my $sortby = shift;
+	my $desc = shift;
 
 	return if((time() - $CONFIG{CACHE_REC_LASTUPDATE}) < ($CONFIG{CACHE_REC_TIMEOUT} * 60));
 
@@ -3982,9 +4024,6 @@ sub ParseRecordings {
 					isfolder     => 1,
 					date         => 0,
 					time         => 0,
-					sortbydate   => ($sortby eq "date") ? 1 : 0,
-					sortbytime   => ($sortby eq "time") ? 1 : 0,
-					sortbyname   => ($sortby eq "name") ? 1 : 0,
 					infurl       => sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, $recording_id)
 				});
 			}
@@ -4002,19 +4041,19 @@ sub ParseRecordings {
 			$yearofrecording = my_strftime("%Y");
 		} # endif
 
+		my $name_js = $name;
+		$name_js =~ s/\'/\\\'/g;
 		push(@RECORDINGS, {
 			sse        => timelocal(undef, substr($time, 3, 2), substr($time, 0, 2), substr($date, 0, 2), (substr($date, 3, 2)- 1), $yearofrecording),
 			date       => $date,
 			time       => $time,
 			name       => CGI::escapeHTML($name),
+			name_js    => $name_js,
 			serie      => $serie,
 			episode    => $episode,
 			parent     => $parent,
 			new        => $new,
 			id         => $id,
-			sortbydate => ($sortby eq "date") ? 1 : 0,
-			sortbytime => ($sortby eq "time") ? 1 : 0,
-			sortbyname => ($sortby eq "name") ? 1 : 0,
 			delurl     => $MyURL . "?aktion=rec_delete&amp;rec_delete=y&amp;id=$id",
 			editurl    => $MyURL . "?aktion=rec_edit&amp;id=$id",
 			infurl     => $MyURL . "?aktion=rec_detail&amp;id=$id",
@@ -4073,6 +4112,7 @@ sub getRecInfo {
 		$imdb_title =~ s/^.*~\([^~]*\)/\1/;
 
 		$vars = {
+			url      => $MyURL,
 			usercss  => $UserCSS,
 			text     => $displaytext ? $displaytext : undef,
 			title    => $displaytitle ? $displaytitle : undef,
@@ -4102,6 +4142,7 @@ sub getRecInfo {
 		$imdb_title =~ s/^.*\~//;
 		$title =~ s/\~/ - /g;
 		$vars = {
+			url     => $MyURL,
 			usercss => $UserCSS,
 			text    => $text ? $text : "",
 			imdburl => "http://akas.imdb.com/Tsearch?title=" . $imdb_title,
@@ -4138,6 +4179,8 @@ sub rec_delete {
 			}
 		}
 		CloseSocket();
+		# Re-read recording's list
+		$CONFIG{CACHE_REC_LASTUPDATE} = 0;
 	} elsif ($q->param("rec_runcmd")) {
 		if ($id) {
 			recRunCmd($q->param("rec_cmd"), $id);
@@ -4148,8 +4191,11 @@ sub rec_delete {
 				}
 			}
 		}
+	} elsif ($q->param("rec_update")) {
+		# Re-read recording's list
+		$CONFIG{CACHE_REC_LASTUPDATE} = 0;
 	}
-	return(headerForward(RedirectToReferer("$MyURL?aktion=rec_list")));
+	return(headerForward(RedirectToReferer("$MyURL?aktion=rec_list&sortby=" . $q->param("sortby") . "&desc=" . $q->param("desc"))));
 }
 
 sub recRunCmd {
@@ -4205,8 +4251,20 @@ sub recRunCmd {
 }
 
 sub rec_edit {
+  my $epg_id   = $q->param("epg_id");
+  # determine referer (redirect to where we come from)
+  my $ref;
+  if(defined($epg_id)) {
+    if($Referer =~ /(.*)\#\d+$/) {
+      $ref = sprintf("%s#id%s", $1, $epg_id);
+    } else {
+      $ref = sprintf("%s#id%s", $Referer, $epg_id);
+    }
+  }
+  
   my $template = TemplateNew("rec_edit.html");
   my $vars = getRecInfo($q->param("id"));
+#TODO	$vars += {	referer  => Encode_Referer($ref) };
   $template->param($vars);
   my $output;
   my $out = $template->output;
@@ -4219,15 +4277,11 @@ sub rec_rename {
   my($nn) = $q->param('nn');
   if($id) {
     SendCMD("RENR $id $nn");
-# } else {
-#   for($q->param) {
-#     if(/xxxx_(.*)/) {
-#			SendCMD("renr $1 $_[0]");
-#     }
-#   }
+  	CloseSocket();
+		# Re-read recording's list
+		$CONFIG{CACHE_REC_LASTUPDATE} = 0;
   }
-  CloseSocket();
-  headerForward("$MyURL?aktion=rec_list");
+  headerForward("$MyURL?aktion=rec_list&sortby=" . $q->param("sortby") . "&desc=" . $q->param("desc"));
 }
 
 #############################################################################
