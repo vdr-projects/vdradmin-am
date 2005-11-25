@@ -110,7 +110,7 @@ $CONFIG{EPGIMAGES}        = "$CONFIG{VIDEODIR}/epgimages";
 $CONFIG{VDRVFAT}          = 1;
 #
 $CONFIG{TEMPLATE}         = "default";
-$CONFIG{SKIN}             = "default";
+$CONFIG{SKIN}             = "bilder";
 $CONFIG{LOGINPAGE}        = 0;
 $CONFIG{RECORDINGS}       = 1;
 $CONFIG{LANG}             = "";
@@ -159,6 +159,8 @@ $CONFIG{MAIL_PROG}        = "/usr/bin/sendEmail";
 $CONFIG{MAIL_FROMDOMAIN}  = "fromaddress.tld";
 $CONFIG{MAIL_TO}          = "your\@email.address";
 $CONFIG{MAIL_SERVER}      = "your.email.server";
+$CONFIG{MAIL_AUTH_USER}   = "";
+$CONFIG{MAIL_AUTH_PASS}   = "";
 #
 $CONFIG{CHANNELS_WANTED}           = "";
 $CONFIG{CHANNELS_WANTED_AUTOTIMER} = "";
@@ -170,7 +172,7 @@ $CONFIG{CHANNELS_WANTED_WATCHTV}   = "";
 #
 $CONFIG{PROG_SUMMARY_COLS} = 3;
 
-my $VERSION               = "0.97-am3.4.2rc4";
+my $VERSION               = "0.97-am3.4.2rc5";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0;
@@ -348,7 +350,6 @@ if($DAEMON) {
 		exit(0);
 	}
 }
-print("\nThis release includes a new skin named \"default\". You can set it in \"Configuration\" menu...\n\n");
 $SIG{__DIE__} = \&Shutdown;
 
 my @reccmds;
@@ -395,7 +396,7 @@ while(true) {
 	
 	$ACCEPT_GZIP = 0;
 #	print("REQUEST: $raw_request\n");
-	if($raw_request =~ /^GET (\/[\w\.\/-\:]*)([\?[\w=&\.\+\%-\:\!\@\~]*]*)[\#\d ]+HTTP\/1.\d$/) {
+	if($raw_request =~ /^GET (\/[\w\.\/-\:]*)([\?[\w=&\.\+\%-\:\!\@\~\#]*]*)[\#\d ]+HTTP\/1.\d$/) {
 		($Request, $Query) = ($1, $2 ? substr($2, 1, length($2)) : undef);
 	} else {
 		Error("404", gettext("Not found"), gettext("The requested URL was not found on this server!"));
@@ -445,7 +446,7 @@ while(true) {
 	if($Request eq "/vdradmin.pl" || $Request eq "/vdradmin.m3u") { 
 		$q = CGI->new($Query);
 		my $aktion;
-		my $real_aktion = $q->param("aktion");
+		my ($real_aktion, $dummy) = split("#", $q->param("aktion"), 2);
 		if ($real_aktion eq "at_timer_aktion") {
 			$real_aktion = "at_timer_save";
 			$real_aktion = "at_timer_delete" if ($q->param("at_delete"));
@@ -1459,6 +1460,12 @@ sub AT_ProgTimer {
      	#
      	# the "sendEmail" tool (written by "caspian at dotconf.net") is available from [URL]http://caspian.dotconf.net/menu/Software/SendEmail/[/URL]
      	#
+			my $auth_user;
+			my $auth_pass;
+			if($CONFIG{MAIL_AUTH_USER} ne "") {
+				$auth_user = "-xu " . $CONFIG{MAIL_AUTH_USER};
+				$auth_pass = "-xp " . $CONFIG{MAIL_AUTH_PASS};
+			}
      	open (MAIL, "|$CONFIG{MAIL_PROG} -q -f autotimer\@$CONFIG{MAIL_FROMDOMAIN} -t $CONFIG{MAIL_TO} -u \"AUTOTIMER: New timer created for $title\" -s $CONFIG{MAIL_SERVER}");
      	print MAIL $mail;
      	close(MAIL);
@@ -1669,7 +1676,8 @@ sub ParseTimer {
 		# VDR > 1.3.24 sets a bit if it's currently recording
 		my $recording = 0;
     $recording = 1 if(($active & 8) == 8);
-    $active = 1 if(($active & 1) == 1);
+		$active = 1 if($active == 3 || $active == 9);
+    #$active = 1 if(($active & 1) == 1);
 
 		# replace "|" by ":" in timer's title (man vdr.5)
 		$title =~ s/\|/\:/g;
@@ -1803,7 +1811,7 @@ sub DisplayMessage {
 
 sub LoadTranslation {
 	undef %ERROR_MESSAGE;
-	printf("Setting locale to \"%s\".\n", $CONFIG{LANG} eq "" ? "System default" : $CONFIG{LANG});
+
 	%ERROR_MESSAGE = (
 		not_found      => gettext("Not found"),
 		notfound_long  => gettext("The requested URL was not found on this server!"),
@@ -2302,7 +2310,7 @@ sub prog_detail {
 #############################################################################
 sub prog_list {
   return if(UptoDate());
-	my $vdr_id = $q->param("vdr_id");
+	my ($vdr_id, $dummy) = split("#", $q->param("vdr_id"), 2);
   
 	# called without vdr_id, redirect to the first known channel
   if(!$vdr_id) {
@@ -2361,7 +2369,7 @@ sub prog_list {
       duration    => my_strftime("%H:%M", $event->{stop}),
       title       => CGI::escapeHTML($event->{title}),
       subtitle    => CGI::escapeHTML($event->{subtitle}),
-      recurl      => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
+      recurl      => sprintf("%s?aktion=timer_new_form&amp;old_aktion=prog_list&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
       infurl      => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}) : undef,
       newd        => 0,
       anchor      => "id" . $event->{event_id}
@@ -2481,7 +2489,7 @@ sub prog_list2 {
           duration    => my_strftime("%H:%M", $event->{stop}),
           title       => CGI::escapeHTML($event->{title}),
           subtitle    => CGI::escapeHTML($event->{subtitle}),
-          recurl      => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
+          recurl      => sprintf("%s?aktion=timer_new_form&amp;old_aktion=prog_list2&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
           infurl      => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}) : undef,
           newd        => 0,
           anchor      => "id" . $event->{event_id}
@@ -2865,14 +2873,7 @@ sub timer_new_form {
   }
   
   # determine referer (redirect to where we come from)
-  my $ref;
-  if(defined($epg_id)) {
-    if($Referer =~ /(.*)\#\d+$/) {
-      $ref = sprintf("%s#id%s", $1, $epg_id);
-    } else {
-      $ref = sprintf("%s#id%s", $Referer, $epg_id);
-    }
-  }
+  my $ref = getReferer($epg_id);
   
   # check if we may use Event-IDs in general or not
   if($CONFIG{NO_EVENTID} == 1) {
@@ -3112,6 +3113,23 @@ sub rec_stream {
       }
   }
   return(header("200", "video/x-mpegurl", $data));
+}
+
+sub getReferer {
+	my $epg_id = shift;
+  if(defined($epg_id)) {
+    if($Referer =~ /(.*)\#\d+$/) {
+#			print("1: $1, $epg_id\n");
+      return sprintf("%s#id%s", $1, $epg_id);
+#    } elsif ($Referer) {
+#			print("2: $Referer, $epg_id\n");
+#      return sprintf("%s#id%s", $Referer, $epg_id);
+    } else {
+			my $vdr_id = $q->param("vdr_id");
+#			print("3: " . $q->param("old_aktion") . ", $vdr_id, $epg_id\n");
+			return sprintf("/vdradmin.pl?aktion=%s%s#id%s", $q->param("old_aktion"), ($vdr_id ? "&vdr_id=$vdr_id" : ""), $epg_id);
+		}
+  }
 }
 
 #############################################################################
@@ -3757,7 +3775,7 @@ sub prog_summary {
 				streamurl      => sprintf("%s?aktion=live_stream&amp;channel=%s", $MyStreamURL, $event->{vdr_id}),
 				stream_live_on => $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
 				infurl         => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}) : undef,
-				recurl         => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
+				recurl         => sprintf("%s?aktion=timer_new_form&amp;old_aktion=prog_summary&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
 				find_title     => uri_escape($event->{title}),
         anchor         => "id" . $event->{event_id}
 				});
@@ -4032,13 +4050,24 @@ sub ParseRecordings {
 		#
 		my $yearofrecording;
 		if ( $VDRVERSION >= 10326 ) {
-			$yearofrecording = "20".substr($date,6,2);
+			# let localtime() decide about the century
+			$yearofrecording = substr($date,6,2);
+
+			# alternatively decide about the century ourself
+			#	my $shortyear = substr($date,6,2);
+			#	if ($shortyear > 70) {
+			#		$yearofrecording = "19" . $shortyear;
+			#	} else {
+			#		$yearofrecording = "20" . $shortyear;
+			#	}
 		} else {
 			# old way of vdradmin to handle the date while vdr did not report the year
 			# current year was assumed.
-			# This will fail for example for a recording on the 29.2. if the current
-			# year does not have this date
-			$yearofrecording = my_strftime("%Y");
+			if ($date eq "29.02") {
+				$yearofrecording = "2004";
+			} else {
+				$yearofrecording = my_strftime("%Y");
+			}
 		} # endif
 
 		my $name_js = $name;
@@ -4062,23 +4091,34 @@ sub ParseRecordings {
 		});
 	}
 
-	# XXX doesn't count subsub-folders
-	for(@RECORDINGS) {
-		if($_->{parent} eq $parent && $_->{isfolder}) {
-			for my $recording (@RECORDINGS) {
-				if($recording->{parent} eq $_->{recording_id}) {
-					$_->{date}++;
-					$_->{time}++ if($recording->{new});
-				}
-			}
-		}
-	}
+	countRecordings(0);
 
 	$CONFIG{CACHE_REC_LASTUPDATE} = time();
 }
 
+sub countRecordings {
+	my $parent = shift;
+	my $folder = shift;
+
+	for(@RECORDINGS) {
+		if($_->{parent} eq $parent) {
+			if($_->{isfolder}) {
+				countRecordings($_->{recording_id}, $_);
+				if($folder) {
+					$folder->{date} += $_->{date};
+					$folder->{time} += $_->{time} if($_->{time});
+				}
+			} elsif($folder) {
+				$folder->{date}++;
+				$folder->{time}++ if($_->{new});
+			}
+		}
+	}
+}
+
 sub getRecInfo {
 	my $id = shift;
+	my $ref = shift;
 
   my($i, $title);
   for(SendCMD("lstr")) {
@@ -4105,11 +4145,12 @@ sub getRecInfo {
 
 		$displaytext =~ s/\n/<br \/>\n/g;
 		$displaytext =~ s/\|/<br \/>\n/g;
+		$displaytitle =~ s/\~/ - /g;
 		$displaytitle =~ s/\n/<br \/>\n/g;
 		$displaytitle =~ s/\|/<br \/>\n/g;
 		$displaysubtitle =~ s/\n/<br \/>\n/g;
 		$displaysubtitle =~ s/\|/<br \/>\n/g;
-		$imdb_title =~ s/^.*~\([^~]*\)/\1/;
+		$imdb_title =~ s/^.*\~\%*([^\~]*)$/\1/;
 
 		$vars = {
 			url      => $MyURL,
@@ -4117,8 +4158,9 @@ sub getRecInfo {
 			text     => $displaytext ? $displaytext : undef,
 			title    => $displaytitle ? $displaytitle : undef,
 			subtitle => $displaysubtitle ? $displaysubtitle : undef,
-			imdburl  => "http://akas.imdb.com/Tsearch?title=" . $imdb_title,
-			id       => $id
+			imdburl  => "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title),
+			id       => $id,
+			referer  => $ref ? $ref : undef
 		};
 	} else {
 		my($text); my($first) = 1;
@@ -4145,7 +4187,7 @@ sub getRecInfo {
 			url     => $MyURL,
 			usercss => $UserCSS,
 			text    => $text ? $text : "",
-			imdburl => "http://akas.imdb.com/Tsearch?title=" . $imdb_title,
+			imdburl => "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title),
 			title   => CGI::escapeHTML($title),
 			id      => $id
 		};
@@ -4251,20 +4293,11 @@ sub recRunCmd {
 }
 
 sub rec_edit {
-  my $epg_id   = $q->param("epg_id");
   # determine referer (redirect to where we come from)
-  my $ref;
-  if(defined($epg_id)) {
-    if($Referer =~ /(.*)\#\d+$/) {
-      $ref = sprintf("%s#id%s", $1, $epg_id);
-    } else {
-      $ref = sprintf("%s#id%s", $Referer, $epg_id);
-    }
-  }
+  my $ref = ($Referer ? Encode_Referer($Referer) : undef);
   
   my $template = TemplateNew("rec_edit.html");
-  my $vars = getRecInfo($q->param("id"));
-#TODO	$vars += {	referer  => Encode_Referer($ref) };
+  my $vars = getRecInfo($q->param("id"), $ref);
   $template->param($vars);
   my $output;
   my $out = $template->output;
@@ -4281,7 +4314,12 @@ sub rec_rename {
 		# Re-read recording's list
 		$CONFIG{CACHE_REC_LASTUPDATE} = 0;
   }
-  headerForward("$MyURL?aktion=rec_list&sortby=" . $q->param("sortby") . "&desc=" . $q->param("desc"));
+
+  if($q->param("referer")) {
+    return headerForward(Decode_Referer($q->param("referer")));
+  } else {
+  	return headerForward("$MyURL?aktion=rec_list&sortby=" . $q->param("sortby") . "&desc=" . $q->param("desc"));
+  }
 }
 
 #############################################################################

@@ -4,7 +4,10 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
-2005-11-11: 0.97-am3.4.2rc4
+2005-11-xx: 0.97-am3.4.2
+- Fixed: Programming a timer using InternetExplorer, didn't return to the previous page but gave an error (Reported by several people).
+- Remember sorting after (in)activating selected timers (Reported by Atti).
+
 - Updated Template-Toolkit to v2.13.
 - Reworked sorting in rec_list/timer_list/at_timer_list.
 - Activate/Inactivate selected timers in timers_list (Requested by Atti).
@@ -14,7 +17,6 @@ VDR-Portal: amair
 - Remember sorting after deleteing or editing timer or autotimer (Reported by Atti).
 - Improved re-connect to VDR if VDRAdmin crashes.
 
-2005-11-04: 0.97-am3.4.2rc3
 - Set "LANGUAGE" environment variable to "" on startup, so it causes no problems with language setting in VDRAdmin.
 - Added caching of listing of recordings. Can be adjusted by "CACHE_REC_TIMEOUT=number of minutes" in vdradmind.conf. Defaults to "60", "0" disables caching.
 - Remember sorting when toggling in timer or autotimer list.
@@ -25,15 +27,13 @@ VDR-Portal: amair
 - No more config settings that require a VDRAdmin restart.
 - Find "sendEmail" program in $PATH.
 
-2005-10-24: 0.97-am3.4.2rc2
 - For VDR >=1.3.24 use VDR's timer flags for finding timers that are currently recording.
 - Fixed sendmail notification for AutoTimer.
 - If /usr/bin/locale is not available, language can be entered in textfield instead of chosing in selectbox.
 - Fixed wrong display of double quotes in timer_list and at_timer_list.
 
-2005-10-21: 0.97-am3.4.2rc
 - Hopefully fixed browsing in "recordings" menu (if there are folders having the same name).
-- Added new skin "default".
+- Added new skin "default" (InternetExplorer has problems in displaying it).
 - Removed i18n.pl.
 - Localization can be set in configuration again.
 - Added "Transponder" and "CA-System" to tooltips in timer_list.
