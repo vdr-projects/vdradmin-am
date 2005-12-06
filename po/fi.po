@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-0.97-AM3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-25 13:45+0100\n"
+"POT-Creation-Date: 2005-12-06 13:54+0100\n"
 "PO-Revision-Date: 2005-06-17 12:36+0200\n"
 "Last-Translator: Rofa\n"
 "Language-Team: Suomi\n"
@@ -339,7 +339,7 @@ msgstr "Poistetaanko valitut ajastimet?"
 
 #: ../template/default/prog_summary.html:7
 #: ../template/default/prog_timeline.html:7
-#: ../template/default/navigation.html:30 ../vdradmind.pl:4375
+#: ../template/default/navigation.html:30 ../vdradmind.pl:4377
 msgid "What's On Now?"
 msgstr "Menossa nyt"
 
@@ -464,7 +464,7 @@ msgstr "Vierailijan salasana:"
 
 #: ../template/default/config.html:213 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:86
-#: ../template/default/navigation.html:38 ../vdradmind.pl:4377
+#: ../template/default/navigation.html:38 ../vdradmind.pl:4379
 msgid "Timeline"
 msgstr "Aikajana"
 
@@ -530,13 +530,12 @@ msgstr "Sähköpostipalvelin:"
 #: ../template/default/config.html:332
 #: ../template/default/help_config.html:116
 msgid "SMTPAuth user:"
-msgstr ""
+msgstr "SMTP-käyttäjätunnus:"
 
 #: ../template/default/config.html:338
 #: ../template/default/help_config.html:118
-#, fuzzy
 msgid "SMTPAuth password:"
-msgstr "Salasana:"
+msgstr "SMTP-salasana:"
 
 #: ../template/default/config.html:361 ../template/default/timer_list.html:6
 #: ../template/default/timer_list.html:44
@@ -719,7 +718,7 @@ msgid "Delete Selected Timers"
 msgstr "Poista valitut ajastimet"
 
 #: ../template/default/prog_list.html:6 ../template/default/navigation.html:42
-#: ../vdradmind.pl:4378
+#: ../vdradmind.pl:4380
 msgid "Channels"
 msgstr "Kanavat"
 
@@ -785,7 +784,7 @@ msgstr "etsi IMDB:stä"
 #: ../template/default/rec_list.html:6 ../template/default/rec_list.html:18
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:18
-#: ../template/default/navigation.html:54 ../vdradmind.pl:4380
+#: ../template/default/navigation.html:54 ../vdradmind.pl:4382
 msgid "Recordings"
 msgstr "Tallenteet"
 
@@ -1642,18 +1641,18 @@ msgstr "Ohjelmisto huomenna"
 msgid "Playing on the %d."
 msgstr "Ohjelmisto %d. päivä"
 
-#: ../vdradmind.pl:3862
+#: ../vdradmind.pl:3864
 msgid "Schedule"
 msgstr "Ohjelmisto"
 
-#: ../vdradmind.pl:4376
+#: ../vdradmind.pl:4378
 msgid "Playing Today?"
 msgstr "Tänään"
 
-#: ../vdradmind.pl:4379
+#: ../vdradmind.pl:4381
 msgid "Timers"
 msgstr "Ajastimet"
 
-#: ../vdradmind.pl:4442
+#: ../vdradmind.pl:4444
 msgid "System default"
 msgstr "Oletus"

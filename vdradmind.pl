@@ -172,7 +172,7 @@ $CONFIG{CHANNELS_WANTED_WATCHTV}   = "";
 #
 $CONFIG{PROG_SUMMARY_COLS} = 3;
 
-my $VERSION               = "0.97-am3.4.2rc5";
+my $VERSION               = "0.97-am3.4.2";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0;
@@ -1452,10 +1452,10 @@ sub AT_ProgTimer {
      	$sum = $summary;
      	# remove all HTML-Tags from text
      	$sum =~ s/\<[^\>]+\>/ /g;
-     	$dat = strftime("%x", localtime($start));
+     	$dat = strftime("%A, %x", localtime($start));
      	$strt= strftime("%H:%M", localtime($start));
      	$end = strftime("%H:%M", localtime($stop));
-     	$mail = sprintf("Created AUTOTIMER for $title\n===========================================================================\n$dat,$strt-$end\n\nSummary:\n--------\n$sum");
+     	$mail = sprintf("Created AUTOTIMER for $title\n===========================================================================\nChannel: $channel\n$title\n$dat, $strt-$end\n\nSummary:\n--------\n$sum");
  
      	#
      	# the "sendEmail" tool (written by "caspian at dotconf.net") is available from [URL]http://caspian.dotconf.net/menu/Software/SendEmail/[/URL]
@@ -1564,7 +1564,7 @@ sub CheckTimers {
                 #$ntitle,
                 $timer->{title},
                 # If there already is a summary, the user might have changed it -- leave it untouched.
-                $timer->{summary} ? $timer->{summary} : $event->{summary},
+                $timer->{summary} ? $timer->{summary} : ( $CONFIG{TM_ADD_SUMMARY} ? $event->{summary} : "" ),
               );
               Log(LOG_CHECKTIMER, sprintf("CheckTimers: Timer %s updated.", $timer->{id}));
           }
@@ -1628,7 +1628,7 @@ sub CheckTimers {
               # don't touch the title since we're not too sure about the event
               $timer->{title},
               # If there already is a summary, the user might have changed it -- leave it untouched.
-              $timer->{summary} ? $timer->{summary} : $event->{summary},
+              $timer->{summary} ? $timer->{summary} : ( $CONFIG{TM_ADD_SUMMARY} ? $event->{summary} : "" ),
             );
             Log(LOG_CHECKTIMER, sprintf("CheckTimers: Timer %s updated.", $timer->{id}));
           }
@@ -2982,6 +2982,8 @@ sub timer_add {
 
 		if(length($q->param("title")) > 0) {
 			$data->{title} = $q->param("title");
+		} else {
+			$data->{title} = GetChannelDescByNumber($data->{channel}) if ($data->{channel});
 		}
 
 		if(length($q->param("summary")) > 0) {
