@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-0.97-AM3.3\n"
+"Project-Id-Version: VDRAdmin-AM-3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-06 13:54+0100\n"
+"POT-Creation-Date: 2006-01-18 08:21+0100\n"
 "PO-Revision-Date: 2005-06-17 12:36+0200\n"
 "Last-Translator: Rofa\n"
 "Language-Team: Suomi\n"
@@ -32,7 +32,8 @@ msgstr ""
 #: ../template/default/help_at_timer_new.html:11
 #: ../template/default/help_rec_list.html:5
 #: ../template/default/at_timer_new.html:5
-#: ../template/default/navigation.html:4
+#: ../template/default/navigation.html:4 ../template/default/help.html:5
+#: ../template/default/about.html:5
 msgid "charset=ISO-8859-1"
 msgstr "charset=ISO-8859-1"
 
@@ -55,6 +56,7 @@ msgstr "Muokkaa ajastinta"
 #: ../template/default/config.html:23 ../template/default/timer_list.html:51
 #: ../template/default/rec_list.html:27
 #: ../template/default/at_timer_new.html:24
+#: ../template/default/navigation.html:76 ../template/default/help.html:6
 msgid "Help"
 msgstr "Opaste"
 
@@ -70,10 +72,10 @@ msgstr "Aktiivinen:"
 #: ../template/default/config.html:346 ../template/default/config.html:397
 #: ../template/default/config.html:406 ../template/default/config.html:415
 #: ../template/default/config.html:443 ../template/default/config.html:458
-#: ../template/default/config.html:506 ../template/default/config.html:521
-#: ../template/default/config.html:552 ../template/default/config.html:561
-#: ../template/default/config.html:570 ../template/default/config.html:579
-#: ../template/default/config.html:588 ../template/default/config.html:597
+#: ../template/default/config.html:530 ../template/default/config.html:545
+#: ../template/default/config.html:576 ../template/default/config.html:585
+#: ../template/default/config.html:594 ../template/default/config.html:603
+#: ../template/default/config.html:612 ../template/default/config.html:621
 #: ../template/default/timer_list.html:322
 #: ../template/default/at_timer_new.html:48
 #: ../template/default/at_timer_new.html:52
@@ -88,10 +90,10 @@ msgstr "Kyllä"
 #: ../template/default/config.html:347 ../template/default/config.html:398
 #: ../template/default/config.html:407 ../template/default/config.html:416
 #: ../template/default/config.html:444 ../template/default/config.html:459
-#: ../template/default/config.html:507 ../template/default/config.html:522
-#: ../template/default/config.html:553 ../template/default/config.html:562
-#: ../template/default/config.html:571 ../template/default/config.html:580
-#: ../template/default/config.html:589 ../template/default/config.html:598
+#: ../template/default/config.html:531 ../template/default/config.html:546
+#: ../template/default/config.html:577 ../template/default/config.html:586
+#: ../template/default/config.html:595 ../template/default/config.html:604
+#: ../template/default/config.html:613 ../template/default/config.html:622
 #: ../template/default/timer_list.html:323
 #: ../template/default/at_timer_new.html:49
 #: ../template/default/at_timer_new.html:53
@@ -189,6 +191,10 @@ msgid "End Time:"
 msgstr "Lopetusaika:"
 
 #: ../template/default/timer_new.html:144
+msgid "Use VPS:"
+msgstr "VPS-toiminto:"
+
+#: ../template/default/timer_new.html:150
 #: ../template/default/at_timer_list.html:24
 #: ../template/default/config.html:279 ../template/default/config.html:371
 #: ../template/default/timer_list.html:27
@@ -200,7 +206,7 @@ msgstr "Lopetusaika:"
 msgid "Priority:"
 msgstr "Prioriteetti:"
 
-#: ../template/default/timer_new.html:150
+#: ../template/default/timer_new.html:156
 #: ../template/default/at_timer_list.html:24
 #: ../template/default/config.html:285 ../template/default/config.html:377
 #: ../template/default/timer_list.html:27
@@ -212,22 +218,22 @@ msgstr "Prioriteetti:"
 msgid "Lifetime:"
 msgstr "Elinaika:"
 
-#: ../template/default/timer_new.html:156
+#: ../template/default/timer_new.html:162
 #: ../template/default/help_timer_new.html:65
 msgid "Title of Recording:"
 msgstr "Tallenteen nimi:"
 
-#: ../template/default/timer_new.html:162 ../template/default/rec_edit.html:57
+#: ../template/default/timer_new.html:168 ../template/default/rec_edit.html:57
 #: ../template/default/help_timer_new.html:67
 msgid "Summary:"
 msgstr "Tallenteen kuvaus:"
 
-#: ../template/default/timer_new.html:174 ../template/default/config.html:635
+#: ../template/default/timer_new.html:180 ../template/default/config.html:659
 #: ../template/default/at_timer_new.html:176
 msgid "Save"
 msgstr "Tallenna"
 
-#: ../template/default/timer_new.html:175 ../template/default/rec_edit.html:70
+#: ../template/default/timer_new.html:181 ../template/default/rec_edit.html:70
 #: ../template/default/at_timer_new.html:178
 msgid "Cancel"
 msgstr "Peru"
@@ -339,7 +345,7 @@ msgstr "Poistetaanko valitut ajastimet?"
 
 #: ../template/default/prog_summary.html:7
 #: ../template/default/prog_timeline.html:7
-#: ../template/default/navigation.html:30 ../vdradmind.pl:4377
+#: ../template/default/navigation.html:30 ../vdradmind.pl:4410
 msgid "What's On Now?"
 msgstr "Menossa nyt"
 
@@ -464,7 +470,7 @@ msgstr "Vierailijan salasana:"
 
 #: ../template/default/config.html:213 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:86
-#: ../template/default/navigation.html:38 ../vdradmind.pl:4379
+#: ../template/default/navigation.html:38 ../vdradmind.pl:4412
 msgid "Timeline"
 msgstr "Aikajana"
 
@@ -587,60 +593,80 @@ msgstr "Tallenteiden suoratoisto:"
 msgid "Path to VDR Recordings on your workstation:"
 msgstr "VDR-tallenteiden polku työasemallasi:"
 
-#: ../template/default/config.html:472
+#: ../template/default/config.html:471
+#: ../template/default/help_config.html:156
+msgid "MIME type for live streaming:"
+msgstr "Live-kuvan suoratoiston MIME-tyyppi:"
+
+#: ../template/default/config.html:477
+#: ../template/default/help_config.html:158
+msgid "Suffix for live streaming:"
+msgstr "Live-kuvan suoratoiston tiedostopääte:"
+
+#: ../template/default/config.html:483
+#: ../template/default/help_config.html:160
+msgid "MIME type for recordings streaming:"
+msgstr "Tallenteiden suoratoiston MIME-tyyppi:"
+
+#: ../template/default/config.html:489
+#: ../template/default/help_config.html:162
+msgid "Suffix for recordings streaming:"
+msgstr "Tallenteiden suoratoiston tiedostopääte:"
+
+#: ../template/default/config.html:496
 msgid "Bandwidth of Streams:"
 msgstr "Kaistanleveys:"
 
-#: ../template/default/config.html:494 ../template/default/help_config.html:38
-#: ../template/default/help_config.html:160
+#: ../template/default/config.html:518 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:168
 msgid "Expert"
 msgstr "Guru-käyttäjä"
 
-#: ../template/default/config.html:504
-#: ../template/default/help_config.html:163
+#: ../template/default/config.html:528
+#: ../template/default/help_config.html:171
 msgid "Read EPG directly using epg.data:"
 msgstr "Lue ohjelmatiedot suoraan tiedostosta:"
 
-#: ../template/default/config.html:513
-#: ../template/default/help_config.html:165
+#: ../template/default/config.html:537
+#: ../template/default/help_config.html:173
 msgid "epg.data filename:"
 msgstr "Tiedosto ohjelmatiedoille:"
 
-#: ../template/default/config.html:519
-#: ../template/default/help_config.html:167
+#: ../template/default/config.html:543
+#: ../template/default/help_config.html:175
 msgid "VFAT:"
 msgstr "VFAT-tuki:"
 
-#: ../template/default/config.html:540 ../template/default/help_config.html:38
-#: ../template/default/help_config.html:173
+#: ../template/default/config.html:564 ../template/default/help_config.html:38
+#: ../template/default/help_config.html:181
 msgid "Channel Selections"
 msgstr "Kanavavalinnat"
 
-#: ../template/default/config.html:550
+#: ../template/default/config.html:574
 msgid "In \"Timeline\"?"
 msgstr "Käytä kanavavalintoja \"Aikajana\"-sivulla"
 
-#: ../template/default/config.html:559
+#: ../template/default/config.html:583
 msgid "In \"Channels\"?"
 msgstr "Käytä kanavavalintoja \"Kanavat\"-sivulla"
 
-#: ../template/default/config.html:568
+#: ../template/default/config.html:592
 msgid "In \"Playing Today\"?"
 msgstr "Käytä kanavavalintoja \"Ohjelmisto tänään\"-sivulla"
 
-#: ../template/default/config.html:577
+#: ../template/default/config.html:601
 msgid "In \"What's On Now\"?"
 msgstr "Käytä kanavavalintoja \"Menossa nyt\"-sivulla"
 
-#: ../template/default/config.html:586
+#: ../template/default/config.html:610
 msgid "In \"AutoTimer\"?"
 msgstr "Käytä kanavavalintoja \"Hakuajastimet\"-sivulla"
 
-#: ../template/default/config.html:595
+#: ../template/default/config.html:619
 msgid "In \"Watch TV\"?"
 msgstr "Käytä kanavavalintoja \"Katso TV:tä\"-sivulla"
 
-#: ../template/default/config.html:636
+#: ../template/default/config.html:660
 msgid "Apply"
 msgstr "Käytä"
 
@@ -718,7 +744,7 @@ msgid "Delete Selected Timers"
 msgstr "Poista valitut ajastimet"
 
 #: ../template/default/prog_list.html:6 ../template/default/navigation.html:42
-#: ../vdradmind.pl:4380
+#: ../vdradmind.pl:4413
 msgid "Channels"
 msgstr "Kanavat"
 
@@ -769,22 +795,22 @@ msgstr "sulje"
 msgid "view"
 msgstr "katso"
 
-#: ../template/default/prog_detail.html:46
+#: ../template/default/prog_detail.html:47
 msgid "record"
 msgstr "tallenna"
 
-#: ../template/default/prog_detail.html:47
+#: ../template/default/prog_detail.html:49
 msgid "search"
 msgstr "etsi"
 
-#: ../template/default/prog_detail.html:50
+#: ../template/default/prog_detail.html:52
 msgid "Lookup movie in the Internet-Movie-Database (IMDb)"
 msgstr "etsi IMDB:stä"
 
 #: ../template/default/rec_list.html:6 ../template/default/rec_list.html:18
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:18
-#: ../template/default/navigation.html:54 ../vdradmind.pl:4382
+#: ../template/default/navigation.html:54 ../vdradmind.pl:4415
 msgid "Recordings"
 msgstr "Tallenteet"
 
@@ -851,16 +877,17 @@ msgid "The skin you want to use."
 msgstr ""
 
 #: ../template/default/help_config.html:45
-msgid "The page you want to see at first connect to VDRAdmin."
+msgid "The page you want to see at first connect to VDRAdmin-AM."
 msgstr ""
 
 #: ../template/default/help_config.html:47
 msgid ""
-"VDRAdmin will load the given number of channels from VDR and present only "
+"VDRAdmin-AM will load the given number of channels from VDR and present only "
 "those in any fields where channels can be selected. This also limits the EPG "
-"information VDRAdmin will read so that you can use this to reduce VDRAdmin's "
-"memory consumption and increase its performance. <strong>0</strong> turns "
-"this feature off and VDRAdmin will use all available channels."
+"information VDRAdmin-AM will read so that you can use this to reduce "
+"VDRAdmin-AM's memory consumption and increase its performance. <strong>0</"
+"strong> turns this feature off and VDRAdmin-AM will use all available "
+"channels."
 msgstr ""
 
 #: ../template/default/help_config.html:49
@@ -872,7 +899,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_config.html:51
-msgid "Here you can set the localization VDRAdmin should use."
+msgid "Here you can set the localization VDRAdmin-AM should use."
 msgstr ""
 
 #: ../template/default/help_config.html:53
@@ -881,22 +908,22 @@ msgstr ""
 #: ../template/default/help_config.html:95
 #: ../template/default/help_config.html:123
 #: ../template/default/help_config.html:143
-#: ../template/default/help_config.html:157
-#: ../template/default/help_config.html:170
-#: ../template/default/help_config.html:177
+#: ../template/default/help_config.html:165
+#: ../template/default/help_config.html:178
+#: ../template/default/help_config.html:185
 msgid "Top"
 msgstr "Alkuun"
 
 #: ../template/default/help_config.html:59
 msgid ""
-"The number of DVB cards VDR can access. Depending on this value VDRAdmin "
+"The number of DVB cards VDR can access. Depending on this value VDRAdmin-AM "
 "will calculate critical timers in the <span class=\"ref_menu\">Timer</span> "
 "menu."
 msgstr ""
 
 #: ../template/default/help_config.html:61
 msgid ""
-"The path to VDR's recordings. It's used so that VDRAdmin can locate the "
+"The path to VDR's recordings. It's used so that VDRAdmin-AM can locate the "
 "recordings when using <span class=\"ref_label\">Recordings Streaming</span> "
 "and <span class=\"ref_file\">reccmds.conf</span> in the <span class="
 "\"ref_menu\">Recordings</span> menu."
@@ -999,11 +1026,8 @@ msgstr ""
 
 #: ../template/default/help_config.html:109
 msgid ""
-"VDRAdmin will send an email whenever an event matches an AutoTimer and a "
-"timer has been programmed if you enable this feature. This requires that you "
-"have the sendEmail programm (which you will find <a target=\"_new\" href="
-"\"http://caspian.dotconf.net/menu/Software/SendEmail/\">here</a>) located in "
-"PATH."
+"VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a "
+"timer has been programmed if you enable this feature."
 msgstr ""
 
 #: ../template/default/help_config.html:111
@@ -1031,15 +1055,15 @@ msgstr ""
 
 #: ../template/default/help_config.html:133
 msgid ""
-"The number of minutes VDRAdmin subtracts from the broadcasts start time "
+"The number of minutes VDRAdmin-AM subtracts from the broadcasts start time "
 "found in the EPG. This value is used for timers programmed by AutoTimer and "
 "timers manually programmed when pressing \"Record\" in any EPG view."
 msgstr ""
 
 #: ../template/default/help_config.html:135
 msgid ""
-"The number of minutes VDRAdmin adds to the broadcasts stop time found in the "
-"EPG. This value is used for timers programmed by AutoTimer and timers "
+"The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in "
+"the EPG. This value is used for timers programmed by AutoTimer and timers "
 "manually programmed when pressing \"Record\" in any EPG view."
 msgstr ""
 
@@ -1053,8 +1077,8 @@ msgstr ""
 
 #: ../template/default/help_config.html:141
 msgid ""
-"If you don't want VDRAdmin to add the summary taken from EPG to new timers "
-"you can switch it off here."
+"If you don't want VDRAdmin-AM to add the summary taken from EPG to new "
+"timers you can switch it off here."
 msgstr ""
 
 #: ../template/default/help_config.html:149
@@ -1076,7 +1100,7 @@ msgid ""
 "Enable or disable streaming of recordings.<br />Well actually this is no "
 "real \"streaming\", but you have to setup your workstation so that it can "
 "access VDR's recordings. You can use for example Samba or NFS for this. "
-"VDRAdmin simply generates a playlist that contains all parts of the "
+"VDRAdmin-AM simply generates a playlist that contains all parts of the "
 "recording and sends this to your browser. If your browser and media player "
 "are configured correctly you will see the recording on your workstation's "
 "display."
@@ -1089,36 +1113,56 @@ msgid ""
 "or \"V:\\\" (on Windows) or \"/mnt/videos\" (on Linux)."
 msgstr ""
 
+#: ../template/default/help_config.html:157
+msgid ""
+"The MIME type to send when using live streaming. Defaults to \"video/x-"
+"mpegurl\"."
+msgstr ""
+
+#: ../template/default/help_config.html:159
+msgid "The suffix to use for live streaming. Defaults to \"m3u\"."
+msgstr ""
+
 #: ../template/default/help_config.html:161
+msgid ""
+"The MIME type to send when using recordings streaming. Defaults to \"video/x-"
+"mpegurl\"."
+msgstr ""
+
+#: ../template/default/help_config.html:163
+msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
+msgstr ""
+
+#: ../template/default/help_config.html:169
 msgid ""
 "<p>This section is for experts <strong>only</strong>, i.e. you know what you "
 "are doing!</p>"
 msgstr ""
 
-#: ../template/default/help_config.html:164
+#: ../template/default/help_config.html:172
 msgid ""
 "Accessing VDR's EPG through VDR's SVDRPort seems to block VDR for some time. "
-"If this option is activated VDRAdmin will read the <span class=\"ref_file"
+"If this option is activated VDRAdmin-AM will read the <span class=\"ref_file"
 "\">epg.data</span> file directly so that VDR doesn't get blocked."
 msgstr ""
 
-#: ../template/default/help_config.html:166
+#: ../template/default/help_config.html:174
 msgid ""
-"If you've enabled the option above you need to tell VDRAdmin where the <span "
-"class=\"ref_file\">epg.data</span> file is located."
+"If you've enabled the option above you need to tell VDRAdmin-AM where the "
+"<span class=\"ref_file\">epg.data</span> file is located."
 msgstr ""
 
-#: ../template/default/help_config.html:168
+#: ../template/default/help_config.html:176
 msgid ""
 "If you have compiled VDR with the VFAT define you have to enable this "
 "option. If this option is set to the wrong value, you may have problems with "
 "certain recordings if you want to stream them or run reccmds on them."
 msgstr ""
 
-#: ../template/default/help_config.html:174
+#: ../template/default/help_config.html:182
 msgid ""
 "<p>If you want to limit the number of channels used in some parts of "
-"VDRAdmin, this is for you!</p><p>Use the radio buttons to activate or "
+"VDRAdmin-AM, this is for you!</p><p>Use the radio buttons to activate or "
 "deactivate the wanted channels in the named menu.</p><p>To add channels to "
 "the list of wanted channels you have to select them in the left side "
 "selectbox and click <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;"
@@ -1136,7 +1180,7 @@ msgid "to"
 msgstr "-"
 
 #: ../template/default/prog_list2.html:6
-#: ../template/default/navigation.html:34 ../vdradmind.pl:2508
+#: ../template/default/navigation.html:34 ../vdradmind.pl:2527
 msgid "Playing Today"
 msgstr "Ohjelmisto tänään"
 
@@ -1278,7 +1322,7 @@ msgstr ""
 #: ../template/default/help_at_timer_list.html:33
 msgid ""
 "<p>Here you will find a listing of automatic timers (AutoTimer) known to "
-"VDRAdmin.</p><p>The list shows some information on AutoTimers. You can "
+"VDRAdmin-AM.</p><p>The list shows some information on AutoTimers. You can "
 "change the list's sorting by clicking the columns heading.</p><p>For each "
 "AutoTimer you have the following options:<dl><dt>Set its state</dt><dd>By "
 "clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the "
@@ -1297,8 +1341,8 @@ msgid ""
 "once by checking the box in the last column of those timers and clicking "
 "<input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/"
 ">.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update"
-"\"/> to force VDRAdmin to reconnect to VDR, fetch the current EPG and check "
-"for matching AutoTimers.</p>"
+"\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and "
+"check for matching AutoTimers.</p>"
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:12
@@ -1311,11 +1355,11 @@ msgstr "Muokkaa hakuajastinta"
 #: ../template/default/help_at_timer_new.html:35
 msgid ""
 "<p>Here you can edit an automatic timer's (AutoTimer) settings.</"
-"p><p>AutoTimer is a key feature of VDRAdmin. An AutoTimer consists of one or "
-"more search terms and some other settings, that are looked for regularly in "
-"the Electronic Program Guide (EPG). On match AutoTimer adds a timer in VDR "
-"automatically for that broadcast. That's very comfortable for irregularly "
-"broadcasted series or movies you don't want to miss.</p>"
+"p><p>AutoTimer is a key feature of VDRAdmin-AM. An AutoTimer consists of one "
+"or more search terms and some other settings, that are looked for regularly "
+"in the Electronic Program Guide (EPG). On match AutoTimer adds a timer in "
+"VDR automatically for that broadcast. That's very comfortable for "
+"irregularly broadcasted series or movies you don't want to miss.</p>"
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:38
@@ -1345,16 +1389,16 @@ msgid ""
 "will match if they contain <strong>all</strong> items.<br />You'd better "
 "only use letters and numbers for search items, as the EPG often miss colons, "
 "brackets and other characters.<br />Experts can also use regular "
-"expressions, but you have to get needed information from the VDRAdmin "
+"expressions, but you have to get needed information from the VDRAdmin-AM "
 "sources (undocumented feature).<br /><br />You can exclude broadcasts so "
 "that they don't get recorded even if they would match an AutoTimer. "
 "Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, "
-"one event a line. This file must be located in your VDRAdmin's configuration "
-"folder. If this string is found either in the EPG's <u>title</u> or in "
-"<u>title~subtitle</u>, this event will not be programmed by AutoTimer. So "
-"you can disable complete episodes (for example when using \"Enterprise\" as "
-"Blacklist-string) or only one episode (when using \"Enterprise~Azati Prime\" "
-"as Blacklist-string)."
+"one event a line. This file must be located in your VDRAdmin-AM's "
+"configuration folder. If this string is found either in the EPG's <u>title</"
+"u> or in <u>title~subtitle</u>, this event will not be programmed by "
+"AutoTimer. So you can disable complete episodes (for example when using "
+"\"Enterprise\" as Blacklist-string) or only one episode (when using "
+"\"Enterprise~Azati Prime\" as Blacklist-string)."
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:42
@@ -1364,7 +1408,7 @@ msgstr "Hakukentät:"
 
 #: ../template/default/help_at_timer_new.html:43
 msgid ""
-"Here you can define the EPG sections where VDRAdmin should look for the "
+"Here you can define the EPG sections where VDRAdmin-AM should look for the "
 "search pattern."
 msgstr ""
 
@@ -1415,8 +1459,8 @@ msgstr "Sarjatallennus:"
 
 #: ../template/default/help_at_timer_new.html:57
 msgid ""
-"Check this box if you want VDRAdmin to append the broadcast's EPG subtitle "
-"to the recording's file name."
+"Check this box if you want VDRAdmin-AM to append the broadcast's EPG "
+"subtitle to the recording's file name."
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:58
@@ -1426,7 +1470,7 @@ msgstr "Muista ohjelmoidut ajastimet:"
 
 #: ../template/default/help_at_timer_new.html:59
 msgid ""
-"If you enable this VDRAdmin will track timers it has already programmed "
+"If you enable this VDRAdmin-AM will track timers it has already programmed "
 "automatically. This is useful if want to deactivate or delete timers that "
 "have been programmed automatically in the timers listing."
 msgstr ""
@@ -1440,7 +1484,7 @@ msgstr "Hakemisto:"
 msgid ""
 "The directory this AutoTimer will place the recordings in. If the name shall "
 "contain subdirectories, these have to be delimited by '~' (since the '/' "
-"character may be part of a regular programme name).<br />VDRAdmin will "
+"character may be part of a regular programme name).<br />VDRAdmin-AM will "
 "append the matching broadcast's title and subtitle (if the \"Episode\" "
 "checkbox is marked) to the directory given here.<br /><br />You can also use "
 "the following keywords that are replaced in the final file name by the "
@@ -1457,8 +1501,8 @@ msgid ""
 "episode's title of the event.</li><li>%Rating% - will become the rating of "
 "the event from the EPG provider.</li></ul><h4>Note:</h4>If you use the above "
 "keywords it's in your own responsibility to supply the <strong>complete file "
-"name</strong> for the recordings! VDRAdmin will not append anything to the "
-"resulting string."
+"name</strong> for the recordings! VDRAdmin-AM will not append anything to "
+"the resulting string."
 msgstr ""
 
 #: ../template/default/help_rec_list.html:29
@@ -1550,109 +1594,182 @@ msgstr "Katso TV:tä"
 msgid "Search"
 msgstr "Etsi"
 
-#: ../vdradmind.pl:282
+#: ../template/default/navigation.html:80 ../template/default/about.html:6
+msgid "About"
+msgstr "Tietoja"
+
+#: ../template/default/help.html:18
+msgid "Getting Help and Reporting Bugs"
+msgstr "Avunsaanti ja virheiden raportointi"
+
+#: ../template/default/help.html:30
+msgid ""
+"If you need help please first try to use the online help you'll find on some "
+"pages. You can access it by clicking <img src=\"bilder/help.gif\"/>."
+msgstr ""
+
+#: ../template/default/help.html:31
+msgid ""
+"If this doesn't provide the information you need you can try to get help at "
+"<a href=\"http://www.vdrportal.de\" target=\"_new\">VDR-Portal</a> if you "
+"understand German language. Please use the announcement thread if possible, "
+"search for:"
+msgstr ""
+
+#: ../template/default/help.html:32
+msgid ""
+"If you think you have found a bug please check that it's a new one and "
+"report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page."
+"php\" target=\"_new\">VDRAdmin-AM BugTracking system</a>."
+msgstr ""
+
+#: ../template/default/about.html:18
+msgid "Authors"
+msgstr "Tekijät"
+
+#: ../template/default/about.html:28
+msgid "Current author (VDRAdmin-AM branch):"
+msgstr "Nykyinen tekijä (VDRAdmin-AM -haara):"
+
+#: ../template/default/about.html:34
+msgid "Original author (VDRAdmin):"
+msgstr "Alkuperäinen tekijä (VDRAdmin):"
+
+#: ../template/default/about.html:48
+msgid "Translation Team"
+msgstr "Lokalisointi"
+
+#: ../template/default/about.html:58
+msgid "Dutch:"
+msgstr "Hollanti:"
+
+#: ../template/default/about.html:64
+msgid "English:"
+msgstr "Englanti:"
+
+#: ../template/default/about.html:70
+msgid "Finnish:"
+msgstr "Suomi:"
+
+#: ../template/default/about.html:76
+msgid "French:"
+msgstr "Ranska:"
+
+#: ../template/default/about.html:77
+msgid "At the moment unmaintained, former translations by:"
+msgstr "Ei ylläpidetty - aiemmat lokalisoinnit:"
+
+#: ../template/default/about.html:82
+msgid "German:"
+msgstr "Saksa:"
+
+#: ../template/default/about.html:88
+msgid "Spanish:"
+msgstr "Espanja:"
+
+#: ../vdradmind.pl:286
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Anna VDR-koneesi nimi (esim. video.intra.net):"
 
-#: ../vdradmind.pl:283
+#: ../vdradmind.pl:287
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Anna VDR-koneesi käyttämä SVDRP-portti:"
 
-#: ../vdradmind.pl:284
-msgid "On which address should VDRAdmin listen (0.0.0.0 for any)?"
-msgstr "Anna VDRAdminin käyttämä osoiteavaruus (0.0.0.0 ei rajoituksia):"
-
-#: ../vdradmind.pl:285
-msgid "On which port should VDRAdmin listen?"
-msgstr "Anna VDRAdminin käyttämä portti:"
-
-#: ../vdradmind.pl:286
-msgid "Username?"
-msgstr "Anna käyttäjätunnus VDRAdminia varten:"
-
-#: ../vdradmind.pl:287
-msgid "Password?"
-msgstr "Anna salasana VDRAdminia varten:"
-
 #: ../vdradmind.pl:288
+msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
+msgstr "Anna VDRAdmin-AM käyttämä osoiteavaruus (0.0.0.0 ei rajoituksia):"
+
+#: ../vdradmind.pl:289
+msgid "On which port should VDRAdmin-AM listen?"
+msgstr "Anna VDRAdmin-AM käyttämä portti:"
+
+#: ../vdradmind.pl:290
+msgid "Username?"
+msgstr "Anna käyttäjätunnus VDRAdmin-AM varten:"
+
+#: ../vdradmind.pl:291
+msgid "Password?"
+msgstr "Anna salasana VDRAdmin-AM varten:"
+
+#: ../vdradmind.pl:292
 msgid "Where are your recordings stored?"
 msgstr "Anna VDR-koneesi tallennehakemiston polku:"
 
-#: ../vdradmind.pl:289
+#: ../vdradmind.pl:293
 msgid "Where are your VDR's configuration files located?"
 msgstr "Anna VDR-koneesi konfigurointihakemiston polku:"
 
-#: ../vdradmind.pl:295
+#: ../vdradmind.pl:299
 msgid "Config file written successfully."
-msgstr "VDRAdminin konfigurointitiedosto muodostettu."
+msgstr "VDRAdmin-AM konfigurointitiedosto muodostettu."
 
-#: ../vdradmind.pl:348
+#: ../vdradmind.pl:351
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s käynnistetty prosessitunnisteella %d."
 
-#: ../vdradmind.pl:402 ../vdradmind.pl:994 ../vdradmind.pl:1816
+#: ../vdradmind.pl:405 ../vdradmind.pl:997 ../vdradmind.pl:1830
 msgid "Not found"
 msgstr "Ei löydy"
 
-#: ../vdradmind.pl:402 ../vdradmind.pl:1817
+#: ../vdradmind.pl:405 ../vdradmind.pl:1831
 msgid "The requested URL was not found on this server!"
 msgstr "Pyydettyä URL:ia ei löydy palvelimelta!"
 
-#: ../vdradmind.pl:470 ../vdradmind.pl:990 ../vdradmind.pl:1819
+#: ../vdradmind.pl:473 ../vdradmind.pl:993 ../vdradmind.pl:1833
 msgid "Forbidden"
 msgstr "Kielletty"
 
-#: ../vdradmind.pl:470 ../vdradmind.pl:1820
+#: ../vdradmind.pl:473 ../vdradmind.pl:1834
 msgid "You don't have permission to access this function!"
 msgstr "Puutteelliset käyttäjäoikeudet haluttuun toimintoon!"
 
-#: ../vdradmind.pl:990 ../vdradmind.pl:1821
+#: ../vdradmind.pl:993 ../vdradmind.pl:1835
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "Pääsy tiedostoon \"%s\" evätty!"
 
-#: ../vdradmind.pl:994 ../vdradmind.pl:1818
+#: ../vdradmind.pl:997 ../vdradmind.pl:1832
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "URL:ia \"%s\" ei löydy palvelimelta!"
 
-#: ../vdradmind.pl:1822
+#: ../vdradmind.pl:1836
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Tiedoston \"%s\" avaus ei onnistu!"
 
-#: ../vdradmind.pl:1823
+#: ../vdradmind.pl:1837
 #, perl-format
 msgid "Can't connect to VDR at %s!"
 msgstr "VDR:ään ei saada yhteyttä (%s)"
 
-#: ../vdradmind.pl:1824
+#: ../vdradmind.pl:1838
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Komennon lähetys VDR:lle epäonnistui (%s)"
 
-#: ../vdradmind.pl:2508
+#: ../vdradmind.pl:2527
 msgid "Playing Tomorrow"
 msgstr "Ohjelmisto huomenna"
 
-#: ../vdradmind.pl:2508
+#: ../vdradmind.pl:2527
 #, perl-format
 msgid "Playing on the %d."
 msgstr "Ohjelmisto %d. päivä"
 
-#: ../vdradmind.pl:3864
+#: ../vdradmind.pl:3891
 msgid "Schedule"
 msgstr "Ohjelmisto"
 
-#: ../vdradmind.pl:4378
+#: ../vdradmind.pl:4411
 msgid "Playing Today?"
 msgstr "Tänään"
 
-#: ../vdradmind.pl:4381
+#: ../vdradmind.pl:4414
 msgid "Timers"
 msgstr "Ajastimet"
 
-#: ../vdradmind.pl:4444
+#: ../vdradmind.pl:4477
 msgid "System default"
 msgstr "Oletus"

@@ -12,7 +12,7 @@ EPGIMAGES=$(VIDEODIR)/epgimages
 VDRCONF=$(VIDEODIR)
 EPGDATA=$(VIDEODIR)/epg.data
 
-LANGS=de es fr fi
+LANGS=de es fr fi nl
 
 po/build_stamp:
 	$(MAKE) -C po LANGS="$(LANGS)"

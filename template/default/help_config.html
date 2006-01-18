@@ -42,13 +42,13 @@
 						<dt><%! Skin: !%></dt>
 						<dd><%! The skin you want to use. !%></dd>
 						<dt><%! Login Page: !%></dt>
-						<dd><%! The page you want to see at first connect to VDRAdmin. !%></dd>
+						<dd><%! The page you want to see at first connect to VDRAdmin-AM. !%></dd>
 						<dt><%! Number of channels to use: !%></dt>
-						<dd><%! VDRAdmin will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin will read so that you can use this to reduce VDRAdmin's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin will use all available channels. !%></dd>
+						<dd><%! VDRAdmin-AM will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin-AM will read so that you can use this to reduce VDRAdmin-AM's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin-AM will use all available channels. !%></dd>
 						<dt><%! Local net (no login required): !%></dt>
 						<dd><%! Here you can specify an IP address or range that can login without providing login information. For example: "192.168.0.0/24" will include any IP starting with "192.168.0", "192.168.0.123/32" will only match "192.168.0.123". !%></dd>
 						<dt><%! Language: !%></dt>
-						<dd><%! Here you can set the localization VDRAdmin should use. !%></dd>
+						<dd><%! Here you can set the localization VDRAdmin-AM should use. !%></dd>
 					</dl>
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
@@ -56,9 +56,9 @@
 				<div class="group"><a id="vdr" name="vdr"></a><h3><%! VDR !%></h3>
 					<dl>
 						<dt><%! Number of DVB cards: !%></dt>
-						<dd><%! The number of DVB cards VDR can access. Depending on this value VDRAdmin will calculate critical timers in the <span class="ref_menu">Timer</span> menu. !%></dd>
+						<dd><%! The number of DVB cards VDR can access. Depending on this value VDRAdmin-AM will calculate critical timers in the <span class="ref_menu">Timer</span> menu. !%></dd>
 						<dt><%! Path to recordings: !%></dt>
-						<dd><%! The path to VDR's recordings. It's used so that VDRAdmin can locate the recordings when using <span class="ref_label">Recordings Streaming</span> and <span class="ref_file">reccmds.conf</span> in the <span class="ref_menu">Recordings</span> menu. !%></dd>
+						<dd><%! The path to VDR's recordings. It's used so that VDRAdmin-AM can locate the recordings when using <span class="ref_label">Recordings Streaming</span> and <span class="ref_file">reccmds.conf</span> in the <span class="ref_menu">Recordings</span> menu. !%></dd>
 						<dt><%! Path to configuration files: !%></dt>
 						<dd><%! The path where VDR's configuration files are located. If this directory contains the file <span class="ref_file">reccmds.conf</span> its content is shown in a selectbox in the <span class="ref_menu">Recordings</span> menu. !%></dd>
 						<dt><%! Path to EPG images: !%></dt>
@@ -106,7 +106,7 @@
 						<dt><%! Lifetime: !%></dt>
 						<dd><%! The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by. !%></dd>
 						<dt><%! Send email after programming timer: !%></dt>
-						<dd><%! VDRAdmin will send an email whenever an event matches an AutoTimer and a timer has been programmed if you enable this feature. This requires that you have the sendEmail programm (which you will find <a target="_new" href="http://caspian.dotconf.net/menu/Software/SendEmail/">here</a>) located in PATH. !%></dd>
+						<dd><%! VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a timer has been programmed if you enable this feature. !%></dd>
 						<dt><%! Send email as: !%></dt>
 						<dd><%! Here you set the sending domain of the generated email. !%></dd>
 						<dt><%! Send email to: !%></dt>
@@ -130,15 +130,15 @@
 						<dt><%! Lifetime: !%></dt>
 						<dd><%! The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by. !%></dd>
 						<dt><%! Time Margin at Start: !%></dt>
-						<dd><%! The number of minutes VDRAdmin subtracts from the broadcasts start time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view. !%></dd>
+						<dd><%! The number of minutes VDRAdmin-AM subtracts from the broadcasts start time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view. !%></dd>
 						<dt><%! Time Margin at Stop: !%></dt>
-						<dd><%! The number of minutes VDRAdmin adds to the broadcasts stop time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view. !%></dd>
+						<dd><%! The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view. !%></dd>
 						<dt><%! Tooltips in timeline: !%></dt>
 						<dd><%! Here you can (de-)activate the tooltips in the timeline. !%></dd>
 						<dt><%! Tooltips in list: !%></dt>
 						<dd><%! Here you can (de-)activate the tooltips in the list. !%></dd>
 						<dt><%! Add summary to new timers: !%></dt>
-						<dd><%! If you don't want VDRAdmin to add the summary taken from EPG to new timers you can switch it off here. !%></dd>
+						<dd><%! If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here. !%></dd>
 					</dl>
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
@@ -150,9 +150,17 @@
 						<dt><%! HTTP Port of Streamdev (also possible 3000/ts): !%></dt>
 						<dd><%! Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use. !%></dd>
 						<dt><%! Recordings Streaming: !%></dt>
-						<dd><%! Enable or disable streaming of recordings.<br />Well actually this is no real "streaming", but you have to setup your workstation so that it can access VDR's recordings. You can use for example Samba or NFS for this. VDRAdmin simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation's display. !%></dd>
+						<dd><%! Enable or disable streaming of recordings.<br />Well actually this is no real "streaming", but you have to setup your workstation so that it can access VDR's recordings. You can use for example Samba or NFS for this. VDRAdmin-AM simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation's display. !%></dd>
 						<dt><%! Path to VDR Recordings on your workstation: !%></dt>
 						<dd><%! This is the path where your workstation can access VDR's recordings. This depends on your VDR and workstation setup, for example "\\vdr\videos" or "V:\" (on Windows) or "/mnt/videos" (on Linux). !%></dd>
+						<dt><%! MIME type for live streaming: !%></dt>
+						<dd><%! The MIME type to send when using live streaming. Defaults to "video/x-mpegurl". !%></dd>
+						<dt><%! Suffix for live streaming: !%></dt>
+						<dd><%! The suffix to use for live streaming. Defaults to "m3u". !%></dd>
+						<dt><%! MIME type for recordings streaming: !%></dt>
+						<dd><%! The MIME type to send when using recordings streaming. Defaults to "video/x-mpegurl". !%></dd>
+						<dt><%! Suffix for recordings streaming: !%></dt>
+						<dd><%! The suffix to use for recordings streaming. Defaults to "m3u". !%></dd>
 					</dl>
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
 				</div>
@@ -161,9 +169,9 @@
 					<%! <p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p> !%>
 					<dl>
 						<dt><%! Read EPG directly using epg.data: !%></dt>
-						<dd><%! Accessing VDR's EPG through VDR's SVDRPort seems to block VDR for some time. If this option is activated VDRAdmin will read the <span class="ref_file">epg.data</span> file directly so that VDR doesn't get blocked. !%></dd>
+						<dd><%! Accessing VDR's EPG through VDR's SVDRPort seems to block VDR for some time. If this option is activated VDRAdmin-AM will read the <span class="ref_file">epg.data</span> file directly so that VDR doesn't get blocked. !%></dd>
 						<dt><%! epg.data filename: !%></dt>
-						<dd><%! If you've enabled the option above you need to tell VDRAdmin where the <span class="ref_file">epg.data</span> file is located. !%></dd>
+						<dd><%! If you've enabled the option above you need to tell VDRAdmin-AM where the <span class="ref_file">epg.data</span> file is located. !%></dd>
 						<dt><%! VFAT: !%></dt>
 						<dd><%! If you have compiled VDR with the VFAT define you have to enable this option. If this option is set to the wrong value, you may have problems with certain recordings if you want to stream them or run reccmds on them. !%></dd>
 					</dl>
@@ -171,7 +179,7 @@
 				</div>
 
 				<div class="group"><a id="channels" name="channels"></a><h3><%! Channel Selections !%></h3>
-					<%! <p>If you want to limit the number of channels used in some parts of VDRAdmin, this is for you!</p>
+					<%! <p>If you want to limit the number of channels used in some parts of VDRAdmin-AM, this is for you!</p>
 					<p>Use the radio buttons to activate or deactivate the wanted channels in the named menu.</p>
 					<p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click <input type="submit" class="submit" value="&gt;&gt;&gt;&gt;&gt;"/>. If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click <input type="submit" class="submit" value="&lt;&lt;&lt;&lt;&lt;"/>.</p> !%>
 					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
-	<title>VDRAdmin - <%! Configuration !%></title>
+	<title>VDRAdmin-AM - <%! Configuration !%></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<tmpl_if usercss>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
@@ -464,6 +464,30 @@
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Path to VDR Recordings on your workstation: !%></h5></td>
 							<td class="col_value"><input type="text" name="ST_VIDEODIR" value="<tmpl_var ST_VIDEODIR>" size="20" maxlength="256" /></td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_odd">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! MIME type for live streaming: !%></h5></td>
+							<td class="col_value"><input type="text" name="TV_MIMETYPE" value="<tmpl_var TV_MIMETYPE>" size="20" maxlength="256" /></td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_even">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! Suffix for live streaming: !%></h5></td>
+							<td class="col_value"><input type="text" name="TV_EXT" value="<tmpl_var TV_EXT>" size="4" maxlength="256" /></td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_odd">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! MIME type for recordings streaming: !%></h5></td>
+							<td class="col_value"><input type="text" name="REC_MIMETYPE" value="<tmpl_var REC_MIMETYPE>" size="20" maxlength="256" /></td>
+							<td class="col_right"></td>
+						</tr>
+						<tr class="row_even">
+							<td class="col_left"></td>
+							<td class="col_label"><h5><%! Suffix for recordings streaming: !%></h5></td>
+							<td class="col_value"><input type="text" name="REC_EXT" value="<tmpl_var REC_EXT>" size="4" maxlength="256" /></td>
 							<td class="col_right"></td>
 						</tr>
 <!-- not (yet?) supported 

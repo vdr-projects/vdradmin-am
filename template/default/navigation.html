@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
-	<title>VDRAdmin</title>
+	<title>VDRAdmin-AM</title>
 	<link type="text/css" href="style.css" rel="stylesheet" media="screen" />
 	<tmpl_if usercss>
 		<link type="text/css" href="user.css" rel="stylesheet" media="screen" />
@@ -70,6 +70,15 @@
 			<input type="submit" name="submit" value="<%! Search !%>" />
 			<input type="hidden" name="aktion" value="prog_summary" />
 		</form>
+	</div>
+	<div class="nav_bar bottom">
+		<div class="navi">
+			<a href="vdradmin.pl?aktion=help" target="main"><%! Help !%></a></a>
+		</div>
+		<div class="separator"></div>
+		<div class="navi">
+			<a href="vdradmin.pl?aktion=about" target="main"><%! About !%></a>
+		</div>
 	</div>
 </body>
 </html>

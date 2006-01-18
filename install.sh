@@ -20,7 +20,7 @@ EPGIMAGES=${EPGIMAGES:-$VIDEODIR/epgimages}
 VDRCONF=${VDRCONF:-$VIDEODIR}
 EPGDATA=${EPGDATA:-$VIDEODIR/epg.data}
 
-LANGS="de es fr fi"
+LANGS="de es fr fi nl"
 
 function usage()
 {
@@ -66,7 +66,7 @@ function checkPerlModule()
 		fi
 		echo " MISSING"
 		read -p "Do you want to install $MODULE? [y/N]"
-		[ "$REPLY" = "y" -o "$REPLY" = "Y" ] && su -c "perl -MCPAN -e 'install '$MODULE"
+		[ "$REPLY" = "y" -o "$REPLY" = "Y" ] && su -c "perl -MCPAN -e 'CPAN::install \"$MODULE\"'"
 	else
 		echo " found"
 	fi
@@ -84,6 +84,7 @@ function perlModules()
 	checkPerlModule File::Temp
 	checkPerlModule Locale::gettext Locale::Messages
 	checkPerlModule URI::Escape
+	checkPerlModule Net::SMTP
 }
 
 function makeDir()

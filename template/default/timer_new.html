@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
-	<title>VDRAdmin - <tmpl_if newtimer><%! Create New Timer !%><tmpl_else><%! Edit Timer !%></tmpl_if></title>
+	<title>VDRAdmin-AM - <tmpl_if newtimer><%! Create New Timer !%><tmpl_else><%! Edit Timer !%></tmpl_if></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<tmpl_if usercss>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
@@ -141,23 +141,29 @@
 			</tr>
 			<tr class="row_odd">
 				<td  class="col_left"></td>
+				<td  class="col_label"><h5><%! Use VPS: !%></h5></td>
+				<td  class="col_value"><input type="checkbox" name="vps" value="1" <tmpl_if vps>checked</tmpl_if> /></td>
+				<td  class="col_right"></td>
+			</tr>
+			<tr class="row_even">
+				<td  class="col_left"></td>
 				<td  class="col_label"><h5><%! Priority: !%></h5></td>
 				<td  class="col_value"><input type="text" name="prio" value="<tmpl_var prio>" size="2" maxlength="2" /></td>
 				<td  class="col_right"></td>
 			</tr>
-			<tr class="row_even">
+			<tr class="row_odd">
 				<td  class="col_left"></td>
 				<td  class="col_label"><h5><%! Lifetime: !%></h5></td>
 				<td  class="col_value"><input type="text" name="lft" value="<tmpl_var lft>" size="2" maxlength="2" /></td>
 				<td  class="col_right"></td>
 			</tr>
-			<tr class="row_odd">
+			<tr class="row_even">
 				<td  class="col_left"></td>
 				<td  class="col_label"><h5><%! Title of Recording: !%></h5></td>
 				<td  class="col_value"><input type="text" name="title" value="<tmpl_var title>" size="80" /></td>
 				<td  class="col_right"></td>
 			</tr>
-			<tr class="row_even">
+			<tr class="row_odd">
 				<td class="col_left"></td>
 				<td class="col_label" valign="top"><h5><%! Summary: !%></h5></td>
 				<td class="col_value"><textarea name="summary" rows="6" cols="80"><tmpl_var summary></textarea></td>

@@ -33,14 +33,14 @@
 			<td class="col_left"</td>
 			<td>
 				<%! <p>Here you can edit an automatic timer's (AutoTimer) settings.</p>
-				<p>AutoTimer is a key feature of VDRAdmin. An AutoTimer consists of one or more search terms and some other settings, that are looked for regularly in the Electronic Program Guide (EPG). On match AutoTimer adds a timer in VDR automatically for that broadcast. That's very comfortable for irregularly broadcasted series or movies you don't want to miss.</p> !%>
+				<p>AutoTimer is a key feature of VDRAdmin-AM. An AutoTimer consists of one or more search terms and some other settings, that are looked for regularly in the Electronic Program Guide (EPG). On match AutoTimer adds a timer in VDR automatically for that broadcast. That's very comfortable for irregularly broadcasted series or movies you don't want to miss.</p> !%>
 				<dl>
 					<dt><%! AutoTimer Active: !%></dt>
 					<dd><%! Activate or deactivate this AutoTimer. Deactivated AutoTimers are still stored in the AutoTimer list so that they can be activated again, but they do not record anything meanwhile. Above that you can set this to "oneshot" so this AutoTimer only programs the (one!) next matching broadcast. !%></dd>
 					<dt><%! Search Patterns: !%></dt>
-					<dd><%! Choosing the right search items decides whether only the wanted broadcasts or broadcasts having similar names or even nothing gets recorded.<br />Case doesn't matter, "X-Files" matches anything "x-files" will match. You can set multiple search items by separating them with spaces. Only broadcasts will match if they contain <strong>all</strong> items.<br />You'd better only use letters and numbers for search items, as the EPG often miss colons, brackets and other characters.<br />Experts can also use regular expressions, but you have to get needed information from the VDRAdmin sources (undocumented feature).<br /><br />You can exclude broadcasts so that they don't get recorded even if they would match an AutoTimer. Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, one event a line. This file must be located in your VDRAdmin's configuration folder. If this string is found either in the EPG's <u>title</u> or in <u>title~subtitle</u>, this event will not be programmed by AutoTimer. So you can disable complete episodes (for example when using "Enterprise" as Blacklist-string) or only one episode (when using "Enterprise~Azati Prime" as Blacklist-string). !%></dd>
+					<dd><%! Choosing the right search items decides whether only the wanted broadcasts or broadcasts having similar names or even nothing gets recorded.<br />Case doesn't matter, "X-Files" matches anything "x-files" will match. You can set multiple search items by separating them with spaces. Only broadcasts will match if they contain <strong>all</strong> items.<br />You'd better only use letters and numbers for search items, as the EPG often miss colons, brackets and other characters.<br />Experts can also use regular expressions, but you have to get needed information from the VDRAdmin-AM sources (undocumented feature).<br /><br />You can exclude broadcasts so that they don't get recorded even if they would match an AutoTimer. Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, one event a line. This file must be located in your VDRAdmin-AM's configuration folder. If this string is found either in the EPG's <u>title</u> or in <u>title~subtitle</u>, this event will not be programmed by AutoTimer. So you can disable complete episodes (for example when using "Enterprise" as Blacklist-string) or only one episode (when using "Enterprise~Azati Prime" as Blacklist-string). !%></dd>
 					<dt><%! Search in: !%></dt>
-					<dd><%! Here you can define the EPG sections where VDRAdmin should look for the search pattern. !%></dd>
+					<dd><%! Here you can define the EPG sections where VDRAdmin-AM should look for the search pattern. !%></dd>
 					<dt><%! Search only on these days: !%></dt>
 					<dd><%! Use these checkboxes to limit searching for matching broadcasts to a set of weekdays. !%></dd>
 					<dt><%! Channel: !%></dt>
@@ -54,12 +54,12 @@
 					<dt><%! Lifetime: !%></dt>
 					<dd><%! The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by. !%></dd>
 					<dt><%! Episode: !%></dt>
-					<dd><%! Check this box if you want VDRAdmin to append the broadcast's EPG subtitle to the recording's file name. !%></dd>
+					<dd><%! Check this box if you want VDRAdmin-AM to append the broadcast's EPG subtitle to the recording's file name. !%></dd>
 					<dt><%! Remember programmed timers: !%></dt>
-					<dd><%! If you enable this VDRAdmin will track timers it has already programmed automatically. This is useful if want to deactivate or delete timers that have been programmed automatically in the timers listing. !%></dd>
+					<dd><%! If you enable this VDRAdmin-AM will track timers it has already programmed automatically. This is useful if want to deactivate or delete timers that have been programmed automatically in the timers listing. !%></dd>
 					<dt><%! Directory: !%></dt>
 					<dd>
-						<%! The directory this AutoTimer will place the recordings in. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br />VDRAdmin will append the matching broadcast's title and subtitle (if the "Episode" checkbox is marked) to the directory given here.<br /><br />
+						<%! The directory this AutoTimer will place the recordings in. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br />VDRAdmin-AM will append the matching broadcast's title and subtitle (if the "Episode" checkbox is marked) to the directory given here.<br /><br />
 						You can also use the following keywords that are replaced in the final file name by the values supplied by for example <a href="http://tvmovie2vdr.vdr-developer.org">tvm2vdr</a>:
 						<ul>
 							<li>%Title% - will become the title of the event.</li>
@@ -76,7 +76,7 @@
 							<li>%Rating% - will become the rating of the event from the EPG provider.</li>
 						</ul>
 						<h4>Note:</h4>
-						If you use the above keywords it's in your own responsibility to supply the <strong>complete file name</strong> for the recordings! VDRAdmin will not append anything to the resulting string. !%>
+						If you use the above keywords it's in your own responsibility to supply the <strong>complete file name</strong> for the recordings! VDRAdmin-AM will not append anything to the resulting string. !%>
 					</dd>
 				</dl>
 			</td>

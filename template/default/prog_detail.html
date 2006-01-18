@@ -43,7 +43,9 @@
 				&nbsp;<a href="javascript:window.close()">[<%! close !%>]</a>
 				<tmpl_if date>
 					&nbsp;<a href="javascript:callurl('<tmpl_var switchurl>')">[<%! view !%>]</a>
-					&nbsp;<a href="javascript:window.close();opener.location.href='<tmpl_var recurl>'">[<%! record !%>]</a>
+					<tmpl_if recurl>
+						&nbsp;<a href="javascript:window.close();opener.location.href='<tmpl_var recurl>'">[<%! record !%>]</a>
+					</tmpl_if>
 					&nbsp;<a href="vdradmin.pl?search=<tmpl_var find_title>&amp;aktion=prog_summary&amp;submit=go11)"  target="main">[<%! search !%>]</a>
 				</tmpl_if>
 				<tmpl_if imdburl>

@@ -4,6 +4,21 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-01-17: 3.4.3rc
+- Changed program name to VDRAdmin-AM to make clear it's a fork of VDRAdmin.
+- Added "Help" and "About" to navigation bar at the left.
+- Hide "Record" button if prog_detail is opened from timer_list.
+- After clicking "Record" in prog_detail and leaving timer_new return to page where prog_detail has been opened (Reported by Ferdinand Grassmann).
+- Timers were re-programmed every CheckTimers() call if setup option "do not add summary to timers" is active (Reported by Ferdinand Grassmann).
+- Dropped sendEmail dependency. Now uses Net::SMTP modules (Patch by Ville Skyttä).
+- Don't show EPG images for other events (Fixed by Ferdinand Grassmann).
+- Changed GRAB so that it doesn't use temporary files for VDR >=1.3.38.
+- VPS for timers (Requested by reibuehl).
+- Made extension and mimetype for both live and recordings streaming configurable (Suggested at vdrportal.de).
+- Understand format of VDR v1.3.38+ "lste" command (Thanks to Marcus Breitenstein).
+- In skin "default": returning from timer_new didn't scroll to the line where "Rec" has been called in prog_list/prog_list2 (Reported by Foobar42)
+- Fixed installing of missing Perl modules.
+
 2005-12-06: 0.97-am3.4.2
 - Updated de, es and fi translation (got no response by fr translator).
 - Use the channel name as title if title in timer_new is empty (Requested by Hardy Flor).
