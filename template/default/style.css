@@ -133,6 +133,7 @@ label + input { margin-left: 1em; }
 #help .ref_label { font-style: italic; }
 #help .links { padding: 5px; background-color: silver; text-align: justify; }
 #help .links a { white-space: nowrap; }
+#help a , #help a:visited, #help a:active { color: blue; }
 #help .group { margin-top: 0.6em; border: 1px solid black; white-space: normal; }
 #help .group p { padding: 5px; }
 #help .top_link { text-align: right; font-size: 0.8em; background-color: silver; padding: 1px 5px; margin: 0px; }

@@ -1,15 +1,16 @@
+# translation of nl.po to Nederlands
 # translation of vdradmin-nl.po to Nederlands
 # translation of vdradmin.po to Nederlands
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Roel <rl.koelewijn@home.nl>, 2005.
+# Roel <rl.koelewijn@home.nl>, 2005, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vdradmin-nl\n"
+"Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-18 08:21+0100\n"
-"PO-Revision-Date: 2005-12-13 19:46+0100\n"
+"POT-Creation-Date: 2006-01-30 12:21+0100\n"
+"PO-Revision-Date: 2006-01-27 20:37+0100\n"
 "Last-Translator: Roel <rl.koelewijn@home.nl>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -194,7 +195,7 @@ msgstr "Eind tijd"
 
 #: ../template/default/timer_new.html:144
 msgid "Use VPS:"
-msgstr ""
+msgstr "Gebruik VPS"
 
 #: ../template/default/timer_new.html:150
 #: ../template/default/at_timer_list.html:24
@@ -349,7 +350,7 @@ msgstr "Verwijder alle geselecteerde timers?"
 
 #: ../template/default/prog_summary.html:7
 #: ../template/default/prog_timeline.html:7
-#: ../template/default/navigation.html:30 ../vdradmind.pl:4410
+#: ../template/default/navigation.html:30 ../vdradmind.pl:4439
 msgid "What's On Now?"
 msgstr "Wat is er nu op?"
 
@@ -424,7 +425,7 @@ msgstr "Lokaal netwerk (geen login benodigd):"
 
 #: ../template/default/config.html:96 ../template/default/help_config.html:50
 msgid "Language:"
-msgstr ""
+msgstr "Taal:"
 
 #: ../template/default/config.html:120 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:56
@@ -474,7 +475,7 @@ msgstr "Wachtwoord gast"
 
 #: ../template/default/config.html:213 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:86
-#: ../template/default/navigation.html:38 ../vdradmind.pl:4412
+#: ../template/default/navigation.html:38 ../vdradmind.pl:4441
 msgid "Timeline"
 msgstr "Tijdlijn"
 
@@ -490,7 +491,7 @@ msgstr "Tijden:"
 #: ../template/default/help_config.html:92
 #: ../template/default/help_config.html:120
 msgid "Tooltips:"
-msgstr ""
+msgstr "Handigheden:"
 
 #: ../template/default/config.html:264
 #: ../template/default/help_config.html:100
@@ -519,35 +520,33 @@ msgstr "Tijd marge bij stop:"
 
 #: ../template/default/config.html:305
 #: ../template/default/help_config.html:108
-#, fuzzy
 msgid "Send email after programming timer:"
-msgstr "Herinner geprogrammeerde timer:"
+msgstr "Stuur email na het programmeren van de timer:"
 
 #: ../template/default/config.html:314
 #: ../template/default/help_config.html:110
 msgid "Send email as:"
-msgstr ""
+msgstr "Stuur email als:"
 
 #: ../template/default/config.html:320
 #: ../template/default/help_config.html:112
 msgid "Send email to:"
-msgstr ""
+msgstr "Stuur email naar:"
 
 #: ../template/default/config.html:326
 #: ../template/default/help_config.html:114
 msgid "Mail server:"
-msgstr ""
+msgstr "Mail server:"
 
 #: ../template/default/config.html:332
 #: ../template/default/help_config.html:116
 msgid "SMTPAuth user:"
-msgstr ""
+msgstr "SMTPAuth gebruiker:"
 
 #: ../template/default/config.html:338
 #: ../template/default/help_config.html:118
-#, fuzzy
 msgid "SMTPAuth password:"
-msgstr "Wachtwoord:"
+msgstr "SMTPAuth Wachtwoord:"
 
 #: ../template/default/config.html:361 ../template/default/timer_list.html:6
 #: ../template/default/timer_list.html:44
@@ -562,17 +561,17 @@ msgstr "Timer"
 #: ../template/default/config.html:395
 #: ../template/default/help_config.html:136
 msgid "Tooltips in timeline:"
-msgstr ""
+msgstr "Handigheden in de tijdlijn:"
 
 #: ../template/default/config.html:404
 #: ../template/default/help_config.html:138
 msgid "Tooltips in list:"
-msgstr ""
+msgstr "Handigheden in lijst:"
 
 #: ../template/default/config.html:413
 #: ../template/default/help_config.html:140
 msgid "Add summary to new timers:"
-msgstr ""
+msgstr "Voeg beschrijving toe aan nieuwe timers:"
 
 #: ../template/default/config.html:431 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:146
@@ -602,25 +601,22 @@ msgstr "Pad naar VDR opnames op uw werkstation:"
 #: ../template/default/config.html:471
 #: ../template/default/help_config.html:156
 msgid "MIME type for live streaming:"
-msgstr ""
+msgstr "Mime type voor live streaming:"
 
 #: ../template/default/config.html:477
 #: ../template/default/help_config.html:158
-#, fuzzy
 msgid "Suffix for live streaming:"
-msgstr "Live Streaming:"
+msgstr "Extensie voor Live Streaming:"
 
 #: ../template/default/config.html:483
 #: ../template/default/help_config.html:160
-#, fuzzy
 msgid "MIME type for recordings streaming:"
-msgstr "Streaming opnames:"
+msgstr "MIME type voor opgenomen Streaming:"
 
 #: ../template/default/config.html:489
 #: ../template/default/help_config.html:162
-#, fuzzy
 msgid "Suffix for recordings streaming:"
-msgstr "Streaming opnames:"
+msgstr "Extensie voor opgenomen Streaming:"
 
 #: ../template/default/config.html:496
 msgid "Bandwidth of Streams:"
@@ -672,9 +668,8 @@ msgid "In \"AutoTimer\"?"
 msgstr "In \"AutoTimer\"?"
 
 #: ../template/default/config.html:619
-#, fuzzy
 msgid "In \"Watch TV\"?"
-msgstr "TV bekijken"
+msgstr "In \"TV bekijken\"?"
 
 #: ../template/default/config.html:660
 msgid "Apply"
@@ -692,11 +687,11 @@ msgstr "min"
 
 #: ../template/default/timer_list.html:27
 msgid "Transponder:"
-msgstr ""
+msgstr "Transponder:"
 
 #: ../template/default/timer_list.html:27
 msgid "CA-System:"
-msgstr ""
+msgstr "CA-Systeem:"
 
 #: ../template/default/timer_list.html:46
 msgid "New Timer"
@@ -738,26 +733,23 @@ msgid "Auto"
 msgstr "Auto"
 
 #: ../template/default/timer_list.html:380
-#, fuzzy
 msgid "activate"
-msgstr "Aktief"
+msgstr "Aktiven"
 
 #: ../template/default/timer_list.html:381
-#, fuzzy
 msgid "inactivate"
-msgstr "Aktief"
+msgstr "Deaktiveren"
 
 #: ../template/default/timer_list.html:382
-#, fuzzy
 msgid "selected timers"
-msgstr "Timer verwijderen? "
+msgstr "Geselecteerde timers"
 
 #: ../template/default/timer_list.html:385
 msgid "Delete Selected Timers"
 msgstr "Verwijder geselecteerde timers"
 
 #: ../template/default/prog_list.html:6 ../template/default/navigation.html:42
-#: ../vdradmind.pl:4413
+#: ../vdradmind.pl:4442
 msgid "Channels"
 msgstr "Kanalen"
 
@@ -823,7 +815,7 @@ msgstr "Zoek de film op bij de Internet-Movie-Database (IMDb)"
 #: ../template/default/rec_list.html:6 ../template/default/rec_list.html:18
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:18
-#: ../template/default/navigation.html:54 ../vdradmind.pl:4415
+#: ../template/default/navigation.html:54 ../vdradmind.pl:4444
 msgid "Recordings"
 msgstr "Opnames"
 
@@ -857,7 +849,7 @@ msgstr "Opname verwijderen?"
 
 #: ../template/default/rec_list.html:170
 msgid "Refresh"
-msgstr ""
+msgstr "Verversen"
 
 #: ../template/default/rec_list.html:174
 msgid "Commands:"
@@ -896,7 +888,6 @@ msgid "The page you want to see at first connect to VDRAdmin-AM."
 msgstr "De pagina die u als eerste wilt zien als VDRAdmin-AM start."
 
 #: ../template/default/help_config.html:47
-#, fuzzy
 msgid ""
 "VDRAdmin-AM will load the given number of channels from VDR and present only "
 "those in any fields where channels can be selected. This also limits the EPG "
@@ -910,11 +901,7 @@ msgstr ""
 "informatie die VDRAdmin-AM zal lezen zodat het geheugen gebruikt van "
 "VDRAdmin-AM beperkt zal worden en de prestaties zal verbeteren. <strong>0</"
 "strong>als deze functie is uitgeschakeld dan zal VDRAdmin-AM alle "
-"beschikbare kanalen gebruiken<h4> Opmerking:</h4> Veranderingen zullen niet "
-"direct in werking treden, u zult moeten wachten tot dat VDRAdmin-AM "
-"herverbind met VDR om de EPG data te verversen of forceer verversen "
-"handmating in de <span class=\"ref_menu\">Autotimer</span> menu of VDRAdmin-"
-"AM herstarten."
+"beschikbare kanalen gebruiken."
 
 #: ../template/default/help_config.html:49
 msgid ""
@@ -929,11 +916,8 @@ msgstr ""
 "toestaan."
 
 #: ../template/default/help_config.html:51
-#, fuzzy
 msgid "Here you can set the localization VDRAdmin-AM should use."
-msgstr ""
-"Hier kunt u aangeven de EPG delen aangeven waar VDRAdmin-AM moet zoeken naar "
-"zoekpatronen."
+msgstr "Hier kunt u de taal instellen die VDRAdmin-AM moet gebruiken."
 
 #: ../template/default/help_config.html:53
 #: ../template/default/help_config.html:67
@@ -1029,7 +1013,7 @@ msgstr ""
 #: ../template/default/help_config.html:93
 #: ../template/default/help_config.html:121
 msgid "Here you can (de-)activate the tooltips."
-msgstr ""
+msgstr "Hier kunt u de handigheden (de)aktiveren."
 
 #: ../template/default/help_config.html:101
 msgid "Activate or deactivate the AutoTimer function."
@@ -1103,18 +1087,20 @@ msgid ""
 "VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a "
 "timer has been programmed if you enable this feature."
 msgstr ""
+"VDRAdmin-AM zal een email sturen als een gebeurtenis overeenkomt met een "
+"autotimer en een timer is geprogrammeerd als u dit aktiveerd in de toekomst."
 
 #: ../template/default/help_config.html:111
 msgid "Here you set the sending domain of the generated email."
-msgstr ""
+msgstr "Hier het domein instellen voor de aangemaakte email."
 
 #: ../template/default/help_config.html:113
 msgid "The email address the email is sent to."
-msgstr ""
+msgstr "Het email adres, de email is gestuurd naar:"
 
 #: ../template/default/help_config.html:115
 msgid "The outgoing mail server."
-msgstr ""
+msgstr "De uitgaande mail server."
 
 #: ../template/default/help_config.html:117
 msgid ""
@@ -1122,11 +1108,13 @@ msgid ""
 "to supply the username and the password below. Leaving this field empty will "
 "disable SMTPAuth."
 msgstr ""
+"Als u zich moet identificeren voor SMTPAuth de uitgaande mail server dan "
+"moet u uw gebruikersnaam en wachtwoord hieronder invoeren. Als dit veld leeg "
+"is dan zal SMTPAuth niet aktief zijn."
 
 #: ../template/default/help_config.html:119
-#, fuzzy
 msgid "The password for the SMTPAuth user."
-msgstr "De gebruikersnaam van de gast gebruiker."
+msgstr "Het wachtwoord voor de SMTPAuth gebruiker."
 
 #: ../template/default/help_config.html:133
 msgid ""
@@ -1152,17 +1140,19 @@ msgstr ""
 
 #: ../template/default/help_config.html:137
 msgid "Here you can (de-)activate the tooltips in the timeline."
-msgstr ""
+msgstr "Hier kunt u  de handigheen (de)aktiveren in de tijdlijn."
 
 #: ../template/default/help_config.html:139
 msgid "Here you can (de-)activate the tooltips in the list."
-msgstr ""
+msgstr "Hier kunt u  de handigheen (de)aktiveren in de lijst."
 
 #: ../template/default/help_config.html:141
 msgid ""
 "If you don't want VDRAdmin-AM to add the summary taken from EPG to new "
 "timers you can switch it off here."
 msgstr ""
+"Als u niet wilt dat VDRAdmin-AM de programma informatie uit de EPG overneemt "
+"aan nieuwe timer dan kunt u dat hier uitzetten."
 
 #: ../template/default/help_config.html:149
 msgid ""
@@ -1218,20 +1208,24 @@ msgid ""
 "The MIME type to send when using live streaming. Defaults to \"video/x-"
 "mpegurl\"."
 msgstr ""
+"Het MIME type te gebruiken voor live streaming. standaard is \"video/x-"
+"mpegurl\"."
 
 #: ../template/default/help_config.html:159
 msgid "The suffix to use for live streaming. Defaults to \"m3u\"."
-msgstr ""
+msgstr "De extensie voor live streaming. Standaard is  \"m3u\"."
 
 #: ../template/default/help_config.html:161
 msgid ""
 "The MIME type to send when using recordings streaming. Defaults to \"video/x-"
 "mpegurl\"."
 msgstr ""
+"Het MIME type te gebruiken voor opgenomen streaming. standaard is \"video/x-"
+"mpegurl\"."
 
 #: ../template/default/help_config.html:163
 msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
-msgstr ""
+msgstr "De extensie voor opgenomen streaming. Standaard is  \"m3u\"."
 
 #: ../template/default/help_config.html:169
 msgid ""
@@ -1301,7 +1295,7 @@ msgid "to"
 msgstr "naar "
 
 #: ../template/default/prog_list2.html:6
-#: ../template/default/navigation.html:34 ../vdradmind.pl:2527
+#: ../template/default/navigation.html:34 ../vdradmind.pl:2538
 msgid "Playing Today"
 msgstr "Programma vandaag "
 
@@ -1318,12 +1312,10 @@ msgid "New Name of Recording:"
 msgstr "Nieuwe naam van de opname:"
 
 #: ../template/default/rec_edit.html:51
-#, fuzzy
 msgid "Subtitle:"
-msgstr "Subtitel"
+msgstr "Subtitel:"
 
 #: ../template/default/help_timer_list.html:33
-#, fuzzy
 msgid ""
 "<p>Here you will find a listing of timers known to VDR.</p><p>On top you "
 "will find a chart showing a day's timers graphically. This provides an quick "
@@ -1398,7 +1390,7 @@ msgstr ""
 "in<input type=\"submit\" class=\"submit\" value=\"New Timer\"/> te klikken "
 "en u kunt een aantal timers verwijderen door eenmaal op het selectie vakje "
 "in de laatste kolom te klikken en dan op <input type=\"submit\"  class="
-"\"submit\" value=\"Delete Selected Timers\"/>.</p> te klikken."
+"\"submit\" value=\"Verwijder geselecteerde timers\"/>.</p> te klikken."
 
 #: ../template/default/help_timer_new.html:32
 msgid "<p>Here you can edit a timer's settings.</p>"
@@ -1789,7 +1781,6 @@ msgstr ""
 "toevoegen aan de resulterende reeks."
 
 #: ../template/default/help_rec_list.html:29
-#, fuzzy
 msgid ""
 "<p>Here you will find a listing of recordings known to VDR. The headline "
 "will also show you VDR's total and free disk space.</p><p>The listing "
@@ -1850,11 +1841,11 @@ msgstr ""
 "\">Configuratie</span> menu. U kunt de opname bekijken op uw werkstation.</"
 "dd></dl></p><p> Aanvullend bij deze functies kunt u een aantal opnames "
 "verwijderen door te klikken in het aanvink vak van de opnames en te klikken "
-"op <input type=\"submit\" class=\"submit\" value=\"Delete Selected Recordings"
-"\"/>.</p><p>Als u het pad van de VDR configuratie bestanden heeft ingesteld "
-"en ingangen heeft staan in  <span class=\"ref_file\">reccmds.conf</span> "
-"kunt u deze commando's uitvoeren voor de geselecteerde opnames door het "
-"gewenste commando aant te klikken in het aanvinkvak naast <span class="
+"op <input type=\"submit\" class=\"submit\" value=\"Verwijder geselecteerde "
+"opnames\"/>.</p><p>Als u het pad van de VDR configuratie bestanden heeft "
+"ingesteld en ingangen heeft staan in  <span class=\"ref_file\">reccmds.conf</"
+"span> kunt u deze commando's uitvoeren voor de geselecteerde opnames door "
+"het gewenste commando aant te klikken in het aanvinkvak naast <span class="
 "\"ref_label\">Commando's:</span> en te klikken op <input type=\"submit\" "
 "class=\"submit\" value=\"Run\"/> knop.</p>"
 
@@ -1888,21 +1879,19 @@ msgstr "Alle"
 
 #: ../template/default/at_timer_new.html:177
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #: ../template/default/at_timer_new.html:192
 msgid "Broadcasted"
-msgstr ""
+msgstr "Uitgezonden"
 
 #: ../template/default/at_timer_new.html:193
-#, fuzzy
 msgid "Stored in"
-msgstr "Streaming"
+msgstr "Opgeslagen in"
 
 #: ../template/default/at_timer_new.html:213
-#, fuzzy
 msgid "No matches found!"
-msgstr "Niet gevonden"
+msgstr "Geen overeenkomsten gevonden!"
 
 #: ../template/default/navigation.html:66
 msgid "Watch TV"
@@ -1913,19 +1902,21 @@ msgid "Search"
 msgstr "Zoeken"
 
 #: ../template/default/navigation.html:80 ../template/default/about.html:6
-#, fuzzy
 msgid "About"
-msgstr "Auto"
+msgstr "Over"
 
 #: ../template/default/help.html:18
 msgid "Getting Help and Reporting Bugs"
-msgstr ""
+msgstr "Voor het verkrijgen van hulp en melden van bugs"
 
 #: ../template/default/help.html:30
 msgid ""
 "If you need help please first try to use the online help you'll find on some "
 "pages. You can access it by clicking <img src=\"bilder/help.gif\"/>."
 msgstr ""
+"Als u hulp nodig heeft probeer dan eers de online hulp, u zult enige "
+"pagina's vinden. U kunt dit bezoeken door op <img src=\"bilder/help.gif\"/> "
+"te klikken."
 
 #: ../template/default/help.html:31
 msgid ""
@@ -1934,6 +1925,10 @@ msgid ""
 "understand German language. Please use the announcement thread if possible, "
 "search for:"
 msgstr ""
+"Als dit niet de informatie verschaft die u zoekt dan kunt u het proberen op "
+"<a href=\"http://www.vdrportal.de\" target=\"_new\">VDR-Portal</a> als u de "
+"duitse taal verstaat. Gebruik graag de bekendmakingen draad indien mogelijk, "
+"zoek naar:"
 
 #: ../template/default/help.html:32
 msgid ""
@@ -1941,53 +1936,53 @@ msgid ""
 "report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page."
 "php\" target=\"_new\">VDRAdmin-AM BugTracking system</a>."
 msgstr ""
+"Als u denkt een bug gevonden te hebben controleer dan graag eerst of dit een "
+"nieuwe is en meld het in de  <a href=\"http://www.vdr-developer.org/mantisbt/"
+"main_page.php\" target=\"_new\">VDRAdmin-AM BugTracking systeem</a>."
 
 #: ../template/default/about.html:18
-#, fuzzy
 msgid "Authors"
-msgstr "Auto"
+msgstr "Auteurs"
 
 #: ../template/default/about.html:28
 msgid "Current author (VDRAdmin-AM branch):"
-msgstr ""
+msgstr "Huidige auteur (VDRAdmin-AM branch):"
 
 #: ../template/default/about.html:34
-#, fuzzy
 msgid "Original author (VDRAdmin):"
-msgstr "Originele naam van de opname: "
+msgstr "Originele auteru van (VDRAdmin):"
 
 #: ../template/default/about.html:48
 msgid "Translation Team"
-msgstr ""
+msgstr "Vertalings team"
 
 #: ../template/default/about.html:58
 msgid "Dutch:"
-msgstr ""
+msgstr "Nederlands:"
 
 #: ../template/default/about.html:64
 msgid "English:"
-msgstr ""
+msgstr "Engels:"
 
 #: ../template/default/about.html:70
 msgid "Finnish:"
-msgstr ""
+msgstr "Fins:"
 
 #: ../template/default/about.html:76
-#, fuzzy
 msgid "French:"
-msgstr "Vrij:"
+msgstr "Frans:"
 
 #: ../template/default/about.html:77
 msgid "At the moment unmaintained, former translations by:"
-msgstr ""
+msgstr "Op dit moment niet onderhouden, eerdere vertalingen door:"
 
 #: ../template/default/about.html:82
 msgid "German:"
-msgstr ""
+msgstr "Duits:"
 
 #: ../template/default/about.html:88
 msgid "Spanish:"
-msgstr ""
+msgstr "Spaans:"
 
 #: ../vdradmind.pl:286
 msgid "What's your VDR hostname (e.g video.intra.net)?"
@@ -2030,71 +2025,68 @@ msgstr "Configuratie bestanden succesvol weggeschreven."
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s gestart met pid %d."
 
-#: ../vdradmind.pl:405 ../vdradmind.pl:997 ../vdradmind.pl:1830
+#: ../vdradmind.pl:405 ../vdradmind.pl:997 ../vdradmind.pl:1841
 msgid "Not found"
 msgstr "Niet gevonden"
 
-#: ../vdradmind.pl:405 ../vdradmind.pl:1831
+#: ../vdradmind.pl:405 ../vdradmind.pl:1842
 msgid "The requested URL was not found on this server!"
 msgstr "De gevraagde URl is niet gevonden op deze server!"
 
-#: ../vdradmind.pl:473 ../vdradmind.pl:993 ../vdradmind.pl:1833
+#: ../vdradmind.pl:473 ../vdradmind.pl:993 ../vdradmind.pl:1844
 msgid "Forbidden"
 msgstr "Verboden"
 
-#: ../vdradmind.pl:473 ../vdradmind.pl:1834
+#: ../vdradmind.pl:473 ../vdradmind.pl:1845
 msgid "You don't have permission to access this function!"
 msgstr "U heeft geen toestemming om deze functie te gebruiken!"
 
-#: ../vdradmind.pl:993 ../vdradmind.pl:1835
+#: ../vdradmind.pl:993 ../vdradmind.pl:1846
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "Toegang tot bestand \"%s\" geweigerd!"
 
-#: ../vdradmind.pl:997 ../vdradmind.pl:1832
+#: ../vdradmind.pl:997 ../vdradmind.pl:1843
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "De  URl  \"%s\" is niet gevonden op deze server!"
 
-#: ../vdradmind.pl:1836
+#: ../vdradmind.pl:1847
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Kan bestand \"%s\" niet openen!"
 
-#: ../vdradmind.pl:1837
+#: ../vdradmind.pl:1848
 #, perl-format
 msgid "Can't connect to VDR at %s!"
 msgstr "Kan niet met VDR verbinden op %s!"
 
-#: ../vdradmind.pl:1838
+#: ../vdradmind.pl:1849
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Fout tijdens verzenden van commando op %s"
 
-#: ../vdradmind.pl:2527
+#: ../vdradmind.pl:2538
 msgid "Playing Tomorrow"
 msgstr "Speelt morgen"
 
-#: ../vdradmind.pl:2527
+#: ../vdradmind.pl:2538
 #, perl-format
 msgid "Playing on the %d."
 msgstr "Speelt op de %d."
 
-#: ../vdradmind.pl:3891
+#: ../vdradmind.pl:3920
 msgid "Schedule"
 msgstr "Schema"
 
-#: ../vdradmind.pl:4411
+#: ../vdradmind.pl:4440
 msgid "Playing Today?"
 msgstr "Speelt vandaag?"
 
-#: ../vdradmind.pl:4414
+#: ../vdradmind.pl:4443
 msgid "Timers"
 msgstr "Timers"
 
-#: ../vdradmind.pl:4477
+#: ../vdradmind.pl:4506
 msgid "System default"
-msgstr ""
-
-#~ msgid "Gets active after restarting VDRAdmin-AM"
-#~ msgstr "Wordt geaktiveerd na herstarten van VDRAdmin-AM"
+msgstr "Systeem standaard"

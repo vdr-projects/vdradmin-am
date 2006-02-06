@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-18 08:21+0100\n"
+"POT-Creation-Date: 2006-01-30 12:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -342,7 +342,7 @@ msgstr ""
 
 #: ../template/default/prog_summary.html:7
 #: ../template/default/prog_timeline.html:7
-#: ../template/default/navigation.html:30 ../vdradmind.pl:4410
+#: ../template/default/navigation.html:30 ../vdradmind.pl:4439
 msgid "What's On Now?"
 msgstr ""
 
@@ -467,7 +467,7 @@ msgstr ""
 
 #: ../template/default/config.html:213 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:86
-#: ../template/default/navigation.html:38 ../vdradmind.pl:4412
+#: ../template/default/navigation.html:38 ../vdradmind.pl:4441
 msgid "Timeline"
 msgstr ""
 
@@ -741,7 +741,7 @@ msgid "Delete Selected Timers"
 msgstr ""
 
 #: ../template/default/prog_list.html:6 ../template/default/navigation.html:42
-#: ../vdradmind.pl:4413
+#: ../vdradmind.pl:4442
 msgid "Channels"
 msgstr ""
 
@@ -807,7 +807,7 @@ msgstr ""
 #: ../template/default/rec_list.html:6 ../template/default/rec_list.html:18
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:18
-#: ../template/default/navigation.html:54 ../vdradmind.pl:4415
+#: ../template/default/navigation.html:54 ../vdradmind.pl:4444
 msgid "Recordings"
 msgstr ""
 
@@ -1177,7 +1177,7 @@ msgid "to"
 msgstr ""
 
 #: ../template/default/prog_list2.html:6
-#: ../template/default/navigation.html:34 ../vdradmind.pl:2527
+#: ../template/default/navigation.html:34 ../vdradmind.pl:2538
 msgid "Playing Today"
 msgstr ""
 
@@ -1705,68 +1705,68 @@ msgstr ""
 msgid "vdradmind.pl %s started with pid %d."
 msgstr ""
 
-#: ../vdradmind.pl:405 ../vdradmind.pl:997 ../vdradmind.pl:1830
+#: ../vdradmind.pl:405 ../vdradmind.pl:997 ../vdradmind.pl:1841
 msgid "Not found"
 msgstr ""
 
-#: ../vdradmind.pl:405 ../vdradmind.pl:1831
+#: ../vdradmind.pl:405 ../vdradmind.pl:1842
 msgid "The requested URL was not found on this server!"
 msgstr ""
 
-#: ../vdradmind.pl:473 ../vdradmind.pl:993 ../vdradmind.pl:1833
+#: ../vdradmind.pl:473 ../vdradmind.pl:993 ../vdradmind.pl:1844
 msgid "Forbidden"
 msgstr ""
 
-#: ../vdradmind.pl:473 ../vdradmind.pl:1834
+#: ../vdradmind.pl:473 ../vdradmind.pl:1845
 msgid "You don't have permission to access this function!"
 msgstr ""
 
-#: ../vdradmind.pl:993 ../vdradmind.pl:1835
+#: ../vdradmind.pl:993 ../vdradmind.pl:1846
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr ""
 
-#: ../vdradmind.pl:997 ../vdradmind.pl:1832
+#: ../vdradmind.pl:997 ../vdradmind.pl:1843
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr ""
 
-#: ../vdradmind.pl:1836
+#: ../vdradmind.pl:1847
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr ""
 
-#: ../vdradmind.pl:1837
+#: ../vdradmind.pl:1848
 #, perl-format
 msgid "Can't connect to VDR at %s!"
 msgstr ""
 
-#: ../vdradmind.pl:1838
+#: ../vdradmind.pl:1849
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr ""
 
-#: ../vdradmind.pl:2527
+#: ../vdradmind.pl:2538
 msgid "Playing Tomorrow"
 msgstr ""
 
-#: ../vdradmind.pl:2527
+#: ../vdradmind.pl:2538
 #, perl-format
 msgid "Playing on the %d."
 msgstr ""
 
-#: ../vdradmind.pl:3891
+#: ../vdradmind.pl:3920
 msgid "Schedule"
 msgstr ""
 
-#: ../vdradmind.pl:4411
+#: ../vdradmind.pl:4440
 msgid "Playing Today?"
 msgstr ""
 
-#: ../vdradmind.pl:4414
+#: ../vdradmind.pl:4443
 msgid "Timers"
 msgstr ""
 
-#: ../vdradmind.pl:4477
+#: ../vdradmind.pl:4506
 msgid "System default"
 msgstr ""

@@ -176,7 +176,7 @@ $CONFIG{TV_EXT}       = "m3u";
 $CONFIG{REC_MIMETYPE} = "video/x-mpegurl";
 $CONFIG{REC_EXT}      = "m3u";
 
-my $VERSION               = "3.4.3rc";
+my $VERSION               = "3.4.3rc2";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0;
@@ -1438,12 +1438,24 @@ sub AT_ProgTimer {
   my $found = 0;
   my $Update = 0;
   for(ParseTimer(1)) {
-    if(($event_id) && ($_->{event_id} == $event_id) && ($_->{vdr_id} == $channel)) {
-      $found = 1;
-    }
-    if((!$found) && ($_->{vdr_id} == $channel) && ($_->{dor} =~ my_strftime("%d", $start)) && ($_->{start} eq $start)) {
+		if($_->{vdr_id} == $channel) {
+	    if(($event_id) && ($_->{event_id} == $event_id)) {
+  	    $found = 1;
+				last;
+    	}
+    	if($_->{start} eq $start) {
         $found = 1;
-    }
+				last;
+   		}
+			if(($VDRVERSION < 010323) && ($_->{dor} eq my_strftime("%Y-%m-%d", $start))) {
+				$found = 1;
+				last;
+			}
+			if(($_->{dor} == my_strftime("%d", $start))) {
+				$found = 1;
+				last;
+			}
+		}
   }
 
   # we will only programm new timers, CheckTimers is responsible for
@@ -1601,6 +1613,7 @@ sub CheckTimers {
         # now we have all events in eventlist that touch the old timer margins
         # check for each event how probable it is matching the old timer
         if(scalar(@eventlist) > 0) {
+					my $origlen = ($timer->{stop} - $CONFIG{TM_MARGIN_END} * 60) - ($timer->{start} + $CONFIG{TM_MARGIN_BEGIN} * 60);
           my $maxwight = 0;
           $event = $eventlist[0];
 
@@ -1620,13 +1633,13 @@ sub CheckTimers {
 
             my $wight = ($stop - $start) / ($eventlist[$i]->{stop} - $eventlist[$i]->{start});
 
-            if($wight > $maxwight) {
+            if($wight > $maxwight && (($eventlist[$i]->{stop} - $eventlist[$i]->{start}) / $origlen) >= 0.9 ) {
               $maxwight = $wight;
               $event = $eventlist[$i];
             }
           }
           # update timer if the existing one differs from the EPG
-          if((($event->{summary}) && (!$timer->{summary})) ||
+          if(($CONFIG{TM_ADD_SUMMARY} && ($event->{summary}) && (!$timer->{summary})) ||
             ($timer->{start} > ($event->{start} - $CONFIG{TM_MARGIN_BEGIN} * 60)) ||
             ($timer->{stop} < ($event->{stop} + $CONFIG{TM_MARGIN_END} * 60))) {
             Log(LOG_CHECKTIMER, sprintf("CheckTimers: Timer \"%s\" (No. %s, Event-ID %s, %s - %s) differs from EPG: \"%s\", Event-ID %s, %s - %s)", $timer->{title}, $timer->{id}, $timer->{event_id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop})), $event->{title}, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
@@ -1864,12 +1877,12 @@ sub ProgTimer {
     }
   }
 
-  Log(LOG_AT, sprintf("ProgTimer: Programming Timer \"%s\" (Channel %s, Event-ID %s, %s - %s)", $title, $channel, $event_id, my_strftime("%Y%m%d-%H%M", $start), my_strftime("%Y%m%d-%H%M", $stop)));
-
 	my $send_cmd = $timer_id ? "modt $timer_id" : "newt";
 	my $send_active = $active & 0x8000 ? PackStatus($active, $event_id) : $active;
 	my $send_dor = $dor ? $dor : RemoveLeadingZero(strftime("%d", localtime($start)));
 	my $send_summary = ($VDRVERSION >= 10336) ? $summary : substr($summary, 0, $VDR_MAX_SVDRP_LENGTH - 9 - length($send_cmd) - length($send_active) - length($channel) - length($send_dor) - 8 - length($prio) - length($lft) - length($title));
+
+  Log(LOG_AT, sprintf("ProgTimer: Programming Timer \"%s\" (Channel %s, Event-ID %s, %s - %s, Active %s)", $title, $channel, $event_id, my_strftime("%Y%m%d-%H%M", $start), my_strftime("%Y%m%d-%H%M", $stop), $send_active));
   my $return = SendCMD(
     sprintf("%s %s:%s:%s:%s:%s:%s:%s:%s:%s",
       $send_cmd,
@@ -2249,7 +2262,7 @@ sub prog_switch {
   if($channel) {
     SendCMD("chan $channel");
   }
-  SendFile($BASENAME . "/bilder/spacer.gif");
+  SendFile("bilder/spacer.gif");
 }
 
 sub prog_detail {
@@ -3049,7 +3062,6 @@ sub timer_add {
  
   #XXX
   if($q->param("referer")) {
-	printf("1: %s\n", Decode_Referer($q->param("referer")));
     return(headerForward(Decode_Referer($q->param("referer"))));
   } else {
     return(headerForward("$MyURL?aktion=timer_list"));
@@ -3154,7 +3166,7 @@ sub getReferer {
     } else {
 			my $vdr_id = $q->param("vdr_id");
 #			print("3: " . $q->param("old_aktion") . ", $vdr_id, $epg_id\n");
-			return sprintf("/vdradmin.pl?aktion=%s%s#id%s", $q->param("old_aktion"), ($vdr_id ? "&vdr_id=$vdr_id" : ""), $epg_id);
+			return sprintf("./vdradmin.pl?aktion=%s%s#id%s", $q->param("old_aktion"), ($vdr_id ? "&vdr_id=$vdr_id" : ""), $epg_id);
 		}
   }
 }
@@ -3538,35 +3550,37 @@ sub at_timer_test {
 
 	my @at_matches = AutoTimer(1, @at);
 	my $template = TemplateNew("at_timer_new.html");
+	my $pattern = $q->param("pattern");
+	$pattern =~ s/"/\&quot;/g;
   my $vars = {
 		usercss     => $UserCSS,
     url         => $MyURL,
     channels    => \@chans,
-    $q->Vars,
-#		active      => $q->param("active"),
-#		pattern     => $q->param("pattern"),
-#		title       => $q->param("title") ? $q->param("title") : 0,
-#		subtitle    => $q->param("subtitle") ? $q->param("subtitle") : 0,
-#		description => $q->param("description") ? $q->param("description") :0 ,
-#		wday_mon    => $q->param("wday_mon") ? $q->param("wday_mon") : 0,
-#		wday_tue    => $q->param("wday_tue") ? $q->param("wday_tue") : 0,
-#		wday_wed    => $q->param("wday_wed") ? $q->param("wday_wed") : 0,
-#		wday_thu    => $q->param("wday_thu") ? $q->param("wday_thu") : 0,
-#		wday_fri    => $q->param("wday_fri") ? $q->param("wday_fri") : 0,
-#		wday_sat    => $q->param("wday_sat") ? $q->param("wday_sat") : 0,
-#		wday_sun    => $q->param("wday_sun") ? $q->param("wday_sun") : 0,
-#		channel     => $q->param("channel"),
-#		starth      => $q->param("starth"),
-#		startm      => $q->param("startm"),
-#		stoph       => $q->param("stoph"),
-#		stopm       => $q->param("stopm"),
-#		prio        => $q->param("prio"),
-#		lft         => $q->param("lft"),
-#		episode     => $q->param("episode") ? $q->param("episode") : 0,
-#		done        => $q->param("done"),
-#		directory   => $q->param("directory"),
+#TODO    $q->Vars,
+		active      => $q->param("active"),
+		pattern     => $pattern,
+		title       => $q->param("title") ? $q->param("title") : 0,
+		subtitle    => $q->param("subtitle") ? $q->param("subtitle") : 0,
+		description => $q->param("description") ? $q->param("description") :0 ,
+		wday_mon    => $q->param("wday_mon") ? $q->param("wday_mon") : 0,
+		wday_tue    => $q->param("wday_tue") ? $q->param("wday_tue") : 0,
+		wday_wed    => $q->param("wday_wed") ? $q->param("wday_wed") : 0,
+		wday_thu    => $q->param("wday_thu") ? $q->param("wday_thu") : 0,
+		wday_fri    => $q->param("wday_fri") ? $q->param("wday_fri") : 0,
+		wday_sat    => $q->param("wday_sat") ? $q->param("wday_sat") : 0,
+		wday_sun    => $q->param("wday_sun") ? $q->param("wday_sun") : 0,
+		channel     => $q->param("channel"),
+		starth      => $q->param("starth"),
+		startm      => $q->param("startm"),
+		stoph       => $q->param("stoph"),
+		stopm       => $q->param("stopm"),
+		prio        => $q->param("prio"),
+		lft         => $q->param("lft"),
+		episode     => $q->param("episode") ? $q->param("episode") : 0,
+		done        => $q->param("done"),
+		directory   => $q->param("directory"),
 		at_test     => 1,
-		matches     => \@at_matches
+	matches     => \@at_matches
   };
   $template->param($vars);
   my $output;
@@ -3749,6 +3763,17 @@ sub prog_summary {
     $event_time = time();
   }
 
+	my $pattern;
+	my $mode;
+	if($search) {
+		if($search =~ /^\/(.*)\/(i?)$/) {
+			$pattern=$1;
+			$mode=$2
+		} else {
+			$search =~ s/([\+\?\.\*\^\$\(\)\[\]\{\}\|\\])/\\$1/g;
+		}
+	}
+			
   my(@show, @shows, @temp);
   for(keys(%EPG)) {
     for my $event (@{$EPG{$_}}) {
@@ -3763,15 +3788,31 @@ sub prog_summary {
 				next if($event_time > $event->{stop});
 			} else {
 				my($found);
-				for my $word (split(/ +/, $search)) {
-					$found = 0;
-					for my $section (qw(title subtitle summary)) {
-						if($event->{$section} =~ /$word/i) {
-							$found = 1;
-						}
+				if($pattern) {
+					# We have a RegExp
+					next if(!length($pattern));
+					next if(!defined($pattern));
+					my $SearchStr = $event->{title} . "~" . $event->{subtitle} . "~" . $event->{summary};
+					# Shall we search case insensitive?
+					if(($mode eq "i") && ($SearchStr !~ /$pattern/i)) {
+						next;
+					} elsif(($mode ne "i") && ($SearchStr !~ /$pattern/)) {
+						next;
+					} else {
+						$found = 1;
 					}
-					if(!$found) {
-						last;
+				} else {
+					next if(! length($search));
+					for my $word (split(/ +/, $search)) {
+						$found = 0;
+						for my $section (qw(title subtitle summary)) {
+							if($event->{$section} =~ /$word/i) {
+								$found = 1;
+							}
+						}
+						if(!$found) {
+							last;
+						}
 					}
 				}
 				next if(!$found);
@@ -4398,12 +4439,12 @@ sub config {
       	$CONFIG{CHANNELS_WANTED} = csvRemove($CONFIG{CHANNELS_WANTED}, $vdr_id); 
     	}
     	ApplyConfig(); WriteConfig();
-  	} elsif($q->param("save")) {
-    	ApplyConfig(); WriteConfig();
-  	} elsif($q->param("apply")) {
-    	ApplyConfig();
-  	}
-	}
+		}
+  } elsif($q->param("save")) {
+   	ApplyConfig(); WriteConfig();
+  } elsif($q->param("apply")) {
+   	ApplyConfig();
+  }
 
 	#
 	my @LOGINPAGES_DESCRIPTION = (

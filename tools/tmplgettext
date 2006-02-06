@@ -1,0 +1,158 @@
+#!/usr/bin/perl
+
+#
+# tmplgettext <regexp> <directories>
+#
+# Creates a gettext pot-template from any text template specified by <regexp>
+# in <directories> (recursivly)
+#
+# Any text matching /<%! (.*) !%>/ (even across multiple lines) will be 
+# interpreted as a translatable strings like in gettext("foo") or _("foo").
+#
+# e.g.: tmplgettext "^.*\.html$" ./templates >templates.pot
+#
+# Output goes to stdout.
+#
+# 04/2005 - Tobias Grimm <vdr@e-tobi.net>
+#
+
+my $BASENAME;
+BEGIN {
+	$BASENAME = $1;
+	unshift(@INC, $BASENAME . "../tools/lib/");
+}
+
+use String::Escape qw(printable);
+use File::Find;
+
+my $START_TAG = "<%! ";
+my $END_TAG = " !%>";
+
+my $filePattern = "";
+
+sub WritePotHeader
+{
+  my ($sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst) =
+    localtime(time);
+  
+  print "#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+#, fuzzy
+msgid \"\"
+msgstr \"\"
+\"Project-Id-Version: VDRAdmin-0.97-AM3.3\\n\"
+\"Report-Msgid-Bugs-To: Andreas Mair <mail@andreas.vdr-developer.org>\\n\"\n";
+
+  # FIXME: Correctly set timezone
+
+  printf "\"POT-Creation-Date: %4d-%02d-%02d %02d:%02d+0100\"\n",
+    $year + 1900, $mon + 1, $mday, $hour, $min;
+
+  print "\"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n\"
+\"Last-Translator: FULL NAME <EMAIL@ADDRESS>\\n\"
+\"Language-Team: LANGUAGE <LL@li.org>\\n\"
+\"MIME-Version: 1.0\\n\"
+\"Content-Type: text/plain; charset=CHARSET\\n\"
+\"Content-Transfer-Encoding: 8bit\\n\"\n\n";
+}
+
+sub my_normalize {
+	my $text = shift;
+	$text =~ s/[\t\n]//g;
+	return printable($text);
+}
+
+sub WritePotEntry 
+{
+    my ($fileName, $lineNumber, $msgid) = @_;
+    my $escapedMsgid = my_normalize($msgid);
+    
+    print "#: $fileName:$lineNumber\n";
+    print "msgid \"$escapedMsgid\"\n";
+    print "msgstr \"\"\n\n";
+}
+
+sub ExtractMsgids
+{
+    my ($fileName, @fileContent) = @_;
+    my $text = "";
+    my $isTextStarted = 0;
+    my $lineCounter = 0;
+    my $textStartLine;
+    
+    foreach my $line (@fileContent)
+    {
+        my $lookAhead;
+        
+        $lineCounter++;
+
+        if ($isTextStarted = 1)
+        {
+            $text = $text . "\n";
+        }
+        
+        for (my $index=0; $index < length($line); $index++)
+        {            
+            $lookAhead = substr($line, $index, length($START_TAG));
+            if ($lookAhead eq $START_TAG)
+            {
+                $index = $index + length($START_TAG); # skip whole tag
+                $isTextStarted = 1;
+                $textStartLine = $lineCounter;
+                $text = "";
+            }
+
+            $lookAhead = substr($line, $index, length($END_TAG));
+            if ($lookAhead eq $END_TAG)
+            {
+                if ($isTextStarted)
+                {
+                    $index = $index + length($END_TAG);  # skip whole tag
+                    if (length($text) > 0)
+                    {
+                        WritePotEntry($fileName, $textStartLine, $text);
+                    }
+                    $isTextStarted = 0;
+                }
+            }
+            
+            if ($isTextStarted)
+            {
+                $text = $text . substr($line, $index, 1);
+            }
+        }
+    } 
+}
+
+sub ProcessFile
+{
+    if ($File::Find::name =~ /$filePattern/)
+    {
+        open(HTML, "< $File::Find::name");
+        my @fileContent = <HTML>;
+        close(HTML);
+        
+        ExtractMsgids($File::Find::name, @fileContent);
+    }
+}
+
+#
+# main()
+#
+
+$filePattern = shift(@ARGV);
+
+WritePotHeader;
+
+find({no_chdir => 1, wanted => \&ProcessFile}, @ARGV);

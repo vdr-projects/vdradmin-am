@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+pushd po/
+../tools/tmplgettext "^.*\.html$" ../template >tmp-html-x.pot
+msguniq tmp-html-x.pot >vdradmin.pot
+
+xgettext --from-code=ISO-8859-1 -L Perl ../vdradmind.pl -j -o vdradmin.pot
+#xgettext --from-code=ISO-8859-1 -L Perl ../template/i18n.pl -j -o vdradmin.pot
+rm tmp-*.pot
+popd
+
+
+for LANG in de es fi fr nl ; do
+		echo -n "$LANG: "
+    if msgmerge po/$LANG.po po/vdradmin.pot >temp.po ; then
+        mv -f temp.po po/$LANG.po
+				echo "    untranslated=$(msgattrib --untranslated po/$LANG.po | grep ^msgid | wc -l) fuzzy=$(msgattrib --fuzzy po/$LANG.po | grep ^msgid | wc -l)"
+    else
+        echo "error merging po/$LANG.po and po/vdradmin.pot"
+    fi
+done

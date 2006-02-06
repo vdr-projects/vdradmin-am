@@ -4,6 +4,13 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-02-06: 3.4.3rc2
+- For timers that are checked by AutoTimer for start/stop times the broadcast's length must at least match 90% of the original timer's length (excluding before/behind buffers).
+- Reworked detection of already programmed AutoTimers and made it compatible to VDR v1.3.23+ (Based on suggestions by Jouni Karvo).
+- Don't crash if illegal characters are used for searching (Reported by foobar42).
+- Fixed error after progamming a timer if VDRAdmin is accessed through apache (Reported by speed).
+- If there were quotes in an AutoTimer's pattern and you clicked "test" the pattern got cleared (Reported by The_Pit).
+
 2006-01-17: 3.4.3rc
 - Changed program name to VDRAdmin-AM to make clear it's a fork of VDRAdmin.
 - Added "Help" and "About" to navigation bar at the left.

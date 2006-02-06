@@ -500,6 +500,11 @@ body.help .heading {
 #help .links a {
 	white-space: nowrap;
 }
+#help a ,
+#help a:visited,
+#help a:active {
+	color: blue;
+}
 #help .group {
 	margin-top: 0.6em;
 	border: 1px solid black;
