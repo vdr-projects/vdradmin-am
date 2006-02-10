@@ -65,13 +65,7 @@
 		<div class="navi">
 			<a href="vdradmin.pl?aktion=tv_show" target="main"><%! Watch TV !%></a>
 		</div>
-		<form action="vdradmin.pl" method="get" name="FormName" target="main" class="search">
-			<input type="text" name="search" /><br />
-			<input type="submit" name="submit" value="<%! Search !%>" />
-			<input type="hidden" name="aktion" value="prog_summary" />
-		</form>
-	</div>
-	<div class="nav_bar bottom">
+		<div class="separator"></div>
 		<div class="navi">
 			<a href="vdradmin.pl?aktion=help" target="main"><%! Help !%></a></a>
 		</div>
@@ -79,6 +73,11 @@
 		<div class="navi">
 			<a href="vdradmin.pl?aktion=about" target="main"><%! About !%></a>
 		</div>
+		<form action="vdradmin.pl" method="get" name="FormName" target="main" class="search">
+			<input type="text" name="search" /><br />
+			<input type="submit" name="submit" value="<%! Search !%>" />
+			<input type="hidden" name="aktion" value="prog_summary" />
+		</form>
 	</div>
 </body>
 </html>

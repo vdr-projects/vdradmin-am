@@ -91,7 +91,7 @@ sub LOG_DEBUG      () { 32768 };
 
 my %CONFIG;
 $CONFIG{LOGLEVEL}             = 81; # 32799
-$CONFIG{LOGGING}              = 1;
+$CONFIG{LOGGING}              = 0;
 $CONFIG{LOGFILE}              = "vdradmind.log";
 $CONFIG{MOD_GZIP}             = 0;
 $CONFIG{CACHE_TIMEOUT}        = 60;
@@ -176,7 +176,7 @@ $CONFIG{TV_EXT}       = "m3u";
 $CONFIG{REC_MIMETYPE} = "video/x-mpegurl";
 $CONFIG{REC_EXT}      = "m3u";
 
-my $VERSION               = "3.4.3rc2";
+my $VERSION               = "3.4.3rc3";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0;
@@ -2309,10 +2309,11 @@ sub prog_detail {
   $displaysubtitle =~ s/\|/<br \/>\n/g;
 	$find_title =~ s/^.*~\([^~]*\)/$1/;
 
-	my $old_aktion;
-	$old_aktion = "&amp;old_aktion=" . $q->param("old_aktion") if($q->param("old_aktion"));
+	# Do not use prog_detail as referer.
+	# Use the referer we received.
+	my $referer = getReferer();
 	my $recurl;
-	$recurl = sprintf("%s?aktion=timer_new_form%s&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $old_aktion, $epg_id, $vdr_id) unless($q->param("old_aktion") =~ "timer_list");
+	$recurl = sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $epg_id, $vdr_id, Encode_Referer($referer)) unless($referer =~ "timer_list");
 
 	my $template = TemplateNew("prog_detail.html");
   my $vars = {
@@ -2348,6 +2349,8 @@ sub prog_list {
   if(!$vdr_id) {
     return(headerForward("$MyURL?aktion=prog_list&vdr_id=1"));
   }
+
+	my $myself = Encode_Referer($MyURL . "?" . $Query);
 
 	#
   my @channel;
@@ -2401,8 +2404,8 @@ sub prog_list {
       duration    => my_strftime("%H:%M", $event->{stop}),
       title       => CGI::escapeHTML($event->{title}),
       subtitle    => CGI::escapeHTML($event->{subtitle}),
-      recurl      => sprintf("%s?aktion=timer_new_form&amp;old_aktion=prog_list&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
-      infurl      => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;old_aktion=prog_list&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}) : undef,
+      recurl      => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
+      infurl      => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
       newd        => 0,
       anchor      => "id" . $event->{event_id}
     });
@@ -2454,6 +2457,7 @@ sub prog_list2 {
 	#
   my $vdr_id;
   my @channel;
+	my $myself = Encode_Referer($MyURL . "?" . $Query);
 
   for my $channel (@CHAN) { 
     # if its wished, display only wanted channels
@@ -2521,8 +2525,8 @@ sub prog_list2 {
           duration    => my_strftime("%H:%M", $event->{stop}),
           title       => CGI::escapeHTML($event->{title}),
           subtitle    => CGI::escapeHTML($event->{subtitle}),
-          recurl      => sprintf("%s?aktion=timer_new_form&amp;old_aktion=prog_list2&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
-          infurl      => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;old_aktion=prog_list2&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}) : undef,
+          recurl      => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
+          infurl      => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
           newd        => 0,
           anchor      => "id" . $event->{event_id}
         });
@@ -2533,7 +2537,6 @@ sub prog_list2 {
      push(@show, { endd => 1 }); 
   } # end: for $vdr_id
 
-	
   # 
   my($template) = TemplateNew("prog_list2.html");
   my $vars = {
@@ -2545,8 +2548,8 @@ sub prog_list2 {
     progname       => GetChannelDescByNumber($vdr_id),
 		switchurl      => "$MyURL?aktion=prog_switch&amp;channel=" . $vdr_id,
 		stream_live_on => $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
-		prevdayurl     => $day > $current_day ? "$MyURL?aktion=prog_list2&amp;day=" . ($day - 1) : undef,
-		nextdayurl     => $last_day > $day ? "$MyURL?aktion=prog_list2&amp;day=" . ($day + 1) : undef,
+		prevdayurl     => $day > $current_day ? "$MyURL?aktion=prog_list2&amp;day=" . ($day - 1): undef,
+		nextdayurl     => $last_day > $day ? "$MyURL?aktion=prog_list2&amp;day=" . ($day + 1): undef,
 		toolbarurl     => "$MyURL?aktion=toolbar"
   };
   $template->param($vars);
@@ -2577,6 +2580,7 @@ sub timer_list {
   my @timer;
   my @timer2;
   my @days;
+	my $myself = Encode_Referer($MyURL . "?" . $Query);
 
   my ($TagAnfang, $TagEnde);
   for my $timer (ParseTimer(0)) {
@@ -2606,7 +2610,7 @@ sub timer_list {
     $timer->{starttime} = my_strftime("%y%m%d", $timer->{startsse});
     $timer->{stoptime}  = my_strftime("%y%m%d", $timer->{stopsse});
     $timer->{sortfield} = $timer->{cdesc} . $timer->{startsse};
-    $timer->{infurl}    = $timer->{event_id} ? sprintf("%s?aktion=prog_detail&amp;old_aktion=timer_list&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $timer->{event_id}, $timer->{vdr_id}) : undef,
+    $timer->{infurl}    = $timer->{event_id} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $timer->{event_id}, $timer->{vdr_id}, $myself) : undef,
 
     $timer->{start} = my_strftime("%H:%M", $timer->{start});
     $timer->{stop} = my_strftime("%H:%M", $timer->{stop});
@@ -2905,7 +2909,7 @@ sub timer_new_form {
   }
   
   # determine referer (redirect to where we come from)
-  my $ref = getReferer($epg_id);
+  my $ref = getReferer();
   
   # check if we may use Event-IDs in general or not
   if($CONFIG{NO_EVENTID} == 1) {
@@ -2944,7 +2948,7 @@ sub timer_new_form {
     timer_id => $timer_id ? $timer_id : 0,
     channels => \@channels,
     newtimer => $timer_id ? 0 : 1,
-    referer  => Encode_Referer($ref),
+    referer  => $ref ? Encode_Referer($ref) : undef,
     help_url => HelpURL("timer_new")
   };
   
@@ -3060,9 +3064,9 @@ sub timer_add {
 
 	}
  
-  #XXX
-  if($q->param("referer")) {
-    return(headerForward(Decode_Referer($q->param("referer"))));
+	my $ref = getReferer();
+  if($ref) {
+    return(headerForward($ref));
   } else {
     return(headerForward("$MyURL?aktion=timer_list"));
   }
@@ -3155,20 +3159,18 @@ sub rec_stream {
 }
 
 sub getReferer {
-	my $epg_id = shift;
-  if(defined($epg_id)) {
-    if($Referer =~ /(.*)\#\d+$/) {
-#			print("1: $1, $epg_id\n");
-      return sprintf("%s#id%s", $1, $epg_id);
-#    } elsif ($Referer) {
-#			print("2: $Referer, $epg_id\n");
-#      return sprintf("%s#id%s", $Referer, $epg_id);
-    } else {
-			my $vdr_id = $q->param("vdr_id");
-#			print("3: " . $q->param("old_aktion") . ", $vdr_id, $epg_id\n");
-			return sprintf("./vdradmin.pl?aktion=%s%s#id%s", $q->param("old_aktion"), ($vdr_id ? "&vdr_id=$vdr_id" : ""), $epg_id);
+	my $epg_id = $q->param("epg_id");
+	my $ref = $q->param("referer");
+	if ($ref) {
+		$ref = Decode_Referer($ref);
+		if ($ref =~ /#/) {
+			return $ref;
+		} else {
+	    return sprintf("%s%s", $ref, $epg_id ? "#id$epg_id" : "");
 		}
-  }
+  } else {
+		return undef;
+	}
 }
 
 #############################################################################
@@ -3596,6 +3598,8 @@ sub prog_timeline {
   return if(UptoDate());
   my $time = $q->param("time");
 
+	my $myself = Encode_Referer($MyURL . "?" . $Query);
+
   # zeitpunkt bestimmen
   my $event_time;
   my $event_time_to;
@@ -3684,8 +3688,8 @@ sub prog_timeline {
         vdr_id   => $event->{vdr_id},
         proglink => sprintf("%s?aktion=prog_list&amp;vdr_id=%s", $MyURL, $event->{vdr_id}),
         switchurl=> sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $event->{vdr_id}),
-        infurl   => ($event->{summary} ? sprintf("%s?aktion=prog_detail&amp;old_aktion=prog_timeline&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}) : undef),
-        recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
+        infurl   => ($event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef),
+        recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
         anchor   => $event->{event_id},
         timer    => ( defined $TIM->{ $event->{title} } && $TIM->{ $event->{title} }->{vdr_id} == $event->{vdr_id} ? 1 : 0 ),
       });
@@ -3830,6 +3834,7 @@ sub prog_summary {
 				$displaysubtitle =~ s/\n/<br \/>\n/g;
 				$displaysubtitle =~ s/\|/<br \/>\n/g;
 			}
+			my $myself = Encode_Referer($MyURL . "?" . $Query);
       push(@show,  {
 				date           => my_strftime("%x", $event->{start}),
 				longdate       => my_strftime("%A, %x", $event->{start}),
@@ -3844,8 +3849,8 @@ sub prog_summary {
 				switchurl      => sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $event->{vdr_id}),
 				streamurl      => sprintf("%s%s?aktion=live_stream&amp;channel=%s", $MyStreamBase, $CONFIG{TV_EXT}, $event->{vdr_id}),
 				stream_live_on => $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
-				infurl         => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;old_aktion=prog_summary&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}) : undef,
-				recurl         => sprintf("%s?aktion=timer_new_form&amp;old_aktion=prog_summary&amp;epg_id=%s&amp;vdr_id=%s", $MyURL, $event->{event_id}, $event->{vdr_id}),
+				infurl         => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
+				recurl         => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
 				find_title     => uri_escape($event->{title}),
         anchor         => "id" . $event->{event_id}
 				});
@@ -4364,10 +4369,10 @@ sub recRunCmd {
 
 sub rec_edit {
   # determine referer (redirect to where we come from)
-  my $ref = ($Referer ? Encode_Referer($Referer) : undef);
+  my $ref = getReferer();
   
   my $template = TemplateNew("rec_edit.html");
-  my $vars = getRecInfo($q->param("id"), $ref);
+  my $vars = getRecInfo($q->param("id"), $ref ? Encode_Referer($ref) : undef);
   $template->param($vars);
   my $output;
   my $out = $template->output;
@@ -4385,8 +4390,9 @@ sub rec_rename {
 		$CONFIG{CACHE_REC_LASTUPDATE} = 0;
   }
 
-  if($q->param("referer")) {
-    return headerForward(Decode_Referer($q->param("referer")));
+	my $ref = getReferer();
+  if($ref) {
+    return headerForward($ref);
   } else {
   	return headerForward("$MyURL?aktion=rec_list&sortby=" . $q->param("sortby") . "&desc=" . $q->param("desc"));
   }

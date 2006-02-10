@@ -4,6 +4,9 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-02-10: 3.4.3rc3
+- Changed handling of refering pages; should work much better now.
+
 2006-02-06: 3.4.3rc2
 - For timers that are checked by AutoTimer for start/stop times the broadcast's length must at least match 90% of the original timer's length (excluding before/behind buffers).
 - Reworked detection of already programmed AutoTimers and made it compatible to VDR v1.3.23+ (Based on suggestions by Jouni Karvo).
