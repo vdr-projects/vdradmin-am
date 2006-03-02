@@ -64,6 +64,9 @@ use File::Temp ();
 use Shell qw(ps locale);
 use URI::Escape;
 
+my $can_use_net_smtp = 1;
+$can_use_net_smtp = undef unless(eval {require Net::SMTP});
+
 # Some users have problems if the LANGUAGE env variable is set
 # so it's cleared here.
 $LANGUAGE="";
@@ -176,7 +179,7 @@ $CONFIG{TV_EXT}       = "m3u";
 $CONFIG{REC_MIMETYPE} = "video/x-mpegurl";
 $CONFIG{REC_EXT}      = "m3u";
 
-my $VERSION               = "3.4.3rc3";
+my $VERSION               = "3.4.3a";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0;
@@ -1439,21 +1442,27 @@ sub AT_ProgTimer {
   my $Update = 0;
   for(ParseTimer(1)) {
 		if($_->{vdr_id} == $channel) {
-	    if(($event_id) && ($_->{event_id} == $event_id)) {
-  	    $found = 1;
-				last;
-    	}
-    	if($_->{start} eq $start) {
-        $found = 1;
-				last;
-   		}
-			if(($VDRVERSION < 010323) && ($_->{dor} eq my_strftime("%Y-%m-%d", $start))) {
-				$found = 1;
-				last;
-			}
-			if(($_->{dor} == my_strftime("%d", $start))) {
-				$found = 1;
-				last;
+			if($event_id && $_->{event_id}) {
+		    if($_->{event_id} == $event_id) {
+  		    $found = 1;
+					last;
+    		}
+			} else {
+  	  	if($_->{start} eq $start) {
+    	    $found = 1;
+					last;
+	   		}
+				if($VDRVERSION < 10323) {
+					if ($_->{dor} eq my_strftime("%Y-%m-%d", $start)) {
+						$found = 1;
+						last;
+					}
+				} else {
+					if($_->{dor} == my_strftime("%d", $start)) {
+						$found = 1;
+						last;
+					}
+				}
 			}
 		}
   }
@@ -1474,7 +1483,7 @@ sub AT_ProgTimer {
       $title,
       $CONFIG{TM_ADD_SUMMARY} ? $summary : ""
     );
-    if ($CONFIG{AT_SENDMAIL} == 1 && eval { require Net::SMTP }) {
+    if ($CONFIG{AT_SENDMAIL} == 1 && $can_use_net_smtp) {
       my $sum = $summary;
       # remove all HTML-Tags from text
       $sum =~ s/\<[^\>]+\>/ /g;
@@ -1493,7 +1502,12 @@ sub AT_ProgTimer {
       	$smtp->to($CONFIG{MAIL_TO});
       	$smtp->data();
       	$smtp->datasend("To: $CONFIG{MAIL_TO}\n");
-      	$smtp->datasend("Subject: AUTOTIMER: New timer created for $title\n");
+				my $qptitle = my_encode_qp($title);
+      	$smtp->datasend("Subject: AUTOTIMER: New timer created for $qptitle\n");
+				$smtp->datasend("From: VDRAdmin-AM AutoTimer <autotimer\@$CONFIG{MAIL_FROMDOMAIN}>\n");
+				$smtp->datasend("MIME-Version: 1.0\n"); 
+				$smtp->datasend("Content-Type: text/plain; charset=iso-8859-1\n"); 
+				$smtp->datasend("Content-Transfer-Encoding: 8bit\n");
       	$smtp->datasend("\n");
       	$smtp->datasend("Created AUTOTIMER for $title\n");
       	$smtp->datasend("===========================================================================\n\n");
@@ -1509,8 +1523,23 @@ sub AT_ProgTimer {
 		print("SMTP failed! Please check your email settings.\n");
 		Log(LOG_FATALERROR, "SMTP failed! Please check your email settings.");
 	}
-    }
+    } elsif ($CONFIG{AT_SENDMAIL} == 1) {
+			print("Missing Perl module Net::SMTP.\nAutoTimer email notification disabled.\n");
+			Log(LOG_FATALERROR, "Missing Perl module Net::SMTP. AutoTimer email notification disabled.");
+		}
   }
+}
+
+sub my_encode_qp {
+  my $title = shift;
+	if ($title =~ /[\001-\037\200-\377]/)
+	{
+		my $qptitle = $title;
+		$qptitle = "=?iso-8859-1?b?" . MIME::Base64::encode_base64($title, "") . "?=";
+		$qptitle =~ s#(=\?iso-8859-1\?b\?[^\?]{56})(?!\?=)#$1?=\n =?iso-8859-1?b?#g while($qptitle =~ /=\?iso-8859-1\?b\?[^\?]{57,}\?=/);
+		return $qptitle;
+	}
+	return $title;
 }
 
 sub PackStatus {
@@ -3518,6 +3547,7 @@ sub at_timer_delete {
 }
 
 sub at_timer_test {
+  my $id = $q->param("id");
   my @chans;
   for my $chan (@CHAN) {
   	if($CONFIG{CHANNELS_WANTED_AUTOTIMER}) {
@@ -3555,6 +3585,7 @@ sub at_timer_test {
 	my $pattern = $q->param("pattern");
 	$pattern =~ s/"/\&quot;/g;
   my $vars = {
+  	id          => $id,
 		usercss     => $UserCSS,
     url         => $MyURL,
     channels    => \@chans,
@@ -3777,7 +3808,8 @@ sub prog_summary {
 			$search =~ s/([\+\?\.\*\^\$\(\)\[\]\{\}\|\\])/\\$1/g;
 		}
 	}
-			
+
+	my $now = time();
   my(@show, @shows, @temp);
   for(keys(%EPG)) {
     for my $event (@{$EPG{$_}}) {
@@ -3848,7 +3880,7 @@ sub prog_summary {
 				proglink       => sprintf("%s?aktion=prog_list&amp;vdr_id=%s", $MyURL, $event->{vdr_id}),
 				switchurl      => sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $event->{vdr_id}),
 				streamurl      => sprintf("%s%s?aktion=live_stream&amp;channel=%s", $MyStreamBase, $CONFIG{TV_EXT}, $event->{vdr_id}),
-				stream_live_on => $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
+				stream_live_on => $event->{start} <= $now && $now <= $event->{stop} ? $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON} : undef,
 				infurl         => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
 				recurl         => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
 				find_title     => uri_escape($event->{title}),
@@ -3880,6 +3912,7 @@ sub prog_summary {
 		usercss => $UserCSS,
     rows    => \@shows,
     now     => strftime("%H:%M", localtime($event_time)),
+		title   => $search ? gettext("Suitable matches for:") . " " . $search : strftime("%H:%M", localtime($event_time)) . " " . gettext("o'clock"),
     nowurl  => $MyURL . "?aktion=prog_summary",
     url     => $MyURL
   };
@@ -4693,9 +4726,8 @@ sub grab_picture {
 	if ($VDRVERSION < 10338) {
 		# Grab using temporary file
 		my $file = new File::Temp(TEMPLATE => "vdr-XXXXX", DIR => File::Spec->tmpdir(), UNLINK => 1, SUFFIX => ".jpg");
-		chmod 0666,$file;
+		chmod 0666,$file if(-e $file);
 		SendCMD("grab $file jpeg 70 $width $height");
-		#SendCMD("grab $file jpeg");
 		if(-e $file && -r $file) {
 			return(header("200", "image/jpeg", ReadFile($file)));
 		} else {
@@ -4706,13 +4738,14 @@ sub grab_picture {
     			print " - VDR Admin may read $file\n";
     			print " - VDR has access to /dev/video* files\n";
     			print " - you have a full featured card\n";
+			return SendFile("bilder/spacer.gif");
 		}
 	} else {
 		my $image;
 		for (SendCMD("grab .jpg 70 $width $height")) {
+			return SendFile("bilder/noise.gif") if(/Grab image failed/);
 			$image .= $_ unless(/Grabbed image/);
 		}
-		#TODO: "Grab image failed" -> predefined image
 		return(header("200", "image/jpeg", MIME::Base64::decode_base64($image)));
 	}
 }
@@ -4784,7 +4817,7 @@ sub subnetcheck {
 }
 
 #############################################################################
-# communikation with vdr
+# communication with vdr
 #############################################################################
 package SVDRP;
 

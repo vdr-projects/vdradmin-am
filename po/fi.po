@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-30 12:21+0100\n"
+"POT-Creation-Date: 2006-03-01 08:07+0100\n"
 "PO-Revision-Date: 2006-01-18 12:36+0200\n"
 "Last-Translator: Rofa\n"
 "Language-Team: Suomi\n"
@@ -56,7 +56,7 @@ msgstr "Muokkaa ajastinta"
 #: ../template/default/config.html:23 ../template/default/timer_list.html:51
 #: ../template/default/rec_list.html:27
 #: ../template/default/at_timer_new.html:24
-#: ../template/default/navigation.html:76 ../template/default/help.html:6
+#: ../template/default/navigation.html:70 ../template/default/help.html:6
 msgid "Help"
 msgstr "Opaste"
 
@@ -175,13 +175,12 @@ msgstr "Aloitusaika:"
 
 #: ../template/default/timer_new.html:127
 #: ../template/default/timer_new.html:138
-#: ../template/default/prog_summary.html:21
 #: ../template/default/prog_summary.html:26
 #: ../template/default/prog_timeline.html:95
 #: ../template/default/prog_timeline.html:108
 #: ../template/default/prog_timeline.html:123
 #: ../template/default/at_timer_new.html:111
-#: ../template/default/at_timer_new.html:122
+#: ../template/default/at_timer_new.html:122 ../vdradmind.pl:3908
 msgid "o'clock"
 msgstr " "
 
@@ -345,7 +344,7 @@ msgstr "Poistetaanko valitut ajastimet?"
 
 #: ../template/default/prog_summary.html:7
 #: ../template/default/prog_timeline.html:7
-#: ../template/default/navigation.html:30 ../vdradmind.pl:4439
+#: ../template/default/navigation.html:30 ../vdradmind.pl:4483
 msgid "What's On Now?"
 msgstr "Menossa nyt"
 
@@ -470,7 +469,7 @@ msgstr "Vierailijan salasana:"
 
 #: ../template/default/config.html:213 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:86
-#: ../template/default/navigation.html:38 ../vdradmind.pl:4441
+#: ../template/default/navigation.html:38 ../vdradmind.pl:4485
 msgid "Timeline"
 msgstr "Aikajana"
 
@@ -744,7 +743,7 @@ msgid "Delete Selected Timers"
 msgstr "Poista valitut ajastimet"
 
 #: ../template/default/prog_list.html:6 ../template/default/navigation.html:42
-#: ../vdradmind.pl:4442
+#: ../vdradmind.pl:4486
 msgid "Channels"
 msgstr "Kanavat"
 
@@ -810,7 +809,7 @@ msgstr "etsi IMDB:stä"
 #: ../template/default/rec_list.html:6 ../template/default/rec_list.html:18
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:18
-#: ../template/default/navigation.html:54 ../vdradmind.pl:4444
+#: ../template/default/navigation.html:54 ../vdradmind.pl:4488
 msgid "Recordings"
 msgstr "Tallenteet"
 
@@ -1180,7 +1179,7 @@ msgid "to"
 msgstr "-"
 
 #: ../template/default/prog_list2.html:6
-#: ../template/default/navigation.html:34 ../vdradmind.pl:2538
+#: ../template/default/navigation.html:34 ../vdradmind.pl:2565
 msgid "Playing Today"
 msgstr "Ohjelmisto tänään"
 
@@ -1590,13 +1589,13 @@ msgstr "Ei löytynyt yhtään hakutulosta!"
 msgid "Watch TV"
 msgstr "Katso TV:tä"
 
-#: ../template/default/navigation.html:70
-msgid "Search"
-msgstr "Etsi"
-
-#: ../template/default/navigation.html:80 ../template/default/about.html:6
+#: ../template/default/navigation.html:74 ../template/default/about.html:6
 msgid "About"
 msgstr "Tietoja"
+
+#: ../template/default/navigation.html:78
+msgid "Search"
+msgstr "Etsi"
 
 #: ../template/default/help.html:18
 msgid "Getting Help and Reporting Bugs"
@@ -1611,7 +1610,7 @@ msgstr ""
 #: ../template/default/help.html:31
 msgid ""
 "If this doesn't provide the information you need you can try to get help at "
-"<a href=\"http://www.vdrportal.de\" target=\"_new\">VDR-Portal</a> if you "
+"<a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> if you "
 "understand German language. Please use the announcement thread if possible, "
 "search for:"
 msgstr ""
@@ -1620,7 +1619,7 @@ msgstr ""
 msgid ""
 "If you think you have found a bug please check that it's a new one and "
 "report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page."
-"php\" target=\"_new\">VDRAdmin-AM BugTracking system</a>."
+"php\" target=\"_blank\">VDRAdmin-AM BugTracking system</a>."
 msgstr ""
 
 #: ../template/default/about.html:18
@@ -1667,109 +1666,113 @@ msgstr "Saksa:"
 msgid "Spanish:"
 msgstr "Espanja:"
 
-#: ../vdradmind.pl:286
+#: ../vdradmind.pl:289
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Anna VDR-koneesi nimi (esim. video.intra.net):"
 
-#: ../vdradmind.pl:287
+#: ../vdradmind.pl:290
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Anna VDR-koneesi käyttämä SVDRP-portti:"
 
-#: ../vdradmind.pl:288
+#: ../vdradmind.pl:291
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
 msgstr "Anna VDRAdmin-AM käyttämä osoiteavaruus (0.0.0.0 ei rajoituksia):"
 
-#: ../vdradmind.pl:289
+#: ../vdradmind.pl:292
 msgid "On which port should VDRAdmin-AM listen?"
 msgstr "Anna VDRAdmin-AM käyttämä portti:"
 
-#: ../vdradmind.pl:290
+#: ../vdradmind.pl:293
 msgid "Username?"
 msgstr "Anna käyttäjätunnus VDRAdmin-AM varten:"
 
-#: ../vdradmind.pl:291
+#: ../vdradmind.pl:294
 msgid "Password?"
 msgstr "Anna salasana VDRAdmin-AM varten:"
 
-#: ../vdradmind.pl:292
+#: ../vdradmind.pl:295
 msgid "Where are your recordings stored?"
 msgstr "Anna VDR-koneesi tallennehakemiston polku:"
 
-#: ../vdradmind.pl:293
+#: ../vdradmind.pl:296
 msgid "Where are your VDR's configuration files located?"
 msgstr "Anna VDR-koneesi konfigurointihakemiston polku:"
 
-#: ../vdradmind.pl:299
+#: ../vdradmind.pl:302
 msgid "Config file written successfully."
 msgstr "VDRAdmin-AM konfigurointitiedosto muodostettu."
 
-#: ../vdradmind.pl:351
+#: ../vdradmind.pl:354
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s käynnistetty prosessitunnisteella %d."
 
-#: ../vdradmind.pl:405 ../vdradmind.pl:997 ../vdradmind.pl:1841
+#: ../vdradmind.pl:408 ../vdradmind.pl:1000 ../vdradmind.pl:1865
 msgid "Not found"
 msgstr "Ei löydy"
 
-#: ../vdradmind.pl:405 ../vdradmind.pl:1842
+#: ../vdradmind.pl:408 ../vdradmind.pl:1866
 msgid "The requested URL was not found on this server!"
 msgstr "Pyydettyä URL:ia ei löydy palvelimelta!"
 
-#: ../vdradmind.pl:473 ../vdradmind.pl:993 ../vdradmind.pl:1844
+#: ../vdradmind.pl:476 ../vdradmind.pl:996 ../vdradmind.pl:1868
 msgid "Forbidden"
 msgstr "Kielletty"
 
-#: ../vdradmind.pl:473 ../vdradmind.pl:1845
+#: ../vdradmind.pl:476 ../vdradmind.pl:1869
 msgid "You don't have permission to access this function!"
 msgstr "Puutteelliset käyttäjäoikeudet haluttuun toimintoon!"
 
-#: ../vdradmind.pl:993 ../vdradmind.pl:1846
+#: ../vdradmind.pl:996 ../vdradmind.pl:1870
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "Pääsy tiedostoon \"%s\" evätty!"
 
-#: ../vdradmind.pl:997 ../vdradmind.pl:1843
+#: ../vdradmind.pl:1000 ../vdradmind.pl:1867
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "URL:ia \"%s\" ei löydy palvelimelta!"
 
-#: ../vdradmind.pl:1847
+#: ../vdradmind.pl:1871
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Tiedoston \"%s\" avaus ei onnistu!"
 
-#: ../vdradmind.pl:1848
+#: ../vdradmind.pl:1872
 #, perl-format
 msgid "Can't connect to VDR at %s!"
 msgstr "VDR:ään ei saada yhteyttä (%s)"
 
-#: ../vdradmind.pl:1849
+#: ../vdradmind.pl:1873
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Komennon lähetys VDR:lle epäonnistui (%s)"
 
-#: ../vdradmind.pl:2538
+#: ../vdradmind.pl:2565
 msgid "Playing Tomorrow"
 msgstr "Ohjelmisto huomenna"
 
-#: ../vdradmind.pl:2538
+#: ../vdradmind.pl:2565
 #, perl-format
 msgid "Playing on the %d."
 msgstr "Ohjelmisto %d. päivä"
 
-#: ../vdradmind.pl:3920
+#: ../vdradmind.pl:3908
+msgid "Suitable matches for:"
+msgstr "Hakutulokset termille:"
+
+#: ../vdradmind.pl:3963
 msgid "Schedule"
 msgstr "Ohjelmisto"
 
-#: ../vdradmind.pl:4440
+#: ../vdradmind.pl:4484
 msgid "Playing Today?"
 msgstr "Tänään"
 
-#: ../vdradmind.pl:4443
+#: ../vdradmind.pl:4487
 msgid "Timers"
 msgstr "Ajastimet"
 
-#: ../vdradmind.pl:4506
+#: ../vdradmind.pl:4550
 msgid "System default"
 msgstr "Oletus"

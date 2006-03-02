@@ -4,6 +4,20 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-03-02: 3.4.3a
+2006-03-01: 3.4.3
+- ****************************************************
+  ** This release is not compatible to VDR >=1.3.44 **
+	****************************************************
+- Show TV noise if grabbing fails (only VDR >= v1.3.38).
+- Fixed: don't crash (on LinVDR) if AutoTimer email notification is enabled but Net::SMTP is missing (Reported by Foobar42).
+- Fixed: testing an AutoTimer that is edited (not newly added) lead to a new AutoTimer instead of replacing the old one.
+- Don't show streaming button in prog_summary if event is currently not broadcasted (Requested by Hardy Flor).
+- Show search pattern in prog_summary instead of current time (Reported by Hardy Flor).
+- Send correct encoded emails for AutoTimer notifications (Thanks a lot to Ferdinand Grassmann for reporting/ideas/testing).
+- Do not program timers in the past (Reported by Ferdinand Grassmann).
+- Fixed "Length of base64 data not a multiple of 4" warning (Reported by Johan Larsson).
+
 2006-02-10: 3.4.3rc3
 - Changed handling of refering pages; should work much better now.
 
