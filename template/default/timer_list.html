@@ -322,7 +322,7 @@
 								<tmpl_if expr="active == 1"><%! Yes !%></tmpl_if>
 								<tmpl_if expr="(active%32768) == 0"><%! No !%></tmpl_if>
 								<tmpl_if expr="active == 5"><%! VPS !%></tmpl_if>
-								<tmpl_if expr="active == 32769"><%! Auto !%></tmpl_if>
+								<tmpl_if expr="autotimer">(<%! Auto !%>)</tmpl_if>
 							</a>
 						</div>
 					</td>

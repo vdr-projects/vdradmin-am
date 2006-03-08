@@ -81,11 +81,12 @@
 				<td class="col_left"></td>
 				<td class="col_label"><h5><%! AutoTimer Checking: !%></h5></td>
 				<td class="col_value">
-					<tmpl_if expr="event_id > 1">
-						<input type="radio" name="event_id" value="<tmpl_var event_id>" id="event_id" checked /><label for="event_id"><%! Transmission Identification !%></label>
+					<input type="hidden" name="event_id" value="<tmpl_var event_id>"/>
+					<tmpl_if expr="at_epg == 1">
+						<input type="radio" name="autotimer" value="2" id="event_id" <tmpl_if expr="autotimer == 2">checked</tmpl_if> /><label for="event_id"><%! Transmission Identification !%></label>
 					</tmpl_if>
-					<input type="radio" name="event_id" value="1" id="event_time" <tmpl_if expr="event_id == 1">checked</tmpl_if> /><label for="event_time"><%! Time !%></label>
-					<input type="radio" name="event_id" value="0" id="event_off" <tmpl_if expr="event_id == 0">checked</tmpl_if> /><label for="event_off"><%! off !%></label>
+					<input type="radio" name="autotimer" value="1" id="event_time" <tmpl_if expr="autotimer == 1">checked</tmpl_if> /><label for="event_time"><%! Time !%></label>
+					<input type="radio" name="autotimer" value="0" id="event_off" <tmpl_if expr="autotimer == 0">checked</tmpl_if> /><label for="event_off"><%! off !%></label>
 				</td>
 				<td class="col_right"></td>
 			</tr>
@@ -165,8 +166,8 @@
 			</tr>
 			<tr class="row_odd">
 				<td class="col_left"></td>
-				<td class="col_label" valign="top"><h5><%! Summary: !%></h5></td>
-				<td class="col_value"><textarea name="summary" rows="6" cols="80"><tmpl_var summary></textarea></td>
+				<td class="col_label" valign="top"><h5><%! Summary: !%></h5><h6>(<%! readonly !%>)</h6></td>
+				<td class="col_value"><textarea name="summary" rows="6" cols="80" readonly="readonly"><tmpl_var summary></textarea></td>
 				<td class="col_right"></td>
 			</tr>
 			<tr class="footer">

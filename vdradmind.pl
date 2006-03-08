@@ -34,7 +34,6 @@ BEGIN {
 	$0 =~ /(^.*\/)/;
 	$EXENAME = $0;
 	$BASENAME = $1;
-	#TODO: $0 = "vdradmind"; # does this harm any external script that depends on vdradmind.pl?
 	unshift(@INC, "/usr/share/vdradmin/lib");
 	unshift(@INC, $BASENAME . "lib/");
 }
@@ -79,6 +78,10 @@ use strict;
 my $SEARCH_FILES_IN_SYSTEM = 0;
 my $VDR_MAX_SVDRP_LENGTH = 10000;	# validate this value
 my $SUPPORTED_LOCALE_PREFIXES = "^(de|en|es|fi|fr|nl)_";
+
+my $AT_BY_EVENT_ID = 2;
+my $AT_BY_TIME     = 1;
+my $AT_OFF         = 0;
 
 sub true           () { 1 };
 sub false          () { 0 };
@@ -142,7 +145,7 @@ $CONFIG{TM_MARGIN_BEGIN}  = 10;
 $CONFIG{TM_MARGIN_END}    = 10;
 $CONFIG{TM_TT_TIMELINE}   = 1;
 $CONFIG{TM_TT_LIST}       = 1;
-$CONFIG{TM_ADD_SUMMARY}   = 0;
+#$CONFIG{TM_ADD_SUMMARY}   = 0;
 #
 $CONFIG{ST_FUNC}          = 1;
 $CONFIG{ST_REC_ON}        = 0;
@@ -179,7 +182,7 @@ $CONFIG{TV_EXT}       = "m3u";
 $CONFIG{REC_MIMETYPE} = "video/x-mpegurl";
 $CONFIG{REC_EXT}      = "m3u";
 
-my $VERSION               = "3.4.3a";
+my $VERSION               = "3.4.4beta";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0;
@@ -492,7 +495,7 @@ while(true) {
 
 #############################################################################
 #############################################################################
-sub GetChannelDesc {
+sub GetChannelDesc { #TODO: unused
 	my(%hash);
 	for(@CHAN) {
 		$hash{$_->{id}} = $_->{name};
@@ -529,7 +532,7 @@ sub ReadFile {
   return($buf);
 }
 
-sub GetChannelID {
+sub GetChannelID { #TODO: unused
   my($sid) = $_[0];
   for(@CHAN) {
     if($_->{id} == $sid) {
@@ -538,7 +541,7 @@ sub GetChannelID {
   }
 }
 
-sub EURL {
+sub EURL { #TODO: unused
   my($text) = @_;
   $text =~ s/([^0-9a-zA-Z])/sprintf("%%%2.2x", ord($1))/ge;
   return($text);
@@ -555,7 +558,7 @@ sub HTMLError {
 }
 
 
-sub FillInZero {
+sub FillInZero { #TODO: unused
   my($str, $length) = @_;
   while(length($str) < $length) {
     $str = "0$str";
@@ -701,7 +704,7 @@ sub EPG_getEntry {
 	}
 }
 
-sub getNumberOfElements {
+sub getNumberOfElements { #TODO: unused
 	my $ref = shift;
 	if($ref) {
 		return(@{$ref});
@@ -836,7 +839,7 @@ sub SendCMD {
   return(@output);
 }
 
-sub mygmtime() {
+sub mygmtime() { #TODO: unused
 	gmtime;
 }
 
@@ -1004,6 +1007,19 @@ sub SendFile {
 #############################################################################
 # autotimer functions
 #############################################################################
+sub can_do_eventid_autotimer {
+  # check if we may use Event-IDs in general or not
+  return 0 if($CONFIG{NO_EVENTID} == 1);
+
+	my $vdr_id = shift;
+  # check if the current channel is on the Event-ID-blacklist
+  for my $n (split(",", $CONFIG{NO_EVENTID_ON})) {
+    return 0 if($n == $vdr_id);
+  }
+
+  return 1;
+}
+
 sub AT_Read {
   my(@at);
   if(-e $AT_FILENAME) {
@@ -1397,7 +1413,7 @@ sub AutoTimer {
 				} else {
         Log(LOG_AT, sprintf("AutoTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
 
-        AT_ProgTimer(0x8001, $event->{event_id}, $event->{vdr_id}, $event->{start}, $event->{stop}, $title, $event->{summary}, $at->{prio}, $at->{lft});
+        AT_ProgTimer(1, $event->{event_id}, $event->{vdr_id}, $event->{start}, $event->{stop}, $title, $event->{summary}, $at);
 
 				if ($at->{active} == 2) {
 	  			Log(LOG_AT, sprintf("AutoTimer: Disabling one-shot Timer"));
@@ -1428,39 +1444,36 @@ sub AutoTimer {
 
 
 sub AT_ProgTimer {
-  my($active, $event_id, $channel, $start, $stop, $title, $summary, $prio, $lft) = @_;
-
-  $title =~ s/\|/\:/g;
+  my($active, $event_id, $channel, $start, $stop, $title, $summary, $at) = @_;
 
   $start -= ($CONFIG{TM_MARGIN_BEGIN} * 60);
   $stop += ($CONFIG{TM_MARGIN_END} * 60);
 
-  ($prio = $CONFIG{AT_PRIORITY}) if(!$prio);
-  ($lft  = $CONFIG{AT_LIFETIME}) if(!$lft);
-
+	my $start_fmt = my_strftime("%H%M", $start);
   my $found = 0;
-  my $Update = 0;
   for(ParseTimer(1)) {
 		if($_->{vdr_id} == $channel) {
-			if($event_id && $_->{event_id}) {
-		    if($_->{event_id} == $event_id) {
-  		    $found = 1;
+	    if($event_id && $_->{event_id}) {
+				if($_->{event_id} == $event_id) {
+	  	    $found = 1;
 					last;
-    		}
-			} else {
-  	  	if($_->{start} eq $start) {
-    	    $found = 1;
+				}
+    	} else {
+	    	if($_->{start} eq $start) {
+ 		      $found = 1;
 					last;
-	   		}
-				if($VDRVERSION < 10323) {
-					if ($_->{dor} eq my_strftime("%Y-%m-%d", $start)) {
-						$found = 1;
-						last;
-					}
-				} else {
-					if($_->{dor} == my_strftime("%d", $start)) {
-						$found = 1;
-						last;
+   			}
+   			if($start_fmt eq my_strftime("%H%M", $_->{start})) {
+					if($VDRVERSION < 10323) {
+						if($_->{dor} == my_strftime("%d", $start)) {
+							$found = 1;
+							last;
+						}
+					} else {
+						if($_->{dor} eq my_strftime("%Y-%m-%d", $start)) {
+							$found = 1;
+							last;
+						}
 					}
 				}
 			}
@@ -1470,6 +1483,14 @@ sub AT_ProgTimer {
   # we will only programm new timers, CheckTimers is responsible for
   # updating existing timers
   if (!$found) {
+  	$title =~ s/\|/\:/g;
+
+		my $autotimer=2;
+		unless(can_do_eventid_autotimer($channel)) {
+			$event_id = 0;
+			$autotimer = 1;
+		}
+
     Log(LOG_AT, sprintf("AT_ProgTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event_id, strftime("%Y%m%d-%H%M", localtime($start)), strftime("%Y%m%d-%H%M", localtime($stop))));
     ProgTimer(
       0,
@@ -1478,10 +1499,10 @@ sub AT_ProgTimer {
       $channel,
       $start,
       $stop,
-      $prio,
-      $lft,
+      $at->{prio} ? $at->{prio} : $CONFIG{AT_PRIORITY},
+      $at->{lft} ? $at->{lft} : $CONFIG{AT_LIFETIME},
       $title,
-      $CONFIG{TM_ADD_SUMMARY} ? $summary : ""
+      append_timer_metadata($VDRVERSION < 10344 ? $summary : undef, $event_id, $autotimer, $CONFIG{TM_MARGIN_BEGIN}, $CONFIG{TM_MARGIN_END}, $at->{pattern})
     );
     if ($CONFIG{AT_SENDMAIL} == 1 && $can_use_net_smtp) {
       my $sum = $summary;
@@ -1542,7 +1563,7 @@ sub my_encode_qp {
 	return $title;
 }
 
-sub PackStatus {
+sub PackStatus {	#TODO: unused
   # make a 32 bit signed int with high 16 Bit as event_id and low 16 Bit as
   # active value
   my($active, $event_id) = @_;
@@ -1566,13 +1587,13 @@ sub PackStatus {
   }
 }
 
-sub UnpackActive {
+sub UnpackActive {	#TODO: unused
   my($tmstatus) = @_;
   # strip the first 16 bit
   return ($tmstatus & 0xFFFF);
 }
 
-sub UnpackEvent_id {
+sub UnpackEvent_id { #TODO: unused
   my($tmstatus) = @_;
   # remove the lower 16 bit by shifting the value 16 bits to the right
   return $tmstatus >> 16;
@@ -1582,53 +1603,40 @@ sub CheckTimers {
   my $event;
 
   for my $timer (ParseTimer(1)) {
-    # only check autotimers (16th bit set) with event_id
-    if( ($timer->{active} & 0x8000) && ($timer->{event_id})) {
+   	# match by event_id
+    if($timer->{autotimer} == $AT_BY_EVENT_ID) {
       for $event (@{$EPG{$timer->{vdr_id}}}) {
         # look for matching event_id on the same channel -- it's unique
         if($timer->{event_id} == $event->{event_id}) {
           Log(LOG_CHECKTIMER, sprintf("CheckTimers: Checking timer \"%s\" (No. %s) for changes by Event-ID", $timer->{title}, $timer->{id}));
-          # don't check for title
-          #my $ntitle = $timer->{title};
-          #if($event->{subtitle}) {
-          #	if($ntitle =~ /(.*\~|^)$event->{title}\~(.*)$/) {
-          #		$ntitle=$1 . $event->{title} . "~" . $event->{subtitle};
-          #	}
-          #}
 
           # update timer if the existing one differs from the EPG
-          #if(($timer->{title} ne ($event->{subtitle} ? ($event->{title} . "~" . $event->{subtitle}) : $event->{title})) ||
-          #  (($event->{summary}) && (!$timer->{summary})) ||
-          # don't check for changed title, as this will break autotimers' "directory" setting
-          if(($CONFIG{TM_ADD_SUMMARY} && ($event->{summary}) && (!$timer->{summary})) ||
-            ($timer->{start} ne ($event->{start} - $CONFIG{TM_MARGIN_BEGIN} * 60)) ||
-            ($timer->{stop} ne ($event->{stop} + $CONFIG{TM_MARGIN_END} * 60))) {
+          # (don't check for changed title, as this will break autotimers' "directory" setting)
+          if(($timer->{start} ne ($event->{start} - $timer->{bstart} * 60)) ||
+            ($timer->{stop} ne ($event->{stop} + $timer->{bstop} * 60))) {
               Log(LOG_CHECKTIMER, sprintf("CheckTimers: Timer \"%s\" (No. %s, Event-ID %s, %s - %s) differs from EPG: \"%s\", Event-ID %s, %s - %s)", $timer->{title}, $timer->{id}, $timer->{event_id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop})), $event->{title}, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
               ProgTimer(
                 $timer->{id},
                 $timer->{active},
                 $timer->{event_id},
                 $timer->{vdr_id},
-                $event->{start} - $CONFIG{TM_MARGIN_BEGIN} * 60,
-                $event->{stop} + $CONFIG{TM_MARGIN_END} * 60,
+                $event->{start} - $timer->{bstart} * 60,
+                $event->{stop} + $timer->{bstop} * 60,
                 $timer->{prio},
                 $timer->{lft},
-                # always add subtitle if there is one
-                #$event->{subtitle} ? ($event->{title} . "~" . $event->{subtitle}) : $event->{title},
           			# don't update title as this may differ from what has been set by the user
-                #$ntitle,
                 $timer->{title},
-                # If there already is a summary, the user might have changed it -- leave it untouched.
-                $timer->{summary} ? $timer->{summary} : ( $CONFIG{TM_ADD_SUMMARY} ? $event->{summary} : "" ),
+                # leave summary untouched.
+                $timer->{summary},
               );
               Log(LOG_CHECKTIMER, sprintf("CheckTimers: Timer %s updated.", $timer->{id}));
           }
         }
       }
     }
-    # all autotimers without event_id will be updated by channel number and start/stop time
-    elsif( ($timer->{active} & 0x8000) && (!$timer->{event_id})) {
-      # We're checking only timers which doesn't record
+    # match by channel number and start/stop time
+    elsif($timer->{autotimer} == $AT_BY_TIME) {
+      # We're checking only timers which don't record
       if ($timer->{start} > time()) {
         Log(LOG_CHECKTIMER, sprintf("CheckTimers: Checking timer \"%s\" (No. %s) for changes by recording time", $timer->{title}, $timer->{id}));
         my @eventlist;
@@ -1642,7 +1650,7 @@ sub CheckTimers {
         # now we have all events in eventlist that touch the old timer margins
         # check for each event how probable it is matching the old timer
         if(scalar(@eventlist) > 0) {
-					my $origlen = ($timer->{stop} - $CONFIG{TM_MARGIN_END} * 60) - ($timer->{start} + $CONFIG{TM_MARGIN_BEGIN} * 60);
+					my $origlen = ($timer->{stop} - $timer->{bstop} * 60) - ($timer->{start} + $timer->{bstart} * 60);
           my $maxwight = 0;
           $event = $eventlist[0];
 
@@ -1668,23 +1676,22 @@ sub CheckTimers {
             }
           }
           # update timer if the existing one differs from the EPG
-          if(($CONFIG{TM_ADD_SUMMARY} && ($event->{summary}) && (!$timer->{summary})) ||
-            ($timer->{start} > ($event->{start} - $CONFIG{TM_MARGIN_BEGIN} * 60)) ||
-            ($timer->{stop} < ($event->{stop} + $CONFIG{TM_MARGIN_END} * 60))) {
+          if(($timer->{start} > ($event->{start} - $timer->{bstart} * 60)) ||
+            ($timer->{stop} < ($event->{stop} + $timer->{bstop} * 60))) {
             Log(LOG_CHECKTIMER, sprintf("CheckTimers: Timer \"%s\" (No. %s, Event-ID %s, %s - %s) differs from EPG: \"%s\", Event-ID %s, %s - %s)", $timer->{title}, $timer->{id}, $timer->{event_id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop})), $event->{title}, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
             ProgTimer(
               $timer->{id},
               $timer->{active},
               0,
               $timer->{vdr_id},
-              $timer->{start} > ($event->{start} - $CONFIG{TM_MARGIN_BEGIN} * 60) ? $event->{start} - $CONFIG{TM_MARGIN_BEGIN} * 60 : $timer->{start},
-              $timer->{stop} < ($event->{stop} + $CONFIG{TM_MARGIN_END} * 60) ? $event->{stop} + $CONFIG{TM_MARGIN_END} * 60 : $timer->{stop},
+              $timer->{start} > ($event->{start} - $timer->{bstart} * 60) ? $event->{start} - $timer->{bstart} * 60 : $timer->{start},
+              $timer->{stop} < ($event->{stop} + $timer->{bstop} * 60) ? $event->{stop} + $timer->{bstop} * 60 : $timer->{stop},
               $timer->{prio},
               $timer->{lft},
               # don't touch the title since we're not too sure about the event
               $timer->{title},
-              # If there already is a summary, the user might have changed it -- leave it untouched.
-              $timer->{summary} ? $timer->{summary} : ( $CONFIG{TM_ADD_SUMMARY} ? $event->{summary} : "" ),
+              # leave summary untouched.
+              $timer->{summary},
             );
             Log(LOG_CHECKTIMER, sprintf("CheckTimers: Timer %s updated.", $timer->{id}));
           }
@@ -1712,7 +1719,7 @@ sub my_mktime {
 }
 
 sub ParseTimer {
-  my $pc = shift;
+  my $pc = shift;	#TODO: what's this supposed to do?
   my $tid = shift;
   my $entry = 1;
 
@@ -1721,19 +1728,18 @@ sub ParseTimer {
     last if(/^No timers defined/);
     chomp;
     my($id, $temp) = split(/ /, $_, 2);
-    my($tmstatus, $vdr_id, $dor, $start, $stop, $prio, $lft, $title, $summary) = split(/\:/, $temp, 9);
+    my($active, $vdr_id, $dor, $start, $stop, $prio, $lft, $title, $summary) = split(/\:/, $temp, 9);
 
     my($startsse, $stopsse, $weekday, $off, $perrec, $length, $first);
 
-    my($active, $event_id);
-    $active = UnpackActive($tmstatus);
-    $event_id = UnpackEvent_id($tmstatus);
+    my($autotimer, $event_id, $bstart, $bstop, $pattern);
+    ($autotimer, $event_id, $bstart, $bstop, $pattern) = extract_timer_metadata($summary);
 
 		# VDR > 1.3.24 sets a bit if it's currently recording
 		my $recording = 0;
     $recording = 1 if(($active & 8) == 8);
 		$active = 1 if($active == 3 || $active == 9);
-    #$active = 1 if(($active & 1) == 1);
+    #$active = 1 if(($active & 1) == 1); #TODO
 
 		# replace "|" by ":" in timer's title (man vdr.5)
 		$title =~ s/\|/\:/g;
@@ -1813,7 +1819,11 @@ sub ParseTimer {
           collision => 0,
           critical  => 0,
           first     => $first,
-					proglink  => sprintf("%s?aktion=prog_list&amp;vdr_id=%s", $MyURL, $vdr_id)
+					proglink  => sprintf("%s?aktion=prog_list&amp;vdr_id=%s", $MyURL, $vdr_id),
+					autotimer => $autotimer,
+					bstart    => $bstart,
+					bstop     => $bstop,
+					pattern   => $pattern
         });
         $first = 0;
       }
@@ -1840,7 +1850,11 @@ sub ParseTimer {
         collision => 0,
         critical  => 0,
         first     => -1,
-				proglink  => sprintf("%s?aktion=prog_list&amp;vdr_id=%s", $MyURL, $vdr_id)
+				proglink  => sprintf("%s?aktion=prog_list&amp;vdr_id=%s", $MyURL, $vdr_id),
+				autotimer => $autotimer,
+				bstart    => $bstart,
+				bstop     => $bstop,
+				pattern   => $pattern
       });
     }
 
@@ -1855,6 +1869,36 @@ sub ParseTimer {
   } else {
     return(@temp);
   }
+}
+
+# extract out own metadata from a timer's aux field.
+sub extract_timer_metadata {
+	my $aux = shift;
+	return unless( $aux =~ /<vdradmin-am>(.*)<\/vdradmin-am>/i);
+	$aux = $1;
+	my $epg_id = $1 if ($aux =~ /<epgid>(.*)<\/epgid>/i);
+	my $autotimer = $1 if ($aux =~ /<autotimer>(.*)<\/autotimer>/i);
+	my $bstart = $1 if ($aux =~ /<bstart>(.*)<\/bstart>/i);
+	my $bstop = $1 if ($aux =~ /<bstop>(.*)<\/bstop>/i);
+	my $pattern = $1 if ($aux =~ /<pattern>(.*)<\/pattern>/i);
+	return ($autotimer, $epg_id, $bstart, $bstop, $pattern);
+}
+
+sub append_timer_metadata {
+	my ($aux, $epg_id, $autotimer, $bstart, $bstop, $pattern) = @_;
+	# remove old autotimer info
+	$aux =~ s/\|?<vdradmin-am>.*<\/vdradmin-am>//i;
+	$aux = substr($aux, 0, 9000) if($VDRVERSION < 10336 and length($aux) > 9000);
+	# add a new line if VDR<1.3.44 because then there might be a summary
+	$aux .= "|" if($VDRVERSION < 10344 and length($aux));
+	$aux .= "<vdradmin-am>";
+	$aux .= "<epgid>$epg_id</epgid>" if($epg_id);
+	$aux .= "<autotimer>$autotimer</autotimer>" if($autotimer);
+	$aux .= "<bstart>$bstart</bstart>" if($bstart);
+	$aux .= "<bstop>$bstop</bstop>" if($bstop);
+	$aux .= "<pattern>$pattern</pattern>" if($pattern);
+	$aux .= "</vdradmin-am>";
+	return $aux;
 }
 
 #############################################################################
@@ -1894,29 +1938,15 @@ sub ProgTimer {
 
   $title =~ s/\:/|/g;	# replace ":" by "|" in timer's title (man vdr.5)
 
-  if(($CONFIG{NO_EVENTID} == 1) && ($event_id > 0)) {
-    $event_id = 0;
-    Log(LOG_CHECKTIMER, sprintf("ProgTimer: Event-ID removed for recording \"%s\"", $title));
-  } else {
-    for my $n (split(",", $CONFIG{NO_EVENTID_ON})) {
-      if(($n == $channel) && ($event_id > 0)) {
-        $event_id = 0;
-        Log(LOG_CHECKTIMER, sprintf("ProgTimer: Event-ID removed for recording \"%s\" on channel %s", $title, $channel));
-      }
-    }
-  }
-
 	my $send_cmd = $timer_id ? "modt $timer_id" : "newt";
-	my $send_active = $active & 0x8000 ? PackStatus($active, $event_id) : $active;
 	my $send_dor = $dor ? $dor : RemoveLeadingZero(strftime("%d", localtime($start)));
-	my $send_summary = ($VDRVERSION >= 10336) ? $summary : substr($summary, 0, $VDR_MAX_SVDRP_LENGTH - 9 - length($send_cmd) - length($send_active) - length($channel) - length($send_dor) - 8 - length($prio) - length($lft) - length($title));
+	my $send_summary = ($VDRVERSION >= 10336) ? $summary : substr($summary, 0, $VDR_MAX_SVDRP_LENGTH - 9 - length($send_cmd) - length($active) - length($channel) - length($send_dor) - 8 - length($prio) - length($lft) - length($title));
 
-  Log(LOG_AT, sprintf("ProgTimer: Programming Timer \"%s\" (Channel %s, Event-ID %s, %s - %s, Active %s)", $title, $channel, $event_id, my_strftime("%Y%m%d-%H%M", $start), my_strftime("%Y%m%d-%H%M", $stop), $send_active));
+  Log(LOG_AT, sprintf("ProgTimer: Programming Timer \"%s\" (Channel %s, Event-ID %s, %s - %s, Active %s)", $title, $channel, $event_id, my_strftime("%Y%m%d-%H%M", $start), my_strftime("%Y%m%d-%H%M", $stop), $active));
   my $return = SendCMD(
     sprintf("%s %s:%s:%s:%s:%s:%s:%s:%s:%s",
       $send_cmd,
-      # only autotimers with 16th bit set will be extended by the event_id
-      $send_active,
+      $active,
       $channel,
       $send_dor,
       strftime("%H%M", localtime($start)),
@@ -1939,7 +1969,7 @@ sub RedirectToReferer {
   }
 }
 
-sub salt {
+sub salt {	#TODO: unused
 	$_ = $_[0];
 	my $string;
 	my($offset1, $offset2);
@@ -2054,7 +2084,7 @@ sub my_strfgmtime {
   return(strftime($format, $time ? gmtime($time) : gmtime(time)));
 }
 
-sub GetFirstChannel {
+sub GetFirstChannel {	#TODO: unused
 	return($CHAN[0]->{service_id});
 }
 
@@ -2075,13 +2105,13 @@ sub Decode_Referer {
   return(MIME::Base64::decode_base64(shift));
 }
 
-sub encode_ref {
+sub encode_ref {	#TODO: unused
   my($tmp) = $_[0]->url(-relative=>1,-query=>1);
   my(undef, $query) = split(/\?/, $tmp, 2);
   return(MIME::Base64::encode_base64($query));
 }
 
-sub decode_ref {
+sub decode_ref { #TODO: unused
   return(MIME::Base64::decode_base64($_[0]));
 }
 
@@ -2280,8 +2310,7 @@ sub toolbar {
 	return(header("200", "text/html", $template->output));
 }
 
-# obsolete?
-sub show_top {
+sub show_top { #TODO: unused?
 	my $template = TemplateNew("top.html");
   return(header("200", "text/html", $template->output));
 }
@@ -2617,7 +2646,7 @@ sub timer_list {
 		if($VDRVERSION < 10324 && $timer->{recording} == 0 && $timer->{startsse} < time() && $timer->{stopsse} > time() && ($timer->{active} & 1)) {
 			$timer->{recording} = 1;
 		}
-		if($timer->{active} & 1) {
+		if($timer->{active} & 1) { #TODO
 		  if($timer->{active} & 0x8000) {
 		    $timer->{active} = 0x8001;
 		  }
@@ -2914,13 +2943,14 @@ sub timer_new_form {
   my $this_event;
   if($epg_id) { # new timer
     my $this = EPG_getEntry($vdr_id, $epg_id);
-    $this_event->{active} = 0x8001;
+    $this_event->{active} = 1;
     $this_event->{event_id} = $this->{event_id};
     $this_event->{start}  = $this->{start} - ($CONFIG{TM_MARGIN_BEGIN} * 60);
     $this_event->{stop}   = $this->{stop}  + ($CONFIG{TM_MARGIN_END}  * 60);
 		$this_event->{dor}    = $this->{dor};
 		$this_event->{title}  = $this->{title};
-		$this_event->{summary}= $CONFIG{TM_ADD_SUMMARY} ? $this->{summary} : "";
+		# Do NOT append EPG summary if VDR >= 10344 as this will be done by VDR itself
+		$this_event->{summary}= $this->{summary} if($VDRVERSION < 10344);
 		$this_event->{vdr_id} = $this->{vdr_id};
   } elsif($timer_id) { # edit existing timer
     $this_event = ParseTimer(0, $timer_id);
@@ -2939,21 +2969,7 @@ sub timer_new_form {
   
   # determine referer (redirect to where we come from)
   my $ref = getReferer();
-  
-  # check if we may use Event-IDs in general or not
-  if($CONFIG{NO_EVENTID} == 1) {
-    # OK, remove Event-ID
-    $this_event->{event_id} = 0;
-  } else {
-    # check if the current channel is on the Event-ID-blacklist
-    for my $n (split(",", $CONFIG{NO_EVENTID_ON})) {
-      if($n == $this_event->{vdr_id}) {
-        # OK, remove Event-ID, on this channel no recording may have one.
-        $this_event->{event_id} = 0;
-      }
-    }
-  }
-  
+
   my $displaysummary = $this_event->{summary};
   $displaysummary =~ s/\|/\n/g;
 	my $displaytitle = $this_event->{title};
@@ -2963,7 +2979,7 @@ sub timer_new_form {
 		usercss  => $UserCSS,
     url      => $MyURL,
     active   => $this_event->{active} & 1,
-    event_id => ($this_event->{event_id} << 1) + (($this_event->{active} & 0x8000) >> 15),
+    event_id => $this_event->{event_id},
     starth   => my_strftime("%H", $this_event->{start}),
     startm   => my_strftime("%M", $this_event->{start}),
     stoph    => $this_event->{stop} ? my_strftime("%H", $this_event->{stop}) : "00",
@@ -2977,6 +2993,8 @@ sub timer_new_form {
     timer_id => $timer_id ? $timer_id : 0,
     channels => \@channels,
     newtimer => $timer_id ? 0 : 1,
+    autotimer => $timer_id ? $this_event->{autotimer} : $AT_OFF,
+    at_epg   => $this_event->{event_id} > 0 ? can_do_eventid_autotimer($this_event->{vdr_id}) : 0,
     referer  => $ref ? Encode_Referer($ref) : undef,
     help_url => HelpURL("timer_new")
   };
@@ -2996,59 +3014,46 @@ sub timer_add {
 	my $data;
   
 	if($q->param("save")) {
-		if($q->param("starth") =~ /\d+/ && $q->param("starth") < 24 && $q->param("starth") >= 0) {
-			$data->{start} = $q->param("starth");
-		} else { print "Help!\n"; }
-		if($q->param("startm") =~ /\d+/ && $q->param("startm") < 60 && $q->param("startm") >= 0) {
-			$data->{start} .= $q->param("startm");
-		} else { print "Help!\n"; }
-
-		if($q->param("stoph") =~ /\d+/ && $q->param("stoph") < 24 && $q->param("stoph") >= 0) {
-			$data->{stop} = $q->param("stoph");
-		} else { print "Help!\n"; }
-		if($q->param("stopm") =~ /\d+/ && $q->param("stopm") < 60 && $q->param("stopm") >= 0) {
-			$data->{stop} .= $q->param("stopm");
-		} else { print "Help!\n"; }
-	 
-		if($q->param("prio") =~ /\d+/) {
-			$data->{prio} = $q->param("prio");
+		my $value = $q->param("starth");
+		if($value =~ /\d+/ && $value < 24 && $value >= 0) {
+			$data->{start} = sprintf("%02d", $value);
+		} else { 
+			print "Help!\n";
+			$data->{start} = "00";
+		}
+		$value = $q->param("startm");
+		if($value =~ /\d+/ && $value < 60 && $value >= 0) {
+			$data->{start} .= sprintf("%02d", $value);
+		} else {
+			print "Help!\n";
+			$data->{start} .= "00";
 		}
 
-		if($q->param("lft") =~ /\d+/) {
-			$data->{lft} = $q->param("lft");
+		$value = $q->param("stoph");
+		if($value =~ /\d+/ && $value < 24 && $value >= 0) {
+			$data->{stop} = sprintf("%02d", $value);
+		} else {
+			print "Help!\n";
+			$data->{stop} = "00";
 		}
-		
-		if($q->param("active") == 0 || $q->param("active") == 1) {
-			$data->{active} = $q->param("active");
-		}
-		
-		if($q->param("vps") == 1) {
-			$data->{active} |= 4;
-		}
-
-		if($q->param("event_id") == 0) {
-			$data->{event_id} = 0;
-		}
-
-		# if($q->param("event_id") == 1 && $data->{active} == 1) {
-		if($q->param("event_id") == 1) {
-			$data->{event_id} = 0;
-			$data->{active} |= 0x8000;
+		$value = $q->param("stopm");
+		if($value =~ /\d+/ && $value < 60 && $value >= 0) {
+			$data->{stop} .= sprintf("%02d", $value);
+		} else {
+			print "Help!\n";
+			$data->{stop} .= "00";
 		}
 
-		# if($q->param("event_id") > 1 && $data->{active} == 1) {
-		if($q->param("event_id") > 1) {
-			$data->{event_id} = ($q->param("event_id") >> 1);
-			$data->{active} |= 0x8000;
-		}
+		$data->{active}    = $q->param("active");
+		$data->{autotimer} = $q->param("autotimer");
+		$data->{event_id}  = $q->param("event_id");
 
-		if($q->param("dor") =~ /[0-9MTWTFSS@-]+/) {
-			$data->{dor} = $q->param("dor");
-		}
-		
-		if($q->param("channel") =~ /\d+/) {
-			$data->{channel} = $q->param("channel");
-		}
+		$data->{prio}    = $1 if($q->param("prio")    =~ /(\d+)/);
+		$data->{lft}     = $1 if($q->param("lft")     =~ /(\d+)/);
+		$data->{dor}     = $1 if($q->param("dor")     =~ /([0-9MTWTFSS@\-]+)/);
+		$data->{channel} = $1 if($q->param("channel") =~ /(\d+)/);
+
+		$data->{active} |= 4  if($q->param("vps") == 1);
 
 		if(length($q->param("title")) > 0) {
 			$data->{title} = $q->param("title");
@@ -3069,14 +3074,19 @@ sub timer_add {
       $dor = 1;
     }
     $data->{startsse} = my_mktime(substr($data->{start}, 2, 2), 
-      substr($data->{start}, 0, 2), $dor,
-      (my_strftime("%m") - 1), my_strftime("%Y"));
+                                  substr($data->{start}, 0, 2),
+                                  $dor,
+                                  (my_strftime("%m") - 1),
+                                  my_strftime("%Y"));
     
     $data->{stopsse} = my_mktime(substr($data->{stop}, 2, 2), 
-      substr($data->{stop}, 0, 2),
-      $data->{stop} > $data->{start} ? $dor : $dor + 1, 
-      (my_strftime("%m") - 1), my_strftime("%Y"));
-		
+                                 substr($data->{stop}, 0, 2),
+                                 $data->{stop} > $data->{start} ? $dor : $dor + 1, 
+                                 (my_strftime("%m") - 1),
+                                 my_strftime("%Y"));
+
+		$data->{event_id} = 0 unless(can_do_eventid_autotimer($data->{channel}));
+
 		my $return = ProgTimer(
 		  $timer_id,
 		  $data->{active},
@@ -3087,7 +3097,7 @@ sub timer_add {
 		  $data->{prio},
 		  $data->{lft},
 		  $data->{title},
-		  $data->{summary},
+		  append_timer_metadata($data->{summary}, $data->{event_id}, $data->{autotimer}, $CONFIG{TM_MARGIN_BEGIN}, $CONFIG{TM_MARGIN_END}, undef),
       ($dor == 1) ? $data->{dor} : undef
 		);
 
@@ -3613,7 +3623,7 @@ sub at_timer_test {
 		done        => $q->param("done"),
 		directory   => $q->param("directory"),
 		at_test     => 1,
-	matches     => \@at_matches
+		matches     => \@at_matches
   };
   $template->param($vars);
   my $output;
@@ -3808,7 +3818,7 @@ sub prog_summary {
 			$search =~ s/([\+\?\.\*\^\$\(\)\[\]\{\}\|\\])/\\$1/g;
 		}
 	}
-
+			
 	my $now = time();
   my(@show, @shows, @temp);
   for(keys(%EPG)) {

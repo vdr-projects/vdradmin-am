@@ -15,6 +15,7 @@ h2 { margin: 0px; font-size: 11px; font-weight: bold; color: black; display: inl
 h3 { margin: 0px; font-size: 11px; font-weight: bold; color: black; }
 h4 { margin: 0px; font-size: 11px; font-weight: normal; font-style: italic; color: black; }
 h5 { margin: 1px 5px; font-size: 11px; font-weight: normal; color: black; text-align: right; }
+h6 { margin: 1px 5px; font-size: 10px; font-weight: normal; color: black; text-align: right; }
 
 label { cursor: default; }
 
@@ -59,7 +60,7 @@ label + input { margin-left: 1em; }
 .col_duration { padding-left: 3px; padding-right: 3px; width: 120px; vertical-align: top; }
 .col_name, .col_title * { padding-left: 3px; padding-right: 3px; min-width: 50px; white-space: normal; }
 .col_info, .col_record { width: 65px; text-align: center; }
-.col_active { width: 75px; max-width: 75px; }
+.col_active { width: 75px; }
 .col_stream { width: 70px; max-width: 70px; }
 .col_channel { width: 120px; }
 .col_start, .col_stop, .col_date, .col_time { width: 66px; text-align: right; }

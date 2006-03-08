@@ -4,18 +4,21 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
-2006-03-02: 3.4.3a
+2006-03-08: 3.4.4beta
+- Added script "convert.sh" to convert the AutoTimer information in VDR's timers.conf to the new format (see "convert.sh" for usage).
+- Use the summary/aux timer field to store AutoTimer information to be compatible to VDR v1.3.44 and later.
+- Removed "Add summary to new timers" option. The EPG summary is no longer copied to the timer's summary/aux field (for VDR 1.3.44+) or always copied (VDR 1.3.43-).
+- Made summary textfield readonly while adding/editing a timer.
+- Unless NO_EVENTID or NO_EVENTID_ON is used the EPG-ID is stored in every (auto)timer set using VDRAdmin-AM.
+- For every timer the current start/stop margins are saved in its summary/aux field. These are used for checking AutoTimers by time.
+- Fixed bug while checking for already programmed (auto)timers if not using EPG-ID.
+
 2006-03-01: 3.4.3
-- ****************************************************
-  ** This release is not compatible to VDR >=1.3.44 **
-	****************************************************
-- Show TV noise if grabbing fails (only VDR >= v1.3.38).
-- Fixed: don't crash (on LinVDR) if AutoTimer email notification is enabled but Net::SMTP is missing (Reported by Foobar42).
-- Fixed: testing an AutoTimer that is edited (not newly added) lead to a new AutoTimer instead of replacing the old one.
 - Don't show streaming button in prog_summary if event is currently not broadcasted (Requested by Hardy Flor).
 - Show search pattern in prog_summary instead of current time (Reported by Hardy Flor).
 - Send correct encoded emails for AutoTimer notifications (Thanks a lot to Ferdinand Grassmann for reporting/ideas/testing).
 - Do not program timers in the past (Reported by Ferdinand Grassmann).
+- Send default image if TV grabbing fails.
 - Fixed "Length of base64 data not a multiple of 4" warning (Reported by Johan Larsson).
 
 2006-02-10: 3.4.3rc3
