@@ -182,10 +182,11 @@ $CONFIG{TV_EXT}       = "m3u";
 $CONFIG{REC_MIMETYPE} = "video/x-mpegurl";
 $CONFIG{REC_EXT}      = "m3u";
 
-my $VERSION               = "3.4.4beta";
+my $VERSION               = "3.4.4beta2";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
-my $VDRVERSION            = 0;
+my $VDRVERSION            = 0; # Numeric VDR version, e.g. 10344
+my $VDRVERSION_HR;             # Human readable VDR version, e.g. 1.3.44	
 my %ERROR_MESSAGE;
 
 my($TEMPLATEDIR, $CONFFILE, $LOGFILE, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME, $ETCDIR, $USER_CSS);
@@ -361,8 +362,8 @@ if($DAEMON) {
 }
 $SIG{__DIE__} = \&Shutdown;
 
-my @reccmds;
-loadRecCmds();
+my @reccmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/reccmds.conf");
+my @vdrcmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/commands.conf");
 
 my($Socket) = IO::Socket::INET->new(
 	Proto => 'tcp',
@@ -380,11 +381,11 @@ $CONFIG{CACHE_LASTUPDATE} = 0;
 ##
 my($Client, $MyURL, $Referer, $Request, $Query, $Guest);
 my @GUEST_USER = qw(prog_detail prog_list prog_list2 prog_timeline timer_list at_timer_list
-	prog_summary rec_list rec_detail show_top toolbar show_help help about);
+	prog_summary rec_list rec_detail show_top toolbar show_help about);
 my @TRUSTED_USER = (@GUEST_USER, qw(at_timer_edit at_timer_new at_timer_save at_timer_test
 	at_timer_delete timer_new_form timer_add timer_delete timer_toggle rec_delete rec_rename rec_edit
 	config prog_switch rc_show rc_hitk grab_picture at_timer_toggle tv_show tv_switch
-	live_stream rec_stream force_update));
+	live_stream rec_stream force_update vdr_cmds));
 my $MyStreamBase = "./vdradmin.";
 
 # Force Update at start
@@ -656,7 +657,7 @@ sub get_name_from_vdrid {
   if($vdr_id) {
     # Kanalliste nach identischer vdr_id durchsuchen
     my @C = grep($_->{vdr_id} == $vdr_id, @CHAN);
-    # Es darf nach Spec nur eine â€¹bereinstimmung geben
+    # Es darf nach Spec nur eine Übereinstimmung geben
     if(scalar(@C) == 1) {
       return $C[0]->{name};
     }
@@ -668,7 +669,7 @@ sub get_transponder_from_vdrid {
   if($vdr_id) {
     # Kanalliste nach identischer vdr_id durchsuchen
     my @C = grep($_->{vdr_id} == $vdr_id, @CHAN);
-    # Es darf nach Spec nur eine â€¹bereinstimmung geben
+    # Es darf nach Spec nur eine Übereinstimmung geben
     if(scalar(@C) == 1) {
       return("$C[0]->{source}-$C[0]->{frequency}-$C[0]->{polarization}");
     }
@@ -680,7 +681,7 @@ sub get_ca_from_vdrid {
   if($vdr_id) {
     # Kanalliste nach identischer vdr_id durchsuchen
     my @C = grep($_->{vdr_id} == $vdr_id, @CHAN);
-    # Es darf nach Spec nur eine â€¹bereinstimmung geben
+    # Es darf nach Spec nur eine Übereinstimmung geben
     if(scalar(@C) == 1) {
       return($C[0]->{ca});
     }
@@ -814,7 +815,7 @@ sub ParseRequest {
 }
 
 sub CloseSocket {
-	$SVDRP->close();
+	$SVDRP->close() if(defined $SVDRP);
 }
 
 sub OpenSocket {
@@ -2268,8 +2269,8 @@ sub show_index {
 sub show_navi {
 	my $template = TemplateNew("navigation.html");
 	my $vars = {
-		usercss => $UserCSS,
-		linvdr  => $LINVDR
+		usercss  => $UserCSS,
+		linvdr   => $LINVDR
   };
 	$template->param($vars);
 	my $output;
@@ -2278,7 +2279,7 @@ sub show_navi {
 	return(header("200", "text/html", $output));
 }
 
-sub toolbar {
+sub toolbar {	#TODO: unused?
 	my $template = TemplateNew("toolbar.html");
 
 	my @channel;
@@ -2646,13 +2647,8 @@ sub timer_list {
 		if($VDRVERSION < 10324 && $timer->{recording} == 0 && $timer->{startsse} < time() && $timer->{stopsse} > time() && ($timer->{active} & 1)) {
 			$timer->{recording} = 1;
 		}
-		if($timer->{active} & 1) { #TODO
-		  if($timer->{active} & 0x8000) {
-		    $timer->{active} = 0x8001;
-		  }
-		} else {
-		  $timer->{active} = 0;
-		}
+	  $timer->{active} = 0 unless($timer->{active} & 1);
+
     $timer->{delurl} = $MyURL . "?aktion=timer_delete&amp;timer_id=" . $timer->{id} . "&amp;sortby=" . $sortby . "&amp;desc=" . $desc,
     $timer->{modurl} = $MyURL . "?aktion=timer_new_form&amp;timer_id=" . $timer->{id} . "&amp;sortby=" . $sortby . "&amp;desc=" . $desc,
 		$timer->{toggleurl} = sprintf("%s?aktion=timer_toggle&amp;active=%s&amp;id=%s&amp;sortby=%s&amp;desc=%s", $MyURL, ($timer->{active} & 1) ? 0 : 1, $timer->{id}, $sortby, $desc),
@@ -2773,6 +2769,8 @@ sub timer_list {
       if(!defined($q->param("timer")))
       {
         $current=my_strftime("%y%m%d", $timer[$ii]->{startsse});
+				my $current_day = my_strftime("%y%m%d",time());
+				$current=$current_day if($current < $current_day);
         $title=my_strftime("%A, %x", $timer[$ii]->{startsse});
       }
       else
@@ -2819,7 +2817,21 @@ sub timer_list {
   }
 
   @days  = sort({ $a->{sortfield} <=> $b->{sortfield} } @days);
-
+	my $prev_day;
+	my $next_day;
+	my $cur_day;
+	foreach (@days) {
+		if($_->{current}) {
+			$cur_day = $_->{sortfield};
+			next;
+		}
+		if($cur_day) {
+			$next_day=$_->{sortfield};
+			last;
+		} else {
+			$prev_day=$_->{sortfield};
+		}
+	}
 
 	#
 	if($sortby eq "active") {
@@ -2892,6 +2904,8 @@ sub timer_list {
 		usercss            => $UserCSS,
 		activateurl        => sprintf("%s?aktion=timer_toggle&amp;active=1&amp;sortby=%s&amp;desc=%s", $MyURL, ,$sortby, $cur_desc),
 		inactivateurl      => sprintf("%s?aktion=timer_toggle&amp;active=0&amp;sortby=%s&amp;desc=%s", $MyURL, ,$sortby, $cur_desc),
+		prevdayurl         => $prev_day ? sprintf("%s?aktion=timer_list&amp;active=0&amp;sortby=%s&amp;desc=%s&timer=%s", $MyURL, ,$sortby, $cur_desc, $prev_day) : undef,
+		nextdayurl         => $next_day ? sprintf("%s?aktion=timer_list&amp;active=0&amp;sortby=%s&amp;desc=%s&timer=%s", $MyURL, ,$sortby, $cur_desc, $next_day) : undef,
     config 	           => \%CONFIG
   };
 
@@ -2975,6 +2989,8 @@ sub timer_new_form {
 	my $displaytitle = $this_event->{title};
 	$displaytitle =~ s/"/\&quot;/g;
 
+	my $at_epg = $this_event->{event_id} > 0 ? can_do_eventid_autotimer($this_event->{vdr_id}) : 0;
+
 	my $vars = {
 		usercss  => $UserCSS,
     url      => $MyURL,
@@ -2993,8 +3009,8 @@ sub timer_new_form {
     timer_id => $timer_id ? $timer_id : 0,
     channels => \@channels,
     newtimer => $timer_id ? 0 : 1,
-    autotimer => $timer_id ? $this_event->{autotimer} : $AT_OFF,
-    at_epg   => $this_event->{event_id} > 0 ? can_do_eventid_autotimer($this_event->{vdr_id}) : 0,
+    autotimer => $timer_id ? $this_event->{autotimer} : $at_epg ? $AT_BY_EVENT_ID : $AT_BY_TIME,
+    at_epg   => $at_epg,
     referer  => $ref ? Encode_Referer($ref) : undef,
     help_url => HelpURL("timer_new")
   };
@@ -4466,7 +4482,10 @@ sub config {
 		$CONFIG{REC_EXT}="m3u" if(!$CONFIG{REC_EXT});
 		LoadTranslation() if($old_lang ne $CONFIG{LANG});
 		UptoDate(1) if($old_epgprune != $CONFIG{EPG_PRUNE} || $old_epgdirect != $CONFIG{EPG_DIRECT} || $old_epgfile ne $CONFIG{EPG_FILENAME});
-		loadRecCmds() if($old_vdrconfdir ne $CONFIG{VDRCONFDIR});
+		if($old_vdrconfdir ne $CONFIG{VDRCONFDIR}) {
+			@reccmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/reccmds.conf");
+			@vdrcmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/commands.conf");
+		}
   }
 
 	sub WriteConfig {
@@ -4648,6 +4667,9 @@ sub tv_show {
 
 	my $template = TemplateNew("tv.html");
 	my $vars = {
+		tv_only  => $q->param("tv_only") ? $q->param("tv_only") : undef,
+		interval => $q->param("interval") ? $q->param("interval") : 5,
+		size     => $q->param("size") ? $q->param("size") : "half",
 		usercss  => $UserCSS,
 		new_win  => $q->param("new_win") eq "1" ? "1" : undef,
 		url      => sprintf("%s?aktion=grab_picture", $MyURL),
@@ -4690,22 +4712,11 @@ sub show_help {
 #############################################################################
 # information
 #############################################################################
-sub help {
-  my $template = TemplateNew("help.html");
-  my $vars = {
-		usercss   => $UserCSS,
-		myversion => "VDRAdmin-AM-$VERSION"
-  };
-  $template->param($vars);
-  my $output;
-  my $out = $template->output;
-  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
-  return(header("200", "text/html", $output));
-}
-
 sub about {
   my $template = TemplateNew("about.html");
   my $vars = {
+		vdrversion => $VDRVERSION_HR,
+		myversion  => $VERSION,
 		usercss => $UserCSS
   };
   $template->param($vars);
@@ -4753,9 +4764,9 @@ sub grab_picture {
 	} else {
 		my $image;
 		for (SendCMD("grab .jpg 70 $width $height")) {
-			return SendFile("bilder/noise.gif") if(/Grab image failed/);
 			$image .= $_ unless(/Grabbed image/);
 		}
+		return SendFile("bilder/noise.gif") if($image =~ /Grab image failed/);
 		return(header("200", "image/jpeg", MIME::Base64::decode_base64($image)));
 	}
 }
@@ -4777,10 +4788,11 @@ sub isLinVDR {
   return($content);
 }
 
-sub loadRecCmds {
-	undef @reccmds;
+sub loadCommandsConf {
+	my $conf_file = shift; 
+	my @commands;
 	my $id = 0;
-	if(-e "$CONFIG{VDRCONFDIR}/reccmds.conf" and my $text = open(FH, "$CONFIG{VDRCONFDIR}/reccmds.conf")) {
+	if(-e $conf_file and my $text = open(FH, $conf_file)) {
 		while(<FH>) {
 			chomp;
 			s/#.*//;
@@ -4788,11 +4800,65 @@ sub loadRecCmds {
 			s/\s+$//;
 			next unless length;
 			my ($title, $cmd) = split(":", $_);
-			push(@reccmds, {title => $title, cmd => $cmd, id => $id});
+			push(@commands, {title => $title, cmd => $cmd, id => $id});
 			$id = $id + 1;
 		}
 		close(FH);
 	}
+	return @commands;
+}
+
+sub vdr_cmds {
+	my @show_output;
+	@show_output = run_vdrcmd() if($q->param("run_vdrcmd"));
+	@show_output = run_svdrpcmd() if($q->param("run_svdrpcmd"));
+	my $template = TemplateNew("vdr_cmds.html");
+	my $vars = {
+		url         => sprintf("%s?aktion=vdr_cmds", $MyURL),
+		commands    => \@vdrcmds,
+		show_output => \@show_output,
+		max_lines   => $q->param("max_lines") ? $q->param("max_lines") : 20,
+		vdr_cmd     => $q->param("vdr_cmd"),
+		svdrp_cmd   => $q->param("svdrp_cmd"),
+		usercss     => $UserCSS
+  };
+  $template->param($vars);
+  my $output;
+  my $out = $template->output;
+  $Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+  return(header("200", "text/html", $output));
+}
+
+sub run_vdrcmd {
+	my $id = $q->param("vdr_cmd");
+	my $max_lines = $q->param("max_lines");
+	return unless($id);
+	my $counter = 1;
+	my $cmd = ${vdrcmds}[$id]{cmd};
+	my @output;
+	open(FH, "$cmd |") or return;
+	while(<FH>) {
+		chomp;
+		push(@output, {line => $_});
+		last if($max_lines && $counter >= $max_lines);
+		$counter++;
+	}
+	close(FH);
+	return @output;
+}
+
+sub run_svdrpcmd {
+	my $id = $q->param("svdrp_cmd");
+	my $max_lines = $q->param("max_lines");
+	return unless($id);
+	my $counter = 1;
+	my @output;
+	for(SendCMD($q->param("svdrp_cmd"))) {
+		push(@output, {line => $_});
+		last if($max_lines && $counter >= $max_lines);
+		$counter++;
+	}
+	return @output;
 }
 
 #############################################################################
@@ -4868,6 +4934,7 @@ sub myconnect {
 	$line = <$SOCKET>;
 	if ( ! $VDRVERSION ) {
 		$line =~ /^220.*VideoDiskRecorder (.*)\.(.*)\.(.*);/;
+		$VDRVERSION_HR = "$1.$2.$3";
 		$VDRVERSION = ($1*10000+$2*100+$3);
 	}
 	$connected = true;

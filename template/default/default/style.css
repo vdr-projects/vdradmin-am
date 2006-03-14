@@ -223,6 +223,10 @@ body.help .heading {
 	white-space: nowrap;
 	height: 17px;
 }
+.col_navi img {
+	position: relative;
+	top: 2px;
+}
 
 .list,
 .group {
@@ -427,6 +431,11 @@ body.help .heading {
 	white-space: normal;
 }
 
+#vdr_cmds pre {
+	margin: 0px;
+	padding: 0px;
+}
+
 #content {
 	margin-top: 1em;
 }
@@ -537,21 +546,21 @@ body.help .heading {
 	padding: 1em 0px;
 }
 #navigation .logo {
-	padding-top: 2em;
-	padding-bottom: 3em;
+	padding-top: 1em;
+	padding-bottom: 2em;
 	width: 150px;
 }
 #navigation .navi {
 	font-size: 12px;
 	padding-top: 6px;
-	height: 25px;
+	padding-bottom: 6px;
 	text-align: center;
 }
 #navigation .navi:hover {
 	background-color: #dedede;
 }
 #navigation .search {
-	padding-top: 2em;
+	padding-top: 6px;
 	font-size: 12px;
 	text-align: center;
 }

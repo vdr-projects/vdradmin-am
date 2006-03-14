@@ -62,12 +62,14 @@
 				<tr class="heading">
 					<td class="col_left"></td>
 					<td><h2><tmpl_var title></h2></td>
-					<td align="right">
+					<td class="col_navi">
+						<tmpl_if prevdayurl><a href="<tmpl_var prevdayurl>"><img src="bilder/pfeile_nachlinks.gif" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachlinks_soft.gif" border="0" /></tmpl_if>
 						<select name="vdr_id" class="submit" onchange="window.open('<tmpl_var url>?aktion=timer_list&amp;sortby=<tmpl_var sortby>&amp;desc=<tmpl_var cur_desc>&amp;timer=' + this.options[this.selectedIndex].value,'main')">
 <tmpl_loop day_loop>
 							<option value="<tmpl_var sortfield>" <tmpl_if current>selected</tmpl_if>><tmpl_var day></option>
 </tmpl_loop>
 						</select>
+						<tmpl_if nextdayurl><a href="<tmpl_var nextdayurl>"><img src="bilder/pfeile_nachrechts.gif" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachrechts_soft.gif" border="0" /></tmpl_if>
 					</td>
 					<td class="col_right"></td>
 				</tr>
@@ -320,7 +322,7 @@
 								</tmpl_if>
 							</tmpl_if>
 								<tmpl_if expr="active == 1"><%! Yes !%></tmpl_if>
-								<tmpl_if expr="(active%32768) == 0"><%! No !%></tmpl_if>
+								<tmpl_if expr="active == 0"><%! No !%></tmpl_if>
 								<tmpl_if expr="active == 5"><%! VPS !%></tmpl_if>
 								<tmpl_if expr="autotimer">(<%! Auto !%>)</tmpl_if>
 							</a>

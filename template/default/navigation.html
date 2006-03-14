@@ -55,10 +55,6 @@
 		</div>
 		<div class="separator"></div>
 		<div class="navi">
-			<a href="vdradmin.pl?aktion=config" target="main"><%! Configuration !%></a>
-		</div>
-		<div class="separator"></div>
-		<div class="navi">
 			<a href="javascript:rc_open();"><%! Remote Control !%></a>
 		</div>
 		<div class="separator"></div>
@@ -67,12 +63,18 @@
 		</div>
 		<div class="separator"></div>
 		<div class="navi">
-			<a href="vdradmin.pl?aktion=help" target="main"><%! Help !%></a></a>
+			<a href="vdradmin.pl?aktion=vdr_cmds" target="main"><%! VDR Commands !%></a>
 		</div>
 		<div class="separator"></div>
 		<div class="navi">
-			<a href="vdradmin.pl?aktion=about" target="main"><%! About !%></a>
+			<a href="vdradmin.pl?aktion=config" target="main"><%! Configuration !%></a>
 		</div>
+		<div class="separator"></div>
+		<div class="navi">
+			<a href="vdradmin.pl?aktion=about" target="main"><%! About !%> / <%! Help !%></a>
+		</div>
+
+		<div class="separator"></div>
 		<form action="vdradmin.pl" method="get" name="FormName" target="main" class="search">
 			<input type="text" name="search" /><br />
 			<input type="submit" name="submit" value="<%! Search !%>" />

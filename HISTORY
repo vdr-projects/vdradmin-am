@@ -4,6 +4,17 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-03-14: 3.4.4beta2
+- Reworked TV grabbing.
+- Added optional parameters for TV for use with external tools: http://vdradmin-am.ip?aktion=tv_show&size=[full|half|quarter]&interval=[0|1|2|3|5|10|30|60]&tv_only=bla
+- Fixed program switching in prog_summary, prog_list and prog_detail (Based on suggestions by kayser).
+- New: buttons to move to previous/next day in timers_list (Requested by BigDiSt).
+- Moved "help" menu into "about" menu.
+- Added VDR's "commands.conf" conntent to select box in navigation menu.
+- Changed defaults for "autotimer checking" in timers as they had been in v3.4.3.
+- New button on remote controls: Mute (Requested by Rüdiger Jung and Hardy Flor).
+- Timeline in timer_list will show timers of current day even if a timer starts the day before (Reported by Hardy Flor).
+
 2006-03-08: 3.4.4beta
 - Added script "convert.sh" to convert the AutoTimer information in VDR's timers.conf to the new format (see "convert.sh" for usage).
 - Use the summary/aux timer field to store AutoTimer information to be compatible to VDR v1.3.44 and later.

@@ -38,6 +38,7 @@ label + input { margin-left: 1em; }
 .col_channels { text-align: right; padding: 10px; width: 40%; }
 .col_wanted_channels { text-align: left; padding: 10px; width: 40%; }
 .col_navi { text-align: right; white-space: nowrap; }
+.col_navi img { position: relative; top: 2px; }
 
 .heading td.selected { background-image: url("bilder/uebersicht_oben_selected.gif"); }
 .heading td { background-image: url("bilder/uebersicht_oben.gif"); }
@@ -94,6 +95,8 @@ label + input { margin-left: 1em; }
 #prog_detail td { white-space: normal; }
 #prog_detail .heading h2 { white-space: normal; }
 
+#vdr_cmds pre { margin: 0px; padding: 0px; }
+
 #content { margin-top: 1em; }
 .group { margin-top: 0.5em; }
 #buttons { margin-top: 0.5em; text-align: right; }
@@ -114,7 +117,7 @@ label + input { margin-left: 1em; }
 #prog_summary .date { text-align: right; margin-top: 3px; float: left; }
 #prog_summary .duration { text-align: right; margin-top: 3px; }
 #prog_summary .title { margin-top: 1em; width: 246px; overflow: hidden; white-space: nowrap; }
-#prog_summary .summary { margin-top: 1em; margin-bottom: 3px; width: 240px; height: 124px; overflow: hidden; white-space: normal; }
+#prog_summary .summary { margin-top: 1em; margin-bottom: 3px; width: 240px; height: 124px; overflow: auto; white-space: normal; }
 
 /* Tooltips */
 .tt_table { width: 250px; border: 2px solid #333399; background-color: #ccccff; }
@@ -139,10 +142,10 @@ label + input { margin-left: 1em; }
 
 /* Navigation */
 #navigation { margin: 0px; background-image: url("bilder/back.gif"); }
-#navigation .logo { padding-top: 2em; padding-bottom: 3em; width: 150px; }
-#navigation .navi { font-size: 12px; padding-top: 6px; height: 25px; text-align: center; width: 148px; }
-#navigation .search { padding-top: 2em; font-size: 12px; width: 148px; text-align: center; }
-#navigation .separator { height: 2px; background-image: url("bilder/separator.png"); width: 148px; }
+#navigation .logo { padding-top: 1em; padding-bottom: 2em; width: 150px; }
+#navigation .navi { font-size: 12px; padding-top: 6px; padding-bottom: 6px; text-align: center; width: 148px; }
+#navigation .search { padding-top: 6px; font-size: 12px; width: 148px; text-align: center; }
+#navigation .separator { height: 2px; background-image: url("bilder/separator.png"); width: 148px; background-repeat: repeat-x; }
 #navigation a { color: black; font-weight: bold; text-decoration: none; }
 #navigation a:hover { font-size: 13px; color: #ff0000 }
 #navigation input { width: 130px; }

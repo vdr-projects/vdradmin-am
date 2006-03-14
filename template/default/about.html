@@ -95,6 +95,63 @@
 			<td class="col_right"></td>
 		</tr>
 	</table>
+
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
+		<tr class="heading">
+			<td class="col_left"></td>
+			<td colspan="2"><h2><%! Informations !%></h2></td>
+			<td class="col_right"></td>
+		</tr>
+		<tr class="row_spacer">
+			<td class="col_left"></td>
+			<td colspan="2"></td>
+			<td class="col_right"></td>
+		</tr>
+		<tr class="row_even">
+			<td class="col_left"></td>
+			<td class="col_label" width="100px"><h4><%! VDRAdmin-AM version: !%></h4></td>
+			<td class="col_value"><tmpl_var myversion></td>
+			<td class="col_right"></td>
+		</tr>
+		<tr class="row_odd">
+			<td class="col_left"></td>
+			<td class="col_label" width="100px"><h4><%! VDR version: !%></h4></td>
+			<td class="col_value"><tmpl_var vdrversion></td>
+			<td class="col_right"></td>
+		</tr>
+		<tr class="footer">
+			<td class="col_left"></td>
+			<td colspan="2"></td>
+			<td class="col_right"></td>
+		</tr>
+	</table>
+
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="help" class="group">
+		<tr class="heading">
+			<td class="col_left"></td>
+			<td><h2><%! Getting Help and Reporting Bugs !%></h2></td>
+			<td class="col_right"></td>
+		</tr>
+		<tr class="row_spacer">
+			<td class="col_left"></td>
+			<td></td>
+			<td class="col_right"></td>
+		</tr>
+		<tr class="row_even">
+			<td class="col_left"></td>
+			<td>
+				<ul>
+					<li><%! If you need help please first try to use the online help you'll find on some pages. You can access it by clicking <img src="bilder/help.gif"/>. !%></li>
+					<li><%! If this doesn't provide the information you need you can try to get help at <a href="http://www.vdrportal.de" target="_blank">VDR-Portal</a> if you understand German language. Please use the announcement thread if possible, search for: !%> &quot;[ANNOUNCE] VDRAdmin-AM-<tmpl_var myversion>&quot;</li>
+					<li><%! If you think you have found a bug please check that it's a new one and report it in the <a href="http://www.vdr-developer.org/mantisbt/main_page.php" target="_blank">VDRAdmin-AM BugTracking system</a>. !%></li>
+			</td>
+			<td class="col_right"></td>
+		</tr>
+		<tr class="footer">
+			<td class="col_left"></td>
+			<td></td>
+			<td class="col_right"></td>
+		</tr>
 	</table>
 </body>
 

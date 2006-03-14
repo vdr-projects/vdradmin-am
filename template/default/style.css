@@ -39,6 +39,7 @@ label + input { margin-left: 1em; }
 .col_channels { text-align: right; padding: 10px; width: 40%; }
 .col_wanted_channels { text-align: left; padding: 10px; width: 40%; }
 .col_navi { text-align: right; white-space: nowrap; }
+.col_navi img { position: relative; top: 2px; }
 
 .heading td.selected { background-image: url("bilder/uebersicht_oben_selected.gif"); }
 .heading td { background-image: url("bilder/uebersicht_oben.gif"); }
@@ -83,7 +84,7 @@ label + input { margin-left: 1em; }
 #prog_timeline .color_current { background-color: #f7fffa; }
 #prog_timeline .color_broadcast { background-color: #e6eee9; }
 #prog_timeline .color_timer { background-color: #ffeee9; }
-#rec_list #path { margin: 1em 10px 0px 10px; }
+#rec_list #path { margin: 1em 10px 0px 10px; border-top: 1px solid black; border-bottom: 1px solid black; padding: 3px 0px; }
 #timer_list .color_ok { background-color: #00a317; }
 #timer_list .color_conflict { background-color: #a11917; }
 #timer_list .color_collision { background-color: #ffde62; }
@@ -95,6 +96,7 @@ label + input { margin-left: 1em; }
 #prog_detail td { white-space: normal; }
 #prog_detail .heading h2 { white-space: normal; }
 
+#vdr_cmds pre { margin: 0px; padding: 0px; }
 #content { margin-top: 1em; }
 .group { margin-top: 0.5em; }
 #buttons { margin-top: 0.5em; text-align: right; }
@@ -141,10 +143,10 @@ label + input { margin-left: 1em; }
 
 /* Navigation */
 #navigation { margin: 0px; background-image: url("bilder/back.gif"); }
-#navigation .logo { padding-top: 2em; padding-bottom: 3em; width: 150px; }
-#navigation .navi { font-size: 12px; padding-top: 6px; height: 25px; text-align: center; width: 148px; }
-#navigation .search { padding-top: 2em; font-size: 12px; width: 148px; text-align: center; }
-#navigation .separator { height: 2px; background-image: url("bilder/separator.png"); width: 148px; }
+#navigation .logo { padding-top: 1em; padding-bottom: 2em; width: 150px; }
+#navigation .navi { font-size: 12px; padding-top: 6px; padding-bottom: 6px; text-align: center; width: 148px; }
+#navigation .search { padding-top: 6px; font-size: 12px; width: 148px; text-align: center; }
+#navigation .separator { height: 2px; background-image: url("bilder/separator.png"); width: 148px; background-repeat: repeat-x; }
 #navigation a { color: black; font-weight: bold; text-decoration: none; }
 #navigation a:hover { text-decoration: underline; }
 #navigation input { width: 130px; }

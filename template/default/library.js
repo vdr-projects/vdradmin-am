@@ -28,7 +28,8 @@ function mdel(message) {
 
 function callurl( url ) {
 	image = new Image();
-	image.src = url;
+	Now = new Date();
+	image.src = url + "&rand=" + Now.getTime();
 }
 
 function popup(URL) {
