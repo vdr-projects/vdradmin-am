@@ -83,7 +83,7 @@
 				<td class="col_value">
 					<input type="hidden" name="event_id" value="<tmpl_var event_id>"/>
 					<tmpl_if expr="at_epg == 1">
-						<input type="radio" name="autotimer" value="2" id="event_id" <tmpl_if expr="autotimer == 2">checked</tmpl_if> /><label for="event_id"><%! Transmission Identification !%></label>
+						<input type="radio" name="autotimer" value="2" id="event_id" <tmpl_if expr="autotimer == 2">checked</tmpl_if> /><label for="event_id"><%! Transmission Identification !%> (<tmpl_var event_id>)</label>
 					</tmpl_if>
 					<input type="radio" name="autotimer" value="1" id="event_time" <tmpl_if expr="autotimer == 1">checked</tmpl_if> /><label for="event_time"><%! Time !%></label>
 					<input type="radio" name="autotimer" value="0" id="event_off" <tmpl_if expr="autotimer == 0">checked</tmpl_if> /><label for="event_off"><%! off !%></label>
@@ -126,6 +126,9 @@
 					<b>&nbsp;:&nbsp;</b>
 					<input type="text" name="startm" value="<tmpl_var startm>" size="2" maxlength="2" />
 					&nbsp;<%! o'clock !%>
+					<tmpl_if bstart>
+						(<%! Buffer: !%> <tmpl_var bstart> <%! minutes !%>)
+					</tmpl_if>
 				</td>
 				<td  class="col_right"></td>
 			</tr>
@@ -137,6 +140,9 @@
 					<b>&nbsp;:&nbsp;</b>
 					<input type="text" name="stopm" value="<tmpl_var stopm>" size="2" maxlength="2" />
 					&nbsp;<%! o'clock !%>
+					<tmpl_if bstop>
+						(<%! Buffer: !%> <tmpl_var bstop> <%! minutes !%>)
+					</tmpl_if>
 				</td>
 				<td  class="col_right"></td>
 			</tr>
@@ -170,6 +176,14 @@
 				<td class="col_value"><textarea name="summary" rows="6" cols="80" readonly="readonly"><tmpl_var summary></textarea></td>
 				<td class="col_right"></td>
 			</tr>
+<tmpl_if pattern>
+			<tr class="row_even">
+				<td  class="col_left"></td>
+				<td  class="col_label"><h5><%! Timer has been set by AutoTimer pattern: !%></h5></td>
+				<td  class="col_value"><tmpl_var pattern></td>
+				<td  class="col_right"></td>
+			</tr>
+</tmpl_if>
 			<tr class="footer">
 				<td class="col_left"></td>
 				<td colspan="2"></td>

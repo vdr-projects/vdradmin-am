@@ -182,7 +182,7 @@ $CONFIG{TV_EXT}       = "m3u";
 $CONFIG{REC_MIMETYPE} = "video/x-mpegurl";
 $CONFIG{REC_EXT}      = "m3u";
 
-my $VERSION               = "3.4.4beta2";
+my $VERSION               = "3.4.4rc";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0; # Numeric VDR version, e.g. 10344
@@ -1454,27 +1454,28 @@ sub AT_ProgTimer {
   my $found = 0;
   for(ParseTimer(1)) {
 		if($_->{vdr_id} == $channel) {
-	    if($event_id && $_->{event_id}) {
+	    if($_->{autotimer} == 2 && $event_id && $_->{event_id}) {
 				if($_->{event_id} == $event_id) {
 	  	    $found = 1;
 					last;
 				}
-    	} else {
-	    	if($_->{start} eq $start) {
- 		      $found = 1;
-					last;
-   			}
-   			if($start_fmt eq my_strftime("%H%M", $_->{start})) {
-					if($VDRVERSION < 10323) {
-						if($_->{dor} == my_strftime("%d", $start)) {
-							$found = 1;
-							last;
-						}
-					} else {
-						if($_->{dor} eq my_strftime("%Y-%m-%d", $start)) {
-							$found = 1;
-							last;
-						}
+    	}
+
+			# event_ids didn't match, try matching using starting time
+	   	if($_->{start} eq $start) {
+ 		     $found = 1;
+				last;
+   		}
+   		if($start_fmt eq my_strftime("%H%M", $_->{start})) {
+				if($VDRVERSION < 10323) {
+					if($_->{dor} == my_strftime("%d", $start)) {
+						$found = 1;
+						last;
+					}
+				} else {
+					if($_->{dor} eq my_strftime("%Y-%m-%d", $start)) {
+						$found = 1;
+						last;
 					}
 				}
 			}
@@ -1746,6 +1747,7 @@ sub ParseTimer {
 		$title =~ s/\|/\:/g;
 		my $title_js = $title;
 		$title_js =~ s/\'/\\\'/g;
+		$title_js =~ s/\"/&quot;/g;
 
     if(length($dor) == 7) { # repeating timer
       $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), my_strftime("%d"), (my_strftime("%m") - 1), my_strftime("%Y"));
@@ -2998,14 +3000,17 @@ sub timer_new_form {
     event_id => $this_event->{event_id},
     starth   => my_strftime("%H", $this_event->{start}),
     startm   => my_strftime("%M", $this_event->{start}),
+		bstart   => $this_event->{bstart},
     stoph    => $this_event->{stop} ? my_strftime("%H", $this_event->{stop}) : "00",
     stopm    => $this_event->{stop} ? my_strftime("%M", $this_event->{stop}) : "00",
+		bstop    => $this_event->{bstop},
 		vps      => $this_event->{active} & 4,
     dor      => (length($this_event->{dor}) == 7 || length($this_event->{dor}) == 10 || length($this_event->{dor}) == 18) ? $this_event->{dor} : my_strftime("%d", $this_event->{start}),
     prio     => $this_event->{prio} ? $this_event->{prio} : $CONFIG{TM_PRIORITY},
     lft      => $this_event->{lft}  ? $this_event->{lft}  : $CONFIG{TM_LIFETIME},
     title    => $displaytitle,
     summary  => $displaysummary,
+		pattern  => $this_event->{pattern},
     timer_id => $timer_id ? $timer_id : 0,
     channels => \@channels,
     newtimer => $timer_id ? 0 : 1,
@@ -3279,6 +3284,7 @@ sub at_timer_list {
     $_->{pattern_js} = $_->{pattern};
     $_->{pattern} = CGI::escapeHTML($_->{pattern});
 		$_->{pattern_js} =~ s/\'/\\\'/g;
+		$_->{pattern_js} =~ s/\"/&quot;/g;
     $_->{modurl} = $MyURL . "?aktion=at_timer_edit&amp;id=$id&amp;sortby=$sortby&amp;desc=$desc";
     $_->{delurl} = $MyURL . "?aktion=at_timer_delete&amp;id=$id&amp;sortby=$sortby&amp;desc=$desc";
     $_->{prio} = $_->{prio} ? $_->{prio} : $CONFIG{AT_PRIORITY};
@@ -4206,6 +4212,7 @@ sub ParseRecordings {
 
 		my $name_js = $name;
 		$name_js =~ s/\'/\\\'/g;
+		$name_js =~ s/\"/\&quot;/g;
 		push(@RECORDINGS, {
 			sse        => timelocal(undef, substr($time, 3, 2), substr($time, 0, 2), substr($date, 0, 2), (substr($date, 3, 2)- 1), $yearofrecording),
 			date       => $date,
@@ -4461,8 +4468,6 @@ sub rec_rename {
 # configuration
 #############################################################################
 sub config {
-  return if(UptoDate());
-
 	sub ApplyConfig {
 		my $old_lang = $CONFIG{LANG};
 		my $old_epgprune = $CONFIG{EPG_PRUNE};

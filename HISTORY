@@ -4,6 +4,12 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-03-30: 3.4.4rc
+- Fixed: new TV grabbing introduced with beta2 (Many thanks to horchi for reporting and testing).
+- Changed: check if a timer to be programmed by an AutoTimer already exists (Requested by several people).
+- Added: display AutoTimer information in timer's edit view (Somehow requested by MarkusE).
+- Fixed: recordings/timers/autotimers containing double-quotes couldn't be deleted (Reported by The Unknown).
+
 2006-03-14: 3.4.4beta2
 - Reworked TV grabbing.
 - Added optional parameters for TV for use with external tools: http://vdradmin-am.ip?aktion=tv_show&size=[full|half|quarter]&interval=[0|1|2|3|5|10|30|60]&tv_only=bla

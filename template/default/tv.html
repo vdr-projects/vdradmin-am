@@ -11,7 +11,6 @@
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<script type="text/javascript" language="JavaScript">
 		<!--
-		var aktiv;
 		var timeout;
 		var interval = <tmpl_var interval>;
 		var size = "<tmpl_var size>";
@@ -26,6 +25,7 @@
 		}
 
 		function switch_channel(url) {
+			v_Stop();
 			Now = new Date();
 			document.switchimage.src = url + "&rand=" + Now.getTime();
       timeout = window.setTimeout("WebcamUpdate()", 500);
@@ -35,41 +35,29 @@
 			Before = new Date();
 			NewPicUrl = "<tmpl_var url>&size=" + size + "&rand=" + Before.getTime();
 			document.Bild.src = NewPicUrl;
-			After = new Date();
-			timeout = window.setTimeout("WebcamUpdate()", (interval * 1000) - (After - Before));
-		}
-
-		function go() {
-			WebcamUpdate();
-//      v_Start();
-		}
-
-		function v_Start() {
-			aktiv = window.setInterval("WebcamUpdate()", interval * 1000);
+			if(interval > 0) {
+				After = new Date();
+				wait_sec = (interval * 1000) - (After - Before);
+				timeout = window.setTimeout("WebcamUpdate()", wait_sec > 0 ? wait_sec : 0);
+			}
 		}
 
 		function v_Stop() {
-//			window.clearInterval(aktiv);
-			cleanTimeout(timeout);
+			window.clearTimeout(timeout);
 		}
 
 		function v_changeInterval(val) {
 			interval = val;
 			v_Stop();
 			if(interval > 0) {
-			  go();
+			  WebcamUpdate();
 			};
 		}
 
 		function v_changeSize(val) {
 			size = val;
 			v_Stop();
-			if(interval > 0) {
-		  	go();
-			}
-			else {
-				WebcamUpdate();
-			};
+			WebcamUpdate();
 		}
 
 		function tv_open() {
@@ -79,7 +67,7 @@
 	</script>
 </head>
 
-<body onLoad="window.focus();go()" id="tv"> 
+<body onLoad="window.focus();WebcamUpdate()" id="tv"> 
 	<form action="<tmpl_var url>" method="get" name="liveform">
 		<table width="200" border="0" cellspacing="0" cellpadding="0" style="background-image: url(bilder/tv_bottom.gif);">
 			<tr>
