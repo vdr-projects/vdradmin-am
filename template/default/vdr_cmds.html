@@ -46,7 +46,7 @@
 						<option value="20" <tmpl_if expr="max_lines == 20">selected="selected"</tmpl_if>>20</option>
 						<option value="50" <tmpl_if expr="max_lines == 50">selected="selected"</tmpl_if>>50</option>
 						<option value="100" <tmpl_if expr="max_lines == 100">selected="selected"</tmpl_if>>100</option>
-						<option value="0"><%! unlimited !%></option>
+						<option value="-1" <tmpl_if expr="max_lines == -1">selected="selected"</tmpl_if>><%! unlimited !%></option>
 					</select>
 				</td>
 				<td class="col_right"></td>

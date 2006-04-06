@@ -182,7 +182,7 @@ $CONFIG{TV_EXT}       = "m3u";
 $CONFIG{REC_MIMETYPE} = "video/x-mpegurl";
 $CONFIG{REC_EXT}      = "m3u";
 
-my $VERSION               = "3.4.4rc";
+my $VERSION               = "3.4.4";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0; # Numeric VDR version, e.g. 10344
@@ -1410,7 +1410,7 @@ sub AutoTimer {
 
 				if ($dry_run) {
 #					printf("AT found: (%s) (%s) (%s) (%s) (%s) (%s)\n", $event->{title}, $title, $event->{subtitle}, $directory, $event->{start}, $event->{stop});
-					push(@at_matches, {	otitle => $event->{title}, title => $title, subtitle => $event->{subtitle}, directory => $directory,	start => my_strftime("%H:%M", $event->{start}), stop => my_strftime("%H:%M", $event->{stop}), date => my_strftime("%A, %x",$event->{start}), channel => GetChannelDescByNumber($event->{vdr_id})});
+					push(@at_matches, {	otitle => $event->{title}, title => $title, subtitle => $event->{subtitle} ? $event->{subtitle} : "", directory => $directory,	start => my_strftime("%H:%M", $event->{start}), stop => my_strftime("%H:%M", $event->{stop}), date => my_strftime("%A, %x",$event->{start}), channel => GetChannelDescByNumber($event->{vdr_id})});
 				} else {
         Log(LOG_AT, sprintf("AutoTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
 
@@ -4428,7 +4428,7 @@ sub recRunCmd {
 		if ($folder) {
 			chomp($folder);
 			print("FOUND: $folder\n");
-			`$cmd $folder`;
+			`$cmd "$folder"`;
 		}
 	}
 }
@@ -4817,14 +4817,16 @@ sub vdr_cmds {
 	my @show_output;
 	@show_output = run_vdrcmd() if($q->param("run_vdrcmd"));
 	@show_output = run_svdrpcmd() if($q->param("run_svdrpcmd"));
+	my $svdrp_cmd = "help";
+	$svdrp_cmd = $q->param("svdrp_cmd") if($q->param("svdrp_cmd"));
 	my $template = TemplateNew("vdr_cmds.html");
 	my $vars = {
 		url         => sprintf("%s?aktion=vdr_cmds", $MyURL),
 		commands    => \@vdrcmds,
 		show_output => \@show_output,
 		max_lines   => $q->param("max_lines") ? $q->param("max_lines") : 20,
+		svdrp_cmd   => $svdrp_cmd,
 		vdr_cmd     => $q->param("vdr_cmd"),
-		svdrp_cmd   => $q->param("svdrp_cmd"),
 		usercss     => $UserCSS
   };
   $template->param($vars);
@@ -4845,7 +4847,7 @@ sub run_vdrcmd {
 	while(<FH>) {
 		chomp;
 		push(@output, {line => $_});
-		last if($max_lines && $counter >= $max_lines);
+		last if($max_lines > 0 && $counter >= $max_lines);
 		$counter++;
 	}
 	close(FH);
@@ -4860,7 +4862,7 @@ sub run_svdrpcmd {
 	my @output;
 	for(SendCMD($q->param("svdrp_cmd"))) {
 		push(@output, {line => $_});
-		last if($max_lines && $counter >= $max_lines);
+		last if($max_lines > 0 && $counter >= $max_lines);
 		$counter++;
 	}
 	return @output;

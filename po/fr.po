@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-30 10:23+0200\n"
+"POT-Creation-Date: 2006-04-06 12:55+0200\n"
 "PO-Revision-Date: 2005-10-04 14:02+0100\n"
 "Last-Translator: Trois Six <trois.six@free.fr>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -194,7 +194,7 @@ msgstr "Heure De Début :"
 #: ../template/default/prog_timeline.html:108
 #: ../template/default/prog_timeline.html:123
 #: ../template/default/at_timer_new.html:111
-#: ../template/default/at_timer_new.html:122 ../vdradmind.pl:3947
+#: ../template/default/at_timer_new.html:122 ../vdradmind.pl:3948
 msgid "o'clock"
 msgstr "Heure"
 
@@ -379,7 +379,7 @@ msgstr "Supprimer Programmations Sélectionnées ?"
 
 #: ../template/default/prog_summary.html:7
 #: ../template/default/prog_timeline.html:7
-#: ../template/default/navigation.html:30 ../vdradmind.pl:4524
+#: ../template/default/navigation.html:30 ../vdradmind.pl:4525
 msgid "What's On Now?"
 msgstr "En ce Moment ?"
 
@@ -504,7 +504,7 @@ msgstr "Mot de Passe Invité :"
 
 #: ../template/default/config.html:213 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:86
-#: ../template/default/navigation.html:38 ../vdradmind.pl:4526
+#: ../template/default/navigation.html:38 ../vdradmind.pl:4527
 msgid "Timeline"
 msgstr "Chronologie"
 
@@ -782,7 +782,7 @@ msgid "Delete Selected Timers"
 msgstr "Supprimer Programmations Sélectionnées"
 
 #: ../template/default/prog_list.html:6 ../template/default/navigation.html:42
-#: ../vdradmind.pl:4527
+#: ../vdradmind.pl:4528
 msgid "Channels"
 msgstr "Chaînes"
 
@@ -848,7 +848,7 @@ msgstr "Plus de details sur Internet"
 #: ../template/default/rec_list.html:6 ../template/default/rec_list.html:18
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:18
-#: ../template/default/navigation.html:54 ../vdradmind.pl:4529
+#: ../template/default/navigation.html:54 ../vdradmind.pl:4530
 msgid "Recordings"
 msgstr "Enregistrements"
 
@@ -1339,7 +1339,7 @@ msgid "to"
 msgstr "à"
 
 #: ../template/default/prog_list2.html:6
-#: ../template/default/navigation.html:34 ../vdradmind.pl:2604
+#: ../template/default/navigation.html:34 ../vdradmind.pl:2605
 msgid "Playing Today"
 msgstr "Joué Aujourd'hui"
 
@@ -2086,114 +2086,114 @@ msgstr ""
 msgid "Output"
 msgstr ""
 
-#: ../vdradmind.pl:293
+#: ../vdradmind.pl:294
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Quel est votre Nom d'Hôte (ex video.intra.net) ?"
 
-#: ../vdradmind.pl:294
+#: ../vdradmind.pl:295
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Sur quel port VDR écoute les requêtes SVDRP ?"
 
-#: ../vdradmind.pl:295
+#: ../vdradmind.pl:296
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
 msgstr "Sur quel adresse VDRAdmin-AM doit-il écouter (0.0.0.0 pour toutes) ?"
 
-#: ../vdradmind.pl:296
+#: ../vdradmind.pl:297
 msgid "On which port should VDRAdmin-AM listen?"
 msgstr "Sur quel port VDRAdmin-AM doit-il écouter ?"
 
-#: ../vdradmind.pl:297
+#: ../vdradmind.pl:298
 msgid "Username?"
 msgstr "Identifiant ?"
 
-#: ../vdradmind.pl:298
+#: ../vdradmind.pl:299
 msgid "Password?"
 msgstr "Mot de Passe ?"
 
-#: ../vdradmind.pl:299
+#: ../vdradmind.pl:300
 msgid "Where are your recordings stored?"
 msgstr "Où vos enregistrements sont-ils stockés ?"
 
-#: ../vdradmind.pl:300
+#: ../vdradmind.pl:301
 msgid "Where are your VDR's configuration files located?"
 msgstr "Où sont vos fichiers de configuration de VDR ?"
 
-#: ../vdradmind.pl:306
+#: ../vdradmind.pl:307
 msgid "Config file written successfully."
 msgstr "Fichier de configuration écrit avec succès."
 
-#: ../vdradmind.pl:358
+#: ../vdradmind.pl:359
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmin.pl %s a démarré avec le pid %d."
 
-#: ../vdradmind.pl:412 ../vdradmind.pl:1004 ../vdradmind.pl:1919
+#: ../vdradmind.pl:413 ../vdradmind.pl:1005 ../vdradmind.pl:1920
 msgid "Not found"
 msgstr "Non trouvé"
 
-#: ../vdradmind.pl:412 ../vdradmind.pl:1920
+#: ../vdradmind.pl:413 ../vdradmind.pl:1921
 msgid "The requested URL was not found on this server!"
 msgstr "L'URL demandée n'a pas été trouvée sur le serveur !"
 
-#: ../vdradmind.pl:480 ../vdradmind.pl:1000 ../vdradmind.pl:1922
+#: ../vdradmind.pl:481 ../vdradmind.pl:1001 ../vdradmind.pl:1923
 msgid "Forbidden"
 msgstr "Interdit"
 
-#: ../vdradmind.pl:480 ../vdradmind.pl:1923
+#: ../vdradmind.pl:481 ../vdradmind.pl:1924
 msgid "You don't have permission to access this function!"
 msgstr "Vous n'avez pas la permission d'accéder à cette fonction !"
 
-#: ../vdradmind.pl:1000 ../vdradmind.pl:1924
+#: ../vdradmind.pl:1001 ../vdradmind.pl:1925
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "Accès au fichier \"%s\" interdit !"
 
-#: ../vdradmind.pl:1004 ../vdradmind.pl:1921
+#: ../vdradmind.pl:1005 ../vdradmind.pl:1922
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "L'URL \"%s\" n'a pas été trouvée sur le serveur !"
 
-#: ../vdradmind.pl:1925
+#: ../vdradmind.pl:1926
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Ne peut pas ouvrir le fichier \"%s\" !"
 
-#: ../vdradmind.pl:1926
+#: ../vdradmind.pl:1927
 #, perl-format
 msgid "Can't connect to VDR at %s!"
 msgstr "Ne peut se connecter à %s !"
 
-#: ../vdradmind.pl:1927
+#: ../vdradmind.pl:1928
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Erreur en envoyant la commande à %s"
 
-#: ../vdradmind.pl:2604
+#: ../vdradmind.pl:2605
 msgid "Playing Tomorrow"
 msgstr "Joué demain"
 
-#: ../vdradmind.pl:2604
+#: ../vdradmind.pl:2605
 #, perl-format
 msgid "Playing on the %d."
 msgstr "En cours sur la %d."
 
-#: ../vdradmind.pl:3947
+#: ../vdradmind.pl:3948
 msgid "Suitable matches for:"
 msgstr ""
 
-#: ../vdradmind.pl:4002
+#: ../vdradmind.pl:4003
 msgid "Schedule"
 msgstr "Programmateur"
 
-#: ../vdradmind.pl:4525
+#: ../vdradmind.pl:4526
 msgid "Playing Today?"
 msgstr "Aujourd'hui ?"
 
-#: ../vdradmind.pl:4528
+#: ../vdradmind.pl:4529
 msgid "Timers"
 msgstr "Programmations"
 
-#: ../vdradmind.pl:4591
+#: ../vdradmind.pl:4592
 msgid "System default"
 msgstr ""
 

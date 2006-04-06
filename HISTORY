@@ -4,6 +4,11 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-04-07: 3.4.4
+- Fixed: reccmds didn't run if recording contained special characters (Reported by Ronny Kornexl).
+- Fixed: remember "unlimited" number of lines to show in vdr_cmds (Reported by Ronny Kornexl).
+- Changed: set "help" as default in vdr_cmds SVDRP command (Requested by Ronny Kornexl).
+
 2006-03-30: 3.4.4rc
 - Fixed: new TV grabbing introduced with beta2 (Many thanks to horchi for reporting and testing).
 - Changed: check if a timer to be programmed by an AutoTimer already exists (Requested by several people).
