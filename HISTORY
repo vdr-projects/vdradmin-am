@@ -4,6 +4,16 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-04-28: 3.4.5rc
+- Changed: request full "from" email address for sending emails instead of domain only (Requested by siryoda).
+- Changed: no red background for inactive timers in prog_timeline (Requested by Zimbo).
+- Changed: result of a search is ordered by the event's start time instead of channel id (Suggested by scorp).
+- Fixed: crashes when sending emails (Thanks to Ville Skyttä for hints and siryoda for testing).
+- Fixed: error page sets charset correct.
+- Added: russian translation (Thanks to Oleg Roitburd and Allrussian-forum translation team)
+- Fixed: lots of perl warnings.
+- Updated: localization, French is again up-to-date (Thanks to Trois Six).
+
 2006-04-07: 3.4.4
 - Fixed: reccmds didn't run if recording contained special characters (Reported by Ronny Kornexl).
 - Fixed: remember "unlimited" number of lines to show in vdr_cmds (Reported by Ronny Kornexl).

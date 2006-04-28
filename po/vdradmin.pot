@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-06 12:55+0200\n"
+"POT-Creation-Date: 2006-04-28 12:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -181,7 +181,7 @@ msgstr ""
 #: ../template/default/prog_timeline.html:108
 #: ../template/default/prog_timeline.html:123
 #: ../template/default/at_timer_new.html:111
-#: ../template/default/at_timer_new.html:122 ../vdradmind.pl:3948
+#: ../template/default/at_timer_new.html:122 ../vdradmind.pl:3981
 msgid "o'clock"
 msgstr ""
 
@@ -360,7 +360,7 @@ msgstr ""
 
 #: ../template/default/prog_summary.html:7
 #: ../template/default/prog_timeline.html:7
-#: ../template/default/navigation.html:30 ../vdradmind.pl:4525
+#: ../template/default/navigation.html:30 ../vdradmind.pl:4558
 msgid "What's On Now?"
 msgstr ""
 
@@ -485,7 +485,7 @@ msgstr ""
 
 #: ../template/default/config.html:213 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:86
-#: ../template/default/navigation.html:38 ../vdradmind.pl:4527
+#: ../template/default/navigation.html:38 ../vdradmind.pl:4560
 msgid "Timeline"
 msgstr ""
 
@@ -754,7 +754,7 @@ msgid "Delete Selected Timers"
 msgstr ""
 
 #: ../template/default/prog_list.html:6 ../template/default/navigation.html:42
-#: ../vdradmind.pl:4528
+#: ../vdradmind.pl:4561
 msgid "Channels"
 msgstr ""
 
@@ -820,7 +820,7 @@ msgstr ""
 #: ../template/default/rec_list.html:6 ../template/default/rec_list.html:18
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:18
-#: ../template/default/navigation.html:54 ../vdradmind.pl:4530
+#: ../template/default/navigation.html:54 ../vdradmind.pl:4563
 msgid "Recordings"
 msgstr ""
 
@@ -964,7 +964,7 @@ msgstr ""
 
 #: ../template/default/help_config.html:77
 msgid ""
-"If you want an user account having only limited privileges, this is for you. "
+"If you want a user account having only limited privileges, this is for you. "
 "The guest user cannot modify anything, it's only allowed to view the EPG, "
 "timers, AutoTimers and recordings listings."
 msgstr ""
@@ -1043,7 +1043,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_config.html:111
-msgid "Here you set the sending domain of the generated email."
+msgid "Here you set the sending email address of the generated email."
 msgstr ""
 
 #: ../template/default/help_config.html:113
@@ -1192,7 +1192,7 @@ msgid "to"
 msgstr ""
 
 #: ../template/default/prog_list2.html:6
-#: ../template/default/navigation.html:34 ../vdradmind.pl:2605
+#: ../template/default/navigation.html:34 ../vdradmind.pl:2637
 msgid "Playing Today"
 msgstr ""
 
@@ -1716,113 +1716,115 @@ msgstr ""
 msgid "Output"
 msgstr ""
 
-#: ../vdradmind.pl:294
+#: ../vdradmind.pl:296
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr ""
 
-#: ../vdradmind.pl:295
+#: ../vdradmind.pl:297
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr ""
 
-#: ../vdradmind.pl:296
+#: ../vdradmind.pl:298
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
 msgstr ""
 
-#: ../vdradmind.pl:297
+#: ../vdradmind.pl:299
 msgid "On which port should VDRAdmin-AM listen?"
 msgstr ""
 
-#: ../vdradmind.pl:298
+#: ../vdradmind.pl:300
 msgid "Username?"
 msgstr ""
 
-#: ../vdradmind.pl:299
+#: ../vdradmind.pl:301
 msgid "Password?"
 msgstr ""
 
-#: ../vdradmind.pl:300
+#: ../vdradmind.pl:302
 msgid "Where are your recordings stored?"
 msgstr ""
 
-#: ../vdradmind.pl:301
+#: ../vdradmind.pl:303
 msgid "Where are your VDR's configuration files located?"
 msgstr ""
 
-#: ../vdradmind.pl:307
+#: ../vdradmind.pl:309
 msgid "Config file written successfully."
 msgstr ""
 
-#: ../vdradmind.pl:359
+#: ../vdradmind.pl:362
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr ""
 
-#: ../vdradmind.pl:413 ../vdradmind.pl:1005 ../vdradmind.pl:1920
+#: ../vdradmind.pl:418 ../vdradmind.pl:1015 ../vdradmind.pl:1947
 msgid "Not found"
 msgstr ""
 
-#: ../vdradmind.pl:413 ../vdradmind.pl:1921
+#: ../vdradmind.pl:418 ../vdradmind.pl:1948
 msgid "The requested URL was not found on this server!"
 msgstr ""
 
-#: ../vdradmind.pl:481 ../vdradmind.pl:1001 ../vdradmind.pl:1923
+#: ../vdradmind.pl:487 ../vdradmind.pl:1011 ../vdradmind.pl:1950
 msgid "Forbidden"
 msgstr ""
 
-#: ../vdradmind.pl:481 ../vdradmind.pl:1924
+#: ../vdradmind.pl:487 ../vdradmind.pl:1951
 msgid "You don't have permission to access this function!"
 msgstr ""
 
-#: ../vdradmind.pl:1001 ../vdradmind.pl:1925
+#: ../vdradmind.pl:1011 ../vdradmind.pl:1952
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr ""
 
-#: ../vdradmind.pl:1005 ../vdradmind.pl:1922
+#: ../vdradmind.pl:1015 ../vdradmind.pl:1949
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr ""
 
-#: ../vdradmind.pl:1926
+#: ../vdradmind.pl:1953
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr ""
 
-#: ../vdradmind.pl:1927
+#: ../vdradmind.pl:1954
 #, perl-format
-msgid "Can't connect to VDR at %s!"
+msgid ""
+"Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
+"if VDR's svdrphosts.conf is configured correctly."
 msgstr ""
 
-#: ../vdradmind.pl:1928
+#: ../vdradmind.pl:1955
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr ""
 
-#: ../vdradmind.pl:2605
+#: ../vdradmind.pl:2637
 msgid "Playing Tomorrow"
 msgstr ""
 
-#: ../vdradmind.pl:2605
+#: ../vdradmind.pl:2637
 #, perl-format
 msgid "Playing on the %d."
 msgstr ""
 
-#: ../vdradmind.pl:3948
+#: ../vdradmind.pl:3981
 msgid "Suitable matches for:"
 msgstr ""
 
-#: ../vdradmind.pl:4003
+#: ../vdradmind.pl:4036
 msgid "Schedule"
 msgstr ""
 
-#: ../vdradmind.pl:4526
+#: ../vdradmind.pl:4559
 msgid "Playing Today?"
 msgstr ""
 
-#: ../vdradmind.pl:4529
+#: ../vdradmind.pl:4562
 msgid "Timers"
 msgstr ""
 
-#: ../vdradmind.pl:4592
+#: ../vdradmind.pl:4625
 msgid "System default"
 msgstr ""

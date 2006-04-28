@@ -29,7 +29,7 @@ function usage()
 	echo ""
 	echo -e "\t-c : Run \"vdradmind.pl -c\" after installation (=configure)."
 	echo -e "\t-u : Perform uninstall."
-	echo -e "\t-p : Only install needed Perl modules (NOT YET FINISHED!!!)."
+	echo -e "\t-p : List and optionally install required Perl modules."
 	echo -e "\t-h : This message."
 	echo ""
 	exit 0
@@ -75,6 +75,8 @@ function checkPerlModule()
 
 function perlModules()
 {
+	echo ""
+	echo "*** Required ***"
 	checkPerlModule Template
 	checkPerlModule Compress::Zlib
 	checkPerlModule CGI
@@ -82,9 +84,19 @@ function perlModules()
 	checkPerlModule Time::Local
 	checkPerlModule MIME::Base64
 	checkPerlModule File::Temp
-	checkPerlModule Locale::gettext Locale::Messages
 	checkPerlModule URI::Escape
+
+	echo ""
+	echo "You need Locale::gettext OR Locale::Messages"
+	checkPerlModule Locale::gettext Locale::Messages
+
+	echo ""
+	echo "*** Optional ***"
+	echo "* Required for AutoTimer email notification"
 	checkPerlModule Net::SMTP
+	checkPerlModule Authen::SASL
+	echo "* Required for AutoTimer email notification and CRAM-MD5 authentication"
+	checkPerlModule Digest::HMAC_MD5
 }
 
 function makeDir()
@@ -238,7 +250,7 @@ if [ $(basename $0) = "uninstall.sh" -o "$UNINSTALL" ]; then
 	doUninstall
 elif [ "$PERL" ]; then
 	echo ""
-	echo "Only LISTING needed Perl modules..."
+	echo "Testing required Perl modules..."
 	perlModules
 	echo "...done."
 else

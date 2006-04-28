@@ -3,7 +3,7 @@ A: There are some things to check:
     - Check if "perl -V:d_setlocale" prints "d_setlocale='define';".
 		  If it doesn't contact your Linux distributor.
 		- Run: echo -e "LANGUAGE=$LANGUAGE\nLANG=$LANG\nLC_ALL=$LC_ALL"
-		  If LANGUAGE *must* be empty so that you can set the language
+		  LANGUAGE *must* be empty so that you can set the language
 			in VDRAdmin's configuration menu. If it's not empty VDRAdmin
 			will *always* use that language if it supports it or English if
 			it doesn't support it.

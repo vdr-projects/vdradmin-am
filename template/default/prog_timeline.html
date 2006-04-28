@@ -42,8 +42,8 @@
 -%?>
 
 	<style type="text/css">
-		#prgtable { border-left-width:1px; border-left-style:solid; border-bottom-width:1px; border-bottom-style:solid; padding:2px; }
-		#timertable { border-left-width:1px; border-left-style:solid; border-bottom-width:1px; border-bottom-style:solid; padding:2px; }
+		#prgtable { border-left-width:1px; border-left-style:solid; border-bottom-width:1px; border-bottom-style:solid; padding-left:1px; }
+		#timertable { border-left-width:1px; border-left-style:solid; border-bottom-width:1px; border-bottom-style:solid; padding-left:1px; }
 
 		<?% IF jetzt_stunde >= akt_stunde && jetzt_stunde < akt_stunde + zeitrahmen %?>
 		#timeline { position:absolute; filter:Alpha(opacity=50); top:150px; left:<?% left + seite + (einheit * diff_minute) + 30 %?>px; width:1px; height:<?% shows.keys.size * 21 + 2 %?>px; z-index:10; z-index:2; }

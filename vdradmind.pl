@@ -23,7 +23,7 @@
 # 08.10.2001
 #
 #
-# VDRAdmin-AM 2005 by Andreas Mair <mail@andreas.vdr-developer.org>
+# VDRAdmin-AM 2005,2006 by Andreas Mair <mail@andreas.vdr-developer.org>
 #
 
 require 5.004;
@@ -65,6 +65,9 @@ use URI::Escape;
 
 my $can_use_net_smtp = 1;
 $can_use_net_smtp = undef unless(eval {require Net::SMTP});
+my $can_use_smtpauth = 1;
+$can_use_smtpauth = undef unless(eval {require Authen::SASL});
+#Authen::SASL->import(qw(Perl)) if($can_use_smtpauth);
 
 # Some users have problems if the LANGUAGE env variable is set
 # so it's cleared here.
@@ -77,7 +80,7 @@ use strict;
 
 my $SEARCH_FILES_IN_SYSTEM = 0;
 my $VDR_MAX_SVDRP_LENGTH = 10000;	# validate this value
-my $SUPPORTED_LOCALE_PREFIXES = "^(de|en|es|fi|fr|nl)_";
+my $SUPPORTED_LOCALE_PREFIXES = "^(de|en|es|fi|fr|nl|ru)_";
 
 my $AT_BY_EVENT_ID = 2;
 my $AT_BY_TIME     = 1;
@@ -161,7 +164,7 @@ $CONFIG{NO_EVENTID}       = 0;
 $CONFIG{NO_EVENTID_ON}    = "";
 #
 $CONFIG{AT_SENDMAIL}      = 0;	# set to 1 and set all the "MAIL_" things if you want email notification on new autotimers.
-$CONFIG{MAIL_FROMDOMAIN}  = "fromaddress.tld";
+$CONFIG{MAIL_FROM}        = "from\@address.tld";
 $CONFIG{MAIL_TO}          = "your\@email.address";
 $CONFIG{MAIL_SERVER}      = "your.email.server";
 $CONFIG{MAIL_AUTH_USER}   = "";
@@ -182,7 +185,7 @@ $CONFIG{TV_EXT}       = "m3u";
 $CONFIG{REC_MIMETYPE} = "video/x-mpegurl";
 $CONFIG{REC_EXT}      = "m3u";
 
-my $VERSION               = "3.4.4";
+my $VERSION               = "3.4.5rc";
 my $SERVERVERSION         = "vdradmind/$VERSION";
 my $LINVDR                = isLinVDR();
 my $VDRVERSION            = 0; # Numeric VDR version, e.g. 10344
@@ -307,6 +310,7 @@ for(my $i = 0; $i < scalar(@ARGV); $i++) {
 		exit(0);
 	}
 	if(/--kill|-k/) {
+		exit(0) unless(-e $PIDFILE); 
 		my $killed = kill(2, getPID($PIDFILE));
 		unlink($PIDFILE);
 		exit($killed > 0 ? 0 : 1);
@@ -388,6 +392,8 @@ my @TRUSTED_USER = (@GUEST_USER, qw(at_timer_edit at_timer_new at_timer_save at_
 	live_stream rec_stream force_update vdr_cmds));
 my $MyStreamBase = "./vdradmin.";
 
+$MyURL = "./vdradmin.pl";
+
 # Force Update at start
 UptoDate(1);
 
@@ -438,6 +444,7 @@ while(true) {
 	}
 				
 	# authenticate
+#	print("Username: $username / Password: $password\n");
 	if(($CONFIG{USERNAME} eq $username && $CONFIG{PASSWORD} eq $password) || subnetcheck($peer,$CONFIG{LOCAL_NET}) ) {
 		$Guest = 0;
 	} elsif(($CONFIG{USERNAME_GUEST} eq $username && $CONFIG{PASSWORD_GUEST} eq $password) && $CONFIG{GUEST_ACCOUNT}) {
@@ -550,12 +557,16 @@ sub EURL { #TODO: unused
 
 sub HTMLError {
   my $error = join("", @_);
-  my $template = HTML::Template->new(filename => "$TEMPLATEDIR/$CONFIG{TEMPLATE}/error.html");
-  $template->param(
-  	error => $error
-  );
 	$CONFIG{CACHE_LASTUPDATE} = 0;
-  return(header("200", "text/html", $template->output));
+	my $template = TemplateNew("error.html");
+	my $vars = {
+		error => $error
+	};
+	$template->param($vars);
+	my $output;
+	my $out = $template->output;
+	$Xtemplate->process(\$out, $vars, \$output) || return(header("500", "text/html", $Xtemplate->error()));
+	return(header("200", "text/html", $output));
 }
 
 
@@ -800,7 +811,7 @@ sub EPG_buildTree {
 sub PrintToClient {
   my $string = join("", @_);
   return if(!defined($string));
-  print($Client $string) if($Client);
+  print($Client $string) if($Client && $Client->connected());
 }
 
 sub ParseRequest {
@@ -1159,26 +1170,32 @@ sub AutoTimer {
   }
 
   # Die Timerliste holen
-  my $timer;
-  foreach my $t (ParseTimer(0)){
-		#TODO: what's the 2nd "%s" for?
-    my $key = sprintf('%d:%s:%s',
-    $t->{vdr_id},
-    $t->{title}
-    );
-    $timer->{$key} = $t;
-  }
+	#TODO: is this really needed? Timers will be checked in AT_ProgTimer...
+#  my $timer;
+#  foreach my $t (ParseTimer(0)){
+#		#TODO: what's the 2nd "%s" for?
+#    my $key = sprintf('%d:%s:%s',
+#    $t->{vdr_id},
+#    $t->{title},
+#		""
+#    );
+#    $timer->{$key} = $t;
+#		printf("Timer: %s / %s / %s\n", $key, $timer->{event_id}, $t);
+#  }
+#	print("TIMER\n") if($timer);
+#/TODO
+
 	my $date_now = time();
   for my $sender (keys(%EPG)) {
     for my $event (@{$EPG{$sender}}) {
 
-				# Timer in the past?
+				# Event in the past?
 				next if($event->{stop} < $date_now);
 
         # Ein Timer der schon programmmiert wurde kann
         # ignoriert werden
 				#TODO: $timer not initialized
-        next if($event->{event_id} == $timer->{event_id});
+#        next if($event->{event_id} == $timer->{event_id});
 
         # Wenn CHANNELS_WANTED_AUTOTIMER dann next wenn der Kanal
         # nicht in der WantedList steht
@@ -1199,14 +1216,15 @@ sub AutoTimer {
 		next;
 		}
 
-	# Wollen wir nicht haben.
-	my $BLStr = $event->{title};
-	$BLStr .= "~" . $event->{subtitle} if $event->{subtitle};
-	
-				#TODO: uninitialized var?
-        if($blacklist{$BLStr} eq 1 ||  $blacklist{$event->{title}} eq 1) {
-          Log(LOG_DEBUG, sprintf("Auto Timer: blacklisted \"%s\"", $event->{title}));
-		next;
+		if(%blacklist) {
+			# Wollen wir nicht haben.
+			my $BLStr = $event->{title};
+			$BLStr .= "~" . $event->{subtitle} if $event->{subtitle};
+
+			if($blacklist{$BLStr} eq 1 ||  $blacklist{$event->{title}} eq 1) {
+				Log(LOG_DEBUG, sprintf("Auto Timer: blacklisted \"%s\"", $event->{title}));
+				next;
+			}
 		}
 
 			for my $at (@at) {
@@ -1506,7 +1524,7 @@ sub AT_ProgTimer {
       $title,
       append_timer_metadata($VDRVERSION < 10344 ? $summary : undef, $event_id, $autotimer, $CONFIG{TM_MARGIN_BEGIN}, $CONFIG{TM_MARGIN_END}, $at->{pattern})
     );
-    if ($CONFIG{AT_SENDMAIL} == 1 && $can_use_net_smtp) {
+    if ($CONFIG{AT_SENDMAIL} == 1 && $can_use_net_smtp && ($CONFIG{MAIL_AUTH_USER} eq "" || $can_use_smtpauth)) {
       my $sum = $summary;
       # remove all HTML-Tags from text
       $sum =~ s/\<[^\>]+\>/ /g;
@@ -1516,39 +1534,51 @@ sub AT_ProgTimer {
       my $strt= strftime("%H:%M", localtime($start));
       my $end = strftime("%H:%M", localtime($stop));
 
-      my $smtp = Net::SMTP->new($CONFIG{MAIL_SERVER}, Timeout => 30);
-      if($smtp) {
-	if ($CONFIG{MAIL_AUTH_USER} ne "") {
-		$smtp->auth($CONFIG{MAIL_AUTH_USER}, $CONFIG{MAIL_AUTH_PASS});
-      	}
-      	$smtp->mail("autotimer\@$CONFIG{MAIL_FROMDOMAIN}");
-      	$smtp->to($CONFIG{MAIL_TO});
-      	$smtp->data();
-      	$smtp->datasend("To: $CONFIG{MAIL_TO}\n");
-				my $qptitle = my_encode_qp($title);
-      	$smtp->datasend("Subject: AUTOTIMER: New timer created for $qptitle\n");
-				$smtp->datasend("From: VDRAdmin-AM AutoTimer <autotimer\@$CONFIG{MAIL_FROMDOMAIN}>\n");
-				$smtp->datasend("MIME-Version: 1.0\n"); 
-				$smtp->datasend("Content-Type: text/plain; charset=iso-8859-1\n"); 
-				$smtp->datasend("Content-Transfer-Encoding: 8bit\n");
-      	$smtp->datasend("\n");
-      	$smtp->datasend("Created AUTOTIMER for $title\n");
-      	$smtp->datasend("===========================================================================\n\n");
-      	$smtp->datasend("Channel: $channel\n\n");
-      	$smtp->datasend("$title\n");
-      	$smtp->datasend("$dat, $strt - $end\n\n");
-      	$smtp->datasend("Summary:\n");
-      	$smtp->datasend("--------\n");
-      	$smtp->datasend("$sum\n");
-      	$smtp->dataend();
-      	$smtp->quit();
-	} else {
-		print("SMTP failed! Please check your email settings.\n");
-		Log(LOG_FATALERROR, "SMTP failed! Please check your email settings.");
-	}
-    } elsif ($CONFIG{AT_SENDMAIL} == 1) {
+			eval {
+				local $SIG{__DIE__};
+
+	      my $smtp = Net::SMTP->new($CONFIG{MAIL_SERVER}, Timeout => 30);
+  	    if($smtp) {
+					if ($CONFIG{MAIL_AUTH_USER} ne "") {
+						$smtp->auth($CONFIG{MAIL_AUTH_USER}, $CONFIG{MAIL_AUTH_PASS}) || return;
+      		}
+	      	$smtp->mail("$CONFIG{MAIL_FROM}");
+  	    	$smtp->to($CONFIG{MAIL_TO});
+    	  	$smtp->data();
+      		$smtp->datasend("To: $CONFIG{MAIL_TO}\n");
+					my $qptitle = my_encode_qp($title);
+	      	$smtp->datasend("Subject: AUTOTIMER: New timer created for $qptitle\n");
+					$smtp->datasend("From: VDRAdmin-AM AutoTimer <$CONFIG{MAIL_FROM}>\n");
+					$smtp->datasend("MIME-Version: 1.0\n"); 
+					$smtp->datasend("Content-Type: text/plain; charset=iso-8859-1\n"); 
+					$smtp->datasend("Content-Transfer-Encoding: 8bit\n");
+	      	$smtp->datasend("\n");
+  	    	$smtp->datasend("Created AUTOTIMER for $title\n");
+    	  	$smtp->datasend("===========================================================================\n\n");
+      		$smtp->datasend("Channel: $channel\n\n");
+      		$smtp->datasend("$title\n");
+	      	$smtp->datasend("$dat, $strt - $end\n\n");
+  	    	$smtp->datasend("Summary:\n");
+    	  	$smtp->datasend("--------\n");
+      		$smtp->datasend("$sum\n");
+      		$smtp->dataend();
+	      	$smtp->quit();
+				} else {
+					print("SMTP failed! Please check your email settings.\n");
+					Log(LOG_FATALERROR, "SMTP failed! Please check your email settings.");
+				}
+			};
+			if ($@) {
+				print("Failed to send email!\nPlease contact the author.\n");
+				Log(LOG_FATALERROR, "Failed to send email! Please contact the author.");
+			};
+   	} elsif ($CONFIG{AT_SENDMAIL} == 1) {
 			print("Missing Perl module Net::SMTP.\nAutoTimer email notification disabled.\n");
 			Log(LOG_FATALERROR, "Missing Perl module Net::SMTP. AutoTimer email notification disabled.");
+			if ($CONFIG{MAIL_AUTH_USER} ne "" && ! $can_use_smtpauth) {
+				print("Missing Perl module Authen::SASL and/or Digest::HMAC_MD5.\nAutoTimer email notification disabled.\n");
+				Log(LOG_FATALERROR, "Missing Perl module Authen::SASL and/or Digest::HMAC_MD5. AutoTimer email notification disabled.");
+			}
 		}
   }
 }
@@ -1796,9 +1826,7 @@ sub ParseTimer {
       for($weekday += $off / 86400, $off = 0; $off < 28; $off++)  {
         $perrec = join("", substr($dor, ($weekday + $off) % 7), substr($dor, 0, ($weekday + $off) % 7));
         $perrec =~ m/^-+/g;
-        if ((pos $perrec) != 0) {
-          next;
-        }
+        next if($perrec && ((pos $perrec) != 0));
 
         $length = push(@temp, {
           id        => $id,
@@ -1890,7 +1918,7 @@ sub extract_timer_metadata {
 sub append_timer_metadata {
 	my ($aux, $epg_id, $autotimer, $bstart, $bstop, $pattern) = @_;
 	# remove old autotimer info
-	$aux =~ s/\|?<vdradmin-am>.*<\/vdradmin-am>//i;
+	$aux =~ s/\|?<vdradmin-am>.*<\/vdradmin-am>//i if($aux);
 	$aux = substr($aux, 0, 9000) if($VDRVERSION < 10336 and length($aux) > 9000);
 	# add a new line if VDR<1.3.44 because then there might be a summary
 	$aux .= "|" if($VDRVERSION < 10344 and length($aux));
@@ -1923,7 +1951,7 @@ sub LoadTranslation {
 		forbidden_long => gettext("You don't have permission to access this function!"),
 		forbidden_file => gettext("Access to file \"%s\" denied!"),
 		cant_open      => gettext("Can't open file \"%s\"!"),
-		connect_failed => gettext("Can't connect to VDR at %s!"),
+		connect_failed => gettext("Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and if VDR's svdrphosts.conf is configured correctly."),
 		send_command   => gettext("Error while sending command to VDR at %s"),
 	);
 
@@ -2148,6 +2176,11 @@ sub ReadConfig {
       $CONFIG{$key} = $value;
     }
     close(CONF);
+
+		#Migrate settings
+		#v3.4.5
+		$CONFIG{MAIL_FROM} = "autotimer@" . $CONFIG{MAIL_FROMDOMAIN} if($CONFIG{MAIL_FROM} =~ /from\@address.tld/);
+
   } else {
     print "$CONFFILE doesn't exist. Please run \"$0 --config\"\n";
     print "Exiting!\n";
@@ -2198,7 +2231,7 @@ sub csvRemove {
   my $csv = shift;
   my $remove = shift;
 
-  my $newcsv;
+  my $newcsv = "";
   for my $item (split(",", $csv)) {
     if($item ne $remove) {
       my $found = 0;
@@ -2366,8 +2399,10 @@ sub prog_detail {
   $displaytext =~ s/\|/<br \/>\n/g;
   $displaytitle =~ s/\n/<br \/>\n/g;
   $displaytitle =~ s/\|/<br \/>\n/g;
-  $displaysubtitle =~ s/\n/<br \/>\n/g;
-  $displaysubtitle =~ s/\|/<br \/>\n/g;
+	if($displaysubtitle) {
+	  $displaysubtitle =~ s/\n/<br \/>\n/g;
+  	$displaysubtitle =~ s/\|/<br \/>\n/g;
+	}
 	$find_title =~ s/^.*~\([^~]*\)/$1/;
 
 	# Do not use prog_detail as referer.
@@ -2404,7 +2439,8 @@ sub prog_detail {
 #############################################################################
 sub prog_list {
   return if(UptoDate());
-	my ($vdr_id, $dummy) = split("#", $q->param("vdr_id"), 2);
+	my ($vdr_id, $dummy);
+	($vdr_id, $dummy) = split("#", $q->param("vdr_id"), 2) if($q->param("vdr_id"));
   
 	# called without vdr_id, redirect to the first known channel
   if(!$vdr_id) {
@@ -2534,8 +2570,7 @@ sub prog_list2 {
 		if(ChannelHasEPG($channel->{vdr_id})) {
 			push(@channel, {
 				name       => $channel->{name},
-				vdr_id     => $channel->{vdr_id},
-				current    => ($vdr_id == $channel->{vdr_id}) ? 1 : 0,
+				vdr_id     => $channel->{vdr_id}
       }); 
     }
   }
@@ -2571,8 +2606,6 @@ sub prog_list2 {
 				   title     => $event->{channel_name} . " | " . my_strftime("%A, %x", $event->{start}),
 				   newd      => 1,
 					 streamurl => $MyStreamBase . $CONFIG{TV_EXT} . "?aktion=live_stream&amp;channel=" . $event->{vdr_id},
-				   undef,
-				   undef,
 					 proglink 	=> "$MyURL?aktion=prog_list&amp;vdr_id=" . $event->{vdr_id}
 	       });
 
@@ -2987,7 +3020,7 @@ sub timer_new_form {
   my $ref = getReferer();
 
   my $displaysummary = $this_event->{summary};
-  $displaysummary =~ s/\|/\n/g;
+  $displaysummary =~ s/\|/\n/g if($displaysummary);
 	my $displaytitle = $this_event->{title};
 	$displaytitle =~ s/"/\&quot;/g;
 
@@ -3005,7 +3038,7 @@ sub timer_new_form {
     stopm    => $this_event->{stop} ? my_strftime("%M", $this_event->{stop}) : "00",
 		bstop    => $this_event->{bstop},
 		vps      => $this_event->{active} & 4,
-    dor      => (length($this_event->{dor}) == 7 || length($this_event->{dor}) == 10 || length($this_event->{dor}) == 18) ? $this_event->{dor} : my_strftime("%d", $this_event->{start}),
+    dor      => ($this_event->{dor} && (length($this_event->{dor}) == 7 || length($this_event->{dor}) == 10 || length($this_event->{dor}) == 18)) ? $this_event->{dor} : my_strftime("%d", $this_event->{start}),
     prio     => $this_event->{prio} ? $this_event->{prio} : $CONFIG{TM_PRIORITY},
     lft      => $this_event->{lft}  ? $this_event->{lft}  : $CONFIG{TM_LIFETIME},
     title    => $displaytitle,
@@ -3074,7 +3107,7 @@ sub timer_add {
 		$data->{dor}     = $1 if($q->param("dor")     =~ /([0-9MTWTFSS@\-]+)/);
 		$data->{channel} = $1 if($q->param("channel") =~ /(\d+)/);
 
-		$data->{active} |= 4  if($q->param("vps") == 1);
+		$data->{active} |= 4  if($q->param("vps") && $q->param("vps") == 1);
 
 		if(length($q->param("title")) > 0) {
 			$data->{title} = $q->param("title");
@@ -3667,7 +3700,7 @@ sub prog_timeline {
   my $event_time;
   my $event_time_to;
 
-  if($time ne "") {
+  if($time) {
     my ($hour, $minute);
     if($time =~ /(\d{1,2})(\D?)(\d{1,2})/) {
       if(length($1) == 1 && length($3) == 1 && !$2) {
@@ -3745,7 +3778,7 @@ sub prog_timeline {
         start    => $event->{start},
         stop     => $event->{stop},
         title    => $title,
-        subtitle => (length($event->{subtitle}) > 30 ? substr($event->{subtitle}, 0, 30) . "..." : $event->{subtitle}),
+        subtitle => (($event->{subtitle} && length($event->{subtitle}) > 30) ? substr($event->{subtitle}, 0, 30) . "..." : $event->{subtitle}),
         progname => $event->{channel_name},
         summary  => $event->{summary},
         vdr_id   => $event->{vdr_id},
@@ -3754,7 +3787,7 @@ sub prog_timeline {
         infurl   => ($event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef),
         recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
         anchor   => $event->{event_id},
-        timer    => ( defined $TIM->{ $event->{title} } && $TIM->{ $event->{title} }->{vdr_id} == $event->{vdr_id} ? 1 : 0 ),
+        timer    => ( defined $TIM->{ $event->{title} } && $TIM->{ $event->{title} }->{vdr_id} == $event->{vdr_id} && $TIM->{ $event->{title} }->{active} ? 1 : 0 ),
       });
     }
     # needed for vdr 1.0.x, dunno why
@@ -3874,16 +3907,16 @@ sub prog_summary {
 					for my $word (split(/ +/, $search)) {
 						$found = 0;
 						for my $section (qw(title subtitle summary)) {
+							next unless($event->{$section});
 							if($event->{$section} =~ /$word/i) {
 								$found = 1;
+								last;
 							}
 						}
-						if(!$found) {
-							last;
-						}
+						last unless($found);
 					}
 				}
-				next if(!$found);
+				next unless($found);
 			}
 
 			my $displaytext = CGI::escapeHTML($event->{summary});
@@ -3904,6 +3937,7 @@ sub prog_summary {
 				longdate       => my_strftime("%A, %x", $event->{start}),
 				start          => my_strftime("%H:%M", $event->{start}),
 				stop           => my_strftime("%H:%M", $event->{stop}),
+				event_start    => $event->{start},
 				title          => $displaytitle,
 				subtitle       => $displaysubtitle,
 				progname       => CGI::escapeHTML($event->{channel_name}),
@@ -3922,8 +3956,8 @@ sub prog_summary {
 			}
 		}
 
-		# needed for vdr 1.0.x, dunno why
-		@show = sort({ $a->{vdr_id} <=> $b->{vdr_id} } @show);
+		# sort by event's start time and with equal start time sort by channel id
+		@show = sort({ $a->{event_start} <=> $b->{event_start} || $a->{vdr_id} <=> $b->{vdr_id} } @show);
 
 		#
 		my @status;
@@ -4676,7 +4710,7 @@ sub tv_show {
 		interval => $q->param("interval") ? $q->param("interval") : 5,
 		size     => $q->param("size") ? $q->param("size") : "half",
 		usercss  => $UserCSS,
-		new_win  => $q->param("new_win") eq "1" ? "1" : undef,
+		new_win  => ($q->param("new_win") && $q->param("new_win") eq "1") ? "1" : undef,
 		url      => sprintf("%s?aktion=grab_picture", $MyURL),
 		channels => \@chans,
     host     => $CONFIG{VDR_HOST}
@@ -4735,7 +4769,7 @@ sub about {
 # experimental
 #############################################################################
 sub grab_picture {
-	my $size = $q->param("size");
+	my $size = $q->param("size") ? $q->param("size") : "half";
 	my $maxwidth = 768;
 	my $maxheight = 576;
 	my($width, $height);
@@ -4826,7 +4860,7 @@ sub vdr_cmds {
 		show_output => \@show_output,
 		max_lines   => $q->param("max_lines") ? $q->param("max_lines") : 20,
 		svdrp_cmd   => $svdrp_cmd,
-		vdr_cmd     => $q->param("vdr_cmd"),
+		vdr_cmd     => $q->param("vdr_cmd") ? $q->param("vdr_cmd") : undef,
 		usercss     => $UserCSS
   };
   $template->param($vars);
@@ -4935,7 +4969,7 @@ sub myconnect {
 		PeerAddr => $CONFIG{VDR_HOST}, 
 		PeerPort => $CONFIG{VDR_PORT}, 
 		Proto => 'tcp'
-	) || main::HTMLError(sprintf($ERROR_MESSAGE{connect_failed}, $CONFIG{VDR_HOST})) && return;
+	) || main::HTMLError(sprintf($ERROR_MESSAGE{connect_failed}, $CONFIG{VDR_HOST}, $CONFIG{VDR_PORT})) && return;
 
 	my $line;
 	$line = <$SOCKET>;
@@ -4984,9 +5018,9 @@ sub command {
 	
 	main::Log(LOG_VDRCOM, sprintf("LOG_VDRCOM: send \"%s\"", $cmd));
 	$cmd = $cmd . CRLF;
-	if($SOCKET) {
+	if($SOCKET && $SOCKET->connected()) {
 		my $result = send($SOCKET, $cmd, 0);
-		if($result != length($cmd)) {
+		if($result != length($cmd)) {	#TODO: ???
 			main::HTMLError(sprintf($ERROR_MESSAGE{send_command}, $CONFIG{VDR_HOST}));
 		} else {
 			$query = true;
@@ -5006,7 +5040,7 @@ sub readoneline {
     return($line);
   }
 
-	if($connected && $query) {
+	if($SOCKET && $SOCKET->connected() && $query) {
 		$line = <$SOCKET>;
 		$line =~ s/\r\n$//;
 		if(substr($line, 3, 1) ne "-") {
