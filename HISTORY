@@ -4,6 +4,13 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-05-12: 3.4.5
+- Fixed: crash if /usr/bin/locale is a directory (Reported by pmeyer).
+- Changed: reformated vdradmind.pl using perltidy.
+- Fixed: Only sort by start time in prog_summary if it's a search result (Reported by Toxic-Tonic).
+- Fixed: install russian catalog (Reported by free-x).
+- Added: credits for russian translation to about menu.
+
 2006-04-28: 3.4.5rc
 - Changed: request full "from" email address for sending emails instead of domain only (Requested by siryoda).
 - Changed: no red background for inactive timers in prog_timeline (Requested by Zimbo).

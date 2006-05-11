@@ -20,7 +20,7 @@ EPGIMAGES=${EPGIMAGES:-$VIDEODIR/epgimages}
 VDRCONF=${VDRCONF:-$VIDEODIR}
 EPGDATA=${EPGDATA:-$VIDEODIR/epg.data}
 
-LANGS="de es fr fi nl"
+LANGS="de es fi fr nl ru"
 
 function usage()
 {
