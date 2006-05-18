@@ -152,7 +152,7 @@ function doInstall()
   		echo "Killed running VDRAdmin-AM..."
   	fi
   	sed <vdradmind.pl >$BINDIR/vdradmind.pl \
-  	    -e "s/^my \$SEARCH_FILES_IN_SYSTEM = 0;/my \$SEARCH_FILES_IN_SYSTEM = 1;/" \
+  	    -e "s/^\(my \$SEARCH_FILES_IN_SYSTEM *=\) 0;/\1 1;/" \
   	    -e "s:/usr/share/vdradmin/lib:${LIBDIR}/lib:" \
   	    -e "s:/usr/share/vdradmin/template:${LIBDIR}/template:" \
   	    -e "s:/var/log/\$CONFIG{LOGFILE}:${LOGDIR}/\$CONFIG{LOGFILE}:" \
