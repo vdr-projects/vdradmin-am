@@ -9,7 +9,7 @@
 }
 
 body {
-	background-color: #c4cdd7;
+	background-color: #ffffff;
 	margin: 3px;
 }
 
@@ -47,8 +47,8 @@ select {
 }
 
 h1 {
-	margin-right: 12px;
-	margin-left: 12px;
+	margin-right: 5px;
+	margin-left: 5px;
 	font-size: 13px;
 	font-weight: bold;
 	color: black;
@@ -61,20 +61,14 @@ h2 {
 	color: black;
 	display: inline;
 }
-h3 {
+h3,
+.epg_title {
 	margin: 0px;
 	font-size: 11px;
 	font-weight: bold;
 	color: black;
 }
-h4 {
-	margin: 0px;
-	font-size: 11px;
-	font-weight: normal;
-	font-style: italic;
-	color: black;
-}
-h5 {
+.col_label h5 {
 	margin: 1px 5px;
 	font-size: 11px;
 	font-weight: normal;
@@ -137,9 +131,7 @@ label + input {
 .footer td.selected,
 .col_left,
 .col_right,
-#timer_new .group .heading,
-#at_timer_new .group .heading,
-#rec_edit .group .heading {
+.heading.optional {
 	display: none;
 }
 body.help .heading {
@@ -151,40 +143,30 @@ body.help .heading {
 .heading {
 	height: 17px;
 }
-.heading td.selected {
-	background-color: #94beee;
-	height: 17px;
-}
 .heading td {
-	background-color: #cdd5e5;
+	background-color: #6d96a9;
 	height: 17px;
 }
 .heading h2,
+.heading .channel_name,
 .heading a {
 	padding-left: 3px;
 	padding-right: 3px;
 	font-weight: bold;
-	font-style: italic;
-	color: black;
+	color: white;
 	margin-top: 0px;
 	white-space: normal;
 }
 .heading a:hover {
-	color: grey;
+	color: white;
 	text-decoration: none;
 }
 
-.row_even td.selected {
-	background-color: #d5def6;
-}
 .row_even td {
-	background-color: #eeeeff;
-}
-.row_odd td.selected {
-	background-color: #dee6f6;
+	background-color: #ffffff;
 }
 .row_odd td {
-	background-color: #f6faff;
+	background-color: #f0faff;
 }
 
 .col_label,
@@ -231,7 +213,7 @@ body.help .heading {
 .list,
 .group {
 	margin-top: 0.6em;
-	border: 1px solid black;
+	border: 1px solid #6d96a9;
 }
 .group td {
 	padding: 2px;
@@ -239,68 +221,180 @@ body.help .heading {
 
 /* Summary */
 #prog_summary .group {
-	margin: 3px; float: left;
+	margin: 3px 3px 0 0;
+	display: inline;
+	float: left;
 }
-#prog_summary h2 {
-	padding: 0px;
-}
-#prog_summary .heading td.col_center {
+#prog_summary .heading td.col_content {
 	height: 17px;
 	width: 246px;
+	color: white;
+	background-color: #6d96a9;
 	white-space: nowrap;
 	overflow: hidden;
 }
-#prog_summary .row_odd td.col_center {
+#prog_summary .row_even td.col_content {
 	width: 246px;
 	height: 200px;
+	background-color: #f0faff;
 	vertical-align: top;
 }
-#prog_summary .date {
+#prog_summary table.content td.col_buttons {
+	height: 200px;
+}
+#prog_summary .col_epg {
+	vertical-align: top;
+}
+#prog_summary .date_long {
 	text-align: right;
 	margin-top: 3px;
 	float: left;
 }
-#prog_summary .duration {
+#prog_summary .time_duration {
 	text-align: right;
 	margin-top: 3px;
 }
-#prog_summary .title {
+#prog_summary .epg_title {
 	margin-top: 1em;
-	width: 246px;
+	width: 216px;
 	overflow: hidden;
 	white-space: nowrap;
 }
-#prog_summary .summary {
+#prog_summary .epg_subtitle {
+	width: 216px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#prog_summary .epg_summary {
 	margin-top: 1em;
 	margin-bottom: 3px;
-	width: 240px;
-	height: 124px;
+	width: 210px;
+	height: 120px;
 	overflow: auto;
 	white-space: normal;
 }
 #prog_summary .heading a {
 	font-weight: bold;
-	font-style: italic;
-	color: black;
+	color: white;
 	padding: 2px 2px;
 }
-#prog_summary .group {
-	margin: 3px;
-	display: inline;
-	float: left;
+
+#prog_summary2 .newday {
+	height: 17px;
+	background-color: #6d96a9;
 }
-#prog_summary tr.footer {
-	display: table-row;
-	background-color: #f6faff;
+#prog_summary2 .newday td {
+	padding-left: 3px;
+	font-weight: bold;
+	color: white;
 }
-#prog_summary .footer td.col_center {
-	display: table-cell;
-	height: 22px;
-	width: 246px;
-	border-top: 1px solid black;
-	vertical-align: middle;
+#prog_summary2 .epg_title,
+#prog_summary2 .channel_name {
+	display: block;
+}
+#prog_summary2 .epg_subtitle {
+	font-size: 11px;
+	font-weight: normal;
+	color: black;
+	display: block;
+}
+#prog_summary2 .col_buttons {
+	width: 120px;
+	text-align: right;
+	padding-right: 3px;
 	white-space: nowrap;
+}
+#prog_summary2 table.percent {
+	height: 8px;
+	width: 80px;
+	border: 1px solid #6d96a9;
+}
+#prog_summary2 table.percent .elapsed {
+	background-color: #6d96a9;
+}
+#prog_summary2 table.percent .remaining {
+	background-color: none;
+}
+
+#prog_detail .heading .col_content * {
+	color: white;
+	font-weight: bold;
+}
+#prog_detail .channel_name {
+	white-space: nowrap;
+}
+#prog_detail .date_long {
+	margin-left: 2em;
+	white-space: nowrap;
+}
+#prog_detail .time_duration {
+	margin-left: 2em;
+	white-space: nowrap;
+}
+#prog_detail .epg_title {
+	display: block;
+}
+#prog_detail .epg_subtitle {
+	font-size: 11px;
+	font-weight: normal;
+	color: black;
+	display: block;
+}
+#prog_detail .epg_summary {
+	margin: 2em 0;
+	display: block;
+}
+#prog_detail .epg_video h4,
+#prog_detail .epg_audio h4 {
+	margin: 0;
+	font-size: 10px;
+	font-weight: bold;
+}
+#prog_detail .epg_video h5,
+#prog_detail .epg_audio h5 {
+	margin-left: 1em;
+	display: inline;
+	font-size: 10px;
+	font-weight: normal;
+	font-style: italic;
+}
+#prog_detail .col_epg {
+	padding: 1em;
+}
+#prog_summary .row_even td.col_content,
+#prog_detail .row_even td.col_content {
+	padding: 0;
+}
+#prog_summary table.content td.col_buttons,
+#prog_detail table.content td.col_buttons {
+	padding-top: 1em;
+	vertical-align: top;
+	width: 20px;
 	text-align: center;
+	background-color: #f0faff;
+	border-right: 1px solid #6d96a9;
+}
+#prog_summary table.content td.col_buttons .item,
+#prog_detail table.content td.col_buttons .item {
+	padding: 2px 0;
+	width: 20px;
+	text-align: center;
+}
+
+#prog_list .heading td span,
+#prog_list .heading td {
+	vertical-align: bottom;
+}
+#prog_list .date_long {
+	color: white;
+	font-weight: bold;
+	padding: 0 2em;
+}
+#prog_list .col_buttons {
+	width: 40px;
+	text-align: right;
+	padding-right: 3px;
+	white-space: nowrap;
 }
 
 #content {
@@ -310,11 +404,15 @@ body.help .heading {
 .col_duration {
 	padding-left: 3px;
 	padding-right: 3px;
-	width: 120px;
+	width: 100px;
 	vertical-align: top;
 }
+.col_duration a:hover {
+	color: black;
+}
+	
 .col_name,
-.col_title * {
+#content .col_title * {
 	padding-left: 3px;
 	padding-right: 3px;
 	min-width: 50px;
@@ -322,7 +420,7 @@ body.help .heading {
 }
 .col_info,
 .col_record {
-	width: 65px;
+	width: 16px;
 	text-align: center;
 }
 .col_active {
@@ -343,17 +441,17 @@ body.help .heading {
 .col_stream,
 .col_checkbox {
 	text-align: center;
-	width: 30px;
-	max-width: 30px;
+	width: 16px;
+	max-width: 16px;
 }
 
 #heading {
-	height: 39px;
-	border: 1px dotted black;
+	height: 29px;
+	border: 1px solid #6d96a9;
 }
 #heading tr {
 	vertical-align: middle;
-	background-color: #dedeee;
+	background-color: #f0faff;
 }
 #heading td {
 	vertical-align: middle;
@@ -391,9 +489,15 @@ body.help .heading {
 #prog_timeline .color_timer {
 	background-color: #ffeee9;
 }
-
+#prog_timeline2 .col_channel {
+	width: 150px;
+	border: 1px solid #6d96a9;
+}
 #rec_list #path {
 	margin: 1em 10px 0px 10px;
+}
+#rec_edit .col_value {
+	white-space: normal;
 }
 
 #timer_list .blackline {
@@ -417,18 +521,11 @@ body.help .heading {
 }
 #prog_timeline .row_even table td.color1,
 #timer_list .row_even table td.color1 {
-	background-color: #e6eff9;
+	background-color: #ffffff;
 }
 #prog_timeline .row_even table td.color2,
 #timer_list .row_even table td.color2 {
-	background-color: #d5dee8;
-}
-
-#prog_detail td {
-	white-space: normal;
-}
-#prog_detail .heading h2 {
-	white-space: normal;
+	background-color: #f0faff;
 }
 
 #vdr_cmds pre {
@@ -443,22 +540,66 @@ body.help .heading {
 	margin-top: 0.5em;
 }
 #buttons {
-	border: 1px solid black;
+	border: 1px solid #6d96a9;
 	padding: 3px;
 	margin-top: 1em;
 	margin-bottom: 1em;
-	background-color: #acb2ac;
+	background-color: #f0faff;
 	text-align: right;
 }
 
+#config .heading {
+	background-color: #f0faff;
+	border: none;
+}
+#config .heading a {
+	color: black;
+	font-weight: normal;
+}
+.tabs td {
+	padding: 0;
+	margin: 0;
+	background-color: transparent;
+	border-bottom: 2px solid #6d96a9;
+}
+.tab_selected a {
+	color: white;
+	margin: 1px 3px;
+}
+.tab_unselected a {
+	color: black;
+	margin: 1px 3px;
+}
+.tab_selected {
+	border-right: 1px solid #6d96a9;
+	background-color: #6d96a9;
+	color: white;
+	font-weight: bold;
+}
+.tab_unselected {
+	border-right: 1px solid #6d96a9;
+	background-color: white;
+	color: black;
+}
+#about .col_label,
+#config .col_label {
+	width: 100px;
+}
+#about .col_label h5 {
+	white-space: nowrap;
+}
+
 /* Tooltips */
+.tt_border {
+	border: 2px solid white;
+}
 .tt_table {
 	width: 250px;
-	border: 2px solid #838183;
-	background-color: #acb2ac;
+	border: 2px solid #6d96a9;
+	background-color: #f0faff;
 }
 .tt_table th {
-	background-color: #838183;
+	background-color: #6d96a9;
 	font-weight: bold;
 	color: white;
 	padding-left: 2px;
@@ -488,7 +629,7 @@ body.help .heading {
 	font-weight: bold;
 	font-style: italic;
 	letter-spacing: 0.5em;
-	background-color: gray;
+	background-color: #6d96a9;
 	color: white;
 	padding: 2px 5px;
 }
@@ -510,7 +651,7 @@ body.help .heading {
 }
 #help .links {
 	padding: 5px;
-	background-color: silver;
+	background-color: #f0faff;
 	text-align: justify;
 }
 #help .links a {
@@ -523,7 +664,7 @@ body.help .heading {
 }
 #help .group {
 	margin-top: 0.6em;
-	border: 1px solid black;
+	border: 1px solid #6d96a9;
 	white-space: normal;
 }
 #help .group p {
@@ -532,7 +673,7 @@ body.help .heading {
 #help .top_link {
 	text-align: right;
 	font-size: 0.8em;
-	background-color: silver;
+	background-color: #f0faff;
 	padding: 1px 5px;
 	margin: 0px;
 }
@@ -542,7 +683,7 @@ body.help .heading {
 	margin: 0px;
 }
 #navigation .nav_bar {
-	border: 1px solid black;
+	border: 1px solid #6d96a9;
 	padding: 1em 0px;
 }
 #navigation .logo {
@@ -557,7 +698,7 @@ body.help .heading {
 	text-align: center;
 }
 #navigation .navi:hover {
-	background-color: #dedede;
+	background-color: #f0faff;
 }
 #navigation .search {
 	padding-top: 6px;
@@ -570,7 +711,7 @@ body.help .heading {
 #navigation a,
 #navigation a:visited,
 #navigation a:active {
-	color: black;
+	color: #436976;
 	font-weight: bold;
 	text-decoration: none;
 	border: 0px;

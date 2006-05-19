@@ -1,17 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
+	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
 	<title>VDRAdmin-AM - <%! Configuration !%></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<tmpl_if usercss>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
 	</tmpl_if>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
+	<script type="text/javascript" language="JavaScript">
+		<!--
+		function new_tab(tab_nr)
+		{
+			document.FormName.new_tab.value = tab_nr;
+			document.FormName.apply.click();
+		}
+		//-->
+	</script>
 </head>
 
 <body id="config">
 	<form action="<tmpl_var url>" method="get" name="FormName">
+		<input type="hidden" name="new_tab" value="<?% active_tab %?>"/>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_left"></td>
@@ -27,20 +37,19 @@
 			</tr>
 		</table>
 
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content">
-			<tr>
-				<td valign="top">
-					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
-						<tr class="heading">
-							<td class="col_left"></td>
-							<td colspan="2"><h2><%! General Settings !%></h2></td>
-							<td class="col_right"></td>
-						</tr>
-						<tr class="row_spacer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
+			<tr class="tabs">
+				<td class="col_left"></td>
+				<td colspan="2"><span class=<?% IF active_tab == 0 %?>"tab_selected"<?% ELSE %?>"tab_unselected"<?% END %?>><a href="javascript:new_tab('0')"><%! General Settings !%></a></span><span class=<?% IF active_tab == 1 %?>"tab_selected"<?% ELSE %?>"tab_unselected"<?% END %?>><a href="javascript:new_tab('1')"><%! VDR !%></a></span><span class=<?% IF active_tab == 2 %?>"tab_selected"<?% ELSE %?>"tab_unselected"<?% END %?>><a href="javascript:new_tab('2')"><%! Identification !%></a></span><span class=<?% IF active_tab == 3 %?>"tab_selected"<?% ELSE %?>"tab_unselected"<?% END %?>><a href="javascript:new_tab('3')"><%! Timeline !%></a></span><span class=<?% IF active_tab == 4 %?>"tab_selected"<?% ELSE %?>"tab_unselected"<?% END %?>><a href="javascript:new_tab('4')"><%! AutoTimer !%></a></span><span class=<?% IF active_tab == 5 %?>"tab_selected"<?% ELSE %?>"tab_unselected"<?% END %?>><a href="javascript:new_tab('5')"><%! Timer !%></a></span><span class=<?% IF active_tab == 6 %?>"tab_selected"<?% ELSE %?>"tab_unselected"<?% END %?>><a href="javascript:new_tab('6')"><%! Streaming !%></a></span><span class=<?% IF active_tab == 7 %?>"tab_selected"<?% ELSE %?>"tab_unselected"<?% END %?>><a href="javascript:new_tab('7')"><%! Expert !%></a></span><span class=<?% IF active_tab == 8 %?>"tab_selected"<?% ELSE %?>"tab_unselected"<?% END %?>><a href="javascript:new_tab('8')"><%! Channel Selections !%></a></span></td>
+				<td class="col_right"></td>
+			</tr>
+			<tr class="row_spacer">
+				<td class="col_left"></td>
+				<td colspan="2"></td>
+				<td class="col_right"></td>
+			</tr>
+<?% SWITCH active_tab %?>
+<?% CASE 0 %?> <!-- General Settings -->
 <!-- Only one template, so no need to chose
 						<tr class="row_odd">
 							<td class="col_left"></td>
@@ -107,24 +116,8 @@
 							</td>
 							<td class="col_right"></td>
 						</tr>
-						<tr class="footer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
-					</table>
 
-					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
-						<tr class="heading">
-							<td class="col_left"></td>
-							<td colspan="2"><h2><%! VDR !%></h2></td>
-							<td class="col_right"></td>
-						</tr>
-						<tr class="row_spacer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
+<?% CASE 1 %?> <!-- VDR -->
 						<tr class="row_odd">
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Number of DVB cards: !%></h5></td>
@@ -149,24 +142,8 @@
 							<td class="col_value"><input type="text" name="EPGIMAGES" value="<tmpl_var EPGIMAGES>" size="20" maxlength="256" /></td>
 							<td class="col_right"></td>
 						</tr>
-						<tr class="footer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
-					</table>
 
-					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
-						<tr class="heading">
-							<td class="col_left"></td>
-							<td colspan="2"><h2><%! Identification !%></h2></td>
-							<td class="col_right"></td>
-						</tr>
-						<tr class="row_spacer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
+<?% CASE 2 %?> <!-- Identification -->
 						<tr class="row_odd">
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Username: !%></h5></td>
@@ -200,24 +177,8 @@
 							<td class="col_value"><input type="password" name="PASSWORD_GUEST" value="<tmpl_var PASSWORD_GUEST>" size="12" /></td>
 							<td class="col_right"></td>
 						</tr>
-						<tr class="footer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
-					</table>
 
-					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
-						<tr class="heading">
-							<td class="col_left"></td>
-							<td colspan="2"><h2><%! Timeline !%></h2></td>
-							<td class="col_right"></td>
-						</tr>
-						<tr class="row_spacer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
+<?% CASE 3 %?> <!-- Timeline -->
 						<tr class="row_odd">
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Hours: !%></h5></td>
@@ -239,26 +200,8 @@
 							</td>
 							<td class="col_right"></td>
 						</tr>
-						<tr class="footer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
-					</table>
-				</td>
-				<td width="10"></td>
-				<td valign="top">
-					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
-						<tr class="heading">
-							<td class="col_left"></td>
-							<td colspan="2"><h2><%! AutoTimer !%></h2></td>
-							<td class="col_right"></td>
-						</tr>
-						<tr class="row_spacer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
+
+<?% CASE 4 %?> <!-- AutoTimer -->
 						<tr class="row_odd">
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Active: !%></h5></td>
@@ -336,7 +279,7 @@
 						<tr class="row_even">
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! SMTPAuth password: !%></h5></td>
-							<td class="col_value"><input type="text" name="MAIL_AUTH_PASS" value="<tmpl_var MAIL_AUTH_PASS>" size="20" maxlength="100" /></td>
+							<td class="col_value"><input type="password" name="MAIL_AUTH_PASS" value="<tmpl_var MAIL_AUTH_PASS>" size="20" maxlength="100" /></td>
 							<td class="col_right"></td>
 						</tr>
 						<tr class="row_odd">
@@ -348,24 +291,8 @@
 							</td>
 							<td class="col_right"></td>
 						</tr>
-						<tr class="footer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
-					</table>
 
-					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
-						<tr class="heading">
-							<td class="col_left"></td>
-							<td colspan="2"><h2><%! Timer !%></h2></td>
-							<td class="col_right"></td>
-						</tr>
-						<tr class="row_spacer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
+<?% CASE 5 %?> <!-- Timer -->
 						<tr class="row_odd">
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Priority: !%></h5></td>
@@ -417,25 +344,9 @@
 							</td>
 							<td class="col_right"></td>
 						</tr>-->
-						<tr class="footer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
-					</table>
 
 <tmpl_if ST_FUNC>
-					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
-						<tr class="heading">
-							<td class="col_left"></td>
-							<td colspan="2"><h2><%! Streaming !%></h2></td>
-							<td class="col_right"></td>
-						</tr>
-						<tr class="row_spacer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
+<?% CASE 6 %?> <!-- Streaming -->
 						<tr class="row_odd">
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Live Streaming: !%></h5></td>
@@ -504,25 +415,9 @@
 							<td class="col_right"></td>
 						</tr>
 -->
-						<tr class="footer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
-					</table>
 </tmpl_if>
 
-					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
-						<tr class="heading">
-							<td class="col_left"></td>
-							<td colspan="2"><h2><%! Expert !%></h2></td>
-							<td class="col_right"></td>
-						</tr>
-						<tr class="row_spacer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
+<?% CASE 7 %?> <!-- Expert -->
 						<tr class="row_odd">
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! Read EPG directly using epg.data: !%></h5></td>
@@ -547,28 +442,11 @@
 							</td>
 							<td class="col_right"></td>
 						</tr>
-						<tr class="footer">
-							<td class="col_left"></td>
-							<td colspan="2"></td>
-							<td class="col_right"></td>
-						</tr>
-					</table>
-				</td>
-			</tr>
 
+<?% CASE 8 %?> <!-- Channel Selections -->
 			<tr>
-				<td colspan="3">                  
-					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
-						<tr class="heading">
-							<td class="col_left"></td>
-							<td colspan="3"><h2><%! Channel Selections !%></h2></td>
-							<td class="col_right"></td>
-						</tr>
-						<tr class="row_spacer">
-							<td class="col_left"></td>
-							<td colspan="3"></td>
-							<td class="col_right"></td>
-						</tr>
+				<td colspan="2">                  
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr class="row_odd">
 							<td class="col_left"></td>
 							<td class="col_label"><h5><%! In "Timeline"? !%></h5></td>
@@ -645,12 +523,8 @@
 							</td>
 							<td class="col_right"></td>
 						</tr>
-						<tr class="footer">
-							<td class="col_left"></td>
-							<td colspan="3"></td>
-							<td class="col_right"></td>
-						</tr>
 					</table>
+<?% END %?>
 				</td>
 			</tr>
 		</table>

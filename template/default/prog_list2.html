@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
+	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
 	<title>VDRAdmin-AM - <%! Playing Today !%></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<tmpl_if usercss>
@@ -25,23 +25,34 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_left"></td>
-				<td class="col_title"><h1><tmpl_var title></h1></td>
+				<td class="col_title">
+					<h1><tmpl_var title></h1>
+					<%! starting at !%>
+					<input type="text" size="5" maxlength="5" value="<tmpl_var now>" name="time"/>
+					<%! o'clock !%>
+				</td>
 				<td class="col_other">
 					<tmpl_if prevdayurl>
-						<a href="<tmpl_var prevdayurl>"><img src="bilder/pfeile_nachlinks.gif" border="0" width="28" height="17" /></a>
+						<a href="<tmpl_var prevdayurl>"><img src="bilder/pfeile_nachlinks.gif" border="0" /></a>
 					<tmpl_else>
-						<img src="bilder/pfeile_nachlinks_soft.gif" border="0" width="28" height="17" />
+						<img src="bilder/pfeile_nachlinks_soft.gif" border="0" />
 					</tmpl_if>
+					<select name="days" size="1" onchange="window.open(this.options[this.selectedIndex].value,'main')">
+<tmpl_loop days>
+						<option value="<tmpl_var id>" <tmpl_if sel>selected</tmpl_if>><tmpl_var name>.</option>
+</tmpl_loop>
+					</select>
 					<tmpl_if nextdayurl>
-						<a href="<tmpl_var nextdayurl>"><img src="bilder/pfeile_nachrechts.gif" border="0" width="29" height="17" /></a>
+						<a href="<tmpl_var nextdayurl>"><img src="bilder/pfeile_nachrechts.gif" border="0" /></a>
 					<tmpl_else>
-						<img src="bilder/pfeile_nachrechts_soft.gif" border="0" width="29" height="17" />
+						<img src="bilder/pfeile_nachrechts_soft.gif" border="0" />
 					</tmpl_if>
 				</td>
 				<td class="col_right"></td>
 			</tr>
 		</table>
-		<input type="hidden" name="aktion" value="prog_list" />
+		<input type="hidden" name="aktion" value="prog_list2" />
+		<input type="hidden" name="day" value="<tmpl_var day>" />
 	</form>
 
 	<div id="content">
@@ -51,10 +62,12 @@
 			<tr class="heading">
 				<td class="col_left"></td>
 				<td colspan="4">
-					<h2><a href="<tmpl_var proglink>"><tmpl_var title></a></h2>
+					<span class="channel_name"><a href="<tmpl_var proglink>" title="<%! Channels !%>"><tmpl_var channel_name></a></span>
+					<span class="date_long"><tmpl_var longdate></span>
 					<tmpl_if stream_live_on>
-						&nbsp;<a href="<tmpl_var streamurl>" title="<%! Stream !%>">[S]</a>
+						<a href="<tmpl_var streamurl>" title="<%! Stream !%>"><img src="bilder/stream.gif" border="0" alt="<%! Stream !%>" onmouseover="window.status='<%! Stream !%>';return true" title="<%! Stream !%>" /></a>
 					</tmpl_if>
+					<a href="javascript:callurl('<tmpl_var switchurl>');" title="<%! TV select !%>"><img src="bilder/view.gif" border="0" alt="<%! TV select !%>" onmouseover="window.status='<%! TV select !%>';return true" title="<%! TV select !%>" /></a>
 				</td>
 				<td class="col_right"></td>
 			</tr>
@@ -71,26 +84,30 @@
 					<a id="<tmpl_var anchor>" name="<tmpl_var anchor>"><tmpl_var emit> - <tmpl_var duration></a>
 				</td>
 				<td class="col_title">
-					<h3>
+					<div class="epg_title">
 						<tmpl_if infurl>
-							<a href="javascript:popup('<tmpl_var infurl>');">
+							<a href="javascript:popup('<tmpl_var infurl>');" title="<%! More Information !%>">
 						</tmpl_if>
 						<tmpl_var title>
 						<tmpl_if infurl>
 							</a>
 						</tmpl_if>
-					</h3>
-					<tmpl_if subtitle>
-						<h4><tmpl_var subtitle></h4>
+					</div>
+					<div class="epg_subtitle">
+						<tmpl_if subtitle>
+							<tmpl_var subtitle>
+						<tmpl_else>
+							&nbsp;
+						</tmpl_if>
+					</div>
+				</td>
+				<td class="col_buttons">
+					<tmpl_if infurl>
+						<a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info_button.gif" border="0" title="<%! More Information !%>" alt="info"/></a>
 					<tmpl_else>
-						<br />
+						<img src="bilder/info_button_disabled.gif" border="0" title="<%! No Information !%>" alt="noinfo"/>
 					</tmpl_if>
-				</td>
-				<td class="col_info">
-					<tmpl_if infurl><a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info_button.gif" border="0" /></a><tmpl_else><img src="bilder/info_button_disabled.gif" border="0" /></tmpl_if>
-				</td>
-				<td class="col_record">
-					<a href="<tmpl_var recurl>"><img src="bilder/rec_button.gif" border="0" /></a>
+					<a href="<tmpl_var recurl>"><img src="bilder/rec_button.gif" border="0" title="<%! Record !%>" alt="record"/></a>
 				</td>
 				<td class="col_right"></td>
 			</tr>

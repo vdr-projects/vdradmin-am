@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="refresh" content="600; URL=vdradmin.pl?aktion=prog_timeline" />
-	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
+	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
 	<title>VDRAdmin-AM - <%! What's On Now? !%></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<tmpl_if usercss>
@@ -121,7 +121,7 @@
 				<tr class="heading">
 					<td class="col_left"></td>
 					<td colspan="3" width='<?% breite + seite %?>'><h2><%! Timeline: !%>&nbsp;<?% date.format(akt_sekunde, '%H:%M') %?>&nbsp;<%! o'clock !%>&nbsp;<%! to !%>&nbsp;<?% date.format(bis_sec, '%H:%M') %?>&nbsp;<%! o'clock !%></h2></td>
-					<td class="col_navi"><?% IF akt_stunde <= jetzt_stunde %?><img src="bilder/pfeile_nachlinks_soft.gif" border="0" width="28" height="17" /><?% ELSE %?><a href="<?% nowurl %?>&amp;time=<?% akt_stunde - zeitrahmen | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachlinks.gif" border="0" width="28" height="17" /></a><?% END %?><a href="<?% nowurl %?>&amp;time=<?% bis_stunde | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachrechts.gif" border="0" width="29" height="17" /></a></td>
+					<td class="col_navi"><?% IF akt_stunde <= jetzt_stunde %?><img src="bilder/pfeile_nachlinks_soft.gif" border="0" /><?% ELSE %?><a href="<?% nowurl %?>&amp;time=<?% akt_stunde - zeitrahmen | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachlinks.gif" border="0" /></a><?% END %?><a href="<?% nowurl %?>&amp;time=<?% bis_stunde | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachrechts.gif" border="0" /></a></td>
 					<td class="col_right"></td>
 				</tr>
 				<tr class="row_spacer">

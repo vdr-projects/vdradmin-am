@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
+	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
 	<title><tmpl_var title></title>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
@@ -15,8 +15,8 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 		<tr class="heading">
 			<td class="col_left"></td>
-			<td>
-				<h2><tmpl_var channel_name><tmpl_if date>&nbsp;|&nbsp;<tmpl_var date>&nbsp;&nbsp;&nbsp;<tmpl_var start>&nbsp;-&nbsp;<tmpl_var stop></tmpl_if></h2>
+			<td class="col_content">
+				<span class="channel_name"><tmpl_var channel_name></span><tmpl_if date><span class="date_long"><tmpl_var date></span><span class="time_duration"><span class="time_start"><tmpl_var start></span> - <span class="time_stop"><tmpl_var stop></span></span></tmpl_if>
 			</td>
 			<td class="col_right"></td>
 		</tr>
@@ -27,30 +27,56 @@
 		</tr>
 		<tr class="row_even">
 			<td class="col_left"></td>
-			<td>
-				<h3><tmpl_var title></h3>
-				<tmpl_if subtitle>
-					<h4><tmpl_var subtitle></h4>
-				</tmpl_if>
-				<br />
-				<tmpl_var text><br /><br />
-				<tmpl_if epgimages>
-					<tmpl_loop epgimages>
-						<img src="<tmpl_var image>"/>
-					</tmpl_loop>
-					<br /><br />
-				</tmpl_if>
-				&nbsp;<a href="javascript:window.close()">[<%! close !%>]</a>
-				<tmpl_if date>
-					&nbsp;<a href="javascript:callurl('<tmpl_var switchurl>')">[<%! view !%>]</a>
-					<tmpl_if recurl>
-						&nbsp;<a href="javascript:window.close();opener.location.href='<tmpl_var recurl>'">[<%! record !%>]</a>
-					</tmpl_if>
-					&nbsp;<a href="vdradmin.pl?search=<tmpl_var find_title>&amp;aktion=prog_summary&amp;submit=go11"  target="main">[<%! search !%>]</a>
-				</tmpl_if>
-				<tmpl_if imdburl>
-					&nbsp;<a href="<tmpl_var imdburl>" target="_blank" title="<%! Lookup movie in the Internet-Movie-Database (IMDb) !%>">[IMDb]</a>
-				</tmpl_if>
+			<td class="col_content">
+				<table border="0" cellspacing="0" cellpadding="0" class="content">
+					<tr>
+						<td class="col_buttons">
+							<span class="item"><a href="javascript:window.close()"><img src="bilder/close.gif" border="0" alt="<%! close !%>" onmouseover="window.status='<%! close !%>';return true" title="<%! close !%>" /></a></span>
+							<tmpl_if date>
+								<tmpl_if switchurl>
+									<span class="item"><a href="javascript:callurl('<tmpl_var switchurl>')"><img src="bilder/sum_view.gif" border="0" alt="<%! view !%>" onmouseover="window.status='<%! view !%>';return true" title="<%! view !%>" /></a></span>
+								</tmpl_if>
+								<tmpl_if recurl>
+									<span class="item"><a href="javascript:window.close();opener.location.href='<tmpl_var recurl>'"><img src="bilder/sum_rec.gif" border="0" alt="<%! record !%>" onmouseover="window.status='<%! record !%>';return true" title="<%! record !%>" /></a></span>
+								</tmpl_if>
+								<span class="item"><a href="vdradmin.pl?search=<tmpl_var find_title>&amp;aktion=prog_summary&amp;submit=go11" target="main"><img src="bilder/sum_find.gif" border="0" alt="<%! search !%>" onmouseover="window.status='<%! search !%>';return true" title="<%! search !%>" /></a></span>
+							</tmpl_if>
+							<tmpl_if imdburl>
+								<span class="item"><a href="<tmpl_var imdburl>" target="_blank" title="<%! Lookup movie in the Internet-Movie-Database (IMDb) !%>"><img src="bilder/imdb.gif" border="0" alt="IMDb" onmouseover="window.status='IMDb';return true" title="IMDb" /></a></span>
+							</tmpl_if>
+						</td>
+						<td class="col_epg">
+							<div class="epg_title"><tmpl_var title></div>
+							<tmpl_if subtitle>
+								<div class="epg_subtitle"><tmpl_var subtitle></div>
+							</tmpl_if>
+							<div class="epg_summary"><tmpl_var text></div>
+							<tmpl_if video>
+								<div class="epg_video">
+									<h4><%! Video tracks: !%></h4>
+									<tmpl_loop video>
+										<h5><%! Language: !%></h5> <tmpl_var lang> <h5><%! Format: !%></h5> <tmpl_var format><br />
+									</tmpl_loop>
+								</div>
+							</tmpl_if>
+							<tmpl_if audio>
+								<div class="epg_audio">
+									<h4><%! Audio tracks: !%></h4>
+									<tmpl_loop audio>
+										<h5><%! Language: !%></h5> <tmpl_var lang> <h5><%! Description: !%></h5> <tmpl_var descr><br />
+									</tmpl_loop>
+								</div>
+							</tmpl_if>
+							<tmpl_if epgimages>
+								<div class="epg_images">
+									<tmpl_loop epgimages>
+										<img src="<tmpl_var image>"/>
+									</tmpl_loop>
+								</div>
+							</tmpl_if>
+						</td>
+					</tr>
+				</table>
 			</td>
 			<td class="col_right"></td>
 		</tr>

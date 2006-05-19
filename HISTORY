@@ -4,6 +4,17 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-05-19: 3.4.6beta
+- Added: "next" shortcut in prog_summary to show events starting after the current event (Based on patch by Joachim).
+- Added: added selectbox in prog_summary to quickly show the epg at a given time (uses times configured in timeline config).
+- Added: list view in prog_summary which includes a graphical elapsed time representation (Based on patch by Joachim).
+- Added: selectbox in prog_list2 to quickly jump to a day's epg.
+- Reworked: prog_detail (incl. recording's details).
+- Changed: cleaned config menu.
+- Removed: "bilder" and "copper" theme".
+- Added: "default.png" theme (nice PNG images, extracted from KDE's Crystal icons).
+- Reworked: "default" theme (ugly GIF images, extracted and converted from KDE's kdeclassic icons).
+
 2006-05-18: 3.4.5a
 - Fixed: install.sh problem due to reformated vdradmind.pl :( (Reported by several people).
 

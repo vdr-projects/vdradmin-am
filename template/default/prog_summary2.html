@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+	<meta http-equiv="refresh" content="600; URL=vdradmin.pl?aktion=prog_summary" />
+	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
+	<title>VDRAdmin-AM - <%! What's On Now? !%></title>
+	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+	<tmpl_if usercss>
+		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
+	</tmpl_if>
+	<script type="text/javascript" language="JavaScript" src="library.js"></script>
+</head>
+
+<body id="prog_summary2">
+	<form action="<tmpl_var url>" method="get" name="FormName">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
+			<tr>
+				<td class="col_left"></td>
+				<td class="col_title">
+					<h1><tmpl_var title></h1>
+				</td>
+				<td class="col_other">
+					[<a href="<tmpl_var switchview_url>"><tmpl_var switchview_text></a>]
+				</td>
+<tmpl_if times>
+				<td class="col_other">
+					<%! What's on: !%>&nbsp;
+					<select name="select_time" size="1" class="submit" onchange="window.open(this.options[this.selectedIndex].value,'main')">
+	<tmpl_loop times>
+						<option value="<tmpl_var id>" <tmpl_if sel>selected</tmpl_if>><tmpl_var name></option>
+	</tmpl_loop>
+					</select>
+					<%! at !%>&nbsp;<input type="text" name="time" size="5" value="<tmpl_var now>" />&nbsp;<%! o'clock !%>
+				</td>
+</tmpl_if>
+				<td class="col_right"></td>
+			</tr>
+		</table>
+		<input type="hidden" name="aktion" value="prog_summary" />
+
+		<table border="0" cellspacing="0" cellpadding="0" width="100%" class="list" id="content">
+			<tr class="heading optional">
+				<td class="col_left"></td>
+				<td colspan="4"></td>
+				<td class="col_right"></td>
+			</tr>
+			<tr class="row_spacer">
+				<td class="col_left"></td>
+				<td colspan="4"></td>
+				<td class="col_right"></td>
+			</tr>
+
+			<?%
+				tr_class = "row_odd";
+				olddate = "";
+			%?>
+
+<?% FOREACH broadcast = rows;
+		IF broadcast.longdate;
+			IF olddate != broadcast.date;
+				olddate = broadcast.date; %?>
+				<tr class="newday">
+					<td class="col_left"></td>
+					<td colspan="4"><span class="date_long"><?% broadcast.longdate %?></span></td>
+					<td class="col_right"></td>
+				</tr>
+			<?% END %?>
+			<tr class="<?% tr_class %?>">
+				<td class="col_left"></td>
+				<td class="col_duration">
+					<span class="time_duration"><span class="time_start"><?% broadcast.start %?></span> - <span class="time_stop"><?% broadcast.stop %?></span></span>
+					<?% IF broadcast.show_percent %?>
+						<table border="0" cellspacing="0" cellpadding="0" class="percent" title="<?% broadcast.elapsed_min %?>min&nbsp;/&nbsp;<?% broadcast.length_min %?>min">
+							<tr>
+								<td class="elapsed" width="<?% broadcast.percent %?>%"><img src="bilder/spacer.gif" width="1px" height="1px"/></td>
+								<td class="remaining"><img src="bilder/spacer.gif" width="1px" height="1px"/></td>
+							</tr>
+						</table>
+					<?% END %?>
+				</td>
+				<td class="col_center">
+					<div class="epg_title">
+						<?% IF broadcast.summary %?>
+							<a href="javascript:popup('<?% broadcast.infurl %?>');" title="<%! More Information !%>">
+						<?% END %?>
+						<?% broadcast.title %?>
+						<?% IF broadcast.summary %?>
+							</a>
+						<?% END %?>
+					</div>
+					<?% IF broadcast.subtitle %?>
+						<div class="epg_subtitle"><?% broadcast.subtitle %?></div>
+					<?% ELSE %?>
+						<div class="epg_subtitle">&nbsp;</div>
+					<?% END %?>
+				</td>
+				<td class="col_channel">
+					<a id="<?% broadcast.anchor %?>" name="<?% broadcast.anchor %?>"></a>
+					<div class="channel_name"><a href="<?% broadcast.proglink %?>" title="<%! Channels !%>"><?% broadcast.progname %?></a></div>
+				</td>
+				<td class="col_buttons">
+					<?% IF broadcast.stream_live_on %?>
+						<a href="<?% broadcast.streamurl %?>"><img src="bilder/stream.gif" border="0" alt="<%! Stream !%>" onmouseover="window.status='<%! Stream !%>';return true" title="<%! Stream !%>" /></a>
+					<?% END %?>
+					<?% IF broadcast.recurl %?>
+						<a href="javascript:callurl('<?% broadcast.switchurl %?>');"><img src="bilder/sum_view.gif" border="0" alt="<%! TV select !%>" onmouseover="window.status='<%! TV select !%>';return true" title="<%! TV select !%>" /></a>
+						<a href="vdradmin.pl?search=<?% broadcast.find_title %?>&amp;aktion=prog_summary&amp;submit=go11"><img src="bilder/sum_find.gif" border="0" alt="<%! Search for other show times !%>" onmouseover="window.status='<%! Search for other show times !%>';return true" title="<%! Search for other show times !%>" /></a>
+						<?% IF broadcast.summary %?>
+							<a href="javascript:popup('<?% broadcast.infurl %?>');"><img src="bilder/sum_info.gif" border="0" alt="<%! More Information !%>" onmouseover="window.status='<%! More Information !%>';return true" title="<%! More Information !%>" /></a>
+						<?% ELSE %?>
+							<img src="bilder/sum_info_disabled.gif" border="0" alt="noinfo" title="<%! No Information !%>" />
+						<?% END %?>
+						<a href="<?% broadcast.recurl %?>"><img src="bilder/sum_rec.gif" border="0" alt="<%! Record !%>" onmouseover="window.status='<%! Record !%>';return true" title="<%! Record !%>" /></a>
+						<?% IF broadcast.imdburl %?>
+							<a href="<tmpl_var broadcast.imdburl>" target="_blank" title="<%! Lookup movie in the Internet-Movie-Database (IMDb) !%>"><img src="bilder/imdb.gif" border="0" alt="IMDb" onmouseover="window.status='IMDb';return true" title="IMDb" /></a>
+						<?% END %?>
+					<?% END %?>
+				</td>
+				<td class="col_right"></td>
+			</tr>
+
+			<?% tr_class = (tr_class == "row_odd") ? "row_even" : "row_odd";
+		END;
+END %?>
+			<tr class="footer">
+				<td class="col_left"></td>
+				<td colspan="4"></td>
+				<td class="col_right"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

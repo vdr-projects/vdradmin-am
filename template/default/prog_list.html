@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
+	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
 	<title>VDRAdmin-AM - <%! Channels !%></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<tmpl_if usercss>
@@ -18,9 +18,9 @@
 				<td class="col_left"></td>
 				<td class="col_title">
 					<h1>
-						<a href="javascript:callurl('<tmpl_var switchurl>');"><tmpl_var progname></a>&nbsp;&nbsp;
+						<a href="javascript:callurl('<tmpl_var switchurl>');" title="<%! TV select !%>"><tmpl_var progname></a>
 <tmpl_if stream_live_on>
-						<a href="<tmpl_var streamurl>" title="<%! Stream !%>">[S]<!--<img src="bilder/stream.gif" alt="stream" title="<%! Stream !%>" height="17" align="middle" border="0" />--></a>
+						<a href="<tmpl_var streamurl>" title="<%! Stream !%>"><img src="bilder/stream.gif" border="0" alt="<%! Stream !%>" onmouseover="window.status='<%! Stream !%>';return true" title="<%! Stream !%>" /></a>
 </tmpl_if>
 					</h1>
 				</td>
@@ -44,15 +44,27 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 			<tr class="heading">
 				<td class="col_left"></td>
-				<td colspan="3"><h2><tmpl_var title></h2></td>
+				<td colspan="2">
+					<span class="channel_name"><tmpl_var progname></span>
+					<span class="date_long"><tmpl_var longdate></span>
+				</td>
 				<td class="col_navi">
-					<tmpl_if prev_channel><a href="<tmpl_var prev_channel>"><img src="bilder/pfeile_nachlinks.gif" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachlinks_soft.gif" border="0" /></tmpl_if><tmpl_if next_channel><a href="<tmpl_var next_channel>"><img src="bilder/pfeile_nachrechts.gif" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachrechts_soft.gif" border="0" /></tmpl_if>
+					<tmpl_if prev_channel>
+						<a href="<tmpl_var prev_channel>"><img src="bilder/pfeile_nachlinks.gif" border="0" /></a>
+					<tmpl_else>
+						<img src="bilder/pfeile_nachlinks_soft.gif" border="0" />
+					</tmpl_if>
+					<tmpl_if next_channel>
+						<a href="<tmpl_var next_channel>"><img src="bilder/pfeile_nachrechts.gif" border="0" /></a>
+					<tmpl_else>
+						<img src="bilder/pfeile_nachrechts_soft.gif" border="0" />
+					</tmpl_if>
 				</td>
 				<td class="col_right"></td>
 			</tr>
 			<tr class="row_spacer">
 				<td class="col_left"></td>
-				<td colspan="4"></td>
+				<td colspan="3"></td>
 				<td class="col_right"></td>
 			</tr>
 	<tmpl_else>
@@ -63,30 +75,28 @@
 					<a name="<tmpl_var anchor>"><tmpl_var emit> - <tmpl_var duration></a>
 				</td>
 				<td class="col_title">
-					<h3>
+					<div class="epg_title">
 					<tmpl_if infurl>
-						<a href="javascript:popup('<tmpl_var infurl>');">
+						<a href="javascript:popup('<tmpl_var infurl>');" title="<%! More Information !%>">
 					</tmpl_if>
 					<tmpl_var title>
 					<tmpl_if infurl>
 						</a>
 					</tmpl_if>
-					</h3>
+					</div>
 					<tmpl_if subtitle>
-						<h4><tmpl_var subtitle></h4>
+						<div class="epg_subtitle"><tmpl_var subtitle></div>
 					<tmpl_else>
 						<br />
 					</tmpl_if>
 				</td>
-				<td class="col_info">
+				<td class="col_buttons">
 					<tmpl_if infurl>
-						<a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info_button.gif" border="0" alt="info" /></a>
+						<a href="javascript:popup('<tmpl_var infurl>');" title="<%! More Information !%>"><img src="bilder/info_button.gif" border="0" alt="info" /></a>
 					<tmpl_else>
-						<img src="bilder/info_button_disabled.gif" border="0" alt="noinfo" />
+						<img src="bilder/info_button_disabled.gif" border="0" alt="noinfo" title="<%! No Information !%>" />
 					</tmpl_if>
-				</td>
-				<td class="col_record">
-					<a href="<tmpl_var recurl>"><img src="bilder/rec_button.gif" border="0" alt="record" /></a>
+					<a href="<tmpl_var recurl>"><img src="bilder/rec_button.gif" border="0" alt="record" title="<%! Record !%>" /></a>
 				</td>
 				<td class="col_right"></td>
 			</tr>
@@ -95,7 +105,7 @@
 	<tmpl_if endd>
 			<tr class="footer">
 				<td class="col_left"></td>
-				<td colspan="4"></td>
+				<td colspan="3"></td>
 				<td class="col_right"></td>
 			</tr>
 		</table>

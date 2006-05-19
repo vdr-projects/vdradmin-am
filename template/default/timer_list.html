@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
+	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
 	<title>VDRAdmin-AM - <%! Timer !%></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<tmpl_if usercss>
@@ -202,6 +202,7 @@
 
 		<form action="<tmpl_var url>" method="get" name="FormName">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
+				<!-- TODO: this breaks IE, but why?
 				<colgroup>
 					<col class="col_left"/>
 					<col class="col_active"/>
@@ -214,7 +215,7 @@
 					<col class="col_delete"/>
 					<col class="col_checkbox"/>
 					<col class="col_right"/>
-				</colgroup>
+				</colgroup>-->
 				<tr class="heading">
 					<td class="col_left"></td>
 					<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>">
@@ -307,16 +308,16 @@
 						<div>
 							<a href="javascript:change('<%! Edit timer status? !%>','<tmpl_var toggleurl>&amp;timer=<?% current %?>');">
 							<tmpl_if expr="(active%32768) == 0">
-								<img src="bilder/poempl_grau.gif" alt="inactive" title="<%! This timer is inactive! !%>" width="19" height="19" align="middle" border="0" />
+								<img src="bilder/poempl_grau.gif" alt="inactive" title="<%! This timer is inactive! !%>" align="middle" border="0" />
 							<tmpl_else>
 								<tmpl_if critical>
-									<img src="bilder/poempl_rot.gif" alt="impossible" title="<%! This timer is impossible! !%>" width="19" height="19" align="middle" border="0" />
+									<img src="bilder/poempl_rot.gif" alt="impossible" title="<%! This timer is impossible! !%>" align="middle" border="0" />
 								<tmpl_else>
 									<tmpl_if collision>
-										<img src="bilder/poempl_gelb.gif" alt="nomore" title="<%! No more timers on other transponders possible! !%>" width="19" height="19" align="middle" border="0" />
+										<img src="bilder/poempl_gelb.gif" alt="nomore" title="<%! No more timers on other transponders possible! !%>" align="middle" border="0" />
 									<tmpl_else>
 										<tmpl_if active>
-											<img src="bilder/poempl_gruen.gif" alt="possible" title="<%! Timer OK. !%>" width="19" height="19" align="middle" border="0" />
+											<img src="bilder/poempl_gruen.gif" alt="possible" title="<%! Timer OK. !%>" align="middle" border="0" />
 										</tmpl_if>
 									</tmpl_if>
 								</tmpl_if>
@@ -351,10 +352,10 @@
 						</div>
 					</td>
 					<td class="col_edit">
-						<div><a href="<tmpl_var modurl>"><img src="bilder/edit.gif" alt="edit" title="<%! Edit !%>" height="17" width="17" border="0" /></a></div>
+						<div><a href="<tmpl_var modurl>"><img src="bilder/edit.gif" alt="edit" title="<%! Edit !%>" border="0" /></a></div>
 					</td>
 					<td class="col_delete">
-						<div><a href="javascript:del('<%! Delete timer? !%>\n\n&quot;<tmpl_var title_js>&quot;','<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" title="<%! Delete !%>" height="17" width="17" border="0" /></a></div>
+						<div><a href="javascript:del('<%! Delete timer? !%>\n\n&quot;<tmpl_var title_js>&quot;','<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" title="<%! Delete !%>" border="0" /></a></div>
 					</td>
 					<td class="col_checkbox">
 						<div><input type="checkbox" name="xxxx_<tmpl_var id>" /></div>

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>" />
+	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
 	<title><%! About !%></title>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
@@ -11,7 +11,7 @@
 	</tmpl_if>
 </head>
 
-<body id="rec_list" onload="window.focus()">
+<body id="about" onload="window.focus()">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 		<tr class="heading">
 			<td class="col_left"></td>
@@ -25,13 +25,13 @@
 		</tr>
 		<tr class="row_even">
 			<td class="col_left"></td>
-			<td class="col_label" width="100px"><h4><%! Current author (VDRAdmin-AM branch): !%></h4></td>
+			<td class="col_label"><h5><%! Current author (VDRAdmin-AM branch): !%></h5></td>
 			<td class="col_value"><a href="mailto:mail@andreas.vdr-developer.org">Andreas Mair</a> (<a href="http://andreas.vdr-developer.org" target="_blank">Homepage</a>)</td>
 			<td class="col_right"></td>
 		</tr>
 		<tr class="row_even">
 			<td class="col_left"></td>
-			<td class="col_label"><h4><%! Original author (VDRAdmin): !%></h4></td>
+			<td class="col_label"><h5><%! Original author (VDRAdmin): !%></h5></td>
 			<td class="col_value">Thomas Koch (<a href="http://www.linvdr.org" target="_blank">Homepage</a>)</td>
 			<td class="col_right"></td>
 		</tr>
@@ -55,43 +55,43 @@
 		</tr>
 		<tr class="row_even">
 			<td class="col_left"></td>
-			<td class="col_label" width="100px"><h4><%! Dutch: !%></h4></td>
+			<td class="col_label"><h5><%! Dutch: !%></h5></td>
 			<td class="col_value">Roel Koelewijn</td>
 			<td class="col_right"></td>
 		</tr>
 		<tr class="row_even">
 			<td class="col_left"></td>
-			<td class="col_label" width="100px"><h4><%! English: !%></h4></td>
+			<td class="col_label"><h5><%! English: !%></h5></td>
 			<td class="col_value">Andreas Mair</td>
 			<td class="col_right"></td>
 		</tr>
 		<tr class="row_even">
 			<td class="col_left"></td>
-			<td class="col_label" width="100px"><h4><%! Finnish: !%></h4></td>
+			<td class="col_label"><h5><%! Finnish: !%></h5></td>
 			<td class="col_value">Rolf Ahrenberg</td>
 			<td class="col_right"></td>
 		</tr>
 		<tr class="row_even">
 			<td class="col_left"></td>
-			<td class="col_label" width="100px"><h4><%! French: !%></h4></td>
+			<td class="col_label"><h5><%! French: !%></h5></td>
 			<td class="col_value"><!-- <%! At the moment unmaintained, former translations by: !%> -->Trois Six, Pierre ERRAUD, map, lobotomise, bads</td>
 			<td class="col_right"></td>
 		</tr>
 		<tr class="row_even">
 			<td class="col_left"></td>
-			<td class="col_label" width="100px"><h4><%! German: !%></h4></td>
+			<td class="col_label"><h5><%! German: !%></h5></td>
 			<td class="col_value">Andreas Mair</td>
 			<td class="col_right"></td>
 		</tr>
 		<tr class="row_even">
 			<td class="col_left"></td>
-			<td class="col_label" width="100px"><h4><%! Spanish: !%></h4></td>
+			<td class="col_label"><h5><%! Spanish: !%></h5></td>
 			<td class="col_value">R&uuml;diger Jung</td>
 			<td class="col_right"></td>
 		</tr>
-		<tr class="row_odd">
+		<tr class="row_even">
 			<td class="col_left"></td>
-			<td class="col_label" width="100px"><h4><%! Russian: !%></h4></td>
+			<td class="col_label"><h5><%! Russian: !%></h5></td>
 			<td class="col_value">Oleg Roitburd and Allrussian-forum translation team</td>
 			<td class="col_right"></td>
 		</tr>
@@ -115,13 +115,13 @@
 		</tr>
 		<tr class="row_even">
 			<td class="col_left"></td>
-			<td class="col_label" width="100px"><h4><%! VDRAdmin-AM version: !%></h4></td>
+			<td class="col_label"><h5><%! VDRAdmin-AM version: !%></h5></td>
 			<td class="col_value"><tmpl_var myversion></td>
 			<td class="col_right"></td>
 		</tr>
-		<tr class="row_odd">
+		<tr class="row_even">
 			<td class="col_left"></td>
-			<td class="col_label" width="100px"><h4><%! VDR version: !%></h4></td>
+			<td class="col_label"><h5><%! VDR version: !%></h5></td>
 			<td class="col_value"><tmpl_var vdrversion></td>
 			<td class="col_right"></td>
 		</tr>

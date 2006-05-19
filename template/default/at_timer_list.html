@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;<%! charset=ISO-8859-1 !%>"/>
+	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>"/>
 	<title>VDRAdmin-AM - <%! AutoTimer !%></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css"/>
 	<tmpl_if usercss>
@@ -130,9 +130,9 @@
 				<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>">
 					<div>
 						<tmpl_if active>
-							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_gruen.gif" alt="" width="19" height="19" align="middle" border="0"/> <%! Yes !%></a>
+							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_gruen.gif" alt="" align="middle" border="0"/> <%! Yes !%></a>
 						<tmpl_else>
-							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_grau.gif" alt="" width="19" height="19" align="middle" border="0"/> <%! No !%></a>
+							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_grau.gif" alt="" align="middle" border="0"/> <%! No !%></a>
 						</tmpl_if>
 					</div>
 				</td>
@@ -158,12 +158,12 @@
 				</td>
 				<td class="col_edit">
 					<div>
-						<a href="<tmpl_var modurl>"><img src="bilder/edit.gif" alt="edit" height="17" width="17" border="0" title="<%! Edit !%>"/></a>
+						<a href="<tmpl_var modurl>"><img src="bilder/edit.gif" alt="edit" border="0" title="<%! Edit !%>"/></a>
 					</div>
 				</td>
 				<td class="col_delete">
 					<div>
-						<a href="javascript:del('<%! Delete timer? !%>\n\n&quot;<tmpl_var pattern_js>&quot;', '<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" height="17" width="17" border="0" title="<%! Delete !%>"/></a>
+						<a href="javascript:del('<%! Delete timer? !%>\n\n&quot;<tmpl_var pattern_js>&quot;', '<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" border="0" title="<%! Delete !%>"/></a>
 					</div>
 				</td>
 				<td class="col_checkbox">

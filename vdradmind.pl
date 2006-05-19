@@ -47,7 +47,13 @@ if (eval { require Locale::gettext }) {
 } else {
     die("Locale::gettext or Locale::Messages is required!\n");
 }
-$localemod->import(qw(gettext bindtextdomain textdomain));
+my $can_use_bind_textdomain_codeset = 1;
+unless (eval { $localemod->import(qw(gettext bindtextdomain textdomain bind_textdomain_codeset)) }) {
+    $localemod->import(qw(gettext bindtextdomain textdomain));
+    print("Not using bind_textdomain_codeset(). Please update your Locale::gettext perl module!\n");
+    $can_use_bind_textdomain_codeset = undef;
+}
+    
 
 require File::Temp;
 
@@ -124,7 +130,7 @@ $CONFIG{VDRVFAT}    = 1;
 
 #
 $CONFIG{TEMPLATE}   = "default";
-$CONFIG{SKIN}       = "bilder";
+$CONFIG{SKIN}       = "default";
 $CONFIG{LOGINPAGE}  = 0;
 $CONFIG{RECORDINGS} = 1;
 $CONFIG{LANG}       = "";
@@ -200,7 +206,10 @@ $CONFIG{TV_EXT}       = "m3u";
 $CONFIG{REC_MIMETYPE} = "video/x-mpegurl";
 $CONFIG{REC_EXT}      = "m3u";
 
-my $VERSION       = "3.4.5";
+#
+$CONFIG{PS_VIEW} = "ext";
+
+my $VERSION       = "3.4.6beta";
 my $SERVERVERSION = "vdradmind/$VERSION";
 my $LINVDR        = isLinVDR();
 my $VDRVERSION    = 0;                      # Numeric VDR version, e.g. 10344
@@ -2007,6 +2016,7 @@ sub LoadTranslation {
     );
 
     setlocale(LC_ALL, $CONFIG{LANG});
+    bind_textdomain_codeset("vdradmin", gettext("ISO-8859-1")) if($can_use_bind_textdomain_codeset);
 }
 
 sub HelpURL {
@@ -2212,6 +2222,8 @@ sub ReadConfig {
         #Migrate settings
         #v3.4.5
         $CONFIG{MAIL_FROM} = "autotimer@" . $CONFIG{MAIL_FROMDOMAIN} if ($CONFIG{MAIL_FROM} =~ /from\@address.tld/);
+        #v3.4.6beta
+        $CONFIG{SKIN} = "default.png" if(($CONFIG{SKIN} eq "bilder") || ($CONFIG{SKIN} eq "copper"));
 
     } else {
         print "$CONFFILE doesn't exist. Please run \"$0 --config\"\n";
@@ -2399,7 +2411,7 @@ sub prog_detail {
     my $vdr_id = $q->param("vdr_id");
     my $epg_id = $q->param("epg_id");
 
-    my ($channel_name, $title, $subtitle, $start, $stop, $date, $text, @epgimages);
+    my ($channel_name, $title, $subtitle, $start, $stop, $text, @epgimages);
 
     if ($vdr_id && $epg_id) {
         for (@{ $EPG{$vdr_id} }) {
@@ -2409,10 +2421,9 @@ sub prog_detail {
                 $channel_name = CGI::escapeHTML($_->{channel_name});
                 $title        = CGI::escapeHTML($_->{title});
                 $subtitle     = CGI::escapeHTML($_->{subtitle});
-                $start        = my_strftime("%H:%M", $_->{start});
-                $stop         = my_strftime("%H:%M", $_->{stop});
+                $start        = $_->{start};
+                $stop         = $_->{stop};
                 $text         = CGI::escapeHTML($_->{summary});
-                $date         = my_strftime("%A, %x", $_->{start});
 
                 # find epgimages
                 if ($CONFIG{EPGIMAGES} && -d $CONFIG{EPGIMAGES}) {
@@ -2430,6 +2441,8 @@ sub prog_detail {
     my $displaytitle    = $title;
     my $displaysubtitle = $subtitle;
     my $find_title      = $title;
+    my $find_subtitle   = $subtitle;
+    my $imdb_title      = $title;
 
     $displaytext  =~ s/\n/<br \/>\n/g;
     $displaytext  =~ s/\|/<br \/>\n/g;
@@ -2439,7 +2452,9 @@ sub prog_detail {
         $displaysubtitle =~ s/\n/<br \/>\n/g;
         $displaysubtitle =~ s/\|/<br \/>\n/g;
     }
-    $find_title =~ s/^.*~\([^~]*\)/$1/;
+    $find_title    =~ s/^.*~\([^~]*\)/$1/;
+    $find_subtitle =~ s/^.*~\([^~]*\)/$1/ if($find_subtitle);
+    $imdb_title    =~ s/^.*\~\%*([^\~]*)$/$1/;
 
     # Do not use prog_detail as referer.
     # Use the referer we received.
@@ -2447,18 +2462,20 @@ sub prog_detail {
     my $recurl;
     $recurl = sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $epg_id, $vdr_id, Encode_Referer($referer)) unless ($referer =~ "timer_list");
 
+    my $now = time();
     my $template = TemplateNew("prog_detail.html");
     my $vars = { usercss      => $UserCSS,
                  title        => $displaytitle ? $displaytitle : undef,
                  recurl       => $recurl,
-                 switchurl    => sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $vdr_id),
+                 switchurl    => $start <= $now && $now <= $stop ? sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $vdr_id) : undef,
                  channel_name => $channel_name,
                  subtitle     => $displaysubtitle,
-                 start        => $start,
-                 stop         => $stop,
+                 start        => my_strftime("%H:%M", $start),
+                 stop         => my_strftime("%H:%M", $stop),
                  text         => $displaytext ? $displaytext : undef,
-                 date         => $date,
-                 find_title   => uri_escape($find_title),
+                 date         => my_strftime("%A, %x", $start),
+                 find_title   => uri_escape("/^" . $find_title . "~" . ($find_subtitle ? $find_subtitle : "") . "~/i"),
+                 imdburl      => "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title),
                  epgimages    => \@epgimages
     };
     $template->param($vars);
@@ -2525,7 +2542,8 @@ sub prog_list {
             # new day
             push(@show, { endd => 1 }) if (scalar(@show) > 0);
             push(@show,
-                 {  title => $event->{channel_name} . " | " . my_strftime("%A, %x", $event->{start}),
+                 {  progname => $event->{channel_name},
+                    longdate => my_strftime("%A, %x", $event->{start}),
                     newd  => 1,
                     next_channel => $next_channel ? "$MyURL?aktion=prog_list&amp;vdr_id=$next_channel" : undef,
                     prev_channel => $prev_channel ? "$MyURL?aktion=prog_list&amp;vdr_id=$prev_channel" : undef,
@@ -2553,13 +2571,14 @@ sub prog_list {
     }
 
     #
+    my $now = time();
     my ($template) = TemplateNew("prog_list.html");
     my $vars = { usercss        => $UserCSS,
                  url            => $MyURL,
                  loop           => \@show,
                  chanloop       => \@channel,
                  progname       => GetChannelDescByNumber($vdr_id),
-                 switchurl      => "$MyURL?aktion=prog_switch&amp;channel=" . $vdr_id,
+                 switchurl      => "$MyURL?aktion=prog_switch&amp;channel=$vdr_id",
                  streamurl      => $MyStreamBase . $CONFIG{TV_EXT} . "?aktion=live_stream&amp;channel=" . $vdr_id,
                  stream_live_on => $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
                  toolbarurl     => "$MyURL?aktion=toolbar"
@@ -2611,8 +2630,9 @@ sub prog_list2 {
         }
     }
 
-    my (@show, $progname, $cnumber);
+    my (@show, $progname, $cnumber, %hash_days);
 
+    my $time = getStartTime($q->param("time"));
     foreach (@channel) {    # loop through all channels
         $vdr_id = $_->{vdr_id};
 
@@ -2630,6 +2650,8 @@ sub prog_list2 {
         for my $event (@{ $EPG{$vdr_id} }) {
             my $event_day = my_strftime("%d", $event->{start});
 
+            $hash_days{$event_day} = "$MyURL?aktion=prog_list2&amp;day=$event_day" unless(exists $hash_days{$event_day});
+
             # print("EVENT: " . $event->{title} . " - "  . $event_day . "\n");
             if ($event_day == $day) {
                 $dayflag = 1 if ($dayflag == 0);
@@ -2638,11 +2660,13 @@ sub prog_list2 {
                 $dayflag = 0;
             }
 
-            if ($dayflag == 1) {
+            if ($dayflag == 1 && $time < $event->{stop}) {
                 push(@show,
-                     {  title     => $event->{channel_name} . " | " . my_strftime("%A, %x", $event->{start}),
+                     {  channel_name => $event->{channel_name},
+                        longdate  => my_strftime("%A, %x", $event->{start}),
                         newd      => 1,
                         streamurl => $MyStreamBase . $CONFIG{TV_EXT} . "?aktion=live_stream&amp;channel=" . $event->{vdr_id},
+                        switchurl => "$MyURL?aktion=prog_switch&amp;channel=" . $event->{vdr_id},
                         proglink  => "$MyURL?aktion=prog_list&amp;vdr_id=" . $event->{vdr_id}
                      }
                 );
@@ -2670,10 +2694,24 @@ sub prog_list2 {
         push(@show, { endd => 1 });
     }    # end: for $vdr_id
 
+    my @days;
+    foreach (keys %hash_days) {
+        push(@days,
+             {  name => $_,
+                id   => $hash_days{$_},
+                sel  => $_ == $day ? "1" : undef
+             }
+        );
+    }
+    @days = sort({ $a->{name} <=> $b->{name} } @days);
+
     #
     my ($template) = TemplateNew("prog_list2.html");
     my $vars = {
         title => $day == $current_day ? gettext("Playing Today") : ($day == $current_day + 1 ? gettext("Playing Tomorrow") : sprintf(gettext("Playing on the %d."), $day)),
+        now            => my_strftime("%H:%M", $time),
+        day            => $day,
+        days           => \@days,
         usercss        => $UserCSS,
         url            => $MyURL,
         loop           => \@show,
@@ -3703,19 +3741,8 @@ sub at_timer_test {
     return (header("200", "text/html", $output));
 }
 
-#############################################################################
-# timeline
-#############################################################################
-sub prog_timeline {
-    return if (UptoDate());
-    my $time = $q->param("time");
-
-    my $myself = Encode_Referer($MyURL . "?" . $Query);
-
-    # zeitpunkt bestimmen
-    my $event_time;
-    my $event_time_to;
-
+sub getStartTime {
+    my $time = shift;
     if ($time) {
         my ($hour, $minute);
         if ($time =~ /(\d{1,2})(\D?)(\d{1,2})/) {
@@ -3729,13 +3756,26 @@ sub prog_timeline {
         }
 
         if ($hour <= my_strftime("%H") && $minute < my_strftime("%M")) {
-            $event_time = timelocal(0, $minute, $hour, my_strftime("%d", time + 86400), (my_strftime("%m", time + 86400) - 1), my_strftime("%Y")) + 1;
+            return timelocal(0, $minute, $hour, my_strftime("%d", time + 86400), (my_strftime("%m", time + 86400) - 1), my_strftime("%Y")) + 1;
         } else {
-            $event_time = timelocal(0, $minute, $hour, my_strftime("%d"), (my_strftime("%m") - 1), my_strftime("%Y")) + 1;
+            return timelocal(0, $minute, $hour, my_strftime("%d"), (my_strftime("%m") - 1), my_strftime("%Y")) + 1;
         }
     } else {
-        $event_time = time();
+        return time();
     }
+}
+
+#############################################################################
+# timeline
+#############################################################################
+sub prog_timeline {
+    return if (UptoDate());
+
+    my $myself = Encode_Referer($MyURL . "?" . $Query);
+
+    # zeitpunkt bestimmen
+    my $event_time = getStartTime($q->param("time"));
+    my $event_time_to;
 
     $event_time_to = $event_time + ($CONFIG{ZEITRAHMEN} * 3600);
 
@@ -3826,31 +3866,15 @@ sub prog_timeline {
 #############################################################################
 sub prog_summary {
     return if (UptoDate());
-    my $time   = $q->param("time");
+    my $time = $q->param("time");
     my $search = $q->param("search");
+    my $next = $q->param("next");
+    my $view = $CONFIG{PS_VIEW};
+    $view = $q->param("view") if($q->param("view"));
+    $CONFIG{PS_VIEW} = $view;
 
     # zeitpunkt bestimmen
-    my $event_time;
-    if ($time) {
-        my ($hour, $minute);
-        if ($time =~ /(\d{1,2})(\D?)(\d{1,2})/) {
-            if (length($1) == 1 && length($3) == 1 && !$2) {
-                $hour = $1 . $3;
-            } else {
-                ($hour, $minute) = ($1, $3);
-            }
-        } elsif ($time =~ /\d/) {
-            $hour = $time;
-        }
-
-        if ($hour <= my_strftime("%H") && $minute < my_strftime("%M")) {
-            $event_time = timelocal(0, $minute, $hour, my_strftime("%d", time + 86400), (my_strftime("%m", time + 86400) - 1), my_strftime("%Y")) + 1;
-        } else {
-            $event_time = timelocal(0, $minute, $hour, my_strftime("%d"), (my_strftime("%m") - 1), my_strftime("%Y")) + 1;
-        }
-    } else {
-        $event_time = time();
-    }
+    my $event_time = getStartTime($time);
 
     my $pattern;
     my $mode;
@@ -3875,14 +3899,15 @@ sub prog_summary {
                     }
                     next if (!$f);
                 }
-                next if ($event_time > $event->{stop});
+                next if(!$next && $event_time > $event->{stop});
+                next if($next && $event_time >= $event->{start});
             } else {
                 my ($found);
                 if ($pattern) {
 
                     # We have a RegExp
-                    next if (!length($pattern));
                     next if (!defined($pattern));
+                    next if (!length($pattern));
                     my $SearchStr = $event->{title} . "~" . $event->{subtitle} . "~" . $event->{summary};
 
                     # Shall we search case insensitive?
@@ -3913,6 +3938,7 @@ sub prog_summary {
             my $displaytext     = CGI::escapeHTML($event->{summary});
             my $displaytitle    = CGI::escapeHTML($event->{title});
             my $displaysubtitle = CGI::escapeHTML($event->{subtitle});
+            my $imdb_title      = $event->{title};
 
             $displaytext  =~ s/\n/<br \/>\n/g;
             $displaytext  =~ s/\|/<br \/>\n/g;
@@ -3922,25 +3948,32 @@ sub prog_summary {
                 $displaysubtitle =~ s/\n/<br \/>\n/g;
                 $displaysubtitle =~ s/\|/<br \/>\n/g;
             }
+            $imdb_title      =~ s/^.*\~\%*([^\~]*)$/$1/;
             my $myself = Encode_Referer($MyURL . "?" . $Query);
+            my $running = $event->{start} <= $now && $now <= $event->{stop};
             push(@show,
                  {  date        => my_strftime("%x",     $event->{start}),
                     longdate    => my_strftime("%A, %x", $event->{start}),
                     start       => my_strftime("%H:%M",  $event->{start}),
                     stop        => my_strftime("%H:%M",  $event->{stop}),
                     event_start => $event->{start},
+                    show_percent => $event->{start} <= $now && $now <= $event->{stop} ? "1" : undef,
+                    percent     => int(($now - $event->{start}) / ($event->{stop} - $event->{start}) * 100),
+                    elapsed_min => int(($now - $event->{start}) / 60),
+                    length_min  => int(($event->{stop} - $event->{start}) / 60),
                     title       => $displaytitle,
                     subtitle    => $displaysubtitle,
                     progname    => CGI::escapeHTML($event->{channel_name}),
                     summary     => $displaytext,
                     vdr_id      => $event->{vdr_id},
                     proglink  => sprintf("%s?aktion=prog_list&amp;vdr_id=%s",      $MyURL,        $event->{vdr_id}),
-                    switchurl => sprintf("%s?aktion=prog_switch&amp;channel=%s",   $MyURL,        $event->{vdr_id}),
+                    switchurl => $running ? sprintf("%s?aktion=prog_switch&amp;channel=%s",   $MyURL,        $event->{vdr_id}) : undef,
                     streamurl => sprintf("%s%s?aktion=live_stream&amp;channel=%s", $MyStreamBase, $CONFIG{TV_EXT}, $event->{vdr_id}),
-                    stream_live_on => $event->{start} <= $now && $now <= $event->{stop} ? $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON} : undef,
+                    stream_live_on => $running ? $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON} : undef,
                     infurl => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
                     recurl     => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
-                    find_title => uri_escape($event->{title}),
+                    find_title => uri_escape("/^" . $event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~/i"),
+                    imdburl    => "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title),
                     anchor     => "id" . $event->{event_id}
                  }
             );
@@ -3956,26 +3989,43 @@ sub prog_summary {
         @show = sort({ $a->{vdr_id} <=> $b->{vdr_id} } @show);
     }
 
-    #
-    my @status;
-    for (my $i = 0 ; $i <= $#show ; $i++) {
-        undef(@temp);
-        undef(@status);
-        for (my $z = 0 ; $z < $CONFIG{PROG_SUMMARY_COLS} ; $i++, $z++) {
-            push(@temp,   $show[$i]);
-            push(@status, $show[$i]);
+    my $displayed_time = strftime("%H:%M", localtime($event_time));
+    my @times;
+    unless ($search) {
+        push(@times,
+             {  name => gettext("now"),
+                id   => "$MyURL?aktion=prog_summary&amp;view=$view",
+             }
+        );
+        push(@times,
+             {  name => gettext("next"),
+                id   => "$MyURL?aktion=prog_summary&amp;next=1&amp;view=$view",
+                sel  => $next ? "1" : undef
+             }
+        );
+        for (split(",\s*", $CONFIG{TIMES})) {
+            s/\s//g;
+            my $id = $_;
+            $id =~ s/://;
+            push(@times,
+                 {  name => gettext("at") . " $_ " . gettext("o'clock"),
+                    id   => "$MyURL?aktion=prog_summary&amp;time=$id",
+                    sel  => $displayed_time == $_ ? "1" : undef
+                 }
+            );
         }
-        $i--;
-        push(@shows, { day => [@temp], status => [@status] });
     }
 
     #
-    my $template = TemplateNew("prog_summary.html");
+    my $label = $next ? gettext("What's on after") : gettext("What's on at");
+    my $template = TemplateNew(($view eq "ext" ? "prog_summary.html" : "prog_summary2.html"));
     my $vars = { usercss => $UserCSS,
-                 rows    => \@shows,
-                 now     => strftime("%H:%M", localtime($event_time)),
-                 title   => $search ? gettext("Suitable matches for:") . " " . $search : strftime("%H:%M", localtime($event_time)) . " " . gettext("o'clock"),
-                 nowurl  => $MyURL . "?aktion=prog_summary",
+                 rows    => \@show,
+                 now     => $displayed_time,
+                 title   => ($search ? gettext("Suitable matches for:") . " <i>" . $search . "</i>" : $label . " " . strftime("%H:%M", localtime($event_time)) . " " . gettext("o'clock")),
+                 switchview_url  => $MyURL . "?aktion=prog_summary&amp;view=" . ($view eq "ext" ? "sml" : "ext") . ($next ? "&amp;next=1" : "") . ($search ? "&amp;search=" . uri_escape($search) : "") . ($time ? "&amp;time=$time" : ""),
+                 switchview_text => ($view eq "ext" ? gettext("short view") : gettext("long view")),
+                 times   => \@times,
                  url     => $MyURL
     };
     $template->param($vars);
@@ -4119,26 +4169,6 @@ sub ParseRecordings {
         my ($new);
         my ($id, $date, $time, $name) = split(/ +/, $recording, 4);
 
-# TODO: support different listing formats of patched VDR 1.2.6
-#    my($id, $temp) = split(/ /, $recording, 2);
-#    my($date, $time, $name);
-#    print("R: $temp\n");
-#    if ($temp =~ /(\d\d\.\d\d) (\d\d:\d\d)\*? .*/ ) {
-#        print("FORMAT1\n");
-#        ($date, $time, $name) = split(/ +/, $temp, 3);
-#    } elsif ($temp =~ /(\d\d\.\d\d)\*? .*/ ) {
-#        print("FORMAT2\n");
-#        ($date, $name) = split(/ +/, $temp, 2);
-#    } elsif ($temp =~ /(\d\d:\d\d)\*? .*/ ) {
-#        print("FORMAT3\n");
-#        ($time, $name) = split(/ +/, $temp, 2);
-#    } elsif ($temp =~ /\*? (\d)+. .*/) {
-#        print("FORMAT4\n");
-#        ($new, $time, $name) = split(/ +/, $temp, 3);
-#    } else {
-#        print("FORMAT5\n");
-#        $name = $temp;
-#    }
         #
         if (length($time) > 5) {
             $new = 1;
@@ -4312,13 +4342,30 @@ sub getRecInfo {
     my $vars;
     if ($VDRVERSION >= 10325) {
         $SVDRP->command("lstr $id");
-        my ($channel_id, $subtitle, $text);
+        my ($channel_id, $subtitle, $text, @video, @audio);
         while ($_ = $SVDRP->readoneline) {
-
             #if(/^C (.*)/) { $channel_id = $1; }
+            #if(/^E (.*)/) { $epg = $1; }
             if (/^T (.*)/) { $title    = $1; }
             if (/^S (.*)/) { $subtitle = $1; }
             if (/^D (.*)/) { $text     = $1; }
+            if(/^X 1 [^ ]* (.*)/) {
+                my ($lang, $format) = split(" ", $1, 2);
+                push(@video,
+                     {  lang => $lang,
+                        format => $format
+                     }
+                );
+            }
+            if(/^X 2 [^ ]* (.*)/) {
+                my ($lang, $descr) = split(" ", $1, 2);
+                push(@audio,
+                     {  lang  => $lang,
+                        descr => $descr
+                     }
+                );
+            }
+            #if(/^V (.*)/) { $vps = $1; }
         }
 
         my $displaytext     = CGI::escapeHTML($text);
@@ -4342,6 +4389,8 @@ sub getRecInfo {
                   subtitle => $displaysubtitle ? $displaysubtitle : undef,
                   imdburl  => "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title),
                   id       => $id,
+                  video    => \@video,
+                  audio    => \@audio,
                   referer  => $ref ? $ref : undef
         };
     } else {
@@ -4514,6 +4563,8 @@ sub rec_rename {
 # configuration
 #############################################################################
 sub config {
+    my $active_tab = $q->param("new_tab");
+    $active_tab = 0 unless($active_tab);
 
     sub ApplyConfig {
         my $old_lang       = $CONFIG{LANG};
@@ -4660,6 +4711,7 @@ sub config {
                  LOGINPAGES        => \@loginpages,
                  SKINLIST          => \@skinlist,
                  MY_LOCALES        => \@my_locales,
+                 active_tab        => $active_tab,
                  url               => $MyURL,
                  help_url          => HelpURL("config")
     };
