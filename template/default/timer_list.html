@@ -48,7 +48,7 @@
 				</td>
 <tmpl_if help_url> 
 				<td class="col_help">
-					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" alt="help" title="<%! Help !%>" /></a>
+					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.png" border="0" alt="help" title="<%! Help !%>" /></a>
 				</td>
 </tmpl_if>
 				<td class="col_right"></td>
@@ -63,13 +63,13 @@
 					<td class="col_left"></td>
 					<td><h2><tmpl_var title></h2></td>
 					<td class="col_navi">
-						<tmpl_if prevdayurl><a href="<tmpl_var prevdayurl>"><img src="bilder/pfeile_nachlinks.gif" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachlinks_soft.gif" border="0" /></tmpl_if>
+						<tmpl_if prevdayurl><a href="<tmpl_var prevdayurl>"><img src="bilder/pfeile_nachlinks.png" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachlinks_soft.png" border="0" /></tmpl_if>
 						<select name="vdr_id" class="submit" onchange="window.open('<tmpl_var url>?aktion=timer_list&amp;sortby=<tmpl_var sortby>&amp;desc=<tmpl_var cur_desc>&amp;timer=' + this.options[this.selectedIndex].value,'main')">
 <tmpl_loop day_loop>
 							<option value="<tmpl_var sortfield>" <tmpl_if current>selected</tmpl_if>><tmpl_var day></option>
 </tmpl_loop>
 						</select>
-						<tmpl_if nextdayurl><a href="<tmpl_var nextdayurl>"><img src="bilder/pfeile_nachrechts.gif" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachrechts_soft.gif" border="0" /></tmpl_if>
+						<tmpl_if nextdayurl><a href="<tmpl_var nextdayurl>"><img src="bilder/pfeile_nachrechts.png" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachrechts_soft.png" border="0" /></tmpl_if>
 					</td>
 					<td class="col_right"></td>
 				</tr>
@@ -308,16 +308,16 @@
 						<div>
 							<a href="javascript:change('<%! Edit timer status? !%>','<tmpl_var toggleurl>&amp;timer=<?% current %?>');">
 							<tmpl_if expr="(active%32768) == 0">
-								<img src="bilder/poempl_grau.gif" alt="inactive" title="<%! This timer is inactive! !%>" align="middle" border="0" />
+								<img src="bilder/poempl_grau.png" alt="inactive" title="<%! This timer is inactive! !%>" align="middle" border="0" />
 							<tmpl_else>
 								<tmpl_if critical>
-									<img src="bilder/poempl_rot.gif" alt="impossible" title="<%! This timer is impossible! !%>" align="middle" border="0" />
+									<img src="bilder/poempl_rot.png" alt="impossible" title="<%! This timer is impossible! !%>" align="middle" border="0" />
 								<tmpl_else>
 									<tmpl_if collision>
-										<img src="bilder/poempl_gelb.gif" alt="nomore" title="<%! No more timers on other transponders possible! !%>" align="middle" border="0" />
+										<img src="bilder/poempl_gelb.png" alt="nomore" title="<%! No more timers on other transponders possible! !%>" align="middle" border="0" />
 									<tmpl_else>
 										<tmpl_if active>
-											<img src="bilder/poempl_gruen.gif" alt="possible" title="<%! Timer OK. !%>" align="middle" border="0" />
+											<img src="bilder/poempl_gruen.png" alt="possible" title="<%! Timer OK. !%>" align="middle" border="0" />
 										</tmpl_if>
 									</tmpl_if>
 								</tmpl_if>
@@ -352,10 +352,10 @@
 						</div>
 					</td>
 					<td class="col_edit">
-						<div><a href="<tmpl_var modurl>"><img src="bilder/edit.gif" alt="edit" title="<%! Edit !%>" border="0" /></a></div>
+						<div><a href="<tmpl_var modurl>"><img src="bilder/edit.png" alt="edit" title="<%! Edit !%>" border="0" /></a></div>
 					</td>
 					<td class="col_delete">
-						<div><a href="javascript:del('<%! Delete timer? !%>\n\n&quot;<tmpl_var title_js>&quot;','<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" title="<%! Delete !%>" border="0" /></a></div>
+						<div><a href="javascript:del('<%! Delete timer? !%>\n\n&quot;<tmpl_var title_js>&quot;','<tmpl_var delurl>');"><img src="bilder/delete.png" alt="delete" title="<%! Delete !%>" border="0" /></a></div>
 					</td>
 					<td class="col_checkbox">
 						<div><input type="checkbox" name="xxxx_<tmpl_var id>" /></div>

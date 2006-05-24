@@ -48,12 +48,14 @@ if (eval { require Locale::gettext }) {
     die("Locale::gettext or Locale::Messages is required!\n");
 }
 my $can_use_bind_textdomain_codeset = 1;
-unless (eval { $localemod->import(qw(gettext bindtextdomain textdomain bind_textdomain_codeset)) }) {
+eval {
+    $localemod->import(qw(gettext bindtextdomain textdomain bind_textdomain_codeset));
+};
+if ($@) {
     $localemod->import(qw(gettext bindtextdomain textdomain));
     print("Not using bind_textdomain_codeset(). Please update your Locale::gettext perl module!\n");
     $can_use_bind_textdomain_codeset = undef;
 }
-    
 
 require File::Temp;
 
@@ -209,7 +211,7 @@ $CONFIG{REC_EXT}      = "m3u";
 #
 $CONFIG{PS_VIEW} = "ext";
 
-my $VERSION       = "3.4.6beta";
+my $VERSION       = "3.4.6beta2";
 my $SERVERVERSION = "vdradmind/$VERSION";
 my $LINVDR        = isLinVDR();
 my $VDRVERSION    = 0;                      # Numeric VDR version, e.g. 10344
@@ -796,8 +798,8 @@ sub EPG_buildTree {
                 $bc++;
                 while ($_ = $SVDRP->readoneline) {
                     if (/^E/) {
-                        my ($garbish, $event_id, $time, $duration) = split(/[ \t]+/);
-                        my ($title, $subtitle, $summary);
+                        my ($garbish, $event_id, $time, $duration) = split(/[ \t]+/); #TODO: table-id, version
+                        my ($title, $subtitle, $summary, $vps, @video, @audio);
                         while ($_ = $SVDRP->readoneline) {
                             # if(/^T (.*)/) { $title = $1;    $title =~ s/\|/<br \/>/sig }
                             # if(/^S (.*)/) { $subtitle = $1; $subtitle =~ s/\|/<br \/>/sig }
@@ -805,6 +807,23 @@ sub EPG_buildTree {
                             if (/^T (.*)/) { $title    = $1; }
                             if (/^S (.*)/) { $subtitle = $1; }
                             if (/^D (.*)/) { $summary  = $1; }
+                            if(/^X 1 [^ ]* (.*)/) {
+                                my ($lang, $format) = split(" ", $1, 2);
+                                push(@video,
+                                     {  lang   => $lang,
+                                        format => $format
+                                     }
+                                );
+                            }
+                            if(/^X 2 [^ ]* (.*)/) {
+                                my ($lang, $descr) = split(" ", $1, 2);
+                                push(@audio,
+                                     {  lang  => $lang,
+                                        descr => $descr
+                                     }
+                                );
+                            }
+                            if (/^V (.*)/) { $vps  = $1; }
                             if (/^e/)      {
 
                                 #
@@ -817,6 +836,9 @@ sub EPG_buildTree {
                                         title        => $title,
                                         subtitle     => $subtitle,
                                         summary      => $summary,
+                                        vps          => $vps,
+                                        video        => \@video,
+                                        audio        => \@audio,
                                         id           => $id,
                                         vdr_id       => $vdr_id,
                                         event_id     => $event_id
@@ -2223,7 +2245,7 @@ sub ReadConfig {
         #v3.4.5
         $CONFIG{MAIL_FROM} = "autotimer@" . $CONFIG{MAIL_FROMDOMAIN} if ($CONFIG{MAIL_FROM} =~ /from\@address.tld/);
         #v3.4.6beta
-        $CONFIG{SKIN} = "default.png" if(($CONFIG{SKIN} eq "bilder") || ($CONFIG{SKIN} eq "copper"));
+        $CONFIG{SKIN} = "default" if(($CONFIG{SKIN} eq "bilder") || ($CONFIG{SKIN} eq "copper") || ($CONFIG{SKIN} eq "default.png"));
 
     } else {
         print "$CONFFILE doesn't exist. Please run \"$0 --config\"\n";
@@ -2411,7 +2433,7 @@ sub prog_detail {
     my $vdr_id = $q->param("vdr_id");
     my $epg_id = $q->param("epg_id");
 
-    my ($channel_name, $title, $subtitle, $start, $stop, $text, @epgimages);
+    my ($channel_name, $title, $subtitle, $vps, @video, @audio, $start, $stop, $text, @epgimages);
 
     if ($vdr_id && $epg_id) {
         for (@{ $EPG{$vdr_id} }) {
@@ -2424,6 +2446,9 @@ sub prog_detail {
                 $start        = $_->{start};
                 $stop         = $_->{stop};
                 $text         = CGI::escapeHTML($_->{summary});
+                $vps          = $_->{vps};
+                @video        = $_->{video};
+                @audio        = $_->{audio};
 
                 # find epgimages
                 if ($CONFIG{EPGIMAGES} && -d $CONFIG{EPGIMAGES}) {
@@ -2470,6 +2495,9 @@ sub prog_detail {
                  switchurl    => $start <= $now && $now <= $stop ? sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $vdr_id) : undef,
                  channel_name => $channel_name,
                  subtitle     => $displaysubtitle,
+                 vps          => $start != $vps ? my_strftime("%H:%M", $vps) : undef,
+                 audio        => @audio,
+                 video        => @video,
                  start        => my_strftime("%H:%M", $start),
                  stop         => my_strftime("%H:%M", $stop),
                  text         => $displaytext ? $displaytext : undef,

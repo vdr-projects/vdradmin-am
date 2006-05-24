@@ -16,7 +16,7 @@
 		<tr class="heading">
 			<td class="col_left"></td>
 			<td class="col_content">
-				<span class="channel_name"><tmpl_var channel_name></span><tmpl_if date><span class="date_long"><tmpl_var date></span><span class="time_duration"><span class="time_start"><tmpl_var start></span> - <span class="time_stop"><tmpl_var stop></span></span></tmpl_if>
+				<span class="channel_name"><tmpl_var channel_name></span><tmpl_if date><span class="date_long"><tmpl_var date></span><span class="time_duration"><span class="time_start"><tmpl_var start></span> - <span class="time_stop"><tmpl_var stop></span></span><tmpl_if vps><span class="time_vps"><%! VPS !%> <tmpl_var vps></span></tmpl_if></tmpl_if>
 			</td>
 			<td class="col_right"></td>
 		</tr>
@@ -31,18 +31,28 @@
 				<table border="0" cellspacing="0" cellpadding="0" class="content">
 					<tr>
 						<td class="col_buttons">
-							<span class="item"><a href="javascript:window.close()"><img src="bilder/close.gif" border="0" alt="<%! close !%>" onmouseover="window.status='<%! close !%>';return true" title="<%! close !%>" /></a></span>
+							<span class="action close">
+								<a href="javascript:window.close()"><img src="bilder/close.png" border="0" alt="<%! close !%>" onmouseover="window.status='<%! close !%>';return true" title="<%! close !%>" /></a>
+							</span>
 							<tmpl_if date>
 								<tmpl_if switchurl>
-									<span class="item"><a href="javascript:callurl('<tmpl_var switchurl>')"><img src="bilder/sum_view.gif" border="0" alt="<%! view !%>" onmouseover="window.status='<%! view !%>';return true" title="<%! view !%>" /></a></span>
+									<span class="action switch">
+										<a href="javascript:callurl('<tmpl_var switchurl>')"><img src="bilder/view.png" border="0" alt="<%! view !%>" onmouseover="window.status='<%! view !%>';return true" title="<%! view !%>" /></a>
+									</span>
 								</tmpl_if>
 								<tmpl_if recurl>
-									<span class="item"><a href="javascript:window.close();opener.location.href='<tmpl_var recurl>'"><img src="bilder/sum_rec.gif" border="0" alt="<%! record !%>" onmouseover="window.status='<%! record !%>';return true" title="<%! record !%>" /></a></span>
+									<span class="action record">
+										<a href="javascript:window.close();opener.location.href='<tmpl_var recurl>'"><img src="bilder/rec_button.png" border="0" alt="<%! record !%>" onmouseover="window.status='<%! record !%>';return true" title="<%! record !%>" /></a>
+									</span>
 								</tmpl_if>
-								<span class="item"><a href="vdradmin.pl?search=<tmpl_var find_title>&amp;aktion=prog_summary&amp;submit=go11" target="main"><img src="bilder/sum_find.gif" border="0" alt="<%! search !%>" onmouseover="window.status='<%! search !%>';return true" title="<%! search !%>" /></a></span>
+								<span class="action repeatings">
+									<a href="vdradmin.pl?search=<tmpl_var find_title>&amp;aktion=prog_summary&amp;submit=go11" target="main"><img src="bilder/find.png" border="0" alt="<%! search !%>" onmouseover="window.status='<%! search !%>';return true" title="<%! search !%>" /></a>
+								</span>
 							</tmpl_if>
 							<tmpl_if imdburl>
-								<span class="item"><a href="<tmpl_var imdburl>" target="_blank" title="<%! Lookup movie in the Internet-Movie-Database (IMDb) !%>"><img src="bilder/imdb.gif" border="0" alt="IMDb" onmouseover="window.status='IMDb';return true" title="IMDb" /></a></span>
+								<span class="action imdb">
+									<a href="<tmpl_var imdburl>" target="_blank" title="<%! Lookup movie in the Internet-Movie-Database (IMDb) !%>"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='IMDb';return true" title="IMDb" /></a>
+								</span>
 							</tmpl_if>
 						</td>
 						<td class="col_epg">
@@ -63,7 +73,11 @@
 								<div class="epg_audio">
 									<h4><%! Audio tracks: !%></h4>
 									<tmpl_loop audio>
-										<h5><%! Language: !%></h5> <tmpl_var lang> <h5><%! Description: !%></h5> <tmpl_var descr><br />
+										<h5><%! Language: !%></h5> <tmpl_var lang>
+										<tmpl_if descr>
+											<h5><%! Description: !%></h5> <tmpl_var descr>
+										</tmpl_if>
+										<br />
 									</tmpl_loop>
 								</div>
 							</tmpl_if>

@@ -1,43 +1,24 @@
 /* The user.css is mainly an example to demonstrate the possibilities */
 
-/* don't want background images */
-td, .heading td, .footer td, .heading td.selected, .footer td.selected, #prog_summary .heading td, #prog_summary .footer td, .row_even td.selected, .row_even td, .row_odd td.selected, .row_odd td { background-image: none; background-repeat: no-repeat; }
-tr { height: 17px; }
-.heading { height: 17px; }
-.row_spacer, .row_spacer td, .row_spacer td.selected, .footer, .footer td, .footer td.selected, .col_left, .col_right { display: none; }
+/*
+	Disable items in navigation bar.
+	For valid ids read navigation.html.
+*/
+#rc {
+	display: none;
+}
 
-tr.heading { height: 17px; }
-.heading td.selected { background-color: #aab0aa; height: 17px; }
-.heading td { background-color: #838183; height: 17px; }
-.row_even td.selected { background-color: #dee6f6; }
-.row_even td { background-color: #eeeeff; }
-.row_odd td.selected { background-color: #d5def6; }
-.row_odd td { background-color: #f6faff; }
+/*
+	Disable action icons.
+	e.g.: close, switch, record, imdb, info, stream
+*/
+/* disable info and stream buttons in lists */
+.list .action.info,
+.list .action.stream {
+	display: none;
+}
 
-td.col_navi { text-align: right; background-color: #f6faff; white-space: nowrap; height: 17px; }
-
-#heading { height: 39px; border: 1px dotted black; }
-#heading tr { vertical-align: middle; background-color: #d5dae6; }
-#heading td { vertical-align: middle; padding: 0px 10px; }
-#heading .col_other { text-align: right; }
-#heading .col_help { text-align: center; width: 45px; }
-
-.list, .group { margin-top: 0.6em; border: 1px solid black; }
-.group td { padding: 2px; }
-.heading h2, .heading a { font-weight: bold; font-style: italic; letter-spacing: 0.5em; color: white; margin-top: 0px; white-space: normal; }
-.heading a:hover { color: black; text-decoration: none; }
-
-/* Dirty hack, must find other solution */
-td[bgcolor] { background-color: black; }
-
-#prog_summary .heading a { font-weight: bold; font-style: italic; letter-spacing: 0.1em; color: white; padding: 2px 2px; }
-#prog_summary .group { margin: 3px; display: inline; float: left; }
-#prog_summary tr.footer { display: table-row; background-image: none; background-color: #f6faff; margin: 0px; padding: 0px; }
-#prog_summary tr.footer td { display: table-cell; background-image: none; white-space: nowrap; text-align: justify; }
-#prog_summary tr.footer .col_left, #prog_summary tr.footer .col_right { display: none; }
-#content { margin-top: 0.5em; }
-
-/* Tooltips */
-.tt_table { width: 250px; border: 2px solid #838183; background-color: #acb2ac; }
-.tt_table th { background-color: #838183; font-weight: bold; color: white; padding-left: 2px; padding-right: 2px; }
-.tt_table td { color: black; padding-left: 5px; padding-right: 5px; }
+/* Disable scrollbars in prog_summary detail view. */
+#prog_summary .epg_summary {
+	overflow: auto;
+}

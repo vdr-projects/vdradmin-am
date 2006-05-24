@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-19 12:27+0200\n"
+"POT-Creation-Date: 2006-05-24 11:26+0200\n"
 "PO-Revision-Date: 2006-04-28 18:54+0200\n"
 "Last-Translator: Roel <rl.koelewijn@home.nl>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: ../template/default/at_timer_new.html:5
 #: ../template/default/navigation.html:4 ../template/default/about.html:5
 #: ../template/default/vdr_cmds.html:5
-#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2013
+#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2041
 msgid "ISO-8859-1"
 msgstr "ISO-8859-1"
 
@@ -60,7 +60,7 @@ msgstr "Timer bewerken"
 #: ../template/default/config.html:33 ../template/default/timer_list.html:51
 #: ../template/default/rec_list.html:27
 #: ../template/default/at_timer_new.html:24
-#: ../template/default/navigation.html:74 ../template/default/vdr_cmds.html:21
+#: ../template/default/navigation.html:62 ../template/default/vdr_cmds.html:21
 msgid "Help"
 msgstr "Help"
 
@@ -180,14 +180,14 @@ msgstr "Start tijd:"
 #: ../template/default/timer_new.html:128
 #: ../template/default/timer_new.html:142
 #: ../template/default/prog_summary.html:34
-#: ../template/default/prog_timeline.html:95
-#: ../template/default/prog_timeline.html:108
-#: ../template/default/prog_timeline.html:123
+#: ../template/default/prog_timeline.html:161
+#: ../template/default/prog_timeline.html:174
+#: ../template/default/prog_timeline.html:190
 #: ../template/default/prog_list2.html:32
 #: ../template/default/at_timer_new.html:111
 #: ../template/default/at_timer_new.html:122
-#: ../template/default/prog_summary2.html:34 ../vdradmind.pl:4005
-#: ../vdradmind.pl:4019
+#: ../template/default/prog_summary2.html:34 ../vdradmind.pl:4039
+#: ../vdradmind.pl:4053
 msgid "o'clock"
 msgstr "Uur"
 
@@ -277,7 +277,7 @@ msgstr ""
 "contact opnemen met<a href=\"mailto:mail@andreas.vdr-developer.org"
 "\">mail@andreas.vdr-developer.org</a>.</p>"
 
-#: ../template/default/rc.html:6 ../template/default/navigation.html:58
+#: ../template/default/rc.html:6 ../template/default/navigation.html:50
 msgid "Remote Control"
 msgstr "Afstands bedienig "
 
@@ -301,7 +301,7 @@ msgstr ""
 #: ../template/default/help_config.html:98
 #: ../template/default/help_at_timer_list.html:6
 #: ../template/default/help_at_timer_list.html:22
-#: ../template/default/navigation.html:50
+#: ../template/default/navigation.html:44
 msgid "AutoTimer"
 msgstr "AutoTimer"
 
@@ -341,6 +341,7 @@ msgstr "Naam"
 msgid "Select all/none"
 msgstr "Selecteer alles/niets"
 
+#: ../template/default/at_timer_list.html:156
 #: ../template/default/at_timer_list.html:161
 #: ../template/default/timer_list.html:355
 msgid "Edit"
@@ -371,85 +372,84 @@ msgid "Delete all selected timers?"
 msgstr "Verwijder alle geselecteerde timers?"
 
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_timeline.html:7
-#: ../template/default/navigation.html:30
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4618
+#: ../template/default/navigation.html:29
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4652
 msgid "What's On Now?"
 msgstr "Wat is er nu op?"
 
 #: ../template/default/prog_summary.html:28
-#: ../template/default/prog_timeline.html:98
+#: ../template/default/prog_timeline.html:164
 #: ../template/default/prog_summary2.html:28
 msgid "What's on:"
 msgstr "Wat is er op:"
 
 #: ../template/default/prog_summary.html:34
-#: ../template/default/prog_summary2.html:34 ../vdradmind.pl:4005
+#: ../template/default/prog_summary2.html:34 ../vdradmind.pl:4039
 #, fuzzy
 msgid "at"
 msgstr "om:"
 
-#: ../template/default/prog_summary.html:49
-#: ../template/default/prog_list.html:6 ../template/default/prog_list2.html:65
-#: ../template/default/navigation.html:42
-#: ../template/default/prog_summary2.html:100 ../vdradmind.pl:4618
+#: ../template/default/prog_summary.html:50
+#: ../template/default/prog_list.html:6 ../template/default/prog_list2.html:56
+#: ../template/default/navigation.html:38
+#: ../template/default/prog_summary2.html:100 ../vdradmind.pl:4652
 msgid "Channels"
 msgstr "Kanalen"
 
-#: ../template/default/prog_summary.html:70
+#: ../template/default/prog_summary.html:72
 #: ../template/default/prog_list.html:23 ../template/default/rec_list.html:147
-#: ../template/default/prog_list2.html:68
+#: ../template/default/prog_list2.html:59
 #: ../template/default/prog_summary2.html:104
 msgid "Stream"
 msgstr "Stream"
 
-#: ../template/default/prog_summary.html:74
+#: ../template/default/prog_summary.html:78
 #: ../template/default/prog_list.html:21
-#: ../template/default/prog_list2.html:70
-#: ../template/default/prog_summary2.html:107
+#: ../template/default/prog_list2.html:61
+#: ../template/default/prog_summary2.html:108
 msgid "TV select"
 msgstr "Selecteer programma"
 
-#: ../template/default/prog_summary.html:76
-#: ../template/default/prog_summary2.html:108
+#: ../template/default/prog_summary.html:82
+#: ../template/default/prog_summary2.html:110
 msgid "Search for other show times"
 msgstr "Zoek naar andere programma tijden"
 
-#: ../template/default/prog_summary.html:78
-#: ../template/default/prog_summary.html:95
-#: ../template/default/prog_list.html:80 ../template/default/prog_list.html:95
-#: ../template/default/prog_list2.html:89
-#: ../template/default/prog_list2.html:106
+#: ../template/default/prog_summary.html:86
+#: ../template/default/prog_summary.html:108
+#: ../template/default/prog_list.html:69 ../template/default/prog_list.html:84
+#: ../template/default/prog_list2.html:80
+#: ../template/default/prog_list2.html:97
 #: ../template/default/prog_summary2.html:85
-#: ../template/default/prog_summary2.html:110
+#: ../template/default/prog_summary2.html:112
 msgid "More Information"
 msgstr "Meer informatie"
 
-#: ../template/default/prog_summary.html:80
-#: ../template/default/prog_list.html:97
-#: ../template/default/prog_list2.html:108
-#: ../template/default/prog_summary2.html:112
+#: ../template/default/prog_summary.html:88
+#: ../template/default/prog_list.html:86
+#: ../template/default/prog_list2.html:99
+#: ../template/default/prog_summary2.html:114
 #, fuzzy
 msgid "No Information"
 msgstr "Meer informatie"
 
-#: ../template/default/prog_summary.html:82
-#: ../template/default/prog_list.html:99
-#: ../template/default/prog_list2.html:110
-#: ../template/default/prog_summary2.html:114
+#: ../template/default/prog_summary.html:92
+#: ../template/default/prog_list.html:88
+#: ../template/default/prog_list2.html:101
+#: ../template/default/prog_summary2.html:116
 msgid "Record"
 msgstr "Opnemen"
 
-#: ../template/default/prog_summary.html:85
-#: ../template/default/prog_detail.html:45
-#: ../template/default/prog_summary2.html:116
+#: ../template/default/prog_summary.html:97
+#: ../template/default/prog_detail.html:54
+#: ../template/default/prog_summary2.html:118
 msgid "Lookup movie in the Internet-Movie-Database (IMDb)"
 msgstr "Zoek de film op bij de Internet-Movie-Database (IMDb)"
 
 #: ../template/default/config.html:5 ../template/default/config.html:29
 #: ../template/default/help_config.html:9
 #: ../template/default/help_config.html:25
-#: ../template/default/navigation.html:70
+#: ../template/default/navigation.html:59
 msgid "Configuration"
 msgstr "Configuratie"
 
@@ -470,7 +470,8 @@ msgstr "Identificatie"
 
 #: ../template/default/config.html:43 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:86
-#: ../template/default/navigation.html:38 ../vdradmind.pl:4618
+#: ../template/default/prog_timeline.html:7
+#: ../template/default/navigation.html:35 ../vdradmind.pl:4652
 msgid "Timeline"
 msgstr "Tijdlijn"
 
@@ -480,7 +481,7 @@ msgstr "Tijdlijn"
 #: ../template/default/help_config.html:126
 #: ../template/default/help_timer_list.html:6
 #: ../template/default/help_timer_list.html:22
-#: ../template/default/navigation.html:46
+#: ../template/default/navigation.html:41
 msgid "Timer"
 msgstr "Timer"
 
@@ -519,8 +520,8 @@ msgstr "Aantal te gebruiken kanalen"
 msgid "Local net (no login required):"
 msgstr "Lokaal netwerk (geen login benodigd):"
 
-#: ../template/default/config.html:105 ../template/default/prog_detail.html:58
-#: ../template/default/prog_detail.html:66
+#: ../template/default/config.html:105 ../template/default/prog_detail.html:68
+#: ../template/default/prog_detail.html:76
 #: ../template/default/help_config.html:50
 msgid "Language:"
 msgstr "Taal:"
@@ -728,12 +729,12 @@ msgid "Apply"
 msgstr "Toepassen"
 
 #: ../template/default/timer_list.html:27
-#: ../template/default/prog_timeline.html:81
+#: ../template/default/prog_timeline.html:147
 msgid "Duration:"
 msgstr "Duur:"
 
 #: ../template/default/timer_list.html:27
-#: ../template/default/prog_timeline.html:81
+#: ../template/default/prog_timeline.html:147
 msgid "min"
 msgstr "min"
 
@@ -777,6 +778,7 @@ msgid "Timer OK."
 msgstr "Timer OK."
 
 #: ../template/default/timer_list.html:327
+#: ../template/default/prog_detail.html:19
 msgid "VPS"
 msgstr "VPS"
 
@@ -839,36 +841,36 @@ msgstr "Grootte:"
 msgid "Open in separate window"
 msgstr "In apart venster openen"
 
-#: ../template/default/prog_detail.html:34
+#: ../template/default/prog_detail.html:35
 msgid "close"
 msgstr "sluiten"
 
-#: ../template/default/prog_detail.html:37
+#: ../template/default/prog_detail.html:40
 msgid "view"
 msgstr "bekijken"
 
-#: ../template/default/prog_detail.html:40
+#: ../template/default/prog_detail.html:45
 msgid "record"
 msgstr "opnemen"
 
-#: ../template/default/prog_detail.html:42
+#: ../template/default/prog_detail.html:49
 msgid "search"
 msgstr "zoeken"
 
-#: ../template/default/prog_detail.html:56
+#: ../template/default/prog_detail.html:66
 msgid "Video tracks:"
 msgstr ""
 
-#: ../template/default/prog_detail.html:58
+#: ../template/default/prog_detail.html:68
 #, fuzzy
 msgid "Format:"
 msgstr "om:"
 
-#: ../template/default/prog_detail.html:64
+#: ../template/default/prog_detail.html:74
 msgid "Audio tracks:"
 msgstr ""
 
-#: ../template/default/prog_detail.html:66
+#: ../template/default/prog_detail.html:78
 #, fuzzy
 msgid "Description:"
 msgstr "Omschrijving"
@@ -876,7 +878,7 @@ msgstr "Omschrijving"
 #: ../template/default/rec_list.html:6 ../template/default/rec_list.html:18
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:18
-#: ../template/default/navigation.html:54 ../vdradmind.pl:4618
+#: ../template/default/navigation.html:47 ../vdradmind.pl:4652
 msgid "Recordings"
 msgstr "Opnames"
 
@@ -1349,24 +1351,24 @@ msgstr ""
 "deze lijst de te verwijderen kanalen en klik op<input type=\"submit\" class="
 "\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
 
-#: ../template/default/prog_timeline.html:100 ../vdradmind.pl:3990
+#: ../template/default/prog_timeline.html:166 ../vdradmind.pl:4024
 msgid "now"
 msgstr "nu"
 
-#: ../template/default/prog_timeline.html:106
+#: ../template/default/prog_timeline.html:172
 msgid "at:"
 msgstr "om:"
 
-#: ../template/default/prog_timeline.html:123
+#: ../template/default/prog_timeline.html:190
 msgid "Timeline:"
 msgstr "Tijdlijn: "
 
-#: ../template/default/prog_timeline.html:123
+#: ../template/default/prog_timeline.html:190
 msgid "to"
 msgstr "naar "
 
 #: ../template/default/prog_list2.html:6
-#: ../template/default/navigation.html:34 ../vdradmind.pl:2705
+#: ../template/default/navigation.html:32 ../vdradmind.pl:2739
 msgid "Playing Today"
 msgstr "Programma vandaag "
 
@@ -1407,20 +1409,20 @@ msgid ""
 "\"ref_label\">AutoTimer Checking</span> to \"Transmission Identification\" "
 "will show you the corresponding EPG entry if you click on the timer's title."
 "</dd><dt>Edit the timer</dt><dd>You can edit a timer by clicking <img src="
-"\"bilder/edit.gif\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To "
-"delete a timer you click <img src=\"bilder/delete.gif\" alt=\"delete\" />.</"
+"\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To "
+"delete a timer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</"
 "dd></dl></p><p>Each timer's state is indicated by differently coloured boxes "
 "(in the chart view) or images (in the list view):<br /><span class=\"color_ok"
-"\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.gif\" alt=\"on"
+"\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on"
 "\" align=\"middle\" /> Timer is OK and will record.<br /><span class="
 "\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/"
-"poempl_gelb.gif\" alt=\"problem\" align=\"middle\" /> Timer conflicts with "
+"poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timer conflicts with "
 "other timers. That's not critical, as long as you have enough DVB cards for "
 "the parallel recordings.<br /><span class=\"color_conflict\">&nbsp;&nbsp;"
-"&nbsp;</span> / <img src=\"bilder/poempl_rot.gif\" alt=\"impossible\" align="
+"&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align="
 "\"middle\" /> Timer is critical and will most likely <strong>not</strong> "
 "record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img "
-"src=\"bilder/poempl_grau.gif\" alt=\"inactive\" align=\"middle\" /> Timer is "
+"src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is "
 "not active.</p><p>In addition to these functions you can add a new timer by "
 "clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at "
 "the top and you can delete a number of timers at once by checking the box in "
@@ -1445,22 +1447,22 @@ msgstr ""
 "ingesteld op <span class=\"ref_label\">AutoTimer Controle</span> tot "
 "\"Transmissie Identificatie\" zal de overeenkomstige EPG informatie tonen "
 "als u klikt op de timer titel.</dd><dt>Bewerken van een timer</dt><dd>U kunt "
-"een timer bewerken door te klikken op<img src=\"bilder/edit.gif\" alt=\"edit"
+"een timer bewerken door te klikken op<img src=\"bilder/edit.png\" alt=\"edit"
 "\" />.</dd><dt>Verwijder de timer</dt><dd> Om een timer te verwijderen klik "
-"op <img src=\"bilder/delete.gif\" alt=\"delete\" />.</dd></dl></p><p>Iedere "
+"op <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Iedere "
 "timers aktiviteit wordt getoond door verschillend gekleurde vakjes (in de "
 "overzichtslijst) of beelden (in de lijst overzicht):<br /><span class="
-"\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.gif"
+"\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png"
 "\" alt=\"on\" align=\"middle\" /> Timer is OK en zal worden opgenomen.<br /"
 "><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src="
-"\"bilder/poempl_gelb.gif\" alt=\"problem\" align=\"middle\" /> Timers die "
+"\"bilder/poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timers die "
 "elkaar overlappen. dit is geen probleem zolang er voldoende DVB kaarten "
 "aanwezig zijn om gelijktijdig te kunne opnemen.<br /><span class="
 "\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot."
-"gif\" alt=\"impossible\" align=\"middle\" /> De timer overlapt en zal "
+"png\" alt=\"impossible\" align=\"middle\" /> De timer overlapt en zal "
 "hoogstwaarschijnlijk <strong>niet</strong> worden opgenomen.<br /><span "
 "class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/"
-"poempl_grau.gif\" alt=\"inactive\" align=\"middle\" /> Timer is niet aktief."
+"poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is niet aktief."
 "</p><p>Naast deze functies kunt u een nieuwe timer toevoegen door op boven "
 "in<input type=\"submit\" class=\"submit\" value=\"New Timer\"/> te klikken "
 "en u kunt een aantal timers verwijderen door eenmaal op het selectie vakje "
@@ -1587,13 +1589,13 @@ msgid ""
 "clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the "
 "activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing "
 "the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</"
-"dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.gif\" "
+"dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" "
 "alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer "
-"you click <img src=\"bilder/delete.gif\" alt=\"delete\" />.</dd></dl></"
+"you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></"
 "p><p>Each AutoTimer's state is indicated by differently coloured images:<br /"
-"><img src=\"bilder/poempl_gruen.gif\" alt=\"on\" align=\"middle\" /> "
+"><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> "
 "AutoTimer is OK and will automatically program matching broadcasts.<br /"
-"><img src=\"bilder/poempl_grau.gif\" alt=\"inactive\" align=\"middle\" /> "
+"><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> "
 "AutoTimer is not active.</p><p>In addition to these functions you can add a "
 "new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value="
 "\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at "
@@ -1611,13 +1613,13 @@ msgstr ""
 "\"Actief\"kolom om de aktiviteit te wisselen.</dd><dt>Het snel bekijken van "
 "de prioriteit en levensduur </dt><dd> door de muiscursor over de auto timers "
 "titel te bewegen.</dd><dt>Bewerk de autotimer </dt><dd>U kunt een auto timer "
-"bewerken door te klikken op<img src=\"bilder/edit.gif\" alt=\"edit\" />.</"
+"bewerken door te klikken op<img src=\"bilder/edit.png\" alt=\"edit\" />.</"
 "dd><dt>Verwijder de auto timerr</dt><dd>Om een auto timer te verwijderen "
-"klik op <img src=\"bilder/delete.gif\" alt=\"verwijderen\" />.</dd></dl></"
+"klik op <img src=\"bilder/delete.png\" alt=\"verwijderen\" />.</dd></dl></"
 "p><p>De status van iedere auto timer word aangeduid door verschillend "
-"gekleurde afbeeldingen<br /><img src=\"bilder/poempl_gruen.gif\" alt=\"aan\" "
+"gekleurde afbeeldingen<br /><img src=\"bilder/poempl_gruen.png\" alt=\"aan\" "
 "align=\"middle\" /> auto timer is OK en zaLovereenkomstige programma's "
-"opnemen<br /><img src=\"bilder/poempl_grau.gif\" alt=\"uit\" align=\"middle"
+"opnemen<br /><img src=\"bilder/poempl_grau.png\" alt=\"uit\" align=\"middle"
 "\" />  auto timer is niet aktief.</p><p>Aanvullend bij deze functies kunt u "
 "een nieuwe auto timer toevoegen door te klikken op <input type=\"submit\" "
 "class=\"submit\" value=\"New AutoTimer\"/>bovenin kunt u een aantal auto "
@@ -1869,13 +1871,13 @@ msgid ""
 "case of folders this will show the number of <strong>new</strong> recordings "
 "the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. "
 "Click it to show the recording's summary or descend into the folder.</"
-"dd><dt>Rename (<img src=\"bilder/edit.gif\" alt=\"edit\" />)</dt><dd>Rename "
+"dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename "
 "a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> "
 "SVDRPort command which is no core VDR feature but is available through a "
 "patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span "
 "class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete "
-"(<img src=\"bilder/delete.gif\" alt=\"delete\" />)</dt><dd>Delete a "
-"recording.</dd><dt>Stream (<img src=\"bilder/stream.gif\" alt=\"stream\" />)"
+"(<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a "
+"recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)"
 "</dt><dd>This column is only shown if you activated and configured <span "
 "class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu"
 "\">Configuration</span> menu. You can watch the recording at your "
@@ -1903,13 +1905,13 @@ msgstr ""
 "aantal <strong>nieuwe</strong>opnames getoond worden in de map.</"
 "dd><dt>Naam</dt><dd>De naam van opname of map naam. Klik erop om de "
 "beschrijving van de opname te tonen of de inhoud van de map te bekijken. </"
-"dd><dt>Hernoemen (<img src=\"bilder/edit.gif\" alt=\"edit\" />)</dt><dd> "
+"dd><dt>Hernoemen (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd> "
 "Hernoem een opname .<br /><h4>Let op:</h4>Dit werkt alleen als VDR de "
 "<u>RENR</u> SVDRPoort commando bevat wat geen kern mogelijkheid is van VDR "
 "maar beschikbaar is via een patch . <span class=\"ref_file\">vdr-"
 "aio21_svdrprename.patch</span> of <span class=\"ref_file\">enAIO-v2.2+</"
 "span> voorzien in dit commando.</dd><dt> Verwijder (<img src=\"bilder/delete."
-"gif\" alt=\"verwijder\" />)</dt><dd> Verwijder een opname </dd><dt>Stream "
+"png\" alt=\"verwijder\" />)</dt><dd> Verwijder een opname </dd><dt>Stream "
 "(<img src=\"bilder/stream.jpg\" alt=\"stream\" />)</dt><dd> Deze kolom word "
 "alleen getoond als deze is geaktiveerd en geconfigureerd <span class="
 "\"ref_label\">Opnames Streaming</span></span> in de <span class=\"ref_menu"
@@ -1968,20 +1970,20 @@ msgstr "Opgeslagen in"
 msgid "No matches found!"
 msgstr "Geen overeenkomsten gevonden!"
 
-#: ../template/default/navigation.html:62
+#: ../template/default/navigation.html:53
 msgid "Watch TV"
 msgstr "TV bekijken"
 
-#: ../template/default/navigation.html:66 ../template/default/vdr_cmds.html:6
+#: ../template/default/navigation.html:56 ../template/default/vdr_cmds.html:6
 #: ../template/default/vdr_cmds.html:18
 msgid "VDR Commands"
 msgstr "VDR Commando's:"
 
-#: ../template/default/navigation.html:74 ../template/default/about.html:6
+#: ../template/default/navigation.html:62 ../template/default/about.html:6
 msgid "About"
 msgstr "Over"
 
-#: ../template/default/navigation.html:80
+#: ../template/default/navigation.html:67
 msgid "Search"
 msgstr "Zoeken"
 
@@ -2052,10 +2054,10 @@ msgstr "Voor het verkrijgen van hulp en melden van bugs"
 #: ../template/default/about.html:150
 msgid ""
 "If you need help please first try to use the online help you'll find on some "
-"pages. You can access it by clicking <img src=\"bilder/help.gif\"/>."
+"pages. You can access it by clicking <img src=\"bilder/help.png\"/>."
 msgstr ""
 "Als u hulp nodig heeft probeer dan eers de online hulp, u zult enige "
-"pagina's vinden. U kunt dit bezoeken door op <img src=\"bilder/help.gif\"/> "
+"pagina's vinden. U kunt dit bezoeken door op <img src=\"bilder/help.png\"/> "
 "te klikken."
 
 #: ../template/default/about.html:151
@@ -2100,79 +2102,79 @@ msgstr "Commando's gedefinieerd in commands.conf:"
 msgid "Output"
 msgstr "Uitvoer"
 
-#: ../vdradmind.pl:315
+#: ../vdradmind.pl:323
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Wat de de hostnaam van de VDR (b.v. video.intra.net)?"
 
-#: ../vdradmind.pl:316
+#: ../vdradmind.pl:324
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Op welke poort luister VDR naar SVDRP verzoeken?"
 
-#: ../vdradmind.pl:317
+#: ../vdradmind.pl:325
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
 msgstr "Naar welk adres moet VDRAdmin-AM luisteren (0.0.0.0 voor alles)?"
 
-#: ../vdradmind.pl:318
+#: ../vdradmind.pl:326
 msgid "On which port should VDRAdmin-AM listen?"
 msgstr "Naar welke poort moet VDRAdmin-AM luisteren?"
 
-#: ../vdradmind.pl:319
+#: ../vdradmind.pl:327
 msgid "Username?"
 msgstr "Gebruikersnaam?"
 
-#: ../vdradmind.pl:320
+#: ../vdradmind.pl:328
 msgid "Password?"
 msgstr "Wachtwoord?"
 
-#: ../vdradmind.pl:321
+#: ../vdradmind.pl:329
 msgid "Where are your recordings stored?"
 msgstr "Waar worden uw opnames opgeslagen?"
 
-#: ../vdradmind.pl:322
+#: ../vdradmind.pl:330
 msgid "Where are your VDR's configuration files located?"
 msgstr "Waar bevinden zicht de VDR's configuratie bestanden?"
 
-#: ../vdradmind.pl:329
+#: ../vdradmind.pl:337
 msgid "Config file written successfully."
 msgstr "Configuratie bestanden succesvol weggeschreven."
 
-#: ../vdradmind.pl:384
+#: ../vdradmind.pl:392
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s gestart met pid %d."
 
-#: ../vdradmind.pl:443 ../vdradmind.pl:1041 ../vdradmind.pl:2001
+#: ../vdradmind.pl:451 ../vdradmind.pl:1069 ../vdradmind.pl:2029
 msgid "Not found"
 msgstr "Niet gevonden"
 
-#: ../vdradmind.pl:443 ../vdradmind.pl:2002
+#: ../vdradmind.pl:451 ../vdradmind.pl:2030
 msgid "The requested URL was not found on this server!"
 msgstr "De gevraagde URl is niet gevonden op deze server!"
 
-#: ../vdradmind.pl:513 ../vdradmind.pl:1037 ../vdradmind.pl:2004
+#: ../vdradmind.pl:521 ../vdradmind.pl:1065 ../vdradmind.pl:2032
 msgid "Forbidden"
 msgstr "Verboden"
 
-#: ../vdradmind.pl:513 ../vdradmind.pl:2005
+#: ../vdradmind.pl:521 ../vdradmind.pl:2033
 msgid "You don't have permission to access this function!"
 msgstr "U heeft geen toestemming om deze functie te gebruiken!"
 
-#: ../vdradmind.pl:1037 ../vdradmind.pl:2006
+#: ../vdradmind.pl:1065 ../vdradmind.pl:2034
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "Toegang tot bestand \"%s\" geweigerd!"
 
-#: ../vdradmind.pl:1041 ../vdradmind.pl:2003
+#: ../vdradmind.pl:1069 ../vdradmind.pl:2031
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "De  URl  \"%s\" is niet gevonden op deze server!"
 
-#: ../vdradmind.pl:2007
+#: ../vdradmind.pl:2035
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Kan bestand \"%s\" niet openen!"
 
-#: ../vdradmind.pl:2008
+#: ../vdradmind.pl:2036
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
@@ -2181,60 +2183,60 @@ msgstr ""
 "Kan geen verbinding maken met VDR at %s:%s<br /><br /> Controleer of VDR "
 "draait en of VDR's svdrphosts.conf op de juiste manier is geconfigureerd."
 
-#: ../vdradmind.pl:2009
+#: ../vdradmind.pl:2037
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Fout tijdens verzenden van commando op %s"
 
-#: ../vdradmind.pl:2705
+#: ../vdradmind.pl:2739
 msgid "Playing Tomorrow"
 msgstr "Speelt morgen"
 
-#: ../vdradmind.pl:2705
+#: ../vdradmind.pl:2739
 #, perl-format
 msgid "Playing on the %d."
 msgstr "Speelt op de %d."
 
-#: ../vdradmind.pl:3995
+#: ../vdradmind.pl:4029
 msgid "next"
 msgstr ""
 
-#: ../vdradmind.pl:4014
+#: ../vdradmind.pl:4048
 #, fuzzy
 msgid "What's on after"
 msgstr "Wat is er op:"
 
-#: ../vdradmind.pl:4014
+#: ../vdradmind.pl:4048
 #, fuzzy
 msgid "What's on at"
 msgstr "Wat is er op:"
 
-#: ../vdradmind.pl:4019
+#: ../vdradmind.pl:4053
 msgid "Suitable matches for:"
 msgstr "Bruikbare overeenkomsten voor:"
 
-#: ../vdradmind.pl:4021
+#: ../vdradmind.pl:4055
 msgid "short view"
 msgstr ""
 
-#: ../vdradmind.pl:4021
+#: ../vdradmind.pl:4055
 #, fuzzy
 msgid "long view"
 msgstr "bekijken"
 
-#: ../vdradmind.pl:4078
+#: ../vdradmind.pl:4112
 msgid "Schedule"
 msgstr "Schema"
 
-#: ../vdradmind.pl:4618
+#: ../vdradmind.pl:4652
 msgid "Playing Today?"
 msgstr "Speelt vandaag?"
 
-#: ../vdradmind.pl:4618
+#: ../vdradmind.pl:4652
 msgid "Timers"
 msgstr "Timers"
 
-#: ../vdradmind.pl:4686
+#: ../vdradmind.pl:4720
 msgid "System default"
 msgstr "Systeem standaard"
 

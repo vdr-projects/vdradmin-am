@@ -4,6 +4,17 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-05-24: 3.4.6beta2
+- Added: VPS time, audio and video tracks to prog_detail if available.
+- Added: class names for action icons (info, record...) for hiding single items (not yet finished).
+- Added: ids for navigation items, see user.css_example for hiding single items.
+- Changed: Icons for stream and switch TV.
+- Replaced: "default" skin by "default.png" skin.
+- Added: Link from pattern title in AutoTimer list to AutoTimer edit (Requested by Tarandor).
+- Reworked: prog_timeline; still needs some beautification (Based on patch submitted by Torsten Herz).
+- Fixed: IMDb link in prog_summary listview (Reported by heiwil).
+- Fixed: detection of valid Locale::gettext calls.
+
 2006-05-19: 3.4.6beta
 - Added: "next" shortcut in prog_summary to show events starting after the current event (Based on patch by Joachim).
 - Added: added selectbox in prog_summary to quickly show the epg at a given time (uses times configured in timeline config).

@@ -20,7 +20,7 @@
 					<h1>
 						<a href="javascript:callurl('<tmpl_var switchurl>');" title="<%! TV select !%>"><tmpl_var progname></a>
 <tmpl_if stream_live_on>
-						<a href="<tmpl_var streamurl>" title="<%! Stream !%>"><img src="bilder/stream.gif" border="0" alt="<%! Stream !%>" onmouseover="window.status='<%! Stream !%>';return true" title="<%! Stream !%>" /></a>
+						<span class="action stream"><a href="<tmpl_var streamurl>" title="<%! Stream !%>"><img src="bilder/stream.png" border="0" alt="<%! Stream !%>" onmouseover="window.status='<%! Stream !%>';return true" title="<%! Stream !%>" /></a></span>
 </tmpl_if>
 					</h1>
 				</td>
@@ -48,18 +48,7 @@
 					<span class="channel_name"><tmpl_var progname></span>
 					<span class="date_long"><tmpl_var longdate></span>
 				</td>
-				<td class="col_navi">
-					<tmpl_if prev_channel>
-						<a href="<tmpl_var prev_channel>"><img src="bilder/pfeile_nachlinks.gif" border="0" /></a>
-					<tmpl_else>
-						<img src="bilder/pfeile_nachlinks_soft.gif" border="0" />
-					</tmpl_if>
-					<tmpl_if next_channel>
-						<a href="<tmpl_var next_channel>"><img src="bilder/pfeile_nachrechts.gif" border="0" /></a>
-					<tmpl_else>
-						<img src="bilder/pfeile_nachrechts_soft.gif" border="0" />
-					</tmpl_if>
-				</td>
+				<td class="col_navi"><tmpl_if prev_channel><a href="<tmpl_var prev_channel>"><img src="bilder/pfeile_nachlinks.png" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachlinks_soft.png" border="0" /></tmpl_if><tmpl_if next_channel><a href="<tmpl_var next_channel>"><img src="bilder/pfeile_nachrechts.png" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachrechts_soft.png" border="0" /></tmpl_if></td>
 				<td class="col_right"></td>
 			</tr>
 			<tr class="row_spacer">
@@ -92,11 +81,11 @@
 				</td>
 				<td class="col_buttons">
 					<tmpl_if infurl>
-						<a href="javascript:popup('<tmpl_var infurl>');" title="<%! More Information !%>"><img src="bilder/info_button.gif" border="0" alt="info" /></a>
+						<span class="action info"><a href="javascript:popup('<tmpl_var infurl>');" title="<%! More Information !%>"><img src="bilder/info_button.png" border="0" alt="info" /></a></span>
 					<tmpl_else>
-						<img src="bilder/info_button_disabled.gif" border="0" alt="noinfo" title="<%! No Information !%>" />
+						<span class="action info"><img src="bilder/info_button_disabled.png" border="0" alt="noinfo" title="<%! No Information !%>" /></span>
 					</tmpl_if>
-					<a href="<tmpl_var recurl>"><img src="bilder/rec_button.gif" border="0" alt="record" title="<%! Record !%>" /></a>
+					<span class="action record"><a href="<tmpl_var recurl>"><img src="bilder/rec_button.png" border="0" alt="record" title="<%! Record !%>" /></a></span>
 				</td>
 				<td class="col_right"></td>
 			</tr>

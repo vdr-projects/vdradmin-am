@@ -101,19 +101,21 @@
 				</td>
 				<td class="col_buttons">
 					<?% IF broadcast.stream_live_on %?>
-						<a href="<?% broadcast.streamurl %?>"><img src="bilder/stream.gif" border="0" alt="<%! Stream !%>" onmouseover="window.status='<%! Stream !%>';return true" title="<%! Stream !%>" /></a>
+						<span class="action stream"><a href="<?% broadcast.streamurl %?>"><img src="bilder/stream.png" border="0" alt="<%! Stream !%>" onmouseover="window.status='<%! Stream !%>';return true" title="<%! Stream !%>" /></a></span>
 					<?% END %?>
 					<?% IF broadcast.recurl %?>
-						<a href="javascript:callurl('<?% broadcast.switchurl %?>');"><img src="bilder/sum_view.gif" border="0" alt="<%! TV select !%>" onmouseover="window.status='<%! TV select !%>';return true" title="<%! TV select !%>" /></a>
-						<a href="vdradmin.pl?search=<?% broadcast.find_title %?>&amp;aktion=prog_summary&amp;submit=go11"><img src="bilder/sum_find.gif" border="0" alt="<%! Search for other show times !%>" onmouseover="window.status='<%! Search for other show times !%>';return true" title="<%! Search for other show times !%>" /></a>
+						<span class="action switch">
+							<a href="javascript:callurl('<?% broadcast.switchurl %?>');"><img src="bilder/view.png" border="0" alt="<%! TV select !%>" onmouseover="window.status='<%! TV select !%>';return true" title="<%! TV select !%>" /></a>
+						</span>
+						<span class="action repeatings"><a href="vdradmin.pl?search=<?% broadcast.find_title %?>&amp;aktion=prog_summary&amp;submit=go11"><img src="bilder/find.png" border="0" alt="<%! Search for other show times !%>" onmouseover="window.status='<%! Search for other show times !%>';return true" title="<%! Search for other show times !%>" /></a></span>
 						<?% IF broadcast.summary %?>
-							<a href="javascript:popup('<?% broadcast.infurl %?>');"><img src="bilder/sum_info.gif" border="0" alt="<%! More Information !%>" onmouseover="window.status='<%! More Information !%>';return true" title="<%! More Information !%>" /></a>
+							<span class="action info"><a href="javascript:popup('<?% broadcast.infurl %?>');"><img src="bilder/info_button.png" border="0" alt="<%! More Information !%>" onmouseover="window.status='<%! More Information !%>';return true" title="<%! More Information !%>" /></a></span>
 						<?% ELSE %?>
-							<img src="bilder/sum_info_disabled.gif" border="0" alt="noinfo" title="<%! No Information !%>" />
+							<span class="action info"><img src="bilder/info_button_disabled.png" border="0" alt="noinfo" title="<%! No Information !%>" /></span>
 						<?% END %?>
-						<a href="<?% broadcast.recurl %?>"><img src="bilder/sum_rec.gif" border="0" alt="<%! Record !%>" onmouseover="window.status='<%! Record !%>';return true" title="<%! Record !%>" /></a>
+						<span class="action record"><a href="<?% broadcast.recurl %?>"><img src="bilder/rec_button.png" border="0" alt="<%! Record !%>" onmouseover="window.status='<%! Record !%>';return true" title="<%! Record !%>" /></a></span>
 						<?% IF broadcast.imdburl %?>
-							<a href="<tmpl_var broadcast.imdburl>" target="_blank" title="<%! Lookup movie in the Internet-Movie-Database (IMDb) !%>"><img src="bilder/imdb.gif" border="0" alt="IMDb" onmouseover="window.status='IMDb';return true" title="IMDb" /></a>
+							<span class="action imdb"><a href="<?% broadcast.imdburl %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<%! Lookup movie in the Internet-Movie-Database (IMDb) !%>';return true" title="<%! Lookup movie in the Internet-Movie-Database (IMDb) !%>" /></a></span>
 						<?% END %?>
 					<?% END %?>
 				</td>

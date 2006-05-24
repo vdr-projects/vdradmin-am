@@ -31,22 +31,13 @@
 					<input type="text" size="5" maxlength="5" value="<tmpl_var now>" name="time"/>
 					<%! o'clock !%>
 				</td>
-				<td class="col_other">
-					<tmpl_if prevdayurl>
-						<a href="<tmpl_var prevdayurl>"><img src="bilder/pfeile_nachlinks.gif" border="0" /></a>
-					<tmpl_else>
-						<img src="bilder/pfeile_nachlinks_soft.gif" border="0" />
-					</tmpl_if>
-					<select name="days" size="1" onchange="window.open(this.options[this.selectedIndex].value,'main')">
-<tmpl_loop days>
+				<td class="col_navi">
+					<tmpl_if prevdayurl><a href="<tmpl_var prevdayurl>"><img src="bilder/pfeile_nachlinks.png" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachlinks_soft.png" border="0" /></tmpl_if>
+					<select name="days" size="1" onchange="window.open(this.options[this.selectedIndex].value,'main')"> <tmpl_loop days>
 						<option value="<tmpl_var id>" <tmpl_if sel>selected</tmpl_if>><tmpl_var name>.</option>
 </tmpl_loop>
 					</select>
-					<tmpl_if nextdayurl>
-						<a href="<tmpl_var nextdayurl>"><img src="bilder/pfeile_nachrechts.gif" border="0" /></a>
-					<tmpl_else>
-						<img src="bilder/pfeile_nachrechts_soft.gif" border="0" />
-					</tmpl_if>
+					<tmpl_if nextdayurl><a href="<tmpl_var nextdayurl>"><img src="bilder/pfeile_nachrechts.png" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachrechts_soft.png" border="0" /></tmpl_if>
 				</td>
 				<td class="col_right"></td>
 			</tr>
@@ -65,9 +56,9 @@
 					<span class="channel_name"><a href="<tmpl_var proglink>" title="<%! Channels !%>"><tmpl_var channel_name></a></span>
 					<span class="date_long"><tmpl_var longdate></span>
 					<tmpl_if stream_live_on>
-						<a href="<tmpl_var streamurl>" title="<%! Stream !%>"><img src="bilder/stream.gif" border="0" alt="<%! Stream !%>" onmouseover="window.status='<%! Stream !%>';return true" title="<%! Stream !%>" /></a>
+						<span class="action stream"><a href="<tmpl_var streamurl>" title="<%! Stream !%>"><img src="bilder/stream.png" border="0" alt="<%! Stream !%>" onmouseover="window.status='<%! Stream !%>';return true" title="<%! Stream !%>" /></a></span>
 					</tmpl_if>
-					<a href="javascript:callurl('<tmpl_var switchurl>');" title="<%! TV select !%>"><img src="bilder/view.gif" border="0" alt="<%! TV select !%>" onmouseover="window.status='<%! TV select !%>';return true" title="<%! TV select !%>" /></a>
+					<span class="action switch"><a href="javascript:callurl('<tmpl_var switchurl>');" title="<%! TV select !%>"><img src="bilder/view.png" border="0" alt="<%! TV select !%>" onmouseover="window.status='<%! TV select !%>';return true" title="<%! TV select !%>" /></a></span>
 				</td>
 				<td class="col_right"></td>
 			</tr>
@@ -103,11 +94,11 @@
 				</td>
 				<td class="col_buttons">
 					<tmpl_if infurl>
-						<a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info_button.gif" border="0" title="<%! More Information !%>" alt="info"/></a>
+						<span class="action info"><a href="javascript:popup('<tmpl_var infurl>');"><img src="bilder/info_button.png" border="0" title="<%! More Information !%>" alt="info"/></a></span>
 					<tmpl_else>
-						<img src="bilder/info_button_disabled.gif" border="0" title="<%! No Information !%>" alt="noinfo"/>
+						<span class="action info"><img src="bilder/info_button_disabled.png" border="0" title="<%! No Information !%>" alt="noinfo"/></span>
 					</tmpl_if>
-					<a href="<tmpl_var recurl>"><img src="bilder/rec_button.gif" border="0" title="<%! Record !%>" alt="record"/></a>
+					<span class="action record"><a href="<tmpl_var recurl>"><img src="bilder/rec_button.png" border="0" title="<%! Record !%>" alt="record"/></a></span>
 				</td>
 				<td class="col_right"></td>
 			</tr>

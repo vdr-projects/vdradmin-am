@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-19 12:27+0200\n"
+"POT-Creation-Date: 2006-05-24 11:26+0200\n"
 "PO-Revision-Date: 2006-01-18 12:36+0200\n"
 "Last-Translator: Rofa\n"
 "Language-Team: Suomi\n"
@@ -34,7 +34,7 @@ msgstr ""
 #: ../template/default/at_timer_new.html:5
 #: ../template/default/navigation.html:4 ../template/default/about.html:5
 #: ../template/default/vdr_cmds.html:5
-#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2013
+#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2041
 msgid "ISO-8859-1"
 msgstr "ISO-8859-1"
 
@@ -57,7 +57,7 @@ msgstr "Muokkaa ajastinta"
 #: ../template/default/config.html:33 ../template/default/timer_list.html:51
 #: ../template/default/rec_list.html:27
 #: ../template/default/at_timer_new.html:24
-#: ../template/default/navigation.html:74 ../template/default/vdr_cmds.html:21
+#: ../template/default/navigation.html:62 ../template/default/vdr_cmds.html:21
 msgid "Help"
 msgstr "Opaste"
 
@@ -177,14 +177,14 @@ msgstr "Aloitusaika:"
 #: ../template/default/timer_new.html:128
 #: ../template/default/timer_new.html:142
 #: ../template/default/prog_summary.html:34
-#: ../template/default/prog_timeline.html:95
-#: ../template/default/prog_timeline.html:108
-#: ../template/default/prog_timeline.html:123
+#: ../template/default/prog_timeline.html:161
+#: ../template/default/prog_timeline.html:174
+#: ../template/default/prog_timeline.html:190
 #: ../template/default/prog_list2.html:32
 #: ../template/default/at_timer_new.html:111
 #: ../template/default/at_timer_new.html:122
-#: ../template/default/prog_summary2.html:34 ../vdradmind.pl:4005
-#: ../vdradmind.pl:4019
+#: ../template/default/prog_summary2.html:34 ../vdradmind.pl:4039
+#: ../vdradmind.pl:4053
 msgid "o'clock"
 msgstr " "
 
@@ -274,7 +274,7 @@ msgstr ""
 "opastetta, ota yhteyttä sähköpostitse: <a href=\"mailto:mail@andreas.vdr-"
 "developer.org\">mail@andreas.vdr-developer.org</a>.</p>"
 
-#: ../template/default/rc.html:6 ../template/default/navigation.html:58
+#: ../template/default/rc.html:6 ../template/default/navigation.html:50
 msgid "Remote Control"
 msgstr "Kauko-ohjain"
 
@@ -296,7 +296,7 @@ msgstr ""
 #: ../template/default/help_config.html:98
 #: ../template/default/help_at_timer_list.html:6
 #: ../template/default/help_at_timer_list.html:22
-#: ../template/default/navigation.html:50
+#: ../template/default/navigation.html:44
 msgid "AutoTimer"
 msgstr "Hakuajastimet"
 
@@ -336,6 +336,7 @@ msgstr "Nimi"
 msgid "Select all/none"
 msgstr "Valitse kaikki/ei yhtään"
 
+#: ../template/default/at_timer_list.html:156
 #: ../template/default/at_timer_list.html:161
 #: ../template/default/timer_list.html:355
 msgid "Edit"
@@ -366,85 +367,84 @@ msgid "Delete all selected timers?"
 msgstr "Poistetaanko valitut ajastimet?"
 
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_timeline.html:7
-#: ../template/default/navigation.html:30
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4618
+#: ../template/default/navigation.html:29
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4652
 msgid "What's On Now?"
 msgstr "Menossa nyt"
 
 #: ../template/default/prog_summary.html:28
-#: ../template/default/prog_timeline.html:98
+#: ../template/default/prog_timeline.html:164
 #: ../template/default/prog_summary2.html:28
 msgid "What's on:"
 msgstr "Menossa"
 
 #: ../template/default/prog_summary.html:34
-#: ../template/default/prog_summary2.html:34 ../vdradmind.pl:4005
+#: ../template/default/prog_summary2.html:34 ../vdradmind.pl:4039
 #, fuzzy
 msgid "at"
 msgstr "kello:"
 
-#: ../template/default/prog_summary.html:49
-#: ../template/default/prog_list.html:6 ../template/default/prog_list2.html:65
-#: ../template/default/navigation.html:42
-#: ../template/default/prog_summary2.html:100 ../vdradmind.pl:4618
+#: ../template/default/prog_summary.html:50
+#: ../template/default/prog_list.html:6 ../template/default/prog_list2.html:56
+#: ../template/default/navigation.html:38
+#: ../template/default/prog_summary2.html:100 ../vdradmind.pl:4652
 msgid "Channels"
 msgstr "Kanavat"
 
-#: ../template/default/prog_summary.html:70
+#: ../template/default/prog_summary.html:72
 #: ../template/default/prog_list.html:23 ../template/default/rec_list.html:147
-#: ../template/default/prog_list2.html:68
+#: ../template/default/prog_list2.html:59
 #: ../template/default/prog_summary2.html:104
 msgid "Stream"
 msgstr "Toista"
 
-#: ../template/default/prog_summary.html:74
+#: ../template/default/prog_summary.html:78
 #: ../template/default/prog_list.html:21
-#: ../template/default/prog_list2.html:70
-#: ../template/default/prog_summary2.html:107
+#: ../template/default/prog_list2.html:61
+#: ../template/default/prog_summary2.html:108
 msgid "TV select"
 msgstr "katso"
 
-#: ../template/default/prog_summary.html:76
-#: ../template/default/prog_summary2.html:108
+#: ../template/default/prog_summary.html:82
+#: ../template/default/prog_summary2.html:110
 msgid "Search for other show times"
 msgstr "etsi vaihtoehtoisia esitysaikoja"
 
-#: ../template/default/prog_summary.html:78
-#: ../template/default/prog_summary.html:95
-#: ../template/default/prog_list.html:80 ../template/default/prog_list.html:95
-#: ../template/default/prog_list2.html:89
-#: ../template/default/prog_list2.html:106
+#: ../template/default/prog_summary.html:86
+#: ../template/default/prog_summary.html:108
+#: ../template/default/prog_list.html:69 ../template/default/prog_list.html:84
+#: ../template/default/prog_list2.html:80
+#: ../template/default/prog_list2.html:97
 #: ../template/default/prog_summary2.html:85
-#: ../template/default/prog_summary2.html:110
+#: ../template/default/prog_summary2.html:112
 msgid "More Information"
 msgstr "lisätietoja"
 
-#: ../template/default/prog_summary.html:80
-#: ../template/default/prog_list.html:97
-#: ../template/default/prog_list2.html:108
-#: ../template/default/prog_summary2.html:112
+#: ../template/default/prog_summary.html:88
+#: ../template/default/prog_list.html:86
+#: ../template/default/prog_list2.html:99
+#: ../template/default/prog_summary2.html:114
 #, fuzzy
 msgid "No Information"
 msgstr "lisätietoja"
 
-#: ../template/default/prog_summary.html:82
-#: ../template/default/prog_list.html:99
-#: ../template/default/prog_list2.html:110
-#: ../template/default/prog_summary2.html:114
+#: ../template/default/prog_summary.html:92
+#: ../template/default/prog_list.html:88
+#: ../template/default/prog_list2.html:101
+#: ../template/default/prog_summary2.html:116
 msgid "Record"
 msgstr "tallenna"
 
-#: ../template/default/prog_summary.html:85
-#: ../template/default/prog_detail.html:45
-#: ../template/default/prog_summary2.html:116
+#: ../template/default/prog_summary.html:97
+#: ../template/default/prog_detail.html:54
+#: ../template/default/prog_summary2.html:118
 msgid "Lookup movie in the Internet-Movie-Database (IMDb)"
 msgstr "etsi IMDB:stä"
 
 #: ../template/default/config.html:5 ../template/default/config.html:29
 #: ../template/default/help_config.html:9
 #: ../template/default/help_config.html:25
-#: ../template/default/navigation.html:70
+#: ../template/default/navigation.html:59
 msgid "Configuration"
 msgstr "Asetukset"
 
@@ -465,7 +465,8 @@ msgstr "Käyttäjätunnistus"
 
 #: ../template/default/config.html:43 ../template/default/help_config.html:38
 #: ../template/default/help_config.html:86
-#: ../template/default/navigation.html:38 ../vdradmind.pl:4618
+#: ../template/default/prog_timeline.html:7
+#: ../template/default/navigation.html:35 ../vdradmind.pl:4652
 msgid "Timeline"
 msgstr "Aikajana"
 
@@ -475,7 +476,7 @@ msgstr "Aikajana"
 #: ../template/default/help_config.html:126
 #: ../template/default/help_timer_list.html:6
 #: ../template/default/help_timer_list.html:22
-#: ../template/default/navigation.html:46
+#: ../template/default/navigation.html:41
 msgid "Timer"
 msgstr "Ajastimet"
 
@@ -514,8 +515,8 @@ msgstr "Kanavien lukumäärä:"
 msgid "Local net (no login required):"
 msgstr "Käyttäjätunnukseton osoiteavaruus:"
 
-#: ../template/default/config.html:105 ../template/default/prog_detail.html:58
-#: ../template/default/prog_detail.html:66
+#: ../template/default/config.html:105 ../template/default/prog_detail.html:68
+#: ../template/default/prog_detail.html:76
 #: ../template/default/help_config.html:50
 msgid "Language:"
 msgstr "Kieli:"
@@ -723,12 +724,12 @@ msgid "Apply"
 msgstr "Käytä"
 
 #: ../template/default/timer_list.html:27
-#: ../template/default/prog_timeline.html:81
+#: ../template/default/prog_timeline.html:147
 msgid "Duration:"
 msgstr "Kesto:"
 
 #: ../template/default/timer_list.html:27
-#: ../template/default/prog_timeline.html:81
+#: ../template/default/prog_timeline.html:147
 msgid "min"
 msgstr "min"
 
@@ -772,6 +773,7 @@ msgid "Timer OK."
 msgstr "Ajastin kunnossa."
 
 #: ../template/default/timer_list.html:327
+#: ../template/default/prog_detail.html:19
 msgid "VPS"
 msgstr "VPS"
 
@@ -834,36 +836,36 @@ msgstr "Koko:"
 msgid "Open in separate window"
 msgstr "Avaa omaan ikkunaan"
 
-#: ../template/default/prog_detail.html:34
+#: ../template/default/prog_detail.html:35
 msgid "close"
 msgstr "sulje"
 
-#: ../template/default/prog_detail.html:37
+#: ../template/default/prog_detail.html:40
 msgid "view"
 msgstr "katso"
 
-#: ../template/default/prog_detail.html:40
+#: ../template/default/prog_detail.html:45
 msgid "record"
 msgstr "tallenna"
 
-#: ../template/default/prog_detail.html:42
+#: ../template/default/prog_detail.html:49
 msgid "search"
 msgstr "etsi"
 
-#: ../template/default/prog_detail.html:56
+#: ../template/default/prog_detail.html:66
 msgid "Video tracks:"
 msgstr ""
 
-#: ../template/default/prog_detail.html:58
+#: ../template/default/prog_detail.html:68
 #, fuzzy
 msgid "Format:"
 msgstr "kello:"
 
-#: ../template/default/prog_detail.html:64
+#: ../template/default/prog_detail.html:74
 msgid "Audio tracks:"
 msgstr ""
 
-#: ../template/default/prog_detail.html:66
+#: ../template/default/prog_detail.html:78
 #, fuzzy
 msgid "Description:"
 msgstr "Kuvaus"
@@ -871,7 +873,7 @@ msgstr "Kuvaus"
 #: ../template/default/rec_list.html:6 ../template/default/rec_list.html:18
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:18
-#: ../template/default/navigation.html:54 ../vdradmind.pl:4618
+#: ../template/default/navigation.html:47 ../vdradmind.pl:4652
 msgid "Recordings"
 msgstr "Tallenteet"
 
@@ -1238,24 +1240,24 @@ msgid ""
 "<input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
 msgstr ""
 
-#: ../template/default/prog_timeline.html:100 ../vdradmind.pl:3990
+#: ../template/default/prog_timeline.html:166 ../vdradmind.pl:4024
 msgid "now"
 msgstr "nyt"
 
-#: ../template/default/prog_timeline.html:106
+#: ../template/default/prog_timeline.html:172
 msgid "at:"
 msgstr "kello:"
 
-#: ../template/default/prog_timeline.html:123
+#: ../template/default/prog_timeline.html:190
 msgid "Timeline:"
 msgstr "Aikajana:"
 
-#: ../template/default/prog_timeline.html:123
+#: ../template/default/prog_timeline.html:190
 msgid "to"
 msgstr "-"
 
 #: ../template/default/prog_list2.html:6
-#: ../template/default/navigation.html:34 ../vdradmind.pl:2705
+#: ../template/default/navigation.html:32 ../vdradmind.pl:2739
 msgid "Playing Today"
 msgstr "Ohjelmisto tänään"
 
@@ -1296,20 +1298,20 @@ msgid ""
 "\"ref_label\">AutoTimer Checking</span> to \"Transmission Identification\" "
 "will show you the corresponding EPG entry if you click on the timer's title."
 "</dd><dt>Edit the timer</dt><dd>You can edit a timer by clicking <img src="
-"\"bilder/edit.gif\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To "
-"delete a timer you click <img src=\"bilder/delete.gif\" alt=\"delete\" />.</"
+"\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To "
+"delete a timer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</"
 "dd></dl></p><p>Each timer's state is indicated by differently coloured boxes "
 "(in the chart view) or images (in the list view):<br /><span class=\"color_ok"
-"\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.gif\" alt=\"on"
+"\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on"
 "\" align=\"middle\" /> Timer is OK and will record.<br /><span class="
 "\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/"
-"poempl_gelb.gif\" alt=\"problem\" align=\"middle\" /> Timer conflicts with "
+"poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timer conflicts with "
 "other timers. That's not critical, as long as you have enough DVB cards for "
 "the parallel recordings.<br /><span class=\"color_conflict\">&nbsp;&nbsp;"
-"&nbsp;</span> / <img src=\"bilder/poempl_rot.gif\" alt=\"impossible\" align="
+"&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align="
 "\"middle\" /> Timer is critical and will most likely <strong>not</strong> "
 "record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img "
-"src=\"bilder/poempl_grau.gif\" alt=\"inactive\" align=\"middle\" /> Timer is "
+"src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is "
 "not active.</p><p>In addition to these functions you can add a new timer by "
 "clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at "
 "the top and you can delete a number of timers at once by checking the box in "
@@ -1407,13 +1409,13 @@ msgid ""
 "clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the "
 "activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing "
 "the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</"
-"dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.gif\" "
+"dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" "
 "alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer "
-"you click <img src=\"bilder/delete.gif\" alt=\"delete\" />.</dd></dl></"
+"you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></"
 "p><p>Each AutoTimer's state is indicated by differently coloured images:<br /"
-"><img src=\"bilder/poempl_gruen.gif\" alt=\"on\" align=\"middle\" /> "
+"><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> "
 "AutoTimer is OK and will automatically program matching broadcasts.<br /"
-"><img src=\"bilder/poempl_grau.gif\" alt=\"inactive\" align=\"middle\" /> "
+"><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> "
 "AutoTimer is not active.</p><p>In addition to these functions you can add a "
 "new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value="
 "\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at "
@@ -1598,13 +1600,13 @@ msgid ""
 "case of folders this will show the number of <strong>new</strong> recordings "
 "the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. "
 "Click it to show the recording's summary or descend into the folder.</"
-"dd><dt>Rename (<img src=\"bilder/edit.gif\" alt=\"edit\" />)</dt><dd>Rename "
+"dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename "
 "a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> "
 "SVDRPort command which is no core VDR feature but is available through a "
 "patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span "
 "class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete "
-"(<img src=\"bilder/delete.gif\" alt=\"delete\" />)</dt><dd>Delete a "
-"recording.</dd><dt>Stream (<img src=\"bilder/stream.gif\" alt=\"stream\" />)"
+"(<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a "
+"recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)"
 "</dt><dd>This column is only shown if you activated and configured <span "
 "class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu"
 "\">Configuration</span> menu. You can watch the recording at your "
@@ -1665,20 +1667,20 @@ msgstr "Tallennehakemisto"
 msgid "No matches found!"
 msgstr "Ei löytynyt yhtään hakutulosta!"
 
-#: ../template/default/navigation.html:62
+#: ../template/default/navigation.html:53
 msgid "Watch TV"
 msgstr "Katso TV:tä"
 
-#: ../template/default/navigation.html:66 ../template/default/vdr_cmds.html:6
+#: ../template/default/navigation.html:56 ../template/default/vdr_cmds.html:6
 #: ../template/default/vdr_cmds.html:18
 msgid "VDR Commands"
 msgstr "Komennot"
 
-#: ../template/default/navigation.html:74 ../template/default/about.html:6
+#: ../template/default/navigation.html:62 ../template/default/about.html:6
 msgid "About"
 msgstr "Tietoja"
 
-#: ../template/default/navigation.html:80
+#: ../template/default/navigation.html:67
 msgid "Search"
 msgstr "Etsi"
 
@@ -1749,9 +1751,9 @@ msgstr "Avunsaanti ja virheiden raportointi"
 #: ../template/default/about.html:150
 msgid ""
 "If you need help please first try to use the online help you'll find on some "
-"pages. You can access it by clicking <img src=\"bilder/help.gif\"/>."
+"pages. You can access it by clicking <img src=\"bilder/help.png\"/>."
 msgstr ""
-"Saat opasteen näytille painamalla <img src=\"bilder/help.gif\"/> -kuvaketta."
+"Saat opasteen näytille painamalla <img src=\"bilder/help.png\"/> -kuvaketta."
 
 #: ../template/default/about.html:151
 msgid ""
@@ -1794,79 +1796,79 @@ msgstr "Määritellyt komennot (commands.conf):"
 msgid "Output"
 msgstr "Vaste"
 
-#: ../vdradmind.pl:315
+#: ../vdradmind.pl:323
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Anna VDR-koneesi nimi (esim. video.intra.net):"
 
-#: ../vdradmind.pl:316
+#: ../vdradmind.pl:324
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Anna VDR-koneesi käyttämä SVDRP-portti:"
 
-#: ../vdradmind.pl:317
+#: ../vdradmind.pl:325
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
 msgstr "Anna VDRAdmin-AM käyttämä osoiteavaruus (0.0.0.0 ei rajoituksia):"
 
-#: ../vdradmind.pl:318
+#: ../vdradmind.pl:326
 msgid "On which port should VDRAdmin-AM listen?"
 msgstr "Anna VDRAdmin-AM käyttämä portti:"
 
-#: ../vdradmind.pl:319
+#: ../vdradmind.pl:327
 msgid "Username?"
 msgstr "Anna käyttäjätunnus VDRAdmin-AM varten:"
 
-#: ../vdradmind.pl:320
+#: ../vdradmind.pl:328
 msgid "Password?"
 msgstr "Anna salasana VDRAdmin-AM varten:"
 
-#: ../vdradmind.pl:321
+#: ../vdradmind.pl:329
 msgid "Where are your recordings stored?"
 msgstr "Anna VDR-koneesi tallennehakemiston polku:"
 
-#: ../vdradmind.pl:322
+#: ../vdradmind.pl:330
 msgid "Where are your VDR's configuration files located?"
 msgstr "Anna VDR-koneesi konfigurointihakemiston polku:"
 
-#: ../vdradmind.pl:329
+#: ../vdradmind.pl:337
 msgid "Config file written successfully."
 msgstr "VDRAdmin-AM konfigurointitiedosto muodostettu."
 
-#: ../vdradmind.pl:384
+#: ../vdradmind.pl:392
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s käynnistetty prosessitunnisteella %d."
 
-#: ../vdradmind.pl:443 ../vdradmind.pl:1041 ../vdradmind.pl:2001
+#: ../vdradmind.pl:451 ../vdradmind.pl:1069 ../vdradmind.pl:2029
 msgid "Not found"
 msgstr "Ei löydy"
 
-#: ../vdradmind.pl:443 ../vdradmind.pl:2002
+#: ../vdradmind.pl:451 ../vdradmind.pl:2030
 msgid "The requested URL was not found on this server!"
 msgstr "Pyydettyä URL:ia ei löydy palvelimelta!"
 
-#: ../vdradmind.pl:513 ../vdradmind.pl:1037 ../vdradmind.pl:2004
+#: ../vdradmind.pl:521 ../vdradmind.pl:1065 ../vdradmind.pl:2032
 msgid "Forbidden"
 msgstr "Kielletty"
 
-#: ../vdradmind.pl:513 ../vdradmind.pl:2005
+#: ../vdradmind.pl:521 ../vdradmind.pl:2033
 msgid "You don't have permission to access this function!"
 msgstr "Puutteelliset käyttäjäoikeudet haluttuun toimintoon!"
 
-#: ../vdradmind.pl:1037 ../vdradmind.pl:2006
+#: ../vdradmind.pl:1065 ../vdradmind.pl:2034
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "Pääsy tiedostoon \"%s\" evätty!"
 
-#: ../vdradmind.pl:1041 ../vdradmind.pl:2003
+#: ../vdradmind.pl:1069 ../vdradmind.pl:2031
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "URL:ia \"%s\" ei löydy palvelimelta!"
 
-#: ../vdradmind.pl:2007
+#: ../vdradmind.pl:2035
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Tiedoston \"%s\" avaus ei onnistu!"
 
-#: ../vdradmind.pl:2008
+#: ../vdradmind.pl:2036
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
@@ -1875,60 +1877,60 @@ msgstr ""
 "Yhteydenotto VDR:ään (%s:%s) epäonnistui!<br /><br />Varmista VDR:n "
 "päälläolo ja svdrphosts.conf-tiedoston oikeellisuus."
 
-#: ../vdradmind.pl:2009
+#: ../vdradmind.pl:2037
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Komennon lähetys VDR:lle epäonnistui (%s)"
 
-#: ../vdradmind.pl:2705
+#: ../vdradmind.pl:2739
 msgid "Playing Tomorrow"
 msgstr "Ohjelmisto huomenna"
 
-#: ../vdradmind.pl:2705
+#: ../vdradmind.pl:2739
 #, perl-format
 msgid "Playing on the %d."
 msgstr "Ohjelmisto %d. päivä"
 
-#: ../vdradmind.pl:3995
+#: ../vdradmind.pl:4029
 msgid "next"
 msgstr ""
 
-#: ../vdradmind.pl:4014
+#: ../vdradmind.pl:4048
 #, fuzzy
 msgid "What's on after"
 msgstr "Menossa"
 
-#: ../vdradmind.pl:4014
+#: ../vdradmind.pl:4048
 #, fuzzy
 msgid "What's on at"
 msgstr "Menossa"
 
-#: ../vdradmind.pl:4019
+#: ../vdradmind.pl:4053
 msgid "Suitable matches for:"
 msgstr "Hakutulokset termille:"
 
-#: ../vdradmind.pl:4021
+#: ../vdradmind.pl:4055
 msgid "short view"
 msgstr ""
 
-#: ../vdradmind.pl:4021
+#: ../vdradmind.pl:4055
 #, fuzzy
 msgid "long view"
 msgstr "katso"
 
-#: ../vdradmind.pl:4078
+#: ../vdradmind.pl:4112
 msgid "Schedule"
 msgstr "Ohjelmisto"
 
-#: ../vdradmind.pl:4618
+#: ../vdradmind.pl:4652
 msgid "Playing Today?"
 msgstr "Tänään"
 
-#: ../vdradmind.pl:4618
+#: ../vdradmind.pl:4652
 msgid "Timers"
 msgstr "Ajastimet"
 
-#: ../vdradmind.pl:4686
+#: ../vdradmind.pl:4720
 msgid "System default"
 msgstr "Oletus"
 

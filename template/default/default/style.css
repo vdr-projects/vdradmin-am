@@ -4,17 +4,18 @@
 
 #rc,
 #tv {
-	background-color: black;
 	margin: 0px;
 }
 
 body {
 	background-color: #ffffff;
 	margin: 3px;
+	padding: 0;
 }
 
 form {
 	margin: 0px;
+	padding: 0;
 }
 
 td,
@@ -41,10 +42,10 @@ select {
 	font-weight: normal;
 	font-size: 11px;
 }
-
+/*
 .submit {
 	height: 20px;
-}
+}*/
 
 h1 {
 	margin-right: 5px;
@@ -89,12 +90,9 @@ label {
 
 a,
 a:visited,
-a:active {
-	color: black;
-	text-decoration: none;
-}
+a:active,
 a:hover {
-	color: gray;
+	color: black;
 	text-decoration: none;
 }
 
@@ -111,11 +109,6 @@ label + input {
 }
 #rec_list .col_name {
 	font-weight: bold;
-}
-#prog_timeline a ,
-#prog_timeline a:visited,
-#prog_timeline a:active {
-	color: blue;
 }
 
 #error h2 {
@@ -157,10 +150,6 @@ body.help .heading {
 	margin-top: 0px;
 	white-space: normal;
 }
-.heading a:hover {
-	color: white;
-	text-decoration: none;
-}
 
 .row_even td {
 	background-color: #ffffff;
@@ -201,27 +190,34 @@ body.help .heading {
 
 .col_navi {
 	text-align: right;
-	background-color: #f6faff;
+	vertical-align: middle;
 	white-space: nowrap;
 	height: 17px;
-}
-.col_navi img {
-	position: relative;
-	top: 2px;
 }
 
 .list,
 .group {
-	margin-top: 0.6em;
 	border: 1px solid #6d96a9;
 }
 .group td {
 	padding: 2px;
 }
 
+#prog_summary .action,
+#prog_detail .action {
+	display: block;
+	margin: 5px 0 0 0;
+}
+.action {
+	margin: 0;
+	padding 0;
+	text-align: center;
+	width: 20px;
+}
+
 /* Summary */
 #prog_summary .group {
-	margin: 3px 3px 0 0;
+	margin: 0 3px 3px 0;
 	display: inline;
 	float: left;
 }
@@ -327,6 +323,7 @@ body.help .heading {
 	margin-left: 2em;
 	white-space: nowrap;
 }
+#prog_detail .time_vps,
 #prog_detail .time_duration {
 	margin-left: 2em;
 	white-space: nowrap;
@@ -374,12 +371,6 @@ body.help .heading {
 	background-color: #f0faff;
 	border-right: 1px solid #6d96a9;
 }
-#prog_summary table.content td.col_buttons .item,
-#prog_detail table.content td.col_buttons .item {
-	padding: 2px 0;
-	width: 20px;
-	text-align: center;
-}
 
 #prog_list .heading td span,
 #prog_list .heading td {
@@ -397,18 +388,11 @@ body.help .heading {
 	white-space: nowrap;
 }
 
-#content {
-	margin-top: 0.5em;
-}
-
 .col_duration {
 	padding-left: 3px;
 	padding-right: 3px;
 	width: 100px;
 	vertical-align: top;
-}
-.col_duration a:hover {
-	color: black;
 }
 	
 .col_name,
@@ -468,23 +452,26 @@ body.help .heading {
 	width: 45px;
 }
 
-#prog_timeline #prgtable {
-	border-left-color: #c4cdd7;
-	border-bottom-color: #c4cdd7;
+#prog_timeline #content {
+	position: absolute;
+	top: 32px + 0.6em;
+	left: 3px;
 }
-#prog_timeline #timertable {
+#prog_timeline .prgtable {
+	border-color: #c4cdd7;
+}
+#prog_timeline .timertable {
 	background: red;
-	border-left-color: #ffcdd7;
-	border-bottom-color: #ffcdd7;
+	border-color: #ffcdd7;
 }
 #prog_timeline #timeline {
 	background: red;
 }
 #prog_timeline .color_current {
-	background-color: #f7fffa;
+	background-color: #e6eee9;
 }
 #prog_timeline .color_broadcast {
-	background-color: #e6eee9;
+	background-color: #f7fffa;
 }
 #prog_timeline .color_timer {
 	background-color: #ffeee9;
@@ -500,6 +487,9 @@ body.help .heading {
 	white-space: normal;
 }
 
+#timer_list .list {
+	margin-top: 0.6em;
+}
 #timer_list .blackline {
 	background-color: black;
 }
@@ -534,10 +524,7 @@ body.help .heading {
 }
 
 #content {
-	margin-top: 1em;
-}
-.group {
-	margin-top: 0.5em;
+	margin-top: 0.6em;
 }
 #buttons {
 	border: 1px solid #6d96a9;
@@ -680,7 +667,7 @@ body.help .heading {
 
 /* Navigation */
 #navigation {
-	margin: 0px;
+	margin: 0px 3px;
 }
 #navigation .nav_bar {
 	border: 1px solid #6d96a9;
@@ -705,13 +692,10 @@ body.help .heading {
 	font-size: 12px;
 	text-align: center;
 }
-#navigation .separator {
-	display: none;
-}
 #navigation a,
 #navigation a:visited,
 #navigation a:active {
-	color: #436976;
+	color: #6d96a9;
 	font-weight: bold;
 	text-decoration: none;
 	border: 0px;

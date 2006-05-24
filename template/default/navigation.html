@@ -22,59 +22,46 @@
 
 <body id="navigation">
 	<div class="logo">
-		<a href="./" target="_top"><tmpl_if linvdr><img src="bilder/logo_linvdr.gif" alt="" height="50px" width="150px" border="0" /><tmpl_else><img src="bilder/logo_other.gif" alt="" height="50" width="150" border="0" /></tmpl_if></a>
+		<a href="./" target="_top"><tmpl_if linvdr><img src="bilder/logo_linvdr.gif" alt="" height="50px" width="150px" border="0" /><tmpl_else><img src="bilder/logo_other.png" alt="" height="50" width="150" border="0" /></tmpl_if></a>
 	</div>
 	<div class="nav_bar">
-		<div class="separator"></div>
-		<div class="navi">
+		<div class="navi" id="prog_summary">
 			<a href="vdradmin.pl?aktion=prog_summary" target="main"><%! What's On Now? !%></a>
 		</div>
-		<div class="separator"></div>
-		<div class="navi">
+		<div class="navi" id="prog_list2">
 			<a href="vdradmin.pl?aktion=prog_list2" target="main"><%! Playing Today !%></a>
 		</div>
-		<div class="separator"></div>
-		<div class="navi">
+		<div class="navi" id="prog_timeline">
 			<a href="vdradmin.pl?aktion=prog_timeline" target="main"><%! Timeline !%></a>
 		</div>
-		<div class="separator"></div>
-		<div class="navi">
+		<div class="navi" id="prog_list">
 			<a href="vdradmin.pl?aktion=prog_list" target="main"><%! Channels !%></a>
 		</div>
-		<div class="separator"></div>
-		<div class="navi">
+		<div class="navi" id="timer_list">
 			<a href="vdradmin.pl?aktion=timer_list" target="main"><%! Timer !%></a>
 		</div>
-		<div class="separator"></div>
-		<div class="navi">
+		<div class="navi" id="at_timer_list">
 			<a href="vdradmin.pl?aktion=at_timer_list" target="main"><%! AutoTimer !%></a>
 		</div>
-		<div class="separator"></div>
-		<div class="navi">
+		<div class="navi" id="rec_list">
 			<a href="vdradmin.pl?aktion=rec_list" target="main"><%! Recordings !%></a>
 		</div>
-		<div class="separator"></div>
-		<div class="navi">
+		<div class="navi" id="rc">
 			<a href="javascript:rc_open();"><%! Remote Control !%></a>
 		</div>
-		<div class="separator"></div>
-		<div class="navi">
+		<div class="navi" id="tv">
 			<a href="vdradmin.pl?aktion=tv_show" target="main"><%! Watch TV !%></a>
 		</div>
-		<div class="separator"></div>
-		<div class="navi">
+		<div class="navi" id="commands">
 			<a href="vdradmin.pl?aktion=vdr_cmds" target="main"><%! VDR Commands !%></a>
 		</div>
-		<div class="separator"></div>
-		<div class="navi">
+		<div class="navi" id="config">
 			<a href="vdradmin.pl?aktion=config" target="main"><%! Configuration !%></a>
 		</div>
-		<div class="separator"></div>
-		<div class="navi">
+		<div class="navi" id="about">
 			<a href="vdradmin.pl?aktion=about" target="main"><%! About !%> / <%! Help !%></a>
 		</div>
 
-		<div class="separator"></div>
 		<form action="vdradmin.pl" method="get" name="FormName" target="main" class="search">
 			<input type="text" name="search" /><br />
 			<input type="submit" name="submit" value="<%! Search !%>" />

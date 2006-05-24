@@ -41,7 +41,7 @@
 				</td>
 <tmpl_if name="help_url">
 				<td class="col_help">
-					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.gif" border="0" alt="help" title="<%! Help !%>"/></a>
+					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.png" border="0" alt="help" title="<%! Help !%>"/></a>
 				</td>
 </tmpl_if>
 				<td class="col_right"></td>
@@ -130,9 +130,9 @@
 				<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>">
 					<div>
 						<tmpl_if active>
-							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_gruen.gif" alt="" align="middle" border="0"/> <%! Yes !%></a>
+							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_gruen.png" alt="" align="middle" border="0"/> <%! Yes !%></a>
 						<tmpl_else>
-							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_grau.gif" alt="" align="middle" border="0"/> <%! No !%></a>
+							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_grau.png" alt="" align="middle" border="0"/> <%! No !%></a>
 						</tmpl_if>
 					</div>
 				</td>
@@ -153,17 +153,17 @@
 				</td>
 				<td class="col_name <tmpl_if sortbypattern>selected</tmpl_if>" <?% IF config.AT_TOOLTIP %?>onMouseOver="tip('VDR-<tmpl_var id>'); return true;" onMouseOut="untip(); return true;"<?% END %?>>
 					<div>
-						<tmpl_var pattern>
+						<a href="<tmpl_var modurl>" title="<%! Edit !%>"><tmpl_var pattern></a>
 					</div>
 				</td>
 				<td class="col_edit">
 					<div>
-						<a href="<tmpl_var modurl>"><img src="bilder/edit.gif" alt="edit" border="0" title="<%! Edit !%>"/></a>
+						<a href="<tmpl_var modurl>"><img src="bilder/edit.png" alt="edit" border="0" title="<%! Edit !%>"/></a>
 					</div>
 				</td>
 				<td class="col_delete">
 					<div>
-						<a href="javascript:del('<%! Delete timer? !%>\n\n&quot;<tmpl_var pattern_js>&quot;', '<tmpl_var delurl>');"><img src="bilder/delete.gif" alt="delete" border="0" title="<%! Delete !%>"/></a>
+						<a href="javascript:del('<%! Delete timer? !%>\n\n&quot;<tmpl_var pattern_js>&quot;', '<tmpl_var delurl>');"><img src="bilder/delete.png" alt="delete" border="0" title="<%! Delete !%>"/></a>
 					</div>
 				</td>
 				<td class="col_checkbox">
