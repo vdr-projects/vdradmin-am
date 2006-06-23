@@ -4,6 +4,26 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-06-23: 3.4.6beta3
+- Fixed: Crash in prog_detail if invalid EPG-ID (Bug #0000077, Reported by Reiner Buehl).
+- Fixed: Bug #0000034 (Reported by The Unknown).
+- Added: error page on internal vdradmind.pl errors.
+- Changed: access_log.
+- Removed: unused stuff in templates.
+- Fixed: quote special characters in "find repeatings" URL (Reported by Hans-Joachim Gurt).
+- Reworked: prog_timeline again (Fixes Bug #0000009, Reported by Georgius, Patch submitted by Torsten Herz).
+- Fixed: correct sorting in prog_list2 selectbox at the end of a month (Reported by sirtobi).
+- Changed: dates in prog_list2 selectbox now shows day and month (Requested by sirtobi).
+- Changed: Removed tabs in configuration menu.
+- Fixed: "Divide by 0" bug in prog_summary list view (Bug #0000072,  Reported by djdagobert).
+- Changed: Place folders in rec_list at the top (Patch submitted by Frank Jepsen).
+- Fixed: Remember sorting after returning fom rec_rename (Bug #0000037, Reported by martind).
+- Fixed: Canceling rec_rename does no longer rename the recording (Bug #0000036, Reported by martind).
+- Fixed: VDRAdmin-AM didn't start if PID file was empty (Reported and fixed by Hirmke Michael).
+- Fixed: In prog_list2 starting time also works for other days.
+- Added: Icons to find repeatings and IMDb lookup in prog_list and prog_list2.
+- Added: Each AutoTimer can have its own start/stop margins (Requested by many people at vdrportal.de). NOTE: vdradmind.at format changed!
+
 2006-05-24: 3.4.6beta2
 - Added: VPS time, audio and video tracks to prog_detail if available.
 - Added: class names for action icons (info, record...) for hiding single items (not yet finished).

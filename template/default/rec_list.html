@@ -14,7 +14,6 @@
 <body id="rec_list">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 		<tr>
-			<td class="col_left"></td>
 			<td class="col_title"><h1><%! Recordings !%></h1></td>
 			<td colspan="2" class="col_other">
 				<tmpl_if disk_total>
@@ -27,7 +26,6 @@
 				<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.png" border="0" alt="help" title="<%! Help !%>" /></a>
 			</td>
 </tmpl_if>
-			<td class="col_right"></td>
 		</tr>
 	</table>
 
@@ -41,7 +39,6 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="list">
 			<!-- TODO: this breaks IE, but why?
 			<colgroup>
-				<col class="col_left"/>
 				<col class="col_date"/>
 				<col class="col_time"/>
 				<col class="col_name"/>
@@ -51,10 +48,8 @@
 				<col class="col_stream"/>
 </tmpL_if>
 				<col class="col_checkbox"/>
-				<col class="col_right"/>
 			</colgroup>-->
 			<tr class="heading">
-				<td class="col_left"></td>
 				<td class="col_date <tmpl_if sortbydate>selected</tmpl_if>">
 					<h2>
 						<a href="<tmpl_var sortbydateurl>"><%! Date !%>
@@ -94,20 +89,10 @@
 				<td class="col_stream"></td>
 </tmpl_if>
 				<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL" onclick="AllMessages(this.form);" title="<%! Select all/none !%>" /></td>
-				<td class="col_right"></td>
-			</tr>
-			<tr class="row_spacer">
-				<td class="col_left"></td>
-				<td class="col_date <tmpl_if sortbydate>selected</tmpl_if>"></td>
-				<td class="col_time <tmpl_if sortbytime>selected</tmpl_if>"></td>
-				<td class="col_name <tmpl_if sortbyname>selected</tmpl_if>"></td>
-				<td colspan="<tmpl_if stream_rec_on>4<tmpl_else>3</tmpl_if>"></td>
-				<td class="col_right"></td>
 			</tr>
 
 <tmpl_loop recloop>
 			<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
-				<td class="col_left"></td>
 				<td class="col_date <tmpl_if sortbydate>selected</tmpl_if>">
 					<span class="date"><tmpl_var date></span>
 					<tmpl_if isfolder><span class="total"><%! Total !%></span></tmpl_if>
@@ -133,7 +118,7 @@
 				</td>
 				<td class="col_edit">
 					<tmpl_unless isfolder>
-						<a href="<tmpl_var editurl><tmpl_var cur_sorting>"><img src="bilder/edit.png" alt="rename" title="<%! Rename !%>" border="0" /></a>
+						<a href="<tmpl_var editurl><tmpl_var cur_sorting><tmpl_var referer>"><img src="bilder/edit.png" alt="rename" title="<%! Rename !%>" border="0" /></a>
 					</tmpl_unless>
 				</td>
 				<td  class="col_delete">
@@ -151,18 +136,8 @@
 				<td class="col_checkbox">
 					<tmpl_unless isfolder><input type="checkbox" name="xxxx_<tmpl_var id>" /></tmpl_unless>
 				</td>
-				<td class="col_right"></td>
 			</tr>
 </tmpl_loop>
-
-			<tr class="footer">
-				<td class="col_left"></td>
-				<td class="col_date <tmpl_if sortbydate>selected</tmpl_if>"></td>
-				<td class="col_time <tmpl_if sortbytime>selected</tmpl_if>"></td>
-				<td class="col_name <tmpl_if sortbyname>selected</tmpl_if>"></td>
-				<td colspan="<tmpl_if stream_rec_on>4<tmpl_else>3</tmpl_if>"></td>
-				<td class="col_right"></td>
-			</tr>
 		</table>
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">

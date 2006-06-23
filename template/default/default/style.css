@@ -69,6 +69,10 @@ h3,
 	font-weight: bold;
 	color: black;
 }
+#prog_list .epg_title a {
+	margin: 0;
+	padding: 0;
+}
 .col_label h5 {
 	margin: 1px 5px;
 	font-size: 11px;
@@ -116,17 +120,6 @@ label + input {
 	color: red;
 }
 
-.row_spacer,
-.row_spacer td,
-.row_spacer td.selected,
-.footer,
-.footer td,
-.footer td.selected,
-.col_left,
-.col_right,
-.heading.optional {
-	display: none;
-}
 body.help .heading {
 	display: table-row;
 }
@@ -138,6 +131,7 @@ body.help .heading {
 }
 .heading td {
 	background-color: #6d96a9;
+	xbackground-color: #2089e6; /*TODO*/
 	height: 17px;
 }
 .heading h2,
@@ -155,7 +149,7 @@ body.help .heading {
 	background-color: #ffffff;
 }
 .row_odd td {
-	background-color: #f0faff;
+	background-color: #dee6ee;
 }
 
 .col_label,
@@ -232,7 +226,7 @@ body.help .heading {
 #prog_summary .row_even td.col_content {
 	width: 246px;
 	height: 200px;
-	background-color: #f0faff;
+	background-color: #dee6ee;
 	vertical-align: top;
 }
 #prog_summary table.content td.col_buttons {
@@ -368,7 +362,7 @@ body.help .heading {
 	vertical-align: top;
 	width: 20px;
 	text-align: center;
-	background-color: #f0faff;
+	background-color: #dee6ee;
 	border-right: 1px solid #6d96a9;
 }
 
@@ -435,7 +429,7 @@ body.help .heading {
 }
 #heading tr {
 	vertical-align: middle;
-	background-color: #f0faff;
+	background-color: #dee6ee;
 }
 #heading td {
 	vertical-align: middle;
@@ -468,7 +462,7 @@ body.help .heading {
 	background: red;
 }
 #prog_timeline .color_current {
-	background-color: #e6eee9;
+	background-color: #e6ffe9;
 }
 #prog_timeline .color_broadcast {
 	background-color: #f7fffa;
@@ -476,9 +470,8 @@ body.help .heading {
 #prog_timeline .color_timer {
 	background-color: #ffeee9;
 }
-#prog_timeline2 .col_channel {
-	width: 150px;
-	border: 1px solid #6d96a9;
+#prog_timeline .col_spacer {
+	background-color: #e0e0e0;
 }
 #rec_list #path {
 	margin: 1em 10px 0px 10px;
@@ -515,9 +508,14 @@ body.help .heading {
 }
 #prog_timeline .row_even table td.color2,
 #timer_list .row_even table td.color2 {
-	background-color: #f0faff;
+	background-color: #dee6ee;
 }
-
+#prog_timeline table.timestable td.color1 {
+	background-color: #ffffff;
+}
+#prog_timeline table.timestable td.color2 {
+	background-color: #dee6ee;
+}
 #vdr_cmds pre {
 	margin: 0px;
 	padding: 0px;
@@ -531,17 +529,24 @@ body.help .heading {
 	padding: 3px;
 	margin-top: 1em;
 	margin-bottom: 1em;
-	background-color: #f0faff;
+	background-color: #dee6ee;
 	text-align: right;
 }
 
 #config .heading {
-	background-color: #f0faff;
+	background-color: #dee6ee;
 	border: none;
 }
 #config .heading a {
 	color: black;
 	font-weight: normal;
+}
+#config .group {
+	margin-top: 0.5em;
+	width: 100%;
+}
+#config .col_label {
+	width: 50%;
 }
 .tabs td {
 	padding: 0;
@@ -568,12 +573,15 @@ body.help .heading {
 	background-color: white;
 	color: black;
 }
-#about .col_label,
-#config .col_label {
-	width: 100px;
+#about .col_label {
+	width: 20%;
 }
 #about .col_label h5 {
 	white-space: nowrap;
+}
+
+select.channels {
+	min-width: 100px;
 }
 
 /* Tooltips */
@@ -583,7 +591,7 @@ body.help .heading {
 .tt_table {
 	width: 250px;
 	border: 2px solid #6d96a9;
-	background-color: #f0faff;
+	background-color: #dee6ee;
 }
 .tt_table th {
 	background-color: #6d96a9;
@@ -638,7 +646,7 @@ body.help .heading {
 }
 #help .links {
 	padding: 5px;
-	background-color: #f0faff;
+	background-color: #dee6ee;
 	text-align: justify;
 }
 #help .links a {
@@ -660,7 +668,7 @@ body.help .heading {
 #help .top_link {
 	text-align: right;
 	font-size: 0.8em;
-	background-color: #f0faff;
+	background-color: #dee6ee;
 	padding: 1px 5px;
 	margin: 0px;
 }
@@ -684,8 +692,10 @@ body.help .heading {
 	padding-bottom: 6px;
 	text-align: center;
 }
+/*TODO Farbe */
 #navigation .navi:hover {
-	background-color: #f0faff;
+	xbackground-color: #f0faff;
+	background-color: #dee6ee;
 }
 #navigation .search {
 	padding-top: 6px;

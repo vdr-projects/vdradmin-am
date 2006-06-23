@@ -44,7 +44,6 @@
 	<form action="<tmpl_var url>" method="get" name="form">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
-				<td class="col_left"></td>
 				<td class="col_title">
 					<h1><tmpl_if newtimer><%! Create New Timer !%><tmpl_else><%! Edit Timer !%></tmpl_if></h1>
 				</td>
@@ -53,32 +52,18 @@
 					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.png" border="0" alt="help" title="<%! Help !%>" /></a>
 				</td>
 </tmpl_if>
-				<td class="col_right"></td>
 			</tr>
 		</table>
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
-			<tr class="heading optional">
-				<td class="col_left"></td>
-				<td colspan="2"></td>
-				<td class="col_right"></td>
-			</tr>
-			<tr class="row_spacer">
-				<td class="col_left"></td>
-				<td colspan="2"></td>
-				<td class="col_right"></td>
-			</tr>
 			<tr class="row_odd">
-				<td class="col_left"></td>
 				<td class="col_label"><h5><%! Timer Active: !%></h5></td>
 				<td class="col_value">
 					<input type="radio" name="active" value="1" id="active_yes" <tmpl_if active>checked</tmpl_if> /><label for="active_yes"><%! Yes !%></label>
 					<input type="radio" name="active" value="0" id="active_no" <tmpl_unless active>checked</tmpl_unless> /><label for="active_no"><%! No !%></label>
 				</td>
-				<td class="col_right"></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_left"></td>
 				<td class="col_label"><h5><%! AutoTimer Checking: !%></h5></td>
 				<td class="col_value">
 					<input type="hidden" name="event_id" value="<tmpl_var event_id>"/>
@@ -88,10 +73,8 @@
 					<input type="radio" name="autotimer" value="1" id="event_time" <tmpl_if expr="autotimer == 1">checked</tmpl_if> /><label for="event_time"><%! Time !%></label>
 					<input type="radio" name="autotimer" value="0" id="event_off" <tmpl_if expr="autotimer == 0">checked</tmpl_if> /><label for="event_off"><%! off !%></label>
 				</td>
-				<td class="col_right"></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_left"></td>
 				<td class="col_label"><h5><%! Channel: !%></h5></td>
 				<td class="col_value">
 					<select name="channel" class="submit">
@@ -100,11 +83,9 @@
 </tmpl_loop>
 					</select>
 				</td>
-				<td class="col_right"></td>
 			</tr>
 			<tr class="row_even">
-				<td valign="top"  class="col_left"></td>
-				<td valign="top"  class="col_label"><h5><%! Day Of Recording: !%></h5></td>
+				<td valign="top" class="col_label"><h5><%! Day Of Recording: !%></h5></td>
 				<td class="col_value">
 					<input type="text" name="dor" value="<tmpl_var dor>" size="20" />
 					<br />
@@ -116,10 +97,8 @@
 					<input onclick="cTimer(6)" type="checkbox" name="D5" value="1" id="wday_sat" /><label for="wday_sat"><%! Saturday !%></label>
 					<input onclick="cTimer(7)" type="checkbox" name="D6" value="1" id="wday_sun" /><label for="wday_sun"><%! Sunday !%></label>
 				</td>
-				<td class="col_right"></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_left"></td>
 				<td class="col_label"><h5><%! Start Time: !%></h5></td>
 				<td class="col_value">
 					<input type="text" name="starth" value="<tmpl_var starth>" size="2" maxlength="2" />
@@ -130,12 +109,10 @@
 						(<%! Buffer: !%> <tmpl_var bstart> <%! minutes !%>)
 					</tmpl_if>
 				</td>
-				<td  class="col_right"></td>
 			</tr>
 			<tr class="row_even">
-				<td  class="col_left"></td>
-				<td  class="col_label"><h5><%! End Time: !%></h5></td>
-				<td  class="col_value">
+				<td class="col_label"><h5><%! End Time: !%></h5></td>
+				<td class="col_value">
 					<input type="text" name="stoph" value="<tmpl_var stoph>" size="2" maxlength="2" />
 					<b>&nbsp;:&nbsp;</b>
 					<input type="text" name="stopm" value="<tmpl_var stopm>" size="2" maxlength="2" />
@@ -144,51 +121,33 @@
 						(<%! Buffer: !%> <tmpl_var bstop> <%! minutes !%>)
 					</tmpl_if>
 				</td>
-				<td  class="col_right"></td>
 			</tr>
 			<tr class="row_odd">
-				<td  class="col_left"></td>
-				<td  class="col_label"><h5><%! Use VPS: !%></h5></td>
-				<td  class="col_value"><input type="checkbox" name="vps" value="1" <tmpl_if vps>checked</tmpl_if> /></td>
-				<td  class="col_right"></td>
+				<td class="col_label"><h5><%! Use VPS: !%></h5></td>
+				<td class="col_value"><input type="checkbox" name="vps" value="1" <tmpl_if vps>checked</tmpl_if> /></td>
 			</tr>
 			<tr class="row_even">
-				<td  class="col_left"></td>
-				<td  class="col_label"><h5><%! Priority: !%></h5></td>
-				<td  class="col_value"><input type="text" name="prio" value="<tmpl_var prio>" size="2" maxlength="2" /></td>
-				<td  class="col_right"></td>
+				<td class="col_label"><h5><%! Priority: !%></h5></td>
+				<td class="col_value"><input type="text" name="prio" value="<tmpl_var prio>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td  class="col_left"></td>
-				<td  class="col_label"><h5><%! Lifetime: !%></h5></td>
-				<td  class="col_value"><input type="text" name="lft" value="<tmpl_var lft>" size="2" maxlength="2" /></td>
-				<td  class="col_right"></td>
+				<td class="col_label"><h5><%! Lifetime: !%></h5></td>
+				<td class="col_value"><input type="text" name="lft" value="<tmpl_var lft>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="row_even">
-				<td  class="col_left"></td>
-				<td  class="col_label"><h5><%! Title of Recording: !%></h5></td>
-				<td  class="col_value"><input type="text" name="title" value="<tmpl_var title>" size="80" /></td>
-				<td  class="col_right"></td>
+				<td class="col_label"><h5><%! Title of Recording: !%></h5></td>
+				<td class="col_value"><input type="text" name="title" value="<tmpl_var title>" size="80" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_left"></td>
 				<td class="col_label" valign="top"><h5><%! Summary: !%></h5><h6>(<%! readonly !%>)</h6></td>
 				<td class="col_value"><textarea name="summary" rows="6" cols="80" readonly="readonly"><tmpl_var summary></textarea></td>
-				<td class="col_right"></td>
 			</tr>
 <tmpl_if pattern>
 			<tr class="row_even">
-				<td  class="col_left"></td>
-				<td  class="col_label"><h5><%! Timer has been set by AutoTimer pattern: !%></h5></td>
-				<td  class="col_value"><tmpl_var pattern></td>
-				<td  class="col_right"></td>
+				<td class="col_label"><h5><%! Timer has been set by AutoTimer pattern: !%></h5></td>
+				<td class="col_value"><tmpl_var pattern></td>
 			</tr>
 </tmpl_if>
-			<tr class="footer">
-				<td class="col_left"></td>
-				<td colspan="2"></td>
-				<td class="col_right"></td>
-			</tr>
 		</table>
 
 		<div id="buttons">

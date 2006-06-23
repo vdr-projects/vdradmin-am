@@ -40,7 +40,6 @@
 	<form action="<tmpl_var url>" method="get" name="FormName0">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
-				<td class="col_left"></td>
 				<td class="col_title"><h1><%! Timer !%></h1></td>
 				<td class="col_other">
 					<input type="submit" class="submit" value="<%! New Timer !%>" name="new_timer"/>
@@ -51,7 +50,6 @@
 					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.png" border="0" alt="help" title="<%! Help !%>" /></a>
 				</td>
 </tmpl_if>
-				<td class="col_right"></td>
 			</tr>
 		</table>
 	</form>
@@ -60,7 +58,6 @@
 		<form action="<tmpl_var url>" method="get" name="FormName1">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
 				<tr class="heading">
-					<td class="col_left"></td>
 					<td><h2><tmpl_var title></h2></td>
 					<td class="col_navi">
 						<tmpl_if prevdayurl><a href="<tmpl_var prevdayurl>"><img src="bilder/pfeile_nachlinks.png" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachlinks_soft.png" border="0" /></tmpl_if>
@@ -71,15 +68,8 @@
 						</select>
 						<tmpl_if nextdayurl><a href="<tmpl_var nextdayurl>"><img src="bilder/pfeile_nachrechts.png" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachrechts_soft.png" border="0" /></tmpl_if>
 					</td>
-					<td class="col_right"></td>
-				</tr>
-				<tr class="row_spacer">
-					<td class="col_left"></td>
-					<td colspan="2"></td>
-					<td class="col_right"></td>
 				</tr>
 				<tr class="row_even">
-					<td class="col_left"></td>
 					<td colspan="2" align="center">
 						<table cellspacing="0" cellpadding="0" border="0">
 							<tr>
@@ -189,12 +179,6 @@
 							</tr>
 						</table>
 					</td>
-					<td class="col_right"></td>
-				</tr>
-				<tr class="footer">
-					<td class="col_left"></td>
-					<td colspan="2"></td>
-					<td class="col_right"></td>
 				</tr>
 			</table>
 			<input type="hidden" name="aktion" value="timer_list" />
@@ -204,7 +188,6 @@
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
 				<!-- TODO: this breaks IE, but why?
 				<colgroup>
-					<col class="col_left"/>
 					<col class="col_active"/>
 					<col class="col_channel"/>
 					<col class="col_date"/>
@@ -214,10 +197,8 @@
 					<col class="col_edit"/>
 					<col class="col_delete"/>
 					<col class="col_checkbox"/>
-					<col class="col_right"/>
 				</colgroup>-->
 				<tr class="heading">
-					<td class="col_left"></td>
 					<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>">
 						<h2>
 							<a href="<tmpl_var sortbyactiveurl>"><%! Active !%>
@@ -287,23 +268,10 @@
 					<td class="col_edit"></td>
 					<td class="col_delete"></td>
 					<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL" onclick="AllMessages(this.form);" title="<%! Select all/none !%>" /></td>
-					<td class="col_right"></td>
-				</tr>
-				<tr class="row_spacer">
-					<td class="col_left"></td>
-					<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>"></td>
-					<td class="col_channel <tmpl_if sortbychannel>selected</tmpl_if>"></td>
-					<td class="col_date <tmpl_if sortbyday>selected</tmpl_if>"></td>
-					<td class="col_start <tmpl_if sortbystart>selected</tmpl_if>"></td>
-					<td class="col_stop <tmpl_if sortbystop>selected</tmpl_if>"></td>
-					<td class="col_name <tmpl_if sortbyname>selected</tmpl_if>"></td>
-					<td colspan="3"></td>
-					<td class="col_right"></td>
 				</tr>
 
 <tmpl_loop timer_loop>
 				<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
-					<td class="col_left"></td>
 					<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>">
 						<div>
 							<a href="javascript:change('<%! Edit timer status? !%>','<tmpl_var toggleurl>&amp;timer=<?% current %?>');">
@@ -360,21 +328,8 @@
 					<td class="col_checkbox">
 						<div><input type="checkbox" name="xxxx_<tmpl_var id>" /></div>
 					</td>
-					<td class="col_right"></td>
 				</tr>
 </tmpl_loop>
-
-				<tr class="footer">
-					<td class="col_left"></td>
-					<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>"></td>
-					<td class="col_channel <tmpl_if sortbychannel>selected</tmpl_if>"></td>
-					<td class="col_date <tmpl_if sortbyday>selected</tmpl_if>"></td>
-					<td class="col_start <tmpl_if sortbystart>selected</tmpl_if>"></td>
-					<td class="col_stop <tmpl_if sortbystop>selected</tmpl_if>"></td>
-					<td class="col_name <tmpl_if sortbyname>selected</tmpl_if>"></td>
-					<td colspan="3"></td>
-					<td class="col_right"></td>
-				</tr>
 			</table>
 
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">

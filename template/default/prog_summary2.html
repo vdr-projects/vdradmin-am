@@ -16,7 +16,6 @@
 	<form action="<tmpl_var url>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
-				<td class="col_left"></td>
 				<td class="col_title">
 					<h1><tmpl_var title></h1>
 				</td>
@@ -34,23 +33,11 @@
 					<%! at !%>&nbsp;<input type="text" name="time" size="5" value="<tmpl_var now>" />&nbsp;<%! o'clock !%>
 				</td>
 </tmpl_if>
-				<td class="col_right"></td>
 			</tr>
 		</table>
 		<input type="hidden" name="aktion" value="prog_summary" />
 
 		<table border="0" cellspacing="0" cellpadding="0" width="100%" class="list" id="content">
-			<tr class="heading optional">
-				<td class="col_left"></td>
-				<td colspan="4"></td>
-				<td class="col_right"></td>
-			</tr>
-			<tr class="row_spacer">
-				<td class="col_left"></td>
-				<td colspan="4"></td>
-				<td class="col_right"></td>
-			</tr>
-
 			<?%
 				tr_class = "row_odd";
 				olddate = "";
@@ -61,13 +48,10 @@
 			IF olddate != broadcast.date;
 				olddate = broadcast.date; %?>
 				<tr class="newday">
-					<td class="col_left"></td>
 					<td colspan="4"><span class="date_long"><?% broadcast.longdate %?></span></td>
-					<td class="col_right"></td>
 				</tr>
 			<?% END %?>
 			<tr class="<?% tr_class %?>">
-				<td class="col_left"></td>
 				<td class="col_duration">
 					<span class="time_duration"><span class="time_start"><?% broadcast.start %?></span> - <span class="time_stop"><?% broadcast.stop %?></span></span>
 					<?% IF broadcast.show_percent %?>
@@ -119,17 +103,11 @@
 						<?% END %?>
 					<?% END %?>
 				</td>
-				<td class="col_right"></td>
 			</tr>
 
 			<?% tr_class = (tr_class == "row_odd") ? "row_even" : "row_odd";
 		END;
 END %?>
-			<tr class="footer">
-				<td class="col_left"></td>
-				<td colspan="4"></td>
-				<td class="col_right"></td>
-			</tr>
 		</table>
 	</form>
 </body>

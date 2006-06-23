@@ -16,7 +16,6 @@
 	<form action="<tmpl_var url>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
-				<td class="col_left"></td>
 				<td class="col_title">
 					<h1><tmpl_var title></h1>
 				</td>
@@ -34,7 +33,6 @@
 					<%! at !%>&nbsp;<input type="text" name="time" size="5" value="<tmpl_var now>" />&nbsp;<%! o'clock !%>
 				</td>
 </tmpl_if>
-				<td class="col_right"></td>
 			</tr>
 		</table>
 		<input type="hidden" name="aktion" value="prog_summary" />
@@ -44,7 +42,6 @@
 	<tmpl_if longdate>
 		<table border="0" cellspacing="0" cellpadding="0" class="group">
 			<tr class="heading">
-				<td class="col_left"></td>
 				<td class="col_center">
 					<a id="<tmpl_var anchor>" name="<tmpl_var anchor>"></a>
 					<span class="channel_name"><a href="<tmpl_var proglink>" title="<%! Channels !%>"><tmpl_var progname></a></span>
@@ -59,10 +56,8 @@
 					</tmpl_if>
 					-->
 				</td>
-				<td class="col_right"></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_left"></td>
 				<td class="col_content">
 					<table border="0" cellspacing="0" cellpadding="0" class="content">
 						<tr>
@@ -126,7 +121,6 @@
 						</tr>
 					</table>
 				</td>
-				<td class="col_right"></td>
 			</tr>
 		</table>
 	</tmpl_if>

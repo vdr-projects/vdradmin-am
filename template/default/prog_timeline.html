@@ -12,36 +12,43 @@
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 
 <?%- 
-	breite = 600;
-	seite = 100;
-	zeitrahmen 	= config.ZEITRAHMEN || 1; # Zeitrahmen der angezeigt werden soll in Stunden
-	times 		= config.TIMES.split(',\s*');
-	
 	USE date;
-	jetzt_stunde = date.format(date.now, '%H');
-	jetzt_minute = date.format(date.now, '%M');
-	akt_stunde = date.format(now_sec, '%H');
-	akt_minute = (date.format(now_sec, '%M') < 30 ? '00' : '30');
-	diff_minute = jetzt_minute - akt_minute; 
+	show_hours = config.ZEITRAHMEN || 1; # Zeitrahmen der angezeigt werden soll in Stunden
+	times      = config.TIMES.split(',\s*');
+	
+	# first_sec is the start time of the 24 hours interval in seconds since 1970
+	# last_sec  is the end   time of the 24 hours interval in seconds since 1970
+	first_sec = date.now + 1799 - show_hours * 3600
+	first_sec = first_sec - first_sec % 1800;
+	last_sec  = first_sec + 86400; 
 
-	IF date.format(date.now, '%H:%M') == date.format(now_sec, '%H:%M');
-		akt_sekunde = now_sec - (diff_minute * 60);
-	ELSE;
-		akt_sekunde = now_sec;
-	END;		
-	akt_sekunde = akt_sekunde - akt_sekunde % 60;
+	# now_sec   is the requested browser time  in seconds since 1970
+	# start_sec is the start time of the table in seconds since 1970
+	# end_sec   is the end   time of the table in seconds since 1970
+	# end_min   is the end   time of the table in minutes since start of the table
+	# diff_sec  is the offset from start_sec to now_sec
+	diff_sec = now_sec % 1800; # time since last 30 minutes interval
+	start_sec = now_sec - diff_sec;
+	end_min = 60 * show_hours;
+	end_sec = start_sec + (end_min * 60);
 
-	bis = 60 * zeitrahmen;
-	bis_sec = akt_sekunde + (bis * 60);
-	bis_minute = bis;
-	bis_stunde = date.format(bis_sec, '%H');
+	name_w = 100;
+	min5_h = 10;
 
-	minute = 0;
-	z = 0;	
-	einheit = ((breite / bis) + 0.5) | format('%i');
-	breite = bis * einheit;
+	# Calculate suitable width for events dependent on the time interval
+	# 1 hour = 60min: 300px -> 5px/min
+	# 2 hours=120min: 600px -> 5px/min
+	# 3 hours=180min: 720px -> 4px/min
+	# 4 hours=240min: 720px -> 3px/min
+	# 5 hours=300min: 600px -> 2px/min
+	# 6 hours=360min: 720px -> 2px/min
+	event_w = show_hours * 300; 
+	IF event_w > 720; event_w = 720; END;
+	px_per_min = (event_w / end_min) | format('%i');
+	event_w = end_min * px_per_min;
 -%?>
 
+<!-- TimeLine: start_sec="<?% date.format(start_sec, '%H:%M:%S') %?>" now="<?% date.format(date.now, '%H:%M:%S') %?>" end_sec="<?% date.format(end_sec, '%H:%M:%S') %?>" -->
 	<style type="text/css">
 		table.prgname {
 			border-width:1px;
@@ -51,21 +58,15 @@
 			margin:0px;
 			text-align:left;
 			table-layout:fixed;
-			overflow:hidden;
 		}
 		td.prgname {
 			margin: 0 2px;
+			overflow:hidden;
 		}
 
-		.prgtable {
-			border-left-width:1px;
-			border-right-width:1px;
-			border-top-width:0px;
-			border-bottom-width:1px;
-			border-left-style:solid;
-			border-right-style:solid;
-			border-top-style:none;
-			border-bottom-style:solid;
+		.prgtable, .timertable {
+			border-width: 1px 1px 0px 1px;
+			border-style: solid none none solid;
 			border-spacing:0px;
 			padding:0px;
 			margin:0px;
@@ -73,47 +74,11 @@
 			table-layout:fixed;
 			overflow:hidden;
 		}
-		.prgtable span,
-		.timertable span {
+		td.prgtable,
+		td.timertable {
 			padding: 0 2px;
-		}
-
-		.timertable {
-			border-left-width:1px;
-			border-right-width:1px;
-			border-top-width:0px;
-			border-bottom-width:1px;
-			border-left-style:solid;
-			border-right-style:solid;
-			border-top-style:none;
-			border-bottom-style:solid;
-			border-spacing:0px;
-			padding:0px;
-			margin:0px;
-			text-align:left;
-			table-layout:fixed;
 			overflow:hidden;
 		}
-
-		.timestables {
-			border-left-width:1px;
-			border-right-width:1px;
-			border-top-width:0px;
-			border-bottom-width:1px;
-			border-left-style:solid;
-			border-right-style:solid;
-			border-top-style:none;
-			border-bottom-style:solid;
-			border-spacing:0px;
-			border-color:black;
-			padding:0px;
-			margin:0px;
-			table-layout:fixed;
-		}
-
-		<?% IF (date.now >= akt_sekunde) && (date.now - akt_sekunde < bis_sec) %?>
-			#timeline { position:absolute; filter:Alpha(opacity=50); top:20px; left:<?% seite + (einheit * diff_minute) + 30 %?>px; width:1px; height:<?% shows.keys.size * 18 + 19 %?>px; z-index:10; z-index:2; }
-		<?% END %?>
 
 		#bigtable { position:absolute; top:0; left: 0; z-index: 1; }
 	</style>
@@ -144,7 +109,7 @@
 			counter = 0;
 			FOREACH show = shows2.${name};
 	%?>
-				maketip("VDR-<?% show.vdr_id %?>-<?% counter %?>", "<?% show.title %?>", "<%! Duration: !%> <?% date.format(show.start, '%H:%M') %?> - <?% date.format(show.stop, '%H:%M') %?> (<?% (show.stop - show.start) / 60 %?><%! min !%>)" );
+				maketip("VDR-<?% show.vdr_id %?>-<?% counter %?>", "<?% show.title %?>", "<%! Duration: !%> <?% date.format(show.start, '%H:%M') %?> - <?% date.format(show.stop, '%H:%M') %?> (<?% (show.stop - show.start) / 60 %?> <%! min !%>)" );
 	<?%
 				counter = counter + 1;
 			END;
@@ -156,17 +121,18 @@
 	<form action="<?% nowurl %?>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
-				<td class="col_left"></td>
 				<td class="col_title">
 					<h1><?% now %?>&nbsp;<%! o'clock !%></h1>
 				</td>
 				<td class="col_other">
 					<%! What's on: !%>&nbsp;
-					<select name="Auswahl" class="submit" onChange="Go(this.form.Auswahl.options[this.form.Auswahl.options.selectedIndex].value)" style="width:100px" width="100">
-						<option value="<?% nowurl %?>"><%! now !%></option>
+					<select name="Auswahl" class="submit" onChange="Go(this.form.Auswahl.options[this.form.Auswahl.options.selectedIndex].value)" width="100">
+						<option value="<?% nowurl %?>"></option>
+<?% select_now = (now == date.format(date.now, '%H:%M')) %?>
+						<option value="<?% nowurl %?>" <?% "selected" IF select_now %?>><%! now !%></option>
 <?% FOREACH timer = times %?>
 	<?% timer_o_dopp = timer | replace('\:', '') %?>
-						<option value="<?% nowurl %?>&amp;time=<?% timer_o_dopp %?>" <?% "selected" IF now == timer %?>><?% timer %?></option>
+						<option value="<?% nowurl %?>&amp;time=<?% timer_o_dopp %?>" <?% "selected" IF !select_now && (now == timer) %?>><?% timer %?></option>
 <?% END %?>
 					</select>
 					&nbsp;|&nbsp;<%! at: !%>&nbsp;
@@ -174,110 +140,132 @@
 					&nbsp;<%! o'clock !%>
 					<input type="hidden" name="aktion" value="prog_timeline" />
 				</td>
-				<td class="col_right"></td>
 			</tr>
 		</table>
 
 
 		<div id="content">
-			<!-- Vertikal ansicht TOP -->
-			<span id="timeline"><img src="bilder/spacer.gif" width="1" height="1" border="0" /></span>
-
- <!-- Zeitleiste: akt="<?% date.format(akt_sekunde, '%H:%M:%S') %?>" jetzt="<?% date.format(date.now, '%H:%M:%S') %?>" -->
-			<table width="<?% breite + seite + 60 %?>" border="0" cellspacing="0" cellpadding="0" class="bigtable list">
+<!-- TimeLine Table TOP -->
+ 			<table width="<?% event_w + name_w %?>" border="0" cellspacing="0" cellpadding="0" class="bigtable list">
 				<tr class="heading">
-					<td class="col_left"></td>
-					<td colspan="3" width='<?% breite + seite %?>'><h2><%! Timeline: !%>&nbsp;<?% date.format(akt_sekunde, '%H:%M') %?>&nbsp;<%! o'clock !%>&nbsp;<%! to !%>&nbsp;<?% date.format(bis_sec, '%H:%M') %?>&nbsp;<%! o'clock !%></h2></td>
-					<td class="col_navi"><?% IF akt_sekunde <= date.now %?><img src="bilder/pfeile_nachlinks_soft.png" border="0" /><?% ELSE %?><a href="<?% nowurl %?>&amp;time=<?% akt_stunde - zeitrahmen | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachlinks.png" border="0" /></a><?% END %?><a href="<?% nowurl %?>&amp;time=<?% bis_stunde | format('%02d') %?><?% akt_minute | format('%02d') %?>"><img src="bilder/pfeile_nachrechts.png" border="0" /></a></td>
-					<td class="col_right"></td>
+					<td colspan="3">
+						<h2><?% date.format(start_sec, '%A, %H:%M') %?>&nbsp;<%! o'clock !%>&nbsp;<%! to !%>&nbsp;<?% date.format(end_sec, '%H:%M') %?>&nbsp;<%! o'clock !%></h2>
+						<br/>
+					</td>
+					<td class="col_navi">
+<?% IF start_sec < first_sec + 1800 %?>
+							<img src="bilder/pfeile_nachlinks_soft.png" border="0" />
+<?% 
+	ELSE;
+		diff_sec = start_sec - end_min * 60;
+		IF (diff_sec < first_sec);
+			diff_sec = first_sec;
+		END;
+%?>
+							<a href="<?% nowurl %?>&amp;time=<?% date.format(diff_sec, '%H:%M') %?>">
+								<img src="bilder/pfeile_nachlinks.png" border="0" />
+							</a>
+<?% END %?>
+<?% IF end_sec > last_sec - 1800 %?>
+							<img src="bilder/pfeile_nachrechts_soft.png" border="0" />
+<?% 
+	ELSE;
+		diff_sec = end_sec;
+		IF (diff_sec > last_sec - end_min * 60 - 1800);
+			diff_sec = last_sec - end_min * 60;
+		END;
+%?>
+						<a href="<?% nowurl %?>&amp;time=<?% date.format(diff_sec, '%H:%M') %?>">
+							<img src="bilder/pfeile_nachrechts.png" border="0" />
+						</a>
+<?% END %?>
+					</td>
 				</tr>
-				<tr class="row_spacer">
-					<td class="col_left"></td>
-					<td colspan="4"></td>
-					<td class="col_right"></td>
-				</tr>
-				<tr class="row_even">
-					<td class="col_left"></td>
+				<tr id="row_timeline" class="row_even">
 					<td colspan="4">
-						<table border="0" cellpadding="0" cellspacing="0" width="<?% seite + breite %?>" class="timestable">
+						<table border="0" cellpadding="0" cellspacing="0" width="<?% name_w + event_w %?>" class="timestable">
 							<tr>
-								<td><img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br /></td>
-<?% WHILE minute < bis %?>
+								<td><img src="bilder/spacer.gif" width="<?% name_w %?>" height="1" border="0" /></td>
+<?% minute = 0 %?>
+<?% WHILE minute < end_min %?>
 								<td colspan="6" class="<?% minute % 60 ? 'color1' : 'color2' %?>">
-									<img src="bilder/spacer.gif" width="<?% einheit * 30 %?>" height="1" border="0" /><br />
-	<?% zeit = akt_sekunde + (minute * 60) %?>
+									<img src="bilder/spacer.gif" width="<?% px_per_min * 30 %?>" height="1" border="0" /><br />
+	<?% zeit = start_sec + (minute * 60) %?>
 									<span class="date_time"><?% date.format(zeit, '%H:%M') %?></span>
 								</td>
 	<?% minute = minute + 30 %?> 
 <?% END %?>
 							</tr>
-<?% minute = 0 %?>
 							<tr>
-								<td><img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br /></td>
-<?% WHILE minute < bis %?>
-								<!-- TODO: unit for next "width" and "height"? -->
-								<td width="<?% einheit * 5 %?>" height="10" align="left" valign="bottom" class="<?% minute % 10 ? 'color1' : 'color2' %?>">
- 									<img src="bilder/spacer.gif" width="<?% einheit * 5 %?>" height="10" border="0" />
+								<td><img src="bilder/spacer.gif" width="<?% name_w %?>" height="1" border="0" /></td>
+<?% minute = 0 %?>
+<?% WHILE minute < end_min %?>
+								<td width="<?% px_per_min * 5 %?>" height="<?% min5_h %?>" class="<?% minute % 10 ? 'color1' : 'color2' %?>">
+ 									<img src="bilder/spacer.gif" width="<?% px_per_min * 5 %?>" height="1" border="0" /><br />
 								</td>
 	<?% minute = minute + 5 %?> 
 <?% END %?>
 							</tr>
 						</table>
 
-						<table border="0" cellpadding="0" cellspacing="0" width="<?% seite + breite %?>" class="prgname">
+						<table border="0" cellpadding="0" cellspacing="0" width="<?% name_w + event_w %?>" class="prgname">
 <?% b = 0;
 	FOREACH name = shows.keys.nsort; 
 		b = b + 1 %?>
 							<tr>
-								<!-- Sendername: "<?% shows.${name}.first.progname %?>" -->
-								<td width="<?% seite %?>" valign="top" class="prgname <?% b % 2 ? 'color2' : 'color1' %?>">
-									<img src="bilder/spacer.gif" width="<?% seite %?>" height="1" border="0" /><br />
+<!-- Channel: "<?% shows.${name}.first.progname %?>" -->
+								<td width="<?% name_w %?>" class="prgname <?% b % 2 ? 'color2' : 'color1' %?>">
+									<img src="bilder/spacer.gif" width="<?% name_w %?>" height="1" border="0" /><br />
 									<nobr><a href="<?% shows.${name}.first.proglink %?>" class="channel_name"><?% shows.${name}.first.progname %?></a></nobr>
 								</td>
-								<!-- Programm -->
-								<td colspan="<?% (bis / 5) %?>" class="<?% b % 2 ? 'color2' : 'color1' %?>">
+<!-- Events -->
+								<td class="<?% b % 2 ? 'color2' : 'color1' %?>">
 									<nobr>
 <?%
 		counter = 0;
-		old_stop_minute = -1;
+		old_stop_minute = 0;
 		FOREACH show = shows.${name}; 
-			start_minute = (show.start - akt_sekunde) / 60 | format('%i');
-			stop_minute = (show.stop - akt_sekunde) / 60 | format('%i');
+			start_minute = (show.start - start_sec) / 60 | format('%i');
+			stop_minute = (show.stop - start_sec) / 60 | format('%i');
+			IF (start_minute >= end_min); BREAK; END;
+%?>
+	<!-- <?% show.vdr_id %?>-<?% counter %?>: <?% date.format(show.start, '%H:%M:%S') %?>..<?% date.format(show.stop, '%H:%M:%S') %?> "<?% show.title %?>" -->
+	<!-- ---- old_stop	=<?% old_stop_minute %?>	end_min	=<?% end_min %?> -->
+	<!-- ---- start		=<?% start_minute %?>	stop	=<?% stop_minute %?>  -->
+<?%
+			IF start_minute < 0; start_minute = 0; END;
+			IF stop_minute  > end_min; stop_minute  = end_min; END;
 
-			IF start_minute < akt_minute; start_minute = 0; END;
-			IF stop_minute  > bis_minute; stop_minute  = bis_minute; END;
-
-			laenge_pix = (stop_minute - start_minute) * einheit;
+			px_w = (stop_minute - start_minute) * px_per_min;
 
 			IF show.timer; 
 				td_class = "color_timer";
 			ELSE;
 				td_class = date.now >= show.start && date.now < show.stop ? "color_current" : "color_broadcast";
 			END;
-%?>
- 
-<!-- old_stop="<?% old_stop_minute %?>" start="<?% start_minute %?>" stop="<?% stop_minute %?>" bis="<?% bis_minute %?>" -->
-<?% IF (start_minute >= old_stop_minute) && (start_minute < bis_minute) %?>
-<?% IF old_stop_minute + 1 < start_minute %?>
-<?% diff = (start_minute - old_stop_minute - 1) * einheit %?> 
-<!-- Spacer -->
+%?>	<!-- ---- start		=<?% start_minute %?>	stop	=<?% stop_minute %?> -->
+<?%
+			IF (start_minute >= old_stop_minute);
+				IF (start_minute  > old_stop_minute + 1);
+					diff = (start_minute - old_stop_minute) * px_per_min;
+%?>	<!-- ---- Time gap detected: fill in space -->
 									<table border="0" align="left" cellpadding="0" cellspacing="0" width="<?% diff %?>" class="prgtable">
 										<tr>
-											<td width="1">
-												<img src="bilder/spacer.gif" width="1" height="1" border="0" hspace="0" /><br/>
+											<td width="1" class="color_spacer">
+												<img src="bilder/spacer.gif" width="1" height="1" border="0" /><br/>
 												<nobr>
-													<img src="bilder/spacer.gif" width="1" height="8" border="0" hspace="0" />
+													<img src="bilder/spacer.gif" width="1" height="8" border="0" />
 												</nobr>
 											</td>
 										</tr>
 									</table>
-		<?% END %?>
-									<!-- <?% show.vdr_id %?>-<?% counter %?>: "<?% show.title %?>" -->
-									<table border="0" align="left" cellpadding="0" cellspacing="0" width="<?% laenge_pix %?>" class=<?% show.timer ? "timertable" : "prgtable" %?>>
+<?% 			END 
+%?>	<!-- ---- Show event title: "<?% show.title %?>" -->
+									<table border="0" align="left" cellpadding="0" cellspacing="0" width="<?% px_w %?>" class="<?% show.timer ? "timertable" : "prgtable" %?>">
 										<tr>
 											<td width="1" class="<?% td_class %?>" <?% IF config.TL_TOOLTIP %?>onMouseOver="tip('VDR-<?% show.vdr_id %?>-<?% counter %?>'); return true;" onMouseOut="untip(); return true;"<?% END %?>>
-												<img src="bilder/spacer.gif" width="1" height="1" border="0" hspace="0" /><br />
-												<span class="event">
+												<img src="bilder/spacer.gif" width="1" height="1" border="0" /><br />
+												<nobr>
 													<?% IF show.summary %?>
 														<a href="javascript:popup('./vdradmin.pl?aktion=prog_detail&amp;epg_id=<?% show.anchor %?>&amp;vdr_id=<?% show.vdr_id %?>');">
 															<?% show.title %?>
@@ -285,14 +273,17 @@
 													<?% ELSE %?>
 														<?% show.title %?>
 													<?% END %?>
-												</span>
+												</nobr>
 											</td>
 										</tr>
 									</table>
-	<?% 
-		old_stop_minute = stop_minute;
-		END;
- 		counter = counter + 1;
+<?% 
+				old_stop_minute = stop_minute;
+			ELSE
+%?>	<!-- ---- Overlapped by previous event: ignored -->
+<?% 
+			END;
+			counter = counter + 1;
 		END %?>
 									</nobr>
 								</td>
@@ -301,15 +292,35 @@
 						</table>
 					</td>
 
-<!-- Vertikal ansicht END -->
-					<td class="col_right"></td>
-				</tr>
-				<tr class="footer">
-					<td class="col_left"></td>
-					<td colspan="4"></td>
-					<td class="col_right"></td>
 				</tr>
 			</table>
+<!-- TimeLine Table BOTTOM -->
+
+<?% IF (date.now >= start_sec) && (date.now < end_sec) %?>
+	<?% diff = ((date.now - start_sec) / 60) | format('%i') %?> 
+			<script type="text/javascript" language="JavaScript">
+				var tab = document.getElementById("row_timeline");
+				if (tab)
+				{
+					var y = tab.offsetTop;
+					var h = tab.offsetHeight;
+					var style = "position:absolute; "
+								 + "top:" + y + "px; "
+								 + "left:<?% name_w + (px_per_min * diff) + 1 %?>px; "
+								 + "width:1px; "
+								 + "height:" + h + "px; "
+								 + "z-index:2; ";
+					if (document.all)
+					{
+						style = style + "filter:Alpha(opacity=50); ";
+					}
+
+					document.write('<span id="timeline" style="' + style + '">');
+					document.write('   <img src="bilder/spacer.gif" width="1" height="1" border="0" />');
+					document.write('</span>');
+				}
+			</script>
+<?% END %?>
 		</div>
 	</form>
 </body>

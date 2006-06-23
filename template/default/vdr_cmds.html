@@ -14,33 +14,19 @@
 <body id="vdr_cmds">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 		<tr>
-			<td class="col_left"></td>
 			<td class="col_title"><h1><%! VDR Commands !%></h1></td>
 <tmpl_if name="help_url">
 			<td class="col_help">
 				<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.png" border="0" alt="help" title="<%! Help !%>" /></a>
 			</td>
 </tmpl_if>
-			<td class="col_right"></td>
 		</tr>
 	</table>
 
 	<form action="<tmpl_var url>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
-			<tr class="heading optional">
-				<td class="col_left"></td>
-				<td colspan="2"></td>
-				<td class="col_right"></td>
-			</tr>
-			<tr class="row_spacer">
-				<td class="col_left"></td>
-				<td colspan="2"></td>
-				<td class="col_right"></td>
-			</tr>
-
 			<tr class="row_odd">
-				<td class="col_left"></td>
-				<td class="col_label"><%! Number of lines to show: !%></td>
+				<td class="col_label"><h5><%! Number of lines to show: !%></h5></td>
 				<td class="col_value">
 					<select name="max_lines">
 						<option value="20" <tmpl_if expr="max_lines == 20">selected="selected"</tmpl_if>>20</option>
@@ -49,21 +35,17 @@
 						<option value="-1" <tmpl_if expr="max_lines == -1">selected="selected"</tmpl_if>><%! unlimited !%></option>
 					</select>
 				</td>
-				<td class="col_right"></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_left"></td>
-				<td class="col_label"><%! SVDRP commands: !%></td>
+				<td class="col_label"><h5><%! SVDRP commands: !%></h5></td>
 				<td class="col_value">
 					<input type="text" name="svdrp_cmd" value="<tmpl_var svdrp_cmd>"/>
 					<input type="submit" class="submit" name="run_svdrpcmd" value="<%! Run !%>" onclick="return confirm('<%! Really run this command? !%>')" />
 				</td>
-				<td class="col_right"></td>
 			</tr>
 <tmpl_if commands>
 			<tr class="row_odd">
-				<td class="col_left"></td>
-				<td class="col_label"><%! Commands defined in commands.conf: !%></td>
+				<td class="col_label"><h5><%! Commands defined in commands.conf: !%></h5></td>
 				<td class="col_value">
 					<select name="vdr_cmd" class="submit">
 						<tmpl_loop commands>
@@ -72,15 +54,9 @@
 					</select>
 					<input type="submit" class="submit" name="run_vdrcmd" value="<%! Run !%>" onclick="return confirm('<%! Really run this command? !%>')" />
 				</td>
-				<td class="col_right"></td>
 			</tr>
 </tmpl_if>
 
-			<tr class="footer">
-				<td class="col_left"></td>
-				<td colspan="2"></td>
-				<td class="col_right"></td>
-			</tr>
 		</table>
 		<input type="hidden" name="aktion" value="vdr_cmds"/>
 	</form>
@@ -88,28 +64,14 @@
 <tmpl_if show_output>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
 		<tr class="heading">
-			<td class="col_left"></td>
 			<td><h2><%! Output !%></h2></td>
-			<td class="col_right"></td>
-		</tr>
-		<tr class="row_spacer">
-			<td class="col_left"></td>
-			<td></td>
-			<td class="col_right"></td>
 		</tr>
 
 <tmpl_loop show_output>
 		<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
-			<td class="col_left"></td>
 			<td><pre><tmpl_var line escape="html"></pre></td>
-			<td class="col_right"></td>
 		</tr>
 </tmpl_loop>
-		<tr class="footer">
-			<td class="col_left"></td>
-			<td></td>
-			<td class="col_right"></td>
-		</tr>
 	</table>
 </tmpl_if>
 </body>

@@ -14,19 +14,11 @@
 <body id="prog_detail" onload="window.focus()">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 		<tr class="heading">
-			<td class="col_left"></td>
 			<td class="col_content">
 				<span class="channel_name"><tmpl_var channel_name></span><tmpl_if date><span class="date_long"><tmpl_var date></span><span class="time_duration"><span class="time_start"><tmpl_var start></span> - <span class="time_stop"><tmpl_var stop></span></span><tmpl_if vps><span class="time_vps"><%! VPS !%> <tmpl_var vps></span></tmpl_if></tmpl_if>
 			</td>
-			<td class="col_right"></td>
-		</tr>
-		<tr class="row_spacer">
-			<td class="col_left"></td>
-			<td></td>
-			<td class="col_right"></td>
 		</tr>
 		<tr class="row_even">
-			<td class="col_left"></td>
 			<td class="col_content">
 				<table border="0" cellspacing="0" cellpadding="0" class="content">
 					<tr>
@@ -61,7 +53,7 @@
 								<div class="epg_subtitle"><tmpl_var subtitle></div>
 							</tmpl_if>
 							<div class="epg_summary"><tmpl_var text></div>
-							<tmpl_if video>
+							<tmpl_if has_video>
 								<div class="epg_video">
 									<h4><%! Video tracks: !%></h4>
 									<tmpl_loop video>
@@ -69,7 +61,7 @@
 									</tmpl_loop>
 								</div>
 							</tmpl_if>
-							<tmpl_if audio>
+							<tmpl_if has_audio>
 								<div class="epg_audio">
 									<h4><%! Audio tracks: !%></h4>
 									<tmpl_loop audio>
@@ -92,12 +84,6 @@
 					</tr>
 				</table>
 			</td>
-			<td class="col_right"></td>
-		</tr>
-		<tr class="footer">
-			<td class="col_left"></td>
-			<td></td>
-			<td class="col_right"></td>
 		</tr>
 	</table>
 </body>

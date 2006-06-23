@@ -15,7 +15,6 @@
 	<form action="<tmpl_var url>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
-				<td class="col_left"></td>
 				<td class="col_title">
 					<h1><tmpl_if newtimer><%! Add New AutoTimer !%><tmpl_else><%! Edit AutoTimer !%></tmpl_if></h1>
 				</td>
@@ -24,24 +23,12 @@
 					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.png" border="0" alt="help" title="<%! Help !%>"/></a>
 				</td>
 </tmpl_if>
-				<td class="col_right"></td>
 			</tr>
 		</table>
 
 		<div id="content">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
-				<tr class="heading optional">
-					<td class="col_left"></td>
-					<td colspan="2"></td>
-					<td class="col_right"></td>
-				</tr>
-				<tr class="row_spacer">
-					<td class="col_left"></td>
-					<td colspan="2"></td>
-					<td class="col_right"></td>
-				</tr>
 				<tr class="row_even">
-					<td class="col_left"></td>
 					<td class="col_label"><h5><%! AutoTimer Active: !%></h5></td>
 					<td class="col_value">
 <?% IF active == 2 %?>
@@ -54,28 +41,22 @@
 						<input type="radio" name="active" value="2" id="active_oneshot" /><label for="active_oneshot"><%! oneshot !%></label>
 <?% END %?>
 					</td>
-					<td class="col_right"></td>
 				</tr>
 				<tr class="row_odd">
-					<td class="col_left"></td>
 					<td class="col_label"><h5><%! Search Patterns: !%></h5></td>
 					<td class="col_value">
 						<input type="text" name="pattern" value="<tmpl_var pattern>" size="40" />
 					</td>
-					<td class="col_right"></td>
 				</tr>
 				<tr class="row_even">
-					<td class="col_left"></td>
 					<td class="col_label"><h5><%! Search in: !%></h5></td>
 					<td class="col_value">
 						<input type="checkbox" name="title" value="1" id="searchin_title" <tmpl_if title>checked</tmpl_if> /><label for="searchin_title"><%! Title !%></label>
 						<input type="checkbox" name="subtitle" value="1" id="searchin_subtitle" <tmpl_if subtitle>checked</tmpl_if> /><label for="searchin_subtitle"><%! Subtitle !%></label>
 						<input type="checkbox" name="description" value="1" id="searchin_description" <tmpl_if description>checked</tmpl_if> /><label for="searchin_description"><%! Description !%></label>
  	       </td>
-					<td class="col_right"></td>
 				</tr>
 				<tr class="row_odd">
-					<td class="col_left"></td>
 					<td class="col_label"><h5><%! Search only on these days: !%></h5></td>
 					<td class="col_value">
 						<input type="checkbox" name="wday_mon" value="1" id="wday_mon" <tmpl_if wday_mon>checked</tmpl_if> /><label for="wday_mon"><%! Monday !%></label>
@@ -86,10 +67,8 @@
 						<input type="checkbox" name="wday_sat" value="1" id="wday_sat" <tmpl_if wday_sat>checked</tmpl_if> /><label for="wday_sat"><%! Saturday !%></label>
 						<input type="checkbox" name="wday_sun" value="1" id="wday_sun" <tmpl_if wday_sun>checked</tmpl_if> /><label for="wday_sun"><%! Sunday !%></label>
  	       </td>
-					<td class="col_right"></td>
 				</tr>
 				<tr class="row_even">
-					<td class="col_left"></td>
 					<td class="col_label"><h5><%! Channel: !%></h5></td>
 					<td class="col_value">
 						<select class="submit" name="channel">
@@ -99,10 +78,8 @@
 </tmpl_loop>
 						</select>
 					</td>
-					<td class="col_right"></td>
 				</tr>
 				<tr class="row_odd">
-					<td class="col_left"></td>
 					<td class="col_label"><h5><%! Starts After: !%></h5></td>
 					<td class="col_value">
 						<input type="text" name="starth" value="<tmpl_var starth>" size="2" maxlength="2" />
@@ -110,10 +87,8 @@
 						<input type="text" name="startm" value="<tmpl_var startm>" size="2" maxlength="2" />
 						&nbsp;<%! o'clock !%>
 					</td>
-					<td class="col_right"></td>
 				</tr>
 				<tr class="row_even">
-					<td class="col_left"></td>
 					<td class="col_label"><h5><%! Ends Before: !%></h5></td>
 					<td class="col_value">
 						<input type="text" name="stoph" value="<tmpl_var stoph>" size="2" maxlength="2" />
@@ -121,53 +96,56 @@
 						<input type="text" name="stopm" value="<tmpl_var stopm>" size="2" maxlength="2" />
 						&nbsp;<%! o'clock !%>
 					</td>
-					<td class="col_right"></td>
 				</tr>
 				<tr class="row_odd">
-					<td class="col_left"></td>
+					<td class="col_label"><h5><%! Override Start/Stop Margins: !%></h5></td>
+					<td class="col_value">
+						<input type="radio" name="buffers" value="1" id="buffers_yes" <tmpl_if buffers>checked</tmpl_if> /><label for="buffers_yes"><%! Yes !%></label>
+						<input type="radio" name="buffers" value="0" id="buffers_no" <tmpl_unless buffers>checked</tmpl_unless> /><label for="buffers_no"><%! No !%></label>
+					</td>
+				</tr>
+				<tr class="row_even">
+					<td class="col_label"><h5><%! Time Margin at Start: !%></h5></td>
+					<td class="col_value">
+						<input type="text" name="bstart" value="<tmpl_var bstart>" size="2" maxlength="2" /> <%! minutes !%>
+					</td>
+				</tr>
+				<tr class="row_odd">
+					<td class="col_label"><h5><%! Time Margin at Stop: !%></h5></td>
+					<td class="col_value">
+						<input type="text" name="bstop" value="<tmpl_var bstop>" size="2" maxlength="2" /> <%! minutes !%>
+					</td>
+				</tr>
+				<tr class="row_even">
 					<td class="col_label"><h5><%! Priority: !%></h5></td>
 					<td class="col_value">
 						<input type="text" name="prio" value="<tmpl_var prio>" size="2" maxlength="2" />
 					</td>
-					<td class="col_right"></td>
 				</tr>
-				<tr class="row_even">
-					<td class="col_left"></td>
+				<tr class="row_odd">
 					<td class="col_label"><h5><%! Lifetime: !%></h5></td>
 					<td class="col_value">
 						<input type="text" name="lft" value="<tmpl_var lft>" size="2" maxlength="2" />
 					</td>
-					<td class="col_right"></td>
 				</tr>
-				<tr class="row_odd">
-					<td class="col_left"></td>
+				<tr class="row_even">
 					<td class="col_label"><h5><label for="episode"><%! Episode: !%></label></h5></td>
 					<td class="col_value">
 						<input type="checkbox" name="episode" value="1" id="episode" <tmpl_if episode>checked</tmpl_if> />
 					</td>
-					<td class="col_right"></td>
 				</tr>
-				<tr class="row_even">
-					<td class="col_left"></td>
+				<tr class="row_odd">
 					<td class="col_label"><h5><%! Remember programmed timers: !%></h5></td>
 					<td class="col_value">
 						<input type="radio" name="done" value="1" id="rem_yes" <tmpl_if done>checked</tmpl_if> /><label for="rem_yes"><%! Yes !%></label>
 						<input type="radio" name="done" value="0" id="rem_no" <tmpl_unless done>checked</tmpl_unless> /><label for="rem_no"><%! No !%></label>
 					</td>
-					<td class="col_right"></td>
 				</tr>
-				<tr class="row_odd">
-					<td class="col_left"></td>
+				<tr class="row_even">
 					<td class="col_label"><h5><%! Directory: !%></h5></td>
 					<td class="col_value">
 						<input type="text" name="directory" value="<tmpl_var directory>" size="40" />
 					</td>
-					<td class="col_right"></td>
-				</tr>
-				<tr class="footer">
-					<td class="col_left"></td>
-					<td colspan="2"></td>
-					<td class="col_right"></td>
 				</tr>
 			</table>
 		</div>
@@ -186,28 +164,19 @@
 	<tmpl_if matches>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
 			<tr class="heading">
-				<td class="col_left"></h2></td>
 				<td><h2><%! Title !%></h2></td>
 				<td><h2><%! Subtitle !%></h2></td>
 				<td><h2><%! Broadcasted !%></h2></td>
 				<td><h2><%! Stored in !%></h2></td>
-				<td class="col_right"></td>
 			</tr>
 		<tmpl_loop matches>
 			<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
-				<td class="col_left"></td>
 				<td><tmpl_var otitle></td>
 				<td><tmpl_var subtitle></td>
 				<td><tmpl_var date>, <tmpl_var start> - <tmpl_var stop> (<tmpl_var channel>)</td>
 				<td><tmpl_var title></td>
-				<td class="col_right"></td>
 			</tr>
 		</tmpl_loop>
-			<tr class="footer">
-				<td class="col_left"></td>
-				<td colspan="4"></td>
-				<td class="col_right"></td>
-			</tr>
 		</table>
 	<tmpl_else>
 		<div class="warning"><%! No matches found! !%></div>
