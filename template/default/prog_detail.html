@@ -53,24 +53,30 @@
 								<div class="epg_subtitle"><tmpl_var subtitle></div>
 							</tmpl_if>
 							<div class="epg_summary"><tmpl_var text></div>
-							<tmpl_if has_video>
+							<tmpl_if video>
 								<div class="epg_video">
 									<h4><%! Video tracks: !%></h4>
-									<tmpl_loop video>
+									<tmpl_var video>
+									<!--
+									<tmpl_loop videox>
 										<h5><%! Language: !%></h5> <tmpl_var lang> <h5><%! Format: !%></h5> <tmpl_var format><br />
 									</tmpl_loop>
+									-->
 								</div>
 							</tmpl_if>
-							<tmpl_if has_audio>
+							<tmpl_if audio>
 								<div class="epg_audio">
 									<h4><%! Audio tracks: !%></h4>
-									<tmpl_loop audio>
+									<tmpl_var audio>
+									<!--
+									<tmpl_loop audiox>
 										<h5><%! Language: !%></h5> <tmpl_var lang>
 										<tmpl_if descr>
 											<h5><%! Description: !%></h5> <tmpl_var descr>
 										</tmpl_if>
 										<br />
 									</tmpl_loop>
+									-->
 								</div>
 							</tmpl_if>
 							<tmpl_if epgimages>

@@ -4,6 +4,11 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-06-26: 3.4.6beta4
+- Changed: CSS a little bit.
+- Rewrote: prog_timeline to make it more dynamic (needs JavaScript) (Submitted by Torsten Herz).
+- Changed: displaying of audio/video tracks in prog_details (Fixes weird EPG display behaviour).
+
 2006-06-23: 3.4.6beta3
 - Fixed: Crash in prog_detail if invalid EPG-ID (Bug #0000077, Reported by Reiner Buehl).
 - Fixed: Bug #0000034 (Reported by The Unknown).

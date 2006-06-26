@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.4.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-23 11:47+0200\n"
+"POT-Creation-Date: 2006-06-26 11:22+0200\n"
 "PO-Revision-Date: 2006-01-18 12:36+0200\n"
 "Last-Translator: Rofa\n"
 "Language-Team: Suomi\n"
@@ -34,7 +34,7 @@ msgstr ""
 #: ../template/default/at_timer_new.html:5
 #: ../template/default/navigation.html:4 ../template/default/about.html:5
 #: ../template/default/vdr_cmds.html:5
-#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2077
+#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2060
 msgid "ISO-8859-1"
 msgstr "ISO-8859-1"
 
@@ -137,36 +137,43 @@ msgid "Day Of Recording:"
 msgstr "Päivä:"
 
 #: ../template/default/timer_new.html:92
+#: ../template/default/prog_timeline.html:79
 #: ../template/default/at_timer_new.html:62
 msgid "Monday"
 msgstr "Maanantai"
 
 #: ../template/default/timer_new.html:93
+#: ../template/default/prog_timeline.html:80
 #: ../template/default/at_timer_new.html:63
 msgid "Tuesday"
 msgstr "Tiistai"
 
 #: ../template/default/timer_new.html:94
+#: ../template/default/prog_timeline.html:81
 #: ../template/default/at_timer_new.html:64
 msgid "Wednesday"
 msgstr "Keskiviikko"
 
 #: ../template/default/timer_new.html:95
+#: ../template/default/prog_timeline.html:82
 #: ../template/default/at_timer_new.html:65
 msgid "Thursday"
 msgstr "Torstai"
 
 #: ../template/default/timer_new.html:96
+#: ../template/default/prog_timeline.html:83
 #: ../template/default/at_timer_new.html:66
 msgid "Friday"
 msgstr "Perjantai"
 
 #: ../template/default/timer_new.html:97
+#: ../template/default/prog_timeline.html:84
 #: ../template/default/at_timer_new.html:67
 msgid "Saturday"
 msgstr "Lauantai"
 
 #: ../template/default/timer_new.html:98
+#: ../template/default/prog_timeline.html:78
 #: ../template/default/at_timer_new.html:68
 msgid "Sunday"
 msgstr "Sunnuntai"
@@ -179,14 +186,14 @@ msgstr "Aloitusaika:"
 #: ../template/default/timer_new.html:107
 #: ../template/default/timer_new.html:119
 #: ../template/default/prog_summary.html:33
-#: ../template/default/prog_timeline.html:125
-#: ../template/default/prog_timeline.html:140
-#: ../template/default/prog_timeline.html:152
+#: ../template/default/prog_timeline.html:76
+#: ../template/default/prog_timeline.html:187
+#: ../template/default/prog_timeline.html:202
 #: ../template/default/prog_list2.html:31
 #: ../template/default/at_timer_new.html:88
 #: ../template/default/at_timer_new.html:97
-#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4162
-#: ../vdradmind.pl:4176
+#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4136
+#: ../vdradmind.pl:4150
 msgid "o'clock"
 msgstr " "
 
@@ -355,7 +362,7 @@ msgstr "Poistetaanko ajastin?"
 #: ../template/default/timer_list.html:326
 #: ../template/default/rec_list.html:126
 msgid "Delete"
-msgstr "Ooista"
+msgstr "Poista"
 
 #: ../template/default/at_timer_list.html:166
 msgid "Force Update"
@@ -372,25 +379,25 @@ msgstr "Poistetaanko valitut ajastimet?"
 
 #: ../template/default/prog_summary.html:7
 #: ../template/default/navigation.html:29
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4793
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4762
 msgid "What's On Now?"
 msgstr "Menossa nyt"
 
 #: ../template/default/prog_summary.html:27
-#: ../template/default/prog_timeline.html:128
+#: ../template/default/prog_timeline.html:190
 #: ../template/default/prog_summary2.html:27
 msgid "What's on:"
 msgstr "Menossa"
 
 #: ../template/default/prog_summary.html:33
-#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4162
+#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4136
 msgid "at"
 msgstr " "
 
 #: ../template/default/prog_summary.html:47
 #: ../template/default/prog_list.html:6 ../template/default/prog_list2.html:53
 #: ../template/default/navigation.html:38
-#: ../template/default/prog_summary2.html:84 ../vdradmind.pl:4793
+#: ../template/default/prog_summary2.html:84 ../vdradmind.pl:4762
 msgid "Channels"
 msgstr "Kanavat"
 
@@ -479,8 +486,8 @@ msgstr "Kanavien lukumäärä:"
 msgid "Local net (no login required):"
 msgstr "Käyttäjätunnukseton osoiteavaruus:"
 
-#: ../template/default/config.html:83 ../template/default/prog_detail.html:60
-#: ../template/default/prog_detail.html:68
+#: ../template/default/config.html:83 ../template/default/prog_detail.html:62
+#: ../template/default/prog_detail.html:73
 #: ../template/default/help_config.html:42
 msgid "Language:"
 msgstr "Kieli:"
@@ -534,7 +541,7 @@ msgstr "Vierailijan salasana:"
 #: ../template/default/config.html:151 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:78
 #: ../template/default/prog_timeline.html:7
-#: ../template/default/navigation.html:35 ../vdradmind.pl:4793
+#: ../template/default/navigation.html:35 ../vdradmind.pl:4762
 msgid "Timeline"
 msgstr "Aikajana"
 
@@ -548,7 +555,7 @@ msgstr "Ajankohdat:"
 
 #: ../template/default/config.html:159
 msgid "Also used for other EPG views!"
-msgstr ""
+msgstr "Käytetään myös muihin ohjelmaoppaan näkymiin!"
 
 #: ../template/default/config.html:162 ../template/default/config.html:231
 #: ../template/default/help_config.html:84
@@ -734,12 +741,12 @@ msgid "Apply"
 msgstr "Käytä"
 
 #: ../template/default/timer_list.html:27
-#: ../template/default/prog_timeline.html:112
+#: ../template/default/prog_timeline.html:131
 msgid "Duration:"
 msgstr "Kesto:"
 
 #: ../template/default/timer_list.html:27
-#: ../template/default/prog_timeline.html:112
+#: ../template/default/prog_timeline.html:132
 msgid "min"
 msgstr "min"
 
@@ -866,22 +873,22 @@ msgstr "Etsi"
 msgid "Video tracks:"
 msgstr "Kuvaraidat:"
 
-#: ../template/default/prog_detail.html:60
+#: ../template/default/prog_detail.html:62
 msgid "Format:"
 msgstr "Kuvasuhde:"
 
-#: ../template/default/prog_detail.html:66
+#: ../template/default/prog_detail.html:69
 msgid "Audio tracks:"
 msgstr "Ääniraidat:"
 
-#: ../template/default/prog_detail.html:70
+#: ../template/default/prog_detail.html:75
 msgid "Description:"
 msgstr "Kuvaus:"
 
 #: ../template/default/rec_list.html:6 ../template/default/rec_list.html:17
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
-#: ../template/default/navigation.html:47 ../vdradmind.pl:4793
+#: ../template/default/navigation.html:47 ../vdradmind.pl:4762
 msgid "Recordings"
 msgstr "Tallenteet"
 
@@ -1248,19 +1255,20 @@ msgid ""
 "<input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
 msgstr ""
 
-#: ../template/default/prog_timeline.html:132 ../vdradmind.pl:4147
+#: ../template/default/prog_timeline.html:75
+#: ../template/default/prog_timeline.html:194 ../vdradmind.pl:4121
 msgid "now"
 msgstr "nyt"
 
-#: ../template/default/prog_timeline.html:138
-msgid "at:"
-msgstr "kello:"
-
-#: ../template/default/prog_timeline.html:152
+#: ../template/default/prog_timeline.html:77
 msgid "to"
 msgstr "-"
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:2811
+#: ../template/default/prog_timeline.html:200
+msgid "at:"
+msgstr "kello:"
+
+#: ../template/default/prog_list2.html:6 ../vdradmind.pl:2788
 msgid "Playing Today"
 msgstr "Ohjelmisto tänään"
 
@@ -1656,7 +1664,7 @@ msgstr "Kaikki"
 
 #: ../template/default/at_timer_new.html:101
 msgid "Override Start/Stop Margins:"
-msgstr ""
+msgstr "Käytä yksilöllisiä aloitus- ja lopetusmarginaaleja"
 
 #: ../template/default/at_timer_new.html:155
 msgid "Test"
@@ -1674,7 +1682,7 @@ msgstr "Tallennehakemisto"
 msgid "No matches found!"
 msgstr "Ei löytynyt yhtään hakutulosta!"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:4793
+#: ../template/default/navigation.html:32 ../vdradmind.pl:4762
 msgid "Playing Today?"
 msgstr "Tänään"
 
@@ -1683,9 +1691,8 @@ msgid "Watch TV"
 msgstr "Katso TV:tä"
 
 #: ../template/default/navigation.html:56
-#, fuzzy
 msgid "Commands"
-msgstr "Komennot:"
+msgstr "Komennot"
 
 #: ../template/default/navigation.html:62 ../template/default/about.html:6
 msgid "About"
@@ -1852,38 +1859,38 @@ msgstr "VDRAdmin-AM konfigurointitiedosto muodostettu."
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s käynnistetty prosessitunnisteella %d."
 
-#: ../vdradmind.pl:455 ../vdradmind.pl:1085 ../vdradmind.pl:2065
+#: ../vdradmind.pl:455 ../vdradmind.pl:1068 ../vdradmind.pl:2048
 msgid "Not found"
 msgstr "Ei löydy"
 
-#: ../vdradmind.pl:455 ../vdradmind.pl:2066
+#: ../vdradmind.pl:455 ../vdradmind.pl:2049
 msgid "The requested URL was not found on this server!"
 msgstr "Pyydettyä URL:ia ei löydy palvelimelta!"
 
-#: ../vdradmind.pl:525 ../vdradmind.pl:1081 ../vdradmind.pl:2068
+#: ../vdradmind.pl:525 ../vdradmind.pl:1064 ../vdradmind.pl:2051
 msgid "Forbidden"
 msgstr "Kielletty"
 
-#: ../vdradmind.pl:525 ../vdradmind.pl:2069
+#: ../vdradmind.pl:525 ../vdradmind.pl:2052
 msgid "You don't have permission to access this function!"
 msgstr "Puutteelliset käyttäjäoikeudet haluttuun toimintoon!"
 
-#: ../vdradmind.pl:1081 ../vdradmind.pl:2070
+#: ../vdradmind.pl:1064 ../vdradmind.pl:2053
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "Pääsy tiedostoon \"%s\" evätty!"
 
-#: ../vdradmind.pl:1085 ../vdradmind.pl:2067
+#: ../vdradmind.pl:1068 ../vdradmind.pl:2050
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "URL:ia \"%s\" ei löydy palvelimelta!"
 
-#: ../vdradmind.pl:2071
+#: ../vdradmind.pl:2054
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Tiedoston \"%s\" avaus ei onnistu!"
 
-#: ../vdradmind.pl:2072
+#: ../vdradmind.pl:2055
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
@@ -1892,59 +1899,56 @@ msgstr ""
 "Yhteydenotto VDR:ään (%s:%s) epäonnistui!<br /><br />Varmista VDR:n "
 "päälläolo ja svdrphosts.conf-tiedoston oikeellisuus."
 
-#: ../vdradmind.pl:2073
+#: ../vdradmind.pl:2056
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Komennon lähetys VDR:lle epäonnistui (%s)"
 
-#: ../vdradmind.pl:2551
+#: ../vdradmind.pl:2532
 msgid "Can't find EPG entry!"
-msgstr ""
+msgstr "Ohjelman tietoja ei löydy ohjelmaoppaasta!"
 
-#: ../vdradmind.pl:2811
+#: ../vdradmind.pl:2788
 msgid "Playing Tomorrow"
 msgstr "Ohjelmisto huomenna"
 
-#: ../vdradmind.pl:2811
+#: ../vdradmind.pl:2788
 #, fuzzy, perl-format
 msgid "Playing on the %s"
 msgstr "Ohjelmisto %d. päivä"
 
-#: ../vdradmind.pl:4152
+#: ../vdradmind.pl:4126
 msgid "next"
 msgstr "seuraavaksi"
 
-#: ../vdradmind.pl:4171
+#: ../vdradmind.pl:4145
 msgid "What's on after"
 msgstr "Menossa seuraavaksi"
 
-#: ../vdradmind.pl:4171
+#: ../vdradmind.pl:4145
 msgid "What's on at"
 msgstr "Menossa"
 
-#: ../vdradmind.pl:4176
+#: ../vdradmind.pl:4150
 msgid "Suitable matches for:"
 msgstr "Hakutulokset termille:"
 
-#: ../vdradmind.pl:4178
+#: ../vdradmind.pl:4152
 msgid "short view"
 msgstr "lyhyt näkymä"
 
-#: ../vdradmind.pl:4178
+#: ../vdradmind.pl:4152
 msgid "long view"
 msgstr "pitkä näkymä"
 
-#: ../vdradmind.pl:4235
+#: ../vdradmind.pl:4209
 msgid "Schedule"
 msgstr "Ohjelmisto"
 
-#: ../vdradmind.pl:4793
+#: ../vdradmind.pl:4762
 msgid "Timers"
 msgstr "Ajastimet"
 
-#: ../vdradmind.pl:4861
+#: ../vdradmind.pl:4830
 msgid "System default"
 msgstr "Oletus"
-
-#~ msgid "Timeline:"
-#~ msgstr "Aikajana:"

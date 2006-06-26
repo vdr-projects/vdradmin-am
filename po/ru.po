@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-23 11:47+0200\n"
-"PO-Revision-Date: 2006-04-26 13:53+0100\n"
+"POT-Creation-Date: 2006-06-26 11:22+0200\n"
+"PO-Revision-Date: 2006-06-26 10:53+0100\n"
 "Last-Translator: Oleg Roitburd <oleg@roitburd.de>\n"
 "Language-Team: Allrussian <LL.org>\n"
 "MIME-Version: 1.0\n"
@@ -44,7 +44,7 @@ msgstr ""
 #: ../template/default/at_timer_new.html:5
 #: ../template/default/navigation.html:4 ../template/default/about.html:5
 #: ../template/default/vdr_cmds.html:5
-#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2077
+#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2060
 msgid "ISO-8859-1"
 msgstr "ISO-8859-5"
 
@@ -147,36 +147,43 @@ msgid "Day Of Recording:"
 msgstr "День записи:"
 
 #: ../template/default/timer_new.html:92
+#: ../template/default/prog_timeline.html:79
 #: ../template/default/at_timer_new.html:62
 msgid "Monday"
 msgstr "Понедельник"
 
 #: ../template/default/timer_new.html:93
+#: ../template/default/prog_timeline.html:80
 #: ../template/default/at_timer_new.html:63
 msgid "Tuesday"
 msgstr "Вторник"
 
 #: ../template/default/timer_new.html:94
+#: ../template/default/prog_timeline.html:81
 #: ../template/default/at_timer_new.html:64
 msgid "Wednesday"
 msgstr "Среда"
 
 #: ../template/default/timer_new.html:95
+#: ../template/default/prog_timeline.html:82
 #: ../template/default/at_timer_new.html:65
 msgid "Thursday"
 msgstr "Четверг"
 
 #: ../template/default/timer_new.html:96
+#: ../template/default/prog_timeline.html:83
 #: ../template/default/at_timer_new.html:66
 msgid "Friday"
 msgstr "Пятница"
 
 #: ../template/default/timer_new.html:97
+#: ../template/default/prog_timeline.html:84
 #: ../template/default/at_timer_new.html:67
 msgid "Saturday"
 msgstr "Суббота"
 
 #: ../template/default/timer_new.html:98
+#: ../template/default/prog_timeline.html:78
 #: ../template/default/at_timer_new.html:68
 msgid "Sunday"
 msgstr "Воскресение"
@@ -189,14 +196,14 @@ msgstr "Начало:"
 #: ../template/default/timer_new.html:107
 #: ../template/default/timer_new.html:119
 #: ../template/default/prog_summary.html:33
-#: ../template/default/prog_timeline.html:125
-#: ../template/default/prog_timeline.html:140
-#: ../template/default/prog_timeline.html:152
+#: ../template/default/prog_timeline.html:76
+#: ../template/default/prog_timeline.html:187
+#: ../template/default/prog_timeline.html:202
 #: ../template/default/prog_list2.html:31
 #: ../template/default/at_timer_new.html:88
 #: ../template/default/at_timer_new.html:97
-#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4162
-#: ../vdradmind.pl:4176
+#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4136
+#: ../vdradmind.pl:4150
 msgid "o'clock"
 msgstr "Часов"
 
@@ -382,26 +389,25 @@ msgstr "Удалить все выбранные Автотаймеры?"
 
 #: ../template/default/prog_summary.html:7
 #: ../template/default/navigation.html:29
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4793
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4762
 msgid "What's On Now?"
 msgstr "Что идет сейчас?"
 
 #: ../template/default/prog_summary.html:27
-#: ../template/default/prog_timeline.html:128
+#: ../template/default/prog_timeline.html:190
 #: ../template/default/prog_summary2.html:27
 msgid "What's on:"
 msgstr "Что сейчас:"
 
 #: ../template/default/prog_summary.html:33
-#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4162
-#, fuzzy
+#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4136
 msgid "at"
-msgstr "в:"
+msgstr "в"
 
 #: ../template/default/prog_summary.html:47
 #: ../template/default/prog_list.html:6 ../template/default/prog_list2.html:53
 #: ../template/default/navigation.html:38
-#: ../template/default/prog_summary2.html:84 ../vdradmind.pl:4793
+#: ../template/default/prog_summary2.html:84 ../vdradmind.pl:4762
 msgid "Channels"
 msgstr "Телегид"
 
@@ -440,9 +446,8 @@ msgstr "Дополнительная информация"
 #: ../template/default/prog_list.html:77
 #: ../template/default/prog_list2.html:90
 #: ../template/default/prog_summary2.html:98
-#, fuzzy
 msgid "No Information"
-msgstr "Дополнительная информация"
+msgstr "Нет информации"
 
 #: ../template/default/prog_summary.html:87
 #: ../template/default/prog_list.html:79
@@ -491,8 +496,8 @@ msgstr "Количество используемых каналов:"
 msgid "Local net (no login required):"
 msgstr "Локальная сеть (вход без авторизации):"
 
-#: ../template/default/config.html:83 ../template/default/prog_detail.html:60
-#: ../template/default/prog_detail.html:68
+#: ../template/default/config.html:83 ../template/default/prog_detail.html:62
+#: ../template/default/prog_detail.html:73
 #: ../template/default/help_config.html:42
 msgid "Language:"
 msgstr "Язык:"
@@ -546,7 +551,7 @@ msgstr "Пароль для гостя:"
 #: ../template/default/config.html:151 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:78
 #: ../template/default/prog_timeline.html:7
-#: ../template/default/navigation.html:35 ../vdradmind.pl:4793
+#: ../template/default/navigation.html:35 ../vdradmind.pl:4762
 msgid "Timeline"
 msgstr "График времени"
 
@@ -560,7 +565,7 @@ msgstr "Время:"
 
 #: ../template/default/config.html:159
 msgid "Also used for other EPG views!"
-msgstr ""
+msgstr "Также использовать для других EPG"
 
 #: ../template/default/config.html:162 ../template/default/config.html:231
 #: ../template/default/help_config.html:84
@@ -746,12 +751,12 @@ msgid "Apply"
 msgstr "Применить"
 
 #: ../template/default/timer_list.html:27
-#: ../template/default/prog_timeline.html:112
+#: ../template/default/prog_timeline.html:131
 msgid "Duration:"
 msgstr "Продолжительность:"
 
 #: ../template/default/timer_list.html:27
-#: ../template/default/prog_timeline.html:112
+#: ../template/default/prog_timeline.html:132
 msgid "min"
 msgstr "мин"
 
@@ -876,26 +881,24 @@ msgstr "Повторения"
 
 #: ../template/default/prog_detail.html:58
 msgid "Video tracks:"
-msgstr ""
+msgstr "Видео дорожки"
 
-#: ../template/default/prog_detail.html:60
-#, fuzzy
+#: ../template/default/prog_detail.html:62
 msgid "Format:"
-msgstr "в:"
+msgstr "Формат:"
 
-#: ../template/default/prog_detail.html:66
+#: ../template/default/prog_detail.html:69
 msgid "Audio tracks:"
-msgstr ""
+msgstr "Аудио дорожки"
 
-#: ../template/default/prog_detail.html:70
-#, fuzzy
+#: ../template/default/prog_detail.html:75
 msgid "Description:"
-msgstr "Описание"
+msgstr "Описание:"
 
 #: ../template/default/rec_list.html:6 ../template/default/rec_list.html:17
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
-#: ../template/default/navigation.html:47 ../vdradmind.pl:4793
+#: ../template/default/navigation.html:47 ../vdradmind.pl:4762
 msgid "Recordings"
 msgstr "Записи"
 
@@ -1167,9 +1170,8 @@ msgstr ""
 "таймер"
 
 #: ../template/default/help_config.html:103
-#, fuzzy
 msgid "Here you set the sending email address of the generated email."
-msgstr "Здесь Вы устанавливаете сервер для отправки почты"
+msgstr "Здесь Вы устанавливаете E-mail адресс для сгенерированных E-mail"
 
 #: ../template/default/help_config.html:105
 msgid "The email address the email is sent to."
@@ -1351,25 +1353,26 @@ msgstr ""
 "нажать на кнопку <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;"
 "&gt;&gt;\"/>.Удалить каналы из этого списка можно выделив "
 
-#: ../template/default/prog_timeline.html:132 ../vdradmind.pl:4147
+#: ../template/default/prog_timeline.html:75
+#: ../template/default/prog_timeline.html:194 ../vdradmind.pl:4121
 msgid "now"
 msgstr "сейчас"
 
-#: ../template/default/prog_timeline.html:138
-msgid "at:"
-msgstr "в:"
-
-#: ../template/default/prog_timeline.html:152
+#: ../template/default/prog_timeline.html:77
 msgid "to"
 msgstr "до"
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:2811
+#: ../template/default/prog_timeline.html:200
+msgid "at:"
+msgstr "в:"
+
+#: ../template/default/prog_list2.html:6 ../vdradmind.pl:2788
 msgid "Playing Today"
 msgstr "Что будет сегодня?"
 
 #: ../template/default/prog_list2.html:29
 msgid "starting at"
-msgstr ""
+msgstr "Начать в"
 
 #: ../template/default/rec_edit.html:6 ../template/default/rec_edit.html:19
 msgid "Rename Recording"
@@ -1940,7 +1943,7 @@ msgstr "все"
 
 #: ../template/default/at_timer_new.html:101
 msgid "Override Start/Stop Margins:"
-msgstr ""
+msgstr "Переписывать старт/стоп "
 
 #: ../template/default/at_timer_new.html:155
 msgid "Test"
@@ -1958,7 +1961,7 @@ msgstr "Сохраненно в"
 msgid "No matches found!"
 msgstr "Совпадений не найдено!"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:4793
+#: ../template/default/navigation.html:32 ../vdradmind.pl:4762
 msgid "Playing Today?"
 msgstr "Что будет сегодня?"
 
@@ -1967,9 +1970,8 @@ msgid "Watch TV"
 msgstr "Телевизор"
 
 #: ../template/default/navigation.html:56
-#, fuzzy
 msgid "Commands"
-msgstr "Команды:"
+msgstr "Команды"
 
 #: ../template/default/navigation.html:62 ../template/default/about.html:6
 msgid "About"
@@ -2025,7 +2027,7 @@ msgstr "Испанский:"
 
 #: ../template/default/about.html:58
 msgid "Russian:"
-msgstr ""
+msgstr "Русский"
 
 #: ../template/default/about.html:65
 msgid "Informations"
@@ -2140,107 +2142,102 @@ msgstr "Файл конфигурации успешно записан."
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s был запущен с PID-ом %d."
 
-#: ../vdradmind.pl:455 ../vdradmind.pl:1085 ../vdradmind.pl:2065
+#: ../vdradmind.pl:455 ../vdradmind.pl:1068 ../vdradmind.pl:2048
 msgid "Not found"
 msgstr "Не найдено"
 
-#: ../vdradmind.pl:455 ../vdradmind.pl:2066
+#: ../vdradmind.pl:455 ../vdradmind.pl:2049
 msgid "The requested URL was not found on this server!"
 msgstr "Затребованный URL не был найден на этом сервере!"
 
-#: ../vdradmind.pl:525 ../vdradmind.pl:1081 ../vdradmind.pl:2068
+#: ../vdradmind.pl:525 ../vdradmind.pl:1064 ../vdradmind.pl:2051
 msgid "Forbidden"
 msgstr "Запрещено"
 
-#: ../vdradmind.pl:525 ../vdradmind.pl:2069
+#: ../vdradmind.pl:525 ../vdradmind.pl:2052
 msgid "You don't have permission to access this function!"
 msgstr "У вас недостаточно прав для вызова этой функции!"
 
-#: ../vdradmind.pl:1081 ../vdradmind.pl:2070
+#: ../vdradmind.pl:1064 ../vdradmind.pl:2053
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "В доступе к файлу \"%s\" отказанно!"
 
-#: ../vdradmind.pl:1085 ../vdradmind.pl:2067
+#: ../vdradmind.pl:1068 ../vdradmind.pl:2050
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "URL \"%s\" не был найден на этом сервере!"
 
-#: ../vdradmind.pl:2071
+#: ../vdradmind.pl:2054
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Не может открыть файл \"%s\"!"
 
-#: ../vdradmind.pl:2072
+#: ../vdradmind.pl:2055
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
 "if VDR's svdrphosts.conf is configured correctly."
 msgstr ""
+"Не могу соединиться с VDR  %s:%s<br /><br />Проконтролируйте VDR и "
+"svdrphosts.conf"
 
-#: ../vdradmind.pl:2073
+#: ../vdradmind.pl:2056
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Ошибка при отправлении команды к %s"
 
-#: ../vdradmind.pl:2551
+#: ../vdradmind.pl:2532
 msgid "Can't find EPG entry!"
-msgstr ""
+msgstr "Нет EPG записей!"
 
-#: ../vdradmind.pl:2811
+#: ../vdradmind.pl:2788
 msgid "Playing Tomorrow"
 msgstr "Программа на завтра"
 
-#: ../vdradmind.pl:2811
-#, fuzzy, perl-format
+#: ../vdradmind.pl:2788
+#, perl-format
 msgid "Playing on the %s"
-msgstr "Что будет %d."
+msgstr "Воспроизвести %s."
 
-#: ../vdradmind.pl:4152
+#: ../vdradmind.pl:4126
 msgid "next"
-msgstr ""
+msgstr "след."
 
-#: ../vdradmind.pl:4171
-#, fuzzy
+#: ../vdradmind.pl:4145
 msgid "What's on after"
-msgstr "Что сейчас:"
+msgstr "Что потом"
 
-#: ../vdradmind.pl:4171
-#, fuzzy
+#: ../vdradmind.pl:4145
 msgid "What's on at"
-msgstr "Что сейчас:"
+msgstr "Что в:"
 
-#: ../vdradmind.pl:4176
+#: ../vdradmind.pl:4150
 msgid "Suitable matches for:"
 msgstr "Результаты поиска для"
 
-#: ../vdradmind.pl:4178
+#: ../vdradmind.pl:4152
 msgid "short view"
-msgstr ""
+msgstr "сокращенная информация"
 
-#: ../vdradmind.pl:4178
-#, fuzzy
+#: ../vdradmind.pl:4152
 msgid "long view"
-msgstr "переключить"
+msgstr "Расширенная информация"
 
-#: ../vdradmind.pl:4235
+#: ../vdradmind.pl:4209
 msgid "Schedule"
 msgstr "Расписание"
 
-#: ../vdradmind.pl:4793
+#: ../vdradmind.pl:4762
 msgid "Timers"
 msgstr "Таймеры"
 
-#: ../vdradmind.pl:4861
+#: ../vdradmind.pl:4830
 msgid "System default"
 msgstr "Системный стандарт"
 
 #~ msgid "Timeline:"
 #~ msgstr "График времени:"
-
-#, fuzzy
-#~ msgid "Playing Today2"
-#~ msgstr "Что будет сегодня?"
 
 #~ msgid "charset=ISO-8859-1"
 #~ msgstr "charset=ISO-8859-5"

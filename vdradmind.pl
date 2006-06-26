@@ -28,7 +28,7 @@
 
 require 5.004;
 
-my $VERSION = "3.4.6beta3";
+my $VERSION = "3.4.6beta4";
 my $BASENAME;
 my $EXENAME;
 
@@ -803,7 +803,7 @@ sub EPG_buildTree {
                 while ($_ = $SVDRP->readoneline) {
                     if (/^E/) {
                         my ($garbish, $event_id, $time, $duration) = split(/[ \t]+/); #TODO: table-id, version
-                        my ($title, $subtitle, $summary, $vps, @video, @audio, $has_video, $has_audio);
+                        my ($title, $subtitle, $summary, $vps, $video, $audio);
                         while ($_ = $SVDRP->readoneline) {
                             # if(/^T (.*)/) { $title = $1;    $title =~ s/\|/<br \/>/sig }
                             # if(/^S (.*)/) { $subtitle = $1; $subtitle =~ s/\|/<br \/>/sig }
@@ -813,35 +813,18 @@ sub EPG_buildTree {
                             if (/^D (.*)/) { $summary  = $1; }
                             if(/^X 1 [^ ]* (.*)/) {
                                 my ($lang, $format) = split(" ", $1, 2);
-                                $has_video = 1;
-                                push(@video,
-                                     {  lang   => $lang,
-                                        format => $format
-                                     }
-                                );
+                                $video .= ", " if($video);
+                                $video .= $format;
+                                $video .= " (" . $lang . ")";
                             }
                             if(/^X 2 [^ ]* (.*)/) {
                                 my ($lang, $descr) = split(" ", $1, 2);
-                                $has_audio = 1;
-                                push(@audio,
-                                     {  lang  => $lang,
-                                        descr => $descr
-                                     }
-                                );
+                                $audio .= ", " if ($audio);
+                                $audio .= ($descr ? $descr . " (" . $lang . ")" : $lang);
                             }
                             if (/^V (.*)/) { $vps  = $1; }
                             if (/^e/)      {
 
-#                                push(@video,
-#                                     {  lang   => "DE",
-#                                        format => "TEST"
-#                                     }
-#                                );
-#                                push(@audio,
-#                                     {  lang  => "EN",
-#                                        descr => "TEST"
-#                                     }
-#                                );
                                 #
                                 $low_time = $time if ($time < $low_time);
                                 push(@events,
@@ -853,11 +836,11 @@ sub EPG_buildTree {
                                         subtitle     => $subtitle,
                                         summary      => $summary,
                                         vps          => $vps,
-                                        video        => @video,
-                                        audio        => @audio,
                                         id           => $id,
                                         vdr_id       => $vdr_id,
-                                        event_id     => $event_id
+                                        event_id     => $event_id,
+                                        video        => $video,
+                                        audio        => $audio,
                                      }
                                 );
                                 $id++;
@@ -2485,7 +2468,7 @@ sub prog_detail {
     my $vdr_id = $q->param("vdr_id");
     my $epg_id = $q->param("epg_id");
 
-    my ($channel_name, $title, $subtitle, $vps, $video, $audio, $has_video, $has_audio, $start, $stop, $text, @epgimages);
+    my ($channel_name, $title, $subtitle, $vps, $video, $audio, $start, $stop, $text, @epgimages);
 
     if ($vdr_id && $epg_id) {
         for (@{ $EPG{$vdr_id} }) {
@@ -2500,9 +2483,7 @@ sub prog_detail {
                 $text         = CGI::escapeHTML($_->{summary});
                 $vps          = $_->{vps};
                 $video        = $_->{video};
-                $has_video    = $_->{has_video};
                 $audio        = $_->{audio};
-                $has_audio    = $_->{has_audio};
 
                 # find epgimages
                 if ($CONFIG{EPGIMAGES} && -d $CONFIG{EPGIMAGES}) {
@@ -2554,20 +2535,16 @@ sub prog_detail {
                  channel_name => $channel_name,
                  subtitle     => $displaysubtitle,
                  vps          => ($vps && $start && $start != $vps) ? my_strftime("%H:%M", $vps) : undef,
-#                 audio        => $audio,
-                 has_audio    => $has_audio,
-#                 video        => $video,
-                 has_video    => $has_video,
                  start        => my_strftime("%H:%M", $start),
                  stop         => my_strftime("%H:%M", $stop),
                  text         => $displaytext ? $displaytext : undef,
                  date         => $title ? my_strftime("%A, %x", $start) : undef,
                  find_title   => $find_title ? uri_escape("/^" . quotemeta($find_title) . "~" . ($find_subtitle ? quotemeta($find_subtitle) : "") . "~/i") : undef,
                  imdburl      => $title ? "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title) : undef,
-                 epgimages    => \@epgimages
+                 epgimages    => \@epgimages,
+                 audio        => $audio,
+                 video        => $video,
     };
-    $vars += {video => $video} if ($has_video);
-    $vars += {audio => $audio} if ($has_audio);
     $template->param($vars);
     my $output;
     my $out = $template->output;
@@ -3469,7 +3446,6 @@ sub at_timer_list {
         $q->param("desc") ? ($desc = 1) : ($desc = 0);
     }
     my $sortby = $q->param("sortby");
-    print("SORT: $sortby\n");
     ($sortby = "pattern") if (!$sortby);
 
     #
@@ -3895,13 +3871,11 @@ sub getStartTime {
     my $time   = shift;
     my $day    = shift;
     my $border = shift;
-    print("TIME: ($time) ($day) ($border)\n");
     if ($time) {
         my ($hour, $minute) = getSplittedTime($time);
         $border = time() if (!$border);
         $time = timelocal(0, 0, 0, my_strftime("%d", $border), (my_strftime("%m", $border) - 1), my_strftime("%Y", $border)) + $hour * 3600 + $minute * 60;
         $time += 86400 if ($time < $border);
-    print("TIME2: ($time) ($day) ($border)\n");
         return $time;
     } else {
         return time();
@@ -4509,7 +4483,7 @@ sub getRecInfo {
     my $vars;
     if ($VDRVERSION >= 10325) {
         $SVDRP->command("lstr $id");
-        my ($channel_id, $subtitle, $text, @video, @audio);
+        my ($channel_id, $subtitle, $text, $video, $audio);
         while ($_ = $SVDRP->readoneline) {
             #if(/^C (.*)/) { $channel_id = $1; }
             #if(/^E (.*)/) { $epg = $1; }
@@ -4518,19 +4492,14 @@ sub getRecInfo {
             if (/^D (.*)/) { $text     = $1; }
             if(/^X 1 [^ ]* (.*)/) {
                 my ($lang, $format) = split(" ", $1, 2);
-                push(@video,
-                     {  lang => $lang,
-                        format => $format
-                     }
-                );
+                $video .= ", " if($video);
+                $video .= $format;
+                $video .= " (" . $lang . ")";
             }
             if(/^X 2 [^ ]* (.*)/) {
                 my ($lang, $descr) = split(" ", $1, 2);
-                push(@audio,
-                     {  lang  => $lang,
-                        descr => $descr
-                     }
-                );
+                $audio .= ", " if ($audio);
+                $audio .= ($descr ? $descr. " (" . $lang . ")"  : $lang);
             }
             #if(/^V (.*)/) { $vps = $1; }
         }
@@ -4558,8 +4527,8 @@ sub getRecInfo {
                   subtitle => $displaysubtitle ? $displaysubtitle : undef,
                   imdburl  => "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title),
                   id       => $id,
-                  video    => \@video,
-                  audio    => \@audio,
+                  video    => $video,
+                  audio    => $audio,
                   referer  => $ref ? $ref : undef
         };
     } else {
