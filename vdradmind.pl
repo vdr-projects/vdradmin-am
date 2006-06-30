@@ -28,7 +28,7 @@
 
 require 5.004;
 
-my $VERSION = "3.4.6beta4";
+my $VERSION = "3.4.6beta5";
 my $BASENAME;
 my $EXENAME;
 
@@ -2235,13 +2235,13 @@ sub ChannelHasEPG {
 sub Encode_Referer {
     if ($_[0]) { $_ = $_[0]; }
     else { $_ = $Referer; }
-    $_ =~ s/\~/\\\~/g;
+#    $_ =~ s/\~/\\\~/g;
     return (MIME::Base64::encode_base64($_));
 }
 
 sub Decode_Referer {
     my $ref = MIME::Base64::decode_base64(shift);
-    $ref =~ s/\\\~/\~/g;
+#    $ref =~ s/\\\~/\~/g;
     return ($ref);
 }
 
@@ -2475,12 +2475,12 @@ sub prog_detail {
 
             #if($_->{id} == $epg_id) { #XXX
             if ($_->{event_id} == $epg_id) {
-                $channel_name = CGI::escapeHTML($_->{channel_name});
-                $title        = CGI::escapeHTML($_->{title});
-                $subtitle     = CGI::escapeHTML($_->{subtitle});
+                $channel_name = $_->{channel_name};
+                $title        = $_->{title};
+                $subtitle     = $_->{subtitle};
                 $start        = $_->{start};
                 $stop         = $_->{stop};
-                $text         = CGI::escapeHTML($_->{summary});
+                $text         = $_->{summary};
                 $vps          = $_->{vps};
                 $video        = $_->{video};
                 $audio        = $_->{audio};
@@ -2497,11 +2497,9 @@ sub prog_detail {
         }
     }
 
-    my $displaytext     = $text;
-    my $displaytitle    = $title;
-    my $displaysubtitle = $subtitle;
-    my $find_title      = $title;
-    my $find_subtitle   = $subtitle;
+    my $displaytext     = CGI::escapeHTML($text);
+    my $displaytitle    = CGI::escapeHTML($title);
+    my $displaysubtitle = CGI::escapeHTML($subtitle);
     my $imdb_title      = $title;
 
     if ($displaytext) {
@@ -2516,8 +2514,6 @@ sub prog_detail {
         $displaysubtitle =~ s/\n/<br \/>\n/g;
         $displaysubtitle =~ s/\|/<br \/>\n/g;
     }
-    $find_title    =~ s/^.*~\([^~]*\)/$1/ if($find_title);
-    $find_subtitle =~ s/^.*~\([^~]*\)/$1/ if($find_subtitle);
     $imdb_title    =~ s/^.*\~\%*([^\~]*)$/$1/ if($imdb_title);
 
     # Do not use prog_detail as referer.
@@ -2532,14 +2528,14 @@ sub prog_detail {
                  title        => $displaytitle ? $displaytitle : gettext("Can't find EPG entry!"),
                  recurl       => $recurl,
                  switchurl    => ($start && $stop && $start <= $now && $now <= $stop) ? sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $vdr_id) : undef,
-                 channel_name => $channel_name,
+                 channel_name => CGI::escapeHTML($channel_name),
                  subtitle     => $displaysubtitle,
                  vps          => ($vps && $start && $start != $vps) ? my_strftime("%H:%M", $vps) : undef,
                  start        => my_strftime("%H:%M", $start),
                  stop         => my_strftime("%H:%M", $stop),
                  text         => $displaytext ? $displaytext : undef,
                  date         => $title ? my_strftime("%A, %x", $start) : undef,
-                 find_title   => $find_title ? uri_escape("/^" . quotemeta($find_title) . "~" . ($find_subtitle ? quotemeta($find_subtitle) : "") . "~/i") : undef,
+                 find_title   => $title ? uri_escape("/^" . quotemeta($title) . "\~" . ($subtitle ? quotemeta($subtitle) : "") . "\~/i") : undef,
                  imdburl      => $title ? "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title) : undef,
                  epgimages    => \@epgimages,
                  audio        => $audio,
@@ -2625,7 +2621,7 @@ sub prog_list {
                 subtitle => CGI::escapeHTML($event->{subtitle}),
                 recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
                 infurl   => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
-                find_title => uri_escape("/^" . quotemeta($event->{title}) . "~" . ($event->{subtitle} ? quotemeta($event->{subtitle}) : "") . "~/i"),
+                find_title => uri_escape("/^" . quotemeta($event->{title}) . "\~" . ($event->{subtitle} ? quotemeta($event->{subtitle}) : "") . "\~/i"),
                 imdburl  => "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title),
                 newd     => 0,
                 anchor   => "id" . $event->{event_id}
@@ -2758,7 +2754,7 @@ sub prog_list2 {
                         subtitle => CGI::escapeHTML($event->{subtitle}),
                         recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
                         infurl   => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
-                        find_title => uri_escape("/^" . quotemeta($event->{title}) . "~" . ($event->{subtitle} ? quotemeta($event->{subtitle}) : "") . "~/i"),
+                        find_title => uri_escape("/^" . quotemeta($event->{title}) . "\~" . ($event->{subtitle} ? quotemeta($event->{subtitle}) : "") . "\~/i"),
                         imdburl  => "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title),
                         newd     => 0,
                         anchor   => "id" . $event->{event_id}
@@ -2776,11 +2772,12 @@ sub prog_list2 {
         push(@days,
              {  name => $hash_days{$_},
                 id   => "$MyURL?aktion=prog_list2&amp;day=" . $_,
+                sort => $_,
                 sel  => $_ == $day ? "1" : undef
              }
         );
     }
-    @days = sort({ $a->{name} <=> $b->{name} } @days);
+    @days = sort({ $a->{sort} <=> $b->{sort} } @days);
 
     #
     my ($template) = TemplateNew("prog_list2.html");
@@ -4097,7 +4094,7 @@ sub prog_summary {
                     stream_live_on => $running ? $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON} : undef,
                     infurl => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
                     recurl     => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
-                    find_title => uri_escape("/^" . quotemeta($event->{title}) . "~" . ($event->{subtitle} ? quotemeta($event->{subtitle}) : "") . "~/i"),
+                    find_title => uri_escape("/^" . quotemeta($event->{title}) . "\~" . ($event->{subtitle} ? quotemeta($event->{subtitle}) : "") . "\~/i"),
                     imdburl    => "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title),
                     anchor     => "id" . $event->{event_id}
                  }
@@ -5179,7 +5176,7 @@ sub myconnect {
     my $line;
     $line = <$SOCKET>;
     if (!$VDRVERSION) {
-        $line =~ /^220.*VideoDiskRecorder (\d+)\.(\d+)\.(\d+);/;
+        $line =~ /^220.*VideoDiskRecorder (\d+)\.(\d+)\.(\d+).*;/;
         $VDRVERSION_HR = "$1.$2.$3";
         $VDRVERSION    = ($1 * 10000 + $2 * 100 + $3);
     }

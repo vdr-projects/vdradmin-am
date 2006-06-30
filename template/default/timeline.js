@@ -78,13 +78,17 @@ function TimeLine(_req_sec, _now_url, _px_per_min, _end_min)
    {
       this.table_w = this.innerWidth - 8;
    }
-   this.px_per_min = _px_per_min;
+//   this.px_per_min = _px_per_min;
+	 
+	 this.table_w10 = Div(this.table_w, 10);
+	 my_min = this.table_w10 < 100 ? 100 : this.table_w10;
+	 this.px_per_min = Div((this.table_w - my_min), _end_min);
    
-   this.end_min = Div(this.table_w - this.name_w, this.px_per_min);
-   if (this.end_min > _end_min)
-   {
+//   this.end_min = Div(this.table_w - this.name_w, this.px_per_min);
+//   if (this.end_min > _end_min)
+//   {
       this.end_min = _end_min;
-   }
+//   }
    this.end_min -= this.end_min % 30;
    this.event_w = this.end_min * this.px_per_min;
    this.name_w = this.table_w - this.event_w;

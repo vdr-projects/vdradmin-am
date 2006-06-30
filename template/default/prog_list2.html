@@ -31,12 +31,12 @@
 					<%! o'clock !%>
 				</td>
 				<td class="col_navi">
-					<tmpl_if prevdayurl><a href="<tmpl_var prevdayurl>"><img src="bilder/pfeile_nachlinks.png" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachlinks_soft.png" border="0" /></tmpl_if>
+					<tmpl_if prevdayurl><a href="<tmpl_var prevdayurl>"><img src="bilder/pfeile_nachlinks.png" border="0" alt="" /></a><tmpl_else><img src="bilder/pfeile_nachlinks_soft.png" border="0" alt="" /></tmpl_if>
 					<select name="days" size="1" onchange="window.open(this.options[this.selectedIndex].value,'main')"> <tmpl_loop days>
 						<option value="<tmpl_var id>" <tmpl_if sel>selected</tmpl_if>><tmpl_var name></option>
 </tmpl_loop>
 					</select>
-					<tmpl_if nextdayurl><a href="<tmpl_var nextdayurl>"><img src="bilder/pfeile_nachrechts.png" border="0" /></a><tmpl_else><img src="bilder/pfeile_nachrechts_soft.png" border="0" /></tmpl_if>
+					<tmpl_if nextdayurl><a href="<tmpl_var nextdayurl>"><img src="bilder/pfeile_nachrechts.png" border="0" alt="" /></a><tmpl_else><img src="bilder/pfeile_nachrechts_soft.png" border="0" alt="" /></tmpl_if>
 				</td>
 			</tr>
 		</table>

@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-26 11:22+0200\n"
-"PO-Revision-Date: 2006-05-26 18:12+0100\n"
-"Last-Translator: user <solidpc@gmail.com>\n"
+"POT-Creation-Date: 2006-06-30 14:22+0200\n"
+"PO-Revision-Date: 2006-06-27 18:39+0100\n"
+"Last-Translator: Rudibert <jung.ruediger@gmail.com>\n"
 "Language-Team: Rudi <LL.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -131,7 +131,7 @@ msgstr "Identificador de la emisora"
 msgid "Time"
 msgstr "hora"
 
-#: ../template/default/timer_new.html:74 ../template/default/tv.html:192
+#: ../template/default/timer_new.html:74 ../template/default/tv.html:79
 #: ../template/default/help_timer_new.html:35
 msgid "off"
 msgstr "apagado"
@@ -204,8 +204,8 @@ msgstr "Comienzo:"
 #: ../template/default/prog_list2.html:31
 #: ../template/default/at_timer_new.html:88
 #: ../template/default/at_timer_new.html:97
-#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4136
-#: ../vdradmind.pl:4150
+#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4133
+#: ../vdradmind.pl:4147
 msgid "o'clock"
 msgstr "h."
 
@@ -395,7 +395,7 @@ msgstr "¿Estas seguro de que deseas borrar las programaciones elegidas?"
 
 #: ../template/default/prog_summary.html:7
 #: ../template/default/navigation.html:29
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4762
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4759
 msgid "What's On Now?"
 msgstr "Estrenos ahora"
 
@@ -406,14 +406,14 @@ msgid "What's on:"
 msgstr "Se puede ver:"
 
 #: ../template/default/prog_summary.html:33
-#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4136
+#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4133
 msgid "at"
 msgstr " a la/s:"
 
 #: ../template/default/prog_summary.html:47
 #: ../template/default/prog_list.html:6 ../template/default/prog_list2.html:53
 #: ../template/default/navigation.html:38
-#: ../template/default/prog_summary2.html:84 ../vdradmind.pl:4762
+#: ../template/default/prog_summary2.html:84 ../vdradmind.pl:4759
 msgid "Channels"
 msgstr "EPG por emisoras"
 
@@ -557,7 +557,7 @@ msgstr "Contraseña como invitado:"
 #: ../template/default/config.html:151 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:78
 #: ../template/default/prog_timeline.html:7
-#: ../template/default/navigation.html:35 ../vdradmind.pl:4762
+#: ../template/default/navigation.html:35 ../vdradmind.pl:4759
 msgid "Timeline"
 msgstr "Tabla de tiempo"
 
@@ -571,7 +571,7 @@ msgstr "Horas:"
 
 #: ../template/default/config.html:159
 msgid "Also used for other EPG views!"
-msgstr ""
+msgstr "También se usa para otras vistas de la EPG!"
 
 #: ../template/default/config.html:162 ../template/default/config.html:231
 #: ../template/default/help_config.html:84
@@ -839,34 +839,34 @@ msgstr "¡Venga!"
 msgid "Error!"
 msgstr "¡Error!"
 
-#: ../template/default/tv.html:5
+#: ../template/default/tv.html:5 ../template/default/tv.html:75
 msgid "TV"
 msgstr "TV"
 
-#: ../template/default/tv.html:190
+#: ../template/default/tv.html:77
 msgid "Interval:"
 msgstr "Intervalo:"
 
-#: ../template/default/tv.html:193 ../template/default/tv.html:194
-#: ../template/default/tv.html:195 ../template/default/tv.html:196
-#: ../template/default/tv.html:197 ../template/default/tv.html:198
-#: ../template/default/tv.html:199
+#: ../template/default/tv.html:80 ../template/default/tv.html:81
+#: ../template/default/tv.html:82 ../template/default/tv.html:83
+#: ../template/default/tv.html:84 ../template/default/tv.html:85
+#: ../template/default/tv.html:86
 msgid "sec."
 msgstr "seg"
 
-#: ../template/default/tv.html:201 ../template/default/tv.html:208
+#: ../template/default/tv.html:88 ../template/default/tv.html:95
 msgid "G"
 msgstr "C"
 
-#: ../template/default/tv.html:201 ../template/default/tv.html:208
+#: ../template/default/tv.html:88 ../template/default/tv.html:95
 msgid "Grab the picture!"
 msgstr "¡Captura la imagen!"
 
-#: ../template/default/tv.html:202
+#: ../template/default/tv.html:89
 msgid "Size:"
 msgstr "Dimensiones:"
 
-#: ../template/default/tv.html:210
+#: ../template/default/tv.html:97
 msgid "Open in separate window"
 msgstr "Abrir en una ventana separada"
 
@@ -905,7 +905,7 @@ msgstr "Resumen:"
 #: ../template/default/rec_list.html:6 ../template/default/rec_list.html:17
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
-#: ../template/default/navigation.html:47 ../vdradmind.pl:4762
+#: ../template/default/navigation.html:47 ../vdradmind.pl:4759
 msgid "Recordings"
 msgstr "Grabaciones"
 
@@ -1383,7 +1383,7 @@ msgstr ""
 "emisoras funcciona viceversa.</p>"
 
 #: ../template/default/prog_timeline.html:75
-#: ../template/default/prog_timeline.html:194 ../vdradmind.pl:4121
+#: ../template/default/prog_timeline.html:194 ../vdradmind.pl:4118
 msgid "now"
 msgstr "ahora"
 
@@ -1395,7 +1395,7 @@ msgstr "hasta"
 msgid "at:"
 msgstr " a la/s:"
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:2788
+#: ../template/default/prog_list2.html:6 ../vdradmind.pl:2785
 msgid "Playing Today"
 msgstr "Estrenos hoy"
 
@@ -2028,7 +2028,7 @@ msgstr "todos"
 
 #: ../template/default/at_timer_new.html:101
 msgid "Override Start/Stop Margins:"
-msgstr ""
+msgstr "Reemplazar los margenes de tiempo para Inicio/Fin:"
 
 #: ../template/default/at_timer_new.html:155
 msgid "Test"
@@ -2046,7 +2046,7 @@ msgstr "Guardado en"
 msgid "No matches found!"
 msgstr "Nada igual encontrado!"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:4762
+#: ../template/default/navigation.html:32 ../vdradmind.pl:4759
 msgid "Playing Today?"
 msgstr "¿Estrenos hoy?"
 
@@ -2055,9 +2055,8 @@ msgid "Watch TV"
 msgstr "Televisión"
 
 #: ../template/default/navigation.html:56
-#, fuzzy
 msgid "Commands"
-msgstr "Órdenes:"
+msgstr "Comandos:"
 
 #: ../template/default/navigation.html:62 ../template/default/about.html:6
 msgid "About"
@@ -2134,11 +2133,12 @@ msgstr "Recibir ayuda y comentar \"Bugs\" (fallos)"
 #: ../template/default/about.html:84
 msgid ""
 "If you need help please first try to use the online help you'll find on some "
-"pages. You can access it by clicking <img src=\"bilder/help.png\"/>."
+"pages. You can access it by clicking <img src=\"bilder/help.png\" alt=\"\" /"
+">."
 msgstr ""
 "Si hace falta ayuda, intenta primero \"Online Help\" (Ayuda en linea) que "
 "encontraras en algunas páginas. Tienes acceso haciendo clic encima de <img "
-"src=\"bilder/help.png\"/>."
+"src=\"bilder/help.png\" alt=\"\" />."
 
 #: ../template/default/about.html:85
 msgid ""
@@ -2273,52 +2273,52 @@ msgstr ""
 msgid "Error while sending command to VDR at %s"
 msgstr "Error mientras mandó el orden a %s "
 
-#: ../vdradmind.pl:2532
+#: ../vdradmind.pl:2528
 msgid "Can't find EPG entry!"
-msgstr ""
+msgstr "No se encuentra el registro en la EPG!"
 
-#: ../vdradmind.pl:2788
+#: ../vdradmind.pl:2785
 msgid "Playing Tomorrow"
 msgstr "Estrenos mañana"
 
-#: ../vdradmind.pl:2788
-#, fuzzy, perl-format
+#: ../vdradmind.pl:2785
+#, perl-format
 msgid "Playing on the %s"
-msgstr "Estrenos en %d"
+msgstr "Estrenos en %s"
 
-#: ../vdradmind.pl:4126
+#: ../vdradmind.pl:4123
 msgid "next"
 msgstr "próximo"
 
-#: ../vdradmind.pl:4145
+#: ../vdradmind.pl:4142
 msgid "What's on after"
 msgstr "Se puede ver después:"
 
-#: ../vdradmind.pl:4145
+#: ../vdradmind.pl:4142
 msgid "What's on at"
 msgstr "Se puede ver a la/s:"
 
-#: ../vdradmind.pl:4150
+#: ../vdradmind.pl:4147
 msgid "Suitable matches for:"
 msgstr "Emparejamientos convenientes para:"
 
-#: ../vdradmind.pl:4152
+#: ../vdradmind.pl:4149
 msgid "short view"
 msgstr "Vista rapida"
 
-#: ../vdradmind.pl:4152
+#: ../vdradmind.pl:4149
 msgid "long view"
 msgstr "Vista detallada"
 
-#: ../vdradmind.pl:4209
+#: ../vdradmind.pl:4206
 msgid "Schedule"
 msgstr "Vista general"
 
-#: ../vdradmind.pl:4762
+#: ../vdradmind.pl:4759
 msgid "Timers"
 msgstr "Programaciones"
 
-#: ../vdradmind.pl:4830
+#: ../vdradmind.pl:4827
 msgid "System default"
 msgstr "Defecto del sistema"
 

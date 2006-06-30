@@ -34,7 +34,7 @@
 								</tmpl_if>
 								<tmpl_if recurl>
 									<span class="action record">
-										<a href="javascript:window.close();opener.location.href='<tmpl_var recurl>'"><img src="bilder/rec_button.png" border="0" alt="<%! record !%>" onmouseover="window.status='<%! record !%>';return true" title="<%! record !%>" /></a>
+										<a href="javascript:void(opener.location.href='<tmpl_var recurl>');window.close()"><img src="bilder/rec_button.png" border="0" alt="<%! record !%>" onmouseover="window.status='<%! record !%>';return true" title="<%! record !%>" /></a>
 									</span>
 								</tmpl_if>
 								<span class="action repeatings">
@@ -82,7 +82,7 @@
 							<tmpl_if epgimages>
 								<div class="epg_images">
 									<tmpl_loop epgimages>
-										<img src="<tmpl_var image>"/>
+										<img src="<tmpl_var image>" alt=""/>
 									</tmpl_loop>
 								</div>
 							</tmpl_if>

@@ -69,18 +69,45 @@
 
 <body onLoad="window.focus();WebcamUpdate()" id="tv"> 
 	<form action="<tmpl_var url>" method="get" name="liveform">
-		<table width="200" border="0" cellspacing="0" cellpadding="0" style="background-image: url(bilder/tv_bottom.gif);">
-			<tr>
-				<td align="center" valign="middle"><img name="Bild" src="<tmpl_var url>" border="1" hspace="2" vspace="2" /></td>
-				<td><img src="bilder/spacer.gif" name="switchimage" width="2" height="1" /></td>
 <tmpl_unless tv_only>
-				<td valign="top">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
+			<tr>
+				<td class="col_title"><h1><%! TV !%></h1></td>
+				<td class="col_other">
+					<h5><%! Interval: !%></h5>
+					<select name="Seconds" class="submit" onChange="v_changeInterval(this.options[this.selectedIndex].value)">
+						<option value="0"><%! off !%></option>
+						<option value="1" <tmpl_if expr="interval == 1">selected="selected"</tmpl_if>> 1 <%! sec. !%></option>
+						<option value="2" <tmpl_if expr="interval == 2">selected="selected"</tmpl_if>> 2 <%! sec. !%></option>
+						<option value="3" <tmpl_if expr="interval == 3">selected="selected"</tmpl_if>> 3 <%! sec. !%></option>
+						<option value="5" <tmpl_if expr="interval == 5">selected="selected"</tmpl_if>> 5 <%! sec. !%></option>
+						<option value="10" <tmpl_if expr="interval == 10">selected="selected"</tmpl_if>>10 <%! sec. !%></option>
+						<option value="30" <tmpl_if expr="interval == 30">selected="selected"</tmpl_if>>30 <%! sec. !%></option>
+						<option value="60" <tmpl_if expr="interval == 60">selected="selected"</tmpl_if>>60 <%! sec. !%></option>
+					</select>
+					<input type="button" class="submit" name="livebild" value='<%! G !%>' title="<%! Grab the picture! !%>" onClick="WebcamUpdate()" />
+					&nbsp;&nbsp;<h5><%! Size: !%></h5>
+					<select name="Size" class="submit" onChange="v_changeSize(this.options[this.selectedIndex].value)">
+						<option value="full" <tmpl_if expr="size eq 'full'">selected="selected"</tmpl_if>>1:1</option>
+						<option value="half" <tmpl_if expr="size eq 'half'">selected="selected"</tmpl_if>>1:2</option>
+						<option value="quarter" <tmpl_if expr="size eq 'quarter'">selected="selected"</tmpl_if>>1:4</option>
+					</select>
+					<input type="button" class="submit" name="livebild" value='<%! G !%>' title="<%! Grab the picture! !%>" onClick="WebcamUpdate()" />
+				</td>
+				<td align="right"><tmpl_unless new_win>[<a class="submit" href="javascript:tv_open();"><%! Open in separate window !%></a>]&nbsp;&nbsp;</tmpl_unless></td>
+			</tr>
+		</table>
+</tmpl_unless>
+
+		<table border="0" cellspacing="0" cellpadding="0" id="content">
+			<tr>
+				<td id="sect_tv">
+					<img name="Bild" src="<tmpl_var url>" border="1" hspace="2" vspace="2" class="tv" alt="" />
+					<img src="bilder/spacer.gif" name="switchimage" width="2" height="1" alt="" />
+				</td>
+<tmpl_unless tv_only>
+				<td id="sect_rc">
 					<table width="200" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td></td>
-							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0" /></td>
-							<td></td>
-						</tr>
 						<tr>
 							<td></td>
 							<td></td>
@@ -164,15 +191,10 @@
 							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&amp;key=mute');"><img src="bilder/fern_mute.jpg" alt="" height="27" width="67" border="0" /></a></td>
 							<td><a href="javascript:switch_channel('./vdradmin.pl?aktion=rc_hitk&amp;key=VolumePlus');"><img src="bilder/fern_40.jpg" alt="" height="27" width="67" border="0" /></a></td>
 						</tr>
-						<tr>
-							<td></td>
-							<td><img src="bilder/spacer.gif" alt="" height="20" width="50" border="0" /></td>
-							<td></td>
-						</tr>
 					</table>
 				</td>
-				<td align="center">
-					<select name="channel" size="30" onchange="javascript:switch_channel('./vdradmin.pl?aktion=tv_switch&amp;channel=' + encodeURIComponent(this.options[this.selectedIndex].value));">
+				<td id="sect_channels">
+					<select name="channel" size="32" onchange="javascript:switch_channel('./vdradmin.pl?aktion=tv_switch&amp;channel=' + encodeURIComponent(this.options[this.selectedIndex].value));">
 <tmpl_loop channels>
 						<option value="<tmpl_var vdr_id>" <tmpl_if cur>selected</tmpl_if>><tmpl_var name></option>
 </tmpl_loop>
@@ -180,39 +202,9 @@
 <!--					<a class="submit" href="javascript:switch_by_select();">Switch</a>-->
 				</td>
 </tmpl_unless>
-			</tr>
 <tmpl_unless tv_only>
-			<tr>
-				<td colspan="4"></td>
-			</tr>
-			<tr valign="middle">
-				<td valign="middle" style="white-space: nowrap;">
-					<h5><%! Interval: !%></h5>
-					<select name="Seconds" class="submit" onChange="v_changeInterval(this.options[this.selectedIndex].value)">
-						<option value="0"><%! off !%></option>
-						<option value="1" <tmpl_if expr="interval == 1">selected="selected"</tmpl_if>> 1 <%! sec. !%></option>
-						<option value="2" <tmpl_if expr="interval == 2">selected="selected"</tmpl_if>> 2 <%! sec. !%></option>
-						<option value="3" <tmpl_if expr="interval == 3">selected="selected"</tmpl_if>> 3 <%! sec. !%></option>
-						<option value="5" <tmpl_if expr="interval == 5">selected="selected"</tmpl_if>> 5 <%! sec. !%></option>
-						<option value="10" <tmpl_if expr="interval == 10">selected="selected"</tmpl_if>>10 <%! sec. !%></option>
-						<option value="30" <tmpl_if expr="interval == 30">selected="selected"</tmpl_if>>30 <%! sec. !%></option>
-						<option value="60" <tmpl_if expr="interval == 60">selected="selected"</tmpl_if>>60 <%! sec. !%></option>
-					</select>
-					<input type="button" class="submit" name="livebild" value='<%! G !%>' title="<%! Grab the picture! !%>" onClick="WebcamUpdate()" />
-					&nbsp;&nbsp;<h5><%! Size: !%></h5>
-					<select name="Size" class="submit" onChange="v_changeSize(this.options[this.selectedIndex].value)">
-						<option value="full" <tmpl_if expr="size eq 'full'">selected="selected"</tmpl_if>>1:1</option>
-						<option value="half" <tmpl_if expr="size eq 'half'">selected="selected"</tmpl_if>>1:2</option>
-						<option value="quarter" <tmpl_if expr="size eq 'quarter'">selected="selected"</tmpl_if>>1:4</option>
-					</select>
-					<input type="button" class="submit" name="livebild" value='<%! G !%>' title="<%! Grab the picture! !%>" onClick="WebcamUpdate()" />
-				</td>
-				<td colspan="3" align="right"><tmpl_unless new_win>[<a class="submit" href="javascript:tv_open();"><%! Open in separate window !%></a>]&nbsp;&nbsp;</tmpl_unless></td>
-			</tr>
-			<tr>
-				<td colspan="4"></td>
-			</tr>
 </tmpl_unless>
+			</tr>
 		</table>
 	</form>
 </body>

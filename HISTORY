@@ -4,6 +4,15 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-06-30: 3.4.6beta5
+- Changed: "channels" column in timeline uses max 10% of available width.
+- Fixed: programming a timer in prog_detail in FireFox.
+- Fixed: HTML warnings.
+- Fixed: find repeatings containing "&" in prog_detail (Bug #0000104, Reported by hajo).
+- Changed: TV and remote control to better fit new "default" theme.
+- Fixed: correct sorting in prog_list2 selectbox at the end of a month (Reported by sirtobi).
+- Fixed: Extracting VDR version number.
+
 2006-06-26: 3.4.6beta4
 - Changed: CSS a little bit.
 - Rewrote: prog_timeline to make it more dynamic (needs JavaScript) (Submitted by Torsten Herz).
