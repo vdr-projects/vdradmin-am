@@ -3,71 +3,67 @@
 ***********************************************************
 
 1)  Unpack the archive somewhere:
-    $ tar xvjf vdradmin-VERSION.tar.bz2
-    $ cd vdradmin-VERSION
+    $ tar xvjf vdradmin-am-VERSION.tar.bz2
+    $ cd vdradmin-am-VERSION
 
-2)  If you want to run VDRAdmin using a language other than set on
+2)  If you want to run VDRAdmin-AM using a language other than set on
     your system, then before running it you have to issue:
     $ export LANG="<language code>"
 
-    Where <language code> has to be one of: de_DE, es_ES, fi_FI or fr_FR
-    (en_GB is default).
+    Where <language code> has to be one of: de_DE, es_ES, fi_FI, fr_FR,
+		nl_NL or ru_RU (en_GB is default).
 
 3)  Check if your system provides all requirements and optionally install
     the missing Perl modules:
     $ ./install.sh -p
 
-4)  Now you have to deside wether you want to run VDRAdmin locally (4a)
+4)  Now you have to deside wether you want to run VDRAdmin-AM locally (4a)
     in this directory or install it into your system (4b).
 
 4a) run locally (=no installation)
-    First you have to configure VDRAdmin. This only has to be done once.
+    First you have to configure VDRAdmin-AM. This only has to be done once.
     $ ./vdradmind.pl --config
 
     Some questions about the configuration will be asked.
 
-    Now you're done and you can run VDRAdmin:
+    Now you're done and you can run VDRAdmin-AM:
     $ ./vdradmind.pl
 
 4b) install into system
-    $ ./install.sh
-
-    Now you have to configure VDRAdmin:
-    $ vdradmind.pl --config
+    $ ./make.sh install
 
     Some questions about the configuration will asked.
 
-    Now you're done and you can run VDRAdmin:
+    Now you're done and you can run VDRAdmin-AM:
     $ vdradmind.pl
 
-5)  If you want VDRAdmin to run automatically on system boot, you have
+5)  If you want VDRAdmin-AM to run automatically on system boot, you have
     to add a startup script to the wanted runlevel. Please consult your
-    Linux distribution's documentation. Maybe you'll also find some help
-    in VDRAdmin's "contrib" directory.
+    Linux distribution's documentation.
     Please also note that you might have to set the wanted language in
     that startup as shown in (2).
 
-6)  No matter how you run VDRAdmin, you now can point your browser to
+6)  No matter how you run VDRAdmin-AM, you now can point your browser to
     the given parameters (e.g. http://localhost:8001).
 
 
 ***********************************************************
-*** Removing VDRAdmin from your system                  ***
+*** Removing VDRAdmin-AM from your system                  ***
 ***********************************************************
 
 1)  Uninstall depends on the kind of installation you did:
 
 1a) run locally (=no installation)
     There is not much to do.
-    Simply remove to folder VDRAdmin has been created while unpacking:
-    $ rm -rf vdradmin-VERSION.tar.bz2
+    Simply remove to folder VDRAdmin-AM has been created while unpacking:
+    $ rm -rf vdradmin-am-VERSION.tar.bz2
 
 1b) installed to your system
-    You need the unpacked VDRAdmin archive. Enter it and run uninstall.sh:
-    $ cd vdradmin-VERSION.tar.bz2
-    $ ./uninstall.sh
+    You need the unpacked VDRAdmin-AM archive. Enter it and run uninstall.sh:
+    $ cd vdradmin-am-VERSION.tar.bz2
+    $ ./make.sh uninstall
 
-    You might want to delete your VDRAdmin's configuration files:
+    You might want to delete your VDRAdmin-AM's configuration files:
     $ rm -rf /etc/vdradmin
 
     This of course only works if you didn't change the default install
@@ -80,7 +76,7 @@
 
 
 ***********************************************************
-*** Hide VDRAdmin behind apache                         ***
+*** Hide VDRAdmin-AM behind apache                         ***
 ***********************************************************
 
   you will need apache with mod_proxy and these lines in httpd.conf:

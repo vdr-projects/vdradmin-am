@@ -39,6 +39,7 @@
 			margin:0px;
 			text-align:left;
 			table-layout:fixed;
+			overflow:hidden;
 		}
 		td.prgname {
 			margin: 0 2px;
@@ -189,7 +190,7 @@
 				<td class="col_other">
 					<%! What's on: !%>&nbsp;
 					<select name="Auswahl" class="submit" onChange="Go(this.form.Auswahl.options[this.form.Auswahl.options.selectedIndex].value)" width="100">
-						<option value="<?% nowurl %?>"></option>
+						<option value="<?% nowurl %?>">-</option>
 <?% select_now = (now == date.format(date.now, '%H:%M')) %?>
 						<option value="<?% nowurl %?>" <?% "selected" IF select_now %?>><%! now !%></option>
 <?% FOREACH timer = times %?>
@@ -209,6 +210,13 @@
 			var tl = new TimeLine(<?% now_sec %?>, "<?% nowurl %?>", <?% px_per_min %?>, <?% end_min %?>);
 			BuildContent();
 		</script>
+		<noscript>
+			<p>
+				<center>
+				<h1><%! You need JavaScript to use the timeline! !%></h1>
+				</center>
+			</p>
+		</noscript>
 	</form>
 </body>
 </html>

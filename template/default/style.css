@@ -478,24 +478,27 @@ body.help .heading {
 	top: 32px;
 	left: 3px;
 }
+#prog_timeline .timertable,
 #prog_timeline .prgtable {
-	border-color: #c4cdd7;
-}
-#prog_timeline .timertable {
-	background: red;
-	border-color: #ffcdd7;
+	border-color: #6d96a9;
 }
 #prog_timeline #timeline {
 	background: red;
 }
 #prog_timeline .color_current {
-	background-color: #e6ffe9;
+/*TODO	xbackground-color: #e6ffe9;*/
+	background-color: #b4e29c;
+}
+#prog_timeline .color_summary {
+	background-color: #dee6ee;
 }
 #prog_timeline .color_broadcast {
-	background-color: #f7fffa;
+/*TODO	background-color: #f7fffa;*/
+	background-color: #ffffff;
 }
 #prog_timeline .color_timer {
-	background-color: #ffeee9;
+/*TODO	xbackground-color: #ffeee9;*/
+	background-color: #ffb2b4;
 }
 #prog_timeline .color_spacer {
 	background-color: #e0e0e0;

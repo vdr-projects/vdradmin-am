@@ -78,17 +78,15 @@ function TimeLine(_req_sec, _now_url, _px_per_min, _end_min)
    {
       this.table_w = this.innerWidth - 8;
    }
-//   this.px_per_min = _px_per_min;
-	 
-	 this.table_w10 = Div(this.table_w, 10);
-	 my_min = this.table_w10 < 100 ? 100 : this.table_w10;
-	 this.px_per_min = Div((this.table_w - my_min), _end_min);
+	 //this.table_w -= tab.offsetLeft;
+   this.px_per_min = _px_per_min;
    
-//   this.end_min = Div(this.table_w - this.name_w, this.px_per_min);
-//   if (this.end_min > _end_min)
-//   {
+   this.end_min = Div(this.table_w - this.name_w, this.px_per_min);
+   if (this.end_min > _end_min)
+   {
+		this.px_per_min = Div(this.table_w - this.name_w, _end_min);
       this.end_min = _end_min;
-//   }
+   }
    this.end_min -= this.end_min % 30;
    this.event_w = this.end_min * this.px_per_min;
    this.name_w = this.table_w - this.event_w;
@@ -132,7 +130,7 @@ function BuildHeader()
               + '&nbsp;' + trans.to + '&nbsp;' 
               + format_date('%H:%M', tl.end_sec) + '&nbsp;' + trans.o_clock);
          W('</h2>');
-         W('<br/>');
+         W('<br />');
       W('</td>');
       W('<td id="header_navi" class="col_navi">');
       if (tl.start_sec < tl.first_sec + 1800)
@@ -190,7 +188,7 @@ function BuildTimeScale()
             var w = tl.px_per_min * (tl.end_min - min < 30) ? tl.end_min - min : 30;
             var t = tl.start_sec + min * 60;
             W('<td colspan="6" class="' + c + '">');
-               W('<img src="bilder/spacer.gif" width="' + w + '" height="1" border="0" /><br/>');
+               W('<img src="bilder/spacer.gif" width="' + w + '" height="1" border="0" /><br />');
                W('<span class="date_time">' + format_date('%H:%M', t) + '</span>');
             W('</td>');
          }
@@ -202,7 +200,7 @@ function BuildTimeScale()
             var c = min % 10 ? 'color1' : 'color2';
             var w = tl.px_per_min * 5;
             W('<td width="' + tl.px_per_min + '" height="' + tl.min5_h + '" class="' + c + '">');
-               W('<img src="bilder/spacer.gif" width="' + w + '" height="1" border="0" /><br/>');
+               W('<img src="bilder/spacer.gif" width="' + w + '" height="1" border="0" /><br />');
             W('</td>');
          }
       W('</tr>');
@@ -225,7 +223,7 @@ function BuildChannel(channel, td_class)
    W('<tr>');
       /* Channel name */
       W('<td width="' + tl.name_w + '" class="' + td_class + '">');
-         W('<img src="bilder/spacer.gif" width="' + tl.name_w + '" height="1" border="0"/><br/>');
+         W('<img src="bilder/spacer.gif" width="' + tl.name_w + '" height="1" border="0"/><br />');
          W('<nobr>');
             W('<a href="' + channel.url + '" class="channel_name">');
                W(channel.name);
@@ -271,7 +269,11 @@ function BuildChannel(channel, td_class)
                {
                   td_class = "color_current";
                }
-               else
+               else if (event.summary)
+							 {
+							 		td_class = "color_summary";
+							 }
+							 else
                {
                   td_class = "color_broadcast";
                }
@@ -286,6 +288,10 @@ function BuildChannel(channel, td_class)
             BuildEvent(channel.vdr_id, i, event, td_class, px_w);
             old_stop_min = stop_min;
          }
+         if (old_stop_min < tl.end_min)
+         {
+            BuildSpacer((tl.end_min - old_stop_min) * tl.px_per_min);
+         }
          W('</nobr>');
       W('</td>');
    W('</tr>');
@@ -296,9 +302,9 @@ function BuildSpacer(width)
    W('<table border="0" align="left" cellpadding="0" cellspacing="0" width="' + width + '" class="prgtable">');
       W('<tr>');
          W('<td width="1" class="color_spacer">');
-            W('<img src="bilder/spacer.gif" width="1" height="1" border="0"/><br/>');
+            W('<img src="bilder/spacer.gif" width="1" height="1" border="0"/><br />');
             W('<nobr>');
-               W('<img src="bilder/spacer.gif" width="1" height="8" border="0"/>');
+               W('<img src="bilder/spacer.gif" width="1" height="8" border="0"/>&nbsp;');
             W('</nobr>');
          W('</td>');
       W('</tr>');

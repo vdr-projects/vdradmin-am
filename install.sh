@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (c) 2005 Andreas Mair
+# Copyright (c) 2005/6 Andreas Mair
 #
 #
 # Download and patchscript for VDRAdmin-AM

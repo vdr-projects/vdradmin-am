@@ -1,4 +1,4 @@
-VDRAdmin-am translators guide
+VDRAdmin-AM translators guide
 ==============================
 
 Since vdradmin-0.97-am3.2 almost every text has been extracted from the
@@ -53,7 +53,7 @@ The basic work flow for a translation looks like this:
    a new *.mo-file from your changed *.po-file.
    
    Please note, that you have to restart vdradmind.pl after any changes you 
-   make to the translation. In order to allow vdradmin to select your language,
+   make to the translation. In order to allow VDRAdmin-AM to select your language,
    you must have the appropriate locales installed on your system (see 
    `locale -a`). You should make sure, that the correct locale is selected
    with the LANG and LC_* environemt variables.
@@ -62,7 +62,7 @@ The basic work flow for a translation looks like this:
 
    mail AT andreas DOT vdr-developer DOT org
    
-6) When changes have been made to vdradmin-am, that cause some messages to
+6) When changes have been made to VDRAdmin-AM, that cause some messages to
    change, the *.po-files will by modified and we will send them to the
    translators. The process then starts with 2) again and we will include your 
    new translation with the next release.

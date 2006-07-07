@@ -28,7 +28,7 @@
 
 require 5.004;
 
-my $VERSION = "3.4.6beta5";
+my $VERSION = "3.4.6rc";
 my $BASENAME;
 my $EXENAME;
 
@@ -213,7 +213,6 @@ $CONFIG{REC_EXT}      = "m3u";
 $CONFIG{PS_VIEW} = "ext";
 
 my $SERVERVERSION = "vdradmind/$VERSION";
-my $LINVDR        = isLinVDR();
 my $VDRVERSION    = 0;                      # Numeric VDR version, e.g. 10344
 my $VDRVERSION_HR;                          # Human readable VDR version, e.g. 1.3.44
 my %ERROR_MESSAGE;
@@ -2235,13 +2234,13 @@ sub ChannelHasEPG {
 sub Encode_Referer {
     if ($_[0]) { $_ = $_[0]; }
     else { $_ = $Referer; }
-#    $_ =~ s/\~/\\\~/g;
+    $_ =~ s/\~/\\\~/g;
     return (MIME::Base64::encode_base64($_));
 }
 
 sub Decode_Referer {
     my $ref = MIME::Base64::decode_base64(shift);
-#    $ref =~ s/\\\~/\~/g;
+    $ref =~ s/\\\~/\~/g;
     return ($ref);
 }
 
@@ -2405,9 +2404,7 @@ sub show_index {
 
 sub show_navi {
     my $template = TemplateNew("navigation.html");
-    my $vars = { usercss => $UserCSS,
-                 linvdr  => $LINVDR
-    };
+    my $vars = { usercss => $UserCSS };
     $template->param($vars);
     my $output;
     my $out = $template->output;
@@ -2778,6 +2775,19 @@ sub prog_list2 {
         );
     }
     @days = sort({ $a->{sort} <=> $b->{sort} } @days);
+    my $prev_day;
+    my $cur_day;
+    my $next_day;
+    foreach (@days) {
+        if($_->{sort} == $day) {
+            $cur_day = $_->{sort};
+            next;
+        } elsif($cur_day) {
+            $next_day = $_->{sort};
+            last;
+        }
+        $prev_day = $_->{sort} unless($cur_day);
+    }
 
     #
     my ($template) = TemplateNew("prog_list2.html");
@@ -2793,8 +2803,8 @@ sub prog_list2 {
         progname       => GetChannelDescByNumber($vdr_id),
         switchurl      => "$MyURL?aktion=prog_switch&amp;channel=" . $vdr_id,
         stream_live_on => $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
-        prevdayurl     => $day > $current_day ? "$MyURL?aktion=prog_list2&amp;day=" . ($day - 1) . ($param_time ? "&amp;time=$param_time" : undef) : undef,
-        nextdayurl     => $last_day > $day ? "$MyURL?aktion=prog_list2&amp;day=" . ($day + 1) . ($param_time ? "&amp;time=$param_time" : undef) : undef,
+        prevdayurl     => $prev_day ? "$MyURL?aktion=prog_list2&amp;day=" . $prev_day . ($param_time ? "&amp;time=$param_time" : undef) : undef,
+        nextdayurl     => $next_day ? "$MyURL?aktion=prog_list2&amp;day=" . $next_day . ($param_time ? "&amp;time=$param_time" : undef) : undef,
         toolbarurl     => "$MyURL?aktion=toolbar"
     };
     $template->param($vars);
@@ -5017,18 +5027,6 @@ sub force_update {
     RedirectToReferer("$MyURL?aktion=prog_summary");
 }
 
-sub isLinVDR {
-    my $file = "/etc/linvdr-release";
-    my $content;
-    if (-e $file) {
-        open(FILE, $file);
-        $content = <FILE>;
-        chomp($content);
-        close(FILE);
-    }
-    return ($content);
-}
-
 sub loadCommandsConf {
     my $conf_file = shift;
     my @commands;
@@ -5222,7 +5220,7 @@ sub command {
     $cmd = $cmd . CRLF;
     if ($SOCKET && $SOCKET->connected()) {
         my $result = send($SOCKET, $cmd, 0);
-        if ($result != length($cmd)) {    #TODO: ???
+        if ($result != length($cmd)) {
             main::HTMLError(sprintf($ERROR_MESSAGE{send_command}, $CONFIG{VDR_HOST}));
         } else {
             $query = true;

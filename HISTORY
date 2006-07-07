@@ -4,6 +4,13 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-07-07: 3.4.6rc
+- Replaced: Makefiles by make.sh (run "./make.sh" for usage information").
+- Removed: LinVDR logo.
+- Changed: colors in timeline.
+- Fixed: layout problems in prog_summary detail view (Reported by Sven Soltau).
+- Fixed: moving forward/backward at the end/start of a month (Reported by foobar42).
+
 2006-06-30: 3.4.6beta5
 - Changed: "channels" column in timeline uses max 10% of available width.
 - Fixed: programming a timer in prog_detail in FireFox.
