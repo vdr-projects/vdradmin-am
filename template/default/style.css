@@ -143,6 +143,11 @@ body.help .heading {
 .heading {
 	height: 17px;
 }
+.list.hilight .row_even:hover,
+.list.hilight .row_odd:hover
+{
+	background-color: #8cc1da;
+}
 .heading td {
 	background-color: #6d96a9;
 	height: 17px;
@@ -158,10 +163,11 @@ body.help .heading {
 	white-space: normal;
 }
 
-.row_even td {
+#prog_summary .row_even .col_epg,
+.row_even {
 	background-color: #ffffff;
 }
-.row_odd td {
+.row_odd {
 	background-color: #dee6ee;
 }
 

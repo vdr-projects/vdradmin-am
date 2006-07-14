@@ -1,4 +1,40 @@
 /*##########################################################################*/
+/* Browser independent size detection                                       */
+/*##########################################################################*/
+function GetWindowW() 
+{
+   if (window.innerWidth) 
+   {
+      return window.innerWidth;
+   } 
+   else if (document.body && document.body.offsetWidth) 
+   {
+      return document.body.offsetWidth;
+   } 
+   else 
+   {
+      return 0;
+   }
+}
+
+function GetWindowH() 
+{
+   if (window.innerHeight) 
+   {
+      return window.innerHeight;
+   } 
+   else if (document.body && document.body.offsetHeight) 
+   {
+      return document.body.offsetHeight;
+   } 
+   else 
+   {
+      return 0;
+   }
+}
+
+
+/*##########################################################################*/
 /* Utility functions                                                        */
 /*##########################################################################*/
 function W(s)
@@ -11,15 +47,11 @@ function Div(x, y)
    return (x - x % y) / y;
 }
 
-function Translation(_now, _o_clock, _to, 
-                     _sunday, _monday, _tuesday, _wednesday, 
-                     _thursday, _friday, _saturday)
+function Translation(_now, _o_clock, _to)
 {
    this.now = _now;
    this.o_clock = _o_clock;
    this.to = _to;
-   this.week_day = new Array(_sunday, _monday, _tuesday, _wednesday, 
-                             _thursday, _friday, _saturday);
 }
 
 function ChannelInfo(vdr_id, name, url, events)
@@ -53,62 +85,110 @@ function format_date(fmt, time)
          var m = '0' + date.getMinutes();
          return h.substr(h.length-2, 2) + ':' + m.substr(m.length-2, 2);
       }
-      case "%A, %H:%M":
-      {
-         var d = trans.week_day[date.getDay()];
-         var h = '0' + date.getHours();
-         var m = '0' + date.getMinutes();
-         return d + ", " + h.substr(h.length-2, 2) + ':' + m.substr(m.length-2, 2);
-      }
    }
    return "[WRONG_FMT:" + fmt + "]";
+}
+
+function SetTimeLine(_this, _table_w, _px_per_min, _end_min)
+{
+   _this.name_w = 100;
+   _this.table_w = _table_w;
+   _this.px_per_min = _px_per_min;
+   
+   _this.end_min = Div(_this.table_w - _this.name_w, _this.px_per_min);
+   if (_this.end_min > _end_min)
+   {
+      _this.px_per_min = Div(_this.table_w - _this.name_w, _end_min);
+      _this.end_min = _end_min;
+   }
+   _this.end_min -= _this.end_min % 30;
+   _this.event_w = _this.end_min * _this.px_per_min;
+   _this.name_w = _this.table_w - _this.event_w;
+   
+   _this.end_sec = _this.start_sec + _this.end_min * 60;
+   
+   _this.first_sec = _this.now_sec + 1799 - _this.end_min * 60;
+   _this.first_sec -= _this.first_sec % 1800;
+   _this.last_sec = _this.first_sec + 86400;
 }
 
 function TimeLine(_req_sec, _now_url, _px_per_min, _end_min)
 {
    this.now_url = _now_url;
+   this.org_px_per_min = _px_per_min;
+   this.org_end_min = _end_min;
    
-   this.name_w = 100;
-   var tab = document.getElementById("heading");
-   if (tab)
-   {
-      this.table_w = tab.clientWidth;
-   }
-   else
-   {
-      this.table_w = this.innerWidth - 8;
-   }
-	 //this.table_w -= tab.offsetLeft;
-   this.px_per_min = _px_per_min;
-   
-   this.end_min = Div(this.table_w - this.name_w, this.px_per_min);
-   if (this.end_min > _end_min)
-   {
-		this.px_per_min = Div(this.table_w - this.name_w, _end_min);
-      this.end_min = _end_min;
-   }
-   this.end_min -= this.end_min % 30;
-   this.event_w = this.end_min * this.px_per_min;
-   this.name_w = this.table_w - this.event_w;
+   this.req_sec = _req_sec;
+   this.start_sec = _req_sec - _req_sec % 1800;
    this.min5_h = 10;
    
    var d = new Date();
    this.now_sec = Div(d.getTime(), 1000);
-   
-   this.req_sec = _req_sec;
-   this.start_sec = _req_sec - _req_sec % 1800;
-   this.end_sec = this.start_sec + this.end_min * 60;
-   
-   this.first_sec = this.now_sec + 1799 - this.end_min * 60;
-   this.first_sec -= this.first_sec % 1800;
-   this.last_sec = this.first_sec + 86400;
+
+   var table_w = GetWindowW();
+   if (!document.all)
+   {
+      table_w -= 8;
+   }
+   SetTimeLine(this, table_w, _px_per_min, _end_min);
 }
 
 
 /*##########################################################################*/
 /* Build the HTML code                                                      */
 /*##########################################################################*/
+function BuildOption(time, selected, text)
+{
+	W('<option value="' + tl.now_url);
+   if (time)
+   {
+      W('&amp;time=' + time + '&amp;frame=' + tl.first_sec);
+   }
+   W('"');
+   if (selected)
+   {
+      W(' selected');
+   }
+   W('>' + text + '</option>');
+}
+
+function BuildHiddenFrameInput()
+{
+   W('<input type="hidden" name="frame" value="' + tl.first_sec + '"/>');
+}
+
 function BuildContent()
+{
+   /* Write content div */
+   BuildContentDiv();
+   
+   /* Check if the width has changed due to vertical scrollbar */
+   var tab = document.getElementById("heading");
+   var table_w;
+   if (tab)
+   {
+      table_w = tab.clientWidth;
+   }
+   else
+   {
+      table_w = this.innerWidth;
+   }
+
+   if (tl.table_w > table_w)
+   {
+      /* Recalculate all data for new table width */
+      SetTimeLine(tl, table_w, tl.org_px_per_min, tl.org_end_min);
+
+      /* Delete first content div */
+      tab = document.getElementById("content");
+      tab.innerHTML = null;
+      
+      /* Write second content div */
+      BuildContentDiv();
+   }
+}
+
+function BuildContentDiv()
 {
    W('<div id="content">');
    
@@ -126,7 +206,7 @@ function BuildHeader()
    W('<tr class="heading">');
       W('<td id="header_title" colspan="3">');
          W('<h2>');
-            W(format_date('%A, %H:%M', tl.start_sec) + '&nbsp;' + trans.o_clock 
+            W(format_date('%H:%M', tl.start_sec) + '&nbsp;' + trans.o_clock 
               + '&nbsp;' + trans.to + '&nbsp;' 
               + format_date('%H:%M', tl.end_sec) + '&nbsp;' + trans.o_clock);
          W('</h2>');
@@ -144,22 +224,18 @@ function BuildHeader()
          {
             diff_sec = tl.first_sec;
          }
-         W('<a href="' + tl.now_url + '&amp;time=' + format_date('%H:%M', diff_sec) + '">');
+         W('<a href="' + tl.now_url + '&amp;time=' + format_date('%H:%M', diff_sec) + '&amp;frame=' + tl.first_sec + '">');
             W('<img src="bilder/pfeile_nachlinks.png" border="0" />');
          W('</a>');
       }
-      if (tl.end_sec > tl.last_sec - 1800)
+      if (tl.end_sec >= tl.last_sec)
       {
          W('<img src="bilder/pfeile_nachrechts_soft.png" border="0" />');
       }
       else
       {
          var diff_sec = tl.end_sec;
-         if (diff_sec > tl.last_sec - tl.end_min * 60 - 1800)
-         {
-            diff_sec = tl.last_sec - tl.end_min * 60;
-         }
-         W('<a href="' + tl.now_url + '&amp;time=' + format_date('%H:%M', diff_sec) + '">');
+         W('<a href="' + tl.now_url + '&amp;time=' + format_date('%H:%M', diff_sec) + '&amp;frame=' + tl.first_sec + '">');
             W('<img src="bilder/pfeile_nachrechts.png" border="0" />');
          W('</a>');
       }
@@ -270,10 +346,10 @@ function BuildChannel(channel, td_class)
                   td_class = "color_current";
                }
                else if (event.summary)
-							 {
-							 		td_class = "color_summary";
-							 }
-							 else
+               {
+                  td_class = "color_summary";
+               }
+               else
                {
                   td_class = "color_broadcast";
                }

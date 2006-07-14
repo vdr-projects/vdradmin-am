@@ -5,9 +5,9 @@ DIST_FILES="COPYING CREDITS FAQ HISTORY INSTALL README README.translators REQUIR
 INSTALL_SH=./install.sh
 TMPDIR=/tmp
 
-#TODO:
-# - dist / distclean / clean
 
+# Print usage information and exit
+#
 function Usage()
 {
 	echo "Usage: $0 cvs"
@@ -19,12 +19,16 @@ function Usage()
 	exit 1
 }
 
+# Print error message and exit.
+#
 function Error()
 {
 	[ "$1" ] && echo $*
 	exit 1
 }
 
+# Compile and install locales.
+#
 function do_po()
 {
 	for L in $LANGS
@@ -32,9 +36,12 @@ function do_po()
 		[  -d locale/$L/LC_MESSAGES/ ] || mkdir -p locale/$L/LC_MESSAGES/
 		msgfmt po/$L.po -o po/$L.mo
 		install -m 644 po/$L.mo locale/$L/LC_MESSAGES/vdradmin.mo
+		rm -f po/$L.mo
 	done
 }
 
+# Setup things after CVS checkout or update.
+#
 function do_cvs()
 {
 	# Create missing symbolic links
@@ -42,11 +49,15 @@ function do_cvs()
 	[ -e README ] || ln -s INSTALL README
 }
 
+# Extract VDRAdmin-AM version from vdradmind.pl
+#
 function getVersion()
 {
 	grep "^my \$VERSION" vdradmind.pl | sed -e 's/^[^\"]*\"\([^\"]*\)\".*$/\1/'
 }
 
+# Create tar.bz2 for distribution.
+#
 function do_dist()
 {
 	local DIST_NAME=vdradmin-am-$(getVersion)

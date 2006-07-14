@@ -75,46 +75,9 @@
 	<script type="text/javascript" language="JavaScript1.2">
 		var trans = new Translation("<%! now !%>", 
 		                          "<%! o'clock !%>", 
-		                          "<%! to !%>",
-		                          "<%! Sunday !%>",
-		                          "<%! Monday !%>",
-		                          "<%! Tuesday !%>",
-		                          "<%! Wednesday !%>",
-		                          "<%! Thursday !%>",
-		                          "<%! Friday !%>",
-		                          "<%! Saturday !%>");
-		
-		function GetWindowW() 
-		{
-			if (window.innerWidth) 
-			{
-				return window.innerWidth;
-			} 
-			else if (document.body && document.body.offsetWidth) 
-			{
-				return document.body.offsetWidth;
-			} 
-			else 
-			{
-				return 0;
-			}
-		}
-		
-		function GetWindowH() 
-		{
-			if (window.innerHeight) 
-			{
-				return window.innerHeight;
-			} 
-			else if (document.body && document.body.offsetHeight) 
-			{
-				return document.body.offsetHeight;
-			} 
-			else 
-			{
-				return 0;
-			}
-		}
+		                          "<%! to !%>");
+		var redraw_w;
+		var redraw_h;
 		
 		function Redraw() 
 		{
@@ -182,32 +145,40 @@
 	</script>
 
 	<form action="<?% nowurl %?>" method="get" name="FormName">
+		<script type="text/javascript" language="JavaScript1.2">
+			var tl = new TimeLine(<?% now_sec %?>, "<?% nowurl %?>", <?% px_per_min %?>, <?% end_min %?>);
+		</script>
+
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_title">
-					<h1><?% now %?>&nbsp;<%! o'clock !%></h1>
+					<h1><?% date.format(now_sec, "%A,") %?>&nbsp;<?% now %?>&nbsp;<%! o'clock !%></h1>
 				</td>
 				<td class="col_other">
 					<%! What's on: !%>&nbsp;
 					<select name="Auswahl" class="submit" onChange="Go(this.form.Auswahl.options[this.form.Auswahl.options.selectedIndex].value)" width="100">
-						<option value="<?% nowurl %?>">-</option>
 <?% select_now = (now == date.format(date.now, '%H:%M')) %?>
-						<option value="<?% nowurl %?>" <?% "selected" IF select_now %?>><%! now !%></option>
+						<script type="text/javascript" language="JavaScript1.2">
+							BuildOption("", 0, "-");
+							BuildOption("", <?% select_now ? 1 : 0 %?>, "<%! now !%>");
 <?% FOREACH timer = times %?>
 	<?% timer_o_dopp = timer | replace('\:', '') %?>
-						<option value="<?% nowurl %?>&amp;time=<?% timer_o_dopp %?>" <?% "selected" IF !select_now && (now == timer) %?>><?% timer %?></option>
+							BuildOption("<?% timer_o_dopp %?>", <?% !select_now && (now == timer) ? 1 : 0 %?>, "<?% timer %?>");
 <?% END %?>
+						</script>
 					</select>
 					&nbsp;|&nbsp;<%! at: !%>&nbsp;
 					<input type="text" name="time" size="5" value="<?% now %?>" />
 					&nbsp;<%! o'clock !%>
 					<input type="hidden" name="aktion" value="prog_timeline" />
+					<script type="text/javascript" language="JavaScript1.2">
+						BuildHiddenFrameInput();
+					</script>
 				</td>
 			</tr>
 		</table>
 
 		<script type="text/javascript" language="JavaScript1.2">
-			var tl = new TimeLine(<?% now_sec %?>, "<?% nowurl %?>", <?% px_per_min %?>, <?% end_min %?>);
 			BuildContent();
 		</script>
 		<noscript>

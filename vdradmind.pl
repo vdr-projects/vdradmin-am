@@ -28,7 +28,7 @@
 
 require 5.004;
 
-my $VERSION = "3.4.6rc";
+my $VERSION = "3.4.6";
 my $BASENAME;
 my $EXENAME;
 
@@ -2234,13 +2234,11 @@ sub ChannelHasEPG {
 sub Encode_Referer {
     if ($_[0]) { $_ = $_[0]; }
     else { $_ = $Referer; }
-    $_ =~ s/\~/\\\~/g;
-    return (MIME::Base64::encode_base64($_));
+    return (MIME::Base64::encode_base64(sprintf("%s", $_)));
 }
 
 sub Decode_Referer {
     my $ref = MIME::Base64::decode_base64(shift);
-    $ref =~ s/\\\~/\~/g;
     return ($ref);
 }
 
@@ -2532,7 +2530,7 @@ sub prog_detail {
                  stop         => my_strftime("%H:%M", $stop),
                  text         => $displaytext ? $displaytext : undef,
                  date         => $title ? my_strftime("%A, %x", $start) : undef,
-                 find_title   => $title ? uri_escape("/^" . quotemeta($title) . "\~" . ($subtitle ? quotemeta($subtitle) : "") . "\~/i") : undef,
+                 find_title   => $title ? uri_escape("/^" . quotemeta($title . "~" . ($subtitle ? $subtitle : "") . "~") . "/i") : undef,
                  imdburl      => $title ? "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title) : undef,
                  epgimages    => \@epgimages,
                  audio        => $audio,
@@ -2618,7 +2616,7 @@ sub prog_list {
                 subtitle => CGI::escapeHTML($event->{subtitle}),
                 recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
                 infurl   => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
-                find_title => uri_escape("/^" . quotemeta($event->{title}) . "\~" . ($event->{subtitle} ? quotemeta($event->{subtitle}) : "") . "\~/i"),
+                find_title => uri_escape("/^" . quotemeta($event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~") . "/i"),
                 imdburl  => "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title),
                 newd     => 0,
                 anchor   => "id" . $event->{event_id}
@@ -2751,7 +2749,7 @@ sub prog_list2 {
                         subtitle => CGI::escapeHTML($event->{subtitle}),
                         recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
                         infurl   => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
-                        find_title => uri_escape("/^" . quotemeta($event->{title}) . "\~" . ($event->{subtitle} ? quotemeta($event->{subtitle}) : "") . "\~/i"),
+                        find_title => uri_escape("/^" . quotemeta($event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~") . "/i"),
                         imdburl  => "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title),
                         newd     => 0,
                         anchor   => "id" . $event->{event_id}
@@ -3900,8 +3898,12 @@ sub prog_timeline {
     # zeitpunkt bestimmen
     my $border;
     if ($q->param("time")) {
-        $border = time + 1799 - $CONFIG{ZEITRAHMEN} * 3600;
-        $border -= $border % 1800;
+        if ($q->param("frame")) {
+            $border = $q->param("frame");
+        } else {
+            $border = time + 1799 - $CONFIG{ZEITRAHMEN} * 3600;
+            $border -= $border % 1800;
+        }
     }
     my $event_time = getStartTime($q->param("time"), undef, $border);
     my $event_time_to;
@@ -4104,7 +4106,7 @@ sub prog_summary {
                     stream_live_on => $running ? $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON} : undef,
                     infurl => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
                     recurl     => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
-                    find_title => uri_escape("/^" . quotemeta($event->{title}) . "\~" . ($event->{subtitle} ? quotemeta($event->{subtitle}) : "") . "\~/i"),
+                    find_title => uri_escape("/^" . quotemeta($event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~") . "/i"),
                     imdburl    => "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title),
                     anchor     => "id" . $event->{event_id}
                  }
