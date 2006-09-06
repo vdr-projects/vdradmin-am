@@ -2,165 +2,163 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title>VDRAdmin-AM - <%! Recordings !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title>VDRAdmin-AM - <?% gettext('Recordings') %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 </head>
 
 <body id="rec_list">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 		<tr>
-			<td class="col_title"><h1><%! Recordings !%></h1></td>
+			<td class="col_title"><h1><?% gettext('Recordings') %?></h1></td>
 			<td colspan="2" class="col_other">
-				<tmpl_if disk_total>
-					<%! Total: !%>&nbsp;<tmpl_var minutes_total><%! h !%> &nbsp;(<tmpl_var disk_total>)
-					&nbsp;|&nbsp;<%! Free: !%>&nbsp;<tmpl_var minutes_free><%! h !%> &nbsp;(<tmpl_var disk_free>)
-				</tmpl_if>
+				<?% IF disk_total %?>
+					<?% gettext('Total:') %?>&nbsp;<?% minutes_total %?><?% gettext('h') %?> &nbsp;(<?% disk_total %?>)
+					&nbsp;|&nbsp;<?% gettext('Free:') %?>&nbsp;<?% minutes_free %?><?% gettext('h') %?> &nbsp;(<?% disk_free %?>)
+				<?% END %?>
 			</td>
-<tmpl_if name="help_url">
+<?% IF help_url %?>
 			<td class="col_help">
-				<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.png" border="0" alt="help" title="<%! Help !%>" /></a>
+				<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help" title="<?% gettext('Help') %?>" /></a>
 			</td>
-</tmpl_if>
+<?% END %?>
 		</tr>
 	</table>
 
 	<div id="path">
-<tmpl_loop path>
-				&gt;&gt;&nbsp;<tmpl_if url><a href="<tmpl_var url>"><tmpl_var name></a><tmpl_else><tmpl_var name></tmpl_if>
-</tmpl_loop>
+<?% FOREACH p = path %?>
+				&gt;&gt;&nbsp;<?% IF p.url %?><a href="<?% p.url %?>"><?% p.name %?></a><?% ELSE %?><?% p.name %?><?% END %?>
+<?% END %?>
 	</div>
 
-	<form action="<tmpl_var url>" method="get" name="FormName">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="list hilight">
-			<!-- TODO: this breaks IE, but why?
-			<colgroup>
-				<col class="col_date"/>
-				<col class="col_time"/>
-				<col class="col_name"/>
-				<col class="col_edit"/>
-				<col class="col_delete"/>
-<tmpl_if stream_rec_on>
-				<col class="col_stream"/>
-</tmpL_if>
-				<col class="col_checkbox"/>
-			</colgroup>-->
-			<tr class="heading">
-				<td class="col_date <tmpl_if sortbydate>selected</tmpl_if>">
-					<h2>
-						<a href="<tmpl_var sortbydateurl>"><%! Date !%>
-							<tmpl_if sortbydate>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td class="col_time <tmpl_if sortbytime>selected</tmpl_if>">
-					<h2>
-						<a href="<tmpl_var sortbytimeurl>"><%! Time !%>
-							<tmpl_if sortbytime>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td class="col_name <tmpl_if sortbyname>selected</tmpl_if>">
-					<h2>
-						<a href="<tmpl_var sortbynameurl>"><%! Name !%>
-							<tmpl_if sortbyname>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0" />
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td class="col_edit"></td>
-				<td class="col_delete"></td>
-<tmpl_if stream_rec_on>
-				<td class="col_stream"></td>
-</tmpl_if>
-				<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL" onclick="AllMessages(this.form);" title="<%! Select all/none !%>" /></td>
-			</tr>
+	<div id="content">
+<?% IF recloop.size() > 0 %?>
+		<form action="<?% url %?>" method="get" name="FormName">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list hilight">
+				<!-- TODO: this breaks IE, but why?
+				<colgroup>
+					<col class="col_date"/>
+					<col class="col_time"/>
+					<col class="col_name"/>
+					<col class="col_buttons"/>
+					<col class="col_checkbox"/>
+				</colgroup>-->
+				<tr class="heading">
+					<td class="col_date <?% IF sortbydate %?>selected<?% END %?>">
+						<h2>
+							<a href="<?% sortbydateurl %?>"><?% gettext('Date') %?>
+								<?% IF sortbydate %?>
+									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
+								<?% ELSE %?>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								<?% END %?>
+							</a>
+						</h2>
+					</td>
+					<td class="col_time <?% IF sortbytime %?>selected<?% END %?>">
+						<h2>
+							<a href="<?% sortbytimeurl %?>"><?% gettext('Time') %?>
+								<?% IF sortbytime %?>
+									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
+								<?% ELSE %?>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								<?% END %?>
+							</a>
+						</h2>
+					</td>
+					<td class="col_name <?% IF sortbyname %?>selected<?% END %?>">
+						<h2>
+							<a href="<?% sortbynameurl %?>"><?% gettext('Name') %?>
+								<?% IF sortbyname %?>
+									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
+								<?% ELSE %?>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								<?% END %?>
+							</a>
+						</h2>
+					</td>
+					<td class="col_buttons"></td>
+					<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL" onclick="AllMessages(this.form);" title="<?% gettext('Select all/none') %?>" /></td>
+				</tr>
 
-<tmpl_loop recloop>
-			<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
-				<td class="col_date <tmpl_if sortbydate>selected</tmpl_if>">
-					<span class="date"><tmpl_var date></span>
-					<tmpl_if isfolder><span class="total"><%! Total !%></span></tmpl_if>
-				</td>
-				<td class="col_time <tmpl_if sortbytime>selected</tmpl_if>">
-					<span class="time"><tmpl_var time></span>
-					<span class="new">
-						<tmpl_if isfolder>
-							<%! New !%>
-						<tmpl_else>
-							<tmpl_if new>
-								<%! New !%>
-							</tmpl_if>
-						</tmpl_if>
-					</span>
-				</td>
-				<td class="col_name <tmpl_if sortbyname>selected</tmpl_if>">
-					<tmpl_if isfolder>
-						<a href="<tmpl_var infurl><tmpl_var cur_sorting>"><img align="middle" src="bilder/folder_video.png" border="0" alt="" />&nbsp;<tmpl_var name></a>
-					<tmpl_else>
-						<a href="javascript:popup('<tmpl_var infurl>');"><img align="middle" src="bilder/aktion.png" border="0" alt="" />&nbsp;<tmpl_var name></a>
-					</tmpl_if>
-				</td>
-				<td class="col_edit">
-					<tmpl_unless isfolder>
-						<a href="<tmpl_var editurl><tmpl_var cur_sorting><tmpl_var referer>"><img src="bilder/edit.png" alt="rename" title="<%! Rename !%>" border="0" /></a>
-					</tmpl_unless>
-				</td>
-				<td  class="col_delete">
-					<tmpl_unless isfolder>
-						<a href="javascript:del('<%! Delete recording? !%>\n\n&quot;<tmpl_var name_js>&quot;', '<tmpl_var delurl><tmpl_var cur_sorting>');"><img src="bilder/delete.png" alt="delete" title="<%! Delete !%>" border="0" /></a>
-					</tmpl_unless>
-				</td>
-<tmpl_if stream_rec_on>
-				<td class="col_stream">
-					<tmpl_unless isfolder>
-						<a href="<tmpl_var streamurl>"><img src="bilder/stream.png" alt="stream" title="<%! Stream !%>" border="0" /></a>
-					</tmpl_unless>
-				</td>
-</tmpl_if>
-				<td class="col_checkbox">
-					<tmpl_unless isfolder><input type="checkbox" name="xxxx_<tmpl_var id>" /></tmpl_unless>
-				</td>
-			</tr>
-</tmpl_loop>
-		</table>
+	<?% FOREACH rec = recloop %?>
+				<tr class="<?% IF loop.count() % 2 == 0 %?>row_even<?% ELSE %?>row_odd<?% END %?>">
+					<td class="col_date <?% IF rec.sortbydate %?>selected<?% END %?>">
+						<span class="date"><?% rec.date %?></span>
+						<?% IF rec.isfolder %?><span class="total"><?% gettext('Total') %?></span><?% END %?>
+					</td>
+					<td class="col_time <?% IF rec.sortbytime %?>selected<?% END %?>">
+						<span class="time"><?% rec.time %?></span>
+						<span class="new">
+							<?% IF rec.isfolder %?>
+								<?% gettext('New') %?>
+							<?% ELSE %?>
+								<?% IF rec.new %?>
+									<?% gettext('New') %?>
+								<?% END %?>
+							<?% END %?>
+						</span>
+					</td>
+					<td class="col_name <?% IF rec.sortbyname %?>selected<?% END %?>">
+						<?% IF rec.isfolder %?>
+							<a href="<?% rec.infurl %?>"><img align="middle" src="bilder/folder_video.png" border="0" alt="" />&nbsp;<?% rec.name %?></a>
+						<?% ELSE %?>
+							<a href="javascript:popup('<?% rec.infurl %?>');"><img align="middle" src="bilder/aktion.png" border="0" alt="" />&nbsp;<?% rec.name %?></a>
+						<?% END %?>
+					</td>
+					<td class="col_buttons">
+						<?% UNLESS rec.isfolder %?>
+							<?% IF rec.playurl %?>
+								<span class="action play"><a href="javascript:callurl('<?% rec.playurl %?>')"><img src="bilder/play.png" alt="play" title="<?% gettext('Play') %?>" border="0" /></a></span>
+							<?% END %?>
+							<?% IF rec.cuturl %?>
+								<span class="action cut"><a href="javascript:callurl('<?% rec.cuturl %?>')"><img src="bilder/cut.png" alt="cut" title="<?% gettext('Cut') %?>" border="0" /></a></span>
+							<?% END %?>
+							<?% IF rec.editurl %?>
+								<span class="action edit"><a href="<?% rec.editurl %?><?% rec.referer %?>"><img src="bilder/edit.png" alt="rename" title="<?% gettext('Rename') %?>" border="0" /></a></span>
+							<?% END %?>
+							<span class="action delete"><a href="javascript:del('<?% gettext('Delete recording?') %?>\n\n&quot;<?% rec.name_js %?>&quot;', '<?% rec.delurl %?>');"><img src="bilder/delete.png" alt="delete" title="<?% gettext('Delete') %?>" border="0" /></a></span>
+							<?% IF rec.streamurl %?>
+								<span class="action stream"><a href="<?% rec.streamurl %?>"><img src="bilder/stream.png" alt="stream" title="<?% gettext('Stream') %?>" border="0" /></a></span>
+							<?% END %?>
+						<?% END %?>
+					</td>
+					<td class="col_checkbox">
+						<?% UNLESS rec.isfolder %?><input type="checkbox" name="xxxx_<?% rec.id %?>" /><?% END %?>
+					</td>
+				</tr>
+	<?% END %?>
+			</table>
 
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
-			<tr>
-				<td align="left">
-					<input type="submit" class="submit" name="rec_update" value="<%! Refresh !%>" />
-				</td>
-<tmpl_if reccmds>
-				<td align="center">
-					<%! Commands: !%>
-					<select name="rec_cmd" class="submit">
-	<tmpl_loop reccmds>
-						<option value="<tmpl_var id>"><tmpl_var title></option>
-	</tmpl_loop>				
-					</select>
-					<input type="submit" class="submit" name="rec_runcmd" value="<%! Run !%>" onclick="return confirm('<%! Really run this command? !%>')" />
-				</td>
-</tmpl_if>
-				<td align="right">
-					<input type="submit" class="submit" name="rec_delete" value="<%! Delete Selected Recordings !%>" onclick="return mdel('<%! Delete all selected recordings? !%>');" />
-				</td>
-		</table>
-		<input type="hidden" name="aktion" value="rec_delete" />
-	</form>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
+				<tr>
+					<td align="left">
+						<input type="submit" class="submit" name="rec_update" value="<?% gettext('Refresh') %?>" />
+					</td>
+	<?% IF reccmds %?>
+					<td align="center">
+						<?% gettext('Commands:') %?>
+						<select name="rec_cmd" class="submit">
+		<?% FOREACH cmd = reccmds %?>
+							<option value="<?% cmd.id %?>"><?% cmd.title %?></option>
+		<?% END %?>				
+						</select>
+						<input type="submit" class="submit" name="rec_runcmd" value="<?% gettext('Run') %?>" onclick="return confirm('<?% gettext('Really run this command?') %?>')" />
+					</td>
+	<?% END %?>
+					<td align="right">
+						<input type="submit" class="submit" name="rec_delete" value="<?% gettext('Delete Selected Recordings') %?>" onclick="return mdel('<?% gettext('Delete all selected recordings?') %?>');" />
+					</td>
+			</table>
+			<input type="hidden" name="aktion" value="rec_delete" />
+		</form>
+<?% ELSE %?>
+		<div class="warning"><?% gettext('No recordings available') %?></div>
+<?% END %?>
+	</div>
 </body>
 </html>

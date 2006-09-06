@@ -2,12 +2,12 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>"/>
-	<title>VDRAdmin-AM - <%! AutoTimer !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>"/>
+	<title>VDRAdmin-AM - <?% gettext('AutoTimer') %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css"/>
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css"/>
-	</tmpl_if>
+	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<?% IF config.AT_TOOLTIP %?>
 		<script type="text/javascript" language="JavaScript1.2" src="infobox.js"></script>
@@ -21,158 +21,163 @@
 <?%
 	FOREACH timer = at_timer_loop2;
 %?>
-			maketip("VDR-<?% timer.id %?>", "<?% timer.pattern %?>", "<%! Priority: !%> <?% timer.prio %?><br /><%! Lifetime: !%> <?% timer.lft %?>");
+			maketip("VDR-<?% timer.id %?>", "<?% timer.pattern %?>", "<?% gettext('Priority:') %?> <?% timer.prio %?><br /><?% gettext('Lifetime:') %?> <?% timer.lft %?>");
 <?%
 	END
 %?>
 	</script>
 <?% END %?>
 
-	<form action="<tmpl_var url>" method="get" name="FormName0">
+	<form action="<?% url %?>" method="get" name="FormName0">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_title">
-					<h1><%! AutoTimer !%></h1>
+					<h1><?% gettext('AutoTimer') %?></h1>
 				</td>
 				<td class="col_other">
-					<input type="submit" class="submit" name="new_at" value="<%! New AutoTimer !%>" />
+					<input type="submit" class="submit" name="new_at" value="<?% gettext('New AutoTimer') %?>" />
 					<input type="hidden" name="aktion" value="at_timer_new" />
 				</td>
-<tmpl_if name="help_url">
+<?% IF help_url %?>
 				<td class="col_help">
-					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.png" border="0" alt="help" title="<%! Help !%>"/></a>
+					<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help" title="<?% gettext('Help') %?>"/></a>
 				</td>
-</tmpl_if>
+<?% END %?>
 			</tr>
 		</table>
 	</form>
 
-	<form action="<tmpl_var url>" method="get" name="FormName">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="list hilight">
-			<tr class="heading">
-				<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>">
-					<h2>
-						<a href="<tmpl_var sortbyactiveurl>"><%! Active !%>
-							<tmpl_if sortbyactive>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0"/>
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td class="col_channel <tmpl_if sortbychannel>selected</tmpl_if>">
-					<h2>
-						<a href="<tmpl_var sortbychannelurl>"><%! Channel !%>
-							<tmpl_if sortbychannel>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0"/>
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td class="col_start <tmpl_if sortbystart>selected</tmpl_if>">
-					<h2>
-						<a href="<tmpl_var sortbystarturl>"><%! Start !%>
-							<tmpl_if sortbystart>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0"/>
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td class="col_stop <tmpl_if sortbystop>selected</tmpl_if>">
-					<h2>
-						<a href="<tmpl_var sortbystopurl>"><%! Stop !%>
-							<tmpl_if sortbystop>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0"/>
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td class="col_name <tmpl_if sortbypattern>selected</tmpl_if>">
-					<h2>
-						<a href="<tmpl_var sortbypatternurl>"><%! Name !%>
-							<tmpl_if sortbypattern>
-								<img src="bilder/sortiert_<tmpl_if desc>desc<tmpl_else>asc</tmpl_if>.gif" alt="" width="9" height="11" border="0"/>
-							<tmpl_else>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
-							</tmpl_if>
-						</a>
-					</h2>
-				</td>
-				<td class="col_edit"></td>
-				<td class="col_delete"></td>
-				<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL" onclick="AllMessages(this.form);" title="<%! Select all/none !%>"/></td>
-			</tr>
+	<div id="content">
+<?% IF at_timer_loop.size() > 0 %?>
+		<form action="<?% url %?>" method="get" name="FormName">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list hilight">
+				<tr class="heading">
+					<td class="col_active <?% IF sortbyactive %?>selected<?% END %?>">
+						<h2>
+							<a href="<?% sortbyactiveurl %?>"><?% gettext('Active') %?>
+								<?% IF sortbyactive %?>
+									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0"/>
+								<?% ELSE %?>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
+								<?% END %?>
+							</a>
+						</h2>
+					</td>
+					<td class="col_channel <?% IF sortbychannel %?>selected<?% END %?>">
+						<h2>
+							<a href="<?% sortbychannelurl %?>"><?% gettext('Channel') %?>
+								<?% IF sortbychannel %?>
+									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0"/>
+								<?% ELSE %?>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
+								<?% END %?>
+							</a>
+						</h2>
+					</td>
+					<td class="col_start <?% IF sortbystart %?>selected<?% END %?>">
+						<h2>
+							<a href="<?% sortbystarturl %?>"><?% gettext('Start') %?>
+								<?% IF sortbystart %?>
+									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0"/>
+								<?% ELSE %?>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
+								<?% END %?>
+							</a>
+						</h2>
+					</td>
+					<td class="col_stop <?% IF sortbystop %?>selected<?% END %?>">
+						<h2>
+							<a href="<?% sortbystopurl %?>"><?% gettext('Stop') %?>
+								<?% IF sortbystop %?>
+									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0"/>
+								<?% ELSE %?>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
+								<?% END %?>
+							</a>
+						</h2>
+					</td>
+					<td class="col_name <?% IF sortbypattern %?>selected<?% END %?>">
+						<h2>
+							<a href="<?% sortbypatternurl %?>"><?% gettext('Name') %?>
+								<?% IF sortbypattern %?>
+									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0"/>
+								<?% ELSE %?>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
+								<?% END %?>
+							</a>
+						</h2>
+					</td>
+					<td class="col_edit"></td>
+					<td class="col_delete"></td>
+					<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL" onclick="AllMessages(this.form);" title="<?% gettext('Select all/none') %?>"/></td>
+				</tr>
 
-<tmpl_loop at_timer_loop>
-			<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
-				<td class="col_active <tmpl_if sortbyactive>selected</tmpl_if>">
-					<div>
-						<tmpl_if active>
-							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_gruen.png" alt="" align="middle" border="0"/> <%! Yes !%></a>
-						<tmpl_else>
-							<a href="<tmpl_var toggleurl>"><img src="bilder/poempl_grau.png" alt="" align="middle" border="0"/> <%! No !%></a>
-						</tmpl_if>
-					</div>
-				</td>
-				<td class="col_channel <tmpl_if sortbychannel>selected</tmpl_if>">
-					<div>
-						<tmpl_if channel><a href="<tmpl_var proglink>"><tmpl_var channel></a><tmpl_else>-</tmpl_if>
-					</div>
-				</td>
-				<td class="col_start <tmpl_if sortbystart>selected</tmpl_if>">
-					<div>
-						<tmpl_if start><tmpl_var start><tmpl_else>-</tmpl_if>
-					</div>
-				</td>
-				<td class="col_stop <tmpl_if sortbystop>selected</tmpl_if>">
-					<div>
-						<tmpl_if stop><tmpl_var stop><tmpl_else>-</tmpl_if>
-					</div>
-				</td>
-				<td class="col_name <tmpl_if sortbypattern>selected</tmpl_if>" <?% IF config.AT_TOOLTIP %?>onMouseOver="tip('VDR-<tmpl_var id>'); return true;" onMouseOut="untip(); return true;"<?% END %?>>
-					<div>
-						<a href="<tmpl_var modurl>" title="<%! Edit !%>"><tmpl_var pattern></a>
-					</div>
-				</td>
-				<td class="col_edit">
-					<div>
-						<a href="<tmpl_var modurl>"><img src="bilder/edit.png" alt="edit" border="0" title="<%! Edit !%>"/></a>
-					</div>
-				</td>
-				<td class="col_delete">
-					<div>
-						<a href="javascript:del('<%! Delete timer? !%>\n\n&quot;<tmpl_var pattern_js>&quot;', '<tmpl_var delurl>');"><img src="bilder/delete.png" alt="delete" border="0" title="<%! Delete !%>"/></a>
-					</div>
-				</td>
-				<td class="col_checkbox">
-					<div>
-						<input type="checkbox" name="xxxx_<tmpl_var id>"/>
-					</div>
-				</td>
-			</tr>
-</tmpl_loop>
-		</table>
+	<?% FOREACH at = at_timer_loop %?>
+				<tr class="<?% IF loop.count() % 2 == 0 %?>row_even<?% ELSE %?>row_odd<?% END %?>">
+					<td class="col_active <?% IF at.sortbyactive %?>selected<?% END %?>">
+						<div>
+							<?% IF at.active %?>
+								<a href="<?% at.toggleurl %?>"><img src="bilder/poempl_gruen.png" alt="" align="middle" border="0"/> <?% gettext('Yes') %?></a>
+							<?% ELSE %?>
+								<a href="<?% at.toggleurl %?>"><img src="bilder/poempl_grau.png" alt="" align="middle" border="0"/> <?% gettext('No') %?></a>
+							<?% END %?>
+						</div>
+					</td>
+					<td class="col_channel <?% IF at.sortbychannel %?>selected<?% END %?>">
+						<div>
+							<?% IF at.channel %?><a href="<?% at.proglink %?>"><?% at.channel %?></a><?% ELSE %?>-<?% END %?>
+						</div>
+					</td>
+					<td class="col_start <?% IF at.sortbystart %?>selected<?% END %?>">
+						<div>
+							<?% IF at.start %?><?% at.start %?><?% ELSE %?>-<?% END %?>
+						</div>
+					</td>
+					<td class="col_stop <?% IF at.sortbystop %?>selected<?% END %?>">
+						<div>
+							<?% IF at.stop %?><?% at.stop %?><?% ELSE %?>-<?% END %?>
+						</div>
+					</td>
+					<td class="col_name <?% IF at.sortbypattern %?>selected<?% END %?>" <?% IF config.AT_TOOLTIP %?>onMouseOver="tip('VDR-<?% at.id %?>'); return true;" onMouseOut="untip(); return true;"<?% END %?>>
+						<div>
+							<a href="<?% at.modurl %?>" title="<?% gettext('Edit') %?>"><?% at.pattern %?></a>
+						</div>
+					</td>
+					<td class="col_edit">
+						<div>
+							<a href="<?% at.modurl %?>"><img src="bilder/edit.png" alt="edit" border="0" title="<?% gettext('Edit') %?>"/></a>
+						</div>
+					</td>
+					<td class="col_delete">
+						<div>
+							<a href="javascript:del('<?% gettext('Delete timer?') %?>\n\n&quot;<?% at.pattern_js %?>&quot;', '<?% at.delurl %?>');"><img src="bilder/delete.png" alt="delete" border="0" title="<?% gettext('Delete') %?>"/></a>
+						</div>
+					</td>
+					<td class="col_checkbox">
+						<div>
+							<input type="checkbox" name="xxxx_<?% at.id %?>"/>
+						</div>
+					</td>
+				</tr>
+	<?% END %?>
+			</table>
 
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
-			<tr>
-				<td align="left">
-					<input type="submit" class="submit" name="at_force" value="<%! Force Update !%>" />
-				</td>
-				<td align="right">
-					<input type="submit" class="submit" name="at_delete" value="<%! Delete Selected AutoTimers !%>" onclick="return mdel_old('<%! Delete all selected timers? !%>');" />
-				</td>
-			</tr>
-		</table>
-		<input type="hidden" name="aktion" value="at_timer_aktion"/>
-		<input type="hidden" name="sortby" value="<tmpl_var sortby>"/>
-	</form>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
+				<tr>
+					<td align="left">
+						<input type="submit" class="submit" name="at_force" value="<?% gettext('Force Update') %?>" />
+					</td>
+					<td align="right">
+						<input type="submit" class="submit" name="at_delete" value="<?% gettext('Delete Selected AutoTimers') %?>" onclick="return mdel_old('<?% gettext('Delete all selected timers?') %?>');" />
+					</td>
+				</tr>
+			</table>
+			<input type="hidden" name="aktion" value="at_timer_aktion"/>
+		</form>
+<?% ELSE %?>
+		<div class="warning"><?% gettext('No AutoTimers defined!') %?></div>
+<?% END %?>
+	</div>
 </body>
 
 </html>

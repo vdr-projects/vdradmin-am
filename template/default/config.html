@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title>VDRAdmin-AM - <%! Configuration !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title>VDRAdmin-AM - <?% gettext('Configuration') %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<script type="text/javascript" language="JavaScript">
 		<!--
@@ -20,399 +20,416 @@
 </head>
 
 <body id="config">
-	<form action="<tmpl_var url>" method="get" name="FormName">
+	<form action="<?% url %?>" method="get" name="FormName">
 		<input type="hidden" name="new_tab" value="<?% active_tab %?>"/>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_title">
-					<h1><%! Configuration !%></h1>
+					<h1><?% gettext('Configuration') %?></h1>
 				</td>
-<tmpl_if name="help_url">
+<?% IF help_url %?>
 				<td class="col_help">
-					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.png" border="0" alt="help" title="<%! Help !%>" /></a>
+					<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help" title="<?% gettext('Help') %?>" /></a>
 				</td>
-</tmpl_if>
+<?% END %?>
 			</tr>
 		</table>
 
 		<table border="0" cellspacing="0" cellpadding="0" class="group">
 			<tr class="heading">
-				<td colspan="2"><h2><%! General Settings !%></h2></td>
+				<td colspan="2"><h2><?% gettext('General Settings') %?></h2></td>
 			</tr>
-<!-- Only one template, so no need to chose
-			<tr class="row_odd">
-				<td class="col_label"><h5><%! Template: !%></h5></td>
+<?% tr_class = "row_odd" %?>
+<?% IF TEMPLATELIST.size() > 1 %?>
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+				<td class="col_label"><h5><?% gettext('Template:') %?></h5></td>
 				<td class="col_value">
 					<select class="submit" name="TEMPLATE">
-<tmpl_loop name="TEMPLATELIST">
-						<option value="<tmpl_var name>" <tmpl_if aktemplate> selected</tmpl_if>><tmpl_var name></option>
-</tmpl_loop>
+<?% FOREACH template = TEMPLATELIST %?>
+						<option value="<?% template.name %?>" <?% IF template.aktemplate %?>selected="selected"<?% END %?>><?% template.name %?></option>
+<?% END %?>
 					</select>
 				</td>
 			</tr>
--->
-			<tr class="row_odd">
-				<td class="col_label"><h5><%! Skin: !%></h5></td>
+<?% END %?>
+<?% IF SKINLIST.size() > 1 %?>
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+				<td class="col_label"><h5><?% gettext('Skin:') %?></h5></td>
 				<td class="col_value">
 					<select class="submit" name="SKIN">
-<tmpl_loop name="SKINLIST">
-						<option value="<tmpl_var name>" <tmpl_if sel> selected</tmpl_if>><tmpl_var name></option>
-</tmpl_loop>
+<?% FOREACH skin = SKINLIST %?>
+						<option value="<?% skin.name %?>" <?% IF skin.sel %?>selected="selected"<?% END %?>><?% skin.name %?></option>
+<?% END %?>
 					</select>
 				</td>
 			</tr>
-			<tr class="row_even">
-				<td class="col_label"><h5><%! Login Page: !%></h5></td>
+<?% END %?>
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+				<td class="col_label"><h5><?% gettext('Login Page:') %?></h5></td>
 				<td class="col_value">
 					<select class="submit" name="LOGINPAGE">
-<tmpl_loop name="LOGINPAGES">
-						<option value="<tmpl_var id>" <tmpl_if current> selected</tmpl_if>><tmpl_var name></option>
-</tmpl_loop>
+<?% FOREACH loginpage = LOGINPAGES %?>
+						<option value="<?% loginpage.id %?>" <?% IF loginpage.current %?>selected="selected"<?% END %?>><?% loginpage.name %?></option>
+<?% END %?>
 					</select>
 				</td>
 			</tr>
-			<tr class="row_odd">
-				<td class="col_label"><h5><%! Number of channels to use: !%></h5></td>
-				<td class="col_value"><input type="text" name="EPG_PRUNE" value="<tmpl_var EPG_PRUNE>" size="5" maxlength="25" /></td>
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+				<td class="col_label"><h5><?% gettext('Number of channels to use:') %?></h5></td>
+				<td class="col_value"><input type="text" name="EPG_PRUNE" value="<?% config.EPG_PRUNE %?>" size="5" maxlength="25" /></td>
 			</tr>
-			<tr class="row_even">
-				<td class="col_label"><h5><%! Local net (no login required): !%></h5></td>
-				<td class="col_value"><input type="text" name="LOCAL_NET" value="<tmpl_var LOCAL_NET>" size="20" maxlength="50" /></td>
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+				<td class="col_label"><h5><?% gettext('Local net (no login required):') %?></h5></td>
+				<td class="col_value"><input type="text" name="LOCAL_NET" value="<?% config.LOCAL_NET %?>" size="20" maxlength="50" /></td>
 			</tr>
-			<tr class="row_odd">
-				<td class="col_label"><h5><%! Language: !%></h5></td>
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+				<td class="col_label"><h5><?% gettext('Language:') %?></h5></td>
 				<td class="col_value">
-<tmpl_if name="MY_LOCALES">
+<?% IF MY_LOCALES %?>
 					<select class="submit" name="LANG">
-	<tmpl_loop name="MY_LOCALES">
-						<option value="<tmpl_var id>" <tmpl_if cur>selected</tmpl_if>><tmpl_var name></option>
-	</tmpl_loop>
+	<?% FOREACH locale = MY_LOCALES %?>
+						<option value="<?% locale.id %?>" <?% IF locale.cur %?>selected="selected"<?% END %?>><?% locale.name %?></option>
+	<?% END %?>
 					</select>
-<tmpl_else>
-					<input type="text" name="LANG" value="<tmpl_var LANG>" size="20" maxlength="50" />
-</tmpl_if>
+<?% ELSE %?>
+					<input type="text" name="LANG" value="<?% config.LANG %?>" size="20" maxlength="50" />
+<?% END %?>
 				</td>
 			</tr>
-		</table>
-
-		<table border="0" cellspacing="0" cellpadding="0" class="group">
-			<tr class="heading">
-				<td colspan="2"><h2><%! VDR !%></h2></td>
-			</tr>
-			<tr class="row_odd">
-				<td class="col_label"><h5><%! Number of DVB cards: !%></h5></td>
-				<td class="col_value"><input type="text" name="RECORDINGS" value="<tmpl_var RECORDINGS>" size="2" /></td>
-			</tr>
-			<tr class="row_even">
-				<td class="col_label"><h5><%! Path to recordings: !%></h5></td>
-				<td class="col_value"><input type="text" name="VIDEODIR" value="<tmpl_var VIDEODIR>" size="20" maxlength="256" /></td>
-			</tr>
-			<tr class="row_odd">
-				<td class="col_label"><h5><%! Path to configuration files: !%></h5></td>
-				<td class="col_value"><input type="text" name="VDRCONFDIR" value="<tmpl_var VDRCONFDIR>" size="20" maxlength="256" /></td>
-			</tr>
-			<tr class="row_even">
-				<td class="col_label"><h5><%! Path to EPG images: !%></h5></td>
-				<td class="col_value"><input type="text" name="EPGIMAGES" value="<tmpl_var EPGIMAGES>" size="20" maxlength="256" /></td>
-			</tr>
-		</table>
-
-		<table border="0" cellspacing="0" cellpadding="0" class="group">
-			<tr class="heading">
-				<td colspan="2"><h2><%! Identification !%></h2></td>
-			</tr>
-			<tr class="row_odd">
-				<td class="col_label"><h5><%! Username: !%></h5></td>
-				<td class="col_value"><input type="text" name="USERNAME" value="<tmpl_var USERNAME>" size="12" /></td>
-			</tr>
-			<tr class="row_even">
-				<td class="col_label"><h5><%! Password: !%></h5></td>
-				<td class="col_value"><input type="password" name="PASSWORD" value="<tmpl_var PASSWORD>" size="12" /></td>
-			</tr>
-			<tr class="row_odd">
-				<td class="col_label"><h5><%! Guest Account: !%></h5></td>
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+				<td class="col_label"><h5><?% gettext('Save settings on exit:') %?></h5></td>
 				<td class="col_value">
-					<input type="radio" name="GUEST_ACCOUNT" value="1" id="guest_yes" <tmpl_if guest_account>checked</tmpl_if> /><label for="guest_yes"><%! Yes !%></label>
-					<input type="radio" name="GUEST_ACCOUNT" value="0" id="guest_no" <tmpl_unless guest_account>checked</tmpl_unless> /><label for="guest_no"><%! No !%></label>
-				</td>
-			</tr>
-			<tr class="row_even">
-				<td class="col_label"><h5><%! Guest Username: !%></h5></td>
-				<td class="col_value"><input type="text" name="USERNAME_GUEST" value="<tmpl_var USERNAME_GUEST>" size="12" /></td>
-			</tr>
-			<tr class="row_odd">
-				<td class="col_label"><h5><%! Guest Password: !%></h5></td>
-				<td class="col_value"><input type="password" name="PASSWORD_GUEST" value="<tmpl_var PASSWORD_GUEST>" size="12" /></td>
-			</tr>
-		</table>
-
-		<table border="0" cellspacing="0" cellpadding="0" class="group">
-			<tr class="heading">
-				<td colspan="2"><h2><%! Timeline !%></h2></td>
-			</tr>
-			<tr class="row_odd">
-				<td class="col_label"><h5><%! Hours: !%></h5></td>
-				<td class="col_value"><input type="text" name="ZEITRAHMEN" value="<tmpl_var ZEITRAHMEN>" size="2" /></td>
-			</tr>
-			<tr class="row_even">
-				<td class="col_label"><h5><%! Times: !%></h5></td>
-				<td class="col_value"><input type="text" name="TIMES" value="<tmpl_var TIMES>" size="20" />&nbsp;&nbsp;&nbsp;<%! Also used for other EPG views! !%></td>
-			</tr>
-			<tr class="row_odd">
-				<td class="col_label"><h5><%! Tooltips: !%></h5></td>
-				<td class="col_value">
-					<input type="radio" name="TL_TOOLTIP" value="1" id="tl_tooltip_yes" <tmpl_if tl_tooltip>checked</tmpl_if> /><label for="tl_tooltip_yes"><%! Yes !%></label>
-					<input type="radio" name="TL_TOOLTIP" value="0" id="tl_tooltip_no" <tmpl_unless tl_tooltip>checked</tmpl_unless> /><label for="tl_tooltip_no"><%! No !%></label>
+					<input type="radio" name="AUTO_SAVE_CONFIG" value="1" id="autosave_yes" <?% IF config.AUTO_SAVE_CONFIG %?>checked="checked"<?% END %?> /><label for="autosave_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="AUTO_SAVE_CONFIG" value="0" id="autosave_no" <?% UNLESS config.AUTO_SAVE_CONFIG %?>checked="checked"<?% END %?> /><label for="autosave_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
 		</table>
 
 		<table border="0" cellspacing="0" cellpadding="0" class="group">
 			<tr class="heading">
-				<td colspan="2"><h2><%! AutoTimer !%></h2></td>
+				<td colspan="2"><h2><?% gettext('VDR') %?></h2></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Active: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Number of DVB cards:') %?></h5></td>
+				<td class="col_value"><input type="text" name="RECORDINGS" value="<?% config.RECORDINGS %?>" size="2" /></td>
+			</tr>
+			<tr class="row_even">
+				<td class="col_label"><h5><?% gettext('Path to recordings:') %?></h5></td>
+				<td class="col_value"><input type="text" name="VIDEODIR" value="<?% config.VIDEODIR %?>" size="20" maxlength="256" /></td>
+			</tr>
+			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Path to configuration files:') %?></h5></td>
+				<td class="col_value"><input type="text" name="VDRCONFDIR" value="<?% config.VDRCONFDIR %?>" size="20" maxlength="256" /></td>
+			</tr>
+			<tr class="row_even">
+				<td class="col_label"><h5><?% gettext('Path to EPG images:') %?></h5></td>
+				<td class="col_value"><input type="text" name="EPGIMAGES" value="<?% config.EPGIMAGES %?>" size="20" maxlength="256" /></td>
+			</tr>
+		</table>
+
+		<table border="0" cellspacing="0" cellpadding="0" class="group">
+			<tr class="heading">
+				<td colspan="2"><h2><?% gettext('Identification') %?></h2></td>
+			</tr>
+			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Username:') %?></h5></td>
+				<td class="col_value"><input type="text" name="USERNAME" value="<?% config.USERNAME %?>" size="12" /></td>
+			</tr>
+			<tr class="row_even">
+				<td class="col_label"><h5><?% gettext('Password:') %?></h5></td>
+				<td class="col_value"><input type="password" name="PASSWORD" value="<?% config.PASSWORD %?>" size="12" /></td>
+			</tr>
+			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Guest Account:') %?></h5></td>
 				<td class="col_value">
-					<input type="radio" name="AT_FUNC" value="1" id="at_yes" <tmpl_if at_func>checked</tmpl_if> /><label for="at_yes"><%! Yes !%></label>
-					<input type="radio" name="AT_FUNC" value="0" id="at_no" <tmpl_unless at_func>checked</tmpl_unless> /><label for="at_no"><%! No !%></label>
+					<input type="radio" name="GUEST_ACCOUNT" value="1" id="guest_yes" <?% IF config.GUEST_ACCOUNT %?>checked="checked"<?% END %?> /><label for="guest_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="GUEST_ACCOUNT" value="0" id="guest_no" <?% UNLESS config.GUEST_ACCOUNT %?>checked="checked"<?% END %?> /><label for="guest_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Timeout: !%></h5></td>
-				<td class="col_value"><input type="text" name="AT_TIMEOUT" value="<tmpl_var AT_TIMEOUT>" size="4" /> <%! minutes !%></td>
+				<td class="col_label"><h5><?% gettext('Guest Username:') %?></h5></td>
+				<td class="col_value"><input type="text" name="USERNAME_GUEST" value="<?% config.USERNAME_GUEST %?>" size="12" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Priority: !%></h5></td>
-				<td class="col_value"><input type="text" name="AT_PRIORITY" value="<tmpl_var AT_PRIORITY>" size="2" maxlength="2" /></td>
+				<td class="col_label"><h5><?% gettext('Guest Password:') %?></h5></td>
+				<td class="col_value"><input type="password" name="PASSWORD_GUEST" value="<?% config.PASSWORD_GUEST %?>" size="12" /></td>
+			</tr>
+		</table>
+
+		<table border="0" cellspacing="0" cellpadding="0" class="group">
+			<tr class="heading">
+				<td colspan="2"><h2><?% gettext('Timeline') %?></h2></td>
+			</tr>
+			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Hours:') %?></h5></td>
+				<td class="col_value"><input type="text" name="ZEITRAHMEN" value="<?% config.ZEITRAHMEN %?>" size="2" /></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Lifetime: !%></h5></td>
-				<td class="col_value"><input type="text" name="AT_LIFETIME" value="<tmpl_var AT_LIFETIME>" size="2" maxlength="2" /></td>
+				<td class="col_label"><h5><?% gettext('Times:') %?></h5></td>
+				<td class="col_value"><input type="text" name="TIMES" value="<?% config.TIMES %?>" size="20" />&nbsp;&nbsp;&nbsp;<?% gettext('Also used for other EPG views!') %?></td>
+			</tr>
+			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Tooltips:') %?></h5></td>
+				<td class="col_value">
+					<input type="radio" name="TL_TOOLTIP" value="1" id="tl_tooltip_yes" <?% IF config.TL_TOOLTIP %?>checked="checked"<?% END %?> /><label for="tl_tooltip_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="TL_TOOLTIP" value="0" id="tl_tooltip_no" <?% UNLESS config.TL_TOOLTIP %?>checked="checked"<?% END %?> /><label for="tl_tooltip_no"><?% gettext('No') %?></label>
+				</td>
+			</tr>
+		</table>
+
+		<table border="0" cellspacing="0" cellpadding="0" class="group">
+			<tr class="heading">
+				<td colspan="2"><h2><?% gettext('AutoTimer') %?></h2></td>
+			</tr>
+			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Active:') %?></h5></td>
+				<td class="col_value">
+					<input type="radio" name="AT_FUNC" value="1" id="at_yes" <?% IF config.AT_FUNC %?>checked="checked"<?% END %?> /><label for="at_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="AT_FUNC" value="0" id="at_no" <?% UNLESS config.AT_FUNC %?>checked="checked"<?% END %?> /><label for="at_no"><?% gettext('No') %?></label>
+				</td>
+			</tr>
+			<tr class="row_even">
+				<td class="col_label"><h5><?% gettext('Timeout:') %?></h5></td>
+				<td class="col_value"><input type="text" name="AT_TIMEOUT" value="<?% config.AT_TIMEOUT %?>" size="4" /> <?% gettext('minutes') %?></td>
+			</tr>
+			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Priority:') %?></h5></td>
+				<td class="col_value"><input type="text" name="AT_PRIORITY" value="<?% config.AT_PRIORITY %?>" size="2" maxlength="2" /></td>
+			</tr>
+			<tr class="row_even">
+				<td class="col_label"><h5><?% gettext('Lifetime:') %?></h5></td>
+				<td class="col_value"><input type="text" name="AT_LIFETIME" value="<?% config.AT_LIFETIME %?>" size="2" maxlength="2" /></td>
 			</tr>
 <!--
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Time Margin at Start: !%></h5></td>
-				<td class="col_value"><input type="text" name="AT_MARGIN_BEGIN" value="<tmpl_var AT_MARGIN_BEGIN>" size="2" maxlength="2" /></td>
+				<td class="col_label"><h5><?% gettext('Time Margin at Start:') %?></h5></td>
+				<td class="col_value"><input type="text" name="AT_MARGIN_BEGIN" value="<?% config.AT_MARGIN_BEGIN %?>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Time Margin at Stop: !%></h5></td>
-				<td class="col_value"><input type="text" name="AT_MARGIN_END" value="<tmpl_var AT_MARGIN_END>" size="2" maxlength="2" /></td>
+				<td class="col_label"><h5><?% gettext('Time Margin at Stop:') %?></h5></td>
+				<td class="col_value"><input type="text" name="AT_MARGIN_END" value="<?% config.AT_MARGIN_END %?>" size="2" maxlength="2" /></td>
 			</tr>
 -->
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Send email after programming timer: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Send email after programming timer:') %?></h5></td>
 				<td class="col_value">
-					<input type="radio" name="AT_SENDMAIL" value="1" id="at_sendmail_yes" <tmpl_if at_sendmail>checked</tmpl_if> /><label for="at_sendmail_yes"><%! Yes !%></label>
-					<input type="radio" name="AT_SENDMAIL" value="0" id="at_sendmail_no" <tmpl_unless at_sendmail>checked</tmpl_unless> /><label for="at_sendmail_no"><%! No !%></label>
+					<input type="radio" name="AT_SENDMAIL" value="1" id="at_sendmail_yes" <?% IF config.AT_SENDMAIL %?>checked="checked"<?% END %?> /><label for="at_sendmail_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="AT_SENDMAIL" value="0" id="at_sendmail_no" <?% UNLESS config.AT_SENDMAIL %?>checked="checked"<?% END %?> /><label for="at_sendmail_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Send email as: !%></h5></td>
-				<td class="col_value"><input type="text" name="MAIL_FROM" value="<tmpl_var MAIL_FROM>" size="20" maxlength="100" /></td>
+				<td class="col_label"><h5><?% gettext('Send email as:') %?></h5></td>
+				<td class="col_value"><input type="text" name="MAIL_FROM" value="<?% config.MAIL_FROM %?>" size="20" maxlength="100" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Send email to: !%></h5></td>
-				<td class="col_value"><input type="text" name="MAIL_TO" value="<tmpl_var MAIL_TO>" size="20" maxlength="100" /></td>
+				<td class="col_label"><h5><?% gettext('Send email to:') %?></h5></td>
+				<td class="col_value"><input type="text" name="MAIL_TO" value="<?% config.MAIL_TO %?>" size="20" maxlength="100" /></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Mail server: !%></h5></td>
-				<td class="col_value"><input type="text" name="MAIL_SERVER" value="<tmpl_var MAIL_SERVER>" size="20" maxlength="100" /></td>
+				<td class="col_label"><h5><?% gettext('Mail server:') %?></h5></td>
+				<td class="col_value"><input type="text" name="MAIL_SERVER" value="<?% config.MAIL_SERVER %?>" size="20" maxlength="100" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! SMTPAuth user: !%></h5></td>
-				<td class="col_value"><input type="text" name="MAIL_AUTH_USER" value="<tmpl_var MAIL_AUTH_USER>" size="20" maxlength="100" /></td>
+				<td class="col_label"><h5><?% gettext('SMTPAuth user:') %?></h5></td>
+				<td class="col_value"><input type="text" name="MAIL_AUTH_USER" value="<?% config.MAIL_AUTH_USER %?>" size="20" maxlength="100" /></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! SMTPAuth password: !%></h5></td>
-				<td class="col_value"><input type="password" name="MAIL_AUTH_PASS" value="<tmpl_var MAIL_AUTH_PASS>" size="20" maxlength="100" /></td>
+				<td class="col_label"><h5><?% gettext('SMTPAuth password:') %?></h5></td>
+				<td class="col_value"><input type="password" name="MAIL_AUTH_PASS" value="<?% config.MAIL_AUTH_PASS %?>" size="20" maxlength="100" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Tooltips: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Tooltips:') %?></h5></td>
 				<td class="col_value">
-					<input type="radio" name="AT_TOOLTIP" value="1" id="at_tooltip_yes" <tmpl_if at_tooltip>checked</tmpl_if> /><label for="at_tooltip_yes"><%! Yes !%></label>
-					<input type="radio" name="AT_TOOLTIP" value="0" id="at_tooltip_no" <tmpl_unless at_tooltip>checked</tmpl_unless> /><label for="at_tooltip_no"><%! No !%></label>
+					<input type="radio" name="AT_TOOLTIP" value="1" id="at_tooltip_yes" <?% IF config.AT_TOOLTIP %?>checked="checked"<?% END %?> /><label for="at_tooltip_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="AT_TOOLTIP" value="0" id="at_tooltip_no" <?% UNLESS config.AT_TOOLTIP %?>checked="checked"<?% END %?> /><label for="at_tooltip_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
 		</table>
 
 		<table border="0" cellspacing="0" cellpadding="0" class="group">
 			<tr class="heading">
-				<td colspan="2"><h2><%! Timer !%></h2></td>
+				<td colspan="2"><h2><?% gettext('Timer') %?></h2></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Priority: !%></h5></td>
-				<td class="col_value"><input type="text" name="TM_PRIORITY" value="<tmpl_var TM_PRIORITY>" size="2" maxlength="2" /></td>
+				<td class="col_label"><h5><?% gettext('Priority:') %?></h5></td>
+				<td class="col_value"><input type="text" name="TM_PRIORITY" value="<?% config.TM_PRIORITY %?>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Lifetime: !%></h5></td>
-				<td class="col_value"><input type="text" name="TM_LIFETIME" value="<tmpl_var TM_LIFETIME>" size="2" maxlength="2" /></td>
+				<td class="col_label"><h5><?% gettext('Lifetime:') %?></h5></td>
+				<td class="col_value"><input type="text" name="TM_LIFETIME" value="<?% config.TM_LIFETIME %?>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Time Margin at Start: !%></h5></td>
-				<td class="col_value"><input type="text" name="TM_MARGIN_BEGIN" value="<tmpl_var TM_MARGIN_BEGIN>" size="3" /> <%! minutes !%></td>
+				<td class="col_label"><h5><?% gettext('Time Margin at Start:') %?></h5></td>
+				<td class="col_value"><input type="text" name="TM_MARGIN_BEGIN" value="<?% config.TM_MARGIN_BEGIN %?>" size="3" /> <?% gettext('minutes') %?></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Time Margin at Stop: !%></h5></td>
-				<td class="col_value"><input type="text" name="TM_MARGIN_END" value="<tmpl_var TM_MARGIN_END>" size="3" /> <%! minutes !%></td>
+				<td class="col_label"><h5><?% gettext('Time Margin at Stop:') %?></h5></td>
+				<td class="col_value"><input type="text" name="TM_MARGIN_END" value="<?% config.TM_MARGIN_END %?>" size="3" /> <?% gettext('minutes') %?></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Tooltips in timeline: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Tooltips in timeline:') %?></h5></td>
 				<td class="col_value">
-					<input type="radio" name="TM_TT_TIMELINE" value="1" id="tm_tl_timeline_yes" <tmpl_if tm_tt_timeline>checked</tmpl_if> /><label for="tm_tl_timeline_yes"><%! Yes !%></label>
-					<input type="radio" name="TM_TT_TIMELINE" value="0" id="tm_tl_timeline_no" <tmpl_unless tm_tt_timeline>checked</tmpl_unless> /><label for="tm_tl_timeline_no"><%! No !%></label>
+					<input type="radio" name="TM_TT_TIMELINE" value="1" id="tm_tl_timeline_yes" <?% IF config.TM_TT_TIMELINE %?>checked="checked"<?% END %?> /><label for="tm_tl_timeline_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="TM_TT_TIMELINE" value="0" id="tm_tl_timeline_no" <?% UNLESS config.TM_TT_TIMELINE %?>checked="checked"<?% END %?> /><label for="tm_tl_timeline_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Tooltips in list: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Tooltips in list:') %?></h5></td>
 				<td class="col_value">
-					<input type="radio" name="TM_TT_LIST" value="1" id="tm_tl_list_yes" <tmpl_if tm_tt_list>checked</tmpl_if> /><label for="tm_tl_list_yes"><%! Yes !%></label>
-					<input type="radio" name="TM_TT_LIST" value="0" id="tm_tl_list_no" <tmpl_unless tm_tt_list>checked</tmpl_unless> /><label for="tm_tl_list_no"><%! No !%></label>
+					<input type="radio" name="TM_TT_LIST" value="1" id="tm_tl_list_yes" <?% IF config.TM_TT_LIST %?>checked="checked"<?% END %?> /><label for="tm_tl_list_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="TM_TT_LIST" value="0" id="tm_tl_list_no" <?% UNLESS config.TM_TT_LIST %?>checked="checked"<?% END %?> /><label for="tm_tl_list_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
 <!--						<tr class="row_odd">
-				<td class="col_label"><h5><%! Add summary to new timers: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Add summary to new timers:') %?></h5></td>
 				<td class="col_value">
-					<input type="radio" name="TM_ADD_SUMMARY" value="1" id="tm_add_summary_yes" <tmpl_if tm_add_summary>checked</tmpl_if> /><label for="tm_add_summary_yes"><%! Yes !%></label>
-					<input type="radio" name="TM_ADD_SUMMARY" value="0" id="tm_add_summary_no" <tmpl_unless tm_add_summary>checked</tmpl_unless> /><label for="tm_add_summary_no"><%! No !%></label>
+					<input type="radio" name="TM_ADD_SUMMARY" value="1" id="tm_add_summary_yes" <?% IF config.TM_ADD_SUMMARY %?>checked="checked"<?% END %?> /><label for="tm_add_summary_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="TM_ADD_SUMMARY" value="0" id="tm_add_summary_no" <?% UNLESS config.TM_ADD_SUMMARY %?>checked="checked"<?% END %?> /><label for="tm_add_summary_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>-->
 		</table>
 
-<tmpl_if ST_FUNC>
+<?% IF config.ST_FUNC %?>
 		<table border="0" cellspacing="0" cellpadding="0" class="group">
 			<tr class="heading">
-				<td colspan="2"><h2><%! Streaming !%></h2></td>
+				<td colspan="2"><h2><?% gettext('Streaming') %?></h2></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Live Streaming: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Live Streaming:') %?></h5></td>
 				<td class="col_value">
-					<input type="radio" name="ST_LIVE_ON" value="1" id="live_yes" <tmpl_if ST_LIVE_ON>checked</tmpl_if> /><label for="live_yes"><%! Yes !%></label>
-					<input type="radio" name="ST_LIVE_ON" value="0" id="live_no" <tmpl_unless ST_LIVE_ON>checked</tmpl_unless> /><label for="live_no"><%! No !%></label>
+					<input type="radio" name="ST_LIVE_ON" value="1" id="live_yes" <?% IF config.ST_LIVE_ON %?>checked="checked"<?% END %?> /><label for="live_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="ST_LIVE_ON" value="0" id="live_no" <?% UNLESS config.ST_LIVE_ON %?>checked="checked"<?% END %?> /><label for="live_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! HTTP Port of Streamdev (also possible 3000/ts): !%></h5></td>
-				<td class="col_value"><input type="text" name="ST_STREAMDEV_PORT" value="<tmpl_var ST_STREAMDEV_PORT>" size="10" /></td>
+				<td class="col_label"><h5><?% gettext('HTTP Port of Streamdev (also possible 3000/ts):') %?></h5></td>
+				<td class="col_value"><input type="text" name="ST_STREAMDEV_PORT" value="<?% config.ST_STREAMDEV_PORT %?>" size="10" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Recordings Streaming: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Recordings Streaming:') %?></h5></td>
 				<td class="col_value">
-					<input type="radio" name="ST_REC_ON" value="1" id="rec_yes" <tmpl_if ST_REC_ON>checked</tmpl_if> /><label for="rec_yes"><%! Yes !%></label>
-					<input type="radio" name="ST_REC_ON" value="0" id="rec_no" <tmpl_unless ST_REC_ON>checked</tmpl_unless> /><label for="rec_no"><%! No !%></label>
+					<input type="radio" name="ST_REC_ON" value="1" id="rec_yes" <?% IF config.ST_REC_ON %?>checked="checked"<?% END %?> /><label for="rec_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="ST_REC_ON" value="0" id="rec_no" <?% UNLESS config.ST_REC_ON %?>checked="checked"<?% END %?> /><label for="rec_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Path to VDR Recordings on your workstation: !%></h5></td>
-				<td class="col_value"><input type="text" name="ST_VIDEODIR" value="<tmpl_var ST_VIDEODIR>" size="20" maxlength="256" /></td>
+				<td class="col_label"><h5><?% gettext('Path to VDR Recordings on your workstation:') %?></h5></td>
+				<td class="col_value"><input type="text" name="ST_VIDEODIR" value="<?% config.ST_VIDEODIR %?>" size="20" maxlength="256" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! MIME type for live streaming: !%></h5></td>
-				<td class="col_value"><input type="text" name="TV_MIMETYPE" value="<tmpl_var TV_MIMETYPE>" size="20" maxlength="256" /></td>
+				<td class="col_label"><h5><?% gettext('MIME type for live streaming:') %?></h5></td>
+				<td class="col_value"><input type="text" name="TV_MIMETYPE" value="<?% config.TV_MIMETYPE %?>" size="20" maxlength="256" /></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Suffix for live streaming: !%></h5></td>
-				<td class="col_value"><input type="text" name="TV_EXT" value="<tmpl_var TV_EXT>" size="4" maxlength="256" /></td>
+				<td class="col_label"><h5><?% gettext('Suffix for live streaming:') %?></h5></td>
+				<td class="col_value"><input type="text" name="TV_EXT" value="<?% config.TV_EXT %?>" size="4" maxlength="256" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! MIME type for recordings streaming: !%></h5></td>
-				<td class="col_value"><input type="text" name="REC_MIMETYPE" value="<tmpl_var REC_MIMETYPE>" size="20" maxlength="256" /></td>
+				<td class="col_label"><h5><?% gettext('MIME type for recordings streaming:') %?></h5></td>
+				<td class="col_value"><input type="text" name="REC_MIMETYPE" value="<?% config.REC_MIMETYPE %?>" size="20" maxlength="256" /></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Suffix for recordings streaming: !%></h5></td>
-				<td class="col_value"><input type="text" name="REC_EXT" value="<tmpl_var REC_EXT>" size="4" maxlength="256" /></td>
+				<td class="col_label"><h5><?% gettext('Suffix for recordings streaming:') %?></h5></td>
+				<td class="col_value"><input type="text" name="REC_EXT" value="<?% config.REC_EXT %?>" size="4" maxlength="256" /></td>
 			</tr>
 <!-- not (yet?) supported 
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Bandwidth of Streams: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Bandwidth of Streams:') %?></h5></td>
 				<td class="col_value">
 					<select class="submit" name="STREAMTYPE">
-<tmpl_loop name="STREAMTYPELIST">
-						<option value="<tmpl_var name>" <tmpl_if sel> selected</tmpl_if>><tmpl_var name></option>
-</tmpl_loop>
+<?% FOREACH streamtype = STREAMTYPELIST %?>
+						<option value="<?% streamtype.name %?>" <?% IF streamtype.sel %?>selected="selected"<?% END %?>><?% streamtype.name %?></option>
+<?% END %?>
 					</select>
 				</td>
 			</tr>
 -->
 		</table>
-</tmpl_if>
+<?% END %?>
 
 		<table border="0" cellspacing="0" cellpadding="0" class="group">
 			<tr class="heading">
-				<td colspan="2"><h2><%! Expert !%></h2></td>
+				<td colspan="2"><h2><?% gettext('Expert') %?></h2></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Read EPG directly using epg.data: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Read EPG directly using epg.data:') %?></h5></td>
 				<td class="col_value">
-					<input type="radio" name="EPG_DIRECT" value="1" id="epg_yes" <tmpl_if EPG_DIRECT>checked</tmpl_if> /><label for="epg_yes"><%! Yes !%></label>
-					<input type="radio" name="EPG_DIRECT" value="0" id="epg_no" <tmpl_unless EPG_DIRECT>checked</tmpl_unless> /><label for="epg_no"><%! No !%></label>
+					<input type="radio" name="EPG_DIRECT" value="1" id="epg_yes" <?% IF config.EPG_DIRECT %?>checked="checked"<?% END %?> /><label for="epg_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="EPG_DIRECT" value="0" id="epg_no" <?% UNLESS config.EPG_DIRECT %?>checked="checked"<?% END %?> /><label for="epg_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! epg.data filename: !%></h5></td>
-				<td class="col_value"><input type="text" name="EPG_FILENAME" value="<tmpl_var EPG_FILENAME>" size="20" maxlength="256" /></td>
+				<td class="col_label"><h5><?% gettext('epg.data filename:') %?></h5></td>
+				<td class="col_value"><input type="text" name="EPG_FILENAME" value="<?% config.EPG_FILENAME %?>" size="20" maxlength="256" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! VFAT: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('VFAT:') %?></h5></td>
 				<td class="col_value">
-					<input type="radio" name="VDRVFAT" value="1" id="vfat_yes" <tmpl_if VDRVFAT>checked</tmpl_if> /><label for="vfat_yes"><%! Yes !%></label>
-					<input type="radio" name="VDRVFAT" value="0" id="vfat_no" <tmpl_unless VDRVFAT>checked</tmpl_unless> /><label for="vfat_no"><%! No !%></label>
+					<input type="radio" name="VDRVFAT" value="1" id="vfat_yes" <?% IF config.VDRVFAT %?>checked="checked"<?% END %?> /><label for="vfat_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="VDRVFAT" value="0" id="vfat_no" <?% UNLESS config.VDRVFAT %?>checked="checked"<?% END %?> /><label for="vfat_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
 		</table>
 
 		<table border="0" cellspacing="0" cellpadding="0" class="group">
 			<tr class="heading">
-				<td colspan="3"><h2><%! Channel Selections !%></h2></td>
+				<td colspan="3"><h2><?% gettext('Channel Selections') %?></h2></td>
 			</tr>
 						<tr class="row_odd">
-							<td class="col_label"><h5><%! In "Timeline"? !%></h5></td>
+							<td class="col_label"><h5><?% gettext('In "Timeline"?') %?></h5></td>
 							<td class="col_value" colspan="2">
-								<input type="radio" name="CHANNELS_WANTED_TIMELINE" value="1" id="tl_yes" <tmpl_if CHANNELS_WANTED_TIMELINE>checked</tmpl_if> /><label for="tl_yes"><%! Yes !%></label>
-								<input type="radio" name="CHANNELS_WANTED_TIMELINE" value="0" id="tl_no" <tmpl_unless CHANNELS_WANTED_TIMELINE>checked</tmpl_unless> /><label for="tl_no"><%! No !%></label>
+								<input type="radio" name="CHANNELS_WANTED_TIMELINE" value="1" id="tl_yes" <?% IF config.CHANNELS_WANTED_TIMELINE %?>checked="checked"<?% END %?> /><label for="tl_yes"><?% gettext('Yes') %?></label>
+								<input type="radio" name="CHANNELS_WANTED_TIMELINE" value="0" id="tl_no" <?% UNLESS config.CHANNELS_WANTED_TIMELINE %?>checked="checked"<?% END %?> /><label for="tl_no"><?% gettext('No') %?></label>
 							</td>
 						</tr>
 						<tr class="row_even">
-							<td class="col_label"><h5><%! In "Channels"? !%></h5></td>
+							<td class="col_label"><h5><?% gettext('In "Channels"?') %?></h5></td>
 							<td class="col_value" colspan="2">
-								<input type="radio" name="CHANNELS_WANTED_PRG" value="1" id="prg_yes" <tmpl_if CHANNELS_WANTED_PRG>checked</tmpl_if> /><label for="prg_yes"><%! Yes !%></label>
-								<input type="radio" name="CHANNELS_WANTED_PRG" value="0" id="prg_no"<tmpl_unless CHANNELS_WANTED_PRG>checked</tmpl_unless> /><label for="prg_no"><%! No !%> </label>
+								<input type="radio" name="CHANNELS_WANTED_PRG" value="1" id="prg_yes" <?% IF config.CHANNELS_WANTED_PRG %?>checked="checked"<?% END %?> /><label for="prg_yes"><?% gettext('Yes') %?></label>
+								<input type="radio" name="CHANNELS_WANTED_PRG" value="0" id="prg_no"<?% UNLESS config.CHANNELS_WANTED_PRG %?>checked="checked"<?% END %?> /><label for="prg_no"><?% gettext('No') %?> </label>
 							</td>
 						</tr>
 						<tr class="row_odd">
-							<td class="col_label"><h5><%! In "Playing Today"? !%></h5></td>
+							<td class="col_label"><h5><?% gettext('In "Playing Today"?') %?></h5></td>
 							<td class="col_value" colspan="2">
-								<input type="radio" name="CHANNELS_WANTED_PRG2" value="1" id="prg2_yes" <tmpl_if CHANNELS_WANTED_PRG2>checked</tmpl_if> /><label for="prg2_yes"><%! Yes !%></label>
-								<input type="radio" name="CHANNELS_WANTED_PRG2" value="0" id="prg2_no"<tmpl_unless CHANNELS_WANTED_PRG2>checked</tmpl_unless> /><label for="prg2_no"><%! No !%> </label>
+								<input type="radio" name="CHANNELS_WANTED_PRG2" value="1" id="prg2_yes" <?% IF config.CHANNELS_WANTED_PRG2 %?>checked="checked"<?% END %?> /><label for="prg2_yes"><?% gettext('Yes') %?></label>
+								<input type="radio" name="CHANNELS_WANTED_PRG2" value="0" id="prg2_no"<?% UNLESS config.CHANNELS_WANTED_PRG2 %?>checked="checked"<?% END %?> /><label for="prg2_no"><?% gettext('No') %?> </label>
 							</td>
 						</tr>
 						<tr class="row_even">
-							<td class="col_label"><h5><%! In "What's On Now"? !%></h5></td>
+							<td class="col_label"><h5><?% gettext('In "What\'s On Now"?') %?></h5></td>
 							<td class="col_value" colspan="2">
-								<input type="radio" name="CHANNELS_WANTED_SUMMARY" value="1" id="sum_yes" <tmpl_if CHANNELS_WANTED_SUMMARY>checked</tmpl_if> /><label for="sum_yes"><%! Yes !%></label>
-								<input type="radio" name="CHANNELS_WANTED_SUMMARY" value="0" id="sum_no" <tmpl_unless CHANNELS_WANTED_SUMMARY>checked</tmpl_unless> /><label for="sum_no"><%! No !%></label>
+								<input type="radio" name="CHANNELS_WANTED_SUMMARY" value="1" id="sum_yes" <?% IF config.CHANNELS_WANTED_SUMMARY %?>checked="checked"<?% END %?> /><label for="sum_yes"><?% gettext('Yes') %?></label>
+								<input type="radio" name="CHANNELS_WANTED_SUMMARY" value="0" id="sum_no" <?% UNLESS config.CHANNELS_WANTED_SUMMARY %?>checked="checked"<?% END %?> /><label for="sum_no"><?% gettext('No') %?></label>
 							</td>
 						</tr>
 						<tr class="row_odd">
-							<td class="col_label"><h5><%! In "AutoTimer"? !%></h5></td>
+							<td class="col_label"><h5><?% gettext('In "AutoTimer"?') %?></h5></td>
 							<td class="col_value" colspan="2">
-								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="1" id="wat_yes" <tmpl_if CHANNELS_WANTED_AUTOTIMER>checked</tmpl_if> /><label for="wat_yes"><%! Yes !%></label>
-								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="0" id="wat_no" <tmpl_unless CHANNELS_WANTED_AUTOTIMER>checked</tmpl_unless> /><label for="wat_no"><%! No !%></label>
+								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="1" id="wat_yes" <?% IF config.CHANNELS_WANTED_AUTOTIMER %?>checked="checked"<?% END %?> /><label for="wat_yes"><?% gettext('Yes') %?></label>
+								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="0" id="wat_no" <?% UNLESS config.CHANNELS_WANTED_AUTOTIMER %?>checked="checked"<?% END %?> /><label for="wat_no"><?% gettext('No') %?></label>
 							</td>
 						</tr>
 						<tr class="row_even">
-							<td class="col_label"><h5><%! In "Watch TV"? !%></h5></td>
+							<td class="col_label"><h5><?% gettext('In "Watch TV"?') %?></h5></td>
 							<td class="col_value" colspan="2">
-								<input type="radio" name="CHANNELS_WANTED_WATCHTV" value="1" id="wtv_yes" <tmpl_if CHANNELS_WANTED_WATCHTV>checked</tmpl_if> /><label for="wtv_yes"><%! Yes !%></label>
-								<input type="radio" name="CHANNELS_WANTED_WATCHTV" value="0" id="wtv_no" <tmpl_unless CHANNELS_WANTED_WATCHTV>checked</tmpl_unless> /><label for="wtv_no"><%! No !%></label>
+								<input type="radio" name="CHANNELS_WANTED_WATCHTV" value="1" id="wtv_yes" <?% IF config.CHANNELS_WANTED_WATCHTV %?>checked="checked"<?% END %?> /><label for="wtv_yes"><?% gettext('Yes') %?></label>
+								<input type="radio" name="CHANNELS_WANTED_WATCHTV" value="0" id="wtv_no" <?% UNLESS config.CHANNELS_WANTED_WATCHTV %?>checked="checked"<?% END %?> /><label for="wtv_no"><?% gettext('No') %?></label>
 							</td>
 						</tr>
 						<tr class="row_odd">
 							<td class="col_channels">
 								<select name="all_channels" size="8" multiple class="channels">
-<tmpl_loop name="ALL_CHANNELS">
-									<option value="<tmpl_var vdr_id>"><tmpl_var name escape="html"></option>
-</tmpl_loop>
+<?% FOREACH chan = ALL_CHANNELS %?>
+									<option value="<?% chan.vdr_id %?>"><?% chan.name | html %?></option>
+<?% END %?>
 								</select>
 							</td>
 							<td>
@@ -421,17 +438,17 @@
 							</td>
 							<td class="col_wanted_channels">
 								<select name="selected_channels" size="8" multiple class="channels">
-<tmpl_loop name="SELECTED_CHANNELS">
-									<option value="<tmpl_var vdr_id>"><tmpl_var name escape="html"></option>
-</tmpl_loop>
+<?% FOREACH chan = SELECTED_CHANNELS %?>
+									<option value="<?% chan.vdr_id %?>"><?% chan.name | html %?></option>
+<?% END %?>
 								</select>
 							</td>
 						</tr>
 		</table>
 
 		<div id="buttons">
-			<input type="submit" class="submit" name="save" value="<%! Save !%>" />
-			<input type="submit" class="submit" name="apply" value="<%! Apply !%>" />
+			<input type="submit" class="submit" name="save" value="<?% gettext('Save') %?>" />
+			<input type="submit" class="submit" name="apply" value="<?% gettext('Apply') %?>" />
 		</div>
 		<input type="hidden" name="aktion" value="config" />
 	</form>

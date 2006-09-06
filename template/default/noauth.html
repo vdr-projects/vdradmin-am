@@ -1,17 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title><%! Authorization Required !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title><?% gettext('Authorization Required') %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 </head>
 
 <body id="noauth">
-	<h1><%! Authorization Required !%></h1>
-	<p><%! This server could not verify that you are authorized to access the document requested. Either you supplied the wrong credentials (e.g. bad password), or your browser doesn't understand how to supply the credentials required. !%></p>
+	<h1><?% gettext('Authorization Required') %?></h1>
+	<p><?% gettext('This server could not verify that you are authorized to access the document requested. Either you supplied the wrong credentials (e.g. bad password), or your browser doesn\'t understand how to supply the credentials required.') %?></p>
 </body>
 </html>

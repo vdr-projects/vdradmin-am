@@ -2,88 +2,106 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title><%! About !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title><?% gettext('About') %?></title>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 </head>
 
 <body id="about" onload="window.focus()">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 		<tr class="heading">
-			<td colspan="2"><h2><%! Authors !%></h2></td>
+			<td colspan="2"><h2><?% gettext('Authors') %?></h2></td>
 		</tr>
 		<tr class="row_even">
-			<td class="col_label"><h5><%! Current author (VDRAdmin-AM branch): !%></h5></td>
+			<td class="col_label"><h5><?% gettext('Current author (VDRAdmin-AM branch):') %?></h5></td>
 			<td class="col_value"><a href="mailto:mail@andreas.vdr-developer.org">Andreas Mair</a> (<a href="http://andreas.vdr-developer.org" target="_blank">Homepage</a>)</td>
 		</tr>
 		<tr class="row_even">
-			<td class="col_label"><h5><%! Original author (VDRAdmin): !%></h5></td>
+			<td class="col_label"><h5><?% gettext('Original author (VDRAdmin):') %?></h5></td>
 			<td class="col_value">Thomas Koch (<a href="http://www.linvdr.org" target="_blank">Homepage</a>)</td>
 		</tr>
 	</table>
 
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 		<tr class="heading">
-			<td colspan="2"><h2><%! Translation Team !%></h2></td>
+			<td colspan="2"><h2><?% gettext('Translation Team') %?></h2></td>
 		</tr>
 		<tr class="row_even">
-			<td class="col_label"><h5><%! Dutch: !%></h5></td>
+			<td class="col_label"><h5><?% gettext('Dutch:') %?></h5></td>
 			<td class="col_value">Roel Koelewijn</td>
 		</tr>
 		<tr class="row_even">
-			<td class="col_label"><h5><%! English: !%></h5></td>
+			<td class="col_label"><h5><?% gettext('English:') %?></h5></td>
 			<td class="col_value">Andreas Mair</td>
 		</tr>
 		<tr class="row_even">
-			<td class="col_label"><h5><%! Finnish: !%></h5></td>
+			<td class="col_label"><h5><?% gettext('Finnish:') %?></h5></td>
 			<td class="col_value">Rolf Ahrenberg</td>
 		</tr>
 		<tr class="row_even">
-			<td class="col_label"><h5><%! French: !%></h5></td>
-			<td class="col_value"><!-- <%! At the moment unmaintained, former translations by: !%> -->Trois Six (also at vdrportal.de), map, lobotomise, bads, Mickaël Nival</td>
+			<td class="col_label"><h5><?% gettext('French:') %?></h5></td>
+			<td class="col_value"><!-- <?% gettext('At the moment unmaintained, former translations by:') %?> -->Trois Six (also at vdrportal.de), map, lobotomise, bads, Mickaël Nival</td>
 		</tr>
 		<tr class="row_even">
-			<td class="col_label"><h5><%! German: !%></h5></td>
+			<td class="col_label"><h5><?% gettext('German:') %?></h5></td>
 			<td class="col_value">Andreas Mair</td>
 		</tr>
 		<tr class="row_even">
-			<td class="col_label"><h5><%! Spanish: !%></h5></td>
+			<td class="col_label"><h5><?% gettext('Spanish:') %?></h5></td>
 			<td class="col_value">R&uuml;diger Jung</td>
 		</tr>
 		<tr class="row_even">
-			<td class="col_label"><h5><%! Russian: !%></h5></td>
+			<td class="col_label"><h5><?% gettext('Russian:') %?></h5></td>
 			<td class="col_value">Oleg Roitburd and Allrussian-forum translation team</td>
 		</tr>
 	</table>
 
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 		<tr class="heading">
-			<td colspan="2"><h2><%! Informations !%></h2></td>
+			<td colspan="2"><h2><?% gettext('Informations') %?></h2></td>
 		</tr>
 		<tr class="row_even">
-			<td class="col_label"><h5><%! VDRAdmin-AM version: !%></h5></td>
-			<td class="col_value"><tmpl_var myversion></td>
+			<td class="col_label"><h5><?% gettext('VDRAdmin-AM version:') %?></h5></td>
+			<td class="col_value"><?% myversion %?></td>
 		</tr>
 		<tr class="row_even">
-			<td class="col_label"><h5><%! VDR version: !%></h5></td>
-			<td class="col_value"><tmpl_var vdrversion></td>
+			<td class="col_label"><h5><?% gettext('VDR version:') %?></h5></td>
+			<td class="col_value"><?% vdrversion %?></td>
+		</tr>
+		<tr class="row_even">
+			<td class="col_label" valign="top"><h5><?% gettext('Supported features in VDR:') %?></h5></td>
+			<td class="col_value">
+				<?% IF features.STREAMDEV %?>
+					<img src="bilder/poempl_gruen.png" alt="" align="middle" border="0"/>
+				<?% ELSE %?>
+					<img src="bilder/poempl_rot.png" alt="" align="middle" border="0"/>
+				<?% END %?>
+				&nbsp;<?% gettext('LiveTV Streaming (<a href="http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin" target="_blank">Streamdev Plugin</a>)') %?><br />
+				<?% IF features.REC_RENAME %?>
+					<img src="bilder/poempl_gruen.png" alt="" align="middle" border="0"/>
+				<?% ELSE %?>
+					<img src="bilder/poempl_rot.png" alt="" align="middle" border="0"/>
+				<?% END %?>
+				&nbsp;<?% gettext('Rename Recordings (<a href="http://www.saunalahti.fi/~rahrenbe/vdr/patches/" target="_blank">Liemikuutio Patch</a>)') %?><br />
+			</td>
 		</tr>
 	</table>
 
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="help" class="group">
 		<tr class="heading">
-			<td><h2><%! Getting Help and Reporting Bugs !%></h2></td>
+			<td><h2><?% gettext('Getting Help and Reporting Bugs') %?></h2></td>
 		</tr>
 		<tr class="row_even">
 			<td>
 				<ul>
-					<li><%! If you need help please first try to use the online help you'll find on some pages. You can access it by clicking <img src="bilder/help.png" alt="" />. !%></li>
-					<li><%! If this doesn't provide the information you need you can try to get help at <a href="http://www.vdrportal.de" target="_blank">VDR-Portal</a> if you understand German language. Please use the announcement thread if possible, search for: !%> &quot;[ANNOUNCE] VDRAdmin-AM-<tmpl_var myversion>&quot;</li>
-					<li><%! If you think you have found a bug please check that it's a new one and report it in the <a href="http://www.vdr-developer.org/mantisbt/main_page.php" target="_blank">VDRAdmin-AM BugTracking system</a>. !%></li>
+					<li><?% gettext('If you need help please first try to use the online help you\'ll find on some pages. You can access it by clicking <img src="bilder/help.png" alt="" />.') %?></li>
+					<li><?% gettext('If this doesn\'t provide the information you need you can try to get help at <a href="http://www.vdrportal.de" target="_blank">VDR-Portal</a> if you understand German language. Please use the announcement thread if possible, search for:') %?> &quot;[ANNOUNCE] VDRAdmin-AM-<?% myversion %?>&quot;</li>
+					<li><?% gettext('If you think you have found a bug please check that it\'s a new one and report it in the <a href="http://www.vdr-developer.org/mantisbt/main_page.php" target="_blank">VDRAdmin-AM BugTracking system</a>.') %?></li>
+				</ul>
 			</td>
 		</tr>
 	</table>

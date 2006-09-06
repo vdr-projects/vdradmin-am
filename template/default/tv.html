@@ -2,18 +2,18 @@
 <html>
 
 <head>
-	<title>VDRAdmin-AM - <%! TV !%> (<tmpl_var host>)</title>
-	<meta http-equiv="Content-Type" content="text/html;charset=<%! ISO-8859-1 !%>" />
+	<title>VDRAdmin-AM - <?% gettext('TV') %?> (<?% host %?>)</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<script type="text/javascript" language="JavaScript">
 		<!--
 		var timeout;
-		var interval = <tmpl_var interval>;
-		var size = "<tmpl_var size>";
+		var interval = <?% interval %?>;
+		var size = "<?% size %?>";
 
 		function switch_by_select() {
 			for (i = 0; i < document.forms[0].channel.length; ++i)
@@ -33,7 +33,7 @@
 
 		function WebcamUpdate() {
 			Before = new Date();
-			NewPicUrl = "<tmpl_var url>&size=" + size + "&rand=" + Before.getTime();
+			NewPicUrl = "<?% url %?>&size=" + size + "&interval=" + interval + "&rand=" + Before.getTime();
 			document.Bild.src = NewPicUrl;
 			if(interval > 0) {
 				After = new Date();
@@ -68,44 +68,44 @@
 </head>
 
 <body onLoad="window.focus();WebcamUpdate()" id="tv"> 
-	<form action="<tmpl_var url>" method="get" name="liveform">
-<tmpl_unless tv_only>
+	<form action="<?% url %?>" method="get" name="liveform">
+<?% UNLESS tv_only %?>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
-				<td class="col_title"><h1><%! TV !%></h1></td>
+				<td class="col_title"><h1><?% gettext('TV') %?></h1></td>
 				<td class="col_other">
-					<h5><%! Interval: !%></h5>
+					<h5><?% gettext('Interval:') %?></h5>
 					<select name="Seconds" class="submit" onChange="v_changeInterval(this.options[this.selectedIndex].value)">
-						<option value="0"><%! off !%></option>
-						<option value="1" <tmpl_if expr="interval == 1">selected="selected"</tmpl_if>> 1 <%! sec. !%></option>
-						<option value="2" <tmpl_if expr="interval == 2">selected="selected"</tmpl_if>> 2 <%! sec. !%></option>
-						<option value="3" <tmpl_if expr="interval == 3">selected="selected"</tmpl_if>> 3 <%! sec. !%></option>
-						<option value="5" <tmpl_if expr="interval == 5">selected="selected"</tmpl_if>> 5 <%! sec. !%></option>
-						<option value="10" <tmpl_if expr="interval == 10">selected="selected"</tmpl_if>>10 <%! sec. !%></option>
-						<option value="30" <tmpl_if expr="interval == 30">selected="selected"</tmpl_if>>30 <%! sec. !%></option>
-						<option value="60" <tmpl_if expr="interval == 60">selected="selected"</tmpl_if>>60 <%! sec. !%></option>
+						<option value="0"><?% gettext('off') %?></option>
+						<option value="1" <?% IF interval == 1 %?>selected="selected"<?% END %?>> 1 <?% gettext('sec.') %?></option>
+						<option value="2" <?% IF interval == 2 %?>selected="selected"<?% END %?>> 2 <?% gettext('sec.') %?></option>
+						<option value="3" <?% IF interval == 3 %?>selected="selected"<?% END %?>> 3 <?% gettext('sec.') %?></option>
+						<option value="5" <?% IF interval == 5 %?>selected="selected"<?% END %?>> 5 <?% gettext('sec.') %?></option>
+						<option value="10" <?% IF interval == 10 %?>selected="selected"<?% END %?>>10 <?% gettext('sec.') %?></option>
+						<option value="30" <?% IF interval == 30 %?>selected="selected"<?% END %?>>30 <?% gettext('sec.') %?></option>
+						<option value="60" <?% IF interval == 60 %?>selected="selected"<?% END %?>>60 <?% gettext('sec.') %?></option>
 					</select>
-					<input type="button" class="submit" name="livebild" value='<%! G !%>' title="<%! Grab the picture! !%>" onClick="WebcamUpdate()" />
-					&nbsp;&nbsp;<h5><%! Size: !%></h5>
+					<input type="button" class="submit" name="livebild" value='<?% gettext('G') %?>' title="<?% gettext('Grab the picture!') %?>" onClick="WebcamUpdate()" />
+					&nbsp;&nbsp;<h5><?% gettext('Size:') %?></h5>
 					<select name="Size" class="submit" onChange="v_changeSize(this.options[this.selectedIndex].value)">
-						<option value="full" <tmpl_if expr="size eq 'full'">selected="selected"</tmpl_if>>1:1</option>
-						<option value="half" <tmpl_if expr="size eq 'half'">selected="selected"</tmpl_if>>1:2</option>
-						<option value="quarter" <tmpl_if expr="size eq 'quarter'">selected="selected"</tmpl_if>>1:4</option>
+						<option value="full" <?% IF size == 'full' %?>selected="selected"<?% END %?>>1:1</option>
+						<option value="half" <?% IF size == 'half' %?>selected="selected"<?% END %?>>1:2</option>
+						<option value="quarter" <?% IF size == 'quarter' %?>selected="selected"<?% END %?>>1:4</option>
 					</select>
-					<input type="button" class="submit" name="livebild" value='<%! G !%>' title="<%! Grab the picture! !%>" onClick="WebcamUpdate()" />
+					<input type="button" class="submit" name="livebild" value='<?% gettext('G') %?>' title="<?% gettext('Grab the picture!') %?>" onClick="WebcamUpdate()" />
 				</td>
-				<td align="right"><tmpl_unless new_win>[<a class="submit" href="javascript:tv_open();"><%! Open in separate window !%></a>]&nbsp;&nbsp;</tmpl_unless></td>
+				<td align="right"><?% UNLESS new_win %?>[<a class="submit" href="javascript:tv_open();"><?% gettext('Open in separate window') %?></a>]&nbsp;&nbsp;<?% END %?></td>
 			</tr>
 		</table>
-</tmpl_unless>
+<?% END %?>
 
 		<table border="0" cellspacing="0" cellpadding="0" id="content">
 			<tr>
 				<td id="sect_tv">
-					<img name="Bild" src="<tmpl_var url>" border="1" hspace="2" vspace="2" class="tv" alt="" />
+					<img name="Bild" src="<?% url %?>" border="1" hspace="2" vspace="2" class="tv" alt="" />
 					<img src="bilder/spacer.gif" name="switchimage" width="2" height="1" alt="" />
 				</td>
-<tmpl_unless tv_only>
+<?% UNLESS tv_only %?>
 				<td id="sect_rc">
 					<table width="200" border="0" cellspacing="0" cellpadding="0">
 						<tr>
@@ -195,15 +195,15 @@
 				</td>
 				<td id="sect_channels">
 					<select name="channel" size="32" onchange="javascript:switch_channel('./vdradmin.pl?aktion=tv_switch&amp;channel=' + encodeURIComponent(this.options[this.selectedIndex].value));">
-<tmpl_loop channels>
-						<option value="<tmpl_var vdr_id>" <tmpl_if cur>selected</tmpl_if>><tmpl_var name></option>
-</tmpl_loop>
+<?% FOREACH chan = channels %?>
+						<option value="<?% chan.vdr_id %?>" <?% IF chan.cur %?>selected="selected"<?% END %?>><?% chan.name | html %?></option>
+<?% END %?>
 					</select>
 <!--					<a class="submit" href="javascript:switch_by_select();">Switch</a>-->
 				</td>
-</tmpl_unless>
-<tmpl_unless tv_only>
-</tmpl_unless>
+<?% END %?>
+<?% UNLESS tv_only %?>
+<?% END %?>
 			</tr>
 		</table>
 	</form>

@@ -2,20 +2,20 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title><tmpl_var title></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title><?% title %?></title>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 </head>
 
 <body id="prog_detail" onload="window.focus()">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 		<tr class="heading">
 			<td class="col_content">
-				<span class="channel_name"><tmpl_var channel_name></span><tmpl_if date><span class="date_long"><tmpl_var date></span><span class="time_duration"><span class="time_start"><tmpl_var start></span> - <span class="time_stop"><tmpl_var stop></span></span><tmpl_if vps><span class="time_vps"><%! VPS !%> <tmpl_var vps></span></tmpl_if></tmpl_if>
+				<span class="channel_name"><?% channel_name %?></span><?% IF date %?><span class="date_long"><?% date %?></span><span class="time_duration"><span class="time_start"><?% start %?></span> - <span class="time_stop"><?% stop %?></span></span><?% IF vps %?><span class="time_vps"><?% gettext('VPS') %?> <?% vps %?></span><?% END %?><?% END %?>
 			</td>
 		</tr>
 		<tr class="row_even">
@@ -24,68 +24,54 @@
 					<tr>
 						<td class="col_buttons">
 							<span class="action close">
-								<a href="javascript:window.close()"><img src="bilder/close.png" border="0" alt="<%! close !%>" onmouseover="window.status='<%! close !%>';return true" title="<%! close !%>" /></a>
+								<a href="javascript:window.close()"><img src="bilder/close.png" border="0" alt="<?% gettext('close') %?>" onmouseover="window.status='<?% gettext('close') %?>';return true" title="<?% gettext('close') %?>" /></a>
 							</span>
-							<tmpl_if date>
-								<tmpl_if switchurl>
+							<?% IF date %?>
+								<?% IF switchurl %?>
 									<span class="action switch">
-										<a href="javascript:callurl('<tmpl_var switchurl>')"><img src="bilder/view.png" border="0" alt="<%! view !%>" onmouseover="window.status='<%! view !%>';return true" title="<%! view !%>" /></a>
+										<a href="javascript:callurl('<?% switchurl %?>')"><img src="bilder/view.png" border="0" alt="<?% gettext('view') %?>" onmouseover="window.status='<?% gettext('view') %?>';return true" title="<?% gettext('view') %?>" /></a>
 									</span>
-								</tmpl_if>
-								<tmpl_if recurl>
+								<?% END %?>
+								<?% IF recurl %?>
 									<span class="action record">
-										<a href="javascript:void(opener.location.href='<tmpl_var recurl>');window.close()"><img src="bilder/rec_button.png" border="0" alt="<%! record !%>" onmouseover="window.status='<%! record !%>';return true" title="<%! record !%>" /></a>
+										<a href="javascript:void(opener.location.href='<?% recurl %?>');window.close()"><img src="bilder/rec_button.png" border="0" alt="<?% gettext('record') %?>" onmouseover="window.status='<?% gettext('record') %?>';return true" title="<?% gettext('record') %?>" /></a>
 									</span>
-								</tmpl_if>
+								<?% END %?>
 								<span class="action repeatings">
-									<a href="vdradmin.pl?search=<tmpl_var find_title>&amp;aktion=prog_summary&amp;submit=go11" target="main"><img src="bilder/find.png" border="0" alt="<%! search !%>" onmouseover="window.status='<%! search !%>';return true" title="<%! search !%>" /></a>
+									<a href="vdradmin.pl?search=<?% find_title %?>&amp;aktion=prog_summary&amp;submit=go11" target="main"><img src="bilder/find.png" border="0" alt="<?% gettext('search') %?>" onmouseover="window.status='<?% gettext('search') %?>';return true" title="<?% gettext('search') %?>" /></a>
 								</span>
-							</tmpl_if>
-							<tmpl_if imdburl>
+							<?% END %?>
+							<?% IF imdburl %?>
 								<span class="action imdb">
-									<a href="<tmpl_var imdburl>" target="_blank" title="<%! Lookup movie in the Internet-Movie-Database (IMDb) !%>"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='IMDb';return true" title="IMDb" /></a>
+									<a href="<?% imdburl %?>" target="_blank" title="<?% gettext('Lookup movie in the Internet-Movie-Database (IMDb)') %?>"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='IMDb';return true" title="IMDb" /></a>
 								</span>
-							</tmpl_if>
+							<?% END %?>
 						</td>
 						<td class="col_epg">
-							<div class="epg_title"><tmpl_var title></div>
-							<tmpl_if subtitle>
-								<div class="epg_subtitle"><tmpl_var subtitle></div>
-							</tmpl_if>
-							<div class="epg_summary"><tmpl_var text></div>
-							<tmpl_if video>
+							<div class="epg_title"><?% title %?></div>
+							<?% IF subtitle %?>
+								<div class="epg_subtitle"><?% subtitle %?></div>
+							<?% END %?>
+							<div class="epg_summary"><?% text %?></div>
+							<?% IF video %?>
 								<div class="epg_video">
-									<h4><%! Video tracks: !%></h4>
-									<tmpl_var video>
-									<!--
-									<tmpl_loop videox>
-										<h5><%! Language: !%></h5> <tmpl_var lang> <h5><%! Format: !%></h5> <tmpl_var format><br />
-									</tmpl_loop>
-									-->
+									<h4><?% gettext('Video tracks:') %?></h4>
+									<?% video %?>
 								</div>
-							</tmpl_if>
-							<tmpl_if audio>
+							<?% END %?>
+							<?% IF audio %?>
 								<div class="epg_audio">
-									<h4><%! Audio tracks: !%></h4>
-									<tmpl_var audio>
-									<!--
-									<tmpl_loop audiox>
-										<h5><%! Language: !%></h5> <tmpl_var lang>
-										<tmpl_if descr>
-											<h5><%! Description: !%></h5> <tmpl_var descr>
-										</tmpl_if>
-										<br />
-									</tmpl_loop>
-									-->
+									<h4><?% gettext('Audio tracks:') %?></h4>
+									<?% audio %?>
 								</div>
-							</tmpl_if>
-							<tmpl_if epgimages>
+							<?% END %?>
+							<?% IF epgimages %?>
 								<div class="epg_images">
-									<tmpl_loop epgimages>
-										<img src="<tmpl_var image>" alt=""/>
-									</tmpl_loop>
+									<?% FOREACH ei = epgimages %?>
+										<img src="<?% ei.image %?>" alt=""/>
+									<?% END %?>
 								</div>
-							</tmpl_if>
+							<?% END %?>
 						</td>
 					</tr>
 				</table>

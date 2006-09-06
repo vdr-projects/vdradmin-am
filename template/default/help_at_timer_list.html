@@ -2,46 +2,46 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title><%! AutoTimer !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title><?% gettext('AutoTimer') %?></title>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 </head>
 
 <body id="at_timer_list" class="help" onload="window.focus()">
 <form onsubmit="return false;" action="help_at_timer_list.html">
 	<input type="hidden" name="aktion" value="show_help"/>
-	<input type="hidden" name="area" value="<tmpl_var area>"/>
+	<input type="hidden" name="area" value="<?% area %?>"/>
 
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="help" class="group">
 		<tr class="heading">
-			<td><h2><%! AutoTimer !%></h2></td>
+			<td><h2><?% gettext('AutoTimer') %?></h2></td>
 		</tr>
 		<tr class="row_even">
 			<td>
-				<%! <p>Here you will find a listing of automatic timers (AutoTimer) known to VDRAdmin-AM.</p>
-				<p>The list shows some information on AutoTimers. You can change the list's sorting by clicking the columns heading.</p>
+				<?% gettext('<p>Here you will find a listing of automatic timers (AutoTimer) known to VDRAdmin-AM.</p>
+				<p>The list shows some information on AutoTimers. You can change the list\'s sorting by clicking the columns heading.</p>
 				<p>For each AutoTimer you have the following options:
 					<dl>
 						<dt>Set its state</dt>
 						<dd>By clicking on "Yes" or "No" in the "Active" column to toggle the activity.</dd>
 						<dt>Quickly view its priority and lifetime</dt>
-						<dd>By pointing the mouse cursor to the AutoTimer's title.</dd>
+						<dd>By pointing the mouse cursor to the AutoTimer\'s title.</dd>
 						<dt>Edit the AutoTimer</dt>
 						<dd>You can edit an AutoTimer by clicking <img src="bilder/edit.png" alt="edit" />.</dd>
 						<dt>Delete the AutoTimer</dt>
 						<dd>To delete an AutoTimer you click <img src="bilder/delete.png" alt="delete" />.</dd>
 					</dl>
 				</p>
-				<p>Each AutoTimer's state is indicated by differently coloured images:<br />
+				<p>Each AutoTimer\'s state is indicated by differently coloured images:<br />
 					<img src="bilder/poempl_gruen.png" alt="on" align="middle" /> AutoTimer is OK and will automatically program matching broadcasts.<br />
 					<img src="bilder/poempl_grau.png" alt="inactive" align="middle" /> AutoTimer is not active.
 				</p>
 				<p>In addition to these functions you can add a new AutoTimer by clicking <input type="submit" class="submit" value="New AutoTimer"/> at the top and you can delete a number of AutoTimers at once by checking the box in the last column of those timers and clicking <input type="submit" class="submit" value="Delete Selected AutoTimers"/>.</p>
-				<p>Click <input type="submit" class="submit" value="Force Update"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and check for matching AutoTimers.</p> !%>
+				<p>Click <input type="submit" class="submit" value="Force Update"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and check for matching AutoTimers.</p>') %?>
 			</td>
 		</tr>
 	</table>

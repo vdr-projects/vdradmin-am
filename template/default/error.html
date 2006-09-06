@@ -2,12 +2,12 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>"/>
-	<title><%! Error! !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>"/>
+	<title><?% gettext('Error!') %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css"/>
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css"/>
-	</tmpl_if>
+	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 </head>
 
@@ -15,7 +15,7 @@
 	<div align="center">
 		<img src="bilder/sauerei.gif" height="230" width="177" border="0" alt="" />
 		<br/>
-		<h2><tmpl_var name="error"></h2>
+		<h2><?% error %?></h2>
 	</div>
 </body>
 

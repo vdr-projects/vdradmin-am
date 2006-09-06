@@ -4,6 +4,30 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-09-06: 3.4.7beta
+- Fixed: Smaller bugs (see ChangeLog).
+- Changed: Hide select boxes for templates and skins if it contains only a single choice.
+- Fixed: Another fix for the refering pages problem(s).
+- Changed: Hide "AutoTimer" menu item unless $FEATURE{AUTOTIMER} is set.
+- Changed: Use date instead of empty subtitle in timers programed by AutoTimer with activated "Episode" option.
+- Fixed: Don't show outdated broadcast as search result.
+- Added: Display warning message if lists is empty.
+- Added: UTF8 locales patch by Zoolook (see Bug #124).
+- Fixed: AutoTimer test feature didn't find broadcasts if they were in vdradmind.done.
+- Removed: HTML::Template dependency.
+- Changed: Only use Template-Toolkit's Template.pm.
+- Fixed: Hide "switch" button in prog_summary2 if broadcast is not running (Based on suggestion by Hardy Flor).
+- Fixed: Initial display of rec_list was empty.
+- Added: New PLAY and EDIT actions in rec_list.
+- Added: Remember selected size and interval in TV.
+- Added: check for features available with VDR's SVDRP, disable missing ones and show them in about.html (ATM used for RENR).
+- Changed: handling of sorting in rec_list (should always keep the current sorting).
+- Changed: handling of sorting in at_timer_list (should always keep the current sorting).
+- New: option to autosave config on exit (also saves sorting state in lists and viewmode in prog_summary).
+- Added: Czech translation (Submitted by Karel Borkovec).
+- Changed: handling of sorting in timer_list (should always keep the current sorting).
+- Changed: Moved favicon.ico from a template's skin folder to the template's main folder.
+
 2006-07-14: 3.4.6
 - No changes.
 

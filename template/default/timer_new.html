@@ -2,12 +2,12 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title>VDRAdmin-AM - <tmpl_if newtimer><%! Create New Timer !%><tmpl_else><%! Edit Timer !%></tmpl_if></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title>VDRAdmin-AM - <?% IF newtimer %?><?% gettext('Create New Timer') %?><?% ELSE %?><?% gettext('Edit Timer') %?><?% END %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<script type="text/javascript" language="JavaScript1.2">
 	<!--
@@ -40,127 +40,127 @@
 	</script>
 </head>
 
-<body onload='eCheckbox("<tmpl_var dor>")' id="timer_new">
-	<form action="<tmpl_var url>" method="get" name="form">
+<body onload='eCheckbox("<?% dor %?>")' id="timer_new">
+	<form action="<?% url %?>" method="get" name="form">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_title">
-					<h1><tmpl_if newtimer><%! Create New Timer !%><tmpl_else><%! Edit Timer !%></tmpl_if></h1>
+					<h1><?% IF newtimer %?><?% gettext('Create New Timer') %?><?% ELSE %?><?% gettext('Edit Timer') %?><?% END %?></h1>
 				</td>
-<tmpl_if name="help_url">
+<?% IF help_url %?>
 				<td class="col_help">
-					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.png" border="0" alt="help" title="<%! Help !%>" /></a>
+					<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help" title="<?% gettext('Help') %?>" /></a>
 				</td>
-</tmpl_if>
+<?% END %?>
 			</tr>
 		</table>
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Timer Active: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Timer Active:') %?></h5></td>
 				<td class="col_value">
-					<input type="radio" name="active" value="1" id="active_yes" <tmpl_if active>checked</tmpl_if> /><label for="active_yes"><%! Yes !%></label>
-					<input type="radio" name="active" value="0" id="active_no" <tmpl_unless active>checked</tmpl_unless> /><label for="active_no"><%! No !%></label>
+					<input type="radio" name="active" value="1" id="active_yes" <?% IF active %?>checked="checked"<?% END %?> /><label for="active_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="active" value="0" id="active_no" <?% UNLESS active %?>checked="checked"<?% END %?> /><label for="active_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! AutoTimer Checking: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('AutoTimer Checking:') %?></h5></td>
 				<td class="col_value">
-					<input type="hidden" name="event_id" value="<tmpl_var event_id>"/>
-					<tmpl_if expr="at_epg == 1">
-						<input type="radio" name="autotimer" value="2" id="event_id" <tmpl_if expr="autotimer == 2">checked</tmpl_if> /><label for="event_id"><%! Transmission Identification !%> (<tmpl_var event_id>)</label>
-					</tmpl_if>
-					<input type="radio" name="autotimer" value="1" id="event_time" <tmpl_if expr="autotimer == 1">checked</tmpl_if> /><label for="event_time"><%! Time !%></label>
-					<input type="radio" name="autotimer" value="0" id="event_off" <tmpl_if expr="autotimer == 0">checked</tmpl_if> /><label for="event_off"><%! off !%></label>
+					<input type="hidden" name="event_id" value="<?% event_id %?>"/>
+					<?% IF at_epg == 1 %?>
+						<input type="radio" name="autotimer" value="2" id="event_id" <?% IF autotimer == 2 %?>checked="checked"<?% END %?> /><label for="event_id"><?% gettext('Transmission Identification') %?> (<?% event_id %?>)</label>
+					<?% END %?>
+					<input type="radio" name="autotimer" value="1" id="event_time" <?% IF autotimer == 1 %?>checked="checked"<?% END %?> /><label for="event_time"><?% gettext('Time') %?></label>
+					<input type="radio" name="autotimer" value="0" id="event_off" <?% IF autotimer == 0 %?>checked="checked"<?% END %?> /><label for="event_off"><?% gettext('off') %?></label>
 				</td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Channel: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Channel:') %?></h5></td>
 				<td class="col_value">
 					<select name="channel" class="submit">
-<tmpl_loop name="channels">
-						<option value="<tmpl_var vdr_id>" <tmpl_if current>selected</tmpl_if>><tmpl_var name="name" escape="html"></option>
-</tmpl_loop>
+<?% FOREACH chan = channels %?>
+						<option value="<?% chan.vdr_id %?>" <?% IF chan.current %?>selected="selected"<?% END %?>><?% chan.name | html %?></option>
+<?% END %?>
 					</select>
 				</td>
 			</tr>
 			<tr class="row_even">
-				<td valign="top" class="col_label"><h5><%! Day Of Recording: !%></h5></td>
+				<td valign="top" class="col_label"><h5><?% gettext('Day Of Recording:') %?></h5></td>
 				<td class="col_value">
-					<input type="text" name="dor" value="<tmpl_var dor>" size="20" />
+					<input type="text" name="dor" value="<?% dor %?>" size="20" />
 					<br />
-					<input onclick="cTimer(1)" type="checkbox" name="D0" value="1" id="wday_mon" /><label for="wday_mon"><%! Monday !%></label>
-					<input onclick="cTimer(2)" type="checkbox" name="D1" value="1" id="wday_tue" /><label for="wday_tue"><%! Tuesday !%></label>
-					<input onclick="cTimer(3)" type="checkbox" name="D2" value="1" id="wday_wed" /><label for="wday_wed"><%! Wednesday !%></label>
-					<input onclick="cTimer(4)" type="checkbox" name="D3" value="1" id="wday_thu" /><label for="wday_thu"><%! Thursday !%></label>
-					<input onclick="cTimer(5)" type="checkbox" name="D4" value="1" id="wday_fri" /><label for="wday_fri"><%! Friday !%></label>
-					<input onclick="cTimer(6)" type="checkbox" name="D5" value="1" id="wday_sat" /><label for="wday_sat"><%! Saturday !%></label>
-					<input onclick="cTimer(7)" type="checkbox" name="D6" value="1" id="wday_sun" /><label for="wday_sun"><%! Sunday !%></label>
+					<input onclick="cTimer(1)" type="checkbox" name="D0" value="1" id="wday_mon" /><label for="wday_mon"><?% gettext('Monday') %?></label>
+					<input onclick="cTimer(2)" type="checkbox" name="D1" value="1" id="wday_tue" /><label for="wday_tue"><?% gettext('Tuesday') %?></label>
+					<input onclick="cTimer(3)" type="checkbox" name="D2" value="1" id="wday_wed" /><label for="wday_wed"><?% gettext('Wednesday') %?></label>
+					<input onclick="cTimer(4)" type="checkbox" name="D3" value="1" id="wday_thu" /><label for="wday_thu"><?% gettext('Thursday') %?></label>
+					<input onclick="cTimer(5)" type="checkbox" name="D4" value="1" id="wday_fri" /><label for="wday_fri"><?% gettext('Friday') %?></label>
+					<input onclick="cTimer(6)" type="checkbox" name="D5" value="1" id="wday_sat" /><label for="wday_sat"><?% gettext('Saturday') %?></label>
+					<input onclick="cTimer(7)" type="checkbox" name="D6" value="1" id="wday_sun" /><label for="wday_sun"><?% gettext('Sunday') %?></label>
 				</td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Start Time: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Start Time:') %?></h5></td>
 				<td class="col_value">
-					<input type="text" name="starth" value="<tmpl_var starth>" size="2" maxlength="2" />
+					<input type="text" name="starth" value="<?% starth %?>" size="2" maxlength="2" />
 					<b>&nbsp;:&nbsp;</b>
-					<input type="text" name="startm" value="<tmpl_var startm>" size="2" maxlength="2" />
-					&nbsp;<%! o'clock !%>
-					<tmpl_if bstart>
-						(<%! Buffer: !%> <tmpl_var bstart> <%! minutes !%>)
-					</tmpl_if>
+					<input type="text" name="startm" value="<?% startm %?>" size="2" maxlength="2" />
+					&nbsp;<?% gettext('o\'clock') %?>
+					<?% IF bstart %?>
+						(<?% gettext('Buffer:') %?> <?% bstart %?> <?% gettext('minutes') %?>)
+					<?% END %?>
 				</td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! End Time: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('End Time:') %?></h5></td>
 				<td class="col_value">
-					<input type="text" name="stoph" value="<tmpl_var stoph>" size="2" maxlength="2" />
+					<input type="text" name="stoph" value="<?% stoph %?>" size="2" maxlength="2" />
 					<b>&nbsp;:&nbsp;</b>
-					<input type="text" name="stopm" value="<tmpl_var stopm>" size="2" maxlength="2" />
-					&nbsp;<%! o'clock !%>
-					<tmpl_if bstop>
-						(<%! Buffer: !%> <tmpl_var bstop> <%! minutes !%>)
-					</tmpl_if>
+					<input type="text" name="stopm" value="<?% stopm %?>" size="2" maxlength="2" />
+					&nbsp;<?% gettext('o\'clock') %?>
+					<?% IF bstop %?>
+						(<?% gettext('Buffer:') %?> <?% bstop %?> <?% gettext('minutes') %?>)
+					<?% END %?>
 				</td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Use VPS: !%></h5></td>
-				<td class="col_value"><input type="checkbox" name="vps" value="1" <tmpl_if vps>checked</tmpl_if> /></td>
+				<td class="col_label"><h5><?% gettext('Use VPS:') %?></h5></td>
+				<td class="col_value"><input type="checkbox" name="vps" value="1" <?% IF vps %?>checked="checked"<?% END %?> /></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Priority: !%></h5></td>
-				<td class="col_value"><input type="text" name="prio" value="<tmpl_var prio>" size="2" maxlength="2" /></td>
+				<td class="col_label"><h5><?% gettext('Priority:') %?></h5></td>
+				<td class="col_value"><input type="text" name="prio" value="<?% prio %?>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Lifetime: !%></h5></td>
-				<td class="col_value"><input type="text" name="lft" value="<tmpl_var lft>" size="2" maxlength="2" /></td>
+				<td class="col_label"><h5><?% gettext('Lifetime:') %?></h5></td>
+				<td class="col_value"><input type="text" name="lft" value="<?% lft %?>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Title of Recording: !%></h5></td>
-				<td class="col_value"><input type="text" name="title" value="<tmpl_var title>" size="80" /></td>
+				<td class="col_label"><h5><?% gettext('Title of Recording:') %?></h5></td>
+				<td class="col_value"><input type="text" name="title" value="<?% title %?>" size="80" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label" valign="top"><h5><%! Summary: !%></h5><h6>(<%! readonly !%>)</h6></td>
-				<td class="col_value"><textarea name="summary" rows="6" cols="80" readonly="readonly"><tmpl_var summary></textarea></td>
+				<td class="col_label" valign="top"><h5><?% gettext('Summary:') %?></h5><h6>(<?% gettext('readonly') %?>)</h6></td>
+				<td class="col_value"><textarea name="summary" rows="6" cols="80" readonly="readonly"><?% summary %?></textarea></td>
 			</tr>
-<tmpl_if pattern>
+<?% IF pattern %?>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! Timer has been set by AutoTimer pattern: !%></h5></td>
-				<td class="col_value"><tmpl_var pattern></td>
+				<td class="col_label"><h5><?% gettext('Timer has been set by AutoTimer pattern:') %?></h5></td>
+				<td class="col_value"><?% pattern %?></td>
 			</tr>
-</tmpl_if>
+<?% END %?>
 		</table>
 
 		<div id="buttons">
-			<input type="submit" class="submit" name="save" value="<%! Save !%>" />
-			<input type="submit" class="submit" name="exit" value="<%! Cancel !%>" />
+			<input type="submit" class="submit" name="save" value="<?% gettext('Save') %?>" />
+			<input type="submit" class="submit" name="exit" value="<?% gettext('Cancel') %?>" />
 		</div>
 		<input type="hidden" name="aktion" value="timer_add" /> 
-		<tmpl_if referer>
-			<input type="hidden" name="referer" value="<tmpl_var referer>" />
-		</tmpl_if>
-		<tmpl_if timer_id>
-			<input type="hidden" name="timer_id" value="<tmpl_var timer_id>" /> 
-		</tmpl_if>
+		<?% IF referer %?>
+			<input type="hidden" name="referer" value="<?% referer %?>" />
+		<?% END %?>
+		<?% IF timer_id %?>
+			<input type="hidden" name="timer_id" value="<?% timer_id %?>" /> 
+		<?% END %?>
 	</form>
 </body>
 

@@ -1,0 +1,465 @@
+2006-09-06  amair
+
+	* HISTORY, po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po,
+	  po/nl.po, po/ru.po, po/vdradmin.pot:
+
+	Updated for v3.4.7beta release.
+
+2006-09-06  amair
+
+	* contrib/user.css.example:
+
+	Added more examples.
+
+2006-09-06  amair
+
+	* template/default/style.css:
+
+	Hilight links in about and help.
+
+2006-09-06  amair
+
+	* vdradmind.pl:
+
+	Encode quotes in channel name in prog_timeline.
+
+2006-09-04  amair
+
+	* template/default/about.html:
+
+	Fixed forgotten <tmpl_var ...> statements.
+	Changed the way missing and available features are displayed.
+
+2006-09-04  amair
+
+	* template/default/config.html:
+
+	Hide select boxes for templates and skins if it contains only a single choice.
+
+2006-09-04  amair
+
+	* vdradmind.pl:
+
+	Another fix for the refering pages problem(s).
+
+2006-09-01  amair
+
+	* template/default/navigation.html:
+
+	Hide "AutoTimer" menu item unless $FEATURE{AUTOTIMER} is set.
+
+2006-09-01  amair
+
+	* vdradmind.pl, template/default/config.html:
+
+	Changed $FEAT_something to $FEATURES{something}.
+	Made %CONFIG and %FEATURES available for every template.
+
+2006-09-01  amair
+
+	* tools/tmplgettext:
+
+	Fix problems with text extraction in prog_timeline.html.
+
+2006-09-01  amair
+
+	* template/default/about.html, template/default/at_timer_new.html,
+	  template/default/config.html, template/default/error.html,
+	  template/default/index.html, template/default/navigation.html,
+	  template/default/noauth.html, template/default/prog_detail.html,
+	  template/default/prog_list.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html,
+	  template/default/prog_timeline.html,
+	  template/default/timer_list.html, template/default/tv.html:
+
+	Use gettext('...') in templates everywere.
+
+2006-08-30  amair
+
+	* vdradmind.pl:
+
+	Changed: Use date instead of empty subtitle in timers programed by AutoTimer with activated "Episode" option.
+	Fixed: Don't show outdated broadcast as search result.
+	Fixed: Don't purge AutoTimer done list if in test mode.
+
+2006-08-30  amair
+
+	* tools/tmplgettext:
+
+	Updated to new start/end tags for translations.
+
+2006-08-30  amair
+
+	* template/default/at_timer_list.html,
+	  template/default/prog_list.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html,
+	  template/default/prog_timeline.html,
+	  template/default/rec_list.html, template/default/timer_list.html:
+
+	Display warning message if lists is empty.
+
+2006-08-30  amair
+
+	* template/default/help_at_timer_new.html,
+	  template/default/help_config.html:
+
+	Added help for "Save settings on exit".
+
+2006-08-28  scop
+
+	* vdradmind.pl:
+
+	Include Auto-Submitted header in mails per RFC 3834.
+
+2006-08-27  scop
+
+	* vdradmind.pl:
+
+	Detach from STDIN when daemonizing, check fork() return value.
+
+2006-08-24  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Fixed: AutoTimer test feature didn't find broadcasts if they were in vdradmind.done.
+
+2006-08-22  amair
+
+	* HISTORY, vdradmind.pl, template/default/about.html,
+	  template/default/at_timer_list.html,
+	  template/default/at_timer_new.html, template/default/config.html,
+	  template/default/error.html,
+	  template/default/help_at_timer_list.html,
+	  template/default/help_at_timer_new.html,
+	  template/default/help_config.html, template/default/help_no.html,
+	  template/default/help_rec_list.html,
+	  template/default/help_timer_list.html,
+	  template/default/help_timer_new.html,
+	  template/default/index.html, template/default/navigation.html,
+	  template/default/noauth.html, template/default/noperm.html,
+	  template/default/prog_detail.html,
+	  template/default/prog_list.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html,
+	  template/default/prog_timeline.html, template/default/rc.html,
+	  template/default/rec_edit.html, template/default/rec_list.html,
+	  template/default/style.css, template/default/timer_list.html,
+	  template/default/timer_new.html, template/default/tv.html,
+	  template/default/vdr_cmds.html:
+
+	Changed: Only use Template-Toolkit's Template.pm.
+	Removed: HTML::Template dependency.
+
+2006-08-07  amair
+
+	* template/default/prog_summary2.html:
+
+	Only show switch button if broadcast is running.
+
+2006-08-07  amair
+
+	* vdradmind.pl:
+
+	Fix previous commit: streamurl != switchurl :(
+
+2006-08-07  amair
+
+	* vdradmind.pl:
+
+	Check for streamdev-client plugin and disable LiveTV streaming if absent.
+
+2006-08-07  amair
+
+	* make.sh:
+
+	Added UTF8 locales patch by Zoolook (see Bug #124).
+
+2006-08-06  scop
+
+	* template/default/at_timer_new.html,
+	  template/default/prog_list2.html, template/default/tv.html:
+
+	Escape channel names.
+
+2006-08-06  scop
+
+	* template/default/about.html, template/default/prog_timeline.html,
+	  vdradmind.pl:
+
+	XHTML validity fixes.
+
+2006-08-04  amair
+
+	* template/default/default/cut.png,
+	  template/default/default/play.png:
+
+	Added missing icons for PLAY and EDIT actions in rec_list.
+
+2006-07-28  scop
+
+	* template/default/at_timer_new.html, template/default/config.html,
+	  template/default/prog_list.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html,
+	  template/default/timer_list.html,
+	  template/default/timer_new.html, template/default/tv.html:
+
+	XHTML validity fixes.
+
+2006-07-28  amair
+
+	* .cvsignore, make.sh:
+
+	Added more files to .cvsignore.
+	Added "cl" target to make.sh.
+	Changed "dist" target to also call "cvs", "po" and "cl".
+
+2006-07-27  scop
+
+	* .cvsignore:
+
+	Ignore more generated files.
+
+2006-07-27  scop
+
+	* .cvsignore, make.sh:
+
+	Autogenerate ChangeLog from CVS.
+
+2006-07-26  scop
+
+	* vdradmind.pl:
+
+	Add (X)Emacs coding style settings.
+
+2006-07-24  amair
+
+	* HISTORY:
+
+	Updated.
+
+2006-07-24  amair
+
+	* vdradmind.pl, template/default/rec_list.html,
+	  template/default/style.css:
+
+	Fixed: Initial display of rec_list was empty.
+	Added: New PLAY and EDIT actions in rec_list.
+
+	Modified Files:
+	vdradmind.pl
+	template/default/rec_list.html
+	template/default/style.css
+
+2006-07-24  amair
+
+	* vdradmind.pl, template/default/tv.html:
+
+	Remember selected size and interval in TV.
+
+	Modified Files:
+	vdradmind.pl
+	template/default/tv.html
+
+2006-07-20  amair
+
+	* vdradmind.pl, template/default/about.html,
+	  template/default/rec_list.html:
+
+	Added check for features available with VDR's SVDRP, disable missing ones and show them in about.html (ATM used for RENR).
+
+	Modified Files:
+	vdradmind.pl
+	template/default/about.html
+	template/default/rec_list.html
+
+2006-07-20  amair
+
+	* INSTALL:
+
+	Added notes for CVS.
+
+2006-07-19  amair
+
+	* vdradmind.pl, template/default/config.html:
+
+	New option to autosave config on exit (also saves sorting state in lists and viewmode in prog_summary).
+
+	Modified Files:
+	vdradmind.pl
+	template/default/config.html
+
+2006-07-19  amair
+
+	* vdradmind.pl, template/default/rec_list.html:
+
+	Changed handling of sorting in rec_list (should always keep the current sorting).
+
+	Modified Files:
+	vdradmind.pl
+	template/default/rec_list.html
+
+2006-07-19  amair
+
+	* vdradmind.pl:
+
+	Fixed bug with latest "sorting" modification.
+
+2006-07-19  amair
+
+	* vdradmind.pl, template/default/at_timer_list.html:
+
+	Changed handling of sorting in at_timer_list (should always keep the current sorting).
+
+	Modified Files:
+	vdradmind.pl
+	template/default/at_timer_list.html
+
+2006-07-18  amair
+
+	* vdradmind.pl:
+
+	Removed unneeded sortby/desc param passing in timer_list.
+
+2006-07-18  amair
+
+	* CREDITS, README.translators, install.sh, make.sh, vdradmind.pl,
+	  po/cs.po, tools/update-po:
+
+	Added Czech translation (Submitted by Karel Borkovec).
+
+	Modified Files:
+	CREDITS
+	README.translators
+	install.sh
+	make.sh
+	vdradmind.pl
+	tools/update-po
+
+	Added Files:
+	po/cs.po
+
+2006-07-18  amair
+
+	* CREDITS:
+
+	Updated.
+
+2006-07-18  amair
+
+	* vdradmind.pl, template/default/timer_list.html:
+
+	Changed handling of sorting in timer_list (should always keep the current sorting).
+
+	Modified Files:
+	vdradmind.pl
+	template/default/timer_list.html
+
+2006-07-18  amair
+
+	* template/default/favicon.ico, template/default/index.html,
+	  template/default/default/favicon.ico:
+
+	Moved favicon.ico from a template's skin folder to the template's main folder.
+
+	Modified Files:
+	template/default/index.html
+
+	Added Files:
+	template/default/favicon.ico
+
+	Removed Files:
+	template/default/default/favicon.ico
+
+2006-07-14  tag v3_4_6
+
+2006-07-14  amair
+
+	* vdradmind.pl:
+
+	Release v3.4.6
+
+2006-07-14  amair
+
+	* HISTORY:
+
+	Release v3.4.6
+
+2006-07-14  amair
+
+	* make.sh:
+
+	Added comments.
+
+2006-07-14  amair
+
+	* po/de.po, po/es.po, po/fi.po, po/fr.po, po/nl.po, po/ru.po,
+	  po/vdradmin.pot:
+
+	Updated.
+
+	Modified Files:
+	po/de.po
+	po/es.po
+	po/fi.po
+	po/fr.po
+	po/nl.po
+	po/ru.po
+	po/vdradmin.pot
+
+2006-07-11  tag v3_4_6rc2a
+
+2006-07-11  amair
+
+	* HISTORY, template/default/at_timer_list.html,
+	  template/default/prog_list.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary2.html,
+	  template/default/rec_list.html, template/default/style.css,
+	  template/default/timer_list.html:
+
+	Added: Hilighting of row beneath mouse pointer in lists.
+
+	Modified Files:
+	HISTORY
+	template/default/at_timer_list.html
+	template/default/prog_list.html
+	template/default/prog_list2.html
+	template/default/prog_summary2.html
+	template/default/rec_list.html
+	template/default/style.css
+	template/default/timer_list.html
+
+2006-07-11  amair
+
+	* vdradmind.pl:
+
+	(Hopefully) fixed "unknown URL" bug if "record" is clicked in prog_detail called from list of repeats (Reported by anso20030).
+
+2006-07-11  tag v3_4_6rc2
+
+2006-07-11  amair
+
+	* po/de.po:
+
+	Fixed typo.
+
+2006-07-11  amair
+
+	* HISTORY, vdradmind.pl, template/default/prog_timeline.html,
+	  template/default/timeline.js:
+
+	Bugfixes in prog_timeline.
+
+	Modified Files:
+	template/default/timeline.js
+	template/default/prog_timeline.html
+	vdradmind.pl
+	HISTORY
+

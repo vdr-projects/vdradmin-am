@@ -2,186 +2,186 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>"/>
-	<title>VDRAdmin-AM - <tmpl_if newtimer><%! Add New AutoTimer !%><tmpl_else><%! Edit AutoTimer !%></tmpl_if></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>"/>
+	<title>VDRAdmin-AM - <?% IF newtimer %?><?% gettext('Add New AutoTimer') %?><?% ELSE %?><?% gettext('Edit AutoTimer') %?><?% END %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css"/>
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css"/>
-	</tmpl_if>
+	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 </head>
 
 <body id="at_timer_new">
-	<form action="<tmpl_var url>" method="get" name="FormName">
+	<form action="<?% url %?>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_title">
-					<h1><tmpl_if newtimer><%! Add New AutoTimer !%><tmpl_else><%! Edit AutoTimer !%></tmpl_if></h1>
+					<h1><?% IF newtimer %?><?% gettext('Add New AutoTimer') %?><?% ELSE %?><?% gettext('Edit AutoTimer') %?><?% END %?></h1>
 				</td>
-<tmpl_if name="help_url">
+<?% IF help_url %?>
 				<td class="col_help">
-					<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.png" border="0" alt="help" title="<%! Help !%>"/></a>
+					<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help" title="<?% gettext('Help') %?>"/></a>
 				</td>
-</tmpl_if>
+<?% END %?>
 			</tr>
 		</table>
 
 		<div id="content">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 				<tr class="row_even">
-					<td class="col_label"><h5><%! AutoTimer Active: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('AutoTimer Active:') %?></h5></td>
 					<td class="col_value">
 <?% IF active == 2 %?>
-	         	<input type="radio" name="active" value="1" id="active_yes" /><label for="active_yes"><%! Yes !%></label>
- 	        	<input type="radio" name="active" value="0" id="active_no" /><label for="active_no"><%! No !%></label>
-						<input type="radio" name="active" value="2" id="active_oneshot" checked /><label for="active_oneshot"><%! oneshot !%></label>
+	         	<input type="radio" name="active" value="1" id="active_yes" /><label for="active_yes"><?% gettext('Yes') %?></label>
+ 	        	<input type="radio" name="active" value="0" id="active_no" /><label for="active_no"><?% gettext('No') %?></label>
+						<input type="radio" name="active" value="2" id="active_oneshot" checked="checked" /><label for="active_oneshot"><?% gettext('oneshot') %?></label>
 <?% ELSE %?>
-						<input type="radio" name="active" value="1" id="active_yes" <tmpl_if active>checked</tmpl_if> /><label for="active_yes"><%! Yes !%></label>
-						<input type="radio" name="active" value="0" id="active_no" <tmpl_unless active>checked</tmpl_unless> /><label for="active_no"><%! No !%></label>
-						<input type="radio" name="active" value="2" id="active_oneshot" /><label for="active_oneshot"><%! oneshot !%></label>
+						<input type="radio" name="active" value="1" id="active_yes" <?% IF active %?>checked="checked"<?% END %?> /><label for="active_yes"><?% gettext('Yes') %?></label>
+						<input type="radio" name="active" value="0" id="active_no" <?% UNLESS active %?>checked="checked"<?% END %?> /><label for="active_no"><?% gettext('No') %?></label>
+						<input type="radio" name="active" value="2" id="active_oneshot" /><label for="active_oneshot"><?% gettext('oneshot') %?></label>
 <?% END %?>
 					</td>
 				</tr>
 				<tr class="row_odd">
-					<td class="col_label"><h5><%! Search Patterns: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('Search Patterns:') %?></h5></td>
 					<td class="col_value">
-						<input type="text" name="pattern" value="<tmpl_var pattern>" size="40" />
+						<input type="text" name="pattern" value="<?% pattern %?>" size="40" />
 					</td>
 				</tr>
 				<tr class="row_even">
-					<td class="col_label"><h5><%! Search in: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('Search in:') %?></h5></td>
 					<td class="col_value">
-						<input type="checkbox" name="title" value="1" id="searchin_title" <tmpl_if title>checked</tmpl_if> /><label for="searchin_title"><%! Title !%></label>
-						<input type="checkbox" name="subtitle" value="1" id="searchin_subtitle" <tmpl_if subtitle>checked</tmpl_if> /><label for="searchin_subtitle"><%! Subtitle !%></label>
-						<input type="checkbox" name="description" value="1" id="searchin_description" <tmpl_if description>checked</tmpl_if> /><label for="searchin_description"><%! Description !%></label>
+						<input type="checkbox" name="title" value="1" id="searchin_title" <?% IF title %?>checked="checked"<?% END %?> /><label for="searchin_title"><?% gettext('Title') %?></label>
+						<input type="checkbox" name="subtitle" value="1" id="searchin_subtitle" <?% IF subtitle %?>checked="checked"<?% END %?> /><label for="searchin_subtitle"><?% gettext('Subtitle') %?></label>
+						<input type="checkbox" name="description" value="1" id="searchin_description" <?% IF description %?>checked="checked"<?% END %?> /><label for="searchin_description"><?% gettext('Description') %?></label>
  	       </td>
 				</tr>
 				<tr class="row_odd">
-					<td class="col_label"><h5><%! Search only on these days: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('Search only on these days:') %?></h5></td>
 					<td class="col_value">
-						<input type="checkbox" name="wday_mon" value="1" id="wday_mon" <tmpl_if wday_mon>checked</tmpl_if> /><label for="wday_mon"><%! Monday !%></label>
-						<input type="checkbox" name="wday_tue" value="1" id="wday_tue" <tmpl_if wday_tue>checked</tmpl_if> /><label for="wday_tue"><%! Tuesday !%></label>
-						<input type="checkbox" name="wday_wed" value="1" id="wday_wed" <tmpl_if wday_wed>checked</tmpl_if> /><label for="wday_wed"><%! Wednesday !%></label>
-						<input type="checkbox" name="wday_thu" value="1" id="wday_thu" <tmpl_if wday_thu>checked</tmpl_if> /><label for="wday_thu"><%! Thursday !%></label>
-						<input type="checkbox" name="wday_fri" value="1" id="wday_fri" <tmpl_if wday_fri>checked</tmpl_if> /><label for="wday_fri"><%! Friday !%></label>
-						<input type="checkbox" name="wday_sat" value="1" id="wday_sat" <tmpl_if wday_sat>checked</tmpl_if> /><label for="wday_sat"><%! Saturday !%></label>
-						<input type="checkbox" name="wday_sun" value="1" id="wday_sun" <tmpl_if wday_sun>checked</tmpl_if> /><label for="wday_sun"><%! Sunday !%></label>
+						<input type="checkbox" name="wday_mon" value="1" id="wday_mon" <?% IF wday_mon %?>checked="checked"<?% END %?> /><label for="wday_mon"><?% gettext('Monday') %?></label>
+						<input type="checkbox" name="wday_tue" value="1" id="wday_tue" <?% IF wday_tue %?>checked="checked"<?% END %?> /><label for="wday_tue"><?% gettext('Tuesday') %?></label>
+						<input type="checkbox" name="wday_wed" value="1" id="wday_wed" <?% IF wday_wed %?>checked="checked"<?% END %?> /><label for="wday_wed"><?% gettext('Wednesday') %?></label>
+						<input type="checkbox" name="wday_thu" value="1" id="wday_thu" <?% IF wday_thu %?>checked="checked"<?% END %?> /><label for="wday_thu"><?% gettext('Thursday') %?></label>
+						<input type="checkbox" name="wday_fri" value="1" id="wday_fri" <?% IF wday_fri %?>checked="checked"<?% END %?> /><label for="wday_fri"><?% gettext('Friday') %?></label>
+						<input type="checkbox" name="wday_sat" value="1" id="wday_sat" <?% IF wday_sat %?>checked="checked"<?% END %?> /><label for="wday_sat"><?% gettext('Saturday') %?></label>
+						<input type="checkbox" name="wday_sun" value="1" id="wday_sun" <?% IF wday_sun %?>checked="checked"<?% END %?> /><label for="wday_sun"><?% gettext('Sunday') %?></label>
  	       </td>
 				</tr>
 				<tr class="row_even">
-					<td class="col_label"><h5><%! Channel: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('Channel:') %?></h5></td>
 					<td class="col_value">
 						<select class="submit" name="channel">
-							<option value="0"><%! all !%></option>
-<tmpl_loop channels>
-								<option value="<tmpl_var vdr_id>" <tmpl_if cur> selected</tmpl_if>><tmpl_var name></option>
-</tmpl_loop>
+							<option value="0"><?% gettext('all') %?></option>
+<?% FOREACH chan = channels %?>
+								<option value="<?% chan.vdr_id %?>" <?% IF chan.cur %?>selected="selected"<?% END %?>><?% chan.name | html %?></option>
+<?% END %?>
 						</select>
 					</td>
 				</tr>
 				<tr class="row_odd">
-					<td class="col_label"><h5><%! Starts After: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('Starts After:') %?></h5></td>
 					<td class="col_value">
-						<input type="text" name="starth" value="<tmpl_var starth>" size="2" maxlength="2" />
+						<input type="text" name="starth" value="<?% starth %?>" size="2" maxlength="2" />
 						<b>&nbsp;:&nbsp;</b>
-						<input type="text" name="startm" value="<tmpl_var startm>" size="2" maxlength="2" />
-						&nbsp;<%! o'clock !%>
+						<input type="text" name="startm" value="<?% startm %?>" size="2" maxlength="2" />
+						&nbsp;<?% gettext('o\'clock') %?>
 					</td>
 				</tr>
 				<tr class="row_even">
-					<td class="col_label"><h5><%! Ends Before: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('Ends Before:') %?></h5></td>
 					<td class="col_value">
-						<input type="text" name="stoph" value="<tmpl_var stoph>" size="2" maxlength="2" />
+						<input type="text" name="stoph" value="<?% stoph %?>" size="2" maxlength="2" />
 						<b>&nbsp;:&nbsp;</b>
-						<input type="text" name="stopm" value="<tmpl_var stopm>" size="2" maxlength="2" />
-						&nbsp;<%! o'clock !%>
+						<input type="text" name="stopm" value="<?% stopm %?>" size="2" maxlength="2" />
+						&nbsp;<?% gettext('o\'clock') %?>
 					</td>
 				</tr>
 				<tr class="row_odd">
-					<td class="col_label"><h5><%! Override Start/Stop Margins: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('Override Start/Stop Margins:') %?></h5></td>
 					<td class="col_value">
-						<input type="radio" name="buffers" value="1" id="buffers_yes" <tmpl_if buffers>checked</tmpl_if> /><label for="buffers_yes"><%! Yes !%></label>
-						<input type="radio" name="buffers" value="0" id="buffers_no" <tmpl_unless buffers>checked</tmpl_unless> /><label for="buffers_no"><%! No !%></label>
+						<input type="radio" name="buffers" value="1" id="buffers_yes" <?% IF buffers %?>checked="checked"<?% END %?> /><label for="buffers_yes"><?% gettext('Yes') %?></label>
+						<input type="radio" name="buffers" value="0" id="buffers_no" <?% UNLESS buffers %?>checked="checked"<?% END %?> /><label for="buffers_no"><?% gettext('No') %?></label>
 					</td>
 				</tr>
 				<tr class="row_even">
-					<td class="col_label"><h5><%! Time Margin at Start: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('Time Margin at Start:') %?></h5></td>
 					<td class="col_value">
-						<input type="text" name="bstart" value="<tmpl_var bstart>" size="2" maxlength="2" /> <%! minutes !%>
+						<input type="text" name="bstart" value="<?% bstart %?>" size="2" maxlength="2" /> <?% gettext('minutes') %?>
 					</td>
 				</tr>
 				<tr class="row_odd">
-					<td class="col_label"><h5><%! Time Margin at Stop: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('Time Margin at Stop:') %?></h5></td>
 					<td class="col_value">
-						<input type="text" name="bstop" value="<tmpl_var bstop>" size="2" maxlength="2" /> <%! minutes !%>
+						<input type="text" name="bstop" value="<?% bstop %?>" size="2" maxlength="2" /> <?% gettext('minutes') %?>
 					</td>
 				</tr>
 				<tr class="row_even">
-					<td class="col_label"><h5><%! Priority: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('Priority:') %?></h5></td>
 					<td class="col_value">
-						<input type="text" name="prio" value="<tmpl_var prio>" size="2" maxlength="2" />
+						<input type="text" name="prio" value="<?% prio %?>" size="2" maxlength="2" />
 					</td>
 				</tr>
 				<tr class="row_odd">
-					<td class="col_label"><h5><%! Lifetime: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('Lifetime:') %?></h5></td>
 					<td class="col_value">
-						<input type="text" name="lft" value="<tmpl_var lft>" size="2" maxlength="2" />
+						<input type="text" name="lft" value="<?% lft %?>" size="2" maxlength="2" />
 					</td>
 				</tr>
 				<tr class="row_even">
-					<td class="col_label"><h5><label for="episode"><%! Episode: !%></label></h5></td>
+					<td class="col_label"><h5><label for="episode"><?% gettext('Episode:') %?></label></h5></td>
 					<td class="col_value">
-						<input type="checkbox" name="episode" value="1" id="episode" <tmpl_if episode>checked</tmpl_if> />
+						<input type="checkbox" name="episode" value="1" id="episode" <?% IF episode %?>checked="checked"<?% END %?> />
 					</td>
 				</tr>
 				<tr class="row_odd">
-					<td class="col_label"><h5><%! Remember programmed timers: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('Remember programmed timers:') %?></h5></td>
 					<td class="col_value">
-						<input type="radio" name="done" value="1" id="rem_yes" <tmpl_if done>checked</tmpl_if> /><label for="rem_yes"><%! Yes !%></label>
-						<input type="radio" name="done" value="0" id="rem_no" <tmpl_unless done>checked</tmpl_unless> /><label for="rem_no"><%! No !%></label>
+						<input type="radio" name="done" value="1" id="rem_yes" <?% IF done %?>checked="checked"<?% END %?> /><label for="rem_yes"><?% gettext('Yes') %?></label>
+						<input type="radio" name="done" value="0" id="rem_no" <?% UNLESS done %?>checked="checked"<?% END %?> /><label for="rem_no"><?% gettext('No') %?></label>
 					</td>
 				</tr>
 				<tr class="row_even">
-					<td class="col_label"><h5><%! Directory: !%></h5></td>
+					<td class="col_label"><h5><?% gettext('Directory:') %?></h5></td>
 					<td class="col_value">
-						<input type="text" name="directory" value="<tmpl_var directory>" size="40" />
+						<input type="text" name="directory" value="<?% directory %?>" size="40" />
 					</td>
 				</tr>
 			</table>
 		</div>
 
 		<div id="buttons">
-			<input type="submit" class="submit" name="save" value="<%! Save !%>" />
-			<input type="submit" class="submit" name="test" value="<%! Test !%>" />
-			<input type="submit" class="submit" name="exit" value="<%! Cancel !%>" />
+			<input type="submit" class="submit" name="save" value="<?% gettext('Save') %?>" />
+			<input type="submit" class="submit" name="test" value="<?% gettext('Test') %?>" />
+			<input type="submit" class="submit" name="exit" value="<?% gettext('Cancel') %?>" />
 		</div>
 		<input type="hidden" name="aktion" value="at_timer_aktion" />
-		<input type="hidden" name="id" value="<tmpl_var id>" />
+		<input type="hidden" name="id" value="<?% id %?>" />
 	</form>
 
-<tmpl_if at_test>
+<?% IF at_test %?>
 	<br />
-	<tmpl_if matches>
+	<?% IF matches %?>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
 			<tr class="heading">
-				<td><h2><%! Title !%></h2></td>
-				<td><h2><%! Subtitle !%></h2></td>
-				<td><h2><%! Broadcasted !%></h2></td>
-				<td><h2><%! Stored in !%></h2></td>
+				<td><h2><?% gettext('Title') %?></h2></td>
+				<td><h2><?% gettext('Subtitle') %?></h2></td>
+				<td><h2><?% gettext('Broadcasted') %?></h2></td>
+				<td><h2><?% gettext('Stored in') %?></h2></td>
 			</tr>
-		<tmpl_loop matches>
-			<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
-				<td><tmpl_var otitle></td>
-				<td><tmpl_var subtitle></td>
-				<td><tmpl_var date>, <tmpl_var start> - <tmpl_var stop> (<tmpl_var channel>)</td>
-				<td><tmpl_var title></td>
+		<?% FOREACH match = matches %?>
+			<tr class="<?% IF loop.count() % 2 == 0 %?>row_even<?% ELSE %?>row_odd<?% END %?>">
+				<td><?% match.otitle %?></td>
+				<td><?% match.subtitle %?></td>
+				<td><?% match.date %?>, <?% match.start %?> - <?% match.stop %?> (<?% match.channel %?>)</td>
+				<td><?% match.title %?></td>
 			</tr>
-		</tmpl_loop>
+		<?% END %?>
 		</table>
-	<tmpl_else>
-		<div class="warning"><%! No matches found! !%></div>
-	</tmpl_if>
-</tmpl_if>
+	<?% ELSE %?>
+		<div class="warning"><?% gettext('No matches found!') %?></div>
+	<?% END %?>
+<?% END %?>
 </body>
 
 </html>

@@ -5,59 +5,59 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title><%! Edit Timer !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title><?% gettext('Edit Timer') %?></title>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 </head>
 
 <body id="timer_new" class="help" onload="window.focus()">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="help" class="group">
 		<tr class="heading">
-			<td><h2><%! Edit Timer !%></h2></td>
+			<td><h2><?% gettext('Edit Timer') %?></h2></td>
 		</tr>
 		<tr class="row_even">
 			<td>
-				<%! <p>Here you can edit a timer's settings.</p> !%>
+				<?% gettext('<p>Here you can edit a timer\'s settings.</p>') %?>
 				<dl>
-					<dt><%! Timer Active: !%></dt>
-					<dd><%! Activate or deactivate this timer. Deactivated timers are still stored in the timer list so that they can be activated again, but they do not record anything meanwhile. !%></dd>
-					<dt><%! AutoTimer Checking: !%></dt>
-					<dd><%! Depending on how this timer has been programmed you have up to three possible settings: !%>
+					<dt><?% gettext('Timer Active:') %?></dt>
+					<dd><?% gettext('Activate or deactivate this timer. Deactivated timers are still stored in the timer list so that they can be activated again, but they do not record anything meanwhile.') %?></dd>
+					<dt><?% gettext('AutoTimer Checking:') %?></dt>
+					<dd><?% gettext('Depending on how this timer has been programmed you have up to three possible settings:') %?>
 						<dl>
-							<dt><%! Transmission Identification !%></dt>
-							<dd><%! Monitor this timer using the identification provided in the EPG. Please note that this only works if the provided identification is a fix and unique value! This option is not available with timers programmed in VDR. !%></dd>
-							<dt><%! Time !%></dt>
-							<dd><%! Monitor this timer using the start and stop time. !%></dd>
-							<dt><%! off !%></dt>
-							<dd><%! Do not monitor this timer. !%></dd>
+							<dt><?% gettext('Transmission Identification') %?></dt>
+							<dd><?% gettext('Monitor this timer using the identification provided in the EPG. Please note that this only works if the provided identification is a fix and unique value! This option is not available with timers programmed in VDR.') %?></dd>
+							<dt><?% gettext('Time') %?></dt>
+							<dd><?% gettext('Monitor this timer using the start and stop time.') %?></dd>
+							<dt><?% gettext('off') %?></dt>
+							<dd><?% gettext('Do not monitor this timer.') %?></dd>
 						</dl>
 					</dd>
-					<dt><%! Channel: !%></dt>
-					<dd><%! The channel to record. !%></dd>
-					<dt><%! Day Of Recording: !%></dt>
-					<dd><%! The day when the timer should get active. You can enter the day in two formats:
+					<dt><?% gettext('Channel:') %?></dt>
+					<dd><?% gettext('The channel to record.') %?></dd>
+					<dt><?% gettext('Day Of Recording:') %?></dt>
+					<dd><?% gettext('The day when the timer should get active. You can enter the day in two formats:
 						<ul>
 							<li>Two digits (DD). This will use the current month and year.</li>
 							<li>ISO norm (YYYY-MM-DD). Program your timers as far in the future as you like.</li>
 						</ul>
-						In case you want to program a repeating timer you can use the seven checkboxes below the text field. Check the box for each day you want the timer to get active. !%>
+						In case you want to program a repeating timer you can use the seven checkboxes below the text field. Check the box for each day you want the timer to get active.') %?>
 					</dd>
-					<dt><%! Start Time: !%></dt>
-					<dd><%! This is the time when the timer should start recording. The first text field is for "hour", the second for "minute". !%></dd>
-					<dt><%! End Time: !%></dt>
-					<dd><%! This is the time when the timer should stop recording. The first text field is for "hour", the second for "minute". !%></dd>
-					<dt><%! Priority: !%></dt>
-					<dd><%! An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording. !%></dd>
-					<dt><%! Lifetime: !%></dt>
-					<dd><%! The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by. !%></dd>
-					<dt><%! Title of Recording: !%></dt>
-					<dd><%! The <strong>file name</strong> this timer will give to a recording. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br /><br />The special keywords <strong>TITLE</strong> and <strong>EPISODE</strong>, if present, will be replaced by the title and episode information from the EPG data at the time of recording (if that data is available). If at the time of recording either of these cannot be determined, <strong>TITLE</strong> will default to the channel name, and <strong>EPISODE</strong> will default to a blank. !%></dd>
-					<dt><%! Summary: !%></dt>
-					<dd><%! Arbitrary text that describes the recording made by this timer. If this field is not empty, its contents will be written into the <span class="ref_file">summary.vdr</span> or <span class="ref_file">info.vdr</span> file of the recording. !%></dd>
+					<dt><?% gettext('Start Time:') %?></dt>
+					<dd><?% gettext('This is the time when the timer should start recording. The first text field is for "hour", the second for "minute".') %?></dd>
+					<dt><?% gettext('End Time:') %?></dt>
+					<dd><?% gettext('This is the time when the timer should stop recording. The first text field is for "hour", the second for "minute".') %?></dd>
+					<dt><?% gettext('Priority:') %?></dt>
+					<dd><?% gettext('An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording.') %?></dd>
+					<dt><?% gettext('Lifetime:') %?></dt>
+					<dd><?% gettext('The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by.') %?></dd>
+					<dt><?% gettext('Title of Recording:') %?></dt>
+					<dd><?% gettext('The <strong>file name</strong> this timer will give to a recording. If the name shall contain subdirectories, these have to be delimited by \'~\' (since the \'/\' character may be part of a regular programme name).<br /><br />The special keywords <strong>TITLE</strong> and <strong>EPISODE</strong>, if present, will be replaced by the title and episode information from the EPG data at the time of recording (if that data is available). If at the time of recording either of these cannot be determined, <strong>TITLE</strong> will default to the channel name, and <strong>EPISODE</strong> will default to a blank.') %?></dd>
+					<dt><?% gettext('Summary:') %?></dt>
+					<dd><?% gettext('Arbitrary text that describes the recording made by this timer. If this field is not empty, its contents will be written into the <span class="ref_file">summary.vdr</span> or <span class="ref_file">info.vdr</span> file of the recording.') %?></dd>
 				</dl>
 			</td>
 		</tr>

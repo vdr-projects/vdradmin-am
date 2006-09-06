@@ -44,6 +44,7 @@ select {
 }
 img {
 	border: 0;
+	vertical-align: middle;
 }
 /*
 .submit {
@@ -76,12 +77,23 @@ h3,
 	margin: 0;
 	padding: 0;
 }
+.col_label {
+	width: 100px;
+	text-align: right;
+}
 .col_label h5 {
 	margin: 1px 5px;
 	font-size: 11px;
 	font-weight: normal;
 	color: black;
 	text-align: right;
+	white-space: nowrap;
+}
+.col_value h5 {
+	display: inline;
+	font-size: 11px;
+	font-weight: normal;
+	color: black;
 }
 h6 {
 	margin: 1px 5px;
@@ -155,8 +167,6 @@ body.help .heading {
 .heading h2,
 .heading .channel_name,
 .heading a {
-	padding-left: 3px;
-	padding-right: 3px;
 	font-weight: bold;
 	color: white;
 	margin-top: 0px;
@@ -300,11 +310,11 @@ body.help .heading {
 	padding: 2px 2px;
 }
 
-#prog_summary2 .newday {
+.newday {
 	height: 17px;
 	background-color: #6d96a9;
 }
-#prog_summary2 .newday td {
+.newday td {
 	padding-left: 3px;
 	font-weight: bold;
 	color: white;
@@ -319,6 +329,8 @@ body.help .heading {
 	color: black;
 	display: block;
 }
+#prog_list .col_buttons,
+#rec_list .col_buttons,
 #prog_summary2 .col_buttons {
 	width: 120px;
 	text-align: right;
@@ -408,12 +420,6 @@ body.help .heading {
 	font-weight: bold;
 	padding: 0 2em;
 }
-#prog_list .col_buttons {
-	width: 120px;
-	text-align: right;
-	padding-right: 3px;
-	white-space: nowrap;
-}
 
 .col_duration {
 	padding-left: 3px;
@@ -445,7 +451,7 @@ body.help .heading {
 .col_date,
 .col_time {
 	width: 76px;
-	text-align: right;
+	text-align: left;
 }
 .col_edit,
 .col_delete,
@@ -492,18 +498,15 @@ body.help .heading {
 	background: red;
 }
 #prog_timeline .color_current {
-/*TODO	xbackground-color: #e6ffe9;*/
 	background-color: #b4e29c;
 }
 #prog_timeline .color_summary {
 	background-color: #dee6ee;
 }
 #prog_timeline .color_broadcast {
-/*TODO	background-color: #f7fffa;*/
 	background-color: #ffffff;
 }
 #prog_timeline .color_timer {
-/*TODO	xbackground-color: #ffeee9;*/
 	background-color: #ffb2b4;
 }
 #prog_timeline .color_spacer {
@@ -577,6 +580,7 @@ body.help .heading {
 	color: black;
 	font-weight: normal;
 }
+#about .group,
 #config .group {
 	margin-top: 0.5em;
 	width: 100%;
@@ -688,7 +692,10 @@ select.channels {
 #help .links a {
 	white-space: nowrap;
 }
-#help a ,
+#about a,
+#about a:visited,
+#about a:active,
+#help a,
 #help a:visited,
 #help a:active {
 	color: blue;
@@ -728,7 +735,7 @@ select.channels {
 	padding-bottom: 6px;
 	text-align: center;
 }
-/*TODO Farbe */
+
 #navigation .navi:hover {
 	background-color: #dee6ee;
 }
@@ -747,4 +754,36 @@ select.channels {
 }
 #navigation input {
 	width: 140px;
+}
+#navigation #epgsearch_list a {
+	color: green;
+}
+
+/* message boxes */
+.warning h1 {
+	display: block;
+	font-weight: bold;
+	font-size: 14px;
+}
+.warning {
+	margin: 2em;
+	padding: 1em;
+	border: 1px solid #6d96a9;
+	background-color: #dee6ee;
+	text-align: center;
+	vertical-align: middle;
+}
+.error h1 {
+	display: block;
+	color: red;
+	font-weight: bold;
+	font-size: 14px;
+}
+.error {
+	margin: 2em;
+	padding: 1em;
+	border: 2px solid red;
+	background-color: #dee6ee;
+	text-align: center;
+	vertical-align: middle;
 }

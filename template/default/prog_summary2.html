@@ -3,47 +3,48 @@
 
 <head>
 	<meta http-equiv="refresh" content="600; URL=vdradmin.pl?aktion=prog_summary" />
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title>VDRAdmin-AM - <%! What's On Now? !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title>VDRAdmin-AM - <?% gettext('What\'s On Now?') %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 	<script type="text/javascript" language="JavaScript" src="library.js"></script>
 </head>
 
 <body id="prog_summary2">
-	<form action="<tmpl_var url>" method="get" name="FormName">
+	<form action="<?% url %?>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_title">
-					<h1><tmpl_var title></h1>
+					<h1><?% title %?></h1>
 				</td>
 				<td class="col_other">
-					[<a href="<tmpl_var switchview_url>"><tmpl_var switchview_text></a>]
+					[<a href="<?% switchview_url %?>"><?% switchview_text %?></a>]
 				</td>
-<tmpl_if times>
+<?% IF times.size() > 0 %?>
 				<td class="col_other">
-					<%! What's on: !%>&nbsp;
+					<?% gettext('What\'s on:') %?>&nbsp;
 					<select name="select_time" size="1" class="submit" onchange="window.open(this.options[this.selectedIndex].value,'main')">
-	<tmpl_loop times>
-						<option value="<tmpl_var id>" <tmpl_if sel>selected</tmpl_if>><tmpl_var name></option>
-	</tmpl_loop>
+	<?% FOREACH time = times %?>
+						<option value="<?% time.id %?>" <?% IF time.sel %?>selected="selected"<?% END %?>><?% time.name %?></option>
+	<?% END %?>
 					</select>
-					<%! at !%>&nbsp;<input type="text" name="time" size="5" value="<tmpl_var now>" />&nbsp;<%! o'clock !%>
+					<?% gettext('at') %?>&nbsp;<input type="text" name="time" size="5" value="<?% now %?>" />&nbsp;<?% gettext('o\'clock') %?>
 				</td>
-</tmpl_if>
+<?% END %?>
 			</tr>
 		</table>
 		<input type="hidden" name="aktion" value="prog_summary" />
 
+<?% IF rows.size > 0 %?>
 		<table border="0" cellspacing="0" cellpadding="0" width="100%" class="list hilight" id="content">
 			<?%
 				tr_class = "row_odd";
 				olddate = "";
 			%?>
 
-<?% FOREACH broadcast = rows;
+	<?% FOREACH broadcast = rows;
 		IF broadcast.longdate;
 			IF olddate != broadcast.date;
 				olddate = broadcast.date; %?>
@@ -66,7 +67,7 @@
 				<td class="col_center">
 					<div class="epg_title">
 						<?% IF broadcast.summary %?>
-							<a href="javascript:popup('<?% broadcast.infurl %?>');" title="<%! More Information !%>">
+							<a href="javascript:popup('<?% broadcast.infurl %?>');" title="<?% gettext('More Information') %?>">
 						<?% END %?>
 						<?% broadcast.title %?>
 						<?% IF broadcast.summary %?>
@@ -81,25 +82,27 @@
 				</td>
 				<td class="col_channel">
 					<a id="<?% broadcast.anchor %?>" name="<?% broadcast.anchor %?>"></a>
-					<div class="channel_name"><a href="<?% broadcast.proglink %?>" title="<%! Channels !%>"><?% broadcast.progname %?></a></div>
+					<div class="channel_name"><a href="<?% broadcast.proglink %?>" title="<?% gettext('Channels') %?>"><?% broadcast.progname %?></a></div>
 				</td>
 				<td class="col_buttons">
 					<?% IF broadcast.stream_live_on %?>
-						<span class="action stream"><a href="<?% broadcast.streamurl %?>"><img src="bilder/stream.png" border="0" alt="<%! Stream !%>" onmouseover="window.status='<%! Stream !%>';return true" title="<%! Stream !%>" /></a></span>
+						<span class="action stream"><a href="<?% broadcast.streamurl %?>"><img src="bilder/stream.png" border="0" alt="<?% gettext('Stream') %?>" onmouseover="window.status='<?% gettext('Stream') %?>';return true" title="<?% gettext('Stream') %?>" /></a></span>
 					<?% END %?>
 					<?% IF broadcast.recurl %?>
-						<span class="action switch">
-							<a href="javascript:callurl('<?% broadcast.switchurl %?>');"><img src="bilder/view.png" border="0" alt="<%! TV select !%>" onmouseover="window.status='<%! TV select !%>';return true" title="<%! TV select !%>" /></a>
-						</span>
-						<span class="action repeatings"><a href="vdradmin.pl?search=<?% broadcast.find_title %?>&amp;aktion=prog_summary&amp;submit=go11"><img src="bilder/find.png" border="0" alt="<%! Search for other show times !%>" onmouseover="window.status='<%! Search for other show times !%>';return true" title="<%! Search for other show times !%>" /></a></span>
-						<?% IF broadcast.summary %?>
-							<span class="action info"><a href="javascript:popup('<?% broadcast.infurl %?>');"><img src="bilder/info_button.png" border="0" alt="<%! More Information !%>" onmouseover="window.status='<%! More Information !%>';return true" title="<%! More Information !%>" /></a></span>
-						<?% ELSE %?>
-							<span class="action info"><img src="bilder/info_button_disabled.png" border="0" alt="noinfo" title="<%! No Information !%>" /></span>
+						<?% IF broadcast.switchurl %?>
+							<span class="action switch">
+								<a href="javascript:callurl('<?% broadcast.switchurl %?>');"><img src="bilder/view.png" border="0" alt="<?% gettext('TV select') %?>" onmouseover="window.status='<?% gettext('TV select') %?>';return true" title="<?% gettext('TV select') %?>" /></a>
+							</span>
 						<?% END %?>
-						<span class="action record"><a href="<?% broadcast.recurl %?>"><img src="bilder/rec_button.png" border="0" alt="<%! Record !%>" onmouseover="window.status='<%! Record !%>';return true" title="<%! Record !%>" /></a></span>
+						<span class="action repeatings"><a href="vdradmin.pl?search=<?% broadcast.find_title %?>&amp;aktion=prog_summary&amp;submit=go11"><img src="bilder/find.png" border="0" alt="<?% gettext('Search for other show times') %?>" onmouseover="window.status='<?% gettext('Search for other show times') %?>';return true" title="<?% gettext('Search for other show times') %?>" /></a></span>
+						<?% IF broadcast.summary %?>
+							<span class="action info"><a href="javascript:popup('<?% broadcast.infurl %?>');"><img src="bilder/info_button.png" border="0" alt="<?% gettext('More Information') %?>" onmouseover="window.status='<?% gettext('More Information') %?>';return true" title="<?% gettext('More Information') %?>" /></a></span>
+						<?% ELSE %?>
+							<span class="action info"><img src="bilder/info_button_disabled.png" border="0" alt="noinfo" title="<?% gettext('No Information') %?>" /></span>
+						<?% END %?>
+						<span class="action record"><a href="<?% broadcast.recurl %?>"><img src="bilder/rec_button.png" border="0" alt="<?% gettext('Record') %?>" onmouseover="window.status='<?% gettext('Record') %?>';return true" title="<?% gettext('Record') %?>" /></a></span>
 						<?% IF broadcast.imdburl %?>
-							<span class="action imdb"><a href="<?% broadcast.imdburl %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<%! Lookup movie in the Internet-Movie-Database (IMDb) !%>';return true" title="<%! Lookup movie in the Internet-Movie-Database (IMDb) !%>" /></a></span>
+							<span class="action imdb"><a href="<?% broadcast.imdburl %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<?% gettext('Lookup movie in the Internet-Movie-Database (IMDb)') %?>';return true" title="<?% gettext('Lookup movie in the Internet-Movie-Database (IMDb)') %?>" /></a></span>
 						<?% END %?>
 					<?% END %?>
 				</td>
@@ -107,8 +110,13 @@
 
 			<?% tr_class = (tr_class == "row_odd") ? "row_even" : "row_odd";
 		END;
-END %?>
+	END %?>
 		</table>
+<?% ELSE %?>
+		<div id="content">
+			<div class="warning"><?% gettext('No EPG information available') %?></div>
+		</div>
+<?% END %?>
 	</form>
 </body>
 </html>

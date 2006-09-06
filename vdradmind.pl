@@ -28,7 +28,7 @@
 
 require 5.004;
 
-my $VERSION = "3.4.6";
+my $VERSION = "3.4.7beta";
 my $BASENAME;
 my $EXENAME;
 
@@ -64,7 +64,6 @@ use locale;
 use Env qw(@PATH LANGUAGE);
 use CGI qw(:no_debug);
 use IO::Socket;
-use HTML::Template::Expr();
 use Template;
 use Time::Local qw(timelocal);
 use POSIX ":sys_wait_h", qw(strftime mktime locale_h);
@@ -92,7 +91,7 @@ use strict;
 
 my $SEARCH_FILES_IN_SYSTEM    = 0;
 my $VDR_MAX_SVDRP_LENGTH      = 10000;                        # validate this value
-my $SUPPORTED_LOCALE_PREFIXES = "^(de|en|es|fi|fr|nl|ru)_";
+my $SUPPORTED_LOCALE_PREFIXES = "^(cs|de|en|es|fi|fr|nl|ru)_";
 
 my $AT_BY_EVENT_ID = 2;
 my $AT_BY_TIME     = 1;
@@ -119,6 +118,7 @@ $CONFIG{CACHE_TIMEOUT}        = 60;
 $CONFIG{CACHE_LASTUPDATE}     = 0;
 $CONFIG{CACHE_REC_TIMEOUT}    = 60;
 $CONFIG{CACHE_REC_LASTUPDATE} = 0;
+$CONFIG{AUTO_SAVE_CONFIG}     = 1;
 
 #
 $CONFIG{VDR_HOST}   = "localhost";
@@ -158,6 +158,8 @@ $CONFIG{AT_PRIORITY}     = 99;
 $CONFIG{AT_MARGIN_BEGIN} = 10;
 $CONFIG{AT_MARGIN_END}   = 10;
 $CONFIG{AT_TOOLTIP}      = 1;
+$CONFIG{AT_SORTBY};
+$CONFIG{AT_DESC};
 
 #
 $CONFIG{TM_LIFETIME}     = 99;
@@ -166,6 +168,8 @@ $CONFIG{TM_MARGIN_BEGIN} = 10;
 $CONFIG{TM_MARGIN_END}   = 10;
 $CONFIG{TM_TT_TIMELINE}  = 1;
 $CONFIG{TM_TT_LIST}      = 1;
+$CONFIG{TM_SORTBY};
+$CONFIG{TM_DESC};
 
 #$CONFIG{TM_ADD_SUMMARY}   = 0;
 #
@@ -206,11 +210,21 @@ $CONFIG{PROG_SUMMARY_COLS} = 3;
 #
 $CONFIG{TV_MIMETYPE}  = "video/x-mpegurl";
 $CONFIG{TV_EXT}       = "m3u";
+$CONFIG{TV_INTERVAL}  = "5";
+$CONFIG{TV_SIZE}      = "half";
 $CONFIG{REC_MIMETYPE} = "video/x-mpegurl";
 $CONFIG{REC_EXT}      = "m3u";
+$CONFIG{REC_SORTBY};
+$CONFIG{REC_DESC};
 
 #
 $CONFIG{PS_VIEW} = "ext";
+
+#
+my %FEATURES;
+$FEATURES{STREAMDEV}  = 0;
+$FEATURES{REC_RENAME} = 0;
+$FEATURES{AUTOTIMER}  = 0;
 
 my $SERVERVERSION = "vdradmind/$VERSION";
 my $VDRVERSION    = 0;                      # Numeric VDR version, e.g. 10344
@@ -245,9 +259,18 @@ my $DONE = &DONE_Read || {};
 
 textdomain("vdradmin");
 
+my $UserCSS;
+$UserCSS = "user.css" if (-e "$USER_CSS");
+
 #use Template::Constants qw( :debug );
 # IMHO a better Template Modul ;-)
 # some useful options (see below for full list)
+my $Xtemplate_vars = { usercss  => $UserCSS,
+                       gettext  => sub{ $_[0] =~ s/\n\s+//g; return gettext($_[0]); },
+                       config   => \%CONFIG,
+                       features => \%FEATURES
+};
+
 my $Xconfig = {
     START_TAG    => '\<\?\%',        # Tagstyle
     END_TAG      => '\%\?\>',        # Tagstyle
@@ -259,6 +282,7 @@ my $Xconfig = {
     CACHE_SIZE   => 10000,           # Tuning for Templates
     COMPILE_EXT  => 'cache',         # Tuning for Templates
     COMPILE_DIR  => '/tmp',          # Tuning for Templates
+    VARIABLES    => $Xtemplate_vars,
 
     #DEBUG        => DEBUG_ALL,
 };
@@ -287,9 +311,6 @@ $SIG{INT}  = \&Shutdown;
 $SIG{TERM} = \&Shutdown;
 $SIG{HUP}  = \&HupSignal;
 $SIG{PIPE} = 'IGNORE';
-
-my $UserCSS;
-$UserCSS = "user.css" if (-e "$USER_CSS");
 
 #
 my $DAEMON = 1;
@@ -390,8 +411,9 @@ if (-e "$PIDFILE") {
 }
 
 if ($DAEMON) {
-    my ($pid) = fork;
-    if ($pid != 0) {
+    open(STDIN, "</dev/null");
+    defined(my $pid = fork) or die "Cannot fork: $!\n";
+    if ($pid) {
         printf(gettext("vdradmind.pl %s started with pid %d.") . "\n", $VERSION, $pid);
         writePID($pid);
         exit(0);
@@ -412,6 +434,7 @@ my ($Socket) =
 die("can't start server: $!\n")            if (!$Socket);
 $Socket->timeout($CONFIG{AT_TIMEOUT} * 60) if ($CONFIG{AT_FUNC});
 $CONFIG{CACHE_LASTUPDATE} = 0;
+$CONFIG{CACHE_REC_LASTUPDATE} = 0;
 
 ##
 # Mainloop
@@ -423,7 +446,7 @@ my @TRUSTED_USER = (
     @GUEST_USER, qw(at_timer_edit at_timer_new at_timer_save at_timer_test
       at_timer_delete timer_new_form timer_add timer_delete timer_toggle rec_delete rec_rename rec_edit
       config prog_switch rc_show rc_hitk grab_picture at_timer_toggle tv_show tv_switch
-      live_stream rec_stream force_update vdr_cmds)
+      live_stream rec_stream rec_play rec_cut force_update vdr_cmds)
 );
 my $MyStreamBase = "./vdradmin.";
 
@@ -596,13 +619,8 @@ sub EURL {            #TODO: unused
 sub HTMLError {
     my $error = join("", @_);
     $CONFIG{CACHE_LASTUPDATE} = 0;
-    my $template = TemplateNew("error.html");
     my $vars = { error => $error };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("error.html", $vars);
 }
 
 sub FillInZero {    #TODO: unused
@@ -999,12 +1017,10 @@ sub headerForward {
     return (302, 0);
 }
 
-sub headerNoAuth {    #TODO?
-    my $template = TemplateNew("noauth.html");
+sub headerNoAuth {
     my $vars;
     my $data;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$data);
+    $Xtemplate->process("$CONFIG{TEMPLATE}/noauth.html", $vars, \$data);
     PrintToClient("HTTP/1.0 401 Authorization Required",         CRLF);
     PrintToClient("Date: ",                                      headerTime(), CRLF);
     PrintToClient("Server: $SERVERVERSION",                      CRLF);
@@ -1017,12 +1033,11 @@ sub headerNoAuth {    #TODO?
 }
 
 sub Error {
-    my $template = HTML::Template->new(filename => "$TEMPLATEDIR/$CONFIG{TEMPLATE}/noperm.html");
-    $template->param(title => $_[0] . " - " . $_[1],
-                     h1    => $_[1],
-                     error => $_[2],
-    );
-    return (header("$_[0] $_[1]", "text/html", $template->output));
+    my $vars = { title => $_[0] . " - " . $_[1],
+                 h1    => $_[1],
+                 error => $_[2],
+    };
+    return showTemplate("noperm.html", $vars, $_[0], $_[1]);
 }
 
 sub SendFile {
@@ -1174,7 +1189,7 @@ sub DONE_Write {
 sub DONE_Read {
     my $done;
     if (-e $DONE_FILENAME) {
-        open(DONE_FILE, $DONE_FILENAME) || HTMLError(sprintf($ERROR_MESSAGE{cant_open}, $AT_FILENAME));
+        open(DONE_FILE, $DONE_FILENAME) || HTMLError(sprintf($ERROR_MESSAGE{cant_open}, $DONE_FILENAME));
         while (<DONE_FILE>) {
             chomp;
             next if ($_ eq "");
@@ -1260,11 +1275,14 @@ sub AutoTimer {
             }
 
             # Hamwa schon gehabt?
-            my $DoneStr = sprintf('%s~%d~%s', $event->{title}, $event->{event_id}, ($event->{subtitle} ? $event->{subtitle} : ''),);
+            my $DoneStr;
+            unless ($dry_run) {
+                $DoneStr = sprintf('%s~%d~%s', $event->{title}, $event->{event_id}, ($event->{subtitle} ? $event->{subtitle} : ''),);
 
-            if (exists $DONE->{$DoneStr}) {
-                Log(LOG_DEBUG, sprintf("Auto Timer: already done \"%s\"", $DoneStr));
-                next;
+                if (exists $DONE->{$DoneStr}) {
+                    Log(LOG_DEBUG, sprintf("Auto Timer: already done \"%s\"", $DoneStr));
+                    next;
+                }
             }
 
             if (%blacklist) {
@@ -1482,7 +1500,7 @@ sub AutoTimer {
                         if ($event->{subtitle}) {
                             $title .= "~" . $event->{subtitle};
                         } else {
-                            $title .= "~ ";
+                            $title .= "~" . my_strftime("%Y-%m-%d", $event->{start});
                         }
                     }
                 }
@@ -1501,7 +1519,14 @@ sub AutoTimer {
                 if ($dry_run) {
 
                     #printf("AT found: (%s) (%s) (%s) (%s) (%s) (%s)\n", $event->{title}, $title, $event->{subtitle}, $directory, $event->{start}, $event->{stop});
-                    push(@at_matches, { otitle => $event->{title}, title => $title, subtitle => $event->{subtitle} ? $event->{subtitle} : "", directory => $directory, start => my_strftime("%H:%M", $event->{start}), stop => my_strftime("%H:%M", $event->{stop}), date => my_strftime("%A, %x", $event->{start}), channel => GetChannelDescByNumber($event->{vdr_id}) });
+                    push(@at_matches, { otitle    => $event->{title},
+                                        title     => $title,
+                                        subtitle  => $event->{subtitle} ? $event->{subtitle} : "",
+                                        directory => $directory,
+                                        start     => my_strftime("%H:%M", $event->{start}),
+                                        stop      => my_strftime("%H:%M", $event->{stop}),
+                                        date      => my_strftime("%A, %x", $event->{start}),
+                                        channel   => GetChannelDescByNumber($event->{vdr_id}) });
                 } else {
                     Log(LOG_AT, sprintf("AutoTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
 
@@ -1523,10 +1548,12 @@ sub AutoTimer {
     }
 
     Log(LOG_AT, "Auto Timer: Done.");
-    Log(LOG_AT, "Auto Timer: Purging done list... (lowtime $low_time)");
-    for (keys %$DONE) { delete $DONE->{$_} if ($low_time > $DONE->{$_}) }
-    Log(LOG_AT, "Auto Timer: Save done list...");
-    &DONE_Write($DONE) if ($DONE);
+    unless ($dry_run) {
+        Log(LOG_AT, "Auto Timer: Purging done list... (lowtime $low_time)");
+        for (keys %$DONE) { delete $DONE->{$_} if ($low_time > $DONE->{$_}) }
+        Log(LOG_AT, "Auto Timer: Save done list...");
+        &DONE_Write($DONE) if ($DONE);
+    }
     Log(LOG_AT, "Auto Timer: Done.");
 
     if ($dry_run) {
@@ -1629,6 +1656,7 @@ sub AT_ProgTimer {
                     my $qptitle = my_encode_qp($title);
                     $smtp->datasend("Subject: AUTOTIMER: New timer created for $qptitle\n");
                     $smtp->datasend("From: VDRAdmin-AM AutoTimer <$CONFIG{MAIL_FROM}>\n");
+                    $smtp->datasend("Auto-Submitted: auto-generated\n"); # RFC 3834
                     $smtp->datasend("MIME-Version: 1.0\n");
                     $smtp->datasend("Content-Type: text/plain; charset=iso-8859-1\n");
                     $smtp->datasend("Content-Transfer-Encoding: 8bit\n");
@@ -2108,19 +2136,14 @@ sub salt {    #TODO: unused
 sub SigDieHandler {
     my $error = $_[0];
     CloseSocket();
-    my ($template) = TemplateNew("error.html");
-    my $vars = {
-                error => "Interner Fehler:<br />$error"
+    my $vars = { error   => gettext("Internal error:") . "<br />$error"
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("error.html", $vars);
 }
 
 sub Shutdown {
     CloseSocket();
+    WriteConfig() if ($CONFIG{AUTO_SAVE_CONFIG});
     unlink($PIDFILE);
     exit(0);
 }
@@ -2177,34 +2200,18 @@ sub Log {
     }
 }
 
-sub my_normalize {
-    my $text = shift;
-    $text =~ s/[\t\n]//g;
-    return $text;
-}
+sub showTemplate {
+    my $file   = shift;
+    my $vars   = shift;
+    my $status = shift;
+    my $ctype  = shift;
 
-sub TemplateNew {
-    my $file = shift;
+    $status = "200" unless($status);
+    $ctype  = "text/html" unless($ctype);
 
-    my $translation_filter = sub {
-        my $text_ref = shift;
-        $$text_ref =~ s/<%! (.*?) !%>/gettext(my_normalize($1))/ges;
-    };
-
-    $CONFIG{TEMPLATE} = "default" if (!$CONFIG{TEMPLATE});
-    $file = "$TEMPLATEDIR/$CONFIG{TEMPLATE}/$file";
-    if (!-e $file) {
-        Log(LOG_FATALERROR, "Fatal! Can't find $file!");
-    }
-    my $template = HTML::Template::Expr->new(
-        die_on_bad_params => 0,
-        loop_context_vars => 1,
-
-#        DEBUG        => DEBUG_ALL,
-        filter   => $translation_filter,
-        filename => $file
-    );
-    return $template;
+    my $output;
+    $Xtemplate->process("$CONFIG{TEMPLATE}/$file", $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
+    return (header($status, $ctype, $output));
 }
 
 sub my_strftime {
@@ -2234,18 +2241,20 @@ sub ChannelHasEPG {
 sub Encode_Referer {
     if ($_[0]) { $_ = $_[0]; }
     else { $_ = $Referer; }
-    return (MIME::Base64::encode_base64(sprintf("%s", $_)));
+    return (MIME::Base64::encode_base64(sprintf("%s", $_), ""));
 }
 
 sub Decode_Referer {
-    my $ref = MIME::Base64::decode_base64(shift);
+    my $text = shift;
+    $text =~ s/ /+/g;
+    my $ref = MIME::Base64::decode_base64($text);
     return ($ref);
 }
 
 sub encode_ref {    #TODO: unused
     my ($tmp) = $_[0]->url(-relative => 1, -query => 1);
     my (undef, $query) = split(/\?/, $tmp, 2);
-    return (MIME::Base64::encode_base64($query));
+    return (MIME::Base64::encode_base64($query, ""));
 }
 
 sub decode_ref {    #TODO: unused
@@ -2263,6 +2272,17 @@ sub access_log {
     return sprintf("%s %s \"%s\" %s %s \"%s\" \"%s\"", $ip, $username, $rawrequest, $http_status ? $http_status : "-", $bytes_transfered ? $bytes_transfered : "-", $request, $useragent);
 }
 
+sub ValidConfig {
+    $CONFIG{SKIN}     = "default" unless($CONFIG{SKIN});
+    $CONFIG{TEMPLATE} = "default" unless($CONFIG{TEMPLATE});
+    $CONFIG{TV_MIMETYPE}  = "video/x-mpegurl" if (!$CONFIG{TV_MIMETYPE});
+    $CONFIG{TV_EXT}       = "m3u"             if (!$CONFIG{TV_EXT});
+    $CONFIG{REC_MIMETYPE} = "video/x-mpegurl" if (!$CONFIG{REC_MIMETYPE});
+    $CONFIG{REC_EXT}      = "m3u"             if (!$CONFIG{REC_EXT});
+
+    $FEATURES{AUTOTIMER} = $CONFIG{AT_FUNC};
+}
+
 sub ReadConfig {
     if (-e $CONFFILE) {
         open(CONF, $CONFFILE);
@@ -2272,6 +2292,8 @@ sub ReadConfig {
             $CONFIG{$key} = $value;
         }
         close(CONF);
+
+        ValidConfig();
 
         #Migrate settings
         #v3.4.5
@@ -2381,73 +2403,22 @@ sub VideoDiskFree {
 # frontend
 #############################################################################
 sub show_index {
-    my $template = TemplateNew("index.html");
     my $page;
     if (defined($CONFIG{LOGINPAGE})) {
         $page = $LOGINPAGES[ $CONFIG{LOGINPAGE} ];
     } else {
         $page = $LOGINPAGES[0];
     }
-    my $vars = { usercss   => $UserCSS,
-                 loginpage => "$MyURL?aktion=$page",
+    my $vars = { loginpage => "$MyURL?aktion=$page",
                  version   => $VERSION,
                  host      => $CONFIG{VDR_HOST}
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("index.html", $vars);
 }
 
 sub show_navi {
-    my $template = TemplateNew("navigation.html");
-    my $vars = { usercss => $UserCSS };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
-}
-
-sub toolbar {    #TODO: unused?
-    my $template = TemplateNew("toolbar.html");
-
-    my @channel;
-    for my $channel (@CHAN) {
-
-        # if its wished, display only wanted channels
-        if ($CONFIG{CHANNELS_WANTED_PRG}) {
-            my $found = 0;
-            for my $n (split(",", $CONFIG{CHANNELS_WANTED})) {
-                ($found = 1) if ($n eq $channel->{vdr_id});
-            }
-            next if (!$found);
-        }
-
-        # skip channels without EPG data
-        if (ChannelHasEPG($channel->{vdr_id})) {
-            push(
-                @channel,
-                {  name   => $channel->{name},
-                   vdr_id => $channel->{vdr_id},
-
-                   #current    => ($vdr_id == $channel->{vdr_id}) ? 1 : 0,
-                }
-            );
-        }
-    }
-
-    $template->param(usercss  => $UserCSS,
-                     url      => $MyURL,
-                     chanloop => \@channel
-    );
-    return (header("200", "text/html", $template->output));
-}
-
-sub show_top {    #TODO: unused?
-    my $template = TemplateNew("top.html");
-    return (header("200", "text/html", $template->output));
+    my $vars = { };
+    return showTemplate("navigation.html", $vars);
 }
 
 sub prog_switch {
@@ -2518,9 +2489,7 @@ sub prog_detail {
     $recurl = sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $epg_id, $vdr_id, Encode_Referer($referer)) unless ($referer =~ "timer_list");
 
     my $now = time();
-    my $template = TemplateNew("prog_detail.html");
-    my $vars = { usercss      => $UserCSS,
-                 title        => $displaytitle ? $displaytitle : gettext("Can't find EPG entry!"),
+    my $vars = { title        => $displaytitle ? $displaytitle : gettext("Can't find EPG entry!"),
                  recurl       => $recurl,
                  switchurl    => ($start && $stop && $start <= $now && $now <= $stop) ? sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $vdr_id) : undef,
                  channel_name => CGI::escapeHTML($channel_name),
@@ -2536,11 +2505,7 @@ sub prog_detail {
                  audio        => $audio,
                  video        => $video,
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("prog_detail.html", $vars);
 }
 
 #############################################################################
@@ -2631,22 +2596,16 @@ sub prog_list {
 
     #
     my $now = time();
-    my ($template) = TemplateNew("prog_list.html");
-    my $vars = { usercss        => $UserCSS,
-                 url            => $MyURL,
+    my $vars = { url            => $MyURL,
                  loop           => \@show,
                  chanloop       => \@channel,
                  progname       => GetChannelDescByNumber($vdr_id),
                  switchurl      => "$MyURL?aktion=prog_switch&amp;channel=$vdr_id",
-                 streamurl      => $MyStreamBase . $CONFIG{TV_EXT} . "?aktion=live_stream&amp;channel=" . $vdr_id,
-                 stream_live_on => $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
+                 streamurl      => $FEATURES{STREAMDEV} ? $MyStreamBase . $CONFIG{TV_EXT} . "?aktion=live_stream&amp;channel=" . $vdr_id : undef,
+                 stream_live_on => $FEATURES{STREAMDEV} && $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
                  toolbarurl     => "$MyURL?aktion=toolbar"
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("prog_list.html", $vars);
 }
 
 #############################################################################
@@ -2729,7 +2688,7 @@ sub prog_list2 {
                      {  channel_name => $event->{channel_name},
                         longdate  => my_strftime("%A, %x", $event->{start}),
                         newd      => 1,
-                        streamurl => $MyStreamBase . $CONFIG{TV_EXT} . "?aktion=live_stream&amp;channel=" . $event->{vdr_id},
+                        streamurl => $FEATURES{STREAMDEV} ? $MyStreamBase . $CONFIG{TV_EXT} . "?aktion=live_stream&amp;channel=" . $event->{vdr_id} : undef,
                         switchurl => "$MyURL?aktion=prog_switch&amp;channel=" . $event->{vdr_id},
                         proglink  => "$MyURL?aktion=prog_list&amp;vdr_id=" . $event->{vdr_id}
                      }
@@ -2788,28 +2747,22 @@ sub prog_list2 {
     }
 
     #
-    my ($template) = TemplateNew("prog_list2.html");
     my $vars = {
         title => $day == $current_day ? gettext("Playing Today") : ($day == $current_day + 1 ? gettext("Playing Tomorrow") : sprintf(gettext("Playing on the %s"), $hash_days{$day})),
         now            => my_strftime("%H:%M", $time),
         day            => $day,
         days           => \@days,
-        usercss        => $UserCSS,
         url            => $MyURL,
         loop           => \@show,
         chanloop       => \@channel,
         progname       => GetChannelDescByNumber($vdr_id),
         switchurl      => "$MyURL?aktion=prog_switch&amp;channel=" . $vdr_id,
-        stream_live_on => $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
+        stream_live_on => $FEATURES{STREAMDEV} && $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
         prevdayurl     => $prev_day ? "$MyURL?aktion=prog_list2&amp;day=" . $prev_day . ($param_time ? "&amp;time=$param_time" : undef) : undef,
         nextdayurl     => $next_day ? "$MyURL?aktion=prog_list2&amp;day=" . $next_day . ($param_time ? "&amp;time=$param_time" : undef) : undef,
         toolbarurl     => "$MyURL?aktion=toolbar"
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("prog_list2.html", $vars);
 }
 
 #############################################################################
@@ -2818,15 +2771,9 @@ sub prog_list2 {
 sub timer_list {
     return if (UptoDate());
 
-    #
-    my $desc;
-    if (!defined($q->param("desc"))) {
-        $desc = 1;
-    } else {
-        $q->param("desc") ? ($desc = 1) : ($desc = 0);
-    }
-    my $sortby = $q->param("sortby");
-    ($sortby = "day") if (!$sortby);
+    $CONFIG{TM_DESC} = ($q->param("desc") ? 1 : 0) if (defined($q->param("desc")));
+    $CONFIG{TM_SORTBY} = $q->param("sortby") if (defined($q->param("sortby")));
+    $CONFIG{TM_SORTBY} = "day" if (!$CONFIG{TM_SORTBY});
 
     #
     my @timer;
@@ -2843,9 +2790,9 @@ sub timer_list {
         }
         $timer->{active} = 0 unless ($timer->{active} & 1);
 
-        $timer->{delurl}    = $MyURL . "?aktion=timer_delete&amp;timer_id=" . $timer->{id} . "&amp;sortby=" . $sortby . "&amp;desc=" . $desc,
-        $timer->{modurl}    = $MyURL . "?aktion=timer_new_form&amp;timer_id=" . $timer->{id} . "&amp;sortby=" . $sortby . "&amp;desc=" . $desc,
-        $timer->{toggleurl} = sprintf("%s?aktion=timer_toggle&amp;active=%s&amp;id=%s&amp;sortby=%s&amp;desc=%s", $MyURL, ($timer->{active} & 1) ? 0 : 1, $timer->{id}, $sortby, $desc),
+        $timer->{delurl}    = $MyURL . "?aktion=timer_delete&amp;timer_id=" . $timer->{id},
+        $timer->{modurl}    = $MyURL . "?aktion=timer_new_form&amp;timer_id=" . $timer->{id},
+        $timer->{toggleurl} = sprintf("%s?aktion=timer_toggle&amp;active=%s&amp;id=%s", $MyURL, ($timer->{active} & 1) ? 0 : 1, $timer->{id}), #TODO: nur id?
         $timer->{dor}       = my_strftime("%a %d.%m", $timer->{startsse});    #TODO: localize date
 
         $timer->{title} = CGI::escapeHTML($timer->{title});
@@ -2862,12 +2809,12 @@ sub timer_list {
 
           $timer->{start}   = my_strftime("%H:%M", $timer->{start});
         $timer->{stop}      = my_strftime("%H:%M", $timer->{stop});
-        $timer->{sortbyactive}  = 1 if ($sortby eq "active");
-        $timer->{sortbychannel} = 1 if ($sortby eq "channel");
-        $timer->{sortbyname}    = 1 if ($sortby eq "name");
-        $timer->{sortbystart}   = 1 if ($sortby eq "start");
-        $timer->{sortbystop}    = 1 if ($sortby eq "stop");
-        $timer->{sortbyday}     = 1 if ($sortby eq "day");
+        $timer->{sortbyactive}  = 1 if ($CONFIG{TM_SORTBY} eq "active");
+        $timer->{sortbychannel} = 1 if ($CONFIG{TM_SORTBY} eq "channel");
+        $timer->{sortbyname}    = 1 if ($CONFIG{TM_SORTBY} eq "name");
+        $timer->{sortbystart}   = 1 if ($CONFIG{TM_SORTBY} eq "start");
+        $timer->{sortbystop}    = 1 if ($CONFIG{TM_SORTBY} eq "stop");
+        $timer->{sortbyday}     = 1 if ($CONFIG{TM_SORTBY} eq "day");
 
         $timer->{transponder} = get_transponder_from_vdrid($timer->{vdr_id});
         $timer->{ca}          = get_ca_from_vdrid($timer->{vdr_id});
@@ -3018,64 +2965,61 @@ sub timer_list {
     }
 
     #
-    if ($sortby eq "active") {
-        if (!$desc) {
+    if ($CONFIG{TM_SORTBY} eq "active") {
+        if ($CONFIG{TM_DESC}) {
             @timer = sort({ $b->{active} <=> $a->{active} } @timer);
         } else {
             @timer = sort({ $a->{active} <=> $b->{active} } @timer);
         }
-    } elsif ($sortby eq "channel") {
-        if (!$desc) {
+    } elsif ($CONFIG{TM_SORTBY} eq "channel") {
+        if ($CONFIG{TM_DESC}) {
             @timer = sort({ lc($b->{cdesc}) cmp lc($a->{cdesc}) } @timer);
         } else {
             @timer = sort({ lc($a->{cdesc}) cmp lc($b->{cdesc}) } @timer);
         }
-    } elsif ($sortby eq "name") {
-        if (!$desc) {
+    } elsif ($CONFIG{TM_SORTBY} eq "name") {
+        if ($CONFIG{TM_DESC}) {
             @timer = sort({ lc($b->{title}) cmp lc($a->{title}) } @timer);
         } else {
             @timer = sort({ lc($a->{title}) cmp lc($b->{title}) } @timer);
         }
-    } elsif ($sortby eq "start") {
-        if (!$desc) {
+    } elsif ($CONFIG{TM_SORTBY} eq "start") {
+        if ($CONFIG{TM_DESC}) {
             @timer = sort({ $b->{start} <=> $a->{start} } @timer);
         } else {
             @timer = sort({ $a->{start} <=> $b->{start} } @timer);
         }
-    } elsif ($sortby eq "stop") {
-        if (!$desc) {
+    } elsif ($CONFIG{TM_SORTBY} eq "stop") {
+        if ($CONFIG{TM_DESC}) {
             @timer = sort({ $b->{stop} <=> $a->{stop} } @timer);
         } else {
             @timer = sort({ $a->{stop} <=> $b->{stop} } @timer);
         }
-    } elsif ($sortby eq "day") {
-        if (!$desc) {
+    } elsif ($CONFIG{TM_SORTBY} eq "day") {
+        if ($CONFIG{TM_DESC}) {
             @timer = sort({ $b->{startsse} <=> $a->{startsse} } @timer);
         } else {
             @timer = sort({ $a->{startsse} <=> $b->{startsse} } @timer);
         }
     }
-    my $cur_desc = $desc;
-    $desc ? ($desc = 0) : ($desc = 1);
+    my $toggle_desc = ($CONFIG{TM_DESC} ? 0 : 1);
     @timer2 = @timer;
     @timer2 = sort({ lc($a->{sortfield}) cmp lc($b->{sortfield}) } @timer2);
 
-    my $template = TemplateNew("timer_list.html");
-    my $vars = { sortbydayurl     => "$MyURL?aktion=timer_list&amp;sortby=day&amp;desc=" .     (($sortby eq "day")     ? $desc : $cur_desc),
-                 sortbychannelurl => "$MyURL?aktion=timer_list&amp;sortby=channel&amp;desc=" . (($sortby eq "channel") ? $desc : $cur_desc),
-                 sortbynameurl    => "$MyURL?aktion=timer_list&amp;sortby=name&amp;desc=" .    (($sortby eq "name")    ? $desc : $cur_desc),
-                 sortbyactiveurl  => "$MyURL?aktion=timer_list&amp;sortby=active&amp;desc=" .  (($sortby eq "active")  ? $desc : $cur_desc),
-                 sortbystarturl   => "$MyURL?aktion=timer_list&amp;sortby=start&amp;desc=" .   (($sortby eq "start")   ? $desc : $cur_desc),
-                 sortbystopurl    => "$MyURL?aktion=timer_list&amp;sortby=stop&amp;desc=" .    (($sortby eq "stop")    ? $desc : $cur_desc),
-                 sortbyday     => ($sortby eq "day")     ? 1 : 0,
-                 sortbychannel => ($sortby eq "channel") ? 1 : 0,
-                 sortbyname    => ($sortby eq "name")    ? 1 : 0,
-                 sortbyactive  => ($sortby eq "active")  ? 1 : 0,
-                 sortbystart   => ($sortby eq "start")   ? 1 : 0,
-                 sortbystop    => ($sortby eq "stop")    ? 1 : 0,
-                 sortby        => $sortby,
-                 desc          => $desc,
-                 cur_desc      => $cur_desc,
+    my $vars = { sortbydayurl     => "$MyURL?aktion=timer_list&amp;sortby=day&amp;desc=" .     (($CONFIG{TM_SORTBY} eq "day")     ? $toggle_desc : $CONFIG{TM_DESC}),
+                 sortbychannelurl => "$MyURL?aktion=timer_list&amp;sortby=channel&amp;desc=" . (($CONFIG{TM_SORTBY} eq "channel") ? $toggle_desc : $CONFIG{TM_DESC}),
+                 sortbynameurl    => "$MyURL?aktion=timer_list&amp;sortby=name&amp;desc=" .    (($CONFIG{TM_SORTBY} eq "name")    ? $toggle_desc : $CONFIG{TM_DESC}),
+                 sortbyactiveurl  => "$MyURL?aktion=timer_list&amp;sortby=active&amp;desc=" .  (($CONFIG{TM_SORTBY} eq "active")  ? $toggle_desc : $CONFIG{TM_DESC}),
+                 sortbystarturl   => "$MyURL?aktion=timer_list&amp;sortby=start&amp;desc=" .   (($CONFIG{TM_SORTBY} eq "start")   ? $toggle_desc : $CONFIG{TM_DESC}),
+                 sortbystopurl    => "$MyURL?aktion=timer_list&amp;sortby=stop&amp;desc=" .    (($CONFIG{TM_SORTBY} eq "stop")    ? $toggle_desc : $CONFIG{TM_DESC}),
+                 sortbyday     => ($CONFIG{TM_SORTBY} eq "day")     ? 1 : 0,
+                 sortbychannel => ($CONFIG{TM_SORTBY} eq "channel") ? 1 : 0,
+                 sortbyname    => ($CONFIG{TM_SORTBY} eq "name")    ? 1 : 0,
+                 sortbyactive  => ($CONFIG{TM_SORTBY} eq "active")  ? 1 : 0,
+                 sortbystart   => ($CONFIG{TM_SORTBY} eq "start")   ? 1 : 0,
+                 sortbystop    => ($CONFIG{TM_SORTBY} eq "stop")    ? 1 : 0,
+                 sortby        => $CONFIG{TM_SORTBY},
+                 desc          => $CONFIG{TM_DESC} ? "desc" : "asc",
                  timer_loop    => \@timer,
                  timers        => \@timer2,
                  timers2       => \@timer2,
@@ -3084,26 +3028,17 @@ sub timer_list {
                  help_url      => HelpURL("timer_list"),
                  current       => $current,
                  title         => $title,
-                 usercss       => $UserCSS,
-                 activateurl   => sprintf("%s?aktion=timer_toggle&amp;active=1&amp;sortby=%s&amp;desc=%s", $MyURL,, $sortby, $cur_desc),
-                 inactivateurl => sprintf("%s?aktion=timer_toggle&amp;active=0&amp;sortby=%s&amp;desc=%s", $MyURL,, $sortby, $cur_desc),
-                 prevdayurl    => $prev_day ? sprintf("%s?aktion=timer_list&amp;active=0&amp;sortby=%s&amp;desc=%s&timer=%s", $MyURL,, $sortby, $cur_desc, $prev_day) : undef,
-                 nextdayurl    => $next_day ? sprintf("%s?aktion=timer_list&amp;active=0&amp;sortby=%s&amp;desc=%s&timer=%s", $MyURL,, $sortby, $cur_desc, $next_day) : undef,
-                 config        => \%CONFIG
+                 activateurl   => sprintf("%s?aktion=timer_toggle&amp;active=1", $MyURL),
+                 inactivateurl => sprintf("%s?aktion=timer_toggle&amp;active=0", $MyURL),
+                 prevdayurl    => $prev_day ? sprintf("%s?aktion=timer_list&amp;active=0&amp;timer=%s", $MyURL, $prev_day) : undef,
+                 nextdayurl    => $next_day ? sprintf("%s?aktion=timer_list&amp;active=0&amp;timer=%s", $MyURL, $next_day) : undef
     };
-
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("timer_list.html", $vars);
 }
 
 sub timer_toggle {
     UptoDate();
     my $id     = $q->param("id");
-    my $sortby = $q->param("sortby");
-    my $desc   = $q->param("desc");
     if ($id) {
         my $active = $q->param("active");
         SendCMD(sprintf("modt %s %s", $id, $active ? "on" : "off"));
@@ -3129,7 +3064,7 @@ sub timer_toggle {
             CloseSocket();
         }
     }
-    return (headerForward(RedirectToReferer("$MyURL?aktion=timer_list&sortby=$sortby&desc=$desc")));
+    return (headerForward(RedirectToReferer("$MyURL?aktion=timer_list")));
 }
 
 sub timer_new_form {
@@ -3177,8 +3112,7 @@ sub timer_new_form {
 
     my $at_epg = $this_event->{event_id} > 0 ? can_do_eventid_autotimer($this_event->{vdr_id}) : 0;
 
-    my $vars = { usercss  => $UserCSS,
-                 url      => $MyURL,
+    my $vars = { url      => $MyURL,
                  active   => $this_event->{active} & 1,
                  event_id => $this_event->{event_id},
                  starth   => my_strftime("%H", $this_event->{start}),
@@ -3202,14 +3136,7 @@ sub timer_new_form {
                  referer => $ref ? Encode_Referer($ref) : undef,
                  help_url => HelpURL("timer_new")
     };
-
-    my $template = TemplateNew("timer_new.html");
-    $template->param($vars);
-
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("timer_new.html", $vars);
 }
 
 sub timer_add {
@@ -3443,15 +3370,9 @@ sub live_stream {
 sub at_timer_list {
     return if (UptoDate());
 
-    #
-    my $desc;
-    if (!defined($q->param("desc"))) {
-        $desc = 1;
-    } else {
-        $q->param("desc") ? ($desc = 1) : ($desc = 0);
-    }
-    my $sortby = $q->param("sortby");
-    ($sortby = "pattern") if (!$sortby);
+    $CONFIG{AT_DESC} = ($q->param("desc") ? 1 : 0) if (defined($q->param("desc")));
+    $CONFIG{AT_SORTBY} = $q->param("sortby") if (defined($q->param("sortby")));
+    $CONFIG{AT_SORTBY} = "pattern" if (!$CONFIG{AT_SORTBY});
 
     #
     my @at;
@@ -3468,90 +3389,79 @@ sub at_timer_list {
         $_->{pattern}    = CGI::escapeHTML($_->{pattern});
         $_->{pattern_js} =~ s/\'/\\\'/g;
         $_->{pattern_js} =~ s/\"/&quot;/g;
-        $_->{modurl}        = $MyURL . "?aktion=at_timer_edit&amp;id=$id&amp;sortby=$sortby&amp;desc=$desc";
-        $_->{delurl}        = $MyURL . "?aktion=at_timer_delete&amp;id=$id&amp;sortby=$sortby&amp;desc=$desc";
+        $_->{modurl}        = $MyURL . "?aktion=at_timer_edit&amp;id=$id";
+        $_->{delurl}        = $MyURL . "?aktion=at_timer_delete&amp;id=$id";
         $_->{prio}          = $_->{prio} ? $_->{prio} : $CONFIG{AT_PRIORITY};
         $_->{lft}           = $_->{lft} ? $_->{lft} : $CONFIG{AT_LIFETIME};
         $_->{id}            = $id;
         $_->{proglink}      = sprintf("%s?aktion=prog_list&amp;vdr_id=%s", $MyURL, $_->{channel});
         $_->{channel}       = GetChannelDescByNumber($_->{channel});
-        $_->{sortbyactive}  = 1 if ($sortby eq "active");
-        $_->{sortbychannel} = 1 if ($sortby eq "channel");
-        $_->{sortbypattern} = 1 if ($sortby eq "pattern");
-        $_->{sortbystart}   = 1 if ($sortby eq "start");
-        $_->{sortbystop}    = 1 if ($sortby eq "stop");
-        $_->{toggleurl}     = sprintf("%s?aktion=at_timer_toggle&amp;active=%s&amp;id=%s&amp;sortby=%s&amp;desc=%s", $MyURL, ($_->{active} & 1) ? 0 : 1, $_->{id}, $sortby, $desc), push(@at, $_);
+        $_->{sortbyactive}  = 1 if ($CONFIG{AT_SORTBY} eq "active");
+        $_->{sortbychannel} = 1 if ($CONFIG{AT_SORTBY} eq "channel");
+        $_->{sortbypattern} = 1 if ($CONFIG{AT_SORTBY} eq "pattern");
+        $_->{sortbystart}   = 1 if ($CONFIG{AT_SORTBY} eq "start");
+        $_->{sortbystop}    = 1 if ($CONFIG{AT_SORTBY} eq "stop");
+        $_->{toggleurl}     = sprintf("%s?aktion=at_timer_toggle&amp;active=%s&amp;id=%s", $MyURL, ($_->{active} & 1) ? 0 : 1, $_->{id}), push(@at, $_);
     }
     my @timer = sort({ lc($a->{pattern}) cmp lc($b->{pattern}) } @at);
 
     #
-    if ($sortby eq "active") {
-        if (!$desc) {
+    if ($CONFIG{AT_SORTBY} eq "active") {
+        if ($CONFIG{AT_DESC}) {
             @timer = sort({ $b->{active} <=> $a->{active} } @timer);
         } else {
             @timer = sort({ $a->{active} <=> $b->{active} } @timer);
         }
-    } elsif ($sortby eq "channel") {
-        if (!$desc) {
+    } elsif ($CONFIG{AT_SORTBY} eq "channel") {
+        if ($CONFIG{AT_DESC}) {
             @timer = sort({ lc($b->{channel}) cmp lc($a->{channel}) } @timer);
         } else {
             @timer = sort({ lc($a->{channel}) cmp lc($b->{channel}) } @timer);
         }
-    } elsif ($sortby eq "pattern") {
-        if (!$desc) {
+    } elsif ($CONFIG{AT_SORTBY} eq "pattern") {
+        if ($CONFIG{AT_DESC}) {
             @timer = sort({ lc($b->{pattern}) cmp lc($a->{pattern}) } @timer);
         } else {
             @timer = sort({ lc($a->{pattern}) cmp lc($b->{pattern}) } @timer);
         }
-    } elsif ($sortby eq "start") {
-        if (!$desc) {
+    } elsif ($CONFIG{AT_SORTBY} eq "start") {
+        if ($CONFIG{AT_DESC}) {
             @timer = sort({ $b->{start} <=> $a->{start} } @timer);
         } else {
             @timer = sort({ $a->{start} <=> $b->{start} } @timer);
         }
-    } elsif ($sortby eq "stop") {
-        if (!$desc) {
+    } elsif ($CONFIG{AT_SORTBY} eq "stop") {
+        if ($CONFIG{AT_DESC}) {
             @timer = sort({ $b->{stop} <=> $a->{stop} } @timer);
         } else {
             @timer = sort({ $a->{stop} <=> $b->{stop} } @timer);
         }
     }
-    my $cur_desc = $desc;
-    $desc ? ($desc = 0) : ($desc = 1);
+    my $toggle_desc = ($CONFIG{AT_DESC} ? 0 : 1);
 
-    my $template = TemplateNew("at_timer_list.html");
-    my $vars = { usercss          => $UserCSS,
-                 sortbychannelurl => "$MyURL?aktion=at_timer_list&amp;sortby=channel&amp;desc=" . (($sortby eq "channel") ? $desc : $cur_desc),
-                 sortbypatternurl => "$MyURL?aktion=at_timer_list&amp;sortby=pattern&amp;desc=" . (($sortby eq "pattern") ? $desc : $cur_desc),
-                 sortbyactiveurl  => "$MyURL?aktion=at_timer_list&amp;sortby=active&amp;desc=" . (($sortby eq "active") ? $desc : $cur_desc),
-                 sortbystarturl   => "$MyURL?aktion=at_timer_list&amp;sortby=start&amp;desc=" . (($sortby eq "start") ? $desc : $cur_desc),
-                 sortbystopurl    => "$MyURL?aktion=at_timer_list&amp;sortby=stop&amp;desc=" . (($sortby eq "stop") ? $desc : $cur_desc),
-                 sortbychannel => ($sortby eq "channel") ? 1 : 0,
-                 sortbypattern => ($sortby eq "pattern") ? 1 : 0,
-                 sortbyactive  => ($sortby eq "active")  ? 1 : 0,
-                 sortbystart   => ($sortby eq "start")   ? 1 : 0,
-                 sortbystop    => ($sortby eq "stop")    ? 1 : 0,
-                 desc          => $desc,
-                 sortby        => $sortby,
+    my $vars = { sortbychannelurl => "$MyURL?aktion=at_timer_list&amp;sortby=channel&amp;desc=" . (($CONFIG{AT_SORTBY} eq "channel") ? $toggle_desc : $CONFIG{AT_DESC}),
+                 sortbypatternurl => "$MyURL?aktion=at_timer_list&amp;sortby=pattern&amp;desc=" . (($CONFIG{AT_SORTBY} eq "pattern") ? $toggle_desc : $CONFIG{AT_DESC}),
+                 sortbyactiveurl  => "$MyURL?aktion=at_timer_list&amp;sortby=active&amp;desc=" . (($CONFIG{AT_SORTBY} eq "active") ? $toggle_desc : $CONFIG{AT_DESC}),
+                 sortbystarturl   => "$MyURL?aktion=at_timer_list&amp;sortby=start&amp;desc=" . (($CONFIG{AT_SORTBY} eq "start") ? $toggle_desc : $CONFIG{AT_DESC}),
+                 sortbystopurl    => "$MyURL?aktion=at_timer_list&amp;sortby=stop&amp;desc=" . (($CONFIG{AT_SORTBY} eq "stop") ? $toggle_desc : $CONFIG{AT_DESC}),
+                 sortbychannel => ($CONFIG{AT_SORTBY} eq "channel") ? 1 : 0,
+                 sortbypattern => ($CONFIG{AT_SORTBY} eq "pattern") ? 1 : 0,
+                 sortbyactive  => ($CONFIG{AT_SORTBY} eq "active")  ? 1 : 0,
+                 sortbystart   => ($CONFIG{AT_SORTBY} eq "start")   ? 1 : 0,
+                 sortbystop    => ($CONFIG{AT_SORTBY} eq "stop")    ? 1 : 0,
+                 desc          => $CONFIG{AT_DESC} ? "desc" : "asc",
                  at_timer_loop => \@timer,
                  at_timer_loop2 => \@timer,
                  url            => $MyURL,
-                 help_url       => HelpURL("at_timer_list"),
-                 config         => \%CONFIG
+                 help_url       => HelpURL("at_timer_list")
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("at_timer_list.html", $vars);
 }
 
 sub at_timer_toggle {
     UptoDate();
     my $active = $q->param("active");
     my $id     = $q->param("id");
-    my $sortby = $q->param("sortby");
-    my $desc   = $q->param("desc");
 
     my (@at, $z);
 
@@ -3564,7 +3474,7 @@ sub at_timer_toggle {
     }
     AT_Write(@at);
 
-    return (headerForward(RedirectToReferer("$MyURL?aktion=at_timer_list&sortby=$sortby&desc=$desc")));
+    return (headerForward(RedirectToReferer("$MyURL?aktion=at_timer_list")));
 }
 
 sub at_timer_edit {
@@ -3590,9 +3500,7 @@ sub at_timer_edit {
 
     my $pattern = $at[ $id - 1 ]->{pattern};
     $pattern =~ s/"/\&quot;/g;
-    my $template = TemplateNew("at_timer_new.html");
-    my $vars = { usercss  => $UserCSS,
-                 channels => \@chans,
+    my $vars = { channels => \@chans,
                  id       => $id,
                  url      => $MyURL,
                  prio     => $at[ $id - 1 ]->{prio} ? $at[ $id - 1 ]->{prio} : $CONFIG{AT_PRIORITY},
@@ -3616,12 +3524,7 @@ sub at_timer_edit {
                  (map { $_ => $at[ $id - 1 ]->{weekdays}->{$_} } qw (wday_mon wday_tue wday_wed wday_thu wday_fri wday_sat wday_sun)),
                  help_url => HelpURL("at_timer_new")
     };
-
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("at_timer_new.html", $vars);
 }
 
 sub at_timer_new {
@@ -3636,9 +3539,7 @@ sub at_timer_new {
             push(@chans, $chan);
         }
     }
-    my $template = TemplateNew("at_timer_new.html");
-    my $vars = { usercss  => $UserCSS,
-                 url      => $MyURL,
+    my $vars = { url      => $MyURL,
                  active   => $q->param("active"),
                  done     => $q->param("done"),
                  title    => 1,
@@ -3657,11 +3558,7 @@ sub at_timer_new {
                  newtimer => 1,
                  help_url => HelpURL("at_timer_new")
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("at_timer_new.html", $vars);
 }
 
 sub at_timer_save {
@@ -3811,12 +3708,10 @@ sub at_timer_test {
     };
 
     my @at_matches = AutoTimer(1, @at);
-    my $template   = TemplateNew("at_timer_new.html");
     my $pattern    = $q->param("pattern");
     $pattern =~ s/"/\&quot;/g;
     my $vars = {
         id       => $id,
-        usercss  => $UserCSS,
         url      => $MyURL,
         channels => \@chans,
 
@@ -3846,11 +3741,7 @@ sub at_timer_test {
         at_test     => 1,
         matches     => \@at_matches
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("at_timer_new.html", $vars);
 }
 
 sub getSplittedTime {
@@ -3951,12 +3842,14 @@ sub prog_timeline {
 
             my $title = $event->{title};
             $title =~ s/"/\&quot;/g;
+            my $progname = $event->{channel_name};
+            $progname =~ s/"/\&quot;/g;
             push(@show,
                  {  start    => $event->{start},
                     stop     => $event->{stop},
                     title    => $title,
                     subtitle => (($event->{subtitle} && length($event->{subtitle}) > 30) ? substr($event->{subtitle}, 0, 30) . "..." : $event->{subtitle}),
-                    progname => $event->{channel_name},
+                    progname => $progname,
                     summary  => $event->{summary},
                     vdr_id   => $event->{vdr_id},
                     proglink  => sprintf("%s?aktion=prog_list&amp;vdr_id=%s",    $MyURL, $event->{vdr_id}),
@@ -3964,7 +3857,7 @@ sub prog_timeline {
                     infurl => ($event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef),
                     recurl => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
                     anchor => $event->{event_id},
-                    timer => (defined $TIM->{ $event->{title} } && $TIM->{ $event->{title} }->{vdr_id} == $event->{vdr_id} && $TIM->{ $event->{title} }->{active} ? 1 : 0),
+                    timer => (defined $TIM->{ $event->{title} } && $TIM->{ $event->{title} }->{vdr_id} == $event->{vdr_id} && $TIM->{ $event->{title} }->{active} ? 1 : 0), #TODO
                  }
             );
         }
@@ -3976,23 +3869,15 @@ sub prog_timeline {
         undef @show;
     }
 
-    my $vars = { usercss => $UserCSS,
-                 shows   => $shows,
+    my $vars = { shows   => $shows,
                  shows2  => $shows,
                  now_sec => $event_time,
                  now     => strftime("%H:%M", localtime($event_time)),
                  datum   => my_strftime("%A, %x", time),
                  nowurl  => $MyURL . "?aktion=prog_timeline",
-                 url     => $MyURL,
-                 config  => \%CONFIG
+                 url     => $MyURL
     };
-
-    my $template = TemplateNew("prog_timeline.html");
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("prog_timeline.html", $vars);
 }
 
 #############################################################################
@@ -4025,6 +3910,7 @@ sub prog_summary {
     my (@show, @shows, @temp);
     for (keys(%EPG)) {
         for my $event (@{ $EPG{$_} }) {
+            next if ($event->{stop} <= $now);
             if (!$search) {
                 if ($CONFIG{CHANNELS_WANTED_SUMMARY}) {
                     my $f = 0;
@@ -4102,8 +3988,8 @@ sub prog_summary {
                     vdr_id      => $event->{vdr_id},
                     proglink  => sprintf("%s?aktion=prog_list&amp;vdr_id=%s",      $MyURL,        $event->{vdr_id}),
                     switchurl => $running ? sprintf("%s?aktion=prog_switch&amp;channel=%s",   $MyURL,        $event->{vdr_id}) : undef,
-                    streamurl => sprintf("%s%s?aktion=live_stream&amp;channel=%s", $MyStreamBase, $CONFIG{TV_EXT}, $event->{vdr_id}),
-                    stream_live_on => $running ? $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON} : undef,
+                    streamurl => $FEATURES{STREAMDEV} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s", $MyStreamBase, $CONFIG{TV_EXT}, $event->{vdr_id}) : undef,
+                    stream_live_on => $FEATURES{STREAMDEV} && $running ? $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON} : undef,
                     infurl => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
                     recurl     => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
                     find_title => uri_escape("/^" . quotemeta($event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~") . "/i"),
@@ -4152,21 +4038,16 @@ sub prog_summary {
 
     #
     my $label = $next ? gettext("What's on after") : gettext("What's on at");
-    my $template = TemplateNew(($view eq "ext" ? "prog_summary.html" : "prog_summary2.html"));
-    my $vars = { usercss => $UserCSS,
-                 rows    => \@show,
+    my $vars = { rows    => \@show,
                  now     => $displayed_time,
-                 title   => ($search ? gettext("Suitable matches for:") . " <i>" . $search . "</i>" : $label . " " . strftime("%H:%M", localtime($event_time)) . " " . gettext("o'clock")),
+                 title   => ($search ? gettext("Suitable matches for:") . " <i>" . $search . "</i>" 
+                                     : $label . " " . strftime("%H:%M", localtime($event_time)) . " " . gettext("o'clock")),
                  switchview_url  => $MyURL . "?aktion=prog_summary&amp;view=" . ($view eq "ext" ? "sml" : "ext") . ($next ? "&amp;next=1" : "") . ($search ? "&amp;search=" . uri_escape($search) : "") . ($time ? "&amp;time=$time" : ""),
                  switchview_text => ($view eq "ext" ? gettext("short view") : gettext("long view")),
                  times   => \@times,
                  url     => $MyURL
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate($view eq "ext" ? "prog_summary.html" : "prog_summary2.html", $vars);
 }
 
 #############################################################################
@@ -4175,14 +4056,10 @@ sub prog_summary {
 sub rec_list {
     my @recordings;
 
-    my $desc;
-    if (!defined($q->param("desc"))) {
-        $desc = 1;
-    } else {
-        $q->param("desc") ? ($desc = 1) : ($desc = 0);
-    }
-    my $sortby = $q->param("sortby");
-    ($sortby = "name") if (!$sortby);
+    $CONFIG{REC_DESC} = ($q->param("desc") ? 1 : 0) if (defined($q->param("desc")));
+    $CONFIG{REC_SORTBY} = $q->param("sortby") if (defined($q->param("sortby")));
+    $CONFIG{REC_SORTBY} = "name" if (!$CONFIG{REC_SORTBY});
+
     my $parent = $q->param("parent");
     my $parent2;
     if (!$parent) {
@@ -4191,7 +4068,7 @@ sub rec_list {
         $parent = uri_escape($parent);
     }
 
-    ParseRecordings($parent, $sortby, $desc);
+    ParseRecordings($parent);
 
     # create path array
     my @path;
@@ -4233,8 +4110,8 @@ sub rec_list {
     }
 
     #
-    if ($sortby eq "time") {
-        if (!$desc) {
+    if ($CONFIG{REC_SORTBY} eq "time") {
+        if ($CONFIG{REC_DESC}) {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
                                  lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
                                  $b->{time} <=> $a->{time} } @recordings);
@@ -4243,8 +4120,8 @@ sub rec_list {
                                  lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
                                  $a->{time} <=> $b->{time} } @recordings);
         }
-    } elsif ($sortby eq "name") {
-        if (!$desc) {
+    } elsif ($CONFIG{REC_SORTBY} eq "name") {
+        if ($CONFIG{REC_DESC}) {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
                                  lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
                                  lc($b->{name}) cmp lc($a->{name}) } @recordings);
@@ -4253,8 +4130,8 @@ sub rec_list {
                                  lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
                                  lc($a->{name}) cmp lc($b->{name}) } @recordings);
         }
-    } elsif ($sortby eq "date") {
-        if (!$desc) {
+    } elsif ($CONFIG{REC_SORTBY} eq "date") {
+        if ($CONFIG{REC_DESC}) {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
                                  lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
                                  $b->{sse} <=> $a->{sse} } @recordings);
@@ -4264,25 +4141,21 @@ sub rec_list {
                                  $a->{sse} <=> $b->{sse} } @recordings);
         }
     }
-    my $cur_desc = $desc;
-    $desc ? ($desc = 0) : ($desc = 1);
+    my $toggle_desc = ($CONFIG{REC_DESC} ? 0 : 1);
 
     #
     my ($total, $minutes_total, $free, $minutes_free, $percent) = VideoDiskFree();
 
     my $referer = Encode_Referer($MyURL . "?" . $Query);
     chomp($referer);
-    my $template = TemplateNew("rec_list.html");
-    my $vars = { usercss       => $UserCSS,
-                 recloop       => \@recordings,
-                 sortbydateurl => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=date&amp;parent=$parent&amp;desc=" . (($sortby eq "date") ? $desc : $cur_desc),
-                 sortbytimeurl => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=time&amp;parent=$parent&amp;desc=" . (($sortby eq "time") ? $desc : $cur_desc),
-                 sortbynameurl => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=name&amp;parent=$parent&amp;desc=" . (($sortby eq "name") ? $desc : $cur_desc),
-                 sortbydate => ($sortby eq "date") ? 1 : 0,
-                 sortbytime => ($sortby eq "time") ? 1 : 0,
-                 sortbyname => ($sortby eq "name") ? 1 : 0,
-                 desc       => $desc,
-                 cur_sorting   => "&amp;sortby=$sortby&amp;desc=$cur_desc",
+    my $vars = { recloop       => \@recordings,
+                 sortbydateurl => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=date&amp;parent=$parent&amp;desc=" . (($CONFIG{REC_SORTBY} eq "date") ? $toggle_desc : $CONFIG{REC_DESC}),
+                 sortbytimeurl => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=time&amp;parent=$parent&amp;desc=" . (($CONFIG{REC_SORTBY} eq "time") ? $toggle_desc : $CONFIG{REC_DESC}),
+                 sortbynameurl => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=name&amp;parent=$parent&amp;desc=" . (($CONFIG{REC_SORTBY} eq "name") ? $toggle_desc : $CONFIG{REC_DESC}),
+                 sortbydate => ($CONFIG{REC_SORTBY} eq "date") ? 1 : 0,
+                 sortbytime => ($CONFIG{REC_SORTBY} eq "time") ? 1 : 0,
+                 sortbyname => ($CONFIG{REC_SORTBY} eq "name") ? 1 : 0,
+                 desc       => $CONFIG{REC_DESC} ? "desc" : "asc",
                  disk_total    => $total,
                  disk_free     => $free,
                  disk_percent  => $percent,
@@ -4295,17 +4168,11 @@ sub rec_list {
                  stream_rec_on => $CONFIG{ST_FUNC} && $CONFIG{ST_REC_ON},
                  referer       => "&amp;referer=$referer"
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("rec_list.html", $vars);
 }
 
 sub ParseRecordings {
     my $parent = shift;
-    my $sortby = shift;
-    my $desc   = shift;
 
     return if ((time() - $CONFIG{CACHE_REC_LASTUPDATE}) < ($CONFIG{CACHE_REC_TIMEOUT} * 60));
 
@@ -4444,10 +4311,11 @@ sub ParseRecordings {
                 new           => $new,
                 id            => $id,
                 delurl        => $MyURL . "?aktion=rec_delete&amp;rec_delete=y&amp;id=$id",
-                editurl       => $MyURL . "?aktion=rec_edit&amp;id=$id",
+                editurl       => $FEATURES{REC_RENAME} ? $MyURL . "?aktion=rec_edit&amp;id=$id" : undef,
                 infurl        => $MyURL . "?aktion=rec_detail&amp;id=$id",
-                streamurl     => $MyStreamBase . $CONFIG{REC_EXT} . "?aktion=rec_stream&amp;id=$id",
-                stream_rec_on => $CONFIG{ST_FUNC} && $CONFIG{ST_REC_ON}
+                playurl       => $VDRVERSION >= 10331 ? $MyURL . "?aktion=rec_play&amp;id=$id" : undef, #TODO
+                cuturl        => $VDRVERSION >= 10331 ? $MyURL . "?aktion=rec_cut&amp;id=$id" : undef, #TODO
+                streamurl     => ($CONFIG{ST_FUNC} && $CONFIG{ST_REC_ON}) ? $MyStreamBase . $CONFIG{REC_EXT} . "?aktion=rec_stream&amp;id=$id" : undef
              }
         );
     }
@@ -4530,7 +4398,6 @@ sub getRecInfo {
         $imdb_title      =~ s/^.*\~\%*([^\~]*)$/$1/;
 
         $vars = { url      => $MyURL,
-                  usercss  => $UserCSS,
                   text     => $displaytext ? $displaytext : undef,
                   title    => $displaytitle ? $displaytitle : undef,
                   subtitle => $displaysubtitle ? $displaysubtitle : undef,
@@ -4563,7 +4430,6 @@ sub getRecInfo {
         $imdb_title =~ s/^.*\~//;
         $title      =~ s/\~/ - /g unless($rename);
         $vars = { url     => $MyURL,
-                  usercss => $UserCSS,
                   text    => $text ? $text : "",
                   imdburl => "http://akas.imdb.com/Tsearch?title=" . uri_escape($imdb_title),
                   title   => CGI::escapeHTML($title),
@@ -4577,12 +4443,7 @@ sub getRecInfo {
 sub rec_detail {
     my $vars = getRecInfo($q->param('id'));
 
-    my $template = TemplateNew("prog_detail.html");
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("prog_detail.html", $vars);
 }
 
 sub rec_delete {
@@ -4678,13 +4539,8 @@ sub rec_edit {
     # determine referer (redirect to where we come from)
     my $ref = getReferer();
 
-    my $template = TemplateNew("rec_edit.html");
     my $vars = getRecInfo($q->param("id"), $ref ? Encode_Referer($ref) : undef, "renr");
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("rec_edit.html", $vars);
 }
 
 sub rec_rename {
@@ -4703,6 +4559,22 @@ sub rec_rename {
         return headerForward($ref);
     } else {
         return headerForward("$MyURL?aktion=rec_list&sortby=" . $q->param("sortby") . "&desc=" . $q->param("desc"));
+    }
+}
+
+sub rec_play {
+    my $id = $q->param('id');
+    if ($id) {
+        SendCMD("PLAY $id");
+        CloseSocket();
+    }
+}
+
+sub rec_cut {
+    my $id = $q->param('id');
+    if ($id) {
+        SendCMD("EDIT $id");
+        CloseSocket();
     }
 }
 
@@ -4725,11 +4597,9 @@ sub config {
                 $CONFIG{$_} = $q->param($_);
             }
         }
+ 
+        ValidConfig();
 
-        $CONFIG{TV_MIMETYPE}  = "video/x-mpegurl" if (!$CONFIG{TV_MIMETYPE});
-        $CONFIG{TV_EXT}       = "m3u"             if (!$CONFIG{TV_EXT});
-        $CONFIG{REC_MIMETYPE} = "video/x-mpegurl" if (!$CONFIG{REC_MIMETYPE});
-        $CONFIG{REC_EXT}      = "m3u"             if (!$CONFIG{REC_EXT});
         LoadTranslation() if ($old_lang ne $CONFIG{LANG});
         UptoDate(1) if ($old_epgprune != $CONFIG{EPG_PRUNE} || $old_epgdirect != $CONFIG{EPG_DIRECT} || $old_epgfile ne $CONFIG{EPG_FILENAME});
         if ($old_vdrconfdir ne $CONFIG{VDRCONFDIR}) {
@@ -4849,10 +4719,7 @@ sub config {
         }
     }
 
-    my $template = TemplateNew("config.html");
-    my $vars = { usercss => $UserCSS,
-                 %CONFIG,
-                 TEMPLATELIST      => \@template,
+    my $vars = { TEMPLATELIST      => \@template,
                  ALL_CHANNELS      => \@all_channels,
                  SELECTED_CHANNELS => \@selected_channels,
                  LOGINPAGES        => \@loginpages,
@@ -4862,27 +4729,17 @@ sub config {
                  url               => $MyURL,
                  help_url          => HelpURL("config")
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("config.html", $vars);
 }
 
 #############################################################################
 # remote control
 #############################################################################
 sub rc_show {
-    my $template = TemplateNew("rc.html");
-    my $vars = { usercss => $UserCSS,
-                 url     => sprintf("%s?aktion=grab_picture", $MyURL),
+    my $vars = { url     => sprintf("%s?aktion=grab_picture", $MyURL),
                  host    => $CONFIG{VDR_HOST}
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("rc.html", $vars);
 }
 
 sub rc_hitk {
@@ -4900,6 +4757,11 @@ sub rc_hitk {
 }
 
 sub tv_show {
+    $CONFIG{TV_INTERVAL} = $q->param("interval") if($q->param("interval"));
+    $CONFIG{TV_INTERVAL} = "5" unless($CONFIG{TV_INTERVAL});
+    $CONFIG{TV_SIZE}     = $q->param("size")     if($q->param("size"));
+    $CONFIG{TV_SIZE}     = "half" unless($CONFIG{TV_SIZE});
+
     my ($cur_channel_id, $cur_channel_name);
     for (SendCMD("chan")) {
         ($cur_channel_id, $cur_channel_name) = split(" ", $_, 2);
@@ -4920,21 +4782,15 @@ sub tv_show {
         push(@chans, $chan);
     }
 
-    my $template = TemplateNew("tv.html");
     my $vars = { tv_only  => $q->param("tv_only")  ? $q->param("tv_only")  : undef,
-                 interval => $q->param("interval") ? $q->param("interval") : 5,
-                 size     => $q->param("size")     ? $q->param("size")     : "half",
-                 usercss  => $UserCSS,
-                 new_win => ($q->param("new_win") && $q->param("new_win") eq "1") ? "1" : undef,
+                 interval => $CONFIG{TV_INTERVAL},
+                 size     => $CONFIG{TV_SIZE},
+                 new_win  => ($q->param("new_win") && $q->param("new_win") eq "1") ? "1" : undef,
                  url      => sprintf("%s?aktion=grab_picture", $MyURL),
                  channels => \@chans,
                  host     => $CONFIG{VDR_HOST}
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("tv.html", $vars);
 }
 
 sub tv_switch {
@@ -4947,50 +4803,48 @@ sub tv_switch {
 sub show_help {
     my $area     = $q->param("area");
     my $filename = "help_" . $area . ".html";
-    $CONFIG{TEMPLATE} = "default" if (!$CONFIG{TEMPLATE});
     if (!-e "$TEMPLATEDIR/$CONFIG{TEMPLATE}/$filename") {
         $filename = "help_no.html";
     }
-    my $template = TemplateNew($filename);
-    my $vars = { usercss => $UserCSS,
-                 area    => $area
+    my $vars = { area    => $area
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate($filename, $vars);
 }
 
 #############################################################################
 # information
 #############################################################################
 sub about {
-    my $template = TemplateNew("about.html");
+    my $missing_features = "RENR" unless ($FEATURES{REC_RENAME});
+    unless ($FEATURES{STREAMDEV}) {
+        $missing_features .= ", " if ($missing_features);
+        $missing_features .= "streamdev-client plugin";
+    }
+    
     my $vars = { vdrversion => $VDRVERSION_HR,
                  myversion  => $VERSION,
-                 usercss    => $UserCSS
+                 missing_features => $missing_features
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("about.html", $vars);
 }
 
 #############################################################################
 # experimental
 #############################################################################
 sub grab_picture {
-    my $size      = $q->param("size") ? $q->param("size") : "half";
+    $CONFIG{TV_INTERVAL} = $q->param("interval") if($q->param("interval"));
+    $CONFIG{TV_INTERVAL} = "5" unless($CONFIG{TV_INTERVAL});
+    $CONFIG{TV_SIZE}     = $q->param("size")     if($q->param("size"));
+    $CONFIG{TV_SIZE}     = "half" unless($CONFIG{TV_SIZE});
+ 
     my $maxwidth  = 768;
     my $maxheight = 576;
     my ($width, $height);
-    if ($size eq "full") {
+    if ($CONFIG{TV_SIZE} eq "full") {
         ($width, $height) = ($maxwidth, $maxheight);
-    } elsif ($size eq "half") {
+    } elsif ($CONFIG{TV_SIZE} eq "half") {
         ($width, $height) = ($maxwidth / 2, $maxheight / 2);
-    } elsif ($size eq "quarter") {
+    } elsif ($CONFIG{TV_SIZE} eq "quarter") {
         ($width, $height) = ($maxwidth / 4, $maxheight / 4);
     } else {
         ($width, $height) = ($maxwidth / 4, $maxheight / 4);
@@ -5055,21 +4909,16 @@ sub vdr_cmds {
     @show_output = run_svdrpcmd() if ($q->param("run_svdrpcmd"));
     my $svdrp_cmd = "help";
     $svdrp_cmd = $q->param("svdrp_cmd") if ($q->param("svdrp_cmd"));
-    my $template = TemplateNew("vdr_cmds.html");
+
     my $vars = {
         url         => sprintf("%s?aktion=vdr_cmds", $MyURL),
         commands    => \@vdrcmds,
         show_output => \@show_output,
         max_lines => $q->param("max_lines") ? $q->param("max_lines") : 20,
         svdrp_cmd => $svdrp_cmd,
-        vdr_cmd   => $q->param("vdr_cmd")   ? $q->param("vdr_cmd")   : undef,
-        usercss   => $UserCSS
+        vdr_cmd   => $q->param("vdr_cmd")   ? $q->param("vdr_cmd")   : undef
     };
-    $template->param($vars);
-    my $output;
-    my $out = $template->output;
-    $Xtemplate->process(\$out, $vars, \$output) || return (header("500", "text/html", $Xtemplate->error()));
-    return (header("200", "text/html", $output));
+    return showTemplate("vdr_cmds.html", $vars);
 }
 
 sub run_vdrcmd {
@@ -5173,14 +5022,33 @@ sub myconnect {
       )
       || main::HTMLError(sprintf($ERROR_MESSAGE{connect_failed}, $CONFIG{VDR_HOST}, $CONFIG{VDR_PORT})) && return;
 
+    $connected = true;
     my $line;
     $line = <$SOCKET>;
     if (!$VDRVERSION) {
         $line =~ /^220.*VideoDiskRecorder (\d+)\.(\d+)\.(\d+).*;/;
         $VDRVERSION_HR = "$1.$2.$3";
         $VDRVERSION    = ($1 * 10000 + $2 * 100 + $3);
+        getSupportedFeatures($this);
     }
-    $connected = true;
+}
+
+sub getSupportedFeatures {
+    my $this = shift;
+    if ($VDRVERSION >= 10331) {
+        command($this, "plug");
+        while ($_ = readoneline($this)) {
+            if ($_ =~ /^streamdev-server/) {
+                $FEATURES{STREAMDEV} = 1;
+            }
+        }
+    }
+    command($this, "help");
+    while ($_ = readoneline($this)) {
+        if ($_ =~ /\sRENR\s/) {
+            $FEATURES{REC_RENAME} = 1;
+        }
+    }
 }
 
 sub close {
@@ -5258,5 +5126,12 @@ sub readoneline {
 
 #
 #############################################################################
+
+# Local variables:
+# indent-tabs-mode: nil
+# cperl-indent-level: 4
+# perl-indent-level: 4
+# tab-width: 4
+# End:
 
 # EOF

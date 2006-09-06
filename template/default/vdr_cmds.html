@@ -2,77 +2,77 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title>VDRAdmin-AM - <%! VDR Commands !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title>VDRAdmin-AM - <?% gettext('VDR Commands') %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 </head>
 
 <body id="vdr_cmds">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 		<tr>
-			<td class="col_title"><h1><%! VDR Commands !%></h1></td>
-<tmpl_if name="help_url">
+			<td class="col_title"><h1><?% gettext('VDR Commands') %?></h1></td>
+<?% IF help_url %?>
 			<td class="col_help">
-				<a href="javascript:open_help('<tmpl_var help_url>');"><img src="bilder/help.png" border="0" alt="help" title="<%! Help !%>" /></a>
+				<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help" title="<?% gettext('Help') %?>" /></a>
 			</td>
-</tmpl_if>
+<?% END %?>
 		</tr>
 	</table>
 
-	<form action="<tmpl_var url>" method="get" name="FormName">
+	<form action="<?% url %?>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Number of lines to show: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Number of lines to show:') %?></h5></td>
 				<td class="col_value">
 					<select name="max_lines">
-						<option value="20" <tmpl_if expr="max_lines == 20">selected="selected"</tmpl_if>>20</option>
-						<option value="50" <tmpl_if expr="max_lines == 50">selected="selected"</tmpl_if>>50</option>
-						<option value="100" <tmpl_if expr="max_lines == 100">selected="selected"</tmpl_if>>100</option>
-						<option value="-1" <tmpl_if expr="max_lines == -1">selected="selected"</tmpl_if>><%! unlimited !%></option>
+						<option value="20" <?% IF max_lines == 20 %?>selected="selected"<?% END %?>>20</option>
+						<option value="50" <?% IF max_lines == 50 %?>selected="selected"<?% END %?>>50</option>
+						<option value="100" <?% IF max_lines == 100 %?>selected="selected"<?% END %?>>100</option>
+						<option value="-1" <?% IF max_lines == -1 %?>selected="selected"<?% END %?>><?% gettext('unlimited') %?></option>
 					</select>
 				</td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! SVDRP commands: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('SVDRP commands:') %?></h5></td>
 				<td class="col_value">
-					<input type="text" name="svdrp_cmd" value="<tmpl_var svdrp_cmd>"/>
-					<input type="submit" class="submit" name="run_svdrpcmd" value="<%! Run !%>" onclick="return confirm('<%! Really run this command? !%>')" />
+					<input type="text" name="svdrp_cmd" value="<?% svdrp_cmd %?>"/>
+					<input type="submit" class="submit" name="run_svdrpcmd" value="<?% gettext('Run') %?>" onclick="return confirm('<?% gettext('Really run this command?') %?>')" />
 				</td>
 			</tr>
-<tmpl_if commands>
+<?% IF commands.size() > 0 %?>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Commands defined in commands.conf: !%></h5></td>
+				<td class="col_label"><h5><?% gettext('Commands defined in commands.conf:') %?></h5></td>
 				<td class="col_value">
 					<select name="vdr_cmd" class="submit">
-						<tmpl_loop commands>
-							<option value="<tmpl_var id>" <tmpl_if expr="vdr_cmd == id">selected="selected"</tmpl_if>><tmpl_var title></option>
-						</tmpl_loop>
+						<?% FOREACH cmd = commands %?>
+							<option value="<?% cmd.id %?>" <?% IF vdr_cmd == cmd.id %?>selected="selected"<?% END %?>><?% cmd.title %?></option>
+						<?% END %?>
 					</select>
-					<input type="submit" class="submit" name="run_vdrcmd" value="<%! Run !%>" onclick="return confirm('<%! Really run this command? !%>')" />
+					<input type="submit" class="submit" name="run_vdrcmd" value="<?% gettext('Run') %?>" onclick="return confirm('<?% gettext('Really run this command?') %?>')" />
 				</td>
 			</tr>
-</tmpl_if>
+<?% END %?>
 
 		</table>
 		<input type="hidden" name="aktion" value="vdr_cmds"/>
 	</form>
 
-<tmpl_if show_output>
+<?% IF show_output.size() > 0 %?>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
 		<tr class="heading">
-			<td><h2><%! Output !%></h2></td>
+			<td><h2><?% gettext('Output') %?></h2></td>
 		</tr>
 
-<tmpl_loop show_output>
-		<tr class="<tmpl_if __ODD__>row_odd<tmpl_else>row_even</tmpl_if>">
-			<td><pre><tmpl_var line escape="html"></pre></td>
+<?% FOREACH output = show_output %?>
+		<tr class="<?% IF loop.count() % 2 == 0 %?>row_even<?% ELSE %?>row_odd<?% END %?>">
+			<td><pre><?% output.line | html %?></pre></td>
 		</tr>
-</tmpl_loop>
+<?% END %?>
 	</table>
-</tmpl_if>
+<?% END %?>
 </body>
 </html>

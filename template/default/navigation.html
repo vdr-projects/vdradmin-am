@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
 	<title>VDRAdmin-AM</title>
 	<link type="text/css" href="style.css" rel="stylesheet" media="screen" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link type="text/css" href="user.css" rel="stylesheet" media="screen" />
-	</tmpl_if>
+	<?% END %?>
 
 	<script type="text/javascript">
 		<!--
@@ -26,45 +26,47 @@
 	</div>
 	<div class="nav_bar">
 		<div class="navi" id="prog_summary">
-			<a href="vdradmin.pl?aktion=prog_summary" target="main"><%! What's On Now? !%></a>
+			<a href="vdradmin.pl?aktion=prog_summary" target="main"><?% gettext('What\'s On Now?') %?></a>
 		</div>
 		<div class="navi" id="prog_list2">
-			<a href="vdradmin.pl?aktion=prog_list2" target="main"><%! Playing Today? !%></a>
+			<a href="vdradmin.pl?aktion=prog_list2" target="main"><?% gettext('Playing Today?') %?></a>
 		</div>
 		<div class="navi" id="prog_timeline">
-			<a href="vdradmin.pl?aktion=prog_timeline" target="main"><%! Timeline !%></a>
+			<a href="vdradmin.pl?aktion=prog_timeline" target="main"><?% gettext('Timeline') %?></a>
 		</div>
 		<div class="navi" id="prog_list">
-			<a href="vdradmin.pl?aktion=prog_list" target="main"><%! Channels !%></a>
+			<a href="vdradmin.pl?aktion=prog_list" target="main"><?% gettext('Channels') %?></a>
 		</div>
 		<div class="navi" id="timer_list">
-			<a href="vdradmin.pl?aktion=timer_list" target="main"><%! Timer !%></a>
+			<a href="vdradmin.pl?aktion=timer_list" target="main"><?% gettext('Timer') %?></a>
 		</div>
+<?% IF features.AUTOTIMER %?>
 		<div class="navi" id="at_timer_list">
-			<a href="vdradmin.pl?aktion=at_timer_list" target="main"><%! AutoTimer !%></a>
+			<a href="vdradmin.pl?aktion=at_timer_list" target="main"><?% gettext('AutoTimer') %?></a>
 		</div>
+<?% END %?>
 		<div class="navi" id="rec_list">
-			<a href="vdradmin.pl?aktion=rec_list" target="main"><%! Recordings !%></a>
+			<a href="vdradmin.pl?aktion=rec_list" target="main"><?% gettext('Recordings') %?></a>
 		</div>
 		<div class="navi" id="rc">
-			<a href="javascript:rc_open();"><%! Remote Control !%></a>
+			<a href="javascript:rc_open();"><?% gettext('Remote Control') %?></a>
 		</div>
 		<div class="navi" id="tv">
-			<a href="vdradmin.pl?aktion=tv_show" target="main"><%! Watch TV !%></a>
+			<a href="vdradmin.pl?aktion=tv_show" target="main"><?% gettext('Watch TV') %?></a>
 		</div>
 		<div class="navi" id="commands">
-			<a href="vdradmin.pl?aktion=vdr_cmds" target="main"><%! Commands !%></a>
+			<a href="vdradmin.pl?aktion=vdr_cmds" target="main"><?% gettext('Commands') %?></a>
 		</div>
 		<div class="navi" id="config">
-			<a href="vdradmin.pl?aktion=config" target="main"><%! Configuration !%></a>
+			<a href="vdradmin.pl?aktion=config" target="main"><?% gettext('Configuration') %?></a>
 		</div>
 		<div class="navi" id="about">
-			<a href="vdradmin.pl?aktion=about" target="main"><%! About !%> / <%! Help !%></a>
+			<a href="vdradmin.pl?aktion=about" target="main"><?% gettext('About') %?> / <?% gettext('Help') %?></a>
 		</div>
 
 		<form action="vdradmin.pl" method="get" name="FormName" target="main" class="search">
 			<input type="text" name="search" /><br />
-			<input type="submit" name="submit" value="<%! Search !%>" />
+			<input type="submit" name="submit" value="<?% gettext('Search') %?>" /
 			<input type="hidden" name="aktion" value="prog_summary" />
 		</form>
 	</div>

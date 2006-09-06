@@ -3,12 +3,12 @@
 
 <head>
 	<meta http-equiv="refresh" content="600; URL=vdradmin.pl?aktion=prog_timeline" />
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title>VDRAdmin-AM - <%! Timeline !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title>VDRAdmin-AM - <?% gettext('Timeline') %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 
 <?%- 
@@ -73,9 +73,9 @@
 <?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="timeline.js"></script>
 	<script type="text/javascript" language="JavaScript1.2">
-		var trans = new Translation("<%! now !%>", 
-		                          "<%! o'clock !%>", 
-		                          "<%! to !%>");
+		var trans = new Translation("<?% gettext('now') %?>", 
+		                          "<?% gettext('o\'clock') %?>", 
+		                          "<?% gettext('to') %?>");
 		var redraw_w;
 		var redraw_h;
 		
@@ -92,8 +92,8 @@
 			var e = new EPGEvent(epg_id, start_sec, stop_sec, title, timer, summary);
 <?% IF config.TL_TOOLTIP %?>
 			maketip("VDR-" + vdr_id + "-" + counter, title, 
-					 "<%! Duration: !%> " + e.start_str + " - " + e.stop_str
-					 + " (" + Div(stop_sec - start_sec, 60) + " <%! min !%>)");
+					 "<?% gettext('Duration:') %?> " + e.start_str + " - " + e.stop_str
+					 + " (" + Div(stop_sec - start_sec, 60) + " <?% gettext('min') %?>)");
 <?% END %?>
 			return e;
 		}
@@ -152,24 +152,24 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_title">
-					<h1><?% date.format(now_sec, "%A,") %?>&nbsp;<?% now %?>&nbsp;<%! o'clock !%></h1>
+					<h1><?% date.format(now_sec, "%A,") %?>&nbsp;<?% now %?>&nbsp;<?% gettext('o\'clock') %?></h1>
 				</td>
 				<td class="col_other">
-					<%! What's on: !%>&nbsp;
+					<?% gettext('What\'s on:') %?>&nbsp;
 					<select name="Auswahl" class="submit" onChange="Go(this.form.Auswahl.options[this.form.Auswahl.options.selectedIndex].value)" width="100">
 <?% select_now = (now == date.format(date.now, '%H:%M')) %?>
 						<script type="text/javascript" language="JavaScript1.2">
 							BuildOption("", 0, "-");
-							BuildOption("", <?% select_now ? 1 : 0 %?>, "<%! now !%>");
+							BuildOption("", <?% select_now ? 1 : 0 %?>, "<?% gettext('now') %?>");
 <?% FOREACH timer = times %?>
 	<?% timer_o_dopp = timer | replace('\:', '') %?>
 							BuildOption("<?% timer_o_dopp %?>", <?% !select_now && (now == timer) ? 1 : 0 %?>, "<?% timer %?>");
 <?% END %?>
 						</script>
 					</select>
-					&nbsp;|&nbsp;<%! at: !%>&nbsp;
+					&nbsp;&nbsp;<?% gettext('at:') %?>&nbsp;
 					<input type="text" name="time" size="5" value="<?% now %?>" />
-					&nbsp;<%! o'clock !%>
+					&nbsp;<?% gettext('o\'clock') %?>
 					<input type="hidden" name="aktion" value="prog_timeline" />
 					<script type="text/javascript" language="JavaScript1.2">
 						BuildHiddenFrameInput();
@@ -178,16 +178,22 @@
 			</tr>
 		</table>
 
+<?% IF shows.size() > 0 %?>
 		<script type="text/javascript" language="JavaScript1.2">
 			BuildContent();
 		</script>
-		<noscript>
-			<p>
+		<p>
+			<noscript>
 				<center>
-				<h1><%! You need JavaScript to use the timeline! !%></h1>
+				<h1><?% gettext('You need JavaScript to use the timeline!') %?></h1>
 				</center>
-			</p>
-		</noscript>
+			</noscript>
+		</p>
+<?% ELSE %?>
+		<div id="content">
+			<div class="warning"><?% gettext('No EPG information available') %?></div>
+		</div>
+<?% END %?>
 	</form>
 </body>
 </html>

@@ -2,24 +2,24 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title><%! Recordings !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title><?% gettext('Recordings') %?></title>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 </head>
 
 <body id="rec_list" class="help" onload="window.focus()">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="help" class="group">
 		<tr class="heading">
-			<td><h2><%! Recordings !%></h2></td>
+			<td><h2><?% gettext('Recordings') %?></h2></td>
 		</tr>
 		<tr class="row_even">
 			<td>
-				<%! <p>Here you will find a listing of recordings known to VDR. The headline will also show you VDR's total and free disk space.</p>
-				<p>The listing showing you some information on the recordings. You can change the list's sorting by clicking the columns heading. Above the list you'll see the navigation path. If you want to view the contents of previous folders you'll have to click on its name in that path.</p>
+				<?% gettext('<p>Here you will find a listing of recordings known to VDR. The headline will also show you VDR\'s total and free disk space.</p>
+				<p>The listing showing you some information on the recordings. You can change the list\'s sorting by clicking the columns heading. Above the list you\'ll see the navigation path. If you want to view the contents of previous folders you\'ll have to click on its name in that path.</p>
 				<p>Each row contains this information:
 					<dl>
 						<dt>Date</dt>
@@ -27,7 +27,7 @@
 						<dt>Time</dt>
 						<dd>The time when the recording has been done. In case of folders this will show the number of <strong>new</strong> recordings the folder contains.</dd>
 						<dt>Name</dt>
-						<dd>The recording's or folder's name. Click it to show the recording's summary or descend into the folder.</dd>
+						<dd>The recording\'s or folder\'s name. Click it to show the recording\'s summary or descend into the folder.</dd>
 						<dt>Rename (<img src="bilder/edit.png" alt="edit" />)</dt>
 						<dd>Rename a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> SVDRPort command which is no core VDR feature but is available through a patch. <span class="ref_file">vdr-aio21_svdrprename.patch</span> or <span class="ref_file">enAIO-v2.2+</span> provide this command.</dd>
 						<dt>Delete (<img src="bilder/delete.png" alt="delete" />)</dt>
@@ -37,8 +37,8 @@
 					</dl>
 				</p>
 				<p>In addition to these functions you can delete a number of recordings at once by checking the box in the last but one column of those recordings and clicking <input type="submit" class="submit" value="Delete Selected Recordings"/>.</p>
-				<p>If you've set the path the VDR's configuration files and have entries in VDR's <span class="ref_file">reccmds.conf</span> you can run those commands for the selected recording by selecting the wanted command in the select box locate next to <span class="ref_label">Commands:</span> and pressing the <input type="submit" class="submit" value="Run"/> button.</p>
-				<p>Use <input type="submit" class="submit" value="Refresh"/> to force reloading of VDR's recordings listing.</p> !%>
+				<p>If you\'ve set the path the VDR\'s configuration files and have entries in VDR\'s <span class="ref_file">reccmds.conf</span> you can run those commands for the selected recording by selecting the wanted command in the select box locate next to <span class="ref_label">Commands:</span> and pressing the <input type="submit" class="submit" value="Run"/> button.</p>
+				<p>Use <input type="submit" class="submit" value="Refresh"/> to force reloading of VDR\'s recordings listing.</p>') %?>
 			</td>
 		</tr>
 	</table>

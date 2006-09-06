@@ -2,53 +2,53 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title>VDRAdmin-AM - <%! Rename Recording !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title>VDRAdmin-AM - <?% gettext('Rename Recording') %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 </head>
 
 <body id="rec_edit">
-	<form action="<tmpl_var url>" method="get" name="form">
+	<form action="<?% url %?>" method="get" name="form">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_title">
-					<h1><%! Rename Recording !%></h1>
+					<h1><?% gettext('Rename Recording') %?></h1>
 				</td>
 			</tr>
 		</table>
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Original Name of Recording: !%></h5></td>
-				<td class="col_value"><tmpl_var title></td>
+				<td class="col_label"><h5><?% gettext('Original Name of Recording:') %?></h5></td>
+				<td class="col_value"><?% title %?></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><%! New Name of Recording: !%></h5></td>
-				<td class="col_value"><input type="text" name="nn" value="<tmpl_var title>" size="55" /></td>
+				<td class="col_label"><h5><?% gettext('New Name of Recording:') %?></h5></td>
+				<td class="col_value"><input type="text" name="nn" value="<?% title %?>" size="55" /></td>
 			</tr>
 			<tr class="row_odd">
-				<td class="col_label"><h5><%! Subtitle: !%></h5></td>
-				<td class="col_value"><tmpl_if subtitle><tmpl_var subtitle></tmpl_if></td>
+				<td class="col_label"><h5><?% gettext('Subtitle:') %?></h5></td>
+				<td class="col_value"><?% IF subtitle %?><?% subtitle %?><?% END %?></td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label" valign="top"><h5><%! Summary: !%></h5></td>
-				<td class="col_value"><tmpl_var text></td>
+				<td class="col_label" valign="top"><h5><?% gettext('Summary:') %?></h5></td>
+				<td class="col_value"><?% text %?></td>
 			</tr>
 		</table>
 
 		<div id="buttons">
-			<input type="submit" class="submit" name="save" value="<%! Rename !%>" />
-			<input type="submit" class="submit" name="exit" value="<%! Cancel !%>" />
+			<input type="submit" class="submit" name="save" value="<?% gettext('Rename') %?>" />
+			<input type="submit" class="submit" name="exit" value="<?% gettext('Cancel') %?>" />
 		</div>
 		<input type="hidden" name="aktion" value="rec_rename" /> 
-		<input type="hidden" name="id" value="<tmpl_var id>" /> 
-		<tmpl_if referer>
-			<input type="hidden" name="referer" value="<tmpl_var referer>" />
-		</tmpl_if>
+		<input type="hidden" name="id" value="<?% id %?>" /> 
+		<?% IF referer %?>
+			<input type="hidden" name="referer" value="<?% referer %?>" />
+		<?% END %?>
 	</form>
 </body>
 

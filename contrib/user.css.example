@@ -25,3 +25,26 @@
 #prog_summary .epg_summary {
 	overflow: auto;
 }
+
+/*
+  Workaround for scrollbar problem in InternetExplorer.
+*/
+table#heading,
+table.list,
+table#buttons,
+div#buttons,
+#at_timer_new .group,
+#timer_new .group,
+#rec_edit .group,
+#vdr_cmds .group,
+#about .group,
+#config .group {
+	width: 95%;
+}
+
+/*
+	Change color of links from EPG title to prog_detail.
+*/
+.epg_title a {
+	color: blue;
+}

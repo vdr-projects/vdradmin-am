@@ -2,23 +2,23 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title>VDRAdmin-AM <tmpl_var version> (<tmpl_var host>)</title>
-	<link href="bilder/favicon.ico" rel="shortcut icon" />
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title>VDRAdmin-AM <?% version %?> (<?% host %?>)</title>
+	<link href="favicon.ico" rel="shortcut icon" />
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 </head>
 
 <frameset border="0" cols="155,*" frameborder="no" framespacing="0">
 	<frame name="nav" noresize src="navigation.html" />
-	<frame name="main" noresize src="<tmpl_var loginpage>" />
+	<frame name="main" noresize src="<?% loginpage %?>" />
 
 	<noframes>
 		<body>
-			<p><%! Your Browser does not support frames! !%></p>
+			<p><?% gettext('Your Browser does not support frames!') %?></p>
 		</body>
 	</noframes>
 </frameset>

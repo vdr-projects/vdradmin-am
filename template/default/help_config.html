@@ -5,176 +5,178 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title><%! Configuration !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title><?% gettext('Configuration') %?></title>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 </head>
 
 <body id="config" class="help" onload="window.focus()">
 <form onsubmit="return false;" action="help_config.html">
 	<input type="hidden" name="aktion" value="show_help"/>
-	<input type="hidden" name="area" value="<tmpl_var area>"/>
+	<input type="hidden" name="area" value="<?% area %?>"/>
 
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="help" class="group">
 		<tr class="heading">
-			<td><h2><a id="top" name="top"></a><%! Configuration !%></h2></td>
+			<td><h2><a id="top" name="top"></a><?% gettext('Configuration') %?></h2></td>
 		</tr>
 		<tr class="row_even">
 			<td>
-				<%! <p>Here you can change general settings and base settings for timers, AutoTimers, channel selection and streaming parameters.</p> !%>
+				<?% gettext('<p>Here you can change general settings and base settings for timers, AutoTimers, channel selection and streaming parameters.</p>') %?>
 				<div class="links">
-					[<a href="#general"><%! General Settings !%></a>] [<a href="#vdr"><%! VDR !%></a>] [<a href="#identification"><%! Identification !%></a>] [<a href="#timeline"><%! Timeline !%></a>] [<a href="#autotimer"><%! AutoTimer !%></a>] [<a href="#timer"><%! Timer !%></a>] [<a href="#streaming"><%! Streaming !%></a>] [<a href="#expert"><%! Expert !%></a>] [<a href="#channels"><%! Channel Selections !%></a>]
+					[<a href="#general"><?% gettext('General Settings') %?></a>] [<a href="#vdr"><?% gettext('VDR') %?></a>] [<a href="#identification"><?% gettext('Identification') %?></a>] [<a href="#timeline"><?% gettext('Timeline') %?></a>] [<a href="#autotimer"><?% gettext('AutoTimer') %?></a>] [<a href="#timer"><?% gettext('Timer') %?></a>] [<a href="#streaming"><?% gettext('Streaming') %?></a>] [<a href="#expert"><?% gettext('Expert') %?></a>] [<a href="#channels"><?% gettext('Channel Selections') %?></a>]
 				</div>
-				<div class="group"><a id="general" name="general"></a><h3><%! General Settings !%></h3>
+				<div class="group"><a id="general" name="general"></a><h3><?% gettext('General Settings') %?></h3>
 					<dl>
-						<dt><%! Skin: !%></dt>
-						<dd><%! The skin you want to use. !%></dd>
-						<dt><%! Login Page: !%></dt>
-						<dd><%! The page you want to see at first connect to VDRAdmin-AM. !%></dd>
-						<dt><%! Number of channels to use: !%></dt>
-						<dd><%! VDRAdmin-AM will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin-AM will read so that you can use this to reduce VDRAdmin-AM's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin-AM will use all available channels. !%></dd>
-						<dt><%! Local net (no login required): !%></dt>
-						<dd><%! Here you can specify an IP address or range that can login without providing login information. For example: "192.168.0.0/24" will include any IP starting with "192.168.0", "192.168.0.123/32" will only match "192.168.0.123". !%></dd>
-						<dt><%! Language: !%></dt>
-						<dd><%! Here you can set the localization VDRAdmin-AM should use. !%></dd>
+						<dt><?% gettext('Skin:') %?></dt>
+						<dd><?% gettext('The skin you want to use.') %?></dd>
+						<dt><?% gettext('Login Page:') %?></dt>
+						<dd><?% gettext('The page you want to see at first connect to VDRAdmin-AM.') %?></dd>
+						<dt><?% gettext('Number of channels to use:') %?></dt>
+						<dd><?% gettext('VDRAdmin-AM will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin-AM will read so that you can use this to reduce VDRAdmin-AM\'s memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin-AM will use all available channels.') %?></dd>
+						<dt><?% gettext('Local net (no login required):') %?></dt>
+						<dd><?% gettext('Here you can specify an IP address or range that can login without providing login information. For example: "192.168.0.0/24" will include any IP starting with "192.168.0", "192.168.0.123/32" will only match "192.168.0.123".') %?></dd>
+						<dt><?% gettext('Language:') %?></dt>
+						<dd><?% gettext('Here you can set the localization VDRAdmin-AM should use.') %?></dd>
+						<dt><?% gettext('Save settings on exit:') %?></dt>
+						<dd><?% gettext('With this option the settings will be saved if VDRAdmin-AM exits. This will also save settings not available on the "Configuration" menu like interval and size in TV, sorting in the lists and current view in "What\'s on now".') %?></dd>
 					</dl>
-					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
+					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
 				</div>
 
-				<div class="group"><a id="vdr" name="vdr"></a><h3><%! VDR !%></h3>
+				<div class="group"><a id="vdr" name="vdr"></a><h3><?% gettext('VDR') %?></h3>
 					<dl>
-						<dt><%! Number of DVB cards: !%></dt>
-						<dd><%! The number of DVB cards VDR can access. Depending on this value VDRAdmin-AM will calculate critical timers in the <span class="ref_menu">Timer</span> menu. !%></dd>
-						<dt><%! Path to recordings: !%></dt>
-						<dd><%! The path to VDR's recordings. It's used so that VDRAdmin-AM can locate the recordings when using <span class="ref_label">Recordings Streaming</span> and <span class="ref_file">reccmds.conf</span> in the <span class="ref_menu">Recordings</span> menu. !%></dd>
-						<dt><%! Path to configuration files: !%></dt>
-						<dd><%! The path where VDR's configuration files are located. If this directory contains the file <span class="ref_file">reccmds.conf</span> its content is shown in a selectbox in the <span class="ref_menu">Recordings</span> menu. !%></dd>
-						<dt><%! Path to EPG images: !%></dt>
-						<dd><%! The path where the EPG images are stored. !%></dd>
+						<dt><?% gettext('Number of DVB cards:') %?></dt>
+						<dd><?% gettext('The number of DVB cards VDR can access. Depending on this value VDRAdmin-AM will calculate critical timers in the <span class="ref_menu">Timer</span> menu.') %?></dd>
+						<dt><?% gettext('Path to recordings:') %?></dt>
+						<dd><?% gettext('The path to VDR\'s recordings. It\'s used so that VDRAdmin-AM can locate the recordings when using <span class="ref_label">Recordings Streaming</span> and <span class="ref_file">reccmds.conf</span> in the <span class="ref_menu">Recordings</span> menu.') %?></dd>
+						<dt><?% gettext('Path to configuration files:') %?></dt>
+						<dd><?% gettext('The path where VDR\'s configuration files are located. If this directory contains the file <span class="ref_file">reccmds.conf</span> its content is shown in a selectbox in the <span class="ref_menu">Recordings</span> menu.') %?></dd>
+						<dt><?% gettext('Path to EPG images:') %?></dt>
+						<dd><?% gettext('The path where the EPG images are stored.') %?></dd>
 					</dl>
-					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
+					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
 				</div>
 
-				<div class="group"><a id="identification" name="identification"></a><h3><%! Identification !%></h3>
+				<div class="group"><a id="identification" name="identification"></a><h3><?% gettext('Identification') %?></h3>
 					<dl>
-						<dt><%! Username: !%></dt>
-						<dd><%! The username for the main user, i.e. the user having the most privileges. !%></dd>
-						<dt><%! Password: !%></dt>
-						<dd><%! The main user's password. !%></dd>
-						<dt><%! Guest Account: !%></dt>
-						<dd><%! If you want a user account having only limited privileges, this is for you. The guest user cannot modify anything, it's only allowed to view the EPG, timers, AutoTimers and recordings listings. !%></dd>
-						<dt><%! Guest Username: !%></dt>
-						<dd><%! The username for the guest user. !%></dd>
-						<dt><%! Guest Password: !%></dt>
-						<dd><%! The guest user's password. !%></dd>
+						<dt><?% gettext('Username:') %?></dt>
+						<dd><?% gettext('The username for the main user, i.e. the user having the most privileges.') %?></dd>
+						<dt><?% gettext('Password:') %?></dt>
+						<dd><?% gettext('The main user\'s password.') %?></dd>
+						<dt><?% gettext('Guest Account:') %?></dt>
+						<dd><?% gettext('If you want a user account having only limited privileges, this is for you. The guest user cannot modify anything, it\'s only allowed to view the EPG, timers, AutoTimers and recordings listings.') %?></dd>
+						<dt><?% gettext('Guest Username:') %?></dt>
+						<dd><?% gettext('The username for the guest user.') %?></dd>
+						<dt><?% gettext('Guest Password:') %?></dt>
+						<dd><?% gettext('The guest user\'s password.') %?></dd>
 					</dl>
-					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
+					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
 				</div>
 
-				<div class="group"><a id="timeline" name="timeline"></a><h3><%! Timeline !%></h3>
+				<div class="group"><a id="timeline" name="timeline"></a><h3><?% gettext('Timeline') %?></h3>
 					<dl>
-						<dt><%! Hours: !%></dt>
-						<dd><%! The number of hours to show in the timeline. !%></dd>
-						<dt><%! Times: !%></dt>
-						<dd><%! A comma separated list of times in <strong>hh:mm</strong> format that appear in the selectbox placed at the top. !%></dd>
-						<dt><%! Tooltips: !%></dt>
-						<dd><%! Here you can (de-)activate the tooltips. !%></dd>
+						<dt><?% gettext('Hours:') %?></dt>
+						<dd><?% gettext('The number of hours to show in the timeline.') %?></dd>
+						<dt><?% gettext('Times:') %?></dt>
+						<dd><?% gettext('A comma separated list of times in <strong>hh:mm</strong> format that appear in the selectbox placed at the top.') %?></dd>
+						<dt><?% gettext('Tooltips:') %?></dt>
+						<dd><?% gettext('Here you can (de-)activate the tooltips.') %?></dd>
 					</dl>
-					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
+					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
 				</div>
 
-				<div class="group"><a id="autotimer" name="autotimer"></a><h3><%! AutoTimer !%></h3>
+				<div class="group"><a id="autotimer" name="autotimer"></a><h3><?% gettext('AutoTimer') %?></h3>
 					<dl>
-						<dt><%! Active: !%></dt>
-						<dd><%! Activate or deactivate the AutoTimer function. !%></dd>
-						<dt><%! Timeout: !%></dt>
-						<dd><%! The interval, the the EPG data is checked for updating the AutoTimers. !%></dd>
-						<dt><%! Priority: !%></dt>
-						<dd><%! An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording. !%></dd>
-						<dt><%! Lifetime: !%></dt>
-						<dd><%! The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by. !%></dd>
-						<dt><%! Send email after programming timer: !%></dt>
-						<dd><%! VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a timer has been programmed if you enable this feature. !%></dd>
-						<dt><%! Send email as: !%></dt>
-						<dd><%! Here you set the sending email address of the generated email. !%></dd>
-						<dt><%! Send email to: !%></dt>
-						<dd><%! The email address the email is sent to. !%></dd>
-						<dt><%! Mail server: !%></dt>
-						<dd><%! The outgoing mail server. !%></dd>
-						<dt><%! SMTPAuth user: !%></dt>
-						<dd><%! If you need to authenticate yourself at the outgoing mail server, you have to supply the username and the password below. Leaving this field empty will disable SMTPAuth. !%>
-						<dt><%! SMTPAuth password: !%></dt>
-						<dd><%! The password for the SMTPAuth user. !%></dd>
-						<dt><%! Tooltips: !%></dt>
-						<dd><%! Here you can (de-)activate the tooltips. !%></dd>
+						<dt><?% gettext('Active:') %?></dt>
+						<dd><?% gettext('Activate or deactivate the AutoTimer function.') %?></dd>
+						<dt><?% gettext('Timeout:') %?></dt>
+						<dd><?% gettext('The interval, the the EPG data is checked for updating the AutoTimers.') %?></dd>
+						<dt><?% gettext('Priority:') %?></dt>
+						<dd><?% gettext('An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording.') %?></dd>
+						<dt><?% gettext('Lifetime:') %?></dt>
+						<dd><?% gettext('The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by.') %?></dd>
+						<dt><?% gettext('Send email after programming timer:') %?></dt>
+						<dd><?% gettext('VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a timer has been programmed if you enable this feature.') %?></dd>
+						<dt><?% gettext('Send email as:') %?></dt>
+						<dd><?% gettext('Here you set the sending email address of the generated email.') %?></dd>
+						<dt><?% gettext('Send email to:') %?></dt>
+						<dd><?% gettext('The email address the email is sent to.') %?></dd>
+						<dt><?% gettext('Mail server:') %?></dt>
+						<dd><?% gettext('The outgoing mail server.') %?></dd>
+						<dt><?% gettext('SMTPAuth user:') %?></dt>
+						<dd><?% gettext('If you need to authenticate yourself at the outgoing mail server, you have to supply the username and the password below. Leaving this field empty will disable SMTPAuth.') %?>
+						<dt><?% gettext('SMTPAuth password:') %?></dt>
+						<dd><?% gettext('The password for the SMTPAuth user.') %?></dd>
+						<dt><?% gettext('Tooltips:') %?></dt>
+						<dd><?% gettext('Here you can (de-)activate the tooltips.') %?></dd>
 					</dl>
-					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
+					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
 				</div>
 
-				<div class="group"><a id="timer" name="timer"></a><h3><%! Timer !%></h3>
+				<div class="group"><a id="timer" name="timer"></a><h3><?% gettext('Timer') %?></h3>
 					<dl>
-						<dt><%! Priority: !%></dt>
-						<dd><%! An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording. !%></dd>
-						<dt><%! Lifetime: !%></dt>
-						<dd><%! The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by. !%></dd>
-						<dt><%! Time Margin at Start: !%></dt>
-						<dd><%! The number of minutes VDRAdmin-AM subtracts from the broadcasts start time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view. !%></dd>
-						<dt><%! Time Margin at Stop: !%></dt>
-						<dd><%! The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view. !%></dd>
-						<dt><%! Tooltips in timeline: !%></dt>
-						<dd><%! Here you can (de-)activate the tooltips in the timeline. !%></dd>
-						<dt><%! Tooltips in list: !%></dt>
-						<dd><%! Here you can (de-)activate the tooltips in the list. !%></dd>
-<!--						<dt><%! Add summary to new timers: !%></dt>
-						<dd><%! If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here. !%></dd>-->
+						<dt><?% gettext('Priority:') %?></dt>
+						<dd><?% gettext('An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording.') %?></dd>
+						<dt><?% gettext('Lifetime:') %?></dt>
+						<dd><?% gettext('The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by.') %?></dd>
+						<dt><?% gettext('Time Margin at Start:') %?></dt>
+						<dd><?% gettext('The number of minutes VDRAdmin-AM subtracts from the broadcasts start time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view.') %?></dd>
+						<dt><?% gettext('Time Margin at Stop:') %?></dt>
+						<dd><?% gettext('The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view.') %?></dd>
+						<dt><?% gettext('Tooltips in timeline:') %?></dt>
+						<dd><?% gettext('Here you can (de-)activate the tooltips in the timeline.') %?></dd>
+						<dt><?% gettext('Tooltips in list:') %?></dt>
+						<dd><?% gettext('Here you can (de-)activate the tooltips in the list.') %?></dd>
+<!--						<dt><?% gettext('Add summary to new timers:') %?></dt>
+						<dd><?% gettext('If you don\'t want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here.') %?></dd>-->
 					</dl>
-					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
+					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
 				</div>
 
-				<div class="group"><a id="streaming" name="streaming"></a><h3><%! Streaming !%></h3>
+				<div class="group"><a id="streaming" name="streaming"></a><h3><?% gettext('Streaming') %?></h3>
 					<dl>
-						<dt><%! Live Streaming: !%></dt>
-						<dd><%! Enable or disable live streaming using the <a href="http://www.magoa.net/linux/">streamdev plugin</a>. You also have to set the correct <span class="ref_label">HTTP Port for Streamdev</span> below. !%></dd>
-						<dt><%! HTTP Port of Streamdev (also possible 3000/ts): !%></dt>
-						<dd><%! Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use. !%></dd>
-						<dt><%! Recordings Streaming: !%></dt>
-						<dd><%! Enable or disable streaming of recordings.<br />Well actually this is no real "streaming", but you have to setup your workstation so that it can access VDR's recordings. You can use for example Samba or NFS for this. VDRAdmin-AM simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation's display. !%></dd>
-						<dt><%! Path to VDR Recordings on your workstation: !%></dt>
-						<dd><%! This is the path where your workstation can access VDR's recordings. This depends on your VDR and workstation setup, for example "\\vdr\videos" or "V:\" (on Windows) or "/mnt/videos" (on Linux). !%></dd>
-						<dt><%! MIME type for live streaming: !%></dt>
-						<dd><%! The MIME type to send when using live streaming. Defaults to "video/x-mpegurl". !%></dd>
-						<dt><%! Suffix for live streaming: !%></dt>
-						<dd><%! The suffix to use for live streaming. Defaults to "m3u". !%></dd>
-						<dt><%! MIME type for recordings streaming: !%></dt>
-						<dd><%! The MIME type to send when using recordings streaming. Defaults to "video/x-mpegurl". !%></dd>
-						<dt><%! Suffix for recordings streaming: !%></dt>
-						<dd><%! The suffix to use for recordings streaming. Defaults to "m3u". !%></dd>
+						<dt><?% gettext('Live Streaming:') %?></dt>
+						<dd><?% gettext('Enable or disable live streaming using the <a href="http://www.magoa.net/linux/">streamdev plugin</a>. You also have to set the correct <span class="ref_label">HTTP Port for Streamdev</span> below.') %?></dd>
+						<dt><?% gettext('HTTP Port of Streamdev (also possible 3000/ts):') %?></dt>
+						<dd><?% gettext('Here you have to set the port number your VDR\'s streamdev server listens for connections. Additionally you can also provide the stream type you like to use.') %?></dd>
+						<dt><?% gettext('Recordings Streaming:') %?></dt>
+						<dd><?% gettext('Enable or disable streaming of recordings.<br />Well actually this is no real "streaming", but you have to setup your workstation so that it can access VDR\'s recordings. You can use for example Samba or NFS for this. VDRAdmin-AM simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation\'s display.') %?></dd>
+						<dt><?% gettext('Path to VDR Recordings on your workstation:') %?></dt>
+						<dd><?% gettext('This is the path where your workstation can access VDR\'s recordings. This depends on your VDR and workstation setup, for example "\\vdr\videos" or "V:\" (on Windows) or "/mnt/videos" (on Linux).') %?></dd>
+						<dt><?% gettext('MIME type for live streaming:') %?></dt>
+						<dd><?% gettext('The MIME type to send when using live streaming. Defaults to "video/x-mpegurl".') %?></dd>
+						<dt><?% gettext('Suffix for live streaming:') %?></dt>
+						<dd><?% gettext('The suffix to use for live streaming. Defaults to "m3u".') %?></dd>
+						<dt><?% gettext('MIME type for recordings streaming:') %?></dt>
+						<dd><?% gettext('The MIME type to send when using recordings streaming. Defaults to "video/x-mpegurl".') %?></dd>
+						<dt><?% gettext('Suffix for recordings streaming:') %?></dt>
+						<dd><?% gettext('The suffix to use for recordings streaming. Defaults to "m3u".') %?></dd>
 					</dl>
-					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
+					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
 				</div>
 
-				<div class="group"><a id="expert" name="expert"></a><h3><%! Expert !%></h3>
-					<%! <p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p> !%>
+				<div class="group"><a id="expert" name="expert"></a><h3><?% gettext('Expert') %?></h3>
+					<?% gettext('<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>') %?>
 					<dl>
-						<dt><%! Read EPG directly using epg.data: !%></dt>
-						<dd><%! Accessing VDR's EPG through VDR's SVDRPort seems to block VDR for some time. If this option is activated VDRAdmin-AM will read the <span class="ref_file">epg.data</span> file directly so that VDR doesn't get blocked. !%></dd>
-						<dt><%! epg.data filename: !%></dt>
-						<dd><%! If you've enabled the option above you need to tell VDRAdmin-AM where the <span class="ref_file">epg.data</span> file is located. !%></dd>
-						<dt><%! VFAT: !%></dt>
-						<dd><%! If you have compiled VDR with the VFAT define you have to enable this option. If this option is set to the wrong value, you may have problems with certain recordings if you want to stream them or run reccmds on them. !%></dd>
+						<dt><?% gettext('Read EPG directly using epg.data:') %?></dt>
+						<dd><?% gettext('Accessing VDR\'s EPG through VDR\'s SVDRPort seems to block VDR for some time. If this option is activated VDRAdmin-AM will read the <span class="ref_file">epg.data</span> file directly so that VDR doesn\'t get blocked.') %?></dd>
+						<dt><?% gettext('epg.data filename:') %?></dt>
+						<dd><?% gettext('If you\'ve enabled the option above you need to tell VDRAdmin-AM where the <span class="ref_file">epg.data</span> file is located.') %?></dd>
+						<dt><?% gettext('VFAT:') %?></dt>
+						<dd><?% gettext('If you have compiled VDR with the VFAT define you have to enable this option. If this option is set to the wrong value, you may have problems with certain recordings if you want to stream them or run reccmds on them.') %?></dd>
 					</dl>
-					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
+					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
 				</div>
 
-				<div class="group"><a id="channels" name="channels"></a><h3><%! Channel Selections !%></h3>
-					<%! <p>If you want to limit the number of channels used in some parts of VDRAdmin-AM, this is for you!</p>
+				<div class="group"><a id="channels" name="channels"></a><h3><?% gettext('Channel Selections') %?></h3>
+					<?% gettext('<p>If you want to limit the number of channels used in some parts of VDRAdmin-AM, this is for you!</p>
 					<p>Use the radio buttons to activate or deactivate the wanted channels in the named menu.</p>
-					<p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click <input type="submit" class="submit" value="&gt;&gt;&gt;&gt;&gt;"/>. If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click <input type="submit" class="submit" value="&lt;&lt;&lt;&lt;&lt;"/>.</p> !%>
-					<div class="top_link">[<a href="#top"><%! Top !%></a>]</div>
+					<p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click <input type="submit" class="submit" value="&gt;&gt;&gt;&gt;&gt;"/>. If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click <input type="submit" class="submit" value="&lt;&lt;&lt;&lt;&lt;"/>.</p>') %?>
+					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
 				</div>
 			</td>
 		</tr>

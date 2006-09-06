@@ -2,51 +2,51 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<%! ISO-8859-1 !%>" />
-	<title><%! Timer !%></title>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title><?% gettext('Timer') %?></title>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-	<tmpl_if usercss>
+	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
-	</tmpl_if>
+	<?% END %?>
 </head>
 
 <body id="timer_list" class="help" onload="window.focus()">
 <form onsubmit="return false;" action="help_timer_list.html">
 	<input type="hidden" name="aktion" value="show_help"/>
-	<input type="hidden" name="area" value="<tmpl_var area>"/>
+	<input type="hidden" name="area" value="<?% area %?>"/>
 
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="help" class="group">
 		<tr class="heading">
-			<td><h2><%! Timer !%></h2></td>
+			<td><h2><?% gettext('Timer') %?></h2></td>
 		</tr>
 		<tr class="row_even">
 			<td>
-				<%! <p>Here you will find a listing of timers known to VDR.</p>
-				<p>On top you will find a chart showing a day's timers graphically. This provides an quick overview on what's going on at the specified day and helps you in finding conflicting timers. Moving the mouse cursor above any timer box will display a tooltip containing the timer's title, priority, lifetime and duration.</p>
-				<p>Below the chart you'll find the timers list showing you some information on the timers. You can change the list's sorting by clicking the columns heading.</p>
+				<?% gettext('<p>Here you will find a listing of timers known to VDR.</p>
+				<p>On top you will find a chart showing a day\'s timers graphically. This provides an quick overview on what\'s going on at the specified day and helps you in finding conflicting timers. Moving the mouse cursor above any timer box will display a tooltip containing the timer\'s title, priority, lifetime and duration.</p>
+				<p>Below the chart you\'ll find the timers list showing you some information on the timers. You can change the list\'s sorting by clicking the columns heading.</p>
 				<p>For each timer you have the following options:
 					<dl>
 						<dt>Set its state</dt>
 						<dd>By clicking on "Yes", "No", "VPS" or "Auto" in the "Active" column.</dd>
 						<dt>Quickly view its priority and lifetime</dt>
-						<dd>By pointing the mouse cursor to the timer's title.</dd>
+						<dd>By pointing the mouse cursor to the timer\'s title.</dd>
 						<dt>View its EPG entry</dt>
-						<dd>Timers that have set <span class="ref_label">AutoTimer Checking</span> to "Transmission Identification" will show you the corresponding EPG entry if you click on the timer's title.</dd>
+						<dd>Timers that have set <span class="ref_label">AutoTimer Checking</span> to "Transmission Identification" will show you the corresponding EPG entry if you click on the timer\'s title.</dd>
 						<dt>Edit the timer</dt>
 						<dd>You can edit a timer by clicking <img src="bilder/edit.png" alt="edit" />.</dd>
 						<dt>Delete the timer</dt>
 						<dd>To delete a timer you click <img src="bilder/delete.png" alt="delete" />.</dd>
 					</dl>
 				</p>
-				<p>Each timer's state is indicated by differently coloured boxes (in the chart view) or images (in the list view):<br />
+				<p>Each timer\'s state is indicated by differently coloured boxes (in the chart view) or images (in the list view):<br />
 					<span class="color_ok">&nbsp;&nbsp;&nbsp;</span> / <img src="bilder/poempl_gruen.png" alt="on" align="middle" /> Timer is OK and will record.<br />
-					<span class="color_collision">&nbsp;&nbsp;&nbsp;</span> / <img src="bilder/poempl_gelb.png" alt="problem" align="middle" /> Timer conflicts with other timers. That's not critical, as long as you have enough DVB cards for the parallel recordings.<br />
+					<span class="color_collision">&nbsp;&nbsp;&nbsp;</span> / <img src="bilder/poempl_gelb.png" alt="problem" align="middle" /> Timer conflicts with other timers. That\'s not critical, as long as you have enough DVB cards for the parallel recordings.<br />
 					<span class="color_conflict">&nbsp;&nbsp;&nbsp;</span> / <img src="bilder/poempl_rot.png" alt="impossible" align="middle" /> Timer is critical and will most likely <strong>not</strong> record.<br />
 					<span class="color_inactive">&nbsp;&nbsp;&nbsp;</span> / <img src="bilder/poempl_grau.png" alt="inactive" align="middle" /> Timer is not active.
 				</p>
 				<p>In addition to these functions you can add a new timer by clicking <input type="submit" class="submit" value="New Timer"/> at the top and you can delete a number of timers at once by checking the box in the last column of those timers and clicking <input type="submit"  class="submit" value="Delete Selected Timers"/>.</p>
-				<p>You can <input type="submit" class="submit" value="activate"/> and <input type="submit" class="submit" value="inactivate"/> selected timers.</p> !%>
+				<p>You can <input type="submit" class="submit" value="activate"/> and <input type="submit" class="submit" value="inactivate"/> selected timers.</p>') %?>
 			</td>
 		</tr>
 	</table>
