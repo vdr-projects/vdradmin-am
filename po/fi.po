@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.4.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-06 13:05+0200\n"
+"POT-Creation-Date: 2006-09-29 11:18+0200\n"
 "PO-Revision-Date: 2006-06-26 12:36+0200\n"
 "Last-Translator: Rofa\n"
 "Language-Team: Suomi\n"
@@ -33,7 +33,7 @@ msgstr ""
 #: ../template/default/rec_edit.html:5 ../template/default/rec_list.html:5
 #: ../template/default/timer_list.html:5 ../template/default/timer_new.html:5
 #: ../template/default/tv.html:6 ../template/default/vdr_cmds.html:5
-#: ../vdradmind.pl:2087
+#: ../vdradmind.pl:2090
 msgid "ISO-8859-1"
 msgstr "ISO-8859-1"
 
@@ -103,19 +103,23 @@ msgstr "VDR:n versio:"
 
 #: ../template/default/about.html:76
 msgid "Supported features in VDR:"
-msgstr ""
+msgstr "VDR:n tuetut ominaisuudet:"
 
 #: ../template/default/about.html:83
 msgid ""
 "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-"
 "plugin\" target=\"_blank\">Streamdev Plugin</a>)"
 msgstr ""
+"Live-kuvan suoratoisto (<a href=\"http://www.vdr-wiki.de/wiki/index.php/"
+"Streamdev-plugin\" target=\"_blank\">Streamdev-laajennos</a>)"
 
 #: ../template/default/about.html:89
 msgid ""
 "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/"
 "\" target=\"_blank\">Liemikuutio Patch</a>)"
 msgstr ""
+"Tallenteiden uudelleennimeäminen (<a href=\"http://www.saunalahti.fi/"
+"~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio-kokoelma</a>)"
 
 #: ../template/default/about.html:96
 msgid "Getting Help and Reporting Bugs"
@@ -299,9 +303,8 @@ msgid "Delete all selected timers?"
 msgstr "Poistetaanko valitut ajastimet?"
 
 #: ../template/default/at_timer_list.html:178
-#, fuzzy
 msgid "No AutoTimers defined!"
-msgstr "Hakuajastimen tarkistus:"
+msgstr "Hakuajastimia ei ole määritelty!"
 
 #: ../template/default/at_timer_new.html:6
 #: ../template/default/at_timer_new.html:19
@@ -414,8 +417,8 @@ msgstr "Alkaa jälkeen:"
 #: ../template/default/prog_timeline.html:155
 #: ../template/default/prog_timeline.html:172
 #: ../template/default/timer_new.html:107
-#: ../template/default/timer_new.html:119 ../vdradmind.pl:4031
-#: ../vdradmind.pl:4044
+#: ../template/default/timer_new.html:119 ../vdradmind.pl:4034
+#: ../vdradmind.pl:4047
 msgid "o'clock"
 msgstr " "
 
@@ -489,7 +492,6 @@ msgid "Stored in"
 msgstr "Tallennehakemisto"
 
 #: ../template/default/at_timer_new.html:182
-#, fuzzy
 msgid "No matches found!"
 msgstr "Ei löydy"
 
@@ -582,7 +584,7 @@ msgstr "Vierailijan salasana:"
 #: ../template/default/config.html:168 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:80
 #: ../template/default/navigation.html:35
-#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:4641
+#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:4644
 msgid "Timeline"
 msgstr "Aikajana"
 
@@ -1259,7 +1261,7 @@ msgstr ""
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:49 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:4641
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:4644
 msgid "Recordings"
 msgstr "Tallenteet"
 
@@ -1481,18 +1483,18 @@ msgstr "Selaimesi ei tue kehyksiä!"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4641
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4644
 msgid "What's On Now?"
 msgstr "Menossa nyt"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:4641
+#: ../template/default/navigation.html:32 ../vdradmind.pl:4644
 msgid "Playing Today?"
 msgstr "Tänään"
 
 #: ../template/default/navigation.html:38 ../template/default/prog_list.html:6
 #: ../template/default/prog_list2.html:56
 #: ../template/default/prog_summary.html:48
-#: ../template/default/prog_summary2.html:85 ../vdradmind.pl:4641
+#: ../template/default/prog_summary2.html:85 ../vdradmind.pl:4644
 msgid "Channels"
 msgstr "Kanavat"
 
@@ -1601,9 +1603,8 @@ msgstr "Etsi vaihtoehtoisia esitysaikoja"
 #: ../template/default/prog_list2.html:93
 #: ../template/default/prog_summary.html:84
 #: ../template/default/prog_summary2.html:101
-#, fuzzy
 msgid "No Information"
-msgstr "Lisätietoja"
+msgstr "Ei tietoja"
 
 #: ../template/default/prog_list.html:87
 #: ../template/default/prog_list2.html:95
@@ -1617,11 +1618,10 @@ msgstr "Tallenna"
 #: ../template/default/prog_summary.html:128
 #: ../template/default/prog_summary2.html:117
 #: ../template/default/prog_timeline.html:194
-#, fuzzy
 msgid "No EPG information available"
-msgstr "Ei tietoja"
+msgstr "Ohjelmaoppaan tietoja ei saatavilla"
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:2751
+#: ../template/default/prog_list2.html:6 ../vdradmind.pl:2754
 msgid "Playing Today"
 msgstr "Ohjelmisto tänään"
 
@@ -1636,12 +1636,12 @@ msgid "What's on:"
 msgstr "Menossa"
 
 #: ../template/default/prog_summary.html:33
-#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4031
+#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4034
 msgid "at"
 msgstr " "
 
 #: ../template/default/prog_timeline.html:76
-#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4016
+#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4019
 msgid "now"
 msgstr "nyt"
 
@@ -1665,7 +1665,7 @@ msgstr "kello:"
 
 #: ../template/default/prog_timeline.html:188
 msgid "You need JavaScript to use the timeline!"
-msgstr ""
+msgstr "Aikajanatoiminto tarvitsee JavaScript-tuen!"
 
 #: ../template/default/rec_edit.html:6 ../template/default/rec_edit.html:19
 msgid "Rename Recording"
@@ -1710,15 +1710,15 @@ msgstr "kpl"
 
 #: ../template/default/rec_list.html:98 ../template/default/rec_list.html:101
 msgid "New"
-msgstr "uusi"
+msgstr "Uusi"
 
 #: ../template/default/rec_list.html:116
 msgid "Play"
-msgstr ""
+msgstr "Toista"
 
 #: ../template/default/rec_list.html:119
 msgid "Cut"
-msgstr ""
+msgstr "Leikkaa"
 
 #: ../template/default/rec_list.html:124
 msgid "Delete recording?"
@@ -1751,9 +1751,8 @@ msgid "Delete all selected recordings?"
 msgstr "Poistetaanko valitut tallenteet?"
 
 #: ../template/default/rec_list.html:160
-#, fuzzy
 msgid "No recordings available"
-msgstr "Ei opastetta"
+msgstr "Tallenteita ei saatavilla"
 
 #: ../template/default/timer_list.html:27
 msgid "Transponder:"
@@ -1810,9 +1809,8 @@ msgid "Delete Selected Timers"
 msgstr "Poista valitut ajastimet"
 
 #: ../template/default/timer_list.html:351
-#, fuzzy
 msgid "No timers defined!"
-msgstr "Ei löytynyt yhtään hakutulosta!"
+msgstr "Ajastimia ei määritelty!"
 
 #: ../template/default/timer_new.html:6 ../template/default/timer_new.html:48
 msgid "Create New Timer"
@@ -1890,79 +1888,79 @@ msgstr "Määritellyt komennot (commands.conf):"
 msgid "Output"
 msgstr "Vaste"
 
-#: ../vdradmind.pl:343
+#: ../vdradmind.pl:346
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Anna VDR-koneesi nimi (esim. video.intra.net):"
 
-#: ../vdradmind.pl:344
+#: ../vdradmind.pl:347
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Anna VDR-koneesi käyttämä SVDRP-portti:"
 
-#: ../vdradmind.pl:345
+#: ../vdradmind.pl:348
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
 msgstr "Anna VDRAdmin-AM käyttämä osoiteavaruus (0.0.0.0 ei rajoituksia):"
 
-#: ../vdradmind.pl:346
+#: ../vdradmind.pl:349
 msgid "On which port should VDRAdmin-AM listen?"
 msgstr "Anna VDRAdmin-AM käyttämä portti:"
 
-#: ../vdradmind.pl:347
+#: ../vdradmind.pl:350
 msgid "Username?"
 msgstr "Anna käyttäjätunnus VDRAdmin-AM varten:"
 
-#: ../vdradmind.pl:348
+#: ../vdradmind.pl:351
 msgid "Password?"
 msgstr "Anna salasana VDRAdmin-AM varten:"
 
-#: ../vdradmind.pl:349
+#: ../vdradmind.pl:352
 msgid "Where are your recordings stored?"
 msgstr "Anna VDR-koneesi tallennehakemiston polku:"
 
-#: ../vdradmind.pl:350
+#: ../vdradmind.pl:353
 msgid "Where are your VDR's configuration files located?"
 msgstr "Anna VDR-koneesi konfigurointihakemiston polku:"
 
-#: ../vdradmind.pl:357
+#: ../vdradmind.pl:360
 msgid "Config file written successfully."
 msgstr "VDRAdmin-AM konfigurointitiedosto muodostettu."
 
-#: ../vdradmind.pl:417
+#: ../vdradmind.pl:420
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s käynnistetty prosessitunnisteella %d."
 
-#: ../vdradmind.pl:477 ../vdradmind.pl:1082 ../vdradmind.pl:2075
+#: ../vdradmind.pl:480 ../vdradmind.pl:1085 ../vdradmind.pl:2078
 msgid "Not found"
 msgstr "Ei löydy"
 
-#: ../vdradmind.pl:477 ../vdradmind.pl:2076
+#: ../vdradmind.pl:480 ../vdradmind.pl:2079
 msgid "The requested URL was not found on this server!"
 msgstr "Pyydettyä URL:ia ei löydy palvelimelta!"
 
-#: ../vdradmind.pl:547 ../vdradmind.pl:1078 ../vdradmind.pl:2078
+#: ../vdradmind.pl:550 ../vdradmind.pl:1081 ../vdradmind.pl:2081
 msgid "Forbidden"
 msgstr "Kielletty"
 
-#: ../vdradmind.pl:547 ../vdradmind.pl:2079
+#: ../vdradmind.pl:550 ../vdradmind.pl:2082
 msgid "You don't have permission to access this function!"
 msgstr "Puutteelliset käyttäjäoikeudet haluttuun toimintoon!"
 
-#: ../vdradmind.pl:1078 ../vdradmind.pl:2080
+#: ../vdradmind.pl:1081 ../vdradmind.pl:2083
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "Pääsy tiedostoon \"%s\" evätty!"
 
-#: ../vdradmind.pl:1082 ../vdradmind.pl:2077
+#: ../vdradmind.pl:1085 ../vdradmind.pl:2080
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "URL:ia \"%s\" ei löydy palvelimelta!"
 
-#: ../vdradmind.pl:2081
+#: ../vdradmind.pl:2084
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Tiedoston \"%s\" avaus ei onnistu!"
 
-#: ../vdradmind.pl:2082
+#: ../vdradmind.pl:2085
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
@@ -1971,67 +1969,60 @@ msgstr ""
 "Yhteydenotto VDR:ään (%s:%s) epäonnistui!<br /><br />Varmista VDR:n "
 "päälläolo ja svdrphosts.conf-tiedoston oikeellisuus."
 
-#: ../vdradmind.pl:2083
+#: ../vdradmind.pl:2086
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Komennon lähetys VDR:lle epäonnistui (%s)"
 
-#: ../vdradmind.pl:2139
-#, fuzzy
+#: ../vdradmind.pl:2142
 msgid "Internal error:"
-msgstr "Päivitysväli:"
+msgstr "Sisäinen virhe:"
 
-#: ../vdradmind.pl:2492
+#: ../vdradmind.pl:2495
 msgid "Can't find EPG entry!"
 msgstr "Ohjelman tietoja ei löydy ohjelmaoppaasta!"
 
-#: ../vdradmind.pl:2751
+#: ../vdradmind.pl:2754
 msgid "Playing Tomorrow"
 msgstr "Ohjelmisto huomenna"
 
-#: ../vdradmind.pl:2751
+#: ../vdradmind.pl:2754
 #, perl-format
 msgid "Playing on the %s"
 msgstr "Ohjelmisto %d päivä"
 
-#: ../vdradmind.pl:4021
+#: ../vdradmind.pl:4024
 msgid "next"
 msgstr "seuraavaksi"
 
-#: ../vdradmind.pl:4040
+#: ../vdradmind.pl:4043
 msgid "What's on after"
 msgstr "Menossa seuraavaksi"
 
-#: ../vdradmind.pl:4040
+#: ../vdradmind.pl:4043
 msgid "What's on at"
 msgstr "Menossa"
 
-#: ../vdradmind.pl:4043
+#: ../vdradmind.pl:4046
 msgid "Suitable matches for:"
 msgstr "Hakutulokset termille:"
 
-#: ../vdradmind.pl:4046
+#: ../vdradmind.pl:4049
 msgid "short view"
 msgstr "lyhyt näkymä"
 
-#: ../vdradmind.pl:4046
+#: ../vdradmind.pl:4049
 msgid "long view"
 msgstr "pitkä näkymä"
 
-#: ../vdradmind.pl:4095
+#: ../vdradmind.pl:4098
 msgid "Schedule"
 msgstr "Ohjelmisto"
 
-#: ../vdradmind.pl:4641
+#: ../vdradmind.pl:4644
 msgid "Timers"
 msgstr "Ajastimet"
 
-#: ../vdradmind.pl:4709
+#: ../vdradmind.pl:4712
 msgid "System default"
 msgstr "Oletus"
-
-#~ msgid "Format:"
-#~ msgstr "Kuvasuhde:"
-
-#~ msgid "Description:"
-#~ msgstr "Kuvaus:"

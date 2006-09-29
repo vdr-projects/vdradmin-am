@@ -28,7 +28,7 @@
 
 require 5.004;
 
-my $VERSION = "3.4.7beta";
+my $VERSION = "3.4.7";
 my $BASENAME;
 my $EXENAME;
 
@@ -219,6 +219,9 @@ $CONFIG{REC_DESC};
 
 #
 $CONFIG{PS_VIEW} = "ext";
+
+#
+$CONFIG{CMD_LINES} = 20;
 
 #
 my %FEATURES;
@@ -4909,12 +4912,13 @@ sub vdr_cmds {
     @show_output = run_svdrpcmd() if ($q->param("run_svdrpcmd"));
     my $svdrp_cmd = "help";
     $svdrp_cmd = $q->param("svdrp_cmd") if ($q->param("svdrp_cmd"));
+    $CONFIG{CMD_LINES} = $q->param("max_lines") if ($q->param("max_lines"));
 
     my $vars = {
         url         => sprintf("%s?aktion=vdr_cmds", $MyURL),
         commands    => \@vdrcmds,
         show_output => \@show_output,
-        max_lines => $q->param("max_lines") ? $q->param("max_lines") : 20,
+        max_lines => $CONFIG{CMD_LINES},
         svdrp_cmd => $svdrp_cmd,
         vdr_cmd   => $q->param("vdr_cmd")   ? $q->param("vdr_cmd")   : undef
     };
@@ -4924,7 +4928,7 @@ sub vdr_cmds {
 sub run_vdrcmd {
     my $id        = $q->param("vdr_cmd");
     my $max_lines = $q->param("max_lines");
-    return unless ($id);
+    return unless (defined($id) && $id =~ /^\d+$/);
     my $counter = 1;
     my $cmd     = ${vdrcmds}[$id]{cmd};
     my @output;

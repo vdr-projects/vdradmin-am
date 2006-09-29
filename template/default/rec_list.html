@@ -89,7 +89,7 @@
 				<tr class="<?% IF loop.count() % 2 == 0 %?>row_even<?% ELSE %?>row_odd<?% END %?>">
 					<td class="col_date <?% IF rec.sortbydate %?>selected<?% END %?>">
 						<span class="date"><?% rec.date %?></span>
-						<?% IF rec.isfolder %?><span class="total"><?% gettext('Total') %?></span><?% END %?>
+						<?% IF rec.isfolder %?>&nbsp;<span class="total"><?% gettext('Total') %?></span><?% END %?>
 					</td>
 					<td class="col_time <?% IF rec.sortbytime %?>selected<?% END %?>">
 						<span class="time"><?% rec.time %?></span>

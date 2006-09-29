@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-06 13:05+0200\n"
-"PO-Revision-Date: 2006-07-17 13:41+0200\n"
+"POT-Creation-Date: 2006-09-29 11:18+0200\n"
+"PO-Revision-Date: 2006-09-23 13:14+0200\n"
 "Last-Translator: Karel Borkovec <her-ur@her-ur.org>\n"
 "Language-Team:  <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,13 +34,13 @@ msgstr ""
 #: ../template/default/rec_edit.html:5 ../template/default/rec_list.html:5
 #: ../template/default/timer_list.html:5 ../template/default/timer_new.html:5
 #: ../template/default/tv.html:6 ../template/default/vdr_cmds.html:5
-#: ../vdradmind.pl:2087
+#: ../vdradmind.pl:2090
 msgid "ISO-8859-1"
 msgstr "ISO-8859-2"
 
 #: ../template/default/about.html:6 ../template/default/navigation.html:64
 msgid "About"
-msgstr ""
+msgstr "O programu"
 
 #: ../template/default/about.html:17
 #, fuzzy
@@ -49,7 +49,7 @@ msgstr "Auto-Èasovaè"
 
 #: ../template/default/about.html:20
 msgid "Current author (VDRAdmin-AM branch):"
-msgstr ""
+msgstr "Souèasný autor (VDRAdmin-AM):"
 
 #: ../template/default/about.html:24
 #, fuzzy
@@ -106,23 +106,27 @@ msgstr "Verze VDR:"
 
 #: ../template/default/about.html:76
 msgid "Supported features in VDR:"
-msgstr ""
+msgstr "Podporované vlastnosti ve VDR:"
 
 #: ../template/default/about.html:83
 msgid ""
 "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-"
 "plugin\" target=\"_blank\">Streamdev Plugin</a>)"
 msgstr ""
+"TV streamování (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-"
+"plugin\" target=\"_blank\">Streamdev Plugin</a>)"
 
 #: ../template/default/about.html:89
 msgid ""
 "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/"
 "\" target=\"_blank\">Liemikuutio Patch</a>)"
 msgstr ""
+"Pøejmenování nahrávek (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/"
+"patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
 
 #: ../template/default/about.html:96
 msgid "Getting Help and Reporting Bugs"
-msgstr ""
+msgstr "Rady a nahla¹ování chyb"
 
 #: ../template/default/about.html:101
 msgid ""
@@ -130,6 +134,8 @@ msgid ""
 "pages. You can access it by clicking <img src=\"bilder/help.png\" alt=\"\" /"
 ">."
 msgstr ""
+"Pokud si nevíte rady, pou¾ijte prosím nejdøíve on-line nápovìdu na rùzných "
+"webech. Kliknìte zde <img src=\"bilder/help.png\" alt=\"\" />."
 
 #: ../template/default/about.html:102
 msgid ""
@@ -138,6 +144,10 @@ msgid ""
 "understand German language. Please use the announcement thread if possible, "
 "search for:"
 msgstr ""
+"Jestli¾e tato nápovìda neobsahuje informace, které potøebujete zkuste se "
+"zeptat na nìmeckém portálu <a href=\"http://www.vdrportal.de\" target="
+"\"_blank\">VDR-Portal</a> (nìmecký jazyk je samozøejmostí, popø. "
+"angliètina). Vyu¾ijte tzv. ANNOUNCE vlákno, hledat:"
 
 #: ../template/default/about.html:103
 msgid ""
@@ -305,19 +315,19 @@ msgstr "Nové èasování"
 #: ../template/default/at_timer_new.html:6
 #: ../template/default/at_timer_new.html:19
 msgid "Add New AutoTimer"
-msgstr ""
+msgstr "Pøidat nový AutoÈasovaè"
 
 #: ../template/default/at_timer_new.html:6
 #: ../template/default/at_timer_new.html:19
 #: ../template/default/help_at_timer_new.html:12
 #: ../template/default/help_at_timer_new.html:23
 msgid "Edit AutoTimer"
-msgstr ""
+msgstr "Upravit AutoÈasovaè"
 
 #: ../template/default/at_timer_new.html:32
 #: ../template/default/help_at_timer_new.html:30
 msgid "AutoTimer Active:"
-msgstr ""
+msgstr "Aktivní AutoÈasovaè:"
 
 #: ../template/default/at_timer_new.html:37
 #: ../template/default/at_timer_new.html:41
@@ -327,31 +337,31 @@ msgstr ""
 #: ../template/default/at_timer_new.html:46
 #: ../template/default/help_at_timer_new.html:32
 msgid "Search Patterns:"
-msgstr ""
+msgstr "Vyhledávací znaky:"
 
 #: ../template/default/at_timer_new.html:52
 #: ../template/default/help_at_timer_new.html:34
 msgid "Search in:"
-msgstr ""
+msgstr "Hledat v:"
 
 #: ../template/default/at_timer_new.html:54
 #: ../template/default/at_timer_new.html:167
 msgid "Title"
-msgstr ""
+msgstr "Název"
 
 #: ../template/default/at_timer_new.html:55
 #: ../template/default/at_timer_new.html:168
 msgid "Subtitle"
-msgstr ""
+msgstr "Titulky"
 
 #: ../template/default/at_timer_new.html:56
 msgid "Description"
-msgstr ""
+msgstr "Popis"
 
 #: ../template/default/at_timer_new.html:60
 #: ../template/default/help_at_timer_new.html:36
 msgid "Search only on these days:"
-msgstr ""
+msgstr "Hledat pouze v tyto dny:"
 
 #: ../template/default/at_timer_new.html:62
 #: ../template/default/timer_new.html:92
@@ -397,12 +407,12 @@ msgstr "Kanál"
 
 #: ../template/default/at_timer_new.html:75
 msgid "all"
-msgstr ""
+msgstr "v¹e"
 
 #: ../template/default/at_timer_new.html:83
 #: ../template/default/help_at_timer_new.html:40
 msgid "Starts After:"
-msgstr ""
+msgstr "Zaèátek po:"
 
 #: ../template/default/at_timer_new.html:88
 #: ../template/default/at_timer_new.html:97
@@ -413,15 +423,15 @@ msgstr ""
 #: ../template/default/prog_timeline.html:155
 #: ../template/default/prog_timeline.html:172
 #: ../template/default/timer_new.html:107
-#: ../template/default/timer_new.html:119 ../vdradmind.pl:4031
-#: ../vdradmind.pl:4044
+#: ../template/default/timer_new.html:119 ../vdradmind.pl:4034
+#: ../vdradmind.pl:4047
 msgid "o'clock"
 msgstr "hodin"
 
 #: ../template/default/at_timer_new.html:92
 #: ../template/default/help_at_timer_new.html:42
 msgid "Ends Before:"
-msgstr ""
+msgstr "Konec pøed:"
 
 #: ../template/default/at_timer_new.html:101
 #: ../template/default/help_at_timer_new.html:44
@@ -453,17 +463,17 @@ msgstr ""
 #: ../template/default/at_timer_new.html:132
 #: ../template/default/help_at_timer_new.html:54
 msgid "Episode:"
-msgstr ""
+msgstr "Epizoda:"
 
 #: ../template/default/at_timer_new.html:138
 #: ../template/default/help_at_timer_new.html:56
 msgid "Remember programmed timers:"
-msgstr ""
+msgstr "Zapamatovat naprogramovaný èasovaè:"
 
 #: ../template/default/at_timer_new.html:145
 #: ../template/default/help_at_timer_new.html:58
 msgid "Directory:"
-msgstr ""
+msgstr "Slo¾ka:"
 
 #: ../template/default/at_timer_new.html:154
 #: ../template/default/config.html:450 ../template/default/timer_new.html:154
@@ -472,7 +482,7 @@ msgstr "Ulo¾it"
 
 #: ../template/default/at_timer_new.html:155
 msgid "Test"
-msgstr ""
+msgstr "Test:"
 
 #: ../template/default/at_timer_new.html:156
 #: ../template/default/rec_edit.html:45 ../template/default/timer_new.html:155
@@ -481,11 +491,11 @@ msgstr "Zru¹it"
 
 #: ../template/default/at_timer_new.html:169
 msgid "Broadcasted"
-msgstr ""
+msgstr "Vysíláno"
 
 #: ../template/default/at_timer_new.html:170
 msgid "Stored in"
-msgstr ""
+msgstr "Ulo¾eno v:"
 
 #: ../template/default/at_timer_new.html:182
 #, fuzzy
@@ -510,7 +520,7 @@ msgstr "©ablona:"
 
 #: ../template/default/config.html:59 ../template/default/help_config.html:34
 msgid "Skin:"
-msgstr ""
+msgstr "Skin:"
 
 #: ../template/default/config.html:71 ../template/default/help_config.html:36
 msgid "Login Page:"
@@ -530,12 +540,12 @@ msgstr "Jazyk:"
 
 #: ../template/default/config.html:107 ../template/default/help_config.html:44
 msgid "Save settings on exit:"
-msgstr ""
+msgstr "Ulo¾it nastavení pøi vypnutí:"
 
 #: ../template/default/config.html:117 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:50
 msgid "VDR"
-msgstr ""
+msgstr "VDR"
 
 #: ../template/default/config.html:120 ../template/default/help_config.html:52
 msgid "Number of DVB cards:"
@@ -581,7 +591,7 @@ msgstr "Guest heslo:"
 #: ../template/default/config.html:168 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:80
 #: ../template/default/navigation.html:35
-#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:4641
+#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:4644
 msgid "Timeline"
 msgstr "Èasová pøímka"
 
@@ -733,7 +743,7 @@ msgstr "jméno souboru epg.data"
 #: ../template/default/config.html:373
 #: ../template/default/help_config.html:169
 msgid "VFAT:"
-msgstr ""
+msgstr "VFAT:"
 
 #: ../template/default/config.html:383 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:175
@@ -797,6 +807,26 @@ msgid ""
 "\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and "
 "check for matching AutoTimers.</p>"
 msgstr ""
+"<p>Seznam AutoÈasovaèù ve VDRAdmin-AM.</p><p>Seznam zobrazuje nìkteré "
+"informace, lze mìnit øazení polo¾ek dle hlavièek sloupcù.</p><p>Pro ka¾dý "
+"èasovaè máte k dispozici následující mo¾nosti:<dl><dt>Nastavení stavu</"
+"dt><dd>Kliknutím na \"Ano\" nebo \"Ne\"v \"Aktivním\" sloupci urèujícím "
+"aktivitu.</dd><dt>Rychlý pohled na prioritu a dobu trvání</dt><dd>Najetím "
+"kurzoru my¹i na název AutoÈasovaèe.</dd><dt>Upravení AutoÈasovaèe</"
+"dt><dd>Upravovat Autoèasovaè lze kliknutím na <img src=\"bilder/edit.png\" "
+"alt=\"edit\" />.</dd><dt>Smazání AutoÈasovaèe</dt><dd>Smazat AutoÈasovaè lze "
+"kliknutím na <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></"
+"p><p>Ka¾dý stav Autoèasovaèe je indikován rùznì barevnými obrázky <br /><img "
+"src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" />Autoèasovaè je "
+"v poøádku a automaticky bude spu¹tìn.<br /><img src=\"bilder/poempl_grau.png"
+"\" alt=\"inactive\" align=\"middle\" />AutoÈasovaè není aktivní.</p><p>Navíc "
+"k tìmto funkcím lze je¹tì pøidat nový AutoÈasovaè kliknutím na <input type="
+"\"submit\" class=\"submit\" value=\"New AutoTimer\"/> nahoøe na stránce a "
+"také lze smazat více AutoÈasovaèù zároveò za¹krtnutím boxù v posledním "
+"sloupci a kliknutím na <input type=\"submit\" class=\"submit\" value="
+"\"Delete Selected AutoTimers\"/>.</p><p>Kliknìte zde <input type=\"submit\" "
+"class=\"submit\" value=\"Force Update\"/> k vynucení re-connectu k VDR, "
+"stáhnutí aktuálního EPG a kontroly AutoÈasovaèù.</p>"
 
 #: ../template/default/help_at_timer_new.html:27
 msgid ""
@@ -1323,7 +1353,7 @@ msgstr ""
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:49 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:4641
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:4644
 msgid "Recordings"
 msgstr "Nahrávky"
 
@@ -1429,7 +1459,7 @@ msgstr ""
 #: ../template/default/help_timer_new.html:28
 #: ../template/default/timer_new.html:67
 msgid "AutoTimer Checking:"
-msgstr ""
+msgstr "Kontrola AutoÈasovaèù:"
 
 #: ../template/default/help_timer_new.html:29
 msgid ""
@@ -1456,20 +1486,20 @@ msgstr "Èas"
 
 #: ../template/default/help_timer_new.html:34
 msgid "Monitor this timer using the start and stop time."
-msgstr ""
+msgstr "Sledovat tento èasovaè pomocí zaèátku a konce nahrávání."
 
 #: ../template/default/help_timer_new.html:35
 #: ../template/default/timer_new.html:74 ../template/default/tv.html:79
 msgid "off"
-msgstr ""
+msgstr "off"
 
 #: ../template/default/help_timer_new.html:36
 msgid "Do not monitor this timer."
-msgstr ""
+msgstr "Nesledovat tento Èasovaè."
 
 #: ../template/default/help_timer_new.html:40
 msgid "The channel to record."
-msgstr ""
+msgstr "Kanál k nahrávání."
 
 #: ../template/default/help_timer_new.html:41
 #: ../template/default/timer_new.html:88
@@ -1489,13 +1519,15 @@ msgstr ""
 #: ../template/default/help_timer_new.html:49
 #: ../template/default/timer_new.html:102
 msgid "Start Time:"
-msgstr ""
+msgstr "Zaèátek nahrávání:"
 
 #: ../template/default/help_timer_new.html:50
 msgid ""
 "This is the time when the timer should start recording. The first text field "
 "is for \"hour\", the second for \"minute\"."
 msgstr ""
+"Toto je èas kdy by VDR mìlo zaèít nahrávat. První textové pole je pro "
+"\"hodinu\" a druhé pro \"minutu\"."
 
 #: ../template/default/help_timer_new.html:51
 #: ../template/default/timer_new.html:114
@@ -1507,6 +1539,8 @@ msgid ""
 "This is the time when the timer should stop recording. The first text field "
 "is for \"hour\", the second for \"minute\"."
 msgstr ""
+"Toto je èas kdy by VDR mìlo ukonèit nahrávání. První textové pole je pro "
+"\"hodinu\" a druhé pro \"minutu\"."
 
 #: ../template/default/help_timer_new.html:57
 #: ../template/default/timer_new.html:138
@@ -1538,6 +1572,9 @@ msgid ""
 "\"ref_file\">summary.vdr</span> or <span class=\"ref_file\">info.vdr</span> "
 "file of the recording."
 msgstr ""
+"Libovolný text popisující nahrávku z èasovaèe. Jestli¾e pole není prázdné, "
+"tak text bude zapsán do souboru <span class=\"ref_file\">summary.vdr</span> "
+"nebo <span class=\"ref_file\">info.vdr</span>,"
 
 #: ../template/default/index.html:21
 msgid "Your Browser does not support frames!"
@@ -1545,18 +1582,18 @@ msgstr "Vá¹ prohlí¾eè nepodporuje rámy!"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4641
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4644
 msgid "What's On Now?"
 msgstr "Co bì¾í nyní?"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:4641
+#: ../template/default/navigation.html:32 ../vdradmind.pl:4644
 msgid "Playing Today?"
-msgstr ""
+msgstr "Co pobì¾í dnes?"
 
 #: ../template/default/navigation.html:38 ../template/default/prog_list.html:6
 #: ../template/default/prog_list2.html:56
 #: ../template/default/prog_summary.html:48
-#: ../template/default/prog_summary2.html:85 ../vdradmind.pl:4641
+#: ../template/default/prog_summary2.html:85 ../vdradmind.pl:4644
 msgid "Channels"
 msgstr "Kanály"
 
@@ -1595,7 +1632,7 @@ msgstr ""
 #: ../template/default/prog_detail.html:18
 #: ../template/default/timer_list.html:296
 msgid "VPS"
-msgstr ""
+msgstr "VPS"
 
 #: ../template/default/prog_detail.html:27
 msgid "close"
@@ -1643,7 +1680,7 @@ msgstr "Naladit TV"
 #: ../template/default/prog_summary2.html:89
 #: ../template/default/rec_list.html:126
 msgid "Stream"
-msgstr ""
+msgstr "Stream"
 
 #: ../template/default/prog_list.html:38
 msgid "Go!"
@@ -1690,7 +1727,7 @@ msgstr "Nahrávání"
 msgid "No EPG information available"
 msgstr "®ádné informace"
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:2751
+#: ../template/default/prog_list2.html:6 ../vdradmind.pl:2754
 msgid "Playing Today"
 msgstr "Bì¾í dnes"
 
@@ -1705,12 +1742,12 @@ msgid "What's on:"
 msgstr "Co bì¾í:"
 
 #: ../template/default/prog_summary.html:33
-#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4031
+#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4034
 msgid "at"
 msgstr "v"
 
 #: ../template/default/prog_timeline.html:76
-#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4016
+#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4019
 msgid "now"
 msgstr "nyní"
 
@@ -1726,7 +1763,7 @@ msgstr "Délka:"
 #: ../template/default/prog_timeline.html:96
 #: ../template/default/timer_list.html:27
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: ../template/default/prog_timeline.html:170
 msgid "at:"
@@ -1734,7 +1771,7 @@ msgstr "v:"
 
 #: ../template/default/prog_timeline.html:188
 msgid "You need JavaScript to use the timeline!"
-msgstr ""
+msgstr "K pou¾ívání èasové linie potøebujete JavaScript!"
 
 #: ../template/default/rec_edit.html:6 ../template/default/rec_edit.html:19
 msgid "Rename Recording"
@@ -1783,11 +1820,11 @@ msgstr "Nový"
 
 #: ../template/default/rec_list.html:116
 msgid "Play"
-msgstr ""
+msgstr "Hrát"
 
 #: ../template/default/rec_list.html:119
 msgid "Cut"
-msgstr ""
+msgstr "Støihnout"
 
 #: ../template/default/rec_list.html:124
 msgid "Delete recording?"
@@ -1826,11 +1863,11 @@ msgstr "Nápovìda není dostupná"
 
 #: ../template/default/timer_list.html:27
 msgid "Transponder:"
-msgstr ""
+msgstr "Transponder:"
 
 #: ../template/default/timer_list.html:27
 msgid "CA-System:"
-msgstr ""
+msgstr "CA-System:"
 
 #: ../template/default/timer_list.html:45
 msgid "New Timer"
@@ -1860,7 +1897,7 @@ msgstr "Èasovaè je v cajku."
 
 #: ../template/default/timer_list.html:297
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: ../template/default/timer_list.html:339
 msgid "activate"
@@ -1880,7 +1917,7 @@ msgstr "Vymazat vybrané èasovaèe"
 
 #: ../template/default/timer_list.html:351
 msgid "No timers defined!"
-msgstr ""
+msgstr "®ádný èasovaè není definován!"
 
 #: ../template/default/timer_new.html:6 ../template/default/timer_new.html:48
 msgid "Create New Timer"
@@ -1958,79 +1995,79 @@ msgstr "Pøíkazy definované v commands.conf:"
 msgid "Output"
 msgstr "Výstup"
 
-#: ../vdradmind.pl:343
+#: ../vdradmind.pl:346
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Jaké je Va¹e VDR hostname?"
 
-#: ../vdradmind.pl:344
+#: ../vdradmind.pl:347
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Na jakém portu mám oèekávat SVDRP pøíkazy?"
 
-#: ../vdradmind.pl:345
+#: ../vdradmind.pl:348
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
 msgstr "Na jaké adrese má èekat VDRAdmin-AM (0.0.0.0 pro jakoukoli)?"
 
-#: ../vdradmind.pl:346
+#: ../vdradmind.pl:349
 msgid "On which port should VDRAdmin-AM listen?"
 msgstr "Na jakém portu má èekat VDRAdmin-AM?"
 
-#: ../vdradmind.pl:347
+#: ../vdradmind.pl:350
 msgid "Username?"
 msgstr "U¾iv. jméno?"
 
-#: ../vdradmind.pl:348
+#: ../vdradmind.pl:351
 msgid "Password?"
 msgstr "Heslo?"
 
-#: ../vdradmind.pl:349
+#: ../vdradmind.pl:352
 msgid "Where are your recordings stored?"
 msgstr "Kam ukládáte nahrávky z VDR?"
 
-#: ../vdradmind.pl:350
+#: ../vdradmind.pl:353
 msgid "Where are your VDR's configuration files located?"
 msgstr "Kde se nacházejí konfiguraèní soubory VDR?"
 
-#: ../vdradmind.pl:357
+#: ../vdradmind.pl:360
 msgid "Config file written successfully."
 msgstr "Konfiguraèní soubor ulo¾en v poøádku."
 
-#: ../vdradmind.pl:417
+#: ../vdradmind.pl:420
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s startuje s pidem %d."
 
-#: ../vdradmind.pl:477 ../vdradmind.pl:1082 ../vdradmind.pl:2075
+#: ../vdradmind.pl:480 ../vdradmind.pl:1085 ../vdradmind.pl:2078
 msgid "Not found"
 msgstr "Nefunguje"
 
-#: ../vdradmind.pl:477 ../vdradmind.pl:2076
+#: ../vdradmind.pl:480 ../vdradmind.pl:2079
 msgid "The requested URL was not found on this server!"
 msgstr "Po¾adovaná URL nebyla na tomto serveru nalezena!"
 
-#: ../vdradmind.pl:547 ../vdradmind.pl:1078 ../vdradmind.pl:2078
+#: ../vdradmind.pl:550 ../vdradmind.pl:1081 ../vdradmind.pl:2081
 msgid "Forbidden"
 msgstr "Zakázáno"
 
-#: ../vdradmind.pl:547 ../vdradmind.pl:2079
+#: ../vdradmind.pl:550 ../vdradmind.pl:2082
 msgid "You don't have permission to access this function!"
 msgstr "Nemáte práva pro vyu¾ití této funkce!"
 
-#: ../vdradmind.pl:1078 ../vdradmind.pl:2080
+#: ../vdradmind.pl:1081 ../vdradmind.pl:2083
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "Pøístup k souboru \"%s\" odmítnut!"
 
-#: ../vdradmind.pl:1082 ../vdradmind.pl:2077
+#: ../vdradmind.pl:1085 ../vdradmind.pl:2080
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "URL \"%s\" nebyla na tomto serveru nalezena!"
 
-#: ../vdradmind.pl:2081
+#: ../vdradmind.pl:2084
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Nemohu otevøít soubor \"%s\"!"
 
-#: ../vdradmind.pl:2082
+#: ../vdradmind.pl:2085
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
@@ -2039,67 +2076,61 @@ msgstr ""
 "Nemohu se pøipojit k VDR v %s:%s<br /><br />Prosím zkontrolujte, zda VDR "
 "bì¾í a pokud je soubor soubor svdrphosts.conf øádnì nastaven."
 
-#: ../vdradmind.pl:2083
+#: ../vdradmind.pl:2086
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Chyba pøi posílání pøíkazu k VDR v %s"
 
-#: ../vdradmind.pl:2139
+#: ../vdradmind.pl:2142
 #, fuzzy
 msgid "Internal error:"
 msgstr "Interval:"
 
-#: ../vdradmind.pl:2492
+#: ../vdradmind.pl:2495
 msgid "Can't find EPG entry!"
 msgstr "Nemohu nalézt EPG vstup!"
 
-#: ../vdradmind.pl:2751
+#: ../vdradmind.pl:2754
 msgid "Playing Tomorrow"
 msgstr "Co pobì¾í zítra?"
 
-#: ../vdradmind.pl:2751
+#: ../vdradmind.pl:2754
 #, perl-format
 msgid "Playing on the %s"
-msgstr ""
+msgstr "Pobì¾í v %s"
 
-#: ../vdradmind.pl:4021
+#: ../vdradmind.pl:4024
 msgid "next"
 msgstr "dal¹í"
 
-#: ../vdradmind.pl:4040
+#: ../vdradmind.pl:4043
 msgid "What's on after"
 msgstr "Co bì¾í pak"
 
-#: ../vdradmind.pl:4040
+#: ../vdradmind.pl:4043
 msgid "What's on at"
 msgstr "Co bì¾í v"
 
-#: ../vdradmind.pl:4043
+#: ../vdradmind.pl:4046
 msgid "Suitable matches for:"
 msgstr ""
 
-#: ../vdradmind.pl:4046
+#: ../vdradmind.pl:4049
 msgid "short view"
 msgstr "struèný pøehled"
 
-#: ../vdradmind.pl:4046
+#: ../vdradmind.pl:4049
 msgid "long view"
 msgstr "detailní pøehled"
 
-#: ../vdradmind.pl:4095
+#: ../vdradmind.pl:4098
 msgid "Schedule"
 msgstr "Plán"
 
-#: ../vdradmind.pl:4641
+#: ../vdradmind.pl:4644
 msgid "Timers"
 msgstr "Èasovaèe"
 
-#: ../vdradmind.pl:4709
+#: ../vdradmind.pl:4712
 msgid "System default"
 msgstr "Defaultní nastavení"
-
-#~ msgid "Format:"
-#~ msgstr "Formát:"
-
-#~ msgid "Description:"
-#~ msgstr "Popis:"
