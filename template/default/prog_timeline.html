@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html id="scroller">
 
 <head>
 	<meta http-equiv="refresh" content="600; URL=vdradmin.pl?aktion=prog_timeline" />
@@ -83,7 +83,7 @@
 		{
 			if (redraw_w != GetWindowW() || redraw_h != GetWindowH())
 			{
-				Go('<?% nowurl %?>&time=<?% date.format(now_sec, '%H:%M') %?>');
+				Go('<?% nowurl %?>&amp;time=<?% date.format(now_sec, '%H:%M') %?>');
 			}
 		}
 		
@@ -132,7 +132,7 @@
 <?%
 			FOREACH show = shows2.${name};
 %?>
-				events[<?% counter %?>] = AddEvent(<?% counter %?>, <?% show.vdr_id %?>, <?% show.anchor %?>, <?% show.start %?>, <?% show.stop %?>, "<?% show.title %?>", <?% show.timer %?>, <?% show.summary ? 1 : 0 %?>);
+				events[<?% counter %?>] = AddEvent(<?% counter %?>, <?% show.vdr_id %?>, <?% show.anchor %?>, <?% show.start %?>, <?% show.stop %?>, "<?% show.title | html %?>", <?% show.timer %?>, <?% show.summary ? 1 : 0 %?>);
 <?%
 				counter = counter + 1;
 			END;
@@ -156,7 +156,7 @@
 				</td>
 				<td class="col_other">
 					<?% gettext('What\'s on:') %?>&nbsp;
-					<select name="Auswahl" class="submit" onChange="Go(this.form.Auswahl.options[this.form.Auswahl.options.selectedIndex].value)" width="100">
+					<select name="Auswahl" class="submit" onchange="Go(this.form.Auswahl.options[this.form.Auswahl.options.selectedIndex].value)">
 <?% select_now = (now == date.format(date.now, '%H:%M')) %?>
 						<script type="text/javascript" language="JavaScript1.2">
 							BuildOption("", 0, "-");

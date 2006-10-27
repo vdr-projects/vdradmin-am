@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html id="scroller">
 
 <head>
 	<title>VDRAdmin-AM - <?% gettext('TV') %?> (<?% host %?>)</title>
@@ -67,7 +67,7 @@
 	</script>
 </head>
 
-<body onLoad="window.focus();WebcamUpdate()" id="tv"> 
+<body onload="window.focus();WebcamUpdate()" id="tv"> 
 	<form action="<?% url %?>" method="get" name="liveform">
 <?% UNLESS tv_only %?>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
@@ -75,7 +75,7 @@
 				<td class="col_title"><h1><?% gettext('TV') %?></h1></td>
 				<td class="col_other">
 					<h5><?% gettext('Interval:') %?></h5>
-					<select name="Seconds" class="submit" onChange="v_changeInterval(this.options[this.selectedIndex].value)">
+					<select name="Seconds" class="submit" onchange="v_changeInterval(this.options[this.selectedIndex].value)">
 						<option value="0"><?% gettext('off') %?></option>
 						<option value="1" <?% IF interval == 1 %?>selected="selected"<?% END %?>> 1 <?% gettext('sec.') %?></option>
 						<option value="2" <?% IF interval == 2 %?>selected="selected"<?% END %?>> 2 <?% gettext('sec.') %?></option>
@@ -85,14 +85,14 @@
 						<option value="30" <?% IF interval == 30 %?>selected="selected"<?% END %?>>30 <?% gettext('sec.') %?></option>
 						<option value="60" <?% IF interval == 60 %?>selected="selected"<?% END %?>>60 <?% gettext('sec.') %?></option>
 					</select>
-					<input type="button" class="submit" name="livebild" value='<?% gettext('G') %?>' title="<?% gettext('Grab the picture!') %?>" onClick="WebcamUpdate()" />
+					<input type="button" class="submit" name="livebild" value='<?% gettext('G') %?>' title="<?% gettext('Grab the picture!') %?>" onclick="WebcamUpdate()" />
 					&nbsp;&nbsp;<h5><?% gettext('Size:') %?></h5>
-					<select name="Size" class="submit" onChange="v_changeSize(this.options[this.selectedIndex].value)">
+					<select name="Size" class="submit" onchange="v_changeSize(this.options[this.selectedIndex].value)">
 						<option value="full" <?% IF size == 'full' %?>selected="selected"<?% END %?>>1:1</option>
 						<option value="half" <?% IF size == 'half' %?>selected="selected"<?% END %?>>1:2</option>
 						<option value="quarter" <?% IF size == 'quarter' %?>selected="selected"<?% END %?>>1:4</option>
 					</select>
-					<input type="button" class="submit" name="livebild" value='<?% gettext('G') %?>' title="<?% gettext('Grab the picture!') %?>" onClick="WebcamUpdate()" />
+					<input type="button" class="submit" name="livebild" value='<?% gettext('G') %?>' title="<?% gettext('Grab the picture!') %?>" onclick="WebcamUpdate()" />
 				</td>
 				<td align="right"><?% UNLESS new_win %?>[<a class="submit" href="javascript:tv_open();"><?% gettext('Open in separate window') %?></a>]&nbsp;&nbsp;<?% END %?></td>
 			</tr>

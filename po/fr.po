@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.4.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-29 11:18+0200\n"
+"POT-Creation-Date: 2006-10-27 12:17+0200\n"
 "PO-Revision-Date: 2006-05-21 00:34+0100\n"
 "Last-Translator: NIVAL Michaël <mnival@club-internet.fr>\n"
 "Language-Team: Trois Six <trois.six@free.fr>\n"
@@ -13,8 +13,7 @@ msgstr ""
 "X-Poedit-Country: FRANCE\n"
 
 #: ../template/default/about.html:5 ../template/default/at_timer_list.html:5
-#: ../template/default/at_timer_new.html:5 ../template/default/config.html:4
-#: ../template/default/error.html:5
+#: ../template/default/config.html:4 ../template/default/error.html:5
 #: ../template/default/help_at_timer_list.html:5
 #: ../template/default/help_at_timer_new.html:11
 #: ../template/default/help_config.html:8 ../template/default/help_no.html:5
@@ -30,11 +29,13 @@ msgstr ""
 #: ../template/default/rec_edit.html:5 ../template/default/rec_list.html:5
 #: ../template/default/timer_list.html:5 ../template/default/timer_new.html:5
 #: ../template/default/tv.html:6 ../template/default/vdr_cmds.html:5
-#: ../vdradmind.pl:2090
+#: ../template/default/epgsearch_new.html:5
+#: ../template/default/at_timer_new.html:5
+#: ../template/default/epgsearch_list.html:5 ../vdradmind.pl:2740
 msgid "ISO-8859-1"
 msgstr "ISO-8859-1"
 
-#: ../template/default/about.html:6 ../template/default/navigation.html:64
+#: ../template/default/about.html:6 ../template/default/navigation.html:69
 msgid "About"
 msgstr "A propos"
 
@@ -55,70 +56,81 @@ msgid "Translation Team"
 msgstr "Équipe de Traduction"
 
 #: ../template/default/about.html:34
-msgid "Dutch:"
-msgstr "Hollandais :"
-
-#: ../template/default/about.html:38
 msgid "English:"
 msgstr "Anglais :"
 
-#: ../template/default/about.html:42
-msgid "Finnish:"
-msgstr "Finlandais :"
-
-#: ../template/default/about.html:46
-msgid "French:"
-msgstr "Français"
-
-#: ../template/default/about.html:47
-msgid "At the moment unmaintained, former translations by:"
-msgstr "Pour le moment non maintenu, précédente traductions par :"
-
-#: ../template/default/about.html:50
+#: ../template/default/about.html:38
 msgid "German:"
 msgstr "Allemand :"
 
-#: ../template/default/about.html:54
+#: ../template/default/about.html:42
+msgid "French:"
+msgstr "Français"
+
+#: ../template/default/about.html:43
+msgid "At the moment unmaintained, former translations by:"
+msgstr "Pour le moment non maintenu, précédente traductions par :"
+
+#: ../template/default/about.html:46
 msgid "Spanish:"
 msgstr "Espagnol :"
+
+#: ../template/default/about.html:50
+msgid "Finnish:"
+msgstr "Finlandais :"
+
+#: ../template/default/about.html:54
+msgid "Dutch:"
+msgstr "Hollandais :"
 
 #: ../template/default/about.html:58
 msgid "Russian:"
 msgstr "Russe"
 
-#: ../template/default/about.html:65
+#: ../template/default/about.html:62
+#, fuzzy
+msgid "Czech:"
+msgstr "Français"
+
+#: ../template/default/about.html:69
 msgid "Informations"
 msgstr "Informations"
 
-#: ../template/default/about.html:68
+#: ../template/default/about.html:72
 msgid "VDRAdmin-AM version:"
 msgstr "Version de VDRAdmin-AM :"
 
-#: ../template/default/about.html:72
+#: ../template/default/about.html:76
 msgid "VDR version:"
 msgstr "Version de VDR :"
 
-#: ../template/default/about.html:76
+#: ../template/default/about.html:80
 msgid "Supported features in VDR:"
 msgstr ""
 
-#: ../template/default/about.html:83
+#: ../template/default/about.html:87
+msgid ""
+"EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search."
+"html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgstr ""
+
+#: ../template/default/about.html:93
 msgid ""
 "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-"
 "plugin\" target=\"_blank\">Streamdev Plugin</a>)"
 msgstr ""
 
-#: ../template/default/about.html:89
+#: ../template/default/about.html:99
 msgid ""
 "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/"
 "\" target=\"_blank\">Liemikuutio Patch</a>)"
 msgstr ""
 
-#: ../template/default/about.html:96
+#: ../template/default/about.html:106
 msgid "Getting Help and Reporting Bugs"
 msgstr "Avoir de l'Aide et Rapporter les Bugs"
 
-#: ../template/default/about.html:101
+#: ../template/default/about.html:111
 msgid ""
 "If you need help please first try to use the online help you'll find on some "
 "pages. You can access it by clicking <img src=\"bilder/help.png\" alt=\"\" /"
@@ -127,7 +139,7 @@ msgstr ""
 "Si vous avez besoin d'aide, merci de regarder en priorité sur l'aide en "
 "ligne. Ici <img src=\"bilder/help.png\" alt=\"\" />."
 
-#: ../template/default/about.html:102
+#: ../template/default/about.html:112
 msgid ""
 "If this doesn't provide the information you need you can try to get help at "
 "<a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> if you "
@@ -139,7 +151,7 @@ msgstr ""
 "\">VDR-Portal</a> si vous comprenez l'allemand. Merci d'utiliser le topic de "
 "l'annonce si possible, recherchez : "
 
-#: ../template/default/about.html:103
+#: ../template/default/about.html:113
 msgid ""
 "If you think you have found a bug please check that it's a new one and "
 "report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page."
@@ -161,7 +173,6 @@ msgid "AutoTimer"
 msgstr "Auto-Programmation"
 
 #: ../template/default/at_timer_list.html:24
-#: ../template/default/at_timer_new.html:120
 #: ../template/default/config.html:203 ../template/default/config.html:261
 #: ../template/default/help_at_timer_new.html:50
 #: ../template/default/help_config.html:98
@@ -169,11 +180,12 @@ msgstr "Auto-Programmation"
 #: ../template/default/help_timer_new.html:53
 #: ../template/default/timer_list.html:27
 #: ../template/default/timer_new.html:130
+#: ../template/default/epgsearch_new.html:502
+#: ../template/default/at_timer_new.html:120
 msgid "Priority:"
 msgstr "Priorité :"
 
 #: ../template/default/at_timer_list.html:24
-#: ../template/default/at_timer_new.html:126
 #: ../template/default/config.html:207 ../template/default/config.html:265
 #: ../template/default/help_at_timer_new.html:52
 #: ../template/default/help_config.html:100
@@ -181,6 +193,8 @@ msgstr "Priorité :"
 #: ../template/default/help_timer_new.html:55
 #: ../template/default/timer_list.html:27
 #: ../template/default/timer_new.html:134
+#: ../template/default/epgsearch_new.html:508
+#: ../template/default/at_timer_new.html:126
 msgid "Lifetime:"
 msgstr "Chronologie :"
 
@@ -189,30 +203,38 @@ msgid "New AutoTimer"
 msgstr "Nouvelle Auto-Programmation"
 
 #: ../template/default/at_timer_list.html:43
-#: ../template/default/at_timer_new.html:23 ../template/default/config.html:32
-#: ../template/default/navigation.html:64 ../template/default/rec_list.html:26
-#: ../template/default/timer_list.html:50
+#: ../template/default/config.html:32 ../template/default/navigation.html:69
+#: ../template/default/rec_list.html:26 ../template/default/timer_list.html:50
 #: ../template/default/timer_new.html:52 ../template/default/vdr_cmds.html:20
+#: ../template/default/epgsearch_new.html:155
+#: ../template/default/at_timer_new.html:23
+#: ../template/default/epgsearch_list.html:31
 msgid "Help"
 msgstr "Aide"
 
 #: ../template/default/at_timer_list.html:57
 #: ../template/default/timer_list.html:205
+#: ../template/default/epgsearch_list.html:43
 msgid "Active"
 msgstr "Actif"
 
 #: ../template/default/at_timer_list.html:68
 #: ../template/default/timer_list.html:216
+#: ../template/default/epgsearch_list.html:65
+#: ../template/default/epgsearch_list.html:67
+#: ../template/default/epgsearch_list.html:214
 msgid "Channel"
 msgstr "Chaîne"
 
 #: ../template/default/at_timer_list.html:79
 #: ../template/default/timer_list.html:238
+#: ../template/default/epgsearch_list.html:81
 msgid "Start"
 msgstr "Début"
 
 #: ../template/default/at_timer_list.html:90
 #: ../template/default/timer_list.html:249
+#: ../template/default/epgsearch_list.html:95
 msgid "Stop"
 msgstr "Fin"
 
@@ -225,14 +247,11 @@ msgstr "Nom"
 #: ../template/default/at_timer_list.html:112
 #: ../template/default/rec_list.html:85
 #: ../template/default/timer_list.html:271
+#: ../template/default/epgsearch_list.html:117
 msgid "Select all/none"
 msgstr "Selectionner tout/rien"
 
 #: ../template/default/at_timer_list.html:120
-#: ../template/default/at_timer_new.html:35
-#: ../template/default/at_timer_new.html:39
-#: ../template/default/at_timer_new.html:103
-#: ../template/default/at_timer_new.html:140
 #: ../template/default/config.html:109 ../template/default/config.html:152
 #: ../template/default/config.html:181 ../template/default/config.html:194
 #: ../template/default/config.html:223 ../template/default/config.html:250
@@ -244,14 +263,15 @@ msgstr "Selectionner tout/rien"
 #: ../template/default/config.html:409 ../template/default/config.html:416
 #: ../template/default/config.html:423 ../template/default/timer_list.html:294
 #: ../template/default/timer_new.html:62
+#: ../template/default/at_timer_new.html:35
+#: ../template/default/at_timer_new.html:39
+#: ../template/default/at_timer_new.html:103
+#: ../template/default/at_timer_new.html:140
+#: ../template/default/epgsearch_list.html:125
 msgid "Yes"
 msgstr "Oui"
 
 #: ../template/default/at_timer_list.html:122
-#: ../template/default/at_timer_new.html:36
-#: ../template/default/at_timer_new.html:40
-#: ../template/default/at_timer_new.html:104
-#: ../template/default/at_timer_new.html:141
 #: ../template/default/config.html:110 ../template/default/config.html:153
 #: ../template/default/config.html:182 ../template/default/config.html:195
 #: ../template/default/config.html:224 ../template/default/config.html:251
@@ -263,23 +283,32 @@ msgstr "Oui"
 #: ../template/default/config.html:410 ../template/default/config.html:417
 #: ../template/default/config.html:424 ../template/default/timer_list.html:295
 #: ../template/default/timer_new.html:63
+#: ../template/default/at_timer_new.html:36
+#: ../template/default/at_timer_new.html:40
+#: ../template/default/at_timer_new.html:104
+#: ../template/default/at_timer_new.html:141
+#: ../template/default/epgsearch_list.html:127
 msgid "No"
 msgstr "Non"
 
 #: ../template/default/at_timer_list.html:143
 #: ../template/default/at_timer_list.html:148
 #: ../template/default/timer_list.html:324
+#: ../template/default/epgsearch_list.html:158
+#: ../template/default/epgsearch_list.html:166
 msgid "Edit"
 msgstr "Editer"
 
 #: ../template/default/at_timer_list.html:153
 #: ../template/default/timer_list.html:327
+#: ../template/default/epgsearch_list.html:169
 msgid "Delete timer?"
 msgstr "Supprimer Programmation ?"
 
 #: ../template/default/at_timer_list.html:153
-#: ../template/default/rec_list.html:124
+#: ../template/default/rec_list.html:118
 #: ../template/default/timer_list.html:327
+#: ../template/default/epgsearch_list.html:169
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -301,200 +330,10 @@ msgstr "Supprimer Programmations Sélectionnées ?"
 msgid "No AutoTimers defined!"
 msgstr "Vérification Auto-Programmation :"
 
-#: ../template/default/at_timer_new.html:6
-#: ../template/default/at_timer_new.html:19
-msgid "Add New AutoTimer"
-msgstr "Ajouter Nouvelle Auto-Programmation"
-
-#: ../template/default/at_timer_new.html:6
-#: ../template/default/at_timer_new.html:19
-#: ../template/default/help_at_timer_new.html:12
-#: ../template/default/help_at_timer_new.html:23
-msgid "Edit AutoTimer"
-msgstr "Editer Auto-Programmation"
-
-#: ../template/default/at_timer_new.html:32
-#: ../template/default/help_at_timer_new.html:30
-msgid "AutoTimer Active:"
-msgstr "Auto-Programmation Active :"
-
-#: ../template/default/at_timer_new.html:37
-#: ../template/default/at_timer_new.html:41
-msgid "oneshot"
-msgstr "une fois"
-
-#: ../template/default/at_timer_new.html:46
-#: ../template/default/help_at_timer_new.html:32
-msgid "Search Patterns:"
-msgstr "Rechercher Modèles :"
-
-#: ../template/default/at_timer_new.html:52
-#: ../template/default/help_at_timer_new.html:34
-msgid "Search in:"
-msgstr "Rechercher dans :"
-
-#: ../template/default/at_timer_new.html:54
-#: ../template/default/at_timer_new.html:167
-msgid "Title"
-msgstr "une fois"
-
-#: ../template/default/at_timer_new.html:55
-#: ../template/default/at_timer_new.html:168
-msgid "Subtitle"
-msgstr "Sous-titre"
-
-#: ../template/default/at_timer_new.html:56
-msgid "Description"
-msgstr "Description"
-
-#: ../template/default/at_timer_new.html:60
-#: ../template/default/help_at_timer_new.html:36
-msgid "Search only on these days:"
-msgstr "Rechercher uniquement sur ces jours :"
-
-#: ../template/default/at_timer_new.html:62
-#: ../template/default/timer_new.html:92
-msgid "Monday"
-msgstr "Lundi"
-
-#: ../template/default/at_timer_new.html:63
-#: ../template/default/timer_new.html:93
-msgid "Tuesday"
-msgstr "Mardi"
-
-#: ../template/default/at_timer_new.html:64
-#: ../template/default/timer_new.html:94
-msgid "Wednesday"
-msgstr "Mercredi"
-
-#: ../template/default/at_timer_new.html:65
-#: ../template/default/timer_new.html:95
-msgid "Thursday"
-msgstr "Jeudi"
-
-#: ../template/default/at_timer_new.html:66
-#: ../template/default/timer_new.html:96
-msgid "Friday"
-msgstr "Vendredi"
-
-#: ../template/default/at_timer_new.html:67
-#: ../template/default/timer_new.html:97
-msgid "Saturday"
-msgstr "Samedi"
-
-#: ../template/default/at_timer_new.html:68
-#: ../template/default/timer_new.html:98
-msgid "Sunday"
-msgstr "Dimanche"
-
-#: ../template/default/at_timer_new.html:72
-#: ../template/default/help_at_timer_new.html:38
-#: ../template/default/help_timer_new.html:39
-#: ../template/default/prog_list.html:32 ../template/default/timer_new.html:78
-msgid "Channel:"
-msgstr "Chaîne :"
-
-#: ../template/default/at_timer_new.html:75
-msgid "all"
-msgstr "tout"
-
-#: ../template/default/at_timer_new.html:83
-#: ../template/default/help_at_timer_new.html:40
-msgid "Starts After:"
-msgstr "Début de recherche :"
-
-#: ../template/default/at_timer_new.html:88
-#: ../template/default/at_timer_new.html:97
-#: ../template/default/prog_list2.html:31
-#: ../template/default/prog_summary.html:33
-#: ../template/default/prog_summary2.html:33
-#: ../template/default/prog_timeline.html:77
-#: ../template/default/prog_timeline.html:155
-#: ../template/default/prog_timeline.html:172
-#: ../template/default/timer_new.html:107
-#: ../template/default/timer_new.html:119 ../vdradmind.pl:4034
-#: ../vdradmind.pl:4047
-msgid "o'clock"
-msgstr "Heure"
-
-#: ../template/default/at_timer_new.html:92
-#: ../template/default/help_at_timer_new.html:42
-msgid "Ends Before:"
-msgstr "Fin de recherche :"
-
-#: ../template/default/at_timer_new.html:101
-#: ../template/default/help_at_timer_new.html:44
-msgid "Override Start/Stop Margins:"
-msgstr ""
-
-#: ../template/default/at_timer_new.html:108
-#: ../template/default/config.html:212 ../template/default/config.html:269
-#: ../template/default/help_at_timer_new.html:46
-#: ../template/default/help_config.html:126
-msgid "Time Margin at Start:"
-msgstr "Marge avant :"
-
-#: ../template/default/at_timer_new.html:110
-#: ../template/default/at_timer_new.html:116
-#: ../template/default/config.html:200 ../template/default/config.html:270
-#: ../template/default/config.html:274 ../template/default/timer_new.html:109
-#: ../template/default/timer_new.html:121
-msgid "minutes"
-msgstr "minutes"
-
-#: ../template/default/at_timer_new.html:114
-#: ../template/default/config.html:216 ../template/default/config.html:273
-#: ../template/default/help_at_timer_new.html:48
-#: ../template/default/help_config.html:128
-msgid "Time Margin at Stop:"
-msgstr "Marge après :"
-
-#: ../template/default/at_timer_new.html:132
-#: ../template/default/help_at_timer_new.html:54
-msgid "Episode:"
-msgstr "Episode :"
-
-#: ../template/default/at_timer_new.html:138
-#: ../template/default/help_at_timer_new.html:56
-msgid "Remember programmed timers:"
-msgstr "Se souvenir des programmations :"
-
-#: ../template/default/at_timer_new.html:145
-#: ../template/default/help_at_timer_new.html:58
-msgid "Directory:"
-msgstr "Chemin :"
-
-#: ../template/default/at_timer_new.html:154
-#: ../template/default/config.html:450 ../template/default/timer_new.html:154
-msgid "Save"
-msgstr "Enregistrer"
-
-#: ../template/default/at_timer_new.html:155
-msgid "Test"
-msgstr "Test"
-
-#: ../template/default/at_timer_new.html:156
-#: ../template/default/rec_edit.html:45 ../template/default/timer_new.html:155
-msgid "Cancel"
-msgstr "Annuler"
-
-#: ../template/default/at_timer_new.html:169
-msgid "Broadcasted"
-msgstr "Diffusé"
-
-#: ../template/default/at_timer_new.html:170
-msgid "Stored in"
-msgstr "Stockés dans"
-
-#: ../template/default/at_timer_new.html:182
-#, fuzzy
-msgid "No matches found!"
-msgstr "Non trouvé"
-
 #: ../template/default/config.html:5 ../template/default/config.html:28
 #: ../template/default/help_config.html:9
 #: ../template/default/help_config.html:24
-#: ../template/default/navigation.html:61
+#: ../template/default/navigation.html:66
 msgid "Configuration"
 msgstr "Configuration"
 
@@ -580,7 +419,7 @@ msgstr "Mot de Passe Invité :"
 #: ../template/default/config.html:168 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:80
 #: ../template/default/navigation.html:35
-#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:4644
+#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:5318
 msgid "Timeline"
 msgstr "Chronologie"
 
@@ -609,6 +448,33 @@ msgstr "Active :"
 #: ../template/default/config.html:199 ../template/default/help_config.html:96
 msgid "Timeout:"
 msgstr "Délai de dépassement :"
+
+#: ../template/default/config.html:200 ../template/default/config.html:270
+#: ../template/default/config.html:274 ../template/default/timer_new.html:109
+#: ../template/default/timer_new.html:121
+#: ../template/default/epgsearch_new.html:516
+#: ../template/default/epgsearch_new.html:522
+#: ../template/default/epgsearch_new.html:542
+#: ../template/default/at_timer_new.html:110
+#: ../template/default/at_timer_new.html:116
+msgid "minutes"
+msgstr "minutes"
+
+#: ../template/default/config.html:212 ../template/default/config.html:269
+#: ../template/default/help_at_timer_new.html:46
+#: ../template/default/help_config.html:126
+#: ../template/default/epgsearch_new.html:514
+#: ../template/default/at_timer_new.html:108
+msgid "Time Margin at Start:"
+msgstr "Marge avant :"
+
+#: ../template/default/config.html:216 ../template/default/config.html:273
+#: ../template/default/help_at_timer_new.html:48
+#: ../template/default/help_config.html:128
+#: ../template/default/epgsearch_new.html:520
+#: ../template/default/at_timer_new.html:114
+msgid "Time Margin at Stop:"
+msgstr "Marge après :"
 
 #: ../template/default/config.html:221
 #: ../template/default/help_config.html:102
@@ -763,6 +629,12 @@ msgstr "Dans \"Auto-Programmations\" ?"
 msgid "In \"Watch TV\"?"
 msgstr "Dans \"Regarder TV\" ?"
 
+#: ../template/default/config.html:450 ../template/default/timer_new.html:154
+#: ../template/default/epgsearch_new.html:557
+#: ../template/default/at_timer_new.html:154
+msgid "Save"
+msgstr "Enregistrer"
+
 #: ../template/default/config.html:451
 msgid "Apply"
 msgstr "Appliquer"
@@ -825,6 +697,13 @@ msgstr ""
 "données EPG courantes et vérifier and les modèles de Programmations "
 "Automatiques.</p>"
 
+#: ../template/default/help_at_timer_new.html:12
+#: ../template/default/help_at_timer_new.html:23
+#: ../template/default/at_timer_new.html:6
+#: ../template/default/at_timer_new.html:19
+msgid "Edit AutoTimer"
+msgstr "Editer Auto-Programmation"
+
 #: ../template/default/help_at_timer_new.html:27
 msgid ""
 "<p>Here you can edit an automatic timer's (AutoTimer) settings.</"
@@ -843,6 +722,11 @@ msgstr ""
 "est très confortable pour enregistrer des séries diffusées irrégulièrement "
 "ou des films que vous ne voulez par manquer.</p>"
 
+#: ../template/default/help_at_timer_new.html:30
+#: ../template/default/at_timer_new.html:32
+msgid "AutoTimer Active:"
+msgstr "Auto-Programmation Active :"
+
 #: ../template/default/help_at_timer_new.html:31
 msgid ""
 "Activate or deactivate this AutoTimer. Deactivated AutoTimers are still "
@@ -856,6 +740,11 @@ msgstr ""
 "n'enregistre rien. Au dessus vous pouvez régler ceci à \"Une Fois\", donc "
 "cette Auto-Programmation programme seulement la prochaine (et unique!) "
 "occurrence de la diffusion."
+
+#: ../template/default/help_at_timer_new.html:32
+#: ../template/default/at_timer_new.html:46
+msgid "Search Patterns:"
+msgstr "Rechercher Modèles :"
 
 #: ../template/default/help_at_timer_new.html:33
 msgid ""
@@ -898,6 +787,12 @@ msgstr ""
 "de caractère) ou seulement un épisode (en utilisant \"Enterprise~Azati Prime"
 "\" comme chaîne de caractères)."
 
+#: ../template/default/help_at_timer_new.html:34
+#: ../template/default/epgsearch_new.html:248
+#: ../template/default/at_timer_new.html:52
+msgid "Search in:"
+msgstr "Rechercher dans :"
+
 #: ../template/default/help_at_timer_new.html:35
 msgid ""
 "Here you can define the EPG sections where VDRAdmin-AM should look for the "
@@ -906,6 +801,11 @@ msgstr ""
 "Ici, vous pouvez définir les sections du guide électronique des programmes "
 "où VDRAdmin-AM recherchera le motif de recherche."
 
+#: ../template/default/help_at_timer_new.html:36
+#: ../template/default/at_timer_new.html:60
+msgid "Search only on these days:"
+msgstr "Rechercher uniquement sur ces jours :"
+
 #: ../template/default/help_at_timer_new.html:37
 msgid ""
 "Use these checkboxes to limit searching for matching broadcasts to a set of "
@@ -913,6 +813,13 @@ msgid ""
 msgstr ""
 "Utilisez ces cases à cocher pour limiter la recherche de diffusions "
 "concordantes à un jeu de jours."
+
+#: ../template/default/help_at_timer_new.html:38
+#: ../template/default/help_timer_new.html:39
+#: ../template/default/prog_list.html:32 ../template/default/timer_new.html:78
+#: ../template/default/at_timer_new.html:72
+msgid "Channel:"
+msgstr "Chaîne :"
 
 #: ../template/default/help_at_timer_new.html:39
 msgid ""
@@ -924,6 +831,11 @@ msgstr ""
 "rechercher dans toutes les chaînes connues ou désirées. Vous pouvez définir "
 "les chaînes désirées pour l'Auto-programmation dans \"Configuration\"."
 
+#: ../template/default/help_at_timer_new.html:40
+#: ../template/default/at_timer_new.html:83
+msgid "Starts After:"
+msgstr "Début de recherche :"
+
 #: ../template/default/help_at_timer_new.html:41
 msgid ""
 "A broadcast must start after the time entered here to match. The first text "
@@ -932,6 +844,11 @@ msgstr ""
 "Une diffusion doit démarrer après l'horaire entrée pour être concordante. Le "
 "premier champ est pour \"heure\", le second pour \"minute\"."
 
+#: ../template/default/help_at_timer_new.html:42
+#: ../template/default/at_timer_new.html:92
+msgid "Ends Before:"
+msgstr "Fin de recherche :"
+
 #: ../template/default/help_at_timer_new.html:43
 msgid ""
 "A broadcast must end before the time entered here to match. The first text "
@@ -939,6 +856,11 @@ msgid ""
 msgstr ""
 "Une diffusion doit s'arrêter avant l'horaire entrée pour être concordante. "
 "Le premier champ est pour \"heure\", le second pour \"minute\"."
+
+#: ../template/default/help_at_timer_new.html:44
+#: ../template/default/at_timer_new.html:101
+msgid "Override Start/Stop Margins:"
+msgstr ""
 
 #: ../template/default/help_at_timer_new.html:45
 msgid ""
@@ -1020,6 +942,11 @@ msgstr ""
 "enregistrement, jusqu'à ce que le nombre de jour donné depuis la date de "
 "<strong>démarrage</strong> de l'enregistrement soit dépassé."
 
+#: ../template/default/help_at_timer_new.html:54
+#: ../template/default/at_timer_new.html:132
+msgid "Episode:"
+msgstr "Episode :"
+
 #: ../template/default/help_at_timer_new.html:55
 msgid ""
 "Check this box if you want VDRAdmin-AM to append the broadcast's EPG "
@@ -1027,6 +954,11 @@ msgid ""
 msgstr ""
 "Cochez cette case si vous voulez que VDRAdmin-AM ajoute le sous-titre EPG de "
 "la diffusion au nom du fichier de l'enregistrement."
+
+#: ../template/default/help_at_timer_new.html:56
+#: ../template/default/at_timer_new.html:138
+msgid "Remember programmed timers:"
+msgstr "Se souvenir des programmations :"
 
 #: ../template/default/help_at_timer_new.html:57
 msgid ""
@@ -1038,6 +970,12 @@ msgstr ""
 "automatiquement créées. Ceci est utile si vous voulez désactiver ou "
 "supprimer les programmations automatiquement créées dans la liste des "
 "programmations."
+
+#: ../template/default/help_at_timer_new.html:58
+#: ../template/default/epgsearch_new.html:446
+#: ../template/default/at_timer_new.html:145
+msgid "Directory:"
+msgstr "Chemin :"
 
 #: ../template/default/help_at_timer_new.html:60
 msgid ""
@@ -1476,8 +1414,8 @@ msgstr ""
 
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
-#: ../template/default/navigation.html:49 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:4644
+#: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5318
 msgid "Recordings"
 msgstr "Enregistrements"
 
@@ -1815,35 +1753,42 @@ msgstr "Votre Navigateur ne supporte pas les cadres !"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:4644
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5318
 msgid "What's On Now?"
 msgstr "En ce Moment ?"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:4644
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5318
 msgid "Playing Today?"
 msgstr "Aujourd'hui ?"
 
 #: ../template/default/navigation.html:38 ../template/default/prog_list.html:6
 #: ../template/default/prog_list2.html:56
 #: ../template/default/prog_summary.html:48
-#: ../template/default/prog_summary2.html:85 ../vdradmind.pl:4644
+#: ../template/default/prog_summary2.html:85
+#: ../template/default/epgsearch_list.html:246 ../vdradmind.pl:5318
 msgid "Channels"
 msgstr "Chaînes"
 
-#: ../template/default/navigation.html:52 ../template/default/rc.html:6
+#: ../template/default/navigation.html:50
+#: ../template/default/epgsearch_list.html:23
+#, fuzzy
+msgid "EPG Search"
+msgstr "Rechercher"
+
+#: ../template/default/navigation.html:57 ../template/default/rc.html:6
 msgid "Remote Control"
 msgstr "Télécommande"
 
-#: ../template/default/navigation.html:55
+#: ../template/default/navigation.html:60
 msgid "Watch TV"
 msgstr "Regarder TV"
 
-#: ../template/default/navigation.html:58
+#: ../template/default/navigation.html:63
 #, fuzzy
 msgid "Commands"
 msgstr "Commandes :"
 
-#: ../template/default/navigation.html:69
+#: ../template/default/navigation.html:74
 msgid "Search"
 msgstr "Rechercher"
 
@@ -1875,6 +1820,7 @@ msgid "view"
 msgstr "vue"
 
 #: ../template/default/prog_detail.html:37
+#: ../template/default/epgsearch_new.html:425 ../vdradmind.pl:2270
 msgid "record"
 msgstr "enregistrer"
 
@@ -1909,7 +1855,7 @@ msgstr "Zapper"
 #: ../template/default/prog_list2.html:59
 #: ../template/default/prog_summary.html:68
 #: ../template/default/prog_summary2.html:89
-#: ../template/default/rec_list.html:126
+#: ../template/default/rec_list.html:120
 msgid "Stream"
 msgstr "Flux"
 
@@ -1924,6 +1870,8 @@ msgstr "Ok !"
 #: ../template/default/prog_summary.html:104
 #: ../template/default/prog_summary2.html:70
 #: ../template/default/prog_summary2.html:99
+#: ../template/default/epgsearch_new.html:181
+#: ../template/default/epgsearch_list.html:232
 msgid "More Information"
 msgstr "Plus d'Informations"
 
@@ -1958,13 +1906,29 @@ msgstr "Enregistrer"
 msgid "No EPG information available"
 msgstr "Pas d'information"
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:2754
+#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3427
 msgid "Playing Today"
 msgstr "Joué Aujourd'hui"
 
 #: ../template/default/prog_list2.html:29
 msgid "starting at"
 msgstr "Commence à"
+
+#: ../template/default/prog_list2.html:31
+#: ../template/default/prog_summary.html:33
+#: ../template/default/prog_summary2.html:33
+#: ../template/default/prog_timeline.html:77
+#: ../template/default/prog_timeline.html:155
+#: ../template/default/prog_timeline.html:172
+#: ../template/default/timer_new.html:107
+#: ../template/default/timer_new.html:119
+#: ../template/default/epgsearch_new.html:336
+#: ../template/default/epgsearch_new.html:343
+#: ../template/default/at_timer_new.html:88
+#: ../template/default/at_timer_new.html:97 ../vdradmind.pl:4708
+#: ../vdradmind.pl:4721
+msgid "o'clock"
+msgstr "Heure"
 
 #: ../template/default/prog_summary.html:27
 #: ../template/default/prog_summary2.html:27
@@ -1973,12 +1937,12 @@ msgid "What's on:"
 msgstr "En ce moment :"
 
 #: ../template/default/prog_summary.html:33
-#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4034
+#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4708
 msgid "at"
 msgstr "à"
 
 #: ../template/default/prog_timeline.html:76
-#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4019
+#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4693
 msgid "now"
 msgstr "maintenant"
 
@@ -2020,9 +1984,15 @@ msgstr "Nouveau Nom d'Enregistrement :"
 msgid "Subtitle:"
 msgstr "Sous-titre :"
 
-#: ../template/default/rec_edit.html:44 ../template/default/rec_list.html:122
+#: ../template/default/rec_edit.html:44 ../template/default/rec_list.html:116
 msgid "Rename"
 msgstr "Renommer"
+
+#: ../template/default/rec_edit.html:45 ../template/default/timer_new.html:155
+#: ../template/default/epgsearch_new.html:559
+#: ../template/default/at_timer_new.html:156
+msgid "Cancel"
+msgstr "Annuler"
 
 #: ../template/default/rec_list.html:20
 msgid "Total:"
@@ -2045,49 +2015,50 @@ msgstr "Date"
 msgid "Total"
 msgstr "Total"
 
-#: ../template/default/rec_list.html:98 ../template/default/rec_list.html:101
+#: ../template/default/rec_list.html:97
 msgid "New"
 msgstr "Nouveau"
 
-#: ../template/default/rec_list.html:116
+#: ../template/default/rec_list.html:110
 msgid "Play"
 msgstr ""
 
-#: ../template/default/rec_list.html:119
+#: ../template/default/rec_list.html:113
 msgid "Cut"
 msgstr ""
 
-#: ../template/default/rec_list.html:124
+#: ../template/default/rec_list.html:118
 msgid "Delete recording?"
 msgstr "Supprimer l'Enregistrement ?"
 
-#: ../template/default/rec_list.html:140
+#: ../template/default/rec_list.html:134
 msgid "Refresh"
 msgstr "Rafraîchir"
 
-#: ../template/default/rec_list.html:144
+#: ../template/default/rec_list.html:138
 msgid "Commands:"
 msgstr "Commandes :"
 
-#: ../template/default/rec_list.html:150 ../template/default/vdr_cmds.html:43
+#: ../template/default/rec_list.html:144 ../template/default/vdr_cmds.html:43
 #: ../template/default/vdr_cmds.html:55
+#: ../template/default/epgsearch_new.html:558
 msgid "Run"
 msgstr "Exécuter"
 
-#: ../template/default/rec_list.html:150 ../template/default/vdr_cmds.html:43
+#: ../template/default/rec_list.html:144 ../template/default/vdr_cmds.html:43
 #: ../template/default/vdr_cmds.html:55
 msgid "Really run this command?"
 msgstr "Voulez-vous réellement exécuter cette commande ?"
 
-#: ../template/default/rec_list.html:154
+#: ../template/default/rec_list.html:148
 msgid "Delete Selected Recordings"
 msgstr "Supprimer Enregistrements Sélectionnés"
 
-#: ../template/default/rec_list.html:154
+#: ../template/default/rec_list.html:148
 msgid "Delete all selected recordings?"
 msgstr "Supprimer Enregistrements Sélectionnés ?"
 
-#: ../template/default/rec_list.html:160
+#: ../template/default/rec_list.html:155
 #, fuzzy
 msgid "No recordings available"
 msgstr "Pas d'aide disponible"
@@ -2154,6 +2125,48 @@ msgstr "Aucune correspondance trouvée !"
 #: ../template/default/timer_new.html:6 ../template/default/timer_new.html:48
 msgid "Create New Timer"
 msgstr "Créer Nouvelle Programmation"
+
+#: ../template/default/timer_new.html:92
+#: ../template/default/epgsearch_new.html:381
+#: ../template/default/at_timer_new.html:62
+msgid "Monday"
+msgstr "Lundi"
+
+#: ../template/default/timer_new.html:93
+#: ../template/default/epgsearch_new.html:382
+#: ../template/default/at_timer_new.html:63
+msgid "Tuesday"
+msgstr "Mardi"
+
+#: ../template/default/timer_new.html:94
+#: ../template/default/epgsearch_new.html:383
+#: ../template/default/at_timer_new.html:64
+msgid "Wednesday"
+msgstr "Mercredi"
+
+#: ../template/default/timer_new.html:95
+#: ../template/default/epgsearch_new.html:384
+#: ../template/default/at_timer_new.html:65
+msgid "Thursday"
+msgstr "Jeudi"
+
+#: ../template/default/timer_new.html:96
+#: ../template/default/epgsearch_new.html:385
+#: ../template/default/at_timer_new.html:66
+msgid "Friday"
+msgstr "Vendredi"
+
+#: ../template/default/timer_new.html:97
+#: ../template/default/epgsearch_new.html:386
+#: ../template/default/at_timer_new.html:67
+msgid "Saturday"
+msgstr "Samedi"
+
+#: ../template/default/timer_new.html:98
+#: ../template/default/epgsearch_new.html:387
+#: ../template/default/at_timer_new.html:68
+msgid "Sunday"
+msgstr "Dimanche"
 
 #: ../template/default/timer_new.html:109
 #: ../template/default/timer_new.html:121
@@ -2223,83 +2236,441 @@ msgstr "Commandes SVDRP :"
 msgid "Commands defined in commands.conf:"
 msgstr "Commandes définies dans commands.conf :"
 
-#: ../template/default/vdr_cmds.html:67
+#: ../template/default/vdr_cmds.html:68
 msgid "Output"
 msgstr "Sortie"
 
-#: ../vdradmind.pl:346
+#: ../template/default/epgsearch_new.html:6
+msgid "Define New Search"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:6
+#: ../template/default/epgsearch_new.html:151
+#, fuzzy
+msgid "Edit Search"
+msgstr "Rechercher"
+
+#: ../template/default/epgsearch_new.html:135
+msgid "Small search pattern.\\nDo you really want to use it?"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:151
+#, fuzzy
+msgid "Add New Search"
+msgstr "Ajouter Nouvelle Auto-Programmation"
+
+#: ../template/default/epgsearch_new.html:165
+msgid "Hide results"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:204
+#: ../template/default/at_timer_new.html:182
+#: ../template/default/epgsearch_list.html:255
+#, fuzzy
+msgid "No matches found!"
+msgstr "Non trouvé"
+
+#: ../template/default/epgsearch_new.html:211
+#, fuzzy
+msgid "Settings"
+msgstr "Paramètres Généraux"
+
+#: ../template/default/epgsearch_new.html:216
+#, fuzzy
+msgid "Search Term:"
+msgstr "Rechercher dans :"
+
+#: ../template/default/epgsearch_new.html:223
+#, fuzzy
+msgid "Search Mode:"
+msgstr "Rechercher dans :"
+
+#: ../template/default/epgsearch_new.html:226
+msgid "phrase"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:227
+msgid "all words"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:228
+msgid "at least one word"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:229
+msgid "match exactly"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:230
+msgid "regular expression"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:231
+msgid "fuzzy"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:234
+msgid "Tolerance for \"fuzzy\":"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:241
+msgid "Match Case:"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:250
+#: ../template/default/epgsearch_new.html:483
+#: ../template/default/at_timer_new.html:54
+#: ../template/default/at_timer_new.html:167
+#: ../template/default/epgsearch_list.html:213
+msgid "Title"
+msgstr "une fois"
+
+#: ../template/default/epgsearch_new.html:251
+#: ../template/default/epgsearch_new.html:484
+#: ../template/default/at_timer_new.html:55
+#: ../template/default/at_timer_new.html:168
+msgid "Subtitle"
+msgstr "Sous-titre"
+
+#: ../template/default/epgsearch_new.html:252
+#: ../template/default/epgsearch_new.html:485
+#: ../template/default/at_timer_new.html:56
+msgid "Description"
+msgstr "Description"
+
+#: ../template/default/epgsearch_new.html:258
+msgid "Use extended EPG info:"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:293
+#, fuzzy
+msgid "Use Channel:"
+msgstr "Chaîne :"
+
+#: ../template/default/epgsearch_new.html:296
+#: ../template/default/epgsearch_new.html:396
+#, fuzzy
+msgid "no"
+msgstr "maintenant"
+
+#: ../template/default/epgsearch_new.html:297
+#, fuzzy
+msgid "interval"
+msgstr "Intervalle :"
+
+#: ../template/default/epgsearch_new.html:298
+#, fuzzy
+msgid "channel group"
+msgstr "Chaîne"
+
+#: ../template/default/epgsearch_new.html:299
+msgid "only FTA"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:302
+#, fuzzy
+msgid "Range:"
+msgstr "Langue :"
+
+#: ../template/default/epgsearch_new.html:316
+#, fuzzy
+msgid "Channel Group:"
+msgstr "Chaîne :"
+
+#: ../template/default/epgsearch_new.html:327
+#, fuzzy
+msgid "Use Time:"
+msgstr "Identifiant :"
+
+#: ../template/default/epgsearch_new.html:333
+#, fuzzy
+msgid "Start After:"
+msgstr "Début de recherche :"
+
+#: ../template/default/epgsearch_new.html:340
+#, fuzzy
+msgid "Start Before:"
+msgstr "Début de recherche :"
+
+#: ../template/default/epgsearch_new.html:352
+#, fuzzy
+msgid "Use Duration:"
+msgstr "Durée :"
+
+#: ../template/default/epgsearch_new.html:358
+#, fuzzy
+msgid "Min. Duration:"
+msgstr "Durée :"
+
+#: ../template/default/epgsearch_new.html:361
+#: ../template/default/epgsearch_new.html:368
+msgid "hh:mm"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:365
+#, fuzzy
+msgid "Max. Duration:"
+msgstr "Durée :"
+
+#: ../template/default/epgsearch_new.html:377
+msgid "Use Day of Week:"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:393
+msgid "Use Blacklists:"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:397
+#, fuzzy
+msgid "selection"
+msgstr "Zapper"
+
+#: ../template/default/epgsearch_new.html:398
+#: ../template/default/at_timer_new.html:75
+msgid "all"
+msgstr "tout"
+
+#: ../template/default/epgsearch_new.html:412
+msgid "Use in Favorites Menu:"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:420
+#, fuzzy
+msgid "Use as Search Timer:"
+msgstr "Rechercher dans :"
+
+#: ../template/default/epgsearch_new.html:426 ../vdradmind.pl:2272
+msgid "announce only"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:427 ../vdradmind.pl:2274
+msgid "switch only"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:437
+msgid "Settings for action \"record\""
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:440
+#, fuzzy
+msgid "Series Recording:"
+msgstr "Nom Original d'Enregistrement :"
+
+#: ../template/default/epgsearch_new.html:452
+#, fuzzy
+msgid "Delete Recordings After ... Days:"
+msgstr "Supprimer l'Enregistrement ?"
+
+#: ../template/default/epgsearch_new.html:455
+#, fuzzy
+msgid "Keep ... Recordings:"
+msgstr "Enregistrements"
+
+#: ../template/default/epgsearch_new.html:460
+#, fuzzy
+msgid "Pause, when ... recordings exist:"
+msgstr "Chemin des Enregistrements VDR :"
+
+#: ../template/default/epgsearch_new.html:466
+msgid "Avoid Repeats:"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:472
+msgid "Allowed Repeats:"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:475
+msgid "Only Repeats Within ... Days:"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:480
+msgid "Compare:"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:526
+#, fuzzy
+msgid "VPS:"
+msgstr "VPS"
+
+#: ../template/default/epgsearch_new.html:537
+msgid "Settings for action \"switch only\""
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:540
+msgid "Switch ... Minutes Before Start:"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:553
+msgid "Save as template"
+msgstr ""
+
+#: ../template/default/at_timer_new.html:6
+#: ../template/default/at_timer_new.html:19
+msgid "Add New AutoTimer"
+msgstr "Ajouter Nouvelle Auto-Programmation"
+
+#: ../template/default/at_timer_new.html:37
+#: ../template/default/at_timer_new.html:41
+msgid "oneshot"
+msgstr "une fois"
+
+#: ../template/default/at_timer_new.html:155
+msgid "Test"
+msgstr "Test"
+
+#: ../template/default/at_timer_new.html:169
+msgid "Broadcasted"
+msgstr "Diffusé"
+
+#: ../template/default/at_timer_new.html:170
+#: ../template/default/epgsearch_list.html:215
+msgid "Stored in"
+msgstr "Stockés dans"
+
+#: ../template/default/epgsearch_list.html:6
+#, fuzzy
+msgid "EPG search"
+msgstr "rechercher"
+
+#: ../template/default/epgsearch_list.html:26
+#, fuzzy
+msgid "New Search"
+msgstr "Rechercher"
+
+#: ../template/default/epgsearch_list.html:54
+#, fuzzy
+msgid "Action"
+msgstr "Actif"
+
+#: ../template/default/epgsearch_list.html:79
+msgid "From"
+msgstr ""
+
+#: ../template/default/epgsearch_list.html:93
+#, fuzzy
+msgid "To"
+msgstr "Haut"
+
+#: ../template/default/epgsearch_list.html:107
+#, fuzzy
+msgid "Search pattern"
+msgstr "Rechercher Modèles :"
+
+#: ../template/default/epgsearch_list.html:163
+#, fuzzy
+msgid "Find"
+msgstr "Vendredi"
+
+#: ../template/default/epgsearch_list.html:184
+msgid "Show Favorites"
+msgstr ""
+
+#: ../template/default/epgsearch_list.html:187
+#, fuzzy
+msgid "Delete Selected Searches"
+msgstr "Supprimer Programmations Sélectionnées"
+
+#: ../template/default/epgsearch_list.html:187
+#, fuzzy
+msgid "Delete all selected searches?"
+msgstr "Supprimer Programmations Sélectionnées ?"
+
+#: ../template/default/epgsearch_list.html:188
+#, fuzzy
+msgid "Execute Selected Searches"
+msgstr "Supprimer Programmations Sélectionnées"
+
+#: ../template/default/epgsearch_list.html:212
+#, fuzzy
+msgid "Duration"
+msgstr "Durée :"
+
+#: ../vdradmind.pl:352
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Quel est votre Nom d'hôte (ex video.intra.net) ?"
 
-#: ../vdradmind.pl:347
+#: ../vdradmind.pl:353
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Sur quel port VDR écoute les requêtes SVDRP ?"
 
-#: ../vdradmind.pl:348
+#: ../vdradmind.pl:354
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
 msgstr "Sur quelle adresse VDRAdmin-AM doit-il écouter (0.0.0.0 pour toutes) ?"
 
-#: ../vdradmind.pl:349
+#: ../vdradmind.pl:355
 msgid "On which port should VDRAdmin-AM listen?"
 msgstr "Sur quel port VDRAdmin-AM doit-il écouter ?"
 
-#: ../vdradmind.pl:350
+#: ../vdradmind.pl:356
 msgid "Username?"
 msgstr "Identifiant ?"
 
-#: ../vdradmind.pl:351
+#: ../vdradmind.pl:357
 msgid "Password?"
 msgstr "Mot de Passe ?"
 
-#: ../vdradmind.pl:352
+#: ../vdradmind.pl:358
 msgid "Where are your recordings stored?"
 msgstr "Où vos enregistrements sont-ils stockés ?"
 
-#: ../vdradmind.pl:353
+#: ../vdradmind.pl:359
 msgid "Where are your VDR's configuration files located?"
 msgstr "Où sont vos fichiers de configuration de VDR ?"
 
-#: ../vdradmind.pl:360
+#: ../vdradmind.pl:366
 msgid "Config file written successfully."
 msgstr "Fichier de configuration écrit avec succès."
 
-#: ../vdradmind.pl:420
+#: ../vdradmind.pl:426
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmin.pl %s a démarré avec le pid %d."
 
-#: ../vdradmind.pl:480 ../vdradmind.pl:1085 ../vdradmind.pl:2078
+#: ../vdradmind.pl:486 ../vdradmind.pl:1117 ../vdradmind.pl:2728
 msgid "Not found"
 msgstr "Non trouvé"
 
-#: ../vdradmind.pl:480 ../vdradmind.pl:2079
+#: ../vdradmind.pl:486 ../vdradmind.pl:2729
 msgid "The requested URL was not found on this server!"
 msgstr "L'URL demandée n'a pas été trouvée sur le serveur !"
 
-#: ../vdradmind.pl:550 ../vdradmind.pl:1081 ../vdradmind.pl:2081
+#: ../vdradmind.pl:563 ../vdradmind.pl:1113 ../vdradmind.pl:2731
 msgid "Forbidden"
 msgstr "Interdit"
 
-#: ../vdradmind.pl:550 ../vdradmind.pl:2082
+#: ../vdradmind.pl:563 ../vdradmind.pl:2732
 msgid "You don't have permission to access this function!"
 msgstr "Vous n'avez pas la permission d'accéder à cette fonction !"
 
-#: ../vdradmind.pl:1081 ../vdradmind.pl:2083
+#: ../vdradmind.pl:1113 ../vdradmind.pl:2733
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "Accès au fichier \"%s\" interdit !"
 
-#: ../vdradmind.pl:1085 ../vdradmind.pl:2080
+#: ../vdradmind.pl:1117 ../vdradmind.pl:2730
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "L'URL \"%s\" n'a pas été trouvée sur le serveur !"
 
-#: ../vdradmind.pl:2084
+#: ../vdradmind.pl:2188
+msgid "--- no timer ---"
+msgstr ""
+
+#: ../vdradmind.pl:2276
+#, fuzzy
+msgid "unknown"
+msgstr "maintenant"
+
+#: ../vdradmind.pl:2279
+msgid "none"
+msgstr ""
+
+#: ../vdradmind.pl:2734
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Ne peut pas ouvrir le fichier \"%s\" !"
 
-#: ../vdradmind.pl:2085
+#: ../vdradmind.pl:2735
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
@@ -2308,62 +2679,62 @@ msgstr ""
 "Connexion impossible vers VDR %s:%s<br /><br />Merci de vérifier que VDR est "
 "lancé et que le fichier svdrphosts.conf est configuré correctement."
 
-#: ../vdradmind.pl:2086
+#: ../vdradmind.pl:2736
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Erreur en envoyant la commande à %s"
 
-#: ../vdradmind.pl:2142
+#: ../vdradmind.pl:2792
 #, fuzzy
 msgid "Internal error:"
 msgstr "Intervalle :"
 
-#: ../vdradmind.pl:2495
+#: ../vdradmind.pl:3164
 msgid "Can't find EPG entry!"
 msgstr ""
 
-#: ../vdradmind.pl:2754
+#: ../vdradmind.pl:3427
 msgid "Playing Tomorrow"
 msgstr "Joué demain"
 
-#: ../vdradmind.pl:2754
+#: ../vdradmind.pl:3427
 #, fuzzy, perl-format
 msgid "Playing on the %s"
 msgstr "En cours sur la %d."
 
-#: ../vdradmind.pl:4024
+#: ../vdradmind.pl:4698
 msgid "next"
 msgstr "suivant"
 
-#: ../vdradmind.pl:4043
+#: ../vdradmind.pl:4717
 msgid "What's on after"
 msgstr "Que se passe-t-il ensuite"
 
-#: ../vdradmind.pl:4043
+#: ../vdradmind.pl:4717
 msgid "What's on at"
 msgstr "Que se passe-t-il à telle heure"
 
-#: ../vdradmind.pl:4046
+#: ../vdradmind.pl:4720
 msgid "Suitable matches for:"
 msgstr "Correspondances trouvées pour :"
 
-#: ../vdradmind.pl:4049
+#: ../vdradmind.pl:4723
 msgid "short view"
 msgstr "Court aperçu"
 
-#: ../vdradmind.pl:4049
+#: ../vdradmind.pl:4723
 msgid "long view"
 msgstr "Long aperçu"
 
-#: ../vdradmind.pl:4098
+#: ../vdradmind.pl:4772
 msgid "Schedule"
 msgstr "Programmateur"
 
-#: ../vdradmind.pl:4644
+#: ../vdradmind.pl:5318
 msgid "Timers"
 msgstr "Programmations"
 
-#: ../vdradmind.pl:4712
+#: ../vdradmind.pl:5386
 msgid "System default"
 msgstr "Par défaut"
 

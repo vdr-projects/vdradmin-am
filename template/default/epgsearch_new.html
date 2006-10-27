@@ -1,0 +1,571 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="scroller">
+
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>"/>
+	<title>VDRAdmin-AM - <?% IF newtimer %?><?% gettext('Define New Search') %?><?% ELSE %?><?% gettext('Edit Search') %?><?% END %?></title>
+	<link href="style.css" rel="stylesheet" media="screen" type="text/css"/>
+	<?% IF usercss %?>
+		<link href="user.css" rel="stylesheet" media="screen" type="text/css"/>
+	<?% END %?>
+	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
+	<script type="text/javascript" language="JavaScript1.2">
+	<!--
+		function initGUI()
+		{
+			if (document.getElementById("hide_results"))
+				document.getElementById("hide_results").style.display = "block";
+			changedSearchMode(document.getElementById("search_mode"));
+			changedUseChannel(document.getElementById("use_channel"));
+<?% IF extepg.size() > 0 %?>
+			changedUseExtEpg(document.getElementById("use_extepg"));
+<?% END %?>
+			changedUseTime(document.getElementById("use_time"));
+			changedUseDuration(document.getElementById("use_duration"));
+			changedUseDays(document.getElementById("use_days"));
+			changedUseBlacklists(document.getElementById("use_blacklists"));
+			changedAction(document.getElementById("select_action"));
+			changedHasAction(document.getElementById("has_action"));
+			changedAvoidRepeats(document.getElementById("avoid_repeats"));
+		}
+
+		function changedSearchMode(mySelect)
+		{
+			document.getElementById("fuzzy_tolerance").style.display = (mySelect.options[mySelect.selectedIndex].value == 5 ? "block" : "none");
+		}
+
+		function changedUseChannel(mySelect)
+		{
+			switch (mySelect.options[mySelect.selectedIndex].value)
+			{
+				case "0":
+				case "3":
+					document.getElementById("channel_range").style.display = "none";
+					document.getElementById("channel_group").style.display = "none";
+					break;
+
+				case "1":
+					document.getElementById("channel_range").style.display = "block";
+					document.getElementById("channel_group").style.display = "none";
+					break;
+
+				case "2":
+					document.getElementById("channel_range").style.display = "none";
+					document.getElementById("channel_group").style.display = "block";
+					break;
+			}
+		}
+
+		function changedUseExtEpg(myCheckbox)
+		{
+			document.getElementById("use_extepg_settings").style.display = (myCheckbox.checked ? "block" : "none");
+		}
+
+		function changedUseTime(myCheckbox)
+		{
+			document.getElementById("use_time_settings").style.display = (myCheckbox.checked ? "block" : "none");
+		}
+
+		function changedUseDuration(myCheckbox)
+		{
+			document.getElementById("use_duration_settings").style.display = (myCheckbox.checked ? "block" : "none");
+		}
+
+		function changedUseDays(myCheckbox)
+		{
+			document.getElementById("use_days_settings").style.display = (myCheckbox.checked ? "block" : "none");
+		}
+
+		function changedUseBlacklists(mySelect)
+		{
+			document.getElementById("select_blacklists").style.display = (mySelect.options[mySelect.selectedIndex].value == 1 ? "block" : "none");
+		}
+
+		function changedHasAction(myCheckbox)
+		{
+			if (myCheckbox.checked)
+			{
+				document.getElementById("set_action").style.display = "inline";
+				changedAction(document.getElementById("select_action"));
+			}
+			else
+			{
+				document.getElementById("set_action").style.display = "none";
+				document.getElementById("action_record_settings").style.display = "none";
+				document.getElementById("action_switch_settings").style.display = "none";
+			}
+		}
+
+		function changedAction(mySelect)
+		{
+			switch (mySelect.options[mySelect.selectedIndex].value)
+			{
+				case "0":
+					document.getElementById("action_record_settings").style.display = "block";
+					document.getElementById("action_switch_settings").style.display = "none";
+					break;
+
+				case "1":
+					document.getElementById("action_record_settings").style.display = "none";
+					document.getElementById("action_switch_settings").style.display = "none";
+					break;
+
+				case "2":
+					document.getElementById("action_record_settings").style.display = "none";
+					document.getElementById("action_switch_settings").style.display = "block";
+					break;
+			}
+		}
+
+		function changedAvoidRepeats(myCheckbox)
+		{
+			document.getElementById("avoid_repeats_settings").style.display = (myCheckbox.checked ? "block" : "none");
+		}
+
+		function checkSearchPattern()
+		{
+			if (document.getElementById("pattern").value.length > 3)
+				return true;
+
+			if (   !document.getElementById("use_title").checked
+			    && !document.getElementById("use_subtitle").checked
+					&& !document.getElementById("use_descr").checked)
+				return true;
+
+			return confirm('<?% gettext('Small search pattern.\nDo you really want to use it?') %?>');
+		}
+
+		function hideResults()
+		{
+			document.getElementById("results").style.display = "none";
+		}
+	//-->
+	</script>
+</head>
+
+<body id="epgsearch_new" onload="javascript:initGUI()">
+	<form action="<?% url %?>" method="get" name="FormName">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
+			<tr>
+				<td class="col_title">
+					<h1><?% IF do_edit %?><?% gettext('Edit Search') %?><?% ELSE %?><?% gettext('Add New Search') %?><?% END %?></h1>
+				</td>
+<?% IF help_url %?>
+				<td class="col_help">
+					<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help" title="<?% gettext('Help') %?>"/></a>
+				</td>
+<?% END %?>
+			</tr>
+		</table>
+
+		<div id="content">
+<?% IF did_search %?>
+	<?% IF matches %?>
+			<div id="results">
+				<input type="button" name="hide_results" value="<?% gettext('Hide results') %?>" onclick="javascript:hideResults()" id="hide_results" style="display:none;"/>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
+					<?% FOREACH matches;
+						IF olddate != date;
+							olddate = date; %?>
+							<tr class="newday">
+								<td colspan="4"><span class="date_long"><?% date %?></span></td>
+							</tr>
+						<?% END %?>
+						<tr class="<?% IF loop.count % 2 == 0 %?>row_even<?% ELSE %?>row_odd<?% END %?>">
+							<td class="col_duration">
+								<span class="time_duration"><span class="time_start"><?% start %?></span> - <span class="time_stop"><?% stop %?></span></span>
+							</td>
+							<td class="col_center">
+								<div class="epg_title">
+									<?% IF infurl %?>
+										<a href="javascript:popup('<?% infurl %?>');" title="<?% gettext('More Information') %?>">
+									<?% END %?>
+									<?% title %?>
+									<?% IF infurl %?>
+										</a>
+									<?% END %?>
+								</div>
+								<?% IF subtitle %?>
+									<div class="epg_subtitle"><?% subtitle %?></div>
+								<?% ELSE %?>
+									<div class="epg_subtitle">&nbsp;</div>
+								<?% END %?>
+							</td>
+							<td class="col_channel">
+								<div class="channel_name"><?% channel %?></div>
+							</td>
+							<td class="col_folder">
+								<?% folder %?>
+							</td>
+						</tr>
+					<?% END %?>
+				</table>
+		<?% ELSE %?>
+				<div class="warning"><?% gettext('No matches found!') %?></div>
+		<?% END %?>
+				<br />
+			</div>
+<?% END %?>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
+				<tr class="newday">
+					<td colspan="2"><?% gettext('Settings') %?></td>
+				</tr>
+				<?% tr_class = "row_odd" %?>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label"><h5><?% gettext('Search Term:') %?></h5></td>
+					<td class="col_value">
+						<input type="text" name="pattern" id="pattern" value="<?% epgsearch.pattern %?>" size="40" />
+					</td>
+				</tr>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label" valign="top"><h5><?% gettext('Search Mode:') %?></h5></td>
+					<td class="col_value">
+						<select onchange="javascript:changedSearchMode(this)" id="search_mode" name="mode">
+							<option value="0" <?% IF epgsearch.mode == 0 %?>selected="selected"<?% END %?>><?% gettext('phrase') %?></option>
+							<option value="1" <?% IF epgsearch.mode == 1 %?>selected="selected"<?% END %?>><?% gettext('all words') %?></option>
+							<option value="2" <?% IF epgsearch.mode == 2 %?>selected="selected"<?% END %?>><?% gettext('at least one word') %?></option>
+							<option value="3" <?% IF epgsearch.mode == 3 %?>selected="selected"<?% END %?>><?% gettext('match exactly') %?></option>
+							<option value="4" <?% IF epgsearch.mode == 4 %?>selected="selected"<?% END %?>><?% gettext('regular expression') %?></option>
+							<option value="5" <?% IF epgsearch.mode == 5 %?>selected="selected"<?% END %?>><?% gettext('fuzzy') %?></option>
+						</select>
+						<div id="fuzzy_tolerance">
+							<?% gettext('Tolerance for "fuzzy":') %?>
+							<input type="text" name="fuzzy_tolerance" size="2" value="<?% epgsearch.fuzzy_tolerance %?>" />
+						</div>
+					</td>
+				</tr>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label"><h5><?% gettext('Match Case:') %?></h5></td>
+					<td class="col_value">
+						<input type="checkbox" name="matchcase" value="1" <?% IF epgsearch.matchcase %?>checked="checked"<?% END %?> />
+					</td>
+				</tr>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label" valign="top"><h5><?% gettext('Search in:') %?></h5></td>
+					<td class="col_value">
+						<input type="checkbox" name="use_title" value="1" id="use_title" <?% IF epgsearch.use_title %?>checked="checked"<?% END %?> /><label for="use_title"><?% gettext('Title') %?></label>
+						<input type="checkbox" name="use_subtitle" value="1" id="use_subtitle" <?% IF epgsearch.use_subtitle %?>checked="checked"<?% END %?> /><label for="use_subtitle"><?% gettext('Subtitle') %?></label>
+						<input type="checkbox" name="use_descr" value="1" id="use_descr" <?% IF epgsearch.use_descr %?>checked="checked"<?% END %?> /><label for="use_descr"><?% gettext('Description') %?></label>
+					</td>
+				</tr>
+<?% IF extepg.size() > 0 %?>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label" valign="top"><h5><?% gettext('Use extended EPG info:') %?></h5></td>
+					<td class="col_value">
+						<input type="checkbox" name="use_extepg" value="1" id="use_extepg" <?% IF epgsearch.use_extepg %?>checked="checked"<?% END %?> onclick="javascript:changedUseExtEpg(this)" /><br/>
+						<div id="use_extepg_settings">
+							<?% FOREACH ext = extepg %?>
+								<table border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td><?% ext.title %?></td>
+									</tr>
+									<tr>
+										<td>
+											<input type="text" value="<?% ext.data_text %?>" size="10" name="extepg_<?% ext.id %?>_data_text"/>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<select size="3" multiple="multiple" style="<?% IF ext.data.size() == 0 %?>visibility:hidden;<?% END %?>" name="extepg_<?% ext.id %?>_data">
+												<?% IF ext.data.size() > 0 %?>
+													<?% FOREACH v = ext.data %?>
+														<option value="<?% v.name | html %?>" <?% IF v.sel %?>selected="selected"<?% END %?>><?% v.name | html %?></option>
+													<?% END %?>
+												<?% ELSE %?>
+													<option/>
+												<?% END %?>
+											</select>
+										</td>
+									</tr>
+								</table>
+							<?% END %?>
+						</div>
+ 	    		</td>
+			 	</tr>
+<?% END %?>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label" valign="top"><h5><?% gettext('Use Channel:') %?></h5></td>
+					<td class="col_value">
+						<select onchange="javascript:changedUseChannel(this)" id="use_channel" name="use_channel">
+							<option value="0" <?% IF epgsearch.use_channel == 0 %?>selected="selected"<?% END %?>><?% gettext('no') %?></option>
+							<option value="1" <?% IF epgsearch.use_channel == 1 %?>selected="selected"<?% END %?>><?% gettext('interval') %?></option>
+							<option value="2" <?% IF epgsearch.use_channel == 2 %?>selected="selected"<?% END %?>><?% gettext('channel group') %?></option>
+							<option value="3" <?% IF epgsearch.use_channel == 3 %?>selected="selected"<?% END %?>><?% gettext('only FTA') %?></option>
+						</select>
+						<div id="channel_range">
+							<?% gettext('Range:') %?>
+							<select name="channel_from">
+<?% FOREACH channels %?>
+									<option value="<?% uniq_id %?>" <?% IF uniq_id == epgsearch.channel_from %?>selected="selected"<?% END %?>><?% name | html %?></option>
+<?% END %?>
+							</select>
+							-
+							<select name="channel_to">
+<?% FOREACH channels %?>
+									<option value="<?% uniq_id %?>" <?% IF uniq_id == epgsearch.channel_to %?>selected="selected"<?% END %?>><?% name | html %?></option>
+<?% END %?>
+							</select>
+						</div>
+						<div id="channel_group">
+							<?% gettext('Channel Group:') %?>
+							<select name="channel_group">
+								<?% FOREACH group = ch_groups %?>
+									<option value="<?% group.id %?>" <?% IF group.sel %?>selected="selected"<?% END %?>><?% group.name | html %?></option>
+								<?% END %?>
+							</select>
+						</div>
+					</td>
+				</tr>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label" valign="top"><h5><?% gettext('Use Time:') %?></h5></td>
+					<td class="col_value">
+						<input type="checkbox" name="use_time" value="1" <?% IF epgsearch.use_time %?>checked="checked"<?% END %?> onclick="javascript:changedUseTime(this)" id="use_time" />
+						<div id="use_time_settings">
+							<table border="0" cellpadding="0" cellspacing="0">
+								<tr>
+									<td class="col_label"><h5><?% gettext('Start After:') %?></h5></td>
+									<td class="col_value">
+										<input type="text" name="time_start" value="<?% epgsearch.time_start %?>" size="5" maxlength="5" />
+										&nbsp;<?% gettext('o\'clock') %?>
+									</td>
+								</tr>
+								<tr>
+									<td class="col_label"><h5><?% gettext('Start Before:') %?></h5></td>
+									<td class="col_value">
+										<input type="text" name="time_stop" value="<?% epgsearch.time_stop %?>" size="5" maxlength="5" />
+										&nbsp;<?% gettext('o\'clock') %?>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label" valign="top"><h5><?% gettext('Use Duration:') %?></h5></td>
+					<td class="col_value">
+						<input type="checkbox" name="use_duration" value="1" <?% IF epgsearch.use_duration %?>checked="checked"<?% END %?> onclick="javascript:changedUseDuration(this)" id="use_duration" />
+						<div id="use_duration_settings">
+							<table border="0" cellpadding="0" cellspacing="0">
+								<tr>
+									<td class="col_label"><h5><?% gettext('Min. Duration:') %?></h5></td>
+									<td class="col_value">
+										<input type="text" name="min_duration" value="<?% epgsearch.min_duration %?>" size="5" maxlength="5" />
+										&nbsp;(<?% gettext('hh:mm') %?>)
+									</td>
+								</tr>
+								<tr>
+						  		<td class="col_label"><h5><?% gettext('Max. Duration:') %?></h5></td>
+									<td class="col_value">
+										<input type="text" name="max_duration" value="<?% epgsearch.max_duration %?>" size="5" maxlength="5" />
+										&nbsp;(<?% gettext('hh:mm') %?>)
+									</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label" valign="top"><h5><?% gettext('Use Day of Week:') %?></h5></td>
+					<td class="col_value">
+						<input type="checkbox" name="use_days" value="1" id="use_days" <?% IF epgsearch.use_days %?>checked="checked"<?% END %?> onclick="javascript:changedUseDays(this)" />
+						<div id="use_days_settings">
+							<input type="checkbox" name="monday" value="1" id="monday" <?% IF epgsearch.monday %?>checked="checked"<?% END %?> /><label for="monday"><?% gettext('Monday') %?></label>
+							<input type="checkbox" name="tuesday" value="1" id="tuesday" <?% IF epgsearch.tuesday %?>checked="checked"<?% END %?> /><label for="tuesday"><?% gettext('Tuesday') %?></label>
+							<input type="checkbox" name="wednesday" value="1" id="wednesday" <?% IF epgsearch.wednesday %?>checked="checked"<?% END %?> /><label for="wednesday"><?% gettext('Wednesday') %?></label>
+							<input type="checkbox" name="thursday" value="1" id="thursday" <?% IF epgsearch.thursday %?>checked="checked"<?% END %?> /><label for="thursday"><?% gettext('Thursday') %?></label>
+							<input type="checkbox" name="friday" value="1" id="friday" <?% IF epgsearch.friday %?>checked="checked"<?% END %?> /><label for="friday"><?% gettext('Friday') %?></label>
+							<input type="checkbox" name="saturday" value="1" id="saturday" <?% IF epgsearch.saturday %?>checked="checked"<?% END %?> /><label for="saturday"><?% gettext('Saturday') %?></label>
+							<input type="checkbox" name="sunday" value="1" id="sunday" <?% IF epgsearch.sunday %?>checked="checked"<?% END %?> /><label for="sunday"><?% gettext('Sunday') %?></label>
+						</div>
+ 	       </td>
+				</tr>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label" valign="top"><h5><?% gettext('Use Blacklists:') %?></h5></td>
+					<td class="col_value">
+						<select onchange="javascript:changedUseBlacklists(this)" id="use_blacklists" name="use_blacklists">
+							<option value="0" <?% IF epgsearch.use_blacklists == 0 %?> selected="selected"<?% END %?>><?% gettext('no') %?></option>
+							<option value="1" <?% IF epgsearch.use_blacklists == 1 %?> selected="selected"<?% END %?>><?% gettext('selection') %?></option>
+							<option value="2" <?% IF epgsearch.use_blacklists == 2 %?> selected="selected"<?% END %?>><?% gettext('all') %?></option>
+						</select>
+						<div id="select_blacklists">
+							<select size="5" multiple="multiple" name="sel_blacklists">
+								<?% FOREACH bl = blacklists %?>
+									<option value="<?% bl.id %?>" <?% IF bl.sel %?>selected="selected"<?% END %?>><?% bl.pattern | html %?></option>
+								<?% END %?>
+							</select>
+						</div>
+					</td>
+				</tr>
+<?% IF epgs_settings.ShowFavoritesMenu %?>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label"><h5><?% gettext('Use in Favorites Menu:') %?></h5></td>
+					<td class="col_value">
+						<input type="checkbox" name="use_for_fav" value="1" <?% IF epgsearch.use_for_fav %?>checked="checked"<?% END %?> />
+					</td>
+				</tr>
+<?% END %?>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label"><h5><?% gettext('Use as Search Timer:') %?></h5></td>
+					<td class="col_value">
+						<input type="checkbox" name="has_action" value="1" <?% IF epgsearch.has_action %?>checked="checked"<?% END %?> onclick="javascript:changedHasAction(this)" id="has_action" />
+						<span id="set_action">
+							<select onchange="javascript:changedAction(this)" id="select_action" name="action">
+								<option value="0" <?% IF epgsearch.action == 0 %?>selected="selected"<?% END %?>><?% gettext('record') %?></option>
+								<option value="1" <?% IF epgsearch.action == 1 %?>selected="selected"<?% END %?>><?% gettext('announce only') %?></option>
+								<option value="2" <?% IF epgsearch.action == 2 %?>selected="selected"<?% END %?>><?% gettext('switch only') %?></option>
+							</select>
+						</span>
+					</td>
+				</tr>
+			</table>
+
+			<div id="action_record_settings">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
+					<tr class="heading">
+						<td colspan="2"><h2><?% gettext('Settings for action "record"') %?></h2></td>
+					</tr>
+					<tr class="row_odd">
+						<td class="col_label"><h5><?% gettext('Series Recording:') %?></h5></td>
+						<td class="col_value">
+							<input type="checkbox" name="is_series" value="1" id="is_series" <?% IF epgsearch.is_series %?>checked="checked"<?% END %?> />
+						</td>
+					</tr>
+					<tr class="row_even">
+						<td class="col_label"><h5><?% gettext('Directory:') %?></h5></td>
+						<td class="col_value">
+							<input type="text" name="directory" value="<?% epgsearch.directory %?>" size="40" />
+						</td>
+					</tr>
+					<tr class="row_odd">
+						<td class="col_label"><h5><?% gettext('Delete Recordings After ... Days:') %?></h5></td>
+						<td class="col_value">
+							<input type="text" name="delete_after" value="<?% epgsearch.delete_after %?>" size="3" />
+							&nbsp;&nbsp;<h5><?% gettext('Keep ... Recordings:') %?></h5>
+							<input type="text" name="keep_recordings" value="<?% epgsearch.keep_recordings %?>" size="3" />
+						</td>
+					</tr>
+					<tr class="row_even">
+						<td class="col_label"><h5><?% gettext('Pause, when ... recordings exist:') %?></h5></td>
+						<td class="col_value">
+							<input type="text" name="pause" value="<?% epgsearch.pause %?>" size="3" />
+						</td>
+					</tr>
+					<tr class="row_odd">
+						<td class="col_label" valign="top"><h5><?% gettext('Avoid Repeats:') %?></h5></td>
+						<td class="col_value">
+							<input type="checkbox" name="avoid_repeats" value="1" <?% IF epgsearch.avoid_repeats %?>checked="checked"<?% END %?> onclick="javascript:changedAvoidRepeats(this)" id="avoid_repeats" />
+							<div id="avoid_repeats_settings">
+								<table border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td class="col_label"><h5><?% gettext('Allowed Repeats:') %?></h5></td>
+										<td class="col_value">
+											<input type="text" name="allowed_repeats" value="<?% epgsearch.allowed_repeats %?>" size="3" id="allowed_repeats"/>
+											&nbsp;&nbsp;<h5><?% gettext('Only Repeats Within ... Days:') %?></h5>
+											<input type="text" name="repeats_in_days" value="<?% epgsearch.repeats_in_days %?>" size="3" />
+										</td>
+									</tr>
+									<tr>
+										<td class="col_label" valign="top"><h5><?% gettext('Compare:') %?></h5></td>
+										<td class="col_value">
+											<div>
+												<input type="checkbox" name="comp_title" value="1" id="comp_title" <?% IF epgsearch.comp_title %?>checked="checked"<?% END %?> /><label for="comp_title"><?% gettext('Title') %?></label>
+												<input type="checkbox" name="comp_subtitle" value="1" id="comp_subtitle" <?% IF epgsearch.comp_subtitle %?>checked="checked"<?% END %?> /><label for="comp_subtitle"><?% gettext('Subtitle') %?></label>
+												<input type="checkbox" name="comp_descr" value="1" id="comp_descr" <?% IF epgsearch.comp_descr %?>checked="checked"<?% END %?> /><label for="comp_descr"><?% gettext('Description') %?></label>
+											</div>
+											<div>
+												<?% FOREACH ext = extepg %?>
+													<span>
+														<?% fullid = "comp_extepg_${ext.id}" %?>
+														<input type="checkbox" name="<?% fullid %?>" value="1" id="<?% fullid %?>" <?% IF epgsearch.$fullid %?>checked="checked"<?% END %?> /><label for="<?% fullid %?>"><?% ext.title %?></label>
+													</span>
+												<?% END %?>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</td>
+					</tr>
+					<tr class="row_even">
+						<td class="col_label"><h5><?% gettext('Priority:') %?></h5></td>
+						<td class="col_value">
+							<input type="text" name="prio" value="<?% epgsearch.prio %?>" size="2" maxlength="2" />
+						</td>
+					</tr>
+					<tr class="row_odd">
+						<td class="col_label"><h5><?% gettext('Lifetime:') %?></h5></td>
+						<td class="col_value">
+							<input type="text" name="lft" value="<?% epgsearch.lft %?>" size="2" maxlength="2" />
+						</td>
+					</tr>
+					<tr class="row_even">
+						<td class="col_label"><h5><?% gettext('Time Margin at Start:') %?></h5></td>
+						<td class="col_value">
+							<input type="text" name="bstart" value="<?% epgsearch.bstart %?>" size="2" maxlength="2" /> <?% gettext('minutes') %?>
+						</td>
+					</tr>
+					<tr class="row_odd">
+						<td class="col_label"><h5><?% gettext('Time Margin at Stop:') %?></h5></td>
+						<td class="col_value">
+							<input type="text" name="bstop" value="<?% epgsearch.bstop %?>" size="2" maxlength="2" /> <?% gettext('minutes') %?>
+						</td>
+					</tr>
+					<tr class="row_even">
+						<td class="col_label"><h5><?% gettext('VPS:') %?></h5></td>
+						<td class="col_value">
+							<input type="checkbox" name="use_vps" value="1" id="use_vps" <?% IF epgsearch.use_vps %?>checked="checked"<?% END %?> />
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div id="action_switch_settings">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
+					<tr class="heading">
+						<td colspan="2"><h2><?% gettext('Settings for action "switch only"') %?></h2></td>
+					</tr>
+					<tr class="row_odd">
+						<td class="col_label"><h5><?% gettext('Switch ... Minutes Before Start:') %?></h5></td>
+						<td class="col_value">
+							<input type="text" name="switch_before" value="<?% epgsearch.switch_before %?>" size="2" maxlength="2" /> <?% gettext('minutes') %?>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
+			<tr>
+				<!--
+				<td align="left">
+					<input type="submit" class="submit" name="template" value="<?% gettext('Save as template') %?>" />
+				</td>
+				-->
+				<td align="right">
+					<input type="submit" class="submit" name="save" value="<?% gettext('Save') %?>" onclick="return checkSearchPattern();" />
+					<input type="submit" class="submit" name="single_test" value="<?% gettext('Run') %?>" onclick="return checkSearchPattern();" />
+					<input type="submit" class="submit" name="exit" value="<?% gettext('Cancel') %?>" />
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" name="aktion" value="epgsearch_aktion" />
+		<?% IF do_edit %?>
+			<input type="hidden" name="id" value="<?% epgsearch.id %?>" />
+		<?% END %?>
+		<input type="hidden" name="unused" value="<?% epgsearch.unused %?>" />
+	</form>
+</body>
+
+</html>

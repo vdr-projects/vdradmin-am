@@ -28,7 +28,7 @@
 
 require 5.004;
 
-my $VERSION = "3.4.7";
+my $VERSION = "3.5.0beta";
 my $BASENAME;
 my $EXENAME;
 
@@ -151,6 +151,7 @@ $CONFIG{TIMES}      = "18:00, 20:00, 21:00, 22:00";
 $CONFIG{TL_TOOLTIP} = 1;
 
 #
+$CONFIG{AT_OFFER}        = 0;
 $CONFIG{AT_FUNC}         = 1;
 $CONFIG{AT_TIMEOUT}      = 120;
 $CONFIG{AT_LIFETIME}     = 99;
@@ -158,18 +159,21 @@ $CONFIG{AT_PRIORITY}     = 99;
 $CONFIG{AT_MARGIN_BEGIN} = 10;
 $CONFIG{AT_MARGIN_END}   = 10;
 $CONFIG{AT_TOOLTIP}      = 1;
-$CONFIG{AT_SORTBY};
-$CONFIG{AT_DESC};
+$CONFIG{AT_SORTBY}       = "pattern";
+$CONFIG{AT_DESC}         = 0;
 
 #
+$CONFIG{ES_SORTBY}       = "pattern";
+$CONFIG{ES_DESC}         = 0;
+
 $CONFIG{TM_LIFETIME}     = 99;
 $CONFIG{TM_PRIORITY}     = 99;
 $CONFIG{TM_MARGIN_BEGIN} = 10;
 $CONFIG{TM_MARGIN_END}   = 10;
 $CONFIG{TM_TT_TIMELINE}  = 1;
 $CONFIG{TM_TT_LIST}      = 1;
-$CONFIG{TM_SORTBY};
-$CONFIG{TM_DESC};
+$CONFIG{TM_SORTBY}       = "day";
+$CONFIG{TM_DESC}         = 0;
 
 #$CONFIG{TM_ADD_SUMMARY}   = 0;
 #
@@ -214,8 +218,8 @@ $CONFIG{TV_INTERVAL}  = "5";
 $CONFIG{TV_SIZE}      = "half";
 $CONFIG{REC_MIMETYPE} = "video/x-mpegurl";
 $CONFIG{REC_EXT}      = "m3u";
-$CONFIG{REC_SORTBY};
-$CONFIG{REC_DESC};
+$CONFIG{REC_SORTBY}   = "name";
+$CONFIG{REC_DESC}     = 0;
 
 #
 $CONFIG{PS_VIEW} = "ext";
@@ -228,10 +232,12 @@ my %FEATURES;
 $FEATURES{STREAMDEV}  = 0;
 $FEATURES{REC_RENAME} = 0;
 $FEATURES{AUTOTIMER}  = 0;
+my %EPGSEARCH_SETTINGS;
 
 my $SERVERVERSION = "vdradmind/$VERSION";
 my $VDRVERSION    = 0;                      # Numeric VDR version, e.g. 10344
 my $VDRVERSION_HR;                          # Human readable VDR version, e.g. 1.3.44
+my $EPGSEARCH_VERSION = 0;                  # Numeric epgsearch plugin version, e.g. 918
 my %ERROR_MESSAGE;
 
 my ($TEMPLATEDIR, $CONFFILE, $LOGFILE, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME, $ETCDIR, $USER_CSS);
@@ -435,7 +441,7 @@ my ($Socket) =
                         Reuse     => 1
   );
 die("can't start server: $!\n")            if (!$Socket);
-$Socket->timeout($CONFIG{AT_TIMEOUT} * 60) if ($CONFIG{AT_FUNC});
+$Socket->timeout($CONFIG{AT_TIMEOUT} * 60) if ($CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER});
 $CONFIG{CACHE_LASTUPDATE} = 0;
 $CONFIG{CACHE_REC_LASTUPDATE} = 0;
 
@@ -443,11 +449,11 @@ $CONFIG{CACHE_REC_LASTUPDATE} = 0;
 # Mainloop
 ##
 my ($Client, $MyURL, $Referer, $Request, $Query, $Guest);
-my @GUEST_USER = qw(prog_detail prog_list prog_list2 prog_timeline timer_list at_timer_list
+my @GUEST_USER = qw(prog_detail prog_list prog_list2 prog_timeline timer_list at_timer_list epgsearch_list
   prog_summary rec_list rec_detail show_top toolbar show_help about);
 my @TRUSTED_USER = (
-    @GUEST_USER, qw(at_timer_edit at_timer_new at_timer_save at_timer_test
-      at_timer_delete timer_new_form timer_add timer_delete timer_toggle rec_delete rec_rename rec_edit
+    @GUEST_USER, qw(at_timer_edit at_timer_new at_timer_save at_timer_test at_timer_delete
+      epgsearch_edit epgsearch_save epgsearch_delete epgsearch_toggle timer_new_form timer_add timer_delete timer_toggle rec_delete rec_rename rec_edit
       config prog_switch rc_show rc_hitk grab_picture at_timer_toggle tv_show tv_switch
       live_stream rec_stream rec_play rec_cut force_update vdr_cmds)
 );
@@ -534,6 +540,13 @@ while (true) {
         } elsif ($real_aktion eq "timer_aktion") {
             $real_aktion = "timer_delete" if ($q->param("timer_delete"));
             $real_aktion = "timer_toggle" if ($q->param("timer_active") || $q->param("timer_inactive"));
+        } elsif ($real_aktion eq "epgsearch_aktion") {
+            $real_aktion = "epgsearch_save";
+            $real_aktion = "epgsearch_delete" if ($q->param("delete"));
+            $real_aktion = "epgsearch_edit" if ($q->param("single_test"));
+            $real_aktion = "epgsearch_list" if ($q->param("execute"));
+            $real_aktion = "epgsearch_list" if ($q->param("favorites"));
+            $real_aktion = "epgsearch_list" if ($q->param("exit"));
         }
 
         my @ALLOWED_FUNCTIONS;
@@ -665,7 +678,8 @@ sub ChanTree {
                 service_id   => $service_id,
                 nid          => $nid,
                 tid          => $tid,
-                rid          => $rid
+                rid          => $rid,
+                uniq_id      => $source . "-" . $nid . "-" . ($nid || $tid ? $tid : $frequency) . "-" . $service_id
              }
         );
     }
@@ -717,6 +731,24 @@ sub get_channelid_from_vdrid {
         if (scalar(@C) == 1) {
             my $ch = $C[0];
             return $ch->{source} . "-" . $ch->{nid} . "-" . ($ch->{nid} || $ch->{tid} ? $ch->{tid} : $ch->{frequency}) . "-" . $ch->{service_id};
+        }
+    }
+}
+
+sub get_name_from_uniqid {
+    my $uniq_id = shift;
+    if ($uniq_id) {
+
+        # Kanalliste nach identischer vdr_id durchsuchen
+        my @C = grep($_->{uniq_id} eq $uniq_id, @CHAN);
+#        foreach (@CHAN) {
+#            printf("(%s) ($uniq_id)\n", $_->{uniq_id});
+#            return $_->{name} if ($_->{uniq_id} eq $uniq_id);
+#        }
+
+        # Es darf nach Spec nur eine Übereinstimmung geben
+        if (scalar(@C) == 1) {
+            return $C[0]->{name};
         }
     }
 }
@@ -1219,7 +1251,7 @@ sub BlackList_Read {
 }
 
 sub AutoTimer {
-    return if (!$CONFIG{AT_FUNC});
+    return if (!$CONFIG{AT_FUNC} || !$FEATURES{AUTOTIMER});
     Log(LOG_AT, "Auto Timer: Scanning for events...");
     my ($search, $start, $stop) = @_;
     my @at_matches;
@@ -1684,8 +1716,10 @@ sub AT_ProgTimer {
                 Log(LOG_FATALERROR, "Failed to send email! Please contact the author.");
             }
         } elsif ($CONFIG{AT_SENDMAIL} == 1) {
-            print("Missing Perl module Net::SMTP.\nAutoTimer email notification disabled.\n");
-            Log(LOG_FATALERROR, "Missing Perl module Net::SMTP. AutoTimer email notification disabled.");
+            if (!$can_use_net_smtp) {
+                print("Missing Perl module Net::SMTP.\nAutoTimer email notification disabled.\n");
+                Log(LOG_FATALERROR, "Missing Perl module Net::SMTP. AutoTimer email notification disabled.");
+            }
             if ($CONFIG{MAIL_AUTH_USER} ne "" && !$can_use_smtpauth) {
                 print("Missing Perl module Authen::SASL and/or Digest::HMAC_MD5.\nAutoTimer email notification disabled.\n");
                 Log(LOG_FATALERROR, "Missing Perl module Authen::SASL and/or Digest::HMAC_MD5. AutoTimer email notification disabled.");
@@ -1804,6 +1838,7 @@ sub CheckTimers {
                 # check for each event how probable it is matching the old timer
                 if (scalar(@eventlist) > 0) {
                     my $origlen = ($timer->{stop} - $timer->{bstop} * 60) - ($timer->{start} + $timer->{bstart} * 60);
+                    next unless($origlen);
                     my $maxwight = 0;
                     $event = $eventlist[0];
 
@@ -1857,6 +1892,621 @@ sub CheckTimers {
                 Log(LOG_CHECKTIMER, sprintf("CheckTimers: Skipping Timer \"%s\" (No. %s, %s - %s)", $timer->{title}, $timer->{id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop}))));
             }
         }
+    }
+}
+
+#############################################################################
+# epgsearch
+#############################################################################
+sub epgsearch_list {
+    return if (UptoDate());
+
+    if ($EPGSEARCH_VERSION < 918) {
+        HTMLError("Your version of epgsearch plugin is too old! You need at least v0.9.18!");
+        return
+    }
+
+    $CONFIG{ES_DESC} = ($q->param("desc") ? 1 : 0) if (defined($q->param("desc")));
+    $CONFIG{ES_SORTBY} = $q->param("sortby") if (defined($q->param("sortby")));
+    $CONFIG{ES_SORTBY} = "pattern" if (!$CONFIG{ES_SORTBY});
+
+    my @matches;
+    my $do_test = $q->param("execute");
+        
+    if ($do_test) {
+        my $id = $q->param("id");
+        unless (defined $id) {
+            for ($q->param) {
+                if (/xxxx_(.*)/) {
+                    $id .= "|" if (defined $id);
+                    $id .= $1;
+                }
+            }
+        }
+
+        if (defined $id) {
+            @matches = EpgSearchQuery("plug epgsearch qrys $id");
+        }
+    } else {
+        $do_test = $q->param("favorites");
+        @matches = EpgSearchQuery("plug epgsearch qryf") if ($do_test);
+    }
+
+    my @searches;
+    for (ParseEpgSearch(undef)) {
+        $_->{modurl}  = $MyURL . "?aktion=epgsearch_edit&amp;id=" . $_->{id};
+        $_->{delurl}  = $MyURL . "?aktion=epgsearch_delete&amp;id=" . $_->{id};
+        $_->{findurl} = $MyURL . "?aktion=epgsearch_aktion&amp;execute=1&amp;id=" . $_->{id};
+        $_->{toggleurl}  = sprintf("%s?aktion=epgsearch_toggle&amp;active=%s&amp;id=%s", $MyURL, $_->{has_action}, $_->{id});
+        push(@searches, $_);
+    }
+
+    if ($CONFIG{ES_SORTBY} eq "active") {
+        if ($CONFIG{ES_DESC}) {
+            @searches = sort({ $b->{has_action} <=> $a->{has_action} } @searches);
+        } else {
+            @searches = sort({ $a->{has_action} <=> $b->{has_action} } @searches);
+        }
+    } elsif ($CONFIG{ES_SORTBY} eq "action") {
+        if ($CONFIG{ES_DESC}) {
+            @searches = sort({ lc($b->{action_text}) cmp lc($a->{action_text}) } @searches);
+        } else {
+            @searches = sort({ lc($a->{action_text}) cmp lc($b->{action_text}) } @searches);
+        }
+    } elsif ($CONFIG{ES_SORTBY} eq "pattern") {
+        if ($CONFIG{ES_DESC}) {
+            @searches = sort({ lc($b->{pattern}) cmp lc($a->{pattern}) } @searches);
+        } else {
+            @searches = sort({ lc($a->{pattern}) cmp lc($b->{pattern}) } @searches);
+        }
+    }
+
+    my $toggle_desc = ($CONFIG{ES_DESC} ? 0 : 1);
+    
+    my $vars = { usercss          => $UserCSS,
+                 url              => $MyURL,
+                 sortbypatternurl => "$MyURL?aktion=epgsearch_list&amp;sortby=pattern&amp;desc=" . (($CONFIG{ES_SORTBY} eq "pattern") ? $toggle_desc : $CONFIG{ES_DESC}),
+                 sortbyactiveurl  => "$MyURL?aktion=epgsearch_list&amp;sortby=active&amp;desc=" . (($CONFIG{ES_SORTBY} eq "active") ? $toggle_desc : $CONFIG{ES_DESC}),
+                 sortbyactionurl  => "$MyURL?aktion=epgsearch_list&amp;sortby=action&amp;desc=" . (($CONFIG{ES_SORTBY} eq "action") ? $toggle_desc : $CONFIG{ES_DESC}),
+                 desc             => $CONFIG{ES_DESC} ? "desc" : "asc",
+                 sortbypattern    => ($CONFIG{ES_SORTBY} eq "pattern") ? 1 : 0,
+                 sortbyactive     => ($CONFIG{ES_SORTBY} eq "active")  ? 1 : 0,
+                 sortbyaction     => ($CONFIG{ES_SORTBY} eq "action")  ? 1 : 0,
+                 searches         => \@searches,
+                 did_search       => $do_test,
+                 title            => $do_test ? ($q->param("favorites") ? "Your favorites" : "Search results") : undef,
+                 matches          => (@matches ? \@matches : undef)
+    };
+    return showTemplate("epgsearch_list.html", $vars);
+}
+
+sub epgsearch_edit {
+    my $id = $q->param("id");
+    my $do_test = $q->param("single_test");
+
+    my $search;
+    my @blacklists;
+    my @ch_groups;
+    my @matches;
+    my @sel_bl;
+
+    if ($do_test) {
+        # test search
+        $search = $q->Vars();
+        @sel_bl = $q->param("sel_blacklists");
+        @matches = EpgSearchQuery("plug epgsearch qrys 0:" . epgsearch_Param2Line());
+    } elsif (defined $id) {
+        # edit search
+        my @temp = ParseEpgSearch($id);
+        $search = pop @temp;
+        @sel_bl = split(/\|/, $search->{sel_blacklists});
+    } else {
+        # new search
+        $search->{use_title}    = 1;
+        $search->{use_subtitle} = 1;
+        $search->{use_descr}    = 1;
+        $search->{comp_title}    = 1;
+        $search->{comp_subtitle} = 1;
+        $search->{comp_descr}    = 1;
+    }
+
+    if (@sel_bl) {
+        for my $bl (ParseEpgSearchBlacklists(undef)) {
+            for (@sel_bl) {
+                if ($bl->{id} == $_) {
+                    $bl->{sel} = 1;
+                    last;
+                }
+            }
+            push(@blacklists, $bl);
+        }
+    } else {
+        @blacklists = ParseEpgSearchBlacklists(undef);
+    }
+
+    if ($search->{use_channels} == 2) {
+        for my $cg (ParseEpgSearchChanGroups(undef)) {
+            $cg->{sel} = 1 if ($cg->{id} == $search->{channels}) ;
+            push(@ch_groups, $cg);
+        }
+    } else {
+        @ch_groups = ParseEpgSearchChanGroups(undef);
+    }
+
+    my @extepg = ParseEpgSearchExtEpgInfos($search->{extepg_infos});
+    if ($search->{comp_extepg_info}) {
+        foreach (@extepg) {
+            if ($search->{comp_extepg_info} & (1 << ($_->{id} - 1))) {
+                $search->{"comp_extepg_" . $_->{id}} = 1;
+            }
+        }
+    }
+
+    epgsearch_getSettings();
+
+    my $vars = { usercss       => $UserCSS,
+                 url           => $MyURL,
+                 epgsearch     => $search,
+                 channels      => \@CHAN,
+                 blacklists    => \@blacklists,
+                 ch_groups     => \@ch_groups,
+                 did_search    => $do_test,
+                 matches       => (@matches ? \@matches : undef),
+                 do_edit       => (defined $id ? "1" : undef),
+                 extepg        => \@extepg,
+                 epgs_settings => \%EPGSEARCH_SETTINGS
+    };
+    return showTemplate("epgsearch_new.html", $vars);
+}
+
+sub ParseEpgSearch {
+    my $id = shift;
+
+    my @temp;
+    for (SendCMD("plug epgsearch lsts $id")) {
+        chomp;
+        next if (length($_) == 0);
+        last if (/^no searches defined$/);
+
+        push(@temp, ExtractEpgSearchConf($_));
+    }
+
+    return @temp;
+}
+
+sub ParseEpgSearchBlacklists {
+    my $id = shift;
+
+    my @temp;
+    for (SendCMD("plug epgsearch lstb $id")) {
+        chomp;
+        next if (length($_) == 0);
+        last if (/^no blacklists defined$/);
+
+        push(@temp, ExtractEpgSearchConf($_));
+    }
+
+    return @temp;
+}
+
+sub ParseEpgSearchChanGroups {
+    my $id = shift;
+
+    my @temp;
+    for (SendCMD("plug epgsearch lstc $id")) {
+        chomp;
+        next if (length($_) == 0);
+        last if (/^no channel groups defined$/);
+
+        my ($name, $channels) = split(/\|/, $_, 2);
+        push(@temp, {
+                     id       => $name,
+                     name     => $name,
+                     channels => $channels
+                    }
+        );
+    }
+
+    return @temp;
+}
+
+sub ParseEpgSearchExtEpgInfos {
+    my @temp = split(/\|/, shift);
+    my %sel;
+    foreach (@temp) {
+        my ($id, $val) = split(/#/);
+        $val =~ s/\!\^colon\^\!/\:/g;
+        $val =~ s/\!\^pipe\^\!/\|/g;
+        $sel{$id} = $val;
+    }
+
+    my @return;
+    for (SendCMD("plug epgsearch lste")) {
+        chomp;
+        next if (length($_) == 0);
+        last if (/^no EPG categories defined$/);
+
+        my ($id, $name, $title, $values, $searchmode) = split(/\|/, $_, 5);
+        my @val;
+        my $selected;
+        foreach (split(/, /, $values)) {
+            my $value = $_;
+            my @res = grep(/^$value$/, split(/, /, $sel{$id}));
+            $selected = 1 if (@res);
+            push(@val, { name => $value,
+                         sel  => (@res) ? 1 : undef
+                       }
+            );
+        }
+        push(@return, {
+                        id         => $id,
+                        name       => $name,
+                        title      => $title,
+                        data       => \@val,
+                        searchmode => $searchmode,
+                        data_text  => $selected ? undef : $sel{$id}
+                      }
+        );
+    }
+
+    return @return;
+}
+
+sub EpgSearchQuery {
+    my $cmd = shift;
+    my $ref = shift;
+    return unless($cmd);
+
+#print("EpgSearchQuery: $cmd\n");
+    my @result;
+    for (SendCMD($cmd)) {
+        chomp;
+        next if (length($_) == 0);
+        last if(/^no results$/);
+#        Suchtimer-ID : Event-ID : Title : Subtitle : Event-Begin : Event-Ende : 
+#        Kanalnummer : Timer-Start : Timer-Ende : Timer-File : hat/bekommt Timer
+        my ($es_id, $event_id, $title, $subtitle, $estart, $estop, $chan, $tstart, $tstop, $tdir, $has_timer) = split(/:/);
+        if ($title) {
+            $title =~ s/\|/:/g;
+            $title =~ s/\!\^pipe\^\!/\|/g;
+        }
+        if ($subtitle) {
+            $subtitle =~ s/\|/:/g;
+            $subtitle =~ s/\!\^pipe\^\!/\|/g;
+        }
+        if ($tdir) {
+            $tdir =~ s/\|/:/g;
+            $tdir =~ s/\!\^pipe\^\!/\|/g;
+        }
+
+        push(@result, { title    => $title,
+                        subtitle => $subtitle,
+                        date     => my_strftime("%A, %x", $estart),
+                        start    => my_strftime("%H:%M", $estart),
+                        stop     => my_strftime("%H:%M", $estop),
+                        channel  => get_name_from_uniqid($chan),
+                        folder   => $has_timer ? $tdir : gettext("--- no timer ---"),
+                        infurl   => $event_id ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;channel_id=%s&amp;referer=%s", $MyURL, $event_id, $chan, $ref) : undef,
+                        proglink => sprintf("%s?aktion=prog_list&amp;channel_id=%s", $MyURL, $chan)
+                      }
+        );
+    }
+    return @result;
+}
+
+sub ExtractEpgSearchConf {
+    my $timer;
+        ($timer->{id},               # 1 - unique search timer id
+         $timer->{pattern},          # 2 - the search term
+         $timer->{use_time},         # 3 - use time? 0/1
+         $timer->{time_start},       # 4 - start time in HHMM
+         $timer->{time_stop},        # 5 - stop time in HHMM
+         $timer->{use_channel},      # 6 - use channel? 0 = no,  1 = Intervall, 2 = Channel group, 3 = FTA only
+         $timer->{channels},         # 7 - if 'use channel' = 1 then channel id[|channel id] in vdr format,
+                                     #     one entry or min/max entry separated with |, if 'use channel' = 2
+                                     #     then the channel group name
+         $timer->{matchcase},        # 8 - match case? 0/1
+         $timer->{mode},             # 9 - search mode:
+                                     #      0 - the whole term must appear as substring
+                                     #      1 - all single terms (delimiters are blank,',', ';', '|' or '~')
+                                     #          must exist as substrings.
+                                     #      2 - at least one term (delimiters are blank, ',', ';', '|' or '~')
+                                     #          must exist as substring.
+                                     #      3 - matches exactly
+                                     #      4 - regular expression
+         $timer->{use_title},        #10 - use title? 0/1
+         $timer->{use_subtitle},     #11 - use subtitle? 0/1
+         $timer->{use_descr},        #12 - use description? 0/1
+         $timer->{use_duration},     #13 - use duration? 0/1
+         $timer->{min_duration},     #14 - min duration in minutes
+         $timer->{max_duration},     #15 - max duration in minutes
+         $timer->{has_action},       #16 - use as search timer? 0/1
+         $timer->{use_days},         #17 - use day of week? 0/1
+         $timer->{which_days},       #18 - day of week (0 = sunday, 1 = monday...)
+         $timer->{is_series},        #19 - use series recording? 0/1
+         $timer->{directory},        #20 - directory for recording
+         $timer->{prio},             #21 - priority of recording
+         $timer->{lft},              #22 - lifetime of recording
+         $timer->{bstart},           #23 - time margin for start in minutes
+         $timer->{bstop},            #24 - time margin for stop in minutes
+         $timer->{use_vps},          #25 - use VPS? 0/1
+         $timer->{action},           #26 - action:
+                                     #      0 = create a timer
+                                     #      1 = announce only via OSD (no timer)
+                                     #      2 = switch only (no timer)
+         $timer->{use_extepg},       #27 - use extended EPG info? 0/1  #TODO
+         $timer->{extepg_infos},     #28 - extended EPG info values. This entry has the following format #TODO
+                                     #     (delimiter is '|' for each category, '#' separates id and value):
+                                     #     1 - the id of the extended EPG info category as specified in
+                                     #         epgsearchcats.conf
+                                     #     2 - the value of the extended EPG info category
+                                     #         (a ':' will be tranlated to "!^colon^!", e.g. in "16:9")
+         $timer->{avoid_repeats},    #29 - avoid repeats? 0/1
+         $timer->{allowed_repeats},  #30 - allowed repeats
+         $timer->{comp_title},       #31 - compare title when testing for a repeat? 0/1
+         $timer->{comp_subtitle},    #32 - compare subtitle when testing for a repeat? 0/1
+         $timer->{comp_descr},       #33 - compare description when testing for a repeat? 0/1
+         $timer->{comp_extepg_info}, #34 - compare extended EPG info when testing for a repeat? #TODO
+                                     #     This entry is a bit field of the category ids.
+         $timer->{repeats_in_days},  #35 - accepts repeats only within x days
+         $timer->{delete_after},     #36 - delete a recording automatically after x days
+         $timer->{keep_recordings},  #37 - but keep this number of recordings anyway
+         $timer->{switch_before},    #38 - minutes before switch (if action = 2)
+         $timer->{pause},            #39 - pause if x recordings already exist
+         $timer->{use_blacklists},   #40 - blacklist usage mode (0 none, 1 selection, 2 all)
+         $timer->{sel_blacklists},   #41 - selected blacklist IDs separated with '|'
+         $timer->{fuzzy_tolerance},  #42 - fuzzy tolerance value for fuzzy searching
+         $timer->{use_for_fav},      #43 - use this search in favorites menu (0 no, 1 yes)
+         $timer->{unused}) = split(/:/, $_);
+        
+        #format selected fields
+        $timer->{time_start} =~ s/(\d\d)(\d\d)/\1:\2/ if($timer->{time_start});
+        $timer->{time_stop} =~ s/(\d\d)(\d\d)/\1:\2/ if($timer->{time_stop});
+        $timer->{min_duration} =~ s/(\d\d)(\d\d)/\1:\2/ if($timer->{min_duration});
+        $timer->{max_duration} =~ s/(\d\d)(\d\d)/\1:\2/ if($timer->{max_duration});
+
+        if ($timer->{has_action}) {
+            if ($timer->{action} == 0) {
+                $timer->{action_text} = gettext("record");
+            } elsif ($timer->{action} == 1) {
+                $timer->{action_text} = gettext("announce only");
+            } elsif ($timer->{action} == 2) {
+                $timer->{action_text} = gettext("switch only");
+            } else {
+                $timer->{action_text} = gettext("unknown");
+            }
+        } else {
+            $timer->{action_text} = gettext("none");
+        }
+
+        if ($timer->{channels} && $timer->{use_channel} == 1) {
+            ($timer->{channel_from}, $timer->{channel_to}) = split(/\|/, $timer->{channels}, 2);
+            $timer->{channel_to} = $timer->{channel_from} unless ($timer->{channel_to});
+            $timer->{channel_from_name} = get_name_from_uniqid($timer->{channel_from});
+            $timer->{channel_to_name} = get_name_from_uniqid($timer->{channel_to});
+            #TODO: links to channels
+        }
+
+        if ($timer->{use_days}) {
+            if ($timer->{which_days} >= 0) {
+                $timer->{sunday}    = 1 if ($timer->{which_days} == 0);
+                $timer->{monday}    = 1 if ($timer->{which_days} == 1);
+                $timer->{tuesday}   = 1 if ($timer->{which_days} == 2);
+                $timer->{wednesday} = 1 if ($timer->{which_days} == 3);
+                $timer->{thursday}  = 1 if ($timer->{which_days} == 4);
+                $timer->{friday}    = 1 if ($timer->{which_days} == 5);
+                $timer->{saturday}  = 1 if ($timer->{which_days} == 6);
+            } else {
+                my $which_days = -$timer->{which_days};
+                $timer->{sunday}    = 1 if ($which_days &  1);
+                $timer->{monday}    = 1 if ($which_days &  2);
+                $timer->{tuesday}   = 1 if ($which_days &  4);
+                $timer->{wednesday} = 1 if ($which_days &  8);
+                $timer->{thursday}  = 1 if ($which_days & 16);
+                $timer->{friday}    = 1 if ($which_days & 32);
+                $timer->{saturday}  = 1 if ($which_days & 64);
+            }
+        }
+
+        if ($timer->{pattern}) {
+            $timer->{pattern} =~ s/\|/:/g;
+            $timer->{pattern} =~ s/\!\^pipe\^\!/\|/g;
+        }
+
+        if ($timer->{directory}) {
+            $timer->{directory} =~ s/\|/:/g;
+            $timer->{directory} =~ s/\!\^pipe\^\!/\|/g;
+        }
+    return $timer;
+}
+
+sub validTime {
+    my $t = shift;
+    return unless ($t);
+    my ($h, $m) = split(/:/, $t);
+    $h = "0" . $h if (length($h) == 1);
+    if (length($h) > 2) {  #TODO: $m defined?
+        $m = substr($h, -2);
+        $h = substr($h, 0, -2);
+    }
+    return sprintf("%02d%02d", $h, $m);
+}
+
+sub epgsearch_Param2Line {
+    my $weekdays_bits = 0;
+    my $weekdays      = 0;
+    my $had_weekday   = 0;
+
+    if ($q->param("use_days")) {
+        if ($q->param("sunday")) {
+            $had_weekday++;
+            $weekdays_bits |= 1;
+            $weekdays = 0;
+        }
+        if ($q->param("monday")) {
+            $had_weekday++;
+            $weekdays_bits |= 2;
+            $weekdays = 1;
+        }
+        if ($q->param("tuesday")) {
+            $had_weekday++;
+            $weekdays_bits |= 4;
+            $weekdays = 2;
+        }
+        if ($q->param("wednesday")) {
+            $had_weekday++;
+            $weekdays_bits |= 8;
+            $weekdays = 3;
+        }
+        if ($q->param("thursday")) {
+            $had_weekday++;
+            $weekdays_bits |= 16;
+            $weekdays = 4;
+        }
+        if ($q->param("friday")) {
+            $had_weekday++;
+            $weekdays_bits |= 32;
+            $weekdays = 5;
+        }
+        if ($q->param("saturday")) {
+            $had_weekday++;
+            $weekdays_bits |= 64;
+            $weekdays = 6;
+        }
+        $weekdays_bits = - $weekdays_bits;
+    }
+
+    my $time_start = validTime($q->param("time_start"));
+    my $time_stop  = validTime($q->param("time_stop"));
+    my $min_duration = validTime($q->param("min_duration"));
+    my $max_duration = validTime($q->param("max_duration"));
+
+    my $use_channel = $q->param("use_channel");
+    my $channels;
+    if ($use_channel == 1) {
+        $channels = $q->param("channel_from") . "|" . $q->param("channel_to");
+    } elsif ($use_channel == 2) {
+        $channels = $q->param("channel_group");
+    }
+
+    my $sel_blacklists;
+    for ($q->param("sel_blacklists")) {
+        $sel_blacklists .= "|" if (defined($sel_blacklists));
+        $sel_blacklists .= $_;
+    }
+
+    my $pattern = $q->param("pattern");
+    if ($pattern) {
+        $pattern =~ s/\|/\!\^pipe\^\!/g;
+        $pattern =~ s/:/\|/g;
+    }
+
+    my $directory = $q->param("directory");
+    if ($directory) {
+        $directory =~ s/\|/\!\^pipe\^\!/g;
+        $directory =~ s/:/\|/g;
+    }
+
+    my $extepg_info;
+    for ($q->param) {
+        if (/extepg_([0-9]+)_data_text/) {
+            my $e_id = $1;
+            $extepg_info .= "|" if ($extepg_info);
+            my $data = join(", ", $q->param("extepg_" . $e_id . "_data"));
+            $data =~ s/:/\!\^colon\^\!/g;
+            $data =~ s/\|/\!\^pipe\^\!/g;
+            $extepg_info .= sprintf("%s#%s", $e_id, $data);
+            my $data_text = $q->param("extepg_" . $e_id . "_data_text");
+            if ($data_text) {
+                $extepg_info .= ", " if ($data);
+                $data_text =~ s/:/\!\^colon\^\!/g;
+                $data_text =~ s/\|/\!\^pipe\^\!/g;
+                $extepg_info .= $data_text;
+            }
+        }
+    }
+
+    my $cmd =  $pattern . ":"
+               . ($q->param("use_time") ? "1" : "0") . ":"
+               . $time_start . ":"
+               . $time_stop . ":"
+               . $use_channel . ":"
+               . $channels . ":"
+               . ($q->param("matchcase") ? "1" : "0") . ":"
+               . $q->param("mode") . ":"
+               . ($q->param("use_title") ? "1" : "0") . ":"
+               . ($q->param("use_subtitle") ? "1" : "0") . ":"
+               . ($q->param("use_descr") ? "1" : "0") . ":"
+               . ($q->param("use_duration") ? "1" : "0") . ":"
+               . $min_duration . ":"
+               . $max_duration . ":"
+               . ($q->param("has_action") ? "1" : "0") . ":"
+               . ($q->param("use_days") ? "1" : "0") . ":"
+               . ($had_weekday > 1 ? $weekdays_bits : $weekdays) . ":"
+               . ($q->param("is_series") ? "1" : "0") . ":"
+               . $directory . ":"
+               . $q->param("prio") . ":"
+               . $q->param("lft") . ":"
+               . $q->param("bstart") . ":"
+               . $q->param("bstop") . ":"
+               . ($q->param("use_vps") ? "1" : "0") . ":"
+               . $q->param("action") . ":"
+               . ($q->param("use_extepg") ? "1" : "0") . ":"
+               . $extepg_info . ":"
+               . ($q->param("avoid_repeats") ? "1" : "0") . ":"
+               . $q->param("allowed_repeats") . ":"
+               . ($q->param("comp_title") ? "1" : "0") . ":"
+               . ($q->param("comp_subtitle") ? "1" : "0") . ":"
+               . ($q->param("comp_descr") ? "1" : "0") . ":"
+               . ($q->param("comp_extepg_info") ? "1" : "0") . ":"    #TODO
+               . $q->param("repeats_in_days") . ":"
+               . $q->param("delete_after") . ":"
+               . $q->param("keep_recordings") . ":"
+               . $q->param("switch_before") . ":"
+               . $q->param("pause") . ":"
+               . $q->param("use_blacklists") . ":"
+               . $sel_blacklists . ":"
+               . $q->param("fuzzy_tolerance") . ":"
+               . ($q->param("use_for_fav") ? "1" : "0");
+
+    $cmd .= ":" . $q->param("unused") if ($q->param("unused"));
+#print("CMD: $cmd\n");
+    return $cmd;
+}
+
+sub epgsearch_save {
+    my $cmd = (defined $q->param("id") ? "EDIS " . $q->param("id")
+                                       : "NEWS 0")
+               . ":" . epgsearch_Param2Line();
+    SendCMD("plug epgsearch " . $cmd);
+    return (headerForward("$MyURL?aktion=epgsearch_list"));
+}
+
+sub epgsearch_delete {
+    my $id = $q->param("id");
+    if (defined $id) {
+        SendCMD("plug epgsearch dels $id");
+    } else {
+        for ($q->param) {
+            SendCMD("plug epgsearch dels $1") if (/xxxx_(.*)/);
+        }
+    }
+    return (headerForward("$MyURL?aktion=epgsearch_list"));
+}
+
+sub epgsearch_toggle {
+    my $id = $q->param("id");
+    if (defined $id) {
+        SendCMD(sprintf("plug epgsearch mods %s %s", $id, $q->param("active") ? "off" : "on"));
+    }
+    return (headerForward("$MyURL?aktion=epgsearch_list"));
+}
+
+sub epgsearch_getSettings {
+    for (SendCMD("plug epgsearch setp")) {
+        chomp;
+        next if (length($_) == 0);
+        $EPGSEARCH_SETTINGS{$1} = $2 if (/^([^:]*): (.*)/);
     }
 }
 
@@ -2283,7 +2933,23 @@ sub ValidConfig {
     $CONFIG{REC_MIMETYPE} = "video/x-mpegurl" if (!$CONFIG{REC_MIMETYPE});
     $CONFIG{REC_EXT}      = "m3u"             if (!$CONFIG{REC_EXT});
 
-    $FEATURES{AUTOTIMER} = $CONFIG{AT_FUNC};
+    if ($CONFIG{AT_OFFER} == 2) {
+        # User wants to use AutoTimer
+        $FEATURES{AUTOTIMER} = 1;
+    } elsif ($CONFIG{AT_OFFER} == 1) {
+        # User doesn't want AutoTimer
+        $FEATURES{AUTOTIMER} = 0;
+    } else {
+        # No decition made yet
+        if (-s $AT_FILENAME && $CONFIG{AT_FUNC}) {
+            $FEATURES{AUTOTIMER} = 1;
+            $CONFIG{AT_OFFER} = 2;
+        } else {
+            $CONFIG{AT_FUNC} = 0;
+            $FEATURES{AUTOTIMER} = 0;
+            $CONFIG{AT_OFFER} = 1;
+        }
+    }
 }
 
 sub ReadConfig {
@@ -2439,6 +3105,9 @@ sub prog_detail {
 
     my ($channel_name, $title, $subtitle, $vps, $video, $audio, $start, $stop, $text, @epgimages);
 
+    if ($q->param("channel_id")) {
+        $vdr_id = get_vdrid_from_channelid($q->param("channel_id"));
+    }
     if ($vdr_id && $epg_id) {
         for (@{ $EPG{$vdr_id} }) {
 
@@ -2518,6 +3187,10 @@ sub prog_list {
     return if (UptoDate());
     my ($vdr_id, $dummy);
     ($vdr_id, $dummy) = split("#", $q->param("vdr_id"), 2) if ($q->param("vdr_id"));
+
+    if ($q->param("channel_id")) {
+        $vdr_id = get_vdrid_from_channelid($q->param("channel_id"));
+    }
 
     my $myself = Encode_Referer($MyURL . "?" . $Query);
 
@@ -3363,6 +4036,7 @@ sub live_stream {
     } else {
         $ip = $CONFIG{VDR_HOST};
     }
+    chomp($ip);
     $data = "http://$ip:$CONFIG{ST_STREAMDEV_PORT}/$channel";
     return (header("200", $CONFIG{TV_MIMETYPE}, $data));
 }
@@ -4818,15 +5492,8 @@ sub show_help {
 # information
 #############################################################################
 sub about {
-    my $missing_features = "RENR" unless ($FEATURES{REC_RENAME});
-    unless ($FEATURES{STREAMDEV}) {
-        $missing_features .= ", " if ($missing_features);
-        $missing_features .= "streamdev-client plugin";
-    }
-    
     my $vars = { vdrversion => $VDRVERSION_HR,
-                 myversion  => $VERSION,
-                 missing_features => $missing_features
+                 myversion  => $VERSION
     };
     return showTemplate("about.html", $vars);
 }
@@ -5042,6 +5709,10 @@ sub getSupportedFeatures {
     if ($VDRVERSION >= 10331) {
         command($this, "plug");
         while ($_ = readoneline($this)) {
+            if ($_ =~ /^epgsearch v(\d+)\.(\d+)\.(\d+)/) {
+                $FEATURES{EPGSEARCH} = 1;
+                $EPGSEARCH_VERSION = ($1 * 10000 + $2 * 100 + $3);
+            }
             if ($_ =~ /^streamdev-server/) {
                 $FEATURES{STREAMDEV} = 1;
             }

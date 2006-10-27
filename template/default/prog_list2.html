@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html id="scroller">
 
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
@@ -27,7 +27,7 @@
 				<td class="col_title">
 					<h1><?% title %?></h1>
 					<?% gettext('starting at') %?>
-					<input type="text" size="5" maxlength="5" value="<?% now %?>" name="time"/>
+					<input type="text" size="5" maxlength="5" value="<?% now %?>" name="time"/>&nbsp;
 					<?% gettext('o\'clock') %?>
 				</td>
 				<td class="col_navi">
@@ -36,7 +36,7 @@
 					<select name="days" size="1" onchange="window.open(this.options[this.selectedIndex].value,'main')"> <?% FOREACH d = days %?>
 						<option value="<?% d.id %?>" <?% IF d.sel %?>selected="selected"<?% END %?>><?% d.name %?></option>
 <?% END %?>
-					</select>
+					</select>&nbsp;
 					<?% IF nextdayurl %?><a href="<?% nextdayurl %?>"><img src="bilder/pfeile_nachrechts.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachrechts_soft.png" border="0" alt="" /><?% END %?>
 <?% END %?>
 				</td>

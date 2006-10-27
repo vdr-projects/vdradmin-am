@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html id="scroller">
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
 	<title>VDRAdmin-AM - <?% gettext('Configuration') %?></title>
@@ -426,7 +426,7 @@
 						</tr>
 						<tr class="row_odd">
 							<td class="col_channels">
-								<select name="all_channels" size="8" multiple class="channels">
+								<select name="all_channels" size="8" multiple="multiple" class="channels">
 <?% FOREACH chan = ALL_CHANNELS %?>
 									<option value="<?% chan.vdr_id %?>"><?% chan.name | html %?></option>
 <?% END %?>
@@ -437,7 +437,7 @@
 								<input type="submit" class="submit" name="submit" value="&lt;&lt;&lt;&lt;&lt;" />
 							</td>
 							<td class="col_wanted_channels">
-								<select name="selected_channels" size="8" multiple class="channels">
+								<select name="selected_channels" size="8" multiple="multiple" class="channels">
 <?% FOREACH chan = SELECTED_CHANNELS %?>
 									<option value="<?% chan.vdr_id %?>"><?% chan.name | html %?></option>
 <?% END %?>

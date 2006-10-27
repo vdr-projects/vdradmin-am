@@ -15,15 +15,9 @@ function change(message, suffix) {
 	if(check) window.location.href=suffix;
 }
 
-function mdel_old(message) {
+function mdel(but, message) {
 	check=confirm(message);
-  if(check) document.FormName.submit();
-}
-
-function mdel(message) {
-	check=confirm(message);
-//  if(check) document.FormName.submit();
-  return check;
+  if(check) but.form.submit();
 }
 
 function callurl( url ) {

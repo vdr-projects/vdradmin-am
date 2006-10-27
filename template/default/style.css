@@ -1,5 +1,17 @@
+/* ugly MSIE6/7 hacks */
+/* always show vertical scroller to avoid horizontal scrolling on some pages */
+* html#scroller {
+	overflow-y: scroll;
+}
+/* avoid too small inputs/selects */
+*+html #epgsearch_new #use_extepg_settings table,
+* html #epgsearch_new #use_extepg_settings table {
+	width: 30%;
+}
+/* END OF ugly MSIE hacks */
+
 * {
-	font-family: Verdana, Arial, Geneva, Helvetica, sans-serif;
+	font-family: Bitstream Vera Sans, Verdana, Arial, Geneva, Helvetica, sans-serif;
 }
 
 #rc,
@@ -45,6 +57,7 @@ select {
 img {
 	border: 0;
 	vertical-align: middle;
+	display: inline;
 }
 /*
 .submit {
@@ -150,8 +163,8 @@ body.help .heading {
 	display: table-row;
 }
 
-.row_odd
-.row_even,
+.row_odd td,
+.row_even td,
 .heading {
 	height: 17px;
 }
@@ -192,11 +205,6 @@ body.help .heading {
 	padding-left: 3px;
 	padding-right: 3px;
 	white-space: nowrap;
-}
-
-.row_odd,
-.row_even {
-	height: 25px;
 }
 
 .col_channels {
@@ -248,6 +256,9 @@ body.help .heading {
 	padding: 0;
 	text-align: center;
 	width: 20px;
+}
+.heading .action {
+	background-color: white;
 }
 
 /* Summary */
@@ -310,6 +321,10 @@ body.help .heading {
 	padding: 2px 2px;
 }
 
+#action_record_settings,
+#action_switch_settings {
+	margin-top: 1em;
+}
 .newday {
 	height: 17px;
 	background-color: #6d96a9;
@@ -331,11 +346,15 @@ body.help .heading {
 }
 #prog_list .col_buttons,
 #rec_list .col_buttons,
+#epgsearch_list .col_buttons,
 #prog_summary2 .col_buttons {
 	width: 120px;
 	text-align: right;
 	padding-right: 3px;
 	white-space: nowrap;
+}
+#prog_summary2 table.percent td {
+	height: 8px;
 }
 #prog_summary2 table.percent {
 	height: 8px;
@@ -523,6 +542,7 @@ body.help .heading {
 	margin-top: 0.6em;
 }
 #timer_list .blackline {
+	height: 1px;
 	background-color: black;
 }
 #timer_list .color_ok {
@@ -537,7 +557,7 @@ body.help .heading {
 #timer_list .color_inactive {
 	background-color: #858585;
 }
-#timer_list #prgtable {
+#timer_list .prgtable {
 	border-left-color: #000000;
 	border-right-color: #000000;
 }
@@ -558,6 +578,29 @@ body.help .heading {
 #vdr_cmds pre {
 	margin: 0px;
 	padding: 0px;
+}
+
+#epgsearch_new #use_extepg_settings {
+	white-space: normal;
+	vertical-align: top;
+}
+#epgsearch_new #use_extepg_settings table {
+	padding: 0 5px 5px 0;
+	display: inline;
+	float: left;
+	vertical-align: top;
+	height: 100%;
+}
+#epgsearch_new #use_extepg_settings table select,
+#epgsearch_new #use_extepg_settings table input {
+	width: 100%;
+}
+#epgsearch_new #avoid_repeats_settings div {
+	white-space: normal;
+}
+#epgsearch_new #avoid_repeats_settings span {
+	float: left;
+	padding-right: 1em;
 }
 
 #content {
@@ -587,31 +630,6 @@ body.help .heading {
 }
 #config .col_label {
 	width: 50%;
-}
-.tabs td {
-	padding: 0;
-	margin: 0;
-	background-color: transparent;
-	border-bottom: 2px solid #6d96a9;
-}
-.tab_selected a {
-	color: white;
-	margin: 1px 3px;
-}
-.tab_unselected a {
-	color: black;
-	margin: 1px 3px;
-}
-.tab_selected {
-	border-right: 1px solid #6d96a9;
-	background-color: #6d96a9;
-	color: white;
-	font-weight: bold;
-}
-.tab_unselected {
-	border-right: 1px solid #6d96a9;
-	background-color: white;
-	color: black;
 }
 #about .col_label {
 	width: 20%;
@@ -754,9 +772,6 @@ select.channels {
 }
 #navigation input {
 	width: 140px;
-}
-#navigation #epgsearch_list a {
-	color: green;
 }
 
 /* message boxes */

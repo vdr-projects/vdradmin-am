@@ -1,3 +1,91 @@
+2006-10-27  amair
+
+	* HISTORY, autotimer2searchtimer.pl, make.sh, vdradmind.pl,
+	  lib/Template/Plugin/HTML.pm, lib/Template/Plugin/JavaScript.pm,
+	  po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po, po/nl.po,
+	  po/ru.po, po/vdradmin.pot, template/default/about.html,
+	  template/default/at_timer_list.html,
+	  template/default/epgsearch_list.html,
+	  template/default/epgsearch_new.html, template/default/library.js,
+	  template/default/navigation.html, template/default/rec_list.html,
+	  template/default/style.css, template/default/timer_list.html:
+
+	Added epgsearch plugin support.
+	Release v3.5.0beta.
+
+2006-10-27  amair
+
+	* vdradmind.pl:
+
+	Fixed crash if a timer's length is 0 + buffer start + buffer stop.
+
+2006-10-26  amair
+
+	* template/default/style.css, template/default/prog_list2.html:
+
+	Some layout fixes.
+
+2006-10-26  amair
+
+	* vdradmind.pl:
+
+	Remove trailing "\n" from "hostname" output.
+
+2006-10-20  amair
+
+	* template/default/error.html,
+	  template/default/default/sauerei.gif:
+
+	Removed "sauerei.gif" on error page.
+
+2006-10-20  amair
+
+	* template/default/about.html, template/default/at_timer_list.html,
+	  template/default/at_timer_new.html, template/default/config.html,
+	  template/default/help_at_timer_list.html,
+	  template/default/help_at_timer_new.html,
+	  template/default/help_config.html,
+	  template/default/help_rec_list.html,
+	  template/default/help_timer_list.html,
+	  template/default/help_timer_new.html,
+	  template/default/index.html, template/default/prog_list.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html,
+	  template/default/prog_timeline.html,
+	  template/default/rec_edit.html, template/default/rec_list.html,
+	  template/default/style.css, template/default/timer_list.html,
+	  template/default/timer_new.html, template/default/tv.html,
+	  template/default/vdr_cmds.html:
+
+	* MSIE6 fix for too wide lists having a scrollbar at the left.
+	* Fixed some (X)HTML bugs.
+
+2006-10-02  amair
+
+	* template/default/about.html:
+
+	Added Karel Borkovec to translation team (Reported by Jörg Bornkessel)
+	Sort languages by date they were added.
+
+2006-10-02  amair
+
+	* vdradmind.pl:
+
+	Log error for Net::SMTP only if module really missing (Provided by Tobias Grimm).
+
+2006-09-30  scop
+
+	* template/default/navigation.html, template/default/rec_list.html:
+
+	Small HTML cleanups/fixes.
+
+2006-09-30  scop
+
+	* po/fi.po:
+
+	Add some missing Finnish translations.
+
 2006-09-29  tag v3_4_7
 
 2006-09-29  amair

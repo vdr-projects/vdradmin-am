@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html id="scroller">
 
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>"/>
@@ -138,7 +138,7 @@
 							<?% IF at.stop %?><?% at.stop %?><?% ELSE %?>-<?% END %?>
 						</div>
 					</td>
-					<td class="col_name <?% IF at.sortbypattern %?>selected<?% END %?>" <?% IF config.AT_TOOLTIP %?>onMouseOver="tip('VDR-<?% at.id %?>'); return true;" onMouseOut="untip(); return true;"<?% END %?>>
+					<td class="col_name <?% IF at.sortbypattern %?>selected<?% END %?>" <?% IF config.AT_TOOLTIP %?>onmouseover="tip('VDR-<?% at.id %?>'); return true;" onmouseout="untip(); return true;"<?% END %?>>
 						<div>
 							<a href="<?% at.modurl %?>" title="<?% gettext('Edit') %?>"><?% at.pattern %?></a>
 						</div>
@@ -168,7 +168,7 @@
 						<input type="submit" class="submit" name="at_force" value="<?% gettext('Force Update') %?>" />
 					</td>
 					<td align="right">
-						<input type="submit" class="submit" name="at_delete" value="<?% gettext('Delete Selected AutoTimers') %?>" onclick="return mdel_old('<?% gettext('Delete all selected timers?') %?>');" />
+						<input type="submit" class="submit" name="at_delete" value="<?% gettext('Delete Selected AutoTimers') %?>" onclick="return mdel(this, '<?% gettext('Delete all selected timers?') %?>');" />
 					</td>
 				</tr>
 			</table>

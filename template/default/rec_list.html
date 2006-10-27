@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html id="scroller">
 
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
@@ -93,15 +93,9 @@
 					</td>
 					<td class="col_time <?% IF rec.sortbytime %?>selected<?% END %?>">
 						<span class="time"><?% rec.time %?></span>
-						<span class="new">
-							<?% IF rec.isfolder %?>
-								<?% gettext('New') %?>
-							<?% ELSE %?>
-								<?% IF rec.new %?>
-									<?% gettext('New') %?>
-								<?% END %?>
-							<?% END %?>
-						</span>
+						<?% IF rec.isfolder || rec.new %?>
+						<span class="new"><?% gettext('New') %?></span>
+						<?% END %?>
 					</td>
 					<td class="col_name <?% IF rec.sortbyname %?>selected<?% END %?>">
 						<?% IF rec.isfolder %?>
@@ -151,8 +145,9 @@
 					</td>
 	<?% END %?>
 					<td align="right">
-						<input type="submit" class="submit" name="rec_delete" value="<?% gettext('Delete Selected Recordings') %?>" onclick="return mdel('<?% gettext('Delete all selected recordings?') %?>');" />
+						<input type="submit" class="submit" name="rec_delete" value="<?% gettext('Delete Selected Recordings') %?>" onclick="return mdel(this, '<?% gettext('Delete all selected recordings?') %?>');" />
 					</td>
+				</tr>
 			</table>
 			<input type="hidden" name="aktion" value="rec_delete" />
 		</form>

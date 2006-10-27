@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LANGS="cs de es fr fi nl ru"
-DIST_FILES="ChangeLog COPYING CREDITS FAQ HISTORY INSTALL README README.translators REQUIREMENTS contrib convert.pl install.sh lib locale make.sh template uninstall.sh vdradmind.pl vdradmind.pl.1"
+DIST_FILES="autotimer2searchtimer.pl ChangeLog COPYING CREDITS FAQ HISTORY INSTALL README README.translators REQUIREMENTS contrib convert.pl install.sh lib locale make.sh template uninstall.sh vdradmind.pl vdradmind.pl.1"
 INSTALL_SH=./install.sh
 CVS2CL="./cvs2cl.pl"	# get it at http://www.red-bean.com/cvs2cl/
 TMPDIR=/tmp

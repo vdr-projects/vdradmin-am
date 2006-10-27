@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html id="scroller">
 
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
@@ -13,7 +13,7 @@
 		<script type="text/javascript" language="JavaScript1.2" src="infobox.js"></script>
 	<?% END %?>
 	<style type="text/css">
-		#prgtable { border-left-width:1px; border-left-style:solid; border-right-width:1px; border-right-style:solid; }
+		.prgtable { border-left-width:1px; border-left-style:solid; border-right-width:1px; border-right-style:solid; }
 	</style>
 </head>
 
@@ -147,12 +147,12 @@
 						END;
 						IF ende - pos < 2;
 	%?>
-								<td class="<?% td_class %?>"><span <?% IF config.TM_TT_TIMELINE %?>onMouseOver="tip('VDR-<?% sendung.id %?>'); return true;" onMouseOut="untip(); return true;"<?% END %?>><img src="bilder/spacer.gif" width="<?% ende - pos %?>" height="20" border="0" alt="" /></span></td>
+								<td class="<?% td_class %?>"><span <?% IF config.TM_TT_TIMELINE %?>onmouseover="tip('VDR-<?% sendung.id %?>'); return true;" onmouseout="untip(); return true;"<?% END %?>><img src="bilder/spacer.gif" width="<?% ende - pos %?>" height="20" border="0" alt="" /></span></td>
 
 	<?%
 						ELSE;
 	%?>
-								<td class="<?% td_class %?>" id="prgtable"><span <?% IF config.TM_TT_TIMELINE %?>onMouseOver="tip('VDR-<?% sendung.id %?>'); return true;" onMouseOut="untip(); return true;"<?% END %?>><img src="bilder/spacer.gif" width="<?% ende - pos - 2 %?>" height="20" border="0" alt="" /></span></td>
+								<td class="<?% td_class %?> prgtable"><span <?% IF config.TM_TT_TIMELINE %?>onmouseover="tip('VDR-<?% sendung.id %?>'); return true;" onmouseout="untip(); return true;"<?% END %?>><img src="bilder/spacer.gif" width="<?% ende - pos - 2 %?>" height="20" border="0" alt="" /></span></td>
 
 	<?%
 						END;
@@ -311,7 +311,7 @@
 						<div><?% timer.stop %?></div>
 					</td>
 					<td class="col_name <?% IF timer.sortbyname %?>selected<?% END %?>">
-						<div <?% IF config.TM_TT_LIST %?>onMouseOver="tip('VDR-<?% timer.id %?>'); return true;" onMouseOut="untip(); return true;"<?% END %?>>
+						<div <?% IF config.TM_TT_LIST %?>onmouseover="tip('VDR-<?% timer.id %?>'); return true;" onmouseout="untip(); return true;"<?% END %?>>
 							<?% IF timer.recording %?><img align="middle" src="bilder/rec.gif" border="0" alt="" />&nbsp;<?% END %?>
 							<?% IF timer.infurl %?>
 								<a href="javascript:popup('<?% timer.infurl %?>');"><?% timer.title %?></a>
@@ -341,7 +341,7 @@
 						&nbsp;<?% gettext('selected timers') %?>
 					</td>
 					<td align="right">
-						<input type="submit" class="submit" name="timer_delete" value="<?% gettext('Delete Selected Timers') %?>" onclick="return mdel('<?% gettext('Delete all selected timers?') %?>');" />
+						<input type="submit" class="submit" name="timer_delete" value="<?% gettext('Delete Selected Timers') %?>" onclick="return mdel(this, '<?% gettext('Delete all selected timers?') %?>');" />
 					</td>
 				</tr>
 			</table>

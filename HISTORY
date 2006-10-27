@@ -4,6 +4,12 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-10-27: 3.5.0beta
+- Added: script to convert existing AutoTimers to epgsearch (autotimer2searchtimer.pl).
+- Added: Hack for MSIE to always show vertical scroller to prevent horizontal scroller (Submitted by Udo Richter).
+- Added: Support for epgsearch plugin; AutoTimer now considered deprecated and unsupported.
+- Minor bugfixes
+
 2006-09-29: 3.4.7
 - Autosave now takes care of the number of lines to show in commands menu (Requested by Ronny Kornexl).
 
