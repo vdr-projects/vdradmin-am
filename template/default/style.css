@@ -4,7 +4,9 @@
 	overflow-y: scroll;
 }
 /* avoid too small inputs/selects */
-*+html #epgsearch_new #use_extepg_settings table,
+* + html #epgsearch_new #use_extepg_settings table {
+	width: 30%;
+}
 * html #epgsearch_new #use_extepg_settings table {
 	width: 30%;
 }
@@ -541,9 +543,8 @@ body.help .heading {
 #timer_list .list {
 	margin-top: 0.6em;
 }
-#timer_list .blackline {
-	height: 1px;
-	background-color: black;
+#timer_list .timers {
+	border-top: 1px solid black;
 }
 #timer_list .color_ok {
 	background-color: #00a317;

@@ -56,14 +56,18 @@
 		</table>
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
-			<tr class="row_odd">
+			<?% tr_class = "row_odd" %?>
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Timer Active:') %?></h5></td>
 				<td class="col_value">
 					<input type="radio" name="active" value="1" id="active_yes" <?% IF active %?>checked="checked"<?% END %?> /><label for="active_yes"><?% gettext('Yes') %?></label>
 					<input type="radio" name="active" value="0" id="active_no" <?% UNLESS active %?>checked="checked"<?% END %?> /><label for="active_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
-			<tr class="row_even">
+<?% IF features.AUTOTIMER %?>
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('AutoTimer Checking:') %?></h5></td>
 				<td class="col_value">
 					<input type="hidden" name="event_id" value="<?% event_id %?>"/>
@@ -74,7 +78,9 @@
 					<input type="radio" name="autotimer" value="0" id="event_off" <?% IF autotimer == 0 %?>checked="checked"<?% END %?> /><label for="event_off"><?% gettext('off') %?></label>
 				</td>
 			</tr>
-			<tr class="row_odd">
+<?% END %?>
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Channel:') %?></h5></td>
 				<td class="col_value">
 					<select name="channel" class="submit">
@@ -84,7 +90,8 @@
 					</select>
 				</td>
 			</tr>
-			<tr class="row_even">
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td valign="top" class="col_label"><h5><?% gettext('Day Of Recording:') %?></h5></td>
 				<td class="col_value">
 					<input type="text" name="dor" value="<?% dor %?>" size="20" />
@@ -98,7 +105,8 @@
 					<input onclick="cTimer(7)" type="checkbox" name="D6" value="1" id="wday_sun" /><label for="wday_sun"><?% gettext('Sunday') %?></label>
 				</td>
 			</tr>
-			<tr class="row_odd">
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Start Time:') %?></h5></td>
 				<td class="col_value">
 					<input type="text" name="starth" value="<?% starth %?>" size="2" maxlength="2" />
@@ -110,7 +118,8 @@
 					<?% END %?>
 				</td>
 			</tr>
-			<tr class="row_even">
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('End Time:') %?></h5></td>
 				<td class="col_value">
 					<input type="text" name="stoph" value="<?% stoph %?>" size="2" maxlength="2" />
@@ -122,28 +131,34 @@
 					<?% END %?>
 				</td>
 			</tr>
-			<tr class="row_odd">
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Use VPS:') %?></h5></td>
 				<td class="col_value"><input type="checkbox" name="vps" value="1" <?% IF vps %?>checked="checked"<?% END %?> /></td>
 			</tr>
-			<tr class="row_even">
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Priority:') %?></h5></td>
 				<td class="col_value"><input type="text" name="prio" value="<?% prio %?>" size="2" maxlength="2" /></td>
 			</tr>
-			<tr class="row_odd">
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Lifetime:') %?></h5></td>
 				<td class="col_value"><input type="text" name="lft" value="<?% lft %?>" size="2" maxlength="2" /></td>
 			</tr>
-			<tr class="row_even">
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Title of Recording:') %?></h5></td>
 				<td class="col_value"><input type="text" name="title" value="<?% title %?>" size="80" /></td>
 			</tr>
-			<tr class="row_odd">
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label" valign="top"><h5><?% gettext('Summary:') %?></h5><h6>(<?% gettext('readonly') %?>)</h6></td>
 				<td class="col_value"><textarea name="summary" rows="6" cols="80" readonly="readonly"><?% summary %?></textarea></td>
 			</tr>
 <?% IF pattern %?>
-			<tr class="row_even">
+			<tr class="<?% tr_class %?>">
+				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Timer has been set by AutoTimer pattern:') %?></h5></td>
 				<td class="col_value"><?% pattern %?></td>
 			</tr>

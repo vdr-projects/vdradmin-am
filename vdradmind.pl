@@ -28,7 +28,7 @@
 
 require 5.004;
 
-my $VERSION = "3.5.0beta";
+my $VERSION = "3.5.0rc";
 my $BASENAME;
 my $EXENAME;
 
@@ -453,7 +453,7 @@ my @GUEST_USER = qw(prog_detail prog_list prog_list2 prog_timeline timer_list at
   prog_summary rec_list rec_detail show_top toolbar show_help about);
 my @TRUSTED_USER = (
     @GUEST_USER, qw(at_timer_edit at_timer_new at_timer_save at_timer_test at_timer_delete
-      epgsearch_edit epgsearch_save epgsearch_delete epgsearch_toggle timer_new_form timer_add timer_delete timer_toggle rec_delete rec_rename rec_edit
+      epgsearch_upds epgsearch_edit epgsearch_save epgsearch_delete epgsearch_toggle timer_new_form timer_add timer_delete timer_toggle rec_delete rec_rename rec_edit
       config prog_switch rc_show rc_hitk grab_picture at_timer_toggle tv_show tv_switch
       live_stream rec_stream rec_play rec_cut force_update vdr_cmds)
 );
@@ -547,6 +547,7 @@ while (true) {
             $real_aktion = "epgsearch_list" if ($q->param("execute"));
             $real_aktion = "epgsearch_list" if ($q->param("favorites"));
             $real_aktion = "epgsearch_list" if ($q->param("exit"));
+            $real_aktion = "epgsearch_upds" if ($q->param("upds"));
         }
 
         my @ALLOWED_FUNCTIONS;
@@ -2510,6 +2511,11 @@ sub epgsearch_getSettings {
     }
 }
 
+sub epgsearch_upds {
+    SendCMD("plug epgsearch upds osd");
+    return (headerForward("$MyURL?aktion=epgsearch_list"));
+}
+
 #############################################################################
 # regulary timers
 #############################################################################
@@ -2940,10 +2946,10 @@ sub ValidConfig {
         # User doesn't want AutoTimer
         $FEATURES{AUTOTIMER} = 0;
     } else {
-        # No decition made yet
+        # No decision made yet
         if (-s $AT_FILENAME && $CONFIG{AT_FUNC}) {
             $FEATURES{AUTOTIMER} = 1;
-            $CONFIG{AT_OFFER} = 2;
+            $CONFIG{AT_OFFER} = 0;
         } else {
             $CONFIG{AT_FUNC} = 0;
             $FEATURES{AUTOTIMER} = 0;
@@ -5259,9 +5265,6 @@ sub rec_cut {
 # configuration
 #############################################################################
 sub config {
-    my $active_tab = $q->param("new_tab");
-    $active_tab = 0 unless($active_tab);
-
     sub ApplyConfig {
         my $old_lang       = $CONFIG{LANG};
         my $old_epgprune   = $CONFIG{EPG_PRUNE};
@@ -5402,7 +5405,6 @@ sub config {
                  LOGINPAGES        => \@loginpages,
                  SKINLIST          => \@skinlist,
                  MY_LOCALES        => \@my_locales,
-                 active_tab        => $active_tab,
                  url               => $MyURL,
                  help_url          => HelpURL("config")
     };

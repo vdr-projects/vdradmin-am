@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-27 12:17+0200\n"
+"POT-Creation-Date: 2006-10-31 11:26+0100\n"
 "PO-Revision-Date: 2006-09-23 13:14+0200\n"
 "Last-Translator: Karel Borkovec <her-ur@her-ur.org>\n"
 "Language-Team:  <cs@li.org>\n"
@@ -177,7 +177,7 @@ msgstr ""
 
 #: ../template/default/at_timer_list.html:6
 #: ../template/default/at_timer_list.html:35
-#: ../template/default/config.html:189
+#: ../template/default/config.html:180
 #: ../template/default/help_at_timer_list.html:6
 #: ../template/default/help_at_timer_list.html:21
 #: ../template/default/help_config.html:30
@@ -187,28 +187,28 @@ msgid "AutoTimer"
 msgstr "Auto-Èasovaè"
 
 #: ../template/default/at_timer_list.html:24
-#: ../template/default/config.html:203 ../template/default/config.html:261
+#: ../template/default/config.html:194 ../template/default/config.html:253
 #: ../template/default/help_at_timer_new.html:50
 #: ../template/default/help_config.html:98
 #: ../template/default/help_config.html:122
 #: ../template/default/help_timer_new.html:53
 #: ../template/default/timer_list.html:27
-#: ../template/default/timer_new.html:130
+#: ../template/default/timer_new.html:141
 #: ../template/default/epgsearch_new.html:502
-#: ../template/default/at_timer_new.html:120
+#: ../template/default/at_timer_new.html:132
 msgid "Priority:"
 msgstr "Priorita:"
 
 #: ../template/default/at_timer_list.html:24
-#: ../template/default/config.html:207 ../template/default/config.html:265
+#: ../template/default/config.html:198 ../template/default/config.html:257
 #: ../template/default/help_at_timer_new.html:52
 #: ../template/default/help_config.html:100
 #: ../template/default/help_config.html:124
 #: ../template/default/help_timer_new.html:55
 #: ../template/default/timer_list.html:27
-#: ../template/default/timer_new.html:134
+#: ../template/default/timer_new.html:146
 #: ../template/default/epgsearch_new.html:508
-#: ../template/default/at_timer_new.html:126
+#: ../template/default/at_timer_new.html:139
 msgid "Lifetime:"
 msgstr ""
 
@@ -217,7 +217,7 @@ msgid "New AutoTimer"
 msgstr "Nové èasování"
 
 #: ../template/default/at_timer_list.html:43
-#: ../template/default/config.html:32 ../template/default/navigation.html:69
+#: ../template/default/config.html:22 ../template/default/navigation.html:69
 #: ../template/default/rec_list.html:26 ../template/default/timer_list.html:50
 #: ../template/default/timer_new.html:52 ../template/default/vdr_cmds.html:20
 #: ../template/default/epgsearch_new.html:155
@@ -227,13 +227,13 @@ msgid "Help"
 msgstr "Nápovìda"
 
 #: ../template/default/at_timer_list.html:57
-#: ../template/default/timer_list.html:205
+#: ../template/default/timer_list.html:193
 #: ../template/default/epgsearch_list.html:43
 msgid "Active"
 msgstr "Aktivovat"
 
 #: ../template/default/at_timer_list.html:68
-#: ../template/default/timer_list.html:216
+#: ../template/default/timer_list.html:204
 #: ../template/default/epgsearch_list.html:65
 #: ../template/default/epgsearch_list.html:67
 #: ../template/default/epgsearch_list.html:214
@@ -241,87 +241,87 @@ msgid "Channel"
 msgstr "Kanál"
 
 #: ../template/default/at_timer_list.html:79
-#: ../template/default/timer_list.html:238
+#: ../template/default/timer_list.html:226
 #: ../template/default/epgsearch_list.html:81
 msgid "Start"
 msgstr "Start"
 
 #: ../template/default/at_timer_list.html:90
-#: ../template/default/timer_list.html:249
+#: ../template/default/timer_list.html:237
 #: ../template/default/epgsearch_list.html:95
 msgid "Stop"
 msgstr "Stop"
 
 #: ../template/default/at_timer_list.html:101
 #: ../template/default/rec_list.html:75
-#: ../template/default/timer_list.html:260
+#: ../template/default/timer_list.html:248
 msgid "Name"
 msgstr "Jméno"
 
 #: ../template/default/at_timer_list.html:112
 #: ../template/default/rec_list.html:85
-#: ../template/default/timer_list.html:271
+#: ../template/default/timer_list.html:259
 #: ../template/default/epgsearch_list.html:117
 msgid "Select all/none"
 msgstr "Vybrat v¹e/Nic"
 
 #: ../template/default/at_timer_list.html:120
-#: ../template/default/config.html:109 ../template/default/config.html:152
-#: ../template/default/config.html:181 ../template/default/config.html:194
-#: ../template/default/config.html:223 ../template/default/config.html:250
-#: ../template/default/config.html:279 ../template/default/config.html:286
-#: ../template/default/config.html:293 ../template/default/config.html:307
-#: ../template/default/config.html:318 ../template/default/config.html:364
-#: ../template/default/config.html:375 ../template/default/config.html:388
-#: ../template/default/config.html:395 ../template/default/config.html:402
-#: ../template/default/config.html:409 ../template/default/config.html:416
-#: ../template/default/config.html:423 ../template/default/timer_list.html:294
-#: ../template/default/timer_new.html:62
-#: ../template/default/at_timer_new.html:35
-#: ../template/default/at_timer_new.html:39
-#: ../template/default/at_timer_new.html:103
-#: ../template/default/at_timer_new.html:140
+#: ../template/default/config.html:99 ../template/default/config.html:142
+#: ../template/default/config.html:171 ../template/default/config.html:185
+#: ../template/default/config.html:214 ../template/default/config.html:241
+#: ../template/default/config.html:271 ../template/default/config.html:278
+#: ../template/default/config.html:285 ../template/default/config.html:299
+#: ../template/default/config.html:310 ../template/default/config.html:356
+#: ../template/default/config.html:367 ../template/default/config.html:380
+#: ../template/default/config.html:387 ../template/default/config.html:394
+#: ../template/default/config.html:401 ../template/default/config.html:408
+#: ../template/default/config.html:415 ../template/default/timer_list.html:282
+#: ../template/default/timer_new.html:64
+#: ../template/default/at_timer_new.html:37
+#: ../template/default/at_timer_new.html:41
+#: ../template/default/at_timer_new.html:112
+#: ../template/default/at_timer_new.html:155
 #: ../template/default/epgsearch_list.html:125
 msgid "Yes"
 msgstr "Ano"
 
 #: ../template/default/at_timer_list.html:122
-#: ../template/default/config.html:110 ../template/default/config.html:153
-#: ../template/default/config.html:182 ../template/default/config.html:195
-#: ../template/default/config.html:224 ../template/default/config.html:251
-#: ../template/default/config.html:280 ../template/default/config.html:287
-#: ../template/default/config.html:294 ../template/default/config.html:308
-#: ../template/default/config.html:319 ../template/default/config.html:365
-#: ../template/default/config.html:376 ../template/default/config.html:389
-#: ../template/default/config.html:396 ../template/default/config.html:403
-#: ../template/default/config.html:410 ../template/default/config.html:417
-#: ../template/default/config.html:424 ../template/default/timer_list.html:295
-#: ../template/default/timer_new.html:63
-#: ../template/default/at_timer_new.html:36
-#: ../template/default/at_timer_new.html:40
-#: ../template/default/at_timer_new.html:104
-#: ../template/default/at_timer_new.html:141
+#: ../template/default/config.html:100 ../template/default/config.html:143
+#: ../template/default/config.html:172 ../template/default/config.html:186
+#: ../template/default/config.html:215 ../template/default/config.html:242
+#: ../template/default/config.html:272 ../template/default/config.html:279
+#: ../template/default/config.html:286 ../template/default/config.html:300
+#: ../template/default/config.html:311 ../template/default/config.html:357
+#: ../template/default/config.html:368 ../template/default/config.html:381
+#: ../template/default/config.html:388 ../template/default/config.html:395
+#: ../template/default/config.html:402 ../template/default/config.html:409
+#: ../template/default/config.html:416 ../template/default/timer_list.html:283
+#: ../template/default/timer_new.html:65
+#: ../template/default/at_timer_new.html:38
+#: ../template/default/at_timer_new.html:42
+#: ../template/default/at_timer_new.html:113
+#: ../template/default/at_timer_new.html:156
 #: ../template/default/epgsearch_list.html:127
 msgid "No"
 msgstr "Ne"
 
 #: ../template/default/at_timer_list.html:143
 #: ../template/default/at_timer_list.html:148
-#: ../template/default/timer_list.html:324
+#: ../template/default/timer_list.html:312
 #: ../template/default/epgsearch_list.html:158
 #: ../template/default/epgsearch_list.html:166
 msgid "Edit"
 msgstr "Upravit"
 
 #: ../template/default/at_timer_list.html:153
-#: ../template/default/timer_list.html:327
+#: ../template/default/timer_list.html:315
 #: ../template/default/epgsearch_list.html:169
 msgid "Delete timer?"
 msgstr "Smazat èasovaè?"
 
 #: ../template/default/at_timer_list.html:153
 #: ../template/default/rec_list.html:118
-#: ../template/default/timer_list.html:327
+#: ../template/default/timer_list.html:315
 #: ../template/default/epgsearch_list.html:169
 msgid "Delete"
 msgstr "Smazat"
@@ -335,7 +335,7 @@ msgid "Delete Selected AutoTimers"
 msgstr "Smazat vybraný AutoÈasovaè?"
 
 #: ../template/default/at_timer_list.html:171
-#: ../template/default/timer_list.html:344
+#: ../template/default/timer_list.html:332
 msgid "Delete all selected timers?"
 msgstr "Vymazat v¹echny vybrané èasovaèe?"
 
@@ -344,183 +344,183 @@ msgstr "Vymazat v¹echny vybrané èasovaèe?"
 msgid "No AutoTimers defined!"
 msgstr "Nové èasování"
 
-#: ../template/default/config.html:5 ../template/default/config.html:28
+#: ../template/default/config.html:5 ../template/default/config.html:18
 #: ../template/default/help_config.html:9
 #: ../template/default/help_config.html:24
 #: ../template/default/navigation.html:66
 msgid "Configuration"
 msgstr "Nastavení"
 
-#: ../template/default/config.html:40 ../template/default/help_config.html:30
+#: ../template/default/config.html:30 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:32
 msgid "General Settings"
 msgstr "Obecné nastavení"
 
-#: ../template/default/config.html:46
+#: ../template/default/config.html:36
 msgid "Template:"
 msgstr "©ablona:"
 
-#: ../template/default/config.html:59 ../template/default/help_config.html:34
+#: ../template/default/config.html:49 ../template/default/help_config.html:34
 msgid "Skin:"
 msgstr "Skin:"
 
-#: ../template/default/config.html:71 ../template/default/help_config.html:36
+#: ../template/default/config.html:61 ../template/default/help_config.html:36
 msgid "Login Page:"
 msgstr "Úvodní strana:"
 
-#: ../template/default/config.html:82 ../template/default/help_config.html:38
+#: ../template/default/config.html:72 ../template/default/help_config.html:38
 msgid "Number of channels to use:"
 msgstr "Poèet kanálù k pou¾ití:"
 
-#: ../template/default/config.html:87 ../template/default/help_config.html:40
+#: ../template/default/config.html:77 ../template/default/help_config.html:40
 msgid "Local net (no login required):"
 msgstr "Lokální sí» (login není vy¾adován):"
 
-#: ../template/default/config.html:92 ../template/default/help_config.html:42
+#: ../template/default/config.html:82 ../template/default/help_config.html:42
 msgid "Language:"
 msgstr "Jazyk:"
 
-#: ../template/default/config.html:107 ../template/default/help_config.html:44
+#: ../template/default/config.html:97 ../template/default/help_config.html:44
 msgid "Save settings on exit:"
 msgstr "Ulo¾it nastavení pøi vypnutí:"
 
-#: ../template/default/config.html:117 ../template/default/help_config.html:30
+#: ../template/default/config.html:107 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:50
 msgid "VDR"
 msgstr "VDR"
 
-#: ../template/default/config.html:120 ../template/default/help_config.html:52
+#: ../template/default/config.html:110 ../template/default/help_config.html:52
 msgid "Number of DVB cards:"
 msgstr "Poèet DVB karet:"
 
-#: ../template/default/config.html:124 ../template/default/help_config.html:54
+#: ../template/default/config.html:114 ../template/default/help_config.html:54
 msgid "Path to recordings:"
 msgstr "Slo¾ka s nahrávkami:"
 
-#: ../template/default/config.html:128 ../template/default/help_config.html:56
+#: ../template/default/config.html:118 ../template/default/help_config.html:56
 msgid "Path to configuration files:"
 msgstr "Slo¾ka s konfiguraèními soubory:"
 
-#: ../template/default/config.html:132 ../template/default/help_config.html:58
+#: ../template/default/config.html:122 ../template/default/help_config.html:58
 msgid "Path to EPG images:"
 msgstr "Cesta k EPG souborùm:"
 
-#: ../template/default/config.html:139 ../template/default/help_config.html:30
+#: ../template/default/config.html:129 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:64
 msgid "Identification"
 msgstr "Identifikace"
 
-#: ../template/default/config.html:142 ../template/default/help_config.html:66
+#: ../template/default/config.html:132 ../template/default/help_config.html:66
 msgid "Username:"
 msgstr "U¾iv. jméno:"
 
-#: ../template/default/config.html:146 ../template/default/help_config.html:68
+#: ../template/default/config.html:136 ../template/default/help_config.html:68
 msgid "Password:"
 msgstr "Heslo:"
 
-#: ../template/default/config.html:150 ../template/default/help_config.html:70
+#: ../template/default/config.html:140 ../template/default/help_config.html:70
 msgid "Guest Account:"
 msgstr "Guest úèet:"
 
-#: ../template/default/config.html:157 ../template/default/help_config.html:72
+#: ../template/default/config.html:147 ../template/default/help_config.html:72
 msgid "Guest Username:"
 msgstr "Guest u¾iv. jméno:"
 
-#: ../template/default/config.html:161 ../template/default/help_config.html:74
+#: ../template/default/config.html:151 ../template/default/help_config.html:74
 msgid "Guest Password:"
 msgstr "Guest heslo:"
 
-#: ../template/default/config.html:168 ../template/default/help_config.html:30
+#: ../template/default/config.html:158 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:80
 #: ../template/default/navigation.html:35
-#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:5318
+#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:5315
 msgid "Timeline"
 msgstr "Èasová pøímka"
 
-#: ../template/default/config.html:171 ../template/default/help_config.html:82
+#: ../template/default/config.html:161 ../template/default/help_config.html:82
 msgid "Hours:"
 msgstr "Hodiny:"
 
-#: ../template/default/config.html:175 ../template/default/help_config.html:84
+#: ../template/default/config.html:165 ../template/default/help_config.html:84
 msgid "Times:"
 msgstr "Èasy:"
 
-#: ../template/default/config.html:176
+#: ../template/default/config.html:166
 msgid "Also used for other EPG views!"
 msgstr "Pou¾ít pro ostatní EPG náhledy!"
 
-#: ../template/default/config.html:179 ../template/default/config.html:248
+#: ../template/default/config.html:169 ../template/default/config.html:239
 #: ../template/default/help_config.html:86
 #: ../template/default/help_config.html:114
 msgid "Tooltips:"
 msgstr "Tipy:"
 
-#: ../template/default/config.html:192 ../template/default/help_config.html:94
+#: ../template/default/config.html:183 ../template/default/help_config.html:94
 msgid "Active:"
 msgstr "Aktivní:"
 
-#: ../template/default/config.html:199 ../template/default/help_config.html:96
+#: ../template/default/config.html:190 ../template/default/help_config.html:96
 msgid "Timeout:"
 msgstr ""
 
-#: ../template/default/config.html:200 ../template/default/config.html:270
-#: ../template/default/config.html:274 ../template/default/timer_new.html:109
-#: ../template/default/timer_new.html:121
+#: ../template/default/config.html:191 ../template/default/config.html:262
+#: ../template/default/config.html:266 ../template/default/timer_new.html:117
+#: ../template/default/timer_new.html:130
 #: ../template/default/epgsearch_new.html:516
 #: ../template/default/epgsearch_new.html:522
 #: ../template/default/epgsearch_new.html:542
-#: ../template/default/at_timer_new.html:110
-#: ../template/default/at_timer_new.html:116
+#: ../template/default/at_timer_new.html:120
+#: ../template/default/at_timer_new.html:127
 msgid "minutes"
 msgstr "minuty"
 
-#: ../template/default/config.html:212 ../template/default/config.html:269
+#: ../template/default/config.html:203 ../template/default/config.html:261
 #: ../template/default/help_at_timer_new.html:46
 #: ../template/default/help_config.html:126
 #: ../template/default/epgsearch_new.html:514
-#: ../template/default/at_timer_new.html:108
+#: ../template/default/at_timer_new.html:118
 msgid "Time Margin at Start:"
 msgstr ""
 
-#: ../template/default/config.html:216 ../template/default/config.html:273
+#: ../template/default/config.html:207 ../template/default/config.html:265
 #: ../template/default/help_at_timer_new.html:48
 #: ../template/default/help_config.html:128
 #: ../template/default/epgsearch_new.html:520
-#: ../template/default/at_timer_new.html:114
+#: ../template/default/at_timer_new.html:125
 msgid "Time Margin at Stop:"
 msgstr ""
 
-#: ../template/default/config.html:221
+#: ../template/default/config.html:212
 #: ../template/default/help_config.html:102
 msgid "Send email after programming timer:"
 msgstr "Poslat email po nastavení èasovaèe:"
 
-#: ../template/default/config.html:228
+#: ../template/default/config.html:219
 #: ../template/default/help_config.html:104
 msgid "Send email as:"
 msgstr "Odesílatel emailu:"
 
-#: ../template/default/config.html:232
+#: ../template/default/config.html:223
 #: ../template/default/help_config.html:106
 msgid "Send email to:"
 msgstr "Komu:"
 
-#: ../template/default/config.html:236
+#: ../template/default/config.html:227
 #: ../template/default/help_config.html:108
 msgid "Mail server:"
 msgstr "Po¹tovní server:"
 
-#: ../template/default/config.html:240
+#: ../template/default/config.html:231
 #: ../template/default/help_config.html:110
 msgid "SMTPAuth user:"
 msgstr "SMTPAuth u¾ivatel:"
 
-#: ../template/default/config.html:244
+#: ../template/default/config.html:235
 #: ../template/default/help_config.html:112
 msgid "SMTPAuth password:"
 msgstr "SMTPAuth heslo:"
 
-#: ../template/default/config.html:258 ../template/default/help_config.html:30
+#: ../template/default/config.html:250 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:120
 #: ../template/default/help_timer_list.html:6
 #: ../template/default/help_timer_list.html:21
@@ -530,126 +530,126 @@ msgstr "SMTPAuth heslo:"
 msgid "Timer"
 msgstr "Èasovaè"
 
-#: ../template/default/config.html:277
+#: ../template/default/config.html:269
 #: ../template/default/help_config.html:130
 msgid "Tooltips in timeline:"
 msgstr "Tipy v èasové pøímce:"
 
-#: ../template/default/config.html:284
+#: ../template/default/config.html:276
 #: ../template/default/help_config.html:132
 msgid "Tooltips in list:"
 msgstr "Tipy v seznamu:"
 
-#: ../template/default/config.html:291
+#: ../template/default/config.html:283
 #: ../template/default/help_config.html:134
 msgid "Add summary to new timers:"
 msgstr "Pøidat souhrn k novým èasovaèùm:"
 
-#: ../template/default/config.html:302 ../template/default/help_config.html:30
+#: ../template/default/config.html:294 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:140
 msgid "Streaming"
 msgstr "Streamování"
 
-#: ../template/default/config.html:305
+#: ../template/default/config.html:297
 #: ../template/default/help_config.html:142
 msgid "Live Streaming:"
 msgstr "Live Streamování:"
 
-#: ../template/default/config.html:312
+#: ../template/default/config.html:304
 #: ../template/default/help_config.html:144
 msgid "HTTP Port of Streamdev (also possible 3000/ts):"
 msgstr "HTTP Port pro Streamdev (mo¾no 3000/ts):"
 
-#: ../template/default/config.html:316
+#: ../template/default/config.html:308
 #: ../template/default/help_config.html:146
 msgid "Recordings Streaming:"
 msgstr "Nahrávání streamu:"
 
-#: ../template/default/config.html:323
+#: ../template/default/config.html:315
 #: ../template/default/help_config.html:148
 msgid "Path to VDR Recordings on your workstation:"
 msgstr "Cesta ke slo¾ce s VDR nahrávkami na Va¹em PC:"
 
-#: ../template/default/config.html:327
+#: ../template/default/config.html:319
 #: ../template/default/help_config.html:150
 msgid "MIME type for live streaming:"
 msgstr "MIME typ pro live streamování:"
 
-#: ../template/default/config.html:331
+#: ../template/default/config.html:323
 #: ../template/default/help_config.html:152
 msgid "Suffix for live streaming:"
 msgstr "Pøípona pro live streamování:"
 
-#: ../template/default/config.html:335
+#: ../template/default/config.html:327
 #: ../template/default/help_config.html:154
 msgid "MIME type for recordings streaming:"
 msgstr "MIME typ pro nahrávky streamu:"
 
-#: ../template/default/config.html:339
+#: ../template/default/config.html:331
 #: ../template/default/help_config.html:156
 msgid "Suffix for recordings streaming:"
 msgstr "Pøípona pro nahrávky streamu:"
 
-#: ../template/default/config.html:344
+#: ../template/default/config.html:336
 msgid "Bandwidth of Streams:"
 msgstr "©íøka pásma pro streamy:"
 
-#: ../template/default/config.html:359 ../template/default/help_config.html:30
+#: ../template/default/config.html:351 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:162
 msgid "Expert"
 msgstr "Expert:"
 
-#: ../template/default/config.html:362
+#: ../template/default/config.html:354
 #: ../template/default/help_config.html:165
 msgid "Read EPG directly using epg.data:"
 msgstr "Èíst EPG pøímo ze souboru epg.data:"
 
-#: ../template/default/config.html:369
+#: ../template/default/config.html:361
 #: ../template/default/help_config.html:167
 msgid "epg.data filename:"
 msgstr "jméno souboru epg.data"
 
-#: ../template/default/config.html:373
+#: ../template/default/config.html:365
 #: ../template/default/help_config.html:169
 msgid "VFAT:"
 msgstr "VFAT:"
 
-#: ../template/default/config.html:383 ../template/default/help_config.html:30
+#: ../template/default/config.html:375 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:175
 msgid "Channel Selections"
 msgstr "Výbìr kanálù"
 
-#: ../template/default/config.html:386
+#: ../template/default/config.html:378
 msgid "In \"Timeline\"?"
 msgstr "V \"Èasové pøímce\"?"
 
-#: ../template/default/config.html:393
+#: ../template/default/config.html:385
 msgid "In \"Channels\"?"
 msgstr "V \"Kanálech\"?"
 
-#: ../template/default/config.html:400
+#: ../template/default/config.html:392
 msgid "In \"Playing Today\"?"
 msgstr "V \"Co bì¾í dnes\"?"
 
-#: ../template/default/config.html:407
+#: ../template/default/config.html:399
 msgid "In \"What's On Now\"?"
 msgstr "V \"Co bì¾í teï\"?"
 
-#: ../template/default/config.html:414
+#: ../template/default/config.html:406
 msgid "In \"AutoTimer\"?"
 msgstr "V \"AutoÈasovaèi\"?"
 
-#: ../template/default/config.html:421
+#: ../template/default/config.html:413
 msgid "In \"Watch TV\"?"
 msgstr "V \"Sleduj TV\"?"
 
-#: ../template/default/config.html:450 ../template/default/timer_new.html:154
+#: ../template/default/config.html:442 ../template/default/timer_new.html:169
 #: ../template/default/epgsearch_new.html:557
-#: ../template/default/at_timer_new.html:154
+#: ../template/default/at_timer_new.html:170
 msgid "Save"
 msgstr "Ulo¾it"
 
-#: ../template/default/config.html:451
+#: ../template/default/config.html:443
 msgid "Apply"
 msgstr "Pou¾ij"
 
@@ -721,7 +721,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:30
-#: ../template/default/at_timer_new.html:32
+#: ../template/default/at_timer_new.html:34
 msgid "AutoTimer Active:"
 msgstr "Aktivní AutoÈasovaè:"
 
@@ -734,7 +734,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:32
-#: ../template/default/at_timer_new.html:46
+#: ../template/default/at_timer_new.html:49
 msgid "Search Patterns:"
 msgstr "Vyhledávací znaky:"
 
@@ -761,7 +761,7 @@ msgstr ""
 
 #: ../template/default/help_at_timer_new.html:34
 #: ../template/default/epgsearch_new.html:248
-#: ../template/default/at_timer_new.html:52
+#: ../template/default/at_timer_new.html:56
 msgid "Search in:"
 msgstr "Hledat v:"
 
@@ -772,7 +772,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:36
-#: ../template/default/at_timer_new.html:60
+#: ../template/default/at_timer_new.html:65
 msgid "Search only on these days:"
 msgstr "Hledat pouze v tyto dny:"
 
@@ -784,8 +784,8 @@ msgstr ""
 
 #: ../template/default/help_at_timer_new.html:38
 #: ../template/default/help_timer_new.html:39
-#: ../template/default/prog_list.html:32 ../template/default/timer_new.html:78
-#: ../template/default/at_timer_new.html:72
+#: ../template/default/prog_list.html:32 ../template/default/timer_new.html:84
+#: ../template/default/at_timer_new.html:78
 msgid "Channel:"
 msgstr "Kanál"
 
@@ -797,7 +797,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:40
-#: ../template/default/at_timer_new.html:83
+#: ../template/default/at_timer_new.html:90
 msgid "Starts After:"
 msgstr "Zaèátek po:"
 
@@ -808,7 +808,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:42
-#: ../template/default/at_timer_new.html:92
+#: ../template/default/at_timer_new.html:100
 msgid "Ends Before:"
 msgstr "Konec pøed:"
 
@@ -819,7 +819,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:44
-#: ../template/default/at_timer_new.html:101
+#: ../template/default/at_timer_new.html:110
 msgid "Override Start/Stop Margins:"
 msgstr ""
 
@@ -901,7 +901,7 @@ msgstr ""
 "recording has passed by."
 
 #: ../template/default/help_at_timer_new.html:54
-#: ../template/default/at_timer_new.html:132
+#: ../template/default/at_timer_new.html:146
 msgid "Episode:"
 msgstr "Epizoda:"
 
@@ -912,7 +912,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:56
-#: ../template/default/at_timer_new.html:138
+#: ../template/default/at_timer_new.html:153
 msgid "Remember programmed timers:"
 msgstr "Zapamatovat naprogramovaný èasovaè:"
 
@@ -925,7 +925,7 @@ msgstr ""
 
 #: ../template/default/help_at_timer_new.html:58
 #: ../template/default/epgsearch_new.html:446
-#: ../template/default/at_timer_new.html:145
+#: ../template/default/at_timer_new.html:161
 msgid "Directory:"
 msgstr "Slo¾ka:"
 
@@ -1294,7 +1294,7 @@ msgstr ""
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5318
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5315
 msgid "Recordings"
 msgstr "Nahrávky"
 
@@ -1386,7 +1386,7 @@ msgid "<p>Here you can edit a timer's settings.</p>"
 msgstr "<p>Zde mù¾ete upravit nastavení Èasovaèe.</p>"
 
 #: ../template/default/help_timer_new.html:26
-#: ../template/default/timer_new.html:60
+#: ../template/default/timer_new.html:62
 msgid "Timer Active:"
 msgstr "Èasovaè aktivní"
 
@@ -1398,7 +1398,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_timer_new.html:28
-#: ../template/default/timer_new.html:67
+#: ../template/default/timer_new.html:71
 msgid "AutoTimer Checking:"
 msgstr "Kontrola AutoÈasovaèù:"
 
@@ -1409,7 +1409,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_timer_new.html:31
-#: ../template/default/timer_new.html:71
+#: ../template/default/timer_new.html:75
 msgid "Transmission Identification"
 msgstr ""
 
@@ -1421,7 +1421,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_timer_new.html:33
-#: ../template/default/rec_list.html:64 ../template/default/timer_new.html:73
+#: ../template/default/rec_list.html:64 ../template/default/timer_new.html:77
 msgid "Time"
 msgstr "Èas"
 
@@ -1430,7 +1430,7 @@ msgid "Monitor this timer using the start and stop time."
 msgstr "Sledovat tento èasovaè pomocí zaèátku a konce nahrávání."
 
 #: ../template/default/help_timer_new.html:35
-#: ../template/default/timer_new.html:74 ../template/default/tv.html:79
+#: ../template/default/timer_new.html:78 ../template/default/tv.html:79
 msgid "off"
 msgstr "off"
 
@@ -1443,7 +1443,7 @@ msgid "The channel to record."
 msgstr "Kanál k nahrávání."
 
 #: ../template/default/help_timer_new.html:41
-#: ../template/default/timer_new.html:88
+#: ../template/default/timer_new.html:95
 msgid "Day Of Recording:"
 msgstr "Den nahrávání"
 
@@ -1458,7 +1458,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_timer_new.html:49
-#: ../template/default/timer_new.html:102
+#: ../template/default/timer_new.html:110
 msgid "Start Time:"
 msgstr "Zaèátek nahrávání:"
 
@@ -1471,7 +1471,7 @@ msgstr ""
 "\"hodinu\" a druhé pro \"minutu\"."
 
 #: ../template/default/help_timer_new.html:51
-#: ../template/default/timer_new.html:114
+#: ../template/default/timer_new.html:123
 msgid "End Time:"
 msgstr "Konec èasu:"
 
@@ -1484,7 +1484,7 @@ msgstr ""
 "\"hodinu\" a druhé pro \"minutu\"."
 
 #: ../template/default/help_timer_new.html:57
-#: ../template/default/timer_new.html:138
+#: ../template/default/timer_new.html:151
 msgid "Title of Recording:"
 msgstr "Název nahrávky:"
 
@@ -1502,7 +1502,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_timer_new.html:59
-#: ../template/default/rec_edit.html:38 ../template/default/timer_new.html:142
+#: ../template/default/rec_edit.html:38 ../template/default/timer_new.html:156
 msgid "Summary:"
 msgstr "Souhrn:"
 
@@ -1523,11 +1523,11 @@ msgstr "Vá¹ prohlí¾eè nepodporuje rámy!"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5318
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5315
 msgid "What's On Now?"
 msgstr "Co bì¾í nyní?"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5318
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5315
 msgid "Playing Today?"
 msgstr "Co pobì¾í dnes?"
 
@@ -1535,7 +1535,7 @@ msgstr "Co pobì¾í dnes?"
 #: ../template/default/prog_list2.html:56
 #: ../template/default/prog_summary.html:48
 #: ../template/default/prog_summary2.html:85
-#: ../template/default/epgsearch_list.html:246 ../vdradmind.pl:5318
+#: ../template/default/epgsearch_list.html:246 ../vdradmind.pl:5315
 msgid "Channels"
 msgstr "Kanály"
 
@@ -1578,7 +1578,7 @@ msgstr ""
 "pøedávání parametrù, které jsou vy¾adované."
 
 #: ../template/default/prog_detail.html:18
-#: ../template/default/timer_list.html:296
+#: ../template/default/timer_list.html:284
 msgid "VPS"
 msgstr "VPS"
 
@@ -1692,12 +1692,12 @@ msgstr "zaèíná v"
 #: ../template/default/prog_timeline.html:77
 #: ../template/default/prog_timeline.html:155
 #: ../template/default/prog_timeline.html:172
-#: ../template/default/timer_new.html:107
-#: ../template/default/timer_new.html:119
+#: ../template/default/timer_new.html:115
+#: ../template/default/timer_new.html:128
 #: ../template/default/epgsearch_new.html:336
 #: ../template/default/epgsearch_new.html:343
-#: ../template/default/at_timer_new.html:88
-#: ../template/default/at_timer_new.html:97 ../vdradmind.pl:4708
+#: ../template/default/at_timer_new.html:95
+#: ../template/default/at_timer_new.html:105 ../vdradmind.pl:4708
 #: ../vdradmind.pl:4721
 msgid "o'clock"
 msgstr "hodin"
@@ -1760,9 +1760,9 @@ msgstr "Titulky:"
 msgid "Rename"
 msgstr "Pøejmenovat"
 
-#: ../template/default/rec_edit.html:45 ../template/default/timer_new.html:155
+#: ../template/default/rec_edit.html:45 ../template/default/timer_new.html:170
 #: ../template/default/epgsearch_new.html:559
-#: ../template/default/at_timer_new.html:156
+#: ../template/default/at_timer_new.html:172
 msgid "Cancel"
 msgstr "Zru¹it"
 
@@ -1779,7 +1779,7 @@ msgid "Free:"
 msgstr "Volno:"
 
 #: ../template/default/rec_list.html:53
-#: ../template/default/timer_list.html:227
+#: ../template/default/timer_list.html:215
 msgid "Date"
 msgstr "Datum"
 
@@ -1847,49 +1847,49 @@ msgstr "CA-System:"
 msgid "New Timer"
 msgstr "Nový èasovaè"
 
-#: ../template/default/timer_list.html:278
-#: ../template/default/timer_list.html:339
-#: ../template/default/timer_list.html:340
+#: ../template/default/timer_list.html:266
+#: ../template/default/timer_list.html:327
+#: ../template/default/timer_list.html:328
 msgid "Edit timer status?"
 msgstr "Upravit èasovaè?"
 
-#: ../template/default/timer_list.html:280
+#: ../template/default/timer_list.html:268
 msgid "This timer is inactive!"
 msgstr "Èasovaè není aktivní!"
 
-#: ../template/default/timer_list.html:283
+#: ../template/default/timer_list.html:271
 msgid "This timer is impossible!"
 msgstr "Tento èasovaè není mo¾né nastavit!"
 
-#: ../template/default/timer_list.html:286
+#: ../template/default/timer_list.html:274
 msgid "No more timers on other transponders possible!"
 msgstr "®ádné dal¹í èasovaèe na ostatních transpondérech nejsou mo¾né!"
 
-#: ../template/default/timer_list.html:289
+#: ../template/default/timer_list.html:277
 msgid "Timer OK."
 msgstr "Èasovaè je v cajku."
 
-#: ../template/default/timer_list.html:297
+#: ../template/default/timer_list.html:285
 msgid "Auto"
 msgstr "Auto"
 
-#: ../template/default/timer_list.html:339
+#: ../template/default/timer_list.html:327
 msgid "activate"
 msgstr "aktivní"
 
-#: ../template/default/timer_list.html:340
+#: ../template/default/timer_list.html:328
 msgid "inactivate"
 msgstr "deaktivovat"
 
-#: ../template/default/timer_list.html:341
+#: ../template/default/timer_list.html:329
 msgid "selected timers"
 msgstr "vybrané èasovaèe"
 
-#: ../template/default/timer_list.html:344
+#: ../template/default/timer_list.html:332
 msgid "Delete Selected Timers"
 msgstr "Vymazat vybrané èasovaèe"
 
-#: ../template/default/timer_list.html:351
+#: ../template/default/timer_list.html:339
 msgid "No timers defined!"
 msgstr "®ádný èasovaè není definován!"
 
@@ -1897,62 +1897,62 @@ msgstr "®ádný èasovaè není definován!"
 msgid "Create New Timer"
 msgstr "Vytvoøit nový èasovaè"
 
-#: ../template/default/timer_new.html:92
+#: ../template/default/timer_new.html:99
 #: ../template/default/epgsearch_new.html:381
-#: ../template/default/at_timer_new.html:62
+#: ../template/default/at_timer_new.html:67
 msgid "Monday"
 msgstr "Pondìlí"
 
-#: ../template/default/timer_new.html:93
+#: ../template/default/timer_new.html:100
 #: ../template/default/epgsearch_new.html:382
-#: ../template/default/at_timer_new.html:63
+#: ../template/default/at_timer_new.html:68
 msgid "Tuesday"
 msgstr "Úterý"
 
-#: ../template/default/timer_new.html:94
+#: ../template/default/timer_new.html:101
 #: ../template/default/epgsearch_new.html:383
-#: ../template/default/at_timer_new.html:64
+#: ../template/default/at_timer_new.html:69
 msgid "Wednesday"
 msgstr "Støeda"
 
-#: ../template/default/timer_new.html:95
+#: ../template/default/timer_new.html:102
 #: ../template/default/epgsearch_new.html:384
-#: ../template/default/at_timer_new.html:65
+#: ../template/default/at_timer_new.html:70
 msgid "Thursday"
 msgstr "Ètvrtek"
 
-#: ../template/default/timer_new.html:96
+#: ../template/default/timer_new.html:103
 #: ../template/default/epgsearch_new.html:385
-#: ../template/default/at_timer_new.html:66
+#: ../template/default/at_timer_new.html:71
 msgid "Friday"
 msgstr "Pátek"
 
-#: ../template/default/timer_new.html:97
+#: ../template/default/timer_new.html:104
 #: ../template/default/epgsearch_new.html:386
-#: ../template/default/at_timer_new.html:67
+#: ../template/default/at_timer_new.html:72
 msgid "Saturday"
 msgstr "Sobota"
 
-#: ../template/default/timer_new.html:98
+#: ../template/default/timer_new.html:105
 #: ../template/default/epgsearch_new.html:387
-#: ../template/default/at_timer_new.html:68
+#: ../template/default/at_timer_new.html:73
 msgid "Sunday"
 msgstr "Nedìle"
 
-#: ../template/default/timer_new.html:109
-#: ../template/default/timer_new.html:121
+#: ../template/default/timer_new.html:117
+#: ../template/default/timer_new.html:130
 msgid "Buffer:"
 msgstr "Zásobník:"
 
-#: ../template/default/timer_new.html:126
+#: ../template/default/timer_new.html:136
 msgid "Use VPS:"
 msgstr "Pou¾ít VPS:"
 
-#: ../template/default/timer_new.html:142
+#: ../template/default/timer_new.html:156
 msgid "readonly"
 msgstr "Pouze pro ètení"
 
-#: ../template/default/timer_new.html:147
+#: ../template/default/timer_new.html:162
 msgid "Timer has been set by AutoTimer pattern:"
 msgstr "Èasovaè byl nastaven podle AutoÈasovaèe"
 
@@ -2035,7 +2035,7 @@ msgid "Hide results"
 msgstr ""
 
 #: ../template/default/epgsearch_new.html:204
-#: ../template/default/at_timer_new.html:182
+#: ../template/default/at_timer_new.html:198
 #: ../template/default/epgsearch_list.html:255
 #, fuzzy
 msgid "No matches found!"
@@ -2090,22 +2090,22 @@ msgstr ""
 
 #: ../template/default/epgsearch_new.html:250
 #: ../template/default/epgsearch_new.html:483
-#: ../template/default/at_timer_new.html:54
-#: ../template/default/at_timer_new.html:167
+#: ../template/default/at_timer_new.html:58
+#: ../template/default/at_timer_new.html:183
 #: ../template/default/epgsearch_list.html:213
 msgid "Title"
 msgstr "Název"
 
 #: ../template/default/epgsearch_new.html:251
 #: ../template/default/epgsearch_new.html:484
-#: ../template/default/at_timer_new.html:55
-#: ../template/default/at_timer_new.html:168
+#: ../template/default/at_timer_new.html:59
+#: ../template/default/at_timer_new.html:184
 msgid "Subtitle"
 msgstr "Titulky"
 
 #: ../template/default/epgsearch_new.html:252
 #: ../template/default/epgsearch_new.html:485
-#: ../template/default/at_timer_new.html:56
+#: ../template/default/at_timer_new.html:60
 msgid "Description"
 msgstr "Popis"
 
@@ -2197,7 +2197,7 @@ msgid "selection"
 msgstr "Naladit TV"
 
 #: ../template/default/epgsearch_new.html:398
-#: ../template/default/at_timer_new.html:75
+#: ../template/default/at_timer_new.html:81
 msgid "all"
 msgstr "v¹e"
 
@@ -2280,20 +2280,20 @@ msgstr ""
 msgid "Add New AutoTimer"
 msgstr "Pøidat nový AutoÈasovaè"
 
-#: ../template/default/at_timer_new.html:37
-#: ../template/default/at_timer_new.html:41
+#: ../template/default/at_timer_new.html:39
+#: ../template/default/at_timer_new.html:43
 msgid "oneshot"
 msgstr ""
 
-#: ../template/default/at_timer_new.html:155
+#: ../template/default/at_timer_new.html:171
 msgid "Test"
 msgstr "Test:"
 
-#: ../template/default/at_timer_new.html:169
+#: ../template/default/at_timer_new.html:185
 msgid "Broadcasted"
 msgstr "Vysíláno"
 
-#: ../template/default/at_timer_new.html:170
+#: ../template/default/at_timer_new.html:186
 #: ../template/default/epgsearch_list.html:215
 msgid "Stored in"
 msgstr "Ulo¾eno v:"
@@ -2501,10 +2501,10 @@ msgstr "detailní pøehled"
 msgid "Schedule"
 msgstr "Plán"
 
-#: ../vdradmind.pl:5318
+#: ../vdradmind.pl:5315
 msgid "Timers"
 msgstr "Èasovaèe"
 
-#: ../vdradmind.pl:5386
+#: ../vdradmind.pl:5383
 msgid "System default"
 msgstr "Defaultní nastavení"

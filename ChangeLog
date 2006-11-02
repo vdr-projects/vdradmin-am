@@ -1,3 +1,74 @@
+2006-11-02  tag v3_5_0rc
+
+2006-11-02  amair
+
+	* HISTORY:
+
+	Updated for v3.5.0rc release.
+
+2006-11-02  amair
+
+	* vdradmind.pl:
+
+	Set version to 3.5.0rc.
+
+2006-10-31  amair
+
+	* template/default/epgsearch_list.html, vdradmind.pl:
+
+	Added button to manually start epgsearch timer update thread.
+
+2006-10-31  amair
+
+	* po/de.po, po/es.po, po/fi.po, po/nl.po, po/ru.po,
+	  po/vdradmin.pot:
+
+	Updated.
+
+2006-10-31  amair
+
+	* vdradmind.pl:
+
+	Do not set AT_OFFER=2 (=use AT) if AT_FUNC=1 and vdradmind.at is not empty. This allows users to first try epgsearch and after they've converted remove all there AutoTimers and set AT_FUNC=0 in config menu to completely hide AT feature.
+
+2006-10-30  amair
+
+	* template/default/style.css, template/default/timer_list.html:
+
+	Fixed bold black line in MSIE.
+
+2006-10-30  amair
+
+	* template/default/config.html:
+
+	Hide AutoTimer config if AT feature not wanted.
+
+2006-10-30  amair
+
+	* template/default/timer_new.html:
+
+	Hide "AutoTimer Checking" setting unless using AutoTimer.
+
+2006-10-30  amair
+
+	* template/default/style.css:
+
+	Fixed MSIE hack.
+
+2006-10-30  amair
+
+	* template/default/at_timer_new.html:
+
+	Prepared for easier adding new lines.
+
+2006-10-30  amair
+
+	* vdradmind.pl, template/default/config.html:
+
+	Removed unused code.
+
+2006-10-27  tag v3_5_0beta
+
 2006-10-27  amair
 
 	* HISTORY, autotimer2searchtimer.pl, make.sh, vdradmind.pl,

@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.4.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-27 12:17+0200\n"
-"PO-Revision-Date: 2006-09-30 11:50+0200\n"
-"Last-Translator: Ville Skyttä <ville.skytta@iki.fi>\n"
+"POT-Creation-Date: 2006-10-31 11:26+0100\n"
+"PO-Revision-Date: 2006-10-27 21:55+0200\n"
+"Last-Translator: Rofa\n"
 "Language-Team: Suomi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -91,9 +91,8 @@ msgid "Russian:"
 msgstr "Venäjä:"
 
 #: ../template/default/about.html:62
-#, fuzzy
 msgid "Czech:"
-msgstr "Ranska:"
+msgstr "Tsekki:"
 
 #: ../template/default/about.html:69
 msgid "Informations"
@@ -112,13 +111,12 @@ msgid "Supported features in VDR:"
 msgstr "VDR:n tuetut ominaisuudet:"
 
 #: ../template/default/about.html:87
-#, fuzzy
 msgid ""
 "EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search."
 "html\" target=\"_blank\">EPGSearch Plugin</a>)"
 msgstr ""
-"Live-kuvan suoratoisto (<a href=\"http://www.vdr-wiki.de/wiki/index.php/"
-"Streamdev-plugin\" target=\"_blank\">Streamdev-laajennos</a>)"
+"Hakuajastimet (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-"
+"search.html\" target=\"_blank\">EPGSearch-laajennos</a>)"
 
 #: ../template/default/about.html:93
 msgid ""
@@ -172,7 +170,7 @@ msgstr ""
 
 #: ../template/default/at_timer_list.html:6
 #: ../template/default/at_timer_list.html:35
-#: ../template/default/config.html:189
+#: ../template/default/config.html:180
 #: ../template/default/help_at_timer_list.html:6
 #: ../template/default/help_at_timer_list.html:21
 #: ../template/default/help_config.html:30
@@ -182,28 +180,28 @@ msgid "AutoTimer"
 msgstr "Hakuajastimet"
 
 #: ../template/default/at_timer_list.html:24
-#: ../template/default/config.html:203 ../template/default/config.html:261
+#: ../template/default/config.html:194 ../template/default/config.html:253
 #: ../template/default/help_at_timer_new.html:50
 #: ../template/default/help_config.html:98
 #: ../template/default/help_config.html:122
 #: ../template/default/help_timer_new.html:53
 #: ../template/default/timer_list.html:27
-#: ../template/default/timer_new.html:130
+#: ../template/default/timer_new.html:141
 #: ../template/default/epgsearch_new.html:502
-#: ../template/default/at_timer_new.html:120
+#: ../template/default/at_timer_new.html:132
 msgid "Priority:"
 msgstr "Prioriteetti:"
 
 #: ../template/default/at_timer_list.html:24
-#: ../template/default/config.html:207 ../template/default/config.html:265
+#: ../template/default/config.html:198 ../template/default/config.html:257
 #: ../template/default/help_at_timer_new.html:52
 #: ../template/default/help_config.html:100
 #: ../template/default/help_config.html:124
 #: ../template/default/help_timer_new.html:55
 #: ../template/default/timer_list.html:27
-#: ../template/default/timer_new.html:134
+#: ../template/default/timer_new.html:146
 #: ../template/default/epgsearch_new.html:508
-#: ../template/default/at_timer_new.html:126
+#: ../template/default/at_timer_new.html:139
 msgid "Lifetime:"
 msgstr "Elinaika:"
 
@@ -212,7 +210,7 @@ msgid "New AutoTimer"
 msgstr "Uusi hakuajastin"
 
 #: ../template/default/at_timer_list.html:43
-#: ../template/default/config.html:32 ../template/default/navigation.html:69
+#: ../template/default/config.html:22 ../template/default/navigation.html:69
 #: ../template/default/rec_list.html:26 ../template/default/timer_list.html:50
 #: ../template/default/timer_new.html:52 ../template/default/vdr_cmds.html:20
 #: ../template/default/epgsearch_new.html:155
@@ -222,13 +220,13 @@ msgid "Help"
 msgstr "Opaste"
 
 #: ../template/default/at_timer_list.html:57
-#: ../template/default/timer_list.html:205
+#: ../template/default/timer_list.html:193
 #: ../template/default/epgsearch_list.html:43
 msgid "Active"
 msgstr "Aktiivinen"
 
 #: ../template/default/at_timer_list.html:68
-#: ../template/default/timer_list.html:216
+#: ../template/default/timer_list.html:204
 #: ../template/default/epgsearch_list.html:65
 #: ../template/default/epgsearch_list.html:67
 #: ../template/default/epgsearch_list.html:214
@@ -236,87 +234,87 @@ msgid "Channel"
 msgstr "Kanava"
 
 #: ../template/default/at_timer_list.html:79
-#: ../template/default/timer_list.html:238
+#: ../template/default/timer_list.html:226
 #: ../template/default/epgsearch_list.html:81
 msgid "Start"
 msgstr "Aloitus"
 
 #: ../template/default/at_timer_list.html:90
-#: ../template/default/timer_list.html:249
+#: ../template/default/timer_list.html:237
 #: ../template/default/epgsearch_list.html:95
 msgid "Stop"
 msgstr "Lopetus"
 
 #: ../template/default/at_timer_list.html:101
 #: ../template/default/rec_list.html:75
-#: ../template/default/timer_list.html:260
+#: ../template/default/timer_list.html:248
 msgid "Name"
 msgstr "Nimi"
 
 #: ../template/default/at_timer_list.html:112
 #: ../template/default/rec_list.html:85
-#: ../template/default/timer_list.html:271
+#: ../template/default/timer_list.html:259
 #: ../template/default/epgsearch_list.html:117
 msgid "Select all/none"
 msgstr "Valitse kaikki/ei yhtään"
 
 #: ../template/default/at_timer_list.html:120
-#: ../template/default/config.html:109 ../template/default/config.html:152
-#: ../template/default/config.html:181 ../template/default/config.html:194
-#: ../template/default/config.html:223 ../template/default/config.html:250
-#: ../template/default/config.html:279 ../template/default/config.html:286
-#: ../template/default/config.html:293 ../template/default/config.html:307
-#: ../template/default/config.html:318 ../template/default/config.html:364
-#: ../template/default/config.html:375 ../template/default/config.html:388
-#: ../template/default/config.html:395 ../template/default/config.html:402
-#: ../template/default/config.html:409 ../template/default/config.html:416
-#: ../template/default/config.html:423 ../template/default/timer_list.html:294
-#: ../template/default/timer_new.html:62
-#: ../template/default/at_timer_new.html:35
-#: ../template/default/at_timer_new.html:39
-#: ../template/default/at_timer_new.html:103
-#: ../template/default/at_timer_new.html:140
+#: ../template/default/config.html:99 ../template/default/config.html:142
+#: ../template/default/config.html:171 ../template/default/config.html:185
+#: ../template/default/config.html:214 ../template/default/config.html:241
+#: ../template/default/config.html:271 ../template/default/config.html:278
+#: ../template/default/config.html:285 ../template/default/config.html:299
+#: ../template/default/config.html:310 ../template/default/config.html:356
+#: ../template/default/config.html:367 ../template/default/config.html:380
+#: ../template/default/config.html:387 ../template/default/config.html:394
+#: ../template/default/config.html:401 ../template/default/config.html:408
+#: ../template/default/config.html:415 ../template/default/timer_list.html:282
+#: ../template/default/timer_new.html:64
+#: ../template/default/at_timer_new.html:37
+#: ../template/default/at_timer_new.html:41
+#: ../template/default/at_timer_new.html:112
+#: ../template/default/at_timer_new.html:155
 #: ../template/default/epgsearch_list.html:125
 msgid "Yes"
 msgstr "Kyllä"
 
 #: ../template/default/at_timer_list.html:122
-#: ../template/default/config.html:110 ../template/default/config.html:153
-#: ../template/default/config.html:182 ../template/default/config.html:195
-#: ../template/default/config.html:224 ../template/default/config.html:251
-#: ../template/default/config.html:280 ../template/default/config.html:287
-#: ../template/default/config.html:294 ../template/default/config.html:308
-#: ../template/default/config.html:319 ../template/default/config.html:365
-#: ../template/default/config.html:376 ../template/default/config.html:389
-#: ../template/default/config.html:396 ../template/default/config.html:403
-#: ../template/default/config.html:410 ../template/default/config.html:417
-#: ../template/default/config.html:424 ../template/default/timer_list.html:295
-#: ../template/default/timer_new.html:63
-#: ../template/default/at_timer_new.html:36
-#: ../template/default/at_timer_new.html:40
-#: ../template/default/at_timer_new.html:104
-#: ../template/default/at_timer_new.html:141
+#: ../template/default/config.html:100 ../template/default/config.html:143
+#: ../template/default/config.html:172 ../template/default/config.html:186
+#: ../template/default/config.html:215 ../template/default/config.html:242
+#: ../template/default/config.html:272 ../template/default/config.html:279
+#: ../template/default/config.html:286 ../template/default/config.html:300
+#: ../template/default/config.html:311 ../template/default/config.html:357
+#: ../template/default/config.html:368 ../template/default/config.html:381
+#: ../template/default/config.html:388 ../template/default/config.html:395
+#: ../template/default/config.html:402 ../template/default/config.html:409
+#: ../template/default/config.html:416 ../template/default/timer_list.html:283
+#: ../template/default/timer_new.html:65
+#: ../template/default/at_timer_new.html:38
+#: ../template/default/at_timer_new.html:42
+#: ../template/default/at_timer_new.html:113
+#: ../template/default/at_timer_new.html:156
 #: ../template/default/epgsearch_list.html:127
 msgid "No"
 msgstr "Ei"
 
 #: ../template/default/at_timer_list.html:143
 #: ../template/default/at_timer_list.html:148
-#: ../template/default/timer_list.html:324
+#: ../template/default/timer_list.html:312
 #: ../template/default/epgsearch_list.html:158
 #: ../template/default/epgsearch_list.html:166
 msgid "Edit"
 msgstr "Muokkaa"
 
 #: ../template/default/at_timer_list.html:153
-#: ../template/default/timer_list.html:327
+#: ../template/default/timer_list.html:315
 #: ../template/default/epgsearch_list.html:169
 msgid "Delete timer?"
 msgstr "Poistetaanko ajastin?"
 
 #: ../template/default/at_timer_list.html:153
 #: ../template/default/rec_list.html:118
-#: ../template/default/timer_list.html:327
+#: ../template/default/timer_list.html:315
 #: ../template/default/epgsearch_list.html:169
 msgid "Delete"
 msgstr "Poista"
@@ -330,7 +328,7 @@ msgid "Delete Selected AutoTimers"
 msgstr "Poista valitut hakuajastimet"
 
 #: ../template/default/at_timer_list.html:171
-#: ../template/default/timer_list.html:344
+#: ../template/default/timer_list.html:332
 msgid "Delete all selected timers?"
 msgstr "Poistetaanko valitut ajastimet?"
 
@@ -338,183 +336,183 @@ msgstr "Poistetaanko valitut ajastimet?"
 msgid "No AutoTimers defined!"
 msgstr "Hakuajastimia ei ole määritelty!"
 
-#: ../template/default/config.html:5 ../template/default/config.html:28
+#: ../template/default/config.html:5 ../template/default/config.html:18
 #: ../template/default/help_config.html:9
 #: ../template/default/help_config.html:24
 #: ../template/default/navigation.html:66
 msgid "Configuration"
 msgstr "Asetukset"
 
-#: ../template/default/config.html:40 ../template/default/help_config.html:30
+#: ../template/default/config.html:30 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:32
 msgid "General Settings"
 msgstr "Yleiset"
 
-#: ../template/default/config.html:46
+#: ../template/default/config.html:36
 msgid "Template:"
 msgstr "Pohja:"
 
-#: ../template/default/config.html:59 ../template/default/help_config.html:34
+#: ../template/default/config.html:49 ../template/default/help_config.html:34
 msgid "Skin:"
 msgstr "Ulkoasu:"
 
-#: ../template/default/config.html:71 ../template/default/help_config.html:36
+#: ../template/default/config.html:61 ../template/default/help_config.html:36
 msgid "Login Page:"
 msgstr "Aloitussivu:"
 
-#: ../template/default/config.html:82 ../template/default/help_config.html:38
+#: ../template/default/config.html:72 ../template/default/help_config.html:38
 msgid "Number of channels to use:"
 msgstr "Kanavien lukumäärä:"
 
-#: ../template/default/config.html:87 ../template/default/help_config.html:40
+#: ../template/default/config.html:77 ../template/default/help_config.html:40
 msgid "Local net (no login required):"
 msgstr "Käyttäjätunnukseton osoiteavaruus:"
 
-#: ../template/default/config.html:92 ../template/default/help_config.html:42
+#: ../template/default/config.html:82 ../template/default/help_config.html:42
 msgid "Language:"
 msgstr "Kieli:"
 
-#: ../template/default/config.html:107 ../template/default/help_config.html:44
+#: ../template/default/config.html:97 ../template/default/help_config.html:44
 msgid "Save settings on exit:"
 msgstr "Tallenna asetukset suljettaessa:"
 
-#: ../template/default/config.html:117 ../template/default/help_config.html:30
+#: ../template/default/config.html:107 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:50
 msgid "VDR"
 msgstr "VDR"
 
-#: ../template/default/config.html:120 ../template/default/help_config.html:52
+#: ../template/default/config.html:110 ../template/default/help_config.html:52
 msgid "Number of DVB cards:"
 msgstr "DVB-korttien lukumäärä:"
 
-#: ../template/default/config.html:124 ../template/default/help_config.html:54
+#: ../template/default/config.html:114 ../template/default/help_config.html:54
 msgid "Path to recordings:"
 msgstr "VDR-tallenteiden polku:"
 
-#: ../template/default/config.html:128 ../template/default/help_config.html:56
+#: ../template/default/config.html:118 ../template/default/help_config.html:56
 msgid "Path to configuration files:"
 msgstr "Konfigurointitiedostojen polku:"
 
-#: ../template/default/config.html:132 ../template/default/help_config.html:58
+#: ../template/default/config.html:122 ../template/default/help_config.html:58
 msgid "Path to EPG images:"
 msgstr "Ohjelmisto-oppaan kuvapolku:"
 
-#: ../template/default/config.html:139 ../template/default/help_config.html:30
+#: ../template/default/config.html:129 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:64
 msgid "Identification"
 msgstr "Käyttäjätunnistus"
 
-#: ../template/default/config.html:142 ../template/default/help_config.html:66
+#: ../template/default/config.html:132 ../template/default/help_config.html:66
 msgid "Username:"
 msgstr "Käyttäjätunnus:"
 
-#: ../template/default/config.html:146 ../template/default/help_config.html:68
+#: ../template/default/config.html:136 ../template/default/help_config.html:68
 msgid "Password:"
 msgstr "Salasana:"
 
-#: ../template/default/config.html:150 ../template/default/help_config.html:70
+#: ../template/default/config.html:140 ../template/default/help_config.html:70
 msgid "Guest Account:"
 msgstr "Sallitaanko vierailija:"
 
-#: ../template/default/config.html:157 ../template/default/help_config.html:72
+#: ../template/default/config.html:147 ../template/default/help_config.html:72
 msgid "Guest Username:"
 msgstr "Vierailijan käyttäjätunnus:"
 
-#: ../template/default/config.html:161 ../template/default/help_config.html:74
+#: ../template/default/config.html:151 ../template/default/help_config.html:74
 msgid "Guest Password:"
 msgstr "Vierailijan salasana:"
 
-#: ../template/default/config.html:168 ../template/default/help_config.html:30
+#: ../template/default/config.html:158 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:80
 #: ../template/default/navigation.html:35
-#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:5318
+#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:5315
 msgid "Timeline"
 msgstr "Aikajana"
 
-#: ../template/default/config.html:171 ../template/default/help_config.html:82
+#: ../template/default/config.html:161 ../template/default/help_config.html:82
 msgid "Hours:"
 msgstr "Pituus tunteina:"
 
-#: ../template/default/config.html:175 ../template/default/help_config.html:84
+#: ../template/default/config.html:165 ../template/default/help_config.html:84
 msgid "Times:"
 msgstr "Ajankohdat:"
 
-#: ../template/default/config.html:176
+#: ../template/default/config.html:166
 msgid "Also used for other EPG views!"
 msgstr "Käytetään myös muihin ohjelmaoppaan näkymiin!"
 
-#: ../template/default/config.html:179 ../template/default/config.html:248
+#: ../template/default/config.html:169 ../template/default/config.html:239
 #: ../template/default/help_config.html:86
 #: ../template/default/help_config.html:114
 msgid "Tooltips:"
 msgstr "Lisätietolaatikot:"
 
-#: ../template/default/config.html:192 ../template/default/help_config.html:94
+#: ../template/default/config.html:183 ../template/default/help_config.html:94
 msgid "Active:"
 msgstr "Käytössä:"
 
-#: ../template/default/config.html:199 ../template/default/help_config.html:96
+#: ../template/default/config.html:190 ../template/default/help_config.html:96
 msgid "Timeout:"
 msgstr "Odotusaika:"
 
-#: ../template/default/config.html:200 ../template/default/config.html:270
-#: ../template/default/config.html:274 ../template/default/timer_new.html:109
-#: ../template/default/timer_new.html:121
+#: ../template/default/config.html:191 ../template/default/config.html:262
+#: ../template/default/config.html:266 ../template/default/timer_new.html:117
+#: ../template/default/timer_new.html:130
 #: ../template/default/epgsearch_new.html:516
 #: ../template/default/epgsearch_new.html:522
 #: ../template/default/epgsearch_new.html:542
-#: ../template/default/at_timer_new.html:110
-#: ../template/default/at_timer_new.html:116
+#: ../template/default/at_timer_new.html:120
+#: ../template/default/at_timer_new.html:127
 msgid "minutes"
 msgstr "minuuttia"
 
-#: ../template/default/config.html:212 ../template/default/config.html:269
+#: ../template/default/config.html:203 ../template/default/config.html:261
 #: ../template/default/help_at_timer_new.html:46
 #: ../template/default/help_config.html:126
 #: ../template/default/epgsearch_new.html:514
-#: ../template/default/at_timer_new.html:108
+#: ../template/default/at_timer_new.html:118
 msgid "Time Margin at Start:"
 msgstr "Aloitusmarginaali:"
 
-#: ../template/default/config.html:216 ../template/default/config.html:273
+#: ../template/default/config.html:207 ../template/default/config.html:265
 #: ../template/default/help_at_timer_new.html:48
 #: ../template/default/help_config.html:128
 #: ../template/default/epgsearch_new.html:520
-#: ../template/default/at_timer_new.html:114
+#: ../template/default/at_timer_new.html:125
 msgid "Time Margin at Stop:"
 msgstr "Lopetusmarginaali:"
 
-#: ../template/default/config.html:221
+#: ../template/default/config.html:212
 #: ../template/default/help_config.html:102
 msgid "Send email after programming timer:"
 msgstr "Lähetä sähköpostia ohjelmoidusta ajastimesta:"
 
-#: ../template/default/config.html:228
+#: ../template/default/config.html:219
 #: ../template/default/help_config.html:104
 msgid "Send email as:"
 msgstr "Lähetä sähköposti nimellä:"
 
-#: ../template/default/config.html:232
+#: ../template/default/config.html:223
 #: ../template/default/help_config.html:106
 msgid "Send email to:"
 msgstr "Lähetä sähköposti osoitteeseen:"
 
-#: ../template/default/config.html:236
+#: ../template/default/config.html:227
 #: ../template/default/help_config.html:108
 msgid "Mail server:"
 msgstr "Sähköpostipalvelin:"
 
-#: ../template/default/config.html:240
+#: ../template/default/config.html:231
 #: ../template/default/help_config.html:110
 msgid "SMTPAuth user:"
 msgstr "SMTP-käyttäjätunnus:"
 
-#: ../template/default/config.html:244
+#: ../template/default/config.html:235
 #: ../template/default/help_config.html:112
 msgid "SMTPAuth password:"
 msgstr "SMTP-salasana:"
 
-#: ../template/default/config.html:258 ../template/default/help_config.html:30
+#: ../template/default/config.html:250 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:120
 #: ../template/default/help_timer_list.html:6
 #: ../template/default/help_timer_list.html:21
@@ -524,126 +522,126 @@ msgstr "SMTP-salasana:"
 msgid "Timer"
 msgstr "Ajastimet"
 
-#: ../template/default/config.html:277
+#: ../template/default/config.html:269
 #: ../template/default/help_config.html:130
 msgid "Tooltips in timeline:"
 msgstr "Lisätietolaatikot \"Aikajana\"-sivulla:"
 
-#: ../template/default/config.html:284
+#: ../template/default/config.html:276
 #: ../template/default/help_config.html:132
 msgid "Tooltips in list:"
 msgstr "Lisätietolaatikot \"Ajastimet\"-sivulla:"
 
-#: ../template/default/config.html:291
+#: ../template/default/config.html:283
 #: ../template/default/help_config.html:134
 msgid "Add summary to new timers:"
 msgstr "Lisää tallenteen kuvaus uusiin ajastimiin"
 
-#: ../template/default/config.html:302 ../template/default/help_config.html:30
+#: ../template/default/config.html:294 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:140
 msgid "Streaming"
 msgstr "Suoratoisto"
 
-#: ../template/default/config.html:305
+#: ../template/default/config.html:297
 #: ../template/default/help_config.html:142
 msgid "Live Streaming:"
 msgstr "Live-kuvan suoratoisto:"
 
-#: ../template/default/config.html:312
+#: ../template/default/config.html:304
 #: ../template/default/help_config.html:144
 msgid "HTTP Port of Streamdev (also possible 3000/ts):"
 msgstr "Streamdev-laajennoksen HTTP-portti (esim. 3000/ts):"
 
-#: ../template/default/config.html:316
+#: ../template/default/config.html:308
 #: ../template/default/help_config.html:146
 msgid "Recordings Streaming:"
 msgstr "Tallenteiden suoratoisto:"
 
-#: ../template/default/config.html:323
+#: ../template/default/config.html:315
 #: ../template/default/help_config.html:148
 msgid "Path to VDR Recordings on your workstation:"
 msgstr "VDR-tallenteiden polku työasemallasi:"
 
-#: ../template/default/config.html:327
+#: ../template/default/config.html:319
 #: ../template/default/help_config.html:150
 msgid "MIME type for live streaming:"
 msgstr "Live-kuvan suoratoiston MIME-tyyppi:"
 
-#: ../template/default/config.html:331
+#: ../template/default/config.html:323
 #: ../template/default/help_config.html:152
 msgid "Suffix for live streaming:"
 msgstr "Live-kuvan suoratoiston tiedostopääte:"
 
-#: ../template/default/config.html:335
+#: ../template/default/config.html:327
 #: ../template/default/help_config.html:154
 msgid "MIME type for recordings streaming:"
 msgstr "Tallenteiden suoratoiston MIME-tyyppi:"
 
-#: ../template/default/config.html:339
+#: ../template/default/config.html:331
 #: ../template/default/help_config.html:156
 msgid "Suffix for recordings streaming:"
 msgstr "Tallenteiden suoratoiston tiedostopääte:"
 
-#: ../template/default/config.html:344
+#: ../template/default/config.html:336
 msgid "Bandwidth of Streams:"
 msgstr "Kaistanleveys:"
 
-#: ../template/default/config.html:359 ../template/default/help_config.html:30
+#: ../template/default/config.html:351 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:162
 msgid "Expert"
-msgstr "Guru-käyttäjä"
+msgstr "Ekspertti"
 
-#: ../template/default/config.html:362
+#: ../template/default/config.html:354
 #: ../template/default/help_config.html:165
 msgid "Read EPG directly using epg.data:"
 msgstr "Lue ohjelmatiedot suoraan tiedostosta:"
 
-#: ../template/default/config.html:369
+#: ../template/default/config.html:361
 #: ../template/default/help_config.html:167
 msgid "epg.data filename:"
 msgstr "Tiedosto ohjelmatiedoille:"
 
-#: ../template/default/config.html:373
+#: ../template/default/config.html:365
 #: ../template/default/help_config.html:169
 msgid "VFAT:"
 msgstr "VFAT-tuki:"
 
-#: ../template/default/config.html:383 ../template/default/help_config.html:30
+#: ../template/default/config.html:375 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:175
 msgid "Channel Selections"
 msgstr "Kanavavalinnat"
 
-#: ../template/default/config.html:386
+#: ../template/default/config.html:378
 msgid "In \"Timeline\"?"
 msgstr "Käytä kanavavalintoja \"Aikajana\"-sivulla"
 
-#: ../template/default/config.html:393
+#: ../template/default/config.html:385
 msgid "In \"Channels\"?"
 msgstr "Käytä kanavavalintoja \"Kanavat\"-sivulla"
 
-#: ../template/default/config.html:400
+#: ../template/default/config.html:392
 msgid "In \"Playing Today\"?"
 msgstr "Käytä kanavavalintoja \"Ohjelmisto tänään\"-sivulla"
 
-#: ../template/default/config.html:407
+#: ../template/default/config.html:399
 msgid "In \"What's On Now\"?"
 msgstr "Käytä kanavavalintoja \"Menossa nyt\"-sivulla"
 
-#: ../template/default/config.html:414
+#: ../template/default/config.html:406
 msgid "In \"AutoTimer\"?"
 msgstr "Käytä kanavavalintoja \"Hakuajastimet\"-sivulla"
 
-#: ../template/default/config.html:421
+#: ../template/default/config.html:413
 msgid "In \"Watch TV\"?"
 msgstr "Käytä kanavavalintoja \"Katso TV:tä\"-sivulla"
 
-#: ../template/default/config.html:450 ../template/default/timer_new.html:154
+#: ../template/default/config.html:442 ../template/default/timer_new.html:169
 #: ../template/default/epgsearch_new.html:557
-#: ../template/default/at_timer_new.html:154
+#: ../template/default/at_timer_new.html:170
 msgid "Save"
 msgstr "Tallenna"
 
-#: ../template/default/config.html:451
+#: ../template/default/config.html:443
 msgid "Apply"
 msgstr "Käytä"
 
@@ -695,7 +693,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:30
-#: ../template/default/at_timer_new.html:32
+#: ../template/default/at_timer_new.html:34
 msgid "AutoTimer Active:"
 msgstr "Aktiivinen:"
 
@@ -708,7 +706,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:32
-#: ../template/default/at_timer_new.html:46
+#: ../template/default/at_timer_new.html:49
 msgid "Search Patterns:"
 msgstr "Hakuehdot:"
 
@@ -735,7 +733,7 @@ msgstr ""
 
 #: ../template/default/help_at_timer_new.html:34
 #: ../template/default/epgsearch_new.html:248
-#: ../template/default/at_timer_new.html:52
+#: ../template/default/at_timer_new.html:56
 msgid "Search in:"
 msgstr "Hakukentät:"
 
@@ -746,7 +744,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:36
-#: ../template/default/at_timer_new.html:60
+#: ../template/default/at_timer_new.html:65
 msgid "Search only on these days:"
 msgstr "Etsi valittuina päivinä:"
 
@@ -758,8 +756,8 @@ msgstr ""
 
 #: ../template/default/help_at_timer_new.html:38
 #: ../template/default/help_timer_new.html:39
-#: ../template/default/prog_list.html:32 ../template/default/timer_new.html:78
-#: ../template/default/at_timer_new.html:72
+#: ../template/default/prog_list.html:32 ../template/default/timer_new.html:84
+#: ../template/default/at_timer_new.html:78
 msgid "Channel:"
 msgstr "Kanava:"
 
@@ -771,7 +769,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:40
-#: ../template/default/at_timer_new.html:83
+#: ../template/default/at_timer_new.html:90
 msgid "Starts After:"
 msgstr "Alkaa jälkeen:"
 
@@ -782,7 +780,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:42
-#: ../template/default/at_timer_new.html:92
+#: ../template/default/at_timer_new.html:100
 msgid "Ends Before:"
 msgstr "Loppuu ennen:"
 
@@ -793,7 +791,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:44
-#: ../template/default/at_timer_new.html:101
+#: ../template/default/at_timer_new.html:110
 msgid "Override Start/Stop Margins:"
 msgstr "Käytä yksilöllisiä aloitus- ja lopetusmarginaaleja"
 
@@ -875,7 +873,7 @@ msgstr ""
 "tarvitessa levytilaa."
 
 #: ../template/default/help_at_timer_new.html:54
-#: ../template/default/at_timer_new.html:132
+#: ../template/default/at_timer_new.html:146
 msgid "Episode:"
 msgstr "Sarjatallennus:"
 
@@ -886,7 +884,7 @@ msgid ""
 msgstr ""
 
 #: ../template/default/help_at_timer_new.html:56
-#: ../template/default/at_timer_new.html:138
+#: ../template/default/at_timer_new.html:153
 msgid "Remember programmed timers:"
 msgstr "Muista ohjelmoidut ajastimet:"
 
@@ -899,7 +897,7 @@ msgstr ""
 
 #: ../template/default/help_at_timer_new.html:58
 #: ../template/default/epgsearch_new.html:446
-#: ../template/default/at_timer_new.html:145
+#: ../template/default/at_timer_new.html:161
 msgid "Directory:"
 msgstr "Hakemisto:"
 
@@ -1225,7 +1223,7 @@ msgstr ""
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5318
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5315
 msgid "Recordings"
 msgstr "Tallenteet"
 
@@ -1317,7 +1315,7 @@ msgid "<p>Here you can edit a timer's settings.</p>"
 msgstr "<p>Tässä näkymässä voit muokata ajastimen asetuksia.</p>"
 
 #: ../template/default/help_timer_new.html:26
-#: ../template/default/timer_new.html:60
+#: ../template/default/timer_new.html:62
 msgid "Timer Active:"
 msgstr "Aktiivinen:"
 
@@ -1332,7 +1330,7 @@ msgstr ""
 "uudelleen."
 
 #: ../template/default/help_timer_new.html:28
-#: ../template/default/timer_new.html:67
+#: ../template/default/timer_new.html:71
 msgid "AutoTimer Checking:"
 msgstr "Hakuajastimen tarkistus:"
 
@@ -1343,7 +1341,7 @@ msgid ""
 msgstr "Riippuen ajastimen tekotavasta, käytettävissäsi on useita asetuksia:"
 
 #: ../template/default/help_timer_new.html:31
-#: ../template/default/timer_new.html:71
+#: ../template/default/timer_new.html:75
 msgid "Transmission Identification"
 msgstr "Lähetteen tunniste"
 
@@ -1359,7 +1357,7 @@ msgstr ""
 "stä tehtyjen ajastimien kohdalla."
 
 #: ../template/default/help_timer_new.html:33
-#: ../template/default/rec_list.html:64 ../template/default/timer_new.html:73
+#: ../template/default/rec_list.html:64 ../template/default/timer_new.html:77
 msgid "Time"
 msgstr "Aika"
 
@@ -1368,7 +1366,7 @@ msgid "Monitor this timer using the start and stop time."
 msgstr "Tarkista ajastin käyttäen alku- ja loppuaikoja."
 
 #: ../template/default/help_timer_new.html:35
-#: ../template/default/timer_new.html:74 ../template/default/tv.html:79
+#: ../template/default/timer_new.html:78 ../template/default/tv.html:79
 msgid "off"
 msgstr "Pois"
 
@@ -1381,7 +1379,7 @@ msgid "The channel to record."
 msgstr "Tallennettava kanava."
 
 #: ../template/default/help_timer_new.html:41
-#: ../template/default/timer_new.html:88
+#: ../template/default/timer_new.html:95
 msgid "Day Of Recording:"
 msgstr "Päivä:"
 
@@ -1403,7 +1401,7 @@ msgstr ""
 "haluat ajastimen aktivoituvan."
 
 #: ../template/default/help_timer_new.html:49
-#: ../template/default/timer_new.html:102
+#: ../template/default/timer_new.html:110
 msgid "Start Time:"
 msgstr "Aloitusaika:"
 
@@ -1416,7 +1414,7 @@ msgstr ""
 "tunnit, jälkimmäiseen minuutit."
 
 #: ../template/default/help_timer_new.html:51
-#: ../template/default/timer_new.html:114
+#: ../template/default/timer_new.html:123
 msgid "End Time:"
 msgstr "Lopetusaika:"
 
@@ -1429,7 +1427,7 @@ msgstr ""
 "tunnit, jälkimmäiseen minuutit."
 
 #: ../template/default/help_timer_new.html:57
-#: ../template/default/timer_new.html:138
+#: ../template/default/timer_new.html:151
 msgid "Title of Recording:"
 msgstr "Tallenteen nimi:"
 
@@ -1453,7 +1451,7 @@ msgstr ""
 "oletus on kanavan nimi ja <strong>EPISODE</strong>:n tyhjä."
 
 #: ../template/default/help_timer_new.html:59
-#: ../template/default/rec_edit.html:38 ../template/default/timer_new.html:142
+#: ../template/default/rec_edit.html:38 ../template/default/timer_new.html:156
 msgid "Summary:"
 msgstr "Lisätiedot:"
 
@@ -1475,11 +1473,11 @@ msgstr "Selaimesi ei tue kehyksiä!"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5318
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5315
 msgid "What's On Now?"
 msgstr "Menossa nyt"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5318
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5315
 msgid "Playing Today?"
 msgstr "Tänään"
 
@@ -1487,15 +1485,14 @@ msgstr "Tänään"
 #: ../template/default/prog_list2.html:56
 #: ../template/default/prog_summary.html:48
 #: ../template/default/prog_summary2.html:85
-#: ../template/default/epgsearch_list.html:246 ../vdradmind.pl:5318
+#: ../template/default/epgsearch_list.html:246 ../vdradmind.pl:5315
 msgid "Channels"
 msgstr "Kanavat"
 
 #: ../template/default/navigation.html:50
 #: ../template/default/epgsearch_list.html:23
-#, fuzzy
 msgid "EPG Search"
-msgstr "Etsi"
+msgstr "Hakuajastimet"
 
 #: ../template/default/navigation.html:57 ../template/default/rc.html:6
 msgid "Remote Control"
@@ -1526,7 +1523,7 @@ msgstr ""
 "Käyttäjätunnistus ei onnistu! Tarkista syöttämäsi käyttäjätunnus/salasana."
 
 #: ../template/default/prog_detail.html:18
-#: ../template/default/timer_list.html:296
+#: ../template/default/timer_list.html:284
 msgid "VPS"
 msgstr "VPS"
 
@@ -1637,12 +1634,12 @@ msgstr "alkaen kello"
 #: ../template/default/prog_timeline.html:77
 #: ../template/default/prog_timeline.html:155
 #: ../template/default/prog_timeline.html:172
-#: ../template/default/timer_new.html:107
-#: ../template/default/timer_new.html:119
+#: ../template/default/timer_new.html:115
+#: ../template/default/timer_new.html:128
 #: ../template/default/epgsearch_new.html:336
 #: ../template/default/epgsearch_new.html:343
-#: ../template/default/at_timer_new.html:88
-#: ../template/default/at_timer_new.html:97 ../vdradmind.pl:4708
+#: ../template/default/at_timer_new.html:95
+#: ../template/default/at_timer_new.html:105 ../vdradmind.pl:4708
 #: ../vdradmind.pl:4721
 msgid "o'clock"
 msgstr " "
@@ -1699,15 +1696,15 @@ msgstr "Tallenteen uusi nimi:"
 
 #: ../template/default/rec_edit.html:34
 msgid "Subtitle:"
-msgstr "Lyhyt kuvaus"
+msgstr "Lyhyt kuvaus:"
 
 #: ../template/default/rec_edit.html:44 ../template/default/rec_list.html:116
 msgid "Rename"
 msgstr "Nimeä"
 
-#: ../template/default/rec_edit.html:45 ../template/default/timer_new.html:155
+#: ../template/default/rec_edit.html:45 ../template/default/timer_new.html:170
 #: ../template/default/epgsearch_new.html:559
-#: ../template/default/at_timer_new.html:156
+#: ../template/default/at_timer_new.html:172
 msgid "Cancel"
 msgstr "Peru"
 
@@ -1724,7 +1721,7 @@ msgid "Free:"
 msgstr "Vapaana:"
 
 #: ../template/default/rec_list.html:53
-#: ../template/default/timer_list.html:227
+#: ../template/default/timer_list.html:215
 msgid "Date"
 msgstr "Päivä"
 
@@ -1791,49 +1788,49 @@ msgstr "Salaus:"
 msgid "New Timer"
 msgstr "Uusi ajastin"
 
-#: ../template/default/timer_list.html:278
-#: ../template/default/timer_list.html:339
-#: ../template/default/timer_list.html:340
+#: ../template/default/timer_list.html:266
+#: ../template/default/timer_list.html:327
+#: ../template/default/timer_list.html:328
 msgid "Edit timer status?"
 msgstr "Muokataanko ajastinta?"
 
-#: ../template/default/timer_list.html:280
+#: ../template/default/timer_list.html:268
 msgid "This timer is inactive!"
 msgstr "Ajastin ei ole aktiivinen!"
 
-#: ../template/default/timer_list.html:283
+#: ../template/default/timer_list.html:271
 msgid "This timer is impossible!"
 msgstr "Ajastin ei ole mahdollinen!"
 
-#: ../template/default/timer_list.html:286
+#: ../template/default/timer_list.html:274
 msgid "No more timers on other transponders possible!"
 msgstr "Maksimimäärä ajastimia käytössä!"
 
-#: ../template/default/timer_list.html:289
+#: ../template/default/timer_list.html:277
 msgid "Timer OK."
 msgstr "Ajastin kunnossa."
 
-#: ../template/default/timer_list.html:297
+#: ../template/default/timer_list.html:285
 msgid "Auto"
 msgstr "Automaattinen"
 
-#: ../template/default/timer_list.html:339
+#: ../template/default/timer_list.html:327
 msgid "activate"
 msgstr "Aktivoi"
 
-#: ../template/default/timer_list.html:340
+#: ../template/default/timer_list.html:328
 msgid "inactivate"
 msgstr "Älä aktivoi"
 
-#: ../template/default/timer_list.html:341
+#: ../template/default/timer_list.html:329
 msgid "selected timers"
 msgstr "valittuja ajastimia"
 
-#: ../template/default/timer_list.html:344
+#: ../template/default/timer_list.html:332
 msgid "Delete Selected Timers"
 msgstr "Poista valitut ajastimet"
 
-#: ../template/default/timer_list.html:351
+#: ../template/default/timer_list.html:339
 msgid "No timers defined!"
 msgstr "Ajastimia ei määritelty!"
 
@@ -1841,62 +1838,62 @@ msgstr "Ajastimia ei määritelty!"
 msgid "Create New Timer"
 msgstr "Luo uusi ajastin"
 
-#: ../template/default/timer_new.html:92
+#: ../template/default/timer_new.html:99
 #: ../template/default/epgsearch_new.html:381
-#: ../template/default/at_timer_new.html:62
+#: ../template/default/at_timer_new.html:67
 msgid "Monday"
 msgstr "Maanantai"
 
-#: ../template/default/timer_new.html:93
+#: ../template/default/timer_new.html:100
 #: ../template/default/epgsearch_new.html:382
-#: ../template/default/at_timer_new.html:63
+#: ../template/default/at_timer_new.html:68
 msgid "Tuesday"
 msgstr "Tiistai"
 
-#: ../template/default/timer_new.html:94
+#: ../template/default/timer_new.html:101
 #: ../template/default/epgsearch_new.html:383
-#: ../template/default/at_timer_new.html:64
+#: ../template/default/at_timer_new.html:69
 msgid "Wednesday"
 msgstr "Keskiviikko"
 
-#: ../template/default/timer_new.html:95
+#: ../template/default/timer_new.html:102
 #: ../template/default/epgsearch_new.html:384
-#: ../template/default/at_timer_new.html:65
+#: ../template/default/at_timer_new.html:70
 msgid "Thursday"
 msgstr "Torstai"
 
-#: ../template/default/timer_new.html:96
+#: ../template/default/timer_new.html:103
 #: ../template/default/epgsearch_new.html:385
-#: ../template/default/at_timer_new.html:66
+#: ../template/default/at_timer_new.html:71
 msgid "Friday"
 msgstr "Perjantai"
 
-#: ../template/default/timer_new.html:97
+#: ../template/default/timer_new.html:104
 #: ../template/default/epgsearch_new.html:386
-#: ../template/default/at_timer_new.html:67
+#: ../template/default/at_timer_new.html:72
 msgid "Saturday"
 msgstr "Lauantai"
 
-#: ../template/default/timer_new.html:98
+#: ../template/default/timer_new.html:105
 #: ../template/default/epgsearch_new.html:387
-#: ../template/default/at_timer_new.html:68
+#: ../template/default/at_timer_new.html:73
 msgid "Sunday"
 msgstr "Sunnuntai"
 
-#: ../template/default/timer_new.html:109
-#: ../template/default/timer_new.html:121
+#: ../template/default/timer_new.html:117
+#: ../template/default/timer_new.html:130
 msgid "Buffer:"
 msgstr "Marginaali:"
 
-#: ../template/default/timer_new.html:126
+#: ../template/default/timer_new.html:136
 msgid "Use VPS:"
 msgstr "VPS-toiminto:"
 
-#: ../template/default/timer_new.html:142
+#: ../template/default/timer_new.html:156
 msgid "readonly"
 msgstr "kirjoitussuojattu"
 
-#: ../template/default/timer_new.html:147
+#: ../template/default/timer_new.html:162
 msgid "Timer has been set by AutoTimer pattern:"
 msgstr "Ajastin on luotu automaattisesti hakuehdolla:"
 
@@ -1957,347 +1954,313 @@ msgstr "Vaste"
 
 #: ../template/default/epgsearch_new.html:6
 msgid "Define New Search"
-msgstr ""
+msgstr "Määritä uusi hakuajastin"
 
 #: ../template/default/epgsearch_new.html:6
 #: ../template/default/epgsearch_new.html:151
-#, fuzzy
 msgid "Edit Search"
-msgstr "Etsi"
+msgstr "Muokkaa hakuajastinta"
 
 #: ../template/default/epgsearch_new.html:135
 msgid "Small search pattern.\\nDo you really want to use it?"
-msgstr ""
+msgstr "Hakuehdot ovat hyvin suppeat.\\nHaetaanko silti?"
 
 #: ../template/default/epgsearch_new.html:151
-#, fuzzy
 msgid "Add New Search"
 msgstr "Lisää uusi hakuajastin"
 
 #: ../template/default/epgsearch_new.html:165
 msgid "Hide results"
-msgstr ""
+msgstr "Piilota hakutulokset"
 
 #: ../template/default/epgsearch_new.html:204
-#: ../template/default/at_timer_new.html:182
+#: ../template/default/at_timer_new.html:198
 #: ../template/default/epgsearch_list.html:255
 msgid "No matches found!"
-msgstr "Ei löydy"
+msgstr "Ei löydy!"
 
 #: ../template/default/epgsearch_new.html:211
-#, fuzzy
 msgid "Settings"
-msgstr "Yleiset"
+msgstr "Asetukset"
 
 #: ../template/default/epgsearch_new.html:216
-#, fuzzy
 msgid "Search Term:"
-msgstr "Hakukentät:"
+msgstr "Hakutermi:"
 
 #: ../template/default/epgsearch_new.html:223
-#, fuzzy
 msgid "Search Mode:"
-msgstr "Hakukentät:"
+msgstr "Hakutapa:"
 
 #: ../template/default/epgsearch_new.html:226
 msgid "phrase"
-msgstr ""
+msgstr "fraasi"
 
 #: ../template/default/epgsearch_new.html:227
 msgid "all words"
-msgstr ""
+msgstr "kaikki sanat"
 
 #: ../template/default/epgsearch_new.html:228
 msgid "at least one word"
-msgstr ""
+msgstr "yksi sana"
 
 #: ../template/default/epgsearch_new.html:229
 msgid "match exactly"
-msgstr ""
+msgstr "täsmällinen"
 
 #: ../template/default/epgsearch_new.html:230
 msgid "regular expression"
-msgstr ""
+msgstr "säännöllinen lauseke"
 
 #: ../template/default/epgsearch_new.html:231
 msgid "fuzzy"
-msgstr ""
+msgstr "sumea"
 
 #: ../template/default/epgsearch_new.html:234
 msgid "Tolerance for \"fuzzy\":"
-msgstr ""
+msgstr "Toleranssi:"
 
 #: ../template/default/epgsearch_new.html:241
 msgid "Match Case:"
-msgstr ""
+msgstr "Huomioi kirjainkoko:"
 
 #: ../template/default/epgsearch_new.html:250
 #: ../template/default/epgsearch_new.html:483
-#: ../template/default/at_timer_new.html:54
-#: ../template/default/at_timer_new.html:167
+#: ../template/default/at_timer_new.html:58
+#: ../template/default/at_timer_new.html:183
 #: ../template/default/epgsearch_list.html:213
 msgid "Title"
 msgstr "Otsikko"
 
 #: ../template/default/epgsearch_new.html:251
 #: ../template/default/epgsearch_new.html:484
-#: ../template/default/at_timer_new.html:55
-#: ../template/default/at_timer_new.html:168
+#: ../template/default/at_timer_new.html:59
+#: ../template/default/at_timer_new.html:184
 msgid "Subtitle"
 msgstr "Lyhyt kuvaus"
 
 #: ../template/default/epgsearch_new.html:252
 #: ../template/default/epgsearch_new.html:485
-#: ../template/default/at_timer_new.html:56
+#: ../template/default/at_timer_new.html:60
 msgid "Description"
 msgstr "Kuvaus"
 
 #: ../template/default/epgsearch_new.html:258
 msgid "Use extended EPG info:"
-msgstr ""
+msgstr "Käytä laajennettua ohjelmaopasta:"
 
 #: ../template/default/epgsearch_new.html:293
-#, fuzzy
 msgid "Use Channel:"
-msgstr "Kanava:"
+msgstr "Käytä kanavaa:"
 
 #: ../template/default/epgsearch_new.html:296
 #: ../template/default/epgsearch_new.html:396
-#, fuzzy
 msgid "no"
-msgstr "nyt"
+msgstr "ei"
 
 #: ../template/default/epgsearch_new.html:297
-#, fuzzy
 msgid "interval"
-msgstr "Päivitysväli:"
+msgstr "kyllä"
 
 #: ../template/default/epgsearch_new.html:298
-#, fuzzy
 msgid "channel group"
-msgstr "Kanava"
+msgstr "kanavaryhmä"
 
 #: ../template/default/epgsearch_new.html:299
 msgid "only FTA"
-msgstr ""
+msgstr "vapaat"
 
 #: ../template/default/epgsearch_new.html:302
-#, fuzzy
 msgid "Range:"
-msgstr "Kieli:"
+msgstr "Kanavat:"
 
 #: ../template/default/epgsearch_new.html:316
-#, fuzzy
 msgid "Channel Group:"
-msgstr "Kanava:"
+msgstr "Kanavaryhmä:"
 
 #: ../template/default/epgsearch_new.html:327
-#, fuzzy
 msgid "Use Time:"
-msgstr "Käyttäjätunnus:"
+msgstr "Käytä aloitusaikaa:"
 
 #: ../template/default/epgsearch_new.html:333
-#, fuzzy
 msgid "Start After:"
-msgstr "Alkaa jälkeen:"
+msgstr "Aikaisintaan:"
 
 #: ../template/default/epgsearch_new.html:340
-#, fuzzy
 msgid "Start Before:"
-msgstr "Alkaa jälkeen:"
+msgstr "Viimeistään:"
 
 #: ../template/default/epgsearch_new.html:352
-#, fuzzy
 msgid "Use Duration:"
-msgstr "Kesto:"
+msgstr "Käytä kestoaikaa:"
 
 #: ../template/default/epgsearch_new.html:358
-#, fuzzy
 msgid "Min. Duration:"
-msgstr "Kesto:"
+msgstr "Kestoaika vähintään:"
 
 #: ../template/default/epgsearch_new.html:361
 #: ../template/default/epgsearch_new.html:368
 msgid "hh:mm"
-msgstr ""
+msgstr "hh:mm"
 
 #: ../template/default/epgsearch_new.html:365
-#, fuzzy
 msgid "Max. Duration:"
-msgstr "Kesto:"
+msgstr "Kestoaika enintään:"
 
 #: ../template/default/epgsearch_new.html:377
 msgid "Use Day of Week:"
-msgstr ""
+msgstr "Käytä viikonpäivää:"
 
 #: ../template/default/epgsearch_new.html:393
 msgid "Use Blacklists:"
-msgstr ""
+msgstr "Käytä mustia listoja:"
 
 #: ../template/default/epgsearch_new.html:397
-#, fuzzy
 msgid "selection"
-msgstr "Valitse"
+msgstr "valitut"
 
 #: ../template/default/epgsearch_new.html:398
-#: ../template/default/at_timer_new.html:75
+#: ../template/default/at_timer_new.html:81
 msgid "all"
-msgstr "Kaikki"
+msgstr "kaikki"
 
 #: ../template/default/epgsearch_new.html:412
 msgid "Use in Favorites Menu:"
-msgstr ""
+msgstr "Käytä suosikkina:"
 
 #: ../template/default/epgsearch_new.html:420
-#, fuzzy
 msgid "Use as Search Timer:"
-msgstr "Hakukentät:"
+msgstr "Käytä hakuajastimena:"
 
 #: ../template/default/epgsearch_new.html:426 ../vdradmind.pl:2272
 msgid "announce only"
-msgstr ""
+msgstr "Muistutus"
 
 #: ../template/default/epgsearch_new.html:427 ../vdradmind.pl:2274
 msgid "switch only"
-msgstr ""
+msgstr "Kanavanvaihto"
 
 #: ../template/default/epgsearch_new.html:437
 msgid "Settings for action \"record\""
-msgstr ""
+msgstr "Tallennustoiminnon asetukset"
 
 #: ../template/default/epgsearch_new.html:440
-#, fuzzy
 msgid "Series Recording:"
-msgstr "Nimeä tallenne"
+msgstr "Sarjatallennus:"
 
 #: ../template/default/epgsearch_new.html:452
-#, fuzzy
 msgid "Delete Recordings After ... Days:"
-msgstr "Poistetaanko tallenne?"
+msgstr "Poista tallenteet ... päivän jälkeen:"
 
 #: ../template/default/epgsearch_new.html:455
-#, fuzzy
 msgid "Keep ... Recordings:"
-msgstr "Tallenteet"
+msgstr "Säilytä ... tallennetta:"
 
 #: ../template/default/epgsearch_new.html:460
-#, fuzzy
 msgid "Pause, when ... recordings exist:"
-msgstr "VDR-tallenteiden polku:"
+msgstr "Keskeytä ... tallenteen jälkeen:"
 
 #: ../template/default/epgsearch_new.html:466
 msgid "Avoid Repeats:"
-msgstr ""
+msgstr "Estä uusinnat:"
 
 #: ../template/default/epgsearch_new.html:472
 msgid "Allowed Repeats:"
-msgstr ""
+msgstr "Sallittujen uusintojen lukumäärä:"
 
 #: ../template/default/epgsearch_new.html:475
 msgid "Only Repeats Within ... Days:"
-msgstr ""
+msgstr "Vain uusinnat ... päivän sisällä:"
 
 #: ../template/default/epgsearch_new.html:480
 msgid "Compare:"
-msgstr ""
+msgstr "Vertaa hakukenttiä:"
 
 #: ../template/default/epgsearch_new.html:526
-#, fuzzy
 msgid "VPS:"
-msgstr "VPS"
+msgstr "VPS-toiminto:"
 
 #: ../template/default/epgsearch_new.html:537
 msgid "Settings for action \"switch only\""
-msgstr ""
+msgstr "Kanavanvaihdon asetukset"
 
 #: ../template/default/epgsearch_new.html:540
 msgid "Switch ... Minutes Before Start:"
-msgstr ""
+msgstr "Vaihda ... minuuttia ennen alkua:"
 
 #: ../template/default/epgsearch_new.html:553
 msgid "Save as template"
-msgstr ""
+msgstr "Tallenna mallipohjaksi"
 
 #: ../template/default/at_timer_new.html:6
 #: ../template/default/at_timer_new.html:19
 msgid "Add New AutoTimer"
 msgstr "Lisää uusi hakuajastin"
 
-#: ../template/default/at_timer_new.html:37
-#: ../template/default/at_timer_new.html:41
+#: ../template/default/at_timer_new.html:39
+#: ../template/default/at_timer_new.html:43
 msgid "oneshot"
 msgstr "Kerran"
 
-#: ../template/default/at_timer_new.html:155
+#: ../template/default/at_timer_new.html:171
 msgid "Test"
 msgstr "Hae"
 
-#: ../template/default/at_timer_new.html:169
+#: ../template/default/at_timer_new.html:185
 msgid "Broadcasted"
 msgstr "Lähetysaika"
 
-#: ../template/default/at_timer_new.html:170
+#: ../template/default/at_timer_new.html:186
 #: ../template/default/epgsearch_list.html:215
 msgid "Stored in"
 msgstr "Tallennehakemisto"
 
 #: ../template/default/epgsearch_list.html:6
-#, fuzzy
 msgid "EPG search"
-msgstr "Etsi"
+msgstr "Hae ohjelmaoppaasta"
 
 #: ../template/default/epgsearch_list.html:26
-#, fuzzy
 msgid "New Search"
-msgstr "Etsi"
+msgstr "Uusi haku"
 
 #: ../template/default/epgsearch_list.html:54
-#, fuzzy
 msgid "Action"
-msgstr "Aktiivinen"
+msgstr "Toiminto"
 
 #: ../template/default/epgsearch_list.html:79
 msgid "From"
-msgstr ""
+msgstr "Aikaisintaan"
 
 #: ../template/default/epgsearch_list.html:93
-#, fuzzy
 msgid "To"
-msgstr "Alkuun"
+msgstr "Viimeistään"
 
 #: ../template/default/epgsearch_list.html:107
-#, fuzzy
 msgid "Search pattern"
-msgstr "Hakuehdot:"
+msgstr "Hakuehto"
 
 #: ../template/default/epgsearch_list.html:163
-#, fuzzy
 msgid "Find"
-msgstr "Perjantai"
+msgstr "Etsi"
 
 #: ../template/default/epgsearch_list.html:184
 msgid "Show Favorites"
-msgstr ""
+msgstr "Näytä suosikit"
 
 #: ../template/default/epgsearch_list.html:187
-#, fuzzy
 msgid "Delete Selected Searches"
-msgstr "Poista valitut ajastimet"
+msgstr "Poista valitut haut"
 
 #: ../template/default/epgsearch_list.html:187
-#, fuzzy
 msgid "Delete all selected searches?"
-msgstr "Poistetaanko valitut ajastimet?"
+msgstr "Poistetaanko kaikki valitut haut?"
 
 #: ../template/default/epgsearch_list.html:188
-#, fuzzy
 msgid "Execute Selected Searches"
-msgstr "Poista valitut ajastimet"
+msgstr "Suorita valitut haut"
 
 #: ../template/default/epgsearch_list.html:212
-#, fuzzy
 msgid "Duration"
-msgstr "Kesto:"
+msgstr "Kesto"
 
 #: ../vdradmind.pl:352
 msgid "What's your VDR hostname (e.g video.intra.net)?"
@@ -2368,16 +2331,15 @@ msgstr "URL:ia \"%s\" ei löydy palvelimelta!"
 
 #: ../vdradmind.pl:2188
 msgid "--- no timer ---"
-msgstr ""
+msgstr "-- ei ajastinta ---"
 
 #: ../vdradmind.pl:2276
-#, fuzzy
 msgid "unknown"
-msgstr "nyt"
+msgstr "tuntematon"
 
 #: ../vdradmind.pl:2279
 msgid "none"
-msgstr ""
+msgstr "-"
 
 #: ../vdradmind.pl:2734
 #, perl-format
@@ -2413,7 +2375,7 @@ msgstr "Ohjelmisto huomenna"
 #: ../vdradmind.pl:3427
 #, perl-format
 msgid "Playing on the %s"
-msgstr "Ohjelmisto %d päivä"
+msgstr "Ohjelmisto %s"
 
 #: ../vdradmind.pl:4698
 msgid "next"
@@ -2443,10 +2405,10 @@ msgstr "pitkä näkymä"
 msgid "Schedule"
 msgstr "Ohjelmisto"
 
-#: ../vdradmind.pl:5318
+#: ../vdradmind.pl:5315
 msgid "Timers"
 msgstr "Ajastimet"
 
-#: ../vdradmind.pl:5386
+#: ../vdradmind.pl:5383
 msgid "System default"
 msgstr "Oletus"

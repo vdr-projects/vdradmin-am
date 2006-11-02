@@ -8,20 +8,10 @@
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
 	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
-	<script type="text/javascript" language="JavaScript">
-		<!--
-		function new_tab(tab_nr)
-		{
-			document.FormName.new_tab.value = tab_nr;
-			document.FormName.apply.click();
-		}
-		//-->
-	</script>
 </head>
 
 <body id="config">
 	<form action="<?% url %?>" method="get" name="FormName">
-		<input type="hidden" name="new_tab" value="<?% active_tab %?>"/>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_title">
@@ -184,6 +174,7 @@
 			</tr>
 		</table>
 
+<?% IF features.AUTOTIMER %?>
 		<table border="0" cellspacing="0" cellpadding="0" class="group">
 			<tr class="heading">
 				<td colspan="2"><h2><?% gettext('AutoTimer') %?></h2></td>
@@ -252,6 +243,7 @@
 				</td>
 			</tr>
 		</table>
+<?% END %?>
 
 		<table border="0" cellspacing="0" cellpadding="0" class="group">
 			<tr class="heading">
