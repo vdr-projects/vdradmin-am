@@ -28,7 +28,7 @@
 
 require 5.004;
 
-my $VERSION = "3.5.0rc";
+my $VERSION = "3.5.0";
 my $BASENAME;
 my $EXENAME;
 
@@ -1913,7 +1913,7 @@ sub epgsearch_list {
 
     my @matches;
     my $do_test = $q->param("execute");
-        
+
     if ($do_test) {
         my $id = $q->param("id");
         unless (defined $id) {
@@ -1963,7 +1963,7 @@ sub epgsearch_list {
     }
 
     my $toggle_desc = ($CONFIG{ES_DESC} ? 0 : 1);
-    
+
     my $vars = { usercss          => $UserCSS,
                  url              => $MyURL,
                  sortbypatternurl => "$MyURL?aktion=epgsearch_list&amp;sortby=pattern&amp;desc=" . (($CONFIG{ES_SORTBY} eq "pattern") ? $toggle_desc : $CONFIG{ES_DESC}),
@@ -2164,7 +2164,7 @@ sub EpgSearchQuery {
         chomp;
         next if (length($_) == 0);
         last if(/^no results$/);
-#        Suchtimer-ID : Event-ID : Title : Subtitle : Event-Begin : Event-Ende : 
+#        Suchtimer-ID : Event-ID : Title : Subtitle : Event-Begin : Event-Ende :
 #        Kanalnummer : Timer-Start : Timer-Ende : Timer-File : hat/bekommt Timer
         my ($es_id, $event_id, $title, $subtitle, $estart, $estop, $chan, $tstart, $tstop, $tdir, $has_timer) = split(/:/);
         if ($title) {
@@ -2259,7 +2259,7 @@ sub ExtractEpgSearchConf {
          $timer->{fuzzy_tolerance},  #42 - fuzzy tolerance value for fuzzy searching
          $timer->{use_for_fav},      #43 - use this search in favorites menu (0 no, 1 yes)
          $timer->{unused}) = split(/:/, $_);
-        
+
         #format selected fields
         $timer->{time_start} =~ s/(\d\d)(\d\d)/\1:\2/ if($timer->{time_start});
         $timer->{time_stop} =~ s/(\d\d)(\d\d)/\1:\2/ if($timer->{time_stop});
@@ -3252,7 +3252,7 @@ sub prog_list {
                  }
             );
             $day = strftime("%d", localtime($event->{start}));
-        } 
+        }
         my $imdb_title = $event->{title};
         $imdb_title    =~ s/^.*\~\%*([^\~]*)$/$1/;
         push(@show,
@@ -4723,7 +4723,7 @@ sub prog_summary {
     my $label = $next ? gettext("What's on after") : gettext("What's on at");
     my $vars = { rows    => \@show,
                  now     => $displayed_time,
-                 title   => ($search ? gettext("Suitable matches for:") . " <i>" . $search . "</i>" 
+                 title   => ($search ? gettext("Suitable matches for:") . " <i>" . $search . "</i>"
                                      : $label . " " . strftime("%H:%M", localtime($event_time)) . " " . gettext("o'clock")),
                  switchview_url  => $MyURL . "?aktion=prog_summary&amp;view=" . ($view eq "ext" ? "sml" : "ext") . ($next ? "&amp;next=1" : "") . ($search ? "&amp;search=" . uri_escape($search) : "") . ($time ? "&amp;time=$time" : ""),
                  switchview_text => ($view eq "ext" ? gettext("short view") : gettext("long view")),
@@ -5277,7 +5277,7 @@ sub config {
                 $CONFIG{$_} = $q->param($_);
             }
         }
- 
+
         ValidConfig();
 
         LoadTranslation() if ($old_lang ne $CONFIG{LANG});
@@ -5290,9 +5290,12 @@ sub config {
 
     sub WriteConfig {
         open(CONF, ">$CONFFILE") || print "Can't open $CONFFILE! ($!)\n";
+        my $old_collate = setlocale(LC_COLLATE);
+        setlocale(LC_COLLATE, "C");
         for my $key (sort(keys(%CONFIG))) {
             print CONF "$key = $CONFIG{$key}\n";
         }
+        setlocale(LC_COLLATE, $old_collate);
         close(CONF);
     }
 
@@ -5508,7 +5511,7 @@ sub grab_picture {
     $CONFIG{TV_INTERVAL} = "5" unless($CONFIG{TV_INTERVAL});
     $CONFIG{TV_SIZE}     = $q->param("size")     if($q->param("size"));
     $CONFIG{TV_SIZE}     = "half" unless($CONFIG{TV_SIZE});
- 
+
     my $maxwidth  = 768;
     my $maxheight = 576;
     my ($width, $height);
