@@ -4,6 +4,12 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2006-11-24: 3.5.1beta
+- Changed: Handling of critical/colliding timers on encrypted channels in timer_list (Requested lot's of time in vdr-portal.de).
+- Fixed: Lost info on selected extepginfos if testing an epgsearch in epgsearch_new (Reported by marpiet).
+- Fixed: Didn't select the right channel group in epgsearch_new (Reported by viking).
+- Added: epgsearches can be based on epgsearch's templates.
+
 2006-11-10: 3.5.0
 - Changed: Don't use "Bitstream Vera Sans" font as default as this looks ugly on Windows (at least for some users).
 

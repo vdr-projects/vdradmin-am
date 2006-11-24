@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-31 11:26+0100\n"
+"POT-Creation-Date: 2006-11-24 12:46+0100\n"
 "PO-Revision-Date: 2006-10-27 15:42+0100\n"
 "Last-Translator: Oleg Roitburd <oleg@roitburd.de>\n"
 "Language-Team: Allrussian <LL.org>\n"
@@ -43,7 +43,7 @@ msgstr ""
 #: ../template/default/tv.html:6 ../template/default/vdr_cmds.html:5
 #: ../template/default/epgsearch_new.html:5
 #: ../template/default/at_timer_new.html:5
-#: ../template/default/epgsearch_list.html:5 ../vdradmind.pl:2740
+#: ../template/default/epgsearch_list.html:5 ../vdradmind.pl:2795
 msgid "ISO-8859-1"
 msgstr "ISO-8859-5"
 
@@ -226,33 +226,33 @@ msgstr "Новый Автотаймер"
 #: ../template/default/timer_new.html:52 ../template/default/vdr_cmds.html:20
 #: ../template/default/epgsearch_new.html:155
 #: ../template/default/at_timer_new.html:23
-#: ../template/default/epgsearch_list.html:31
+#: ../template/default/epgsearch_list.html:39
 msgid "Help"
 msgstr "Помощь"
 
 #: ../template/default/at_timer_list.html:57
 #: ../template/default/timer_list.html:193
-#: ../template/default/epgsearch_list.html:43
+#: ../template/default/epgsearch_list.html:51
 msgid "Active"
 msgstr "Активировано"
 
 #: ../template/default/at_timer_list.html:68
 #: ../template/default/timer_list.html:204
-#: ../template/default/epgsearch_list.html:65
-#: ../template/default/epgsearch_list.html:67
-#: ../template/default/epgsearch_list.html:214
+#: ../template/default/epgsearch_list.html:73
+#: ../template/default/epgsearch_list.html:75
+#: ../template/default/epgsearch_list.html:223
 msgid "Channel"
 msgstr "Канал"
 
 #: ../template/default/at_timer_list.html:79
 #: ../template/default/timer_list.html:226
-#: ../template/default/epgsearch_list.html:81
+#: ../template/default/epgsearch_list.html:89
 msgid "Start"
 msgstr "Начало"
 
 #: ../template/default/at_timer_list.html:90
 #: ../template/default/timer_list.html:237
-#: ../template/default/epgsearch_list.html:95
+#: ../template/default/epgsearch_list.html:103
 msgid "Stop"
 msgstr "Конец"
 
@@ -265,7 +265,7 @@ msgstr "Имя"
 #: ../template/default/at_timer_list.html:112
 #: ../template/default/rec_list.html:85
 #: ../template/default/timer_list.html:259
-#: ../template/default/epgsearch_list.html:117
+#: ../template/default/epgsearch_list.html:125
 msgid "Select all/none"
 msgstr "Выбрать все или ничего"
 
@@ -285,7 +285,7 @@ msgstr "Выбрать все или ничего"
 #: ../template/default/at_timer_new.html:41
 #: ../template/default/at_timer_new.html:112
 #: ../template/default/at_timer_new.html:155
-#: ../template/default/epgsearch_list.html:125
+#: ../template/default/epgsearch_list.html:133
 msgid "Yes"
 msgstr "Да"
 
@@ -305,32 +305,33 @@ msgstr "Да"
 #: ../template/default/at_timer_new.html:42
 #: ../template/default/at_timer_new.html:113
 #: ../template/default/at_timer_new.html:156
-#: ../template/default/epgsearch_list.html:127
+#: ../template/default/epgsearch_list.html:135
 msgid "No"
 msgstr "Нет"
 
 #: ../template/default/at_timer_list.html:143
 #: ../template/default/at_timer_list.html:148
 #: ../template/default/timer_list.html:312
-#: ../template/default/epgsearch_list.html:158
 #: ../template/default/epgsearch_list.html:166
+#: ../template/default/epgsearch_list.html:174
 msgid "Edit"
 msgstr "Редактировать"
 
 #: ../template/default/at_timer_list.html:153
 #: ../template/default/timer_list.html:315
-#: ../template/default/epgsearch_list.html:169
+#: ../template/default/epgsearch_list.html:177
 msgid "Delete timer?"
 msgstr "Удалить таймер?"
 
 #: ../template/default/at_timer_list.html:153
 #: ../template/default/rec_list.html:118
 #: ../template/default/timer_list.html:315
-#: ../template/default/epgsearch_list.html:169
+#: ../template/default/epgsearch_list.html:177
 msgid "Delete"
 msgstr "Удалить"
 
 #: ../template/default/at_timer_list.html:168
+#: ../template/default/epgsearch_list.html:193
 msgid "Force Update"
 msgstr "Произвести обновление"
 
@@ -436,7 +437,7 @@ msgstr "Пароль для гостя:"
 #: ../template/default/config.html:158 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:80
 #: ../template/default/navigation.html:35
-#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:5315
+#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:5372
 msgid "Timeline"
 msgstr "График времени"
 
@@ -1390,7 +1391,7 @@ msgstr ""
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5315
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5372
 msgid "Recordings"
 msgstr "Записи"
 
@@ -1710,11 +1711,11 @@ msgstr "Ваш Броузер не поддерживает фреймы!"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5315
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5372
 msgid "What's On Now?"
 msgstr "Что идет сейчас?"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5315
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5372
 msgid "Playing Today?"
 msgstr "Что будет сегодня?"
 
@@ -1722,7 +1723,7 @@ msgstr "Что будет сегодня?"
 #: ../template/default/prog_list2.html:56
 #: ../template/default/prog_summary.html:48
 #: ../template/default/prog_summary2.html:85
-#: ../template/default/epgsearch_list.html:246 ../vdradmind.pl:5315
+#: ../template/default/epgsearch_list.html:255 ../vdradmind.pl:5372
 msgid "Channels"
 msgstr "Телегид"
 
@@ -1774,7 +1775,7 @@ msgid "view"
 msgstr "переключить"
 
 #: ../template/default/prog_detail.html:37
-#: ../template/default/epgsearch_new.html:425 ../vdradmind.pl:2270
+#: ../template/default/epgsearch_new.html:425 ../vdradmind.pl:2320
 msgid "record"
 msgstr "записать"
 
@@ -1825,7 +1826,7 @@ msgstr "Стартовать!"
 #: ../template/default/prog_summary2.html:70
 #: ../template/default/prog_summary2.html:99
 #: ../template/default/epgsearch_new.html:181
-#: ../template/default/epgsearch_list.html:232
+#: ../template/default/epgsearch_list.html:241
 msgid "More Information"
 msgstr "Дополнительная информация"
 
@@ -1858,7 +1859,7 @@ msgstr "Записать передачу"
 msgid "No EPG information available"
 msgstr "Нет EPG информации"
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3427
+#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3482
 msgid "Playing Today"
 msgstr "Что будет сегодня?"
 
@@ -1877,8 +1878,8 @@ msgstr "Начать в"
 #: ../template/default/epgsearch_new.html:336
 #: ../template/default/epgsearch_new.html:343
 #: ../template/default/at_timer_new.html:95
-#: ../template/default/at_timer_new.html:105 ../vdradmind.pl:4708
-#: ../vdradmind.pl:4721
+#: ../template/default/at_timer_new.html:105 ../vdradmind.pl:4762
+#: ../vdradmind.pl:4775
 msgid "o'clock"
 msgstr "Часов"
 
@@ -1889,12 +1890,12 @@ msgid "What's on:"
 msgstr "Что сейчас:"
 
 #: ../template/default/prog_summary.html:33
-#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4708
+#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4762
 msgid "at"
 msgstr "в"
 
 #: ../template/default/prog_timeline.html:76
-#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4693
+#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4747
 msgid "now"
 msgstr "сейчас"
 
@@ -2213,7 +2214,7 @@ msgstr "Спрятать результаты"
 
 #: ../template/default/epgsearch_new.html:204
 #: ../template/default/at_timer_new.html:198
-#: ../template/default/epgsearch_list.html:255
+#: ../template/default/epgsearch_list.html:264
 msgid "No matches found!"
 msgstr "Нет результатов!"
 
@@ -2265,7 +2266,7 @@ msgstr "Поиск условия:"
 #: ../template/default/epgsearch_new.html:483
 #: ../template/default/at_timer_new.html:58
 #: ../template/default/at_timer_new.html:183
-#: ../template/default/epgsearch_list.html:213
+#: ../template/default/epgsearch_list.html:222
 msgid "Title"
 msgstr "Заголовок"
 
@@ -2369,11 +2370,11 @@ msgstr "Использовать фаворитное меню:"
 msgid "Use as Search Timer:"
 msgstr "Использовать как поиск таймера:"
 
-#: ../template/default/epgsearch_new.html:426 ../vdradmind.pl:2272
+#: ../template/default/epgsearch_new.html:426 ../vdradmind.pl:2322
 msgid "announce only"
 msgstr "только анонсы"
 
-#: ../template/default/epgsearch_new.html:427 ../vdradmind.pl:2274
+#: ../template/default/epgsearch_new.html:427 ../vdradmind.pl:2324
 msgid "switch only"
 msgstr "только переключится"
 
@@ -2448,7 +2449,7 @@ msgid "Broadcasted"
 msgstr "Вещялось"
 
 #: ../template/default/at_timer_new.html:186
-#: ../template/default/epgsearch_list.html:215
+#: ../template/default/epgsearch_list.html:224
 msgid "Stored in"
 msgstr "Сохраненно в"
 
@@ -2456,47 +2457,52 @@ msgstr "Сохраненно в"
 msgid "EPG search"
 msgstr "ЕПГ поиск"
 
-#: ../template/default/epgsearch_list.html:26
+#: ../template/default/epgsearch_list.html:27
+#, fuzzy
+msgid "Use template"
+msgstr "Запомнить шаблон"
+
+#: ../template/default/epgsearch_list.html:34
 msgid "New Search"
 msgstr "Новый поиск"
 
-#: ../template/default/epgsearch_list.html:54
+#: ../template/default/epgsearch_list.html:62
 msgid "Action"
 msgstr "Действие"
 
-#: ../template/default/epgsearch_list.html:79
+#: ../template/default/epgsearch_list.html:87
 msgid "From"
 msgstr "С"
 
-#: ../template/default/epgsearch_list.html:93
+#: ../template/default/epgsearch_list.html:101
 msgid "To"
 msgstr "К"
 
-#: ../template/default/epgsearch_list.html:107
+#: ../template/default/epgsearch_list.html:115
 msgid "Search pattern"
 msgstr "Поисковые признаки"
 
-#: ../template/default/epgsearch_list.html:163
+#: ../template/default/epgsearch_list.html:171
 msgid "Find"
 msgstr "Поиск"
 
-#: ../template/default/epgsearch_list.html:184
+#: ../template/default/epgsearch_list.html:192
 msgid "Show Favorites"
 msgstr "Показать фавориты"
 
-#: ../template/default/epgsearch_list.html:187
+#: ../template/default/epgsearch_list.html:196
 msgid "Delete Selected Searches"
 msgstr "Удалить выбранные поиски"
 
-#: ../template/default/epgsearch_list.html:187
+#: ../template/default/epgsearch_list.html:196
 msgid "Delete all selected searches?"
 msgstr "Удалить все выбранные поиски?"
 
-#: ../template/default/epgsearch_list.html:188
+#: ../template/default/epgsearch_list.html:197
 msgid "Execute Selected Searches"
 msgstr "Выполнить выбранные поиски"
 
-#: ../template/default/epgsearch_list.html:212
+#: ../template/default/epgsearch_list.html:221
 msgid "Duration"
 msgstr "Продолжительность"
 
@@ -2542,50 +2548,65 @@ msgstr "Файл конфигурации успешно записан."
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s был запущен с PID-ом %d."
 
-#: ../vdradmind.pl:486 ../vdradmind.pl:1117 ../vdradmind.pl:2728
+#: ../vdradmind.pl:486 ../vdradmind.pl:1118 ../vdradmind.pl:2783
 msgid "Not found"
 msgstr "Не найдено"
 
-#: ../vdradmind.pl:486 ../vdradmind.pl:2729
+#: ../vdradmind.pl:486 ../vdradmind.pl:2784
 msgid "The requested URL was not found on this server!"
 msgstr "Затребованный URL не был найден на этом сервере!"
 
-#: ../vdradmind.pl:563 ../vdradmind.pl:1113 ../vdradmind.pl:2731
+#: ../vdradmind.pl:564 ../vdradmind.pl:1114 ../vdradmind.pl:2786
 msgid "Forbidden"
 msgstr "Запрещено"
 
-#: ../vdradmind.pl:563 ../vdradmind.pl:2732
+#: ../vdradmind.pl:564 ../vdradmind.pl:2787
 msgid "You don't have permission to access this function!"
 msgstr "У вас недостаточно прав для вызова этой функции!"
 
-#: ../vdradmind.pl:1113 ../vdradmind.pl:2733
+#: ../vdradmind.pl:1114 ../vdradmind.pl:2788
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "В доступе к файлу \"%s\" отказанно!"
 
-#: ../vdradmind.pl:1117 ../vdradmind.pl:2730
+#: ../vdradmind.pl:1118 ../vdradmind.pl:2785
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "URL \"%s\" не был найден на этом сервере!"
 
-#: ../vdradmind.pl:2188
+#: ../vdradmind.pl:1979
+#, fuzzy
+msgid "Your favorites"
+msgstr "Показать фавориты"
+
+#: ../vdradmind.pl:1979
+#, fuzzy
+msgid "Search results"
+msgstr "Спрятать результаты"
+
+#: ../vdradmind.pl:2118
+#, fuzzy
+msgid "Default"
+msgstr "Удалить"
+
+#: ../vdradmind.pl:2236
 msgid "--- no timer ---"
 msgstr "--- нет таймера ---"
 
-#: ../vdradmind.pl:2276
+#: ../vdradmind.pl:2326
 msgid "unknown"
 msgstr "неизвестно"
 
-#: ../vdradmind.pl:2279
+#: ../vdradmind.pl:2329
 msgid "none"
 msgstr "нет"
 
-#: ../vdradmind.pl:2734
+#: ../vdradmind.pl:2789
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Не может открыть файл \"%s\"!"
 
-#: ../vdradmind.pl:2735
+#: ../vdradmind.pl:2790
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
@@ -2594,61 +2615,61 @@ msgstr ""
 "Не могу соединиться с VDR  %s:%s<br /><br />Проконтролируйте VDR и "
 "svdrphosts.conf"
 
-#: ../vdradmind.pl:2736
+#: ../vdradmind.pl:2791
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Ошибка при отправлении команды к %s"
 
-#: ../vdradmind.pl:2792
+#: ../vdradmind.pl:2847
 msgid "Internal error:"
 msgstr "Внутренняя ошибка:"
 
-#: ../vdradmind.pl:3164
+#: ../vdradmind.pl:3219
 msgid "Can't find EPG entry!"
 msgstr "Нет EPG записей!"
 
-#: ../vdradmind.pl:3427
+#: ../vdradmind.pl:3482
 msgid "Playing Tomorrow"
 msgstr "Программа на завтра"
 
-#: ../vdradmind.pl:3427
+#: ../vdradmind.pl:3482
 #, perl-format
 msgid "Playing on the %s"
 msgstr "Воспроизвести %s."
 
-#: ../vdradmind.pl:4698
+#: ../vdradmind.pl:4752
 msgid "next"
 msgstr "след."
 
-#: ../vdradmind.pl:4717
+#: ../vdradmind.pl:4771
 msgid "What's on after"
 msgstr "Что потом"
 
-#: ../vdradmind.pl:4717
+#: ../vdradmind.pl:4771
 msgid "What's on at"
 msgstr "Что в:"
 
-#: ../vdradmind.pl:4720
+#: ../vdradmind.pl:4774
 msgid "Suitable matches for:"
 msgstr "Результаты поиска для"
 
-#: ../vdradmind.pl:4723
+#: ../vdradmind.pl:4777
 msgid "short view"
 msgstr "сокращенная информация"
 
-#: ../vdradmind.pl:4723
+#: ../vdradmind.pl:4777
 msgid "long view"
 msgstr "Расширенная информация"
 
-#: ../vdradmind.pl:4772
+#: ../vdradmind.pl:4826
 msgid "Schedule"
 msgstr "Расписание"
 
-#: ../vdradmind.pl:5315
+#: ../vdradmind.pl:5372
 msgid "Timers"
 msgstr "Таймеры"
 
-#: ../vdradmind.pl:5383
+#: ../vdradmind.pl:5440
 msgid "System default"
 msgstr "Системный стандарт"
 

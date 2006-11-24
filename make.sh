@@ -73,7 +73,7 @@ function do_dist()
 	cp -a po/*.po po/*.pot $TMPDIR/$DIST_NAME/po
 	(
 		cd $TMPDIR
-		tar --exclude CVS -cjf $DIST_NAME.tar.bz2 $DIST_NAME
+		tar --exclude CVS --exclude '.#*' -cjf $DIST_NAME.tar.bz2 $DIST_NAME
 		rm -rf $TMPDIR/$DIST_NAME
 	)
 	mv $TMPDIR/$DIST_NAME.tar.bz2 .

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-31 11:26+0100\n"
+"POT-Creation-Date: 2006-11-24 12:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,7 +35,7 @@ msgstr ""
 #: ../template/default/tv.html:6 ../template/default/vdr_cmds.html:5
 #: ../template/default/epgsearch_new.html:5
 #: ../template/default/at_timer_new.html:5
-#: ../template/default/epgsearch_list.html:5 ../vdradmind.pl:2740
+#: ../template/default/epgsearch_list.html:5 ../vdradmind.pl:2795
 msgid "ISO-8859-1"
 msgstr ""
 
@@ -202,33 +202,33 @@ msgstr ""
 #: ../template/default/timer_new.html:52 ../template/default/vdr_cmds.html:20
 #: ../template/default/epgsearch_new.html:155
 #: ../template/default/at_timer_new.html:23
-#: ../template/default/epgsearch_list.html:31
+#: ../template/default/epgsearch_list.html:39
 msgid "Help"
 msgstr ""
 
 #: ../template/default/at_timer_list.html:57
 #: ../template/default/timer_list.html:193
-#: ../template/default/epgsearch_list.html:43
+#: ../template/default/epgsearch_list.html:51
 msgid "Active"
 msgstr ""
 
 #: ../template/default/at_timer_list.html:68
 #: ../template/default/timer_list.html:204
-#: ../template/default/epgsearch_list.html:65
-#: ../template/default/epgsearch_list.html:67
-#: ../template/default/epgsearch_list.html:214
+#: ../template/default/epgsearch_list.html:73
+#: ../template/default/epgsearch_list.html:75
+#: ../template/default/epgsearch_list.html:223
 msgid "Channel"
 msgstr ""
 
 #: ../template/default/at_timer_list.html:79
 #: ../template/default/timer_list.html:226
-#: ../template/default/epgsearch_list.html:81
+#: ../template/default/epgsearch_list.html:89
 msgid "Start"
 msgstr ""
 
 #: ../template/default/at_timer_list.html:90
 #: ../template/default/timer_list.html:237
-#: ../template/default/epgsearch_list.html:95
+#: ../template/default/epgsearch_list.html:103
 msgid "Stop"
 msgstr ""
 
@@ -241,7 +241,7 @@ msgstr ""
 #: ../template/default/at_timer_list.html:112
 #: ../template/default/rec_list.html:85
 #: ../template/default/timer_list.html:259
-#: ../template/default/epgsearch_list.html:117
+#: ../template/default/epgsearch_list.html:125
 msgid "Select all/none"
 msgstr ""
 
@@ -261,7 +261,7 @@ msgstr ""
 #: ../template/default/at_timer_new.html:41
 #: ../template/default/at_timer_new.html:112
 #: ../template/default/at_timer_new.html:155
-#: ../template/default/epgsearch_list.html:125
+#: ../template/default/epgsearch_list.html:133
 msgid "Yes"
 msgstr ""
 
@@ -281,32 +281,33 @@ msgstr ""
 #: ../template/default/at_timer_new.html:42
 #: ../template/default/at_timer_new.html:113
 #: ../template/default/at_timer_new.html:156
-#: ../template/default/epgsearch_list.html:127
+#: ../template/default/epgsearch_list.html:135
 msgid "No"
 msgstr ""
 
 #: ../template/default/at_timer_list.html:143
 #: ../template/default/at_timer_list.html:148
 #: ../template/default/timer_list.html:312
-#: ../template/default/epgsearch_list.html:158
 #: ../template/default/epgsearch_list.html:166
+#: ../template/default/epgsearch_list.html:174
 msgid "Edit"
 msgstr ""
 
 #: ../template/default/at_timer_list.html:153
 #: ../template/default/timer_list.html:315
-#: ../template/default/epgsearch_list.html:169
+#: ../template/default/epgsearch_list.html:177
 msgid "Delete timer?"
 msgstr ""
 
 #: ../template/default/at_timer_list.html:153
 #: ../template/default/rec_list.html:118
 #: ../template/default/timer_list.html:315
-#: ../template/default/epgsearch_list.html:169
+#: ../template/default/epgsearch_list.html:177
 msgid "Delete"
 msgstr ""
 
 #: ../template/default/at_timer_list.html:168
+#: ../template/default/epgsearch_list.html:193
 msgid "Force Update"
 msgstr ""
 
@@ -412,7 +413,7 @@ msgstr ""
 #: ../template/default/config.html:158 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:80
 #: ../template/default/navigation.html:35
-#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:5315
+#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:5372
 msgid "Timeline"
 msgstr ""
 
@@ -1181,7 +1182,7 @@ msgstr ""
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5315
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5372
 msgid "Recordings"
 msgstr ""
 
@@ -1403,11 +1404,11 @@ msgstr ""
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5315
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5372
 msgid "What's On Now?"
 msgstr ""
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5315
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5372
 msgid "Playing Today?"
 msgstr ""
 
@@ -1415,7 +1416,7 @@ msgstr ""
 #: ../template/default/prog_list2.html:56
 #: ../template/default/prog_summary.html:48
 #: ../template/default/prog_summary2.html:85
-#: ../template/default/epgsearch_list.html:246 ../vdradmind.pl:5315
+#: ../template/default/epgsearch_list.html:255 ../vdradmind.pl:5372
 msgid "Channels"
 msgstr ""
 
@@ -1465,7 +1466,7 @@ msgid "view"
 msgstr ""
 
 #: ../template/default/prog_detail.html:37
-#: ../template/default/epgsearch_new.html:425 ../vdradmind.pl:2270
+#: ../template/default/epgsearch_new.html:425 ../vdradmind.pl:2320
 msgid "record"
 msgstr ""
 
@@ -1516,7 +1517,7 @@ msgstr ""
 #: ../template/default/prog_summary2.html:70
 #: ../template/default/prog_summary2.html:99
 #: ../template/default/epgsearch_new.html:181
-#: ../template/default/epgsearch_list.html:232
+#: ../template/default/epgsearch_list.html:241
 msgid "More Information"
 msgstr ""
 
@@ -1549,7 +1550,7 @@ msgstr ""
 msgid "No EPG information available"
 msgstr ""
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3427
+#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3482
 msgid "Playing Today"
 msgstr ""
 
@@ -1568,8 +1569,8 @@ msgstr ""
 #: ../template/default/epgsearch_new.html:336
 #: ../template/default/epgsearch_new.html:343
 #: ../template/default/at_timer_new.html:95
-#: ../template/default/at_timer_new.html:105 ../vdradmind.pl:4708
-#: ../vdradmind.pl:4721
+#: ../template/default/at_timer_new.html:105 ../vdradmind.pl:4762
+#: ../vdradmind.pl:4775
 msgid "o'clock"
 msgstr ""
 
@@ -1580,12 +1581,12 @@ msgid "What's on:"
 msgstr ""
 
 #: ../template/default/prog_summary.html:33
-#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4708
+#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4762
 msgid "at"
 msgstr ""
 
 #: ../template/default/prog_timeline.html:76
-#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4693
+#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4747
 msgid "now"
 msgstr ""
 
@@ -1904,7 +1905,7 @@ msgstr ""
 
 #: ../template/default/epgsearch_new.html:204
 #: ../template/default/at_timer_new.html:198
-#: ../template/default/epgsearch_list.html:255
+#: ../template/default/epgsearch_list.html:264
 msgid "No matches found!"
 msgstr ""
 
@@ -1956,7 +1957,7 @@ msgstr ""
 #: ../template/default/epgsearch_new.html:483
 #: ../template/default/at_timer_new.html:58
 #: ../template/default/at_timer_new.html:183
-#: ../template/default/epgsearch_list.html:213
+#: ../template/default/epgsearch_list.html:222
 msgid "Title"
 msgstr ""
 
@@ -2060,11 +2061,11 @@ msgstr ""
 msgid "Use as Search Timer:"
 msgstr ""
 
-#: ../template/default/epgsearch_new.html:426 ../vdradmind.pl:2272
+#: ../template/default/epgsearch_new.html:426 ../vdradmind.pl:2322
 msgid "announce only"
 msgstr ""
 
-#: ../template/default/epgsearch_new.html:427 ../vdradmind.pl:2274
+#: ../template/default/epgsearch_new.html:427 ../vdradmind.pl:2324
 msgid "switch only"
 msgstr ""
 
@@ -2139,7 +2140,7 @@ msgid "Broadcasted"
 msgstr ""
 
 #: ../template/default/at_timer_new.html:186
-#: ../template/default/epgsearch_list.html:215
+#: ../template/default/epgsearch_list.html:224
 msgid "Stored in"
 msgstr ""
 
@@ -2147,47 +2148,51 @@ msgstr ""
 msgid "EPG search"
 msgstr ""
 
-#: ../template/default/epgsearch_list.html:26
+#: ../template/default/epgsearch_list.html:27
+msgid "Use template"
+msgstr ""
+
+#: ../template/default/epgsearch_list.html:34
 msgid "New Search"
 msgstr ""
 
-#: ../template/default/epgsearch_list.html:54
+#: ../template/default/epgsearch_list.html:62
 msgid "Action"
 msgstr ""
 
-#: ../template/default/epgsearch_list.html:79
+#: ../template/default/epgsearch_list.html:87
 msgid "From"
 msgstr ""
 
-#: ../template/default/epgsearch_list.html:93
+#: ../template/default/epgsearch_list.html:101
 msgid "To"
 msgstr ""
 
-#: ../template/default/epgsearch_list.html:107
+#: ../template/default/epgsearch_list.html:115
 msgid "Search pattern"
 msgstr ""
 
-#: ../template/default/epgsearch_list.html:163
+#: ../template/default/epgsearch_list.html:171
 msgid "Find"
 msgstr ""
 
-#: ../template/default/epgsearch_list.html:184
+#: ../template/default/epgsearch_list.html:192
 msgid "Show Favorites"
 msgstr ""
 
-#: ../template/default/epgsearch_list.html:187
+#: ../template/default/epgsearch_list.html:196
 msgid "Delete Selected Searches"
 msgstr ""
 
-#: ../template/default/epgsearch_list.html:187
+#: ../template/default/epgsearch_list.html:196
 msgid "Delete all selected searches?"
 msgstr ""
 
-#: ../template/default/epgsearch_list.html:188
+#: ../template/default/epgsearch_list.html:197
 msgid "Execute Selected Searches"
 msgstr ""
 
-#: ../template/default/epgsearch_list.html:212
+#: ../template/default/epgsearch_list.html:221
 msgid "Duration"
 msgstr ""
 
@@ -2232,110 +2237,122 @@ msgstr ""
 msgid "vdradmind.pl %s started with pid %d."
 msgstr ""
 
-#: ../vdradmind.pl:486 ../vdradmind.pl:1117 ../vdradmind.pl:2728
+#: ../vdradmind.pl:486 ../vdradmind.pl:1118 ../vdradmind.pl:2783
 msgid "Not found"
 msgstr ""
 
-#: ../vdradmind.pl:486 ../vdradmind.pl:2729
+#: ../vdradmind.pl:486 ../vdradmind.pl:2784
 msgid "The requested URL was not found on this server!"
 msgstr ""
 
-#: ../vdradmind.pl:563 ../vdradmind.pl:1113 ../vdradmind.pl:2731
+#: ../vdradmind.pl:564 ../vdradmind.pl:1114 ../vdradmind.pl:2786
 msgid "Forbidden"
 msgstr ""
 
-#: ../vdradmind.pl:563 ../vdradmind.pl:2732
+#: ../vdradmind.pl:564 ../vdradmind.pl:2787
 msgid "You don't have permission to access this function!"
 msgstr ""
 
-#: ../vdradmind.pl:1113 ../vdradmind.pl:2733
+#: ../vdradmind.pl:1114 ../vdradmind.pl:2788
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr ""
 
-#: ../vdradmind.pl:1117 ../vdradmind.pl:2730
+#: ../vdradmind.pl:1118 ../vdradmind.pl:2785
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr ""
 
-#: ../vdradmind.pl:2188
+#: ../vdradmind.pl:1979
+msgid "Your favorites"
+msgstr ""
+
+#: ../vdradmind.pl:1979
+msgid "Search results"
+msgstr ""
+
+#: ../vdradmind.pl:2118
+msgid "Default"
+msgstr ""
+
+#: ../vdradmind.pl:2236
 msgid "--- no timer ---"
 msgstr ""
 
-#: ../vdradmind.pl:2276
+#: ../vdradmind.pl:2326
 msgid "unknown"
 msgstr ""
 
-#: ../vdradmind.pl:2279
+#: ../vdradmind.pl:2329
 msgid "none"
 msgstr ""
 
-#: ../vdradmind.pl:2734
+#: ../vdradmind.pl:2789
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr ""
 
-#: ../vdradmind.pl:2735
+#: ../vdradmind.pl:2790
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
 "if VDR's svdrphosts.conf is configured correctly."
 msgstr ""
 
-#: ../vdradmind.pl:2736
+#: ../vdradmind.pl:2791
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr ""
 
-#: ../vdradmind.pl:2792
+#: ../vdradmind.pl:2847
 msgid "Internal error:"
 msgstr ""
 
-#: ../vdradmind.pl:3164
+#: ../vdradmind.pl:3219
 msgid "Can't find EPG entry!"
 msgstr ""
 
-#: ../vdradmind.pl:3427
+#: ../vdradmind.pl:3482
 msgid "Playing Tomorrow"
 msgstr ""
 
-#: ../vdradmind.pl:3427
+#: ../vdradmind.pl:3482
 #, perl-format
 msgid "Playing on the %s"
 msgstr ""
 
-#: ../vdradmind.pl:4698
+#: ../vdradmind.pl:4752
 msgid "next"
 msgstr ""
 
-#: ../vdradmind.pl:4717
+#: ../vdradmind.pl:4771
 msgid "What's on after"
 msgstr ""
 
-#: ../vdradmind.pl:4717
+#: ../vdradmind.pl:4771
 msgid "What's on at"
 msgstr ""
 
-#: ../vdradmind.pl:4720
+#: ../vdradmind.pl:4774
 msgid "Suitable matches for:"
 msgstr ""
 
-#: ../vdradmind.pl:4723
+#: ../vdradmind.pl:4777
 msgid "short view"
 msgstr ""
 
-#: ../vdradmind.pl:4723
+#: ../vdradmind.pl:4777
 msgid "long view"
 msgstr ""
 
-#: ../vdradmind.pl:4772
+#: ../vdradmind.pl:4826
 msgid "Schedule"
 msgstr ""
 
-#: ../vdradmind.pl:5315
+#: ../vdradmind.pl:5372
 msgid "Timers"
 msgstr ""
 
-#: ../vdradmind.pl:5383
+#: ../vdradmind.pl:5440
 msgid "System default"
 msgstr ""

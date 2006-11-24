@@ -28,7 +28,7 @@
 
 require 5.004;
 
-my $VERSION = "3.5.0";
+my $VERSION = "3.5.1beta";
 my $BASENAME;
 my $EXENAME;
 
@@ -1933,6 +1933,7 @@ sub epgsearch_list {
         @matches = EpgSearchQuery("plug epgsearch qryf") if ($do_test);
     }
 
+    my @templates = GetEpgSearchTemplates();
     my @searches;
     for (ParseEpgSearch(undef)) {
         $_->{modurl}  = $MyURL . "?aktion=epgsearch_edit&amp;id=" . $_->{id};
@@ -1975,8 +1976,9 @@ sub epgsearch_list {
                  sortbyaction     => ($CONFIG{ES_SORTBY} eq "action")  ? 1 : 0,
                  searches         => \@searches,
                  did_search       => $do_test,
-                 title            => $do_test ? ($q->param("favorites") ? "Your favorites" : "Search results") : undef,
-                 matches          => (@matches ? \@matches : undef)
+                 title            => $do_test ? ($q->param("favorites") ? gettext("Your favorites") : gettext("Search results")) : undef,
+                 matches          => (@matches ? \@matches : undef),
+                 templates        => \@templates
     };
     return showTemplate("epgsearch_list.html", $vars);
 }
@@ -1993,9 +1995,10 @@ sub epgsearch_edit {
 
     if ($do_test) {
         # test search
-        $search = $q->Vars();
+        my $temp = epgsearch_Param2Line();
+        $search = ExtractEpgSearchConf(($id ? $id : "0") . ":" . $temp);
         @sel_bl = $q->param("sel_blacklists");
-        @matches = EpgSearchQuery("plug epgsearch qrys 0:" . epgsearch_Param2Line());
+        @matches = EpgSearchQuery("plug epgsearch qrys 0:" . $temp);
     } elsif (defined $id) {
         # edit search
         my @temp = ParseEpgSearch($id);
@@ -2003,12 +2006,20 @@ sub epgsearch_edit {
         @sel_bl = split(/\|/, $search->{sel_blacklists});
     } else {
         # new search
-        $search->{use_title}    = 1;
-        $search->{use_subtitle} = 1;
-        $search->{use_descr}    = 1;
-        $search->{comp_title}    = 1;
-        $search->{comp_subtitle} = 1;
-        $search->{comp_descr}    = 1;
+        if (defined $q->param("template")) {
+            my @temp = GetEpgSearchTemplate($q->param("template"));
+            $search = pop @temp;
+            $search->{pattern} = ""; # don't want the template's name as search pattern
+            @sel_bl = split(/\|/, $search->{sel_blacklists});
+        } else {
+            #TODO: defaults for PRIO, LFT, BUFFER START/STOP
+            $search->{use_title}    = 1;
+            $search->{use_subtitle} = 1;
+            $search->{use_descr}    = 1;
+            $search->{comp_title}    = 1;
+            $search->{comp_subtitle} = 1;
+            $search->{comp_descr}    = 1;
+        }
     }
 
     if (@sel_bl) {
@@ -2025,9 +2036,9 @@ sub epgsearch_edit {
         @blacklists = ParseEpgSearchBlacklists(undef);
     }
 
-    if ($search->{use_channels} == 2) {
+    if ($search->{use_channel} == 2) {
         for my $cg (ParseEpgSearchChanGroups(undef)) {
-            $cg->{sel} = 1 if ($cg->{id} == $search->{channels}) ;
+            $cg->{sel} = 1 if ($cg->{id} eq $search->{channels}) ;
             push(@ch_groups, $cg);
         }
     } else {
@@ -2084,6 +2095,42 @@ sub ParseEpgSearchBlacklists {
         next if (length($_) == 0);
         last if (/^no blacklists defined$/);
 
+        push(@temp, ExtractEpgSearchConf($_));
+    }
+
+    return @temp;
+}
+
+sub GetEpgSearchTemplates {
+    my $def_template = 0;;
+    for (SendCMD("plug epgsearch deft")) {
+        chomp;
+        next if (length($_) == 0);
+        $def_template = $_;
+    }
+    my @temp;
+    for (SendCMD("plug epgsearch lstt")) {
+        chomp;
+        next if (length($_) == 0);
+        last if (/^no search templates defined$/);
+        my $template = ExtractEpgSearchConf($_);
+        if ($template->{id} == $def_template) {
+           $template->{pattern} .= " (" . gettext("Default") . ")";
+           $template->{sel} = 1;
+        }
+        push(@temp, $template);
+    }
+
+    return @temp;
+}
+
+sub GetEpgSearchTemplate {
+    my $id = shift;
+    my @temp;
+    for (SendCMD("plug epgsearch lstt $id")) {
+        chomp;
+        next if (length($_) == 0);
+        last if (/^search template id .* not defined$/);
         push(@temp, ExtractEpgSearchConf($_));
     }
 
@@ -2196,6 +2243,8 @@ sub EpgSearchQuery {
 }
 
 sub ExtractEpgSearchConf {
+    my $line = shift;
+
     my $timer;
         ($timer->{id},               # 1 - unique search timer id
          $timer->{pattern},          # 2 - the search term
@@ -2258,7 +2307,7 @@ sub ExtractEpgSearchConf {
          $timer->{sel_blacklists},   #41 - selected blacklist IDs separated with '|'
          $timer->{fuzzy_tolerance},  #42 - fuzzy tolerance value for fuzzy searching
          $timer->{use_for_fav},      #43 - use this search in favorites menu (0 no, 1 yes)
-         $timer->{unused}) = split(/:/, $_);
+         $timer->{unused}) = split(/:/, $line);
 
         #format selected fields
         $timer->{time_start} =~ s/(\d\d)(\d\d)/\1:\2/ if($timer->{time_start});
@@ -3535,7 +3584,8 @@ sub timer_list {
                             # Beide Timer laufen auf dem gleichen CAM auf verschiedenen
                             # Kanaelen, davon kann nur einer aufgenommen werden
                             Log(LOG_DEBUG, "Beide Kanaele gleiches CAM");
-                            ($timer[$ii]->{collision}) = $CONFIG{RECORDINGS};
+                            #($timer[$ii]->{collision}) = $CONFIG{RECORDINGS}; #OLDIMPL
+                            ($timer[$ii]->{collision})++; #NEWIMPL
 
                             # Nur Kosmetik: Transponderliste vervollstaendigen
                             push(@Transponder, $timer[$jj]->{transponder});
@@ -3575,7 +3625,7 @@ sub timer_list {
                     }
                 }
             }
-            $timer[$ii]->{collision} |= ($timer[$ii]->{ca} >= 100);
+            #$timer[$ii]->{collision} |= ($timer[$ii]->{ca} >= 100); #OLDIMPL
         }
     }
 
@@ -4523,14 +4573,12 @@ sub prog_timeline {
         foreach my $event (sort { $a->{start} <=> $b->{start} } @{ $EPG{$_} }) {    # Events durchgehen
             next if ($event->{stop} <= $start_time or $event->{start} >= $event_time_to);
 
-            my $title = $event->{title};
-            $title =~ s/"/\&quot;/g;
             my $progname = $event->{channel_name};
-            $progname =~ s/"/\&quot;/g;
+            $progname =~ s/\"/\&quot;/g;
             push(@show,
                  {  start    => $event->{start},
                     stop     => $event->{stop},
-                    title    => $title,
+                    title    => $event->{title},
                     subtitle => (($event->{subtitle} && length($event->{subtitle}) > 30) ? substr($event->{subtitle}, 0, 30) . "..." : $event->{subtitle}),
                     progname => $progname,
                     summary  => $event->{summary},

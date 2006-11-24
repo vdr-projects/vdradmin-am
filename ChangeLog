@@ -1,3 +1,52 @@
+2006-11-24  amair
+
+	* HISTORY, po/de.po, po/vdradmin.pot:
+
+	Updated for v3.5.1beta release.
+
+2006-11-24  amair
+
+	* vdradmind.pl:
+
+	Changed handling of critical/colliding timers on encrypted channels in timer_list.
+
+2006-11-24  amair
+
+	* vdradmind.pl:
+
+	- Lost info on selected extepginfos if testing an epgsearch in epgsearch_new.
+	- Don't use an epgsearch template's name as pattern if adding a new epgsearch.
+
+2006-11-22  amair
+
+	* vdradmind.pl:
+
+	Didn't select the right channel group in epgsearch_new.
+
+2006-11-20  amair
+
+	* vdradmind.pl:
+
+	Fixed "&quot;" in prog_timeline.
+
+2006-11-16  amair
+
+	* vdradmind.pl, template/default/epgsearch_list.html:
+
+	New epgsearches can be based on epgsearch's templates.
+
+2006-11-13  amair
+
+	* make.sh:
+
+	Exclude ".#*" files from distribution tarball.
+
+2006-11-13  amair
+
+	* vdradmind.pl:
+
+	Added missing localisation for headlines in epgsearch results/favourites.
+
 2006-11-10  amair
 
 	* HISTORY, vdradmind.pl, po/cs.po, po/fr.po,

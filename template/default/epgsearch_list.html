@@ -23,6 +23,14 @@
 					<h1><?% gettext('EPG Search') %?></h1>
 				</td>
 				<td class="col_other">
+					<?% IF templates.size() > 0 %?>
+						<?% gettext('Use template') %?>
+						<select name="template">
+							<?% FOREACH templ = templates %?>
+								<option value="<?% templ.id %?>" <?% IF templ.sel %?>selected="selected"<?% END %?>><?% templ.pattern %?></option>
+							<?% END %?>
+						</select>
+					<?% END %?>
 					<input type="submit" class="submit" name="new_search" value="<?% gettext('New Search') %?>" />
 					<input type="hidden" name="aktion" value="epgsearch_edit" />
 				</td>
