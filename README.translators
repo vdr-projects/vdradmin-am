@@ -3,7 +3,7 @@ VDRAdmin-AM translators guide
 
 Since vdradmin-0.97-am3.2 almost every text has been extracted from the
 scripts and templates. This makes it much easier for anybody, who wants to
-translate VDRAdmin to another language.
+translate VDRAdmin-AM to another language.
 
 All you need to do is to let me (mail AT andreas DOT vdr-developer DOT org)
 know, that you plan to add a new language, so that I can tell you if anybody
@@ -24,14 +24,14 @@ po-files with any text editor, but we recommend to use a po-editor like
 poedit [1], kbabel [2] or gtranslator [3].
 
 You must have installed the "gettext" package of your distribution to compile
-the plain text translations to the binary files needed by VDRAdmin.
+the plain text translations to the binary files needed by VDRAdmin-AM.
 
 The basic work flow for a translation looks like this:
 
 1) Copy po/vdradmin.pot to po/<language code>.po. See [4] for a list of
    available language codes.
    
-2) Open the file in your favorit po-editor. Make sure you set the correct
+2) Open the file in your favorite po-editor. Make sure you set the correct
    encoding and fill in your email and language in the corresponding header
    fields. poedit makes this pretty easy - just go to catalog/options and
    fill out the form.
@@ -48,15 +48,17 @@ The basic work flow for a translation looks like this:
    fuzzy (poedit: edit/mark as fuzzy)
    
 4) To check how your translated texts look like, you have to compile them
-   first to *.mo-files. To do so, you edit the "Makefile" first and append
-   your  <language code> to the "LANGS=" line. Running "make" will then create
-   a new *.mo-file from your changed *.po-file.
+   first to *.mo-files. To do so, you edit "make.sh" first and append
+   your  <language code> to the "LANGS=" line. Running "./make.sh po" will then
+	 create a new *.mo-file from your changed *.po-file.
    
    Please note, that you have to restart vdradmind.pl after any changes you 
    make to the translation. In order to allow VDRAdmin-AM to select your language,
    you must have the appropriate locales installed on your system (see 
-   `locale -a`). You should make sure, that the correct locale is selected
+   "locale -a"). You should make sure, that the correct locale is selected
    with the LANG and LC_* environment variables.
+
+	 For example: LANG=de_DE ./vdradmind.pl
    
 5) If you are done, send the *.po-file to me:
 
@@ -71,7 +73,7 @@ The basic work flow for a translation looks like this:
 If you have any further questions, please don't hesitate to contact me.
 
 
---- 2005-04-22, Andreas Mair ---
+--- 2006-11-29, Andreas Mair ---
 
 
 [1] http://www.poedit.org (available for Windows and Linux)

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LANGS="cs de es fr fi nl ru"
+LANGS="cs de es fr fi it nl ru"
 DIST_FILES="autotimer2searchtimer.pl ChangeLog COPYING CREDITS FAQ HISTORY INSTALL README README.translators REQUIREMENTS contrib convert.pl install.sh lib locale make.sh template uninstall.sh vdradmind.pl vdradmind.pl.1"
 INSTALL_SH=./install.sh
 CVS2CL="./cvs2cl.pl"	# get it at http://www.red-bean.com/cvs2cl/
@@ -20,6 +20,7 @@ function Usage()
 	echo "  utf8add   - generate utf8 locales from existing locales"
 	echo "  utf8clean - cleanup utf8 locales"
 	echo "  cl        - create ChangeLog file."
+	echo "  check     - check requirements"
 	exit 1
 }
 
@@ -73,7 +74,7 @@ function do_dist()
 	cp -a po/*.po po/*.pot $TMPDIR/$DIST_NAME/po
 	(
 		cd $TMPDIR
-		tar --exclude CVS --exclude '.#*' -cjf $DIST_NAME.tar.bz2 $DIST_NAME
+		tar --exclude CVS --exclude '.#*' --exclude '.nfs*' -cjf $DIST_NAME.tar.bz2 $DIST_NAME
 		rm -rf $TMPDIR/$DIST_NAME
 	)
 	mv $TMPDIR/$DIST_NAME.tar.bz2 .
@@ -161,6 +162,13 @@ function do_cl()
 	$CVS2CL --FSF --separate-header --no-wrap --no-times --tagdates --log-opts "-d>2006-07-08"
 }
 
+# check requirements.
+#
+function do_check()
+{
+	LANGS=$LANGS $INSTALL_SH -p
+}
+
 [ "$1" ] || Usage
 [ -x $INSTALL_SH ] || Error "$INSTALL_SH not found!"
 
@@ -172,11 +180,11 @@ do
 			;;
 
 		install)
-			$INSTALL_SH -c
+			LANGS=$LANGS $INSTALL_SH -c
 			;;
 
 		uninstall)
-			$INSTALL_SH -u
+			LANGS=$LANGS $INSTALL_SH -u
 			;;
 
 		po)
@@ -201,6 +209,10 @@ do
 
 		cl)
 			do_cl;
+			;;
+
+		check)
+			do_check;
 			;;
 
 		*)

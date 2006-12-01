@@ -28,7 +28,7 @@
 
 require 5.004;
 
-my $VERSION = "3.5.1beta";
+my $VERSION = "3.5.1";
 my $BASENAME;
 my $EXENAME;
 
@@ -91,7 +91,7 @@ use strict;
 
 my $SEARCH_FILES_IN_SYSTEM    = 0;
 my $VDR_MAX_SVDRP_LENGTH      = 10000;                        # validate this value
-my $SUPPORTED_LOCALE_PREFIXES = "^(cs|de|en|es|fi|fr|nl|ru)_";
+my $SUPPORTED_LOCALE_PREFIXES = "^(cs|de|en|es|fi|fr|it|nl|ru)_";
 
 my $AT_BY_EVENT_ID = 2;
 my $AT_BY_TIME     = 1;
@@ -487,6 +487,8 @@ while (true) {
         close($Client);
         next;
     }
+
+    $Request =~ s/^\/\/*/\//;
 
     # parse header
     my ($username, $password, $http_useragent);
@@ -2641,6 +2643,7 @@ sub ParseTimer {
                 $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), $3, ($2 - 1), $1);
                 $stopsse = my_mktime(substr($stop, 2, 2), substr($stop, 0, 2), $stop > $start ? $3 : $3 + 1, ($2 - 1), $1);
             } else {                                     # vdr < 1.3.23
+                next unless($start || $stop);
                 $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), $dor, (my_strftime("%m") - 1), my_strftime("%Y"));
                 $stopsse = my_mktime(substr($stop, 2, 2), substr($stop, 0, 2), $stop > $start ? $dor : $dor + 1, (my_strftime("%m") - 1), my_strftime("%Y"));
 

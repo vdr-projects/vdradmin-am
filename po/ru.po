@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-24 12:46+0100\n"
+"POT-Creation-Date: 2006-11-30 16:20+0100\n"
 "PO-Revision-Date: 2006-10-27 15:42+0100\n"
 "Last-Translator: Oleg Roitburd <oleg@roitburd.de>\n"
 "Language-Team: Allrussian <LL.org>\n"
@@ -43,7 +43,7 @@ msgstr ""
 #: ../template/default/tv.html:6 ../template/default/vdr_cmds.html:5
 #: ../template/default/epgsearch_new.html:5
 #: ../template/default/at_timer_new.html:5
-#: ../template/default/epgsearch_list.html:5 ../vdradmind.pl:2795
+#: ../template/default/epgsearch_list.html:5 ../vdradmind.pl:2798
 msgid "ISO-8859-1"
 msgstr "ISO-8859-5"
 
@@ -103,23 +103,27 @@ msgstr "Русский"
 msgid "Czech:"
 msgstr "Чешский:"
 
-#: ../template/default/about.html:69
+#: ../template/default/about.html:66
+msgid "Italian:"
+msgstr ""
+
+#: ../template/default/about.html:73
 msgid "Informations"
 msgstr "Информация"
 
-#: ../template/default/about.html:72
+#: ../template/default/about.html:76
 msgid "VDRAdmin-AM version:"
 msgstr "Версия VDRAdmin-AM:"
 
-#: ../template/default/about.html:76
+#: ../template/default/about.html:80
 msgid "VDR version:"
 msgstr "Версия VDR:"
 
-#: ../template/default/about.html:80
+#: ../template/default/about.html:84
 msgid "Supported features in VDR:"
 msgstr "Поддерживаемые улучшения в VDR:"
 
-#: ../template/default/about.html:87
+#: ../template/default/about.html:91
 msgid ""
 "EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search."
 "html\" target=\"_blank\">EPGSearch Plugin</a>)"
@@ -127,7 +131,7 @@ msgstr ""
 "EPG Поиск (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search."
 "html\" target=\"_blank\">EPGSearch Plugin</a>)"
 
-#: ../template/default/about.html:93
+#: ../template/default/about.html:97
 msgid ""
 "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-"
 "plugin\" target=\"_blank\">Streamdev Plugin</a>)"
@@ -135,7 +139,7 @@ msgstr ""
 "LiveTV Streaming (<a href=\"http://www.free-x.de/wiki/index.php/Streamdev-"
 "plugin\" target=\"_blank\">Streamdev Plugin</a>"
 
-#: ../template/default/about.html:99
+#: ../template/default/about.html:103
 msgid ""
 "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/"
 "\" target=\"_blank\">Liemikuutio Patch</a>)"
@@ -143,11 +147,11 @@ msgstr ""
 "Переименование записей (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/"
 "patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
 
-#: ../template/default/about.html:106
+#: ../template/default/about.html:110
 msgid "Getting Help and Reporting Bugs"
 msgstr "Получить помощь и сообщить об ошибке"
 
-#: ../template/default/about.html:111
+#: ../template/default/about.html:115
 msgid ""
 "If you need help please first try to use the online help you'll find on some "
 "pages. You can access it by clicking <img src=\"bilder/help.png\" alt=\"\" /"
@@ -157,7 +161,7 @@ msgstr ""
 "интерактивной помощи, которая доступна на некоторых страницах. Вы можете "
 "вызывать ее нажимая на <img src=\"bilder/help.png\" alt=\"\" />."
 
-#: ../template/default/about.html:112
+#: ../template/default/about.html:116
 msgid ""
 "If this doesn't provide the information you need you can try to get help at "
 "<a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> if you "
@@ -168,7 +172,7 @@ msgstr ""
 "попытаться получить помощь в <a href=\"http://www.allrussian.info/board.php?"
 "boardid=61 \"target=\"_blank\">Allrussian VDR форуме</a>. Ищите для этого:"
 
-#: ../template/default/about.html:113
+#: ../template/default/about.html:117
 msgid ""
 "If you think you have found a bug please check that it's a new one and "
 "report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page."
@@ -437,7 +441,7 @@ msgstr "Пароль для гостя:"
 #: ../template/default/config.html:158 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:80
 #: ../template/default/navigation.html:35
-#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:5372
+#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:5375
 msgid "Timeline"
 msgstr "График времени"
 
@@ -1391,7 +1395,7 @@ msgstr ""
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5372
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5375
 msgid "Recordings"
 msgstr "Записи"
 
@@ -1711,11 +1715,11 @@ msgstr "Ваш Броузер не поддерживает фреймы!"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5372
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5375
 msgid "What's On Now?"
 msgstr "Что идет сейчас?"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5372
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5375
 msgid "Playing Today?"
 msgstr "Что будет сегодня?"
 
@@ -1723,7 +1727,7 @@ msgstr "Что будет сегодня?"
 #: ../template/default/prog_list2.html:56
 #: ../template/default/prog_summary.html:48
 #: ../template/default/prog_summary2.html:85
-#: ../template/default/epgsearch_list.html:255 ../vdradmind.pl:5372
+#: ../template/default/epgsearch_list.html:255 ../vdradmind.pl:5375
 msgid "Channels"
 msgstr "Телегид"
 
@@ -1775,7 +1779,7 @@ msgid "view"
 msgstr "переключить"
 
 #: ../template/default/prog_detail.html:37
-#: ../template/default/epgsearch_new.html:425 ../vdradmind.pl:2320
+#: ../template/default/epgsearch_new.html:425 ../vdradmind.pl:2322
 msgid "record"
 msgstr "записать"
 
@@ -1859,7 +1863,7 @@ msgstr "Записать передачу"
 msgid "No EPG information available"
 msgstr "Нет EPG информации"
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3482
+#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3485
 msgid "Playing Today"
 msgstr "Что будет сегодня?"
 
@@ -1878,8 +1882,8 @@ msgstr "Начать в"
 #: ../template/default/epgsearch_new.html:336
 #: ../template/default/epgsearch_new.html:343
 #: ../template/default/at_timer_new.html:95
-#: ../template/default/at_timer_new.html:105 ../vdradmind.pl:4762
-#: ../vdradmind.pl:4775
+#: ../template/default/at_timer_new.html:105 ../vdradmind.pl:4765
+#: ../vdradmind.pl:4778
 msgid "o'clock"
 msgstr "Часов"
 
@@ -1890,12 +1894,12 @@ msgid "What's on:"
 msgstr "Что сейчас:"
 
 #: ../template/default/prog_summary.html:33
-#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4762
+#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4765
 msgid "at"
 msgstr "в"
 
 #: ../template/default/prog_timeline.html:76
-#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4747
+#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4750
 msgid "now"
 msgstr "сейчас"
 
@@ -2370,11 +2374,11 @@ msgstr "Использовать фаворитное меню:"
 msgid "Use as Search Timer:"
 msgstr "Использовать как поиск таймера:"
 
-#: ../template/default/epgsearch_new.html:426 ../vdradmind.pl:2322
+#: ../template/default/epgsearch_new.html:426 ../vdradmind.pl:2324
 msgid "announce only"
 msgstr "только анонсы"
 
-#: ../template/default/epgsearch_new.html:427 ../vdradmind.pl:2324
+#: ../template/default/epgsearch_new.html:427 ../vdradmind.pl:2326
 msgid "switch only"
 msgstr "только переключится"
 
@@ -2548,65 +2552,65 @@ msgstr "Файл конфигурации успешно записан."
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s был запущен с PID-ом %d."
 
-#: ../vdradmind.pl:486 ../vdradmind.pl:1118 ../vdradmind.pl:2783
+#: ../vdradmind.pl:486 ../vdradmind.pl:1120 ../vdradmind.pl:2786
 msgid "Not found"
 msgstr "Не найдено"
 
-#: ../vdradmind.pl:486 ../vdradmind.pl:2784
+#: ../vdradmind.pl:486 ../vdradmind.pl:2787
 msgid "The requested URL was not found on this server!"
 msgstr "Затребованный URL не был найден на этом сервере!"
 
-#: ../vdradmind.pl:564 ../vdradmind.pl:1114 ../vdradmind.pl:2786
+#: ../vdradmind.pl:566 ../vdradmind.pl:1116 ../vdradmind.pl:2789
 msgid "Forbidden"
 msgstr "Запрещено"
 
-#: ../vdradmind.pl:564 ../vdradmind.pl:2787
+#: ../vdradmind.pl:566 ../vdradmind.pl:2790
 msgid "You don't have permission to access this function!"
 msgstr "У вас недостаточно прав для вызова этой функции!"
 
-#: ../vdradmind.pl:1114 ../vdradmind.pl:2788
+#: ../vdradmind.pl:1116 ../vdradmind.pl:2791
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "В доступе к файлу \"%s\" отказанно!"
 
-#: ../vdradmind.pl:1118 ../vdradmind.pl:2785
+#: ../vdradmind.pl:1120 ../vdradmind.pl:2788
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "URL \"%s\" не был найден на этом сервере!"
 
-#: ../vdradmind.pl:1979
+#: ../vdradmind.pl:1981
 #, fuzzy
 msgid "Your favorites"
 msgstr "Показать фавориты"
 
-#: ../vdradmind.pl:1979
+#: ../vdradmind.pl:1981
 #, fuzzy
 msgid "Search results"
 msgstr "Спрятать результаты"
 
-#: ../vdradmind.pl:2118
+#: ../vdradmind.pl:2120
 #, fuzzy
 msgid "Default"
 msgstr "Удалить"
 
-#: ../vdradmind.pl:2236
+#: ../vdradmind.pl:2238
 msgid "--- no timer ---"
 msgstr "--- нет таймера ---"
 
-#: ../vdradmind.pl:2326
+#: ../vdradmind.pl:2328
 msgid "unknown"
 msgstr "неизвестно"
 
-#: ../vdradmind.pl:2329
+#: ../vdradmind.pl:2331
 msgid "none"
 msgstr "нет"
 
-#: ../vdradmind.pl:2789
+#: ../vdradmind.pl:2792
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Не может открыть файл \"%s\"!"
 
-#: ../vdradmind.pl:2790
+#: ../vdradmind.pl:2793
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
@@ -2615,61 +2619,61 @@ msgstr ""
 "Не могу соединиться с VDR  %s:%s<br /><br />Проконтролируйте VDR и "
 "svdrphosts.conf"
 
-#: ../vdradmind.pl:2791
+#: ../vdradmind.pl:2794
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Ошибка при отправлении команды к %s"
 
-#: ../vdradmind.pl:2847
+#: ../vdradmind.pl:2850
 msgid "Internal error:"
 msgstr "Внутренняя ошибка:"
 
-#: ../vdradmind.pl:3219
+#: ../vdradmind.pl:3222
 msgid "Can't find EPG entry!"
 msgstr "Нет EPG записей!"
 
-#: ../vdradmind.pl:3482
+#: ../vdradmind.pl:3485
 msgid "Playing Tomorrow"
 msgstr "Программа на завтра"
 
-#: ../vdradmind.pl:3482
+#: ../vdradmind.pl:3485
 #, perl-format
 msgid "Playing on the %s"
 msgstr "Воспроизвести %s."
 
-#: ../vdradmind.pl:4752
+#: ../vdradmind.pl:4755
 msgid "next"
 msgstr "след."
 
-#: ../vdradmind.pl:4771
+#: ../vdradmind.pl:4774
 msgid "What's on after"
 msgstr "Что потом"
 
-#: ../vdradmind.pl:4771
+#: ../vdradmind.pl:4774
 msgid "What's on at"
 msgstr "Что в:"
 
-#: ../vdradmind.pl:4774
+#: ../vdradmind.pl:4777
 msgid "Suitable matches for:"
 msgstr "Результаты поиска для"
 
-#: ../vdradmind.pl:4777
+#: ../vdradmind.pl:4780
 msgid "short view"
 msgstr "сокращенная информация"
 
-#: ../vdradmind.pl:4777
+#: ../vdradmind.pl:4780
 msgid "long view"
 msgstr "Расширенная информация"
 
-#: ../vdradmind.pl:4826
+#: ../vdradmind.pl:4829
 msgid "Schedule"
 msgstr "Расписание"
 
-#: ../vdradmind.pl:5372
+#: ../vdradmind.pl:5375
 msgid "Timers"
 msgstr "Таймеры"
 
-#: ../vdradmind.pl:5440
+#: ../vdradmind.pl:5443
 msgid "System default"
 msgstr "Системный стандарт"
 
