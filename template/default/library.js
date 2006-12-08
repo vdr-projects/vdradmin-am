@@ -16,8 +16,7 @@ function change(message, suffix) {
 }
 
 function mdel(but, message) {
-	check=confirm(message);
-  if(check) but.form.submit();
+	return confirm(message);
 }
 
 function callurl( url ) {
