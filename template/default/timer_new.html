@@ -149,7 +149,7 @@
 			<tr class="<?% tr_class %?>">
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Title of Recording:') %?></h5></td>
-				<td class="col_value"><input type="text" name="title" value="<?% title %?>" size="80" /></td>
+				<td class="col_value"><input type="text" name="title" value="<?% title | html %?>" size="80" /></td>
 			</tr>
 			<tr class="<?% tr_class %?>">
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>

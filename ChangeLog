@@ -1,3 +1,100 @@
+2007-01-25  tag v3_5_3
+
+2007-01-25  amair
+
+	* vdradmind.pl, template/default/config.html,
+	  template/default/help_config.html:
+
+	Disable EPG_DIRECT because it no longer works with the "lste" speedup patch.
+
+2007-01-25  amair
+
+	* HISTORY:
+
+	Fixed year.
+
+2007-01-25  amair
+
+	* HISTORY, po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po,
+	  po/it.po, po/nl.po, po/ru.po, po/vdradmin.pot:
+
+	Update for release 3.5.3.
+
+2007-01-25  amair
+
+	* vdradmind.pl:
+
+	Handle "command not found" for epgsearch's LSTT and DEFT commands.
+	Another fix for VDR connect error in index.html.
+
+2007-01-24  amair
+
+	* vdradmind.pl:
+
+	Fixed: epgsearch's LSTT command needs at least epgsearch v0.9.20.
+
+2007-01-11  amair
+
+	* vdradmind.pl:
+
+	Include Klaus Schmidinger's "lste" speedup patch.
+
+2007-01-11  amair
+
+	* vdradmind.pl:
+
+	Fixed: Access VDRAdmin-AM if VDR didn't run before starting VDRAdmin-AM.
+	Changed: Do not send every HTTP header line in its own TCP packet.
+
+2007-01-09  amair
+
+	* vdradmind.pl:
+
+	Display error message if VDRAdmin-AM can't connect to VDR if index.html is requested.
+	This should reduce "I can't see the EPGsearch menu item" bug reports.
+
+2007-01-09  amair
+
+	* template/default/epgsearch_new.html:
+
+	Added warning if neither "title", "subtitle" nor "description" is checked.
+
+2007-01-07  scop
+
+	* template/default/rec_list.html:
+
+	Don't show recording commands drop-down if there are no reccmds.
+
+2007-01-07  scop
+
+	* vdradmind.pl, template/default/timer_new.html:
+
+	HTML escaping fixes.
+
+2007-01-07  scop
+
+	* vdradmind.pl:
+
+	When sorting recordings by name, sort folders by name too.
+
+2007-01-07  scop
+
+	* vdradmind.pl:
+
+	Warning cleanups.
+
+2007-01-07  scop
+
+	* vdradmind.pl:
+
+	Use constants instead of magic numbers.
+
+2006-12-09  scop
+
+	* po/fi.po:
+
+	Finnish translation updates.
+
 2006-12-08  tag v3_5_2
 
 2006-12-08  amair

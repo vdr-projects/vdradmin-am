@@ -26,7 +26,7 @@
 
 require 5.004;
 
-my $VERSION = "3.5.2";
+my $VERSION = "3.5.3";
 my $BASENAME;
 my $EXENAME;
 
@@ -514,9 +514,10 @@ while (true) {
 
     # authenticate
     #print("Username: $username / Password: $password\n");
-    if (($CONFIG{USERNAME} eq $username && $CONFIG{PASSWORD} eq $password) || subnetcheck($peer, $CONFIG{LOCAL_NET})) {
+    my $checkpass = defined($username) && defined($password);
+    if (($checkpass && $CONFIG{USERNAME} eq $username && $CONFIG{PASSWORD} eq $password) || subnetcheck($peer, $CONFIG{LOCAL_NET})) {
         $Guest = 0;
-    } elsif (($CONFIG{USERNAME_GUEST} eq $username && $CONFIG{PASSWORD_GUEST} eq $password) && $CONFIG{GUEST_ACCOUNT}) {
+    } elsif (($checkpass && $CONFIG{USERNAME_GUEST} eq $username && $CONFIG{PASSWORD_GUEST} eq $password) && $CONFIG{GUEST_ACCOUNT}) {
         $Guest = 1;
     } else {
         headerNoAuth();
@@ -835,12 +836,13 @@ sub getElement {
 
 sub EPG_buildTree {
     $SVDRP->command("lste");
+    my @DATA = $SVDRP->readresponse;
+    CloseSocket();
     my ($i, @events);
     my ($id, $bc) = (1, 0);
     $low_time = time;
     undef(%EPG);
-    while ($_ = $SVDRP->readoneline) {
-        chomp;
+    while($_ = shift @DATA) {
         if (/^C ([^ ]+) *(.*)/) {
             undef(@events);
             my ($channel_id, $channel_name) = ($1, $2);
@@ -848,16 +850,16 @@ sub EPG_buildTree {
             if ($CONFIG{EPG_PRUNE} > 0 && $vdr_id > $CONFIG{EPG_PRUNE}) {
 
                 # diesen channel nicht einlesen
-                while ($_ = $SVDRP->readoneline) {
+                while($_ = shift @DATA) {
                     last if (/^c/);
                 }
             } else {
                 $bc++;
-                while ($_ = $SVDRP->readoneline) {
+                while($_ = shift @DATA) {
                     if (/^E/) {
                         my ($garbish, $event_id, $time, $duration) = split(/[ \t]+/); #TODO: table-id, version
                         my ($title, $subtitle, $summary, $vps, $video, $audio);
-                        while ($_ = $SVDRP->readoneline) {
+                        while($_ = shift @DATA) {
                             # if(/^T (.*)/) { $title = $1;    $title =~ s/\|/<br \/>/sig }
                             # if(/^S (.*)/) { $subtitle = $1; $subtitle =~ s/\|/<br \/>/sig }
                             # if(/^D (.*)/) { $summary = $1;  $summary =~ s/\|/<br \/>/sig }
@@ -1022,34 +1024,37 @@ sub header {
 
     my $status_text = " OK" if ($status eq "200");
 
-    PrintToClient("HTTP/1.0 $status$status_text", CRLF);
-    PrintToClient("Date: ", headerTime(), CRLF);
+    my $response = "HTTP/1.0 $status$status_text" . CRLF
+                 . "Date: " . headerTime() . CRLF;
     if (!$caching || $ContentType =~ /text\/html/) {
-        PrintToClient("Cache-Control: max-age=0",               CRLF);
-        PrintToClient("Cache-Control: private",                 CRLF);
-        PrintToClient("Pragma: no-cache",                       CRLF);
-        PrintToClient("Expires: Thu, 01 Jan 1970 00:00:00 GMT", CRLF);
+        $response .= "Cache-Control: max-age=0" . CRLF
+                  .  "Cache-Control: private" . CRLF
+                  .  "Pragma: no-cache" . CRLF
+                  .  "Expires: Thu, 01 Jan 1970 00:00:00 GMT" . CRLF;
     } else {
-        PrintToClient("Expires: ", headerTime(time() + 3600), CRLF);
-        PrintToClient("Cache-Control: max-age=3600", CRLF);
+        $response .= "Expires: " . headerTime(time() + 3600) . CRLF
+                  .  "Cache-Control: max-age=3600" . CRLF;
     }
-    PrintToClient("Server: $SERVERVERSION",     CRLF);
-    PrintToClient("Content-Length: ",           length($data), CRLF) if ($data);
-    PrintToClient("Connection: close",          CRLF);
-    PrintToClient("Content-encoding: gzip",     CRLF) if ($CONFIG{MOD_GZIP} && $ACCEPT_GZIP);
-    PrintToClient("Content-type: $ContentType", CRLF, CRLF) if ($ContentType);
-    PrintToClient($data) if ($data);
+    $response .= "Server: $SERVERVERSION" . CRLF
+              .  "Connection: close" . CRLF;
+    $response .= "Content-Length: " . length($data) . CRLF  if ($data);
+    $response .= "Content-encoding: gzip" . CRLF if ($CONFIG{MOD_GZIP} && $ACCEPT_GZIP);
+    $response .= "Content-type: $ContentType" . CRLF if ($ContentType);
+    $response .= CRLF;
+    $response .= $data if ($data);
+    PrintToClient($response);
     return ($status, length($data));
 }
 
 sub headerForward {
     my $url = shift;
-    PrintToClient("HTTP/1.0 302 Found",      CRLF);
-    PrintToClient("Date: ",                  headerTime(), CRLF);
-    PrintToClient("Server: $SERVERVERSION",  CRLF);
-    PrintToClient("Connection: close",       CRLF);
-    PrintToClient("Location: $url",          CRLF);
-    PrintToClient("Content-type: text/html", CRLF, CRLF);
+    my $header = "HTTP/1.0 302 Found" . CRLF
+               . "Date: " . headerTime() . CRLF
+               . "Server: $SERVERVERSION" . CRLF
+               . "Connection: close" . CRLF
+               . "Location: $url" . CRLF
+               . "Content-type: text/html" . CRLF . CRLF;
+    PrintToClient($header);
     return (302, 0);
 }
 
@@ -1057,14 +1062,15 @@ sub headerNoAuth {
     my $vars;
     my $data;
     $Xtemplate->process("$CONFIG{TEMPLATE}/noauth.html", $vars, \$data);
-    PrintToClient("HTTP/1.0 401 Authorization Required",         CRLF);
-    PrintToClient("Date: ",                                      headerTime(), CRLF);
-    PrintToClient("Server: $SERVERVERSION",                      CRLF);
-    PrintToClient("WWW-Authenticate: Basic realm=\"vdradmind\"", CRLF);
-    PrintToClient("Content-Length: ",                            length($data), CRLF) if ($data);
-    PrintToClient("Connection: close",                           CRLF);
-    PrintToClient("Content-type: text/html", CRLF, CRLF);
-    PrintToClient($data);
+
+    my $header = "HTTP/1.0 401 Authorization Required" . CRLF
+               . "Date: " . headerTime() . CRLF
+               . "Server: $SERVERVERSION" . CRLF
+               . "WWW-Authenticate: Basic realm=\"vdradmind\"" . CRLF
+               . "Connection: close" . CRLF
+               . "Content-type: text/html" . CRLF;
+    $header .= "Content-Length: " . length($data) . CRLF if ($data);
+    PrintToClient($header, CRLF, $data);
     return (401, length($data));
 }
 
@@ -1607,7 +1613,7 @@ sub AT_ProgTimer {
     my $found = 0;
     for (ParseTimer(1)) {
         if ($_->{vdr_id} == $channel) {
-            if ($_->{autotimer} == 2 && $event_id && $_->{event_id}) {
+            if ($_->{autotimer} == $AT_BY_EVENT_ID && $event_id && $_->{event_id}) {
                 if ($_->{event_id} == $event_id) {
                     $found = 1;
                     last;
@@ -1640,10 +1646,10 @@ sub AT_ProgTimer {
     if (!$found) {
         $title =~ s/\|/\:/g;
 
-        my $autotimer = 2;
+        my $autotimer = $AT_BY_EVENT_ID;
         unless (can_do_eventid_autotimer($channel)) {
             $event_id  = 0;
-            $autotimer = 1;
+            $autotimer = $AT_BY_TIME;
         }
 
         Log(LOG_AT, sprintf("AT_ProgTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event_id, strftime("%Y%m%d-%H%M", localtime($start)), strftime("%Y%m%d-%H%M", localtime($stop))));
@@ -1783,6 +1789,8 @@ sub CheckTimers {
 
     for my $timer (ParseTimer(1)) {
 
+        next unless $timer->{autotimer};
+
         # match by event_id
         if ($timer->{autotimer} == $AT_BY_EVENT_ID) {
             for $event (@{ $EPG{ $timer->{vdr_id} } }) {
@@ -1793,8 +1801,8 @@ sub CheckTimers {
 
                     # update timer if the existing one differs from the EPG
                     # (don't check for changed title, as this will break autotimers' "directory" setting)
-                    if (   ($timer->{start} ne ($event->{start} - $timer->{bstart} * 60))
-                        || ($timer->{stop} ne ($event->{stop} + $timer->{bstop} * 60)))
+                    if (   ($timer->{start} != ($event->{start} - $timer->{bstart} * 60))
+                        || ($timer->{stop} != ($event->{stop} + $timer->{bstop} * 60)))
                     {
                         Log(LOG_CHECKTIMER, sprintf("CheckTimers: Timer \"%s\" (No. %s, Event-ID %s, %s - %s) differs from EPG: \"%s\", Event-ID %s, %s - %s)", $timer->{title}, $timer->{id}, $timer->{event_id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop})), $event->{title}, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
                         ProgTimer(
@@ -2102,17 +2110,18 @@ sub ParseEpgSearchBlacklists {
 }
 
 sub GetEpgSearchTemplates {
-    my $def_template = 0;;
+    my $def_template = 0;
     for (SendCMD("plug epgsearch deft")) {
         chomp;
         next if (length($_) == 0);
+        last if (/^Command unrecognized/);
         $def_template = $_;
     }
     my @temp;
     for (SendCMD("plug epgsearch lstt")) {
         chomp;
         next if (length($_) == 0);
-        last if (/^no search templates defined$/);
+        last if (/^no search templates defined$|^Command unrecognized/);
         my $template = ExtractEpgSearchConf($_);
         if ($template->{id} == $def_template) {
            $template->{pattern} .= " (" . gettext("Default") . ")";
@@ -2130,7 +2139,7 @@ sub GetEpgSearchTemplate {
     for (SendCMD("plug epgsearch lstt $id")) {
         chomp;
         next if (length($_) == 0);
-        last if (/^search template id .* not defined$/);
+        last if (/^search template id .* not defined$|^Command unrecognized/);
         push(@temp, ExtractEpgSearchConf($_));
     }
 
@@ -3025,6 +3034,8 @@ sub ReadConfig {
         $CONFIG{MAIL_FROM} = "autotimer@" . $CONFIG{MAIL_FROMDOMAIN} if ($CONFIG{MAIL_FROM} =~ /from\@address.tld/);
         #v3.4.6beta
         $CONFIG{SKIN} = "default" if(($CONFIG{SKIN} eq "bilder") || ($CONFIG{SKIN} eq "copper") || ($CONFIG{SKIN} eq "default.png"));
+        #v3.5.3
+        $CONFIG{EPG_DIRECT} = 0;
 
     } else {
         print "$CONFFILE doesn't exist. Please run \"$0 --config\"\n";
@@ -3128,6 +3139,7 @@ sub VideoDiskFree {
 # frontend
 #############################################################################
 sub show_index {
+    return if (UptoDate());
     my $page;
     if (defined($CONFIG{LOGINPAGE})) {
         $page = $LOGINPAGES[ $CONFIG{LOGINPAGE} ];
@@ -3490,8 +3502,8 @@ sub prog_list2 {
         progname       => GetChannelDescByNumber($vdr_id),
         switchurl      => "$MyURL?aktion=prog_switch&amp;channel=" . $vdr_id,
         stream_live_on => $FEATURES{STREAMDEV} && $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
-        prevdayurl     => $prev_day ? "$MyURL?aktion=prog_list2&amp;day=" . $prev_day . ($param_time ? "&amp;time=$param_time" : undef) : undef,
-        nextdayurl     => $next_day ? "$MyURL?aktion=prog_list2&amp;day=" . $next_day . ($param_time ? "&amp;time=$param_time" : undef) : undef,
+        prevdayurl     => $prev_day ? "$MyURL?aktion=prog_list2&amp;day=" . $prev_day . ($param_time ? "&amp;time=$param_time" : "") : undef,
+        nextdayurl     => $next_day ? "$MyURL?aktion=prog_list2&amp;day=" . $next_day . ($param_time ? "&amp;time=$param_time" : "") : undef,
         toolbarurl     => "$MyURL?aktion=toolbar"
     };
     return showTemplate("prog_list2.html", $vars);
@@ -3843,7 +3855,7 @@ sub timer_new_form {
     my $displaytitle = $this_event->{title};
     $displaytitle =~ s/"/\&quot;/g;
 
-    my $at_epg = $this_event->{event_id} > 0 ? can_do_eventid_autotimer($this_event->{vdr_id}) : 0;
+    my $at_epg = $this_event->{event_id} ? can_do_eventid_autotimer($this_event->{vdr_id}) : 0;
 
     my $vars = { url      => $MyURL,
                  active   => $this_event->{active} & 1,
@@ -4660,7 +4672,7 @@ sub prog_summary {
                     # We have a RegExp
                     next if (!defined($pattern));
                     next if (!length($pattern));
-                    my $SearchStr = $event->{title} . "~" . $event->{subtitle} . "~" . $event->{summary};
+                    my $SearchStr = $event->{title} . "~" . ($event->{subtitle} || "") . "~" . ($event->{summary} || "");
 
                     # Shall we search case insensitive?
                     if (($mode eq "i") && ($SearchStr !~ /$pattern/i)) {
@@ -4687,7 +4699,7 @@ sub prog_summary {
                 next unless ($found);
             }
 
-            my $displaytext     = CGI::escapeHTML($event->{summary});
+            my $displaytext     = CGI::escapeHTML($event->{summary}) || "";
             my $displaytitle    = CGI::escapeHTML($event->{title});
             my $displaysubtitle = CGI::escapeHTML($event->{subtitle});
             my $imdb_title      = $event->{title};
@@ -4762,7 +4774,7 @@ sub prog_summary {
             push(@times,
                  {  name => gettext("at") . " $_ " . gettext("o'clock"),
                     id   => "$MyURL?aktion=prog_summary&amp;time=$id",
-                    sel  => $displayed_time == $_ ? "1" : undef
+                    sel  => $displayed_time eq $_ ? "1" : undef
                  }
             );
         }
@@ -4772,7 +4784,7 @@ sub prog_summary {
     my $label = $next ? gettext("What's on after") : gettext("What's on at");
     my $vars = { rows    => \@show,
                  now     => $displayed_time,
-                 title   => ($search ? gettext("Suitable matches for:") . " <i>" . $search . "</i>"
+                 title   => ($search ? gettext("Suitable matches for:") . " <i>" . CGI::escapeHTML($search) . "</i>"
                                      : $label . " " . strftime("%H:%M", localtime($event_time)) . " " . gettext("o'clock")),
                  switchview_url  => $MyURL . "?aktion=prog_summary&amp;view=" . ($view eq "ext" ? "sml" : "ext") . ($next ? "&amp;next=1" : "") . ($search ? "&amp;search=" . uri_escape($search) : "") . ($time ? "&amp;time=$time" : ""),
                  switchview_text => ($view eq "ext" ? gettext("short view") : gettext("long view")),
@@ -4855,7 +4867,7 @@ sub rec_list {
     } elsif ($CONFIG{REC_SORTBY} eq "name") {
         if ($CONFIG{REC_DESC}) {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
+                                 lc($b->{isfolder} ? $b->{name} : "") cmp lc($a->{isfolder} ? $a->{name} : "") ||
                                  lc($b->{name}) cmp lc($a->{name}) } @recordings);
         } else {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
@@ -5042,6 +5054,7 @@ sub ParseRecordings {
                 parent        => $parent,
                 new           => $new,
                 id            => $id,
+                isfolder      => 0,
                 delurl        => $MyURL . "?aktion=rec_delete&amp;rec_delete=y&amp;id=$id",
                 editurl       => $FEATURES{REC_RENAME} ? $MyURL . "?aktion=rec_edit&amp;id=$id" : undef,
                 infurl        => $MyURL . "?aktion=rec_detail&amp;id=$id",
@@ -5113,7 +5126,7 @@ sub getRecInfo {
             #if(/^V (.*)/) { $vps = $1; }
         }
 
-        my $displaytext     = CGI::escapeHTML($text);
+        my $displaytext     = CGI::escapeHTML($text) || "";
         my $displaytitle    = CGI::escapeHTML($title);
         my $displaysubtitle = CGI::escapeHTML($subtitle);
         my $imdb_title      = $title;
@@ -5851,6 +5864,20 @@ sub readoneline {
     } else {
         return undef;
     }
+}
+
+sub readresponse {
+    my $this = shift;
+    my @a = ();
+    if($connected) {
+        while (<$SOCKET>) {
+            chomp;
+            my $end = substr($_, 3, 1) ne "-";
+            push(@a, substr($_, 4, length($_)));
+            last if ($end);
+        }
+    }
+    return @a;
 }
 
 #

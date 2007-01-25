@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-08 10:18+0100\n"
+"POT-Creation-Date: 2007-01-25 09:35+0100\n"
 "PO-Revision-Date: 2006-10-27 15:42+0100\n"
 "Last-Translator: Oleg Roitburd <oleg@roitburd.de>\n"
 "Language-Team: Allrussian <LL.org>\n"
@@ -25,7 +25,9 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 
 #: ../template/default/about.html:5 ../template/default/at_timer_list.html:5
-#: ../template/default/config.html:4 ../template/default/error.html:5
+#: ../template/default/at_timer_new.html:5 ../template/default/config.html:4
+#: ../template/default/epgsearch_list.html:5
+#: ../template/default/epgsearch_new.html:5 ../template/default/error.html:5
 #: ../template/default/help_at_timer_list.html:5
 #: ../template/default/help_at_timer_new.html:11
 #: ../template/default/help_config.html:8 ../template/default/help_no.html:5
@@ -41,9 +43,7 @@ msgstr ""
 #: ../template/default/rec_edit.html:5 ../template/default/rec_list.html:5
 #: ../template/default/timer_list.html:5 ../template/default/timer_new.html:5
 #: ../template/default/tv.html:6 ../template/default/vdr_cmds.html:5
-#: ../template/default/epgsearch_new.html:5
-#: ../template/default/at_timer_new.html:5
-#: ../template/default/epgsearch_list.html:5 ../vdradmind.pl:2796
+#: ../vdradmind.pl:2805
 msgid "ISO-8859-1"
 msgstr "ISO-8859-5"
 
@@ -195,28 +195,28 @@ msgid "AutoTimer"
 msgstr "Автотаймеры"
 
 #: ../template/default/at_timer_list.html:24
+#: ../template/default/at_timer_new.html:132
 #: ../template/default/config.html:194 ../template/default/config.html:253
+#: ../template/default/epgsearch_new.html:504
 #: ../template/default/help_at_timer_new.html:50
 #: ../template/default/help_config.html:98
 #: ../template/default/help_config.html:122
 #: ../template/default/help_timer_new.html:53
 #: ../template/default/timer_list.html:27
 #: ../template/default/timer_new.html:141
-#: ../template/default/epgsearch_new.html:502
-#: ../template/default/at_timer_new.html:132
 msgid "Priority:"
 msgstr "Приоритет:"
 
 #: ../template/default/at_timer_list.html:24
+#: ../template/default/at_timer_new.html:139
 #: ../template/default/config.html:198 ../template/default/config.html:257
+#: ../template/default/epgsearch_new.html:510
 #: ../template/default/help_at_timer_new.html:52
 #: ../template/default/help_config.html:100
 #: ../template/default/help_config.html:124
 #: ../template/default/help_timer_new.html:55
 #: ../template/default/timer_list.html:27
 #: ../template/default/timer_new.html:146
-#: ../template/default/epgsearch_new.html:508
-#: ../template/default/at_timer_new.html:139
 msgid "Lifetime:"
 msgstr "Как долго хранить:"
 
@@ -225,38 +225,38 @@ msgid "New AutoTimer"
 msgstr "Новый Автотаймер"
 
 #: ../template/default/at_timer_list.html:43
-#: ../template/default/config.html:22 ../template/default/navigation.html:69
-#: ../template/default/rec_list.html:26 ../template/default/timer_list.html:50
-#: ../template/default/timer_new.html:52 ../template/default/vdr_cmds.html:20
-#: ../template/default/epgsearch_new.html:155
-#: ../template/default/at_timer_new.html:23
+#: ../template/default/at_timer_new.html:23 ../template/default/config.html:22
 #: ../template/default/epgsearch_list.html:39
+#: ../template/default/epgsearch_new.html:157
+#: ../template/default/navigation.html:69 ../template/default/rec_list.html:26
+#: ../template/default/timer_list.html:50
+#: ../template/default/timer_new.html:52 ../template/default/vdr_cmds.html:20
 msgid "Help"
 msgstr "Помощь"
 
 #: ../template/default/at_timer_list.html:57
-#: ../template/default/timer_list.html:193
 #: ../template/default/epgsearch_list.html:51
+#: ../template/default/timer_list.html:193
 msgid "Active"
 msgstr "Активировано"
 
 #: ../template/default/at_timer_list.html:68
-#: ../template/default/timer_list.html:204
 #: ../template/default/epgsearch_list.html:73
 #: ../template/default/epgsearch_list.html:75
 #: ../template/default/epgsearch_list.html:223
+#: ../template/default/timer_list.html:204
 msgid "Channel"
 msgstr "Канал"
 
 #: ../template/default/at_timer_list.html:79
-#: ../template/default/timer_list.html:226
 #: ../template/default/epgsearch_list.html:89
+#: ../template/default/timer_list.html:226
 msgid "Start"
 msgstr "Начало"
 
 #: ../template/default/at_timer_list.html:90
-#: ../template/default/timer_list.html:237
 #: ../template/default/epgsearch_list.html:103
+#: ../template/default/timer_list.html:237
 msgid "Stop"
 msgstr "Конец"
 
@@ -267,13 +267,17 @@ msgid "Name"
 msgstr "Имя"
 
 #: ../template/default/at_timer_list.html:112
+#: ../template/default/epgsearch_list.html:125
 #: ../template/default/rec_list.html:85
 #: ../template/default/timer_list.html:259
-#: ../template/default/epgsearch_list.html:125
 msgid "Select all/none"
 msgstr "Выбрать все или ничего"
 
 #: ../template/default/at_timer_list.html:120
+#: ../template/default/at_timer_new.html:37
+#: ../template/default/at_timer_new.html:41
+#: ../template/default/at_timer_new.html:112
+#: ../template/default/at_timer_new.html:155
 #: ../template/default/config.html:99 ../template/default/config.html:142
 #: ../template/default/config.html:171 ../template/default/config.html:185
 #: ../template/default/config.html:214 ../template/default/config.html:241
@@ -283,17 +287,18 @@ msgstr "Выбрать все или ничего"
 #: ../template/default/config.html:367 ../template/default/config.html:380
 #: ../template/default/config.html:387 ../template/default/config.html:394
 #: ../template/default/config.html:401 ../template/default/config.html:408
-#: ../template/default/config.html:415 ../template/default/timer_list.html:282
-#: ../template/default/timer_new.html:64
-#: ../template/default/at_timer_new.html:37
-#: ../template/default/at_timer_new.html:41
-#: ../template/default/at_timer_new.html:112
-#: ../template/default/at_timer_new.html:155
+#: ../template/default/config.html:415
 #: ../template/default/epgsearch_list.html:133
+#: ../template/default/timer_list.html:282
+#: ../template/default/timer_new.html:64
 msgid "Yes"
 msgstr "Да"
 
 #: ../template/default/at_timer_list.html:122
+#: ../template/default/at_timer_new.html:38
+#: ../template/default/at_timer_new.html:42
+#: ../template/default/at_timer_new.html:113
+#: ../template/default/at_timer_new.html:156
 #: ../template/default/config.html:100 ../template/default/config.html:143
 #: ../template/default/config.html:172 ../template/default/config.html:186
 #: ../template/default/config.html:215 ../template/default/config.html:242
@@ -303,34 +308,31 @@ msgstr "Да"
 #: ../template/default/config.html:368 ../template/default/config.html:381
 #: ../template/default/config.html:388 ../template/default/config.html:395
 #: ../template/default/config.html:402 ../template/default/config.html:409
-#: ../template/default/config.html:416 ../template/default/timer_list.html:283
-#: ../template/default/timer_new.html:65
-#: ../template/default/at_timer_new.html:38
-#: ../template/default/at_timer_new.html:42
-#: ../template/default/at_timer_new.html:113
-#: ../template/default/at_timer_new.html:156
+#: ../template/default/config.html:416
 #: ../template/default/epgsearch_list.html:135
+#: ../template/default/timer_list.html:283
+#: ../template/default/timer_new.html:65
 msgid "No"
 msgstr "Нет"
 
 #: ../template/default/at_timer_list.html:143
 #: ../template/default/at_timer_list.html:148
-#: ../template/default/timer_list.html:312
 #: ../template/default/epgsearch_list.html:166
 #: ../template/default/epgsearch_list.html:174
+#: ../template/default/timer_list.html:312
 msgid "Edit"
 msgstr "Редактировать"
 
 #: ../template/default/at_timer_list.html:153
-#: ../template/default/timer_list.html:315
 #: ../template/default/epgsearch_list.html:177
+#: ../template/default/timer_list.html:315
 msgid "Delete timer?"
 msgstr "Удалить таймер?"
 
 #: ../template/default/at_timer_list.html:153
+#: ../template/default/epgsearch_list.html:177
 #: ../template/default/rec_list.html:118
 #: ../template/default/timer_list.html:315
-#: ../template/default/epgsearch_list.html:177
 msgid "Delete"
 msgstr "Удалить"
 
@@ -351,6 +353,226 @@ msgstr "Удалить все выбранные Автотаймеры?"
 #: ../template/default/at_timer_list.html:178
 msgid "No AutoTimers defined!"
 msgstr "AutoTimer не установлен"
+
+#: ../template/default/at_timer_new.html:6
+#: ../template/default/at_timer_new.html:19
+msgid "Add New AutoTimer"
+msgstr "Создать новый Автотаймер"
+
+#: ../template/default/at_timer_new.html:6
+#: ../template/default/at_timer_new.html:19
+#: ../template/default/help_at_timer_new.html:12
+#: ../template/default/help_at_timer_new.html:23
+msgid "Edit AutoTimer"
+msgstr "Редактирование Автотаймера"
+
+#: ../template/default/at_timer_new.html:34
+#: ../template/default/help_at_timer_new.html:30
+msgid "AutoTimer Active:"
+msgstr "Автотаймер активен:"
+
+#: ../template/default/at_timer_new.html:39
+#: ../template/default/at_timer_new.html:43
+msgid "oneshot"
+msgstr "однократно"
+
+#: ../template/default/at_timer_new.html:49
+#: ../template/default/help_at_timer_new.html:32
+msgid "Search Patterns:"
+msgstr "Поисковые признаки:"
+
+#: ../template/default/at_timer_new.html:56
+#: ../template/default/epgsearch_new.html:250
+#: ../template/default/help_at_timer_new.html:34
+msgid "Search in:"
+msgstr "искать в:"
+
+#: ../template/default/at_timer_new.html:58
+#: ../template/default/at_timer_new.html:183
+#: ../template/default/epgsearch_list.html:222
+#: ../template/default/epgsearch_new.html:252
+#: ../template/default/epgsearch_new.html:485
+msgid "Title"
+msgstr "Заголовок"
+
+#: ../template/default/at_timer_new.html:59
+#: ../template/default/at_timer_new.html:184
+#: ../template/default/epgsearch_new.html:253
+#: ../template/default/epgsearch_new.html:486
+msgid "Subtitle"
+msgstr "Подзаголовок"
+
+#: ../template/default/at_timer_new.html:60
+#: ../template/default/epgsearch_new.html:254
+#: ../template/default/epgsearch_new.html:487
+msgid "Description"
+msgstr "Описание"
+
+#: ../template/default/at_timer_new.html:65
+#: ../template/default/help_at_timer_new.html:36
+msgid "Search only on these days:"
+msgstr "Искать только в эти дни:"
+
+#: ../template/default/at_timer_new.html:67
+#: ../template/default/epgsearch_new.html:383
+#: ../template/default/timer_new.html:99
+msgid "Monday"
+msgstr "Понедельник"
+
+#: ../template/default/at_timer_new.html:68
+#: ../template/default/epgsearch_new.html:384
+#: ../template/default/timer_new.html:100
+msgid "Tuesday"
+msgstr "Вторник"
+
+#: ../template/default/at_timer_new.html:69
+#: ../template/default/epgsearch_new.html:385
+#: ../template/default/timer_new.html:101
+msgid "Wednesday"
+msgstr "Среда"
+
+#: ../template/default/at_timer_new.html:70
+#: ../template/default/epgsearch_new.html:386
+#: ../template/default/timer_new.html:102
+msgid "Thursday"
+msgstr "Четверг"
+
+#: ../template/default/at_timer_new.html:71
+#: ../template/default/epgsearch_new.html:387
+#: ../template/default/timer_new.html:103
+msgid "Friday"
+msgstr "Пятница"
+
+#: ../template/default/at_timer_new.html:72
+#: ../template/default/epgsearch_new.html:388
+#: ../template/default/timer_new.html:104
+msgid "Saturday"
+msgstr "Суббота"
+
+#: ../template/default/at_timer_new.html:73
+#: ../template/default/epgsearch_new.html:389
+#: ../template/default/timer_new.html:105
+msgid "Sunday"
+msgstr "Воскресение"
+
+#: ../template/default/at_timer_new.html:78
+#: ../template/default/help_at_timer_new.html:38
+#: ../template/default/help_timer_new.html:39
+#: ../template/default/prog_list.html:32 ../template/default/timer_new.html:84
+msgid "Channel:"
+msgstr "Канал:"
+
+#: ../template/default/at_timer_new.html:81
+#: ../template/default/epgsearch_new.html:400
+msgid "all"
+msgstr "все"
+
+#: ../template/default/at_timer_new.html:90
+#: ../template/default/help_at_timer_new.html:40
+msgid "Starts After:"
+msgstr "Начинается не раньше:"
+
+#: ../template/default/at_timer_new.html:95
+#: ../template/default/at_timer_new.html:105
+#: ../template/default/epgsearch_new.html:338
+#: ../template/default/epgsearch_new.html:345
+#: ../template/default/prog_list2.html:31
+#: ../template/default/prog_summary.html:33
+#: ../template/default/prog_summary2.html:33
+#: ../template/default/prog_timeline.html:77
+#: ../template/default/prog_timeline.html:155
+#: ../template/default/prog_timeline.html:172
+#: ../template/default/timer_new.html:115
+#: ../template/default/timer_new.html:128 ../vdradmind.pl:4773
+#: ../vdradmind.pl:4786
+msgid "o'clock"
+msgstr "Часов"
+
+#: ../template/default/at_timer_new.html:100
+#: ../template/default/help_at_timer_new.html:42
+msgid "Ends Before:"
+msgstr "Заканчивается не позднее:"
+
+#: ../template/default/at_timer_new.html:110
+#: ../template/default/help_at_timer_new.html:44
+msgid "Override Start/Stop Margins:"
+msgstr "Переписывать старт/стоп "
+
+#: ../template/default/at_timer_new.html:118
+#: ../template/default/config.html:203 ../template/default/config.html:261
+#: ../template/default/epgsearch_new.html:516
+#: ../template/default/help_at_timer_new.html:46
+#: ../template/default/help_config.html:126
+msgid "Time Margin at Start:"
+msgstr "Опережение начала таймера (мин.):"
+
+#: ../template/default/at_timer_new.html:120
+#: ../template/default/at_timer_new.html:127
+#: ../template/default/config.html:191 ../template/default/config.html:262
+#: ../template/default/config.html:266
+#: ../template/default/epgsearch_new.html:518
+#: ../template/default/epgsearch_new.html:524
+#: ../template/default/epgsearch_new.html:544
+#: ../template/default/timer_new.html:117
+#: ../template/default/timer_new.html:130
+msgid "minutes"
+msgstr "Минуты"
+
+#: ../template/default/at_timer_new.html:125
+#: ../template/default/config.html:207 ../template/default/config.html:265
+#: ../template/default/epgsearch_new.html:522
+#: ../template/default/help_at_timer_new.html:48
+#: ../template/default/help_config.html:128
+msgid "Time Margin at Stop:"
+msgstr "Запаздывание остановки таймера (мин.):"
+
+#: ../template/default/at_timer_new.html:146
+#: ../template/default/help_at_timer_new.html:54
+msgid "Episode:"
+msgstr "Серия:"
+
+#: ../template/default/at_timer_new.html:153
+#: ../template/default/help_at_timer_new.html:56
+msgid "Remember programmed timers:"
+msgstr "Запомнить запрограммированные таймеры:"
+
+#: ../template/default/at_timer_new.html:161
+#: ../template/default/epgsearch_new.html:448
+#: ../template/default/help_at_timer_new.html:58
+msgid "Directory:"
+msgstr "Каталог:"
+
+#: ../template/default/at_timer_new.html:170
+#: ../template/default/config.html:442
+#: ../template/default/epgsearch_new.html:559
+#: ../template/default/timer_new.html:169
+msgid "Save"
+msgstr "Сохранить"
+
+#: ../template/default/at_timer_new.html:171
+msgid "Test"
+msgstr "Тест"
+
+#: ../template/default/at_timer_new.html:172
+#: ../template/default/epgsearch_new.html:561
+#: ../template/default/rec_edit.html:45 ../template/default/timer_new.html:170
+msgid "Cancel"
+msgstr "Отменить"
+
+#: ../template/default/at_timer_new.html:185
+msgid "Broadcasted"
+msgstr "Вещялось"
+
+#: ../template/default/at_timer_new.html:186
+#: ../template/default/epgsearch_list.html:224
+msgid "Stored in"
+msgstr "Сохраненно в"
+
+#: ../template/default/at_timer_new.html:198
+#: ../template/default/epgsearch_list.html:264
+#: ../template/default/epgsearch_new.html:206
+msgid "No matches found!"
+msgstr "Нет результатов!"
 
 #: ../template/default/config.html:5 ../template/default/config.html:18
 #: ../template/default/help_config.html:9
@@ -441,7 +663,7 @@ msgstr "Пароль для гостя:"
 #: ../template/default/config.html:158 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:80
 #: ../template/default/navigation.html:35
-#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:5373
+#: ../template/default/prog_timeline.html:7 ../vdradmind.pl:5384
 msgid "Timeline"
 msgstr "График времени"
 
@@ -470,33 +692,6 @@ msgstr "Активировано:"
 #: ../template/default/config.html:190 ../template/default/help_config.html:96
 msgid "Timeout:"
 msgstr "Timeout:"
-
-#: ../template/default/config.html:191 ../template/default/config.html:262
-#: ../template/default/config.html:266 ../template/default/timer_new.html:117
-#: ../template/default/timer_new.html:130
-#: ../template/default/epgsearch_new.html:516
-#: ../template/default/epgsearch_new.html:522
-#: ../template/default/epgsearch_new.html:542
-#: ../template/default/at_timer_new.html:120
-#: ../template/default/at_timer_new.html:127
-msgid "minutes"
-msgstr "Минуты"
-
-#: ../template/default/config.html:203 ../template/default/config.html:261
-#: ../template/default/help_at_timer_new.html:46
-#: ../template/default/help_config.html:126
-#: ../template/default/epgsearch_new.html:514
-#: ../template/default/at_timer_new.html:118
-msgid "Time Margin at Start:"
-msgstr "Опережение начала таймера (мин.):"
-
-#: ../template/default/config.html:207 ../template/default/config.html:265
-#: ../template/default/help_at_timer_new.html:48
-#: ../template/default/help_config.html:128
-#: ../template/default/epgsearch_new.html:520
-#: ../template/default/at_timer_new.html:125
-msgid "Time Margin at Stop:"
-msgstr "Запаздывание остановки таймера (мин.):"
 
 #: ../template/default/config.html:212
 #: ../template/default/help_config.html:102
@@ -651,15 +846,311 @@ msgstr "В \"Автотаймеры\"?"
 msgid "In \"Watch TV\"?"
 msgstr "При \"просмотре TV\"?"
 
-#: ../template/default/config.html:442 ../template/default/timer_new.html:169
-#: ../template/default/epgsearch_new.html:557
-#: ../template/default/at_timer_new.html:170
-msgid "Save"
-msgstr "Сохранить"
-
 #: ../template/default/config.html:443
 msgid "Apply"
 msgstr "Применить"
+
+#: ../template/default/epgsearch_list.html:6
+msgid "EPG search"
+msgstr "ЕПГ поиск"
+
+#: ../template/default/epgsearch_list.html:23
+#: ../template/default/navigation.html:50
+msgid "EPG Search"
+msgstr "Поиск по ЕПГ"
+
+#: ../template/default/epgsearch_list.html:27
+#, fuzzy
+msgid "Use template"
+msgstr "Запомнить шаблон"
+
+#: ../template/default/epgsearch_list.html:34
+msgid "New Search"
+msgstr "Новый поиск"
+
+#: ../template/default/epgsearch_list.html:62
+msgid "Action"
+msgstr "Действие"
+
+#: ../template/default/epgsearch_list.html:87
+msgid "From"
+msgstr "С"
+
+#: ../template/default/epgsearch_list.html:101
+msgid "To"
+msgstr "К"
+
+#: ../template/default/epgsearch_list.html:115
+msgid "Search pattern"
+msgstr "Поисковые признаки"
+
+#: ../template/default/epgsearch_list.html:171
+msgid "Find"
+msgstr "Поиск"
+
+#: ../template/default/epgsearch_list.html:192
+msgid "Show Favorites"
+msgstr "Показать фавориты"
+
+#: ../template/default/epgsearch_list.html:196
+msgid "Delete Selected Searches"
+msgstr "Удалить выбранные поиски"
+
+#: ../template/default/epgsearch_list.html:196
+msgid "Delete all selected searches?"
+msgstr "Удалить все выбранные поиски?"
+
+#: ../template/default/epgsearch_list.html:197
+msgid "Execute Selected Searches"
+msgstr "Выполнить выбранные поиски"
+
+#: ../template/default/epgsearch_list.html:221
+msgid "Duration"
+msgstr "Продолжительность"
+
+#: ../template/default/epgsearch_list.html:241
+#: ../template/default/epgsearch_new.html:183
+#: ../template/default/prog_list.html:67 ../template/default/prog_list.html:83
+#: ../template/default/prog_list2.html:73
+#: ../template/default/prog_list2.html:91
+#: ../template/default/prog_summary.html:82
+#: ../template/default/prog_summary.html:104
+#: ../template/default/prog_summary2.html:70
+#: ../template/default/prog_summary2.html:99
+msgid "More Information"
+msgstr "Дополнительная информация"
+
+#: ../template/default/epgsearch_list.html:255
+#: ../template/default/navigation.html:38 ../template/default/prog_list.html:6
+#: ../template/default/prog_list2.html:56
+#: ../template/default/prog_summary.html:48
+#: ../template/default/prog_summary2.html:85 ../vdradmind.pl:5384
+msgid "Channels"
+msgstr "Телегид"
+
+#: ../template/default/epgsearch_new.html:6
+msgid "Define New Search"
+msgstr "Декларация нового поиска"
+
+#: ../template/default/epgsearch_new.html:6
+#: ../template/default/epgsearch_new.html:153
+msgid "Edit Search"
+msgstr "Изменить поиск"
+
+#: ../template/default/epgsearch_new.html:129
+msgid "Small search pattern.\\nDo you really want to use it?"
+msgstr "Маленькая маска поиска.\\n Действительно по ней искать?"
+
+#: ../template/default/epgsearch_new.html:136
+msgid ""
+"You didn't select at least one of\\ntitle, subtitle or description.\\nDo you "
+"really want to use this search?"
+msgstr ""
+
+#: ../template/default/epgsearch_new.html:153
+msgid "Add New Search"
+msgstr "Создать новый поиск"
+
+#: ../template/default/epgsearch_new.html:167
+msgid "Hide results"
+msgstr "Спрятать результаты"
+
+#: ../template/default/epgsearch_new.html:213
+msgid "Settings"
+msgstr "Настройки"
+
+#: ../template/default/epgsearch_new.html:218
+msgid "Search Term:"
+msgstr "Поиск по условию:"
+
+#: ../template/default/epgsearch_new.html:225
+msgid "Search Mode:"
+msgstr "Режим поиска:"
+
+#: ../template/default/epgsearch_new.html:228
+msgid "phrase"
+msgstr "фразы"
+
+#: ../template/default/epgsearch_new.html:229
+msgid "all words"
+msgstr "все слова"
+
+#: ../template/default/epgsearch_new.html:230
+msgid "at least one word"
+msgstr "в конце одно слово"
+
+#: ../template/default/epgsearch_new.html:231
+msgid "match exactly"
+msgstr "точный поиск"
+
+#: ../template/default/epgsearch_new.html:232
+msgid "regular expression"
+msgstr "регулярные выражения"
+
+#: ../template/default/epgsearch_new.html:233
+msgid "fuzzy"
+msgstr "неточно"
+
+#: ../template/default/epgsearch_new.html:236
+msgid "Tolerance for \"fuzzy\":"
+msgstr "погрешность для \"неточно\""
+
+#: ../template/default/epgsearch_new.html:243
+msgid "Match Case:"
+msgstr "Поиск условия:"
+
+#: ../template/default/epgsearch_new.html:260
+msgid "Use extended EPG info:"
+msgstr "Использовать расширенную ЕПГ информацию"
+
+#: ../template/default/epgsearch_new.html:295
+msgid "Use Channel:"
+msgstr "Использовать канал:"
+
+#: ../template/default/epgsearch_new.html:298
+#: ../template/default/epgsearch_new.html:398
+msgid "no"
+msgstr "нет"
+
+#: ../template/default/epgsearch_new.html:299
+msgid "interval"
+msgstr "интервал"
+
+#: ../template/default/epgsearch_new.html:300
+msgid "channel group"
+msgstr "группа каналов"
+
+#: ../template/default/epgsearch_new.html:301
+msgid "only FTA"
+msgstr "только FTA"
+
+#: ../template/default/epgsearch_new.html:304
+msgid "Range:"
+msgstr "Область:"
+
+#: ../template/default/epgsearch_new.html:318
+msgid "Channel Group:"
+msgstr "Группа каналов:"
+
+#: ../template/default/epgsearch_new.html:329
+msgid "Use Time:"
+msgstr "Использовать время:"
+
+#: ../template/default/epgsearch_new.html:335
+msgid "Start After:"
+msgstr "Старт после:"
+
+#: ../template/default/epgsearch_new.html:342
+msgid "Start Before:"
+msgstr "Старт раньше:"
+
+#: ../template/default/epgsearch_new.html:354
+msgid "Use Duration:"
+msgstr "Использовать продолжительность:"
+
+#: ../template/default/epgsearch_new.html:360
+msgid "Min. Duration:"
+msgstr "Мин. продолжительность:"
+
+#: ../template/default/epgsearch_new.html:363
+#: ../template/default/epgsearch_new.html:370
+msgid "hh:mm"
+msgstr "чч:мм"
+
+#: ../template/default/epgsearch_new.html:367
+msgid "Max. Duration:"
+msgstr "Макс. продолжительность:"
+
+#: ../template/default/epgsearch_new.html:379
+msgid "Use Day of Week:"
+msgstr "Использовать день недели:"
+
+#: ../template/default/epgsearch_new.html:395
+msgid "Use Blacklists:"
+msgstr "Использовать список запретов:"
+
+#: ../template/default/epgsearch_new.html:399
+msgid "selection"
+msgstr "выбор"
+
+#: ../template/default/epgsearch_new.html:414
+msgid "Use in Favorites Menu:"
+msgstr "Использовать фаворитное меню:"
+
+#: ../template/default/epgsearch_new.html:422
+msgid "Use as Search Timer:"
+msgstr "Использовать как поиск таймера:"
+
+#: ../template/default/epgsearch_new.html:427
+#: ../template/default/prog_detail.html:37 ../vdradmind.pl:2329
+msgid "record"
+msgstr "записать"
+
+#: ../template/default/epgsearch_new.html:428 ../vdradmind.pl:2331
+msgid "announce only"
+msgstr "только анонсы"
+
+#: ../template/default/epgsearch_new.html:429 ../vdradmind.pl:2333
+msgid "switch only"
+msgstr "только переключится"
+
+#: ../template/default/epgsearch_new.html:439
+msgid "Settings for action \"record\""
+msgstr "Настройки для \"записи\""
+
+#: ../template/default/epgsearch_new.html:442
+msgid "Series Recording:"
+msgstr "Запись серий:"
+
+#: ../template/default/epgsearch_new.html:454
+msgid "Delete Recordings After ... Days:"
+msgstr "Удалить записи после ... дней"
+
+#: ../template/default/epgsearch_new.html:457
+msgid "Keep ... Recordings:"
+msgstr "Сохранить ... Записей"
+
+#: ../template/default/epgsearch_new.html:462
+msgid "Pause, when ... recordings exist:"
+msgstr "Пауза, если ... запись существует:"
+
+#: ../template/default/epgsearch_new.html:468
+msgid "Avoid Repeats:"
+msgstr "Избегать повторений:"
+
+#: ../template/default/epgsearch_new.html:474
+msgid "Allowed Repeats:"
+msgstr "Разрешенные повторения:"
+
+#: ../template/default/epgsearch_new.html:477
+msgid "Only Repeats Within ... Days:"
+msgstr "Повторения только в течение ... Дней"
+
+#: ../template/default/epgsearch_new.html:482
+msgid "Compare:"
+msgstr "Сравнить:"
+
+#: ../template/default/epgsearch_new.html:528
+msgid "VPS:"
+msgstr "VPS:"
+
+#: ../template/default/epgsearch_new.html:539
+msgid "Settings for action \"switch only\""
+msgstr "Настройки для \"только переключится\""
+
+#: ../template/default/epgsearch_new.html:542
+msgid "Switch ... Minutes Before Start:"
+msgstr "Переключится за ... минут до старта\""
+
+#: ../template/default/epgsearch_new.html:555
+msgid "Save as template"
+msgstr "Запомнить шаблон"
+
+#: ../template/default/epgsearch_new.html:560
+#: ../template/default/rec_list.html:144 ../template/default/vdr_cmds.html:43
+#: ../template/default/vdr_cmds.html:55
+msgid "Run"
+msgstr "Выполнить"
 
 #: ../template/default/error.html:6
 msgid "Error!"
@@ -715,13 +1206,6 @@ msgstr ""
 "связываться с VDR для обновления данных EPG и поиска совподающих "
 "Автотаймеров.</p>"
 
-#: ../template/default/help_at_timer_new.html:12
-#: ../template/default/help_at_timer_new.html:23
-#: ../template/default/at_timer_new.html:6
-#: ../template/default/at_timer_new.html:19
-msgid "Edit AutoTimer"
-msgstr "Редактирование Автотаймера"
-
 #: ../template/default/help_at_timer_new.html:27
 msgid ""
 "<p>Here you can edit an automatic timer's (AutoTimer) settings.</"
@@ -739,11 +1223,6 @@ msgstr ""
 "нерегулярно транслируемых сериалов или художественных фильмов, которые Вы не "
 "хотите пропустить.</p>"
 
-#: ../template/default/help_at_timer_new.html:30
-#: ../template/default/at_timer_new.html:34
-msgid "AutoTimer Active:"
-msgstr "Автотаймер активен:"
-
 #: ../template/default/help_at_timer_new.html:31
 msgid ""
 "Activate or deactivate this AutoTimer. Deactivated AutoTimers are still "
@@ -756,11 +1235,6 @@ msgstr ""
 "не будут, но их можно активировать снова. Вы можете устанавливать их также "
 "на \"однократно\", так чтобы этот Автотаймер сработал только единажды на "
 "следущей передаче."
-
-#: ../template/default/help_at_timer_new.html:32
-#: ../template/default/at_timer_new.html:49
-msgid "Search Patterns:"
-msgstr "Поисковые признаки:"
 
 #: ../template/default/help_at_timer_new.html:33
 msgid ""
@@ -798,12 +1272,6 @@ msgstr ""
 "передача автоматически не программируется.Таким образом Вы можете исключать "
 "полную серию."
 
-#: ../template/default/help_at_timer_new.html:34
-#: ../template/default/epgsearch_new.html:248
-#: ../template/default/at_timer_new.html:56
-msgid "Search in:"
-msgstr "искать в:"
-
 #: ../template/default/help_at_timer_new.html:35
 msgid ""
 "Here you can define the EPG sections where VDRAdmin-AM should look for the "
@@ -812,23 +1280,11 @@ msgstr ""
 "Здесь Вы указываете разделы из EPG, которые VDRAdmin-AM должен осматривать "
 "на наличие признаков поиска."
 
-#: ../template/default/help_at_timer_new.html:36
-#: ../template/default/at_timer_new.html:65
-msgid "Search only on these days:"
-msgstr "Искать только в эти дни:"
-
 #: ../template/default/help_at_timer_new.html:37
 msgid ""
 "Use these checkboxes to limit searching for matching broadcasts to a set of "
 "weekdays."
 msgstr "Отметьте дни недели, в которые будет проводиться поиск передач."
-
-#: ../template/default/help_at_timer_new.html:38
-#: ../template/default/help_timer_new.html:39
-#: ../template/default/prog_list.html:32 ../template/default/timer_new.html:84
-#: ../template/default/at_timer_new.html:78
-msgid "Channel:"
-msgstr "Канал:"
 
 #: ../template/default/help_at_timer_new.html:39
 msgid ""
@@ -840,11 +1296,6 @@ msgstr ""
 "\" будут просмотрены все известные или желаемые каналы. Желаемые каналы для "
 "автотаймеров устанавливаются на странице \"Конфигурации\". "
 
-#: ../template/default/help_at_timer_new.html:40
-#: ../template/default/at_timer_new.html:90
-msgid "Starts After:"
-msgstr "Начинается не раньше:"
-
 #: ../template/default/help_at_timer_new.html:41
 msgid ""
 "A broadcast must start after the time entered here to match. The first text "
@@ -853,11 +1304,6 @@ msgstr ""
 "Передача может начинаться не раньше установленного здесь времени. Первое "
 "текстовое поле указывает часы, второе минуты."
 
-#: ../template/default/help_at_timer_new.html:42
-#: ../template/default/at_timer_new.html:100
-msgid "Ends Before:"
-msgstr "Заканчивается не позднее:"
-
 #: ../template/default/help_at_timer_new.html:43
 msgid ""
 "A broadcast must end before the time entered here to match. The first text "
@@ -865,11 +1311,6 @@ msgid ""
 msgstr ""
 "Передача должна заканчиваться не позднее установленного здесь времени."
 "Первоетекстовое поле указывает часы, второе минуты."
-
-#: ../template/default/help_at_timer_new.html:44
-#: ../template/default/at_timer_new.html:110
-msgid "Override Start/Stop Margins:"
-msgstr "Переписывать старт/стоп "
 
 #: ../template/default/help_at_timer_new.html:45
 msgid ""
@@ -950,11 +1391,6 @@ msgstr ""
 "удалится автоматически, если указанное количество дней истекло со дня записи "
 "и на жестком диске нет больше места для новых записей. "
 
-#: ../template/default/help_at_timer_new.html:54
-#: ../template/default/at_timer_new.html:146
-msgid "Episode:"
-msgstr "Серия:"
-
 #: ../template/default/help_at_timer_new.html:55
 msgid ""
 "Check this box if you want VDRAdmin-AM to append the broadcast's EPG "
@@ -962,11 +1398,6 @@ msgid ""
 msgstr ""
 "Активируйте эту опцию, если Вы хотите, чтобы VDRAdmin-AM добавлял "
 "подзаголовок передачи из EPG к названию записи."
-
-#: ../template/default/help_at_timer_new.html:56
-#: ../template/default/at_timer_new.html:153
-msgid "Remember programmed timers:"
-msgstr "Запомнить запрограммированные таймеры:"
 
 #: ../template/default/help_at_timer_new.html:57
 msgid ""
@@ -978,12 +1409,6 @@ msgstr ""
 "уже программировал автоматически. Это полезно, если автоматически "
 "запрограммированные таймеры должны удаляться или деактивироваться в списке "
 "таймеров."
-
-#: ../template/default/help_at_timer_new.html:58
-#: ../template/default/epgsearch_new.html:446
-#: ../template/default/at_timer_new.html:161
-msgid "Directory:"
-msgstr "Каталог:"
 
 #: ../template/default/help_at_timer_new.html:60
 msgid ""
@@ -1395,7 +1820,7 @@ msgstr ""
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5373
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5384
 msgid "Recordings"
 msgstr "Записи"
 
@@ -1715,26 +2140,13 @@ msgstr "Ваш Броузер не поддерживает фреймы!"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5373
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5384
 msgid "What's On Now?"
 msgstr "Что идет сейчас?"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5373
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5384
 msgid "Playing Today?"
 msgstr "Что будет сегодня?"
-
-#: ../template/default/navigation.html:38 ../template/default/prog_list.html:6
-#: ../template/default/prog_list2.html:56
-#: ../template/default/prog_summary.html:48
-#: ../template/default/prog_summary2.html:85
-#: ../template/default/epgsearch_list.html:255 ../vdradmind.pl:5373
-msgid "Channels"
-msgstr "Телегид"
-
-#: ../template/default/navigation.html:50
-#: ../template/default/epgsearch_list.html:23
-msgid "EPG Search"
-msgstr "Поиск по ЕПГ"
 
 #: ../template/default/navigation.html:57 ../template/default/rc.html:6
 msgid "Remote Control"
@@ -1778,11 +2190,6 @@ msgstr "закрыть"
 msgid "view"
 msgstr "переключить"
 
-#: ../template/default/prog_detail.html:37
-#: ../template/default/epgsearch_new.html:425 ../vdradmind.pl:2320
-msgid "record"
-msgstr "записать"
-
 #: ../template/default/prog_detail.html:41
 msgid "search"
 msgstr "Повторения"
@@ -1822,18 +2229,6 @@ msgstr "Stream"
 msgid "Go!"
 msgstr "Стартовать!"
 
-#: ../template/default/prog_list.html:67 ../template/default/prog_list.html:83
-#: ../template/default/prog_list2.html:73
-#: ../template/default/prog_list2.html:91
-#: ../template/default/prog_summary.html:82
-#: ../template/default/prog_summary.html:104
-#: ../template/default/prog_summary2.html:70
-#: ../template/default/prog_summary2.html:99
-#: ../template/default/epgsearch_new.html:181
-#: ../template/default/epgsearch_list.html:241
-msgid "More Information"
-msgstr "Дополнительная информация"
-
 #: ../template/default/prog_list.html:81
 #: ../template/default/prog_list2.html:89
 #: ../template/default/prog_summary.html:78
@@ -1863,29 +2258,13 @@ msgstr "Записать передачу"
 msgid "No EPG information available"
 msgstr "Нет EPG информации"
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3483
+#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3493
 msgid "Playing Today"
 msgstr "Что будет сегодня?"
 
 #: ../template/default/prog_list2.html:29
 msgid "starting at"
 msgstr "Начать в"
-
-#: ../template/default/prog_list2.html:31
-#: ../template/default/prog_summary.html:33
-#: ../template/default/prog_summary2.html:33
-#: ../template/default/prog_timeline.html:77
-#: ../template/default/prog_timeline.html:155
-#: ../template/default/prog_timeline.html:172
-#: ../template/default/timer_new.html:115
-#: ../template/default/timer_new.html:128
-#: ../template/default/epgsearch_new.html:336
-#: ../template/default/epgsearch_new.html:343
-#: ../template/default/at_timer_new.html:95
-#: ../template/default/at_timer_new.html:105 ../vdradmind.pl:4763
-#: ../vdradmind.pl:4776
-msgid "o'clock"
-msgstr "Часов"
 
 #: ../template/default/prog_summary.html:27
 #: ../template/default/prog_summary2.html:27
@@ -1894,12 +2273,12 @@ msgid "What's on:"
 msgstr "Что сейчас:"
 
 #: ../template/default/prog_summary.html:33
-#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4763
+#: ../template/default/prog_summary2.html:33 ../vdradmind.pl:4773
 msgid "at"
 msgstr "в"
 
 #: ../template/default/prog_timeline.html:76
-#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4748
+#: ../template/default/prog_timeline.html:163 ../vdradmind.pl:4758
 msgid "now"
 msgstr "сейчас"
 
@@ -1945,12 +2324,6 @@ msgstr "Подзаголовок:"
 msgid "Rename"
 msgstr "Переименовать"
 
-#: ../template/default/rec_edit.html:45 ../template/default/timer_new.html:170
-#: ../template/default/epgsearch_new.html:559
-#: ../template/default/at_timer_new.html:172
-msgid "Cancel"
-msgstr "Отменить"
-
 #: ../template/default/rec_list.html:20
 msgid "Total:"
 msgstr "Всего:"
@@ -1995,12 +2368,6 @@ msgstr "Обновить"
 #: ../template/default/rec_list.html:138
 msgid "Commands:"
 msgstr "Команды:"
-
-#: ../template/default/rec_list.html:144 ../template/default/vdr_cmds.html:43
-#: ../template/default/vdr_cmds.html:55
-#: ../template/default/epgsearch_new.html:558
-msgid "Run"
-msgstr "Выполнить"
 
 #: ../template/default/rec_list.html:144 ../template/default/vdr_cmds.html:43
 #: ../template/default/vdr_cmds.html:55
@@ -2081,48 +2448,6 @@ msgstr "Нет таймеров!"
 msgid "Create New Timer"
 msgstr "Создать новый таймер"
 
-#: ../template/default/timer_new.html:99
-#: ../template/default/epgsearch_new.html:381
-#: ../template/default/at_timer_new.html:67
-msgid "Monday"
-msgstr "Понедельник"
-
-#: ../template/default/timer_new.html:100
-#: ../template/default/epgsearch_new.html:382
-#: ../template/default/at_timer_new.html:68
-msgid "Tuesday"
-msgstr "Вторник"
-
-#: ../template/default/timer_new.html:101
-#: ../template/default/epgsearch_new.html:383
-#: ../template/default/at_timer_new.html:69
-msgid "Wednesday"
-msgstr "Среда"
-
-#: ../template/default/timer_new.html:102
-#: ../template/default/epgsearch_new.html:384
-#: ../template/default/at_timer_new.html:70
-msgid "Thursday"
-msgstr "Четверг"
-
-#: ../template/default/timer_new.html:103
-#: ../template/default/epgsearch_new.html:385
-#: ../template/default/at_timer_new.html:71
-msgid "Friday"
-msgstr "Пятница"
-
-#: ../template/default/timer_new.html:104
-#: ../template/default/epgsearch_new.html:386
-#: ../template/default/at_timer_new.html:72
-msgid "Saturday"
-msgstr "Суббота"
-
-#: ../template/default/timer_new.html:105
-#: ../template/default/epgsearch_new.html:387
-#: ../template/default/at_timer_new.html:73
-msgid "Sunday"
-msgstr "Воскресение"
-
 #: ../template/default/timer_new.html:117
 #: ../template/default/timer_new.html:130
 msgid "Buffer:"
@@ -2195,321 +2520,6 @@ msgstr "Комманды из commands.conf:"
 msgid "Output"
 msgstr "Вывод"
 
-#: ../template/default/epgsearch_new.html:6
-msgid "Define New Search"
-msgstr "Декларация нового поиска"
-
-#: ../template/default/epgsearch_new.html:6
-#: ../template/default/epgsearch_new.html:151
-msgid "Edit Search"
-msgstr "Изменить поиск"
-
-#: ../template/default/epgsearch_new.html:135
-msgid "Small search pattern.\\nDo you really want to use it?"
-msgstr "Маленькая маска поиска.\\n Действительно по ней искать?"
-
-#: ../template/default/epgsearch_new.html:151
-msgid "Add New Search"
-msgstr "Создать новый поиск"
-
-#: ../template/default/epgsearch_new.html:165
-msgid "Hide results"
-msgstr "Спрятать результаты"
-
-#: ../template/default/epgsearch_new.html:204
-#: ../template/default/at_timer_new.html:198
-#: ../template/default/epgsearch_list.html:264
-msgid "No matches found!"
-msgstr "Нет результатов!"
-
-#: ../template/default/epgsearch_new.html:211
-msgid "Settings"
-msgstr "Настройки"
-
-#: ../template/default/epgsearch_new.html:216
-msgid "Search Term:"
-msgstr "Поиск по условию:"
-
-#: ../template/default/epgsearch_new.html:223
-msgid "Search Mode:"
-msgstr "Режим поиска:"
-
-#: ../template/default/epgsearch_new.html:226
-msgid "phrase"
-msgstr "фразы"
-
-#: ../template/default/epgsearch_new.html:227
-msgid "all words"
-msgstr "все слова"
-
-#: ../template/default/epgsearch_new.html:228
-msgid "at least one word"
-msgstr "в конце одно слово"
-
-#: ../template/default/epgsearch_new.html:229
-msgid "match exactly"
-msgstr "точный поиск"
-
-#: ../template/default/epgsearch_new.html:230
-msgid "regular expression"
-msgstr "регулярные выражения"
-
-#: ../template/default/epgsearch_new.html:231
-msgid "fuzzy"
-msgstr "неточно"
-
-#: ../template/default/epgsearch_new.html:234
-msgid "Tolerance for \"fuzzy\":"
-msgstr "погрешность для \"неточно\""
-
-#: ../template/default/epgsearch_new.html:241
-msgid "Match Case:"
-msgstr "Поиск условия:"
-
-#: ../template/default/epgsearch_new.html:250
-#: ../template/default/epgsearch_new.html:483
-#: ../template/default/at_timer_new.html:58
-#: ../template/default/at_timer_new.html:183
-#: ../template/default/epgsearch_list.html:222
-msgid "Title"
-msgstr "Заголовок"
-
-#: ../template/default/epgsearch_new.html:251
-#: ../template/default/epgsearch_new.html:484
-#: ../template/default/at_timer_new.html:59
-#: ../template/default/at_timer_new.html:184
-msgid "Subtitle"
-msgstr "Подзаголовок"
-
-#: ../template/default/epgsearch_new.html:252
-#: ../template/default/epgsearch_new.html:485
-#: ../template/default/at_timer_new.html:60
-msgid "Description"
-msgstr "Описание"
-
-#: ../template/default/epgsearch_new.html:258
-msgid "Use extended EPG info:"
-msgstr "Использовать расширенную ЕПГ информацию"
-
-#: ../template/default/epgsearch_new.html:293
-msgid "Use Channel:"
-msgstr "Использовать канал:"
-
-#: ../template/default/epgsearch_new.html:296
-#: ../template/default/epgsearch_new.html:396
-msgid "no"
-msgstr "нет"
-
-#: ../template/default/epgsearch_new.html:297
-msgid "interval"
-msgstr "интервал"
-
-#: ../template/default/epgsearch_new.html:298
-msgid "channel group"
-msgstr "группа каналов"
-
-#: ../template/default/epgsearch_new.html:299
-msgid "only FTA"
-msgstr "только FTA"
-
-#: ../template/default/epgsearch_new.html:302
-msgid "Range:"
-msgstr "Область:"
-
-#: ../template/default/epgsearch_new.html:316
-msgid "Channel Group:"
-msgstr "Группа каналов:"
-
-#: ../template/default/epgsearch_new.html:327
-msgid "Use Time:"
-msgstr "Использовать время:"
-
-#: ../template/default/epgsearch_new.html:333
-msgid "Start After:"
-msgstr "Старт после:"
-
-#: ../template/default/epgsearch_new.html:340
-msgid "Start Before:"
-msgstr "Старт раньше:"
-
-#: ../template/default/epgsearch_new.html:352
-msgid "Use Duration:"
-msgstr "Использовать продолжительность:"
-
-#: ../template/default/epgsearch_new.html:358
-msgid "Min. Duration:"
-msgstr "Мин. продолжительность:"
-
-#: ../template/default/epgsearch_new.html:361
-#: ../template/default/epgsearch_new.html:368
-msgid "hh:mm"
-msgstr "чч:мм"
-
-#: ../template/default/epgsearch_new.html:365
-msgid "Max. Duration:"
-msgstr "Макс. продолжительность:"
-
-#: ../template/default/epgsearch_new.html:377
-msgid "Use Day of Week:"
-msgstr "Использовать день недели:"
-
-#: ../template/default/epgsearch_new.html:393
-msgid "Use Blacklists:"
-msgstr "Использовать список запретов:"
-
-#: ../template/default/epgsearch_new.html:397
-msgid "selection"
-msgstr "выбор"
-
-#: ../template/default/epgsearch_new.html:398
-#: ../template/default/at_timer_new.html:81
-msgid "all"
-msgstr "все"
-
-#: ../template/default/epgsearch_new.html:412
-msgid "Use in Favorites Menu:"
-msgstr "Использовать фаворитное меню:"
-
-#: ../template/default/epgsearch_new.html:420
-msgid "Use as Search Timer:"
-msgstr "Использовать как поиск таймера:"
-
-#: ../template/default/epgsearch_new.html:426 ../vdradmind.pl:2322
-msgid "announce only"
-msgstr "только анонсы"
-
-#: ../template/default/epgsearch_new.html:427 ../vdradmind.pl:2324
-msgid "switch only"
-msgstr "только переключится"
-
-#: ../template/default/epgsearch_new.html:437
-msgid "Settings for action \"record\""
-msgstr "Настройки для \"записи\""
-
-#: ../template/default/epgsearch_new.html:440
-msgid "Series Recording:"
-msgstr "Запись серий:"
-
-#: ../template/default/epgsearch_new.html:452
-msgid "Delete Recordings After ... Days:"
-msgstr "Удалить записи после ... дней"
-
-#: ../template/default/epgsearch_new.html:455
-msgid "Keep ... Recordings:"
-msgstr "Сохранить ... Записей"
-
-#: ../template/default/epgsearch_new.html:460
-msgid "Pause, when ... recordings exist:"
-msgstr "Пауза, если ... запись существует:"
-
-#: ../template/default/epgsearch_new.html:466
-msgid "Avoid Repeats:"
-msgstr "Избегать повторений:"
-
-#: ../template/default/epgsearch_new.html:472
-msgid "Allowed Repeats:"
-msgstr "Разрешенные повторения:"
-
-#: ../template/default/epgsearch_new.html:475
-msgid "Only Repeats Within ... Days:"
-msgstr "Повторения только в течение ... Дней"
-
-#: ../template/default/epgsearch_new.html:480
-msgid "Compare:"
-msgstr "Сравнить:"
-
-#: ../template/default/epgsearch_new.html:526
-msgid "VPS:"
-msgstr "VPS:"
-
-#: ../template/default/epgsearch_new.html:537
-msgid "Settings for action \"switch only\""
-msgstr "Настройки для \"только переключится\""
-
-#: ../template/default/epgsearch_new.html:540
-msgid "Switch ... Minutes Before Start:"
-msgstr "Переключится за ... минут до старта\""
-
-#: ../template/default/epgsearch_new.html:553
-msgid "Save as template"
-msgstr "Запомнить шаблон"
-
-#: ../template/default/at_timer_new.html:6
-#: ../template/default/at_timer_new.html:19
-msgid "Add New AutoTimer"
-msgstr "Создать новый Автотаймер"
-
-#: ../template/default/at_timer_new.html:39
-#: ../template/default/at_timer_new.html:43
-msgid "oneshot"
-msgstr "однократно"
-
-#: ../template/default/at_timer_new.html:171
-msgid "Test"
-msgstr "Тест"
-
-#: ../template/default/at_timer_new.html:185
-msgid "Broadcasted"
-msgstr "Вещялось"
-
-#: ../template/default/at_timer_new.html:186
-#: ../template/default/epgsearch_list.html:224
-msgid "Stored in"
-msgstr "Сохраненно в"
-
-#: ../template/default/epgsearch_list.html:6
-msgid "EPG search"
-msgstr "ЕПГ поиск"
-
-#: ../template/default/epgsearch_list.html:27
-#, fuzzy
-msgid "Use template"
-msgstr "Запомнить шаблон"
-
-#: ../template/default/epgsearch_list.html:34
-msgid "New Search"
-msgstr "Новый поиск"
-
-#: ../template/default/epgsearch_list.html:62
-msgid "Action"
-msgstr "Действие"
-
-#: ../template/default/epgsearch_list.html:87
-msgid "From"
-msgstr "С"
-
-#: ../template/default/epgsearch_list.html:101
-msgid "To"
-msgstr "К"
-
-#: ../template/default/epgsearch_list.html:115
-msgid "Search pattern"
-msgstr "Поисковые признаки"
-
-#: ../template/default/epgsearch_list.html:171
-msgid "Find"
-msgstr "Поиск"
-
-#: ../template/default/epgsearch_list.html:192
-msgid "Show Favorites"
-msgstr "Показать фавориты"
-
-#: ../template/default/epgsearch_list.html:196
-msgid "Delete Selected Searches"
-msgstr "Удалить выбранные поиски"
-
-#: ../template/default/epgsearch_list.html:196
-msgid "Delete all selected searches?"
-msgstr "Удалить все выбранные поиски?"
-
-#: ../template/default/epgsearch_list.html:197
-msgid "Execute Selected Searches"
-msgstr "Выполнить выбранные поиски"
-
-#: ../template/default/epgsearch_list.html:221
-msgid "Duration"
-msgstr "Продолжительность"
-
 #: ../vdradmind.pl:350
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Имя хоста VDR (например, video.intra.net)?"
@@ -2552,65 +2562,65 @@ msgstr "Файл конфигурации успешно записан."
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s был запущен с PID-ом %d."
 
-#: ../vdradmind.pl:484 ../vdradmind.pl:1118 ../vdradmind.pl:2784
+#: ../vdradmind.pl:484 ../vdradmind.pl:1124 ../vdradmind.pl:2793
 msgid "Not found"
 msgstr "Не найдено"
 
-#: ../vdradmind.pl:484 ../vdradmind.pl:2785
+#: ../vdradmind.pl:484 ../vdradmind.pl:2794
 msgid "The requested URL was not found on this server!"
 msgstr "Затребованный URL не был найден на этом сервере!"
 
-#: ../vdradmind.pl:564 ../vdradmind.pl:1114 ../vdradmind.pl:2787
+#: ../vdradmind.pl:565 ../vdradmind.pl:1120 ../vdradmind.pl:2796
 msgid "Forbidden"
 msgstr "Запрещено"
 
-#: ../vdradmind.pl:564 ../vdradmind.pl:2788
+#: ../vdradmind.pl:565 ../vdradmind.pl:2797
 msgid "You don't have permission to access this function!"
 msgstr "У вас недостаточно прав для вызова этой функции!"
 
-#: ../vdradmind.pl:1114 ../vdradmind.pl:2789
+#: ../vdradmind.pl:1120 ../vdradmind.pl:2798
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "В доступе к файлу \"%s\" отказанно!"
 
-#: ../vdradmind.pl:1118 ../vdradmind.pl:2786
+#: ../vdradmind.pl:1124 ../vdradmind.pl:2795
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "URL \"%s\" не был найден на этом сервере!"
 
-#: ../vdradmind.pl:1979
+#: ../vdradmind.pl:1987
 #, fuzzy
 msgid "Your favorites"
 msgstr "Показать фавориты"
 
-#: ../vdradmind.pl:1979
+#: ../vdradmind.pl:1987
 #, fuzzy
 msgid "Search results"
 msgstr "Спрятать результаты"
 
-#: ../vdradmind.pl:2118
+#: ../vdradmind.pl:2127
 #, fuzzy
 msgid "Default"
 msgstr "Удалить"
 
-#: ../vdradmind.pl:2236
+#: ../vdradmind.pl:2245
 msgid "--- no timer ---"
 msgstr "--- нет таймера ---"
 
-#: ../vdradmind.pl:2326
+#: ../vdradmind.pl:2335
 msgid "unknown"
 msgstr "неизвестно"
 
-#: ../vdradmind.pl:2329
+#: ../vdradmind.pl:2338
 msgid "none"
 msgstr "нет"
 
-#: ../vdradmind.pl:2790
+#: ../vdradmind.pl:2799
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Не может открыть файл \"%s\"!"
 
-#: ../vdradmind.pl:2791
+#: ../vdradmind.pl:2800
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
@@ -2619,61 +2629,61 @@ msgstr ""
 "Не могу соединиться с VDR  %s:%s<br /><br />Проконтролируйте VDR и "
 "svdrphosts.conf"
 
-#: ../vdradmind.pl:2792
+#: ../vdradmind.pl:2801
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Ошибка при отправлении команды к %s"
 
-#: ../vdradmind.pl:2848
+#: ../vdradmind.pl:2857
 msgid "Internal error:"
 msgstr "Внутренняя ошибка:"
 
-#: ../vdradmind.pl:3220
+#: ../vdradmind.pl:3230
 msgid "Can't find EPG entry!"
 msgstr "Нет EPG записей!"
 
-#: ../vdradmind.pl:3483
+#: ../vdradmind.pl:3493
 msgid "Playing Tomorrow"
 msgstr "Программа на завтра"
 
-#: ../vdradmind.pl:3483
+#: ../vdradmind.pl:3493
 #, perl-format
 msgid "Playing on the %s"
 msgstr "Воспроизвести %s."
 
-#: ../vdradmind.pl:4753
+#: ../vdradmind.pl:4763
 msgid "next"
 msgstr "след."
 
-#: ../vdradmind.pl:4772
+#: ../vdradmind.pl:4782
 msgid "What's on after"
 msgstr "Что потом"
 
-#: ../vdradmind.pl:4772
+#: ../vdradmind.pl:4782
 msgid "What's on at"
 msgstr "Что в:"
 
-#: ../vdradmind.pl:4775
+#: ../vdradmind.pl:4785
 msgid "Suitable matches for:"
 msgstr "Результаты поиска для"
 
-#: ../vdradmind.pl:4778
+#: ../vdradmind.pl:4788
 msgid "short view"
 msgstr "сокращенная информация"
 
-#: ../vdradmind.pl:4778
+#: ../vdradmind.pl:4788
 msgid "long view"
 msgstr "Расширенная информация"
 
-#: ../vdradmind.pl:4827
+#: ../vdradmind.pl:4837
 msgid "Schedule"
 msgstr "Расписание"
 
-#: ../vdradmind.pl:5373
+#: ../vdradmind.pl:5384
 msgid "Timers"
 msgstr "Таймеры"
 
-#: ../vdradmind.pl:5441
+#: ../vdradmind.pl:5452
 msgid "System default"
 msgstr "Системный стандарт"
 

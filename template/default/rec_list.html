@@ -133,7 +133,7 @@
 					<td align="left">
 						<input type="submit" class="submit" name="rec_update" value="<?% gettext('Refresh') %?>" />
 					</td>
-	<?% IF reccmds %?>
+	<?% IF reccmds.size > 0 %?>
 					<td align="center">
 						<?% gettext('Commands:') %?>
 						<select name="rec_cmd" class="submit">

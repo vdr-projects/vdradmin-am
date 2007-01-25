@@ -124,15 +124,17 @@
 
 		function checkSearchPattern()
 		{
-			if (document.getElementById("pattern").value.length > 3)
-				return true;
-
-			if (   !document.getElementById("use_title").checked
-			    && !document.getElementById("use_subtitle").checked
-					&& !document.getElementById("use_descr").checked)
-				return true;
-
-			return confirm('<?% gettext('Small search pattern.\nDo you really want to use it?') %?>');
+			if (document.getElementById("pattern").value.length <= 3)
+			{
+					return confirm('<?% gettext('Small search pattern.\nDo you really want to use it?') %?>');
+			}
+			else
+			{
+				if (   !document.getElementById("use_title").checked
+			      && !document.getElementById("use_subtitle").checked
+					  && !document.getElementById("use_descr").checked)
+					return confirm("<?% gettext('You didn\'t select at least one of\ntitle, subtitle or description.\nDo you really want to use this search?') %?>");
+			}
 		}
 
 		function hideResults()

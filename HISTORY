@@ -4,6 +4,15 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2007-01-25: 3.5.3
+- Fixed: epgsearch's LSTT/DEFT commands need at least epgsearch v0.9.20.
+- Added: Klaus Schmidinger's "lste" speedup patch.
+- Changed: Do not send every HTTP header line in its own TCP packet (Speedup!).
+- Changed: Display error message if VDRAdmin-AM can't connect to VDR if index.html is requested.
+- Changed: Added warning in epgsearch edit if neither "title", "subtitle" nor "description" is checked.
+- Changed: Don't show recording commands drop-down if there are no reccmds.
+- Fixed: When sorting recordings by name, sort folders by name too.
+
 2006-12-08: 3.5.2
 - Fixed: Canceling of "Do you really want to delete?" messages (Reported by KHG_AC @vdr-portal.de).
 
@@ -15,7 +24,7 @@ VDR-Portal: amair
 - Changed: Handling of critical/colliding timers on encrypted channels in timer_list (Requested lot's of time in vdr-portal.de).
 - Fixed: Lost info on selected extepginfos if testing an epgsearch in epgsearch_new (Reported by marpiet).
 - Fixed: Didn't select the right channel group in epgsearch_new (Reported by viking).
-- Added: epgsearches can be based on epgsearch's templates.
+- Added: epgsearches can be based on epgsearch's templates (Requires epgsearch >= 0.9.20).
 
 2006-11-10: 3.5.0
 - Changed: Don't use "Bitstream Vera Sans" font as default as this looks ugly on Windows (at least for some users).
