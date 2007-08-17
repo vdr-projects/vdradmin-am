@@ -40,10 +40,18 @@
 								<span class="action repeatings">
 									<a href="vdradmin.pl?search=<?% find_title %?>&amp;aktion=prog_summary&amp;submit=go11" target="main"><img src="bilder/find.png" border="0" alt="<?% gettext('search') %?>" onmouseover="window.status='<?% gettext('search') %?>';return true" title="<?% gettext('search') %?>" /></a>
 								</span>
+								<span class="action edit">
+									<a href="javascript:void(opener.location.href='<?% editurl %?>'); window.close()"><img src="bilder/edit.png" border="0" alt="<?% gettext('edit') %?>" onmouseover="window.status='<?% gettext('edit') %?>';return true" title="<?% gettext('edit') %?>" /></a>
+								</span>
 							<?% END %?>
-							<?% IF imdburl %?>
+							<?% IF srch1_url %?>
 								<span class="action imdb">
-									<a href="<?% imdburl %?>" target="_blank" title="<?% gettext('Lookup movie in the Internet-Movie-Database (IMDb)') %?>"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='IMDb';return true" title="IMDb" /></a>
+									<a href="<?% srch1_url %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<?% srch1_title %?>';return true" title="<?% srch1_title %?>" /></a>
+								</span>
+							<?% END %?>
+							<?% IF srch2_url %?>
+								<span class="action imdb">
+									<a href="<?% srch2_url %?>" target="_blank"><img src="bilder/udef_search.png" border="0" alt="Search" onmouseover="window.status='<?% broadcast.srch2_url %?>';return true" title="<?% broadcast.srch2_url %?>" /></a>
 								</span>
 							<?% END %?>
 						</td>
@@ -55,13 +63,13 @@
 							<div class="epg_summary"><?% text %?></div>
 							<?% IF video %?>
 								<div class="epg_video">
-									<h4><?% gettext('Video tracks:') %?></h4>
+									<h4><?% gettext('Video tracks:') %?></h4>&nbsp;
 									<?% video %?>
 								</div>
 							<?% END %?>
 							<?% IF audio %?>
 								<div class="epg_audio">
-									<h4><?% gettext('Audio tracks:') %?></h4>
+									<h4><?% gettext('Audio tracks:') %?></h4>&nbsp;
 									<?% audio %?>
 								</div>
 							<?% END %?>

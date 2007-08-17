@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title><?% title %?></title>
+	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
+	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+	<?% IF usercss %?>
+		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
+	<?% END %?>
+</head>
+
+<body id="prog_detail_form"">
+	<form action="<?% url %?>" method="get" name="EPGform">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
+			<tr>
+				<td class="col_title">
+					<h1><?% gettext('Edit EPG') %?></h1>
+				</td>
+<?% IF help_url %?>
+				<td class="col_help">
+					<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help" title="<?% gettext('Help') %?>"/></a>
+				</td>
+<?% END %?>
+			</tr>
+		</table>
+
+		<div id="content">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
+				<?% tr_class = "row_odd" %?>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label"><h5><?% gettext('Channel') %?>:</h5></td>
+					<td class="col_value"><?% channel_name %?></td>
+				</tr>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label"><h5><?% gettext('Time') %?>:</h5></td>
+					<td class="col_value"><?% start_hr %?></td>
+				</tr>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label"><h5><?% gettext('Title') %?>:</h5></td>
+					<td class="col_value"><input type="text" name="title" value="<?% title %?>" size="80" /></td>
+				</tr>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label"><h5><?% gettext('Subtitle') %?>:</h5></td>
+					<td class="col_value"><input type="text" name="subtitle" value="<?% subtitle %?>" size="80" /></td>
+				</tr>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label" valign="top"><h5><?% gettext('Description') %?>:</h5></td>
+					<td class="col_value"><textarea name="description" rows="8" cols="80"><?% description %?></textarea></td>
+				</tr>
+				<?% IF vps %?>
+				<tr class="<?% tr_class %?>">
+					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+					<td class="col_label"><h5><?% gettext('VPS') %?>:</h5></td>
+					<td class="col_value"><?% vps %?></td>
+				</tr>
+				<?% END %?>
+				<?% IF video %?>
+					<tr class="<?% tr_class %?>">
+						<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+						<td class="col_label"><h5><?% gettext('Video tracks') %?>:</h5></td>
+						<td class="col_value"><?% video %?></td>
+					</tr>
+				<?% END %?>
+				<?% IF audio %?>
+					<tr class="<?% tr_class %?>">
+						<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+						<td class="col_label"><h5><?% gettext('Audio tracks') %?>:</h5></td>
+						<td class="col_value"><?% audio %?></td>
+					</tr>
+				<?% END %?>
+			</table>
+		</div>
+
+		<div id="buttons">
+			<input type="submit" class="submit" name="save" value="<?% gettext('Save') %?>" />
+			<input type="submit" class="submit" name="exit" value="<?% gettext('Cancel') %?>" />
+		</div>
+		<input type="hidden" name="aktion" value="prog_detail_aktion" />
+		<?% IF referer %?>
+			<input type="hidden" name="referer" value="<?% referer %?>" />
+		<?% END %?>
+		<input type="hidden" name="vdr_id" value="<?% vdr_id %?>" />
+		<input type="hidden" name="epg_id" value="<?% epg_id %?>" />
+		<input type="hidden" name="start" value="<?% start %?>" />
+		<input type="hidden" name="duration" value="<?% duration %?>" />
+	</form>
+</body>
+
+</html>

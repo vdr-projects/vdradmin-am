@@ -27,7 +27,7 @@
 			<td>
 				<?% gettext('<p>Here you can change general settings and base settings for timers, AutoTimers, channel selection and streaming parameters.</p>') %?>
 				<div class="links">
-					[<a href="#general"><?% gettext('General Settings') %?></a>] [<a href="#vdr"><?% gettext('VDR') %?></a>] [<a href="#identification"><?% gettext('Identification') %?></a>] [<a href="#timeline"><?% gettext('Timeline') %?></a>] [<a href="#autotimer"><?% gettext('AutoTimer') %?></a>] [<a href="#timer"><?% gettext('Timer') %?></a>] [<a href="#streaming"><?% gettext('Streaming') %?></a>] [<a href="#expert"><?% gettext('Expert') %?></a>] [<a href="#channels"><?% gettext('Channel Selections') %?></a>]
+					[<a href="#general"><?% gettext('General Settings') %?></a>] [<a href="#vdr"><?% gettext('VDR') %?></a>] [<a href="#identification"><?% gettext('Identification') %?></a>] [<a href="#timeline"><?% gettext('Timeline') %?></a>] [<a href="#autotimer"><?% gettext('AutoTimer') %?></a>] [<a href="#timer"><?% gettext('Timer') %?></a>] [<a href="#streaming"><?% gettext('Streaming') %?></a>] [<a href="#expert"><?% gettext('Expert') %?></a>] [<a href="#ext_search"><?% gettext('External Search') %?></a>] [<a href="#channels"><?% gettext('Channel Selections') %?></a>]
 				</div>
 				<div class="group"><a id="general" name="general"></a><h3><?% gettext('General Settings') %?></h3>
 					<dl>
@@ -93,12 +93,14 @@
 					<dl>
 						<dt><?% gettext('Active:') %?></dt>
 						<dd><?% gettext('Activate or deactivate the AutoTimer function.') %?></dd>
-						<dt><?% gettext('Timeout:') %?></dt>
-						<dd><?% gettext('The interval, the the EPG data is checked for updating the AutoTimers.') %?></dd>
 						<dt><?% gettext('Priority:') %?></dt>
 						<dd><?% gettext('An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording.') %?></dd>
 						<dt><?% gettext('Lifetime:') %?></dt>
 						<dd><?% gettext('The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by.') %?></dd>
+						<dt><?% gettext('Time Margin at Start:') %?></dt>
+						<dd><?% gettext('The number of minutes VDRAdmin-AM subtracts from the broadcasts start time found in the EPG.') %?></dd>
+						<dt><?% gettext('Time Margin at Stop:') %?></dt>
+						<dd><?% gettext('The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in the EPG.') %?></dd>
 						<dt><?% gettext('Send email after programming timer:') %?></dt>
 						<dd><?% gettext('VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a timer has been programmed if you enable this feature.') %?></dd>
 						<dt><?% gettext('Send email as:') %?></dt>
@@ -124,9 +126,9 @@
 						<dt><?% gettext('Lifetime:') %?></dt>
 						<dd><?% gettext('The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by.') %?></dd>
 						<dt><?% gettext('Time Margin at Start:') %?></dt>
-						<dd><?% gettext('The number of minutes VDRAdmin-AM subtracts from the broadcasts start time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view.') %?></dd>
+						<dd><?% gettext('The number of minutes VDRAdmin-AM subtracts from the broadcasts start time found in the EPG.') %?></dd>
 						<dt><?% gettext('Time Margin at Stop:') %?></dt>
-						<dd><?% gettext('The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in the EPG. This value is used for timers programmed by AutoTimer and timers manually programmed when pressing "Record" in any EPG view.') %?></dd>
+						<dd><?% gettext('The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in the EPG.') %?></dd>
 						<dt><?% gettext('Tooltips in timeline:') %?></dt>
 						<dd><?% gettext('Here you can (de-)activate the tooltips in the timeline.') %?></dd>
 						<dt><?% gettext('Tooltips in list:') %?></dt>
@@ -159,9 +161,27 @@
 					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
 				</div>
 
+				<div class="group"><a id="ext_search" name="ext_search"></a><h3><?% gettext('External Search') %?></h3>
+					<?% gettext('<p>Here you can define two external searches that you can access in the EPG views. You simply have to find the required URL and where the search pattern has to be located. %TITLE% will be substituted by the boadcast\'s EPG title.</p>') %?>
+						<?% gettext('Some examples:') %?>
+						<dl>
+							<dt>Internet Movie Database (IMDb): (<a href="http://www.imdb.com/">http://www.imdb.com/</a>)</dt>
+							<dd>http://akas.imdb.com/Tsearch?title=%TITLE%</dd>
+							<dt>VideoDB: (<a href="http://videodb.sf.net">videodb.sf.net</a>)</dt>
+							<dd>
+								http://www.videodb.net/videodb/search.php?q=%TITLE%&engine=videodb&owner=Guest&fields%5B%5D=title<br />
+								Please change the hostname to your local needs!
+							</dd>
+						</dl>
+				</div>
+
 				<div class="group"><a id="expert" name="expert"></a><h3><?% gettext('Expert') %?></h3>
 					<?% gettext('<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>') %?>
 					<dl>
+						<dt><?% gettext('Update EPG data in background:') %?></dt>
+						<dd><?% gettext('If set to "yes" VDRAdmin-AM will periodically refresh its local EPG cache. Else the EPG will be refreshed if the user accesses any EPG view at the web interface and the timeout set at "Update EPG every" has been reached.') %?></dd>
+						<dt><?% gettext('Update EPG every:') %?></dt>
+						<dd><?% gettext('The interval, the EPG data is refreshed from VDR and AutoTimer updates are performed (if AutoTimer feature is used).') %?></dd>
 <!--
 						<dt><?% gettext('Read EPG directly using epg.data:') %?></dt>
 						<dd><?% gettext('Accessing VDR\'s EPG through VDR\'s SVDRPort seems to block VDR for some time. If this option is activated VDRAdmin-AM will read the <span class="ref_file">epg.data</span> file directly so that VDR doesn\'t get blocked.') %?></dd>
@@ -178,6 +198,10 @@
 					<?% gettext('<p>If you want to limit the number of channels used in some parts of VDRAdmin-AM, this is for you!</p>
 					<p>Use the radio buttons to activate or deactivate the wanted channels in the named menu.</p>
 					<p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click <input type="submit" class="submit" value="&gt;&gt;&gt;&gt;&gt;"/>. If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click <input type="submit" class="submit" value="&lt;&lt;&lt;&lt;&lt;"/>.</p>') %?>
+					<dl>
+						<dt><?% gettext('Show channels without EPG information:') %?></dt>
+						<dd><?% gettext('Usually channels that don\'t have EPG information are hidden in all EPG views. If you don\'t want them to be hidden you have to set this option to "yes".') %?></dt>
+					</dl>
 					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
 				</div>
 			</td>

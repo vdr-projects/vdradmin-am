@@ -113,6 +113,7 @@ function getOrigEncoding()
 function do_utf8_clean()
 {
 	(cd po && rm -f *.utf8.po*)
+	(cd locale && rm -rf *.utf8)
 }
 
 # generate utf8 locales

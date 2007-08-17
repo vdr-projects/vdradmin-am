@@ -26,6 +26,14 @@
 	<form action="<?% url %?>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
 			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Export channels as playlist:') %?></h5></td>
+				<td class="col_value">
+<?% FOREACH cmd = export_cmds %?>
+					[<a href="<?% cmd.url %?>"><?% cmd.text %?></a>]
+<?% END %?>
+				</td>
+			</tr>
+			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Number of lines to show:') %?></h5></td>
 				<td class="col_value">
 					<select name="max_lines">
@@ -36,7 +44,7 @@
 					</select>
 				</td>
 			</tr>
-			<tr class="row_even">
+			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('SVDRP commands:') %?></h5></td>
 				<td class="col_value">
 					<input type="text" name="svdrp_cmd" value="<?% svdrp_cmd %?>"/>
@@ -44,7 +52,7 @@
 				</td>
 			</tr>
 <?% IF commands.size() > 0 %?>
-			<tr class="row_odd">
+			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Commands defined in commands.conf:') %?></h5></td>
 				<td class="col_value">
 					<select name="vdr_cmd" class="submit">

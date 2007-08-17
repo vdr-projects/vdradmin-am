@@ -31,6 +31,12 @@
 					<?% gettext('o\'clock') %?>
 				</td>
 				<td class="col_navi">
+					<?% gettext('Channel group:') %?> 
+						<select name="select_wanted_channels" size="1" class="submit" onchange="window.open(this.options[this.selectedIndex].value,'main')">
+<?% FOREACH ch_grp = ch_groups %?> 
+							<option value="<?% ch_grp.url %?>" <?% IF ch_grp.selected %?>selected="selected"<?% END %?> ><?% ch_grp.title %?></option>
+<?% END %?>
+						</select>
 <?% IF days.size() > 0 %?>
 					<?% IF prevdayurl %?><a href="<?% prevdayurl %?>"><img src="bilder/pfeile_nachlinks.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachlinks_soft.png" border="0" alt="" /><?% END %?>
 					<select name="days" size="1" onchange="window.open(this.options[this.selectedIndex].value,'main')"> <?% FOREACH d = days %?>
@@ -65,7 +71,7 @@
 			<?% UNLESS bc.endd %?>
 				<tr class="<?% IF loop.count() % 2 == 0 %?>row_even<?% ELSE %?>row_odd<?% END %?>">
 					<td class="col_duration">
-						<a id="<?% bc.anchor %?>" name="<?% bc.anchor %?>"><?% bc.emit %?> - <?% bc.duration %?></a>
+						<?% IF bc.anchor %?><a id="<?% bc.anchor %?>" name="<?% bc.anchor %?>"><?% bc.emit %?> - <?% bc.duration %?></a><?% END %?>
 					</td>
 					<td class="col_title">
 						<div class="epg_title">
@@ -86,15 +92,21 @@
 						</div>
 					</td>
 					<td class="col_buttons">
-						<span class="action repeatings"><a href="vdradmin.pl?search=<?% bc.find_title %?>&amp;aktion=prog_summary&amp;submit=go11"><img src="bilder/find.png" border="0" alt="<?% gettext('Search for other show times') %?>" onmouseover="window.status='<?% gettext('Search for other show times') %?>';return true" title="<?% gettext('Search for other show times') %?>" /></a></span>
-						<?% IF bc.infurl %?>
-							<span class="action info"><a href="javascript:popup('<?% bc.infurl %?>');"><img src="bilder/info_button.png" border="0" title="<?% gettext('More Information') %?>" alt="info"/></a></span>
-						<?% ELSE %?>
-							<span class="action info"><img src="bilder/info_button_disabled.png" border="0" title="<?% gettext('No Information') %?>" alt="noinfo"/></span>
-						<?% END %?>
-						<span class="action record"><a href="<?% bc.recurl %?>"><img src="bilder/rec_button.png" border="0" title="<?% gettext('Record') %?>" alt="record"/></a></span>
-						<?% IF bc.imdburl %?>
-							<span class="action imdb"><a href="<?% bc.imdburl %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<?% gettext('Lookup movie in the Internet-Movie-Database (IMDb)') %?>';return true" title="<?% gettext('Lookup movie in the Internet-Movie-Database (IMDb)') %?>" /></a></span>
+						<?% IF bc.anchor %?>
+							<span class="action repeatings"><a href="vdradmin.pl?search=<?% bc.find_title %?>&amp;aktion=prog_summary&amp;submit=go11"><img src="bilder/find.png" border="0" alt="<?% gettext('Search for other show times') %?>" onmouseover="window.status='<?% gettext('Search for other show times') %?>';return true" title="<?% gettext('Search for other show times') %?>" /></a></span>
+							<?% IF bc.infurl %?>
+								<span class="action info"><a href="javascript:popup('<?% bc.infurl %?>');"><img src="bilder/info_button.png" border="0" title="<?% gettext('More Information') %?>" alt="info"/></a></span>
+							<?% ELSE %?>
+								<span class="action info"><img src="bilder/info_button_disabled.png" border="0" title="<?% gettext('No Information') %?>" alt="noinfo"/></span>
+							<?% END %?>
+							<span class="action edit"><a href="<?% bc.editurl %?>"><img src="bilder/edit.png" border="0" title="<?% gettext('Edit') %?>" alt="edit"/></a></span>
+							<span class="action record"><a href="<?% bc.recurl %?>"><img src="bilder/rec_button.png" border="0" title="<?% gettext('Record') %?>" alt="record"/></a></span>
+							<?% IF bc.srch1_url %?>
+								<span class="action imdb"><a href="<?% bc.srch1_url %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<?% bc.srch1_title %?>';return true" title="<?% bc.srch1_title %?>" /></a></span>
+							<?% END %?>
+							<?% IF bc.srch2_url %?>
+								<span class="action imdb"><a href="<?% bc.srch2_url %?>" target="_blank"><img src="bilder/udef_search.png" border="0" alt="Search" onmouseover="window.status='<?% bc.srch2_title %?>';return true" title="<?% bc.srch2_title %?>" /></a></span>
+							<?% END %?>
 						<?% END %?>
 					</td>
 				</tr>

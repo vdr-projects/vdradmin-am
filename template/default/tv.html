@@ -13,7 +13,11 @@
 		<!--
 		var timeout;
 		var interval = <?% interval %?>;
-		var size = "<?% size %?>";
+		<?% IF full_tv %?>
+			var size = "<?% size %?>";
+		<?% ELSE %?>
+			var size = "half";
+		<?% END %?>
 
 		function switch_by_select() {
 			for (i = 0; i < document.forms[0].channel.length; ++i)
@@ -35,6 +39,7 @@
 			Before = new Date();
 			NewPicUrl = "<?% url %?>&size=" + size + "&interval=" + interval + "&rand=" + Before.getTime();
 			document.Bild.src = NewPicUrl;
+//TODO      document.getElementById('sect_tv').style.width = (size == 'full' ? 780 : (size == 'half' ? 400 : 210));
 			if(interval > 0) {
 				After = new Date();
 				wait_sec = (interval * 1000) - (After - Before);
@@ -61,7 +66,7 @@
 		}
 
 		function tv_open() {
-	 		window.open("./vdradmin.pl?aktion=tv_show&new_win=1", "vdradminTV", "width=615, height=548, resizable=yes, scrollbars=no, status=no, toolbar=no");
+	 		window.open("./vdradmin.pl?aktion=tv_show&new_win=1&full_tv=1", "vdradminTV", "width=615, height=548, resizable=yes, scrollbars=no, status=no, toolbar=no");
 		}
 		//-->
 	</script>
@@ -69,7 +74,7 @@
 
 <body onload="window.focus();WebcamUpdate()" id="tv"> 
 	<form action="<?% url %?>" method="get" name="liveform">
-<?% UNLESS tv_only %?>
+<?% IF full_tv %?>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_title"><h1><?% gettext('TV') %?></h1></td>
@@ -101,11 +106,11 @@
 
 		<table border="0" cellspacing="0" cellpadding="0" id="content">
 			<tr>
-				<td id="sect_tv">
+        <td id="sect_tv" width="<?% IF size == 'full' %?>780<?% ELSE %?><?% IF size == 'half' %?>400<?% ELSE %?>210<?% END %?><?% END %?>" align="center">
 					<img name="Bild" src="<?% url %?>" border="1" hspace="2" vspace="2" class="tv" alt="" />
 					<img src="bilder/spacer.gif" name="switchimage" width="2" height="1" alt="" />
 				</td>
-<?% UNLESS tv_only %?>
+<?% IF full_tv %?>
 				<td id="sect_rc">
 					<table width="200" border="0" cellspacing="0" cellpadding="0">
 						<tr>
@@ -194,15 +199,30 @@
 					</table>
 				</td>
 				<td id="sect_channels">
-					<select name="channel" size="32" onchange="javascript:switch_channel('./vdradmin.pl?aktion=tv_switch&amp;channel=' + encodeURIComponent(this.options[this.selectedIndex].value));">
-<?% FOREACH chan = channels %?>
-						<option value="<?% chan.vdr_id %?>" <?% IF chan.cur %?>selected="selected"<?% END %?>><?% chan.name | html %?></option>
+				  <table border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td> 
+								<select name="select_wanted_channels" size="1" class="submit" onchange="window.open(this.options[this.selectedIndex].value,'main')" style="width:100%">
+<?% FOREACH ch_grp = ch_groups %?> 
+									<option value="<?% ch_grp.url %?>" <?% IF ch_grp.selected %?>selected="selected"<?% END %?> ><?% ch_grp.title %?></option>
 <?% END %?>
-					</select>
-<!--					<a class="submit" href="javascript:switch_by_select();">Switch</a>-->
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td> 
+								<select name="channel" size="32" onchange="javascript:switch_channel('./vdradmin.pl?aktion=tv_switch&amp;channel=' + encodeURIComponent(this.options[this.selectedIndex].value));" style="width:100%">
+<?% FOREACH chan = channels %?>
+      						<option value="<?% chan.vdr_id %?>" <?% IF chan.cur %?>selected="selected"<?% END %?>><?% chan.name | html %?></option>
+<?% END %?>
+			      		</select>
+<!--						<a class="submit" href="javascript:switch_by_select();">Switch</a>-->
+							</td>
+						</tr>
+					</table>
 				</td>
 <?% END %?>
-<?% UNLESS tv_only %?>
+<?% IF full_tv %?>
 <?% END %?>
 			</tr>
 		</table>

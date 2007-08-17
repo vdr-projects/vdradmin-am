@@ -11,10 +11,10 @@
 	<script type="text/javascript">
 		<!--
 			function rc_open() {
-				window.open("./vdradmin.pl?aktion=rc_show", "vdradminRC", "width=200, height=510, resizable=no, scrollbars=no, status=no, toolbar=no");
+				window.open("./vdradmin.pl?aktion=rc_show&full_rc=1", "vdradminRC", "width=200, height=510, resizable=no, scrollbars=no, status=no, toolbar=no");
 			}
 			function tv_open() {
-				window.open("./vdradmin.pl?aktion=tv_show", "vdradminTV", "width=615, height=548, resizable=yes, scrollbars=no, status=no, toolbar=no");
+				window.open("./vdradmin.pl?aktion=tv_show&amp;full_tv=1", "vdradminTV", "width=615, height=548, resizable=yes, scrollbars=no, status=no, toolbar=no");
 			}
 		// -->
 	</script>
@@ -57,7 +57,7 @@
 			<a href="javascript:rc_open();"><?% gettext('Remote Control') %?></a>
 		</div>
 		<div class="navi" id="tv">
-			<a href="vdradmin.pl?aktion=tv_show" target="main"><?% gettext('Watch TV') %?></a>
+			<a href="vdradmin.pl?aktion=tv_show&amp;full_tv=1" target="main"><?% gettext('Watch TV') %?></a>
 		</div>
 		<div class="navi" id="commands">
 			<a href="vdradmin.pl?aktion=vdr_cmds" target="main"><?% gettext('Commands') %?></a>

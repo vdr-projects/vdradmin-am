@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Copyright (c) 2005/6 Andreas Mair
 #
 #
@@ -155,7 +155,7 @@ function doInstall()
   	    -e "s/^\(my \$SEARCH_FILES_IN_SYSTEM *=\) 0;/\1 1;/" \
   	    -e "s:/usr/share/vdradmin/lib:${LIBDIR}/lib:" \
   	    -e "s:/usr/share/vdradmin/template:${LIBDIR}/template:" \
-  	    -e "s:/var/log/\$CONFIG{LOGFILE}:${LOGDIR}/\$CONFIG{LOGFILE}:" \
+  	    -e "s:/var/log:${LOGDIR}:" \
   	    -e "s:/var/run/vdradmind.pid:${PIDFILE}:" \
   	    -e "s:\(\$ETCDIR *= \)\"/etc/vdradmin\";:\1\"${ETCDIR}\";:" \
   	    -e "s:/usr/share/locale:${LOCDIR}:" \

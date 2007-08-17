@@ -20,6 +20,14 @@
 					<h1><?% title %?></h1>
 				</td>
 				<td class="col_other">
+<?% UNLESS searchresults %?> 
+					<?% gettext('Channel group:') %?> 
+					<select name="select_wanted_channels" size="1" class="submit" onchange="window.open(this.options[this.selectedIndex].value,'main')">
+<?% FOREACH ch_grp = ch_groups %?> 
+						<option value="<?% ch_grp.url %?>" <?% IF ch_grp.selected %?>selected="selected"<?% END %?> ><?% ch_grp.title %?></option>
+<?% END %?>
+					</select> 
+<?% END %?>
 					[<a href="<?% switchview_url %?>"><?% switchview_text %?></a>]
 				</td>
 <?% IF times.size() > 0 %?>
@@ -84,20 +92,26 @@
 												<img src="bilder/info_button_disabled.png" border="0" alt="noinfo" title="<?% gettext('No Information') %?>" />
 											<?% END %?>
 										</span>
+										<span class="action edit">
+											<a href="<?% row.editurl %?>"><img src="bilder/edit.png" border="0" alt="<?% gettext('Edit') %?>" onmouseover="window.status='<?% gettext('Edit') %?>';return true" title="<?% gettext('Edit') %?>" /></a>
+										</span>
 										<span class="action record">
 											<a href="<?% row.recurl %?>"><img src="bilder/rec_button.png" border="0" alt="<?% gettext('Record') %?>" onmouseover="window.status='<?% gettext('Record') %?>';return true" title="<?% gettext('Record') %?>" /></a>
 											</span>
 									<?% END %?>
-									<?% IF row.imdburl %?>
+									<?% IF row.srch1_url %?>
 										<span class="action imdb">
-											<a href="<?% row.imdburl %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<?% gettext('Lookup movie in the Internet-Movie-Database (IMDb)') %?>';return true" title="<?% gettext('Lookup movie in the Internet-Movie-Database (IMDb)') %?>" /></a>
+											<a href="<?% row.srch1_url %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<?% row.srch1_title %?>';return true" title="<?% row.srch1_title %?>" /></a>
 										</span>
+									<?% END %?>
+									<?% IF row.srch2_url %?>
+										<span class="action imdb"><a href="<?% row.srch2_url %?>" target="_blank"><img src="bilder/udef_search.png" border="0" alt="Search" onmouseover="window.status='<?% row.srch2_title %?>';return true" title="<?% row.srch2_title %?>" /></a></span>
 									<?% END %?>
 								</td>
 								<td class="col_epg">
 									<div class="date_long"><?% row.longdate %?></div>
 									<div class="time_duration">
-										<?% IF row.start %?><span class="time_start"><?% row.start %?></span>-<span class="time_stop"><?% row.stop %?></span><?% END %?>
+										<span class="time_start"><?% IF row.start %?><?% row.start %?></span>-<span class="time_stop"><?% row.stop %?><?% ELSE %?>&nbsp;<?% END %?></span>
 									</div>
 									<div class="epg_title">
 										<?% IF row.summary %?>

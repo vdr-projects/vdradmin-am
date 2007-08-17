@@ -1,3 +1,216 @@
+2007-08-17  amair
+
+	* HISTORY, vdradmind.pl, po/cs.po, po/de.po, po/es.po, po/fi.po,
+	  po/fr.po, po/it.po, po/nl.po, po/ru.po, po/vdradmin.pot,
+	  template/default/about.html, template/default/prog_detail.html:
+
+	Updated for v3.6.0beta release.
+
+2007-08-14  amair
+
+	* vdradmind.pl:
+
+	Fixed typo to make LiveTV streaming working again.
+
+2007-08-14  amair
+
+	* vdradmind.pl, template/default/config.html,
+	  template/default/navigation.html,
+	  template/default/prog_list.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html,
+	  template/default/prog_timeline.html, template/default/rc.html,
+	  template/default/tv.html, template/default/vdr_cmds.html:
+
+	- VDRAdmin-AM now holds four default channel groups: all channels / selected channels / tv channels / radio channels.
+	- Added channel list to rc.
+	- Added dropdown box to prog_list, prog_list2, prog_timeline, prog_summary, prog_summary2, rc and tv to switch used channel group.
+	- Removed setting for using selected channels in config menu in favour of above-mentioned dropdown box.
+	- Added export of channels in each channel group as m3u playlist in vdr_cmds.
+
+2007-08-10  amair
+
+	* vdradmind.pl, template/default/navigation.html,
+	  template/default/tv.html:
+
+	Changed default for tv.html to only show the grabbed picture (for VDR streamingtool).
+
+2007-08-10  amair
+
+	* vdradmind.pl, template/default/config.html,
+	  template/default/help_config.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html,
+	  template/default/timeline.js,
+	  template/default/prog_timeline.html:
+
+	- Added config option "Show channels without EPG information".
+	- Improved performance in "What's on new" when using selected channels.
+
+2007-08-07  amair
+
+	* vdradmind.pl:
+
+	Fixed bug introduced with "Don't sort EPG with recent VDR" change.
+
+2007-08-06  amair
+
+	* vdradmind.pl:
+
+	- Fixed channel_id generation.
+	- Don't sort EPG with recent VDR.
+
+2007-08-06  amair
+
+	* template/default/timeline.js:
+
+	Fixed wrong background color for some broadcasts having timers.
+
+2007-07-30  amair
+
+	* template/default/default/rec.gif:
+
+	Last frame now shows "REC" (see bug report #249).
+
+2007-07-27  amair
+
+	* vdradmind.pl, template/default/config.html,
+	  template/default/help_config.html:
+
+	- New configure options for AutoTimer: start/stop buffer.
+	- Priority and lifetime can be set to "0" (See bug report #232).
+	- Priority/Lifetime/Buffer Start/Buffer Stop in (Auto)Timer can now be empty ("") which means "use default set in configuration".
+
+2007-07-27  amair
+
+	* vdradmind.pl:
+
+	Reduce memory usage of EPG tree.
+
+2007-07-27  amair
+
+	* install.sh:
+
+	Make LOGDIR work again with latest vdradmind.pl LOGDIR change.
+
+2007-07-26  amair
+
+	* vdradmind.pl:
+
+	Handle symbolic links when find'ing video files for a recording.
+
+2007-07-26  amair
+
+	* vdradmind.pl:
+
+	- Fixed LOGFILE config file option.
+	- Added "stderr" as special LOGFILE target to log to stderr (=console?).
+	- Changed some print() calls to Log() calls.
+	- Removed some obsolete print()s.
+	- Added Log() calls around building the internal EPG tree.
+
+2007-07-26  amair
+
+	* template/default/epgsearch_new.html:
+
+	Allow more than two characters in EPGsearch's "record" action (See bug report #286).
+
+2007-07-26  amair
+
+	* vdradmind.pl, template/default/config.html,
+	  template/default/help_config.html:
+
+	- Joined CACHE_TIMEOUT and AT_TIMEOUT options to CACHE_TIMEOUT.
+	- Added option for background EPG updates.
+	- Fetch EPG data from VDR at startup only if background EPG updates enabled.
+	- Don't execute CheckTimers() if AutoTimers disabled.
+
+2007-07-16  amair
+
+	* po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po, po/it.po,
+	  po/nl.po, po/ru.po, po/vdradmin.pot:
+
+	Updated.
+
+2007-07-16  amair
+
+	* template/default/help_edit_epg.html,
+	  template/default/prog_detail.html,
+	  template/default/prog_detail_form.html,
+	  template/default/prog_list.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html, HISTORY, vdradmind.pl:
+
+	Added new buttons in EPG views to edit the EPG entry.
+
+2007-07-05  amair
+
+	* FAQ, HISTORY, vdradmind.pl.1:
+
+	Updated.
+
+2007-07-05  amair
+
+	* vdradmind.pl:
+
+	- New command line option "--pid".
+	- Increased minimum required EPGSearch release to 0.9.21.
+
+2007-07-04  amair
+
+	* vdradmind.pl:
+
+	Provide extended information in m3u files used for LiveTV streaming.
+
+2007-07-04  amair
+
+	* template/default/default/udef_search.png,
+	  template/default/help_config.html:
+
+	- IMDb search URL can be modified.
+	- Optional user defined external search.
+
+2007-07-04  amair
+
+	* vdradmind.pl, template/default/config.html,
+	  template/default/prog_detail.html,
+	  template/default/prog_list.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html:
+
+	- IMDb search URL can be modified.
+	- Optional user defined external search.
+
+2007-07-04  amair
+
+	* template/default/timer_new.html:
+
+	Fixed saving of wrong timer if repeating timers have no day set (= "-------").
+
+2007-04-23  amair
+
+	* install.sh:
+
+	Use bash for script.
+
+2007-02-08  amair
+
+	* vdradmind.pl, template/default/epgsearch_list.html,
+	  template/default/epgsearch_new.html:
+
+	Added record button to epgsearch result list if no timer is set.
+
+2007-02-08  amair
+
+	* vdradmind.pl, template/default/timer_new.html:
+
+	- Changed minimum required epgsearch release to 0.9.20.
+	- Support for epgsearch's timer checking.
+
 2007-01-25  tag v3_5_3
 
 2007-01-25  amair

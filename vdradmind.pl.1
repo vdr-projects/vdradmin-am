@@ -22,19 +22,25 @@ will listen on port 8001.
 .SH OPTIONS
 
 .IP "\-\-nofork / -nf"
-Do not fork on start of vdradmin. (vdradmin does not go into daemon-mode)
+Do not fork on start of vdradmind.pl. (vdradmind.pl does not go into daemon-mode)
 
 .IP "\-\-config / -c"
 Ask some questions, to interactively generate the config-file /etc/vdradmin/vdradmind.conf
 
-.IP "\-\-kill / -k" 
-Kill a forked vdradmin.
+.IP "\-\-cfgdir / -d"
+Path to the directory containing the VDRAdmin-AM config files.
 
-.IP "\-\-help" 
-Display a short message about the options of the tool.
+.IP "\-\-kill / -k" 
+Kill a forked vdradmind.pl.
+
+.IP "\-\-pid pidfile / -p pidfile" 
+Set the pidfile to use.
+
+.IP "\-\-help / -h" 
+Display a short message about the options of vdradmind.pl.
 
 .SH AUTHOR
-This man-page has been written by Thomas Schmidt <thomas@thsnet.de>
+This man-page has been written by Thomas Schmidt <thomas@thsnet.de> and has been updated by Andreas Mair <andreas@vdr-developer.org>.
 .PP
 Permission is granted to copy, distribute and/or modify this document under
 the terms of the GNU General Public License, Version 2 any

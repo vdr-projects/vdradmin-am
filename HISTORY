@@ -4,6 +4,38 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2007-08-17: 3.6.0beta
+- Added: export of channels in each channel group as m3u playlist in vdr_cmds.
+- Added: channel list to rc.
+- Added: VDRAdmin-AM now holds four default channel groups: all channels / selected channels / tv channels / radio channels.
+- Reworked: Logging; Use "LOGFILE = stderr" if you want logging to stderr.
+- Added: If background EPG refreshes are enabled, VDRAdmin-AM will try to read the EPG data from VDR at startup and if VDR can't be reached it will try every minute until it can read the EPG data.
+- Added: New option in configuration for enabling/disabling background EPG refreshes.
+- Changed: default for tv.html to only show the grabbed picture (for VDR streamingtool).
+- Added: config option "Show channels without EPG information"
+- Fixed: wrong background color for some broadcasts having timers in prog_timeline.
+- Fixed: Last frame now shows "REC" (see bug report #249).
+- Fixed: Reduce memory usage of EPG tree.
+- Fixed: Priority and lifetime can be set to "0" (See bug report #232).
+- Changed: Priority/Lifetime/Buffer Start/Buffer Stop in (Auto)Timer can now be empty ("") which means "use default set in configuration".
+- New: configure options for AutoTimer: start/stop buffer.
+- Fixed: Handle symbolic links when find'ing video files for a recording.
+- Added: "stderr" as special LOGFILE target to log to stderr (=console?).
+- Fixed: LOGFILE config file option.
+- Fixed: Allow more than two characters in EPGsearch's "record" action (See bug report #286).
+- Changed: Join CACHE_TIMEOUT and AT_TIMEOUT to their minimum in CACHE_TIMEOUT.
+- Added: New buttons in EPG views to edit the EPG entry (Based on patch by Christoph Haubrich).
+- Added: New "--pid" vdradmind.pl to set the used pidfile.
+- Added: extended information in m3u file used for livetv streaming (Submitted by Samuli Sorvakko).
+- Changed: IMDb search URL can be modified.
+- Added: Optional user defined external search (Based on suggestion by Axel Röhken).
+- Fixed: Saving of wrong timer if repeating timers have no day set (= "-------").
+- Added: Record button to epgsearch result list if no timer is set.
+- Added: Support for epgsearch's timer checking.
+- Changed: Minimum required epgsearch release to 0.9.21.
+- Fixed: Disable EPG_DIRECT because it no longer works with the "lste" speedup patch.
+- Minor bugfixes and improvements.
+
 2007-01-25: 3.5.3
 - Fixed: epgsearch's LSTT/DEFT commands need at least epgsearch v0.9.20.
 - Added: Klaus Schmidinger's "lste" speedup patch.

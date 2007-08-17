@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- This help is partly taken from the VDR man page, Copyright (c) by Klaus Schmidinger -->
+
+<html id="scroller">
+
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<title><?% gettext('Edit Timer') %?></title>
+	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
+	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+	<?% IF usercss %?>
+		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
+	<?% END %?>
+</head>
+
+<body id="timer_new" class="help" onload="window.focus()">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="help" class="group">
+		<tr class="heading">
+			<td><h2><?% gettext('Edit EPG') %?></h2></td>
+		</tr>
+		<tr class="row_even">
+			<td>
+				<?% gettext('<p>Here you can edit the descriptive fields of an existing EPG entry.</p>') %?>
+				<dl>
+					<dt><?% gettext('Channel (readonly)') %?>:</dt>
+					<dd><?% gettext('This is the channel of the EPG entry. It cannot be changed.') %?></dd>
+					<dt><?% gettext('Time (readonly)') %?>:</dt>
+					<dd><?% gettext('This is the start and end time of the entry. It cannot be changed.') %?></dd>
+					<dt><?% gettext('Title') %?>:</dt>
+					<dd><?% gettext('Change this string to give this EPG Entry a new title. It must consist of only one line of text.') %?></dd>
+					<dt><?% gettext('Subtitle') %?>:</dt>
+					<dd><?% gettext('Change this string to give this EPG Entry a new subtitle. It must consist of only one line of text.') %?></dd>
+					<dt><?% gettext('Description') %?>:</dt>
+					<dd><?% gettext('Change the text in this field to edit the description of this entry. The text can consist of one or more lines.') %?></dd>
+					<dt><?% gettext('VPS (readonly)') %?>:</dt>
+					<dd><?% gettext('If available this field shows the vps time of the EPG entry. It cannot be changed.') %?></dd>
+					<dt><?% gettext('Video tracks (readonly)') %?>:</dt>
+					<dd><?% gettext('If available this field shows the video track(s). It cannot be changed.') %?></dd>
+					<dt><?% gettext('Audio tracks (readonly)') %?>:</dt>
+					<dd><?% gettext('If available this field shows the audio track(s). It cannot be changed.') %?></dd>
+				</dl>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

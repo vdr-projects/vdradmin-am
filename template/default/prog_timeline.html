@@ -132,7 +132,7 @@
 <?%
 			FOREACH show = shows2.${name};
 %?>
-				events[<?% counter %?>] = AddEvent(<?% counter %?>, <?% show.vdr_id %?>, <?% show.anchor %?>, <?% show.start %?>, <?% show.stop %?>, "<?% show.title | html %?>", <?% show.timer %?>, <?% show.summary ? 1 : 0 %?>);
+				events[<?% counter %?>] = AddEvent(<?% counter %?>, <?% show.vdr_id %?>, "<?% show.anchor %?>", <?% show.start %?>, <?% show.stop %?>, "<?% show.title | html %?>", <?% show.timer %?>, <?% show.summary ? 1 : 0 %?>);
 <?%
 				counter = counter + 1;
 			END;
@@ -155,6 +155,13 @@
 					<h1><?% date.format(now_sec, "%A,") %?>&nbsp;<?% now %?>&nbsp;<?% gettext('o\'clock') %?></h1>
 				</td>
 				<td class="col_other">
+					<?% gettext('Channel group:') %?> 
+					<select name="select_wanted_channels" size="1" class="submit" onchange="window.open(this.options[this.selectedIndex].value, '_self')">
+<?% FOREACH ch_grp = ch_groups %?> 
+						<option value="<?% ch_grp.url %?>" <?% IF ch_grp.selected %?>selected="selected"<?% END %?> ><?% ch_grp.title %?></option>
+<?% END %?>
+					</select>
+					&nbsp;
 					<?% gettext('What\'s on:') %?>&nbsp;
 					<select name="Auswahl" class="submit" onchange="Go(this.form.Auswahl.options[this.form.Auswahl.options.selectedIndex].value)">
 <?% select_now = (now == date.format(date.now, '%H:%M')) %?>

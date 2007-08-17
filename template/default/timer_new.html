@@ -11,6 +11,8 @@
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<script type="text/javascript" language="JavaScript1.2">
 	<!--
+			var defaultDate = "";
+
       function cTimer(idx) {
         var Timer = "";
         var dor = document.form.dor.value;
@@ -23,11 +25,17 @@
           } else {
             Timer = Timer + "-";
           }
-          document.form.dor.value = Timer + StartDay;
         }
+				if (Timer == "-------") {
+					document.form.dor.value = defaultDate;
+					eCheckbox(defaultDate);
+				} else {
+	        document.form.dor.value = Timer + StartDay;
+				}
       }
       
       function eCheckbox(complTimer) {
+				defaultDate = complTimer;
         if(complTimer.length == 7 || complTimer.length == 18) {
           for(var i = 0; i <= 6; i++) {
             if(complTimer.substring(i, i + 1) != "-") {
@@ -65,7 +73,8 @@
 					<input type="radio" name="active" value="0" id="active_no" <?% UNLESS active %?>checked="checked"<?% END %?> /><label for="active_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
-<?% IF features.AUTOTIMER %?>
+<?% UNLESS hide_at_check %?>
+	<?% IF features.AUTOTIMER || features.EPGSEARCH %?>
 			<tr class="<?% tr_class %?>">
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('AutoTimer Checking:') %?></h5></td>
@@ -78,6 +87,7 @@
 					<input type="radio" name="autotimer" value="0" id="event_off" <?% IF autotimer == 0 %?>checked="checked"<?% END %?> /><label for="event_off"><?% gettext('off') %?></label>
 				</td>
 			</tr>
+	<?% END %?>
 <?% END %?>
 			<tr class="<?% tr_class %?>">
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
@@ -114,7 +124,7 @@
 					<input type="text" name="startm" value="<?% startm %?>" size="2" maxlength="2" />
 					&nbsp;<?% gettext('o\'clock') %?>
 					<?% IF bstart %?>
-						(<?% gettext('Buffer:') %?> <?% bstart %?> <?% gettext('minutes') %?>)
+						(<?% gettext('Buffer:') %?>&nbsp;<?% bstart %?>&nbsp;<?% gettext('minutes') %?>)
 					<?% END %?>
 				</td>
 			</tr>
@@ -127,7 +137,7 @@
 					<input type="text" name="stopm" value="<?% stopm %?>" size="2" maxlength="2" />
 					&nbsp;<?% gettext('o\'clock') %?>
 					<?% IF bstop %?>
-						(<?% gettext('Buffer:') %?> <?% bstop %?> <?% gettext('minutes') %?>)
+						(<?% gettext('Buffer:') %?>&nbsp;<?% bstop %?>&nbsp;<?% gettext('minutes') %?>)
 					<?% END %?>
 				</td>
 			</tr>
@@ -154,7 +164,7 @@
 			<tr class="<?% tr_class %?>">
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label" valign="top"><h5><?% gettext('Summary:') %?></h5><h6>(<?% gettext('readonly') %?>)</h6></td>
-				<td class="col_value"><textarea name="summary" rows="6" cols="80" readonly="readonly"><?% summary %?></textarea></td>
+				<td class="col_value"><textarea name="summary" rows="6" cols="80" readonly="readonly"><?% summary | html %?></textarea></td>
 			</tr>
 <?% IF pattern %?>
 			<tr class="<?% tr_class %?>">
@@ -170,6 +180,9 @@
 			<input type="submit" class="submit" name="exit" value="<?% gettext('Cancel') %?>" />
 		</div>
 		<input type="hidden" name="aktion" value="timer_add" /> 
+		<?% IF tool %?>
+			<input type="hidden" name="tool" value="<?% tool %?>" />
+		<?% END %?>
 		<?% IF referer %?>
 			<input type="hidden" name="referer" value="<?% referer %?>" />
 		<?% END %?>

@@ -187,55 +187,49 @@
 				</td>
 			</tr>
 			<tr class="row_even">
-				<td class="col_label"><h5><?% gettext('Timeout:') %?></h5></td>
-				<td class="col_value"><input type="text" name="AT_TIMEOUT" value="<?% config.AT_TIMEOUT %?>" size="4" /> <?% gettext('minutes') %?></td>
-			</tr>
-			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Priority:') %?></h5></td>
 				<td class="col_value"><input type="text" name="AT_PRIORITY" value="<?% config.AT_PRIORITY %?>" size="2" maxlength="2" /></td>
 			</tr>
-			<tr class="row_even">
+			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Lifetime:') %?></h5></td>
 				<td class="col_value"><input type="text" name="AT_LIFETIME" value="<?% config.AT_LIFETIME %?>" size="2" maxlength="2" /></td>
 			</tr>
-<!--
-			<tr class="row_odd">
+			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Time Margin at Start:') %?></h5></td>
 				<td class="col_value"><input type="text" name="AT_MARGIN_BEGIN" value="<?% config.AT_MARGIN_BEGIN %?>" size="2" maxlength="2" /></td>
 			</tr>
-			<tr class="row_even">
+			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Time Margin at Stop:') %?></h5></td>
 				<td class="col_value"><input type="text" name="AT_MARGIN_END" value="<?% config.AT_MARGIN_END %?>" size="2" maxlength="2" /></td>
 			</tr>
--->
-			<tr class="row_odd">
+			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Send email after programming timer:') %?></h5></td>
 				<td class="col_value">
 					<input type="radio" name="AT_SENDMAIL" value="1" id="at_sendmail_yes" <?% IF config.AT_SENDMAIL %?>checked="checked"<?% END %?> /><label for="at_sendmail_yes"><?% gettext('Yes') %?></label>
 					<input type="radio" name="AT_SENDMAIL" value="0" id="at_sendmail_no" <?% UNLESS config.AT_SENDMAIL %?>checked="checked"<?% END %?> /><label for="at_sendmail_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
-			<tr class="row_even">
+			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Send email as:') %?></h5></td>
 				<td class="col_value"><input type="text" name="MAIL_FROM" value="<?% config.MAIL_FROM %?>" size="20" maxlength="100" /></td>
 			</tr>
-			<tr class="row_odd">
+			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Send email to:') %?></h5></td>
 				<td class="col_value"><input type="text" name="MAIL_TO" value="<?% config.MAIL_TO %?>" size="20" maxlength="100" /></td>
 			</tr>
-			<tr class="row_even">
+			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Mail server:') %?></h5></td>
 				<td class="col_value"><input type="text" name="MAIL_SERVER" value="<?% config.MAIL_SERVER %?>" size="20" maxlength="100" /></td>
 			</tr>
-			<tr class="row_odd">
+			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('SMTPAuth user:') %?></h5></td>
 				<td class="col_value"><input type="text" name="MAIL_AUTH_USER" value="<?% config.MAIL_AUTH_USER %?>" size="20" maxlength="100" /></td>
 			</tr>
-			<tr class="row_even">
+			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('SMTPAuth password:') %?></h5></td>
 				<td class="col_value"><input type="password" name="MAIL_AUTH_PASS" value="<?% config.MAIL_AUTH_PASS %?>" size="20" maxlength="100" /></td>
 			</tr>
-			<tr class="row_odd">
+			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Tooltips:') %?></h5></td>
 				<td class="col_value">
 					<input type="radio" name="AT_TOOLTIP" value="1" id="at_tooltip_yes" <?% IF config.AT_TOOLTIP %?>checked="checked"<?% END %?> /><label for="at_tooltip_yes"><?% gettext('Yes') %?></label>
@@ -348,7 +342,52 @@
 
 		<table border="0" cellspacing="0" cellpadding="0" class="group">
 			<tr class="heading">
+				<td colspan="2"><h2><?% gettext('External Search') %?></h2></td>
+			</tr>
+			<tr class="row_odd">
+				<td valign="top" class="col_label"><h5>Internet Movie Database (IMDb):</h5></td>
+				<td class="col_value">
+					<?% gettext('Active:') %?>
+					<input type="radio" name="SRCH1_ACTIVE" value="1" id="srch1_active_yes" <?% IF config.SRCH1_ACTIVE %?>checked="checked"<?% END %?> /><label for="srch1_active_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="SRCH1_ACTIVE" value="0" id="srch1_active_no" <?% UNLESS config.SRCH1_ACTIVE %?>checked="checked"<?% END %?> /><label for="srch1_active_no"><?% gettext('No') %?></label>
+					<br />
+					<?% gettext('URL:') %?>
+					<input type="text" name="SRCH1_URL" value="<?% config.SRCH1_URL %?>" size="40" maxlength="256" />
+					<br />
+					<?% gettext('Title:') %?>
+					<input type="text" name="SRCH1_TITLE" value="<?% config.SRCH1_TITLE %?>" size="40" maxlength="256" />
+				</td>
+			</tr>
+			<tr class="row_even">
+				<td valign="top" class="col_label"><h5><?% gettext('User-defined search:') %?></h5></td>
+				<td class="col_value">
+					<?% gettext('Active:') %?>
+					<input type="radio" name="SRCH2_ACTIVE" value="1" id="srch2_active_yes" <?% IF config.SRCH2_ACTIVE %?>checked="checked"<?% END %?> /><label for="srch2_active_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="SRCH2_ACTIVE" value="0" id="srch2_active_no" <?% UNLESS config.SRCH2_ACTIVE %?>checked="checked"<?% END %?> /><label for="srch2_active_no"><?% gettext('No') %?></label>
+					<br />
+					<?% gettext('URL:') %?>
+					<input type="text" name="SRCH2_URL" value="<?% config.SRCH2_URL %?>" size="40" maxlength="256" />
+					<br />
+					<?% gettext('Title:') %?>
+					<input type="text" name="SRCH2_TITLE" value="<?% config.SRCH2_TITLE %?>" size="40" maxlength="256" />
+				</td>
+			</tr>
+		</table>
+
+		<table border="0" cellspacing="0" cellpadding="0" class="group">
+			<tr class="heading">
 				<td colspan="2"><h2><?% gettext('Expert') %?></h2></td>
+			</tr>
+			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Update EPG data in background:') %?></h5></td>
+				<td class="col_value">
+					<input type="radio" name="CACHE_BG_UPDATE" value="1" id="cbgupd_yes" <?% IF config.CACHE_BG_UPDATE %?>checked="checked"<?% END %?> /><label for="cbgupd_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="CACHE_BG_UPDATE" value="0" id="cbgupd_no" <?% UNLESS config.CACHE_BG_UPDATE %?>checked="checked"<?% END %?> /><label for="cbgupd_no"><?% gettext('No') %?></label>
+				</td>
+			</tr>
+			<tr class="row_even">
+				<td class="col_label"><h5><?% gettext('Update EPG every:') %?></h5></td>
+				<td class="col_value"><input type="text" name="CACHE_TIMEOUT" value="<?% config.CACHE_TIMEOUT %?>" size="4" /> <?% gettext('minutes') %?></td>
 			</tr>
 <!-- no longer supported
 			<tr class="row_odd">
@@ -376,14 +415,22 @@
 			<tr class="heading">
 				<td colspan="3"><h2><?% gettext('Channel Selections') %?></h2></td>
 			</tr>
+			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Show channels without EPG information:') %?></h5></td>
+				<td class="col_value" colspan="2">
+					<input type="radio" name="CHANNELS_WITHOUT_EPG" value="1" id="chnoepg_yes" <?% IF config.CHANNELS_WITHOUT_EPG %?>checked="checked"<?% END %?> /><label for="chnoepg_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="CHANNELS_WITHOUT_EPG" value="0" id="chnoepg_no" <?% UNLESS config.CHANNELS_WITHOUT_EPG %?>checked="checked"<?% END %?> /><label for="chnoepg_no"><?% gettext('No') %?></label>
+				</td>
+			</tr>
+<!-- Now can be set in individual section
 						<tr class="row_odd">
 							<td class="col_label"><h5><?% gettext('In "Timeline"?') %?></h5></td>
 							<td class="col_value" colspan="2">
 								<input type="radio" name="CHANNELS_WANTED_TIMELINE" value="1" id="tl_yes" <?% IF config.CHANNELS_WANTED_TIMELINE %?>checked="checked"<?% END %?> /><label for="tl_yes"><?% gettext('Yes') %?></label>
 								<input type="radio" name="CHANNELS_WANTED_TIMELINE" value="0" id="tl_no" <?% UNLESS config.CHANNELS_WANTED_TIMELINE %?>checked="checked"<?% END %?> /><label for="tl_no"><?% gettext('No') %?></label>
 							</td>
-						</tr>
-						<tr class="row_even">
+            </tr>
+						<tr class="row_odd">
 							<td class="col_label"><h5><?% gettext('In "Channels"?') %?></h5></td>
 							<td class="col_value" colspan="2">
 								<input type="radio" name="CHANNELS_WANTED_PRG" value="1" id="prg_yes" <?% IF config.CHANNELS_WANTED_PRG %?>checked="checked"<?% END %?> /><label for="prg_yes"><?% gettext('Yes') %?></label>
@@ -404,13 +451,22 @@
 								<input type="radio" name="CHANNELS_WANTED_SUMMARY" value="0" id="sum_no" <?% UNLESS config.CHANNELS_WANTED_SUMMARY %?>checked="checked"<?% END %?> /><label for="sum_no"><?% gettext('No') %?></label>
 							</td>
 						</tr>
-						<tr class="row_odd">
+-->
+<?% IF features.AUTOTIMER %?>
+						<tr class="row_even">
 							<td class="col_label"><h5><?% gettext('In "AutoTimer"?') %?></h5></td>
 							<td class="col_value" colspan="2">
 								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="1" id="wat_yes" <?% IF config.CHANNELS_WANTED_AUTOTIMER %?>checked="checked"<?% END %?> /><label for="wat_yes"><?% gettext('Yes') %?></label>
 								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="0" id="wat_no" <?% UNLESS config.CHANNELS_WANTED_AUTOTIMER %?>checked="checked"<?% END %?> /><label for="wat_no"><?% gettext('No') %?></label>
 							</td>
 						</tr>
+<?% ELSE %?>
+						<tr class="row_even">
+							<td class="col_label"><h5>&nbsp;</h5></td>
+							<td class="col_value" colspan="2">&nbsp;</td>
+						</tr>
+<?% END %?>
+<!-- Now can be set in individual section
 						<tr class="row_even">
 							<td class="col_label"><h5><?% gettext('In "Watch TV"?') %?></h5></td>
 							<td class="col_value" colspan="2">
@@ -418,6 +474,7 @@
 								<input type="radio" name="CHANNELS_WANTED_WATCHTV" value="0" id="wtv_no" <?% UNLESS config.CHANNELS_WANTED_WATCHTV %?>checked="checked"<?% END %?> /><label for="wtv_no"><?% gettext('No') %?></label>
 							</td>
 						</tr>
+-->
 						<tr class="row_odd">
 							<td class="col_channels">
 								<select name="all_channels" size="8" multiple="multiple" class="channels">

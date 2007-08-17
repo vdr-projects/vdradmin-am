@@ -28,6 +28,12 @@
 <?% END %?>
 				</td>
 				<td class="col_other">
+					<?% gettext('Channel group:') %?> 
+					<select name="select_wanted_channels" size="1" class="submit" onchange="window.open(this.options[this.selectedIndex].value,'main')">
+<?% FOREACH ch_grp = ch_groups %?> 
+						<option value="<?% ch_grp.url %?>" <?% IF ch_grp.selected %?>selected="selected"<?% END %?> ><?% ch_grp.title %?></option>
+<?% END %?>
+					</select> 
 <?% IF chanloop.size() > 0 %?>
 					<?% gettext('Channel:') %?>&nbsp; 
 					<select name="vdr_id" class="submit" onchange="window.open('<?% url %?>?aktion=prog_list&amp;vdr_id=' + this.options[this.selectedIndex].value,'main')">
@@ -84,9 +90,13 @@
 						<?% ELSE %?>
 							<span class="action info"><img src="bilder/info_button_disabled.png" border="0" alt="noinfo" title="<?% gettext('No Information') %?>" /></span>
 						<?% END %?>
+						<span class="action info"><a href="<?% bc.editurl %?>"><img src="bilder/edit.png" border="0" alt="edit" /></a></span>
 						<span class="action record"><a href="<?% bc.recurl %?>"><img src="bilder/rec_button.png" border="0" alt="record" title="<?% gettext('Record') %?>" /></a></span>
-						<?% IF bc.imdburl %?>
-							<span class="action imdb"><a href="<?% bc.imdburl %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<?% gettext('Lookup movie in the Internet-Movie-Database (IMDb)') %?>';return true" title="<?% gettext('Lookup movie in the Internet-Movie-Database (IMDb)') %?>" /></a></span>
+						<?% IF bc.srch1_url %?>
+							<span class="action imdb"><a href="<?% bc.srch1_url %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<?% bc.srch1_title %?>';return true" title="<?% bc.srch1_title %?>" /></a></span>
+						<?% END %?>
+						<?% IF bc.srch2_url %?>
+							<span class="action imdb"><a href="<?% bc.srch2_url %?>" target="_blank"><img src="bilder/udef_search.png" border="0" alt="Search" onmouseover="window.status='<?% bc.srch2_title %?>';return true" title="<?% bc.srch2_title %?>" /></a></span>
 						<?% END %?>
 					</td>
 				</tr>

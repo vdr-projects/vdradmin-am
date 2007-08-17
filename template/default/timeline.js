@@ -139,7 +139,7 @@ function TimeLine(_req_sec, _now_url, _px_per_min, _end_min)
 /*##########################################################################*/
 function BuildOption(time, selected, text)
 {
-	W('<option value="' + tl.now_url);
+   W('<option value="' + tl.now_url);
    if (time)
    {
       W('&amp;time=' + time + '&amp;frame=' + tl.first_sec);
@@ -311,6 +311,8 @@ function BuildChannel(channel, td_class)
       W('<td class="' + td_class + '">');
          W('<nobr>');
          var old_stop_min = 0;
+       if (channel.events[0].start_sec > 0)
+       { 
          for (var i = 0; i < channel.events.length; i++)
          {
             var event = channel.events[i];
@@ -325,10 +327,10 @@ function BuildChannel(channel, td_class)
             if (start_min < old_stop_min)
             {
                start_min = old_stop_min;
-					if (start_min > 0)
-					{
-						td_class = "color_spacer"; /* overlapped event */
-					}
+               if (start_min > 0 && !event.timer)
+               {
+                 td_class = "color_spacer"; /* overlapped event */
+               }
             }
             if (stop_min > tl.end_min) stop_min = tl.end_min;
    
@@ -368,6 +370,11 @@ function BuildChannel(channel, td_class)
          {
             BuildSpacer((tl.end_min - old_stop_min) * tl.px_per_min);
          }
+       }
+       else
+       {
+         BuildNoEPG(channel.events[0], tl.end_min * tl.px_per_min);
+       } 
          W('</nobr>');
       W('</td>');
    W('</tr>');
@@ -407,12 +414,26 @@ function BuildEvent(vdr_id, counter, event, td_class, px_w)
                {
                   anchor_start = '<a href="javascript:popup(' 
                                + "'./vdradmin.pl?aktion=prog_detail&amp;epg_id=" 
-						             + event.epg_id + "&amp;vdr_id=" + vdr_id + "');" + '">';
+                               + event.epg_id + "&amp;vdr_id=" + vdr_id + "');" + '">';
                   anchor_end = '</a>';
                }
                W(anchor_start);
                   W(event.title);
                W(anchor_end);
+            W('</nobr>');
+         W('</td>');
+      W('</tr>');
+   W('</table>');
+}
+
+function BuildNoEPG(event, width)
+{
+   W('<table border="0" align="left" cellpadding="0" cellspacing="0" width="' + width + '" class="prgtable">');
+      W('<tr>');
+         W('<td width="1" class="color_spacer">');
+            W('<img src="bilder/spacer.gif" width="1" height="1" border="0" /><br />');
+            W('<nobr>');
+              W(event.title);
             W('</nobr>');
          W('</td>');
       W('</tr>');

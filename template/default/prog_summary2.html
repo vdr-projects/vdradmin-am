@@ -20,6 +20,14 @@
 					<h1><?% title %?></h1>
 				</td>
 				<td class="col_other">
+<?% UNLESS searchresults %?> 
+					<?% gettext('Channel group:') %?> 
+					<select name="select_wanted_channels" size="1" class="submit" onchange="window.open(this.options[this.selectedIndex].value,'main')">
+<?% FOREACH ch_grp = ch_groups %?> 
+						<option value="<?% ch_grp.url %?>" <?% IF ch_grp.selected %?>selected="selected"<?% END %?> ><?% ch_grp.title %?></option>
+<?% END %?>
+					</select>
+<?% END %?>
 					[<a href="<?% switchview_url %?>"><?% switchview_text %?></a>]
 				</td>
 <?% IF times.size() > 0 %?>
@@ -54,7 +62,7 @@
 			<?% END %?>
 			<tr class="<?% tr_class %?>">
 				<td class="col_duration">
-					<span class="time_duration"><span class="time_start"><?% broadcast.start %?></span> - <span class="time_stop"><?% broadcast.stop %?></span></span>
+					<span class="time_duration"><span class="time_start"><?% IF broadcast.start %?><?% broadcast.start %?></span> - <span class="time_stop"><?% broadcast.stop %?><?% END %?></span></span>
 					<?% IF broadcast.show_percent %?>
 						<table border="0" cellspacing="0" cellpadding="0" class="percent" title="<?% broadcast.elapsed_min %?>min&nbsp;/&nbsp;<?% broadcast.length_min %?>min">
 							<tr>
@@ -100,9 +108,13 @@
 						<?% ELSE %?>
 							<span class="action info"><img src="bilder/info_button_disabled.png" border="0" alt="noinfo" title="<?% gettext('No Information') %?>" /></span>
 						<?% END %?>
+						<span class="action edit"><a href="<?% broadcast.editurl %?>"><img src="bilder/edit.png" border="0" alt="<?% gettext('Edit') %?>" onmouseover="window.status='<?% gettext('Edit') %?>';return true" title="<?% gettext('Edit') %?>" /></a></span>
 						<span class="action record"><a href="<?% broadcast.recurl %?>"><img src="bilder/rec_button.png" border="0" alt="<?% gettext('Record') %?>" onmouseover="window.status='<?% gettext('Record') %?>';return true" title="<?% gettext('Record') %?>" /></a></span>
-						<?% IF broadcast.imdburl %?>
-							<span class="action imdb"><a href="<?% broadcast.imdburl %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<?% gettext('Lookup movie in the Internet-Movie-Database (IMDb)') %?>';return true" title="<?% gettext('Lookup movie in the Internet-Movie-Database (IMDb)') %?>" /></a></span>
+						<?% IF broadcast.srch1_url %?>
+							<span class="action imdb"><a href="<?% broadcast.srch1_url %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<?% broadcast.srch1_url %?>';return true" title="<?% broadcast.srch1_url %?>" /></a></span>
+						<?% END %?>
+						<?% IF broadcast.srch2_url %?>
+							<span class="action imdb"><a href="<?% broadcast.srch2_url %?>" target="_blank"><img src="bilder/udef_search.png" border="0" alt="Search" onmouseover="window.status='<?% broadcast.srch2_title %?>';return true" title="<?% broadcast.srch2_title %?>" /></a></span>
 						<?% END %?>
 					<?% END %?>
 				</td>

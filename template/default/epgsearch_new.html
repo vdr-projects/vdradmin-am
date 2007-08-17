@@ -170,7 +170,7 @@
 						IF olddate != date;
 							olddate = date; %?>
 							<tr class="newday">
-								<td colspan="4"><span class="date_long"><?% date %?></span></td>
+								<td colspan="5"><span class="date_long"><?% date %?></span></td>
 							</tr>
 						<?% END %?>
 						<tr class="<?% IF loop.count % 2 == 0 %?>row_even<?% ELSE %?>row_odd<?% END %?>">
@@ -198,6 +198,11 @@
 							</td>
 							<td class="col_folder">
 								<?% folder %?>
+							</td>
+							<td class="col_folder">
+								<?% IF recurl %?>
+									<span class="action record"><a href="<?% recurl %?>"><img src="bilder/rec_button.png" border="0" alt="record" title="<?% gettext('Record') %?>" /></a></span>
+								<?% END %?>
 							</td>
 						</tr>
 					<?% END %?>
@@ -515,13 +520,13 @@
 					<tr class="row_even">
 						<td class="col_label"><h5><?% gettext('Time Margin at Start:') %?></h5></td>
 						<td class="col_value">
-							<input type="text" name="bstart" value="<?% epgsearch.bstart %?>" size="2" maxlength="2" /> <?% gettext('minutes') %?>
+							<input type="text" name="bstart" value="<?% epgsearch.bstart %?>" size="5" maxlength="5" /> <?% gettext('minutes') %?>
 						</td>
 					</tr>
 					<tr class="row_odd">
 						<td class="col_label"><h5><?% gettext('Time Margin at Stop:') %?></h5></td>
 						<td class="col_value">
-							<input type="text" name="bstop" value="<?% epgsearch.bstop %?>" size="2" maxlength="2" /> <?% gettext('minutes') %?>
+							<input type="text" name="bstop" value="<?% epgsearch.bstop %?>" size="5" maxlength="5" /> <?% gettext('minutes') %?>
 						</td>
 					</tr>
 					<tr class="row_even">
