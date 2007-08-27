@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-17 10:26+0200\n"
+"POT-Creation-Date: 2007-08-24 13:13+0200\n"
 "PO-Revision-Date: 2007-01-31 00:59+0100\n"
 "Last-Translator: Gringo <vdr-italian@tiscali.it>\n"
 "Language-Team: \n"
@@ -250,7 +250,7 @@ msgstr "Altre informazioni"
 #: ../template/default/prog_list2.html:62
 #: ../template/default/navigation.html:38 ../template/default/prog_list.html:6
 #: ../template/default/prog_summary.html:56
-#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5852
+#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5857
 msgid "Channels"
 msgstr "Canali"
 
@@ -402,7 +402,7 @@ msgstr "Nessun timer definito!"
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5852
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5857
 msgid "Recordings"
 msgstr "Registrazioni"
 
@@ -743,18 +743,18 @@ msgstr "Trasmesso"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5852
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5857
 msgid "What's On Now?"
 msgstr "Cosa c'è adesso?"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5852
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5857
 msgid "Playing Today?"
 msgstr "In esecuzione oggi?"
 
 #: ../template/default/navigation.html:35
 #: ../template/default/prog_timeline.html:7
 #: ../template/default/config.html:158 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:80 ../vdradmind.pl:5852
+#: ../template/default/help_config.html:80 ../vdradmind.pl:5857
 msgid "Timeline"
 msgstr "Linea temporale"
 
@@ -2630,8 +2630,8 @@ msgstr "Suffisso da usare per registrare la trasmissione. Di default è\"m3u\"."
 msgid ""
 "<p>Here you can define two external searches that you can access in the EPG "
 "views. You simply have to find the required URL and where the search pattern "
-"has to be located. %TITLE% will be substituted by the boadcast's EPG title.</"
-"p>"
+"has to be located. %TITLE% will be substituted by the broadcast's EPG title."
+"</p>"
 msgstr ""
 
 #: ../template/default/help_config.html:166
@@ -2775,22 +2775,22 @@ msgstr "Proibito"
 msgid "You don't have permission to access this function!"
 msgstr "Non hai i permessi per accedere a questa funzione!"
 
-#: ../vdradmind.pl:799 ../vdradmind.pl:6102
+#: ../vdradmind.pl:799 ../vdradmind.pl:6124
 #, fuzzy
 msgid "All channels"
 msgstr "Canali"
 
-#: ../vdradmind.pl:802 ../vdradmind.pl:6103
+#: ../vdradmind.pl:802 ../vdradmind.pl:6125
 #, fuzzy
 msgid "Selected channels"
 msgstr "Seleziona tutti/nessuno"
 
-#: ../vdradmind.pl:806 ../vdradmind.pl:6104
+#: ../vdradmind.pl:806 ../vdradmind.pl:6126
 #, fuzzy
 msgid "TV channels"
 msgstr "Canali"
 
-#: ../vdradmind.pl:810 ../vdradmind.pl:6105
+#: ../vdradmind.pl:810 ../vdradmind.pl:6127
 #, fuzzy
 msgid "Radio channels"
 msgstr "Canali"
@@ -2897,17 +2897,13 @@ msgstr "vista estesa"
 msgid "Schedule"
 msgstr "Pianifica"
 
-#: ../vdradmind.pl:5852
+#: ../vdradmind.pl:5857
 msgid "Timers"
 msgstr "Timers"
 
-#: ../vdradmind.pl:5894
+#: ../vdradmind.pl:5915
 msgid "System default"
 msgstr "Default sistema"
-
-#, fuzzy
-#~ msgid "Channels Setup"
-#~ msgstr "Canali"
 
 #~ msgid ""
 #~ "The number of minutes VDRAdmin-AM subtracts from the broadcasts start "

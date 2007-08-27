@@ -26,7 +26,7 @@
 
 require 5.004;
 
-my $VERSION = "3.6.0beta";
+my $VERSION = "3.6.0rc";
 my $BASENAME;
 my $EXENAME;
 
@@ -115,7 +115,7 @@ sub LOG_CHECKTIMER () { 32 }
 sub LOG_FATALERROR () { 64 }
 sub LOG_DEBUG ()      { 32768 }
 
-my %CONFIG;
+my (%CONFIG, %CONFIG_TEMP);
 $CONFIG{LOGLEVEL}             = 81;                # 32799
 $CONFIG{LOGGING}              = 0;
 $CONFIG{LOGFILE}              = "vdradmind.log";
@@ -207,12 +207,12 @@ $CONFIG{MAIL_AUTH_PASS} = "";
 
 #
 $CONFIG{CHANNELS_WANTED}           = "";
-$CONFIG{CHANNELS_WANTED_AUTOTIMER} = "";
-$CONFIG{CHANNELS_WANTED_PRG}       = "";
-$CONFIG{CHANNELS_WANTED_PRG2}      = "";
-$CONFIG{CHANNELS_WANTED_TIMELINE}  = "";
-$CONFIG{CHANNELS_WANTED_SUMMARY}   = "";
-$CONFIG{CHANNELS_WANTED_WATCHTV}   = "";
+$CONFIG{CHANNELS_WANTED_AUTOTIMER} = 0;
+$CONFIG{CHANNELS_WANTED_PRG}       = 0;
+$CONFIG{CHANNELS_WANTED_PRG2}      = 0;
+$CONFIG{CHANNELS_WANTED_TIMELINE}  = 0;
+$CONFIG{CHANNELS_WANTED_SUMMARY}   = 0;
+$CONFIG{CHANNELS_WANTED_WATCHTV}   = 0;
 $CONFIG{CHANNELS_WITHOUT_EPG}      = 0;
 
 #
@@ -5793,24 +5793,33 @@ sub rec_cut {
 # configuration
 #############################################################################
 sub config {
-    sub ApplyConfig {
-        my $old_lang       = $CONFIG{LANG};
-        my $old_epgprune   = $CONFIG{EPG_PRUNE};
-        my $old_epgdirect  = $CONFIG{EPG_DIRECT};
-        my $old_epgfile    = $CONFIG{EPG_FILENAME};
-        my $old_vdrconfdir = $CONFIG{VDRCONFDIR};
+    unless ($q->param("save") || $q->param("apply") || $q->param("submit")) {
+        undef %CONFIG_TEMP;
+        for my $key (keys(%CONFIG)) {
+            $CONFIG_TEMP{$key} = $CONFIG{$key};
+        }
+    }
 
+    sub ApplyConfig {
         for ($q->param) {
             if (/[A-Z]+/) {
-                $CONFIG{$_} = $q->param($_);
+                $CONFIG_TEMP{$_} = $q->param($_);
             }
+        }
+
+        my $need_trans_reload = 1 if ($CONFIG_TEMP{LANG} ne $CONFIG{LANG});
+        my $need_vdrconf_reload = 1 if ($CONFIG_TEMP{VDRCONFDIR} ne $CONFIG{VDRCONFDIR});
+        my $need_update = 1 if ($CONFIG_TEMP{EPG_PRUNE} != $CONFIG{EPG_PRUNE}
+                             || $CONFIG_TEMP{CHANNELS_WANTED} ne $CONFIG{CHANNELS_WANTED});
+        for my $key (keys(%CONFIG_TEMP)) {
+            $CONFIG{$key} = $CONFIG_TEMP{$key};
         }
 
         ValidConfig();
 
-        LoadTranslation() if ($old_lang ne $CONFIG{LANG});
-        UptoDate(1) if ($old_epgprune != $CONFIG{EPG_PRUNE} || $old_epgdirect != $CONFIG{EPG_DIRECT} || $old_epgfile ne $CONFIG{EPG_FILENAME});
-        if ($old_vdrconfdir ne $CONFIG{VDRCONFDIR}) {
+        LoadTranslation() if ($need_trans_reload);
+        UptoDate(1) if ($need_update);
+        if ($need_vdrconf_reload) {
             @reccmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/reccmds.conf");
             @vdrcmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/commands.conf");
         }
@@ -5830,16 +5839,12 @@ sub config {
     if ($q->param("submit")) {
         if ($q->param("submit") eq ">>>>>") {
             for my $vdr_id ($q->param("all_channels")) {
-                $CONFIG{CHANNELS_WANTED} = csvAdd($CONFIG{CHANNELS_WANTED}, $vdr_id);
+                $CONFIG_TEMP{CHANNELS_WANTED} = csvAdd($CONFIG_TEMP{CHANNELS_WANTED}, $vdr_id);
             }
-            ApplyConfig();
-            WriteConfig();
         } elsif ($q->param("submit") eq "<<<<<") {
             for my $vdr_id ($q->param("selected_channels")) {
-                $CONFIG{CHANNELS_WANTED} = csvRemove($CONFIG{CHANNELS_WANTED}, $vdr_id);
+                $CONFIG_TEMP{CHANNELS_WANTED} = csvRemove($CONFIG_TEMP{CHANNELS_WANTED}, $vdr_id);
             }
-            ApplyConfig();
-            WriteConfig();
         }
     } elsif ($q->param("save")) {
         ApplyConfig();
@@ -5856,7 +5861,7 @@ sub config {
         push(@loginpages,
              {  id      => $i,
                 name    => $LOGINPAGES_DESCRIPTION[$i],
-                current => ($CONFIG{LOGINPAGE} == $i) ? 1 : 0
+                current => ($CONFIG_TEMP{LOGINPAGE} == $i) ? 1 : 0
              }
         );
         $i++;
@@ -5872,18 +5877,34 @@ sub config {
         if (!$found) {
             push(@template,
                  {  name       => $dir,
-                    aktemplate => ($CONFIG{TEMPLATE} eq $dir) ? 1 : 0,
+                    aktemplate => ($CONFIG_TEMP{TEMPLATE} eq $dir) ? 1 : 0,
                  }
             );
         }
     }
 
+    my @selected_channels;
+    for my $channel (@{$CHAN{$CHAN_FULL}->{channels}}) {
+        my $found = 0;
+        for (split(",", $CONFIG_TEMP{CHANNELS_WANTED})) {
+            if ($_ eq $channel->{vdr_id}) {
+                $found = 1;
+            }
+        }
+        next unless $found;
+        push(@selected_channels,
+                {   name   => $channel->{name},
+                    vdr_id => $channel->{vdr_id}
+                }
+        );
+    }
+
     my @skinlist;
-    foreach my $file (glob(sprintf("%s/%s/*", $TEMPLATEDIR, $CONFIG{TEMPLATE}))) {
+    foreach my $file (glob(sprintf("%s/%s/*", $TEMPLATEDIR, $CONFIG_TEMP{TEMPLATE}))) {
         my $name = (split('\/', $file))[-1];
         push(@skinlist,
              {  name => $name,
-                sel  => ($CONFIG{SKIN} eq $name ? 1 : 0)
+                sel  => ($CONFIG_TEMP{SKIN} eq $name ? 1 : 0)
              }
           )
           if (-d $file);
@@ -5897,7 +5918,7 @@ sub config {
             push(@my_locales,
                  {  id   => $loc,
                     name => $loc,
-                    cur  => ($loc eq $CONFIG{LANG} ? 1 : 0)
+                    cur  => ($loc eq $CONFIG_TEMP{LANG} ? 1 : 0)
                  }
               )
               if ($loc =~ $SUPPORTED_LOCALE_PREFIXES);
@@ -5906,12 +5927,13 @@ sub config {
 
     my $vars = { TEMPLATELIST      => \@template,
                  ALL_CHANNELS      => \@{$CHAN{$CHAN_FULL}->{channels}},
-                 SELECTED_CHANNELS => \@{$CHAN{$CHAN_WANTED}->{channels}},
+                 SELECTED_CHANNELS => \@selected_channels,
                  LOGINPAGES        => \@loginpages,
                  SKINLIST          => \@skinlist,
                  MY_LOCALES        => \@my_locales,
                  url               => $MyURL,
-                 help_url          => HelpURL("config")
+                 help_url          => HelpURL("config"),
+                 config            => \%CONFIG_TEMP
     };
     return showTemplate("config.html", $vars);
 }

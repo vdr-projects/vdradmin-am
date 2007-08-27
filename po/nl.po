@@ -1,22 +1,21 @@
-# translation of nl.po to Nederlands
-# translation of vdradmin-nl.po to Nederlands
-# translation of vdradmin.po to Nederlands
+# translation of nl.po to
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Roel <rl.koelewijn@home.nl>, 2005, 2006, 2007.
 #
+# Roel <rl.koelewijn@home.nl>, 2005, 2006, 2007.
+# Roel Koelewijn <roel.koelewijn@gmail.com>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-17 10:26+0200\n"
-"PO-Revision-Date: 2007-01-26 18:10+0100\n"
-"Last-Translator: Roel <rl.koelewijn@home.nl>\n"
-"Language-Team: Nederlands <nl@li.org>\n"
+"POT-Creation-Date: 2007-08-24 13:13+0200\n"
+"PO-Revision-Date: 2007-08-23 20:28+0200\n"
+"Last-Translator: Roel Koelewijn <roel.koelewijn@gmail.com>\n"
+"Language-Team:  <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../template/default/epgsearch_list.html:5 ../template/default/error.html:5
 #: ../template/default/timer_list.html:5
@@ -252,7 +251,7 @@ msgstr "Meer informatie"
 #: ../template/default/prog_list2.html:62
 #: ../template/default/navigation.html:38 ../template/default/prog_list.html:6
 #: ../template/default/prog_summary.html:56
-#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5852
+#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5857
 msgid "Channels"
 msgstr "Kanalen"
 
@@ -404,7 +403,7 @@ msgstr "Geen timers opgegeven!"
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5852
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5857
 msgid "Recordings"
 msgstr "Opnames"
 
@@ -506,7 +505,6 @@ msgstr "Uur"
 #: ../template/default/prog_list.html:31
 #: ../template/default/prog_summary.html:24
 #: ../template/default/prog_summary2.html:24
-#, fuzzy
 msgid "Channel group:"
 msgstr "Kanaal groep:"
 
@@ -742,18 +740,18 @@ msgstr "Uitgezonden"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5852
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5857
 msgid "What's On Now?"
 msgstr "Wat is er nu op?"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5852
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5857
 msgid "Playing Today?"
 msgstr "Speelt vandaag?"
 
 #: ../template/default/navigation.html:35
 #: ../template/default/prog_timeline.html:7
 #: ../template/default/config.html:158 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:80 ../vdradmind.pl:5852
+#: ../template/default/help_config.html:80 ../vdradmind.pl:5857
 msgid "Timeline"
 msgstr "Tijdlijn"
 
@@ -887,80 +885,86 @@ msgstr "Timer bewerken"
 
 #: ../template/default/help_edit_epg.html:20
 #: ../template/default/prog_detail_form.html:19
-#, fuzzy
 msgid "Edit EPG"
-msgstr "Bewerken"
+msgstr "Bewerk EPG"
 
 #: ../template/default/help_edit_epg.html:24
-#, fuzzy
 msgid ""
 "<p>Here you can edit the descriptive fields of an existing EPG entry.</p>"
-msgstr "<p>Hier kunt u de timer instellingen bewerken.</p>"
+msgstr "<p>Hier kunt u de omschrijving van een bestaande EPG bewerken.</p>"
 
 #: ../template/default/help_edit_epg.html:26
-#, fuzzy
 msgid "Channel (readonly)"
-msgstr "Kanaal groep:"
+msgstr "Kanaal (alleen lezen)"
 
 #: ../template/default/help_edit_epg.html:27
 msgid "This is the channel of the EPG entry. It cannot be changed."
-msgstr ""
+msgstr "Dit is het kanaal van de EPG invoer. Dit akn niet veranderd worden."
 
 #: ../template/default/help_edit_epg.html:28
-#, fuzzy
 msgid "Time (readonly)"
-msgstr "Alleen lezen"
+msgstr "Tijd (alleen lezen)"
 
 #: ../template/default/help_edit_epg.html:29
 msgid "This is the start and end time of the entry. It cannot be changed."
 msgstr ""
+"Dit is de start en eindtijd van de invoer. Dit kan niet veranderd worden."
 
 #: ../template/default/help_edit_epg.html:31
 msgid ""
 "Change this string to give this EPG Entry a new title. It must consist of "
 "only one line of text."
 msgstr ""
+"Verander deze reeks om deze EPG invoer een nieuwe titel te geven.Het mag "
+"alleen bestaan uit één regel tekst."
 
 #: ../template/default/help_edit_epg.html:33
 msgid ""
 "Change this string to give this EPG Entry a new subtitle. It must consist of "
 "only one line of text."
 msgstr ""
+"Verander deze reeks om deze EPG invoer een nieuwe subtitel te geven.Het mag "
+"alleen bestaan uit één regel tekst."
 
 #: ../template/default/help_edit_epg.html:35
 msgid ""
 "Change the text in this field to edit the description of this entry. The "
 "text can consist of one or more lines."
 msgstr ""
+"Verander de tekst in dit veld om de omschrijving te veranderen van deze "
+"invoer. De tekst mag bestaan uit één of meer regels,."
 
 #: ../template/default/help_edit_epg.html:36
-#, fuzzy
 msgid "VPS (readonly)"
-msgstr "Alleen lezen"
+msgstr "VPS (alleen lezen)"
 
 #: ../template/default/help_edit_epg.html:37
 msgid ""
 "If available this field shows the vps time of the EPG entry. It cannot be "
 "changed."
 msgstr ""
+"Als het beschikbaar is toont dit vel de vps tijd van de EPG invoer. Dit kan "
+"niet veranderd worden."
 
 #: ../template/default/help_edit_epg.html:38
-#, fuzzy
 msgid "Video tracks (readonly)"
-msgstr "Video tracks:"
+msgstr "Video tracks (alleen lezen)"
 
 #: ../template/default/help_edit_epg.html:39
 msgid "If available this field shows the video track(s). It cannot be changed."
 msgstr ""
+"Indien beschikbaar toont dit veld de video spoor of sporen. Dit kan niet "
+"verandert worden."
 
 #: ../template/default/help_edit_epg.html:40
-#, fuzzy
 msgid "Audio tracks (readonly)"
-msgstr "Audio sporen:"
+msgstr "Audio sporen (alleen lezen)"
 
 #: ../template/default/help_edit_epg.html:41
 msgid "If available this field shows the audio track(s). It cannot be changed."
 msgstr ""
+"Indien beschikbaar toont dit veld de audio sporen. Dit kan niet veranderd "
+"worden."
 
 #: ../template/default/help_at_timer_new.html:27
 msgid ""
@@ -1231,14 +1235,12 @@ msgid "Time"
 msgstr "Tijd"
 
 #: ../template/default/prog_detail_form.html:67
-#, fuzzy
 msgid "Video tracks"
-msgstr "Video tracks:"
+msgstr "Video sporen:"
 
 #: ../template/default/prog_detail_form.html:74
-#, fuzzy
 msgid "Audio tracks"
-msgstr "Audio sporen:"
+msgstr "Audio sporen"
 
 #: ../template/default/vdr_cmds.html:6 ../template/default/vdr_cmds.html:17
 msgid "VDR Commands"
@@ -1246,7 +1248,7 @@ msgstr "VDR Commando's:"
 
 #: ../template/default/vdr_cmds.html:29
 msgid "Export channels as playlist:"
-msgstr ""
+msgstr "Exporteeer de kanalen als afspeellijst"
 
 #: ../template/default/vdr_cmds.html:37
 msgid "Number of lines to show:"
@@ -1477,22 +1479,20 @@ msgstr "Bandbreedte van streams:"
 
 #: ../template/default/config.html:345 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:164
-#, fuzzy
 msgid "External Search"
-msgstr "Bewerk zoeken"
+msgstr "Extern zoeken"
 
 #: ../template/default/config.html:354 ../template/default/config.html:368
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: ../template/default/config.html:357 ../template/default/config.html:371
-#, fuzzy
 msgid "Title:"
-msgstr "Titel"
+msgstr "Titel:"
 
 #: ../template/default/config.html:362
 msgid "User-defined search:"
-msgstr ""
+msgstr "Gebruikers definieert zoeken"
 
 #: ../template/default/config.html:379 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:178
@@ -1502,12 +1502,12 @@ msgstr "Expert"
 #: ../template/default/config.html:382
 #: ../template/default/help_config.html:181
 msgid "Update EPG data in background:"
-msgstr ""
+msgstr "Bijwerken van EPG gegevens in de achtergrond:"
 
 #: ../template/default/config.html:389
 #: ../template/default/help_config.html:183
 msgid "Update EPG every:"
-msgstr ""
+msgstr "Werk EPG bij iedere:"
 
 #: ../template/default/config.html:394
 #: ../template/default/help_config.html:186
@@ -1532,7 +1532,7 @@ msgstr "Kanaal selecties"
 #: ../template/default/config.html:419
 #: ../template/default/help_config.html:202
 msgid "Show channels without EPG information:"
-msgstr ""
+msgstr "Toon kanalen zonder EPG informatie:"
 
 #: ../template/default/config.html:427
 msgid "In \"Timeline\"?"
@@ -2019,7 +2019,6 @@ msgid "Italian:"
 msgstr "Italiaans:"
 
 #: ../template/default/about.html:73
-#, fuzzy
 msgid "Information"
 msgstr "Informatie"
 
@@ -2125,7 +2124,6 @@ msgid "search"
 msgstr "zoeken"
 
 #: ../template/default/prog_detail.html:44
-#, fuzzy
 msgid "edit"
 msgstr "Bewerken"
 
@@ -2625,13 +2623,17 @@ msgstr "De extensie voor opgenomen streaming. Standaard is  \"m3u\"."
 msgid ""
 "<p>Here you can define two external searches that you can access in the EPG "
 "views. You simply have to find the required URL and where the search pattern "
-"has to be located. %TITLE% will be substituted by the boadcast's EPG title.</"
-"p>"
+"has to be located. %TITLE% will be substituted by the broadcast's EPG title."
+"</p>"
 msgstr ""
+"<p>Hier kunt u twee externe zoekopdrachten definieren die u kunt benaderen "
+"in de EPG. U moet alleen de benodigde URL zien te vinden en waar het "
+"zoekpatroon geplaatst moet worden . %TITLE% zal worden vervangen door "
+"uitzendings EPG titel.</"
 
 #: ../template/default/help_config.html:166
 msgid "Some examples:"
-msgstr ""
+msgstr "Enkele voorbeelden:"
 
 #: ../template/default/help_config.html:179
 msgid ""
@@ -2647,15 +2649,18 @@ msgid ""
 "Else the EPG will be refreshed if the user accesses any EPG view at the web "
 "interface and the timeout set at \"Update EPG every\" has been reached."
 msgstr ""
+"Als het ingesteld staat op \"ja\" dan zal VDRAdmin-AM met intervallen zijn "
+"lokale EPG cache verversen. Anders word de EPG pas ververst als de gebruiker "
+"met een EPG bezoek op de web interface benadert  en de timeout instelling "
+"\"Ververs EPG iedere\" bereikt is"
 
 #: ../template/default/help_config.html:184
-#, fuzzy
 msgid ""
 "The interval, the EPG data is refreshed from VDR and AutoTimer updates are "
 "performed (if AutoTimer feature is used)."
 msgstr ""
-"De interval dat de EPG data wordt gecontroleerd voor het verversen van de "
-"auto timers."
+"De interval dat EPG data wordt ververst van VDR en auto timer updates worden "
+"uitgevoerd. (Als de auto timer functie word gebruikt)."
 
 #: ../template/default/help_config.html:187
 msgid ""
@@ -2714,6 +2719,8 @@ msgid ""
 "views. If you don't want them to be hidden you have to set this option to "
 "\"yes\"."
 msgstr ""
+"Normaal gesproken worden kanalen verborgen die geen EPG informatie hebben. "
+"Als u deze niet verborgen wilt hebben moet u deze optie op \"ja\" zetten."
 
 #: ../vdradmind.pl:360
 msgid "What's your VDR hostname (e.g video.intra.net)?"
@@ -2766,31 +2773,27 @@ msgstr "De gevraagde URl is niet gevonden op deze server!"
 
 #: ../vdradmind.pl:601 ../vdradmind.pl:1271 ../vdradmind.pl:2986
 msgid "Forbidden"
-msgstr "Verboden"
+msgstr "Niet toegestaan"
 
 #: ../vdradmind.pl:601 ../vdradmind.pl:2987
 msgid "You don't have permission to access this function!"
 msgstr "U heeft geen toestemming om deze functie te gebruiken!"
 
-#: ../vdradmind.pl:799 ../vdradmind.pl:6102
-#, fuzzy
+#: ../vdradmind.pl:799 ../vdradmind.pl:6124
 msgid "All channels"
-msgstr "Kanalen"
+msgstr "alle kanalen"
 
-#: ../vdradmind.pl:802 ../vdradmind.pl:6103
-#, fuzzy
+#: ../vdradmind.pl:802 ../vdradmind.pl:6125
 msgid "Selected channels"
-msgstr "Selecteer alles/niets"
+msgstr "Geselecteerde kanalen"
 
-#: ../vdradmind.pl:806 ../vdradmind.pl:6104
-#, fuzzy
+#: ../vdradmind.pl:806 ../vdradmind.pl:6126
 msgid "TV channels"
-msgstr "Kanalen"
+msgstr "TV kanalen"
 
-#: ../vdradmind.pl:810 ../vdradmind.pl:6105
-#, fuzzy
+#: ../vdradmind.pl:810 ../vdradmind.pl:6127
 msgid "Radio channels"
-msgstr "Kanalen"
+msgstr "Radio kanalen"
 
 #: ../vdradmind.pl:1271 ../vdradmind.pl:2988
 #, perl-format
@@ -2894,38 +2897,10 @@ msgstr "uitgebreid tonen"
 msgid "Schedule"
 msgstr "Schema"
 
-#: ../vdradmind.pl:5852
+#: ../vdradmind.pl:5857
 msgid "Timers"
 msgstr "Timers"
 
-#: ../vdradmind.pl:5894
+#: ../vdradmind.pl:5915
 msgid "System default"
 msgstr "Systeem standaard"
-
-#, fuzzy
-#~ msgid "Channels Setup"
-#~ msgstr "Kanalen"
-
-#~ msgid ""
-#~ "The number of minutes VDRAdmin-AM subtracts from the broadcasts start "
-#~ "time found in the EPG. This value is used for timers programmed by "
-#~ "AutoTimer and timers manually programmed when pressing \"Record\" in any "
-#~ "EPG view."
-#~ msgstr ""
-#~ "Het aantal minuten dat VDRAdmin-AM eerder begint met opnemen dat de start "
-#~ "tijd aangegeven door de EPG. Deze waarde word gebruikt voor timers "
-#~ "geprogrammeerd door de autotimer en timers die handmatig geprogrammeerd "
-#~ "worden door op \"opnemen\" in ieder EPG overzicht."
-
-#~ msgid ""
-#~ "The number of minutes VDRAdmin-AM adds to the broadcasts stop time found "
-#~ "in the EPG. This value is used for timers programmed by AutoTimer and "
-#~ "timers manually programmed when pressing \"Record\" in any EPG view."
-#~ msgstr ""
-#~ "Het aantal minuten die VDRAdmin-AM toevoegd aan de opname tijd die "
-#~ "gevonden is in EPG. Deze waarde word gebruikt voor timers geprogrammeerd "
-#~ "door de autotimer en timers die handmatig geprogrammeerd worden door op "
-#~ "\"opnemen\" in ieder EPG overzicht."
-
-#~ msgid "Timeout:"
-#~ msgstr "Timeout:"

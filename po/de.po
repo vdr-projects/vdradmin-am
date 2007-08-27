@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.5.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-17 10:26+0200\n"
+"POT-Creation-Date: 2007-08-24 13:13+0200\n"
 "PO-Revision-Date: 2007-07-26 14:49+0100\n"
 "Last-Translator: Andreas Mair <mail@andreas.vdr-developer.org>\n"
 "Language-Team: <LL.org>\n"
@@ -257,7 +257,7 @@ msgstr "mehr Infos"
 #: ../template/default/prog_list2.html:62
 #: ../template/default/navigation.html:38 ../template/default/prog_list.html:6
 #: ../template/default/prog_summary.html:56
-#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5852
+#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5857
 msgid "Channels"
 msgstr "Programmübersicht"
 
@@ -409,7 +409,7 @@ msgstr "Es wurden noch keine Timer angelegt!"
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5852
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5857
 msgid "Recordings"
 msgstr "Aufnahmen"
 
@@ -752,18 +752,18 @@ msgstr "Ausgestrahlt"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5852
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5857
 msgid "What's On Now?"
 msgstr "Was läuft jetzt?"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5852
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5857
 msgid "Playing Today?"
 msgstr "Was läuft heute?"
 
 #: ../template/default/navigation.html:35
 #: ../template/default/prog_timeline.html:7
 #: ../template/default/config.html:158 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:80 ../vdradmind.pl:5852
+#: ../template/default/help_config.html:80 ../vdradmind.pl:5857
 msgid "Timeline"
 msgstr "Zeitleiste"
 
@@ -2647,8 +2647,8 @@ msgstr "Dateierweiterung für das Streamen von Aufnahmen. Vorgabe ist \"m3u\"."
 msgid ""
 "<p>Here you can define two external searches that you can access in the EPG "
 "views. You simply have to find the required URL and where the search pattern "
-"has to be located. %TITLE% will be substituted by the boadcast's EPG title.</"
-"p>"
+"has to be located. %TITLE% will be substituted by the broadcast's EPG title."
+"</p>"
 msgstr ""
 "<p>Hier können Sie zwei externe Suchen angeben, die in den EPG-Ansichten "
 "zugreifbar sind. Dazu müssen Sie nur die erforderliche URL und die Position "
@@ -2808,19 +2808,19 @@ msgstr "Verboten"
 msgid "You don't have permission to access this function!"
 msgstr "Sie haben nicht die Erlaubnis diese Funktion aufzurufen!"
 
-#: ../vdradmind.pl:799 ../vdradmind.pl:6102
+#: ../vdradmind.pl:799 ../vdradmind.pl:6124
 msgid "All channels"
 msgstr "Alle Kanäle"
 
-#: ../vdradmind.pl:802 ../vdradmind.pl:6103
+#: ../vdradmind.pl:802 ../vdradmind.pl:6125
 msgid "Selected channels"
 msgstr "Ausgewählte Kanäle"
 
-#: ../vdradmind.pl:806 ../vdradmind.pl:6104
+#: ../vdradmind.pl:806 ../vdradmind.pl:6126
 msgid "TV channels"
 msgstr "Fernsehkanäle"
 
-#: ../vdradmind.pl:810 ../vdradmind.pl:6105
+#: ../vdradmind.pl:810 ../vdradmind.pl:6127
 msgid "Radio channels"
 msgstr "Radiokanäle"
 
@@ -2926,10 +2926,10 @@ msgstr "Ausführliche Ansicht"
 msgid "Schedule"
 msgstr "Übersicht"
 
-#: ../vdradmind.pl:5852
+#: ../vdradmind.pl:5857
 msgid "Timers"
 msgstr "Timer"
 
-#: ../vdradmind.pl:5894
+#: ../vdradmind.pl:5915
 msgid "System default"
 msgstr "Systemstandard"

@@ -4,6 +4,13 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2007-08-27: 3.6.0rc
+- Updated: French translation (Submitted by Trois Six).
+- Updated: Dutch translation (Submitted by Roel Koelewijn).
+- Updated: French translation (Submitted by Ville Skyttä & Rolf Ahrenberg).
+- Reworked: configuration part: selected channels work again and settings are only applied if "save" or "apply" is pressed in config menu.
+- Fixed: initialisation if CHANNEL_WANTED_<area> config options.
+
 2007-08-17: 3.6.0beta
 - Added: export of channels in each channel group as m3u playlist in vdr_cmds.
 - Added: channel list to rc.

@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.4.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-17 10:26+0200\n"
-"PO-Revision-Date: 2006-05-21 00:34+0100\n"
-"Last-Translator: NIVAL Michaël <mnival@club-internet.fr>\n"
+"POT-Creation-Date: 2007-08-24 13:13+0200\n"
+"PO-Revision-Date: 2007-08-23 10:45+0100\n"
+"Last-Translator: Trois Six <trois.six@free.fr>\n"
 "Language-Team: Trois Six <trois.six@free.fr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -40,25 +40,21 @@ msgid "ISO-8859-1"
 msgstr "ISO-8859-1"
 
 #: ../template/default/epgsearch_list.html:6
-#, fuzzy
 msgid "EPG search"
-msgstr "rechercher"
+msgstr "recherche EPG"
 
 #: ../template/default/epgsearch_list.html:23
 #: ../template/default/navigation.html:50
-#, fuzzy
 msgid "EPG Search"
-msgstr "Rechercher"
+msgstr "Recherche EPG"
 
 #: ../template/default/epgsearch_list.html:27
-#, fuzzy
 msgid "Use template"
-msgstr "Gabarit :"
+msgstr "Utiliser un modèle"
 
 #: ../template/default/epgsearch_list.html:34
-#, fuzzy
 msgid "New Search"
-msgstr "Rechercher"
+msgstr "Nouvelle Recherche"
 
 #: ../template/default/epgsearch_list.html:39
 #: ../template/default/timer_list.html:50
@@ -79,9 +75,8 @@ msgid "Active"
 msgstr "Actif"
 
 #: ../template/default/epgsearch_list.html:62
-#, fuzzy
 msgid "Action"
-msgstr "Actif"
+msgstr "Action"
 
 #: ../template/default/epgsearch_list.html:73
 #: ../template/default/epgsearch_list.html:75
@@ -94,7 +89,7 @@ msgstr "Chaîne"
 
 #: ../template/default/epgsearch_list.html:87
 msgid "From"
-msgstr ""
+msgstr "De"
 
 #: ../template/default/epgsearch_list.html:89
 #: ../template/default/timer_list.html:226
@@ -103,9 +98,8 @@ msgid "Start"
 msgstr "Début"
 
 #: ../template/default/epgsearch_list.html:101
-#, fuzzy
 msgid "To"
-msgstr "Haut"
+msgstr "A"
 
 #: ../template/default/epgsearch_list.html:103
 #: ../template/default/timer_list.html:237
@@ -114,9 +108,8 @@ msgid "Stop"
 msgstr "Fin"
 
 #: ../template/default/epgsearch_list.html:115
-#, fuzzy
 msgid "Search pattern"
-msgstr "Rechercher Modèles :"
+msgstr "Rechercher un motif"
 
 #: ../template/default/epgsearch_list.html:125
 #: ../template/default/timer_list.html:259
@@ -181,9 +174,8 @@ msgid "Edit"
 msgstr "Editer"
 
 #: ../template/default/epgsearch_list.html:171
-#, fuzzy
 msgid "Find"
-msgstr "Vendredi"
+msgstr "Rechercher"
 
 #: ../template/default/epgsearch_list.html:177
 #: ../template/default/timer_list.html:315
@@ -200,7 +192,7 @@ msgstr "Supprimer"
 
 #: ../template/default/epgsearch_list.html:192
 msgid "Show Favorites"
-msgstr ""
+msgstr "Montrer les Favoris"
 
 #: ../template/default/epgsearch_list.html:193
 #: ../template/default/at_timer_list.html:168
@@ -208,24 +200,20 @@ msgid "Force Update"
 msgstr "Forcer Mise à jour"
 
 #: ../template/default/epgsearch_list.html:196
-#, fuzzy
 msgid "Delete Selected Searches"
-msgstr "Supprimer Programmations Sélectionnées"
+msgstr "Supprimer Recherches Sélectionnées"
 
 #: ../template/default/epgsearch_list.html:196
-#, fuzzy
 msgid "Delete all selected searches?"
-msgstr "Supprimer Programmations Sélectionnées ?"
+msgstr "Supprimer toutes les Recherches Sélectionnées ?"
 
 #: ../template/default/epgsearch_list.html:197
-#, fuzzy
 msgid "Execute Selected Searches"
-msgstr "Supprimer Programmations Sélectionnées"
+msgstr "Executer les Recherches Sélectionnées"
 
 #: ../template/default/epgsearch_list.html:221
-#, fuzzy
 msgid "Duration"
-msgstr "Durée :"
+msgstr "Durée"
 
 #: ../template/default/epgsearch_list.html:222
 #: ../template/default/at_timer_new.html:58
@@ -258,7 +246,7 @@ msgstr "Plus d'Informations"
 #: ../template/default/prog_list2.html:62
 #: ../template/default/navigation.html:38 ../template/default/prog_list.html:6
 #: ../template/default/prog_summary.html:56
-#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5852
+#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5857
 msgid "Channels"
 msgstr "Chaînes"
 
@@ -274,9 +262,8 @@ msgstr "Enregistrer"
 #: ../template/default/epgsearch_list.html:270
 #: ../template/default/at_timer_new.html:198
 #: ../template/default/epgsearch_new.html:211
-#, fuzzy
 msgid "No matches found!"
-msgstr "Non trouvé"
+msgstr "Aucune correspondance trouvée !"
 
 #: ../template/default/error.html:6
 msgid "Error!"
@@ -405,14 +392,13 @@ msgid "Delete all selected timers?"
 msgstr "Supprimer Programmations Sélectionnées ?"
 
 #: ../template/default/timer_list.html:339
-#, fuzzy
 msgid "No timers defined!"
-msgstr "Aucune correspondance trouvée !"
+msgstr "Aucune Programmation définie !"
 
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5852
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5857
 msgid "Recordings"
 msgstr "Enregistrements"
 
@@ -520,9 +506,8 @@ msgstr "Heure"
 #: ../template/default/prog_list.html:31
 #: ../template/default/prog_summary.html:24
 #: ../template/default/prog_summary2.html:24
-#, fuzzy
 msgid "Channel group:"
-msgstr "Chaîne :"
+msgstr "Groupe de la Chaîne :"
 
 #: ../template/default/prog_list2.html:65
 #: ../template/default/prog_list.html:23 ../template/default/rec_list.html:120
@@ -549,9 +534,8 @@ msgstr "Rechercher d'autres moments de diffusion"
 #: ../template/default/prog_list.html:91
 #: ../template/default/prog_summary.html:92
 #: ../template/default/prog_summary2.html:109
-#, fuzzy
 msgid "No Information"
-msgstr "Plus d'Informations"
+msgstr "Pas d'Information"
 
 #: ../template/default/prog_list2.html:120
 #: ../template/default/prog_timeline.html:201
@@ -559,9 +543,8 @@ msgstr "Plus d'Informations"
 #: ../template/default/prog_summary.html:142
 #: ../template/default/prog_summary2.html:129 ../vdradmind.pl:3624
 #: ../vdradmind.pl:3851 ../vdradmind.pl:5001 ../vdradmind.pl:5166
-#, fuzzy
 msgid "No EPG information available"
-msgstr "Pas d'information"
+msgstr "Pas d'information EPG disponible"
 
 #: ../template/default/at_timer_new.html:6
 #: ../template/default/at_timer_new.html:19
@@ -685,7 +668,7 @@ msgstr "Fin de recherche :"
 #: ../template/default/at_timer_new.html:110
 #: ../template/default/help_at_timer_new.html:44
 msgid "Override Start/Stop Margins:"
-msgstr ""
+msgstr "Permettre de dépasser les Marges de Début/Fin :"
 
 #: ../template/default/at_timer_new.html:118
 #: ../template/default/help_at_timer_new.html:46
@@ -758,18 +741,18 @@ msgstr "Diffusé"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5852
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5857
 msgid "What's On Now?"
 msgstr "En ce Moment ?"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5852
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5857
 msgid "Playing Today?"
 msgstr "Aujourd'hui ?"
 
 #: ../template/default/navigation.html:35
 #: ../template/default/prog_timeline.html:7
 #: ../template/default/config.html:158 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:80 ../vdradmind.pl:5852
+#: ../template/default/help_config.html:80 ../vdradmind.pl:5857
 msgid "Timeline"
 msgstr "Chronologie"
 
@@ -792,9 +775,8 @@ msgid "Watch TV"
 msgstr "Regarder TV"
 
 #: ../template/default/navigation.html:63
-#, fuzzy
 msgid "Commands"
-msgstr "Commandes :"
+msgstr "Commandes"
 
 #: ../template/default/navigation.html:66 ../template/default/config.html:5
 #: ../template/default/config.html:18 ../template/default/help_config.html:9
@@ -831,7 +813,7 @@ msgstr "à :"
 
 #: ../template/default/prog_timeline.html:195
 msgid "You need JavaScript to use the timeline!"
-msgstr ""
+msgstr "Vous avez besoin de JavaScript pour utiliser la chronologie !"
 
 #: ../template/default/at_timer_list.html:38
 msgid "New AutoTimer"
@@ -842,9 +824,8 @@ msgid "Delete Selected AutoTimers"
 msgstr "Supprimer Auto-Programmations Sélectionnées"
 
 #: ../template/default/at_timer_list.html:178
-#, fuzzy
 msgid "No AutoTimers defined!"
-msgstr "Vérification Auto-Programmation :"
+msgstr "Aucune Auto-Programmation définie !"
 
 #: ../template/default/help_at_timer_list.html:25
 msgid ""
@@ -909,80 +890,87 @@ msgstr "Editer Programmation"
 
 #: ../template/default/help_edit_epg.html:20
 #: ../template/default/prog_detail_form.html:19
-#, fuzzy
 msgid "Edit EPG"
-msgstr "Editer"
+msgstr "Editer EPG"
 
 #: ../template/default/help_edit_epg.html:24
-#, fuzzy
 msgid ""
 "<p>Here you can edit the descriptive fields of an existing EPG entry.</p>"
-msgstr "<p>Ici vous pouvez modifier un programmation.</p>"
+msgstr ""
+"<p>Ici vous pouvez modifier les champs de description d'une entrée EPG.</p>"
 
 #: ../template/default/help_edit_epg.html:26
-#, fuzzy
 msgid "Channel (readonly)"
-msgstr "Chaîne :"
+msgstr "Chaîne (lecture seule)"
 
 #: ../template/default/help_edit_epg.html:27
 msgid "This is the channel of the EPG entry. It cannot be changed."
 msgstr ""
+"Ceci est la chaîne diffusant les données EPG. Elle ne peut être changée."
 
 #: ../template/default/help_edit_epg.html:28
-#, fuzzy
 msgid "Time (readonly)"
-msgstr "lecture seule"
+msgstr "Temps (lecture seule)"
 
 #: ../template/default/help_edit_epg.html:29
 msgid "This is the start and end time of the entry. It cannot be changed."
-msgstr ""
+msgstr "Ceci est le début et la fin de cette entrée. Ceci ne peut être changé."
 
 #: ../template/default/help_edit_epg.html:31
 msgid ""
 "Change this string to give this EPG Entry a new title. It must consist of "
 "only one line of text."
 msgstr ""
+"Changez cette chaîne de caractères pour donner à l'entrée EPG un nouveau "
+"titre. Il ne doit y avoir qu'une ligne de texte au maximum."
 
 #: ../template/default/help_edit_epg.html:33
 msgid ""
 "Change this string to give this EPG Entry a new subtitle. It must consist of "
 "only one line of text."
 msgstr ""
+"Changez cette chaîne de caractères pour donner à l'entrée EPG un nouveau "
+"sous-titre. Il ne doit y avoir qu'une ligne de texte au maximum."
 
 #: ../template/default/help_edit_epg.html:35
 msgid ""
 "Change the text in this field to edit the description of this entry. The "
 "text can consist of one or more lines."
 msgstr ""
+"Changez le texte de ce champ pour éditer la description de cette entrée. Le "
+"texte peut faire une ou plusieurs lignes."
 
 #: ../template/default/help_edit_epg.html:36
-#, fuzzy
 msgid "VPS (readonly)"
-msgstr "lecture seule"
+msgstr "VPS (lecture seule)"
 
 #: ../template/default/help_edit_epg.html:37
 msgid ""
 "If available this field shows the vps time of the EPG entry. It cannot be "
 "changed."
 msgstr ""
+"Si des temps VPN dans l'entrée EPG existe(nt), ce champ les montrera. Il ne "
+"peut pas être modifié."
 
 #: ../template/default/help_edit_epg.html:38
-#, fuzzy
 msgid "Video tracks (readonly)"
-msgstr "Piste vidéo :"
+msgstr "Pistes vidéo (lecture seule)"
 
 #: ../template/default/help_edit_epg.html:39
 msgid "If available this field shows the video track(s). It cannot be changed."
 msgstr ""
+"Si des piste(s) vidéo existe(nt), ce champ les montrera. Il ne peut pas être "
+"modifié."
 
 #: ../template/default/help_edit_epg.html:40
-#, fuzzy
 msgid "Audio tracks (readonly)"
-msgstr "Piste audio :"
+msgstr "Pistes audio (lecture seule)"
 
 #: ../template/default/help_edit_epg.html:41
 msgid "If available this field shows the audio track(s). It cannot be changed."
 msgstr ""
+"Si des piste(s) audio existe(nt), ce champ les montrera. Il ne peut pas être "
+"modifié."
 
 #: ../template/default/help_at_timer_new.html:27
 msgid ""
@@ -1105,6 +1093,9 @@ msgid ""
 "have individual start/stop margins and enter the values in the next two text "
 "boxes."
 msgstr ""
+"Sélectionnez cette option à \"oui\" si toutes les programmations programmées "
+"par cette Auto-Programmation devraient avoir des marges de début/fin "
+"individuelles et entrez les valeurs dans les deux prochains champs."
 
 #: ../template/default/help_at_timer_new.html:47
 #: ../template/default/help_config.html:101
@@ -1113,6 +1104,8 @@ msgid ""
 "The number of minutes VDRAdmin-AM subtracts from the broadcasts start time "
 "found in the EPG."
 msgstr ""
+"Le nombre de minutes que VDRAdmin-AM soustrait aux heures de début trouvées "
+"dans les données EPG."
 
 #: ../template/default/help_at_timer_new.html:49
 #: ../template/default/help_config.html:103
@@ -1121,6 +1114,8 @@ msgid ""
 "The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in "
 "the EPG."
 msgstr ""
+"Le nombre de minutes que VDRAdmin-AM ajoute aux heures de fin trouvées dans "
+"les données EPG."
 
 #: ../template/default/help_at_timer_new.html:51
 #: ../template/default/help_timer_new.html:54
@@ -1256,14 +1251,12 @@ msgid "Time"
 msgstr "Horaires"
 
 #: ../template/default/prog_detail_form.html:67
-#, fuzzy
 msgid "Video tracks"
-msgstr "Piste vidéo :"
+msgstr "Pistes vidéo"
 
 #: ../template/default/prog_detail_form.html:74
-#, fuzzy
 msgid "Audio tracks"
-msgstr "Piste audio :"
+msgstr "Pistes audio"
 
 #: ../template/default/vdr_cmds.html:6 ../template/default/vdr_cmds.html:17
 msgid "VDR Commands"
@@ -1271,7 +1264,7 @@ msgstr "Commandes VDR"
 
 #: ../template/default/vdr_cmds.html:29
 msgid "Export channels as playlist:"
-msgstr ""
+msgstr "Exporter les chaînes en tant que playlist :"
 
 #: ../template/default/vdr_cmds.html:37
 msgid "Number of lines to show:"
@@ -1335,7 +1328,7 @@ msgstr "Langue :"
 
 #: ../template/default/config.html:97 ../template/default/help_config.html:44
 msgid "Save settings on exit:"
-msgstr ""
+msgstr "Enregistrer les paramètres en quittant :"
 
 #: ../template/default/config.html:107 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:50
@@ -1393,7 +1386,7 @@ msgstr "Périodes :"
 
 #: ../template/default/config.html:166
 msgid "Also used for other EPG views!"
-msgstr ""
+msgstr "Aussi utilisé pour d'autres vues EPG !"
 
 #: ../template/default/config.html:169 ../template/default/config.html:233
 #: ../template/default/help_config.html:86
@@ -1502,22 +1495,20 @@ msgstr "Bande Passante Flux :"
 
 #: ../template/default/config.html:345 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:164
-#, fuzzy
 msgid "External Search"
-msgstr "Rechercher"
+msgstr "Recherche Extenre"
 
 #: ../template/default/config.html:354 ../template/default/config.html:368
 msgid "URL:"
-msgstr ""
+msgstr "URL :"
 
 #: ../template/default/config.html:357 ../template/default/config.html:371
-#, fuzzy
 msgid "Title:"
-msgstr "une fois"
+msgstr "Titre :"
 
 #: ../template/default/config.html:362
 msgid "User-defined search:"
-msgstr ""
+msgstr "Recherches définies par l'utilisateur :"
 
 #: ../template/default/config.html:379 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:178
@@ -1527,12 +1518,12 @@ msgstr "Expert"
 #: ../template/default/config.html:382
 #: ../template/default/help_config.html:181
 msgid "Update EPG data in background:"
-msgstr ""
+msgstr "Mettre à jour les données EPG en tâche de fond :"
 
 #: ../template/default/config.html:389
 #: ../template/default/help_config.html:183
 msgid "Update EPG every:"
-msgstr ""
+msgstr "Mettre à jour les données EPG toutes les :"
 
 #: ../template/default/config.html:394
 #: ../template/default/help_config.html:186
@@ -1557,7 +1548,7 @@ msgstr "Sélections Chaînes"
 #: ../template/default/config.html:419
 #: ../template/default/help_config.html:202
 msgid "Show channels without EPG information:"
-msgstr ""
+msgstr "Voir les chaînes sans les informations EPG :"
 
 #: ../template/default/config.html:427
 msgid "In \"Timeline\"?"
@@ -1589,175 +1580,159 @@ msgstr "Appliquer"
 
 #: ../template/default/epgsearch_new.html:6
 msgid "Define New Search"
-msgstr ""
+msgstr "Définir une Nouvelle Recherche"
 
 #: ../template/default/epgsearch_new.html:6
 #: ../template/default/epgsearch_new.html:153
-#, fuzzy
 msgid "Edit Search"
-msgstr "Rechercher"
+msgstr "Editer la recherche"
 
 #: ../template/default/epgsearch_new.html:129
 msgid "Small search pattern.\\nDo you really want to use it?"
 msgstr ""
+"Le motif de recherche est trop petit.\\nVoulez-vous vraiment l'utiliser ?"
 
 #: ../template/default/epgsearch_new.html:136
 msgid ""
 "You didn't select at least one of\\ntitle, subtitle or description.\\nDo you "
 "really want to use this search?"
 msgstr ""
+"Vous n'avez ni sélectionné\\ntitre, ni sous-titre, ni description.\\nVoulez-"
+"vous vraiment utiliser cette recherche ?"
 
 #: ../template/default/epgsearch_new.html:153
-#, fuzzy
 msgid "Add New Search"
-msgstr "Ajouter Nouvelle Auto-Programmation"
+msgstr "Ajouter une Nouvelle Recherche"
 
 #: ../template/default/epgsearch_new.html:167
 msgid "Hide results"
-msgstr ""
+msgstr "Cacher les résultats"
 
 #: ../template/default/epgsearch_new.html:218
-#, fuzzy
 msgid "Settings"
-msgstr "Paramètres Généraux"
+msgstr "Paramètres"
 
 #: ../template/default/epgsearch_new.html:223
-#, fuzzy
 msgid "Search Term:"
-msgstr "Rechercher dans :"
+msgstr "Rechercher le Terme :"
 
 #: ../template/default/epgsearch_new.html:230
-#, fuzzy
 msgid "Search Mode:"
-msgstr "Rechercher dans :"
+msgstr "Mode de Recherche :"
 
 #: ../template/default/epgsearch_new.html:233
 msgid "phrase"
-msgstr ""
+msgstr "phrase"
 
 #: ../template/default/epgsearch_new.html:234
 msgid "all words"
-msgstr ""
+msgstr "tous les mots"
 
 #: ../template/default/epgsearch_new.html:235
 msgid "at least one word"
-msgstr ""
+msgstr "au moins un mot"
 
 #: ../template/default/epgsearch_new.html:236
 msgid "match exactly"
-msgstr ""
+msgstr "rechercher exactement"
 
 #: ../template/default/epgsearch_new.html:237
 msgid "regular expression"
-msgstr ""
+msgstr "expression régulière"
 
 #: ../template/default/epgsearch_new.html:238
 msgid "fuzzy"
-msgstr ""
+msgstr "fuzzy"
 
 #: ../template/default/epgsearch_new.html:241
 msgid "Tolerance for \"fuzzy\":"
-msgstr ""
+msgstr "Tolérance pour \"fuzzy\":"
 
 #: ../template/default/epgsearch_new.html:248
 msgid "Match Case:"
-msgstr ""
+msgstr "Respecter la Casse :"
 
 #: ../template/default/epgsearch_new.html:265
 msgid "Use extended EPG info:"
-msgstr ""
+msgstr "Utiliser les informations EPG étendues :"
 
 #: ../template/default/epgsearch_new.html:300
-#, fuzzy
 msgid "Use Channel:"
-msgstr "Chaîne :"
+msgstr "Utiliser la Chaîne :"
 
 #: ../template/default/epgsearch_new.html:303
 #: ../template/default/epgsearch_new.html:403
-#, fuzzy
 msgid "no"
-msgstr "maintenant"
+msgstr "non"
 
 #: ../template/default/epgsearch_new.html:304
-#, fuzzy
 msgid "interval"
-msgstr "Intervalle :"
+msgstr "intervalle"
 
 #: ../template/default/epgsearch_new.html:305
-#, fuzzy
 msgid "channel group"
-msgstr "Chaîne"
+msgstr "groupe de la chaîne"
 
 #: ../template/default/epgsearch_new.html:306
 msgid "only FTA"
-msgstr ""
+msgstr "Seulement les chaînes \"en clair\""
 
 #: ../template/default/epgsearch_new.html:309
-#, fuzzy
 msgid "Range:"
-msgstr "Langue :"
+msgstr "Intervalle :"
 
 #: ../template/default/epgsearch_new.html:323
-#, fuzzy
 msgid "Channel Group:"
-msgstr "Chaîne :"
+msgstr "Groupe de la Chaîne :"
 
 #: ../template/default/epgsearch_new.html:334
-#, fuzzy
 msgid "Use Time:"
-msgstr "Identifiant :"
+msgstr "Utiliser l'Heure :"
 
 #: ../template/default/epgsearch_new.html:340
-#, fuzzy
 msgid "Start After:"
-msgstr "Début de recherche :"
+msgstr "Démarrer après :"
 
 #: ../template/default/epgsearch_new.html:347
-#, fuzzy
 msgid "Start Before:"
-msgstr "Début de recherche :"
+msgstr "Démarrer avant :"
 
 #: ../template/default/epgsearch_new.html:359
-#, fuzzy
 msgid "Use Duration:"
-msgstr "Durée :"
+msgstr "Utiliser Durée :"
 
 #: ../template/default/epgsearch_new.html:365
-#, fuzzy
 msgid "Min. Duration:"
-msgstr "Durée :"
+msgstr "Durée Min. :"
 
 #: ../template/default/epgsearch_new.html:368
 #: ../template/default/epgsearch_new.html:375
 msgid "hh:mm"
-msgstr ""
+msgstr "hh:mm"
 
 #: ../template/default/epgsearch_new.html:372
-#, fuzzy
 msgid "Max. Duration:"
-msgstr "Durée :"
+msgstr "Durée Max. :"
 
 #: ../template/default/epgsearch_new.html:384
 msgid "Use Day of Week:"
-msgstr ""
+msgstr "Utiliser un jour de la Semaine :"
 
 #: ../template/default/epgsearch_new.html:400
 msgid "Use Blacklists:"
-msgstr ""
+msgstr "Utiliser des \"listes noires\" :"
 
 #: ../template/default/epgsearch_new.html:404
-#, fuzzy
 msgid "selection"
-msgstr "Zapper"
+msgstr "Sélectionner"
 
 #: ../template/default/epgsearch_new.html:419
 msgid "Use in Favorites Menu:"
-msgstr ""
+msgstr "Utiliser dans le Menu des Favoris :"
 
 #: ../template/default/epgsearch_new.html:427
-#, fuzzy
 msgid "Use as Search Timer:"
-msgstr "Rechercher dans :"
+msgstr "Utiliser en tant que Recherche de Programmation :"
 
 #: ../template/default/epgsearch_new.html:432
 #: ../template/default/prog_detail.html:37 ../vdradmind.pl:2479
@@ -1766,68 +1741,63 @@ msgstr "enregistrer"
 
 #: ../template/default/epgsearch_new.html:433 ../vdradmind.pl:2481
 msgid "announce only"
-msgstr ""
+msgstr "Annoncer seulement"
 
 #: ../template/default/epgsearch_new.html:434 ../vdradmind.pl:2483
 msgid "switch only"
-msgstr ""
+msgstr "zapper uniquement"
 
 #: ../template/default/epgsearch_new.html:444
 msgid "Settings for action \"record\""
-msgstr ""
+msgstr "Paramètres pour action \"enregistrement\""
 
 #: ../template/default/epgsearch_new.html:447
-#, fuzzy
 msgid "Series Recording:"
-msgstr "Nom Original d'Enregistrement :"
+msgstr "Enregistrement des Séries :"
 
 #: ../template/default/epgsearch_new.html:459
-#, fuzzy
 msgid "Delete Recordings After ... Days:"
-msgstr "Supprimer l'Enregistrement ?"
+msgstr "Supprimer les Enregistrement Après ... Jours :"
 
 #: ../template/default/epgsearch_new.html:462
-#, fuzzy
 msgid "Keep ... Recordings:"
-msgstr "Enregistrements"
+msgstr "Garder ... Enregistrements :"
 
 #: ../template/default/epgsearch_new.html:467
-#, fuzzy
 msgid "Pause, when ... recordings exist:"
-msgstr "Chemin des Enregistrements VDR :"
+msgstr "Pause, quand ... Enregistrements existent :"
 
 #: ../template/default/epgsearch_new.html:473
 msgid "Avoid Repeats:"
-msgstr ""
+msgstr "Eviter les répétitions :"
 
 #: ../template/default/epgsearch_new.html:479
 msgid "Allowed Repeats:"
-msgstr ""
+msgstr "Autoriser les répétitions :"
 
 #: ../template/default/epgsearch_new.html:482
 msgid "Only Repeats Within ... Days:"
-msgstr ""
+msgstr "Se répète uniquement dans ... Jours :"
 
 #: ../template/default/epgsearch_new.html:487
 msgid "Compare:"
-msgstr ""
+msgstr "Comparer :"
 
 #: ../template/default/epgsearch_new.html:533
-#, fuzzy
 msgid "VPS:"
-msgstr "VPS"
+msgstr "VPS :"
 
 #: ../template/default/epgsearch_new.html:544
 msgid "Settings for action \"switch only\""
-msgstr ""
+msgstr "Paramètres pour action \"zapper uniquement\""
 
 #: ../template/default/epgsearch_new.html:547
 msgid "Switch ... Minutes Before Start:"
-msgstr ""
+msgstr "Zapper ... Minutes Avant le Début :"
 
 #: ../template/default/epgsearch_new.html:560
 msgid "Save as template"
-msgstr ""
+msgstr "Enregistrer en tant que modèle"
 
 #: ../template/default/prog_list.html:44
 msgid "Go!"
@@ -1939,11 +1909,11 @@ msgstr "Nouveau"
 
 #: ../template/default/rec_list.html:110
 msgid "Play"
-msgstr ""
+msgstr "Lire"
 
 #: ../template/default/rec_list.html:113
 msgid "Cut"
-msgstr ""
+msgstr "Couper"
 
 #: ../template/default/rec_list.html:116 ../template/default/rec_edit.html:44
 msgid "Rename"
@@ -1970,9 +1940,8 @@ msgid "Delete all selected recordings?"
 msgstr "Supprimer Enregistrements Sélectionnés ?"
 
 #: ../template/default/rec_list.html:155
-#, fuzzy
 msgid "No recordings available"
-msgstr "Pas d'aide disponible"
+msgstr "Aucun enregistrement disponible"
 
 #: ../template/default/tv.html:5 ../template/default/tv.html:80
 msgid "TV"
@@ -2059,18 +2028,16 @@ msgid "Russian:"
 msgstr "Russe"
 
 #: ../template/default/about.html:62
-#, fuzzy
 msgid "Czech:"
-msgstr "Français"
+msgstr "Tchèque :"
 
 #: ../template/default/about.html:66
 msgid "Italian:"
-msgstr ""
+msgstr "Italien :"
 
 #: ../template/default/about.html:73
-#, fuzzy
 msgid "Information"
-msgstr "Informations"
+msgstr "Information"
 
 #: ../template/default/about.html:76
 msgid "VDRAdmin-AM version:"
@@ -2082,25 +2049,31 @@ msgstr "Version de VDR :"
 
 #: ../template/default/about.html:84
 msgid "Supported features in VDR:"
-msgstr ""
+msgstr "Options supportées par VDR :"
 
 #: ../template/default/about.html:91
 msgid ""
 "EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search."
 "html\" target=\"_blank\">EPGSearch Plugin</a>)"
 msgstr ""
+"Plugin de Recherche dans les données EPG (<a href=\"http://people.freenet.de/"
+"cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch</a>)"
 
 #: ../template/default/about.html:97
 msgid ""
 "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-"
 "plugin\" target=\"_blank\">Streamdev Plugin</a>)"
 msgstr ""
+"Plugin de Streaming Live (<a href=\"http://www.vdr-wiki.de/wiki/index.php/"
+"Streamdev-plugin\" target=\"_blank\">Streamdev</a>)"
 
 #: ../template/default/about.html:103
 msgid ""
 "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/"
 "\" target=\"_blank\">Liemikuutio Patch</a>)"
 msgstr ""
+"Renommer les Enregistrements (<a href=\"http://www.saunalahti.fi/~rahrenbe/"
+"vdr/patches/\" target=\"_blank\">Patch Liemikuutio</a>)"
 
 #: ../template/default/about.html:110
 msgid "Getting Help and Reporting Bugs"
@@ -2166,9 +2139,8 @@ msgid "search"
 msgstr "rechercher"
 
 #: ../template/default/prog_detail.html:44
-#, fuzzy
 msgid "edit"
-msgstr "Editer"
+msgstr "éditer"
 
 #: ../template/default/prog_detail.html:66
 msgid "Video tracks:"
@@ -2443,6 +2415,10 @@ msgid ""
 "also save settings not available on the \"Configuration\" menu like interval "
 "and size in TV, sorting in the lists and current view in \"What's on now\"."
 msgstr ""
+"Avec cette option, les paramètres seront sauvegardés si VDRAdmin-AM existe. "
+"Cela enregistrera aussi les paramètres non disponibles dans le menu "
+"\"Configuration\" comme l'intervalle et la taille sur la TV, tri des listes "
+"et la vue courante dans \"En ce Moment\"."
 
 #: ../template/default/help_config.html:47
 #: ../template/default/help_config.html:61
@@ -2679,13 +2655,17 @@ msgstr ""
 msgid ""
 "<p>Here you can define two external searches that you can access in the EPG "
 "views. You simply have to find the required URL and where the search pattern "
-"has to be located. %TITLE% will be substituted by the boadcast's EPG title.</"
-"p>"
+"has to be located. %TITLE% will be substituted by the broadcast's EPG title."
+"</p>"
 msgstr ""
+"<p>Ici vous pouvez définir deux recherches externes auxquelles vous pouvez "
+"accéder dans les vues EPG. You avez seulement à trouver l'URL et où le "
+"paramètres de recherche doit être indiqué. %TITLE% sera substitué par titre "
+"de la diffusion trouvé dans le titre dans les données EPG.</p>"
 
 #: ../template/default/help_config.html:166
 msgid "Some examples:"
-msgstr ""
+msgstr "Quelques exemples :"
 
 #: ../template/default/help_config.html:179
 msgid ""
@@ -2701,15 +2681,19 @@ msgid ""
 "Else the EPG will be refreshed if the user accesses any EPG view at the web "
 "interface and the timeout set at \"Update EPG every\" has been reached."
 msgstr ""
+"Si l'option est \"oui\" VDRAdmin-AM rafraichira périodiquement son cache "
+"local EPG. Sinon l'EPG sera rafraichit si l'utilisateur accède à n'importe "
+"quelle vue EPG dans l'interface web et que le timeout choisit dans \"Mise à "
+"jour EPG tous les\" aura été atteint."
 
 #: ../template/default/help_config.html:184
-#, fuzzy
 msgid ""
 "The interval, the EPG data is refreshed from VDR and AutoTimer updates are "
 "performed (if AutoTimer feature is used)."
 msgstr ""
 "L'intervalle durant lequel les données du guide éléctronique des programmes "
-"sont vérifiées pour mettre à jour les Auto-Programmations."
+"sont vérifiées pour mettre à jour les Auto-Programmations (si les Auto-"
+"Programmations sont activées)."
 
 #: ../template/default/help_config.html:187
 msgid ""
@@ -2767,6 +2751,9 @@ msgid ""
 "views. If you don't want them to be hidden you have to set this option to "
 "\"yes\"."
 msgstr ""
+"De manière générale, les chaînes qui n'ont pas d'information EPG sont "
+"cachées dans toutes les vues EPG. Si vous ne voulez pas les cacher, activez "
+"(\"oui\") cette option."
 
 #: ../vdradmind.pl:360
 msgid "What's your VDR hostname (e.g video.intra.net)?"
@@ -2825,25 +2812,21 @@ msgstr "Interdit"
 msgid "You don't have permission to access this function!"
 msgstr "Vous n'avez pas la permission d'accéder à cette fonction !"
 
-#: ../vdradmind.pl:799 ../vdradmind.pl:6102
-#, fuzzy
+#: ../vdradmind.pl:799 ../vdradmind.pl:6124
 msgid "All channels"
-msgstr "Chaînes"
+msgstr "Toutes les Chaînes"
 
-#: ../vdradmind.pl:802 ../vdradmind.pl:6103
-#, fuzzy
+#: ../vdradmind.pl:802 ../vdradmind.pl:6125
 msgid "Selected channels"
-msgstr "Selectionner tout/rien"
+msgstr "Chaînes Sélectionnées"
 
-#: ../vdradmind.pl:806 ../vdradmind.pl:6104
-#, fuzzy
+#: ../vdradmind.pl:806 ../vdradmind.pl:6126
 msgid "TV channels"
-msgstr "Chaînes"
+msgstr "Chaînes TV"
 
-#: ../vdradmind.pl:810 ../vdradmind.pl:6105
-#, fuzzy
+#: ../vdradmind.pl:810 ../vdradmind.pl:6127
 msgid "Radio channels"
-msgstr "Chaînes"
+msgstr "Chaînes Radio"
 
 #: ../vdradmind.pl:1271 ../vdradmind.pl:2988
 #, perl-format
@@ -2857,30 +2840,27 @@ msgstr "L'URL \"%s\" n'a pas été trouvée sur le serveur !"
 
 #: ../vdradmind.pl:2136
 msgid "Your favorites"
-msgstr ""
+msgstr "Vos favoris"
 
 #: ../vdradmind.pl:2136
-#, fuzzy
 msgid "Search results"
-msgstr "Rechercher dans :"
+msgstr "Résultats de la Recherche"
 
 #: ../vdradmind.pl:2276
-#, fuzzy
 msgid "Default"
-msgstr "Supprimer"
+msgstr "Par défaut"
 
 #: ../vdradmind.pl:2394
 msgid "--- no timer ---"
-msgstr ""
+msgstr "--- pas de programmations ---"
 
 #: ../vdradmind.pl:2485
-#, fuzzy
 msgid "unknown"
-msgstr "maintenant"
+msgstr "inconnu"
 
 #: ../vdradmind.pl:2488
 msgid "none"
-msgstr ""
+msgstr "aucun"
 
 #: ../vdradmind.pl:2989
 #, perl-format
@@ -2902,9 +2882,8 @@ msgid "Error while sending command to VDR at %s"
 msgstr "Erreur en envoyant la commande à %s"
 
 #: ../vdradmind.pl:3047
-#, fuzzy
 msgid "Internal error:"
-msgstr "Intervalle :"
+msgstr "Erreur Interne :"
 
 #: ../vdradmind.pl:3205
 msgid "Lookup movie in the Internet-Movie-Database (IMDb)"
@@ -2912,16 +2891,16 @@ msgstr "Plus de détails sur Internet"
 
 #: ../vdradmind.pl:3458
 msgid "Can't find EPG entry!"
-msgstr ""
+msgstr "Aucune entrée EPG trouvée !"
 
 #: ../vdradmind.pl:3886
 msgid "Playing Tomorrow"
 msgstr "Joué demain"
 
 #: ../vdradmind.pl:3886
-#, fuzzy, perl-format
+#, perl-format
 msgid "Playing on the %s"
-msgstr "En cours sur la %d."
+msgstr "Lecture en cours sur la %s"
 
 #: ../vdradmind.pl:5193
 msgid "next"
@@ -2951,17 +2930,13 @@ msgstr "Long aperçu"
 msgid "Schedule"
 msgstr "Programmateur"
 
-#: ../vdradmind.pl:5852
+#: ../vdradmind.pl:5857
 msgid "Timers"
 msgstr "Programmations"
 
-#: ../vdradmind.pl:5894
+#: ../vdradmind.pl:5915
 msgid "System default"
 msgstr "Par défaut"
-
-#, fuzzy
-#~ msgid "Channels Setup"
-#~ msgstr "Chaînes"
 
 #~ msgid ""
 #~ "The number of minutes VDRAdmin-AM subtracts from the broadcasts start "
