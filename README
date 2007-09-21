@@ -1,1 +1,93 @@
-INSTALL
+This is the "VDRAdmin-AM" a web user interface for VDR.
+
+Written by:                  Andreas Mair (andreas AT vdr - developer DOT org)
+
+Project's homepage:          http://andreas.vdr-developer.org
+
+Latest version available at: http://andreas.vdr-developer.org
+
+
+License
+-------
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License along
+	with this program; if not, write to the Free Software Foundation, Inc.,
+	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+																						
+See the file COPYING for the full GNU GENERAL PUBLIC LICENSE Version 2 (GPLv2).
+
+Some parts (Crystal Theme Icons) are licensed under GNU LESSER GENERAL PUBLIC
+LICENSE v2.1 (LGPLv2.1), see LGPL.txt.
+
+
+Requirements
+------------
+
+- VDR (http://www.cadsoft.de/people/kls/vdr/)
+- Some Perl modules (see "./install.sh -p"):
+  - Required:
+	  - Template
+	  - Compress::Zlib
+	  - CGI
+	  - IO::Socket
+	  - Time::Local
+	  - MIME::Base64
+	  - File::Temp
+	  - URI::Escape
+    - Locale::gettext OR Locale::Messages
+	- Optional:
+	  - Required for AutoTimer email notification:
+	    - Net::SMTP
+	    - Authen::SASL
+	  - Required for AutoTimer email notification and CRAM-MD5 authentication:
+	    - Digest::HMAC_MD5
+
+
+Description
+-----------
+
+VDRAdmin-AM is a web based interface to VDR.
+
+
+Installation
+------------
+
+See "INSTALL" file.
+
+
+Options
+-------
+
+	-nf, --nofork
+		don't fork.
+
+	-c,  --config
+		run configuration dialog.
+
+	-d [dir], --cfgdir [dir]
+		use [dir] for configuration files.
+
+	-k, --kill
+		kill a forked vdradmind.pl.
+
+	-p [name], --pid [name]
+		name of pidfile to use.
+
+	-h, --help
+		print usage information.
+
+
+Credits
+-------
+
+See "CREDITS" file.

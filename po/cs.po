@@ -1,13 +1,13 @@
-# translation of cs.po to
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) Andreas Mair <mail@andreas.vdr-developer.org>
+# This file is distributed under the same license as the VDRAdmin-AM package.
 #
 # Karel Borkovec <her-ur@her-ur.org>, 2006.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-24 13:13+0200\n"
+"POT-Creation-Date: 2007-09-21 12:13+0200\n"
 "PO-Revision-Date: 2006-09-23 13:14+0200\n"
 "Last-Translator: Karel Borkovec <her-ur@her-ur.org>\n"
 "Language-Team:  <cs@li.org>\n"
@@ -39,7 +39,7 @@ msgstr ""
 #: ../template/default/help_timer_list.html:5
 #: ../template/default/help_timer_new.html:8
 #: ../template/default/help_no.html:5 ../template/default/help_config.html:8
-#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2995
+#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2993
 msgid "ISO-8859-1"
 msgstr "ISO-8859-2"
 
@@ -262,7 +262,7 @@ msgstr "Více informací"
 #: ../template/default/prog_list2.html:62
 #: ../template/default/navigation.html:38 ../template/default/prog_list.html:6
 #: ../template/default/prog_summary.html:56
-#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5857
+#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5839
 msgid "Channels"
 msgstr "Kanály"
 
@@ -415,7 +415,7 @@ msgstr "®ádný èasovaè není definován!"
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5857
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5839
 msgid "Recordings"
 msgstr "Nahrávky"
 
@@ -456,7 +456,7 @@ msgid ""
 "listing.</p>"
 msgstr ""
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3886
+#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3884
 msgid "Playing Today"
 msgstr "Bì¾í dnes"
 
@@ -475,8 +475,8 @@ msgstr "zaèíná v"
 #: ../template/default/timer_new.html:125
 #: ../template/default/timer_new.html:138
 #: ../template/default/prog_summary.html:41
-#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5203
-#: ../vdradmind.pl:5216
+#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5185
+#: ../vdradmind.pl:5198
 msgid "o'clock"
 msgstr "hodin"
 
@@ -522,8 +522,8 @@ msgstr "Více informací"
 #: ../template/default/prog_timeline.html:201
 #: ../template/default/prog_list.html:110
 #: ../template/default/prog_summary.html:142
-#: ../template/default/prog_summary2.html:129 ../vdradmind.pl:3624
-#: ../vdradmind.pl:3851 ../vdradmind.pl:5001 ../vdradmind.pl:5166
+#: ../template/default/prog_summary2.html:129 ../vdradmind.pl:3622
+#: ../vdradmind.pl:3849 ../vdradmind.pl:4983 ../vdradmind.pl:5148
 #, fuzzy
 msgid "No EPG information available"
 msgstr "®ádné informace"
@@ -723,18 +723,18 @@ msgstr "Vysíláno"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5857
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5839
 msgid "What's On Now?"
 msgstr "Co bì¾í nyní?"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5857
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5839
 msgid "Playing Today?"
 msgstr "Co pobì¾í dnes?"
 
 #: ../template/default/navigation.html:35
 #: ../template/default/prog_timeline.html:7
 #: ../template/default/config.html:158 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:80 ../vdradmind.pl:5857
+#: ../template/default/help_config.html:80 ../vdradmind.pl:5839
 msgid "Timeline"
 msgstr "Èasová pøímka"
 
@@ -777,7 +777,7 @@ msgid "Search"
 msgstr "hledat"
 
 #: ../template/default/prog_timeline.html:76
-#: ../template/default/prog_timeline.html:170 ../vdradmind.pl:5188
+#: ../template/default/prog_timeline.html:170 ../vdradmind.pl:5170
 msgid "now"
 msgstr "nyní"
 
@@ -1642,15 +1642,15 @@ msgid "Use as Search Timer:"
 msgstr "Hledat v:"
 
 #: ../template/default/epgsearch_new.html:432
-#: ../template/default/prog_detail.html:37 ../vdradmind.pl:2479
+#: ../template/default/prog_detail.html:37 ../vdradmind.pl:2477
 msgid "record"
 msgstr "nahrát"
 
-#: ../template/default/epgsearch_new.html:433 ../vdradmind.pl:2481
+#: ../template/default/epgsearch_new.html:433 ../vdradmind.pl:2479
 msgid "announce only"
 msgstr ""
 
-#: ../template/default/epgsearch_new.html:434 ../vdradmind.pl:2483
+#: ../template/default/epgsearch_new.html:434 ../vdradmind.pl:2481
 msgid "switch only"
 msgstr ""
 
@@ -1888,7 +1888,7 @@ msgid "Open in separate window"
 msgstr "Otevøi v samostatném oknì"
 
 #: ../template/default/prog_summary.html:41
-#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5203
+#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5185
 msgid "at"
 msgstr "v"
 
@@ -2543,126 +2543,126 @@ msgid ""
 "\"yes\"."
 msgstr ""
 
-#: ../vdradmind.pl:360
+#: ../vdradmind.pl:358
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Jaké je Va¹e VDR hostname?"
 
-#: ../vdradmind.pl:361
+#: ../vdradmind.pl:359
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Na jakém portu mám oèekávat SVDRP pøíkazy?"
 
-#: ../vdradmind.pl:362
+#: ../vdradmind.pl:360
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
 msgstr "Na jaké adrese má èekat VDRAdmin-AM (0.0.0.0 pro jakoukoli)?"
 
-#: ../vdradmind.pl:363
+#: ../vdradmind.pl:361
 msgid "On which port should VDRAdmin-AM listen?"
 msgstr "Na jakém portu má èekat VDRAdmin-AM?"
 
-#: ../vdradmind.pl:364
+#: ../vdradmind.pl:362
 msgid "Username?"
 msgstr "U¾iv. jméno?"
 
-#: ../vdradmind.pl:365
+#: ../vdradmind.pl:363
 msgid "Password?"
 msgstr "Heslo?"
 
-#: ../vdradmind.pl:366
+#: ../vdradmind.pl:364
 msgid "Where are your recordings stored?"
 msgstr "Kam ukládáte nahrávky z VDR?"
 
-#: ../vdradmind.pl:367
+#: ../vdradmind.pl:365
 msgid "Where are your VDR's configuration files located?"
 msgstr "Kde se nacházejí konfiguraèní soubory VDR?"
 
-#: ../vdradmind.pl:374
+#: ../vdradmind.pl:372
 msgid "Config file written successfully."
 msgstr "Konfiguraèní soubor ulo¾en v poøádku."
 
-#: ../vdradmind.pl:438
+#: ../vdradmind.pl:436
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s startuje s pidem %d."
 
-#: ../vdradmind.pl:520 ../vdradmind.pl:1275 ../vdradmind.pl:2983
+#: ../vdradmind.pl:518 ../vdradmind.pl:1273 ../vdradmind.pl:2981
 msgid "Not found"
 msgstr "Nefunguje"
 
-#: ../vdradmind.pl:520 ../vdradmind.pl:2984
+#: ../vdradmind.pl:518 ../vdradmind.pl:2982
 msgid "The requested URL was not found on this server!"
 msgstr "Po¾adovaná URL nebyla na tomto serveru nalezena!"
 
-#: ../vdradmind.pl:601 ../vdradmind.pl:1271 ../vdradmind.pl:2986
+#: ../vdradmind.pl:599 ../vdradmind.pl:1269 ../vdradmind.pl:2984
 msgid "Forbidden"
 msgstr "Zakázáno"
 
-#: ../vdradmind.pl:601 ../vdradmind.pl:2987
+#: ../vdradmind.pl:599 ../vdradmind.pl:2985
 msgid "You don't have permission to access this function!"
 msgstr "Nemáte práva pro vyu¾ití této funkce!"
 
-#: ../vdradmind.pl:799 ../vdradmind.pl:6124
+#: ../vdradmind.pl:797 ../vdradmind.pl:6106
 #, fuzzy
 msgid "All channels"
 msgstr "Kanály"
 
-#: ../vdradmind.pl:802 ../vdradmind.pl:6125
+#: ../vdradmind.pl:800 ../vdradmind.pl:6107
 #, fuzzy
 msgid "Selected channels"
 msgstr "Vybrat v¹e/Nic"
 
-#: ../vdradmind.pl:806 ../vdradmind.pl:6126
+#: ../vdradmind.pl:804 ../vdradmind.pl:6108
 #, fuzzy
 msgid "TV channels"
 msgstr "Kanály"
 
-#: ../vdradmind.pl:810 ../vdradmind.pl:6127
+#: ../vdradmind.pl:808 ../vdradmind.pl:6109
 #, fuzzy
 msgid "Radio channels"
 msgstr "Kanály"
 
-#: ../vdradmind.pl:1271 ../vdradmind.pl:2988
+#: ../vdradmind.pl:1269 ../vdradmind.pl:2986
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "Pøístup k souboru \"%s\" odmítnut!"
 
-#: ../vdradmind.pl:1275 ../vdradmind.pl:2985
+#: ../vdradmind.pl:1273 ../vdradmind.pl:2983
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "URL \"%s\" nebyla na tomto serveru nalezena!"
 
-#: ../vdradmind.pl:2136
+#: ../vdradmind.pl:2134
 msgid "Your favorites"
 msgstr ""
 
-#: ../vdradmind.pl:2136
+#: ../vdradmind.pl:2134
 #, fuzzy
 msgid "Search results"
 msgstr "Hledat v:"
 
-#: ../vdradmind.pl:2276
+#: ../vdradmind.pl:2274
 #, fuzzy
 msgid "Default"
 msgstr "Smazat"
 
-#: ../vdradmind.pl:2394
+#: ../vdradmind.pl:2392
 msgid "--- no timer ---"
 msgstr ""
 
-#: ../vdradmind.pl:2485
+#: ../vdradmind.pl:2483
 #, fuzzy
 msgid "unknown"
 msgstr "nyní"
 
-#: ../vdradmind.pl:2488
+#: ../vdradmind.pl:2486
 msgid "none"
 msgstr ""
 
-#: ../vdradmind.pl:2989
+#: ../vdradmind.pl:2987
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Nemohu otevøít soubor \"%s\"!"
 
-#: ../vdradmind.pl:2990
+#: ../vdradmind.pl:2988
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
@@ -2671,66 +2671,66 @@ msgstr ""
 "Nemohu se pøipojit k VDR v %s:%s<br /><br />Prosím zkontrolujte, zda VDR "
 "bì¾í a pokud je soubor soubor svdrphosts.conf øádnì nastaven."
 
-#: ../vdradmind.pl:2991
+#: ../vdradmind.pl:2989
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Chyba pøi posílání pøíkazu k VDR v %s"
 
-#: ../vdradmind.pl:3047
+#: ../vdradmind.pl:3045
 #, fuzzy
 msgid "Internal error:"
 msgstr "Interval:"
 
-#: ../vdradmind.pl:3205
+#: ../vdradmind.pl:3203
 msgid "Lookup movie in the Internet-Movie-Database (IMDb)"
 msgstr "Hledat film v Internetové filmové databázi (IMDb)"
 
-#: ../vdradmind.pl:3458
+#: ../vdradmind.pl:3456
 msgid "Can't find EPG entry!"
 msgstr "Nemohu nalézt EPG vstup!"
 
-#: ../vdradmind.pl:3886
+#: ../vdradmind.pl:3884
 msgid "Playing Tomorrow"
 msgstr "Co pobì¾í zítra?"
 
-#: ../vdradmind.pl:3886
+#: ../vdradmind.pl:3884
 #, perl-format
 msgid "Playing on the %s"
 msgstr "Pobì¾í v %s"
 
-#: ../vdradmind.pl:5193
+#: ../vdradmind.pl:5175
 msgid "next"
 msgstr "dal¹í"
 
-#: ../vdradmind.pl:5212
+#: ../vdradmind.pl:5194
 msgid "What's on after"
 msgstr "Co bì¾í pak"
 
-#: ../vdradmind.pl:5212
+#: ../vdradmind.pl:5194
 msgid "What's on at"
 msgstr "Co bì¾í v"
 
-#: ../vdradmind.pl:5215
+#: ../vdradmind.pl:5197
 msgid "Suitable matches for:"
 msgstr ""
 
-#: ../vdradmind.pl:5218
+#: ../vdradmind.pl:5200
 msgid "short view"
 msgstr "struèný pøehled"
 
-#: ../vdradmind.pl:5218
+#: ../vdradmind.pl:5200
 msgid "long view"
 msgstr "detailní pøehled"
 
-#: ../vdradmind.pl:5269
+#: ../vdradmind.pl:5251
 msgid "Schedule"
 msgstr "Plán"
 
-#: ../vdradmind.pl:5857
+#: ../vdradmind.pl:5839
 msgid "Timers"
 msgstr "Èasovaèe"
 
-#: ../vdradmind.pl:5915
+#: ../vdradmind.pl:5897
 msgid "System default"
 msgstr "Defaultní nastavení"
 

@@ -4,12 +4,20 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2007-09-21: 3.6.0
+- Added: missing license information.
+- Changed: prog_timeline uses global channels array instead of copying it locally.
+- Fixed: Bug in prog_timeline introduced in 3.6.0beta (Reported by several users).
+- Updated: Italian translation (Submitted by Gringo)
+- Updated: Spanish translation (Submitted by Rüdiger Jung).
+- Fixed: Channel range in epgsearch_new didn't work since 3.6.0beta (Reported by mblaster4711 @vdr-portal.de).
+
 2007-08-27: 3.6.0rc
 - Updated: French translation (Submitted by Trois Six).
 - Updated: Dutch translation (Submitted by Roel Koelewijn).
-- Updated: French translation (Submitted by Ville Skyttä & Rolf Ahrenberg).
+- Updated: Finnish translation (Submitted by Ville Skyttä & Rolf Ahrenberg).
 - Reworked: configuration part: selected channels work again and settings are only applied if "save" or "apply" is pressed in config menu.
-- Fixed: initialisation if CHANNEL_WANTED_<area> config options.
+- Fixed: initialisation of CHANNEL_WANTED_<area> config options.
 
 2007-08-17: 3.6.0beta
 - Added: export of channels in each channel group as m3u playlist in vdr_cmds.

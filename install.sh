@@ -134,7 +134,7 @@ function doInstall()
 	perlModules
 
 	makeDir $LIBDIR 1 && cp -r template lib $LIBDIR || exit 1
-  makeDir $DOCDIR && cp -r contrib COPYING CREDITS HISTORY INSTALL README* REQUIREMENTS FAQ $DOCDIR || exit 1
+  makeDir $DOCDIR && cp -r contrib COPYING CREDITS HISTORY INSTALL LGPL.txt README* REQUIREMENTS FAQ $DOCDIR || exit 1
 	makeDir $MANDIR && cp vdradmind.pl.1 $MANDIR || exit 1
 	makeDir $ETCDIR || exit 1
 

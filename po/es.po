@@ -1,24 +1,16 @@
+# Copyright (C) Andreas Mair <mail@andreas.vdr-developer.org>
+# This file is distributed under the same license as the VDRAdmin-AM package.
 #
-#    Translators, if you are not familiar with the PO format, gettext
-#    documentation is worth reading, especially sections dedicated to
-#    this format, e.g. by running:
-#         info -n '(gettext)PO Files'
-#         info -n '(gettext)Header Entry'
-#
-#    Some information specific to po-debconf are available at
-#            /usr/share/doc/po-debconf/README-trans
-#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
-#
-#    Developers do not need to manually edit POT or PO files.
+# rudiberto <r_jung@web.de>, 2007
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-AM-3.2\n"
+"Project-Id-Version: VDRAdmin-AM-3.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-24 13:13+0200\n"
-"PO-Revision-Date: 2007-01-26 20:05+0100\n"
-"Last-Translator: Rudibert <R_Jung@web.de>\n"
-"Language-Team: Rudi <LL.org>\n"
+"POT-Creation-Date: 2007-09-21 12:13+0200\n"
+"PO-Revision-Date: 2007-09-04 21:54+0100\n"
+"Last-Translator: rudiberto <r_jung@web.de>\n"
+"Language-Team: rudiberto <r_jung@web.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -50,7 +42,7 @@ msgstr ""
 #: ../template/default/help_timer_list.html:5
 #: ../template/default/help_timer_new.html:8
 #: ../template/default/help_no.html:5 ../template/default/help_config.html:8
-#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2995
+#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2993
 msgid "ISO-8859-1"
 msgstr "ISO-8859-1"
 
@@ -110,7 +102,7 @@ msgstr "De"
 #: ../template/default/timer_list.html:226
 #: ../template/default/at_timer_list.html:79
 msgid "Start"
-msgstr "Comienzo"
+msgstr "Inicio"
 
 #: ../template/default/epgsearch_list.html:101
 msgid "To"
@@ -261,7 +253,7 @@ msgstr "más información"
 #: ../template/default/prog_list2.html:62
 #: ../template/default/navigation.html:38 ../template/default/prog_list.html:6
 #: ../template/default/prog_summary.html:56
-#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5857
+#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5839
 msgid "Channels"
 msgstr "EPG por emisoras"
 
@@ -413,7 +405,7 @@ msgstr "No hay programaciones!"
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5857
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5839
 msgid "Recordings"
 msgstr "Grabaciones"
 
@@ -455,10 +447,10 @@ msgid ""
 msgstr ""
 "<p>Aquí se ve una lista de todas las grabaciones disponibles en el VDR. En "
 "la fila encabezada se puede ver el espacio total y libre del VDR.</p>\n"
-"<p>Esta lista contiene unas informaciones de las grabaciones. Se puede "
+"<p>Esta lista contiene algunas informaciones de las grabaciones. Se puede "
 "cambiar el orden de la lista haciendo clic en los títulos de las columnas. "
 "Encima se ve la ruta de navegar. Si quieres ver el contenido de una carpeta "
-"visitada anteriormente, se puede hacer clic en el nombre de la carpeta en "
+"visitado anteriormente, se puede hacer clic en el nombre de la carpeta en "
 "esa ruta.</p>\n"
 "<p>Cada fila contiene las informaciones siguientes:<dl>\n"
 "\n"
@@ -500,7 +492,7 @@ msgstr ""
 "\"submit\" value=\"Ejecutar\"/>.</p>/n<p>Así se restaurará la lista de "
 "grabaciones de VDR</p>"
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3886
+#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3884
 msgid "Playing Today"
 msgstr "Estrenos hoy"
 
@@ -519,8 +511,8 @@ msgstr "empezando a la/s"
 #: ../template/default/timer_new.html:125
 #: ../template/default/timer_new.html:138
 #: ../template/default/prog_summary.html:41
-#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5203
-#: ../vdradmind.pl:5216
+#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5185
+#: ../vdradmind.pl:5198
 msgid "o'clock"
 msgstr "h."
 
@@ -529,7 +521,6 @@ msgstr "h."
 #: ../template/default/prog_list.html:31
 #: ../template/default/prog_summary.html:24
 #: ../template/default/prog_summary2.html:24
-#, fuzzy
 msgid "Channel group:"
 msgstr "Grupo de emisoras:"
 
@@ -565,8 +556,8 @@ msgstr "No hay información"
 #: ../template/default/prog_timeline.html:201
 #: ../template/default/prog_list.html:110
 #: ../template/default/prog_summary.html:142
-#: ../template/default/prog_summary2.html:129 ../vdradmind.pl:3624
-#: ../vdradmind.pl:3851 ../vdradmind.pl:5001 ../vdradmind.pl:5166
+#: ../template/default/prog_summary2.html:129 ../vdradmind.pl:3622
+#: ../vdradmind.pl:3849 ../vdradmind.pl:4983 ../vdradmind.pl:5148
 msgid "No EPG information available"
 msgstr "No hay información de la EPG"
 
@@ -765,18 +756,18 @@ msgstr "Difundido"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5857
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5839
 msgid "What's On Now?"
 msgstr "Estrenos ahora"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5857
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5839
 msgid "Playing Today?"
 msgstr "¿Estrenos hoy?"
 
 #: ../template/default/navigation.html:35
 #: ../template/default/prog_timeline.html:7
 #: ../template/default/config.html:158 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:80 ../vdradmind.pl:5857
+#: ../template/default/help_config.html:80 ../vdradmind.pl:5839
 msgid "Timeline"
 msgstr "Tabla de tiempo"
 
@@ -817,7 +808,7 @@ msgid "Search"
 msgstr "Buscar"
 
 #: ../template/default/prog_timeline.html:76
-#: ../template/default/prog_timeline.html:170 ../vdradmind.pl:5188
+#: ../template/default/prog_timeline.html:170 ../vdradmind.pl:5170
 msgid "now"
 msgstr "ahora"
 
@@ -876,13 +867,13 @@ msgid ""
 "\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and "
 "check for matching AutoTimers.</p>"
 msgstr ""
-"<p>Aqui se encuentra una lista de todos las autoprogramaciones conocidas por "
+"<p>Aqui se encuentra una lista de todas las autoprogramaciones conocidas por "
 "VDRAdmin-AM.</p>\n"
 "<p>La lista contiene informaciones de las autoprogramaciones. Se puede "
 "cambiar el orden de la lista haciendo clic en los títulos de las columnas.</"
 "p>\n"
 "\n"
-"<p>Para cada autoprogramación hay las opciones siguientes:<dl>\n"
+"<p>Para cada autoprogramación hay las siguientes opciones:<dl>\n"
 "<dt>Cambiar estado</dt>\n"
 "<dd>Haciendo clic en \"Sí\" o \"No\" en la columna \"Activada\" se puede "
 "activar y desactivar.</dd>\n"
@@ -909,7 +900,7 @@ msgstr ""
 "<p>Además se puede añadir otra autoprogramación más, haciendo clic en <input "
 "type=\"submit\" class=\"submit\" value=\"Añadir autoprogramación\"/> al "
 "tope. Más abajo se encuentra el botón <input type=\"submit\" class=\"submit"
-"\" value=\"Borrar autoprogramaciones elegidas\"/>, cuál es posible borrar "
+"\" value=\"Borrar autoprogramaciones elegidas\"/>, cuál hace posible borrar "
 "las autoprogramaciones marcadas en la lista por lotes.</p>\n"
 "<p>Con el botón <input type=\"submit\" class=\"submit\" value=\"Actualizar "
 "ahora\"/> arrancarás una búsqueda inmediatamente en los datos actuales de la "
@@ -924,80 +915,76 @@ msgstr "Modificar programación"
 
 #: ../template/default/help_edit_epg.html:20
 #: ../template/default/prog_detail_form.html:19
-#, fuzzy
 msgid "Edit EPG"
-msgstr "Modificar"
+msgstr "Modificar EPG"
 
 #: ../template/default/help_edit_epg.html:24
-#, fuzzy
 msgid ""
 "<p>Here you can edit the descriptive fields of an existing EPG entry.</p>"
-msgstr "<p>Aquí se puede modificar ajustes de las programaciones.</p>"
+msgstr ""
+"<p>Aquí se puede modificar la descripción de una entrada EPG existente.</p>"
 
 #: ../template/default/help_edit_epg.html:26
-#, fuzzy
 msgid "Channel (readonly)"
-msgstr "Grupo de emisoras:"
+msgstr "Emisora (solo lectura)"
 
 #: ../template/default/help_edit_epg.html:27
 msgid "This is the channel of the EPG entry. It cannot be changed."
-msgstr ""
+msgstr "Eso es el canal de la entrada del EPG. No se puede cambiar!"
 
 #: ../template/default/help_edit_epg.html:28
-#, fuzzy
 msgid "Time (readonly)"
-msgstr "solo leible"
+msgstr "Horas (solo lectura)"
 
 #: ../template/default/help_edit_epg.html:29
 msgid "This is the start and end time of the entry. It cannot be changed."
-msgstr ""
+msgstr "Eso es la hora de inicio y final de la entrada.  No se puede cambiar!"
 
 #: ../template/default/help_edit_epg.html:31
 msgid ""
 "Change this string to give this EPG Entry a new title. It must consist of "
 "only one line of text."
-msgstr ""
+msgstr "El nuevo título de solo una fila de la entrada de la EPG."
 
 #: ../template/default/help_edit_epg.html:33
 msgid ""
 "Change this string to give this EPG Entry a new subtitle. It must consist of "
 "only one line of text."
-msgstr ""
+msgstr "El nuevo subtítulo monolineal de la entrada de la EPG."
 
 #: ../template/default/help_edit_epg.html:35
 msgid ""
 "Change the text in this field to edit the description of this entry. The "
 "text can consist of one or more lines."
-msgstr ""
+msgstr "Aqui se puede manipular la descripción del EPG. (multifila posible)"
 
 #: ../template/default/help_edit_epg.html:36
-#, fuzzy
 msgid "VPS (readonly)"
-msgstr "solo leible"
+msgstr "VPS (solo lectura)"
 
 #: ../template/default/help_edit_epg.html:37
 msgid ""
 "If available this field shows the vps time of the EPG entry. It cannot be "
 "changed."
 msgstr ""
+"Si disponible, muestra la hora VPS de la entrada de EPG. No se puede "
+"modificar."
 
 #: ../template/default/help_edit_epg.html:38
-#, fuzzy
 msgid "Video tracks (readonly)"
-msgstr "Pista de video:"
+msgstr "Pistas de video (solo lectura)"
 
 #: ../template/default/help_edit_epg.html:39
 msgid "If available this field shows the video track(s). It cannot be changed."
-msgstr ""
+msgstr "Si disponible, muestra las pistas de video. No se puede modificar."
 
 #: ../template/default/help_edit_epg.html:40
-#, fuzzy
 msgid "Audio tracks (readonly)"
-msgstr "Pista de audio:"
+msgstr "Pistas de audio (solo lectura)"
 
 #: ../template/default/help_edit_epg.html:41
 msgid "If available this field shows the audio track(s). It cannot be changed."
-msgstr ""
+msgstr "Si disponible, muestra las pistas de audio. No se puede modificar."
 
 #: ../template/default/help_at_timer_new.html:27
 msgid ""
@@ -1058,9 +1045,9 @@ msgstr ""
 "Es muy recomendable, utilizar solo carácteres normales o cifras como palabra "
 "clave, por que los carácteres especiales no son muy comun en la EPG.<br />\n"
 "Para expertos hay la posibilidad de usar \"regular expressions\". Para esta "
-"funcción no documentada, tienes que investigar el codigo fuente del VDRAdmin-"
+"función no documentada, tienes que investigar el codigo fuente del VDRAdmin-"
 "AM.<br />\n"
-"<br />Otra opción es, excluir un estreno, que normalmente cumlpiria los "
+"<br />Otra opción es, excluir un estreno, que normalmente cumpliría los "
 "valores de búsqueda, agregando su título al fichero <i>vdradmind.bl</i>. "
 "Cada estreno se pone en una fila. Este archivo tiene que estar en la carpeta "
 "de configuración del VDRAdmin-AM. Sí una fila coincide con <u>título</u> o "
@@ -1099,7 +1086,7 @@ msgid ""
 "A broadcast must start after the time entered here to match. The first text "
 "field is for \"hour\", the second for \"minute\"."
 msgstr ""
-"Un estreno tiene que empezar después de la hora esablecida aquí. El primer "
+"Un estreno tiene que empezar después de la hora establecida aquí. El primer "
 "campo es para \"hora\", el segundo para \"minutos\"."
 
 #: ../template/default/help_at_timer_new.html:43
@@ -1107,7 +1094,7 @@ msgid ""
 "A broadcast must end before the time entered here to match. The first text "
 "field is for \"hour\", the second for \"minute\"."
 msgstr ""
-"Un estreno tiene que finalizar antes de la hora esablecida aquí. El primer "
+"Un estreno tiene que finalizar antes de la hora establecida aquí. El primer "
 "campo es para \"hora\", el segundo para \"minutos\"."
 
 #: ../template/default/help_at_timer_new.html:45
@@ -1273,22 +1260,20 @@ msgid "Time"
 msgstr "hora"
 
 #: ../template/default/prog_detail_form.html:67
-#, fuzzy
 msgid "Video tracks"
-msgstr "Pista de video:"
+msgstr "Pistas de video:"
 
 #: ../template/default/prog_detail_form.html:74
-#, fuzzy
 msgid "Audio tracks"
-msgstr "Pista de audio:"
+msgstr "Pistas de audio:"
 
 #: ../template/default/vdr_cmds.html:6 ../template/default/vdr_cmds.html:17
 msgid "VDR Commands"
-msgstr "Órdenes del VDR:"
+msgstr "Comandos del VDR:"
 
 #: ../template/default/vdr_cmds.html:29
 msgid "Export channels as playlist:"
-msgstr ""
+msgstr "Exportar los canales como lista de"
 
 #: ../template/default/vdr_cmds.html:37
 msgid "Number of lines to show:"
@@ -1519,22 +1504,20 @@ msgstr "Ancho de banda del flujo:"
 
 #: ../template/default/config.html:345 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:164
-#, fuzzy
 msgid "External Search"
-msgstr "Editar búsqueda"
+msgstr "Búsqueda external"
 
 #: ../template/default/config.html:354 ../template/default/config.html:368
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: ../template/default/config.html:357 ../template/default/config.html:371
-#, fuzzy
 msgid "Title:"
-msgstr "Título"
+msgstr "Título:"
 
 #: ../template/default/config.html:362
 msgid "User-defined search:"
-msgstr ""
+msgstr "Búsqueda personalizada:"
 
 #: ../template/default/config.html:379 ../template/default/help_config.html:30
 #: ../template/default/help_config.html:178
@@ -1544,12 +1527,12 @@ msgstr "Experto"
 #: ../template/default/config.html:382
 #: ../template/default/help_config.html:181
 msgid "Update EPG data in background:"
-msgstr ""
+msgstr "Actualizar datos EPG en segundo plano"
 
 #: ../template/default/config.html:389
 #: ../template/default/help_config.html:183
 msgid "Update EPG every:"
-msgstr ""
+msgstr "Actualizar datos EPG cada:"
 
 #: ../template/default/config.html:394
 #: ../template/default/help_config.html:186
@@ -1575,7 +1558,7 @@ msgstr "Emisoras preferidas"
 #: ../template/default/config.html:419
 #: ../template/default/help_config.html:202
 msgid "Show channels without EPG information:"
-msgstr ""
+msgstr "Mostrar emisoras sin información EPG:"
 
 #: ../template/default/config.html:427
 msgid "In \"Timeline\"?"
@@ -1761,15 +1744,15 @@ msgid "Use as Search Timer:"
 msgstr "Utiliza como programación de búsqueda:"
 
 #: ../template/default/epgsearch_new.html:432
-#: ../template/default/prog_detail.html:37 ../vdradmind.pl:2479
+#: ../template/default/prog_detail.html:37 ../vdradmind.pl:2477
 msgid "record"
 msgstr "grabar"
 
-#: ../template/default/epgsearch_new.html:433 ../vdradmind.pl:2481
+#: ../template/default/epgsearch_new.html:433 ../vdradmind.pl:2479
 msgid "announce only"
 msgstr "solo avisar"
 
-#: ../template/default/epgsearch_new.html:434 ../vdradmind.pl:2483
+#: ../template/default/epgsearch_new.html:434 ../vdradmind.pl:2481
 msgid "switch only"
 msgstr "solo cambiar"
 
@@ -2002,7 +1985,7 @@ msgid "Open in separate window"
 msgstr "Abrir en una ventana separada"
 
 #: ../template/default/prog_summary.html:41
-#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5203
+#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5185
 msgid "at"
 msgstr " a la/s:"
 
@@ -2063,9 +2046,8 @@ msgid "Italian:"
 msgstr "Italiano:"
 
 #: ../template/default/about.html:73
-#, fuzzy
 msgid "Information"
-msgstr "Informaciones"
+msgstr "Información"
 
 #: ../template/default/about.html:76
 msgid "VDRAdmin-AM version:"
@@ -2169,7 +2151,6 @@ msgid "search"
 msgstr "repeticiones"
 
 #: ../template/default/prog_detail.html:44
-#, fuzzy
 msgid "edit"
 msgstr "Modificar"
 
@@ -2689,10 +2670,13 @@ msgid ""
 "has to be located. %TITLE% will be substituted by the broadcast's EPG title."
 "</p>"
 msgstr ""
+"<p>Aqui se puede definir 2 búsquedas externas que seran accesibles en las "
+"vistas de EPG. Solo hay que encontrar la URL necesario y el lugar del "
+"sistema de búsqueda. %TITLE% se va a sustituir con el título del EPG.</p>"
 
 #: ../template/default/help_config.html:166
 msgid "Some examples:"
-msgstr ""
+msgstr "Unos ejemplos:"
 
 #: ../template/default/help_config.html:179
 msgid ""
@@ -2708,15 +2692,18 @@ msgid ""
 "Else the EPG will be refreshed if the user accesses any EPG view at the web "
 "interface and the timeout set at \"Update EPG every\" has been reached."
 msgstr ""
+"Si esta activado con \"sí\"  VDRAdmin-AM actualizará periodicamente su datos "
+"EPG local en segundo plano. En el otro caso solo se actualiza, cuando el "
+"usuario abre la vista de EPG en la pantilla del VDRAdmin y el periodo "
+"ajustado en \"Actualizar EPG cada\"  se ha caducado."
 
 #: ../template/default/help_config.html:184
-#, fuzzy
 msgid ""
 "The interval, the EPG data is refreshed from VDR and AutoTimer updates are "
 "performed (if AutoTimer feature is used)."
 msgstr ""
 "El intervalo de búsqueda que va a realizar VDRAdmin-AM para actualizar las "
-"autoprogramaciones."
+"autoprogramaciones (en caso de usar el autoprogramador)"
 
 #: ../template/default/help_config.html:187
 msgid ""
@@ -2774,124 +2761,122 @@ msgid ""
 "views. If you don't want them to be hidden you have to set this option to "
 "\"yes\"."
 msgstr ""
+"Normalmente no se ve las emisoras sin información EPG. Si se pone esta "
+"opción a \"si\" se muestra sin embargo."
 
-#: ../vdradmind.pl:360
+#: ../vdradmind.pl:358
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "¿Cuál es el nombre del sitio del VDR (p.e. video.intra.net)?"
 
-#: ../vdradmind.pl:361
+#: ../vdradmind.pl:359
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "¿Cuál puerto esta vigilando VDR para requeridas de SVDRP?"
 
-#: ../vdradmind.pl:362
+#: ../vdradmind.pl:360
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
 msgstr "¿En qué dirección debe VDRAdmin-AM escuchar (0.0.0.0 para todas)?"
 
-#: ../vdradmind.pl:363
+#: ../vdradmind.pl:361
 msgid "On which port should VDRAdmin-AM listen?"
 msgstr "¿Qué puerto debe VDRAdmin-AM esperar órdenes?"
 
-#: ../vdradmind.pl:364
+#: ../vdradmind.pl:362
 msgid "Username?"
 msgstr "¿Nombre del usuario?"
 
-#: ../vdradmind.pl:365
+#: ../vdradmind.pl:363
 msgid "Password?"
 msgstr "¿Contraseña?"
 
-#: ../vdradmind.pl:366
+#: ../vdradmind.pl:364
 msgid "Where are your recordings stored?"
 msgstr "Introduce la ruta de las grabaciones:"
 
-#: ../vdradmind.pl:367
+#: ../vdradmind.pl:365
 msgid "Where are your VDR's configuration files located?"
 msgstr "Introduce la ruta de los archivos de configuración:"
 
-#: ../vdradmind.pl:374
+#: ../vdradmind.pl:372
 msgid "Config file written successfully."
 msgstr "¡Los archivos de configuración creados!"
 
-#: ../vdradmind.pl:438
+#: ../vdradmind.pl:436
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s se ha iniciado con pid %d."
 
-#: ../vdradmind.pl:520 ../vdradmind.pl:1275 ../vdradmind.pl:2983
+#: ../vdradmind.pl:518 ../vdradmind.pl:1273 ../vdradmind.pl:2981
 msgid "Not found"
 msgstr "No encontrado"
 
-#: ../vdradmind.pl:520 ../vdradmind.pl:2984
+#: ../vdradmind.pl:518 ../vdradmind.pl:2982
 msgid "The requested URL was not found on this server!"
 msgstr "¡No encontrado la URL requerida, en el servidor!"
 
-#: ../vdradmind.pl:601 ../vdradmind.pl:1271 ../vdradmind.pl:2986
+#: ../vdradmind.pl:599 ../vdradmind.pl:1269 ../vdradmind.pl:2984
 msgid "Forbidden"
 msgstr "Prohibido"
 
-#: ../vdradmind.pl:601 ../vdradmind.pl:2987
+#: ../vdradmind.pl:599 ../vdradmind.pl:2985
 msgid "You don't have permission to access this function!"
 msgstr "¡No tienes permiso para ésta funcción!"
 
-#: ../vdradmind.pl:799 ../vdradmind.pl:6124
-#, fuzzy
+#: ../vdradmind.pl:797 ../vdradmind.pl:6106
 msgid "All channels"
-msgstr "EPG por emisoras"
+msgstr "Todas las emisoras"
 
-#: ../vdradmind.pl:802 ../vdradmind.pl:6125
-#, fuzzy
+#: ../vdradmind.pl:800 ../vdradmind.pl:6107
 msgid "Selected channels"
-msgstr "Seleccionar todas/ninguna"
+msgstr "Emisoras seleccionadas"
 
-#: ../vdradmind.pl:806 ../vdradmind.pl:6126
-#, fuzzy
+#: ../vdradmind.pl:804 ../vdradmind.pl:6108
 msgid "TV channels"
-msgstr "EPG por emisoras"
+msgstr "Emisoras de TV"
 
-#: ../vdradmind.pl:810 ../vdradmind.pl:6127
-#, fuzzy
+#: ../vdradmind.pl:808 ../vdradmind.pl:6109
 msgid "Radio channels"
-msgstr "EPG por emisoras"
+msgstr "Emisoras de Radio"
 
-#: ../vdradmind.pl:1271 ../vdradmind.pl:2988
+#: ../vdradmind.pl:1269 ../vdradmind.pl:2986
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "¡Acceso al archivo \"%s\" negado!"
 
-#: ../vdradmind.pl:1275 ../vdradmind.pl:2985
+#: ../vdradmind.pl:1273 ../vdradmind.pl:2983
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "¡No encontrado la URL %s  en el servidor!"
 
-#: ../vdradmind.pl:2136
+#: ../vdradmind.pl:2134
 msgid "Your favorites"
 msgstr "Tús favoritos"
 
-#: ../vdradmind.pl:2136
+#: ../vdradmind.pl:2134
 msgid "Search results"
 msgstr "Resultados de búsqueda"
 
-#: ../vdradmind.pl:2276
+#: ../vdradmind.pl:2274
 msgid "Default"
 msgstr "Por defecto"
 
-#: ../vdradmind.pl:2394
+#: ../vdradmind.pl:2392
 msgid "--- no timer ---"
 msgstr "--- sin programación ---"
 
-#: ../vdradmind.pl:2485
+#: ../vdradmind.pl:2483
 msgid "unknown"
 msgstr "desconocido"
 
-#: ../vdradmind.pl:2488
+#: ../vdradmind.pl:2486
 msgid "none"
 msgstr "nada"
 
-#: ../vdradmind.pl:2989
+#: ../vdradmind.pl:2987
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "¡No se pudo abrir el archivo  \"%s\" !"
 
-#: ../vdradmind.pl:2990
+#: ../vdradmind.pl:2988
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
@@ -2900,65 +2885,65 @@ msgstr ""
 "No se puede conectar a VDR a  %s:%s<br /><br />Compruebe si VDR está en "
 "marcha y su svdrhosts.conf bien configurado."
 
-#: ../vdradmind.pl:2991
+#: ../vdradmind.pl:2989
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Error mientras mandó el orden a %s "
 
-#: ../vdradmind.pl:3047
+#: ../vdradmind.pl:3045
 msgid "Internal error:"
 msgstr "Error interno:"
 
-#: ../vdradmind.pl:3205
+#: ../vdradmind.pl:3203
 msgid "Lookup movie in the Internet-Movie-Database (IMDb)"
 msgstr "Buscar la película en la base de datos de películas en Internet (IMDb)"
 
-#: ../vdradmind.pl:3458
+#: ../vdradmind.pl:3456
 msgid "Can't find EPG entry!"
 msgstr "No se encuentra el registro en la EPG!"
 
-#: ../vdradmind.pl:3886
+#: ../vdradmind.pl:3884
 msgid "Playing Tomorrow"
 msgstr "Estrenos mañana"
 
-#: ../vdradmind.pl:3886
+#: ../vdradmind.pl:3884
 #, perl-format
 msgid "Playing on the %s"
 msgstr "Estrenos en %s"
 
-#: ../vdradmind.pl:5193
+#: ../vdradmind.pl:5175
 msgid "next"
 msgstr "próximo"
 
-#: ../vdradmind.pl:5212
+#: ../vdradmind.pl:5194
 msgid "What's on after"
 msgstr "Se puede ver después:"
 
-#: ../vdradmind.pl:5212
+#: ../vdradmind.pl:5194
 msgid "What's on at"
 msgstr "Se puede ver a la/s:"
 
-#: ../vdradmind.pl:5215
+#: ../vdradmind.pl:5197
 msgid "Suitable matches for:"
 msgstr "Emparejamientos convenientes para:"
 
-#: ../vdradmind.pl:5218
+#: ../vdradmind.pl:5200
 msgid "short view"
 msgstr "Vista rapida"
 
-#: ../vdradmind.pl:5218
+#: ../vdradmind.pl:5200
 msgid "long view"
 msgstr "Vista detallada"
 
-#: ../vdradmind.pl:5269
+#: ../vdradmind.pl:5251
 msgid "Schedule"
 msgstr "Vista general"
 
-#: ../vdradmind.pl:5857
+#: ../vdradmind.pl:5839
 msgid "Timers"
 msgstr "Programaciones"
 
-#: ../vdradmind.pl:5915
+#: ../vdradmind.pl:5897
 msgid "System default"
 msgstr "Defecto del sistema"
 

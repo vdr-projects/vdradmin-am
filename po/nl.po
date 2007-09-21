@@ -1,14 +1,14 @@
-# translation of nl.po to
-# This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Copyright (C) Andreas Mair <mail@andreas.vdr-developer.org>
+# This file is distributed under the same license as the VDRAdmin-AM package.
 #
 # Roel <rl.koelewijn@home.nl>, 2005, 2006, 2007.
 # Roel Koelewijn <roel.koelewijn@gmail.com>, 2007.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: nl\n"
+"Project-Id-Version: VDRAdmin-AM-3.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-24 13:13+0200\n"
+"POT-Creation-Date: 2007-09-21 12:13+0200\n"
 "PO-Revision-Date: 2007-08-23 20:28+0200\n"
 "Last-Translator: Roel Koelewijn <roel.koelewijn@gmail.com>\n"
 "Language-Team:  <nl@li.org>\n"
@@ -40,7 +40,7 @@ msgstr ""
 #: ../template/default/help_timer_list.html:5
 #: ../template/default/help_timer_new.html:8
 #: ../template/default/help_no.html:5 ../template/default/help_config.html:8
-#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2995
+#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2993
 msgid "ISO-8859-1"
 msgstr "ISO-8859-1"
 
@@ -251,7 +251,7 @@ msgstr "Meer informatie"
 #: ../template/default/prog_list2.html:62
 #: ../template/default/navigation.html:38 ../template/default/prog_list.html:6
 #: ../template/default/prog_summary.html:56
-#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5857
+#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5839
 msgid "Channels"
 msgstr "Kanalen"
 
@@ -403,7 +403,7 @@ msgstr "Geen timers opgegeven!"
 #: ../template/default/help_rec_list.html:6
 #: ../template/default/help_rec_list.html:17
 #: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5857
+#: ../template/default/rec_list.html:17 ../vdradmind.pl:5839
 msgid "Recordings"
 msgstr "Opnames"
 
@@ -476,7 +476,7 @@ msgstr ""
 "\"ref_label\">Commando's:</span> en te klikken op <input type=\"submit\" "
 "class=\"submit\" value=\"Run\"/> knop.</p>"
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3886
+#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3884
 msgid "Playing Today"
 msgstr "Programma vandaag "
 
@@ -495,8 +495,8 @@ msgstr "start om"
 #: ../template/default/timer_new.html:125
 #: ../template/default/timer_new.html:138
 #: ../template/default/prog_summary.html:41
-#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5203
-#: ../vdradmind.pl:5216
+#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5185
+#: ../vdradmind.pl:5198
 msgid "o'clock"
 msgstr "Uur"
 
@@ -540,8 +540,8 @@ msgstr "Geen informatie"
 #: ../template/default/prog_timeline.html:201
 #: ../template/default/prog_list.html:110
 #: ../template/default/prog_summary.html:142
-#: ../template/default/prog_summary2.html:129 ../vdradmind.pl:3624
-#: ../vdradmind.pl:3851 ../vdradmind.pl:5001 ../vdradmind.pl:5166
+#: ../template/default/prog_summary2.html:129 ../vdradmind.pl:3622
+#: ../vdradmind.pl:3849 ../vdradmind.pl:4983 ../vdradmind.pl:5148
 msgid "No EPG information available"
 msgstr "Geen informatie EPG informatie beschikbaar"
 
@@ -740,18 +740,18 @@ msgstr "Uitgezonden"
 
 #: ../template/default/navigation.html:29
 #: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5857
+#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5839
 msgid "What's On Now?"
 msgstr "Wat is er nu op?"
 
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5857
+#: ../template/default/navigation.html:32 ../vdradmind.pl:5839
 msgid "Playing Today?"
 msgstr "Speelt vandaag?"
 
 #: ../template/default/navigation.html:35
 #: ../template/default/prog_timeline.html:7
 #: ../template/default/config.html:158 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:80 ../vdradmind.pl:5857
+#: ../template/default/help_config.html:80 ../vdradmind.pl:5839
 msgid "Timeline"
 msgstr "Tijdlijn"
 
@@ -792,7 +792,7 @@ msgid "Search"
 msgstr "Zoeken"
 
 #: ../template/default/prog_timeline.html:76
-#: ../template/default/prog_timeline.html:170 ../vdradmind.pl:5188
+#: ../template/default/prog_timeline.html:170 ../vdradmind.pl:5170
 msgid "now"
 msgstr "nu"
 
@@ -1718,15 +1718,15 @@ msgid "Use as Search Timer:"
 msgstr "Gebruik als zoek timer:"
 
 #: ../template/default/epgsearch_new.html:432
-#: ../template/default/prog_detail.html:37 ../vdradmind.pl:2479
+#: ../template/default/prog_detail.html:37 ../vdradmind.pl:2477
 msgid "record"
 msgstr "opnemen"
 
-#: ../template/default/epgsearch_new.html:433 ../vdradmind.pl:2481
+#: ../template/default/epgsearch_new.html:433 ../vdradmind.pl:2479
 msgid "announce only"
 msgstr "alleen bekendmaken"
 
-#: ../template/default/epgsearch_new.html:434 ../vdradmind.pl:2483
+#: ../template/default/epgsearch_new.html:434 ../vdradmind.pl:2481
 msgid "switch only"
 msgstr "alleen wisselen"
 
@@ -1958,7 +1958,7 @@ msgid "Open in separate window"
 msgstr "In apart venster openen"
 
 #: ../template/default/prog_summary.html:41
-#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5203
+#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5185
 msgid "at"
 msgstr "om"
 
@@ -2722,119 +2722,119 @@ msgstr ""
 "Normaal gesproken worden kanalen verborgen die geen EPG informatie hebben. "
 "Als u deze niet verborgen wilt hebben moet u deze optie op \"ja\" zetten."
 
-#: ../vdradmind.pl:360
+#: ../vdradmind.pl:358
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Wat de de hostnaam van de VDR (b.v. video.intra.net)?"
 
-#: ../vdradmind.pl:361
+#: ../vdradmind.pl:359
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Op welke poort luister VDR naar SVDRP verzoeken?"
 
-#: ../vdradmind.pl:362
+#: ../vdradmind.pl:360
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
 msgstr "Naar welk adres moet VDRAdmin-AM luisteren (0.0.0.0 voor alles)?"
 
-#: ../vdradmind.pl:363
+#: ../vdradmind.pl:361
 msgid "On which port should VDRAdmin-AM listen?"
 msgstr "Naar welke poort moet VDRAdmin-AM luisteren?"
 
-#: ../vdradmind.pl:364
+#: ../vdradmind.pl:362
 msgid "Username?"
 msgstr "Gebruikersnaam?"
 
-#: ../vdradmind.pl:365
+#: ../vdradmind.pl:363
 msgid "Password?"
 msgstr "Wachtwoord?"
 
-#: ../vdradmind.pl:366
+#: ../vdradmind.pl:364
 msgid "Where are your recordings stored?"
 msgstr "Waar worden uw opnames opgeslagen?"
 
-#: ../vdradmind.pl:367
+#: ../vdradmind.pl:365
 msgid "Where are your VDR's configuration files located?"
 msgstr "Waar bevinden zicht de VDR's configuratie bestanden?"
 
-#: ../vdradmind.pl:374
+#: ../vdradmind.pl:372
 msgid "Config file written successfully."
 msgstr "Configuratie bestanden succesvol weggeschreven."
 
-#: ../vdradmind.pl:438
+#: ../vdradmind.pl:436
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s gestart met pid %d."
 
-#: ../vdradmind.pl:520 ../vdradmind.pl:1275 ../vdradmind.pl:2983
+#: ../vdradmind.pl:518 ../vdradmind.pl:1273 ../vdradmind.pl:2981
 msgid "Not found"
 msgstr "Niet gevonden"
 
-#: ../vdradmind.pl:520 ../vdradmind.pl:2984
+#: ../vdradmind.pl:518 ../vdradmind.pl:2982
 msgid "The requested URL was not found on this server!"
 msgstr "De gevraagde URl is niet gevonden op deze server!"
 
-#: ../vdradmind.pl:601 ../vdradmind.pl:1271 ../vdradmind.pl:2986
+#: ../vdradmind.pl:599 ../vdradmind.pl:1269 ../vdradmind.pl:2984
 msgid "Forbidden"
 msgstr "Niet toegestaan"
 
-#: ../vdradmind.pl:601 ../vdradmind.pl:2987
+#: ../vdradmind.pl:599 ../vdradmind.pl:2985
 msgid "You don't have permission to access this function!"
 msgstr "U heeft geen toestemming om deze functie te gebruiken!"
 
-#: ../vdradmind.pl:799 ../vdradmind.pl:6124
+#: ../vdradmind.pl:797 ../vdradmind.pl:6106
 msgid "All channels"
 msgstr "alle kanalen"
 
-#: ../vdradmind.pl:802 ../vdradmind.pl:6125
+#: ../vdradmind.pl:800 ../vdradmind.pl:6107
 msgid "Selected channels"
 msgstr "Geselecteerde kanalen"
 
-#: ../vdradmind.pl:806 ../vdradmind.pl:6126
+#: ../vdradmind.pl:804 ../vdradmind.pl:6108
 msgid "TV channels"
 msgstr "TV kanalen"
 
-#: ../vdradmind.pl:810 ../vdradmind.pl:6127
+#: ../vdradmind.pl:808 ../vdradmind.pl:6109
 msgid "Radio channels"
 msgstr "Radio kanalen"
 
-#: ../vdradmind.pl:1271 ../vdradmind.pl:2988
+#: ../vdradmind.pl:1269 ../vdradmind.pl:2986
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "Toegang tot bestand \"%s\" geweigerd!"
 
-#: ../vdradmind.pl:1275 ../vdradmind.pl:2985
+#: ../vdradmind.pl:1273 ../vdradmind.pl:2983
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "De  URl  \"%s\" is niet gevonden op deze server!"
 
-#: ../vdradmind.pl:2136
+#: ../vdradmind.pl:2134
 msgid "Your favorites"
 msgstr "Uw favoriten"
 
-#: ../vdradmind.pl:2136
+#: ../vdradmind.pl:2134
 msgid "Search results"
 msgstr "Zoek resultaten"
 
-#: ../vdradmind.pl:2276
+#: ../vdradmind.pl:2274
 msgid "Default"
 msgstr "Standaard"
 
-#: ../vdradmind.pl:2394
+#: ../vdradmind.pl:2392
 msgid "--- no timer ---"
 msgstr "--- geen timer ---"
 
-#: ../vdradmind.pl:2485
+#: ../vdradmind.pl:2483
 msgid "unknown"
 msgstr "onbekend"
 
-#: ../vdradmind.pl:2488
+#: ../vdradmind.pl:2486
 msgid "none"
 msgstr "geen"
 
-#: ../vdradmind.pl:2989
+#: ../vdradmind.pl:2987
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Kan bestand \"%s\" niet openen!"
 
-#: ../vdradmind.pl:2990
+#: ../vdradmind.pl:2988
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
@@ -2843,64 +2843,64 @@ msgstr ""
 "Kan geen verbinding maken met VDR at %s:%s<br /><br /> Controleer of VDR "
 "draait en of VDR's svdrphosts.conf op de juiste manier is geconfigureerd."
 
-#: ../vdradmind.pl:2991
+#: ../vdradmind.pl:2989
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Fout tijdens verzenden van commando op %s"
 
-#: ../vdradmind.pl:3047
+#: ../vdradmind.pl:3045
 msgid "Internal error:"
 msgstr "Interne fout:"
 
-#: ../vdradmind.pl:3205
+#: ../vdradmind.pl:3203
 msgid "Lookup movie in the Internet-Movie-Database (IMDb)"
 msgstr "Zoek de film op bij de Internet-Movie-Database (IMDb)"
 
-#: ../vdradmind.pl:3458
+#: ../vdradmind.pl:3456
 msgid "Can't find EPG entry!"
 msgstr "Kan geen EPG gegevens vinden!"
 
-#: ../vdradmind.pl:3886
+#: ../vdradmind.pl:3884
 msgid "Playing Tomorrow"
 msgstr "Speelt morgen"
 
-#: ../vdradmind.pl:3886
+#: ../vdradmind.pl:3884
 #, perl-format
 msgid "Playing on the %s"
 msgstr "Speelt op de %s"
 
-#: ../vdradmind.pl:5193
+#: ../vdradmind.pl:5175
 msgid "next"
 msgstr "volgende"
 
-#: ../vdradmind.pl:5212
+#: ../vdradmind.pl:5194
 msgid "What's on after"
 msgstr "Wat is er op na"
 
-#: ../vdradmind.pl:5212
+#: ../vdradmind.pl:5194
 msgid "What's on at"
 msgstr "Wat is er op om:"
 
-#: ../vdradmind.pl:5215
+#: ../vdradmind.pl:5197
 msgid "Suitable matches for:"
 msgstr "Bruikbare overeenkomsten voor:"
 
-#: ../vdradmind.pl:5218
+#: ../vdradmind.pl:5200
 msgid "short view"
 msgstr "beknopt tonen"
 
-#: ../vdradmind.pl:5218
+#: ../vdradmind.pl:5200
 msgid "long view"
 msgstr "uitgebreid tonen"
 
-#: ../vdradmind.pl:5269
+#: ../vdradmind.pl:5251
 msgid "Schedule"
 msgstr "Schema"
 
-#: ../vdradmind.pl:5857
+#: ../vdradmind.pl:5839
 msgid "Timers"
 msgstr "Timers"
 
-#: ../vdradmind.pl:5915
+#: ../vdradmind.pl:5897
 msgid "System default"
 msgstr "Systeem standaard"

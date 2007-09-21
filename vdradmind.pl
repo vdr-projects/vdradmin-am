@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 # vim:et:sw=4:ts=4:
 #
-# vdradmin.pl by Thomas Koch <tom@linvdr.org>
+# VDRAdmin-AM 2005 - 2007 by Andreas Mair <mail@andreas.vdr-developer.org>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -21,12 +21,10 @@
 # 08.10.2001
 #
 #
-# VDRAdmin-AM 2005 - 2007 by Andreas Mair <mail@andreas.vdr-developer.org>
-#
 
 require 5.004;
 
-my $VERSION = "3.6.0rc";
+my $VERSION = "3.6.0";
 my $BASENAME;
 my $EXENAME;
 
@@ -710,7 +708,7 @@ sub ChanTree { #TODO? save channel in each list as reference
         $name =~ /(^[^,;]*).*/;    #TODO?
         $name = $1;
         my $uniq_id = $source . "-" . $nid . "-" . ($nid || $tid ? $tid : $frequency) . "-" . $service_id;
-        $uniq_id .= "-" . $rid if ($rid);
+        $uniq_id .= "-" . $rid if ($rid != 0);
         push(@CHANNELS_FULL,
              {  vdr_id       => $vdr_id,
                 name         => $name,
@@ -4953,23 +4951,7 @@ sub prog_timeline {
     my (@show, @shows, @temp);
     my $shows;
 
-    my @epgChannels; #TODO? avoid extra array
-    for my $channel (@{$CHAN{$CONFIG{CHANNELS_WANTED_TIMELINE}}->{channels}}) {
-
-        # skip channels without EPG data
-        if ($CONFIG{CHANNELS_WITHOUT_EPG} || ChannelHasEPG($channel->{vdr_id})) {
-            push(@epgChannels,
-                {   vdr_id => $channel->{vdr_id},
-                    name   => $channel->{name}
-                }
-            );
-        }
-    }
-
-    @epgChannels = keys(%EPG)
-      unless scalar @epgChannels;
-
-    foreach (@epgChannels) {    # Sender durchgehen
+    foreach (@{$CHAN{$CONFIG{CHANNELS_WANTED_TIMELINE}}->{channels}}) {
         if (ChannelHasEPG($_->{vdr_id})) {
             foreach my $event (sort { $a->{start} <=> $b->{start} } @{ $EPG{$_->{vdr_id}} }) {    # Events durchgehen
                 next if ($event->{stop} <= $start_time or $event->{start} >= $event_time_to);
