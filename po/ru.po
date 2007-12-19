@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-21 12:13+0200\n"
+"POT-Creation-Date: 2007-12-18 12:37+0100\n"
 "PO-Revision-Date: 2006-10-27 15:42+0100\n"
 "Last-Translator: Oleg Roitburd <oleg@roitburd.de>\n"
 "Language-Team: Allrussian <LL.org>\n"
@@ -16,954 +16,491 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 
-#: ../template/default/epgsearch_list.html:5 ../template/default/error.html:5
-#: ../template/default/timer_list.html:5
-#: ../template/default/help_rec_list.html:5
-#: ../template/default/prog_list2.html:5
-#: ../template/default/at_timer_new.html:5
-#: ../template/default/navigation.html:4
-#: ../template/default/prog_timeline.html:6
-#: ../template/default/at_timer_list.html:5
-#: ../template/default/help_at_timer_list.html:5
-#: ../template/default/help_edit_epg.html:8
-#: ../template/default/help_at_timer_new.html:11
-#: ../template/default/prog_detail_form.html:5
-#: ../template/default/vdr_cmds.html:5 ../template/default/config.html:4
-#: ../template/default/epgsearch_new.html:5
-#: ../template/default/prog_list.html:5 ../template/default/index.html:5
-#: ../template/default/rc.html:5 ../template/default/timer_new.html:5
-#: ../template/default/noauth.html:4 ../template/default/rec_list.html:5
-#: ../template/default/tv.html:6 ../template/default/prog_summary.html:6
-#: ../template/default/about.html:5 ../template/default/rec_edit.html:5
-#: ../template/default/noperm.html:4 ../template/default/prog_detail.html:5
-#: ../template/default/help_timer_list.html:5
-#: ../template/default/help_timer_new.html:8
-#: ../template/default/help_no.html:5 ../template/default/help_config.html:8
-#: ../template/default/prog_summary2.html:6 ../vdradmind.pl:2993
 msgid "ISO-8859-1"
 msgstr "ISO-8859-5"
 
-#: ../template/default/epgsearch_list.html:6
-msgid "EPG search"
-msgstr "ЕПГ поиск"
+msgid "Define New Search"
+msgstr "Декларация нового поиска"
 
-#: ../template/default/epgsearch_list.html:23
-#: ../template/default/navigation.html:50
-msgid "EPG Search"
-msgstr "Поиск по ЕПГ"
+msgid "Edit Search"
+msgstr "Изменить поиск"
 
-#: ../template/default/epgsearch_list.html:27
-#, fuzzy
-msgid "Use template"
-msgstr "Запомнить шаблон"
+msgid "Small search pattern.\\nDo you really want to use it?"
+msgstr "Маленькая маска поиска.\\n Действительно по ней искать?"
 
-#: ../template/default/epgsearch_list.html:34
-msgid "New Search"
-msgstr "Новый поиск"
+msgid ""
+"You didn't select at least one of\\ntitle, subtitle or description.\\nDo you "
+"really want to use this search?"
+msgstr ""
 
-#: ../template/default/epgsearch_list.html:39
-#: ../template/default/timer_list.html:50
-#: ../template/default/at_timer_new.html:23
-#: ../template/default/navigation.html:69
-#: ../template/default/at_timer_list.html:43
-#: ../template/default/prog_detail_form.html:23
-#: ../template/default/vdr_cmds.html:20 ../template/default/config.html:22
-#: ../template/default/epgsearch_new.html:157
-#: ../template/default/timer_new.html:60 ../template/default/rec_list.html:26
+msgid "Add New Search"
+msgstr "Создать новый поиск"
+
 msgid "Help"
 msgstr "Помощь"
 
-#: ../template/default/epgsearch_list.html:51
-#: ../template/default/timer_list.html:193
-#: ../template/default/at_timer_list.html:57
-msgid "Active"
-msgstr "Активировано"
+msgid "Hide results"
+msgstr "Спрятать результаты"
 
-#: ../template/default/epgsearch_list.html:62
-msgid "Action"
-msgstr "Действие"
-
-#: ../template/default/epgsearch_list.html:73
-#: ../template/default/epgsearch_list.html:75
-#: ../template/default/epgsearch_list.html:223
-#: ../template/default/timer_list.html:204
-#: ../template/default/at_timer_list.html:68
-#: ../template/default/prog_detail_form.html:34
-msgid "Channel"
-msgstr "Канал"
-
-#: ../template/default/epgsearch_list.html:87
-msgid "From"
-msgstr "С"
-
-#: ../template/default/epgsearch_list.html:89
-#: ../template/default/timer_list.html:226
-#: ../template/default/at_timer_list.html:79
-msgid "Start"
-msgstr "Начало"
-
-#: ../template/default/epgsearch_list.html:101
-msgid "To"
-msgstr "К"
-
-#: ../template/default/epgsearch_list.html:103
-#: ../template/default/timer_list.html:237
-#: ../template/default/at_timer_list.html:90
-msgid "Stop"
-msgstr "Конец"
-
-#: ../template/default/epgsearch_list.html:115
-msgid "Search pattern"
-msgstr "Поисковые признаки"
-
-#: ../template/default/epgsearch_list.html:125
-#: ../template/default/timer_list.html:259
-#: ../template/default/at_timer_list.html:112
-#: ../template/default/rec_list.html:85
-msgid "Select all/none"
-msgstr "Выбрать все или ничего"
-
-#: ../template/default/epgsearch_list.html:133
-#: ../template/default/timer_list.html:282
-#: ../template/default/at_timer_new.html:37
-#: ../template/default/at_timer_new.html:41
-#: ../template/default/at_timer_new.html:112
-#: ../template/default/at_timer_new.html:155
-#: ../template/default/at_timer_list.html:120
-#: ../template/default/config.html:99 ../template/default/config.html:142
-#: ../template/default/config.html:171 ../template/default/config.html:185
-#: ../template/default/config.html:208 ../template/default/config.html:235
-#: ../template/default/config.html:265 ../template/default/config.html:272
-#: ../template/default/config.html:279 ../template/default/config.html:293
-#: ../template/default/config.html:304 ../template/default/config.html:351
-#: ../template/default/config.html:365 ../template/default/config.html:384
-#: ../template/default/config.html:396 ../template/default/config.html:408
-#: ../template/default/config.html:421 ../template/default/config.html:429
-#: ../template/default/config.html:436 ../template/default/config.html:443
-#: ../template/default/config.html:450 ../template/default/config.html:459
-#: ../template/default/config.html:473 ../template/default/timer_new.html:72
-msgid "Yes"
-msgstr "Да"
-
-#: ../template/default/epgsearch_list.html:135
-#: ../template/default/timer_list.html:283
-#: ../template/default/at_timer_new.html:38
-#: ../template/default/at_timer_new.html:42
-#: ../template/default/at_timer_new.html:113
-#: ../template/default/at_timer_new.html:156
-#: ../template/default/at_timer_list.html:122
-#: ../template/default/config.html:100 ../template/default/config.html:143
-#: ../template/default/config.html:172 ../template/default/config.html:186
-#: ../template/default/config.html:209 ../template/default/config.html:236
-#: ../template/default/config.html:266 ../template/default/config.html:273
-#: ../template/default/config.html:280 ../template/default/config.html:294
-#: ../template/default/config.html:305 ../template/default/config.html:352
-#: ../template/default/config.html:366 ../template/default/config.html:385
-#: ../template/default/config.html:397 ../template/default/config.html:409
-#: ../template/default/config.html:422 ../template/default/config.html:430
-#: ../template/default/config.html:437 ../template/default/config.html:444
-#: ../template/default/config.html:451 ../template/default/config.html:460
-#: ../template/default/config.html:474 ../template/default/timer_new.html:73
-msgid "No"
-msgstr "Нет"
-
-#: ../template/default/epgsearch_list.html:166
-#: ../template/default/epgsearch_list.html:174
-#: ../template/default/timer_list.html:312
-#: ../template/default/prog_list2.html:102
-#: ../template/default/at_timer_list.html:143
-#: ../template/default/at_timer_list.html:148
-#: ../template/default/prog_summary.html:96
-#: ../template/default/prog_summary2.html:111
-msgid "Edit"
-msgstr "Редактировать"
-
-#: ../template/default/epgsearch_list.html:171
-msgid "Find"
-msgstr "Поиск"
-
-#: ../template/default/epgsearch_list.html:177
-#: ../template/default/timer_list.html:315
-#: ../template/default/at_timer_list.html:153
-msgid "Delete timer?"
-msgstr "Удалить таймер?"
-
-#: ../template/default/epgsearch_list.html:177
-#: ../template/default/timer_list.html:315
-#: ../template/default/at_timer_list.html:153
-#: ../template/default/rec_list.html:118
-msgid "Delete"
-msgstr "Удалить"
-
-#: ../template/default/epgsearch_list.html:192
-msgid "Show Favorites"
-msgstr "Показать фавориты"
-
-#: ../template/default/epgsearch_list.html:193
-#: ../template/default/at_timer_list.html:168
-msgid "Force Update"
-msgstr "Произвести обновление"
-
-#: ../template/default/epgsearch_list.html:196
-msgid "Delete Selected Searches"
-msgstr "Удалить выбранные поиски"
-
-#: ../template/default/epgsearch_list.html:196
-msgid "Delete all selected searches?"
-msgstr "Удалить все выбранные поиски?"
-
-#: ../template/default/epgsearch_list.html:197
-msgid "Execute Selected Searches"
-msgstr "Выполнить выбранные поиски"
-
-#: ../template/default/epgsearch_list.html:221
-msgid "Duration"
-msgstr "Продолжительность"
-
-#: ../template/default/epgsearch_list.html:222
-#: ../template/default/at_timer_new.html:58
-#: ../template/default/at_timer_new.html:183
-#: ../template/default/help_edit_epg.html:30
-#: ../template/default/prog_detail_form.html:44
-#: ../template/default/epgsearch_new.html:257
-#: ../template/default/epgsearch_new.html:490
-msgid "Title"
-msgstr "Заголовок"
-
-#: ../template/default/epgsearch_list.html:224
-#: ../template/default/at_timer_new.html:186
-msgid "Stored in"
-msgstr "Сохраненно в"
-
-#: ../template/default/epgsearch_list.html:242
-#: ../template/default/prog_list2.html:79
-#: ../template/default/prog_list2.html:98
-#: ../template/default/epgsearch_new.html:183
-#: ../template/default/prog_list.html:73 ../template/default/prog_list.html:89
-#: ../template/default/prog_summary.html:90
-#: ../template/default/prog_summary.html:118
-#: ../template/default/prog_summary2.html:78
-#: ../template/default/prog_summary2.html:107
 msgid "More Information"
 msgstr "Дополнительная информация"
 
-#: ../template/default/epgsearch_list.html:256
-#: ../template/default/prog_list2.html:62
-#: ../template/default/navigation.html:38 ../template/default/prog_list.html:6
-#: ../template/default/prog_summary.html:56
-#: ../template/default/prog_summary2.html:93 ../vdradmind.pl:5839
-msgid "Channels"
-msgstr "Телегид"
-
-#: ../template/default/epgsearch_list.html:263
-#: ../template/default/prog_list2.html:103
-#: ../template/default/epgsearch_new.html:204
-#: ../template/default/prog_list.html:94
-#: ../template/default/prog_summary.html:99
-#: ../template/default/prog_summary2.html:112
 msgid "Record"
 msgstr "Записать передачу"
 
-#: ../template/default/epgsearch_list.html:270
-#: ../template/default/at_timer_new.html:198
-#: ../template/default/epgsearch_new.html:211
 msgid "No matches found!"
 msgstr "Нет результатов!"
 
-#: ../template/default/error.html:6
-msgid "Error!"
-msgstr "Ошибка!"
+msgid "Settings"
+msgstr "Настройки"
 
-#: ../template/default/timer_list.html:6
-#: ../template/default/timer_list.html:43
-#: ../template/default/navigation.html:41 ../template/default/config.html:244
-#: ../template/default/help_timer_list.html:6
-#: ../template/default/help_timer_list.html:21
-#: ../template/default/help_config.html:30
-#: ../template/default/help_config.html:122
-msgid "Timer"
-msgstr "Таймер"
+msgid "Search Term:"
+msgstr "Поиск по условию:"
 
-#: ../template/default/timer_list.html:27
-#: ../template/default/at_timer_new.html:132
-#: ../template/default/at_timer_list.html:24
-#: ../template/default/help_at_timer_new.html:50
-#: ../template/default/config.html:190 ../template/default/config.html:247
-#: ../template/default/epgsearch_new.html:509
-#: ../template/default/timer_new.html:151
-#: ../template/default/help_timer_new.html:53
-#: ../template/default/help_config.html:96
-#: ../template/default/help_config.html:124
-msgid "Priority:"
-msgstr "Приоритет:"
+msgid "Search Mode:"
+msgstr "Режим поиска:"
 
-#: ../template/default/timer_list.html:27
-#: ../template/default/at_timer_new.html:139
-#: ../template/default/at_timer_list.html:24
-#: ../template/default/help_at_timer_new.html:52
-#: ../template/default/config.html:194 ../template/default/config.html:251
-#: ../template/default/epgsearch_new.html:515
-#: ../template/default/timer_new.html:156
-#: ../template/default/help_timer_new.html:55
-#: ../template/default/help_config.html:98
-#: ../template/default/help_config.html:126
-msgid "Lifetime:"
-msgstr "Как долго хранить:"
+msgid "phrase"
+msgstr "фразы"
 
-#: ../template/default/timer_list.html:27
-#: ../template/default/prog_timeline.html:95
-msgid "Duration:"
-msgstr "Продолжительность:"
+msgid "all words"
+msgstr "все слова"
 
-#: ../template/default/timer_list.html:27
-#: ../template/default/prog_timeline.html:96
-msgid "min"
-msgstr "мин"
+msgid "at least one word"
+msgstr "в конце одно слово"
 
-#: ../template/default/timer_list.html:27
-msgid "Transponder:"
-msgstr "Транспондер:"
+msgid "match exactly"
+msgstr "точный поиск"
 
-#: ../template/default/timer_list.html:27
-msgid "CA-System:"
-msgstr "CA-System:"
+msgid "regular expression"
+msgstr "регулярные выражения"
 
-#: ../template/default/timer_list.html:45
-msgid "New Timer"
-msgstr "Новый таймер"
+msgid "fuzzy"
+msgstr "неточно"
 
-#: ../template/default/timer_list.html:215
-#: ../template/default/rec_list.html:53
-msgid "Date"
-msgstr "Дата"
+msgid "Tolerance for \"fuzzy\":"
+msgstr "погрешность для \"неточно\""
 
-#: ../template/default/timer_list.html:248
-#: ../template/default/at_timer_list.html:101
-#: ../template/default/rec_list.html:75
-msgid "Name"
-msgstr "Имя"
+msgid "Match Case:"
+msgstr "Поиск условия:"
 
-#: ../template/default/timer_list.html:266
-#: ../template/default/timer_list.html:327
-#: ../template/default/timer_list.html:328
-msgid "Edit timer status?"
-msgstr "Изменить статус таймера?"
+msgid "Search in:"
+msgstr "искать в:"
 
-#: ../template/default/timer_list.html:268
-msgid "This timer is inactive!"
-msgstr "Эта запись деактивирована!"
+msgid "Title"
+msgstr "Заголовок"
 
-#: ../template/default/timer_list.html:271
-msgid "This timer is impossible!"
-msgstr "Запись по этому таймеру невозможна!"
+msgid "Subtitle"
+msgstr "Подзаголовок"
 
-#: ../template/default/timer_list.html:274
-msgid "No more timers on other transponders possible!"
-msgstr "Дальнейшие записи на других транспондерах невозможны!"
+msgid "Description"
+msgstr "Описание"
 
-#: ../template/default/timer_list.html:277
-msgid "Timer OK."
-msgstr "Запись по этому таймеру возможна."
+msgid "Use extended EPG info:"
+msgstr "Использовать расширенную ЕПГ информацию"
 
-#: ../template/default/timer_list.html:284
-#: ../template/default/prog_detail_form.html:60
-#: ../template/default/prog_detail.html:18
-msgid "VPS"
-msgstr "VPS"
-
-#: ../template/default/timer_list.html:285
-msgid "Auto"
-msgstr "Авто"
-
-#: ../template/default/timer_list.html:327
-msgid "activate"
-msgstr "Активирует"
-
-#: ../template/default/timer_list.html:328
-msgid "inactivate"
-msgstr "Деактивирует"
-
-#: ../template/default/timer_list.html:329
-msgid "selected timers"
-msgstr "выбранные таймеры"
-
-#: ../template/default/timer_list.html:332
-msgid "Delete Selected Timers"
-msgstr "Удалить выбранные таймеры"
-
-#: ../template/default/timer_list.html:332
-#: ../template/default/at_timer_list.html:171
-msgid "Delete all selected timers?"
-msgstr "Удалить все выбранные Автотаймеры?"
-
-#: ../template/default/timer_list.html:339
-msgid "No timers defined!"
-msgstr "Нет таймеров!"
-
-#: ../template/default/help_rec_list.html:6
-#: ../template/default/help_rec_list.html:17
-#: ../template/default/navigation.html:54 ../template/default/rec_list.html:6
-#: ../template/default/rec_list.html:17 ../vdradmind.pl:5839
-msgid "Recordings"
-msgstr "Записи"
-
-#: ../template/default/help_rec_list.html:21
-msgid ""
-"<p>Here you will find a listing of recordings known to VDR. The headline "
-"will also show you VDR's total and free disk space.</p><p>The listing "
-"showing you some information on the recordings. You can change the list's "
-"sorting by clicking the columns heading. Above the list you'll see the "
-"navigation path. If you want to view the contents of previous folders you'll "
-"have to click on its name in that path.</p><p>Each row contains this "
-"information:<dl><dt>Date</dt><dd>The date when the recording has been done. "
-"In case of folders this will show the number of recordings the folder "
-"contains.</dd><dt>Time</dt><dd>The time when the recording has been done. In "
-"case of folders this will show the number of <strong>new</strong> recordings "
-"the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. "
-"Click it to show the recording's summary or descend into the folder.</"
-"dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename "
-"a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> "
-"SVDRPort command which is no core VDR feature but is available through a "
-"patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span "
-"class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete "
-"(<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a "
-"recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)"
-"</dt><dd>This column is only shown if you activated and configured <span "
-"class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu"
-"\">Configuration</span> menu. You can watch the recording at your "
-"workstation.</dd></dl></p><p>In addition to these functions you can delete a "
-"number of recordings at once by checking the box in the last but one column "
-"of those recordings and clicking <input type=\"submit\" class=\"submit\" "
-"value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the "
-"VDR's configuration files and have entries in VDR's <span class=\"ref_file"
-"\">reccmds.conf</span> you can run those commands for the selected recording "
-"by selecting the wanted command in the select box locate next to <span class="
-"\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class="
-"\"submit\" value=\"Run\"/> button.</p><p>Use <input type=\"submit\" class="
-"\"submit\" value=\"Refresh\"/> to force reloading of VDR's recordings "
-"listing.</p>"
+msgid "Ignore missing categories?"
 msgstr ""
-"<p>Здесь Вы видите список всех записей, которые доступны в VDR. В верхнем "
-"колонтитуле Вы можете увидеть общее и свободное место на жестком диске VDR. "
-"</p><p>Этот список показывает Вам несколько сведений о записях. Вы можете "
-"изменять сортировку, нажимая на заголовки столбцов. Над списком Вы видите "
-"путь навигации. Если Вы хотите увидеть содержание ранее посещенного "
-"каталога, то нажмите просто на название каталога в этом пути.</p><p>Каждая "
-"строка содержит следущую информацию:<dl><dt>Дата</dt><dd>Дата когда была "
-"произведена запись. В случае каталога здесь показывается количество "
-"занесeнных записей.</dd><dt>Время</dt><dd>Время когда была произведена "
-"запись. В случае каталога здесь показывается количество <strong>новых</"
-"strong> записей в этом каталоге.</dd><dt>Название</dt><dd>Название записи "
-"или каталога. Нажмите на него, чтобы увидеть резюме записи или, чтобы "
-"перейти в каталог.</dd><dt>Переименовывать (<img src=\"bilder/edit.png\"alt="
-"\"edit\" />)</dt><dd>Переименовать запись.<br /><h4>Внимание:</h4>Это "
-"функционирует только, если VDR понимает SVDRPort-команду <u>RENR</u>. Это не "
-"содержится в стандартном VDR, но может добавляться патчем. <span class="
-"\"ref_file\">vdr-aio21_svdrprename.patch</span> и <span class=\"ref_file"
-"\">enAIO-v2.2+</span> предлагают эту команду.</dd><dt>Удалять (<img src="
-"\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Удаление записи.</"
-"dd><dt>Транслировать (<img src=\"bilder/stream.png\" alt=\"stream\" />)</"
-"dt><dd>Эта колонка показывается только, если Вы активировали и "
-"откoнфигурировали <span class=\"ref_label\">Транслировать записи</span> на "
-"странице <span class=\"ref_menu\">Конфигурация</span>. Потом Вы можете "
-"просматривать записи на вашем компьютере.</dd></dl></p><p>Дополнительно к "
-"этим функциям Вы можете удалять несколько записей одновременно, установив "
-"галочку в предпоследнем столбце этих записей и щeлкнув затем на кнопку "
-"<input type=\"submit\" class=\"submit\" value=\"Удалить выбранные записи\"/>."
-"</p><p>Если Вы указали путь к конфигурационным файлам VDR и там есть файл "
-"<span class=\"ref_file\">reccmds.conf</span>, тогда Вы можете запускать "
-"занесeнные там  команды для выбранных записей. Для этого выберете желаемую "
-"команду возле <span class=\"ref_label\">Команды:</span> и нажмите на <input "
-"type=\"submit\" class=\"submit\" value=\"Выполнить\"/>.</p><p>Кнопкой <input "
-"type=\"submit\" class=\"submit\" value=\"Refresh\"/> Вы можете перезагрузить "
-"список записей VDR.</p>"
 
-#: ../template/default/prog_list2.html:6 ../vdradmind.pl:3884
-msgid "Playing Today"
-msgstr "Что будет сегодня?"
+msgid "Use Channel:"
+msgstr "Использовать канал:"
 
-#: ../template/default/prog_list2.html:29
-msgid "starting at"
-msgstr "Начать в"
+msgid "no"
+msgstr "нет"
 
-#: ../template/default/prog_list2.html:31
-#: ../template/default/at_timer_new.html:95
-#: ../template/default/at_timer_new.html:105
-#: ../template/default/prog_timeline.html:77
-#: ../template/default/prog_timeline.html:155
-#: ../template/default/prog_timeline.html:179
-#: ../template/default/epgsearch_new.html:343
-#: ../template/default/epgsearch_new.html:350
-#: ../template/default/timer_new.html:125
-#: ../template/default/timer_new.html:138
-#: ../template/default/prog_summary.html:41
-#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5185
-#: ../vdradmind.pl:5198
+msgid "interval"
+msgstr "интервал"
+
+msgid "channel group"
+msgstr "группа каналов"
+
+msgid "only FTA"
+msgstr "только FTA"
+
+msgid "Range:"
+msgstr "Область:"
+
+msgid "Channel Group:"
+msgstr "Группа каналов:"
+
+msgid "Use Time:"
+msgstr "Использовать время:"
+
+msgid "Start After:"
+msgstr "Старт после:"
+
 msgid "o'clock"
 msgstr "Часов"
 
-#: ../template/default/prog_list2.html:34
-#: ../template/default/prog_timeline.html:158
-#: ../template/default/prog_list.html:31
-#: ../template/default/prog_summary.html:24
-#: ../template/default/prog_summary2.html:24
+msgid "Start Before:"
+msgstr "Старт раньше:"
+
+msgid "Use Duration:"
+msgstr "Использовать продолжительность:"
+
+msgid "Min. Duration:"
+msgstr "Мин. продолжительность:"
+
+msgid "hh:mm"
+msgstr "чч:мм"
+
+msgid "Max. Duration:"
+msgstr "Макс. продолжительность:"
+
+msgid "Use Day of Week:"
+msgstr "Использовать день недели:"
+
+msgid "Monday"
+msgstr "Понедельник"
+
+msgid "Tuesday"
+msgstr "Вторник"
+
+msgid "Wednesday"
+msgstr "Среда"
+
+msgid "Thursday"
+msgstr "Четверг"
+
+msgid "Friday"
+msgstr "Пятница"
+
+msgid "Saturday"
+msgstr "Суббота"
+
+msgid "Sunday"
+msgstr "Воскресение"
+
+msgid "Use Blacklists:"
+msgstr "Использовать список запретов:"
+
+msgid "selection"
+msgstr "выбор"
+
+msgid "all"
+msgstr "все"
+
+msgid "Use in Favorites Menu:"
+msgstr "Использовать фаворитное меню:"
+
+msgid "Use as Search Timer:"
+msgstr "Использовать как поиск таймера:"
+
+#, fuzzy
+msgid "yes"
+msgstr "Да"
+
+#, fuzzy
+msgid "user-defined"
+msgstr "Нет таймеров!"
+
+msgid "record"
+msgstr "записать"
+
+msgid "announce only"
+msgstr "только анонсы"
+
+msgid "switch only"
+msgstr "только переключится"
+
+#, fuzzy
+msgid "First day:"
+msgstr "Пятница"
+
+msgid "Last day:"
+msgstr ""
+
+msgid "Auto delete:"
+msgstr ""
+
+#, fuzzy
+msgid "count recordings"
+msgstr "Записи"
+
+#, fuzzy
+msgid "count days"
+msgstr "Понедельник"
+
+#, fuzzy
+msgid "After ... recordings:"
+msgstr "Сохранить ... Записей"
+
+msgid "After ... days after first recording:"
+msgstr ""
+
+msgid "Settings for action \"record\""
+msgstr "Настройки для \"записи\""
+
+msgid "Series Recording:"
+msgstr "Запись серий:"
+
+msgid "Directory:"
+msgstr "Каталог:"
+
+msgid "Delete Recordings After ... Days:"
+msgstr "Удалить записи после ... дней"
+
+msgid "Keep ... Recordings:"
+msgstr "Сохранить ... Записей"
+
+msgid "Pause, when ... recordings exist:"
+msgstr "Пауза, если ... запись существует:"
+
+msgid "Avoid Repeats:"
+msgstr "Избегать повторений:"
+
+msgid "Allowed Repeats:"
+msgstr "Разрешенные повторения:"
+
+msgid "Only Repeats Within ... Days:"
+msgstr "Повторения только в течение ... Дней"
+
+msgid "Compare:"
+msgstr "Сравнить:"
+
+msgid "Priority:"
+msgstr "Приоритет:"
+
+msgid "Lifetime:"
+msgstr "Как долго хранить:"
+
+msgid "Time Margin at Start:"
+msgstr "Опережение начала таймера (мин.):"
+
+msgid "minutes"
+msgstr "Минуты"
+
+msgid "Time Margin at Stop:"
+msgstr "Запаздывание остановки таймера (мин.):"
+
+msgid "VPS:"
+msgstr "VPS:"
+
+msgid "Settings for action \"switch only\""
+msgstr "Настройки для \"только переключится\""
+
+msgid "Switch ... Minutes Before Start:"
+msgstr "Переключится за ... минут до старта\""
+
+msgid "Save as template"
+msgstr "Запомнить шаблон"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Run"
+msgstr "Выполнить"
+
+msgid "Cancel"
+msgstr "Отменить"
+
+msgid "Authorization Required"
+msgstr "Требуется авторизация"
+
+msgid ""
+"This server could not verify that you are authorized to access the document "
+"requested. Either you supplied the wrong credentials (e.g. bad password), or "
+"your browser doesn't understand how to supply the credentials required."
+msgstr ""
+"Сервер не может подтвердить, что Вы имеете право просмотра данного документа."
+"Вы или ввели неправильные данные или ваш броузер не может их передать"
+
+msgid "Timer"
+msgstr "Таймер"
+
+msgid "Duration:"
+msgstr "Продолжительность:"
+
+msgid "min"
+msgstr "мин"
+
+msgid "Transponder:"
+msgstr "Транспондер:"
+
+msgid "CA-System:"
+msgstr "CA-System:"
+
+msgid "New Timer"
+msgstr "Новый таймер"
+
+msgid "Active"
+msgstr "Активировано"
+
+msgid "Channel"
+msgstr "Канал"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Start"
+msgstr "Начало"
+
+msgid "Stop"
+msgstr "Конец"
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "Select all/none"
+msgstr "Выбрать все или ничего"
+
+msgid "Edit timer status?"
+msgstr "Изменить статус таймера?"
+
+msgid "This timer is inactive!"
+msgstr "Эта запись деактивирована!"
+
+msgid "This timer is impossible!"
+msgstr "Запись по этому таймеру невозможна!"
+
+msgid "No more timers on other transponders possible!"
+msgstr "Дальнейшие записи на других транспондерах невозможны!"
+
+msgid "Timer OK."
+msgstr "Запись по этому таймеру возможна."
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "VPS"
+msgstr "VPS"
+
+msgid "Auto"
+msgstr "Авто"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Delete timer?"
+msgstr "Удалить таймер?"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "activate"
+msgstr "Активирует"
+
+msgid "inactivate"
+msgstr "Деактивирует"
+
+msgid "selected timers"
+msgstr "выбранные таймеры"
+
+msgid "Delete Selected Timers"
+msgstr "Удалить выбранные таймеры"
+
+msgid "Delete all selected timers?"
+msgstr "Удалить все выбранные Автотаймеры?"
+
+msgid "No timers defined!"
+msgstr "Нет таймеров!"
+
+msgid "Create New Timer"
+msgstr "Создать новый таймер"
+
+msgid "Edit Timer"
+msgstr "Редактировать таймер"
+
+msgid "Timer Active:"
+msgstr "Активный таймер:"
+
+msgid "AutoTimer Checking:"
+msgstr "Автоматическая проверка таймера:"
+
+msgid "Transmission Identification"
+msgstr "Идентификатор передачи"
+
+msgid "Time"
+msgstr "Время"
+
+msgid "off"
+msgstr "выкл."
+
+msgid "Channel:"
+msgstr "Канал:"
+
+msgid "Day Of Recording:"
+msgstr "День записи:"
+
+msgid "Start Time:"
+msgstr "Начало:"
+
+msgid "Buffer:"
+msgstr "Буфер:"
+
+msgid "End Time:"
+msgstr "Конец:"
+
+msgid "Use VPS:"
+msgstr "Использовать VPS:"
+
+msgid "Title of Recording:"
+msgstr "Название записи:"
+
+msgid "Summary:"
+msgstr "Сводная информация:"
+
+msgid "readonly"
+msgstr "не изменяемо"
+
+msgid "Timer has been set by AutoTimer pattern:"
+msgstr "Таймер выставлен Автотаймером:"
+
+msgid "Rename Recording"
+msgstr "Переименовать запись"
+
+msgid "Original Name of Recording:"
+msgstr "Старое название записи:"
+
+msgid "New Name of Recording:"
+msgstr "Новое название записи:"
+
+msgid "Subtitle:"
+msgstr "Подзаголовок:"
+
+msgid "Rename"
+msgstr "Переименовать"
+
+msgid "What's On Now?"
+msgstr "Что идет сейчас?"
+
 #, fuzzy
 msgid "Channel group:"
 msgstr "Группа каналов:"
 
-#: ../template/default/prog_list2.html:65
-#: ../template/default/prog_list.html:23 ../template/default/rec_list.html:120
-#: ../template/default/prog_summary.html:76
-#: ../template/default/prog_summary2.html:97
-msgid "Stream"
-msgstr "Stream"
-
-#: ../template/default/prog_list2.html:67
-#: ../template/default/prog_list.html:21
-#: ../template/default/prog_summary.html:82
-#: ../template/default/prog_summary2.html:102
-msgid "TV select"
-msgstr "TV переключить"
-
-#: ../template/default/prog_list2.html:96
-#: ../template/default/prog_list.html:87
-#: ../template/default/prog_summary.html:86
-#: ../template/default/prog_summary2.html:105
-msgid "Search for other show times"
-msgstr "Искать повторения"
-
-#: ../template/default/prog_list2.html:100
-#: ../template/default/prog_list.html:91
-#: ../template/default/prog_summary.html:92
-#: ../template/default/prog_summary2.html:109
-msgid "No Information"
-msgstr "Нет информации"
-
-#: ../template/default/prog_list2.html:120
-#: ../template/default/prog_timeline.html:201
-#: ../template/default/prog_list.html:110
-#: ../template/default/prog_summary.html:142
-#: ../template/default/prog_summary2.html:129 ../vdradmind.pl:3622
-#: ../vdradmind.pl:3849 ../vdradmind.pl:4983 ../vdradmind.pl:5148
-msgid "No EPG information available"
-msgstr "Нет EPG информации"
-
-#: ../template/default/at_timer_new.html:6
-#: ../template/default/at_timer_new.html:19
-msgid "Add New AutoTimer"
-msgstr "Создать новый Автотаймер"
-
-#: ../template/default/at_timer_new.html:6
-#: ../template/default/at_timer_new.html:19
-#: ../template/default/help_at_timer_new.html:12
-#: ../template/default/help_at_timer_new.html:23
-msgid "Edit AutoTimer"
-msgstr "Редактирование Автотаймера"
-
-#: ../template/default/at_timer_new.html:34
-#: ../template/default/help_at_timer_new.html:30
-msgid "AutoTimer Active:"
-msgstr "Автотаймер активен:"
-
-#: ../template/default/at_timer_new.html:39
-#: ../template/default/at_timer_new.html:43
-msgid "oneshot"
-msgstr "однократно"
-
-#: ../template/default/at_timer_new.html:49
-#: ../template/default/help_at_timer_new.html:32
-msgid "Search Patterns:"
-msgstr "Поисковые признаки:"
-
-#: ../template/default/at_timer_new.html:56
-#: ../template/default/help_at_timer_new.html:34
-#: ../template/default/epgsearch_new.html:255
-msgid "Search in:"
-msgstr "искать в:"
-
-#: ../template/default/at_timer_new.html:59
-#: ../template/default/at_timer_new.html:184
-#: ../template/default/help_edit_epg.html:32
-#: ../template/default/prog_detail_form.html:49
-#: ../template/default/epgsearch_new.html:258
-#: ../template/default/epgsearch_new.html:491
-msgid "Subtitle"
-msgstr "Подзаголовок"
-
-#: ../template/default/at_timer_new.html:60
-#: ../template/default/help_edit_epg.html:34
-#: ../template/default/prog_detail_form.html:54
-#: ../template/default/epgsearch_new.html:259
-#: ../template/default/epgsearch_new.html:492
-msgid "Description"
-msgstr "Описание"
-
-#: ../template/default/at_timer_new.html:65
-#: ../template/default/help_at_timer_new.html:36
-msgid "Search only on these days:"
-msgstr "Искать только в эти дни:"
-
-#: ../template/default/at_timer_new.html:67
-#: ../template/default/epgsearch_new.html:388
-#: ../template/default/timer_new.html:109
-msgid "Monday"
-msgstr "Понедельник"
-
-#: ../template/default/at_timer_new.html:68
-#: ../template/default/epgsearch_new.html:389
-#: ../template/default/timer_new.html:110
-msgid "Tuesday"
-msgstr "Вторник"
-
-#: ../template/default/at_timer_new.html:69
-#: ../template/default/epgsearch_new.html:390
-#: ../template/default/timer_new.html:111
-msgid "Wednesday"
-msgstr "Среда"
-
-#: ../template/default/at_timer_new.html:70
-#: ../template/default/epgsearch_new.html:391
-#: ../template/default/timer_new.html:112
-msgid "Thursday"
-msgstr "Четверг"
-
-#: ../template/default/at_timer_new.html:71
-#: ../template/default/epgsearch_new.html:392
-#: ../template/default/timer_new.html:113
-msgid "Friday"
-msgstr "Пятница"
-
-#: ../template/default/at_timer_new.html:72
-#: ../template/default/epgsearch_new.html:393
-#: ../template/default/timer_new.html:114
-msgid "Saturday"
-msgstr "Суббота"
-
-#: ../template/default/at_timer_new.html:73
-#: ../template/default/epgsearch_new.html:394
-#: ../template/default/timer_new.html:115
-msgid "Sunday"
-msgstr "Воскресение"
-
-#: ../template/default/at_timer_new.html:78
-#: ../template/default/help_at_timer_new.html:38
-#: ../template/default/prog_list.html:38 ../template/default/timer_new.html:94
-#: ../template/default/help_timer_new.html:39
-msgid "Channel:"
-msgstr "Канал:"
-
-#: ../template/default/at_timer_new.html:81
-#: ../template/default/epgsearch_new.html:405
-msgid "all"
-msgstr "все"
-
-#: ../template/default/at_timer_new.html:90
-#: ../template/default/help_at_timer_new.html:40
-msgid "Starts After:"
-msgstr "Начинается не раньше:"
-
-#: ../template/default/at_timer_new.html:100
-#: ../template/default/help_at_timer_new.html:42
-msgid "Ends Before:"
-msgstr "Заканчивается не позднее:"
-
-#: ../template/default/at_timer_new.html:110
-#: ../template/default/help_at_timer_new.html:44
-msgid "Override Start/Stop Margins:"
-msgstr "Переписывать старт/стоп "
-
-#: ../template/default/at_timer_new.html:118
-#: ../template/default/help_at_timer_new.html:46
-#: ../template/default/config.html:198 ../template/default/config.html:255
-#: ../template/default/epgsearch_new.html:521
-#: ../template/default/help_config.html:100
-#: ../template/default/help_config.html:128
-msgid "Time Margin at Start:"
-msgstr "Опережение начала таймера (мин.):"
-
-#: ../template/default/at_timer_new.html:120
-#: ../template/default/at_timer_new.html:127
-#: ../template/default/config.html:256 ../template/default/config.html:260
-#: ../template/default/config.html:390
-#: ../template/default/epgsearch_new.html:523
-#: ../template/default/epgsearch_new.html:529
-#: ../template/default/epgsearch_new.html:549
-#: ../template/default/timer_new.html:127
-#: ../template/default/timer_new.html:140
-msgid "minutes"
-msgstr "Минуты"
-
-#: ../template/default/at_timer_new.html:125
-#: ../template/default/help_at_timer_new.html:48
-#: ../template/default/config.html:202 ../template/default/config.html:259
-#: ../template/default/epgsearch_new.html:527
-#: ../template/default/help_config.html:102
-#: ../template/default/help_config.html:130
-msgid "Time Margin at Stop:"
-msgstr "Запаздывание остановки таймера (мин.):"
-
-#: ../template/default/at_timer_new.html:146
-#: ../template/default/help_at_timer_new.html:54
-msgid "Episode:"
-msgstr "Серия:"
-
-#: ../template/default/at_timer_new.html:153
-#: ../template/default/help_at_timer_new.html:56
-msgid "Remember programmed timers:"
-msgstr "Запомнить запрограммированные таймеры:"
-
-#: ../template/default/at_timer_new.html:161
-#: ../template/default/help_at_timer_new.html:58
-#: ../template/default/epgsearch_new.html:453
-msgid "Directory:"
-msgstr "Каталог:"
-
-#: ../template/default/at_timer_new.html:170
-#: ../template/default/prog_detail_form.html:82
-#: ../template/default/config.html:501
-#: ../template/default/epgsearch_new.html:564
-#: ../template/default/timer_new.html:179
-msgid "Save"
-msgstr "Сохранить"
-
-#: ../template/default/at_timer_new.html:171
-msgid "Test"
-msgstr "Тест"
-
-#: ../template/default/at_timer_new.html:172
-#: ../template/default/prog_detail_form.html:83
-#: ../template/default/epgsearch_new.html:566
-#: ../template/default/timer_new.html:180 ../template/default/rec_edit.html:45
-msgid "Cancel"
-msgstr "Отменить"
-
-#: ../template/default/at_timer_new.html:185
-msgid "Broadcasted"
-msgstr "Вещялось"
-
-#: ../template/default/navigation.html:29
-#: ../template/default/prog_summary.html:7
-#: ../template/default/prog_summary2.html:7 ../vdradmind.pl:5839
-msgid "What's On Now?"
-msgstr "Что идет сейчас?"
-
-#: ../template/default/navigation.html:32 ../vdradmind.pl:5839
-msgid "Playing Today?"
-msgstr "Что будет сегодня?"
-
-#: ../template/default/navigation.html:35
-#: ../template/default/prog_timeline.html:7
-#: ../template/default/config.html:158 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:80 ../vdradmind.pl:5839
-msgid "Timeline"
-msgstr "График времени"
-
-#: ../template/default/navigation.html:45
-#: ../template/default/at_timer_list.html:6
-#: ../template/default/at_timer_list.html:35
-#: ../template/default/help_at_timer_list.html:6
-#: ../template/default/help_at_timer_list.html:21
-#: ../template/default/config.html:180 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:92
-msgid "AutoTimer"
-msgstr "Автотаймеры"
-
-#: ../template/default/navigation.html:57 ../template/default/rc.html:6
-msgid "Remote Control"
-msgstr "Пульт ДУ"
-
-#: ../template/default/navigation.html:60
-msgid "Watch TV"
-msgstr "Телевизор"
-
-#: ../template/default/navigation.html:63
-msgid "Commands"
-msgstr "Команды"
-
-#: ../template/default/navigation.html:66 ../template/default/config.html:5
-#: ../template/default/config.html:18 ../template/default/help_config.html:9
-#: ../template/default/help_config.html:24
-msgid "Configuration"
-msgstr "Настройки"
-
-#: ../template/default/navigation.html:69 ../template/default/about.html:6
-msgid "About"
-msgstr "O"
-
-#: ../template/default/navigation.html:74
-msgid "Search"
-msgstr "Поиск"
-
-#: ../template/default/prog_timeline.html:76
-#: ../template/default/prog_timeline.html:170 ../vdradmind.pl:5170
-msgid "now"
-msgstr "сейчас"
-
-#: ../template/default/prog_timeline.html:78
-msgid "to"
-msgstr "до"
-
-#: ../template/default/prog_timeline.html:165
-#: ../template/default/prog_summary.html:35
-#: ../template/default/prog_summary2.html:35
 msgid "What's on:"
 msgstr "Что сейчас:"
 
-#: ../template/default/prog_timeline.html:177
-msgid "at:"
-msgstr "в:"
+msgid "at"
+msgstr "в"
 
-#: ../template/default/prog_timeline.html:195
-msgid "You need JavaScript to use the timeline!"
-msgstr "Вам нужен JavaScript для использования timeline!"
+msgid "Channels"
+msgstr "Телегид"
 
-#: ../template/default/at_timer_list.html:38
-msgid "New AutoTimer"
-msgstr "Новый Автотаймер"
+msgid "Stream"
+msgstr "Stream"
 
-#: ../template/default/at_timer_list.html:171
-msgid "Delete Selected AutoTimers"
-msgstr "Удалить выбранный  Автотаймер"
+msgid "TV select"
+msgstr "TV переключить"
 
-#: ../template/default/at_timer_list.html:178
-msgid "No AutoTimers defined!"
-msgstr "AutoTimer не установлен"
+msgid "Search for other show times"
+msgstr "Искать повторения"
 
-#: ../template/default/help_at_timer_list.html:25
-msgid ""
-"<p>Here you will find a listing of automatic timers (AutoTimer) known to "
-"VDRAdmin-AM.</p><p>The list shows some information on AutoTimers. You can "
-"change the list's sorting by clicking the columns heading.</p><p>For each "
-"AutoTimer you have the following options:<dl><dt>Set its state</dt><dd>By "
-"clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the "
-"activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing "
-"the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</"
-"dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" "
-"alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer "
-"you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></"
-"p><p>Each AutoTimer's state is indicated by differently coloured images:<br /"
-"><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> "
-"AutoTimer is OK and will automatically program matching broadcasts.<br /"
-"><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> "
-"AutoTimer is not active.</p><p>In addition to these functions you can add a "
-"new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value="
-"\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at "
-"once by checking the box in the last column of those timers and clicking "
-"<input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/"
-">.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update"
-"\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and "
-"check for matching AutoTimers.</p>"
-msgstr ""
-"<p>Здесь Вы найдeте список всех автотаймеров, которые знает VDRAdmin-AM.</"
-"p><p>Список показывает Вам несколько сведений о Автотаймерах. Вы можете "
-"изменить сортировку списка, нажав на желаемую надпись колонки. </p><p>Для "
-"каждого Автотаймера Вы имеете следующие возможности:<dl><dt>Изменение "
-"состояния</dt><dd> Вы можете активировать или деактивировать Автотаймеры "
-"переключив кнопкой мыши \"Да\" или \"Нет\" в столбце \"Активный\".</"
-"dd><dt>Быстрое уведомление его приоритета и срока хранения</dt><dd>Для этого "
-"нужно навести курсор мышки на название Автотаймера.</dd><dt>Редактирование "
-"Автотаймера</dt><dd>Вы можете редактировать Автотаймер, щeлкнув курсором на "
-"<img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Удаление Автотаймера</"
-"dt><dd>Удалить Автотаймер можно нажав на <img src=\"bilder/delete.png\" alt="
-"\"delete\" />.</dd></dl></p><p>Статус каждого Автотаймера показывается "
-"определенным цветом:<br /><img src=\"bilder/poempl_gruen.png\" alt=\"on\" "
-"align=\"middle\" /> Автотаймер в порядке и совподающие передачи будут "
-"запрограммированы.<br /><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" "
-"align=\"middle\" /> Автотаймер не активен.</p><p>Дополнительно к этим "
-"функциям Вы можете создать новый Автотаймер , нажав курсором на <input type="
-"\"submit\" class=\"submit\" value=\"Новый Автотаймер\"/>.В нижнем крае "
-"экрана Вы найдeте кнопку <input type=\"submit\" class=\"submit\" value="
-"\"Удалить выделенные Автотаймеры\"/>, тем самым будут удалены все выбранные "
-"Вами Автотаймеры.</p><p>С помощью кнопки <input type=\"submit\" class="
-"\"submit\" value=\"Мануальное обновление\"/> Вы можете заставить VDRAdmin-AM "
-"связываться с VDR для обновления данных EPG и поиска совподающих "
-"Автотаймеров.</p>"
+msgid "No Information"
+msgstr "Нет информации"
 
-#: ../template/default/help_edit_epg.html:9
-#: ../template/default/timer_new.html:6 ../template/default/timer_new.html:56
-#: ../template/default/help_timer_new.html:9
-#: ../template/default/help_timer_new.html:20
-msgid "Edit Timer"
-msgstr "Редактировать таймер"
+msgid "No EPG information available"
+msgstr "Нет EPG информации"
 
-#: ../template/default/help_edit_epg.html:20
-#: ../template/default/prog_detail_form.html:19
-#, fuzzy
-msgid "Edit EPG"
-msgstr "Редактировать"
+msgid "Error!"
+msgstr "Ошибка!"
 
-#: ../template/default/help_edit_epg.html:24
-#, fuzzy
-msgid ""
-"<p>Here you can edit the descriptive fields of an existing EPG entry.</p>"
-msgstr "<p><p>Здесь Вы можете редактировать установки таймера.</p>"
+msgid "Edit AutoTimer"
+msgstr "Редактирование Автотаймера"
 
-#: ../template/default/help_edit_epg.html:26
-#, fuzzy
-msgid "Channel (readonly)"
-msgstr "Группа каналов:"
-
-#: ../template/default/help_edit_epg.html:27
-msgid "This is the channel of the EPG entry. It cannot be changed."
-msgstr ""
-
-#: ../template/default/help_edit_epg.html:28
-#, fuzzy
-msgid "Time (readonly)"
-msgstr "не изменяемо"
-
-#: ../template/default/help_edit_epg.html:29
-msgid "This is the start and end time of the entry. It cannot be changed."
-msgstr ""
-
-#: ../template/default/help_edit_epg.html:31
-msgid ""
-"Change this string to give this EPG Entry a new title. It must consist of "
-"only one line of text."
-msgstr ""
-
-#: ../template/default/help_edit_epg.html:33
-msgid ""
-"Change this string to give this EPG Entry a new subtitle. It must consist of "
-"only one line of text."
-msgstr ""
-
-#: ../template/default/help_edit_epg.html:35
-msgid ""
-"Change the text in this field to edit the description of this entry. The "
-"text can consist of one or more lines."
-msgstr ""
-
-#: ../template/default/help_edit_epg.html:36
-#, fuzzy
-msgid "VPS (readonly)"
-msgstr "не изменяемо"
-
-#: ../template/default/help_edit_epg.html:37
-msgid ""
-"If available this field shows the vps time of the EPG entry. It cannot be "
-"changed."
-msgstr ""
-
-#: ../template/default/help_edit_epg.html:38
-#, fuzzy
-msgid "Video tracks (readonly)"
-msgstr "Видео дорожки"
-
-#: ../template/default/help_edit_epg.html:39
-msgid "If available this field shows the video track(s). It cannot be changed."
-msgstr ""
-
-#: ../template/default/help_edit_epg.html:40
-#, fuzzy
-msgid "Audio tracks (readonly)"
-msgstr "Аудио дорожки"
-
-#: ../template/default/help_edit_epg.html:41
-msgid "If available this field shows the audio track(s). It cannot be changed."
-msgstr ""
-
-#: ../template/default/help_at_timer_new.html:27
 msgid ""
 "<p>Here you can edit an automatic timer's (AutoTimer) settings.</"
 "p><p>AutoTimer is a key feature of VDRAdmin-AM. An AutoTimer consists of one "
@@ -980,7 +517,9 @@ msgstr ""
 "нерегулярно транслируемых сериалов или художественных фильмов, которые Вы не "
 "хотите пропустить.</p>"
 
-#: ../template/default/help_at_timer_new.html:31
+msgid "AutoTimer Active:"
+msgstr "Автотаймер активен:"
+
 msgid ""
 "Activate or deactivate this AutoTimer. Deactivated AutoTimers are still "
 "stored in the AutoTimer list so that they can be activated again, but they "
@@ -993,7 +532,9 @@ msgstr ""
 "на \"однократно\", так чтобы этот Автотаймер сработал только единажды на "
 "следущей передаче."
 
-#: ../template/default/help_at_timer_new.html:33
+msgid "Search Patterns:"
+msgstr "Поисковые признаки:"
+
 msgid ""
 "Choosing the right search items decides whether only the wanted broadcasts "
 "or broadcasts having similar names or even nothing gets recorded.<br />Case "
@@ -1029,7 +570,6 @@ msgstr ""
 "передача автоматически не программируется.Таким образом Вы можете исключать "
 "полную серию."
 
-#: ../template/default/help_at_timer_new.html:35
 msgid ""
 "Here you can define the EPG sections where VDRAdmin-AM should look for the "
 "search pattern."
@@ -1037,13 +577,14 @@ msgstr ""
 "Здесь Вы указываете разделы из EPG, которые VDRAdmin-AM должен осматривать "
 "на наличие признаков поиска."
 
-#: ../template/default/help_at_timer_new.html:37
+msgid "Search only on these days:"
+msgstr "Искать только в эти дни:"
+
 msgid ""
 "Use these checkboxes to limit searching for matching broadcasts to a set of "
 "weekdays."
 msgstr "Отметьте дни недели, в которые будет проводиться поиск передач."
 
-#: ../template/default/help_at_timer_new.html:39
 msgid ""
 "The channel to look for matching broadcasts or \"all\" to search in all "
 "known or wanted channels. You can define the wanted channels for AutoTimer "
@@ -1053,7 +594,9 @@ msgstr ""
 "\" будут просмотрены все известные или желаемые каналы. Желаемые каналы для "
 "автотаймеров устанавливаются на странице \"Конфигурации\". "
 
-#: ../template/default/help_at_timer_new.html:41
+msgid "Starts After:"
+msgstr "Начинается не раньше:"
+
 msgid ""
 "A broadcast must start after the time entered here to match. The first text "
 "field is for \"hour\", the second for \"minute\"."
@@ -1061,7 +604,9 @@ msgstr ""
 "Передача может начинаться не раньше установленного здесь времени. Первое "
 "текстовое поле указывает часы, второе минуты."
 
-#: ../template/default/help_at_timer_new.html:43
+msgid "Ends Before:"
+msgstr "Заканчивается не позднее:"
+
 msgid ""
 "A broadcast must end before the time entered here to match. The first text "
 "field is for \"hour\", the second for \"minute\"."
@@ -1069,7 +614,9 @@ msgstr ""
 "Передача должна заканчиваться не позднее установленного здесь времени."
 "Первоетекстовое поле указывает часы, второе минуты."
 
-#: ../template/default/help_at_timer_new.html:45
+msgid "Override Start/Stop Margins:"
+msgstr "Переписывать старт/стоп "
+
 msgid ""
 "Set this option to \"yes\" if all timers programed by this AutoTimer should "
 "have individual start/stop margins and enter the values in the next two text "
@@ -1078,9 +625,6 @@ msgstr ""
 "Ответьте \"да\", если все таймеры выставленные по AutoTimer должны иметь "
 "индивидуальные начало/конец и введите ыначения в след. два текстовых поля "
 
-#: ../template/default/help_at_timer_new.html:47
-#: ../template/default/help_config.html:101
-#: ../template/default/help_config.html:129
 msgid ""
 "The number of minutes VDRAdmin-AM subtracts from the broadcasts start time "
 "found in the EPG."
@@ -1088,9 +632,6 @@ msgstr ""
 "Количество минут, которые должен VDRAdmin-AM вычесть от начального времени "
 "передаваемого по EPG."
 
-#: ../template/default/help_at_timer_new.html:49
-#: ../template/default/help_config.html:103
-#: ../template/default/help_config.html:131
 msgid ""
 "The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in "
 "the EPG."
@@ -1098,10 +639,6 @@ msgstr ""
 "Количество минут, которые должен VDRAdmin-AM прибавить к конечному времени "
 "передаваемого по EPG."
 
-#: ../template/default/help_at_timer_new.html:51
-#: ../template/default/help_timer_new.html:54
-#: ../template/default/help_config.html:97
-#: ../template/default/help_config.html:125
 msgid ""
 "An integer in the range <strong>0...99</strong>, defining the "
 "<strong>priority</strong> of this timer and of recordings created by this "
@@ -1130,10 +667,6 @@ msgstr ""
 "высоким припритетом прерывает таймер с самым низким приоритетом для начала "
 "записи."
 
-#: ../template/default/help_at_timer_new.html:53
-#: ../template/default/help_timer_new.html:56
-#: ../template/default/help_config.html:99
-#: ../template/default/help_config.html:127
 msgid ""
 "The <strong>guaranteed</strong> lifetime (in days) of a recording created by "
 "this timer. <strong>0</strong> means that this recording may be "
@@ -1152,7 +685,9 @@ msgstr ""
 "удалится автоматически, если указанное количество дней истекло со дня записи "
 "и на жестком диске нет больше места для новых записей. "
 
-#: ../template/default/help_at_timer_new.html:55
+msgid "Episode:"
+msgstr "Серия:"
+
 msgid ""
 "Check this box if you want VDRAdmin-AM to append the broadcast's EPG "
 "subtitle to the recording's file name."
@@ -1160,7 +695,9 @@ msgstr ""
 "Активируйте эту опцию, если Вы хотите, чтобы VDRAdmin-AM добавлял "
 "подзаголовок передачи из EPG к названию записи."
 
-#: ../template/default/help_at_timer_new.html:57
+msgid "Remember programmed timers:"
+msgstr "Запомнить запрограммированные таймеры:"
+
 msgid ""
 "If you enable this VDRAdmin-AM will track timers it has already programmed "
 "automatically. This is useful if want to deactivate or delete timers that "
@@ -1171,7 +708,6 @@ msgstr ""
 "запрограммированные таймеры должны удаляться или деактивироваться в списке "
 "таймеров."
 
-#: ../template/default/help_at_timer_new.html:60
 msgid ""
 "The directory this AutoTimer will place the recordings in. If the name shall "
 "contain subdirectories, these have to be delimited by '~' (since the '/' "
@@ -1213,916 +749,306 @@ msgstr ""
 "ключевые слова, то Вы должны сами указать <strong>полное название</strong> "
 "записи! VDRAdmin-AM ничего указывать или дополнять не будет."
 
-#: ../template/default/prog_detail_form.html:39
-#: ../template/default/timer_new.html:86 ../template/default/rec_list.html:64
-#: ../template/default/help_timer_new.html:33
-msgid "Time"
-msgstr "Время"
+msgid "Configuration"
+msgstr "Настройки"
 
-#: ../template/default/prog_detail_form.html:67
-#, fuzzy
-msgid "Video tracks"
-msgstr "Видео дорожки"
-
-#: ../template/default/prog_detail_form.html:74
-#, fuzzy
-msgid "Audio tracks"
-msgstr "Аудио дорожки"
-
-#: ../template/default/vdr_cmds.html:6 ../template/default/vdr_cmds.html:17
-msgid "VDR Commands"
-msgstr "VDR Команды:"
-
-#: ../template/default/vdr_cmds.html:29
-msgid "Export channels as playlist:"
-msgstr ""
-
-#: ../template/default/vdr_cmds.html:37
-msgid "Number of lines to show:"
-msgstr "Количество показываемых строк:"
-
-#: ../template/default/vdr_cmds.html:43
-msgid "unlimited"
-msgstr "без ограничений"
-
-#: ../template/default/vdr_cmds.html:48
-msgid "SVDRP commands:"
-msgstr "SVDRP Команды:"
-
-#: ../template/default/vdr_cmds.html:51 ../template/default/vdr_cmds.html:63
-#: ../template/default/epgsearch_new.html:565
-#: ../template/default/rec_list.html:144
-msgid "Run"
-msgstr "Выполнить"
-
-#: ../template/default/vdr_cmds.html:51 ../template/default/vdr_cmds.html:63
-#: ../template/default/rec_list.html:144
-msgid "Really run this command?"
-msgstr "Действительно выполнить команду?"
-
-#: ../template/default/vdr_cmds.html:56
-msgid "Commands defined in commands.conf:"
-msgstr "Комманды из commands.conf:"
-
-#: ../template/default/vdr_cmds.html:76
-msgid "Output"
-msgstr "Вывод"
-
-#: ../template/default/config.html:30 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:32
 msgid "General Settings"
 msgstr "Общие настройки"
 
-#: ../template/default/config.html:36
 msgid "Template:"
 msgstr "Шаблон:"
 
-#: ../template/default/config.html:49 ../template/default/help_config.html:34
 msgid "Skin:"
 msgstr "Стиль:"
 
-#: ../template/default/config.html:61 ../template/default/help_config.html:36
 msgid "Login Page:"
 msgstr "Начальная страница:"
 
-#: ../template/default/config.html:72 ../template/default/help_config.html:38
 msgid "Number of channels to use:"
 msgstr "Количество используемых каналов:"
 
-#: ../template/default/config.html:77 ../template/default/help_config.html:40
 msgid "Local net (no login required):"
 msgstr "Локальная сеть (вход без авторизации):"
 
-#: ../template/default/config.html:82 ../template/default/help_config.html:42
 msgid "Language:"
 msgstr "Язык:"
 
-#: ../template/default/config.html:97 ../template/default/help_config.html:44
 msgid "Save settings on exit:"
 msgstr "Сохранять установки при выходе>"
 
-#: ../template/default/config.html:107 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:50
 msgid "VDR"
 msgstr "VDR"
 
-#: ../template/default/config.html:110 ../template/default/help_config.html:52
 msgid "Number of DVB cards:"
 msgstr "Количество DVB-карт:"
 
-#: ../template/default/config.html:114 ../template/default/help_config.html:54
 msgid "Path to recordings:"
 msgstr "Путь к записям:"
 
-#: ../template/default/config.html:118 ../template/default/help_config.html:56
 msgid "Path to configuration files:"
 msgstr "Путь к настройкам:"
 
-#: ../template/default/config.html:122 ../template/default/help_config.html:58
 msgid "Path to EPG images:"
 msgstr "Путь к EPG-картинкам:"
 
-#: ../template/default/config.html:129 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:64
 msgid "Identification"
 msgstr "Идентификация"
 
-#: ../template/default/config.html:132 ../template/default/help_config.html:66
 msgid "Username:"
 msgstr "Имя:"
 
-#: ../template/default/config.html:136 ../template/default/help_config.html:68
 msgid "Password:"
 msgstr "Пароль:"
 
-#: ../template/default/config.html:140 ../template/default/help_config.html:70
 msgid "Guest Account:"
 msgstr "Гостевой вход:"
 
-#: ../template/default/config.html:147 ../template/default/help_config.html:72
 msgid "Guest Username:"
 msgstr "Имя для гостя:"
 
-#: ../template/default/config.html:151 ../template/default/help_config.html:74
 msgid "Guest Password:"
 msgstr "Пароль для гостя:"
 
-#: ../template/default/config.html:161 ../template/default/help_config.html:82
+msgid "Timeline"
+msgstr "График времени"
+
 msgid "Hours:"
 msgstr "Часы:"
 
-#: ../template/default/config.html:165 ../template/default/help_config.html:84
 msgid "Times:"
 msgstr "Время:"
 
-#: ../template/default/config.html:166
 msgid "Also used for other EPG views!"
 msgstr "Также использовать для других EPG"
 
-#: ../template/default/config.html:169 ../template/default/config.html:233
-#: ../template/default/help_config.html:86
-#: ../template/default/help_config.html:116
 msgid "Tooltips:"
 msgstr "Подсказки:"
 
-#: ../template/default/config.html:183 ../template/default/config.html:350
-#: ../template/default/config.html:364 ../template/default/help_config.html:94
+msgid "AutoTimer"
+msgstr "Автотаймеры"
+
 msgid "Active:"
 msgstr "Активировано:"
 
-#: ../template/default/config.html:206
-#: ../template/default/help_config.html:104
 msgid "Send email after programming timer:"
 msgstr "Отправить E-Mail после запрограммированного таймера:"
 
-#: ../template/default/config.html:213
-#: ../template/default/help_config.html:106
 msgid "Send email as:"
 msgstr "E-Mail отправить как:"
 
-#: ../template/default/config.html:217
-#: ../template/default/help_config.html:108
 msgid "Send email to:"
 msgstr "Oтправить E-Mail к:"
 
-#: ../template/default/config.html:221
-#: ../template/default/help_config.html:110
 msgid "Mail server:"
 msgstr "Mail сервер:"
 
-#: ../template/default/config.html:225
-#: ../template/default/help_config.html:112
 msgid "SMTPAuth user:"
 msgstr "Имя пользователя для SMTPAuth:"
 
-#: ../template/default/config.html:229
-#: ../template/default/help_config.html:114
 msgid "SMTPAuth password:"
 msgstr "Пароль для SMTPAuth:"
 
-#: ../template/default/config.html:263
-#: ../template/default/help_config.html:132
 msgid "Tooltips in timeline:"
 msgstr "Подсказки в графике времени:"
 
-#: ../template/default/config.html:270
-#: ../template/default/help_config.html:134
 msgid "Tooltips in list:"
 msgstr "Подсказки в списке:"
 
-#: ../template/default/config.html:277
-#: ../template/default/help_config.html:136
 msgid "Add summary to new timers:"
 msgstr "Использовать описание из EPG для новых таймеров:"
 
-#: ../template/default/config.html:288 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:142
 msgid "Streaming"
 msgstr "Трансляция"
 
-#: ../template/default/config.html:291
-#: ../template/default/help_config.html:144
 msgid "Live Streaming:"
 msgstr "Трансляция LiveTV:"
 
-#: ../template/default/config.html:298
-#: ../template/default/help_config.html:146
 msgid "HTTP Port of Streamdev (also possible 3000/ts):"
 msgstr "Streamdev HTTP порт (также возможно 3000/ts):"
 
-#: ../template/default/config.html:302
-#: ../template/default/help_config.html:148
 msgid "Recordings Streaming:"
 msgstr "Транслировать записи (Streaming):"
 
-#: ../template/default/config.html:309
-#: ../template/default/help_config.html:150
 msgid "Path to VDR Recordings on your workstation:"
 msgstr "Путь к записям VDR на вашем компьютере:"
 
-#: ../template/default/config.html:313
-#: ../template/default/help_config.html:152
 msgid "MIME type for live streaming:"
 msgstr "Тип MIME для трансляции LiveTV:"
 
-#: ../template/default/config.html:317
-#: ../template/default/help_config.html:154
 msgid "Suffix for live streaming:"
 msgstr "Расширение файла для LiveTV:"
 
-#: ../template/default/config.html:321
-#: ../template/default/help_config.html:156
 msgid "MIME type for recordings streaming:"
 msgstr "Тип MIME для трансляции записей:"
 
-#: ../template/default/config.html:325
-#: ../template/default/help_config.html:158
 msgid "Suffix for recordings streaming:"
 msgstr "Расширение файла для трансляции записей:"
 
-#: ../template/default/config.html:330
 msgid "Bandwidth of Streams:"
 msgstr "Пропускная способность трансляции :"
 
-#: ../template/default/config.html:345 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:164
 #, fuzzy
 msgid "External Search"
 msgstr "Изменить поиск"
 
-#: ../template/default/config.html:354 ../template/default/config.html:368
 msgid "URL:"
 msgstr ""
 
-#: ../template/default/config.html:357 ../template/default/config.html:371
 #, fuzzy
 msgid "Title:"
 msgstr "Заголовок"
 
-#: ../template/default/config.html:362
 msgid "User-defined search:"
 msgstr ""
 
-#: ../template/default/config.html:379 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:178
 msgid "Expert"
 msgstr "Эксперт"
 
-#: ../template/default/config.html:382
-#: ../template/default/help_config.html:181
 msgid "Update EPG data in background:"
 msgstr ""
 
-#: ../template/default/config.html:389
-#: ../template/default/help_config.html:183
 msgid "Update EPG every:"
 msgstr ""
 
-#: ../template/default/config.html:394
-#: ../template/default/help_config.html:186
 msgid "Read EPG directly using epg.data:"
 msgstr "Читать EPG непосредственно из epg.data:"
 
-#: ../template/default/config.html:401
-#: ../template/default/help_config.html:188
 msgid "epg.data filename:"
 msgstr "Имя файла epg.data:"
 
-#: ../template/default/config.html:406
-#: ../template/default/help_config.html:191
 msgid "VFAT:"
 msgstr "VFAT:"
 
-#: ../template/default/config.html:416 ../template/default/help_config.html:30
-#: ../template/default/help_config.html:197
 msgid "Channel Selections"
 msgstr "Выбор канала"
 
-#: ../template/default/config.html:419
-#: ../template/default/help_config.html:202
 msgid "Show channels without EPG information:"
 msgstr ""
 
-#: ../template/default/config.html:427
 msgid "In \"Timeline\"?"
 msgstr "В \"Графике времени\"?"
 
-#: ../template/default/config.html:434
 msgid "In \"Channels\"?"
 msgstr "В \"Телегиде\"?"
 
-#: ../template/default/config.html:441
 msgid "In \"Playing Today\"?"
 msgstr "В \"Что будет сегодня?\"?"
 
-#: ../template/default/config.html:448
 msgid "In \"What's On Now\"?"
 msgstr "В \"Что идет сейчас\"?"
 
-#: ../template/default/config.html:457
 msgid "In \"AutoTimer\"?"
 msgstr "В \"Автотаймеры\"?"
 
-#: ../template/default/config.html:471
 msgid "In \"Watch TV\"?"
 msgstr "При \"просмотре TV\"?"
 
-#: ../template/default/config.html:502
 msgid "Apply"
 msgstr "Применить"
 
-#: ../template/default/epgsearch_new.html:6
-msgid "Define New Search"
-msgstr "Декларация нового поиска"
-
-#: ../template/default/epgsearch_new.html:6
-#: ../template/default/epgsearch_new.html:153
-msgid "Edit Search"
-msgstr "Изменить поиск"
-
-#: ../template/default/epgsearch_new.html:129
-msgid "Small search pattern.\\nDo you really want to use it?"
-msgstr "Маленькая маска поиска.\\n Действительно по ней искать?"
-
-#: ../template/default/epgsearch_new.html:136
-msgid ""
-"You didn't select at least one of\\ntitle, subtitle or description.\\nDo you "
-"really want to use this search?"
-msgstr ""
-
-#: ../template/default/epgsearch_new.html:153
-msgid "Add New Search"
-msgstr "Создать новый поиск"
-
-#: ../template/default/epgsearch_new.html:167
-msgid "Hide results"
-msgstr "Спрятать результаты"
-
-#: ../template/default/epgsearch_new.html:218
-msgid "Settings"
-msgstr "Настройки"
-
-#: ../template/default/epgsearch_new.html:223
-msgid "Search Term:"
-msgstr "Поиск по условию:"
-
-#: ../template/default/epgsearch_new.html:230
-msgid "Search Mode:"
-msgstr "Режим поиска:"
-
-#: ../template/default/epgsearch_new.html:233
-msgid "phrase"
-msgstr "фразы"
-
-#: ../template/default/epgsearch_new.html:234
-msgid "all words"
-msgstr "все слова"
-
-#: ../template/default/epgsearch_new.html:235
-msgid "at least one word"
-msgstr "в конце одно слово"
-
-#: ../template/default/epgsearch_new.html:236
-msgid "match exactly"
-msgstr "точный поиск"
-
-#: ../template/default/epgsearch_new.html:237
-msgid "regular expression"
-msgstr "регулярные выражения"
-
-#: ../template/default/epgsearch_new.html:238
-msgid "fuzzy"
-msgstr "неточно"
-
-#: ../template/default/epgsearch_new.html:241
-msgid "Tolerance for \"fuzzy\":"
-msgstr "погрешность для \"неточно\""
-
-#: ../template/default/epgsearch_new.html:248
-msgid "Match Case:"
-msgstr "Поиск условия:"
-
-#: ../template/default/epgsearch_new.html:265
-msgid "Use extended EPG info:"
-msgstr "Использовать расширенную ЕПГ информацию"
-
-#: ../template/default/epgsearch_new.html:300
-msgid "Use Channel:"
-msgstr "Использовать канал:"
-
-#: ../template/default/epgsearch_new.html:303
-#: ../template/default/epgsearch_new.html:403
-msgid "no"
-msgstr "нет"
-
-#: ../template/default/epgsearch_new.html:304
-msgid "interval"
-msgstr "интервал"
-
-#: ../template/default/epgsearch_new.html:305
-msgid "channel group"
-msgstr "группа каналов"
-
-#: ../template/default/epgsearch_new.html:306
-msgid "only FTA"
-msgstr "только FTA"
-
-#: ../template/default/epgsearch_new.html:309
-msgid "Range:"
-msgstr "Область:"
-
-#: ../template/default/epgsearch_new.html:323
-msgid "Channel Group:"
-msgstr "Группа каналов:"
-
-#: ../template/default/epgsearch_new.html:334
-msgid "Use Time:"
-msgstr "Использовать время:"
-
-#: ../template/default/epgsearch_new.html:340
-msgid "Start After:"
-msgstr "Старт после:"
-
-#: ../template/default/epgsearch_new.html:347
-msgid "Start Before:"
-msgstr "Старт раньше:"
-
-#: ../template/default/epgsearch_new.html:359
-msgid "Use Duration:"
-msgstr "Использовать продолжительность:"
-
-#: ../template/default/epgsearch_new.html:365
-msgid "Min. Duration:"
-msgstr "Мин. продолжительность:"
-
-#: ../template/default/epgsearch_new.html:368
-#: ../template/default/epgsearch_new.html:375
-msgid "hh:mm"
-msgstr "чч:мм"
-
-#: ../template/default/epgsearch_new.html:372
-msgid "Max. Duration:"
-msgstr "Макс. продолжительность:"
-
-#: ../template/default/epgsearch_new.html:384
-msgid "Use Day of Week:"
-msgstr "Использовать день недели:"
-
-#: ../template/default/epgsearch_new.html:400
-msgid "Use Blacklists:"
-msgstr "Использовать список запретов:"
-
-#: ../template/default/epgsearch_new.html:404
-msgid "selection"
-msgstr "выбор"
-
-#: ../template/default/epgsearch_new.html:419
-msgid "Use in Favorites Menu:"
-msgstr "Использовать фаворитное меню:"
-
-#: ../template/default/epgsearch_new.html:427
-msgid "Use as Search Timer:"
-msgstr "Использовать как поиск таймера:"
-
-#: ../template/default/epgsearch_new.html:432
-#: ../template/default/prog_detail.html:37 ../vdradmind.pl:2477
-msgid "record"
-msgstr "записать"
-
-#: ../template/default/epgsearch_new.html:433 ../vdradmind.pl:2479
-msgid "announce only"
-msgstr "только анонсы"
-
-#: ../template/default/epgsearch_new.html:434 ../vdradmind.pl:2481
-msgid "switch only"
-msgstr "только переключится"
-
-#: ../template/default/epgsearch_new.html:444
-msgid "Settings for action \"record\""
-msgstr "Настройки для \"записи\""
-
-#: ../template/default/epgsearch_new.html:447
-msgid "Series Recording:"
-msgstr "Запись серий:"
-
-#: ../template/default/epgsearch_new.html:459
-msgid "Delete Recordings After ... Days:"
-msgstr "Удалить записи после ... дней"
-
-#: ../template/default/epgsearch_new.html:462
-msgid "Keep ... Recordings:"
-msgstr "Сохранить ... Записей"
-
-#: ../template/default/epgsearch_new.html:467
-msgid "Pause, when ... recordings exist:"
-msgstr "Пауза, если ... запись существует:"
-
-#: ../template/default/epgsearch_new.html:473
-msgid "Avoid Repeats:"
-msgstr "Избегать повторений:"
-
-#: ../template/default/epgsearch_new.html:479
-msgid "Allowed Repeats:"
-msgstr "Разрешенные повторения:"
-
-#: ../template/default/epgsearch_new.html:482
-msgid "Only Repeats Within ... Days:"
-msgstr "Повторения только в течение ... Дней"
-
-#: ../template/default/epgsearch_new.html:487
-msgid "Compare:"
-msgstr "Сравнить:"
-
-#: ../template/default/epgsearch_new.html:533
-msgid "VPS:"
-msgstr "VPS:"
-
-#: ../template/default/epgsearch_new.html:544
-msgid "Settings for action \"switch only\""
-msgstr "Настройки для \"только переключится\""
-
-#: ../template/default/epgsearch_new.html:547
-msgid "Switch ... Minutes Before Start:"
-msgstr "Переключится за ... минут до старта\""
-
-#: ../template/default/epgsearch_new.html:560
-msgid "Save as template"
-msgstr "Запомнить шаблон"
-
-#: ../template/default/prog_list.html:44
-msgid "Go!"
-msgstr "Стартовать!"
-
-#: ../template/default/index.html:21
-msgid "Your Browser does not support frames!"
-msgstr "Ваш Броузер не поддерживает фреймы!"
-
-#: ../template/default/timer_new.html:6 ../template/default/timer_new.html:56
-msgid "Create New Timer"
-msgstr "Создать новый таймер"
-
-#: ../template/default/timer_new.html:70
-#: ../template/default/help_timer_new.html:26
-msgid "Timer Active:"
-msgstr "Активный таймер:"
-
-#: ../template/default/timer_new.html:80
-#: ../template/default/help_timer_new.html:28
-msgid "AutoTimer Checking:"
-msgstr "Автоматическая проверка таймера:"
-
-#: ../template/default/timer_new.html:84
-#: ../template/default/help_timer_new.html:31
-msgid "Transmission Identification"
-msgstr "Идентификатор передачи"
-
-#: ../template/default/timer_new.html:87 ../template/default/tv.html:84
-#: ../template/default/help_timer_new.html:35
-msgid "off"
-msgstr "выкл."
-
-#: ../template/default/timer_new.html:105
-#: ../template/default/help_timer_new.html:41
-msgid "Day Of Recording:"
-msgstr "День записи:"
-
-#: ../template/default/timer_new.html:120
-#: ../template/default/help_timer_new.html:49
-msgid "Start Time:"
-msgstr "Начало:"
-
-#: ../template/default/timer_new.html:127
-#: ../template/default/timer_new.html:140
-msgid "Buffer:"
-msgstr "Буфер:"
-
-#: ../template/default/timer_new.html:133
-#: ../template/default/help_timer_new.html:51
-msgid "End Time:"
-msgstr "Конец:"
-
-#: ../template/default/timer_new.html:146
-msgid "Use VPS:"
-msgstr "Использовать VPS:"
-
-#: ../template/default/timer_new.html:161
-#: ../template/default/help_timer_new.html:57
-msgid "Title of Recording:"
-msgstr "Название записи:"
-
-#: ../template/default/timer_new.html:166 ../template/default/rec_edit.html:38
-#: ../template/default/help_timer_new.html:59
-msgid "Summary:"
-msgstr "Сводная информация:"
-
-#: ../template/default/timer_new.html:166
-msgid "readonly"
-msgstr "не изменяемо"
-
-#: ../template/default/timer_new.html:172
-msgid "Timer has been set by AutoTimer pattern:"
-msgstr "Таймер выставлен Автотаймером:"
-
-#: ../template/default/noauth.html:5 ../template/default/noauth.html:14
-msgid "Authorization Required"
-msgstr "Требуется авторизация"
-
-#: ../template/default/noauth.html:15
-msgid ""
-"This server could not verify that you are authorized to access the document "
-"requested. Either you supplied the wrong credentials (e.g. bad password), or "
-"your browser doesn't understand how to supply the credentials required."
-msgstr ""
-"Сервер не может подтвердить, что Вы имеете право просмотра данного документа."
-"Вы или ввели неправильные данные или ваш броузер не может их передать"
-
-#: ../template/default/rec_list.html:20
-msgid "Total:"
-msgstr "Всего:"
-
-#: ../template/default/rec_list.html:20 ../template/default/rec_list.html:21
-msgid "h"
-msgstr "h"
-
-#: ../template/default/rec_list.html:21
-msgid "Free:"
-msgstr "Свободно:"
-
-#: ../template/default/rec_list.html:92
-msgid "Total"
-msgstr "Всего"
-
-#: ../template/default/rec_list.html:97
-msgid "New"
-msgstr "Новый"
-
-#: ../template/default/rec_list.html:110
-msgid "Play"
-msgstr "Воспроизведение"
-
-#: ../template/default/rec_list.html:113
-msgid "Cut"
-msgstr "Срез"
-
-#: ../template/default/rec_list.html:116 ../template/default/rec_edit.html:44
-msgid "Rename"
-msgstr "Переименовать"
-
-#: ../template/default/rec_list.html:118
-msgid "Delete recording?"
-msgstr "Удалить запись?"
-
-#: ../template/default/rec_list.html:134
-msgid "Refresh"
-msgstr "Обновить"
-
-#: ../template/default/rec_list.html:138
-msgid "Commands:"
-msgstr "Команды:"
-
-#: ../template/default/rec_list.html:148
-msgid "Delete Selected Recordings"
-msgstr "Удалить выбранные записи"
-
-#: ../template/default/rec_list.html:148
-msgid "Delete all selected recordings?"
-msgstr "Удалить все выбранные записи?"
-
-#: ../template/default/rec_list.html:155
-msgid "No recordings available"
-msgstr "Нет записей"
-
-#: ../template/default/tv.html:5 ../template/default/tv.html:80
 msgid "TV"
 msgstr "TV"
 
-#: ../template/default/tv.html:82
 msgid "Interval:"
 msgstr "Интервал:"
 
-#: ../template/default/tv.html:85 ../template/default/tv.html:86
-#: ../template/default/tv.html:87 ../template/default/tv.html:88
-#: ../template/default/tv.html:89 ../template/default/tv.html:90
-#: ../template/default/tv.html:91
 msgid "sec."
 msgstr "сек."
 
-#: ../template/default/tv.html:93 ../template/default/tv.html:100
 msgid "G"
 msgstr "G"
 
-#: ../template/default/tv.html:93 ../template/default/tv.html:100
 msgid "Grab the picture!"
 msgstr "Создать скриншот!"
 
-#: ../template/default/tv.html:94
 msgid "Size:"
 msgstr "Размер:"
 
-#: ../template/default/tv.html:102
 msgid "Open in separate window"
 msgstr "Открыть в отдельном окне"
 
-#: ../template/default/prog_summary.html:41
-#: ../template/default/prog_summary2.html:41 ../vdradmind.pl:5185
-msgid "at"
-msgstr "в"
+msgid "VDR Commands"
+msgstr "VDR Команды:"
 
-#: ../template/default/about.html:17
-msgid "Authors"
-msgstr "Авторы"
-
-#: ../template/default/about.html:20
-msgid "Current author (VDRAdmin-AM branch):"
-msgstr "Нынешний автор (VDRAdmin-AM branch):"
-
-#: ../template/default/about.html:24
-msgid "Original author (VDRAdmin):"
-msgstr "Первоначальный автор (VDRAdmin):"
-
-#: ../template/default/about.html:31
-msgid "Translation Team"
-msgstr "Группа переводчиков"
-
-#: ../template/default/about.html:34
-msgid "English:"
-msgstr "Английский:"
-
-#: ../template/default/about.html:38
-msgid "German:"
-msgstr "Немецкий:"
-
-#: ../template/default/about.html:42
-msgid "French:"
-msgstr "Французский:"
-
-#: ../template/default/about.html:43
-msgid "At the moment unmaintained, former translations by:"
-msgstr "В настоящее время не обновляется, прежние переводы от:"
-
-#: ../template/default/about.html:46
-msgid "Spanish:"
-msgstr "Испанский:"
-
-#: ../template/default/about.html:50
-msgid "Finnish:"
-msgstr "Финский:"
-
-#: ../template/default/about.html:54
-msgid "Dutch:"
-msgstr "Голландский:"
-
-#: ../template/default/about.html:58
-msgid "Russian:"
-msgstr "Русский"
-
-#: ../template/default/about.html:62
-msgid "Czech:"
-msgstr "Чешский:"
-
-#: ../template/default/about.html:66
-msgid "Italian:"
+msgid "Export channels as playlist:"
 msgstr ""
 
-#: ../template/default/about.html:73
-#, fuzzy
-msgid "Information"
-msgstr "Информация"
+msgid "Number of lines to show:"
+msgstr "Количество показываемых строк:"
 
-#: ../template/default/about.html:76
-msgid "VDRAdmin-AM version:"
-msgstr "Версия VDRAdmin-AM:"
+msgid "unlimited"
+msgstr "без ограничений"
 
-#: ../template/default/about.html:80
-msgid "VDR version:"
-msgstr "Версия VDR:"
+msgid "SVDRP commands:"
+msgstr "SVDRP Команды:"
 
-#: ../template/default/about.html:84
-msgid "Supported features in VDR:"
-msgstr "Поддерживаемые улучшения в VDR:"
+msgid "Really run this command?"
+msgstr "Действительно выполнить команду?"
 
-#: ../template/default/about.html:91
-msgid ""
-"EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search."
-"html\" target=\"_blank\">EPGSearch Plugin</a>)"
-msgstr ""
-"EPG Поиск (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search."
-"html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgid "Commands defined in commands.conf:"
+msgstr "Комманды из commands.conf:"
 
-#: ../template/default/about.html:97
-msgid ""
-"LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-"
-"plugin\" target=\"_blank\">Streamdev Plugin</a>)"
-msgstr ""
-"LiveTV Streaming (<a href=\"http://www.free-x.de/wiki/index.php/Streamdev-"
-"plugin\" target=\"_blank\">Streamdev Plugin</a>"
+msgid "Output"
+msgstr "Вывод"
 
-#: ../template/default/about.html:103
-msgid ""
-"Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/"
-"\" target=\"_blank\">Liemikuutio Patch</a>)"
-msgstr ""
-"Переименование записей (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/"
-"patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
-
-#: ../template/default/about.html:110
-msgid "Getting Help and Reporting Bugs"
-msgstr "Получить помощь и сообщить об ошибке"
-
-#: ../template/default/about.html:115
-msgid ""
-"If you need help please first try to use the online help you'll find on some "
-"pages. You can access it by clicking <img src=\"bilder/help.png\" alt=\"\" /"
-">."
-msgstr ""
-"Если Вам нужна помощь по данной программе, то обратитесь вначале к "
-"интерактивной помощи, которая доступна на некоторых страницах. Вы можете "
-"вызывать ее нажимая на <img src=\"bilder/help.png\" alt=\"\" />."
-
-#: ../template/default/about.html:116
-msgid ""
-"If this doesn't provide the information you need you can try to get help at "
-"<a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> if you "
-"understand German language. Please use the announcement thread if possible, "
-"search for:"
-msgstr ""
-"Если встроенная справка не дала Вам необходимую информацию, тогда  Вы можете "
-"попытаться получить помощь в <a href=\"http://www.allrussian.info/board.php?"
-"boardid=61 \"target=\"_blank\">Allrussian VDR форуме</a>. Ищите для этого:"
-
-#: ../template/default/about.html:117
-msgid ""
-"If you think you have found a bug please check that it's a new one and "
-"report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page."
-"php\" target=\"_blank\">VDRAdmin-AM BugTracking system</a>."
-msgstr ""
-"Если Вы думаете, что нашли ошибку, тогда первым делом проверьте в  <a href="
-"\"http://www.vdr-developer.org/mantisbt/main_page.php\" target=\"_blank"
-"\">VDRAdmin-AM BugTracking системе</a>. Если ее там нет, тогда отправьте "
-"рапорт о ней."
-
-#: ../template/default/rec_edit.html:6 ../template/default/rec_edit.html:19
-msgid "Rename Recording"
-msgstr "Переименовать запись"
-
-#: ../template/default/rec_edit.html:26
-msgid "Original Name of Recording:"
-msgstr "Старое название записи:"
-
-#: ../template/default/rec_edit.html:30
-msgid "New Name of Recording:"
-msgstr "Новое название записи:"
-
-#: ../template/default/rec_edit.html:34
-msgid "Subtitle:"
-msgstr "Подзаголовок:"
-
-#: ../template/default/prog_detail.html:27
 msgid "close"
 msgstr "закрыть"
 
-#: ../template/default/prog_detail.html:32
 msgid "view"
 msgstr "переключить"
 
-#: ../template/default/prog_detail.html:41
 msgid "search"
 msgstr "Повторения"
 
-#: ../template/default/prog_detail.html:44
 #, fuzzy
 msgid "edit"
 msgstr "Редактировать"
 
-#: ../template/default/prog_detail.html:66
 msgid "Video tracks:"
 msgstr "Видео дорожки"
 
-#: ../template/default/prog_detail.html:72
 msgid "Audio tracks:"
 msgstr "Аудио дорожки"
 
-#: ../template/default/help_timer_list.html:25
+msgid "now"
+msgstr "сейчас"
+
+msgid "to"
+msgstr "до"
+
+msgid "at:"
+msgstr "в:"
+
+msgid "You need JavaScript to use the timeline!"
+msgstr "Вам нужен JavaScript для использования timeline!"
+
+msgid "Playing Today?"
+msgstr "Что будет сегодня?"
+
+msgid "EPG Search"
+msgstr "Поиск по ЕПГ"
+
+msgid "Recordings"
+msgstr "Записи"
+
+msgid "Remote Control"
+msgstr "Пульт ДУ"
+
+msgid "Watch TV"
+msgstr "Телевизор"
+
+msgid "Commands"
+msgstr "Команды"
+
+msgid "About"
+msgstr "O"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Your Browser does not support frames!"
+msgstr "Ваш Броузер не поддерживает фреймы!"
+
 msgid ""
 "<p>Here you will find a listing of timers known to VDR.</p><p>On top you "
 "will find a chart showing a day's timers graphically. This provides an quick "
@@ -2198,11 +1124,162 @@ msgstr ""
 "удалены все выбранные Вами таймеры.</p><p>Вы можете также активироватьили "
 "деактивировать выбранные Вами таймеры.</p>"
 
-#: ../template/default/help_timer_new.html:24
+msgid "No Help Available"
+msgstr "Помощь недоступна"
+
+msgid ""
+"<p>No help available yet. For adding or changing text please contact <a href="
+"\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>."
+"</p>"
+msgstr ""
+"<p>До сих пор нет помощи. Для создания или исправления текста свяжитесь с<a "
+"href=\"mailto:freex@free-x.de\">freex@free-x.de</a>.</p>"
+
+#, fuzzy
+msgid "Edit EPG"
+msgstr "Редактировать"
+
+#, fuzzy
+msgid ""
+"<p>Here you can edit the descriptive fields of an existing EPG entry.</p>"
+msgstr "<p><p>Здесь Вы можете редактировать установки таймера.</p>"
+
+#, fuzzy
+msgid "Channel (readonly)"
+msgstr "Группа каналов:"
+
+msgid "This is the channel of the EPG entry. It cannot be changed."
+msgstr ""
+
+#, fuzzy
+msgid "Time (readonly)"
+msgstr "не изменяемо"
+
+msgid "This is the start and end time of the entry. It cannot be changed."
+msgstr ""
+
+msgid ""
+"Change this string to give this EPG Entry a new title. It must consist of "
+"only one line of text."
+msgstr ""
+
+msgid ""
+"Change this string to give this EPG Entry a new subtitle. It must consist of "
+"only one line of text."
+msgstr ""
+
+msgid ""
+"Change the text in this field to edit the description of this entry. The "
+"text can consist of one or more lines."
+msgstr ""
+
+#, fuzzy
+msgid "VPS (readonly)"
+msgstr "не изменяемо"
+
+msgid ""
+"If available this field shows the vps time of the EPG entry. It cannot be "
+"changed."
+msgstr ""
+
+#, fuzzy
+msgid "Video tracks (readonly)"
+msgstr "Видео дорожки"
+
+msgid "If available this field shows the video track(s). It cannot be changed."
+msgstr ""
+
+#, fuzzy
+msgid "Audio tracks (readonly)"
+msgstr "Аудио дорожки"
+
+msgid "If available this field shows the audio track(s). It cannot be changed."
+msgstr ""
+
+msgid "Go!"
+msgstr "Стартовать!"
+
+msgid "Playing Today"
+msgstr "Что будет сегодня?"
+
+msgid "starting at"
+msgstr "Начать в"
+
+msgid "Add New AutoTimer"
+msgstr "Создать новый Автотаймер"
+
+msgid "oneshot"
+msgstr "однократно"
+
+msgid "Test"
+msgstr "Тест"
+
+msgid "Broadcasted"
+msgstr "Вещялось"
+
+msgid "Stored in"
+msgstr "Сохраненно в"
+
+msgid ""
+"<p>Here you will find a listing of automatic timers (AutoTimer) known to "
+"VDRAdmin-AM.</p><p>The list shows some information on AutoTimers. You can "
+"change the list's sorting by clicking the columns heading.</p><p>For each "
+"AutoTimer you have the following options:<dl><dt>Set its state</dt><dd>By "
+"clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the "
+"activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing "
+"the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</"
+"dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" "
+"alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer "
+"you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></"
+"p><p>Each AutoTimer's state is indicated by differently coloured images:<br /"
+"><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> "
+"AutoTimer is OK and will automatically program matching broadcasts.<br /"
+"><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> "
+"AutoTimer is not active.</p><p>In addition to these functions you can add a "
+"new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value="
+"\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at "
+"once by checking the box in the last column of those timers and clicking "
+"<input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/"
+">.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update"
+"\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and "
+"check for matching AutoTimers.</p>"
+msgstr ""
+"<p>Здесь Вы найдeте список всех автотаймеров, которые знает VDRAdmin-AM.</"
+"p><p>Список показывает Вам несколько сведений о Автотаймерах. Вы можете "
+"изменить сортировку списка, нажав на желаемую надпись колонки. </p><p>Для "
+"каждого Автотаймера Вы имеете следующие возможности:<dl><dt>Изменение "
+"состояния</dt><dd> Вы можете активировать или деактивировать Автотаймеры "
+"переключив кнопкой мыши \"Да\" или \"Нет\" в столбце \"Активный\".</"
+"dd><dt>Быстрое уведомление его приоритета и срока хранения</dt><dd>Для этого "
+"нужно навести курсор мышки на название Автотаймера.</dd><dt>Редактирование "
+"Автотаймера</dt><dd>Вы можете редактировать Автотаймер, щeлкнув курсором на "
+"<img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Удаление Автотаймера</"
+"dt><dd>Удалить Автотаймер можно нажав на <img src=\"bilder/delete.png\" alt="
+"\"delete\" />.</dd></dl></p><p>Статус каждого Автотаймера показывается "
+"определенным цветом:<br /><img src=\"bilder/poempl_gruen.png\" alt=\"on\" "
+"align=\"middle\" /> Автотаймер в порядке и совподающие передачи будут "
+"запрограммированы.<br /><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" "
+"align=\"middle\" /> Автотаймер не активен.</p><p>Дополнительно к этим "
+"функциям Вы можете создать новый Автотаймер , нажав курсором на <input type="
+"\"submit\" class=\"submit\" value=\"Новый Автотаймер\"/>.В нижнем крае "
+"экрана Вы найдeте кнопку <input type=\"submit\" class=\"submit\" value="
+"\"Удалить выделенные Автотаймеры\"/>, тем самым будут удалены все выбранные "
+"Вами Автотаймеры.</p><p>С помощью кнопки <input type=\"submit\" class="
+"\"submit\" value=\"Мануальное обновление\"/> Вы можете заставить VDRAdmin-AM "
+"связываться с VDR для обновления данных EPG и поиска совподающих "
+"Автотаймеров.</p>"
+
+#, fuzzy
+msgid "Video tracks"
+msgstr "Видео дорожки"
+
+#, fuzzy
+msgid "Audio tracks"
+msgstr "Аудио дорожки"
+
 msgid "<p>Here you can edit a timer's settings.</p>"
 msgstr "<p><p>Здесь Вы можете редактировать установки таймера.</p>"
 
-#: ../template/default/help_timer_new.html:27
 msgid ""
 "Activate or deactivate this timer. Deactivated timers are still stored in "
 "the timer list so that they can be activated again, but they do not record "
@@ -2212,7 +1289,6 @@ msgstr ""
 "вестись дальше в списке имеющийхся в распоряжении таймеров так, что их можно "
 "активировать снова.Между тем Вы ничто не записываете."
 
-#: ../template/default/help_timer_new.html:29
 msgid ""
 "Depending on how this timer has been programmed you have up to three "
 "possible settings:"
@@ -2220,7 +1296,6 @@ msgstr ""
 "В зависимости от того как таймер программировался Вы имеете на выбор 3 "
 "варианта:"
 
-#: ../template/default/help_timer_new.html:32
 msgid ""
 "Monitor this timer using the identification provided in the EPG. Please note "
 "that this only works if the provided identification is a fix and unique "
@@ -2231,19 +1306,15 @@ msgstr ""
 "идентификации в EPG твердая и однозначная!  Эта опция недоступна, если "
 "таймер программировался в VDR."
 
-#: ../template/default/help_timer_new.html:34
 msgid "Monitor this timer using the start and stop time."
 msgstr "Таймер контролируется посредством его времени запуска и остановки."
 
-#: ../template/default/help_timer_new.html:36
 msgid "Do not monitor this timer."
 msgstr "Таймер не контролируется."
 
-#: ../template/default/help_timer_new.html:40
 msgid "The channel to record."
 msgstr "Записываемый канал."
 
-#: ../template/default/help_timer_new.html:42
 msgid ""
 "The day when the timer should get active. You can enter the day in two "
 "formats:<ul><li>Two digits (DD). This will use the current month and year.</"
@@ -2260,20 +1331,17 @@ msgstr ""
 "под текстовым полем. Просто выделите поле с названием дня недели, по которым "
 "таймер должен срабатывать."
 
-#: ../template/default/help_timer_new.html:50
 msgid ""
 "This is the time when the timer should start recording. The first text field "
 "is for \"hour\", the second for \"minute\"."
 msgstr ""
 "Это - время начала записи. Первое текстовое поле для часов, второе для минут."
 
-#: ../template/default/help_timer_new.html:52
 msgid ""
 "This is the time when the timer should stop recording. The first text field "
 "is for \"hour\", the second for \"minute\"."
 msgstr "Время конца записи. Первое текстовое поле для часов, второе для минут."
 
-#: ../template/default/help_timer_new.html:58
 msgid ""
 "The <strong>file name</strong> this timer will give to a recording. If the "
 "name shall contain subdirectories, these have to be delimited by '~' (since "
@@ -2294,7 +1362,6 @@ msgstr ""
 "недоступны, то  для <strong>TITLE</strong> будет исползоваться название "
 "канала, а для <strong>EPISODE</strong> используется пробел."
 
-#: ../template/default/help_timer_new.html:60
 msgid ""
 "Arbitrary text that describes the recording made by this timer. If this "
 "field is not empty, its contents will be written into the <span class="
@@ -2305,20 +1372,278 @@ msgstr ""
 "поле заполнено, то текст будет записан в <span class=\"ref_file\">summary."
 "vdr</span> или в <span class=\"ref_file\">info.vdr</span>  записи."
 
-#: ../template/default/help_no.html:6 ../template/default/help_no.html:17
-msgid "No Help Available"
-msgstr "Помощь недоступна"
+msgid "New AutoTimer"
+msgstr "Новый Автотаймер"
 
-#: ../template/default/help_no.html:21
-msgid ""
-"<p>No help available yet. For adding or changing text please contact <a href="
-"\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>."
-"</p>"
+msgid "Force Update"
+msgstr "Произвести обновление"
+
+msgid "Delete Selected AutoTimers"
+msgstr "Удалить выбранный  Автотаймер"
+
+msgid "No AutoTimers defined!"
+msgstr "AutoTimer не установлен"
+
+msgid "License"
 msgstr ""
-"<p>До сих пор нет помощи. Для создания или исправления текста свяжитесь с<a "
-"href=\"mailto:freex@free-x.de\">freex@free-x.de</a>.</p>"
 
-#: ../template/default/help_config.html:28
+msgid "Authors"
+msgstr "Авторы"
+
+msgid "Current author (VDRAdmin-AM branch):"
+msgstr "Нынешний автор (VDRAdmin-AM branch):"
+
+msgid "Original author (VDRAdmin):"
+msgstr "Первоначальный автор (VDRAdmin):"
+
+msgid "Translation Team"
+msgstr "Группа переводчиков"
+
+msgid "English:"
+msgstr "Английский:"
+
+msgid "German:"
+msgstr "Немецкий:"
+
+msgid "French:"
+msgstr "Французский:"
+
+msgid "At the moment unmaintained, former translations by:"
+msgstr "В настоящее время не обновляется, прежние переводы от:"
+
+msgid "Spanish:"
+msgstr "Испанский:"
+
+msgid "Finnish:"
+msgstr "Финский:"
+
+msgid "Dutch:"
+msgstr "Голландский:"
+
+msgid "Russian:"
+msgstr "Русский"
+
+msgid "Czech:"
+msgstr "Чешский:"
+
+msgid "Italian:"
+msgstr ""
+
+#, fuzzy
+msgid "Information"
+msgstr "Информация"
+
+msgid "VDRAdmin-AM version:"
+msgstr "Версия VDRAdmin-AM:"
+
+msgid "VDR version:"
+msgstr "Версия VDR:"
+
+msgid "Supported features in VDR:"
+msgstr "Поддерживаемые улучшения в VDR:"
+
+msgid ""
+"EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search."
+"html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgstr ""
+"EPG Поиск (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search."
+"html\" target=\"_blank\">EPGSearch Plugin</a>)"
+
+msgid ""
+"LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-"
+"plugin\" target=\"_blank\">Streamdev Plugin</a>)"
+msgstr ""
+"LiveTV Streaming (<a href=\"http://www.free-x.de/wiki/index.php/Streamdev-"
+"plugin\" target=\"_blank\">Streamdev Plugin</a>"
+
+msgid ""
+"Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/"
+"\" target=\"_blank\">Liemikuutio Patch</a>)"
+msgstr ""
+"Переименование записей (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/"
+"patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
+
+msgid "Getting Help and Reporting Bugs"
+msgstr "Получить помощь и сообщить об ошибке"
+
+msgid ""
+"If you need help please first try to use the online help you'll find on some "
+"pages. You can access it by clicking <img src=\"bilder/help.png\" alt=\"\" /"
+">."
+msgstr ""
+"Если Вам нужна помощь по данной программе, то обратитесь вначале к "
+"интерактивной помощи, которая доступна на некоторых страницах. Вы можете "
+"вызывать ее нажимая на <img src=\"bilder/help.png\" alt=\"\" />."
+
+msgid ""
+"If this doesn't provide the information you need you can try to get help at "
+"<a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> if you "
+"understand German language. Please use the announcement thread if possible, "
+"search for:"
+msgstr ""
+"Если встроенная справка не дала Вам необходимую информацию, тогда  Вы можете "
+"попытаться получить помощь в <a href=\"http://www.allrussian.info/board.php?"
+"boardid=61 \"target=\"_blank\">Allrussian VDR форуме</a>. Ищите для этого:"
+
+msgid ""
+"If you think you have found a bug please check that it's a new one and "
+"report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page."
+"php\" target=\"_blank\">VDRAdmin-AM BugTracking system</a>."
+msgstr ""
+"Если Вы думаете, что нашли ошибку, тогда первым делом проверьте в  <a href="
+"\"http://www.vdr-developer.org/mantisbt/main_page.php\" target=\"_blank"
+"\">VDRAdmin-AM BugTracking системе</a>. Если ее там нет, тогда отправьте "
+"рапорт о ней."
+
+msgid ""
+"<p>Here you will find a listing of recordings known to VDR. The headline "
+"will also show you VDR's total and free disk space.</p><p>The listing "
+"showing you some information on the recordings. You can change the list's "
+"sorting by clicking the columns heading. Above the list you'll see the "
+"navigation path. If you want to view the contents of previous folders you'll "
+"have to click on its name in that path.</p><p>Each row contains this "
+"information:<dl><dt>Date</dt><dd>The date when the recording has been done. "
+"In case of folders this will show the number of recordings the folder "
+"contains.</dd><dt>Time</dt><dd>The time when the recording has been done. In "
+"case of folders this will show the number of <strong>new</strong> recordings "
+"the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. "
+"Click it to show the recording's summary or descend into the folder.</"
+"dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename "
+"a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> "
+"SVDRPort command which is no core VDR feature but is available through a "
+"patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span "
+"class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete "
+"(<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a "
+"recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)"
+"</dt><dd>This column is only shown if you activated and configured <span "
+"class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu"
+"\">Configuration</span> menu. You can watch the recording at your "
+"workstation.</dd></dl></p><p>In addition to these functions you can delete a "
+"number of recordings at once by checking the box in the last but one column "
+"of those recordings and clicking <input type=\"submit\" class=\"submit\" "
+"value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the "
+"VDR's configuration files and have entries in VDR's <span class=\"ref_file"
+"\">reccmds.conf</span> you can run those commands for the selected recording "
+"by selecting the wanted command in the select box locate next to <span class="
+"\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class="
+"\"submit\" value=\"Run\"/> button.</p><p>Use <input type=\"submit\" class="
+"\"submit\" value=\"Refresh\"/> to force reloading of VDR's recordings "
+"listing.</p>"
+msgstr ""
+"<p>Здесь Вы видите список всех записей, которые доступны в VDR. В верхнем "
+"колонтитуле Вы можете увидеть общее и свободное место на жестком диске VDR. "
+"</p><p>Этот список показывает Вам несколько сведений о записях. Вы можете "
+"изменять сортировку, нажимая на заголовки столбцов. Над списком Вы видите "
+"путь навигации. Если Вы хотите увидеть содержание ранее посещенного "
+"каталога, то нажмите просто на название каталога в этом пути.</p><p>Каждая "
+"строка содержит следущую информацию:<dl><dt>Дата</dt><dd>Дата когда была "
+"произведена запись. В случае каталога здесь показывается количество "
+"занесeнных записей.</dd><dt>Время</dt><dd>Время когда была произведена "
+"запись. В случае каталога здесь показывается количество <strong>новых</"
+"strong> записей в этом каталоге.</dd><dt>Название</dt><dd>Название записи "
+"или каталога. Нажмите на него, чтобы увидеть резюме записи или, чтобы "
+"перейти в каталог.</dd><dt>Переименовывать (<img src=\"bilder/edit.png\"alt="
+"\"edit\" />)</dt><dd>Переименовать запись.<br /><h4>Внимание:</h4>Это "
+"функционирует только, если VDR понимает SVDRPort-команду <u>RENR</u>. Это не "
+"содержится в стандартном VDR, но может добавляться патчем. <span class="
+"\"ref_file\">vdr-aio21_svdrprename.patch</span> и <span class=\"ref_file"
+"\">enAIO-v2.2+</span> предлагают эту команду.</dd><dt>Удалять (<img src="
+"\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Удаление записи.</"
+"dd><dt>Транслировать (<img src=\"bilder/stream.png\" alt=\"stream\" />)</"
+"dt><dd>Эта колонка показывается только, если Вы активировали и "
+"откoнфигурировали <span class=\"ref_label\">Транслировать записи</span> на "
+"странице <span class=\"ref_menu\">Конфигурация</span>. Потом Вы можете "
+"просматривать записи на вашем компьютере.</dd></dl></p><p>Дополнительно к "
+"этим функциям Вы можете удалять несколько записей одновременно, установив "
+"галочку в предпоследнем столбце этих записей и щeлкнув затем на кнопку "
+"<input type=\"submit\" class=\"submit\" value=\"Удалить выбранные записи\"/>."
+"</p><p>Если Вы указали путь к конфигурационным файлам VDR и там есть файл "
+"<span class=\"ref_file\">reccmds.conf</span>, тогда Вы можете запускать "
+"занесeнные там  команды для выбранных записей. Для этого выберете желаемую "
+"команду возле <span class=\"ref_label\">Команды:</span> и нажмите на <input "
+"type=\"submit\" class=\"submit\" value=\"Выполнить\"/>.</p><p>Кнопкой <input "
+"type=\"submit\" class=\"submit\" value=\"Refresh\"/> Вы можете перезагрузить "
+"список записей VDR.</p>"
+
+msgid "Total:"
+msgstr "Всего:"
+
+msgid "h"
+msgstr "h"
+
+msgid "Free:"
+msgstr "Свободно:"
+
+msgid "Total"
+msgstr "Всего"
+
+msgid "New"
+msgstr "Новый"
+
+msgid "Play"
+msgstr "Воспроизведение"
+
+msgid "Cut"
+msgstr "Срез"
+
+msgid "Delete recording?"
+msgstr "Удалить запись?"
+
+msgid "Refresh"
+msgstr "Обновить"
+
+msgid "Commands:"
+msgstr "Команды:"
+
+msgid "Delete Selected Recordings"
+msgstr "Удалить выбранные записи"
+
+msgid "Delete all selected recordings?"
+msgstr "Удалить все выбранные записи?"
+
+msgid "No recordings available"
+msgstr "Нет записей"
+
+msgid "EPG search"
+msgstr "ЕПГ поиск"
+
+#, fuzzy
+msgid "Use template"
+msgstr "Запомнить шаблон"
+
+msgid "New Search"
+msgstr "Новый поиск"
+
+msgid "Action"
+msgstr "Действие"
+
+msgid "From"
+msgstr "С"
+
+msgid "To"
+msgstr "К"
+
+msgid "Search pattern"
+msgstr "Поисковые признаки"
+
+msgid "Find"
+msgstr "Поиск"
+
+msgid "Show Favorites"
+msgstr "Показать фавориты"
+
+msgid "Delete Selected Searches"
+msgstr "Удалить выбранные поиски"
+
+msgid "Delete all selected searches?"
+msgstr "Удалить все выбранные поиски?"
+
+msgid "Execute Selected Searches"
+msgstr "Выполнить выбранные поиски"
+
+msgid "Duration"
+msgstr "Продолжительность"
+
 msgid ""
 "<p>Here you can change general settings and base settings for timers, "
 "AutoTimers, channel selection and streaming parameters.</p>"
@@ -2326,16 +1651,13 @@ msgstr ""
 "<p>Здесь Вы можете изменить общие и основные параметры таймеров, "
 "автотаймеров, выбор канала и трансляции (Streaming).</p>"
 
-#: ../template/default/help_config.html:35
 msgid "The skin you want to use."
 msgstr "Используемый стиль."
 
-#: ../template/default/help_config.html:37
 msgid "The page you want to see at first connect to VDRAdmin-AM."
 msgstr ""
 "Страница, которую Вы хотите увидеть при первом соединении с VDRAdmin-AM"
 
-#: ../template/default/help_config.html:39
 msgid ""
 "VDRAdmin-AM will load the given number of channels from VDR and present only "
 "those in any fields where channels can be selected. This also limits the EPG "
@@ -2350,7 +1672,6 @@ msgstr ""
 "обработки.<strong>0</strong> выключает эту функцию и VDRAdmin-AM использует "
 "все доступные каналы."
 
-#: ../template/default/help_config.html:41
 msgid ""
 "Here you can specify an IP address or range that can login without providing "
 "login information. For example: \"192.168.0.0/24\" will include any IP "
@@ -2362,12 +1683,10 @@ msgstr ""
 "который начинается с \"192.168.0\".\"192.168.0.123/32\" содержит только этот "
 "IP \"192.168.0.123\"."
 
-#: ../template/default/help_config.html:43
 msgid "Here you can set the localization VDRAdmin-AM should use."
 msgstr ""
 "Здесь Вы устанавливаете локализацию, которую должен использовать VDRAdmin-AM."
 
-#: ../template/default/help_config.html:45
 msgid ""
 "With this option the settings will be saved if VDRAdmin-AM exits. This will "
 "also save settings not available on the \"Configuration\" menu like interval "
@@ -2376,19 +1695,9 @@ msgstr ""
 "С этой опцией установки будут запомнены. Они также будут содержать некоторые "
 "другие опции не из меню \"Конфигурация\"."
 
-#: ../template/default/help_config.html:47
-#: ../template/default/help_config.html:61
-#: ../template/default/help_config.html:77
-#: ../template/default/help_config.html:89
-#: ../template/default/help_config.html:119
-#: ../template/default/help_config.html:139
-#: ../template/default/help_config.html:161
-#: ../template/default/help_config.html:194
-#: ../template/default/help_config.html:205
 msgid "Top"
 msgstr "вверх"
 
-#: ../template/default/help_config.html:53
 msgid ""
 "The number of DVB cards VDR can access. Depending on this value VDRAdmin-AM "
 "will calculate critical timers in the <span class=\"ref_menu\">Timer</span> "
@@ -2398,7 +1707,6 @@ msgstr ""
 "значения, VDRAdmin-AM вычислит конфликтующие таймеры в меню <span class="
 "\"ref_menu\">Таймеры</span> "
 
-#: ../template/default/help_config.html:55
 msgid ""
 "The path to VDR's recordings. It's used so that VDRAdmin-AM can locate the "
 "recordings when using <span class=\"ref_label\">Recordings Streaming</span> "
@@ -2410,7 +1718,6 @@ msgstr ""
 "\"ref_label\">Транслировать запись</span> и <span class=\"ref_file\">reccmds."
 "conf</span> в меню <span class=\"ref_menu\">Записи</span> "
 
-#: ../template/default/help_config.html:57
 msgid ""
 "The path where VDR's configuration files are located. If this directory "
 "contains the file <span class=\"ref_file\">reccmds.conf</span> its content "
@@ -2421,20 +1728,16 @@ msgstr ""
 "class=\"ref_file\">reccmds.conf</span> ,то содержимое этого файла будет "
 "доступным в меню <span class=\"ref_menu\">Записи</span> "
 
-#: ../template/default/help_config.html:59
 msgid "The path where the EPG images are stored."
 msgstr "Путь, где сохранены изображения EPG."
 
-#: ../template/default/help_config.html:67
 msgid ""
 "The username for the main user, i.e. the user having the most privileges."
 msgstr "Имя главного пользователя, имеющего права на любые изменения."
 
-#: ../template/default/help_config.html:69
 msgid "The main user's password."
 msgstr "Пароль главного пользователя."
 
-#: ../template/default/help_config.html:71
 msgid ""
 "If you want a user account having only limited privileges, this is for you. "
 "The guest user cannot modify anything, it's only allowed to view the EPG, "
@@ -2444,19 +1747,15 @@ msgstr ""
 "Гостевой пользователь не может ничего изменять, ему дозволен только просмотр "
 "Записей, Таймеров, Автотаймеров и EPG."
 
-#: ../template/default/help_config.html:73
 msgid "The username for the guest user."
 msgstr "Имя пользователя для гостевого пользователя ."
 
-#: ../template/default/help_config.html:75
 msgid "The guest user's password."
 msgstr "Пароль гостевого пользователя."
 
-#: ../template/default/help_config.html:83
 msgid "The number of hours to show in the timeline."
 msgstr "Число часов, которые будут отображаться в графике времени."
 
-#: ../template/default/help_config.html:85
 msgid ""
 "A comma separated list of times in <strong>hh:mm</strong> format that appear "
 "in the selectbox placed at the top."
@@ -2464,16 +1763,12 @@ msgstr ""
 "Список времЈн (через запятую если несколько)в формате <strong>hh:mm</"
 "strong>, который доступен вверху страницы."
 
-#: ../template/default/help_config.html:87
-#: ../template/default/help_config.html:117
 msgid "Here you can (de-)activate the tooltips."
 msgstr "Здесь Вы можете вкл. или выкл. подсказки."
 
-#: ../template/default/help_config.html:95
 msgid "Activate or deactivate the AutoTimer function."
 msgstr "Активирует или деактивирует функцию Автотаймера."
 
-#: ../template/default/help_config.html:105
 msgid ""
 "VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a "
 "timer has been programmed if you enable this feature."
@@ -2482,19 +1777,15 @@ msgstr ""
 "раз E-Mail, если Автотаймер нашeл подходящию передачу изапрограммировал "
 "таймер"
 
-#: ../template/default/help_config.html:107
 msgid "Here you set the sending email address of the generated email."
 msgstr "Здесь Вы устанавливаете E-mail адресс для сгенерированных E-mail"
 
-#: ../template/default/help_config.html:109
 msgid "The email address the email is sent to."
 msgstr "E-Mail адрес куда будет отправляться E-Mail."
 
-#: ../template/default/help_config.html:111
 msgid "The outgoing mail server."
 msgstr "Сервер для выходящих электронных писем."
 
-#: ../template/default/help_config.html:113
 msgid ""
 "If you need to authenticate yourself at the outgoing mail server, you have "
 "to supply the username and the password below. Leaving this field empty will "
@@ -2504,19 +1795,15 @@ msgstr ""
 "имя и пароль пользователя.Оставте поле SMTPAuth  пустым, если авторизации не "
 "требуется."
 
-#: ../template/default/help_config.html:115
 msgid "The password for the SMTPAuth user."
 msgstr "Пароль для пользователя SMTPAuth."
 
-#: ../template/default/help_config.html:133
 msgid "Here you can (de-)activate the tooltips in the timeline."
 msgstr "Здесь Вы можете вкл. или выкл. подсказки в графике времени."
 
-#: ../template/default/help_config.html:135
 msgid "Here you can (de-)activate the tooltips in the list."
 msgstr "Здесь Вы можете вкл. или выкл. подсказки в списке."
 
-#: ../template/default/help_config.html:137
 msgid ""
 "If you don't want VDRAdmin-AM to add the summary taken from EPG to new "
 "timers you can switch it off here."
@@ -2524,7 +1811,6 @@ msgstr ""
 "Если Вы не хотите, чтобы VDRAdmin-AM устанавливал описание передачи из EPG "
 "для нового таймера, тогда выключите это здесь."
 
-#: ../template/default/help_config.html:145
 msgid ""
 "Enable or disable live streaming using the <a href=\"http://www.magoa.net/"
 "linux/\">streamdev plugin</a>. You also have to set the correct <span class="
@@ -2534,7 +1820,6 @@ msgstr ""
 "href=\"http://www.magoa.net/linux/\">streamdev модуль</a>. Кроме этого нужно "
 "установить <span class=\"ref_label\">Streamdev HTTP-порт</span>. "
 
-#: ../template/default/help_config.html:147
 msgid ""
 "Here you have to set the port number your VDR's streamdev server listens for "
 "connections. Additionally you can also provide the stream type you like to "
@@ -2543,7 +1828,6 @@ msgstr ""
 "Здесь Вы указываете номер порта Streamdev сервера в VDR. Вы можете указывать "
 "также используемый тип трансляции."
 
-#: ../template/default/help_config.html:149
 msgid ""
 "Enable or disable streaming of recordings.<br />Well actually this is no "
 "real \"streaming\", but you have to setup your workstation so that it can "
@@ -2561,7 +1845,6 @@ msgstr ""
 "Если браузер и программа воспроизведения сконфигурированы правильно, то "
 "запись на персональном компьютере должна воспроизвестись."
 
-#: ../template/default/help_config.html:151
 msgid ""
 "This is the path where your workstation can access VDR's recordings. This "
 "depends on your VDR and workstation setup, for example \"\\\\vdr\\videos\" "
@@ -2571,27 +1854,22 @@ msgstr ""
 "Он зависит от конфигурации VDR и персонального компьютера.Например: \"\\\\vdr"
 "\\videos\" или \"V:\\\" (для Windows)\" или \"/mnt/videos\" (для Linux)."
 
-#: ../template/default/help_config.html:153
 msgid ""
 "The MIME type to send when using live streaming. Defaults to \"video/x-"
 "mpegurl\"."
 msgstr "MIME-тип трансляции LiveTV. По умолчанию \"video/x-mpegurl\"."
 
-#: ../template/default/help_config.html:155
 msgid "The suffix to use for live streaming. Defaults to \"m3u\"."
 msgstr "Расширение файла трансляции LiveTV. По умолчанию \"m3u\"."
 
-#: ../template/default/help_config.html:157
 msgid ""
 "The MIME type to send when using recordings streaming. Defaults to \"video/x-"
 "mpegurl\"."
 msgstr "MIME-тип трансляции записей. По умолчанию \"video/x-mpegurl\"."
 
-#: ../template/default/help_config.html:159
 msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
 msgstr "Расширение файла трансляции записей. По умолчанию \"m3u\"."
 
-#: ../template/default/help_config.html:165
 msgid ""
 "<p>Here you can define two external searches that you can access in the EPG "
 "views. You simply have to find the required URL and where the search pattern "
@@ -2599,11 +1877,9 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: ../template/default/help_config.html:166
 msgid "Some examples:"
 msgstr ""
 
-#: ../template/default/help_config.html:179
 msgid ""
 "<p>This section is for experts <strong>only</strong>, i.e. you know what you "
 "are doing!</p>"
@@ -2611,21 +1887,18 @@ msgstr ""
 "<p><p>Этот раздел <strong>только</strong> для экспертов, т.е. для тех кто "
 "знает что он делает!</p>"
 
-#: ../template/default/help_config.html:182
 msgid ""
 "If set to \"yes\" VDRAdmin-AM will periodically refresh its local EPG cache. "
 "Else the EPG will be refreshed if the user accesses any EPG view at the web "
 "interface and the timeout set at \"Update EPG every\" has been reached."
 msgstr ""
 
-#: ../template/default/help_config.html:184
 #, fuzzy
 msgid ""
 "The interval, the EPG data is refreshed from VDR and AutoTimer updates are "
 "performed (if AutoTimer feature is used)."
 msgstr "Интервал проверки EPG для обновления Автотаймеров."
 
-#: ../template/default/help_config.html:187
 msgid ""
 "Accessing VDR's EPG through VDR's SVDRPort seems to block VDR for some time. "
 "If this option is activated VDRAdmin-AM will read the <span class=\"ref_file"
@@ -2635,7 +1908,6 @@ msgstr ""
 "Вы активируете эту опцию, VDRAdmin-AM будет читать <span class=\"ref_file"
 "\">epg.data</span> файл напрямую, так, чтобы VDR не блокировался."
 
-#: ../template/default/help_config.html:189
 msgid ""
 "If you've enabled the option above you need to tell VDRAdmin-AM where the "
 "<span class=\"ref_file\">epg.data</span> file is located."
@@ -2643,7 +1915,6 @@ msgstr ""
 "Если Вы активировали опцию сверху, то Вы должны указать VDRAdmin-AM имя "
 "файла включая полный путь к файлу <span class=\"ref_file\">epg.data</span>."
 
-#: ../template/default/help_config.html:192
 msgid ""
 "If you have compiled VDR with the VFAT define you have to enable this "
 "option. If this option is set to the wrong value, you may have problems with "
@@ -2654,7 +1925,6 @@ msgstr ""
 "определенными записями при трансляции (Streaming) или исползовании <span "
 "class=\"ref_file\">reccmd.conf</span> команды."
 
-#: ../template/default/help_config.html:198
 msgid ""
 "<p>If you want to limit the number of channels used in some parts of "
 "VDRAdmin-AM, this is for you!</p><p>Use the radio buttons to activate or "
@@ -2672,134 +1942,105 @@ msgstr ""
 "нажать на кнопку <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;"
 "&gt;&gt;\"/>.Удалить каналы из этого списка можно выделив "
 
-#: ../template/default/help_config.html:203
 msgid ""
 "Usually channels that don't have EPG information are hidden in all EPG "
 "views. If you don't want them to be hidden you have to set this option to "
 "\"yes\"."
 msgstr ""
 
-#: ../vdradmind.pl:358
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Имя хоста VDR (например, video.intra.net)?"
 
-#: ../vdradmind.pl:359
 msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Какой порт использует VDR для запросов SVDRP?"
 
-#: ../vdradmind.pl:360
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
 msgstr ""
 "По какому адресу VDRAdmin-AM должен ждать соединения (0.0.0.0 повсем)? "
 
-#: ../vdradmind.pl:361
 msgid "On which port should VDRAdmin-AM listen?"
 msgstr "Какой номер порта должен использовать VDRAdmin-AM?"
 
-#: ../vdradmind.pl:362
 msgid "Username?"
 msgstr "Имя пользователя?"
 
-#: ../vdradmind.pl:363
 msgid "Password?"
 msgstr "Пароль?"
 
-#: ../vdradmind.pl:364
 msgid "Where are your recordings stored?"
 msgstr "По какому адресу находятся записи?"
 
-#: ../vdradmind.pl:365
 msgid "Where are your VDR's configuration files located?"
 msgstr "По какому адресу находятся конфигурационные файлы VDR?"
 
-#: ../vdradmind.pl:372
 msgid "Config file written successfully."
 msgstr "Файл конфигурации успешно записан."
 
-#: ../vdradmind.pl:436
 #, perl-format
 msgid "vdradmind.pl %s started with pid %d."
 msgstr "vdradmind.pl %s был запущен с PID-ом %d."
 
-#: ../vdradmind.pl:518 ../vdradmind.pl:1273 ../vdradmind.pl:2981
 msgid "Not found"
 msgstr "Не найдено"
 
-#: ../vdradmind.pl:518 ../vdradmind.pl:2982
 msgid "The requested URL was not found on this server!"
 msgstr "Затребованный URL не был найден на этом сервере!"
 
-#: ../vdradmind.pl:599 ../vdradmind.pl:1269 ../vdradmind.pl:2984
 msgid "Forbidden"
 msgstr "Запрещено"
 
-#: ../vdradmind.pl:599 ../vdradmind.pl:2985
 msgid "You don't have permission to access this function!"
 msgstr "У вас недостаточно прав для вызова этой функции!"
 
-#: ../vdradmind.pl:797 ../vdradmind.pl:6106
 #, fuzzy
 msgid "All channels"
 msgstr "Телегид"
 
-#: ../vdradmind.pl:800 ../vdradmind.pl:6107
 #, fuzzy
 msgid "Selected channels"
 msgstr "Выбрать все или ничего"
 
-#: ../vdradmind.pl:804 ../vdradmind.pl:6108
 #, fuzzy
 msgid "TV channels"
 msgstr "Телегид"
 
-#: ../vdradmind.pl:808 ../vdradmind.pl:6109
 #, fuzzy
 msgid "Radio channels"
 msgstr "Телегид"
 
-#: ../vdradmind.pl:1269 ../vdradmind.pl:2986
 #, perl-format
 msgid "Access to file \"%s\" denied!"
 msgstr "В доступе к файлу \"%s\" отказанно!"
 
-#: ../vdradmind.pl:1273 ../vdradmind.pl:2983
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
 msgstr "URL \"%s\" не был найден на этом сервере!"
 
-#: ../vdradmind.pl:2134
 #, fuzzy
 msgid "Your favorites"
 msgstr "Показать фавориты"
 
-#: ../vdradmind.pl:2134
 #, fuzzy
 msgid "Search results"
 msgstr "Спрятать результаты"
 
-#: ../vdradmind.pl:2274
 #, fuzzy
 msgid "Default"
 msgstr "Удалить"
 
-#: ../vdradmind.pl:2392
 msgid "--- no timer ---"
 msgstr "--- нет таймера ---"
 
-#: ../vdradmind.pl:2483
 msgid "unknown"
 msgstr "неизвестно"
 
-#: ../vdradmind.pl:2486
 msgid "none"
 msgstr "нет"
 
-#: ../vdradmind.pl:2987
 #, perl-format
 msgid "Can't open file \"%s\"!"
 msgstr "Не может открыть файл \"%s\"!"
 
-#: ../vdradmind.pl:2988
 #, perl-format
 msgid ""
 "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
@@ -2808,65 +2049,50 @@ msgstr ""
 "Не могу соединиться с VDR  %s:%s<br /><br />Проконтролируйте VDR и "
 "svdrphosts.conf"
 
-#: ../vdradmind.pl:2989
 #, perl-format
 msgid "Error while sending command to VDR at %s"
 msgstr "Ошибка при отправлении команды к %s"
 
-#: ../vdradmind.pl:3045
 msgid "Internal error:"
 msgstr "Внутренняя ошибка:"
 
-#: ../vdradmind.pl:3203
 msgid "Lookup movie in the Internet-Movie-Database (IMDb)"
 msgstr "Искать фильм в Internet-Movie-Database (IMDb)"
 
-#: ../vdradmind.pl:3456
 msgid "Can't find EPG entry!"
 msgstr "Нет EPG записей!"
 
-#: ../vdradmind.pl:3884
 msgid "Playing Tomorrow"
 msgstr "Программа на завтра"
 
-#: ../vdradmind.pl:3884
 #, perl-format
 msgid "Playing on the %s"
 msgstr "Воспроизвести %s."
 
-#: ../vdradmind.pl:5175
 msgid "next"
 msgstr "след."
 
-#: ../vdradmind.pl:5194
 msgid "What's on after"
 msgstr "Что потом"
 
-#: ../vdradmind.pl:5194
 msgid "What's on at"
 msgstr "Что в:"
 
-#: ../vdradmind.pl:5197
 msgid "Suitable matches for:"
 msgstr "Результаты поиска для"
 
-#: ../vdradmind.pl:5200
 msgid "short view"
 msgstr "сокращенная информация"
 
-#: ../vdradmind.pl:5200
 msgid "long view"
 msgstr "Расширенная информация"
 
-#: ../vdradmind.pl:5251
 msgid "Schedule"
 msgstr "Расписание"
 
-#: ../vdradmind.pl:5839
 msgid "Timers"
 msgstr "Таймеры"
 
-#: ../vdradmind.pl:5897
 msgid "System default"
 msgstr "Системный стандарт"
 

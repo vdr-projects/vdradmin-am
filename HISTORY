@@ -4,6 +4,15 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2007-12-19: 3.6.1
+- Fixed: show textfield if no locales found.
+- Updated for infoboxes.js.
+- Fixed: wrong sorting in find results.
+- Changed: Remove leading and trailing whitespaces from a timer's title (Reported by Derek).
+- Changed: Minimal required EPGsearch version to v0.9.23.
+- Added: Support for features introduced in EPGsearch v0.9.23 (e.g. auto delete searches, timeframe for searches).
+- Fixed: Close connection to VDR after AutoTimer update (Reported by Leo @vdr-portal.de).
+
 2007-09-21: 3.6.0
 - Added: missing license information.
 - Changed: prog_timeline uses global channels array instead of copying it locally.

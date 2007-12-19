@@ -24,7 +24,7 @@
 
 require 5.004;
 
-my $VERSION = "3.6.0";
+my $VERSION = "3.6.1";
 my $BASENAME;
 my $EXENAME;
 
@@ -934,6 +934,35 @@ sub get_ca_from_vdrid {
             return ($C[0]->{ca});
         }
     }
+}
+
+#############################################################################
+# common helpers
+#############################################################################
+
+# remove spaces around string
+sub trim($)
+{
+    my $string = shift;
+    $string =~ s/^\s+//;
+    $string =~ s/\s+$//;
+    return $string;
+}
+
+# remove leading whitespaces from string
+sub ltrim($)
+{
+    my $string = shift;
+    $string =~ s/^\s+//;
+    return $string;
+}
+
+# remove trailing whitespaces from string
+sub rtrim($)
+{
+    my $string = shift;
+    $string =~ s/\s+$//;
+    return $string;
 }
 
 #############################################################################
@@ -2057,8 +2086,8 @@ sub CheckTimers {
 sub epgsearch_list {
     return if (UptoDate() != 0);
 
-    if ($EPGSEARCH_VERSION < 921) {
-        HTMLError("Your version of epgsearch plugin is too old! You need at least v0.9.21!");
+    if ($EPGSEARCH_VERSION < 923) {
+        HTMLError("Your version of epgsearch plugin is too old! You need at least v0.9.23!");
         return
     }
 
@@ -2464,6 +2493,13 @@ sub ExtractEpgSearchConf {
          $timer->{sel_blacklists},   #41 - selected blacklist IDs separated with '|'
          $timer->{fuzzy_tolerance},  #42 - fuzzy tolerance value for fuzzy searching
          $timer->{use_for_fav},      #43 - use this search in favorites menu (0 no, 1 yes)
+         $timer->{results_menu},           #44 - menu to display results
+         $timer->{autodelete},             #45 - delMode ( 0 = no autodelete, 1 = after x recordings, 2 = after y days after 1. recording)
+         $timer->{del_after_recs},         #46 - delAfterCountRecs (x recordings)
+         $timer->{del_after_days},         #47 - delAfterDaysOfFirstRec (y days)
+         $timer->{searchtimer_from},       #48 - useAsSearchTimerFrom (if "use as search timer?" = 2)
+         $timer->{searchtimer_until},      #49 - useAsSearchTimerTil (if "use as search timer?" = 2)
+         $timer->{ignore_missing_epgcats}, #50 - ignoreMissingEPGCats
          $timer->{unused}) = split(/:/, $line);
 
         #format selected fields
@@ -2523,6 +2559,13 @@ sub ExtractEpgSearchConf {
         if ($timer->{directory}) {
             $timer->{directory} =~ s/\|/:/g;
             $timer->{directory} =~ s/\!\^pipe\^\!/\|/g;
+        }
+
+        if ($timer->{searchtimer_from}) {
+            $timer->{searchtimer_from} = my_strftime("%Y-%m-%d", $timer->{searchtimer_from});
+        }
+        if ($timer->{searchtimer_until}) {
+            $timer->{searchtimer_until} = my_strftime("%Y-%m-%d", $timer->{searchtimer_until});
         }
     return $timer;
 }
@@ -2614,6 +2657,16 @@ sub epgsearch_Param2Line {
         $directory =~ s/:/\|/g;
     }
 
+    #TODO: $searchtimer_from & $searchtimer_until auf korrektes Format prüfen
+    my $searchtimer_from = $q->param("searchtimer_from");
+    if ($searchtimer_from) {
+        $searchtimer_from = my_mktime("0", "0", substr($searchtimer_from, 8, 2), substr($searchtimer_from, 5, 2) - 1, substr($searchtimer_from, 0, 4));
+    }
+    my $searchtimer_until = $q->param("searchtimer_until");
+    if ($searchtimer_until) {
+        $searchtimer_until = my_mktime("0", "0", substr($searchtimer_until, 8, 2), substr($searchtimer_until, 5, 2) - 1, substr($searchtimer_until, 0, 4));
+    }
+
     my $extepg_info;
     for ($q->param) {
         if (/extepg_([0-9]+)_data_text/) {
@@ -2647,7 +2700,7 @@ sub epgsearch_Param2Line {
                . ($q->param("use_duration") ? "1" : "0") . ":"
                . $min_duration . ":"
                . $max_duration . ":"
-               . ($q->param("has_action") ? "1" : "0") . ":"
+               . $q->param("has_action") . ":"
                . ($q->param("use_days") ? "1" : "0") . ":"
                . ($had_weekday > 1 ? $weekdays_bits : $weekdays) . ":"
                . ($q->param("is_series") ? "1" : "0") . ":"
@@ -2674,7 +2727,14 @@ sub epgsearch_Param2Line {
                . $q->param("use_blacklists") . ":"
                . $sel_blacklists . ":"
                . $q->param("fuzzy_tolerance") . ":"
-               . ($q->param("use_for_fav") ? "1" : "0");
+               . ($q->param("use_for_fav") ? "1" : "0") . ":"
+               .  $q->param("results_menu") . ":"
+               .  $q->param("autodelete") . ":"
+               .  $q->param("del_after_recs") . ":"
+               .  $q->param("del_after_days") . ":"
+               .  $searchtimer_from . ":"
+               .  $searchtimer_until . ":"
+               .  $q->param("ignore_missing_epgcats");
 
     $cmd .= ":" . $q->param("unused") if ($q->param("unused"));
 #print("CMD: $cmd\n");
@@ -3010,7 +3070,7 @@ sub ProgTimer {
     my $send_summary = ($VDRVERSION >= 10336) ? $summary : substr($summary, 0, $VDR_MAX_SVDRP_LENGTH - 9 - length($send_cmd) - length($active) - length($channel) - length($send_dor) - 8 - length($prio) - length($lft) - length($title));
 
     Log(LOG_AT, sprintf("ProgTimer: Programming Timer \"%s\" (Channel %s, Event-ID %s, %s - %s, Active %s)", $title, $channel, $event_id, my_strftime("%Y%m%d-%H%M", $start), my_strftime("%Y%m%d-%H%M", $stop), $active));
-    my $return = SendCMD(sprintf("%s %s:%s:%s:%s:%s:%s:%s:%s:%s", $send_cmd, $active, $channel, $send_dor, strftime("%H%M", localtime($start)), strftime("%H%M", localtime($stop)), $prio, $lft, $title, $send_summary));
+    my $return = SendCMD(sprintf("%s %s:%s:%s:%s:%s:%s:%s:%s:%s", $send_cmd, $active, $channel, $send_dor, strftime("%H%M", localtime($start)), strftime("%H%M", localtime($stop)), $prio, $lft, trim($title), $send_summary));
     return $return;
 }
 
@@ -3091,6 +3151,7 @@ sub UptoDate {
         if ($CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER}) {
             CheckTimers();
             AutoTimer();
+            CloseSocket();
         }
     }
     return (0);
@@ -5112,7 +5173,7 @@ sub prog_summary {
                        longdate    => my_strftime("%A, %x", $event->{start}),
                        start       => my_strftime("%H:%M",  $event->{start}),
                        stop        => my_strftime("%H:%M",  $event->{stop}),
-#                       event_start => $event->{start},
+                       event_start => $event->{start},
                        show_percent => $event->{start} <= $now && $now <= $event->{stop} ? "1" : undef,
                        percent     => $event->{stop} > $event->{start} ? int(($now - $event->{start}) / ($event->{stop} - $event->{start}) * 100) : 0,
                        elapsed_min => int(($now - $event->{start}) / 60),

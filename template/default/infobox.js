@@ -1,5 +1,5 @@
 //
-// Bubblehelp infoboxes, (C) 2002 Klaus Knopper <infobox@knopper.net>
+// Bubblehelp infoboxes, (C) 2007 Klaus Knopper <infobox@knopper.net>
 // You can copy/modify and distribute this code under the conditions
 // of the GNU GENERAL PUBLIC LICENSE Version 2.
 //
@@ -49,8 +49,11 @@ function tip(name){
   if(idiv) untip();
   idiv=gettip(name);
   if(idiv){
-   winW=(window.innerWidth)? window.innerWidth+window.pageXOffset-16:document.body.offsetWidth-20;
-   winH=(window.innerHeight)?window.innerHeight+window.pageYOffset  :document.body.offsetHeight;
+   // winW=(window.innerWidth)? window.innerWidth+window.pageXOffset-16:document.body.offsetWidth-20;
+   // winH=(window.innerHeight)?window.innerHeight+window.pageYOffset  :document.body.offsetHeight;
+   // IE standards compliant mode compatibility partly contributed by Stefan Neufeind
+   winW=(window.innerWidth)? window.innerWidth+window.pageXOffset-16:(document.documentElement&&document.documentElement.clientWidth)?document.documentElement.clientWidth-20:document.body.offsetWidth-20;
+   winH=(window.innerHeight)?window.innerHeight+window.pageYOffset  :(document.documentElement&&document.documentElement.clientHeight)?document.documentElement.clientHeight:document.body.offsetHeight;
    if(x<=0||y<=0){ // konqueror can't get mouse position
     x=(winW-IWIDTH)/2+(window.pageXOffset?window.pageXOffset:0); y=(winH-50)/2+(window.pageYOffset?window.pageYOffset:0); // middle of window
    }
@@ -60,11 +63,8 @@ function tip(name){
 }
 
 function showtip(){
-  if (isNaN(x))	return;
-
   idiv.left=(((x+260)<winW)?x+12:x-255)+px; idiv.top=(((y+90)<winH)?y+12:y-90)+px;
   idiv.visibility=ns4?"show":"visible";
-//  window.status="idiv="+idiv+"X:"+(idiv.left?idiv.left:"NAN")+", Y:"+(idiv.top?idiv.top:"NAN")+", x:"+x+", y:"+y;
 }
 
 function mousemove(e){

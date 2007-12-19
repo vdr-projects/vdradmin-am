@@ -27,6 +27,7 @@
 			changedAction(document.getElementById("select_action"));
 			changedHasAction(document.getElementById("has_action"));
 			changedAvoidRepeats(document.getElementById("avoid_repeats"));
+			changedAutoDelete(document.getElementById("select_autodelete"));
 		}
 
 		function changedSearchMode(mySelect)
@@ -59,6 +60,7 @@
 		function changedUseExtEpg(myCheckbox)
 		{
 			document.getElementById("use_extepg_settings").style.display = (myCheckbox.checked ? "block" : "none");
+			document.getElementById("set_ignore_missing_epgcats").style.display = (myCheckbox.checked ? "block" : "none");
 		}
 
 		function changedUseTime(myCheckbox)
@@ -81,18 +83,30 @@
 			document.getElementById("select_blacklists").style.display = (mySelect.options[mySelect.selectedIndex].value == 1 ? "block" : "none");
 		}
 
-		function changedHasAction(myCheckbox)
+		function changedHasAction(mySelect)
 		{
-			if (myCheckbox.checked)
+			if (mySelect.options[mySelect.selectedIndex].value == 0)
 			{
-				document.getElementById("set_action").style.display = "inline";
-				changedAction(document.getElementById("select_action"));
+				document.getElementById("set_action").style.display = "none";
+				document.getElementById("set_autodelete").style.display = "none";
+				document.getElementById("set_action_timeframe").style.display = "none";
+				document.getElementById("action_record_settings").style.display = "none";
+				document.getElementById("action_switch_settings").style.display = "none";
 			}
 			else
 			{
-				document.getElementById("set_action").style.display = "none";
-				document.getElementById("action_record_settings").style.display = "none";
-				document.getElementById("action_switch_settings").style.display = "none";
+				if (mySelect.options[mySelect.selectedIndex].value == 2)
+				{
+					document.getElementById("set_action_timeframe").style.display = "block";
+				}
+				else
+				{
+					document.getElementById("set_action_timeframe").style.display = "none";
+				}
+
+				document.getElementById("set_action").style.display = "inline";
+				document.getElementById("set_autodelete").style.display = "block";
+				changedAction(document.getElementById("select_action"));
 			}
 		}
 
@@ -115,6 +129,12 @@
 					document.getElementById("action_switch_settings").style.display = "block";
 					break;
 			}
+		}
+
+		function changedAutoDelete(mySelect)
+		{
+			document.getElementById("del_after_recs").style.display = (mySelect.options[mySelect.selectedIndex].value == 1 ? "block" : "none");
+			document.getElementById("del_after_days").style.display = (mySelect.options[mySelect.selectedIndex].value == 2 ? "block" : "none");
 		}
 
 		function changedAvoidRepeats(myCheckbox)
@@ -265,6 +285,9 @@
 					<td class="col_label" valign="top"><h5><?% gettext('Use extended EPG info:') %?></h5></td>
 					<td class="col_value">
 						<input type="checkbox" name="use_extepg" value="1" id="use_extepg" <?% IF epgsearch.use_extepg %?>checked="checked"<?% END %?> onclick="javascript:changedUseExtEpg(this)" /><br/>
+						<div id="set_ignore_missing_epgcats">
+							<input type="checkbox" name="ignore_missing_epgcats" value="1" <?% IF epgsearch.ignore_missing_epgcats %?>checked="checked"<?% END %?>> <?% gettext('Ignore missing categories?') %?>
+						</div><br/>
 						<div id="use_extepg_settings">
 							<?% FOREACH ext = extepg %?>
 								<table border="0" cellspacing="0" cellpadding="0">
@@ -424,9 +447,13 @@
 <?% END %?>
 				<tr class="<?% tr_class %?>">
 					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
-					<td class="col_label"><h5><?% gettext('Use as Search Timer:') %?></h5></td>
+					<td class="col_label" valign="top"><h5><?% gettext('Use as Search Timer:') %?></h5></td>
 					<td class="col_value">
-						<input type="checkbox" name="has_action" value="1" <?% IF epgsearch.has_action %?>checked="checked"<?% END %?> onclick="javascript:changedHasAction(this)" id="has_action" />
+						<select onchange="javascript:changedHasAction(this)" id="has_action" name="has_action">
+							<option value="0" <?% IF epgsearch.has_action == 0 %?>selected="selected"<?% END %?>><?% gettext('no') %?></option>
+							<option value="1" <?% IF epgsearch.has_action == 1 %?>selected="selected"<?% END %?>><?% gettext('yes') %?></option>
+							<option value="2" <?% IF epgsearch.has_action == 2 %?>selected="selected"<?% END %?>><?% gettext('user-defined') %?></option>
+						</select>
 						<span id="set_action">
 							<select onchange="javascript:changedAction(this)" id="select_action" name="action">
 								<option value="0" <?% IF epgsearch.action == 0 %?>selected="selected"<?% END %?>><?% gettext('record') %?></option>
@@ -434,6 +461,25 @@
 								<option value="2" <?% IF epgsearch.action == 2 %?>selected="selected"<?% END %?>><?% gettext('switch only') %?></option>
 							</select>
 						</span>
+						<div id="set_action_timeframe">
+							<?% gettext('First day:') %?> <input type="text" name="searchtimer_from" id="searchtimer_from" value="<?% epgsearch.searchtimer_from %?>" size="12"/>
+							&nbsp;
+							<?% gettext('Last day:') %?> <input type="text" name="searchtimer_until" id="searchtimer_until" value="<?% epgsearch.searchtimer_until %?>" size="12"/>
+						</div>
+						<div id="set_autodelete">
+							<?% gettext('Auto delete:') %?>&nbsp;
+							<select onchange="javascript:changedAutoDelete(this)" id="select_autodelete" name="autodelete">
+								<option value="0" <?% IF epgsearch.autodelete == 0 %?>selected="selected"<?% END %?>><?% gettext('no') %?></option>
+								<option value="1" <?% IF epgsearch.autodelete == 1 %?>selected="selected"<?% END %?>><?% gettext('count recordings') %?></option>
+								<option value="2" <?% IF epgsearch.autodelete == 2 %?>selected="selected"<?% END %?>><?% gettext('count days') %?></option>
+							</select>
+							<div id="del_after_recs">
+								<?% gettext('After ... recordings:') %?> <input type="text" name="del_after_recs" value="<?% epgsearch.del_after_recs %?>" size="5"/>
+							</div>
+							<div id="del_after_days">
+								<?% gettext('After ... days after first recording:') %?> <input type="text" name="del_after_days" value="<?% epgsearch.del_after_days %?>" size="5"/>
+							</div>
+						</div>
 					</td>
 				</tr>
 			</table>
@@ -571,6 +617,7 @@
 		<?% IF do_edit %?>
 			<input type="hidden" name="id" value="<?% epgsearch.id %?>" />
 		<?% END %?>
+		<input type="hidden" name="results_menu" value="<?% epgsearch.results_menu %?>" />
 		<input type="hidden" name="unused" value="<?% epgsearch.unused %?>" />
 	</form>
 </body>

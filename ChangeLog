@@ -1,10 +1,75 @@
+2007-12-19  amair
+
+	* HISTORY, README.translators, po/cs.po, po/de.po, po/es.po,
+	  po/fi.po, po/fr.po, po/it.po, po/nl.po, po/ru.po,
+	  po/vdradmin.pot, tools/tmplgettext, tools/update-po,
+	  vdradmind.pl:
+
+	Updated for release v3.6.1.
+
+2007-12-05  amair
+
+	* template/default/config.html:
+
+	Fixed: show textfield if no locales found.
+
+2007-11-13  amair
+
+	* template/default/about.html:
+
+	Changed license text.
+
+2007-11-12  amair
+
+	* CREDITS, README:
+
+	Updated for infoboxes.js.
+
+2007-11-12  amair
+
+	* template/default/about.html:
+
+	Added license info.
+
+2007-11-12  amair
+
+	* template/default/infobox.js:
+
+	Updated to latest release.
+
+2007-11-12  amair
+
+	* vdradmind.pl:
+
+	Fixed wrong sorting in find results.
+
+2007-10-26  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Introduced new function trim(), ltrim() and rtrim().
+	Remove leading and trailing whitespaces from timer's title.
+
+2007-10-19  amair
+
+	* HISTORY, vdradmind.pl, template/default/epgsearch_new.html:
+
+	Changed minimal required EPGsearch version to v0.9.23.
+	Added support for features introduced in EPGsearch v0.9.23 (e.g. auto delete searches, timeframe for searches).
+
+2007-10-19  amair
+
+	* vdradmind.pl:
+
+	Close connection to VDR after AutoTimer update.
+
+2007-09-21  tag v3_6_0
+
 2007-09-21  amair
 
 	* po/it.po:
 
 	Fixed typo.
-
-2007-09-21  tag v3_6_0
 
 2007-09-21  amair
 

@@ -36,10 +36,9 @@ The basic work flow for a translation looks like this:
    fields. poedit makes this pretty easy - just go to catalog/options and
    fill out the form.
    
-3) Now you can start translating. Each message is commented to give you a hint,
-   where it came from. Keep in mind, that if you translate a message, you should
-	 use html entities [5], [6] for special characters. Any text that origins from
-	 vdradmind.pl must not have html entities.
+3) Now you can start translating. Keep in mind, that if you translate a message,
+   you should use html entities [5], [6] for special characters. Any text that
+   origins from vdradmind.pl must not have html entities.
    Beside the help texts, you will not need any formating tags.
    
    Messages marked as "fuzzy" indicate, that they may have been derived from
@@ -73,7 +72,7 @@ The basic work flow for a translation looks like this:
 If you have any further questions, please don't hesitate to contact me.
 
 
---- 2006-11-29, Andreas Mair ---
+--- 2007-12-18, Andreas Mair ---
 
 
 [1] http://www.poedit.org (available for Windows and Linux)

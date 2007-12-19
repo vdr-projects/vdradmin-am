@@ -81,7 +81,7 @@
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Language:') %?></h5></td>
 				<td class="col_value">
-<?% IF MY_LOCALES %?>
+<?% IF MY_LOCALES.size() > 0 %?>
 					<select class="submit" name="LANG">
 	<?% FOREACH locale = MY_LOCALES %?>
 						<option value="<?% locale.id %?>" <?% IF locale.cur %?>selected="selected"<?% END %?>><?% locale.name %?></option>
