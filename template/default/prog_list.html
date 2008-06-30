@@ -70,7 +70,7 @@
 					<td class="col_title">
 						<div class="epg_title">
 						<?% IF bc.infurl %?>
-							<a href="javascript:popup('<?% bc.infurl %?>');" title="<?% gettext('More Information') %?>">
+							<a href="javascript:popup('<?% bc.infurl %?>', <?% config.GUI_POPUP_WIDTH %?>, <?% config.GUI_POPUP_HEIGHT %?>);" title="<?% gettext('More Information') %?>">
 						<?% END %?>
 						<?% bc.title %?>
 						<?% IF bc.infurl %?>
@@ -86,7 +86,7 @@
 					<td class="col_buttons">
 						<span class="action repeatings"><a href="vdradmin.pl?search=<?% bc.find_title %?>&amp;aktion=prog_summary&amp;submit=go11"><img src="bilder/find.png" border="0" alt="<?% gettext('Search for other show times') %?>" onmouseover="window.status='<?% gettext('Search for other show times') %?>';return true" title="<?% gettext('Search for other show times') %?>" /></a></span>
 						<?% IF bc.infurl %?>
-							<span class="action info"><a href="javascript:popup('<?% bc.infurl %?>');" title="<?% gettext('More Information') %?>"><img src="bilder/info_button.png" border="0" alt="info" /></a></span>
+							<span class="action info"><a href="javascript:popup('<?% bc.infurl %?>', <?% config.GUI_POPUP_WIDTH %?>, <?% config.GUI_POPUP_HEIGHT %?>);" title="<?% gettext('More Information') %?>"><img src="bilder/info_button.png" border="0" alt="info" /></a></span>
 						<?% ELSE %?>
 							<span class="action info"><img src="bilder/info_button_disabled.png" border="0" alt="noinfo" title="<?% gettext('No Information') %?>" /></span>
 						<?% END %?>
@@ -103,6 +103,10 @@
 			<?% END %?>
 		<?% END %?>
 		<?% IF bc.endd %?>
+				<tr class="heading">
+					<td colspan="2"></td>
+					<td class="col_navi"><?% IF bc.prev_channel %?><a href="<?% bc.prev_channel %?>"><img src="bilder/pfeile_nachlinks.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachlinks_soft.png" border="0" alt="" /><?% END %?><?% IF bc.next_channel %?><a href="<?% bc.next_channel %?>"><img src="bilder/pfeile_nachrechts.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachrechts_soft.png" border="0" alt="" /><?% END %?></td>
+				</tr>
 			</table>
 		<?% END %?>
 	<?% END %?>

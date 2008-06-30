@@ -101,7 +101,7 @@
 						<?% IF rec.isfolder %?>
 							<a href="<?% rec.infurl %?>"><img align="middle" src="bilder/folder_video.png" border="0" alt="" />&nbsp;<?% rec.name %?></a>
 						<?% ELSE %?>
-							<a href="javascript:popup('<?% rec.infurl %?>');"><img align="middle" src="bilder/aktion.png" border="0" alt="" />&nbsp;<?% rec.name %?></a>
+							<a href="javascript:popup('<?% rec.infurl %?>', <?% config.GUI_POPUP_WIDTH %?>, <?% config.GUI_POPUP_HEIGHT %?>);"><img align="middle" src="bilder/aktion.png" border="0" alt="" />&nbsp;<?% rec.name %?></a>
 						<?% END %?>
 					</td>
 					<td class="col_buttons">

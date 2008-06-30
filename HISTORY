@@ -4,6 +4,28 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2008-06-30: 3.6.2
+- Changed: No need to set the VFAT option in VDRAdmin-AM any longer as both filename codings will be searched for.
+- Fixed: some bugs in tv.html.
+- Fixed: command line options parsing.
+- Fixed: pattern titles that contain double quotes.
+- Fixed: timer titles that contain double quotes.
+- Added: new command line switch "--ipv6" to use IO::Socket::INET6 for networking (See bug report #462).
+- Updated: Dutch translation (Submitted by Roel Koelewijn).
+- Added: ST_STREAMDEV_HOST config option to set the name/ip to be used for streaming.
+- Fixed: m3u files for Xine (Reported by Robert C. Helling).
+- Updated: Italian translation (Submitted by Gringo).
+- Updated: Spanish translation (Submitted by Rüdiger Jung).
+- Updated: Finnish translation (Submitted by Rolf Ahrenberg).
+- Changed: include UTF8 locales by default.
+- Introduced new config options "GUI_POPUP_WIDTH" and "GUI_POPUP_HEIGHT" for setting the prog_detail's window size (Requested by Viking @vdr-portal.de).
+- Added prev/next arrows in prog_list after each day (Requested by Faudeer @vdr-portal.de).
+- Show channel in prog_list even if it's not in the current channel list; this is useful if prog_list is called by a link (e.g. timer_list) (Requested by Faudeer @vdr-portal.de).
+- Added support for modifying EPGSearch blacklists (Requested by dings @vdr-portal.de).
+- Show stream and switch buttons in prog_summary on channels without EPG information (Reported by Faudeer @vdr-portal.de).
+- Added: Show channelname in recording's details (Suggested by Stefan Seyfried).
+- Minor bugfixes and improvements.
+
 2007-12-19: 3.6.1
 - Fixed: show textfield if no locales found.
 - Updated for infoboxes.js.

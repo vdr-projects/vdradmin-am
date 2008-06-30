@@ -20,8 +20,6 @@ EPGIMAGES=${EPGIMAGES:-$VIDEODIR/epgimages}
 VDRCONF=${VDRCONF:-$VIDEODIR}
 EPGDATA=${EPGDATA:-$VIDEODIR/epg.data}
 
-LANGS="${LANGS:-cs de es fi fr it nl ru}"
-
 function usage()
 {
 	echo ""
@@ -138,10 +136,13 @@ function doInstall()
 	makeDir $MANDIR && cp vdradmind.pl.1 $MANDIR || exit 1
 	makeDir $ETCDIR || exit 1
 
-	for lang in $LANGS
-	do
-		makeDir $LOCDIR/$lang/LC_MESSAGES/ && install -m 644 locale/$lang/LC_MESSAGES/vdradmin.mo $LOCDIR/$lang/LC_MESSAGES/vdradmin.mo || exit 1
-	done
+	(
+		cd locale
+		for lang in *
+		do
+			makeDir $LOCDIR/$lang/LC_MESSAGES/ && install -m 644 $lang/LC_MESSAGES/vdradmin.mo $LOCDIR/$lang/LC_MESSAGES/vdradmin.mo || exit 1
+		done
+	)
 
 	local RESTART=
 	[ ! -e $BINDIR ] && mkdir -p $BINDIR
@@ -216,10 +217,7 @@ function doUninstall()
 	if [ -e $BINDIR/vdradmind.pl ]; then
 		rm -f $BINDIR/vdradmind.pl
 	fi
-	for lang in $LANGS
-	do
-		[ -e $LOCDIR/$lang/LC_MESSAGES/vdradmin.mo ] && rm -f $LOCDIR/$lang/LC_MESSAGES/vdradmin.mo
-	done
+	rm -f $LOCDIR/*/LC_MESSAGES/vdradmin.mo
 
 	echo ""
 	echo "VDRAdmin-AM has been uninstalled!"

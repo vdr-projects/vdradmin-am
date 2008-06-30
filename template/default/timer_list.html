@@ -302,7 +302,7 @@
 						<div <?% IF config.TM_TT_LIST %?>onmouseover="tip('VDR-<?% timer.id %?>'); return true;" onmouseout="untip(); return true;"<?% END %?>>
 							<?% IF timer.recording %?><img align="middle" src="bilder/rec.gif" border="0" alt="" />&nbsp;<?% END %?>
 							<?% IF timer.infurl %?>
-								<a href="javascript:popup('<?% timer.infurl %?>');"><?% timer.title %?></a>
+								<a href="javascript:popup('<?% timer.infurl %?>', <?% config.GUI_POPUP_WIDTH %?>, <?% config.GUI_POPUP_HEIGHT %?>);"><?% timer.title %?></a>
 							<?% ELSE %?>
 								<?% timer.title %?>
 							<?% END %?>

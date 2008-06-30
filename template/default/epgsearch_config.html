@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="scroller">
+<?% USE JavaScript, HTML %?>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>"/>
+	<title>VDRAdmin-AM - <?% gettext('EPG Search Blacklists') %?></title>
+	<link href="style.css" rel="stylesheet" media="screen" type="text/css"/>
+	<?% IF usercss %?>
+		<link href="user.css" rel="stylesheet" media="screen" type="text/css"/>
+	<?% END %?>
+	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
+	<?% IF config.AT_TOOLTIP %?>
+		<script type="text/javascript" language="JavaScript1.2" src="infobox.js"></script>
+	<?% END %?>
+</head>
+
+<body id="epgsearch_config">
+<?% UNLESS did_search %?>
+	<form action="<?% url %?>" method="get" name="FormName0">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
+			<tr>
+				<td class="col_title">
+					<h1><?% gettext('EPG Search Blacklists') %?></h1>
+				</td>
+				<td class="col_other">
+					<input type="submit" class="submit" name="new_blacklist" value="<?% gettext('New Blacklist') %?>" />
+					<input type="hidden" name="aktion" value="epgsearch_bl_edit" />
+				</td>
+<?% IF help_url %?>
+				<td class="col_help">
+					<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help" title="<?% gettext('Help') %?>"/></a>
+				</td>
+<?% END %?>
+			</tr>
+		</table>
+	</form>
+
+	<form action="<?% url %?>" method="get" name="FormName">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="list hilight">
+			<tr class="heading">
+        <td class="col_name <?% IF sortbypattern %?>selected<?% END %?>">
+					<h2>
+						<?% gettext('Search pattern') %?>
+						<!--
+						<a href="<?% sortbypattern %?>"><?% gettext('Channel') %?>
+							<?% IF sortbypattern %?>
+								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0"/>
+							<?% ELSE %?>
+								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
+							<?% END %?>
+						</a>
+						-->
+					</h2>
+				</td>
+				<td class="col_channel <?% IF sortbychannel %?>selected<?% END %?>">
+					<h2>
+						<?% gettext('Channel') %?>
+						<!--
+						<a href="<?% sortbychannelurl %?>"><?% gettext('Channel') %?>
+							<?% IF sortbychannel %?>
+								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0"/>
+							<?% ELSE %?>
+								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
+							<?% END %?>
+						</a>
+						-->
+					</h2>
+				</td>
+				<td class="col_start <?% IF sortbystart %?>selected<?% END %?>">
+					<h2>
+						<?% gettext('From') %?>
+						<!--
+						<a href="<?% sortbystarturl %?>"><?% gettext('Start') %?>
+							<?% IF sortbystart %?>
+								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0"/>
+							<?% ELSE %?>
+								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
+							<?% END %?>
+						</a>
+						-->
+					</h2>
+				</td>
+				<td class="col_stop <?% IF sortbystop %?>selected<?% END %?>">
+					<h2>
+						<?% gettext('To') %?>
+						<!--
+						<a href="<?% sortbystopurl %?>"><?% gettext('Stop') %?>
+							<?% IF sortbystop %?>
+								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0"/>
+							<?% ELSE %?>
+								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
+							<?% END %?>
+						</a>
+						-->
+					</h2>
+				</td>
+				<td class="col_buttons"></td>
+				<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL" onclick="AllMessages(this.form);" title="<?% gettext('Select all/none') %?>"/></td>
+			</tr>
+
+<?% FOREACH list %?>
+			<tr class="<?% IF loop.count % 2 == 0 %?>row_even<?% ELSE %?>row_odd<?% END %?>">
+				<td class="col_name">
+					<div>
+            <a href="<?% modurl %?>" title="<?% gettext('Edit') %?>"><?% pattern | html %?></a>
+					</div>
+				</td>
+				<td class="col_channel <?% IF sortbychannel %?>selected<?% END %?>">
+					<div>
+						<?% SWITCH use_channel %?>
+						<?% CASE 1 %?>
+							<?% channel_from_name %?><?% IF channel_from_name != channel_to_name %?> - <?% channel_to_name %?><?% END %?>
+						<?% CASE 2 %?>
+							<?% channels %?>
+						<?% CASE %?>
+							-
+						<?% END %?>
+					</div>
+				</td>
+				<td class="col_start <?% IF sortbystart %?>selected<?% END %?>">
+					<div>
+						<?% IF time_start %?><?% time_start %?><?% ELSE %?>--:--<?% END %?>
+					</div>
+				</td>
+				<td class="col_stop <?% IF sortbystop %?>selected<?% END %?>">
+					<div>
+						<?% IF time_stop %?><?% time_stop %?><?% ELSE %?>--:--<?% END %?>
+					</div>
+				</td>
+				<td class="col_buttons">
+					<span class="action edit">
+						<a href="<?% modurl %?>"><img src="bilder/edit.png" alt="edit" border="0" title="<?% gettext('Edit') %?>"/></a>
+					</span>
+					<span class="action delete">
+						<a href="javascript:del('<?% gettext('Delete blacklist?') %?>\n\n&quot;<?% pattern | js %?>&quot;', '<?% delurl %?>');"><img src="bilder/delete.png" alt="delete" border="0" title="<?% gettext('Delete') %?>"/></a>
+					</span>
+				</td>
+				<td class="col_checkbox">
+					<div>
+						<input type="checkbox" name="xxxx_<?% id %?>"/>
+					</div>
+				</td>
+			</tr>
+<?% END %?>
+		</table>
+
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
+			<tr>
+				<td align="right">
+					<input type="submit" class="submit" name="delete" value="<?% gettext('Delete Selected Blacklists') %?>" onclick="return mdel(this, '<?% gettext('Delete all selected blacklists?') %?>');" />
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" name="aktion" value="epgsearch_config_aktion"/>
+
+	</form>
+<?% END %?>
+
+</body>
+
+</html>

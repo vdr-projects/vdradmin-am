@@ -273,13 +273,6 @@
 					<input type="radio" name="TM_TT_LIST" value="0" id="tm_tl_list_no" <?% UNLESS config.TM_TT_LIST %?>checked="checked"<?% END %?> /><label for="tm_tl_list_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
-<!--						<tr class="row_odd">
-				<td class="col_label"><h5><?% gettext('Add summary to new timers:') %?></h5></td>
-				<td class="col_value">
-					<input type="radio" name="TM_ADD_SUMMARY" value="1" id="tm_add_summary_yes" <?% IF config.TM_ADD_SUMMARY %?>checked="checked"<?% END %?> /><label for="tm_add_summary_yes"><?% gettext('Yes') %?></label>
-					<input type="radio" name="TM_ADD_SUMMARY" value="0" id="tm_add_summary_no" <?% UNLESS config.TM_ADD_SUMMARY %?>checked="checked"<?% END %?> /><label for="tm_add_summary_no"><?% gettext('No') %?></label>
-				</td>
-			</tr>-->
 		</table>
 
 <?% IF config.ST_FUNC %?>
@@ -389,26 +382,6 @@
 				<td class="col_label"><h5><?% gettext('Update EPG every:') %?></h5></td>
 				<td class="col_value"><input type="text" name="CACHE_TIMEOUT" value="<?% config.CACHE_TIMEOUT %?>" size="4" /> <?% gettext('minutes') %?></td>
 			</tr>
-<!-- no longer supported
-			<tr class="row_odd">
-				<td class="col_label"><h5><?% gettext('Read EPG directly using epg.data:') %?></h5></td>
-				<td class="col_value">
-					<input type="radio" name="EPG_DIRECT" value="1" id="epg_yes" <?% IF config.EPG_DIRECT %?>checked="checked"<?% END %?> /><label for="epg_yes"><?% gettext('Yes') %?></label>
-					<input type="radio" name="EPG_DIRECT" value="0" id="epg_no" <?% UNLESS config.EPG_DIRECT %?>checked="checked"<?% END %?> /><label for="epg_no"><?% gettext('No') %?></label>
-				</td>
-			</tr>
-			<tr class="row_even">
-				<td class="col_label"><h5><?% gettext('epg.data filename:') %?></h5></td>
-				<td class="col_value"><input type="text" name="EPG_FILENAME" value="<?% config.EPG_FILENAME %?>" size="20" maxlength="256" /></td>
-			</tr>
--->
-			<tr class="row_odd">
-				<td class="col_label"><h5><?% gettext('VFAT:') %?></h5></td>
-				<td class="col_value">
-					<input type="radio" name="VDRVFAT" value="1" id="vfat_yes" <?% IF config.VDRVFAT %?>checked="checked"<?% END %?> /><label for="vfat_yes"><?% gettext('Yes') %?></label>
-					<input type="radio" name="VDRVFAT" value="0" id="vfat_no" <?% UNLESS config.VDRVFAT %?>checked="checked"<?% END %?> /><label for="vfat_no"><?% gettext('No') %?></label>
-				</td>
-			</tr>
 		</table>
 
 		<table border="0" cellspacing="0" cellpadding="0" class="group">
@@ -422,79 +395,40 @@
 					<input type="radio" name="CHANNELS_WITHOUT_EPG" value="0" id="chnoepg_no" <?% UNLESS config.CHANNELS_WITHOUT_EPG %?>checked="checked"<?% END %?> /><label for="chnoepg_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
-<!-- Now can be set in individual section
-						<tr class="row_odd">
-							<td class="col_label"><h5><?% gettext('In "Timeline"?') %?></h5></td>
-							<td class="col_value" colspan="2">
-								<input type="radio" name="CHANNELS_WANTED_TIMELINE" value="1" id="tl_yes" <?% IF config.CHANNELS_WANTED_TIMELINE %?>checked="checked"<?% END %?> /><label for="tl_yes"><?% gettext('Yes') %?></label>
-								<input type="radio" name="CHANNELS_WANTED_TIMELINE" value="0" id="tl_no" <?% UNLESS config.CHANNELS_WANTED_TIMELINE %?>checked="checked"<?% END %?> /><label for="tl_no"><?% gettext('No') %?></label>
-							</td>
-            </tr>
-						<tr class="row_odd">
-							<td class="col_label"><h5><?% gettext('In "Channels"?') %?></h5></td>
-							<td class="col_value" colspan="2">
-								<input type="radio" name="CHANNELS_WANTED_PRG" value="1" id="prg_yes" <?% IF config.CHANNELS_WANTED_PRG %?>checked="checked"<?% END %?> /><label for="prg_yes"><?% gettext('Yes') %?></label>
-								<input type="radio" name="CHANNELS_WANTED_PRG" value="0" id="prg_no"<?% UNLESS config.CHANNELS_WANTED_PRG %?>checked="checked"<?% END %?> /><label for="prg_no"><?% gettext('No') %?> </label>
-							</td>
-						</tr>
-						<tr class="row_odd">
-							<td class="col_label"><h5><?% gettext('In "Playing Today"?') %?></h5></td>
-							<td class="col_value" colspan="2">
-								<input type="radio" name="CHANNELS_WANTED_PRG2" value="1" id="prg2_yes" <?% IF config.CHANNELS_WANTED_PRG2 %?>checked="checked"<?% END %?> /><label for="prg2_yes"><?% gettext('Yes') %?></label>
-								<input type="radio" name="CHANNELS_WANTED_PRG2" value="0" id="prg2_no"<?% UNLESS config.CHANNELS_WANTED_PRG2 %?>checked="checked"<?% END %?> /><label for="prg2_no"><?% gettext('No') %?> </label>
-							</td>
-						</tr>
-						<tr class="row_even">
-							<td class="col_label"><h5><?% gettext('In "What\'s On Now"?') %?></h5></td>
-							<td class="col_value" colspan="2">
-								<input type="radio" name="CHANNELS_WANTED_SUMMARY" value="1" id="sum_yes" <?% IF config.CHANNELS_WANTED_SUMMARY %?>checked="checked"<?% END %?> /><label for="sum_yes"><?% gettext('Yes') %?></label>
-								<input type="radio" name="CHANNELS_WANTED_SUMMARY" value="0" id="sum_no" <?% UNLESS config.CHANNELS_WANTED_SUMMARY %?>checked="checked"<?% END %?> /><label for="sum_no"><?% gettext('No') %?></label>
-							</td>
-						</tr>
--->
 <?% IF features.AUTOTIMER %?>
-						<tr class="row_even">
-							<td class="col_label"><h5><?% gettext('In "AutoTimer"?') %?></h5></td>
-							<td class="col_value" colspan="2">
-								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="1" id="wat_yes" <?% IF config.CHANNELS_WANTED_AUTOTIMER %?>checked="checked"<?% END %?> /><label for="wat_yes"><?% gettext('Yes') %?></label>
-								<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="0" id="wat_no" <?% UNLESS config.CHANNELS_WANTED_AUTOTIMER %?>checked="checked"<?% END %?> /><label for="wat_no"><?% gettext('No') %?></label>
-							</td>
-						</tr>
+			<tr class="row_even">
+				<td class="col_label"><h5><?% gettext('In "AutoTimer"?') %?></h5></td>
+				<td class="col_value" colspan="2">
+					<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="1" id="wat_yes" <?% IF config.CHANNELS_WANTED_AUTOTIMER %?>checked="checked"<?% END %?> /><label for="wat_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="CHANNELS_WANTED_AUTOTIMER" value="0" id="wat_no" <?% UNLESS config.CHANNELS_WANTED_AUTOTIMER %?>checked="checked"<?% END %?> /><label for="wat_no"><?% gettext('No') %?></label>
+				</td>
+			</tr>
 <?% ELSE %?>
-						<tr class="row_even">
-							<td class="col_label"><h5>&nbsp;</h5></td>
-							<td class="col_value" colspan="2">&nbsp;</td>
-						</tr>
+			<tr class="row_even">
+				<td class="col_label"><h5>&nbsp;</h5></td>
+				<td class="col_value" colspan="2">&nbsp;</td>
+			</tr>
 <?% END %?>
-<!-- Now can be set in individual section
-						<tr class="row_even">
-							<td class="col_label"><h5><?% gettext('In "Watch TV"?') %?></h5></td>
-							<td class="col_value" colspan="2">
-								<input type="radio" name="CHANNELS_WANTED_WATCHTV" value="1" id="wtv_yes" <?% IF config.CHANNELS_WANTED_WATCHTV %?>checked="checked"<?% END %?> /><label for="wtv_yes"><?% gettext('Yes') %?></label>
-								<input type="radio" name="CHANNELS_WANTED_WATCHTV" value="0" id="wtv_no" <?% UNLESS config.CHANNELS_WANTED_WATCHTV %?>checked="checked"<?% END %?> /><label for="wtv_no"><?% gettext('No') %?></label>
-							</td>
-						</tr>
--->
-						<tr class="row_odd">
-							<td class="col_channels">
-								<select name="all_channels" size="8" multiple="multiple" class="channels">
+			<tr class="row_odd">
+				<td class="col_channels">
+					<select name="all_channels" size="8" multiple="multiple" class="channels">
 <?% FOREACH chan = ALL_CHANNELS %?>
-									<option value="<?% chan.vdr_id %?>"><?% chan.name | html %?></option>
+						<option value="<?% chan.vdr_id %?>"><?% chan.name | html %?></option>
 <?% END %?>
-								</select>
-							</td>
-							<td>
-								<input type="submit" class="submit" name="submit" value="&gt;&gt;&gt;&gt;&gt;" /><br />
-								<input type="submit" class="submit" name="submit" value="&lt;&lt;&lt;&lt;&lt;" />
-							</td>
-							<td class="col_wanted_channels">
-								<select name="selected_channels" size="8" multiple="multiple" class="channels">
+					</select>
+				</td>
+				<td>
+					<input type="submit" class="submit" name="submit" value="&gt;&gt;&gt;&gt;&gt;" /><br />
+					<input type="submit" class="submit" name="submit" value="&lt;&lt;&lt;&lt;&lt;" />
+				</td>
+				<td class="col_wanted_channels">
+					<select name="selected_channels" size="8" multiple="multiple" class="channels">
 <?% FOREACH chan = SELECTED_CHANNELS %?>
-									<option value="<?% chan.vdr_id %?>"><?% chan.name | html %?></option>
+						<option value="<?% chan.vdr_id %?>"><?% chan.name | html %?></option>
 <?% END %?>
-								</select>
-							</td>
-						</tr>
+					</select>
+				</td>
+			</tr>
 		</table>
 
 		<div id="buttons">

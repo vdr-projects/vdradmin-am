@@ -75,7 +75,7 @@
 				<td class="col_center">
 					<div class="epg_title">
 						<?% IF broadcast.summary %?>
-							<a href="javascript:popup('<?% broadcast.infurl %?>');" title="<?% gettext('More Information') %?>">
+							<a href="javascript:popup('<?% broadcast.infurl %?>', <?% config.GUI_POPUP_WIDTH %?>, <?% config.GUI_POPUP_HEIGHT %?>);" title="<?% gettext('More Information') %?>">
 						<?% END %?>
 						<?% broadcast.title %?>
 						<?% IF broadcast.summary %?>
@@ -96,15 +96,15 @@
 					<?% IF broadcast.stream_live_on %?>
 						<span class="action stream"><a href="<?% broadcast.streamurl %?>"><img src="bilder/stream.png" border="0" alt="<?% gettext('Stream') %?>" onmouseover="window.status='<?% gettext('Stream') %?>';return true" title="<?% gettext('Stream') %?>" /></a></span>
 					<?% END %?>
+					<?% IF broadcast.switchurl %?>
+						<span class="action switch">
+							<a href="javascript:callurl('<?% broadcast.switchurl %?>');"><img src="bilder/view.png" border="0" alt="<?% gettext('TV select') %?>" onmouseover="window.status='<?% gettext('TV select') %?>';return true" title="<?% gettext('TV select') %?>" /></a>
+						</span>
+					<?% END %?>
 					<?% IF broadcast.recurl %?>
-						<?% IF broadcast.switchurl %?>
-							<span class="action switch">
-								<a href="javascript:callurl('<?% broadcast.switchurl %?>');"><img src="bilder/view.png" border="0" alt="<?% gettext('TV select') %?>" onmouseover="window.status='<?% gettext('TV select') %?>';return true" title="<?% gettext('TV select') %?>" /></a>
-							</span>
-						<?% END %?>
 						<span class="action repeatings"><a href="vdradmin.pl?search=<?% broadcast.find_title %?>&amp;aktion=prog_summary&amp;submit=go11"><img src="bilder/find.png" border="0" alt="<?% gettext('Search for other show times') %?>" onmouseover="window.status='<?% gettext('Search for other show times') %?>';return true" title="<?% gettext('Search for other show times') %?>" /></a></span>
 						<?% IF broadcast.summary %?>
-							<span class="action info"><a href="javascript:popup('<?% broadcast.infurl %?>');"><img src="bilder/info_button.png" border="0" alt="<?% gettext('More Information') %?>" onmouseover="window.status='<?% gettext('More Information') %?>';return true" title="<?% gettext('More Information') %?>" /></a></span>
+							<span class="action info"><a href="javascript:popup('<?% broadcast.infurl %?>', <?% config.GUI_POPUP_WIDTH %?>, <?% config.GUI_POPUP_HEIGHT %?>);"><img src="bilder/info_button.png" border="0" alt="<?% gettext('More Information') %?>" onmouseover="window.status='<?% gettext('More Information') %?>';return true" title="<?% gettext('More Information') %?>" /></a></span>
 						<?% ELSE %?>
 							<span class="action info"><img src="bilder/info_button_disabled.png" border="0" alt="noinfo" title="<?% gettext('No Information') %?>" /></span>
 						<?% END %?>

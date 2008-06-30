@@ -3,7 +3,11 @@
 
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>"/>
-	<title>VDRAdmin-AM - <?% IF newtimer %?><?% gettext('Define New Search') %?><?% ELSE %?><?% gettext('Edit Search') %?><?% END %?></title>
+<?% IF mode_blacklist %?>
+  <title>VDRAdmin-AM - <?% IF newtimer %?><?% gettext('Add New Blacklist') %?><?% ELSE %?><?% gettext('Edit Blacklist') %?><?% END %?></title>
+<?% ELSE %?>
+  <title>VDRAdmin-AM - <?% IF newtimer %?><?% gettext('Add New Search') %?><?% ELSE %?><?% gettext('Edit Search') %?><?% END %?></title>
+<?% END %?>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css"/>
 	<?% IF usercss %?>
 		<link href="user.css" rel="stylesheet" media="screen" type="text/css"/>
@@ -23,11 +27,13 @@
 			changedUseTime(document.getElementById("use_time"));
 			changedUseDuration(document.getElementById("use_duration"));
 			changedUseDays(document.getElementById("use_days"));
+<?% UNLESS mode_blacklist %?>
 			changedUseBlacklists(document.getElementById("use_blacklists"));
 			changedAction(document.getElementById("select_action"));
 			changedHasAction(document.getElementById("has_action"));
 			changedAvoidRepeats(document.getElementById("avoid_repeats"));
 			changedAutoDelete(document.getElementById("select_autodelete"));
+<?% END %?>
 		}
 
 		function changedSearchMode(mySelect)
@@ -78,6 +84,7 @@
 			document.getElementById("use_days_settings").style.display = (myCheckbox.checked ? "block" : "none");
 		}
 
+<?% UNLESS mode_blacklist %?>
 		function changedUseBlacklists(mySelect)
 		{
 			document.getElementById("select_blacklists").style.display = (mySelect.options[mySelect.selectedIndex].value == 1 ? "block" : "none");
@@ -161,6 +168,7 @@
 		{
 			document.getElementById("results").style.display = "none";
 		}
+<?% END %?>
 	//-->
 	</script>
 </head>
@@ -170,7 +178,11 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_title">
+<?% IF mode_blacklist %?>
+					<h1><?% IF do_edit %?><?% gettext('Edit Blacklist') %?><?% ELSE %?><?% gettext('Add New Blacklist') %?><?% END %?></h1>
+<?% ELSE %?>
 					<h1><?% IF do_edit %?><?% gettext('Edit Search') %?><?% ELSE %?><?% gettext('Add New Search') %?><?% END %?></h1>
+<?% END %?>
 				</td>
 <?% IF help_url %?>
 				<td class="col_help">
@@ -200,7 +212,7 @@
 							<td class="col_center">
 								<div class="epg_title">
 									<?% IF infurl %?>
-										<a href="javascript:popup('<?% infurl %?>');" title="<?% gettext('More Information') %?>">
+										<a href="javascript:popup('<?% infurl %?>', <?% config.GUI_POPUP_WIDTH %?>, <?% config.GUI_POPUP_HEIGHT %?>);" title="<?% gettext('More Information') %?>">
 									<?% END %?>
 									<?% title %?>
 									<?% IF infurl %?>
@@ -242,7 +254,7 @@
 					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 					<td class="col_label"><h5><?% gettext('Search Term:') %?></h5></td>
 					<td class="col_value">
-						<input type="text" name="pattern" id="pattern" value="<?% epgsearch.pattern %?>" size="40" />
+						<input type="text" name="pattern" id="pattern" value="<?% epgsearch.pattern | html %?>" size="40" />
 					</td>
 				</tr>
 				<tr class="<?% tr_class %?>">
@@ -315,8 +327,8 @@
 								</table>
 							<?% END %?>
 						</div>
- 	    		</td>
-			 	</tr>
+					</td>
+				</tr>
 <?% END %?>
 				<tr class="<?% tr_class %?>">
 					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
@@ -392,7 +404,7 @@
 									</td>
 								</tr>
 								<tr>
-						  		<td class="col_label"><h5><?% gettext('Max. Duration:') %?></h5></td>
+									<td class="col_label"><h5><?% gettext('Max. Duration:') %?></h5></td>
 									<td class="col_value">
 										<input type="text" name="max_duration" value="<?% epgsearch.max_duration %?>" size="5" maxlength="5" />
 										&nbsp;(<?% gettext('hh:mm') %?>)
@@ -416,8 +428,9 @@
 							<input type="checkbox" name="saturday" value="1" id="saturday" <?% IF epgsearch.saturday %?>checked="checked"<?% END %?> /><label for="saturday"><?% gettext('Saturday') %?></label>
 							<input type="checkbox" name="sunday" value="1" id="sunday" <?% IF epgsearch.sunday %?>checked="checked"<?% END %?> /><label for="sunday"><?% gettext('Sunday') %?></label>
 						</div>
- 	       </td>
+					</td>
 				</tr>
+<?% UNLESS mode_blacklist %?>
 				<tr class="<?% tr_class %?>">
 					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 					<td class="col_label" valign="top"><h5><?% gettext('Use Blacklists:') %?></h5></td>
@@ -482,8 +495,10 @@
 						</div>
 					</td>
 				</tr>
+<?% END %?>
 			</table>
 
+<?% UNLESS mode_blacklist %?>
 			<div id="action_record_settings">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 					<tr class="heading">
@@ -598,6 +613,7 @@
 				</table>
 			</div>
 		</div>
+<?% END %?>
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
 			<tr>
@@ -608,16 +624,23 @@
 				-->
 				<td align="right">
 					<input type="submit" class="submit" name="save" value="<?% gettext('Save') %?>" onclick="return checkSearchPattern();" />
-					<input type="submit" class="submit" name="single_test" value="<?% gettext('Run') %?>" onclick="return checkSearchPattern();" />
+<?% UNLESS mode_blacklist %?>
+          <input type="submit" class="submit" name="single_test" value="<?% gettext('Run') %?>" onclick="return checkSearchPattern();" />
+<?% END %?>
 					<input type="submit" class="submit" name="exit" value="<?% gettext('Cancel') %?>" />
 				</td>
 			</tr>
 		</table>
-		<input type="hidden" name="aktion" value="epgsearch_aktion" />
 		<?% IF do_edit %?>
 			<input type="hidden" name="id" value="<?% epgsearch.id %?>" />
 		<?% END %?>
+<?% IF mode_blacklist %?>
+		<input type="hidden" name="aktion" value="epgsearch_bl_aktion" />
+		<input type="hidden" name="mode_blacklist" value="1" />
+<?% ELSE %?>
+		<input type="hidden" name="aktion" value="epgsearch_aktion" />
 		<input type="hidden" name="results_menu" value="<?% epgsearch.results_menu %?>" />
+<?% END %?>
 		<input type="hidden" name="unused" value="<?% epgsearch.unused %?>" />
 	</form>
 </body>

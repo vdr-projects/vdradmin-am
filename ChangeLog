@@ -1,3 +1,231 @@
+2008-06-30  tag v3_6_2
+
+2008-06-30  amair
+
+	* HISTORY, vdradmind.pl, po/cs.po, po/de.po, po/es.po, po/fi.po,
+	  po/fr.po, po/it.po, po/nl.po, po/ru.po, po/vdradmin.pot:
+
+	Updated for v3.6.2 release.
+
+2008-06-30  amair
+
+	* make.sh:
+
+	Added "help", "-h" and "--help" options.
+
+2008-06-30  amair
+
+	* template/default/tv.html:
+
+	Added note.
+
+2008-06-30  amair
+
+	* template/default/about.html:
+
+	Fixed &euml;.
+
+2008-06-24  amair
+
+	* vdradmind.pl, template/default/config.html,
+	  template/default/help_config.html:
+
+	Removed unused code.
+
+2008-06-24  amair
+
+	* template/default/config.html:
+
+	Re-add "</table>" which had been wrongly removed by the previous commit.
+
+2008-06-24  amair
+
+	* vdradmind.pl, template/default/config.html,
+	  template/default/help_config.html:
+
+	Removed VDRVFAT config option and try to find the folders/files by using both codings.
+
+2008-06-23  amair
+
+	* template/default/tv.html:
+
+	Reworked changing the grabbed image.
+
+2008-06-20  amair
+
+	* template/default/tv.html:
+
+	Fixed some bugs.
+
+2008-06-10  amair
+
+	* vdradmind.pl:
+
+	Fixed command line options parsing.
+
+2008-05-19  amair
+
+	* template/default/epgsearch_new.html:
+
+	Fixed pattern titles that contain double quotes.
+
+2008-05-19  amair
+
+	* vdradmind.pl:
+
+	Fixed timer titles that contain double quotes.
+
+2008-05-09  amair
+
+	* po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po, po/it.po,
+	  po/ru.po, po/vdradmin.pot:
+
+	Updated.
+
+2008-05-08  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Added new command line switch "--ipv6" to use IO::Socket::INET6 for networking (See bug report #462).
+
+2008-05-08  amair
+
+	* template/default/about.html:
+
+	Updated copyright.
+
+2008-05-08  amair
+
+	* tools/update-po:
+
+	Do not wrap long lines.
+
+2008-05-08  amair
+
+	* make.sh:
+
+	Check for missing folder before changing into it.
+
+2008-05-05  amair
+
+	* po/nl.po:
+
+	Updated.
+
+2008-04-21  amair
+
+	* HISTORY, vdradmind.pl:
+
+	- Added: ST_STREAMDEV_HOST config option to set the name/ip to be used for streaming.
+	- Fixed: m3u files for Xine (Reported by Robert C. Helling).
+
+2008-04-17  amair
+
+	* po/it.po:
+
+	Updated.
+
+2008-04-11  amair
+
+	* po/es.po:
+
+	Updated.
+
+2008-03-31  amair
+
+	* po/fi.po:
+
+	Updated.
+
+2008-03-25  amair
+
+	* po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po, po/it.po,
+	  po/nl.po, po/ru.po, po/vdradmin.pot:
+
+	Updated.
+
+2008-03-14  amair
+
+	* HISTORY, vdradmind.pl, template/default/epgsearch_list.html,
+	  template/default/epgsearch_new.html, template/default/library.js,
+	  template/default/prog_list.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html,
+	  template/default/prog_timeline.html,
+	  template/default/rec_list.html, template/default/timeline.js,
+	  template/default/timer_list.html:
+
+	Introduced new config options "GUI_POPUP_WIDTH" and "GUI_POPUP_HEIGHT" for setting the prog_detail's window size.
+
+2008-03-13  amair
+
+	* template/default/style.css:
+
+	Added space between each day/channel in prog_list/prog_list2.
+
+2008-03-13  amair
+
+	* HISTORY, vdradmind.pl, template/default/prog_list.html:
+
+	Added prev/next arrows in prog_list after each day.
+
+2008-03-12  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Show channel in prog_list even if it's not in the current channel list; this is useful if prog_list is called by a link (e.g. timer_list).
+
+2008-02-13  amair
+
+	* vdradmind.pl:
+
+	Set LANG environment variable when changing the locale.
+
+2008-02-13  amair
+
+	* install.sh, make.sh:
+
+	Generate and install UTF8 locales by default.
+
+2008-02-11  amair
+
+	* HISTORY, vdradmind.pl, po/cs.po, po/de.po, po/es.po, po/fi.po,
+	  po/fr.po, po/it.po, po/nl.po, po/ru.po, po/vdradmin.pot,
+	  template/default/epgsearch_config.html,
+	  template/default/epgsearch_list.html,
+	  template/default/epgsearch_new.html, template/default/style.css,
+	  template/default/default/configure.png:
+
+	Added support for modifying EPGSearch blacklists.
+
+2008-01-30  amair
+
+	* HISTORY, vdradmind.pl, template/default/prog_summary.html,
+	  template/default/prog_summary2.html:
+
+	Show stream and switch buttons in prog_summary on channels without EPG information.
+
+2008-01-29  scop
+
+	* vdradmind.pl:
+
+	Trivial code simplifications.
+
+2008-01-11  amair
+
+	* vdradmind.pl:
+
+	Show channelname in recording's details.
+
+2008-01-07  amair
+
+	* po/it.po:
+
+	Updated.
+
+2007-12-19  tag v3_6_1
+
 2007-12-19  amair
 
 	* HISTORY, README.translators, po/cs.po, po/de.po, po/es.po,

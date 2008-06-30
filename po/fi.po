@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-AM-3.6.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-18 12:37+0100\n"
+"Project-Id-Version: VDRAdmin-AM-3.6.2\n"
+"Report-Msgid-Bugs-To: Andreas Mair <mail@andreas.vdr-developer.org>\n"
+"POT-Creation-Date: 2008-06-30 08:26+0200\n"
 "PO-Revision-Date: 2007-08-17 17:43+0300\n"
 "Last-Translator: Ville Skyttä\n"
 "Language-Team: Suomi\n"
@@ -19,75 +19,59 @@ msgstr ""
 msgid "ISO-8859-1"
 msgstr "ISO-8859-1"
 
-msgid "Define New Search"
-msgstr "Määritä uusi hakuajastin"
+msgid "What's On Now?"
+msgstr "Menossa nyt"
 
-msgid "Edit Search"
-msgstr "Muokkaa hakuajastinta"
+msgid "Channel group:"
+msgstr "Kanavaryhmä:"
 
-msgid "Small search pattern.\\nDo you really want to use it?"
-msgstr "Hakuehdot ovat hyvin suppeat.\\nHaetaanko silti?"
+msgid "What's on:"
+msgstr "Menossa"
 
-msgid ""
-"You didn't select at least one of\\ntitle, subtitle or description.\\nDo you "
-"really want to use this search?"
-msgstr ""
-"Et valinnut otsikkoa, lyhyttä tai\\npitkää kuvausta hakuehdoksi.\\nHaluatko "
-"silti käyttää hakua?"
+msgid "at"
+msgstr " "
 
-msgid "Add New Search"
-msgstr "Lisää uusi hakuajastin"
-
-msgid "Help"
-msgstr "Opaste"
-
-msgid "Hide results"
-msgstr "Piilota hakutulokset"
+msgid "o'clock"
+msgstr " "
 
 msgid "More Information"
 msgstr "Lisätietoja"
 
+msgid "Channels"
+msgstr "Kanavat"
+
+msgid "Stream"
+msgstr "Suoratoisto"
+
+msgid "TV select"
+msgstr "Valitse"
+
+msgid "Search for other show times"
+msgstr "Etsi vaihtoehtoisia esitysaikoja"
+
+msgid "No Information"
+msgstr "Ei tietoja"
+
+msgid "Edit"
+msgstr "Muokkaa"
+
 msgid "Record"
 msgstr "Tallenna"
 
-msgid "No matches found!"
-msgstr "Ei löydy!"
+msgid "No EPG information available"
+msgstr "Ohjelmaoppaan tietoja ei saatavilla"
 
-msgid "Settings"
-msgstr "Asetukset"
+msgid "Edit EPG"
+msgstr "Muokkaa ohjelmatietoja"
 
-msgid "Search Term:"
-msgstr "Hakutermi:"
+msgid "Help"
+msgstr "Opaste"
 
-msgid "Search Mode:"
-msgstr "Hakutapa:"
+msgid "Channel"
+msgstr "Kanava"
 
-msgid "phrase"
-msgstr "fraasi"
-
-msgid "all words"
-msgstr "kaikki sanat"
-
-msgid "at least one word"
-msgstr "yksi sana"
-
-msgid "match exactly"
-msgstr "täsmällinen"
-
-msgid "regular expression"
-msgstr "säännöllinen lauseke"
-
-msgid "fuzzy"
-msgstr "sumea"
-
-msgid "Tolerance for \"fuzzy\":"
-msgstr "Toleranssi:"
-
-msgid "Match Case:"
-msgstr "Huomioi kirjainkoko:"
-
-msgid "Search in:"
-msgstr "Hakukentät:"
+msgid "Time"
+msgstr "Aika"
 
 msgid "Title"
 msgstr "Otsikko"
@@ -98,59 +82,197 @@ msgstr "Lyhyt kuvaus"
 msgid "Description"
 msgstr "Kuvaus"
 
-msgid "Use extended EPG info:"
-msgstr "Käytä laajennettua ohjelmaopasta:"
+msgid "VPS"
+msgstr "VPS"
 
-msgid "Ignore missing categories?"
-msgstr ""
+msgid "Video tracks"
+msgstr "Kuvaraidat"
 
-msgid "Use Channel:"
-msgstr "Käytä kanavaa:"
+msgid "Audio tracks"
+msgstr "Ääniraidat"
 
-msgid "no"
-msgstr "ei"
+msgid "Save"
+msgstr "Tallenna"
 
-msgid "interval"
-msgstr "kyllä"
+msgid "Cancel"
+msgstr "Peru"
 
-msgid "channel group"
-msgstr "kanavaryhmä"
+msgid "Edit Timer"
+msgstr "Muokkaa ajastinta"
 
-msgid "only FTA"
-msgstr "vapaat"
+msgid "<p>Here you can edit a timer's settings.</p>"
+msgstr "<p>Tässä näkymässä voit muokata ajastimen asetuksia.</p>"
 
-msgid "Range:"
-msgstr "Kanavat:"
+msgid "Timer Active:"
+msgstr "Aktiivinen:"
 
-msgid "Channel Group:"
-msgstr "Kanavaryhmä:"
+msgid "Activate or deactivate this timer. Deactivated timers are still stored in the timer list so that they can be activated again, but they do not record anything meanwhile."
+msgstr "Aktivoi tai deaktivoi tämä ajastin. Deaktivoidut ajastimet eivät tallenna mitään, mutta ne näytetään ajastinlistauksessa josta ne voidaan aktivoida uudelleen."
 
-msgid "Use Time:"
-msgstr "Käytä aloitusaikaa:"
+msgid "AutoTimer Checking:"
+msgstr "Hakuajastimen tarkistus:"
 
-msgid "Start After:"
-msgstr "Aikaisintaan:"
+msgid "Depending on how this timer has been programmed you have up to three possible settings:"
+msgstr "Riippuen ajastimen tekotavasta, käytettävissäsi on useita asetuksia:"
 
-msgid "o'clock"
-msgstr " "
+msgid "Transmission Identification"
+msgstr "Lähetteen tunniste"
 
-msgid "Start Before:"
-msgstr "Viimeistään:"
+msgid "Monitor this timer using the identification provided in the EPG. Please note that this only works if the provided identification is a fix and unique value! This option is not available with timers programmed in VDR."
+msgstr "Tarkista ajastinta ohjelmisto-oppaan sisältämän ohjelmatunnisteen perusteella. Tämä tarkistustapa toimii vain mikäli ohjelmisto-oppaan ohjelmatunniste on vakio ja uniikki. Tämä valinta ei ole käytettävissä VDR:stä tehtyjen ajastimien kohdalla."
 
-msgid "Use Duration:"
-msgstr "Käytä kestoaikaa:"
+msgid "Monitor this timer using the start and stop time."
+msgstr "Tarkista ajastin käyttäen alku- ja loppuaikoja."
 
-msgid "Min. Duration:"
-msgstr "Kestoaika vähintään:"
+msgid "off"
+msgstr "Pois"
 
-msgid "hh:mm"
-msgstr "hh:mm"
+msgid "Do not monitor this timer."
+msgstr "Älä tarkista tätä ajastinta."
 
-msgid "Max. Duration:"
-msgstr "Kestoaika enintään:"
+msgid "Channel:"
+msgstr "Kanava:"
 
-msgid "Use Day of Week:"
-msgstr "Käytä viikonpäivää:"
+msgid "The channel to record."
+msgstr "Tallennettava kanava."
+
+msgid "Day Of Recording:"
+msgstr "Päivä:"
+
+msgid "The day when the timer should get active. You can enter the day in two formats:<ul><li>Two digits (DD). This will use the current month and year.</li><li>ISO norm (YYYY-MM-DD). Program your timers as far in the future as you like.</li></ul>In case you want to program a repeating timer you can use the seven checkboxes below the text field. Check the box for each day you want the timer to get active."
+msgstr "Ajastimen aktivoitumispäivä. Voit käyttää kahta eri muotoa päivän asettamiseen:<ul><li>Kaksi numeroa (PP). Tämä täydennetään päivämääräksi kuluvalla kuukaudella ja vuodella.</li><li>ISO-standardi (VVVV-KK-PP). Voit tehdä ajastuksia niin kauas tulevaisuuteen kuin haluat.</li></ul>Halutessasi asettaa toistuvan ajastuksen voit käyttää tekstikentän alla olevia seitsemää viikonpäiväkohtaista valintaruutua. Valitse jokainen viikonpäivä jolloin haluat ajastimen aktivoituvan."
+
+msgid "Start Time:"
+msgstr "Aloitusaika:"
+
+msgid "This is the time when the timer should start recording. The first text field is for \"hour\", the second for \"minute\"."
+msgstr "Aika jolloin ajastettu tallennus alkaa. Ensimmäiseen kenttään syötetään tunnit, jälkimmäiseen minuutit."
+
+msgid "End Time:"
+msgstr "Lopetusaika:"
+
+msgid "This is the time when the timer should stop recording. The first text field is for \"hour\", the second for \"minute\"."
+msgstr "Aika jolloin ajastettu tallennus päättyy. Ensimmäiseen kenttään syötetään tunnit, jälkimmäiseen minuutit."
+
+msgid "Priority:"
+msgstr "Prioriteetti:"
+
+msgid "An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording."
+msgstr "Kokonaisluku väliltä <strong>0...99</strong> joka määrittää tämän ajastimen ja sen tekemien tallennusten <strong>prioriteetin</strong>. <strong>0</strong> on alin prioriteetti, <strong>99</strong> ylin. Prioriteettiarvoa käytetään päättämään mikä ajastettu tallennus aloitetaan mikäli asetettuna on kaksi tai useampia samaan aikaan <strong>alkamaan</strong> asetettuja ajastimia. Valinta kohdistuu ensimmäiseen suurimmalla prioriteetilla olevista ajastimista.<br /><br />Prioriteettiarvo säilytetään myös tallenteen mukana, ja sitä käytetään myöhemmin päättämään mikä tallenne poistetaan mikäli uutta varten pitää saada lisää levytilaa. Mikäli levy täyttyy ja uusi tallenne tarvitsee lisää tilaa, pienimmällä prioriteetilla merkitty tallenne (joka on ylittänyt <strong>taatun</strong> elinaikanasa) poistetaan.<br /><br />Mikäli kaikki DVB-kortit ovat käytössä, korkeamman prioriteetin ajastin keskeyttää tarvittaessa käynnissä olevan alimman prioriteetin tallennuksen."
+
+msgid "Lifetime:"
+msgstr "Elinaika:"
+
+msgid "The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by."
+msgstr "Tämän ajastimen tekemien tallenteiden <strong>taattu</strong> elinaika (päivinä). <strong>0</strong> tarkoittaa että tallenne saatetaan poistaa automaattisesti milloin tahansa korkeamman prioriteetin ajastimen tarvitessa lisää levytilaa. <strong>99</strong> tarkoittaa että tallennetta ei poisteta automaattisesti. Numero väliltä <strong>1...98</strong> tarkoittaa päivien määrää, jonka pitää olla kulunut ajastimen <strong>alkuajankohdasta</strong> ennen kuin tallenne saatetaan poistaa automaattisesti uuden tallenteen tarvitessa levytilaa."
+
+msgid "Title of Recording:"
+msgstr "Tallenteen nimi:"
+
+msgid "The <strong>file name</strong> this timer will give to a recording. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br /><br />The special keywords <strong>TITLE</strong> and <strong>EPISODE</strong>, if present, will be replaced by the title and episode information from the EPG data at the time of recording (if that data is available). If at the time of recording either of these cannot be determined, <strong>TITLE</strong> will default to the channel name, and <strong>EPISODE</strong> will default to a blank."
+msgstr "Ajastimen tekemien tallenteiden <strong>tiedostonimi</strong>. Hakemistoerottimena käytetään '~':a (koska '/' saattaa esiintyä ohjelmien nimissä).<br /><br />Avainsanat <strong>TITLE</strong> ja <strong>EPISODE</strong> korvataan ohjelmisto-oppaan otsikko- ja jaksotiedoilla mikäli ne ovat saatavilla tallennuksen alkaessa. Jos eivät, <strong>TITLE</strong>:n oletus on kanavan nimi ja <strong>EPISODE</strong>:n tyhjä."
+
+msgid "Summary:"
+msgstr "Lisätiedot:"
+
+msgid "Arbitrary text that describes the recording made by this timer. If this field is not empty, its contents will be written into the <span class=\"ref_file\">summary.vdr</span> or <span class=\"ref_file\">info.vdr</span> file of the recording."
+msgstr "Vapaavalintainen lisätietoteksti tämän ajastimen tekemille tallenteille. Jos tämä kenttä ei ole tyhjä, sen sisältö kirjoitetaan tallenteen <span class=\"ref_file\">summary.vdr</span>- tai <span class=\"ref_file\">info.vdr</span>-tiedostoon."
+
+msgid "Go!"
+msgstr "Siirry"
+
+msgid "AutoTimer"
+msgstr "Hakuajastimet"
+
+msgid "New AutoTimer"
+msgstr "Uusi hakuajastin"
+
+msgid "Active"
+msgstr "Aktiivinen"
+
+msgid "Start"
+msgstr "Aloitus"
+
+msgid "Stop"
+msgstr "Lopetus"
+
+msgid "Name"
+msgstr "Nimi"
+
+msgid "Select all/none"
+msgstr "Valitse kaikki/ei yhtään"
+
+msgid "Yes"
+msgstr "Kyllä"
+
+msgid "No"
+msgstr "Ei"
+
+msgid "Delete timer?"
+msgstr "Poistetaanko ajastin?"
+
+msgid "Delete"
+msgstr "Poista"
+
+msgid "Force Update"
+msgstr "Päivitä"
+
+msgid "Delete Selected AutoTimers"
+msgstr "Poista valitut hakuajastimet"
+
+msgid "Delete all selected timers?"
+msgstr "Poistetaanko valitut ajastimet?"
+
+msgid "No AutoTimers defined!"
+msgstr "Hakuajastimia ei ole määritelty!"
+
+msgid "VDR Commands"
+msgstr "Komennot"
+
+msgid "Export channels as playlist:"
+msgstr "Luo soittolista:"
+
+msgid "Number of lines to show:"
+msgstr "Näytettävien rivien lukumäärä:"
+
+msgid "unlimited"
+msgstr "ei rajoitusta"
+
+msgid "SVDRP commands:"
+msgstr "SVDRP-komennot:"
+
+msgid "Run"
+msgstr "Suorita"
+
+msgid "Really run this command?"
+msgstr "Suoritetaanko komento?"
+
+msgid "Commands defined in commands.conf:"
+msgstr "Määritellyt komennot (commands.conf):"
+
+msgid "Output"
+msgstr "Vaste"
+
+msgid "Add New AutoTimer"
+msgstr "Lisää uusi hakuajastin"
+
+msgid "Edit AutoTimer"
+msgstr "Muokkaa hakuajastinta"
+
+msgid "AutoTimer Active:"
+msgstr "Aktiivinen:"
+
+msgid "oneshot"
+msgstr "Kerran"
+
+msgid "Search Patterns:"
+msgstr "Hakuehdot:"
+
+msgid "Search in:"
+msgstr "Hakukentät:"
+
+msgid "Search only on these days:"
+msgstr "Etsi valittuina päivinä:"
 
 msgid "Monday"
 msgstr "Maanantai"
@@ -173,98 +295,17 @@ msgstr "Lauantai"
 msgid "Sunday"
 msgstr "Sunnuntai"
 
-msgid "Use Blacklists:"
-msgstr "Käytä mustia listoja:"
-
-msgid "selection"
-msgstr "valitut"
-
 msgid "all"
 msgstr "kaikki"
 
-msgid "Use in Favorites Menu:"
-msgstr "Käytä suosikkina:"
+msgid "Starts After:"
+msgstr "Alkaa jälkeen:"
 
-msgid "Use as Search Timer:"
-msgstr "Käytä hakuajastimena:"
+msgid "Ends Before:"
+msgstr "Loppuu ennen:"
 
-#, fuzzy
-msgid "yes"
-msgstr "Kyllä"
-
-#, fuzzy
-msgid "user-defined"
-msgstr "Käyttäjän määrittelemä haku:"
-
-msgid "record"
-msgstr "Tallenna"
-
-msgid "announce only"
-msgstr "Muistutus"
-
-msgid "switch only"
-msgstr "Kanavanvaihto"
-
-#, fuzzy
-msgid "First day:"
-msgstr "Perjantai"
-
-msgid "Last day:"
-msgstr ""
-
-msgid "Auto delete:"
-msgstr ""
-
-#, fuzzy
-msgid "count recordings"
-msgstr "Tallenteet"
-
-#, fuzzy
-msgid "count days"
-msgstr "Maanantai"
-
-#, fuzzy
-msgid "After ... recordings:"
-msgstr "Säilytä ... tallennetta:"
-
-msgid "After ... days after first recording:"
-msgstr ""
-
-msgid "Settings for action \"record\""
-msgstr "Tallennustoiminnon asetukset"
-
-msgid "Series Recording:"
-msgstr "Sarjatallennus:"
-
-msgid "Directory:"
-msgstr "Hakemisto:"
-
-msgid "Delete Recordings After ... Days:"
-msgstr "Poista tallenteet ... päivän jälkeen:"
-
-msgid "Keep ... Recordings:"
-msgstr "Säilytä ... tallennetta:"
-
-msgid "Pause, when ... recordings exist:"
-msgstr "Keskeytä ... tallenteen jälkeen:"
-
-msgid "Avoid Repeats:"
-msgstr "Estä uusinnat:"
-
-msgid "Allowed Repeats:"
-msgstr "Sallittujen uusintojen lukumäärä:"
-
-msgid "Only Repeats Within ... Days:"
-msgstr "Vain uusinnat ... päivän sisällä:"
-
-msgid "Compare:"
-msgstr "Vertaa hakukenttiä:"
-
-msgid "Priority:"
-msgstr "Prioriteetti:"
-
-msgid "Lifetime:"
-msgstr "Elinaika:"
+msgid "Override Start/Stop Margins:"
+msgstr "Käytä yksilöllisiä aloitus- ja lopetusmarginaaleja"
 
 msgid "Time Margin at Start:"
 msgstr "Aloitusmarginaali:"
@@ -275,835 +316,14 @@ msgstr "minuuttia"
 msgid "Time Margin at Stop:"
 msgstr "Lopetusmarginaali:"
 
-msgid "VPS:"
-msgstr "VPS-toiminto:"
-
-msgid "Settings for action \"switch only\""
-msgstr "Kanavanvaihdon asetukset"
-
-msgid "Switch ... Minutes Before Start:"
-msgstr "Vaihda ... minuuttia ennen alkua:"
-
-msgid "Save as template"
-msgstr "Tallenna mallipohjaksi"
-
-msgid "Save"
-msgstr "Tallenna"
-
-msgid "Run"
-msgstr "Suorita"
-
-msgid "Cancel"
-msgstr "Peru"
-
-msgid "Authorization Required"
-msgstr "Käyttäjätunnistus puutteellinen"
-
-msgid ""
-"This server could not verify that you are authorized to access the document "
-"requested. Either you supplied the wrong credentials (e.g. bad password), or "
-"your browser doesn't understand how to supply the credentials required."
-msgstr ""
-"Käyttäjätunnistus ei onnistu! Tarkista syöttämäsi käyttäjätunnus/salasana."
-
-msgid "Timer"
-msgstr "Ajastimet"
-
-msgid "Duration:"
-msgstr "Kesto:"
-
-msgid "min"
-msgstr "min"
-
-msgid "Transponder:"
-msgstr "Transponderi:"
-
-msgid "CA-System:"
-msgstr "Salaus:"
-
-msgid "New Timer"
-msgstr "Uusi ajastin"
-
-msgid "Active"
-msgstr "Aktiivinen"
-
-msgid "Channel"
-msgstr "Kanava"
-
-msgid "Date"
-msgstr "Päivä"
-
-msgid "Start"
-msgstr "Aloitus"
-
-msgid "Stop"
-msgstr "Lopetus"
-
-msgid "Name"
-msgstr "Nimi"
-
-msgid "Select all/none"
-msgstr "Valitse kaikki/ei yhtään"
-
-msgid "Edit timer status?"
-msgstr "Muokataanko ajastinta?"
-
-msgid "This timer is inactive!"
-msgstr "Ajastin ei ole aktiivinen!"
-
-msgid "This timer is impossible!"
-msgstr "Ajastin ei ole mahdollinen!"
-
-msgid "No more timers on other transponders possible!"
-msgstr "Maksimimäärä ajastimia käytössä!"
-
-msgid "Timer OK."
-msgstr "Ajastin kunnossa."
-
-msgid "Yes"
-msgstr "Kyllä"
-
-msgid "No"
-msgstr "Ei"
-
-msgid "VPS"
-msgstr "VPS"
-
-msgid "Auto"
-msgstr "Automaattinen"
-
-msgid "Edit"
-msgstr "Muokkaa"
-
-msgid "Delete timer?"
-msgstr "Poistetaanko ajastin?"
-
-msgid "Delete"
-msgstr "Poista"
-
-msgid "activate"
-msgstr "Aktivoi"
-
-msgid "inactivate"
-msgstr "Älä aktivoi"
-
-msgid "selected timers"
-msgstr "valittuja ajastimia"
-
-msgid "Delete Selected Timers"
-msgstr "Poista valitut ajastimet"
-
-msgid "Delete all selected timers?"
-msgstr "Poistetaanko valitut ajastimet?"
-
-msgid "No timers defined!"
-msgstr "Ajastimia ei määritelty!"
-
-msgid "Create New Timer"
-msgstr "Luo uusi ajastin"
-
-msgid "Edit Timer"
-msgstr "Muokkaa ajastinta"
-
-msgid "Timer Active:"
-msgstr "Aktiivinen:"
-
-msgid "AutoTimer Checking:"
-msgstr "Hakuajastimen tarkistus:"
-
-msgid "Transmission Identification"
-msgstr "Lähetteen tunniste"
-
-msgid "Time"
-msgstr "Aika"
-
-msgid "off"
-msgstr "Pois"
-
-msgid "Channel:"
-msgstr "Kanava:"
-
-msgid "Day Of Recording:"
-msgstr "Päivä:"
-
-msgid "Start Time:"
-msgstr "Aloitusaika:"
-
-msgid "Buffer:"
-msgstr "Marginaali:"
-
-msgid "End Time:"
-msgstr "Lopetusaika:"
-
-msgid "Use VPS:"
-msgstr "VPS-toiminto:"
-
-msgid "Title of Recording:"
-msgstr "Tallenteen nimi:"
-
-msgid "Summary:"
-msgstr "Lisätiedot:"
-
-msgid "readonly"
-msgstr "kirjoitussuojattu"
-
-msgid "Timer has been set by AutoTimer pattern:"
-msgstr "Ajastin on luotu automaattisesti hakuehdolla:"
-
-msgid "Rename Recording"
-msgstr "Nimeä tallenne"
-
-msgid "Original Name of Recording:"
-msgstr "Tallenteen alkuperäinen nimi:"
-
-msgid "New Name of Recording:"
-msgstr "Tallenteen uusi nimi:"
-
-msgid "Subtitle:"
-msgstr "Lyhyt kuvaus:"
-
-msgid "Rename"
-msgstr "Nimeä"
-
-msgid "What's On Now?"
-msgstr "Menossa nyt"
-
-msgid "Channel group:"
-msgstr "Kanavaryhmä:"
-
-msgid "What's on:"
-msgstr "Menossa"
-
-msgid "at"
-msgstr " "
-
-msgid "Channels"
-msgstr "Kanavat"
-
-msgid "Stream"
-msgstr "Suoratoisto"
-
-msgid "TV select"
-msgstr "Valitse"
-
-msgid "Search for other show times"
-msgstr "Etsi vaihtoehtoisia esitysaikoja"
-
-msgid "No Information"
-msgstr "Ei tietoja"
-
-msgid "No EPG information available"
-msgstr "Ohjelmaoppaan tietoja ei saatavilla"
-
-msgid "Error!"
-msgstr "Virhe!"
-
-msgid "Edit AutoTimer"
-msgstr "Muokkaa hakuajastinta"
-
-msgid ""
-"<p>Here you can edit an automatic timer's (AutoTimer) settings.</"
-"p><p>AutoTimer is a key feature of VDRAdmin-AM. An AutoTimer consists of one "
-"or more search terms and some other settings, that are looked for regularly "
-"in the Electronic Program Guide (EPG). On match AutoTimer adds a timer in "
-"VDR automatically for that broadcast. That's very comfortable for "
-"irregularly broadcasted series or movies you don't want to miss.</p>"
-msgstr ""
-
-msgid "AutoTimer Active:"
-msgstr "Aktiivinen:"
-
-msgid ""
-"Activate or deactivate this AutoTimer. Deactivated AutoTimers are still "
-"stored in the AutoTimer list so that they can be activated again, but they "
-"do not record anything meanwhile. Above that you can set this to \"oneshot\" "
-"so this AutoTimer only programs the (one!) next matching broadcast."
-msgstr ""
-
-msgid "Search Patterns:"
-msgstr "Hakuehdot:"
-
-msgid ""
-"Choosing the right search items decides whether only the wanted broadcasts "
-"or broadcasts having similar names or even nothing gets recorded.<br />Case "
-"doesn't matter, \"X-Files\" matches anything \"x-files\" will match. You can "
-"set multiple search items by separating them with spaces. Only broadcasts "
-"will match if they contain <strong>all</strong> items.<br />You'd better "
-"only use letters and numbers for search items, as the EPG often miss colons, "
-"brackets and other characters.<br />Experts can also use regular "
-"expressions, but you have to get needed information from the VDRAdmin-AM "
-"sources (undocumented feature).<br /><br />You can exclude broadcasts so "
-"that they don't get recorded even if they would match an AutoTimer. "
-"Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, "
-"one event a line. This file must be located in your VDRAdmin-AM's "
-"configuration folder. If this string is found either in the EPG's <u>title</"
-"u> or in <u>title~subtitle</u>, this event will not be programmed by "
-"AutoTimer. So you can disable complete episodes (for example when using "
-"\"Enterprise\" as Blacklist-string) or only one episode (when using "
-"\"Enterprise~Azati Prime\" as Blacklist-string)."
-msgstr ""
-
-msgid ""
-"Here you can define the EPG sections where VDRAdmin-AM should look for the "
-"search pattern."
-msgstr ""
-
-msgid "Search only on these days:"
-msgstr "Etsi valittuina päivinä:"
-
-msgid ""
-"Use these checkboxes to limit searching for matching broadcasts to a set of "
-"weekdays."
-msgstr ""
-
-msgid ""
-"The channel to look for matching broadcasts or \"all\" to search in all "
-"known or wanted channels. You can define the wanted channels for AutoTimer "
-"in \"Configuration\"."
-msgstr ""
-
-msgid "Starts After:"
-msgstr "Alkaa jälkeen:"
-
-msgid ""
-"A broadcast must start after the time entered here to match. The first text "
-"field is for \"hour\", the second for \"minute\"."
-msgstr ""
-
-msgid "Ends Before:"
-msgstr "Loppuu ennen:"
-
-msgid ""
-"A broadcast must end before the time entered here to match. The first text "
-"field is for \"hour\", the second for \"minute\"."
-msgstr ""
-
-msgid "Override Start/Stop Margins:"
-msgstr "Käytä yksilöllisiä aloitus- ja lopetusmarginaaleja"
-
-msgid ""
-"Set this option to \"yes\" if all timers programed by this AutoTimer should "
-"have individual start/stop margins and enter the values in the next two text "
-"boxes."
-msgstr ""
-
-msgid ""
-"The number of minutes VDRAdmin-AM subtracts from the broadcasts start time "
-"found in the EPG."
-msgstr ""
-
-msgid ""
-"The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in "
-"the EPG."
-msgstr ""
-
-msgid ""
-"An integer in the range <strong>0...99</strong>, defining the "
-"<strong>priority</strong> of this timer and of recordings created by this "
-"timer. <strong>0</strong> represents the lowest value, <strong>99</strong> "
-"the highest. The priority is used to decide which timer shall be started in "
-"case there are two or more timers with the exact same <strong>start</strong> "
-"time. The first timer in the list with the highest priority will be used."
-"<br /><br />This value is also stored with the recording and is later used "
-"to decide which recording to remove from disk in order to free space for a "
-"new recording. If the disk runs full and a new recording needs more space, "
-"an existing recording with the lowest priority (and which has exceeded its "
-"guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all "
-"available DVB cards are currently occupied, a timer with a higher priority "
-"will interrupt the timer with the lowest priority in order to start "
-"recording."
-msgstr ""
-"Kokonaisluku väliltä <strong>0...99</strong> joka määrittää tämän ajastimen "
-"ja sen tekemien tallennusten <strong>prioriteetin</strong>. <strong>0</"
-"strong> on alin prioriteetti, <strong>99</strong> ylin. Prioriteettiarvoa "
-"käytetään päättämään mikä ajastettu tallennus aloitetaan mikäli asetettuna "
-"on kaksi tai useampia samaan aikaan <strong>alkamaan</strong> asetettuja "
-"ajastimia. Valinta kohdistuu ensimmäiseen suurimmalla prioriteetilla "
-"olevista ajastimista.<br /><br />Prioriteettiarvo säilytetään myös "
-"tallenteen mukana, ja sitä käytetään myöhemmin päättämään mikä tallenne "
-"poistetaan mikäli uutta varten pitää saada lisää levytilaa. Mikäli levy "
-"täyttyy ja uusi tallenne tarvitsee lisää tilaa, pienimmällä prioriteetilla "
-"merkitty tallenne (joka on ylittänyt <strong>taatun</strong> elinaikanasa) "
-"poistetaan.<br /><br />Mikäli kaikki DVB-kortit ovat käytössä, korkeamman "
-"prioriteetin ajastin keskeyttää tarvittaessa käynnissä olevan alimman "
-"prioriteetin tallennuksen."
-
-msgid ""
-"The <strong>guaranteed</strong> lifetime (in days) of a recording created by "
-"this timer. <strong>0</strong> means that this recording may be "
-"automatically deleted at any time by a new recording with higher priority. "
-"<strong>99</strong> means that this recording will never be automatically "
-"deleted. Any number in the range <strong>1...98</strong> means that this "
-"recording may not be automatically deleted in favour of a new recording, "
-"until the given number of days since the <strong>start</strong> time of the "
-"recording has passed by."
-msgstr ""
-"Tämän ajastimen tekemien tallenteiden <strong>taattu</strong> elinaika "
-"(päivinä). <strong>0</strong> tarkoittaa että tallenne saatetaan poistaa "
-"automaattisesti milloin tahansa korkeamman prioriteetin ajastimen tarvitessa "
-"lisää levytilaa. <strong>99</strong> tarkoittaa että tallennetta ei poisteta "
-"automaattisesti. Numero väliltä <strong>1...98</strong> tarkoittaa päivien "
-"määrää, jonka pitää olla kulunut ajastimen <strong>alkuajankohdasta</strong> "
-"ennen kuin tallenne saatetaan poistaa automaattisesti uuden tallenteen "
-"tarvitessa levytilaa."
-
 msgid "Episode:"
 msgstr "Sarjatallennus:"
-
-msgid ""
-"Check this box if you want VDRAdmin-AM to append the broadcast's EPG "
-"subtitle to the recording's file name."
-msgstr ""
 
 msgid "Remember programmed timers:"
 msgstr "Muista ohjelmoidut ajastimet:"
 
-msgid ""
-"If you enable this VDRAdmin-AM will track timers it has already programmed "
-"automatically. This is useful if want to deactivate or delete timers that "
-"have been programmed automatically in the timers listing."
-msgstr ""
-
-msgid ""
-"The directory this AutoTimer will place the recordings in. If the name shall "
-"contain subdirectories, these have to be delimited by '~' (since the '/' "
-"character may be part of a regular programme name).<br />VDRAdmin-AM will "
-"append the matching broadcast's title and subtitle (if the \"Episode\" "
-"checkbox is marked) to the directory given here.<br /><br />You can also use "
-"the following keywords that are replaced in the final file name by the "
-"values supplied by for example <a href=\"http://tvmovie2vdr.vdr-developer.org"
-"\">tvm2vdr</a>:<ul><li>%Title% - will become the title of the event.</li><li>"
-"%Subtitle% - will become the subtitle of the event.</li><li>%Director% - "
-"will become the director of the event.</li><li>%Date% - will become the date "
-"of the recording.</li><li>%Category% - will become the category of the event "
-"(Spielfilm/Serie/...).</li><li>%Genre% - will become the genre of the event "
-"(Drama/Krimi/..).</li><li>%Year% - will become the year of production.</"
-"li><li>%Country% - will become the country of production.</li><li>%"
-"Originaltitle% - will become the original title of the event.</li><li>%FSK% "
-"- will become the FSK from the event.</li><li>%Episode% - will become the "
-"episode's title of the event.</li><li>%Rating% - will become the rating of "
-"the event from the EPG provider.</li></ul><h4>Note:</h4>If you use the above "
-"keywords it's in your own responsibility to supply the <strong>complete file "
-"name</strong> for the recordings! VDRAdmin-AM will not append anything to "
-"the resulting string."
-msgstr ""
-
-msgid "Configuration"
-msgstr "Asetukset"
-
-msgid "General Settings"
-msgstr "Yleiset"
-
-msgid "Template:"
-msgstr "Pohja:"
-
-msgid "Skin:"
-msgstr "Ulkoasu:"
-
-msgid "Login Page:"
-msgstr "Aloitussivu:"
-
-msgid "Number of channels to use:"
-msgstr "Kanavien lukumäärä:"
-
-msgid "Local net (no login required):"
-msgstr "Käyttäjätunnukseton osoiteavaruus:"
-
-msgid "Language:"
-msgstr "Kieli:"
-
-msgid "Save settings on exit:"
-msgstr "Tallenna asetukset suljettaessa:"
-
-msgid "VDR"
-msgstr "VDR"
-
-msgid "Number of DVB cards:"
-msgstr "DVB-korttien lukumäärä:"
-
-msgid "Path to recordings:"
-msgstr "VDR-tallenteiden polku:"
-
-msgid "Path to configuration files:"
-msgstr "Konfigurointitiedostojen polku:"
-
-msgid "Path to EPG images:"
-msgstr "Ohjelmisto-oppaan kuvapolku:"
-
-msgid "Identification"
-msgstr "Käyttäjätunnistus"
-
-msgid "Username:"
-msgstr "Käyttäjätunnus:"
-
-msgid "Password:"
-msgstr "Salasana:"
-
-msgid "Guest Account:"
-msgstr "Sallitaanko vierailija:"
-
-msgid "Guest Username:"
-msgstr "Vierailijan käyttäjätunnus:"
-
-msgid "Guest Password:"
-msgstr "Vierailijan salasana:"
-
-msgid "Timeline"
-msgstr "Aikajana"
-
-msgid "Hours:"
-msgstr "Pituus tunteina:"
-
-msgid "Times:"
-msgstr "Ajankohdat:"
-
-msgid "Also used for other EPG views!"
-msgstr "Käytetään myös muihin ohjelmaoppaan näkymiin!"
-
-msgid "Tooltips:"
-msgstr "Lisätietolaatikot:"
-
-msgid "AutoTimer"
-msgstr "Hakuajastimet"
-
-msgid "Active:"
-msgstr "Käytössä:"
-
-msgid "Send email after programming timer:"
-msgstr "Lähetä sähköpostia ohjelmoidusta ajastimesta:"
-
-msgid "Send email as:"
-msgstr "Lähetä sähköposti nimellä:"
-
-msgid "Send email to:"
-msgstr "Lähetä sähköposti osoitteeseen:"
-
-msgid "Mail server:"
-msgstr "Sähköpostipalvelin:"
-
-msgid "SMTPAuth user:"
-msgstr "SMTP-käyttäjätunnus:"
-
-msgid "SMTPAuth password:"
-msgstr "SMTP-salasana:"
-
-msgid "Tooltips in timeline:"
-msgstr "Lisätietolaatikot \"Aikajana\"-sivulla:"
-
-msgid "Tooltips in list:"
-msgstr "Lisätietolaatikot \"Ajastimet\"-sivulla:"
-
-msgid "Add summary to new timers:"
-msgstr "Lisää tallenteen kuvaus uusiin ajastimiin"
-
-msgid "Streaming"
-msgstr "Suoratoisto"
-
-msgid "Live Streaming:"
-msgstr "Live-kuvan suoratoisto:"
-
-msgid "HTTP Port of Streamdev (also possible 3000/ts):"
-msgstr "Streamdev-laajennoksen HTTP-portti (esim. 3000/ts):"
-
-msgid "Recordings Streaming:"
-msgstr "Tallenteiden suoratoisto:"
-
-msgid "Path to VDR Recordings on your workstation:"
-msgstr "VDR-tallenteiden polku työasemallasi:"
-
-msgid "MIME type for live streaming:"
-msgstr "Live-kuvan suoratoiston MIME-tyyppi:"
-
-msgid "Suffix for live streaming:"
-msgstr "Live-kuvan suoratoiston tiedostopääte:"
-
-msgid "MIME type for recordings streaming:"
-msgstr "Tallenteiden suoratoiston MIME-tyyppi:"
-
-msgid "Suffix for recordings streaming:"
-msgstr "Tallenteiden suoratoiston tiedostopääte:"
-
-msgid "Bandwidth of Streams:"
-msgstr "Kaistanleveys:"
-
-msgid "External Search"
-msgstr "Ulkoinen haku"
-
-msgid "URL:"
-msgstr "URL:"
-
-msgid "Title:"
-msgstr "Otsikko:"
-
-msgid "User-defined search:"
-msgstr "Käyttäjän määrittelemä haku:"
-
-msgid "Expert"
-msgstr "Ekspertti"
-
-msgid "Update EPG data in background:"
-msgstr "Päivitä ohjelmaopasta taustalla:"
-
-msgid "Update EPG every:"
-msgstr "Ohjelmaoppaan päivitysväli:"
-
-msgid "Read EPG directly using epg.data:"
-msgstr "Lue ohjelmatiedot suoraan tiedostosta:"
-
-msgid "epg.data filename:"
-msgstr "Tiedosto ohjelmatiedoille:"
-
-msgid "VFAT:"
-msgstr "VFAT-tuki:"
-
-msgid "Channel Selections"
-msgstr "Kanavavalinnat"
-
-msgid "Show channels without EPG information:"
-msgstr "Näytä ohjelmaoppaattomat kanavat:"
-
-msgid "In \"Timeline\"?"
-msgstr "Käytä kanavavalintoja \"Aikajana\"-sivulla"
-
-msgid "In \"Channels\"?"
-msgstr "Käytä kanavavalintoja \"Kanavat\"-sivulla"
-
-msgid "In \"Playing Today\"?"
-msgstr "Käytä kanavavalintoja \"Ohjelmisto tänään\"-sivulla"
-
-msgid "In \"What's On Now\"?"
-msgstr "Käytä kanavavalintoja \"Menossa nyt\"-sivulla"
-
-msgid "In \"AutoTimer\"?"
-msgstr "Käytä kanavavalintoja \"Hakuajastimet\"-sivulla"
-
-msgid "In \"Watch TV\"?"
-msgstr "Käytä kanavavalintoja \"Katso TV:tä\"-sivulla"
-
-msgid "Apply"
-msgstr "Käytä"
-
-msgid "TV"
-msgstr "TV"
-
-msgid "Interval:"
-msgstr "Päivitysväli:"
-
-msgid "sec."
-msgstr "s"
-
-msgid "G"
-msgstr "K"
-
-msgid "Grab the picture!"
-msgstr "Kuvankaappaus"
-
-msgid "Size:"
-msgstr "Koko:"
-
-msgid "Open in separate window"
-msgstr "Avaa omaan ikkunaan"
-
-msgid "VDR Commands"
-msgstr "Komennot"
-
-msgid "Export channels as playlist:"
-msgstr "Luo soittolista:"
-
-msgid "Number of lines to show:"
-msgstr "Näytettävien rivien lukumäärä:"
-
-msgid "unlimited"
-msgstr "ei rajoitusta"
-
-msgid "SVDRP commands:"
-msgstr "SVDRP-komennot:"
-
-msgid "Really run this command?"
-msgstr "Suoritetaanko komento?"
-
-msgid "Commands defined in commands.conf:"
-msgstr "Määritellyt komennot (commands.conf):"
-
-msgid "Output"
-msgstr "Vaste"
-
-msgid "close"
-msgstr "Sulje"
-
-msgid "view"
-msgstr "Katso"
-
-msgid "search"
-msgstr "Etsi"
-
-msgid "edit"
-msgstr "Muokkaa"
-
-msgid "Video tracks:"
-msgstr "Kuvaraidat:"
-
-msgid "Audio tracks:"
-msgstr "Ääniraidat:"
-
-msgid "now"
-msgstr "nyt"
-
-msgid "to"
-msgstr "-"
-
-msgid "at:"
-msgstr "kello:"
-
-msgid "You need JavaScript to use the timeline!"
-msgstr "Aikajanatoiminto tarvitsee JavaScript-tuen!"
-
-msgid "Playing Today?"
-msgstr "Tänään"
-
-msgid "EPG Search"
-msgstr "Hakuajastimet"
-
-msgid "Recordings"
-msgstr "Tallenteet"
-
-msgid "Remote Control"
-msgstr "Kauko-ohjain"
-
-msgid "Watch TV"
-msgstr "Katso TV:tä"
-
-msgid "Commands"
-msgstr "Komennot"
-
-msgid "About"
-msgstr "Tietoja"
-
-msgid "Search"
-msgstr "Etsi"
-
-msgid "Your Browser does not support frames!"
-msgstr "Selaimesi ei tue kehyksiä!"
-
-msgid ""
-"<p>Here you will find a listing of timers known to VDR.</p><p>On top you "
-"will find a chart showing a day's timers graphically. This provides an quick "
-"overview on what's going on at the specified day and helps you in finding "
-"conflicting timers. Moving the mouse cursor above any timer box will display "
-"a tooltip containing the timer's title, priority, lifetime and duration.</"
-"p><p>Below the chart you'll find the timers list showing you some "
-"information on the timers. You can change the list's sorting by clicking the "
-"columns heading.</p><p>For each timer you have the following options:"
-"<dl><dt>Set its state</dt><dd>By clicking on \"Yes\", \"No\", \"VPS\" or "
-"\"Auto\" in the \"Active\" column.</dd><dt>Quickly view its priority and "
-"lifetime</dt><dd>By pointing the mouse cursor to the timer's title.</"
-"dd><dt>View its EPG entry</dt><dd>Timers that have set <span class="
-"\"ref_label\">AutoTimer Checking</span> to \"Transmission Identification\" "
-"will show you the corresponding EPG entry if you click on the timer's title."
-"</dd><dt>Edit the timer</dt><dd>You can edit a timer by clicking <img src="
-"\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To "
-"delete a timer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</"
-"dd></dl></p><p>Each timer's state is indicated by differently coloured boxes "
-"(in the chart view) or images (in the list view):<br /><span class=\"color_ok"
-"\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on"
-"\" align=\"middle\" /> Timer is OK and will record.<br /><span class="
-"\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/"
-"poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timer conflicts with "
-"other timers. That's not critical, as long as you have enough DVB cards for "
-"the parallel recordings.<br /><span class=\"color_conflict\">&nbsp;&nbsp;"
-"&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align="
-"\"middle\" /> Timer is critical and will most likely <strong>not</strong> "
-"record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img "
-"src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is "
-"not active.</p><p>In addition to these functions you can add a new timer by "
-"clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at "
-"the top and you can delete a number of timers at once by checking the box in "
-"the last column of those timers and clicking <input type=\"submit\"  class="
-"\"submit\" value=\"Delete Selected Timers\"/>.</p><p>You can <input type="
-"\"submit\" class=\"submit\" value=\"activate\"/> and <input type=\"submit\" "
-"class=\"submit\" value=\"inactivate\"/> selected timers.</p>"
-msgstr ""
-
-msgid "No Help Available"
-msgstr "Ei opastetta"
-
-msgid ""
-"<p>No help available yet. For adding or changing text please contact <a href="
-"\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>."
-"</p>"
-msgstr ""
-"<p>Valittua opastetta ei ole saatavilla. Jos haluat lisätä tai muokata "
-"opastetta, ota yhteyttä sähköpostitse: <a href=\"mailto:mail@andreas.vdr-"
-"developer.org\">mail@andreas.vdr-developer.org</a>.</p>"
-
-msgid "Edit EPG"
-msgstr "Muokkaa ohjelmatietoja"
-
-msgid ""
-"<p>Here you can edit the descriptive fields of an existing EPG entry.</p>"
-msgstr "<p>Tässä näkymässä voit muokata ohjelmaoppaan tietoja.</p>"
-
-msgid "Channel (readonly)"
-msgstr "Kanava (kirjoitussuojattu)"
-
-msgid "This is the channel of the EPG entry. It cannot be changed."
-msgstr ""
-
-msgid "Time (readonly)"
-msgstr "Aika (kirjoitussuojattu)"
-
-msgid "This is the start and end time of the entry. It cannot be changed."
-msgstr ""
-
-msgid ""
-"Change this string to give this EPG Entry a new title. It must consist of "
-"only one line of text."
-msgstr ""
-
-msgid ""
-"Change this string to give this EPG Entry a new subtitle. It must consist of "
-"only one line of text."
-msgstr ""
-
-msgid ""
-"Change the text in this field to edit the description of this entry. The "
-"text can consist of one or more lines."
-msgstr ""
-
-msgid "VPS (readonly)"
-msgstr "VPS (kirjoitussuojattu)"
-
-msgid ""
-"If available this field shows the vps time of the EPG entry. It cannot be "
-"changed."
-msgstr ""
-
-msgid "Video tracks (readonly)"
-msgstr "Kuvaraidat (kirjoitussuojattu)"
-
-msgid "If available this field shows the video track(s). It cannot be changed."
-msgstr ""
-
-msgid "Audio tracks (readonly)"
-msgstr "Ääniraidat (kirjoitussuojattu)"
-
-msgid "If available this field shows the audio track(s). It cannot be changed."
-msgstr ""
-
-msgid "Go!"
-msgstr "Siirry"
-
-msgid "Playing Today"
-msgstr "Ohjelmisto tänään"
-
-msgid "starting at"
-msgstr "alkaen kello"
-
-msgid "Add New AutoTimer"
-msgstr "Lisää uusi hakuajastin"
-
-msgid "oneshot"
-msgstr "Kerran"
+msgid "Directory:"
+msgstr "Hakemisto:"
 
 msgid "Test"
 msgstr "Hae"
@@ -1114,146 +334,14 @@ msgstr "Lähetysaika"
 msgid "Stored in"
 msgstr "Tallennehakemisto"
 
-msgid ""
-"<p>Here you will find a listing of automatic timers (AutoTimer) known to "
-"VDRAdmin-AM.</p><p>The list shows some information on AutoTimers. You can "
-"change the list's sorting by clicking the columns heading.</p><p>For each "
-"AutoTimer you have the following options:<dl><dt>Set its state</dt><dd>By "
-"clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the "
-"activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing "
-"the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</"
-"dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" "
-"alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer "
-"you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></"
-"p><p>Each AutoTimer's state is indicated by differently coloured images:<br /"
-"><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> "
-"AutoTimer is OK and will automatically program matching broadcasts.<br /"
-"><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> "
-"AutoTimer is not active.</p><p>In addition to these functions you can add a "
-"new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value="
-"\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at "
-"once by checking the box in the last column of those timers and clicking "
-"<input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/"
-">.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update"
-"\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and "
-"check for matching AutoTimers.</p>"
-msgstr ""
+msgid "No matches found!"
+msgstr "Ei löydy!"
 
-msgid "Video tracks"
-msgstr "Kuvaraidat"
-
-msgid "Audio tracks"
-msgstr "Ääniraidat"
-
-msgid "<p>Here you can edit a timer's settings.</p>"
-msgstr "<p>Tässä näkymässä voit muokata ajastimen asetuksia.</p>"
-
-msgid ""
-"Activate or deactivate this timer. Deactivated timers are still stored in "
-"the timer list so that they can be activated again, but they do not record "
-"anything meanwhile."
-msgstr ""
-"Aktivoi tai deaktivoi tämä ajastin. Deaktivoidut ajastimet eivät tallenna "
-"mitään, mutta ne näytetään ajastinlistauksessa josta ne voidaan aktivoida "
-"uudelleen."
-
-msgid ""
-"Depending on how this timer has been programmed you have up to three "
-"possible settings:"
-msgstr "Riippuen ajastimen tekotavasta, käytettävissäsi on useita asetuksia:"
-
-msgid ""
-"Monitor this timer using the identification provided in the EPG. Please note "
-"that this only works if the provided identification is a fix and unique "
-"value! This option is not available with timers programmed in VDR."
-msgstr ""
-"Tarkista ajastinta ohjelmisto-oppaan sisältämän ohjelmatunnisteen "
-"perusteella. Tämä tarkistustapa toimii vain mikäli ohjelmisto-oppaan "
-"ohjelmatunniste on vakio ja uniikki. Tämä valinta ei ole käytettävissä VDR:"
-"stä tehtyjen ajastimien kohdalla."
-
-msgid "Monitor this timer using the start and stop time."
-msgstr "Tarkista ajastin käyttäen alku- ja loppuaikoja."
-
-msgid "Do not monitor this timer."
-msgstr "Älä tarkista tätä ajastinta."
-
-msgid "The channel to record."
-msgstr "Tallennettava kanava."
-
-msgid ""
-"The day when the timer should get active. You can enter the day in two "
-"formats:<ul><li>Two digits (DD). This will use the current month and year.</"
-"li><li>ISO norm (YYYY-MM-DD). Program your timers as far in the future as "
-"you like.</li></ul>In case you want to program a repeating timer you can use "
-"the seven checkboxes below the text field. Check the box for each day you "
-"want the timer to get active."
-msgstr ""
-"Ajastimen aktivoitumispäivä. Voit käyttää kahta eri muotoa päivän "
-"asettamiseen:<ul><li>Kaksi numeroa (PP). Tämä täydennetään päivämääräksi "
-"kuluvalla kuukaudella ja vuodella.</li><li>ISO-standardi (VVVV-KK-PP). Voit "
-"tehdä ajastuksia niin kauas tulevaisuuteen kuin haluat.</li></ul>Halutessasi "
-"asettaa toistuvan ajastuksen voit käyttää tekstikentän alla olevia seitsemää "
-"viikonpäiväkohtaista valintaruutua. Valitse jokainen viikonpäivä jolloin "
-"haluat ajastimen aktivoituvan."
-
-msgid ""
-"This is the time when the timer should start recording. The first text field "
-"is for \"hour\", the second for \"minute\"."
-msgstr ""
-"Aika jolloin ajastettu tallennus alkaa. Ensimmäiseen kenttään syötetään "
-"tunnit, jälkimmäiseen minuutit."
-
-msgid ""
-"This is the time when the timer should stop recording. The first text field "
-"is for \"hour\", the second for \"minute\"."
-msgstr ""
-"Aika jolloin ajastettu tallennus päättyy. Ensimmäiseen kenttään syötetään "
-"tunnit, jälkimmäiseen minuutit."
-
-msgid ""
-"The <strong>file name</strong> this timer will give to a recording. If the "
-"name shall contain subdirectories, these have to be delimited by '~' (since "
-"the '/' character may be part of a regular programme name).<br /><br />The "
-"special keywords <strong>TITLE</strong> and <strong>EPISODE</strong>, if "
-"present, will be replaced by the title and episode information from the EPG "
-"data at the time of recording (if that data is available). If at the time of "
-"recording either of these cannot be determined, <strong>TITLE</strong> will "
-"default to the channel name, and <strong>EPISODE</strong> will default to a "
-"blank."
-msgstr ""
-"Ajastimen tekemien tallenteiden <strong>tiedostonimi</strong>. "
-"Hakemistoerottimena käytetään '~':a (koska '/' saattaa esiintyä ohjelmien "
-"nimissä).<br /><br />Avainsanat <strong>TITLE</strong> ja <strong>EPISODE</"
-"strong> korvataan ohjelmisto-oppaan otsikko- ja jaksotiedoilla mikäli ne "
-"ovat saatavilla tallennuksen alkaessa. Jos eivät, <strong>TITLE</strong>:n "
-"oletus on kanavan nimi ja <strong>EPISODE</strong>:n tyhjä."
-
-msgid ""
-"Arbitrary text that describes the recording made by this timer. If this "
-"field is not empty, its contents will be written into the <span class="
-"\"ref_file\">summary.vdr</span> or <span class=\"ref_file\">info.vdr</span> "
-"file of the recording."
-msgstr ""
-"Vapaavalintainen lisätietoteksti tämän ajastimen tekemille tallenteille. Jos "
-"tämä kenttä ei ole tyhjä, sen sisältö kirjoitetaan tallenteen <span class="
-"\"ref_file\">summary.vdr</span>- tai <span class=\"ref_file\">info.vdr</"
-"span>-tiedostoon."
-
-msgid "New AutoTimer"
-msgstr "Uusi hakuajastin"
-
-msgid "Force Update"
-msgstr "Päivitä"
-
-msgid "Delete Selected AutoTimers"
-msgstr "Poista valitut hakuajastimet"
-
-msgid "No AutoTimers defined!"
-msgstr "Hakuajastimia ei ole määritelty!"
+msgid "About"
+msgstr "Tietoja"
 
 msgid "License"
-msgstr ""
+msgstr "Lisenssi"
 
 msgid "Authors"
 msgstr "Tekijät"
@@ -1309,92 +397,848 @@ msgstr "VDR:n versio:"
 msgid "Supported features in VDR:"
 msgstr "VDR:n tuetut ominaisuudet:"
 
-msgid ""
-"EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search."
-"html\" target=\"_blank\">EPGSearch Plugin</a>)"
-msgstr ""
-"Hakuajastimet (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-"
-"search.html\" target=\"_blank\">EPGSearch-laajennos</a>)"
+msgid "EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgstr "Hakuajastimet (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch-laajennos</a>)"
 
-msgid ""
-"LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-"
-"plugin\" target=\"_blank\">Streamdev Plugin</a>)"
-msgstr ""
-"Live-kuvan suoratoisto (<a href=\"http://www.vdr-wiki.de/wiki/index.php/"
-"Streamdev-plugin\" target=\"_blank\">Streamdev-laajennos</a>)"
+msgid "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>)"
+msgstr "Live-kuvan suoratoisto (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev-laajennos</a>)"
 
-msgid ""
-"Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/"
-"\" target=\"_blank\">Liemikuutio Patch</a>)"
-msgstr ""
-"Tallenteiden uudelleennimeäminen (<a href=\"http://www.saunalahti.fi/"
-"~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio-kokoelma</a>)"
+msgid "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
+msgstr "Tallenteiden uudelleennimeäminen (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio-kokoelma</a>)"
 
 msgid "Getting Help and Reporting Bugs"
 msgstr "Avunsaanti ja virheiden raportointi"
 
-msgid ""
-"If you need help please first try to use the online help you'll find on some "
-"pages. You can access it by clicking <img src=\"bilder/help.png\" alt=\"\" /"
-">."
-msgstr ""
-"Saat opasteen näytille painamalla <img src=\"bilder/help.png\" alt=\"\" /> -"
-"kuvaketta."
+msgid "If you need help please first try to use the online help you'll find on some pages. You can access it by clicking <img src=\"bilder/help.png\" alt=\"\" />."
+msgstr "Saat opasteen näytille painamalla <img src=\"bilder/help.png\" alt=\"\" /> -kuvaketta."
 
-msgid ""
-"If this doesn't provide the information you need you can try to get help at "
-"<a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> if you "
-"understand German language. Please use the announcement thread if possible, "
-"search for:"
-msgstr ""
-"Vaihtoehtoisesti voit etsiä apua saksankieliseltä <a href=\"http://www."
-"vdrportal.de\" target=\"_blank\">VDR-Portal</a> -foorumilta, missä "
-"ensisijaisesti kannattaa selata VDRAdminin julkistussäie läpi: "
+msgid "If this doesn't provide the information you need you can try to get help at <a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> if you understand German language. Please use the announcement thread if possible, search for:"
+msgstr "Vaihtoehtoisesti voit etsiä apua saksankieliseltä <a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> -foorumilta, missä ensisijaisesti kannattaa selata VDRAdminin julkistussäie läpi: "
 
-msgid ""
-"If you think you have found a bug please check that it's a new one and "
-"report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page."
-"php\" target=\"_blank\">VDRAdmin-AM BugTracking system</a>."
-msgstr ""
-"Löydettyäsi ohjelmistovirheen tarkista, ettei sitä ole jo raportoitu aiemmin "
-"ja raportoi se <a href=\"http://www.vdr-developer.org/mantisbt/main_page.php"
-"\" target=\"_blank\">VDRAdmin-AM BugTracking</a> -järjestelmään."
+msgid "If you think you have found a bug please check that it's a new one and report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page.php\" target=\"_blank\">VDRAdmin-AM BugTracking system</a>."
+msgstr "Löydettyäsi ohjelmistovirheen tarkista, ettei sitä ole jo raportoitu aiemmin ja raportoi se <a href=\"http://www.vdr-developer.org/mantisbt/main_page.php\" target=\"_blank\">VDRAdmin-AM BugTracking</a> -järjestelmään."
 
-msgid ""
-"<p>Here you will find a listing of recordings known to VDR. The headline "
-"will also show you VDR's total and free disk space.</p><p>The listing "
-"showing you some information on the recordings. You can change the list's "
-"sorting by clicking the columns heading. Above the list you'll see the "
-"navigation path. If you want to view the contents of previous folders you'll "
-"have to click on its name in that path.</p><p>Each row contains this "
-"information:<dl><dt>Date</dt><dd>The date when the recording has been done. "
-"In case of folders this will show the number of recordings the folder "
-"contains.</dd><dt>Time</dt><dd>The time when the recording has been done. In "
-"case of folders this will show the number of <strong>new</strong> recordings "
-"the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. "
-"Click it to show the recording's summary or descend into the folder.</"
-"dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename "
-"a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> "
-"SVDRPort command which is no core VDR feature but is available through a "
-"patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span "
-"class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete "
-"(<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a "
-"recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)"
-"</dt><dd>This column is only shown if you activated and configured <span "
-"class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu"
-"\">Configuration</span> menu. You can watch the recording at your "
-"workstation.</dd></dl></p><p>In addition to these functions you can delete a "
-"number of recordings at once by checking the box in the last but one column "
-"of those recordings and clicking <input type=\"submit\" class=\"submit\" "
-"value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the "
-"VDR's configuration files and have entries in VDR's <span class=\"ref_file"
-"\">reccmds.conf</span> you can run those commands for the selected recording "
-"by selecting the wanted command in the select box locate next to <span class="
-"\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class="
-"\"submit\" value=\"Run\"/> button.</p><p>Use <input type=\"submit\" class="
-"\"submit\" value=\"Refresh\"/> to force reloading of VDR's recordings "
-"listing.</p>"
+msgid "<p>Here you can edit an automatic timer's (AutoTimer) settings.</p><p>AutoTimer is a key feature of VDRAdmin-AM. An AutoTimer consists of one or more search terms and some other settings, that are looked for regularly in the Electronic Program Guide (EPG). On match AutoTimer adds a timer in VDR automatically for that broadcast. That's very comfortable for irregularly broadcasted series or movies you don't want to miss.</p>"
 msgstr ""
+
+msgid "Activate or deactivate this AutoTimer. Deactivated AutoTimers are still stored in the AutoTimer list so that they can be activated again, but they do not record anything meanwhile. Above that you can set this to \"oneshot\" so this AutoTimer only programs the (one!) next matching broadcast."
+msgstr ""
+
+msgid "Choosing the right search items decides whether only the wanted broadcasts or broadcasts having similar names or even nothing gets recorded.<br />Case doesn't matter, \"X-Files\" matches anything \"x-files\" will match. You can set multiple search items by separating them with spaces. Only broadcasts will match if they contain <strong>all</strong> items.<br />You'd better only use letters and numbers for search items, as the EPG often miss colons, brackets and other characters.<br />Experts can also use regular expressions, but you have to get needed information from the VDRAdmin-AM sources (undocumented feature).<br /><br />You can exclude broadcasts so that they don't get recorded even if they would match an AutoTimer. Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, one event a line. This file must be located in your VDRAdmin-AM's configuration folder. If this string is found either in the EPG's <u>title</u> or in <u>title~subtitle</u>, this event will not be programmed by AutoTimer. So you can disable complete episodes (for example when using \"Enterprise\" as Blacklist-string) or only one episode (when using \"Enterprise~Azati Prime\" as Blacklist-string)."
+msgstr ""
+
+msgid "Here you can define the EPG sections where VDRAdmin-AM should look for the search pattern."
+msgstr ""
+
+msgid "Use these checkboxes to limit searching for matching broadcasts to a set of weekdays."
+msgstr ""
+
+msgid "The channel to look for matching broadcasts or \"all\" to search in all known or wanted channels. You can define the wanted channels for AutoTimer in \"Configuration\"."
+msgstr ""
+
+msgid "A broadcast must start after the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
+msgstr ""
+
+msgid "A broadcast must end before the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
+msgstr ""
+
+msgid "Set this option to \"yes\" if all timers programed by this AutoTimer should have individual start/stop margins and enter the values in the next two text boxes."
+msgstr ""
+
+msgid "The number of minutes VDRAdmin-AM subtracts from the broadcasts start time found in the EPG."
+msgstr ""
+
+msgid "The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in the EPG."
+msgstr ""
+
+msgid "Check this box if you want VDRAdmin-AM to append the broadcast's EPG subtitle to the recording's file name."
+msgstr ""
+
+msgid "If you enable this VDRAdmin-AM will track timers it has already programmed automatically. This is useful if want to deactivate or delete timers that have been programmed automatically in the timers listing."
+msgstr ""
+
+msgid "The directory this AutoTimer will place the recordings in. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br />VDRAdmin-AM will append the matching broadcast's title and subtitle (if the \"Episode\" checkbox is marked) to the directory given here.<br /><br />You can also use the following keywords that are replaced in the final file name by the values supplied by for example <a href=\"http://tvmovie2vdr.vdr-developer.org\">tvm2vdr</a>:<ul><li>%Title% - will become the title of the event.</li><li>%Subtitle% - will become the subtitle of the event.</li><li>%Director% - will become the director of the event.</li><li>%Date% - will become the date of the recording.</li><li>%Category% - will become the category of the event (Spielfilm/Serie/...).</li><li>%Genre% - will become the genre of the event (Drama/Krimi/..).</li><li>%Year% - will become the year of production.</li><li>%Country% - will become the country of production.</li><li>%Originaltitle% - will become the original title of the event.</li><li>%FSK% - will become the FSK from the event.</li><li>%Episode% - will become the episode's title of the event.</li><li>%Rating% - will become the rating of the event from the EPG provider.</li></ul><h4>Note:</h4>If you use the above keywords it's in your own responsibility to supply the <strong>complete file name</strong> for the recordings! VDRAdmin-AM will not append anything to the resulting string."
+msgstr ""
+
+msgid "Timer"
+msgstr "Ajastimet"
+
+msgid "<p>Here you will find a listing of timers known to VDR.</p><p>On top you will find a chart showing a day's timers graphically. This provides an quick overview on what's going on at the specified day and helps you in finding conflicting timers. Moving the mouse cursor above any timer box will display a tooltip containing the timer's title, priority, lifetime and duration.</p><p>Below the chart you'll find the timers list showing you some information on the timers. You can change the list's sorting by clicking the columns heading.</p><p>For each timer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\", \"No\", \"VPS\" or \"Auto\" in the \"Active\" column.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the timer's title.</dd><dt>View its EPG entry</dt><dd>Timers that have set <span class=\"ref_label\">AutoTimer Checking</span> to \"Transmission Identification\" will show you the corresponding EPG entry if you click on the timer's title.</dd><dt>Edit the timer</dt><dd>You can edit a timer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To delete a timer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each timer's state is indicated by differently coloured boxes (in the chart view) or images (in the list view):<br /><span class=\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> Timer is OK and will record.<br /><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timer conflicts with other timers. That's not critical, as long as you have enough DVB cards for the parallel recordings.<br /><span class=\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align=\"middle\" /> Timer is critical and will most likely <strong>not</strong> record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is not active.</p><p>In addition to these functions you can add a new timer by clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at the top and you can delete a number of timers at once by checking the box in the last column of those timers and clicking <input type=\"submit\"  class=\"submit\" value=\"Delete Selected Timers\"/>.</p><p>You can <input type=\"submit\" class=\"submit\" value=\"activate\"/> and <input type=\"submit\" class=\"submit\" value=\"inactivate\"/> selected timers.</p>"
+msgstr ""
+
+msgid "Playing Today"
+msgstr "Ohjelmisto tänään"
+
+msgid "starting at"
+msgstr "alkaen kello"
+
+msgid "Add New Blacklist"
+msgstr "Lisää uusi musta lista"
+
+msgid "Edit Blacklist"
+msgstr "Muokkaa mustaa listaa"
+
+msgid "Add New Search"
+msgstr "Lisää uusi hakuajastin"
+
+msgid "Edit Search"
+msgstr "Muokkaa hakuajastinta"
+
+msgid "Small search pattern.\\nDo you really want to use it?"
+msgstr "Hakuehdot ovat hyvin suppeat.\\nHaetaanko silti?"
+
+msgid "You didn't select at least one of\\ntitle, subtitle or description.\\nDo you really want to use this search?"
+msgstr "Et valinnut otsikkoa, lyhyttä tai\\npitkää kuvausta hakuehdoksi.\\nHaluatko silti käyttää hakua?"
+
+msgid "Hide results"
+msgstr "Piilota hakutulokset"
+
+msgid "Settings"
+msgstr "Asetukset"
+
+msgid "Search Term:"
+msgstr "Hakutermi:"
+
+msgid "Search Mode:"
+msgstr "Hakutapa:"
+
+msgid "phrase"
+msgstr "fraasi"
+
+msgid "all words"
+msgstr "kaikki sanat"
+
+msgid "at least one word"
+msgstr "yksi sana"
+
+msgid "match exactly"
+msgstr "täsmällinen"
+
+msgid "regular expression"
+msgstr "säännöllinen lauseke"
+
+msgid "fuzzy"
+msgstr "sumea"
+
+msgid "Tolerance for \"fuzzy\":"
+msgstr "Toleranssi:"
+
+msgid "Match Case:"
+msgstr "Huomioi kirjainkoko:"
+
+msgid "Use extended EPG info:"
+msgstr "Käytä laajennettua ohjelmaopasta:"
+
+msgid "Ignore missing categories?"
+msgstr "Jätetäänkö puuttuvat kategoriat huomioimatta?"
+
+msgid "Use Channel:"
+msgstr "Käytä kanavaa:"
+
+msgid "no"
+msgstr "ei"
+
+msgid "interval"
+msgstr "kyllä"
+
+msgid "channel group"
+msgstr "kanavaryhmä"
+
+msgid "only FTA"
+msgstr "vapaat"
+
+msgid "Range:"
+msgstr "Kanavat:"
+
+msgid "Channel Group:"
+msgstr "Kanavaryhmä:"
+
+msgid "Use Time:"
+msgstr "Käytä aloitusaikaa:"
+
+msgid "Start After:"
+msgstr "Aikaisintaan:"
+
+msgid "Start Before:"
+msgstr "Viimeistään:"
+
+msgid "Use Duration:"
+msgstr "Käytä kestoaikaa:"
+
+msgid "Min. Duration:"
+msgstr "Kestoaika vähintään:"
+
+msgid "hh:mm"
+msgstr "hh:mm"
+
+msgid "Max. Duration:"
+msgstr "Kestoaika enintään:"
+
+msgid "Use Day of Week:"
+msgstr "Käytä viikonpäivää:"
+
+msgid "Use Blacklists:"
+msgstr "Käytä mustia listoja:"
+
+msgid "selection"
+msgstr "valitut"
+
+msgid "Use in Favorites Menu:"
+msgstr "Käytä suosikkina:"
+
+msgid "Use as Search Timer:"
+msgstr "Käytä hakuajastimena:"
+
+msgid "yes"
+msgstr "Kyllä"
+
+msgid "user-defined"
+msgstr "Määritellyt"
+
+msgid "record"
+msgstr "Tallenna"
+
+msgid "announce only"
+msgstr "Muistutus"
+
+msgid "switch only"
+msgstr "Kanavanvaihto"
+
+msgid "First day:"
+msgstr "Aloituspäivä:"
+
+msgid "Last day:"
+msgstr "Lopetuspäivä:"
+
+msgid "Auto delete:"
+msgstr "Poista automaattisesti:"
+
+msgid "count recordings"
+msgstr "Lukumäärän mukaan"
+
+msgid "count days"
+msgstr "Päivien mukaan"
+
+msgid "After ... recordings:"
+msgstr "... tallenteen jälkeen:"
+
+msgid "After ... days after first recording:"
+msgstr "... päivän jälkeen ensimmäisestä"
+
+msgid "Settings for action \"record\""
+msgstr "Tallennustoiminnon asetukset"
+
+msgid "Series Recording:"
+msgstr "Sarjatallennus:"
+
+msgid "Delete Recordings After ... Days:"
+msgstr "Poista tallenteet ... päivän jälkeen:"
+
+msgid "Keep ... Recordings:"
+msgstr "Säilytä ... tallennetta:"
+
+msgid "Pause, when ... recordings exist:"
+msgstr "Keskeytä ... tallenteen jälkeen:"
+
+msgid "Avoid Repeats:"
+msgstr "Estä uusinnat:"
+
+msgid "Allowed Repeats:"
+msgstr "Sallittujen uusintojen lukumäärä:"
+
+msgid "Only Repeats Within ... Days:"
+msgstr "Vain uusinnat ... päivän sisällä:"
+
+msgid "Compare:"
+msgstr "Vertaa hakukenttiä:"
+
+msgid "VPS:"
+msgstr "VPS-toiminto:"
+
+msgid "Settings for action \"switch only\""
+msgstr "Kanavanvaihdon asetukset"
+
+msgid "Switch ... Minutes Before Start:"
+msgstr "Vaihda ... minuuttia ennen alkua:"
+
+msgid "Save as template"
+msgstr "Tallenna mallipohjaksi"
+
+msgid "Create New Timer"
+msgstr "Luo uusi ajastin"
+
+msgid "Buffer:"
+msgstr "Marginaali:"
+
+msgid "Use VPS:"
+msgstr "VPS-toiminto:"
+
+msgid "readonly"
+msgstr "kirjoitussuojattu"
+
+msgid "Timer has been set by AutoTimer pattern:"
+msgstr "Ajastin on luotu automaattisesti hakuehdolla:"
+
+msgid "No Help Available"
+msgstr "Ei opastetta"
+
+msgid "<p>No help available yet. For adding or changing text please contact <a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>.</p>"
+msgstr "<p>Valittua opastetta ei ole saatavilla. Jos haluat lisätä tai muokata opastetta, ota yhteyttä sähköpostitse: <a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>.</p>"
+
+msgid "Error!"
+msgstr "Virhe!"
+
+msgid "TV"
+msgstr "TV"
+
+msgid "Interval:"
+msgstr "Päivitysväli:"
+
+msgid "sec."
+msgstr "s"
+
+msgid "G"
+msgstr "K"
+
+msgid "Grab the picture!"
+msgstr "Kuvankaappaus"
+
+msgid "Size:"
+msgstr "Koko:"
+
+msgid "Open in separate window"
+msgstr "Avaa omaan ikkunaan"
+
+msgid "Playing Today?"
+msgstr "Tänään"
+
+msgid "Timeline"
+msgstr "Aikajana"
+
+msgid "EPG Search"
+msgstr "Hakuajastimet"
+
+msgid "Recordings"
+msgstr "Tallenteet"
+
+msgid "Remote Control"
+msgstr "Kauko-ohjain"
+
+msgid "Watch TV"
+msgstr "Katso TV:tä"
+
+msgid "Commands"
+msgstr "Komennot"
+
+msgid "Configuration"
+msgstr "Asetukset"
+
+msgid "Search"
+msgstr "Etsi"
+
+msgid "<p>Here you can change general settings and base settings for timers, AutoTimers, channel selection and streaming parameters.</p>"
+msgstr ""
+
+msgid "General Settings"
+msgstr "Yleiset"
+
+msgid "VDR"
+msgstr "VDR"
+
+msgid "Identification"
+msgstr "Käyttäjätunnistus"
+
+msgid "Streaming"
+msgstr "Suoratoisto"
+
+msgid "Expert"
+msgstr "Ekspertti"
+
+msgid "External Search"
+msgstr "Ulkoinen haku"
+
+msgid "Channel Selections"
+msgstr "Kanavavalinnat"
+
+msgid "Skin:"
+msgstr "Ulkoasu:"
+
+msgid "The skin you want to use."
+msgstr ""
+
+msgid "Login Page:"
+msgstr "Aloitussivu:"
+
+msgid "The page you want to see at first connect to VDRAdmin-AM."
+msgstr ""
+
+msgid "Number of channels to use:"
+msgstr "Kanavien lukumäärä:"
+
+msgid "VDRAdmin-AM will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin-AM will read so that you can use this to reduce VDRAdmin-AM's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin-AM will use all available channels."
+msgstr ""
+
+msgid "Local net (no login required):"
+msgstr "Käyttäjätunnukseton osoiteavaruus:"
+
+msgid "Here you can specify an IP address or range that can login without providing login information. For example: \"192.168.0.0/24\" will include any IP starting with \"192.168.0\", \"192.168.0.123/32\" will only match \"192.168.0.123\"."
+msgstr ""
+
+msgid "Language:"
+msgstr "Kieli:"
+
+msgid "Here you can set the localization VDRAdmin-AM should use."
+msgstr ""
+
+msgid "Save settings on exit:"
+msgstr "Tallenna asetukset suljettaessa:"
+
+msgid "With this option the settings will be saved if VDRAdmin-AM exits. This will also save settings not available on the \"Configuration\" menu like interval and size in TV, sorting in the lists and current view in \"What's on now\"."
+msgstr ""
+
+msgid "Top"
+msgstr "Alkuun"
+
+msgid "Number of DVB cards:"
+msgstr "DVB-korttien lukumäärä:"
+
+msgid "The number of DVB cards VDR can access. Depending on this value VDRAdmin-AM will calculate critical timers in the <span class=\"ref_menu\">Timer</span> menu."
+msgstr ""
+
+msgid "Path to recordings:"
+msgstr "VDR-tallenteiden polku:"
+
+msgid "The path to VDR's recordings. It's used so that VDRAdmin-AM can locate the recordings when using <span class=\"ref_label\">Recordings Streaming</span> and <span class=\"ref_file\">reccmds.conf</span> in the <span class=\"ref_menu\">Recordings</span> menu."
+msgstr ""
+
+msgid "Path to configuration files:"
+msgstr "Konfigurointitiedostojen polku:"
+
+msgid "The path where VDR's configuration files are located. If this directory contains the file <span class=\"ref_file\">reccmds.conf</span> its content is shown in a selectbox in the <span class=\"ref_menu\">Recordings</span> menu."
+msgstr ""
+
+msgid "Path to EPG images:"
+msgstr "Ohjelmisto-oppaan kuvapolku:"
+
+msgid "The path where the EPG images are stored."
+msgstr ""
+
+msgid "Username:"
+msgstr "Käyttäjätunnus:"
+
+msgid "The username for the main user, i.e. the user having the most privileges."
+msgstr "Pääkäyttäjän, ts. käyttäjän jolla on kaikki käyttöoikeudet, salasana."
+
+msgid "Password:"
+msgstr "Salasana:"
+
+msgid "The main user's password."
+msgstr "Pääkäyttäjän salasana."
+
+msgid "Guest Account:"
+msgstr "Sallitaanko vierailija:"
+
+msgid "If you want a user account having only limited privileges, this is for you. The guest user cannot modify anything, it's only allowed to view the EPG, timers, AutoTimers and recordings listings."
+msgstr "Jos haluat sallia rajoitetut käyttöoikeudet omaavan käyttäjän, tämä asetus on sinua varten. Vierailijakäyttäjän ei sallita muokkaavan mitään, vaan sillä on ainoastaan lukuoikeudet ohjelmaopas-, ajastin-, automaattiajastin- ja tallennenäkymiin."
+
+msgid "Guest Username:"
+msgstr "Vierailijan käyttäjätunnus:"
+
+msgid "The username for the guest user."
+msgstr "Vierailijakäyttäjän käyttäjätunnus."
+
+msgid "Guest Password:"
+msgstr "Vierailijan salasana:"
+
+msgid "The guest user's password."
+msgstr "Vierailijakäyttäjän salasana."
+
+msgid "Hours:"
+msgstr "Pituus tunteina:"
+
+msgid "The number of hours to show in the timeline."
+msgstr ""
+
+msgid "Times:"
+msgstr "Ajankohdat:"
+
+msgid "A comma separated list of times in <strong>hh:mm</strong> format that appear in the selectbox placed at the top."
+msgstr ""
+
+msgid "Tooltips:"
+msgstr "Lisätietolaatikot:"
+
+msgid "Here you can (de-)activate the tooltips."
+msgstr ""
+
+msgid "Active:"
+msgstr "Käytössä:"
+
+msgid "Activate or deactivate the AutoTimer function."
+msgstr ""
+
+msgid "Send email after programming timer:"
+msgstr "Lähetä sähköpostia ohjelmoidusta ajastimesta:"
+
+msgid "VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a timer has been programmed if you enable this feature."
+msgstr "Mikäli tämä ominaisuus on käytössä, VDRAdmin-AM lähettää sähköpostin aina kun automaattiajastinta vastaava ohjelma on löytynyt ja ajastettu."
+
+msgid "Send email as:"
+msgstr "Lähetä sähköposti nimellä:"
+
+msgid "Here you set the sending email address of the generated email."
+msgstr "Sähköpostin lähettäjän osoite."
+
+msgid "Send email to:"
+msgstr "Lähetä sähköposti osoitteeseen:"
+
+msgid "The email address the email is sent to."
+msgstr "Sähköpostin vastaanottajan osoite."
+
+msgid "Mail server:"
+msgstr "Sähköpostipalvelin:"
+
+msgid "The outgoing mail server."
+msgstr "Sähköpostin lähetyspalvelimen osoite."
+
+msgid "SMTPAuth user:"
+msgstr "SMTP-käyttäjätunnus:"
+
+msgid "If you need to authenticate yourself at the outgoing mail server, you have to supply the username and the password below. Leaving this field empty will disable SMTPAuth."
+msgstr "Mikäli sähköpostin lähetyspalvelin vaatii tunnistautumista, täytä SMTP-käyttäjätunnus ja -salasanakentät. Tämän kentän jättäminen tyhjäksi poistaa SMTP-tunnistautumisen käytöstä."
+
+msgid "SMTPAuth password:"
+msgstr "SMTP-salasana:"
+
+msgid "The password for the SMTPAuth user."
+msgstr "SMTP-tunnistautumisessa käytetty salasana."
+
+msgid "Tooltips in timeline:"
+msgstr "Lisätietolaatikot \"Aikajana\"-sivulla:"
+
+msgid "Here you can (de-)activate the tooltips in the timeline."
+msgstr ""
+
+msgid "Tooltips in list:"
+msgstr "Lisätietolaatikot \"Ajastimet\"-sivulla:"
+
+msgid "Here you can (de-)activate the tooltips in the list."
+msgstr ""
+
+msgid "Add summary to new timers:"
+msgstr "Lisää tallenteen kuvaus uusiin ajastimiin"
+
+msgid "If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here."
+msgstr ""
+
+msgid "Live Streaming:"
+msgstr "Live-kuvan suoratoisto:"
+
+msgid "Enable or disable live streaming using the <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
+msgstr ""
+
+msgid "HTTP Port of Streamdev (also possible 3000/ts):"
+msgstr "Streamdev-laajennoksen HTTP-portti (esim. 3000/ts):"
+
+msgid "Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use."
+msgstr ""
+
+msgid "Recordings Streaming:"
+msgstr "Tallenteiden suoratoisto:"
+
+msgid "Enable or disable streaming of recordings.<br />Well actually this is no real \"streaming\", but you have to setup your workstation so that it can access VDR's recordings. You can use for example Samba or NFS for this. VDRAdmin-AM simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation's display."
+msgstr ""
+
+msgid "Path to VDR Recordings on your workstation:"
+msgstr "VDR-tallenteiden polku työasemallasi:"
+
+msgid "This is the path where your workstation can access VDR's recordings. This depends on your VDR and workstation setup, for example \"\\\\vdr\\videos\" or \"V:\\\" (on Windows) or \"/mnt/videos\" (on Linux)."
+msgstr ""
+
+msgid "MIME type for live streaming:"
+msgstr "Live-kuvan suoratoiston MIME-tyyppi:"
+
+msgid "The MIME type to send when using live streaming. Defaults to \"video/x-mpegurl\"."
+msgstr ""
+
+msgid "Suffix for live streaming:"
+msgstr "Live-kuvan suoratoiston tiedostopääte:"
+
+msgid "The suffix to use for live streaming. Defaults to \"m3u\"."
+msgstr ""
+
+msgid "MIME type for recordings streaming:"
+msgstr "Tallenteiden suoratoiston MIME-tyyppi:"
+
+msgid "The MIME type to send when using recordings streaming. Defaults to \"video/x-mpegurl\"."
+msgstr ""
+
+msgid "Suffix for recordings streaming:"
+msgstr "Tallenteiden suoratoiston tiedostopääte:"
+
+msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
+msgstr ""
+
+msgid "<p>Here you can define two external searches that you can access in the EPG views. You simply have to find the required URL and where the search pattern has to be located. %TITLE% will be substituted by the broadcast's EPG title.</p>"
+msgstr ""
+
+msgid "Some examples:"
+msgstr "Esimerkkejä:"
+
+msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
+msgstr ""
+
+msgid "Update EPG data in background:"
+msgstr "Päivitä ohjelmaopasta taustalla:"
+
+msgid "If set to \"yes\" VDRAdmin-AM will periodically refresh its local EPG cache. Else the EPG will be refreshed if the user accesses any EPG view at the web interface and the timeout set at \"Update EPG every\" has been reached."
+msgstr ""
+
+msgid "Update EPG every:"
+msgstr "Ohjelmaoppaan päivitysväli:"
+
+msgid "The interval, the EPG data is refreshed from VDR and AutoTimer updates are performed (if AutoTimer feature is used)."
+msgstr ""
+
+msgid "<p>If you want to limit the number of channels used in some parts of VDRAdmin-AM, this is for you!</p><p>Use the radio buttons to activate or deactivate the wanted channels in the named menu.</p><p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;&gt;&gt;\"/>. If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click <input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
+msgstr ""
+
+msgid "Show channels without EPG information:"
+msgstr "Näytä ohjelmaoppaattomat kanavat:"
+
+msgid "Usually channels that don't have EPG information are hidden in all EPG views. If you don't want them to be hidden you have to set this option to \"yes\"."
+msgstr ""
+
+msgid "<p>Here you will find a listing of automatic timers (AutoTimer) known to VDRAdmin-AM.</p><p>The list shows some information on AutoTimers. You can change the list's sorting by clicking the columns heading.</p><p>For each AutoTimer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each AutoTimer's state is indicated by differently coloured images:<br /><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> AutoTimer is OK and will automatically program matching broadcasts.<br /><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> AutoTimer is not active.</p><p>In addition to these functions you can add a new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value=\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at once by checking the box in the last column of those timers and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/>.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and check for matching AutoTimers.</p>"
+msgstr ""
+
+msgid "Your Browser does not support frames!"
+msgstr "Selaimesi ei tue kehyksiä!"
+
+msgid "Rename Recording"
+msgstr "Nimeä tallenne"
+
+msgid "Original Name of Recording:"
+msgstr "Tallenteen alkuperäinen nimi:"
+
+msgid "New Name of Recording:"
+msgstr "Tallenteen uusi nimi:"
+
+msgid "Subtitle:"
+msgstr "Lyhyt kuvaus:"
+
+msgid "Rename"
+msgstr "Nimeä"
+
+msgid "<p>Here you will find a listing of recordings known to VDR. The headline will also show you VDR's total and free disk space.</p><p>The listing showing you some information on the recordings. You can change the list's sorting by clicking the columns heading. Above the list you'll see the navigation path. If you want to view the contents of previous folders you'll have to click on its name in that path.</p><p>Each row contains this information:<dl><dt>Date</dt><dd>The date when the recording has been done. In case of folders this will show the number of recordings the folder contains.</dd><dt>Time</dt><dd>The time when the recording has been done. In case of folders this will show the number of <strong>new</strong> recordings the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. Click it to show the recording's summary or descend into the folder.</dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> SVDRPort command which is no core VDR feature but is available through a patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete (<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)</dt><dd>This column is only shown if you activated and configured <span class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu\">Configuration</span> menu. You can watch the recording at your workstation.</dd></dl></p><p>In addition to these functions you can delete a number of recordings at once by checking the box in the last but one column of those recordings and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the VDR's configuration files and have entries in VDR's <span class=\"ref_file\">reccmds.conf</span> you can run those commands for the selected recording by selecting the wanted command in the select box locate next to <span class=\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class=\"submit\" value=\"Run\"/> button.</p><p>Use <input type=\"submit\" class=\"submit\" value=\"Refresh\"/> to force reloading of VDR's recordings listing.</p>"
+msgstr ""
+
+msgid "<p>Here you can edit the descriptive fields of an existing EPG entry.</p>"
+msgstr "<p>Tässä näkymässä voit muokata ohjelmaoppaan tietoja.</p>"
+
+msgid "Channel (readonly)"
+msgstr "Kanava (kirjoitussuojattu)"
+
+msgid "This is the channel of the EPG entry. It cannot be changed."
+msgstr ""
+
+msgid "Time (readonly)"
+msgstr "Aika (kirjoitussuojattu)"
+
+msgid "This is the start and end time of the entry. It cannot be changed."
+msgstr ""
+
+msgid "Change this string to give this EPG Entry a new title. It must consist of only one line of text."
+msgstr ""
+
+msgid "Change this string to give this EPG Entry a new subtitle. It must consist of only one line of text."
+msgstr ""
+
+msgid "Change the text in this field to edit the description of this entry. The text can consist of one or more lines."
+msgstr ""
+
+msgid "VPS (readonly)"
+msgstr "VPS (kirjoitussuojattu)"
+
+msgid "If available this field shows the vps time of the EPG entry. It cannot be changed."
+msgstr ""
+
+msgid "Video tracks (readonly)"
+msgstr "Kuvaraidat (kirjoitussuojattu)"
+
+msgid "If available this field shows the video track(s). It cannot be changed."
+msgstr ""
+
+msgid "Audio tracks (readonly)"
+msgstr "Ääniraidat (kirjoitussuojattu)"
+
+msgid "If available this field shows the audio track(s). It cannot be changed."
+msgstr ""
+
+msgid "Duration:"
+msgstr "Kesto:"
+
+msgid "min"
+msgstr "min"
+
+msgid "Transponder:"
+msgstr "Transponderi:"
+
+msgid "CA-System:"
+msgstr "Salaus:"
+
+msgid "New Timer"
+msgstr "Uusi ajastin"
+
+msgid "Date"
+msgstr "Päivä"
+
+msgid "Edit timer status?"
+msgstr "Muokataanko ajastinta?"
+
+msgid "This timer is inactive!"
+msgstr "Ajastin ei ole aktiivinen!"
+
+msgid "This timer is impossible!"
+msgstr "Ajastin ei ole mahdollinen!"
+
+msgid "No more timers on other transponders possible!"
+msgstr "Maksimimäärä ajastimia käytössä!"
+
+msgid "Timer OK."
+msgstr "Ajastin kunnossa."
+
+msgid "Auto"
+msgstr "Automaattinen"
+
+msgid "activate"
+msgstr "Aktivoi"
+
+msgid "inactivate"
+msgstr "Älä aktivoi"
+
+msgid "selected timers"
+msgstr "valittuja ajastimia"
+
+msgid "Delete Selected Timers"
+msgstr "Poista valitut ajastimet"
+
+msgid "No timers defined!"
+msgstr "Ajastimia ei määritelty!"
+
+msgid "EPG Search Blacklists"
+msgstr "Hakuajastimien mustat listat"
+
+msgid "New Blacklist"
+msgstr "Uusi musta lista"
+
+msgid "Search pattern"
+msgstr "Hakuehto"
+
+msgid "From"
+msgstr "Aikaisintaan"
+
+msgid "To"
+msgstr "Viimeistään"
+
+msgid "Delete blacklist?"
+msgstr "Poistetaanko musta lista?"
+
+msgid "Delete Selected Blacklists"
+msgstr "Poista valitut mustat listat"
+
+msgid "Delete all selected blacklists?"
+msgstr "Poistetaanko kaikki valitut mustat listat?"
+
+msgid "EPG search"
+msgstr "Hae ohjelmaoppaasta"
+
+msgid "Use template"
+msgstr "Käytä mallipohjaa"
+
+msgid "New Search"
+msgstr "Uusi haku"
+
+msgid "Action"
+msgstr "Toiminto"
+
+msgid "Find"
+msgstr "Etsi"
+
+msgid "Show Favorites"
+msgstr "Näytä suosikit"
+
+msgid "Delete Selected Searches"
+msgstr "Poista valitut haut"
+
+msgid "Delete all selected searches?"
+msgstr "Poistetaanko kaikki valitut haut?"
+
+msgid "Execute Selected Searches"
+msgstr "Suorita valitut haut"
+
+msgid "Duration"
+msgstr "Kesto"
+
+msgid "Template:"
+msgstr "Pohja:"
+
+msgid "Also used for other EPG views!"
+msgstr "Käytetään myös muihin ohjelmaoppaan näkymiin!"
+
+msgid "Bandwidth of Streams:"
+msgstr "Kaistanleveys:"
+
+msgid "URL:"
+msgstr "URL:"
+
+msgid "Title:"
+msgstr "Otsikko:"
+
+msgid "User-defined search:"
+msgstr "Käyttäjän määrittelemä haku:"
+
+msgid "In \"AutoTimer\"?"
+msgstr "Käytä kanavavalintoja \"Hakuajastimet\"-sivulla"
+
+msgid "Apply"
+msgstr "Käytä"
+
+msgid "close"
+msgstr "Sulje"
+
+msgid "view"
+msgstr "Katso"
+
+msgid "search"
+msgstr "Etsi"
+
+msgid "edit"
+msgstr "Muokkaa"
+
+msgid "Video tracks:"
+msgstr "Kuvaraidat:"
+
+msgid "Audio tracks:"
+msgstr "Ääniraidat:"
+
+msgid "now"
+msgstr "nyt"
+
+msgid "to"
+msgstr "-"
+
+msgid "at:"
+msgstr "kello:"
+
+msgid "You need JavaScript to use the timeline!"
+msgstr "Aikajanatoiminto tarvitsee JavaScript-tuen!"
+
+msgid "Authorization Required"
+msgstr "Käyttäjätunnistus puutteellinen"
+
+msgid "This server could not verify that you are authorized to access the document requested. Either you supplied the wrong credentials (e.g. bad password), or your browser doesn't understand how to supply the credentials required."
+msgstr "Käyttäjätunnistus ei onnistu! Tarkista syöttämäsi käyttäjätunnus/salasana."
 
 msgid "Total:"
 msgstr "Käytössä:"
@@ -1434,287 +1278,6 @@ msgstr "Poistetaanko valitut tallenteet?"
 
 msgid "No recordings available"
 msgstr "Tallenteita ei saatavilla"
-
-msgid "EPG search"
-msgstr "Hae ohjelmaoppaasta"
-
-msgid "Use template"
-msgstr "Käytä mallipohjaa"
-
-msgid "New Search"
-msgstr "Uusi haku"
-
-msgid "Action"
-msgstr "Toiminto"
-
-msgid "From"
-msgstr "Aikaisintaan"
-
-msgid "To"
-msgstr "Viimeistään"
-
-msgid "Search pattern"
-msgstr "Hakuehto"
-
-msgid "Find"
-msgstr "Etsi"
-
-msgid "Show Favorites"
-msgstr "Näytä suosikit"
-
-msgid "Delete Selected Searches"
-msgstr "Poista valitut haut"
-
-msgid "Delete all selected searches?"
-msgstr "Poistetaanko kaikki valitut haut?"
-
-msgid "Execute Selected Searches"
-msgstr "Suorita valitut haut"
-
-msgid "Duration"
-msgstr "Kesto"
-
-msgid ""
-"<p>Here you can change general settings and base settings for timers, "
-"AutoTimers, channel selection and streaming parameters.</p>"
-msgstr ""
-
-msgid "The skin you want to use."
-msgstr ""
-
-msgid "The page you want to see at first connect to VDRAdmin-AM."
-msgstr ""
-
-msgid ""
-"VDRAdmin-AM will load the given number of channels from VDR and present only "
-"those in any fields where channels can be selected. This also limits the EPG "
-"information VDRAdmin-AM will read so that you can use this to reduce "
-"VDRAdmin-AM's memory consumption and increase its performance. <strong>0</"
-"strong> turns this feature off and VDRAdmin-AM will use all available "
-"channels."
-msgstr ""
-
-msgid ""
-"Here you can specify an IP address or range that can login without providing "
-"login information. For example: \"192.168.0.0/24\" will include any IP "
-"starting with \"192.168.0\", \"192.168.0.123/32\" will only match "
-"\"192.168.0.123\"."
-msgstr ""
-
-msgid "Here you can set the localization VDRAdmin-AM should use."
-msgstr ""
-
-msgid ""
-"With this option the settings will be saved if VDRAdmin-AM exits. This will "
-"also save settings not available on the \"Configuration\" menu like interval "
-"and size in TV, sorting in the lists and current view in \"What's on now\"."
-msgstr ""
-
-msgid "Top"
-msgstr "Alkuun"
-
-msgid ""
-"The number of DVB cards VDR can access. Depending on this value VDRAdmin-AM "
-"will calculate critical timers in the <span class=\"ref_menu\">Timer</span> "
-"menu."
-msgstr ""
-
-msgid ""
-"The path to VDR's recordings. It's used so that VDRAdmin-AM can locate the "
-"recordings when using <span class=\"ref_label\">Recordings Streaming</span> "
-"and <span class=\"ref_file\">reccmds.conf</span> in the <span class="
-"\"ref_menu\">Recordings</span> menu."
-msgstr ""
-
-msgid ""
-"The path where VDR's configuration files are located. If this directory "
-"contains the file <span class=\"ref_file\">reccmds.conf</span> its content "
-"is shown in a selectbox in the <span class=\"ref_menu\">Recordings</span> "
-"menu."
-msgstr ""
-
-msgid "The path where the EPG images are stored."
-msgstr ""
-
-msgid ""
-"The username for the main user, i.e. the user having the most privileges."
-msgstr "Pääkäyttäjän, ts. käyttäjän jolla on kaikki käyttöoikeudet, salasana."
-
-msgid "The main user's password."
-msgstr "Pääkäyttäjän salasana."
-
-msgid ""
-"If you want a user account having only limited privileges, this is for you. "
-"The guest user cannot modify anything, it's only allowed to view the EPG, "
-"timers, AutoTimers and recordings listings."
-msgstr ""
-"Jos haluat sallia rajoitetut käyttöoikeudet omaavan käyttäjän, tämä asetus "
-"on sinua varten. Vierailijakäyttäjän ei sallita muokkaavan mitään, vaan "
-"sillä on ainoastaan lukuoikeudet ohjelmaopas-, ajastin-, automaattiajastin- "
-"ja tallennenäkymiin."
-
-msgid "The username for the guest user."
-msgstr "Vierailijakäyttäjän käyttäjätunnus."
-
-msgid "The guest user's password."
-msgstr "Vierailijakäyttäjän salasana."
-
-msgid "The number of hours to show in the timeline."
-msgstr ""
-
-msgid ""
-"A comma separated list of times in <strong>hh:mm</strong> format that appear "
-"in the selectbox placed at the top."
-msgstr ""
-
-msgid "Here you can (de-)activate the tooltips."
-msgstr ""
-
-msgid "Activate or deactivate the AutoTimer function."
-msgstr ""
-
-msgid ""
-"VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a "
-"timer has been programmed if you enable this feature."
-msgstr ""
-"Mikäli tämä ominaisuus on käytössä, VDRAdmin-AM lähettää sähköpostin aina "
-"kun automaattiajastinta vastaava ohjelma on löytynyt ja ajastettu."
-
-msgid "Here you set the sending email address of the generated email."
-msgstr "Sähköpostin lähettäjän osoite."
-
-msgid "The email address the email is sent to."
-msgstr "Sähköpostin vastaanottajan osoite."
-
-msgid "The outgoing mail server."
-msgstr "Sähköpostin lähetyspalvelimen osoite."
-
-msgid ""
-"If you need to authenticate yourself at the outgoing mail server, you have "
-"to supply the username and the password below. Leaving this field empty will "
-"disable SMTPAuth."
-msgstr ""
-"Mikäli sähköpostin lähetyspalvelin vaatii tunnistautumista, täytä SMTP-"
-"käyttäjätunnus ja -salasanakentät. Tämän kentän jättäminen tyhjäksi poistaa "
-"SMTP-tunnistautumisen käytöstä."
-
-msgid "The password for the SMTPAuth user."
-msgstr "SMTP-tunnistautumisessa käytetty salasana."
-
-msgid "Here you can (de-)activate the tooltips in the timeline."
-msgstr ""
-
-msgid "Here you can (de-)activate the tooltips in the list."
-msgstr ""
-
-msgid ""
-"If you don't want VDRAdmin-AM to add the summary taken from EPG to new "
-"timers you can switch it off here."
-msgstr ""
-
-msgid ""
-"Enable or disable live streaming using the <a href=\"http://www.magoa.net/"
-"linux/\">streamdev plugin</a>. You also have to set the correct <span class="
-"\"ref_label\">HTTP Port for Streamdev</span> below."
-msgstr ""
-
-msgid ""
-"Here you have to set the port number your VDR's streamdev server listens for "
-"connections. Additionally you can also provide the stream type you like to "
-"use."
-msgstr ""
-
-msgid ""
-"Enable or disable streaming of recordings.<br />Well actually this is no "
-"real \"streaming\", but you have to setup your workstation so that it can "
-"access VDR's recordings. You can use for example Samba or NFS for this. "
-"VDRAdmin-AM simply generates a playlist that contains all parts of the "
-"recording and sends this to your browser. If your browser and media player "
-"are configured correctly you will see the recording on your workstation's "
-"display."
-msgstr ""
-
-msgid ""
-"This is the path where your workstation can access VDR's recordings. This "
-"depends on your VDR and workstation setup, for example \"\\\\vdr\\videos\" "
-"or \"V:\\\" (on Windows) or \"/mnt/videos\" (on Linux)."
-msgstr ""
-
-msgid ""
-"The MIME type to send when using live streaming. Defaults to \"video/x-"
-"mpegurl\"."
-msgstr ""
-
-msgid "The suffix to use for live streaming. Defaults to \"m3u\"."
-msgstr ""
-
-msgid ""
-"The MIME type to send when using recordings streaming. Defaults to \"video/x-"
-"mpegurl\"."
-msgstr ""
-
-msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
-msgstr ""
-
-msgid ""
-"<p>Here you can define two external searches that you can access in the EPG "
-"views. You simply have to find the required URL and where the search pattern "
-"has to be located. %TITLE% will be substituted by the broadcast's EPG title."
-"</p>"
-msgstr ""
-
-msgid "Some examples:"
-msgstr ""
-
-msgid ""
-"<p>This section is for experts <strong>only</strong>, i.e. you know what you "
-"are doing!</p>"
-msgstr ""
-
-msgid ""
-"If set to \"yes\" VDRAdmin-AM will periodically refresh its local EPG cache. "
-"Else the EPG will be refreshed if the user accesses any EPG view at the web "
-"interface and the timeout set at \"Update EPG every\" has been reached."
-msgstr ""
-
-msgid ""
-"The interval, the EPG data is refreshed from VDR and AutoTimer updates are "
-"performed (if AutoTimer feature is used)."
-msgstr ""
-
-msgid ""
-"Accessing VDR's EPG through VDR's SVDRPort seems to block VDR for some time. "
-"If this option is activated VDRAdmin-AM will read the <span class=\"ref_file"
-"\">epg.data</span> file directly so that VDR doesn't get blocked."
-msgstr ""
-
-msgid ""
-"If you've enabled the option above you need to tell VDRAdmin-AM where the "
-"<span class=\"ref_file\">epg.data</span> file is located."
-msgstr ""
-
-msgid ""
-"If you have compiled VDR with the VFAT define you have to enable this "
-"option. If this option is set to the wrong value, you may have problems with "
-"certain recordings if you want to stream them or run reccmds on them."
-msgstr ""
-
-msgid ""
-"<p>If you want to limit the number of channels used in some parts of "
-"VDRAdmin-AM, this is for you!</p><p>Use the radio buttons to activate or "
-"deactivate the wanted channels in the named menu.</p><p>To add channels to "
-"the list of wanted channels you have to select them in the left side "
-"selectbox and click <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;"
-"&gt;&gt;&gt;\"/>. If you want to remove channels from the list of wanted "
-"channels you have to select them in the right side selectbox and click "
-"<input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
-msgstr ""
-
-msgid ""
-"Usually channels that don't have EPG information are hidden in all EPG "
-"views. If you don't want them to be hidden you have to set this option to "
-"\"yes\"."
-msgstr ""
 
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Anna VDR-koneesi nimi (esim. video.intra.net):"
@@ -1802,12 +1365,8 @@ msgid "Can't open file \"%s\"!"
 msgstr "Tiedoston \"%s\" avaus ei onnistu!"
 
 #, perl-format
-msgid ""
-"Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
-"if VDR's svdrphosts.conf is configured correctly."
-msgstr ""
-"Yhteydenotto VDR:ään (%s:%s) epäonnistui!<br /><br />Varmista VDR:n "
-"päälläolo ja svdrphosts.conf-tiedoston oikeellisuus."
+msgid "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and if VDR's svdrphosts.conf is configured correctly."
+msgstr "Yhteydenotto VDR:ään (%s:%s) epäonnistui!<br /><br />Varmista VDR:n päälläolo ja svdrphosts.conf-tiedoston oikeellisuus."
 
 #, perl-format
 msgid "Error while sending command to VDR at %s"

@@ -1,3 +1,4 @@
+# translation of nl.po to
 # Copyright (C) Andreas Mair <mail@andreas.vdr-developer.org>
 # This file is distributed under the same license as the VDRAdmin-AM package.
 #
@@ -6,11 +7,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-AM-3.6.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-18 12:37+0100\n"
-"PO-Revision-Date: 2007-08-23 20:28+0200\n"
-"Last-Translator: Roel Koelewijn <roel.koelewijn@gmail.com>\n"
+"Project-Id-Version:  VDRAdmin-AM-3.6.2\n"
+"Report-Msgid-Bugs-To: Andreas Mair <mail@andreas.vdr-developer.org>\n"
+"POT-Creation-Date: 2008-06-30 08:26+0200\n"
+"PO-Revision-Date: 2008-05-01 13:50+0200\n"
+"Last-Translator: roel\n"
 "Language-Team:  <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,75 +21,59 @@ msgstr ""
 msgid "ISO-8859-1"
 msgstr "ISO-8859-1"
 
-msgid "Define New Search"
-msgstr "Definieëer een nieuw zoekpatroon"
+msgid "What's On Now?"
+msgstr "Wat is er nu op?"
 
-msgid "Edit Search"
-msgstr "Bewerk zoeken"
+msgid "Channel group:"
+msgstr "Kanaal groep:"
 
-msgid "Small search pattern.\\nDo you really want to use it?"
-msgstr "Klein zoek patroon.\\nWilt u dit echt gebruiken?"
+msgid "What's on:"
+msgstr "Wat is er op:"
 
-msgid ""
-"You didn't select at least one of\\ntitle, subtitle or description.\\nDo you "
-"really want to use this search?"
-msgstr ""
-"U moet tenminste één \\ntitel, ondertitel of omschrijving selecteren. "
-"\\nWilt u deze zoek opdracht daadwerkelijk gebruiken?"
+msgid "at"
+msgstr "om"
 
-msgid "Add New Search"
-msgstr "Voeg nieuw zoekpatroon toe"
-
-msgid "Help"
-msgstr "Help"
-
-msgid "Hide results"
-msgstr "Verberg resultaten"
+msgid "o'clock"
+msgstr "Uur"
 
 msgid "More Information"
 msgstr "Meer informatie"
 
+msgid "Channels"
+msgstr "Kanalen"
+
+msgid "Stream"
+msgstr "Stream"
+
+msgid "TV select"
+msgstr "Selecteer programma"
+
+msgid "Search for other show times"
+msgstr "Zoek naar andere programma tijden"
+
+msgid "No Information"
+msgstr "Geen informatie"
+
+msgid "Edit"
+msgstr "Bewerken"
+
 msgid "Record"
 msgstr "Opnemen"
 
-msgid "No matches found!"
-msgstr "Geen overeenkomsten gevonden!"
+msgid "No EPG information available"
+msgstr "Geen informatie EPG informatie beschikbaar"
 
-msgid "Settings"
-msgstr "Instellingen"
+msgid "Edit EPG"
+msgstr "Bewerk EPG"
 
-msgid "Search Term:"
-msgstr "Zoeken term: "
+msgid "Help"
+msgstr "Help"
 
-msgid "Search Mode:"
-msgstr "Zoeken modus: "
+msgid "Channel"
+msgstr "Kanaal"
 
-msgid "phrase"
-msgstr "Uitdrukking"
-
-msgid "all words"
-msgstr "allle woorden"
-
-msgid "at least one word"
-msgstr "tenminste één woord"
-
-msgid "match exactly"
-msgstr "exacte overeenkomst"
-
-msgid "regular expression"
-msgstr "reguliere expressie"
-
-msgid "fuzzy"
-msgstr "wazig"
-
-msgid "Tolerance for \"fuzzy\":"
-msgstr "Tolerantie voor \"wazig\":"
-
-msgid "Match Case:"
-msgstr "Hoofdletter gevoelig:"
-
-msgid "Search in:"
-msgstr "Zoeken in: "
+msgid "Time"
+msgstr "Tijd"
 
 msgid "Title"
 msgstr "Titel"
@@ -99,59 +84,197 @@ msgstr "Ondertitel"
 msgid "Description"
 msgstr "Omschrijving"
 
-msgid "Use extended EPG info:"
-msgstr "Gebruik uitgebreide EPG info:"
+msgid "VPS"
+msgstr "VPS"
 
-msgid "Ignore missing categories?"
-msgstr ""
+msgid "Video tracks"
+msgstr "Video sporen:"
 
-msgid "Use Channel:"
-msgstr "Gebruik kanaal:"
+msgid "Audio tracks"
+msgstr "Audio sporen"
 
-msgid "no"
-msgstr "nee"
+msgid "Save"
+msgstr "Opslaan"
 
-msgid "interval"
-msgstr "Interval"
+msgid "Cancel"
+msgstr "Annuleren"
 
-msgid "channel group"
-msgstr "Kanaal groep"
+msgid "Edit Timer"
+msgstr "Timer bewerken"
 
-msgid "only FTA"
-msgstr "Alleen FTA"
+msgid "<p>Here you can edit a timer's settings.</p>"
+msgstr "<p>Hier kunt u de timer instellingen bewerken.</p>"
 
-msgid "Range:"
-msgstr "Bereik:"
+msgid "Timer Active:"
+msgstr "Actieve timers:"
 
-msgid "Channel Group:"
-msgstr "Kanaal groep:"
+msgid "Activate or deactivate this timer. Deactivated timers are still stored in the timer list so that they can be activated again, but they do not record anything meanwhile."
+msgstr "Activeer of deactiveer deze timer. Gedeactiveerde timers worden wel bewaard in de timer lijst zodat deze wel weer geactiveerd kunnen worden, maar ondertussen nemen ze niets op."
 
-msgid "Use Time:"
-msgstr "Gebruik tijd:"
+msgid "AutoTimer Checking:"
+msgstr "Auto timer controle"
 
-msgid "Start After:"
-msgstr "Start na:"
+msgid "Depending on how this timer has been programmed you have up to three possible settings:"
+msgstr "Afhankelijk van hoe deze timer is geprogrammeerd heeft u tot en met drie mogelijkheden:"
 
-msgid "o'clock"
-msgstr "Uur"
+msgid "Transmission Identification"
+msgstr "Verzend identificatie"
 
-msgid "Start Before:"
-msgstr "Start voor: "
+msgid "Monitor this timer using the identification provided in the EPG. Please note that this only works if the provided identification is a fix and unique value! This option is not available with timers programmed in VDR."
+msgstr "Gebruik deze timer door de EPG informatie in de gaten te houden. Let op! dit werkt alleen als de informatie een vaste en unieke waarde heeft. Deze optie is niet beschikbaar met timers geprogrammeerd in VDR."
 
-msgid "Use Duration:"
-msgstr "Gebruik tijdsduur:"
+msgid "Monitor this timer using the start and stop time."
+msgstr "Gebruik deze timer door gebruikt te maken van de start en stop tijd."
 
-msgid "Min. Duration:"
-msgstr "minimale tijdsduur:"
+msgid "off"
+msgstr "Uit "
 
-msgid "hh:mm"
-msgstr "uu:mm"
+msgid "Do not monitor this timer."
+msgstr "Houd deze timer niet in de gaten."
 
-msgid "Max. Duration:"
-msgstr "Maximale tijdsduur:"
+msgid "Channel:"
+msgstr "Kanaal"
 
-msgid "Use Day of Week:"
-msgstr "Gebruik dag van de week:"
+msgid "The channel to record."
+msgstr "Het op te nemen kanaal."
+
+msgid "Day Of Recording:"
+msgstr "Dag van opname"
+
+msgid "The day when the timer should get active. You can enter the day in two formats:<ul><li>Two digits (DD). This will use the current month and year.</li><li>ISO norm (YYYY-MM-DD). Program your timers as far in the future as you like.</li></ul>In case you want to program a repeating timer you can use the seven checkboxes below the text field. Check the box for each day you want the timer to get active."
+msgstr "De dag dat de timer aktief word. U kunt de dag op twee manieren invoeren. <ul><li>Met twee cijfers (DD). Deze zal gebruik maken van de huidige maand en jaar .</li><li>ISO norm (YYYY-MM-DD). Programmeer de timer zo ver in de toekomst als u wilt. </li></ul>In het geval u een herhalende timer wilt programmeren kunt u gebruik maken van de zeven aanvink vakjes onder het tekstveld. Vink het vakje aan voor iedere dag dat u de timer aktief wilt hebben."
+
+msgid "Start Time:"
+msgstr "Start tijd:"
+
+msgid "This is the time when the timer should start recording. The first text field is for \"hour\", the second for \"minute\"."
+msgstr "Dit is de tijd dat de timer moet beginnen met opnemen. Het eerste veld is voor \"uur\", de tweede voor de \"minuten\"."
+
+msgid "End Time:"
+msgstr "Eind tijd"
+
+msgid "This is the time when the timer should stop recording. The first text field is for \"hour\", the second for \"minute\"."
+msgstr "Dit is de tijd dat de timer moet stoppen met opnemen. Het eerste veld is voor \"uur\", de tweede voor de \"minuten\"."
+
+msgid "Priority:"
+msgstr "Prioriteit:"
+
+msgid "An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording."
+msgstr "Een getal in het bereik<strong>0...99</strong>, bepaald de  <strong>prioriteit</strong>van deze timer en de opnames aangemaakt door deze timer <strong>0</strong> geeft de laagst mogelijke waarde aan,  <strong>99</strong> de hoogste. De prioriteit wordt gebruikt als er twee of meer timers gelijktijdig starten, de timer met de hoogste prioriteit heeft voorrang en zal worden opgenomen<br /><br />Deze waarde wordt ook opgeslagen bij de opname en word later gebruikt om een opname te verwijderen om ruimte vrij te maken voor een nieuwe opname. Als de schijf vol raakt en een nieuwe opname heeft meer ruimte nodig dan zal een bestaande opname met de laagste prioriteit ( en die zijn gegarandeerde levensduur al voorbij is) zal worden verwijderd.<br /><br /> Als alle DVB kaarten bezet zijn met een timer dan zal de timer met de laagste prioriteit onderbroken worden om de opname met een hogere prioriteit op te gaan nemen."
+
+msgid "Lifetime:"
+msgstr "Levensduur:"
+
+msgid "The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by."
+msgstr "De <strong>gegarandeerde</strong> levensduur (in dagen) van een opname gecreëerd door deze timer <strong>0</strong> betekend dat deze opname automatisch verwijderd zal worden door een nieuwe timer met een hogere prioriteit.<strong>99</strong> betekend dat deze opname nooit automatisch verwijderd zal worden. Ieder nummer in het bereik van <strong>1...98</strong> betekend dat de opname niet automatisch verwijderd zal worden om plaats te maken voor een nieuwe opname, alleen als de levensduur van de opname voorbij is."
+
+msgid "Title of Recording:"
+msgstr "Titel van opname:"
+
+msgid "The <strong>file name</strong> this timer will give to a recording. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br /><br />The special keywords <strong>TITLE</strong> and <strong>EPISODE</strong>, if present, will be replaced by the title and episode information from the EPG data at the time of recording (if that data is available). If at the time of recording either of these cannot be determined, <strong>TITLE</strong> will default to the channel name, and <strong>EPISODE</strong> will default to a blank."
+msgstr "De <strong>bestandsnaam</strong> die de timer aan de opname zal geven. Als de naam sub mappen zal bevatten dan zullen deze gescheiden worden door '~'(aangezien het '/' karakter een leesteken kan zijn in een programma naam).<br /><br /> Als de speciale sleutelwoorden<strong>TITEL</strong> en <strong>AFLEVERING</strong> aanwezig zijn zullen deze vervangen worden door de titel en aflevering informatie uit de EPG informatie op het tijdstip van opname (als de gegevens beschikbaar zijn). Als deze informatie niet beschikbaar is dan zal <strong>TITEL</strong> vervangen worden door  de naam van het kanaal en <strong>AFLEVERING</strong> zal leeg blijven."
+
+msgid "Summary:"
+msgstr "Omschrijving:"
+
+msgid "Arbitrary text that describes the recording made by this timer. If this field is not empty, its contents will be written into the <span class=\"ref_file\">summary.vdr</span> or <span class=\"ref_file\">info.vdr</span> file of the recording."
+msgstr "Aanvullende informatie die een beschrijving geeft van de opname gemaakt door deze timer. Als dit veld niet leeg is dan zal de inhoud geschreven worden naar <span class=\"ref_file\">summary.vdr</span> of <span class=\"ref_file\">info.vdr</span> bestand behorende bij deze opname."
+
+msgid "Go!"
+msgstr "Ga!"
+
+msgid "AutoTimer"
+msgstr "AutoTimer"
+
+msgid "New AutoTimer"
+msgstr "Nieuwe AutoTimer"
+
+msgid "Active"
+msgstr "Aktief"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Stop"
+msgstr "Stop"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "Select all/none"
+msgstr "Selecteer alles/niets"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "No"
+msgstr "Nee"
+
+msgid "Delete timer?"
+msgstr "Timer verwijderen? "
+
+msgid "Delete"
+msgstr "Verwijderen"
+
+msgid "Force Update"
+msgstr "Verversen forceren"
+
+msgid "Delete Selected AutoTimers"
+msgstr "Verwijder geselecteerde Auto Timers"
+
+msgid "Delete all selected timers?"
+msgstr "Verwijder alle geselecteerde timers?"
+
+msgid "No AutoTimers defined!"
+msgstr "Geen Auto timers ingesteld!"
+
+msgid "VDR Commands"
+msgstr "VDR Commando's:"
+
+msgid "Export channels as playlist:"
+msgstr "Exporteer de kanalen als afspeellijst"
+
+msgid "Number of lines to show:"
+msgstr "Aantal te tonen regels:"
+
+msgid "unlimited"
+msgstr "Onbeperkt"
+
+msgid "SVDRP commands:"
+msgstr "SVDRP commando's:"
+
+msgid "Run"
+msgstr "Uitvoeren"
+
+msgid "Really run this command?"
+msgstr "Dit commando echt uitvoeren?"
+
+msgid "Commands defined in commands.conf:"
+msgstr "Commando's gedefinieerd in commands.conf:"
+
+msgid "Output"
+msgstr "Uitvoer"
+
+msgid "Add New AutoTimer"
+msgstr "Nieuwe auto timer toevoegen "
+
+msgid "Edit AutoTimer"
+msgstr "Auto timer bewerken"
+
+msgid "AutoTimer Active:"
+msgstr "Auto timer aktief:"
+
+msgid "oneshot"
+msgstr "eenmalig"
+
+msgid "Search Patterns:"
+msgstr "Zoek patronen:"
+
+msgid "Search in:"
+msgstr "Zoeken in: "
+
+msgid "Search only on these days:"
+msgstr "Alleen zoeken op deze dagen:"
 
 msgid "Monday"
 msgstr "Maandag"
@@ -174,98 +297,17 @@ msgstr "Zaterdag"
 msgid "Sunday"
 msgstr "Zondag"
 
-msgid "Use Blacklists:"
-msgstr "Gebruik zwarte lijsten:"
-
-msgid "selection"
-msgstr "Selectie"
-
 msgid "all"
 msgstr "Alle"
 
-msgid "Use in Favorites Menu:"
-msgstr "Gebruik in favoriten menu:"
+msgid "Starts After:"
+msgstr "Start na: "
 
-msgid "Use as Search Timer:"
-msgstr "Gebruik als zoek timer:"
+msgid "Ends Before:"
+msgstr "Eindigd voor: "
 
-#, fuzzy
-msgid "yes"
-msgstr "Ja"
-
-#, fuzzy
-msgid "user-defined"
-msgstr "Gebruikers definieert zoeken"
-
-msgid "record"
-msgstr "opnemen"
-
-msgid "announce only"
-msgstr "alleen bekendmaken"
-
-msgid "switch only"
-msgstr "alleen wisselen"
-
-#, fuzzy
-msgid "First day:"
-msgstr "Vrijdag"
-
-msgid "Last day:"
-msgstr ""
-
-msgid "Auto delete:"
-msgstr ""
-
-#, fuzzy
-msgid "count recordings"
-msgstr "Opnames"
-
-#, fuzzy
-msgid "count days"
-msgstr "Maandag"
-
-#, fuzzy
-msgid "After ... recordings:"
-msgstr "Opnames bewaren:"
-
-msgid "After ... days after first recording:"
-msgstr ""
-
-msgid "Settings for action \"record\""
-msgstr "Instelllingen voor aktie \"opname\""
-
-msgid "Series Recording:"
-msgstr "Opname series:"
-
-msgid "Directory:"
-msgstr "Map:"
-
-msgid "Delete Recordings After ... Days:"
-msgstr "Opnames verwijderen na ... dagen:"
-
-msgid "Keep ... Recordings:"
-msgstr "Opnames bewaren:"
-
-msgid "Pause, when ... recordings exist:"
-msgstr "Pauzeren, als ... opname bestaat:"
-
-msgid "Avoid Repeats:"
-msgstr "Voorkom herhalingen:"
-
-msgid "Allowed Repeats:"
-msgstr "Toegestane herhalingen:"
-
-msgid "Only Repeats Within ... Days:"
-msgstr "Alleen herhalingen binnen .. Dagen:"
-
-msgid "Compare:"
-msgstr "Vergelijken:"
-
-msgid "Priority:"
-msgstr "Prioriteit:"
-
-msgid "Lifetime:"
-msgstr "Levensduur:"
+msgid "Override Start/Stop Margins:"
+msgstr "Start/stop marges overschrijden"
 
 msgid "Time Margin at Start:"
 msgstr "Tijd marge bij start:"
@@ -276,960 +318,14 @@ msgstr "minuten"
 msgid "Time Margin at Stop:"
 msgstr "Tijd marge bij stop:"
 
-msgid "VPS:"
-msgstr "VPS:"
-
-msgid "Settings for action \"switch only\""
-msgstr "Instellingen voor aktie \"wissel alleen\""
-
-msgid "Switch ... Minutes Before Start:"
-msgstr "Wissel ... minuten voor start:"
-
-msgid "Save as template"
-msgstr "Opslaan als sjabloon"
-
-msgid "Save"
-msgstr "Opslaan"
-
-msgid "Run"
-msgstr "Uitvoeren"
-
-msgid "Cancel"
-msgstr "Annuleren"
-
-msgid "Authorization Required"
-msgstr "Toestemming benodigd"
-
-msgid ""
-"This server could not verify that you are authorized to access the document "
-"requested. Either you supplied the wrong credentials (e.g. bad password), or "
-"your browser doesn't understand how to supply the credentials required."
-msgstr ""
-"De server kon niet controleren of u toestemming heeft om dit document te "
-"lezen. Waarschijnlijk heeft u een foutief wachtwoord gegeven of uw browser "
-"kan niet met wachtwoorden overweg."
-
-msgid "Timer"
-msgstr "Timer"
-
-msgid "Duration:"
-msgstr "Duur:"
-
-msgid "min"
-msgstr "min"
-
-msgid "Transponder:"
-msgstr "Transponder:"
-
-msgid "CA-System:"
-msgstr "CA-Systeem:"
-
-msgid "New Timer"
-msgstr "Nieuwe timer"
-
-msgid "Active"
-msgstr "Aktief"
-
-msgid "Channel"
-msgstr "Kanaal"
-
-msgid "Date"
-msgstr "Datum"
-
-msgid "Start"
-msgstr "Start"
-
-msgid "Stop"
-msgstr "Stop"
-
-msgid "Name"
-msgstr "Naam"
-
-msgid "Select all/none"
-msgstr "Selecteer alles/niets"
-
-msgid "Edit timer status?"
-msgstr "Timer status bewerken?"
-
-msgid "This timer is inactive!"
-msgstr "Deze timer is niet aktief!"
-
-msgid "This timer is impossible!"
-msgstr "Deze timer is niet mogelijk!"
-
-msgid "No more timers on other transponders possible!"
-msgstr "Geen andere timers op andere transponders mogelijk!"
-
-msgid "Timer OK."
-msgstr "Timer OK."
-
-msgid "Yes"
-msgstr "Ja"
-
-msgid "No"
-msgstr "Nee"
-
-msgid "VPS"
-msgstr "VPS"
-
-msgid "Auto"
-msgstr "Auto"
-
-msgid "Edit"
-msgstr "Bewerken"
-
-msgid "Delete timer?"
-msgstr "Timer verwijderen? "
-
-msgid "Delete"
-msgstr "Verwijderen"
-
-msgid "activate"
-msgstr "Aktiveren"
-
-msgid "inactivate"
-msgstr "niet aktief"
-
-msgid "selected timers"
-msgstr "Geselecteerde timers"
-
-msgid "Delete Selected Timers"
-msgstr "Verwijder geselecteerde timers"
-
-msgid "Delete all selected timers?"
-msgstr "Verwijder alle geselecteerde timers?"
-
-msgid "No timers defined!"
-msgstr "Geen timers opgegeven!"
-
-msgid "Create New Timer"
-msgstr "Nieuwe timer instellen"
-
-msgid "Edit Timer"
-msgstr "Timer bewerken"
-
-msgid "Timer Active:"
-msgstr "Aktieve timers:"
-
-msgid "AutoTimer Checking:"
-msgstr "Auto timer controle"
-
-msgid "Transmission Identification"
-msgstr "Verzend indentificatie"
-
-msgid "Time"
-msgstr "Tijd"
-
-msgid "off"
-msgstr "Uit "
-
-msgid "Channel:"
-msgstr "Kanaal"
-
-msgid "Day Of Recording:"
-msgstr "Dag van opname"
-
-msgid "Start Time:"
-msgstr "Start tijd:"
-
-msgid "Buffer:"
-msgstr "Buffer:"
-
-msgid "End Time:"
-msgstr "Eind tijd"
-
-msgid "Use VPS:"
-msgstr "Gebruik VPS"
-
-msgid "Title of Recording:"
-msgstr "Titel van opname:"
-
-msgid "Summary:"
-msgstr "Omschrijving:"
-
-msgid "readonly"
-msgstr "Alleen lezen"
-
-msgid "Timer has been set by AutoTimer pattern:"
-msgstr "De timer is ingesteld door de auto timer zoek opdracht:"
-
-msgid "Rename Recording"
-msgstr "Hernoemen opname"
-
-msgid "Original Name of Recording:"
-msgstr "Originele naam van de opname: "
-
-msgid "New Name of Recording:"
-msgstr "Nieuwe naam van de opname:"
-
-msgid "Subtitle:"
-msgstr "Ondertitel:"
-
-msgid "Rename"
-msgstr "Hernoemen"
-
-msgid "What's On Now?"
-msgstr "Wat is er nu op?"
-
-msgid "Channel group:"
-msgstr "Kanaal groep:"
-
-msgid "What's on:"
-msgstr "Wat is er op:"
-
-msgid "at"
-msgstr "om"
-
-msgid "Channels"
-msgstr "Kanalen"
-
-msgid "Stream"
-msgstr "Stream"
-
-msgid "TV select"
-msgstr "Selecteer programma"
-
-msgid "Search for other show times"
-msgstr "Zoek naar andere programma tijden"
-
-msgid "No Information"
-msgstr "Geen informatie"
-
-msgid "No EPG information available"
-msgstr "Geen informatie EPG informatie beschikbaar"
-
-msgid "Error!"
-msgstr "Fout!"
-
-msgid "Edit AutoTimer"
-msgstr "Auto timer bewerken"
-
-msgid ""
-"<p>Here you can edit an automatic timer's (AutoTimer) settings.</"
-"p><p>AutoTimer is a key feature of VDRAdmin-AM. An AutoTimer consists of one "
-"or more search terms and some other settings, that are looked for regularly "
-"in the Electronic Program Guide (EPG). On match AutoTimer adds a timer in "
-"VDR automatically for that broadcast. That's very comfortable for "
-"irregularly broadcasted series or movies you don't want to miss.</p>"
-msgstr ""
-"<p>Hier kunt u de instellingen van de automatische timers (AutoTimer) "
-"bewerken.</p><p>De auto timer is een sleutel eigenschap van VDRAdmin-AM. Een "
-"auto timer bevat een of meer zoek termen en andere instellingen waarnaar "
-"regelmatig gezocht word in de Electronische Programma Gids (EPG). Bij een "
-"overeenkomst word een timer toegevoegd.  Dit is zeer gemakkelijk voor "
-"onregelmatig uitgezonden series of voor film die u niet wilt missen.</p> "
-
-msgid "AutoTimer Active:"
-msgstr "Auto timer aktief:"
-
-msgid ""
-"Activate or deactivate this AutoTimer. Deactivated AutoTimers are still "
-"stored in the AutoTimer list so that they can be activated again, but they "
-"do not record anything meanwhile. Above that you can set this to \"oneshot\" "
-"so this AutoTimer only programs the (one!) next matching broadcast."
-msgstr ""
-"Aktiveer of deaktiveer deze auto timer. Als ze zijn gedeaktiveerd worden ze "
-"nog steeds bewaard in de auto timer lijst zodat ze weer opnieuw geaktiveerd "
-"kunnen worden, maar ondertussen nemen ze niets op. Bovendien kunt u dit "
-"instellen op \"eenmalig\" zodat deze auto timer alleen de eerst volgende "
-"overeenkomstige programma zal opnemen."
-
-msgid "Search Patterns:"
-msgstr "Zoek patronen:"
-
-msgid ""
-"Choosing the right search items decides whether only the wanted broadcasts "
-"or broadcasts having similar names or even nothing gets recorded.<br />Case "
-"doesn't matter, \"X-Files\" matches anything \"x-files\" will match. You can "
-"set multiple search items by separating them with spaces. Only broadcasts "
-"will match if they contain <strong>all</strong> items.<br />You'd better "
-"only use letters and numbers for search items, as the EPG often miss colons, "
-"brackets and other characters.<br />Experts can also use regular "
-"expressions, but you have to get needed information from the VDRAdmin-AM "
-"sources (undocumented feature).<br /><br />You can exclude broadcasts so "
-"that they don't get recorded even if they would match an AutoTimer. "
-"Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, "
-"one event a line. This file must be located in your VDRAdmin-AM's "
-"configuration folder. If this string is found either in the EPG's <u>title</"
-"u> or in <u>title~subtitle</u>, this event will not be programmed by "
-"AutoTimer. So you can disable complete episodes (for example when using "
-"\"Enterprise\" as Blacklist-string) or only one episode (when using "
-"\"Enterprise~Azati Prime\" as Blacklist-string)."
-msgstr ""
-"Het kiezen van de juiste zoekpatronen maakt het verschil tussen het opnemen "
-"van gewenste uitzendingen, uitzendingen met gelijksoortige namen of dat er "
-"niets opgenomen word <br />hoofd of kleine letters maken niet uit, \"X-Files"
-"\" of \"x-files\" leidt tot hetzelfde resultaat. U kunt meerdere "
-"zoekpatronen gebruiken door ze te scheiden door spaties. Alleen programma's "
-"die <strong>alle</strong> zoektermen bevatten zullen leiden tot een opname ."
-"<br />U kunt beter alleen cijfers en letters gebruiken voor de zoekpatronen "
-"omdat het bij de EPG vaak de leestekens ontbreken.<br /> Gevorderden kunnen "
-"ook standaard uitdrukkingen gebruiken, maar dan moet u de benodigde "
-"informatie halen van de VDRAdmin-AM broncode (ongedocumenteerd aspect).<br /"
-"><br /> U kunt bepaalde programma's uitsluiten zodat deze niet worden "
-"opgenomen ondanks dat deze  overeenkomen met een auto timer. Hiervoor moet u "
-"<i>vdradmind.bl</i> bewerken en hier de titels in plaatsen, een gebeurtenis "
-"per regel. Dit bestand moet staan in de VDRAdmin-AM's configuratie map. Als "
-"de zoekterm word gevonden in de EPG <u>titel</u> of in <u>titel~subtitel</"
-"u>, dan zal dit programma niet worden opgenomen door de auto timer. Zodoende "
-"kunt u complete afleveringen uitsluiten (bijvoorbeeld \"Enterprise\" zwarte "
-"lijst zoekterm) of alleen een opname (door gebruikt te maken van "
-"\"Enterprise~Azati Prime\" als zwarte lijst zoekterm)."
-
-msgid ""
-"Here you can define the EPG sections where VDRAdmin-AM should look for the "
-"search pattern."
-msgstr ""
-"Hier kunt u aangeven de EPG delen aangeven waar VDRAdmin-AM moet zoeken naar "
-"zoekpatronen."
-
-msgid "Search only on these days:"
-msgstr "Alleen zoeken op deze dagen:"
-
-msgid ""
-"Use these checkboxes to limit searching for matching broadcasts to a set of "
-"weekdays."
-msgstr "Gebruik deze hokjes om het zoeken te beperken op bepaalde dagen."
-
-msgid ""
-"The channel to look for matching broadcasts or \"all\" to search in all "
-"known or wanted channels. You can define the wanted channels for AutoTimer "
-"in \"Configuration\"."
-msgstr ""
-"Het kanaal waar naar gezocht moet worden voor overeenkomstige  programma's "
-"of \"alle\" om te zoeken in alle bekende of gewenste kanalen. U kunt de "
-"gewenste kanalen voor de auto timer aangeven in \"Configuratie\"."
-
-msgid "Starts After:"
-msgstr "Start na: "
-
-msgid ""
-"A broadcast must start after the time entered here to match. The first text "
-"field is for \"hour\", the second for \"minute\"."
-msgstr ""
-"Een programma moet starten na de hier ingegeven tijd om in aanmerking te "
-"komen voor opname. Het eerste veld is voor \"Uur\", de tweede voor  \"minuut"
-"\"."
-
-msgid "Ends Before:"
-msgstr "Eindigd voor: "
-
-msgid ""
-"A broadcast must end before the time entered here to match. The first text "
-"field is for \"hour\", the second for \"minute\"."
-msgstr ""
-"Een programma moet stoppen na de hier ingegeven tijd om in aanmerking te "
-"komen voor opname. Het eerste veld is voor \"Uur\", de tweede voor  \"minuut"
-"\"."
-
-msgid "Override Start/Stop Margins:"
-msgstr "Start/stop marges overschrijden"
-
-msgid ""
-"Set this option to \"yes\" if all timers programed by this AutoTimer should "
-"have individual start/stop margins and enter the values in the next two text "
-"boxes."
-msgstr ""
-"Stel deze optie in op \"ja\" als alle timers die ingesteld zijn met deze "
-"autotimer individuele start/stop marges moeten hebben  en vul de waarden in "
-"in de twee volgende vakken."
-
-msgid ""
-"The number of minutes VDRAdmin-AM subtracts from the broadcasts start time "
-"found in the EPG."
-msgstr ""
-"Het aantal minuten dat VDRAdmin-AM in mindering brengt van de uitzend start "
-"tijd die gevonden is in de EPG."
-
-msgid ""
-"The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in "
-"the EPG."
-msgstr ""
-"Het aantal minuten dat VDRAdmin-AM in toevoegd aan de stop tijd die gevonden "
-"is in de EPG."
-
-msgid ""
-"An integer in the range <strong>0...99</strong>, defining the "
-"<strong>priority</strong> of this timer and of recordings created by this "
-"timer. <strong>0</strong> represents the lowest value, <strong>99</strong> "
-"the highest. The priority is used to decide which timer shall be started in "
-"case there are two or more timers with the exact same <strong>start</strong> "
-"time. The first timer in the list with the highest priority will be used."
-"<br /><br />This value is also stored with the recording and is later used "
-"to decide which recording to remove from disk in order to free space for a "
-"new recording. If the disk runs full and a new recording needs more space, "
-"an existing recording with the lowest priority (and which has exceeded its "
-"guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all "
-"available DVB cards are currently occupied, a timer with a higher priority "
-"will interrupt the timer with the lowest priority in order to start "
-"recording."
-msgstr ""
-"Een getal in het bereik<strong>0...99</strong>, bepaald de  "
-"<strong>prioriteit</strong>van deze timer en de opnames aangemaakt door deze "
-"timer <strong>0</strong> geeft de laagst mogelijke waarde aan,  <strong>99</"
-"strong> de hoogste. De prioriteit wordt gebruikt als er twee of meer timers "
-"gelijktijdig starten, de timer met de hoogste prioriteit heeft voorrang en "
-"zal worden opgenomen<br /><br />Deze waarde wordt ook opgeslagen bij de "
-"opname en word later gebruikt om een opname te verwijderen om ruimte vrij te "
-"maken voor een nieuwe opname. Als de schijf vol raakt en een nieuwe opname "
-"heeft meer ruimte nodig dan zal een bestaande opname met de laagste "
-"prioriteit ( en die zijn gegarandeerde levensduur al voorbij is) zal worden "
-"verwijderd.<br /><br /> Als alle DVB kaarten bezet zijn met een timer dan "
-"zal de timer met de laagste prioriteit onderbroken worden om de opname met "
-"een hogere prioriteit op te gaan nemen."
-
-msgid ""
-"The <strong>guaranteed</strong> lifetime (in days) of a recording created by "
-"this timer. <strong>0</strong> means that this recording may be "
-"automatically deleted at any time by a new recording with higher priority. "
-"<strong>99</strong> means that this recording will never be automatically "
-"deleted. Any number in the range <strong>1...98</strong> means that this "
-"recording may not be automatically deleted in favour of a new recording, "
-"until the given number of days since the <strong>start</strong> time of the "
-"recording has passed by."
-msgstr ""
-"De <strong>gegarandeerde</strong> levensduur (in dagen) van een opname "
-"gecreeerd door deze timer <strong>0</strong> betekend dat deze opname "
-"automatisch verwijderd zal worden door een nieuwe timer met een hogere "
-"prioriteit.<strong>99</strong> betekend dat deze opname nooit automatisch "
-"verwijderd zal worden. Ieder nummer in het bereik van <strong>1...98</"
-"strong> betekend dat de opname niet automatisch verwijderd zal worden om "
-"plaats te maken voor een nieuwe opname, alleen als de levensduur van de "
-"opname voorbij is."
-
 msgid "Episode:"
 msgstr "Aflevering:"
-
-msgid ""
-"Check this box if you want VDRAdmin-AM to append the broadcast's EPG "
-"subtitle to the recording's file name."
-msgstr ""
-"Vink dit vakje aan als u VDRAdmin-AM de titel wilt laten toevoegen die "
-"gevonden is in de EPG informatie aan de opname's bestandsnaam."
 
 msgid "Remember programmed timers:"
 msgstr "Herinner geprogrammeerde timer:"
 
-msgid ""
-"If you enable this VDRAdmin-AM will track timers it has already programmed "
-"automatically. This is useful if want to deactivate or delete timers that "
-"have been programmed automatically in the timers listing."
-msgstr ""
-"Als u dit aktiveerd dan zal VDRAdmin-AM de timers volgen die ze al "
-"automatisch  heeft geprogrammeerd. Dit handig als u timers wilt aktiveren of "
-"verwijderen die  automatisch zijn geprogrammeerd in de timer lijst."
-
-msgid ""
-"The directory this AutoTimer will place the recordings in. If the name shall "
-"contain subdirectories, these have to be delimited by '~' (since the '/' "
-"character may be part of a regular programme name).<br />VDRAdmin-AM will "
-"append the matching broadcast's title and subtitle (if the \"Episode\" "
-"checkbox is marked) to the directory given here.<br /><br />You can also use "
-"the following keywords that are replaced in the final file name by the "
-"values supplied by for example <a href=\"http://tvmovie2vdr.vdr-developer.org"
-"\">tvm2vdr</a>:<ul><li>%Title% - will become the title of the event.</li><li>"
-"%Subtitle% - will become the subtitle of the event.</li><li>%Director% - "
-"will become the director of the event.</li><li>%Date% - will become the date "
-"of the recording.</li><li>%Category% - will become the category of the event "
-"(Spielfilm/Serie/...).</li><li>%Genre% - will become the genre of the event "
-"(Drama/Krimi/..).</li><li>%Year% - will become the year of production.</"
-"li><li>%Country% - will become the country of production.</li><li>%"
-"Originaltitle% - will become the original title of the event.</li><li>%FSK% "
-"- will become the FSK from the event.</li><li>%Episode% - will become the "
-"episode's title of the event.</li><li>%Rating% - will become the rating of "
-"the event from the EPG provider.</li></ul><h4>Note:</h4>If you use the above "
-"keywords it's in your own responsibility to supply the <strong>complete file "
-"name</strong> for the recordings! VDRAdmin-AM will not append anything to "
-"the resulting string."
-msgstr ""
-"De map waar deze auto timer zijn opnames in zal plaatsen. Als de naam  "
-"submappen bevat dan zullen deze aangeven moeten worden door een '~' "
-"aangezien  het '/' karakter een deel kan uitmaken van een programma naam. ."
-"<br />VDRAdmin-AM zal de overeenkomstige programma naam en titel gebruiken "
-"(als de \"aflevering\" aanvinkvak is gemarkeerd) naar de hier aangegeven map."
-"<br /><br /> U kunt ook de volgende sleutelwoorden gebruiken die worden "
-"vervangen voor de uiteindelijke bestandsnaam door waarden opgegeven door "
-"bijvoorbeeld <a href=\"http://tvmovie2vdr.vdr-developer.org\">tvm2vdr</a>:"
-"<ul><li>%Titel% - zal de naam worden van de gebeurtenis .</li><li>%Subtitel% "
-"zal de subtitel worden van de gebeurtenis .</li><li>%Datum% - zal de datum "
-"worden van de opname  .</li><li>%Categorie% zal de categorie worden van de "
-"gebeurtenis (speelfilm, serie,...) .</li><li>%Genre% -  zal het genre worden "
-"van de gebeurtenis (Drama/Krimi/..).</li><li>%Jaar% - zal het jaar worden "
-"van de productie .</li> <li>%Origineletitel% zal de originele titel worden "
-"van de gebeurtenis </li><li>%FSK% - zal de FSK worden van de gebeurtenis .</"
-"li><li>%Aflevering% - zal de afleverings titel worden van de gebeurtenis .</"
-"li><li>%Waardering% - zal de waardering worden van de gebeurtenis van de EPG "
-"informatie .</li></ul><h4>Let op:</h4>Als u bovenstaande sleutelwoorden "
-"gebruikt dan is het uw eigen verantwoording om een <strong>volledige "
-"bestandsnaam</strong> te geven aan de opnames! VDRAdmin-AM zal niets "
-"toevoegen aan de resulterende reeks."
-
-msgid "Configuration"
-msgstr "Configuratie"
-
-msgid "General Settings"
-msgstr "Algemene instellingen"
-
-msgid "Template:"
-msgstr "Sjabloon:"
-
-msgid "Skin:"
-msgstr "Skin:"
-
-msgid "Login Page:"
-msgstr "Inlog pagina:"
-
-msgid "Number of channels to use:"
-msgstr "Aantal te tonen kanalen:"
-
-msgid "Local net (no login required):"
-msgstr "Lokaal netwerk (geen login benodigd):"
-
-msgid "Language:"
-msgstr "Taal:"
-
-msgid "Save settings on exit:"
-msgstr "Instellingen opslaan bij afsluiten:"
-
-msgid "VDR"
-msgstr "VDR"
-
-msgid "Number of DVB cards:"
-msgstr "Aantal DVB kaarten:"
-
-msgid "Path to recordings:"
-msgstr "Pad voor opnames:"
-
-msgid "Path to configuration files:"
-msgstr "Pad naar configuratie bestanden:"
-
-msgid "Path to EPG images:"
-msgstr "Pad naar EPG beelden:"
-
-msgid "Identification"
-msgstr "Identificatie"
-
-msgid "Username:"
-msgstr "Gebruikersnaam:"
-
-msgid "Password:"
-msgstr "Wachtwoord:"
-
-msgid "Guest Account:"
-msgstr "Gast Account:"
-
-msgid "Guest Username:"
-msgstr "Gebruikersnaam gast:"
-
-msgid "Guest Password:"
-msgstr "Wachtwoord gast"
-
-msgid "Timeline"
-msgstr "Tijdlijn"
-
-msgid "Hours:"
-msgstr "Uur:"
-
-msgid "Times:"
-msgstr "Tijden:"
-
-msgid "Also used for other EPG views!"
-msgstr "Word ook gebruikt voor andere EPG"
-
-msgid "Tooltips:"
-msgstr "Handigheden:"
-
-msgid "AutoTimer"
-msgstr "AutoTimer"
-
-msgid "Active:"
-msgstr "Aktief:"
-
-msgid "Send email after programming timer:"
-msgstr "Stuur email na het programmeren van de timer:"
-
-msgid "Send email as:"
-msgstr "Stuur email als:"
-
-msgid "Send email to:"
-msgstr "Stuur email naar:"
-
-msgid "Mail server:"
-msgstr "Mail server:"
-
-msgid "SMTPAuth user:"
-msgstr "SMTPAuth gebruiker:"
-
-msgid "SMTPAuth password:"
-msgstr "SMTPAuth Wachtwoord:"
-
-msgid "Tooltips in timeline:"
-msgstr "Handigheden in de tijdlijn:"
-
-msgid "Tooltips in list:"
-msgstr "Handigheden in lijst:"
-
-msgid "Add summary to new timers:"
-msgstr "Voeg beschrijving toe aan nieuwe timers:"
-
-msgid "Streaming"
-msgstr "Streaming"
-
-msgid "Live Streaming:"
-msgstr "Live Streaming:"
-
-msgid "HTTP Port of Streamdev (also possible 3000/ts):"
-msgstr "HTTP Poort van Streamdev (ook mogelijk 3000/ts):"
-
-msgid "Recordings Streaming:"
-msgstr "Streaming opnames:"
-
-msgid "Path to VDR Recordings on your workstation:"
-msgstr "Pad naar VDR opnames op uw werkstation:"
-
-msgid "MIME type for live streaming:"
-msgstr "Mime type voor live streaming:"
-
-msgid "Suffix for live streaming:"
-msgstr "Extensie voor Live Streaming:"
-
-msgid "MIME type for recordings streaming:"
-msgstr "MIME type voor opgenomen Streaming:"
-
-msgid "Suffix for recordings streaming:"
-msgstr "Extensie voor opgenomen Streaming:"
-
-msgid "Bandwidth of Streams:"
-msgstr "Bandbreedte van streams:"
-
-msgid "External Search"
-msgstr "Extern zoeken"
-
-msgid "URL:"
-msgstr "URL:"
-
-msgid "Title:"
-msgstr "Titel:"
-
-msgid "User-defined search:"
-msgstr "Gebruikers definieert zoeken"
-
-msgid "Expert"
-msgstr "Expert"
-
-msgid "Update EPG data in background:"
-msgstr "Bijwerken van EPG gegevens in de achtergrond:"
-
-msgid "Update EPG every:"
-msgstr "Werk EPG bij iedere:"
-
-msgid "Read EPG directly using epg.data:"
-msgstr "Lees EPG direct door gebruik te maken van epg.data:"
-
-msgid "epg.data filename:"
-msgstr "epg.data bestandsnaam:"
-
-msgid "VFAT:"
-msgstr "VFAT:"
-
-msgid "Channel Selections"
-msgstr "Kanaal selecties"
-
-msgid "Show channels without EPG information:"
-msgstr "Toon kanalen zonder EPG informatie:"
-
-msgid "In \"Timeline\"?"
-msgstr "In\"Tijdlijn\"?"
-
-msgid "In \"Channels\"?"
-msgstr "In\"Kanalen\"?"
-
-msgid "In \"Playing Today\"?"
-msgstr "In\"Speelt vandaag\"?"
-
-msgid "In \"What's On Now\"?"
-msgstr "In\"Wat is er nu op\"?"
-
-msgid "In \"AutoTimer\"?"
-msgstr "In \"AutoTimer\"?"
-
-msgid "In \"Watch TV\"?"
-msgstr "In \"TV bekijken\"?"
-
-msgid "Apply"
-msgstr "Toepassen"
-
-msgid "TV"
-msgstr "TV"
-
-msgid "Interval:"
-msgstr "Interval:"
-
-msgid "sec."
-msgstr "sec."
-
-msgid "G"
-msgstr "G"
-
-msgid "Grab the picture!"
-msgstr "Snapshot maken!"
-
-msgid "Size:"
-msgstr "Grootte:"
-
-msgid "Open in separate window"
-msgstr "In apart venster openen"
-
-msgid "VDR Commands"
-msgstr "VDR Commando's:"
-
-msgid "Export channels as playlist:"
-msgstr "Exporteeer de kanalen als afspeellijst"
-
-msgid "Number of lines to show:"
-msgstr "Aantal te tonen regels:"
-
-msgid "unlimited"
-msgstr "Onbeperkt"
-
-msgid "SVDRP commands:"
-msgstr "SVDRP commando's:"
-
-msgid "Really run this command?"
-msgstr "Dit commando echt uitvoeren?"
-
-msgid "Commands defined in commands.conf:"
-msgstr "Commando's gedefinieerd in commands.conf:"
-
-msgid "Output"
-msgstr "Uitvoer"
-
-msgid "close"
-msgstr "sluiten"
-
-msgid "view"
-msgstr "bekijken"
-
-msgid "search"
-msgstr "zoeken"
-
-msgid "edit"
-msgstr "Bewerken"
-
-msgid "Video tracks:"
-msgstr "Video tracks:"
-
-msgid "Audio tracks:"
-msgstr "Audio sporen:"
-
-msgid "now"
-msgstr "nu"
-
-msgid "to"
-msgstr "naar "
-
-msgid "at:"
-msgstr "om:"
-
-msgid "You need JavaScript to use the timeline!"
-msgstr "U heeft Javascript nodig om de tijdlijn te gebruiken! "
-
-msgid "Playing Today?"
-msgstr "Speelt vandaag?"
-
-msgid "EPG Search"
-msgstr "Auto timer"
-
-msgid "Recordings"
-msgstr "Opnames"
-
-msgid "Remote Control"
-msgstr "Afstands bedienig "
-
-msgid "Watch TV"
-msgstr "TV bekijken"
-
-msgid "Commands"
-msgstr "Commando's"
-
-msgid "About"
-msgstr "Over"
-
-msgid "Search"
-msgstr "Zoeken"
-
-msgid "Your Browser does not support frames!"
-msgstr "UW browser ondersteund geen frames!"
-
-msgid ""
-"<p>Here you will find a listing of timers known to VDR.</p><p>On top you "
-"will find a chart showing a day's timers graphically. This provides an quick "
-"overview on what's going on at the specified day and helps you in finding "
-"conflicting timers. Moving the mouse cursor above any timer box will display "
-"a tooltip containing the timer's title, priority, lifetime and duration.</"
-"p><p>Below the chart you'll find the timers list showing you some "
-"information on the timers. You can change the list's sorting by clicking the "
-"columns heading.</p><p>For each timer you have the following options:"
-"<dl><dt>Set its state</dt><dd>By clicking on \"Yes\", \"No\", \"VPS\" or "
-"\"Auto\" in the \"Active\" column.</dd><dt>Quickly view its priority and "
-"lifetime</dt><dd>By pointing the mouse cursor to the timer's title.</"
-"dd><dt>View its EPG entry</dt><dd>Timers that have set <span class="
-"\"ref_label\">AutoTimer Checking</span> to \"Transmission Identification\" "
-"will show you the corresponding EPG entry if you click on the timer's title."
-"</dd><dt>Edit the timer</dt><dd>You can edit a timer by clicking <img src="
-"\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To "
-"delete a timer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</"
-"dd></dl></p><p>Each timer's state is indicated by differently coloured boxes "
-"(in the chart view) or images (in the list view):<br /><span class=\"color_ok"
-"\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on"
-"\" align=\"middle\" /> Timer is OK and will record.<br /><span class="
-"\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/"
-"poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timer conflicts with "
-"other timers. That's not critical, as long as you have enough DVB cards for "
-"the parallel recordings.<br /><span class=\"color_conflict\">&nbsp;&nbsp;"
-"&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align="
-"\"middle\" /> Timer is critical and will most likely <strong>not</strong> "
-"record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img "
-"src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is "
-"not active.</p><p>In addition to these functions you can add a new timer by "
-"clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at "
-"the top and you can delete a number of timers at once by checking the box in "
-"the last column of those timers and clicking <input type=\"submit\"  class="
-"\"submit\" value=\"Delete Selected Timers\"/>.</p><p>You can <input type="
-"\"submit\" class=\"submit\" value=\"activate\"/> and <input type=\"submit\" "
-"class=\"submit\" value=\"inactivate\"/> selected timers.</p>"
-msgstr ""
-"<p>Hier vind u een lijst van timer die bekend zijn bij VDR.</p><p> Boven in "
-"zult u een lijst vinden die de timers van een dag grafisch weergeven. Dit "
-"voorziet in een snel overzicht van wat er gaande is op een bepaalde dag en "
-"helpt in het vinden van overlappende timers. Door de muis cursor boven "
-"iedere timerbox te plaatsen zal er een tooltip weergegeven worden die de "
-"timers titel, prioriteit, levensduur en lengte van opname zal tonen</"
-"p><p>Onder de lijst kunt u de timer lijst vinden die u enige informatie "
-"toont van de timers. U kunt lijst opsomming veranderen door  op het kopje "
-"van de kolom te klikken.</p><p>Voor iedere timer heeft u de volgende opties: "
-"<dl><dt>De aktiviteit instellen</dt><dd>door te klikken op \"Ja\", \"Nee\", "
-"\"VPS\" of \"Auto\" in de \"Aktief\" kolom.</dd><dt>Om snel de prioriteit en "
-"levensduur te tonen</dt><dd> Door de muis cursor over de timers titel te "
-"bewegen</dd><dt>kunt u de EPG informatie tonen .</dt><dd>Timers die zijn "
-"ingesteld op <span class=\"ref_label\">AutoTimer Controle</span> tot "
-"\"Transmissie Identificatie\" zal de overeenkomstige EPG informatie tonen "
-"als u klikt op de timer titel.</dd><dt>Bewerken van een timer</dt><dd>U kunt "
-"een timer bewerken door te klikken op<img src=\"bilder/edit.png\" alt=\"edit"
-"\" />.</dd><dt>Verwijder de timer</dt><dd> Om een timer te verwijderen klik "
-"op <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Iedere "
-"timers aktiviteit wordt getoond door verschillend gekleurde vakjes (in de "
-"overzichtslijst) of beelden (in de lijst overzicht):<br /><span class="
-"\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png"
-"\" alt=\"on\" align=\"middle\" /> Timer is OK en zal worden opgenomen.<br /"
-"><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src="
-"\"bilder/poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timers die "
-"elkaar overlappen. dit is geen probleem zolang er voldoende DVB kaarten "
-"aanwezig zijn om gelijktijdig te kunne opnemen.<br /><span class="
-"\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot."
-"png\" alt=\"impossible\" align=\"middle\" /> De timer overlapt en zal "
-"hoogstwaarschijnlijk <strong>niet</strong> worden opgenomen.<br /><span "
-"class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/"
-"poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is niet aktief."
-"</p><p>Naast deze functies kunt u een nieuwe timer toevoegen door op boven "
-"in<input type=\"submit\" class=\"submit\" value=\"New Timer\"/> te klikken "
-"en u kunt een aantal timers verwijderen door eenmaal op het selectie vakje "
-"in de laatste kolom te klikken en dan op <input type=\"submit\"  class="
-"\"submit\" value=\"Verwijder geselecteerde timers\"/>.</p> te klikken."
-
-msgid "No Help Available"
-msgstr "Geen help beschikbaar"
-
-msgid ""
-"<p>No help available yet. For adding or changing text please contact <a href="
-"\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>."
-"</p>"
-msgstr ""
-"<p>Nog geen hulp beschikbaar: Voor toevoegen of veranderen van tekst graag "
-"contact opnemen met<a href=\"mailto:mail@andreas.vdr-developer.org"
-"\">mail@andreas.vdr-developer.org</a>.</p>"
-
-msgid "Edit EPG"
-msgstr "Bewerk EPG"
-
-msgid ""
-"<p>Here you can edit the descriptive fields of an existing EPG entry.</p>"
-msgstr "<p>Hier kunt u de omschrijving van een bestaande EPG bewerken.</p>"
-
-msgid "Channel (readonly)"
-msgstr "Kanaal (alleen lezen)"
-
-msgid "This is the channel of the EPG entry. It cannot be changed."
-msgstr "Dit is het kanaal van de EPG invoer. Dit akn niet veranderd worden."
-
-msgid "Time (readonly)"
-msgstr "Tijd (alleen lezen)"
-
-msgid "This is the start and end time of the entry. It cannot be changed."
-msgstr ""
-"Dit is de start en eindtijd van de invoer. Dit kan niet veranderd worden."
-
-msgid ""
-"Change this string to give this EPG Entry a new title. It must consist of "
-"only one line of text."
-msgstr ""
-"Verander deze reeks om deze EPG invoer een nieuwe titel te geven.Het mag "
-"alleen bestaan uit één regel tekst."
-
-msgid ""
-"Change this string to give this EPG Entry a new subtitle. It must consist of "
-"only one line of text."
-msgstr ""
-"Verander deze reeks om deze EPG invoer een nieuwe subtitel te geven.Het mag "
-"alleen bestaan uit één regel tekst."
-
-msgid ""
-"Change the text in this field to edit the description of this entry. The "
-"text can consist of one or more lines."
-msgstr ""
-"Verander de tekst in dit veld om de omschrijving te veranderen van deze "
-"invoer. De tekst mag bestaan uit één of meer regels,."
-
-msgid "VPS (readonly)"
-msgstr "VPS (alleen lezen)"
-
-msgid ""
-"If available this field shows the vps time of the EPG entry. It cannot be "
-"changed."
-msgstr ""
-"Als het beschikbaar is toont dit vel de vps tijd van de EPG invoer. Dit kan "
-"niet veranderd worden."
-
-msgid "Video tracks (readonly)"
-msgstr "Video tracks (alleen lezen)"
-
-msgid "If available this field shows the video track(s). It cannot be changed."
-msgstr ""
-"Indien beschikbaar toont dit veld de video spoor of sporen. Dit kan niet "
-"verandert worden."
-
-msgid "Audio tracks (readonly)"
-msgstr "Audio sporen (alleen lezen)"
-
-msgid "If available this field shows the audio track(s). It cannot be changed."
-msgstr ""
-"Indien beschikbaar toont dit veld de audio sporen. Dit kan niet veranderd "
-"worden."
-
-msgid "Go!"
-msgstr "Ga!"
-
-msgid "Playing Today"
-msgstr "Programma vandaag "
-
-msgid "starting at"
-msgstr "start om"
-
-msgid "Add New AutoTimer"
-msgstr "Nieuwe auto timer toevoegen "
-
-msgid "oneshot"
-msgstr "eenmalig"
+msgid "Directory:"
+msgstr "Map:"
 
 msgid "Test"
 msgstr "Test"
@@ -1240,174 +336,14 @@ msgstr "Uitgezonden"
 msgid "Stored in"
 msgstr "Opgeslagen in"
 
-msgid ""
-"<p>Here you will find a listing of automatic timers (AutoTimer) known to "
-"VDRAdmin-AM.</p><p>The list shows some information on AutoTimers. You can "
-"change the list's sorting by clicking the columns heading.</p><p>For each "
-"AutoTimer you have the following options:<dl><dt>Set its state</dt><dd>By "
-"clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the "
-"activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing "
-"the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</"
-"dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" "
-"alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer "
-"you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></"
-"p><p>Each AutoTimer's state is indicated by differently coloured images:<br /"
-"><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> "
-"AutoTimer is OK and will automatically program matching broadcasts.<br /"
-"><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> "
-"AutoTimer is not active.</p><p>In addition to these functions you can add a "
-"new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value="
-"\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at "
-"once by checking the box in the last column of those timers and clicking "
-"<input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/"
-">.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update"
-"\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and "
-"check for matching AutoTimers.</p>"
-msgstr ""
-"<p>Hier vind u de lijst van automatische timers (AutoTimer)  die bekend zijn "
-"bij VDRAdmin-AM.</p><p>De lijst toont enige informatie over auto timers. U "
-"kunt de lijst's sortering veranderen door op de kolom hoofden te klikken.</"
-"p><p> Voor iedere autotimer heeft u de volgende mogelijkheden:<dl><dt>De "
-"status instellen </dt><dd>door te klikken op  \"Ja\" of \"Nee\" in de "
-"\"Actief\"kolom om de aktiviteit te wisselen.</dd><dt>Het snel bekijken van "
-"de prioriteit en levensduur </dt><dd> door de muiscursor over de auto timers "
-"titel te bewegen.</dd><dt>Bewerk de autotimer </dt><dd>U kunt een auto timer "
-"bewerken door te klikken op<img src=\"bilder/edit.png\" alt=\"edit\" />.</"
-"dd><dt>Verwijder de auto timerr</dt><dd>Om een auto timer te verwijderen "
-"klik op <img src=\"bilder/delete.png\" alt=\"verwijderen\" />.</dd></dl></"
-"p><p>De status van iedere auto timer word aangeduid door verschillend "
-"gekleurde afbeeldingen<br /><img src=\"bilder/poempl_gruen.png\" alt=\"aan\" "
-"align=\"middle\" /> auto timer is OK en zaLovereenkomstige programma's "
-"opnemen<br /><img src=\"bilder/poempl_grau.png\" alt=\"uit\" align=\"middle"
-"\" />  auto timer is niet aktief.</p><p>Aanvullend bij deze functies kunt u "
-"een nieuwe auto timer toevoegen door te klikken op <input type=\"submit\" "
-"class=\"submit\" value=\"New AutoTimer\"/>bovenin kunt u een aantal auto "
-"timers verwijderen door ze aan te vinken in de laatste kolom van deze timers "
-"en klik dan op <input type=\"submit\" class=\"submit\" value=\"Delete "
-"Selected AutoTimers\"/>.</p><p>Klik <input type=\"submit\" class=\"submit\" "
-"value=\"Force Update\"/> om VDRAdmin-AM te dwingen om her te verbinden met "
-"VDR, de laatste EPG data op te halen en te controleren voor overeenkomstige "
-"timers.</p>"
+msgid "No matches found!"
+msgstr "Geen overeenkomsten gevonden!"
 
-msgid "Video tracks"
-msgstr "Video sporen:"
-
-msgid "Audio tracks"
-msgstr "Audio sporen"
-
-msgid "<p>Here you can edit a timer's settings.</p>"
-msgstr "<p>Hier kunt u de timer instellingen bewerken.</p>"
-
-msgid ""
-"Activate or deactivate this timer. Deactivated timers are still stored in "
-"the timer list so that they can be activated again, but they do not record "
-"anything meanwhile."
-msgstr ""
-"Aktiveer of deaktiveer deze timer. Gedeaktiveerde timers worden wel bewaard "
-"in de timer lijst zodat deze wel weer geaktiveerd kunnen worden, maar "
-"ondertussen nemen ze niets op."
-
-msgid ""
-"Depending on how this timer has been programmed you have up to three "
-"possible settings:"
-msgstr ""
-"Afhankelijk van hoe deze timer is geprogrammeerd heeft u tot en met drie "
-"mogelijkheden:"
-
-msgid ""
-"Monitor this timer using the identification provided in the EPG. Please note "
-"that this only works if the provided identification is a fix and unique "
-"value! This option is not available with timers programmed in VDR."
-msgstr ""
-"Gebruik deze timer door de EPG informatie in de gaten te houden. Let op! dit "
-"werkt alleen als de informatie een vaste en unieke waarde heeft. Deze optie "
-"is niet beschikbaar met timers geprogrammeerd in VDR."
-
-msgid "Monitor this timer using the start and stop time."
-msgstr "Gebruik deze timer door gebruikt te maken van de start en stop tijd."
-
-msgid "Do not monitor this timer."
-msgstr "Houd deze timer niet in de gaten."
-
-msgid "The channel to record."
-msgstr "Het op te nemen kanaal."
-
-msgid ""
-"The day when the timer should get active. You can enter the day in two "
-"formats:<ul><li>Two digits (DD). This will use the current month and year.</"
-"li><li>ISO norm (YYYY-MM-DD). Program your timers as far in the future as "
-"you like.</li></ul>In case you want to program a repeating timer you can use "
-"the seven checkboxes below the text field. Check the box for each day you "
-"want the timer to get active."
-msgstr ""
-"De dag dat de timer aktief word. U kunt de dag op twee manieren invoeren. "
-"<ul><li>Met twee cijfers (DD). Deze zal gebruik maken van de huidige maand "
-"en jaar .</li><li>ISO norm (YYYY-MM-DD). Programmeer de timer zo ver in de "
-"toekomst als u wilt. </li></ul>In het geval u een herhalende timer wilt "
-"programmeren kunt u gebruik maken van de zeven aanvink vakjes onder het "
-"tekstveld. Vink het vakje aan voor iedere dag dat u de timer aktief wilt "
-"hebben."
-
-msgid ""
-"This is the time when the timer should start recording. The first text field "
-"is for \"hour\", the second for \"minute\"."
-msgstr ""
-"Dit is de tijd dat de timer moet beginnen met opnemen. Het eerste veld is "
-"voor \"uur\", de tweede voor de \"minuten\"."
-
-msgid ""
-"This is the time when the timer should stop recording. The first text field "
-"is for \"hour\", the second for \"minute\"."
-msgstr ""
-"Dit is de tijd dat de timer moet stoppen met opnemen. Het eerste veld is "
-"voor \"uur\", de tweede voor de \"minuten\"."
-
-msgid ""
-"The <strong>file name</strong> this timer will give to a recording. If the "
-"name shall contain subdirectories, these have to be delimited by '~' (since "
-"the '/' character may be part of a regular programme name).<br /><br />The "
-"special keywords <strong>TITLE</strong> and <strong>EPISODE</strong>, if "
-"present, will be replaced by the title and episode information from the EPG "
-"data at the time of recording (if that data is available). If at the time of "
-"recording either of these cannot be determined, <strong>TITLE</strong> will "
-"default to the channel name, and <strong>EPISODE</strong> will default to a "
-"blank."
-msgstr ""
-"De <strong>bestandsnaam</strong> die de timer aan de opname zal geven. Als "
-"de naam sub mappen zal bevatten dan zullen deze gescheiden worden door "
-"'~'(aangezien het '/' karakter een leesteken kan zijn in een programma naam)."
-"<br /><br /> Als de speciale sleutelwoorden<strong>TITEL</strong> en "
-"<strong>AFLEVERING</strong> aanwezig zijn zullen deze vervangen worden door "
-"de titel en aflevering informatie uit de EPG informatie op het tijdstip van "
-"opname (als de gegevens beschikbaar zijn). Als deze informatie niet "
-"beschikbaar is dan zal <strong>TITEL</strong> vervangen worden door  de naam "
-"van het kanaal en <strong>AFLEVERING</strong> zal leeg blijven."
-
-msgid ""
-"Arbitrary text that describes the recording made by this timer. If this "
-"field is not empty, its contents will be written into the <span class="
-"\"ref_file\">summary.vdr</span> or <span class=\"ref_file\">info.vdr</span> "
-"file of the recording."
-msgstr ""
-"Aanvullende informatie die een beschrijving geeft van de opname gemaakt door "
-"deze timer. Als dit veld niet leeg is dan zal de inhoud geschreven worden "
-"naar <span class=\"ref_file\">summary.vdr</span> of <span class=\"ref_file"
-"\">info.vdr</span> bestand behorende bij deze opname."
-
-msgid "New AutoTimer"
-msgstr "Nieuwe AutoTimer"
-
-msgid "Force Update"
-msgstr "Verversen forceren"
-
-msgid "Delete Selected AutoTimers"
-msgstr "Verwijder geselecteerde Auto Timers"
-
-msgid "No AutoTimers defined!"
-msgstr "Geen Auto timers ingesteld!"
+msgid "About"
+msgstr "Over"
 
 msgid "License"
-msgstr ""
+msgstr "Licentie"
 
 msgid "Authors"
 msgstr "Auteurs"
@@ -1463,127 +399,848 @@ msgstr "VDR versie:"
 msgid "Supported features in VDR:"
 msgstr "Ondersteunde elementen in VDR"
 
-msgid ""
-"EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search."
-"html\" target=\"_blank\">EPGSearch Plugin</a>)"
-msgstr ""
-"Autotimer(Vanaf versie 3.5 is de autotimer vervallen en<br> word nu gebruik "
-"gemaak van de plugin \"EPG zoeken\" <a href=\"http://people.freenet.de/"
-"cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgid "EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgstr "Autotimer(Vanaf versie 3.5 is de autotimer vervallen en<br> word nu gebruik gemaakt van de plugin \"EPG zoeken\" <a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>)"
 
-msgid ""
-"LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-"
-"plugin\" target=\"_blank\">Streamdev Plugin</a>)"
-msgstr ""
-"LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-"
-"plugin\" target=\"_blank\">Streamdev Plugin</a>)"
+msgid "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>)"
+msgstr "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>)"
 
-msgid ""
-"Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/"
-"\" target=\"_blank\">Liemikuutio Patch</a>)"
-msgstr ""
-"Hernoem opnamers  (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/"
-"\" target=\"_blank\">Liemikuutio Patch</a>)"
+msgid "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
+msgstr "Hernoem opnames  (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
 
 msgid "Getting Help and Reporting Bugs"
 msgstr "Voor het verkrijgen van hulp en melden van bugs"
 
-msgid ""
-"If you need help please first try to use the online help you'll find on some "
-"pages. You can access it by clicking <img src=\"bilder/help.png\" alt=\"\" /"
-">."
-msgstr ""
-"Als u hulp nodig heeft probeer dan eerst de online hulp, u zult enige "
-"pagina's vinden. U kunt dit bezoeken door op <img src=\"bilder/help.png\" "
-"alt=\"\" /> te klikken."
+msgid "If you need help please first try to use the online help you'll find on some pages. You can access it by clicking <img src=\"bilder/help.png\" alt=\"\" />."
+msgstr "Als u hulp nodig heeft probeer dan eerst de online hulp, u zult enige pagina's vinden. U kunt dit bezoeken door op <img src=\"bilder/help.png\" alt=\"\" /> te klikken."
 
-msgid ""
-"If this doesn't provide the information you need you can try to get help at "
-"<a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> if you "
-"understand German language. Please use the announcement thread if possible, "
-"search for:"
-msgstr ""
-"Als dit niet de informatie verschaft die u zoekt dan kunt u het proberen op "
-"<a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> als u "
-"de duitse taal verstaat. Gebruik graag de bekendmakingen draad indien "
-"mogelijk, zoek naar:"
+msgid "If this doesn't provide the information you need you can try to get help at <a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> if you understand German language. Please use the announcement thread if possible, search for:"
+msgstr "Als dit niet de informatie verschaft die u zoekt dan kunt u het proberen op <a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> als u de Duitse taal verstaat. Gebruik graag de bekendmakingen draad indien mogelijk, zoek naar:"
 
-msgid ""
-"If you think you have found a bug please check that it's a new one and "
-"report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page."
-"php\" target=\"_blank\">VDRAdmin-AM BugTracking system</a>."
-msgstr ""
-"Als u denkt een bug gevonden te hebben controleer dan graag eerst of dit een "
-"nieuwe is en meld het in de  <a href=\"http://www.vdr-developer.org/mantisbt/"
-"main_page.php\" target=\"_blank\">VDRAdmin-AM BugTracking systeem</a>."
+msgid "If you think you have found a bug please check that it's a new one and report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page.php\" target=\"_blank\">VDRAdmin-AM BugTracking system</a>."
+msgstr "Als u denkt een bug gevonden te hebben controleer dan graag eerst of dit een nieuwe is en meld het in de  <a href=\"http://www.vdr-developer.org/mantisbt/main_page.php\" target=\"_blank\">VDRAdmin-AM BugTracking systeem</a>."
 
-msgid ""
-"<p>Here you will find a listing of recordings known to VDR. The headline "
-"will also show you VDR's total and free disk space.</p><p>The listing "
-"showing you some information on the recordings. You can change the list's "
-"sorting by clicking the columns heading. Above the list you'll see the "
-"navigation path. If you want to view the contents of previous folders you'll "
-"have to click on its name in that path.</p><p>Each row contains this "
-"information:<dl><dt>Date</dt><dd>The date when the recording has been done. "
-"In case of folders this will show the number of recordings the folder "
-"contains.</dd><dt>Time</dt><dd>The time when the recording has been done. In "
-"case of folders this will show the number of <strong>new</strong> recordings "
-"the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. "
-"Click it to show the recording's summary or descend into the folder.</"
-"dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename "
-"a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> "
-"SVDRPort command which is no core VDR feature but is available through a "
-"patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span "
-"class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete "
-"(<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a "
-"recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)"
-"</dt><dd>This column is only shown if you activated and configured <span "
-"class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu"
-"\">Configuration</span> menu. You can watch the recording at your "
-"workstation.</dd></dl></p><p>In addition to these functions you can delete a "
-"number of recordings at once by checking the box in the last but one column "
-"of those recordings and clicking <input type=\"submit\" class=\"submit\" "
-"value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the "
-"VDR's configuration files and have entries in VDR's <span class=\"ref_file"
-"\">reccmds.conf</span> you can run those commands for the selected recording "
-"by selecting the wanted command in the select box locate next to <span class="
-"\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class="
-"\"submit\" value=\"Run\"/> button.</p><p>Use <input type=\"submit\" class="
-"\"submit\" value=\"Refresh\"/> to force reloading of VDR's recordings "
-"listing.</p>"
-msgstr ""
-"<p>Hier zult u een lijst vinden van opnames die bekend zijn bij VDR: De "
-"hoofdlijn zal ook de totale en vrije ruimte tonen die VDR beschikbaar heeft ."
-"</p><p>De lijst zal u enige informatie tonen over de opnames. U kunt de "
-"lijst sorteren door op de kolom hoofden te klikken. Boven de lijst zult u "
-"het navigatie pad aantreffen. Als u de inhoud van vorige mappen wil bekijken "
-"dan zult u op de naam moeten klikken in het pad.</p><p> Elke rij bevat de "
-"volgende informatie:<dl><dt>Datum</dt><dd> De datum van opname. In het geval "
-"van mappen worden het aantal opnames die in de map staan worden getoond.</"
-"dd><dt>Tijd</dt><dd> Het tijdstip van opname. Als het een map is dan zal het "
-"aantal <strong>nieuwe</strong>opnames getoond worden in de map.</"
-"dd><dt>Naam</dt><dd>De naam van opname of map naam. Klik erop om de "
-"beschrijving van de opname te tonen of de inhoud van de map te bekijken. </"
-"dd><dt>Hernoemen (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd> "
-"Hernoem een opname .<br /><h4>Let op:</h4>Dit werkt alleen als VDR de "
-"<u>RENR</u> SVDRPoort commando bevat wat geen kern mogelijkheid is van VDR "
-"maar beschikbaar is via een patch . <span class=\"ref_file\">vdr-"
-"aio21_svdrprename.patch</span> of <span class=\"ref_file\">enAIO-v2.2+</"
-"span> voorzien in dit commando.</dd><dt> Verwijder (<img src=\"bilder/delete."
-"png\" alt=\"verwijder\" />)</dt><dd> Verwijder een opname </dd><dt>Stream "
-"(<img src=\"bilder/stream.jpg\" alt=\"stream\" />)</dt><dd> Deze kolom word "
-"alleen getoond als deze is geaktiveerd en geconfigureerd <span class="
-"\"ref_label\">Opnames Streaming</span></span> in de <span class=\"ref_menu"
-"\">Configuratie</span> menu. U kunt de opname bekijken op uw werkstation.</"
-"dd></dl></p><p> Aanvullend bij deze functies kunt u een aantal opnames "
-"verwijderen door te klikken in het aanvink vak van de opnames en te klikken "
-"op <input type=\"submit\" class=\"submit\" value=\"Verwijder geselecteerde "
-"opnames\"/>.</p><p>Als u het pad van de VDR configuratie bestanden heeft "
-"ingesteld en ingangen heeft staan in  <span class=\"ref_file\">reccmds.conf</"
-"span> kunt u deze commando's uitvoeren voor de geselecteerde opnames door "
-"het gewenste commando aant te klikken in het aanvinkvak naast <span class="
-"\"ref_label\">Commando's:</span> en te klikken op <input type=\"submit\" "
-"class=\"submit\" value=\"Run\"/> knop.</p>"
+msgid "<p>Here you can edit an automatic timer's (AutoTimer) settings.</p><p>AutoTimer is a key feature of VDRAdmin-AM. An AutoTimer consists of one or more search terms and some other settings, that are looked for regularly in the Electronic Program Guide (EPG). On match AutoTimer adds a timer in VDR automatically for that broadcast. That's very comfortable for irregularly broadcasted series or movies you don't want to miss.</p>"
+msgstr "<p>Hier kunt u de instellingen van de automatische timers (AutoTimer) bewerken.</p><p>De auto timer is een sleutel eigenschap van VDRAdmin-AM. Een auto timer bevat een of meer zoek termen en andere instellingen waarnaar regelmatig gezocht word in de Elektronische Programma Gids (EPG). Bij een overeenkomst word een timer toegevoegd.  Dit is zeer gemakkelijk voor onregelmatig uitgezonden series of voor film die u niet wilt missen.</p> "
+
+msgid "Activate or deactivate this AutoTimer. Deactivated AutoTimers are still stored in the AutoTimer list so that they can be activated again, but they do not record anything meanwhile. Above that you can set this to \"oneshot\" so this AutoTimer only programs the (one!) next matching broadcast."
+msgstr "Activeer of deactiveer deze auto timer. Als ze zijn gedeactiveerd worden ze nog steeds bewaard in de auto timer lijst zodat ze weer opnieuw geactiveerd kunnen worden, maar ondertussen nemen ze niets op. Bovendien kunt u dit instellen op \"eenmalig\" zodat deze auto timer alleen de eerst volgende overeenkomstige programma zal opnemen."
+
+msgid "Choosing the right search items decides whether only the wanted broadcasts or broadcasts having similar names or even nothing gets recorded.<br />Case doesn't matter, \"X-Files\" matches anything \"x-files\" will match. You can set multiple search items by separating them with spaces. Only broadcasts will match if they contain <strong>all</strong> items.<br />You'd better only use letters and numbers for search items, as the EPG often miss colons, brackets and other characters.<br />Experts can also use regular expressions, but you have to get needed information from the VDRAdmin-AM sources (undocumented feature).<br /><br />You can exclude broadcasts so that they don't get recorded even if they would match an AutoTimer. Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, one event a line. This file must be located in your VDRAdmin-AM's configuration folder. If this string is found either in the EPG's <u>title</u> or in <u>title~subtitle</u>, this event will not be programmed by AutoTimer. So you can disable complete episodes (for example when using \"Enterprise\" as Blacklist-string) or only one episode (when using \"Enterprise~Azati Prime\" as Blacklist-string)."
+msgstr "Het kiezen van de juiste zoekpatronen maakt het verschil tussen het opnemen van gewenste uitzendingen, uitzendingen met gelijksoortige namen of dat er niets opgenomen word <br />hoofd of kleine letters maken niet uit, \"X-Files\" of \"x-files\" leidt tot hetzelfde resultaat. U kunt meerdere zoekpatronen gebruiken door ze te scheiden door spaties. Alleen programma's die <strong>alle</strong> zoektermen bevatten zullen leiden tot een opname .<br />U kunt beter alleen cijfers en letters gebruiken voor de zoekpatronen omdat het bij de EPG vaak de leestekens ontbreken.<br /> Gevorderden kunnen ook standaard uitdrukkingen gebruiken, maar dan moet u de benodigde informatie halen van de VDRAdmin-AM broncode (ongedocumenteerd aspect).<br /><br /> U kunt bepaalde programma's uitsluiten zodat deze niet worden opgenomen ondanks dat deze  overeenkomen met een auto timer. Hiervoor moet u <i>vdradmind.bl</i> bewerken en hier de titels in plaatsen, een gebeurtenis per regel. Dit bestand moet staan in de VDRAdmin-AM's configuratie map. Als de zoekterm word gevonden in de EPG <u>titel</u> of in <u>titel~subtitel</u>, dan zal dit programma niet worden opgenomen door de auto timer. Zodoende kunt u complete afleveringen uitsluiten (bijvoorbeeld \"Enterprise\" zwarte lijst zoekterm) of alleen een opname (door gebruikt te maken van \"Enterprise~Azati Prime\" als zwarte lijst zoekterm)."
+
+msgid "Here you can define the EPG sections where VDRAdmin-AM should look for the search pattern."
+msgstr "Hier kunt u aangeven de EPG delen aangeven waar VDRAdmin-AM moet zoeken naar zoekpatronen."
+
+msgid "Use these checkboxes to limit searching for matching broadcasts to a set of weekdays."
+msgstr "Gebruik deze hokjes om het zoeken te beperken op bepaalde dagen."
+
+msgid "The channel to look for matching broadcasts or \"all\" to search in all known or wanted channels. You can define the wanted channels for AutoTimer in \"Configuration\"."
+msgstr "Het kanaal waar naar gezocht moet worden voor overeenkomstige  programma's of \"alle\" om te zoeken in alle bekende of gewenste kanalen. U kunt de gewenste kanalen voor de auto timer aangeven in \"Configuratie\"."
+
+msgid "A broadcast must start after the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
+msgstr "Een programma moet starten na de hier ingegeven tijd om in aanmerking te komen voor opname. Het eerste veld is voor \"Uur\", de tweede voor  \"minuut\"."
+
+msgid "A broadcast must end before the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
+msgstr "Een programma moet stoppen na de hier ingegeven tijd om in aanmerking te komen voor opname. Het eerste veld is voor \"Uur\", de tweede voor  \"minuut\"."
+
+msgid "Set this option to \"yes\" if all timers programed by this AutoTimer should have individual start/stop margins and enter the values in the next two text boxes."
+msgstr "Stel deze optie in op \"ja\" als alle timers die ingesteld zijn met deze autotimer individuele start/stop marges moeten hebben  en vul de waarden in in de twee volgende vakken."
+
+msgid "The number of minutes VDRAdmin-AM subtracts from the broadcasts start time found in the EPG."
+msgstr "Het aantal minuten dat VDRAdmin-AM in mindering brengt van de uitzend start tijd die gevonden is in de EPG."
+
+msgid "The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in the EPG."
+msgstr "Het aantal minuten dat VDRAdmin-AM in toevoegd aan de stop tijd die gevonden is in de EPG."
+
+msgid "Check this box if you want VDRAdmin-AM to append the broadcast's EPG subtitle to the recording's file name."
+msgstr "Vink dit vakje aan als u VDRAdmin-AM de titel wilt laten toevoegen die gevonden is in de EPG informatie aan de opname's bestandsnaam."
+
+msgid "If you enable this VDRAdmin-AM will track timers it has already programmed automatically. This is useful if want to deactivate or delete timers that have been programmed automatically in the timers listing."
+msgstr "Als u dit activeerd dan zal VDRAdmin-AM de timers volgen die ze al automatisch  heeft geprogrammeerd. Dit handig als u timers wilt activeren of verwijderen die  automatisch zijn geprogrammeerd in de timer lijst."
+
+msgid "The directory this AutoTimer will place the recordings in. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br />VDRAdmin-AM will append the matching broadcast's title and subtitle (if the \"Episode\" checkbox is marked) to the directory given here.<br /><br />You can also use the following keywords that are replaced in the final file name by the values supplied by for example <a href=\"http://tvmovie2vdr.vdr-developer.org\">tvm2vdr</a>:<ul><li>%Title% - will become the title of the event.</li><li>%Subtitle% - will become the subtitle of the event.</li><li>%Director% - will become the director of the event.</li><li>%Date% - will become the date of the recording.</li><li>%Category% - will become the category of the event (Spielfilm/Serie/...).</li><li>%Genre% - will become the genre of the event (Drama/Krimi/..).</li><li>%Year% - will become the year of production.</li><li>%Country% - will become the country of production.</li><li>%Originaltitle% - will become the original title of the event.</li><li>%FSK% - will become the FSK from the event.</li><li>%Episode% - will become the episode's title of the event.</li><li>%Rating% - will become the rating of the event from the EPG provider.</li></ul><h4>Note:</h4>If you use the above keywords it's in your own responsibility to supply the <strong>complete file name</strong> for the recordings! VDRAdmin-AM will not append anything to the resulting string."
+msgstr "De map waar deze auto timer zijn opnames in zal plaatsen. Als de naam  submappen bevat dan zullen deze aangeven moeten worden door een '~' aangezien  het '/' karakter een deel kan uitmaken van een programma naam. .<br />VDRAdmin-AM zal de overeenkomstige programma naam en titel gebruiken (als de \"aflevering\" aanvinkvak is gemarkeerd) naar de hier aangegeven map.<br /><br /> U kunt ook de volgende sleutelwoorden gebruiken die worden vervangen voor de uiteindelijke bestandsnaam door waarden opgegeven door bijvoorbeeld <a href=\"http://tvmovie2vdr.vdr-developer.org\">tvm2vdr</a>:<ul><li>%Titel% - zal de naam worden van de gebeurtenis .</li><li>%Subtitel% zal de subtitel worden van de gebeurtenis .</li><li>%Datum% - zal de datum worden van de opname  .</li><li>%Categorie% zal de categorie worden van de gebeurtenis (speelfilm, serie,...) .</li><li>%Genre% -  zal het genre worden van de gebeurtenis (Drama/Krimi/..).</li><li>%Jaar% - zal het jaar worden van de productie .</li> <li>%Origineletitel% zal de originele titel worden van de gebeurtenis </li><li>%FSK% - zal de FSK worden van de gebeurtenis .</li><li>%Aflevering% - zal de afleverings titel worden van de gebeurtenis .</li><li>%Waardering% - zal de waardering worden van de gebeurtenis van de EPG informatie .</li></ul><h4>Let op:</h4>Als u bovenstaande sleutelwoorden gebruikt dan is het uw eigen verantwoording om een <strong>volledige bestandsnaam</strong> te geven aan de opnames! VDRAdmin-AM zal niets toevoegen aan de resulterende reeks."
+
+msgid "Timer"
+msgstr "Timer"
+
+msgid "<p>Here you will find a listing of timers known to VDR.</p><p>On top you will find a chart showing a day's timers graphically. This provides an quick overview on what's going on at the specified day and helps you in finding conflicting timers. Moving the mouse cursor above any timer box will display a tooltip containing the timer's title, priority, lifetime and duration.</p><p>Below the chart you'll find the timers list showing you some information on the timers. You can change the list's sorting by clicking the columns heading.</p><p>For each timer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\", \"No\", \"VPS\" or \"Auto\" in the \"Active\" column.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the timer's title.</dd><dt>View its EPG entry</dt><dd>Timers that have set <span class=\"ref_label\">AutoTimer Checking</span> to \"Transmission Identification\" will show you the corresponding EPG entry if you click on the timer's title.</dd><dt>Edit the timer</dt><dd>You can edit a timer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To delete a timer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each timer's state is indicated by differently coloured boxes (in the chart view) or images (in the list view):<br /><span class=\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> Timer is OK and will record.<br /><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timer conflicts with other timers. That's not critical, as long as you have enough DVB cards for the parallel recordings.<br /><span class=\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align=\"middle\" /> Timer is critical and will most likely <strong>not</strong> record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is not active.</p><p>In addition to these functions you can add a new timer by clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at the top and you can delete a number of timers at once by checking the box in the last column of those timers and clicking <input type=\"submit\"  class=\"submit\" value=\"Delete Selected Timers\"/>.</p><p>You can <input type=\"submit\" class=\"submit\" value=\"activate\"/> and <input type=\"submit\" class=\"submit\" value=\"inactivate\"/> selected timers.</p>"
+msgstr "<p>Hier vind u een lijst van timer die bekend zijn bij VDR.</p><p> Boven in zult u een lijst vinden die de timers van een dag grafisch weergeven. Dit voorziet in een snel overzicht van wat er gaande is op een bepaalde dag en helpt in het vinden van overlappende timers. Door de muis cursor boven iedere timerbox te plaatsen zal er een tooltip weergegeven worden die de timers titel, prioriteit, levensduur en lengte van opname zal tonen</p><p>Onder de lijst kunt u de timer lijst vinden die u enige informatie toont van de timers. U kunt lijst opsomming veranderen door  op het kopje van de kolom te klikken.</p><p>Voor iedere timer heeft u de volgende opties: <dl><dt>De activiteit instellen</dt><dd>door te klikken op \"Ja\", \"Nee\", \"VPS\" of \"Auto\" in de \"Aktief\" kolom.</dd><dt>Om snel de prioriteit en levensduur te tonen</dt><dd> Door de muis cursor over de timers titel te bewegen</dd><dt>kunt u de EPG informatie tonen .</dt><dd>Timers die zijn ingesteld op <span class=\"ref_label\">AutoTimer Controle</span> tot \"Transmissie Identificatie\" zal de overeenkomstige EPG informatie tonen als u klikt op de timer titel.</dd><dt>Bewerken van een timer</dt><dd>U kunt een timer bewerken door te klikken op<img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Verwijder de timer</dt><dd> Om een timer te verwijderen klik op <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Iedere timers activiteit wordt getoond door verschillend gekleurde vakjes (in de overzichtslijst) of beelden (in de lijst overzicht):<br /><span class=\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> Timer is OK en zal worden opgenomen.<br /><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timers die elkaar overlappen. dit is geen probleem zolang er voldoende DVB kaarten aanwezig zijn om gelijktijdig te kunne opnemen.<br /><span class=\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align=\"middle\" /> De timer overlapt en zal hoogstwaarschijnlijk <strong>niet</strong> worden opgenomen.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is niet aktief.</p><p>Naast deze functies kunt u een nieuwe timer toevoegen door op boven in<input type=\"submit\" class=\"submit\" value=\"New Timer\"/> te klikken en u kunt een aantal timers verwijderen door eenmaal op het selectie vakje in de laatste kolom te klikken en dan op <input type=\"submit\"  class=\"submit\" value=\"Verwijder geselecteerde timers\"/>.</p> te klikken."
+
+msgid "Playing Today"
+msgstr "Programma vandaag "
+
+msgid "starting at"
+msgstr "start om"
+
+msgid "Add New Blacklist"
+msgstr "Zwarte lijsten toevoegen"
+
+msgid "Edit Blacklist"
+msgstr "Bewerk zwarte lijst"
+
+msgid "Add New Search"
+msgstr "Voeg nieuw zoekpatroon toe"
+
+msgid "Edit Search"
+msgstr "Bewerk zoeken"
+
+msgid "Small search pattern.\\nDo you really want to use it?"
+msgstr "Klein zoek patroon.\\nWilt u dit echt gebruiken?"
+
+msgid "You didn't select at least one of\\ntitle, subtitle or description.\\nDo you really want to use this search?"
+msgstr "U moet tenminste één \\ntitel, ondertitel of omschrijving selecteren. \\nWilt u deze zoek opdracht daadwerkelijk gebruiken?"
+
+msgid "Hide results"
+msgstr "Verberg resultaten"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Search Term:"
+msgstr "Zoeken term: "
+
+msgid "Search Mode:"
+msgstr "Zoeken modus: "
+
+msgid "phrase"
+msgstr "Uitdrukking"
+
+msgid "all words"
+msgstr "alle woorden"
+
+msgid "at least one word"
+msgstr "tenminste één woord"
+
+msgid "match exactly"
+msgstr "exacte overeenkomst"
+
+msgid "regular expression"
+msgstr "reguliere expressie"
+
+msgid "fuzzy"
+msgstr "wazig"
+
+msgid "Tolerance for \"fuzzy\":"
+msgstr "Tolerantie voor \"wazig\":"
+
+msgid "Match Case:"
+msgstr "Hoofdletter gevoelig:"
+
+msgid "Use extended EPG info:"
+msgstr "Gebruik uitgebreide EPG info:"
+
+msgid "Ignore missing categories?"
+msgstr "Negeer missende catogerien"
+
+msgid "Use Channel:"
+msgstr "Gebruik kanaal:"
+
+msgid "no"
+msgstr "nee"
+
+msgid "interval"
+msgstr "Interval"
+
+msgid "channel group"
+msgstr "Kanaal groep"
+
+msgid "only FTA"
+msgstr "Alleen FTA"
+
+msgid "Range:"
+msgstr "Bereik:"
+
+msgid "Channel Group:"
+msgstr "Kanaal groep:"
+
+msgid "Use Time:"
+msgstr "Gebruik tijd:"
+
+msgid "Start After:"
+msgstr "Start na:"
+
+msgid "Start Before:"
+msgstr "Start voor: "
+
+msgid "Use Duration:"
+msgstr "Gebruik tijdsduur:"
+
+msgid "Min. Duration:"
+msgstr "minimale tijdsduur:"
+
+msgid "hh:mm"
+msgstr "uu:mm"
+
+msgid "Max. Duration:"
+msgstr "Maximale tijdsduur:"
+
+msgid "Use Day of Week:"
+msgstr "Gebruik dag van de week:"
+
+msgid "Use Blacklists:"
+msgstr "Gebruik zwarte lijsten:"
+
+msgid "selection"
+msgstr "Selectie"
+
+msgid "Use in Favorites Menu:"
+msgstr "Gebruik in favorieten menu:"
+
+msgid "Use as Search Timer:"
+msgstr "Gebruik als zoek timer:"
+
+msgid "yes"
+msgstr "Ja"
+
+msgid "user-defined"
+msgstr "Gebruikers gedefinieerd"
+
+msgid "record"
+msgstr "opnemen"
+
+msgid "announce only"
+msgstr "alleen bekendmaken"
+
+msgid "switch only"
+msgstr "alleen wisselen"
+
+msgid "First day:"
+msgstr "Eerste dag:"
+
+msgid "Last day:"
+msgstr "Laatste dag:"
+
+msgid "Auto delete:"
+msgstr "Automatisch verwijderen:"
+
+msgid "count recordings"
+msgstr "opnames tellen"
+
+msgid "count days"
+msgstr "dagen tellen"
+
+msgid "After ... recordings:"
+msgstr "Na...opnames:"
+
+msgid "After ... days after first recording:"
+msgstr "Na...dagen na eerste opname:"
+
+msgid "Settings for action \"record\""
+msgstr "Instellingen voor aktie \"opname\""
+
+msgid "Series Recording:"
+msgstr "Opname series:"
+
+msgid "Delete Recordings After ... Days:"
+msgstr "Opnames verwijderen na ... dagen:"
+
+msgid "Keep ... Recordings:"
+msgstr "Opnames bewaren:"
+
+msgid "Pause, when ... recordings exist:"
+msgstr "Pauzeren, als ... opname bestaat:"
+
+msgid "Avoid Repeats:"
+msgstr "Voorkom herhalingen:"
+
+msgid "Allowed Repeats:"
+msgstr "Toegestane herhalingen:"
+
+msgid "Only Repeats Within ... Days:"
+msgstr "Alleen herhalingen binnen .. Dagen:"
+
+msgid "Compare:"
+msgstr "Vergelijken:"
+
+msgid "VPS:"
+msgstr "VPS:"
+
+msgid "Settings for action \"switch only\""
+msgstr "Instellingen voor aktie \"wissel alleen\""
+
+msgid "Switch ... Minutes Before Start:"
+msgstr "Wissel ... minuten voor start:"
+
+msgid "Save as template"
+msgstr "Opslaan als sjabloon"
+
+msgid "Create New Timer"
+msgstr "Nieuwe timer instellen"
+
+msgid "Buffer:"
+msgstr "Buffer:"
+
+msgid "Use VPS:"
+msgstr "Gebruik VPS"
+
+msgid "readonly"
+msgstr "Alleen lezen"
+
+msgid "Timer has been set by AutoTimer pattern:"
+msgstr "De timer is ingesteld door de auto timer zoek opdracht:"
+
+msgid "No Help Available"
+msgstr "Geen help beschikbaar"
+
+msgid "<p>No help available yet. For adding or changing text please contact <a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>.</p>"
+msgstr "<p>Nog geen hulp beschikbaar: Voor toevoegen of veranderen van tekst graag contact opnemen met<a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>.</p>"
+
+msgid "Error!"
+msgstr "Fout!"
+
+msgid "TV"
+msgstr "TV"
+
+msgid "Interval:"
+msgstr "Interval:"
+
+msgid "sec."
+msgstr "sec."
+
+msgid "G"
+msgstr "G"
+
+msgid "Grab the picture!"
+msgstr "Snapshot maken!"
+
+msgid "Size:"
+msgstr "Grootte:"
+
+msgid "Open in separate window"
+msgstr "In apart venster openen"
+
+msgid "Playing Today?"
+msgstr "Speelt vandaag?"
+
+msgid "Timeline"
+msgstr "Tijdlijn"
+
+msgid "EPG Search"
+msgstr "Auto timer"
+
+msgid "Recordings"
+msgstr "Opnames"
+
+msgid "Remote Control"
+msgstr "Afstands bediening "
+
+msgid "Watch TV"
+msgstr "TV bekijken"
+
+msgid "Commands"
+msgstr "Commando's"
+
+msgid "Configuration"
+msgstr "Configuratie"
+
+msgid "Search"
+msgstr "Zoeken"
+
+msgid "<p>Here you can change general settings and base settings for timers, AutoTimers, channel selection and streaming parameters.</p>"
+msgstr "<p>Hier kunt u de algemene en basis instellingen veranderen voor de timers, auto timer, kanaal selectie en streaming parameters.</p>"
+
+msgid "General Settings"
+msgstr "Algemene instellingen"
+
+msgid "VDR"
+msgstr "VDR"
+
+msgid "Identification"
+msgstr "Identificatie"
+
+msgid "Streaming"
+msgstr "Streaming"
+
+msgid "Expert"
+msgstr "Expert"
+
+msgid "External Search"
+msgstr "Extern zoeken"
+
+msgid "Channel Selections"
+msgstr "Kanaal selecties"
+
+msgid "Skin:"
+msgstr "Skin:"
+
+msgid "The skin you want to use."
+msgstr "De skin die u wilt gebruiken."
+
+msgid "Login Page:"
+msgstr "Inlog pagina:"
+
+msgid "The page you want to see at first connect to VDRAdmin-AM."
+msgstr "De pagina die u als eerste wilt zien als VDRAdmin-AM start."
+
+msgid "Number of channels to use:"
+msgstr "Aantal te tonen kanalen:"
+
+msgid "VDRAdmin-AM will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin-AM will read so that you can use this to reduce VDRAdmin-AM's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin-AM will use all available channels."
+msgstr "VDRAdmin-AM zal de kanalen laden van de VDR en alleen aanwezig in deze ieder veld waar een kanaal kan worden geselecteerd. Dit beperkt ook de EPG informatie die VDRAdmin-AM zal lezen zodat het geheugen gebruikt van VDRAdmin-AM beperkt zal worden en de prestaties zal verbeteren. <strong>0</strong>als deze functie is uitgeschakeld dan zal VDRAdmin-AM alle beschikbare kanalen gebruiken."
+
+msgid "Local net (no login required):"
+msgstr "Lokaal netwerk (geen login benodigd):"
+
+msgid "Here you can specify an IP address or range that can login without providing login information. For example: \"192.168.0.0/24\" will include any IP starting with \"192.168.0\", \"192.168.0.123/32\" will only match \"192.168.0.123\"."
+msgstr "Hier kunt u een IP adres opgeven of bereik die kan inloggen zonder login informatie. Bijvoorbeeld:\"192.168.0.0/24\" zal ieder IP adres toestaan dat begint met \"192.168.0\", \"192.168.0.123/32\" zal alleen \"192.168.0.123\" toestaan."
+
+msgid "Language:"
+msgstr "Taal:"
+
+msgid "Here you can set the localization VDRAdmin-AM should use."
+msgstr "Hier kunt u de taal instellen die VDRAdmin-AM moet gebruiken."
+
+msgid "Save settings on exit:"
+msgstr "Instellingen opslaan bij afsluiten:"
+
+msgid "With this option the settings will be saved if VDRAdmin-AM exits. This will also save settings not available on the \"Configuration\" menu like interval and size in TV, sorting in the lists and current view in \"What's on now\"."
+msgstr "Met deze optie worden de instellingen bewaard als VDRAdmin-AM afgesloten word. Dit bewaard ook de instellingen van het niet beschikbare op het \"Configuratie\" menu zoals interval en formaat in TV, het sorteren van de lijsten en huidig beeld in \"Wat is er nu op\"."
+
+msgid "Top"
+msgstr "Boven"
+
+msgid "Number of DVB cards:"
+msgstr "Aantal DVB kaarten:"
+
+msgid "The number of DVB cards VDR can access. Depending on this value VDRAdmin-AM will calculate critical timers in the <span class=\"ref_menu\">Timer</span> menu."
+msgstr "Het aantal kaarten dat VDR kan benaderen.  Afhankelijk van deze waarde zal VDRAdmin-AM de timers berekenen in het <span class=\"ref_menu\">Timer</span> menu."
+
+msgid "Path to recordings:"
+msgstr "Pad voor opnames:"
+
+msgid "The path to VDR's recordings. It's used so that VDRAdmin-AM can locate the recordings when using <span class=\"ref_label\">Recordings Streaming</span> and <span class=\"ref_file\">reccmds.conf</span> in the <span class=\"ref_menu\">Recordings</span> menu."
+msgstr "Pad naar de VDR opnames. Deze word zo gebruikt dat VDRAdmin-AM de opnames kan lokaliseren wanneer  <span class=\"ref_label\">Streaming opnames</span> gebruikt word en <span class=\"ref_file\">reccmds.conf</span> in de <span class=\"ref_menu\">opnames</span> menu."
+
+msgid "Path to configuration files:"
+msgstr "Pad naar configuratie bestanden:"
+
+msgid "The path where VDR's configuration files are located. If this directory contains the file <span class=\"ref_file\">reccmds.conf</span> its content is shown in a selectbox in the <span class=\"ref_menu\">Recordings</span> menu."
+msgstr "Het pad waar de VDR's  configuratie bestanden staan. Als deze map het bestand  <span class=\"ref_file\">reccmds.conf</span> bevat dan zal de inhoud getoond worden in een selectie vak in de <span class=\"ref_menu\">opnames</span> menu."
+
+msgid "Path to EPG images:"
+msgstr "Pad naar EPG beelden:"
+
+msgid "The path where the EPG images are stored."
+msgstr "Het pad waar de EPG beelden zijn opgeslagen."
+
+msgid "Username:"
+msgstr "Gebruikersnaam:"
+
+msgid "The username for the main user, i.e. the user having the most privileges."
+msgstr "De gebruikersnaam voor de hoofdgebruiker, met andere woorden, de gebruiker met de meeste rechten."
+
+msgid "Password:"
+msgstr "Wachtwoord:"
+
+msgid "The main user's password."
+msgstr "De hoofdgebruikers wachtwoord."
+
+msgid "Guest Account:"
+msgstr "Gast Account:"
+
+msgid "If you want a user account having only limited privileges, this is for you. The guest user cannot modify anything, it's only allowed to view the EPG, timers, AutoTimers and recordings listings."
+msgstr "Als u een gebruikers account wilt hebben met alleen beperkte rechten, dat is dit iets voor u. De gast gebruiker kan niets veranderen, deze heeft alleen toestemming om de EPG timers, autotimer en opnames te bekijken. "
+
+msgid "Guest Username:"
+msgstr "Gebruikersnaam gast:"
+
+msgid "The username for the guest user."
+msgstr "De gebruikersnaam van de gast gebruiker."
+
+msgid "Guest Password:"
+msgstr "Wachtwoord gast"
+
+msgid "The guest user's password."
+msgstr "Het wachtwoord van de gast gebruiker."
+
+msgid "Hours:"
+msgstr "Uur:"
+
+msgid "The number of hours to show in the timeline."
+msgstr "Het aantal uren die getoond worden in de tijdlijn. "
+
+msgid "Times:"
+msgstr "Tijden:"
+
+msgid "A comma separated list of times in <strong>hh:mm</strong> format that appear in the selectbox placed at the top."
+msgstr "Een komma gescheiden lijst van tijden in <strong>uu:mm</strong> formaat die verschijnt in het selectie vak die zich boven bevind."
+
+msgid "Tooltips:"
+msgstr "Handigheden:"
+
+msgid "Here you can (de-)activate the tooltips."
+msgstr "Hier kunt u de handigheden (de)activeren."
+
+msgid "Active:"
+msgstr "Aktief:"
+
+msgid "Activate or deactivate the AutoTimer function."
+msgstr "Activeer of deactiveer de autotimer functie."
+
+msgid "Send email after programming timer:"
+msgstr "Stuur email na het programmeren van de timer:"
+
+msgid "VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a timer has been programmed if you enable this feature."
+msgstr "VDRAdmin-AM zal een email sturen als een gebeurtenis overeenkomt met een autotimer en een timer is geprogrammeerd als u dit activeerd in de toekomst."
+
+msgid "Send email as:"
+msgstr "Stuur email als:"
+
+msgid "Here you set the sending email address of the generated email."
+msgstr "Hier kunt u de afzender instellen van de aangemaakte email."
+
+msgid "Send email to:"
+msgstr "Stuur email naar:"
+
+msgid "The email address the email is sent to."
+msgstr "Het email adres, de email is gestuurd naar:"
+
+msgid "Mail server:"
+msgstr "Mail server:"
+
+msgid "The outgoing mail server."
+msgstr "De uitgaande mail server."
+
+msgid "SMTPAuth user:"
+msgstr "SMTPAuth gebruiker:"
+
+msgid "If you need to authenticate yourself at the outgoing mail server, you have to supply the username and the password below. Leaving this field empty will disable SMTPAuth."
+msgstr "Als u zich moet identificeren voor SMTPAuth de uitgaande mail server dan moet u uw gebruikersnaam en wachtwoord hieronder invoeren. Als dit veld leeg is dan zal SMTPAuth niet aktief zijn."
+
+msgid "SMTPAuth password:"
+msgstr "SMTPAuth Wachtwoord:"
+
+msgid "The password for the SMTPAuth user."
+msgstr "Het wachtwoord voor de SMTPAuth gebruiker."
+
+msgid "Tooltips in timeline:"
+msgstr "Handigheden in de tijdlijn:"
+
+msgid "Here you can (de-)activate the tooltips in the timeline."
+msgstr "Hier kunt u  de handigheen (de)activeren in de tijdlijn."
+
+msgid "Tooltips in list:"
+msgstr "Handigheden in lijst:"
+
+msgid "Here you can (de-)activate the tooltips in the list."
+msgstr "Hier kunt u  de handigheen (de)activeren in de lijst."
+
+msgid "Add summary to new timers:"
+msgstr "Voeg beschrijving toe aan nieuwe timers:"
+
+msgid "If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here."
+msgstr "Als u niet wilt dat VDRAdmin-AM de programma informatie uit de EPG overneemt aan nieuwe timer dan kunt u dat hier uitzetten."
+
+msgid "Live Streaming:"
+msgstr "Live Streaming:"
+
+msgid "Enable or disable live streaming using the <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
+msgstr "Activeer of deactiveer live streaming door gebruik te maken van de <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. U moet ook de juiste <span class=\"ref_label\">HTTP Poort voor Streamdev</span>instellen hieronder."
+
+msgid "HTTP Port of Streamdev (also possible 3000/ts):"
+msgstr "HTTP Poort van Streamdev (ook mogelijk 3000/ts):"
+
+msgid "Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use."
+msgstr "Hier moet u het poort nummer instellen waar uw VDR's streamdev server naar luistert voor verbindingen. Tevens is het mogelijk de stream type in te stellen die u wilt gebruiken."
+
+msgid "Recordings Streaming:"
+msgstr "Streaming opnames:"
+
+msgid "Enable or disable streaming of recordings.<br />Well actually this is no real \"streaming\", but you have to setup your workstation so that it can access VDR's recordings. You can use for example Samba or NFS for this. VDRAdmin-AM simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation's display."
+msgstr "Het aan of uitzetten van streaming van opnames<br />Het is eigenlijk wel geen echte \"streaming\", maar u moet u werkstation instellen zodat deze de VDR opnames kan benaderen. U kunt bijvoorbeeld Samba of NFS hiervoor gebruiken. VDRAdmin-AM maakt gewoon een afspeellijst aan die alle delen van de opname bevat en stuurt dit naar uw browser. Als uw browser en media speler juist zijn ingesteld dan kunt u de opname op uw werkstations beeldscherm bekijken."
+
+msgid "Path to VDR Recordings on your workstation:"
+msgstr "Pad naar VDR opnames op uw werkstation:"
+
+msgid "This is the path where your workstation can access VDR's recordings. This depends on your VDR and workstation setup, for example \"\\\\vdr\\videos\" or \"V:\\\" (on Windows) or \"/mnt/videos\" (on Linux)."
+msgstr "Dit is het pad waar uw werkstation de VDR opnames kan benaderen. Dit hangt af de instellingen van de VDR en werkstation. bijvoorbeeld \"\\\\vdr\\videos\" of \"V:\\\" (op Windows) of \"/mnt/videos\" (op Linux)."
+
+msgid "MIME type for live streaming:"
+msgstr "Mime type voor live streaming:"
+
+msgid "The MIME type to send when using live streaming. Defaults to \"video/x-mpegurl\"."
+msgstr "Het MIME type te gebruiken voor live streaming. standaard is \"video/x-mpegurl\"."
+
+msgid "Suffix for live streaming:"
+msgstr "Extensie voor Live Streaming:"
+
+msgid "The suffix to use for live streaming. Defaults to \"m3u\"."
+msgstr "De extensie voor live streaming. Standaard is  \"m3u\"."
+
+msgid "MIME type for recordings streaming:"
+msgstr "MIME type voor opgenomen Streaming:"
+
+msgid "The MIME type to send when using recordings streaming. Defaults to \"video/x-mpegurl\"."
+msgstr "Het MIME type te gebruiken voor opgenomen streaming. standaard is \"video/x-mpegurl\"."
+
+msgid "Suffix for recordings streaming:"
+msgstr "Extensie voor opgenomen Streaming:"
+
+msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
+msgstr "De extensie voor opgenomen streaming. Standaard is  \"m3u\"."
+
+msgid "<p>Here you can define two external searches that you can access in the EPG views. You simply have to find the required URL and where the search pattern has to be located. %TITLE% will be substituted by the broadcast's EPG title.</p>"
+msgstr "<p>Hier kunt u twee externe zoekopdrachten definiëren die u kunt benaderen in de EPG. U moet alleen de benodigde URL zien te vinden en waar het zoekpatroon geplaatst moet worden . %TITLE% zal worden vervangen door uitzendings EPG titel.</"
+
+msgid "Some examples:"
+msgstr "Enkele voorbeelden:"
+
+msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
+msgstr "<p>Deze afdeling is voor deskundigen<strong>alleen</strong>, met andere woorden, als goed weet waar u mee bezig bent!</p>"
+
+msgid "Update EPG data in background:"
+msgstr "Bijwerken van EPG gegevens in de achtergrond:"
+
+msgid "If set to \"yes\" VDRAdmin-AM will periodically refresh its local EPG cache. Else the EPG will be refreshed if the user accesses any EPG view at the web interface and the timeout set at \"Update EPG every\" has been reached."
+msgstr "Als het ingesteld staat op \"ja\" dan zal VDRAdmin-AM met intervallen zijn lokale EPG cache verversen. Anders word de EPG pas ververst als de gebruiker met een EPG bezoek op de web interface benadert  en de timeout instelling \"Ververs EPG iedere\" bereikt is"
+
+msgid "Update EPG every:"
+msgstr "Werk EPG bij iedere:"
+
+msgid "The interval, the EPG data is refreshed from VDR and AutoTimer updates are performed (if AutoTimer feature is used)."
+msgstr "De interval dat EPG data wordt ververst van VDR en auto timer updates worden uitgevoerd. (Als de auto timer functie word gebruikt)."
+
+msgid "<p>If you want to limit the number of channels used in some parts of VDRAdmin-AM, this is for you!</p><p>Use the radio buttons to activate or deactivate the wanted channels in the named menu.</p><p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;&gt;&gt;\"/>. If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click <input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
+msgstr "<p>Als u het aantal kanalen wilt beperken die in sommige delen van VDRAdmin-AM gebruikt worden, dan is dit iets voor u!</p><p>Gebruik de selectie vakken om de gewenste kanalen de activeren of deactiveren in het genoemde menu.</p><p>Om kanalen toe te voegen in de lijst van gewenste kanalen dan moet u de gewenste kanalen selecteren in de linkerlijst van het selectie vak en klikken op <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;&gt;&gt;\"/>. Als u kanalen van deze lijst wilt verwijderen selecteer dan uit deze lijst de te verwijderen kanalen en klik op<input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
+
+msgid "Show channels without EPG information:"
+msgstr "Toon kanalen zonder EPG informatie:"
+
+msgid "Usually channels that don't have EPG information are hidden in all EPG views. If you don't want them to be hidden you have to set this option to \"yes\"."
+msgstr "Normaal gesproken worden kanalen verborgen die geen EPG informatie hebben. Als u deze niet verborgen wilt hebben moet u deze optie op \"ja\" zetten."
+
+msgid "<p>Here you will find a listing of automatic timers (AutoTimer) known to VDRAdmin-AM.</p><p>The list shows some information on AutoTimers. You can change the list's sorting by clicking the columns heading.</p><p>For each AutoTimer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each AutoTimer's state is indicated by differently coloured images:<br /><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> AutoTimer is OK and will automatically program matching broadcasts.<br /><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> AutoTimer is not active.</p><p>In addition to these functions you can add a new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value=\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at once by checking the box in the last column of those timers and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/>.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and check for matching AutoTimers.</p>"
+msgstr "<p>Hier vind u de lijst van automatische timers (AutoTimer)  die bekend zijn bij VDRAdmin-AM.</p><p>De lijst toont enige informatie over auto timers. U kunt de lijst's sortering veranderen door op de kolom hoofden te klikken.</p><p> Voor iedere autotimer heeft u de volgende mogelijkheden:<dl><dt>De status instellen </dt><dd>door te klikken op  \"Ja\" of \"Nee\" in de \"Actief\"kolom om de activiteit te wisselen.</dd><dt>Het snel bekijken van de prioriteit en levensduur </dt><dd> door de muiscursor over de auto timers titel te bewegen.</dd><dt>Bewerk de autotimer </dt><dd>U kunt een auto timer bewerken door te klikken op<img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Verwijder de auto timer</dt><dd>Om een auto timer te verwijderen klik op <img src=\"bilder/delete.png\" alt=\"verwijderen\" />.</dd></dl></p><p>De status van iedere auto timer word aangeduid door verschillend gekleurde afbeeldingen<br /><img src=\"bilder/poempl_gruen.png\" alt=\"aan\" align=\"middle\" /> auto timer is OK en zal overeenkomstige programma's opnemen<br /><img src=\"bilder/poempl_grau.png\" alt=\"uit\" align=\"middle\" />  auto timer is niet aktief.</p><p>Aanvullend bij deze functies kunt u een nieuwe auto timer toevoegen door te klikken op <input type=\"submit\" class=\"submit\" value=\"New AutoTimer\"/>bovenin kunt u een aantal auto timers verwijderen door ze aan te vinken in de laatste kolom van deze timers en klik dan op <input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/>.</p><p>Klik <input type=\"submit\" class=\"submit\" value=\"Force Update\"/> om VDRAdmin-AM te dwingen om her te verbinden met VDR, de laatste EPG data op te halen en te controleren voor overeenkomstige timers.</p>"
+
+msgid "Your Browser does not support frames!"
+msgstr "UW browser ondersteund geen frames!"
+
+msgid "Rename Recording"
+msgstr "Hernoemen opname"
+
+msgid "Original Name of Recording:"
+msgstr "Originele naam van de opname: "
+
+msgid "New Name of Recording:"
+msgstr "Nieuwe naam van de opname:"
+
+msgid "Subtitle:"
+msgstr "Ondertitel:"
+
+msgid "Rename"
+msgstr "Hernoemen"
+
+msgid "<p>Here you will find a listing of recordings known to VDR. The headline will also show you VDR's total and free disk space.</p><p>The listing showing you some information on the recordings. You can change the list's sorting by clicking the columns heading. Above the list you'll see the navigation path. If you want to view the contents of previous folders you'll have to click on its name in that path.</p><p>Each row contains this information:<dl><dt>Date</dt><dd>The date when the recording has been done. In case of folders this will show the number of recordings the folder contains.</dd><dt>Time</dt><dd>The time when the recording has been done. In case of folders this will show the number of <strong>new</strong> recordings the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. Click it to show the recording's summary or descend into the folder.</dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> SVDRPort command which is no core VDR feature but is available through a patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete (<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)</dt><dd>This column is only shown if you activated and configured <span class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu\">Configuration</span> menu. You can watch the recording at your workstation.</dd></dl></p><p>In addition to these functions you can delete a number of recordings at once by checking the box in the last but one column of those recordings and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the VDR's configuration files and have entries in VDR's <span class=\"ref_file\">reccmds.conf</span> you can run those commands for the selected recording by selecting the wanted command in the select box locate next to <span class=\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class=\"submit\" value=\"Run\"/> button.</p><p>Use <input type=\"submit\" class=\"submit\" value=\"Refresh\"/> to force reloading of VDR's recordings listing.</p>"
+msgstr "<p>Hier zult u een lijst vinden van opnames die bekend zijn bij VDR: De hoofdlijn zal ook de totale en vrije ruimte tonen die VDR beschikbaar heeft .</p><p>De lijst zal u enige informatie tonen over de opnames. U kunt de lijst sorteren door op de kolom hoofden te klikken. Boven de lijst zult u het navigatie pad aantreffen. Als u de inhoud van vorige mappen wil bekijken dan zult u op de naam moeten klikken in het pad.</p><p> Elke rij bevat de volgende informatie:<dl><dt>Datum</dt><dd> De datum van opname. In het geval van mappen worden het aantal opnames die in de map staan worden getoond.</dd><dt>Tijd</dt><dd> Het tijdstip van opname. Als het een map is dan zal het aantal <strong>nieuwe</strong>opnames getoond worden in de map.</dd><dt>Naam</dt><dd>De naam van opname of map naam. Klik erop om de beschrijving van de opname te tonen of de inhoud van de map te bekijken. </dd><dt>Hernoemen (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd> Hernoem een opname .<br /><h4>Let op:</h4>Dit werkt alleen als VDR de <u>RENR</u> SVDRPoort commando bevat wat geen kern mogelijkheid is van VDR maar beschikbaar is via een patch . <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> of <span class=\"ref_file\">enAIO-v2.2+</span> voorzien in dit commando.</dd><dt> Verwijder (<img src=\"bilder/delete.png\" alt=\"verwijder\" />)</dt><dd> Verwijder een opname </dd><dt>Stream (<img src=\"bilder/stream.jpg\" alt=\"stream\" />)</dt><dd> Deze kolom word alleen getoond als deze is geactiveerd en geconfigureerd <span class=\"ref_label\">Opnames Streaming</span></span> in de <span class=\"ref_menu\">Configuratie</span> menu. U kunt de opname bekijken op uw werkstation.</dd></dl></p><p> Aanvullend bij deze functies kunt u een aantal opnames verwijderen door te klikken in het aanvink vak van de opnames en te klikken op <input type=\"submit\" class=\"submit\" value=\"Verwijder geselecteerde opnames\"/>.</p><p>Als u het pad van de VDR configuratie bestanden heeft ingesteld en ingangen heeft staan in  <span class=\"ref_file\">reccmds.conf</span> kunt u deze commando's uitvoeren voor de geselecteerde opnames door het gewenste commando aan te klikken in het aanvinkvak naast <span class=\"ref_label\">Commando's:</span> en te klikken op <input type=\"submit\" class=\"submit\" value=\"Run\"/> knop.</p>"
+
+msgid "<p>Here you can edit the descriptive fields of an existing EPG entry.</p>"
+msgstr "<p>Hier kunt u de omschrijving van een bestaande EPG bewerken.</p>"
+
+msgid "Channel (readonly)"
+msgstr "Kanaal (alleen lezen)"
+
+msgid "This is the channel of the EPG entry. It cannot be changed."
+msgstr "Dit is het kanaal van de EPG invoer. Dit kan niet veranderd worden."
+
+msgid "Time (readonly)"
+msgstr "Tijd (alleen lezen)"
+
+msgid "This is the start and end time of the entry. It cannot be changed."
+msgstr "Dit is de start en eindtijd van de invoer. Dit kan niet veranderd worden."
+
+msgid "Change this string to give this EPG Entry a new title. It must consist of only one line of text."
+msgstr "Verander deze reeks om deze EPG invoer een nieuwe titel te geven.Het mag alleen bestaan uit één regel tekst."
+
+msgid "Change this string to give this EPG Entry a new subtitle. It must consist of only one line of text."
+msgstr "Verander deze reeks om deze EPG invoer een nieuwe subtitel te geven.Het mag alleen bestaan uit één regel tekst."
+
+msgid "Change the text in this field to edit the description of this entry. The text can consist of one or more lines."
+msgstr "Verander de tekst in dit veld om de omschrijving te veranderen van deze invoer. De tekst mag bestaan uit één of meer regels,."
+
+msgid "VPS (readonly)"
+msgstr "VPS (alleen lezen)"
+
+msgid "If available this field shows the vps time of the EPG entry. It cannot be changed."
+msgstr "Als het beschikbaar is toont dit vel de vps tijd van de EPG invoer. Dit kan niet veranderd worden."
+
+msgid "Video tracks (readonly)"
+msgstr "Video tracks (alleen lezen)"
+
+msgid "If available this field shows the video track(s). It cannot be changed."
+msgstr "Indien beschikbaar toont dit veld de video spoor of sporen. Dit kan niet verandert worden."
+
+msgid "Audio tracks (readonly)"
+msgstr "Audio sporen (alleen lezen)"
+
+msgid "If available this field shows the audio track(s). It cannot be changed."
+msgstr "Indien beschikbaar toont dit veld de audio sporen. Dit kan niet veranderd worden."
+
+msgid "Duration:"
+msgstr "Duur:"
+
+msgid "min"
+msgstr "min"
+
+msgid "Transponder:"
+msgstr "Transponder:"
+
+msgid "CA-System:"
+msgstr "CA-Systeem:"
+
+msgid "New Timer"
+msgstr "Nieuwe timer"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Edit timer status?"
+msgstr "Timer status bewerken?"
+
+msgid "This timer is inactive!"
+msgstr "Deze timer is niet aktief!"
+
+msgid "This timer is impossible!"
+msgstr "Deze timer is niet mogelijk!"
+
+msgid "No more timers on other transponders possible!"
+msgstr "Geen andere timers op andere transponders mogelijk!"
+
+msgid "Timer OK."
+msgstr "Timer OK."
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "activate"
+msgstr "Activeren"
+
+msgid "inactivate"
+msgstr "niet aktief"
+
+msgid "selected timers"
+msgstr "Geselecteerde timers"
+
+msgid "Delete Selected Timers"
+msgstr "Verwijder geselecteerde timers"
+
+msgid "No timers defined!"
+msgstr "Geen timers opgegeven!"
+
+msgid "EPG Search Blacklists"
+msgstr "EPG zoeken zwarte lijsten"
+
+msgid "New Blacklist"
+msgstr "Nieuwe zwarte lijst"
+
+msgid "Search pattern"
+msgstr "Zoek patroon"
+
+msgid "From"
+msgstr "van"
+
+msgid "To"
+msgstr "Naar"
+
+msgid "Delete blacklist?"
+msgstr "Verwijder zwarte lijst?"
+
+msgid "Delete Selected Blacklists"
+msgstr "Verwijder geselecteerde zwarte lijst"
+
+msgid "Delete all selected blacklists?"
+msgstr "Verwijder alle geselecteerde zwarte lijsten?"
+
+msgid "EPG search"
+msgstr "Auto timer"
+
+msgid "Use template"
+msgstr "Gebruik sjabloon"
+
+msgid "New Search"
+msgstr "Nieuwe zoekopdracht"
+
+msgid "Action"
+msgstr "Aktie"
+
+msgid "Find"
+msgstr "Vinden"
+
+msgid "Show Favorites"
+msgstr "Toon favorieten"
+
+msgid "Delete Selected Searches"
+msgstr "Verwijder geselecteerde zoek opdrachten"
+
+msgid "Delete all selected searches?"
+msgstr "Verwijder alle geselecteerde zoek opdrachten?"
+
+msgid "Execute Selected Searches"
+msgstr "Uitvoeren geselecteerde zoek opdrachten"
+
+msgid "Duration"
+msgstr "Duur"
+
+msgid "Template:"
+msgstr "Sjabloon:"
+
+msgid "Also used for other EPG views!"
+msgstr "Word ook gebruikt voor andere EPG"
+
+msgid "Bandwidth of Streams:"
+msgstr "Bandbreedte van streams:"
+
+msgid "URL:"
+msgstr "URL:"
+
+msgid "Title:"
+msgstr "Titel:"
+
+msgid "User-defined search:"
+msgstr "Gebruikers definieert zoeken"
+
+msgid "In \"AutoTimer\"?"
+msgstr "In \"AutoTimer\"?"
+
+msgid "Apply"
+msgstr "Toepassen"
+
+msgid "close"
+msgstr "sluiten"
+
+msgid "view"
+msgstr "bekijken"
+
+msgid "search"
+msgstr "zoeken"
+
+msgid "edit"
+msgstr "Bewerken"
+
+msgid "Video tracks:"
+msgstr "Video tracks:"
+
+msgid "Audio tracks:"
+msgstr "Audio sporen:"
+
+msgid "now"
+msgstr "nu"
+
+msgid "to"
+msgstr "naar "
+
+msgid "at:"
+msgstr "om:"
+
+msgid "You need JavaScript to use the timeline!"
+msgstr "U heeft Javascript nodig om de tijdlijn te gebruiken! "
+
+msgid "Authorization Required"
+msgstr "Toestemming benodigd"
+
+msgid "This server could not verify that you are authorized to access the document requested. Either you supplied the wrong credentials (e.g. bad password), or your browser doesn't understand how to supply the credentials required."
+msgstr "De server kon niet controleren of u toestemming heeft om dit document te lezen. Waarschijnlijk heeft u een foutief wachtwoord gegeven of uw browser kan niet met wachtwoorden overweg."
 
 msgid "Total:"
 msgstr "Totaal:"
@@ -1623,373 +1280,6 @@ msgstr "Alle geselecteerde opnames verwijderen?"
 
 msgid "No recordings available"
 msgstr "Geen opnames beschikbaar"
-
-msgid "EPG search"
-msgstr "Auto timer"
-
-msgid "Use template"
-msgstr "Gebruik sjabloon"
-
-msgid "New Search"
-msgstr "Nieuwe zoekopdracht"
-
-msgid "Action"
-msgstr "Aktie"
-
-msgid "From"
-msgstr "van"
-
-msgid "To"
-msgstr "Naar"
-
-msgid "Search pattern"
-msgstr "Zoek patroon"
-
-msgid "Find"
-msgstr "Vinden"
-
-msgid "Show Favorites"
-msgstr "Toon favoriten"
-
-msgid "Delete Selected Searches"
-msgstr "Verwijder geselecteerde zoek opdrachten"
-
-msgid "Delete all selected searches?"
-msgstr "Verwijder alle geselecteerde zoek opdrachten?"
-
-msgid "Execute Selected Searches"
-msgstr "Uitvoeren geselecteerde zoek opdrachten"
-
-msgid "Duration"
-msgstr "Duur"
-
-msgid ""
-"<p>Here you can change general settings and base settings for timers, "
-"AutoTimers, channel selection and streaming parameters.</p>"
-msgstr ""
-"<p>Hier kunt u de algemene en basis instellingen veranderen voor de timers, "
-"auto timer, kanaal selectie en streaming parameters.</p>"
-
-msgid "The skin you want to use."
-msgstr "De skin die u wilt gebruiken."
-
-msgid "The page you want to see at first connect to VDRAdmin-AM."
-msgstr "De pagina die u als eerste wilt zien als VDRAdmin-AM start."
-
-msgid ""
-"VDRAdmin-AM will load the given number of channels from VDR and present only "
-"those in any fields where channels can be selected. This also limits the EPG "
-"information VDRAdmin-AM will read so that you can use this to reduce "
-"VDRAdmin-AM's memory consumption and increase its performance. <strong>0</"
-"strong> turns this feature off and VDRAdmin-AM will use all available "
-"channels."
-msgstr ""
-"VDRAdmin-AM zal de kanalen laden van de VDR en alleen aanwezig in deze ieder "
-"veld waar een kanaal kan worden geselecteerd. Dit beperkt ook de EPG "
-"informatie die VDRAdmin-AM zal lezen zodat het geheugen gebruikt van "
-"VDRAdmin-AM beperkt zal worden en de prestaties zal verbeteren. <strong>0</"
-"strong>als deze functie is uitgeschakeld dan zal VDRAdmin-AM alle "
-"beschikbare kanalen gebruiken."
-
-msgid ""
-"Here you can specify an IP address or range that can login without providing "
-"login information. For example: \"192.168.0.0/24\" will include any IP "
-"starting with \"192.168.0\", \"192.168.0.123/32\" will only match "
-"\"192.168.0.123\"."
-msgstr ""
-"Hier kunt u een IP adres opgeven of bereik die kan inloggen zonder login "
-"informatie. Bijvoorbeeld:\"192.168.0.0/24\" zal ieder IP adres toestaan dat "
-"begint met \"192.168.0\", \"192.168.0.123/32\" zal alleen \"192.168.0.123\" "
-"toestaan."
-
-msgid "Here you can set the localization VDRAdmin-AM should use."
-msgstr "Hier kunt u de taal instellen die VDRAdmin-AM moet gebruiken."
-
-msgid ""
-"With this option the settings will be saved if VDRAdmin-AM exits. This will "
-"also save settings not available on the \"Configuration\" menu like interval "
-"and size in TV, sorting in the lists and current view in \"What's on now\"."
-msgstr ""
-"Met deze optie worden de instellingen bewaard als VDRAdmin-AM afgesloten "
-"word. Dit bewaard ook de instellingen van het niet beschikbare op het "
-"\"Configuratie\" menu zoals interval en formaat in TV, het sorteren van de "
-"lijsten en huidig beeld in \"Wat is er nu op\"."
-
-msgid "Top"
-msgstr "Boven"
-
-msgid ""
-"The number of DVB cards VDR can access. Depending on this value VDRAdmin-AM "
-"will calculate critical timers in the <span class=\"ref_menu\">Timer</span> "
-"menu."
-msgstr ""
-"Het aantal kaarten dat VDR kan benaderen.  Afhankelijk van deze waarde zal "
-"VDRAdmin-AM de timers berekenen in het <span class=\"ref_menu\">Timer</span> "
-"menu."
-
-msgid ""
-"The path to VDR's recordings. It's used so that VDRAdmin-AM can locate the "
-"recordings when using <span class=\"ref_label\">Recordings Streaming</span> "
-"and <span class=\"ref_file\">reccmds.conf</span> in the <span class="
-"\"ref_menu\">Recordings</span> menu."
-msgstr ""
-"Pad naar de VDR opnames. Deze word zo gebruikt dat VDRAdmin-AM de opnames "
-"kan lokaliseren wanneer  <span class=\"ref_label\">Streaming opnames</span> "
-"gebruikt word en <span class=\"ref_file\">reccmds.conf</span> in de <span "
-"class=\"ref_menu\">opnames</span> menu."
-
-msgid ""
-"The path where VDR's configuration files are located. If this directory "
-"contains the file <span class=\"ref_file\">reccmds.conf</span> its content "
-"is shown in a selectbox in the <span class=\"ref_menu\">Recordings</span> "
-"menu."
-msgstr ""
-"Het pad waar de VDR's  configuratie bestanden staan. Als deze map het "
-"bestand  <span class=\"ref_file\">reccmds.conf</span> bevat dan zal de "
-"inhoud getoond worden in een selectie vak in de <span class=\"ref_menu"
-"\">opnames</span> menu."
-
-msgid "The path where the EPG images are stored."
-msgstr "Het pad waar de EPG beelden zijn opgeslagen."
-
-msgid ""
-"The username for the main user, i.e. the user having the most privileges."
-msgstr ""
-"De gebruikersnaam voor de hoofdgebruiker, met andere woorden, de gebruiker "
-"met de meeste rechten."
-
-msgid "The main user's password."
-msgstr "De hoofdgebruikers wachtwoord."
-
-msgid ""
-"If you want a user account having only limited privileges, this is for you. "
-"The guest user cannot modify anything, it's only allowed to view the EPG, "
-"timers, AutoTimers and recordings listings."
-msgstr ""
-"Als u een gebruikers account wilt hebben met alleen beperkte rechten, dat is "
-"dit iets voor u. De gast gebruiker kan niets veranderen, deze heeft alleen "
-"toestemming om de EPG timers, autotimer en opnames te bekijken. "
-
-msgid "The username for the guest user."
-msgstr "De gebruikersnaam van de gast gebruiker."
-
-msgid "The guest user's password."
-msgstr "Het wachtwoord van de gast gebruiker."
-
-msgid "The number of hours to show in the timeline."
-msgstr "Het aantal uren die getoond worden in de tijdlijn. "
-
-msgid ""
-"A comma separated list of times in <strong>hh:mm</strong> format that appear "
-"in the selectbox placed at the top."
-msgstr ""
-"Een komma gescheiden lijst van tijden in <strong>uu:mm</strong> formaat die "
-"verschijnt in het selectie vak die zich boven bevind."
-
-msgid "Here you can (de-)activate the tooltips."
-msgstr "Hier kunt u de handigheden (de)aktiveren."
-
-msgid "Activate or deactivate the AutoTimer function."
-msgstr "Aktiveer of deaktiveer de autotimer functie."
-
-msgid ""
-"VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a "
-"timer has been programmed if you enable this feature."
-msgstr ""
-"VDRAdmin-AM zal een email sturen als een gebeurtenis overeenkomt met een "
-"autotimer en een timer is geprogrammeerd als u dit aktiveerd in de toekomst."
-
-msgid "Here you set the sending email address of the generated email."
-msgstr "Hier kunt u de afzender instellen van de aangemaakte email."
-
-msgid "The email address the email is sent to."
-msgstr "Het email adres, de email is gestuurd naar:"
-
-msgid "The outgoing mail server."
-msgstr "De uitgaande mail server."
-
-msgid ""
-"If you need to authenticate yourself at the outgoing mail server, you have "
-"to supply the username and the password below. Leaving this field empty will "
-"disable SMTPAuth."
-msgstr ""
-"Als u zich moet identificeren voor SMTPAuth de uitgaande mail server dan "
-"moet u uw gebruikersnaam en wachtwoord hieronder invoeren. Als dit veld leeg "
-"is dan zal SMTPAuth niet aktief zijn."
-
-msgid "The password for the SMTPAuth user."
-msgstr "Het wachtwoord voor de SMTPAuth gebruiker."
-
-msgid "Here you can (de-)activate the tooltips in the timeline."
-msgstr "Hier kunt u  de handigheen (de)aktiveren in de tijdlijn."
-
-msgid "Here you can (de-)activate the tooltips in the list."
-msgstr "Hier kunt u  de handigheen (de)aktiveren in de lijst."
-
-msgid ""
-"If you don't want VDRAdmin-AM to add the summary taken from EPG to new "
-"timers you can switch it off here."
-msgstr ""
-"Als u niet wilt dat VDRAdmin-AM de programma informatie uit de EPG overneemt "
-"aan nieuwe timer dan kunt u dat hier uitzetten."
-
-msgid ""
-"Enable or disable live streaming using the <a href=\"http://www.magoa.net/"
-"linux/\">streamdev plugin</a>. You also have to set the correct <span class="
-"\"ref_label\">HTTP Port for Streamdev</span> below."
-msgstr ""
-"Aktiveer of deaktiveer live streaming door gebruik te maken van de <a href="
-"\"http://www.magoa.net/linux/\">streamdev plugin</a>. U moet ook de juiste "
-"<span class=\"ref_label\">HTTP Poort voor Streamdev</span>instellen "
-"hieronder."
-
-msgid ""
-"Here you have to set the port number your VDR's streamdev server listens for "
-"connections. Additionally you can also provide the stream type you like to "
-"use."
-msgstr ""
-"Hier moet u het poort nummer instellen waar uw VDR's streamdev server naar "
-"luistert voor verbindingen. Tevens is het mogelijk de stream type in te "
-"stellen die u wilt gebruiken."
-
-msgid ""
-"Enable or disable streaming of recordings.<br />Well actually this is no "
-"real \"streaming\", but you have to setup your workstation so that it can "
-"access VDR's recordings. You can use for example Samba or NFS for this. "
-"VDRAdmin-AM simply generates a playlist that contains all parts of the "
-"recording and sends this to your browser. If your browser and media player "
-"are configured correctly you will see the recording on your workstation's "
-"display."
-msgstr ""
-"Het aan of uitzetten van streaming van opnames<br />Het is eigenlijk wel "
-"geen echte \"streaming\", maar u moet u werkstation instellen zodat deze de "
-"VDR opnames kan benaderen. U kunt bijvoorbeeld Samba of NFS hiervoor "
-"gebruiken. VDRAdmin-AM maakt gewoon een afspeellijst aan die alle delen van "
-"de opname bevat en stuurt dit naar uw browser. Als uw browser en media "
-"speler juist zijn ingesteld dan kunt u de opname op uw werkstations "
-"beeldscherm bekijken."
-
-msgid ""
-"This is the path where your workstation can access VDR's recordings. This "
-"depends on your VDR and workstation setup, for example \"\\\\vdr\\videos\" "
-"or \"V:\\\" (on Windows) or \"/mnt/videos\" (on Linux)."
-msgstr ""
-"Dit is het pad waar uw werkstation de VDR opnames kan benaderen. Dit hangt "
-"af de instellingen van de VDR en werkstation. bijvoorbeeld \"\\\\vdr\\videos"
-"\" of \"V:\\\" (op Windows) of \"/mnt/videos\" (op Linux)."
-
-msgid ""
-"The MIME type to send when using live streaming. Defaults to \"video/x-"
-"mpegurl\"."
-msgstr ""
-"Het MIME type te gebruiken voor live streaming. standaard is \"video/x-"
-"mpegurl\"."
-
-msgid "The suffix to use for live streaming. Defaults to \"m3u\"."
-msgstr "De extensie voor live streaming. Standaard is  \"m3u\"."
-
-msgid ""
-"The MIME type to send when using recordings streaming. Defaults to \"video/x-"
-"mpegurl\"."
-msgstr ""
-"Het MIME type te gebruiken voor opgenomen streaming. standaard is \"video/x-"
-"mpegurl\"."
-
-msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
-msgstr "De extensie voor opgenomen streaming. Standaard is  \"m3u\"."
-
-msgid ""
-"<p>Here you can define two external searches that you can access in the EPG "
-"views. You simply have to find the required URL and where the search pattern "
-"has to be located. %TITLE% will be substituted by the broadcast's EPG title."
-"</p>"
-msgstr ""
-"<p>Hier kunt u twee externe zoekopdrachten definieren die u kunt benaderen "
-"in de EPG. U moet alleen de benodigde URL zien te vinden en waar het "
-"zoekpatroon geplaatst moet worden . %TITLE% zal worden vervangen door "
-"uitzendings EPG titel.</"
-
-msgid "Some examples:"
-msgstr "Enkele voorbeelden:"
-
-msgid ""
-"<p>This section is for experts <strong>only</strong>, i.e. you know what you "
-"are doing!</p>"
-msgstr ""
-"<p>Deze afdeling is voor deskundigen<strong>alleen</strong>, met andere "
-"woorden, als goed weet waar u mee bezig bent!</p>"
-
-msgid ""
-"If set to \"yes\" VDRAdmin-AM will periodically refresh its local EPG cache. "
-"Else the EPG will be refreshed if the user accesses any EPG view at the web "
-"interface and the timeout set at \"Update EPG every\" has been reached."
-msgstr ""
-"Als het ingesteld staat op \"ja\" dan zal VDRAdmin-AM met intervallen zijn "
-"lokale EPG cache verversen. Anders word de EPG pas ververst als de gebruiker "
-"met een EPG bezoek op de web interface benadert  en de timeout instelling "
-"\"Ververs EPG iedere\" bereikt is"
-
-msgid ""
-"The interval, the EPG data is refreshed from VDR and AutoTimer updates are "
-"performed (if AutoTimer feature is used)."
-msgstr ""
-"De interval dat EPG data wordt ververst van VDR en auto timer updates worden "
-"uitgevoerd. (Als de auto timer functie word gebruikt)."
-
-msgid ""
-"Accessing VDR's EPG through VDR's SVDRPort seems to block VDR for some time. "
-"If this option is activated VDRAdmin-AM will read the <span class=\"ref_file"
-"\">epg.data</span> file directly so that VDR doesn't get blocked."
-msgstr ""
-"Het benaderen van de VDR's EPG via VDR's SVDRPoort lijkt de VDR voor enige "
-"tijd te blokkeren. Als deze optie is geaktiveerd zal  VDRAdmin-AM het "
-"bestand <span class=\"ref_file\">epg.data</span> rechtstreeks lezen zodat "
-"VDR niet geblokkeerd raakt."
-
-msgid ""
-"If you've enabled the option above you need to tell VDRAdmin-AM where the "
-"<span class=\"ref_file\">epg.data</span> file is located."
-msgstr ""
-"Als bovenstaande optie aan staat dan is het nodig VDRAdmin-AM te vertellen "
-"waar het <span class=\"ref_file\">epg.data</span> bestand zich bevind."
-
-msgid ""
-"If you have compiled VDR with the VFAT define you have to enable this "
-"option. If this option is set to the wrong value, you may have problems with "
-"certain recordings if you want to stream them or run reccmds on them."
-msgstr ""
-"Als u VDR gecompileerd heeft met de VFAT definitie moet u deze optie "
-"aanzetten. Als deze optie is ingesteld met de verkeerde waarde dan kunt u "
-"problemen ondervinden met bepaalde opnames als u deze wilt streamen of "
-"reccmds  hierop wilt starten."
-
-msgid ""
-"<p>If you want to limit the number of channels used in some parts of "
-"VDRAdmin-AM, this is for you!</p><p>Use the radio buttons to activate or "
-"deactivate the wanted channels in the named menu.</p><p>To add channels to "
-"the list of wanted channels you have to select them in the left side "
-"selectbox and click <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;"
-"&gt;&gt;&gt;\"/>. If you want to remove channels from the list of wanted "
-"channels you have to select them in the right side selectbox and click "
-"<input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
-msgstr ""
-"<p>Als u het aantal kanalen wilt beperken die in sommige delen van VDRAdmin-"
-"AM gebruikt worden, dan is dit iets voor u!</p><p>Gebruik de selectie vakken "
-"om de gewenste kanalen de aktiveren of deaktiveren in het genoemde menu.</"
-"p><p>Om kanalen toe te voegen in de lijst van gewenste kanalen dan moet u de "
-"gewenste kanalen selecteren in de linkerlijst van het selectie vak en "
-"klikken op <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;&gt;"
-"&gt;\"/>. Als u kanalen van deze lijst wilt verwijderen selecteer dan uit "
-"deze lijst de te verwijderen kanalen en klik op<input type=\"submit\" class="
-"\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
-
-msgid ""
-"Usually channels that don't have EPG information are hidden in all EPG "
-"views. If you don't want them to be hidden you have to set this option to "
-"\"yes\"."
-msgstr ""
-"Normaal gesproken worden kanalen verborgen die geen EPG informatie hebben. "
-"Als u deze niet verborgen wilt hebben moet u deze optie op \"ja\" zetten."
 
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Wat de de hostnaam van de VDR (b.v. video.intra.net)?"
@@ -2055,7 +1345,7 @@ msgid "The URL \"%s\" was not found on this server!"
 msgstr "De  URl  \"%s\" is niet gevonden op deze server!"
 
 msgid "Your favorites"
-msgstr "Uw favoriten"
+msgstr "Uw favorieten"
 
 msgid "Search results"
 msgstr "Zoek resultaten"
@@ -2077,12 +1367,8 @@ msgid "Can't open file \"%s\"!"
 msgstr "Kan bestand \"%s\" niet openen!"
 
 #, perl-format
-msgid ""
-"Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and "
-"if VDR's svdrphosts.conf is configured correctly."
-msgstr ""
-"Kan geen verbinding maken met VDR at %s:%s<br /><br /> Controleer of VDR "
-"draait en of VDR's svdrphosts.conf op de juiste manier is geconfigureerd."
+msgid "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and if VDR's svdrphosts.conf is configured correctly."
+msgstr "Kan geen verbinding maken met VDR at %s:%s<br /><br /> Controleer of VDR draait en of VDR's svdrphosts.conf op de juiste manier is geconfigureerd."
 
 #, perl-format
 msgid "Error while sending command to VDR at %s"

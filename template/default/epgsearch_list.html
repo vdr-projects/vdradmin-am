@@ -34,11 +34,14 @@
 					<input type="submit" class="submit" name="new_search" value="<?% gettext('New Search') %?>" />
 					<input type="hidden" name="aktion" value="epgsearch_edit" />
 				</td>
-<?% IF help_url %?>
 				<td class="col_help">
-					<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help" title="<?% gettext('Help') %?>"/></a>
-				</td>
+<?% IF config_url %?>
+          <a href="<?% config_url %?>"><img src="bilder/configure.png" border="0" alt="settings" title="<?% gettext('Settings') %?>"/></a>
 <?% END %?>
+<?% IF help_url %?>
+					<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help" title="<?% gettext('Help') %?>"/></a>
+<?% END %?>
+				</td>
 			</tr>
 		</table>
 	</form>
@@ -239,7 +242,7 @@
 					<td class="col_center">
 						<div class="epg_title">
 							<?% IF infurl %?>
-								<a href="javascript:popup('<?% infurl %?>');" title="<?% gettext('More Information') %?>">
+								<a href="javascript:popup('<?% infurl %?>', <?% config.GUI_POPUP_WIDTH %?>, <?% config.GUI_POPUP_HEIGHT %?>);" title="<?% gettext('More Information') %?>">
 							<?% END %?>
 							<?% title %?>
 							<?% IF infurl %?>

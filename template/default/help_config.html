@@ -182,19 +182,12 @@
 						<dd><?% gettext('If set to "yes" VDRAdmin-AM will periodically refresh its local EPG cache. Else the EPG will be refreshed if the user accesses any EPG view at the web interface and the timeout set at "Update EPG every" has been reached.') %?></dd>
 						<dt><?% gettext('Update EPG every:') %?></dt>
 						<dd><?% gettext('The interval, the EPG data is refreshed from VDR and AutoTimer updates are performed (if AutoTimer feature is used).') %?></dd>
-<!--
-						<dt><?% gettext('Read EPG directly using epg.data:') %?></dt>
-						<dd><?% gettext('Accessing VDR\'s EPG through VDR\'s SVDRPort seems to block VDR for some time. If this option is activated VDRAdmin-AM will read the <span class="ref_file">epg.data</span> file directly so that VDR doesn\'t get blocked.') %?></dd>
-						<dt><?% gettext('epg.data filename:') %?></dt>
-						<dd><?% gettext('If you\'ve enabled the option above you need to tell VDRAdmin-AM where the <span class="ref_file">epg.data</span> file is located.') %?></dd>
--->
-						<dt><?% gettext('VFAT:') %?></dt>
-						<dd><?% gettext('If you have compiled VDR with the VFAT define you have to enable this option. If this option is set to the wrong value, you may have problems with certain recordings if you want to stream them or run reccmds on them.') %?></dd>
 					</dl>
 					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
 				</div>
 
 				<div class="group"><a id="channels" name="channels"></a><h3><?% gettext('Channel Selections') %?></h3>
+					<!-- TODO: remove reference to radios -->
 					<?% gettext('<p>If you want to limit the number of channels used in some parts of VDRAdmin-AM, this is for you!</p>
 					<p>Use the radio buttons to activate or deactivate the wanted channels in the named menu.</p>
 					<p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click <input type="submit" class="submit" value="&gt;&gt;&gt;&gt;&gt;"/>. If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click <input type="submit" class="submit" value="&lt;&lt;&lt;&lt;&lt;"/>.</p>') %?>

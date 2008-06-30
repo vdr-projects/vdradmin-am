@@ -25,8 +25,8 @@ function callurl( url ) {
 	image.src = url + "&rand=" + Now.getTime();
 }
 
-function popup(URL) {
-	window.open(URL, '_new', 'width=500, height=250, scrollbars=yes, resizable=yes, toolbar=no, status=no');
+function popup(URL, win_w, win_h) {
+	window.open(URL, '_new', 'width=' + win_w + ', height=' + win_h + ', scrollbars=yes, resizable=yes, toolbar=no, status=no');
 }
 
 function toolbar(URL) {

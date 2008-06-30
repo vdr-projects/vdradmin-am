@@ -13,6 +13,7 @@
 		<!--
 		var timeout;
 		var interval = <?% interval %?>;
+		var tmpImage = new Image();
 		<?% IF full_tv %?>
 			var size = "<?% size %?>";
 		<?% ELSE %?>
@@ -37,9 +38,10 @@
 
 		function WebcamUpdate() {
 			Before = new Date();
-			NewPicUrl = "<?% url %?>&size=" + size + "&interval=" + interval + "&rand=" + Before.getTime();
-			document.Bild.src = NewPicUrl;
-//TODO      document.getElementById('sect_tv').style.width = (size == 'full' ? 780 : (size == 'half' ? 400 : 210));
+			tmpImage.src = "<?% url %?>&size=" + size + "&interval=" + interval + "&rand=" + Before.getTime();
+			//TODO: wait until (tmpImage.complete == true)?
+			document.Bild.src = tmpImage.src;
+      document.getElementById('sect_tv').style.width = (size == 'full' ? 780 : (size == 'half' ? 400 : 210)) + "px";
 			if(interval > 0) {
 				After = new Date();
 				wait_sec = (interval * 1000) - (After - Before);
@@ -106,12 +108,12 @@
 
 		<table border="0" cellspacing="0" cellpadding="0" id="content">
 			<tr>
-        <td id="sect_tv" width="<?% IF size == 'full' %?>780<?% ELSE %?><?% IF size == 'half' %?>400<?% ELSE %?>210<?% END %?><?% END %?>" align="center">
+        <td id="sect_tv" style="width:<?% IF size == 'full' %?>780<?% ELSE %?><?% IF size == 'half' %?>400<?% ELSE %?>210<?% END %?><?% END %?>px;" align="center">
 					<img name="Bild" src="<?% url %?>" border="1" hspace="2" vspace="2" class="tv" alt="" />
 					<img src="bilder/spacer.gif" name="switchimage" width="2" height="1" alt="" />
 				</td>
 <?% IF full_tv %?>
-				<td id="sect_rc">
+				<td id="sect_rc" valign="top">
 					<table width="200" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td></td>
@@ -202,7 +204,7 @@
 				  <table border="0" cellpadding="0" cellspacing="0">
 						<tr>
 							<td> 
-								<select name="select_wanted_channels" size="1" class="submit" onchange="window.open(this.options[this.selectedIndex].value,'main')" style="width:100%">
+								<select name="select_wanted_channels" size="1" class="submit" onchange="window.open(this.options[this.selectedIndex].value,'main')">
 <?% FOREACH ch_grp = ch_groups %?> 
 									<option value="<?% ch_grp.url %?>" <?% IF ch_grp.selected %?>selected="selected"<?% END %?> ><?% ch_grp.title %?></option>
 <?% END %?>
@@ -211,12 +213,12 @@
 						</tr>
 						<tr>
 							<td> 
-								<select name="channel" size="32" onchange="javascript:switch_channel('./vdradmin.pl?aktion=tv_switch&amp;channel=' + encodeURIComponent(this.options[this.selectedIndex].value));" style="width:100%">
+								<select name="channel" size="32" onchange="javascript:switch_channel('./vdradmin.pl?aktion=tv_switch&amp;channel=' + encodeURIComponent(this.options[this.selectedIndex].value));" style="width:100%;">
 <?% FOREACH chan = channels %?>
       						<option value="<?% chan.vdr_id %?>" <?% IF chan.cur %?>selected="selected"<?% END %?>><?% chan.name | html %?></option>
 <?% END %?>
 			      		</select>
-<!--						<a class="submit" href="javascript:switch_by_select();">Switch</a>-->
+<!--						<a class="submit" href="javascript:switch_by_select();">Switch</a> -->
 							</td>
 						</tr>
 					</table>

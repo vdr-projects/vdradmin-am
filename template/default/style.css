@@ -241,6 +241,10 @@ body.help .heading {
 	padding: 2px;
 }
 
+#prog_list .list {
+	margin-bottom: 0.5em;
+}
+
 #prog_summary .action,
 #prog_detail .action {
 	display: block;
@@ -349,6 +353,7 @@ body.help .heading {
 #prog_list .col_buttons,
 #rec_list .col_buttons,
 #epgsearch_list .col_buttons,
+#epgsearch_config .col_buttons,
 #prog_summary2 .col_buttons {
 	width: 120px;
 	text-align: right;

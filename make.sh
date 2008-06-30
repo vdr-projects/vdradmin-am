@@ -36,11 +36,10 @@ function Error()
 #
 function do_po()
 {
-	local additional_langs="$(get_utf8_LANGS)"
-	local all_langs="$LANGS $additional_langs"
-	for L in $all_langs
+	for PO in po/*.po 
 	do
-		[  -d locale/$L/LC_MESSAGES/ ] || mkdir -p locale/$L/LC_MESSAGES/
+		L=$(basename $PO .po)
+		[ -d locale/$L/LC_MESSAGES/ ] || mkdir -p locale/$L/LC_MESSAGES/
 		msgfmt po/$L.po -o po/$L.mo
 		install -m 644 po/$L.mo locale/$L/LC_MESSAGES/vdradmin.mo
 		rm -f po/$L.mo
@@ -80,22 +79,6 @@ function do_dist()
 	mv $TMPDIR/$DIST_NAME.tar.bz2 .
 }
 
-# determine additional (utf8-)languages
-#
-function get_utf8_LANGS()
-{
-	(	cd po
-		local UTF8LANGS
-		local UTF8LANG
-		for file in *.utf8.po; do
-			[ -e $file ] || continue
-			UTF8LANG=${file%.po}
-			UTF8LANGS="$UTF8LANGS $UTF8LANG"
-		done
-		echo $UTF8LANGS
-	)
-}
-
 # extract original character encoding
 #
 function getOrigEncoding()
@@ -113,7 +96,7 @@ function getOrigEncoding()
 function do_utf8_clean()
 {
 	(cd po && rm -f *.utf8.po*)
-	(cd locale && rm -rf *.utf8)
+	[ -d locale ] && (cd locale && rm -rf *.utf8)
 }
 
 # generate utf8 locales
@@ -144,7 +127,7 @@ function do_utf8_generate()
 		done
 
 		# generate us_US.utf8.po from POT template
-		msginit -i vdradmin.pot -o en_US.utf8.po -l en_US.utf8 --no-translator
+		msginit -i vdradmin.pot -o en_US.utf8.po -l en_US.utf8 --no-translator --no-wrap
 
 		# map ISO-8859-1 encoding to UTF-8 instead of the respective "old" encodings
 		for file in $(ls *.utf8.po); do
@@ -167,7 +150,7 @@ function do_cl()
 #
 function do_check()
 {
-	LANGS=$LANGS $INSTALL_SH -p
+	$INSTALL_SH -p
 }
 
 [ "$1" ] || Usage
@@ -181,11 +164,11 @@ do
 			;;
 
 		install)
-			LANGS=$LANGS $INSTALL_SH -c
+			$INSTALL_SH -c
 			;;
 
 		uninstall)
-			LANGS=$LANGS $INSTALL_SH -u
+			$INSTALL_SH -u
 			;;
 
 		po)
@@ -193,8 +176,8 @@ do
 			;;
 
 		dist)
-			do_utf8_clean
 			do_cvs
+			do_utf8_generate
 			do_po
 			do_cl
 			do_dist
@@ -216,6 +199,9 @@ do
 			do_check;
 			;;
 
+		help|-h|--help)
+			Usage;
+			;;
 		*)
 			Error "Unknown command \"$1\""
 			;;

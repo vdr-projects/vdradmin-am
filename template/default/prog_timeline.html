@@ -147,6 +147,8 @@
 	<form action="<?% nowurl %?>" method="get" name="FormName">
 		<script type="text/javascript" language="JavaScript1.2">
 			var tl = new TimeLine(<?% now_sec %?>, "<?% nowurl %?>", <?% px_per_min %?>, <?% end_min %?>);
+			var popup_width = <?% config.GUI_POPUP_WIDTH %?>;
+			var popup_height = <?% config.GUI_POPUP_HEIGHT %?>;
 		</script>
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">

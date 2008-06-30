@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 # vim:et:sw=4:ts=4:
 #
-# VDRAdmin-AM 2005 - 2007 by Andreas Mair <mail@andreas.vdr-developer.org>
+# VDRAdmin-AM 2005 - 2008 by Andreas Mair <mail@andreas.vdr-developer.org>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 
 require 5.004;
 
-my $VERSION = "3.6.1";
+my $VERSION = "3.6.2";
 my $BASENAME;
 my $EXENAME;
 
@@ -57,7 +57,7 @@ if ($@) {
 require File::Temp;
 
 use locale;
-use Env qw(@PATH LANGUAGE);
+use Env qw(@PATH LANGUAGE LANG);
 use CGI qw(:no_debug);
 use IO::Socket;
 use Template;
@@ -68,6 +68,7 @@ use File::Temp ();
 use Shell qw(ps locale);
 use URI::Escape;
 
+my $InetSocketModule = 'IO::Socket::INET';
 my $can_use_net_smtp = 1;
 $can_use_net_smtp = undef unless (eval { require Net::SMTP });
 my $can_use_smtpauth = 1;
@@ -134,7 +135,6 @@ $CONFIG{LOCAL_NET}  = "0.0.0.0/32";
 $CONFIG{VIDEODIR}   = "/video";
 $CONFIG{VDRCONFDIR} = "$CONFIG{VIDEODIR}";
 $CONFIG{EPGIMAGES}  = "$CONFIG{VIDEODIR}/epgimages";
-$CONFIG{VDRVFAT}    = 1;
 
 #
 $CONFIG{TEMPLATE}   = "default";
@@ -179,18 +179,16 @@ $CONFIG{TM_TT_LIST}      = 1;
 $CONFIG{TM_SORTBY}       = "day";
 $CONFIG{TM_DESC}         = 0;
 
-#$CONFIG{TM_ADD_SUMMARY}   = 0;
 #
 $CONFIG{ST_FUNC}           = 1;
 $CONFIG{ST_REC_ON}         = 0;
 $CONFIG{ST_LIVE_ON}        = 1;
 $CONFIG{ST_URL}            = "";
+$CONFIG{ST_STREAMDEV_HOST} = "";
 $CONFIG{ST_STREAMDEV_PORT} = 3000;
 $CONFIG{ST_VIDEODIR}       = "";
 
 #
-$CONFIG{EPG_DIRECT}    = 0;
-$CONFIG{EPG_FILENAME}  = "$CONFIG{VIDEODIR}/epg.data";
 $CONFIG{EPG_PRUNE}     = 0;
 $CONFIG{NO_EVENTID}    = 0;
 $CONFIG{NO_EVENTID_ON} = "";
@@ -231,6 +229,10 @@ $CONFIG{PS_VIEW} = "ext";
 
 #
 $CONFIG{CMD_LINES} = 20;
+
+#
+$CONFIG{GUI_POPUP_WIDTH} = 500;
+$CONFIG{GUI_POPUP_HEIGHT} = 250;
 
 #
 my %FEATURES;
@@ -330,7 +332,7 @@ $SIG{PIPE} = 'IGNORE';
 my $DAEMON = 1;
 for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
     $_ = $ARGV[$i];
-    if (/-h|--help/) {
+    if (/^(-h|--help)/) {
         print("Usage $0 [OPTION]...\n");
         print("A perl client for the Linux Video Disk Recorder.\n\n");
         print("  -nf       --nofork            don't fork\n");
@@ -338,12 +340,13 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         print("  -d [dir]  --cfgdir [dir]      use [dir] for configuration files\n");
         print("  -k        --kill              kill a forked vdradmind.pl\n");
         print("  -p [name] --pid [name]        name of pidfile\n");
+#TODO        print("  -6        --ipv6              use IPv6\n");
         print("  -h        --help              this message\n");
         print("\nReport bugs to <mail\@andreas.vdr-developer.org>.\n");
         exit(0);
     }
-    if (/--nofork|-nf/) { $DAEMON = 0; last; }
-    if (/--cfgdir|-d/) {
+    if (/^(--nofork|-nf)/) { $DAEMON = 0; last; }
+    if (/^(--cfgdir|-d)/) {
         $ETCDIR        = $ARGV[ ++$i ];
         $CONFFILE      = "${ETCDIR}/vdradmind.conf";
         $AT_FILENAME   = "${ETCDIR}/vdradmind.at";
@@ -352,7 +355,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         $USER_CSS      = "${ETCDIR}/user.css";
         next;
     }
-    if (/--config|-c/) {
+    if (/^(--config|-c)/) {
         ReadConfig() if (-e $CONFFILE);
         LoadTranslation();
         $CONFIG{VDR_HOST}   = Question(gettext("What's your VDR hostname (e.g video.intra.net)?"),               $CONFIG{VDR_HOST});
@@ -364,25 +367,30 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         $CONFIG{VIDEODIR}   = Question(gettext("Where are your recordings stored?"),                             $CONFIG{VIDEODIR});
         $CONFIG{VDRCONFDIR} = Question(gettext("Where are your VDR's configuration files located?"),             $CONFIG{VDRCONFDIR});
 
-        #$CONFIG{EPG_FILENAME} = Question(gettext("Where is your epg.data?"), $CONFIG{EPG_FILENAME});
-        #$CONFIG{EPG_DIRECT} = ($CONFIG{EPG_FILENAME} and -e $CONFIG{EPG_FILENAME} ? 1 : 0);
-
         WriteConfig();
 
         print(gettext("Config file written successfully.") . "\n");
         exit(0);
     }
-    if (/--kill|-k/) {
+    if (/^(--kill|-k)/) {
         exit(0) unless (-e $PIDFILE);
         my $killed = kill(2, getPID($PIDFILE));
         unlink($PIDFILE);
         exit($killed > 0 ? 0 : 1);
     }
-    if (/--pid|-p/) {
+    if (/^(--pid|-p)/) {
         $PIDFILE = $ARGV[ ++$i ];
         next;
     }
-    if (/--displaycall|-i/) {
+    if (/^(--ipv6|-6)/) {
+        if (eval { require IO::Socket::INET6 }) {
+            $InetSocketModule = 'IO::Socket::INET6';
+        } else {
+            print("ERROR: Can't load module IO::Socket::INET6!\n");
+        }
+        next;
+    }
+    if (/^(--displaycall|-i)/) {
         for (my $z = 0 ; $z < 5 ; $z++) {
             DisplayMessage($ARGV[ $i + 1 ]);
             sleep(3);
@@ -390,12 +398,12 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         CloseSocket();
         exit(0);
     }
-    if (/--message|-m/) {
+    if (/^(--message|-m)/) {
         DisplayMessage($ARGV[ $i + 1 ]);
         CloseSocket();
         exit(0);
     }
-    if (/-u/) {
+    if (/^-u/) {
 
         # Don't use user.css
         $UserCSS = undef;
@@ -444,11 +452,11 @@ my @reccmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/reccmds.conf");
 my @vdrcmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/commands.conf");
 
 my ($Socket) =
-  IO::Socket::INET->new(Proto     => 'tcp',
-                        LocalPort => $CONFIG{SERVERPORT},
-                        LocalAddr => $CONFIG{SERVERHOST},
-                        Listen    => 10,
-                        Reuse     => 1
+  $InetSocketModule->new(Proto     => 'tcp',
+                         LocalPort => $CONFIG{SERVERPORT},
+                         LocalAddr => $CONFIG{SERVERHOST},
+                         Listen    => 10,
+                         Reuse     => 1
   );
 die("can't start server: $!\n")            if (!$Socket);
 $CONFIG{CACHE_LASTUPDATE} = 0;
@@ -464,7 +472,7 @@ my @TRUSTED_USER = (
     @GUEST_USER, qw(prog_detail_form prog_detail_aktion at_timer_edit at_timer_new at_timer_save at_timer_test at_timer_delete
       epgsearch_upds epgsearch_edit epgsearch_save epgsearch_delete epgsearch_toggle timer_new_form timer_add timer_delete timer_toggle rec_delete rec_rename rec_edit
       config prog_switch rc_show rc_hitk grab_picture at_timer_toggle tv_show tv_switch
-      live_stream rec_stream rec_play rec_cut force_update vdr_cmds export_channels_m3u)
+      live_stream rec_stream rec_play rec_cut force_update vdr_cmds export_channels_m3u epgsearch_config epgsearch_bl_edit epgsearch_bl_save epgsearch_bl_delete)
 );
 my $MyStreamBase = "./vdradmin.";
 
@@ -583,6 +591,12 @@ while (true) {
             $real_aktion = "epgsearch_list" if ($q->param("favorites"));
             $real_aktion = "epgsearch_list" if ($q->param("exit"));
             $real_aktion = "epgsearch_upds" if ($q->param("upds"));
+        } elsif ($real_aktion eq "epgsearch_config_aktion") {
+            $real_aktion = "epgsearch_config";
+            $real_aktion = "epgsearch_bl_delete" if ($q->param("delete"));
+        } elsif ($real_aktion eq "epgsearch_bl_aktion") {
+            $real_aktion = "epgsearch_bl_save";
+            $real_aktion = "epgsearch_config" if ($q->param("exit"));
         }
 
         my @ALLOWED_FUNCTIONS;
@@ -904,6 +918,20 @@ sub get_name_from_vdrid {
         # Es darf nach Spec nur eine Übereinstimmung geben
         if (scalar(@C) == 1) {
             return $C[0]->{name};
+        }
+    }
+}
+
+sub get_channel_from_vdrid {
+    my $vdr_id = shift;
+    if ($vdr_id) {
+
+        # Kanalliste nach identischer vdr_id durchsuchen
+        my @C = grep($_->{vdr_id} == $vdr_id, @{$CHAN{$CHAN_FULL}->{channels}});
+
+        # Es darf nach Spec nur eine Übereinstimmung geben
+        if (scalar(@C) == 1) {
+            return $C[0];
         }
     }
 }
@@ -2162,7 +2190,8 @@ sub epgsearch_list {
                  did_search       => $do_test,
                  title            => $do_test ? ($q->param("favorites") ? gettext("Your favorites") : gettext("Search results")) : undef,
                  matches          => (@matches ? \@matches : undef),
-                 templates        => \@templates
+                 templates        => \@templates,
+                 config_url       => "$MyURL?aktion=epgsearch_config"
     };
     return showTemplate("epgsearch_list.html", $vars);
 }
@@ -2279,7 +2308,7 @@ sub ParseEpgSearchBlacklists {
         next if (length($_) == 0);
         last if (/^no blacklists defined$/);
 
-        push(@temp, ExtractEpgSearchConf($_));
+        push(@temp, ExtractEpgSearchBlacklistConf($_));
     }
 
     return @temp;
@@ -2583,6 +2612,7 @@ sub validTime {
 }
 
 sub epgsearch_Param2Line {
+    my $mode_blacklist = $q->param("mode_blacklist");
     my $weekdays_bits = 0;
     my $weekdays      = 0;
     my $had_weekday   = 0;
@@ -2699,8 +2729,16 @@ sub epgsearch_Param2Line {
                . ($q->param("use_descr") ? "1" : "0") . ":"
                . ($q->param("use_duration") ? "1" : "0") . ":"
                . $min_duration . ":"
-               . $max_duration . ":"
-               . $q->param("has_action") . ":"
+               . $max_duration . ":";
+    if ($mode_blacklist) {
+        $cmd .= ($q->param("use_days") ? "1" : "0") . ":"
+               . ($had_weekday > 1 ? $weekdays_bits : $weekdays) . ":"
+               . ($q->param("use_extepg") ? "1" : "0") . ":"
+               . $extepg_info . ":"
+               . $q->param("fuzzy_tolerance") . ":"
+               .  $q->param("ignore_missing_epgcats");
+    } else { # ! $mode_blacklist
+        $cmd .= $q->param("has_action") . ":"
                . ($q->param("use_days") ? "1" : "0") . ":"
                . ($had_weekday > 1 ? $weekdays_bits : $weekdays) . ":"
                . ($q->param("is_series") ? "1" : "0") . ":"
@@ -2735,6 +2773,7 @@ sub epgsearch_Param2Line {
                .  $searchtimer_from . ":"
                .  $searchtimer_until . ":"
                .  $q->param("ignore_missing_epgcats");
+    }
 
     $cmd .= ":" . $q->param("unused") if ($q->param("unused"));
 #print("CMD: $cmd\n");
@@ -2794,6 +2833,173 @@ sub epgsearch_getDefTimerCheckMethode {
         return $value;
     }
     return 0;
+}
+
+sub epgsearch_config {
+    my @list;
+    for (ParseEpgSearchBlacklists(undef)) {
+        $_->{modurl}  = $MyURL . "?aktion=epgsearch_bl_edit&amp;id=" . $_->{id};
+        $_->{delurl}  = $MyURL . "?aktion=epgsearch_bl_delete&amp;id=" . $_->{id};
+        push(@list, $_);
+    }
+    my $vars = { usercss          => $UserCSS,
+                 url              => $MyURL,
+                 list             => \@list
+    };
+    return showTemplate("epgsearch_config.html", $vars);
+}
+
+sub epgsearch_bl_edit {
+    my $id = $q->param("id");
+
+    my $blacklist;
+    my @ch_groups;
+
+    if (defined $id) {
+        # edit blacklist
+        my @temp = ParseEpgSearchBlacklists($id);
+        $blacklist = pop @temp;
+    } else {
+        # new blacklist
+        $blacklist->{use_title}    = 1;
+        $blacklist->{use_subtitle} = 1;
+        $blacklist->{use_descr}    = 1;
+    }
+
+    if ($blacklist->{use_channel} == 2) {
+        for my $cg (ParseEpgSearchChanGroups(undef)) {
+            $cg->{sel} = 1 if ($cg->{id} eq $blacklist->{channels}) ;
+            push(@ch_groups, $cg);
+        }
+    } else {
+        @ch_groups = ParseEpgSearchChanGroups(undef);
+    }
+
+    my @extepg = ParseEpgSearchExtEpgInfos($blacklist->{extepg_infos});
+    if ($blacklist->{comp_extepg_info}) {
+        foreach (@extepg) {
+            if ($blacklist->{comp_extepg_info} & (1 << ($_->{id} - 1))) {
+                $blacklist->{"comp_extepg_" . $_->{id}} = 1;
+            }
+        }
+    }
+
+    epgsearch_getSettings();
+
+    my $vars = { usercss       => $UserCSS,
+                 url           => $MyURL,
+                 epgsearch     => $blacklist,
+                 channels      => \@{$CHAN{$CHAN_FULL}->{channels}},
+                 ch_groups     => \@ch_groups,
+                 do_edit       => (defined $id ? "1" : undef),
+                 extepg        => \@extepg,
+                 mode_blacklist => 1
+    };
+    return showTemplate("epgsearch_new.html", $vars);
+}
+
+sub epgsearch_bl_save {
+    my $cmd = (defined $q->param("id") ? "EDIB " . $q->param("id")
+                                       : "NEWB 0")
+               . ":" . epgsearch_Param2Line();
+    SendCMD("plug epgsearch " . $cmd);
+    return (headerForward("$MyURL?aktion=epgsearch_config"));
+}
+
+sub epgsearch_bl_delete {
+    my $id = $q->param("id");
+    if (defined $id) {
+        SendCMD("plug epgsearch delb $id");
+    } else {
+        for ($q->param) {
+            SendCMD("plug epgsearch delb $1") if (/xxxx_(.*)/);
+        }
+    }
+    return (headerForward("$MyURL?aktion=epgsearch_config"));
+}
+
+sub ExtractEpgSearchBlacklistConf {
+    my $line = shift;
+
+    my $timer;
+        ($timer->{id},               # 1 - unique search timer id
+         $timer->{pattern},          # 2 - the search term
+         $timer->{use_time},         # 3 - use time? 0/1
+         $timer->{time_start},       # 4 - start time in HHMM
+         $timer->{time_stop},        # 5 - stop time in HHMM
+         $timer->{use_channel},      # 6 - use channel? 0 = no,  1 = Intervall, 2 = Channel group, 3 = FTA only
+         $timer->{channels},         # 7 - if 'use channel' = 1 then channel id[|channel id] in vdr format,
+                                     #     one entry or min/max entry separated with |, if 'use channel' = 2
+                                     #     then the channel group name
+         $timer->{matchcase},        # 8 - match case? 0/1
+         $timer->{mode},             # 9 - search mode:
+                                     #      0 - the whole term must appear as substring
+                                     #      1 - all single terms (delimiters are blank,',', ';', '|' or '~')
+                                     #          must exist as substrings.
+                                     #      2 - at least one term (delimiters are blank, ',', ';', '|' or '~')
+                                     #          must exist as substring.
+                                     #      3 - matches exactly
+                                     #      4 - regular expression
+         $timer->{use_title},        #10 - use title? 0/1
+         $timer->{use_subtitle},     #11 - use subtitle? 0/1
+         $timer->{use_descr},        #12 - use description? 0/1
+         $timer->{use_duration},     #13 - use duration? 0/1
+         $timer->{min_duration},     #14 - min duration in minutes
+         $timer->{max_duration},     #15 - max duration in minutes
+         $timer->{use_days},         #16 - use day of week? 0/1
+         $timer->{which_days},       #17 - day of week (0 = sunday, 1 = monday...)
+         $timer->{use_extepg},       #18 - use extended EPG info? 0/1  #TODO
+         $timer->{extepg_infos},     #19 - extended EPG info values. This entry has the following format #TODO
+                                     #     (delimiter is '|' for each category, '#' separates id and value):
+                                     #     1 - the id of the extended EPG info category as specified in
+                                     #         epgsearchcats.conf
+                                     #     2 - the value of the extended EPG info category
+                                     #         (a ':' will be tranlated to "!^colon^!", e.g. in "16:9")
+         $timer->{fuzzy_tolerance},  #20 - fuzzy tolerance value for fuzzy searching
+         $timer->{ignore_missing_epgcats}, #21 - ignoreMissingEPGCats
+         $timer->{unused}) = split(/:/, $line);
+
+        #format selected fields
+        $timer->{time_start} =~ s/(\d\d)(\d\d)/$1:$2/ if($timer->{time_start});
+        $timer->{time_stop} =~ s/(\d\d)(\d\d)/$1:$2/ if($timer->{time_stop});
+        $timer->{min_duration} =~ s/(\d\d)(\d\d)/$1:$2/ if($timer->{min_duration});
+        $timer->{max_duration} =~ s/(\d\d)(\d\d)/$1:$2/ if($timer->{max_duration});
+
+        if ($timer->{channels} && $timer->{use_channel} == 1) {
+            ($timer->{channel_from}, $timer->{channel_to}) = split(/\|/, $timer->{channels}, 2);
+            $timer->{channel_to} = $timer->{channel_from} unless ($timer->{channel_to});
+            $timer->{channel_from_name} = get_name_from_uniqid($timer->{channel_from});
+            $timer->{channel_to_name} = get_name_from_uniqid($timer->{channel_to});
+            #TODO: links to channels
+        }
+
+        if ($timer->{use_days}) {
+            if ($timer->{which_days} >= 0) {
+                $timer->{sunday}    = 1 if ($timer->{which_days} == 0);
+                $timer->{monday}    = 1 if ($timer->{which_days} == 1);
+                $timer->{tuesday}   = 1 if ($timer->{which_days} == 2);
+                $timer->{wednesday} = 1 if ($timer->{which_days} == 3);
+                $timer->{thursday}  = 1 if ($timer->{which_days} == 4);
+                $timer->{friday}    = 1 if ($timer->{which_days} == 5);
+                $timer->{saturday}  = 1 if ($timer->{which_days} == 6);
+            } else {
+                my $which_days = -$timer->{which_days};
+                $timer->{sunday}    = 1 if ($which_days &  1);
+                $timer->{monday}    = 1 if ($which_days &  2);
+                $timer->{tuesday}   = 1 if ($which_days &  4);
+                $timer->{wednesday} = 1 if ($which_days &  8);
+                $timer->{thursday}  = 1 if ($which_days & 16);
+                $timer->{friday}    = 1 if ($which_days & 32);
+                $timer->{saturday}  = 1 if ($which_days & 64);
+            }
+        }
+
+        if ($timer->{pattern}) {
+            $timer->{pattern} =~ s/\|/:/g;
+            $timer->{pattern} =~ s/\!\^pipe\^\!/\|/g;
+        }
+
+    return $timer;
 }
 
 #############################################################################
@@ -3050,6 +3256,7 @@ sub LoadTranslation {
     );
 
     setlocale(LC_ALL, $CONFIG{LANG});
+    $LANG = $CONFIG{LANG};
     bind_textdomain_codeset("vdradmin", gettext("ISO-8859-1")) if($can_use_bind_textdomain_codeset);
 }
 
@@ -3300,12 +3507,15 @@ sub ReadConfig {
         #v3.4.6beta
         $CONFIG{SKIN} = "default" if(($CONFIG{SKIN} eq "bilder") || ($CONFIG{SKIN} eq "copper") || ($CONFIG{SKIN} eq "default.png"));
         #v3.5.3
-        $CONFIG{EPG_DIRECT} = 0;
+        delete $CONFIG{EPG_DIRECT};
+        delete $CONFIG{EPG_FILENAME};
         #v3.5.4rc
         if (defined $CONFIG{AT_TIMEOUT}) {
             $CONFIG{CACHE_TIMEOUT} = $CONFIG{AT_TIMEOUT} if ($CONFIG{AT_TIMEOUT} < $CONFIG{CACHE_TIMEOUT});
             delete $CONFIG{AT_TIMEOUT};
         }
+        #v3.6.2
+        delete $CONFIG{VDRVFAT};
 
     } else {
         print "$CONFFILE doesn't exist. Please run \"$0 --config\"\n";
@@ -3687,7 +3897,20 @@ sub prog_list {
             );
         }
     }
-    $vdr_id = $channel[0]->{vdr_id} unless ($current);
+
+    unless ($current) {
+        my $channel = get_channel_from_vdrid($vdr_id);
+        if ($channel) {
+            unshift(@channel,
+                    {   name    => '[' . $channel->{name} .']' . (!$CONFIG{CHANNELS_WITHOUT_EPG} || ChannelHasEPG($channel->{vdr_id}) ? '' : ' (' . gettext("No EPG information available") . ')'),
+                        vdr_id  => $channel->{vdr_id},
+                        current => 1
+                    }
+            );
+        } else {
+            $vdr_id = $channel[0]->{vdr_id};
+        }
+    }
 
     # find the next/prev channel
     my $ci = 0;
@@ -3705,7 +3928,12 @@ sub prog_list {
         if (my_strftime("%d", $event->{start}) != $day) {
 
             # new day
-            push(@show, { endd => 1 }) if (scalar(@show) > 0);
+            push(@show, 
+                 {  endd => 1,
+                    next_channel => $next_channel ? "$MyURL?aktion=prog_list&amp;vdr_id=$next_channel" : undef,
+                    prev_channel => $prev_channel ? "$MyURL?aktion=prog_list&amp;vdr_id=$prev_channel" : undef,
+                 }
+            ) if (scalar(@show) > 0);
             push(@show,
                  {  progname => $event->{channel_name},
                     longdate => my_strftime("%A, %x", $event->{start}),
@@ -4321,8 +4549,6 @@ sub timer_new_form {
 
     my $displaysummary = $this_event->{summary};
     $displaysummary =~ s/\|/\n/g if ($displaysummary);
-    my $displaytitle = $this_event->{title};
-    $displaytitle =~ s/"/\&quot;/g;
 
     my $vars = { url      => $MyURL,
                  active   => $this_event->{active} & 1,
@@ -4337,7 +4563,7 @@ sub timer_new_form {
                  dor      => ($this_event->{dor} && (length($this_event->{dor}) == 7 || length($this_event->{dor}) == 10 || length($this_event->{dor}) == 18)) ? $this_event->{dor} : my_strftime("%d", $this_event->{start}),
                  prio => $this_event->{prio} ne "" ? $this_event->{prio} : $CONFIG{TM_PRIORITY},
                  lft  => $this_event->{lft}  ne "" ? $this_event->{lft}  : $CONFIG{TM_LIFETIME},
-                 title     => $displaytitle,
+                 title     => $this_event->{title},
                  summary   => $displaysummary,
                  pattern   => $this_event->{pattern},
                  timer_id  => $timer_id ? $timer_id : 0,
@@ -4491,8 +4717,6 @@ sub rec_stream {
     my ($id) = $q->param('id');
     my ($i, $title, $newtitle);
     my $data;
-    my $f;
-    my (@tmp, $dirname, $name, $parent, @files);
     my ($date, $time, $day, $month, $hour, $minute);
     my $c;
 
@@ -4506,42 +4730,62 @@ sub rec_stream {
         ($day,  $month)  = split(/\./, $date);
         ($hour, $minute) = split(/:/,  $time);
 
-        # escape characters
-        if ($CONFIG{VDRVFAT} > 0) {
-            for ($i = 0 ; $i < length($title) ; $i++) {
-                $c = substr($title, $i, 1);
-                unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&()+,.\-;=~ ]/) {
-                    $newtitle .= sprintf("#%02X", ord($c));
-                } else {
-                    $newtitle .= $c;
-                }
-            }
-        } else {
-            for ($i = 0 ; $i < length($title) ; $i++) {
-                $c = substr($title, $i, 1);
-                if ($c eq "/") {
-                    $newtitle .= "\x02";
-                } elsif ($c eq "\\") {
-                    $newtitle .= "\x01";
-                } else {
-                    $newtitle .= $c;
-                }
-            }
-        }
-        $title = $newtitle;
-        $title =~ s/ /_/g;
-        $title =~ s/~/\//g;
-        Log(LOG_DEBUG, "rec_stream: find $CONFIG{VIDEODIR}/ -follow -regex \"$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec/...\\.vdr\"");
-        @files = `find $CONFIG{VIDEODIR}/ -follow -regex "$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec/...\\.vdr" | sort -r`;
-        foreach (@files) {
-            chomp;
-            Log(LOG_DEBUG, "rec_stream: found ($_)\n");
-            $_ =~ s/$CONFIG{VIDEODIR}/$CONFIG{ST_VIDEODIR}/;
-            $_ =~ s/\n//g;
-            $data = $CONFIG{ST_URL} . "$_\n$data";
+        # VFAT off
+        $data = findVideoFiles($minute, $hour, $day, $month, encode_RecTitle($title, 0));
+        unless ($data) {
+            # VFAT on
+            $data = findVideoFiles($minute, $hour, $day, $month, encode_RecTitle($title, 1));
         }
     }
     return (header("200", $CONFIG{REC_MIMETYPE}, $data));
+}
+
+sub encode_RecTitle {
+    my ($title, $use_vfat) = @_;
+    my ($c, $i, $newtitle);
+
+    if ($use_vfat) {
+        # VFAT on
+        for ($i = 0 ; $i < length($title) ; $i++) {
+            $c = substr($title, $i, 1);
+            unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&()+,.\-;=~ ]/) {
+                $newtitle .= sprintf("#%02X", ord($c));
+            } else {
+                $newtitle .= $c;
+            }
+        }
+    } else {
+        # VFAT off
+        for ($i = 0 ; $i < length($title) ; $i++) {
+            $c = substr($title, $i, 1);
+            if ($c eq "/") {
+                $newtitle .= "\x02";
+            } elsif ($c eq "\\") {
+                $newtitle .= "\x01";
+            } else {
+                $newtitle .= $c;
+            }
+        }
+    }
+
+    return $newtitle;
+}
+
+sub findVideoFiles {
+    my ($minute, $hour, $day, $month, $title) = @_;
+    my $data;
+    $title =~ s/ /_/g;
+    $title =~ s/~/\//g;
+    Log(LOG_DEBUG, "rec_stream: find $CONFIG{VIDEODIR}/ -follow -regex \"$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec/...\\.vdr\"");
+    my @files = `find $CONFIG{VIDEODIR}/ -follow -regex "$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec/...\\.vdr" | sort -r`;
+    foreach (@files) {
+        chomp;
+        Log(LOG_DEBUG, "rec_stream: found ($_)\n");
+        $_ =~ s/$CONFIG{VIDEODIR}/$CONFIG{ST_VIDEODIR}/;
+        $_ =~ s/\n//g;
+        $data = $CONFIG{ST_URL} . "$_\n$data";
+    }
+    return $data;
 }
 
 sub getReferer {
@@ -4567,20 +4811,24 @@ sub live_stream {
     my $progname = $q->param("progname");
     my ($data, $ifconfig, $ip);
 
-    if ($CONFIG{VDR_HOST} eq "localhost") {
-        $ifconfig = `/sbin/ifconfig eth0`;
-        if ($ifconfig =~ /inet.+:(\d+\.\d+\.\d+\.\d+)\s+Bcast/) {
-            $ip = $1;
-        } else {
-            $ip = `hostname`;
-        }
+    if ($CONFIG{ST_STREAMDEV_HOST}) {
+        $ip = $CONFIG{ST_STREAMDEV_HOST};
     } else {
-        $ip = $CONFIG{VDR_HOST};
+        if ($CONFIG{VDR_HOST} eq "localhost") {
+            $ifconfig = `/sbin/ifconfig eth0`;
+            if ($ifconfig =~ /inet.+:(\d+\.\d+\.\d+\.\d+)\s+Bcast/) {
+                $ip = $1;
+            } else {
+                $ip = `hostname`;
+            }
+        } else {
+            $ip = $CONFIG{VDR_HOST};
+        }
     }
     chomp($ip);
     $data = "";
     $data .= "#EXTINF:0,$progname\n" if ($progname);
-    $data .= "http://$ip:$CONFIG{ST_STREAMDEV_PORT}/$channel";
+    $data .= "http://$ip:$CONFIG{ST_STREAMDEV_PORT}/$channel\n";
     return (header("200", $CONFIG{TV_MIMETYPE}, $data));
 }
 
@@ -5209,7 +5457,10 @@ sub prog_summary {
                    title       => gettext("No EPG information available"),
                    progname    => CGI::escapeHTML($channel->{name}),
                    vdr_id      => $channel->{vdr_id}, 
-                   proglink  => sprintf("%s?aktion=prog_list&amp;vdr_id=%s", $MyURL, $channel->{vdr_id}),
+                   proglink    => sprintf("%s?aktion=prog_list&amp;vdr_id=%s", $MyURL, $channel->{vdr_id}),
+                   switchurl   => sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $channel->{vdr_id}),
+                   streamurl   => $FEATURES{STREAMDEV} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $channel->{vdr_id}, uri_escape($channel->{name})) : undef,
+                   stream_live_on => $FEATURES{STREAMDEV} ? $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON} : undef,
                    anchor     => "id" . $channel->{vdr_id}
                 }
             );
@@ -5578,9 +5829,9 @@ sub getRecInfo {
     my $vars;
     if ($VDRVERSION >= 10325) {
         $SVDRP->command("lstr $id");
-        my ($channel_id, $subtitle, $text, $video, $audio);
+        my ($channel_name, $subtitle, $text, $video, $audio);
         while ($_ = $SVDRP->readoneline) {
-            #if(/^C (.*)/) { $channel_id = $1; }
+            if(/^C (.*)/) { $channel_name = get_name_from_uniqid($1); }
             #if(/^E (.*)/) { $epg = $1; }
             if (/^T (.*)/) { $title    = $1; }
             if (/^S (.*)/) { $subtitle = $1; }
@@ -5630,9 +5881,10 @@ sub getRecInfo {
         $displaysubtitle =~ s/\|/<br \/>\n/g;
 
         $vars = { url      => $MyURL,
-                  text     => $displaytext ? $displaytext : undef,
-                  title    => $displaytitle ? $displaytitle : undef,
-                  subtitle => $displaysubtitle ? $displaysubtitle : undef,
+                  text     => $displaytext || undef,
+                  title    => $displaytitle || undef,
+                  subtitle => $displaysubtitle || undef,
+                  channel_name => $channel_name || undef,
                   srch1_url   => $imdb_url,
                   srch1_title => $imdb_url ? gettext($CONFIG{SRCH1_TITLE}) : undef,
                   srch2_url   => $srch2_url,
@@ -5640,7 +5892,7 @@ sub getRecInfo {
                   id       => $id,
                   video    => $video,
                   audio    => $audio,
-                  referer  => $ref ? $ref : undef
+                  referer  => $ref || undef
         };
     } else {
         my ($text);
@@ -5752,40 +6004,30 @@ sub recRunCmd {
         ($day,  $month)  = split(/\./, $date);
         ($hour, $minute) = split(/:/,  $time);
 
-        # escape characters
-        if ($CONFIG{VDRVFAT} > 0) {
-            for (my $i = 0 ; $i < length($title) ; $i++) {
-                $c = substr($title, $i, 1);
-                unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&()+,.\-;=~ ]/) {
-                    $newtitle .= sprintf("#%02X", ord($c));
-                } else {
-                    $newtitle .= $c;
-                }
-            }
-        } else {
-            for (my $i = 0 ; $i < length($title) ; $i++) {
-                $c = substr($title, $i, 1);
-                if ($c eq "/") {
-                    $newtitle .= "\x02";
-                } elsif ($c eq "\\") {
-                    $newtitle .= "\x01";
-                } else {
-                    $newtitle .= $c;
-                }
-            }
+        # VFAT off
+        my $folder = findVideoFolder($minute, $hour, $day, $month, encode_RecTitle($title, 0));
+        unless ($folder) {
+            # VFAT on
+            $folder = findVideoFolder($minute, $hour, $day, $month, encode_RecTitle($title, 1));
         }
-        $title = $newtitle;
-        $title =~ s/ /_/g;
-        $title =~ s/~/\//g;
-        $folder = `find $CONFIG{VIDEODIR}/ -follow -regex "$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec"`;
-        Log(LOG_DEBUG, "recRunCmd: find $CONFIG{VIDEODIR}/ -follow -regex \"$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec\"");
-
         if ($folder) {
-            chomp($folder);
-            Log(LOG_DEBUG, "recRunCmd: found ($folder)");
+            Log(LOG_DEBUG, "recRunCmd: executing ($cmd \"$folder\")");
             `$cmd "$folder"`;
         }
     }
+}
+
+sub findVideoFolder {
+    my ($minute, $hour, $day, $month, $title) = @_;
+    my $folder;
+
+    $title =~ s/ /_/g;
+    $title =~ s/~/\//g;
+    $folder = `find $CONFIG{VIDEODIR}/ -follow -regex "$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec"`;
+    Log(LOG_DEBUG, "findVideoFolder: find $CONFIG{VIDEODIR}/ -follow -regex \"$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec\"");
+    chomp($folder) if ($folder);
+
+    return $folder;
 }
 
 sub rec_edit {
@@ -6218,15 +6460,19 @@ sub export_channels_m3u {
     my $wanted = $q->param("wanted");
     my @filenames = ( 'vdr_full_channels', 'vdr_selected_channels', 'vdr_tv_channels', 'vdr_radio_channels' );
     my ($ip, $ifconfig);
-    if ($CONFIG{VDR_HOST} eq "localhost") {
-        $ifconfig = `/sbin/ifconfig eth0`;
-        if ($ifconfig =~ /inet.+:(\d+\.\d+\.\d+\.\d+)\s+Bcast/) {
-            $ip = $1;
-        } else {
-            $ip = `hostname`;
-        }
+    if ($CONFIG{ST_STREAMDEV_HOST}) {
+        $ip = $CONFIG{ST_STREAMDEV_HOST};
     } else {
-        $ip = $CONFIG{VDR_HOST};
+        if ($CONFIG{VDR_HOST} eq "localhost") {
+            $ifconfig = `/sbin/ifconfig eth0`;
+            if ($ifconfig =~ /inet.+:(\d+\.\d+\.\d+\.\d+)\s+Bcast/) {
+                $ip = $1;
+            } else {
+                $ip = `hostname`;
+            }
+        } else {
+            $ip = $CONFIG{VDR_HOST};
+        }
     }
     chomp($ip);
 
@@ -6241,7 +6487,7 @@ sub export_channels_m3u {
 # Authentication
 #############################################################################
 
-sub subnetcheck {
+sub subnetcheck { #TODO: IPv6 support
     my $ip  = $_[0];
     my $net = $_[1];
     my ($ip1, $ip2, $ip3, $ip4, $net_base, $net_range, $net_base1, $net_base2, $net_base3, $net_base4, $bin_ip, $bin_net);
@@ -6277,7 +6523,7 @@ sub false ()      { main::false(); }
 sub LOG_VDRCOM () { main::LOG_VDRCOM(); }
 sub CRLF ()       { main::CRLF(); }
 
-my ($SOCKET, $EPGSOCKET, $query, $connected, $epg);
+my ($SOCKET, $EPGSOCKET, $query, $connected);
 
 sub new {
     my $invocant = shift;
@@ -6286,23 +6532,17 @@ sub new {
     bless($self, $class);
     $connected = false;
     $query     = false;
-    $epg       = false;
     return $self;
 }
 
 sub myconnect {
     my $this = shift;
-    if ($epg && $CONFIG{EPG_DIRECT}) {
-        main::Log(LOG_VDRCOM, "LOG_VDRCOM: open EPG $CONFIG{EPG_FILENAME}");
-        open($EPGSOCKET, $CONFIG{EPG_FILENAME}) || main::HTMLError(sprintf($ERROR_MESSAGE{cant_open}, $CONFIG{EPG_FILENAME}));
-        return;
-    }
     main::Log(LOG_VDRCOM, "LOG_VDRCOM: connect to $CONFIG{VDR_HOST}:$CONFIG{VDR_PORT}");
 
     $SOCKET =
-      IO::Socket::INET->new(PeerAddr => $CONFIG{VDR_HOST},
-                            PeerPort => $CONFIG{VDR_PORT},
-                            Proto    => 'tcp'
+      $InetSocketModule->new(PeerAddr => $CONFIG{VDR_HOST},
+                             PeerPort => $CONFIG{VDR_PORT},
+                             Proto    => 'tcp'
       )
       || main::HTMLError(sprintf($ERROR_MESSAGE{connect_failed}, $CONFIG{VDR_HOST}, $CONFIG{VDR_PORT})) && return;
 
@@ -6341,12 +6581,6 @@ sub getSupportedFeatures {
 
 sub close {
     my $this = shift;
-    if ($epg && $CONFIG{EPG_DIRECT}) {
-        main::Log(LOG_VDRCOM, "LOG_VDRCOM: closing EPG");
-        close $EPGSOCKET;
-        $epg = false;
-        return;
-    }
     if ($connected) {
         main::Log(LOG_VDRCOM, "LOG_VDRCOM: closing connection");
         command($this, "quit");
@@ -6360,18 +6594,8 @@ sub command {
     my $this = shift;
     my $cmd  = join("", @_);
 
-    if ($cmd =~ /^lste/ && $CONFIG{EPG_DIRECT}) {
-        $epg = true;
-        main::Log(LOG_VDRCOM, sprintf("LOG_VDRCOM: special epg "));
-    } else {
-        $epg = false;
-    }
-    if (!$connected || $epg) {
+    if (!$connected) {
         myconnect($this);
-    }
-    if ($epg) {
-        $query = true;
-        return;
     }
 
     main::Log(LOG_VDRCOM, sprintf("LOG_VDRCOM: send \"%s\"", $cmd));
@@ -6389,14 +6613,6 @@ sub command {
 sub readoneline {
     my $this = shift;
     my $line;
-
-    if ($epg && $CONFIG{EPG_DIRECT}) {
-        $line = <$EPGSOCKET>;
-        $line =~ s/\n$//;
-        main::Log(LOG_VDRCOM, sprintf("LOG_VDRCOM: EPGread \"%s\"", $line));
-        $query = true;
-        return ($line);
-    }
 
     if ($SOCKET && $SOCKET->connected() && $query) {
         $line = <$SOCKET>;

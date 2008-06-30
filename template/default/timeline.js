@@ -414,7 +414,7 @@ function BuildEvent(vdr_id, counter, event, td_class, px_w)
                {
                   anchor_start = '<a href="javascript:popup(' 
                                + "'./vdradmin.pl?aktion=prog_detail&amp;epg_id=" 
-                               + event.epg_id + "&amp;vdr_id=" + vdr_id + "');" + '">';
+                               + event.epg_id + "&amp;vdr_id=" + vdr_id + "', " + popup_width + ", " + popup_height + ");" + '">';
                   anchor_end = '</a>';
                }
                W(anchor_start);
