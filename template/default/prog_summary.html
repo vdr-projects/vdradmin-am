@@ -38,7 +38,7 @@
 						<option value="<?% time.id %?>" <?% IF time.sel %?>selected="selected"<?% END %?>><?% time.name %?></option>
 	<?% END %?>
 					</select>
-					<?% gettext('at') %?>&nbsp;<input type="text" name="time" size="5" value="<?% now %?>" />&nbsp;<?% gettext('o\'clock') %?>
+					<?% gettext('at') %?>&nbsp;<input type="text" name="time" size="5" value="<?% now | html %?>" />&nbsp;<?% gettext('o\'clock') %?>
 				</td>
 <?% END %?>
 			</tr>

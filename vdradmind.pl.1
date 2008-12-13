@@ -1,43 +1,43 @@
-.\" Man page for vdradmind.pl 
+.\" Man page for vdradmind 
 
-.TH vdradmind.pl 1
+.TH vdradmind 1
 
 .SH NAME
-vdradmind.pl
+vdradmind \- Web-based administration tool for VDR
 
 .SH SYNOPSIS
 
-.B vdradmind.pl [ \-\-nofork ] [ \-\-config ] [ \-\-kill ]
+.B vdradmind [OPTION]...
 
 .SH DESCRIPTION
-.B vdradmind.pl
+.B vdradmind
 provides a webinterface for managing the Linux Video Disk Recorder (VDR), it has a virtual remote to control your VDR, you can view live-tv as a small slideshow, you can search for certain shows in the EPG....
 .PP
 By default 
-.B vdradmind.pl 
+.B vdradmind 
 will listen on port 8001.
 .PP
-.B Note: Your VDR must be configured to be accessible via SVDRP from the machine, you run vdradmind.pl from.
+.B Note: Your VDR must be configured to be accessible via SVDRP from the machine, you run vdradmind from.
 
 .SH OPTIONS
 
 .IP "\-\-nofork / -nf"
-Do not fork on start of vdradmind.pl. (vdradmind.pl does not go into daemon-mode)
+Do not fork on start of vdradmind. (vdradmind does not go into daemon-mode)
 
 .IP "\-\-config / -c"
 Ask some questions, to interactively generate the config-file /etc/vdradmin/vdradmind.conf
 
-.IP "\-\-cfgdir / -d"
+.IP "\-\-cfgdir dir/ -d dir"
 Path to the directory containing the VDRAdmin-AM config files.
 
 .IP "\-\-kill / -k" 
-Kill a forked vdradmind.pl.
+Kill a forked vdradmind.
 
 .IP "\-\-pid pidfile / -p pidfile" 
 Set the pidfile to use.
 
 .IP "\-\-help / -h" 
-Display a short message about the options of vdradmind.pl.
+Display a short message about the options of vdradmind.
 
 .SH AUTHOR
 This man-page has been written by Thomas Schmidt <thomas@thsnet.de> and has been updated by Andreas Mair <andreas@vdr-developer.org>.

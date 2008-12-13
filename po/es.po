@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-AM-3.6.2\n"
-"Report-Msgid-Bugs-To: Andreas Mair <mail@andreas.vdr-developer.org>\n"
-"POT-Creation-Date: 2008-06-30 08:26+0200\n"
-"PO-Revision-Date: 2008-04-10 20:28+0100\n"
+"Project-Id-Version: VDRAdmin-AM-3.6.3\n"
+"Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
+"POT-Creation-Date: 2008-09-25 13:23+0200\n"
+"PO-Revision-Date: 2008-11-02 19:28+0100\n"
 "Last-Translator: r <r@g.c>\n"
 "Language-Team: rudiberto <r_jung@web.de>\n"
 "MIME-Version: 1.0\n"
@@ -538,6 +538,12 @@ msgstr "Agregar lista negra:"
 msgid "Edit Blacklist"
 msgstr "Editar lista negra"
 
+msgid "Add New Template"
+msgstr "Añadir plantilla"
+
+msgid "Edit Template"
+msgstr "Editar plantilla:"
+
 msgid "Add New Search"
 msgstr "Añadir búsqueda"
 
@@ -555,6 +561,10 @@ msgstr "Ocultar resultados"
 
 msgid "Settings"
 msgstr "Propiedades"
+
+
+msgid "Name:"
+msgstr "Nombre:"
 
 msgid "Search Term:"
 msgstr "Concepto de búsqueda:"
@@ -720,6 +730,12 @@ msgstr "Ajustes para \"solo cambiar\""
 
 msgid "Switch ... Minutes Before Start:"
 msgstr "cambiar ... minutos antes del inicio:"
+
+msgid "Delete template"
+msgstr "Borrar plantilla:"
+
+msgid "Delete this template?"
+msgstr "¿Borrar plantilla?"
 
 msgid "Save as template"
 msgstr "Guardar como plantilla:"
@@ -1048,6 +1064,9 @@ msgstr "<p>Aqui se puede definir 2 búsquedas externas que seran accesibles en la
 
 msgid "Some examples:"
 msgstr "Unos ejemplos:"
+
+msgid "Please change the hostname to your local needs!"
+msgstr "Adapta el nombre del host a tus necesidades locales!"
 
 msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
 msgstr "<p>Esta sección es <strong>sólo</strong> para expertos, ¡es bastante importante saber que haces!</p>"
@@ -1420,8 +1439,8 @@ msgid "Config file written successfully."
 msgstr "¡Los archivos de configuración creados!"
 
 #, perl-format
-msgid "vdradmind.pl %s started with pid %d."
-msgstr "vdradmind.pl %s se ha iniciado con pid %d."
+msgid "%s %s started with pid %d."
+msgstr "%s %s se ha iniciado con pid %d."
 
 msgid "Not found"
 msgstr "No encontrado"

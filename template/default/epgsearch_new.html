@@ -6,7 +6,11 @@
 <?% IF mode_blacklist %?>
   <title>VDRAdmin-AM - <?% IF newtimer %?><?% gettext('Add New Blacklist') %?><?% ELSE %?><?% gettext('Edit Blacklist') %?><?% END %?></title>
 <?% ELSE %?>
-  <title>VDRAdmin-AM - <?% IF newtimer %?><?% gettext('Add New Search') %?><?% ELSE %?><?% gettext('Edit Search') %?><?% END %?></title>
+	<?% IF mode_template %?>
+  	<title>VDRAdmin-AM - <?% IF newtimer %?><?% gettext('Add New Template') %?><?% ELSE %?><?% gettext('Edit Template') %?><?% END %?></title>
+	<?% ELSE %?>
+  	<title>VDRAdmin-AM - <?% IF newtimer %?><?% gettext('Add New Search') %?><?% ELSE %?><?% gettext('Edit Search') %?><?% END %?></title>
+	<?% END %?>
 <?% END %?>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css"/>
 	<?% IF usercss %?>
@@ -34,6 +38,7 @@
 			changedAvoidRepeats(document.getElementById("avoid_repeats"));
 			changedAutoDelete(document.getElementById("select_autodelete"));
 <?% END %?>
+			document.getElementById("content").style.display = "block";
 		}
 
 		function changedSearchMode(mySelect)
@@ -181,7 +186,11 @@
 <?% IF mode_blacklist %?>
 					<h1><?% IF do_edit %?><?% gettext('Edit Blacklist') %?><?% ELSE %?><?% gettext('Add New Blacklist') %?><?% END %?></h1>
 <?% ELSE %?>
+	<?% IF mode_template %?>
+					<h1><?% gettext('Edit Template') %?></h1>
+	<?% ELSE %?>
 					<h1><?% IF do_edit %?><?% gettext('Edit Search') %?><?% ELSE %?><?% gettext('Add New Search') %?><?% END %?></h1>
+	<?% END %?>
 <?% END %?>
 				</td>
 <?% IF help_url %?>
@@ -193,6 +202,11 @@
 		</table>
 
 		<div id="content">
+			<script type="text/javascript" language="JavaScript1.2">
+			<!--
+				document.getElementById("content").style.display = "none";
+			//-->
+			</script>
 <?% IF did_search %?>
 	<?% IF matches %?>
 			<div id="results">
@@ -252,7 +266,11 @@
 				<?% tr_class = "row_odd" %?>
 				<tr class="<?% tr_class %?>">
 					<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
+<?% IF mode_template %?>
+					<td class="col_label"><h5><?% gettext('Name:') %?></h5></td>
+<?% ELSE %?>
 					<td class="col_label"><h5><?% gettext('Search Term:') %?></h5></td>
+<?% END %?>
 					<td class="col_value">
 						<input type="text" name="pattern" id="pattern" value="<?% epgsearch.pattern | html %?>" size="40" />
 					</td>
@@ -271,7 +289,7 @@
 						</select>
 						<div id="fuzzy_tolerance">
 							<?% gettext('Tolerance for "fuzzy":') %?>
-							<input type="text" name="fuzzy_tolerance" size="2" value="<?% epgsearch.fuzzy_tolerance %?>" />
+							<input type="text" name="fuzzy_tolerance" size="2" value="<?% epgsearch.fuzzy_tolerance | html %?>" />
 						</div>
 					</td>
 				</tr>
@@ -308,7 +326,7 @@
 									</tr>
 									<tr>
 										<td>
-											<input type="text" value="<?% ext.data_text %?>" size="10" name="extepg_<?% ext.id %?>_data_text"/>
+											<input type="text" value="<?% ext.data_text | html %?>" size="10" name="extepg_<?% ext.id %?>_data_text"/>
 										</td>
 									</tr>
 									<tr>
@@ -374,14 +392,14 @@
 								<tr>
 									<td class="col_label"><h5><?% gettext('Start After:') %?></h5></td>
 									<td class="col_value">
-										<input type="text" name="time_start" value="<?% epgsearch.time_start %?>" size="5" maxlength="5" />
+										<input type="text" name="time_start" value="<?% epgsearch.time_start | html %?>" size="5" maxlength="5" />
 										&nbsp;<?% gettext('o\'clock') %?>
 									</td>
 								</tr>
 								<tr>
 									<td class="col_label"><h5><?% gettext('Start Before:') %?></h5></td>
 									<td class="col_value">
-										<input type="text" name="time_stop" value="<?% epgsearch.time_stop %?>" size="5" maxlength="5" />
+										<input type="text" name="time_stop" value="<?% epgsearch.time_stop | html %?>" size="5" maxlength="5" />
 										&nbsp;<?% gettext('o\'clock') %?>
 									</td>
 								</tr>
@@ -399,14 +417,14 @@
 								<tr>
 									<td class="col_label"><h5><?% gettext('Min. Duration:') %?></h5></td>
 									<td class="col_value">
-										<input type="text" name="min_duration" value="<?% epgsearch.min_duration %?>" size="5" maxlength="5" />
+										<input type="text" name="min_duration" value="<?% epgsearch.min_duration | html %?>" size="5" maxlength="5" />
 										&nbsp;(<?% gettext('hh:mm') %?>)
 									</td>
 								</tr>
 								<tr>
 									<td class="col_label"><h5><?% gettext('Max. Duration:') %?></h5></td>
 									<td class="col_value">
-										<input type="text" name="max_duration" value="<?% epgsearch.max_duration %?>" size="5" maxlength="5" />
+										<input type="text" name="max_duration" value="<?% epgsearch.max_duration | html %?>" size="5" maxlength="5" />
 										&nbsp;(<?% gettext('hh:mm') %?>)
 									</td>
 								</tr>
@@ -475,9 +493,9 @@
 							</select>
 						</span>
 						<div id="set_action_timeframe">
-							<?% gettext('First day:') %?> <input type="text" name="searchtimer_from" id="searchtimer_from" value="<?% epgsearch.searchtimer_from %?>" size="12"/>
+							<?% gettext('First day:') %?> <input type="text" name="searchtimer_from" id="searchtimer_from" value="<?% epgsearch.searchtimer_from | html %?>" size="12"/>
 							&nbsp;
-							<?% gettext('Last day:') %?> <input type="text" name="searchtimer_until" id="searchtimer_until" value="<?% epgsearch.searchtimer_until %?>" size="12"/>
+							<?% gettext('Last day:') %?> <input type="text" name="searchtimer_until" id="searchtimer_until" value="<?% epgsearch.searchtimer_until | html %?>" size="12"/>
 						</div>
 						<div id="set_autodelete">
 							<?% gettext('Auto delete:') %?>&nbsp;
@@ -487,10 +505,10 @@
 								<option value="2" <?% IF epgsearch.autodelete == 2 %?>selected="selected"<?% END %?>><?% gettext('count days') %?></option>
 							</select>
 							<div id="del_after_recs">
-								<?% gettext('After ... recordings:') %?> <input type="text" name="del_after_recs" value="<?% epgsearch.del_after_recs %?>" size="5"/>
+								<?% gettext('After ... recordings:') %?> <input type="text" name="del_after_recs" value="<?% epgsearch.del_after_recs | html %?>" size="5"/>
 							</div>
 							<div id="del_after_days">
-								<?% gettext('After ... days after first recording:') %?> <input type="text" name="del_after_days" value="<?% epgsearch.del_after_days %?>" size="5"/>
+								<?% gettext('After ... days after first recording:') %?> <input type="text" name="del_after_days" value="<?% epgsearch.del_after_days | html %?>" size="5"/>
 							</div>
 						</div>
 					</td>
@@ -513,21 +531,21 @@
 					<tr class="row_even">
 						<td class="col_label"><h5><?% gettext('Directory:') %?></h5></td>
 						<td class="col_value">
-							<input type="text" name="directory" value="<?% epgsearch.directory %?>" size="40" />
+							<input type="text" name="directory" value="<?% epgsearch.directory | html %?>" size="40" />
 						</td>
 					</tr>
 					<tr class="row_odd">
 						<td class="col_label"><h5><?% gettext('Delete Recordings After ... Days:') %?></h5></td>
 						<td class="col_value">
-							<input type="text" name="delete_after" value="<?% epgsearch.delete_after %?>" size="3" />
+							<input type="text" name="delete_after" value="<?% epgsearch.delete_after | html %?>" size="3" />
 							&nbsp;&nbsp;<h5><?% gettext('Keep ... Recordings:') %?></h5>
-							<input type="text" name="keep_recordings" value="<?% epgsearch.keep_recordings %?>" size="3" />
+							<input type="text" name="keep_recordings" value="<?% epgsearch.keep_recordings | html %?>" size="3" />
 						</td>
 					</tr>
 					<tr class="row_even">
 						<td class="col_label"><h5><?% gettext('Pause, when ... recordings exist:') %?></h5></td>
 						<td class="col_value">
-							<input type="text" name="pause" value="<?% epgsearch.pause %?>" size="3" />
+							<input type="text" name="pause" value="<?% epgsearch.pause | html %?>" size="3" />
 						</td>
 					</tr>
 					<tr class="row_odd">
@@ -539,9 +557,9 @@
 									<tr>
 										<td class="col_label"><h5><?% gettext('Allowed Repeats:') %?></h5></td>
 										<td class="col_value">
-											<input type="text" name="allowed_repeats" value="<?% epgsearch.allowed_repeats %?>" size="3" id="allowed_repeats"/>
+											<input type="text" name="allowed_repeats" value="<?% epgsearch.allowed_repeats | html %?>" size="3" id="allowed_repeats"/>
 											&nbsp;&nbsp;<h5><?% gettext('Only Repeats Within ... Days:') %?></h5>
-											<input type="text" name="repeats_in_days" value="<?% epgsearch.repeats_in_days %?>" size="3" />
+											<input type="text" name="repeats_in_days" value="<?% epgsearch.repeats_in_days | html %?>" size="3" />
 										</td>
 									</tr>
 									<tr>
@@ -569,25 +587,25 @@
 					<tr class="row_even">
 						<td class="col_label"><h5><?% gettext('Priority:') %?></h5></td>
 						<td class="col_value">
-							<input type="text" name="prio" value="<?% epgsearch.prio %?>" size="2" maxlength="2" />
+							<input type="text" name="prio" value="<?% epgsearch.prio | html %?>" size="2" maxlength="2" />
 						</td>
 					</tr>
 					<tr class="row_odd">
 						<td class="col_label"><h5><?% gettext('Lifetime:') %?></h5></td>
 						<td class="col_value">
-							<input type="text" name="lft" value="<?% epgsearch.lft %?>" size="2" maxlength="2" />
+							<input type="text" name="lft" value="<?% epgsearch.lft | html %?>" size="2" maxlength="2" />
 						</td>
 					</tr>
 					<tr class="row_even">
 						<td class="col_label"><h5><?% gettext('Time Margin at Start:') %?></h5></td>
 						<td class="col_value">
-							<input type="text" name="bstart" value="<?% epgsearch.bstart %?>" size="5" maxlength="5" /> <?% gettext('minutes') %?>
+							<input type="text" name="bstart" value="<?% epgsearch.bstart | html %?>" size="5" maxlength="5" /> <?% gettext('minutes') %?>
 						</td>
 					</tr>
 					<tr class="row_odd">
 						<td class="col_label"><h5><?% gettext('Time Margin at Stop:') %?></h5></td>
 						<td class="col_value">
-							<input type="text" name="bstop" value="<?% epgsearch.bstop %?>" size="5" maxlength="5" /> <?% gettext('minutes') %?>
+							<input type="text" name="bstop" value="<?% epgsearch.bstop | html %?>" size="5" maxlength="5" /> <?% gettext('minutes') %?>
 						</td>
 					</tr>
 					<tr class="row_even">
@@ -607,7 +625,7 @@
 					<tr class="row_odd">
 						<td class="col_label"><h5><?% gettext('Switch ... Minutes Before Start:') %?></h5></td>
 						<td class="col_value">
-							<input type="text" name="switch_before" value="<?% epgsearch.switch_before %?>" size="2" maxlength="2" /> <?% gettext('minutes') %?>
+							<input type="text" name="switch_before" value="<?% epgsearch.switch_before | html %?>" size="2" maxlength="2" /> <?% gettext('minutes') %?>
 						</td>
 					</tr>
 				</table>
@@ -617,23 +635,37 @@
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
 			<tr>
-				<!--
+<?% IF mode_template %?>
 				<td align="left">
-					<input type="submit" class="submit" name="template" value="<?% gettext('Save as template') %?>" />
+					<input type="submit" class="submit" name="delete_template" value="<?% gettext('Delete template') %?>" onclick="return mdel(this, '<?% gettext('Delete this template?') %?>');" />
 				</td>
-				-->
+<?% ELSE %?>
+	<?% UNLESS mode_blacklist %?>
+				<td align="left">
+					<input type="submit" class="submit" name="save_template" value="<?% gettext('Save as template') %?>" onclick="return checkSearchPattern();" />
+				</td>
+	<?% END %?>
+<?% END %?>
 				<td align="right">
+<?% IF mode_template %?>
+					<input type="submit" class="submit" name="save_template" value="<?% gettext('Save') %?>" onclick="return checkSearchPattern();" />
+<?% ELSE %?>
 					<input type="submit" class="submit" name="save" value="<?% gettext('Save') %?>" onclick="return checkSearchPattern();" />
-<?% UNLESS mode_blacklist %?>
+	<?% UNLESS mode_blacklist %?>
           <input type="submit" class="submit" name="single_test" value="<?% gettext('Run') %?>" onclick="return checkSearchPattern();" />
+	<?% END %?>
 <?% END %?>
 					<input type="submit" class="submit" name="exit" value="<?% gettext('Cancel') %?>" />
 				</td>
 			</tr>
 		</table>
-		<?% IF do_edit %?>
-			<input type="hidden" name="id" value="<?% epgsearch.id %?>" />
-		<?% END %?>
+<?% IF mode_template %?>
+		<input type="hidden" name="template_id" value="<?% template_id %?>" />
+<?% ELSE %?>
+	<?% IF do_edit %?>
+		<input type="hidden" name="id" value="<?% epgsearch.id %?>" />
+	<?% END %?>
+<?% END %?>
 <?% IF mode_blacklist %?>
 		<input type="hidden" name="aktion" value="epgsearch_bl_aktion" />
 		<input type="hidden" name="mode_blacklist" value="1" />
@@ -641,7 +673,7 @@
 		<input type="hidden" name="aktion" value="epgsearch_aktion" />
 		<input type="hidden" name="results_menu" value="<?% epgsearch.results_menu %?>" />
 <?% END %?>
-		<input type="hidden" name="unused" value="<?% epgsearch.unused %?>" />
+		<input type="hidden" name="unused" value="<?% epgsearch.unused | html %?>" />
 	</form>
 </body>
 

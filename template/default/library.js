@@ -26,11 +26,11 @@ function callurl( url ) {
 }
 
 function popup(URL, win_w, win_h) {
-	window.open(URL, '_new', 'width=' + win_w + ', height=' + win_h + ', scrollbars=yes, resizable=yes, toolbar=no, status=no');
+	window.open(URL, '_blank', 'width=' + win_w + ', height=' + win_h + ', scrollbars=yes, resizable=yes, toolbar=no, status=no');
 }
 
 function toolbar(URL) {
-	window.open(URL, '_new', 'width=200, height=50');
+	window.open(URL, '_blank', 'width=200, height=50');
 }
 
 function AllMessages(myform)

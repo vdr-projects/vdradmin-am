@@ -47,7 +47,7 @@
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('SVDRP commands:') %?></h5></td>
 				<td class="col_value">
-					<input type="text" name="svdrp_cmd" value="<?% svdrp_cmd %?>"/>
+					<input type="text" name="svdrp_cmd" value="<?% svdrp_cmd | html %?>"/>
 					<input type="submit" class="submit" name="run_svdrpcmd" value="<?% gettext('Run') %?>" onclick="return confirm('<?% gettext('Really run this command?') %?>')" />
 				</td>
 			</tr>

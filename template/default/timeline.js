@@ -224,7 +224,7 @@ function BuildHeader()
          {
             diff_sec = tl.first_sec;
          }
-         W('<a href="' + tl.now_url + '&amp;time=' + format_date('%H:%M', diff_sec) + '&amp;frame=' + tl.first_sec + '">');
+         W('<a href="' + tl.now_url + '&amp;time=' + format_date('%H:%M', diff_sec) + '&amp;frame=' + tl.first_sec + '" title="' + format_date('%H:%M', diff_sec) + '">');
             W('<img src="bilder/pfeile_nachlinks.png" border="0" />');
          W('</a>');
       }
@@ -235,7 +235,7 @@ function BuildHeader()
       else
       {
          var diff_sec = tl.end_sec;
-         W('<a href="' + tl.now_url + '&amp;time=' + format_date('%H:%M', diff_sec) + '&amp;frame=' + tl.first_sec + '">');
+         W('<a href="' + tl.now_url + '&amp;time=' + format_date('%H:%M', diff_sec) + '&amp;frame=' + tl.first_sec + '" title="' + format_date('%H:%M', diff_sec) + '">');
             W('<img src="bilder/pfeile_nachrechts.png" border="0" />');
          W('</a>');
       }

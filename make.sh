@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LANGS="cs de es fr fi it nl ru"
-DIST_FILES="autotimer2searchtimer.pl ChangeLog COPYING CREDITS FAQ HISTORY INSTALL LGPL.txt README README.translators REQUIREMENTS contrib convert.pl install.sh lib locale make.sh template uninstall.sh vdradmind.pl vdradmind.pl.1"
+DIST_FILES="autotimer2searchtimer.pl ChangeLog COPYING CREDITS FAQ HISTORY INSTALL LGPL.txt README README.translators REQUIREMENTS contrib convert.pl install.sh lib locale make.sh template uninstall.sh vdradmind vdradmind.pl vdradmind.pl.1"
 INSTALL_SH=./install.sh
 CVS2CL="./cvs2cl.pl"	# get it at http://www.red-bean.com/cvs2cl/
 TMPDIR=/tmp
@@ -53,6 +53,7 @@ function do_cvs()
 	# Create missing symbolic links
 	[ -e uninstall.sh ] || ln -s install.sh uninstall.sh
 	[ -e README ] || ln -s INSTALL README
+	[ -e vdradmind ] || ln -s vdradmind.pl vdradmind
 }
 
 # Extract VDRAdmin-AM version from vdradmind.pl
@@ -116,14 +117,12 @@ function do_utf8_generate()
 			[ -e $file ] || continue
 			filename=${file%.po}
 			encoding=iso$(getOrigEncoding $filename.po)
-			newfilename=$(echo $filename | tr [:lower:] [:upper:])
-			if [ "${encoding}" = "iso8859-1" ]; then
-    		# just copy
-				cp $filename.po ${filename}_$newfilename.utf8.po ;
-			else
-				# convert
-				iconv -f $encoding -t utf-8 $filename.po > ${filename}_$newfilename.utf8.po
-			fi
+			case $filename in
+				cs) newfilename=CZ;;
+				*)  newfilename=$(echo $filename | tr [:lower:] [:upper:])
+			esac
+			# convert
+			iconv -f $encoding -t utf-8 $filename.po > ${filename}_$newfilename.utf8.po
 		done
 
 		# generate us_US.utf8.po from POT template
@@ -132,7 +131,7 @@ function do_utf8_generate()
 		# map ISO-8859-1 encoding to UTF-8 instead of the respective "old" encodings
 		for file in $(ls *.utf8.po); do
 			encoding=ISO-$(getOrigEncoding $file)
-    	sed -e 's:msgstr "'$encoding'":msgstr "UTF-8":g' $file > $file.tmp
+    	sed -e 's:msgstr "'$encoding'":msgstr "UTF-8":g' -e 's#"Content-Type: text/plain; charset=.*#"Content-Type: text/plain; charset=UTF-8\\n"#g' $file > $file.tmp
     	mv $file.tmp $file
 		done
 	)
@@ -172,6 +171,12 @@ do
 			;;
 
 		po)
+			do_po
+			;;
+
+		local)
+			do_cvs
+			do_utf8_generate
 			do_po
 			;;
 

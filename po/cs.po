@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
-"Report-Msgid-Bugs-To: Andreas Mair <mail@andreas.vdr-developer.org>\n"
-"POT-Creation-Date: 2008-06-30 08:26+0200\n"
+"Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
+"POT-Creation-Date: 2008-12-02 07:48+0100\n"
 "PO-Revision-Date: 2006-09-23 13:14+0200\n"
 "Last-Translator: Karel Borkovec <her-ur@her-ur.org>\n"
 "Language-Team:  <cs@li.org>\n"
@@ -121,8 +121,9 @@ msgstr "Kontrola AutoÈasovaèù:"
 msgid "Depending on how this timer has been programmed you have up to three possible settings:"
 msgstr ""
 
+#, fuzzy
 msgid "Transmission Identification"
-msgstr ""
+msgstr "Identifikace"
 
 msgid "Monitor this timer using the identification provided in the EPG. Please note that this only works if the provided identification is a fix and unique value! This option is not available with timers programmed in VDR."
 msgstr ""
@@ -440,8 +441,9 @@ msgstr ""
 msgid "Choosing the right search items decides whether only the wanted broadcasts or broadcasts having similar names or even nothing gets recorded.<br />Case doesn't matter, \"X-Files\" matches anything \"x-files\" will match. You can set multiple search items by separating them with spaces. Only broadcasts will match if they contain <strong>all</strong> items.<br />You'd better only use letters and numbers for search items, as the EPG often miss colons, brackets and other characters.<br />Experts can also use regular expressions, but you have to get needed information from the VDRAdmin-AM sources (undocumented feature).<br /><br />You can exclude broadcasts so that they don't get recorded even if they would match an AutoTimer. Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, one event a line. This file must be located in your VDRAdmin-AM's configuration folder. If this string is found either in the EPG's <u>title</u> or in <u>title~subtitle</u>, this event will not be programmed by AutoTimer. So you can disable complete episodes (for example when using \"Enterprise\" as Blacklist-string) or only one episode (when using \"Enterprise~Azati Prime\" as Blacklist-string)."
 msgstr ""
 
+#, fuzzy
 msgid "Here you can define the EPG sections where VDRAdmin-AM should look for the search pattern."
-msgstr ""
+msgstr "Zde mù¾ete nastavit jakou lokalizaci VDRAdmin-AM chcete pou¾ívat."
 
 msgid "Use these checkboxes to limit searching for matching broadcasts to a set of weekdays."
 msgstr ""
@@ -449,11 +451,13 @@ msgstr ""
 msgid "The channel to look for matching broadcasts or \"all\" to search in all known or wanted channels. You can define the wanted channels for AutoTimer in \"Configuration\"."
 msgstr ""
 
+#, fuzzy
 msgid "A broadcast must start after the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
-msgstr ""
+msgstr "Toto je èas kdy by VDR mìlo zaèít nahrávat. První textové pole je pro \"hodinu\" a druhé pro \"minutu\"."
 
+#, fuzzy
 msgid "A broadcast must end before the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
-msgstr ""
+msgstr "Toto je èas kdy by VDR mìlo zaèít nahrávat. První textové pole je pro \"hodinu\" a druhé pro \"minutu\"."
 
 msgid "Set this option to \"yes\" if all timers programed by this AutoTimer should have individual start/stop margins and enter the values in the next two text boxes."
 msgstr ""
@@ -489,8 +493,17 @@ msgstr "zaèíná v"
 msgid "Add New Blacklist"
 msgstr "Pøidat nový AutoÈasovaè"
 
+#, fuzzy
 msgid "Edit Blacklist"
-msgstr ""
+msgstr "Pøidat nový AutoÈasovaè"
+
+#, fuzzy
+msgid "Add New Template"
+msgstr "Pøidat nový AutoÈasovaè"
+
+#, fuzzy
+msgid "Edit Template"
+msgstr "©ablona:"
 
 #, fuzzy
 msgid "Add New Search"
@@ -506,12 +519,17 @@ msgstr ""
 msgid "You didn't select at least one of\\ntitle, subtitle or description.\\nDo you really want to use this search?"
 msgstr ""
 
+#, fuzzy
 msgid "Hide results"
-msgstr ""
+msgstr "Hledat v:"
 
 #, fuzzy
 msgid "Settings"
 msgstr "Obecné nastavení"
+
+#, fuzzy
+msgid "Name:"
+msgstr "Jméno"
 
 #, fuzzy
 msgid "Search Term:"
@@ -608,8 +626,9 @@ msgstr "Délka:"
 msgid "Use Day of Week:"
 msgstr ""
 
+#, fuzzy
 msgid "Use Blacklists:"
-msgstr ""
+msgstr "Pøidat nový AutoÈasovaè"
 
 #, fuzzy
 msgid "selection"
@@ -643,8 +662,9 @@ msgstr ""
 msgid "First day:"
 msgstr "Pátek"
 
+#, fuzzy
 msgid "Last day:"
-msgstr ""
+msgstr "Pátek"
 
 msgid "Auto delete:"
 msgstr ""
@@ -661,8 +681,9 @@ msgstr "Pondìlí"
 msgid "After ... recordings:"
 msgstr "Nahrávky"
 
+#, fuzzy
 msgid "After ... days after first recording:"
-msgstr ""
+msgstr "Nahrávky"
 
 msgid "Settings for action \"record\""
 msgstr ""
@@ -705,8 +726,17 @@ msgstr ""
 msgid "Switch ... Minutes Before Start:"
 msgstr ""
 
+#, fuzzy
+msgid "Delete template"
+msgstr "©ablona:"
+
+#, fuzzy
+msgid "Delete this template?"
+msgstr "Smazat èasovaè?"
+
+#, fuzzy
 msgid "Save as template"
-msgstr ""
+msgstr "©ablona:"
 
 msgid "Create New Timer"
 msgstr "Vytvoøit nový èasovaè"
@@ -1024,13 +1054,17 @@ msgstr ""
 msgid "Suffix for recordings streaming:"
 msgstr "Pøípona pro nahrávky streamu:"
 
+#, fuzzy
 msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
-msgstr ""
+msgstr "Pøípona pro nahrávky streamu:"
 
 msgid "<p>Here you can define two external searches that you can access in the EPG views. You simply have to find the required URL and where the search pattern has to be located. %TITLE% will be substituted by the broadcast's EPG title.</p>"
 msgstr ""
 
 msgid "Some examples:"
+msgstr ""
+
+msgid "Please change the hostname to your local needs!"
 msgstr ""
 
 msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
@@ -1267,8 +1301,9 @@ msgstr ""
 msgid "Title:"
 msgstr "Název"
 
+#, fuzzy
 msgid "User-defined search:"
-msgstr ""
+msgstr "®ádný èasovaè není definován!"
 
 msgid "In \"AutoTimer\"?"
 msgstr "V \"AutoÈasovaèi\"?"
@@ -1382,8 +1417,8 @@ msgid "Config file written successfully."
 msgstr "Konfiguraèní soubor ulo¾en v poøádku."
 
 #, perl-format
-msgid "vdradmind.pl %s started with pid %d."
-msgstr "vdradmind.pl %s startuje s pidem %d."
+msgid "%s %s started with pid %d."
+msgstr "%s %s startuje s pidem %d."
 
 msgid "Not found"
 msgstr "Nefunguje"

@@ -24,14 +24,16 @@
 
 require 5.004;
 
-my $VERSION = "3.6.2";
+my $VERSION = "3.6.3";
 my $BASENAME;
 my $EXENAME;
+my $PROCNAME = "vdradmind";
 
 BEGIN {
     $0 =~ /(^.*\/)/;
     $EXENAME  = $0;
     $BASENAME = $1;
+    $0 = $PROCNAME;
     unshift(@INC, "/usr/share/vdradmin/lib");
     unshift(@INC, $BASENAME . "lib/");
 }
@@ -67,6 +69,7 @@ use MIME::Base64();
 use File::Temp ();
 use Shell qw(ps locale);
 use URI::Escape;
+use Encode;
 
 my $InetSocketModule = 'IO::Socket::INET';
 my $can_use_net_smtp = 1;
@@ -246,6 +249,7 @@ my $VDRVERSION    = 0;                      # Numeric VDR version, e.g. 10344
 my $VDRVERSION_HR;                          # Human readable VDR version, e.g. 1.3.44
 my $EPGSEARCH_VERSION = 0;                  # Numeric epgsearch plugin version, e.g. 918
 my %ERROR_MESSAGE;
+my $MY_ENCODING = '';
 
 my ($TEMPLATEDIR, $CONFFILE, $LOGDIR, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME, $ETCDIR, $USER_CSS);
 if (!$SEARCH_FILES_IN_SYSTEM) {
@@ -278,36 +282,6 @@ textdomain("vdradmin");
 my $UserCSS;
 $UserCSS = "user.css" if (-e "$USER_CSS");
 
-#use Template::Constants qw( :debug );
-# IMHO a better Template Modul ;-)
-# some useful options (see below for full list)
-my $Xtemplate_vars = { usercss  => $UserCSS,
-                       gettext  => sub{ $_[0] =~ s/\n\s+//g; return gettext($_[0]); },
-                       config   => \%CONFIG,
-                       features => \%FEATURES
-};
-
-my $Xconfig = {
-    START_TAG    => '\<\?\%',        # Tagstyle
-    END_TAG      => '\%\?\>',        # Tagstyle
-    INCLUDE_PATH => $TEMPLATEDIR,    # or list ref
-    INTERPOLATE  => 0,               # expand "$var" in plain text
-    PRE_CHOMP    => 1,               # cleanup whitespace
-    POST_CHOMP   => 1,               # cleanup whitespace
-    EVAL_PERL    => 1,               # evaluate Perl code blocks
-    CACHE_SIZE   => 10000,           # Tuning for Templates
-    COMPILE_EXT  => 'cache',         # Tuning for Templates
-    COMPILE_DIR  => '/tmp',          # Tuning for Templates
-    VARIABLES    => $Xtemplate_vars,
-
-    #DEBUG        => DEBUG_ALL,
-};
-
-# create Template object
-my $Xtemplate = Template->new($Xconfig);
-
-# ---- End new template section ----
-
 my $USE_SHELL_GZIP = false;          # set on false to use the gzip library
 
 my ($DEBUG) = 0;
@@ -333,12 +307,12 @@ my $DAEMON = 1;
 for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
     $_ = $ARGV[$i];
     if (/^(-h|--help)/) {
-        print("Usage $0 [OPTION]...\n");
+        print("Usage $EXENAME [OPTION]...\n");
         print("A perl client for the Linux Video Disk Recorder.\n\n");
         print("  -nf       --nofork            don't fork\n");
         print("  -c        --config            run configuration dialog\n");
         print("  -d [dir]  --cfgdir [dir]      use [dir] for configuration files\n");
-        print("  -k        --kill              kill a forked vdradmind.pl\n");
+        print("  -k        --kill              kill a forked vdradmind[.pl]\n");
         print("  -p [name] --pid [name]        name of pidfile\n");
 #TODO        print("  -6        --ipv6              use IPv6\n");
         print("  -h        --help              this message\n");
@@ -410,6 +384,36 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
     }
 }
 
+#use Template::Constants qw( :debug );
+# IMHO a better Template Modul ;-)
+# some useful options (see below for full list)
+my $Xtemplate_vars = { usercss  => $UserCSS,
+                       gettext  => sub{ $_[0] =~ s/\n\s+//g; return gettext($_[0]); },
+                       config   => \%CONFIG,
+                       features => \%FEATURES
+};
+
+my $Xconfig = {
+    START_TAG    => '\<\?\%',        # Tagstyle
+    END_TAG      => '\%\?\>',        # Tagstyle
+    INCLUDE_PATH => $TEMPLATEDIR,    # or list ref
+    INTERPOLATE  => 0,               # expand "$var" in plain text
+    PRE_CHOMP    => 1,               # cleanup whitespace
+    POST_CHOMP   => 1,               # cleanup whitespace
+    EVAL_PERL    => 1,               # evaluate Perl code blocks
+    CACHE_SIZE   => 10000,           # Tuning for Templates
+    COMPILE_EXT  => 'cache',         # Tuning for Templates
+    COMPILE_DIR  => '/tmp',          # Tuning for Templates
+    VARIABLES    => $Xtemplate_vars,
+
+    #DEBUG        => DEBUG_ALL,
+};
+
+# create Template object
+my $Xtemplate = Template->new($Xconfig);
+
+# ---- End new template section ----
+
 ReadConfig();
 LoadTranslation();
 
@@ -425,13 +429,13 @@ if (-e "$PIDFILE") {
         print("There's already a copy of this program running! (pid: $pid)\n");
         my $found;
         foreach (ps("ax")) {
-            $found = 1 if (/$pid\s.*(\s|\/)$EXENAME.*/);
+            $found = 1 if (/$pid\s.*\[$PROCNAME\].*/);
         }
         if ($found) {
             print("If you feel this is an error, remove $PIDFILE!\n");
             exit(1);
         }
-        print("The pid $pid is not a running $EXENAME process, so I'll start anyway.\n");
+        print("The pid $pid is not a running $PROCNAME process, so I'll start anyway.\n");
     } else {
         print("$PIDFILE exists, but is empty, so I'll start anyway.\n");
     }
@@ -441,7 +445,7 @@ if ($DAEMON) {
     open(STDIN, "</dev/null");
     defined(my $pid = fork) or die "Cannot fork: $!\n";
     if ($pid) {
-        printf(gettext("vdradmind.pl %s started with pid %d.") . "\n", $VERSION, $pid);
+        printf(gettext("%s %s started with pid %d.") . "\n", $EXENAME, $VERSION, $pid);
         writePID($pid);
         exit(0);
     }
@@ -470,7 +474,7 @@ my @GUEST_USER = qw(prog_detail prog_list prog_list2 prog_timeline timer_list at
   prog_summary rec_list rec_detail show_top toolbar show_help about);
 my @TRUSTED_USER = (
     @GUEST_USER, qw(prog_detail_form prog_detail_aktion at_timer_edit at_timer_new at_timer_save at_timer_test at_timer_delete
-      epgsearch_upds epgsearch_edit epgsearch_save epgsearch_delete epgsearch_toggle timer_new_form timer_add timer_delete timer_toggle rec_delete rec_rename rec_edit
+      epgsearch_upds epgsearch_edit epgsearch_save epgsearch_save_template epgsearch_delete_template epgsearch_delete epgsearch_toggle timer_new_form timer_add timer_delete timer_toggle rec_delete rec_rename rec_edit
       config prog_switch rc_show rc_hitk grab_picture at_timer_toggle tv_show tv_switch
       live_stream rec_stream rec_play rec_cut force_update vdr_cmds export_channels_m3u epgsearch_config epgsearch_bl_edit epgsearch_bl_save epgsearch_bl_delete)
 );
@@ -585,6 +589,8 @@ while (true) {
             $real_aktion = "timer_toggle" if ($q->param("timer_active") || $q->param("timer_inactive"));
         } elsif ($real_aktion eq "epgsearch_aktion") {
             $real_aktion = "epgsearch_save";
+            $real_aktion = "epgsearch_save_template" if ($q->param("save_template"));
+            $real_aktion = "epgsearch_delete_template" if ($q->param("delete_template"));
             $real_aktion = "epgsearch_delete" if ($q->param("delete"));
             $real_aktion = "epgsearch_edit" if ($q->param("single_test"));
             $real_aktion = "epgsearch_list" if ($q->param("execute"));
@@ -2199,6 +2205,8 @@ sub epgsearch_list {
 sub epgsearch_edit {
     my $id = $q->param("id");
     my $do_test = $q->param("single_test");
+    my $edit_template = $q->param("edit_template");
+    $do_test = 0 if ($edit_template);
 
     my $search;
     my @blacklists;
@@ -2222,7 +2230,7 @@ sub epgsearch_edit {
         if (defined $q->param("template")) {
             my @temp = GetEpgSearchTemplate($q->param("template"));
             $search = pop @temp;
-            $search->{pattern} = ""; # don't want the template's name as search pattern
+            $search->{pattern} = "" unless ($edit_template); # don't want the template's name as search pattern
             @sel_bl = split(/\|/, $search->{sel_blacklists});
         } else {
             #TODO: defaults for PRIO, LFT, BUFFER START/STOP
@@ -2277,7 +2285,9 @@ sub epgsearch_edit {
                  ch_groups     => \@ch_groups,
                  did_search    => $do_test,
                  matches       => (@matches ? \@matches : undef),
-                 do_edit       => (defined $id ? "1" : undef),
+                 do_edit       => (defined $edit_template ? undef : (defined $id ? "1" : undef)),
+                 mode_template => $edit_template,
+                 template_id   => $q->param("template"),
                  extepg        => \@extepg,
                  epgs_settings => \%EPGSEARCH_SETTINGS
     };
@@ -2788,6 +2798,19 @@ sub epgsearch_save {
     return (headerForward("$MyURL?aktion=epgsearch_list"));
 }
 
+sub epgsearch_save_template {
+    my $cmd = (defined $q->param("template_id") ? "EDIT " . $q->param("template_id")
+                                                : "NEWT 0")
+              . ":" . epgsearch_Param2Line();
+    SendCMD("plug epgsearch " . $cmd);
+    return (headerForward("$MyURL?aktion=epgsearch_list"));
+}
+
+sub epgsearch_delete_template {
+    SendCMD("plug epgsearch DELT " . $q->param("template_id"));
+    return (headerForward("$MyURL?aktion=epgsearch_list"));
+}
+
 sub epgsearch_delete {
     my $id = $q->param("id");
     if (defined $id) {
@@ -3257,7 +3280,9 @@ sub LoadTranslation {
 
     setlocale(LC_ALL, $CONFIG{LANG});
     $LANG = $CONFIG{LANG};
-    bind_textdomain_codeset("vdradmin", gettext("ISO-8859-1")) if($can_use_bind_textdomain_codeset);
+    $MY_ENCODING = gettext("ISO-8859-1");
+    bind_textdomain_codeset("vdradmin", $MY_ENCODING) if($can_use_bind_textdomain_codeset);
+    CGI::charset($MY_ENCODING);
 }
 
 sub HelpURL {
@@ -3518,7 +3543,7 @@ sub ReadConfig {
         delete $CONFIG{VDRVFAT};
 
     } else {
-        print "$CONFFILE doesn't exist. Please run \"$0 --config\"\n";
+        print "$CONFFILE doesn't exist. Please run \"$EXENAME --config\"\n";
         print "Exiting!\n";
         exit(1);
 
@@ -3917,9 +3942,15 @@ sub prog_list {
     for (my $i = 0 ; $i <= $#channel ; $i++) {
         ($ci = $i) if ($vdr_id == $channel[$i]->{vdr_id});
     }
-    my ($next_channel, $prev_channel);
-    ($prev_channel = $channel[ $ci - 1 ]->{vdr_id}) if ($ci > 0);
-    ($next_channel = $channel[ $ci + 1 ]->{vdr_id}) if ($ci < $#channel);
+    my ($next_channel, $prev_channel, $next_channel_name, $prev_channel_name);
+    if ($ci > 0) {
+        $prev_channel = $channel[ $ci - 1 ]->{vdr_id};
+        $prev_channel_name = $channel[ $ci - 1 ]->{name};
+    }
+    if ($ci < $#channel) {
+        $next_channel = $channel[ $ci + 1 ]->{vdr_id};
+        $next_channel_name = $channel[ $ci + 1 ]->{name};
+    }
 
     #
     my (@show, $progname, $cnumber);
@@ -3932,6 +3963,8 @@ sub prog_list {
                  {  endd => 1,
                     next_channel => $next_channel ? "$MyURL?aktion=prog_list&amp;vdr_id=$next_channel" : undef,
                     prev_channel => $prev_channel ? "$MyURL?aktion=prog_list&amp;vdr_id=$prev_channel" : undef,
+                    next_channel_name => $next_channel_name,
+                    prev_channel_name => $prev_channel_name,
                  }
             ) if (scalar(@show) > 0);
             push(@show,
@@ -3940,6 +3973,8 @@ sub prog_list {
                     newd  => 1,
                     next_channel => $next_channel ? "$MyURL?aktion=prog_list&amp;vdr_id=$next_channel" : undef,
                     prev_channel => $prev_channel ? "$MyURL?aktion=prog_list&amp;vdr_id=$prev_channel" : undef,
+                    next_channel_name => $next_channel_name,
+                    prev_channel_name => $prev_channel_name,
                  }
             );
             $day = strftime("%d", localtime($event->{start}));
@@ -4155,17 +4190,23 @@ sub prog_list2 {
     }
     @days = sort({ $a->{sort} <=> $b->{sort} } @days);
     my $prev_day;
+    my $prev_day_name;
     my $cur_day;
     my $next_day;
+    my $next_day_name;
     foreach (@days) {
         if($_->{sort} == $day) {
             $cur_day = $_->{sort};
             next;
         } elsif($cur_day) {
             $next_day = $_->{sort};
+            $next_day_name = $_->{name};
             last;
         }
-        $prev_day = $_->{sort} unless($cur_day);
+        unless($cur_day) {
+            $prev_day = $_->{sort};
+            $prev_day_name = $_->{name};
+        }
     }
 
     #
@@ -4182,6 +4223,8 @@ sub prog_list2 {
         stream_live_on => $FEATURES{STREAMDEV} && $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
         prevdayurl     => $prev_day ? "$MyURL?aktion=prog_list2&amp;day=" . $prev_day . ($param_time ? "&amp;time=$param_time" : "") : undef,
         nextdayurl     => $next_day ? "$MyURL?aktion=prog_list2&amp;day=" . $next_day . ($param_time ? "&amp;time=$param_time" : "") : undef,
+        prevdaytext    => $prev_day_name,
+        nextdaytext    => $next_day_name,
         toolbarurl     => "$MyURL?aktion=toolbar",
         ch_groups      => getChannelGroups("$MyURL?aktion=prog_list2&amp;day=" . $cur_day . ($param_time ? "&amp;time=$param_time" : ""), $CONFIG{CHANNELS_WANTED_PRG2})
     };
@@ -4373,7 +4416,9 @@ sub timer_list {
 
     @days = sort({ $a->{sortfield} <=> $b->{sortfield} } @days);
     my $prev_day;
+    my $prev_day_name;
     my $next_day;
+    my $next_day_name;
     my $cur_day;
     foreach (@days) {
         if ($_->{current}) {
@@ -4382,9 +4427,11 @@ sub timer_list {
         }
         if ($cur_day) {
             $next_day = $_->{sortfield};
+            $next_day_name = $_->{day};
             last;
         } else {
             $prev_day = $_->{sortfield};
+            $prev_day_name = $_->{day};
         }
     }
 
@@ -4455,7 +4502,9 @@ sub timer_list {
                  activateurl   => sprintf("%s?aktion=timer_toggle&amp;active=1", $MyURL),
                  inactivateurl => sprintf("%s?aktion=timer_toggle&amp;active=0", $MyURL),
                  prevdayurl    => $prev_day ? sprintf("%s?aktion=timer_list&amp;active=0&amp;timer=%s", $MyURL, $prev_day) : undef,
-                 nextdayurl    => $next_day ? sprintf("%s?aktion=timer_list&amp;active=0&amp;timer=%s", $MyURL, $next_day) : undef
+                 nextdayurl    => $next_day ? sprintf("%s?aktion=timer_list&amp;active=0&amp;timer=%s", $MyURL, $next_day) : undef,
+                 prevdaytext   => $prev_day_name,
+                 nextdaytext   => $next_day_name
     };
     return showTemplate("timer_list.html", $vars);
 }
@@ -5154,6 +5203,8 @@ sub at_timer_test {
     my @at_matches = AutoTimer(1, @at);
     my $pattern    = $q->param("pattern");
     $pattern =~ s/"/\&quot;/g;
+    my $directory = $q->param("directory");
+    $directory =~ s/"/\&quot;/g;
     my $vars = {
         id       => $id,
         url      => $MyURL,
@@ -5181,7 +5232,7 @@ sub at_timer_test {
         lft         => $q->param("lft"),
         episode     => $q->param("episode") ? $q->param("episode") : 0,
         done        => $q->param("done"),
-        directory   => $q->param("directory"),
+        directory   => $directory,
         at_test     => 1,
         matches     => \@at_matches
     };
@@ -6157,6 +6208,7 @@ sub config {
     for my $dir (<$TEMPLATEDIR/*>) {
         next if (!-d $dir);
         $dir =~ s/.*\///g;
+        next if ($dir eq 'CVS');
         my $found = 0;
         for (@template) { ($found = 1) if ($1 && ($_->{name} eq $1)); }
         if (!$found) {
@@ -6187,6 +6239,7 @@ sub config {
     my @skinlist;
     foreach my $file (glob(sprintf("%s/%s/*", $TEMPLATEDIR, $CONFIG_TEMP{TEMPLATE}))) {
         my $name = (split('\/', $file))[-1];
+        next if ($name eq 'CVS' || $name eq 'js');
         push(@skinlist,
              {  name => $name,
                 sel  => ($CONFIG_TEMP{SKIN} eq $name ? 1 : 0)
@@ -6523,7 +6576,7 @@ sub false ()      { main::false(); }
 sub LOG_VDRCOM () { main::LOG_VDRCOM(); }
 sub CRLF ()       { main::CRLF(); }
 
-my ($SOCKET, $EPGSOCKET, $query, $connected);
+my ($SOCKET, $EPGSOCKET, $query, $connected, $VDR_ENCODING, $need_recode);
 
 sub new {
     my $invocant = shift;
@@ -6532,6 +6585,8 @@ sub new {
     bless($self, $class);
     $connected = false;
     $query     = false;
+    $VDR_ENCODING = '';
+    $need_recode = 0;
     return $self;
 }
 
@@ -6553,6 +6608,9 @@ sub myconnect {
         $line =~ /^220.*VideoDiskRecorder (\d+)\.(\d+)\.(\d+).*;/;
         $VDRVERSION_HR = "$1.$2.$3";
         $VDRVERSION    = ($1 * 10000 + $2 * 100 + $3);
+        $line =~ /^220.*VideoDiskRecorder (\d+)\.(\d+)\.(\d+).*; .*; (.*)\r|$/;
+        $VDR_ENCODING = $4;
+        $need_recode = ($VDR_ENCODING and $VDR_ENCODING ne $MY_ENCODING) ? 1 : 0;
         getSupportedFeatures($this);
     }
 }
@@ -6621,6 +6679,7 @@ sub readoneline {
             $query = 0;
         }
         $line = substr($line, 4, length($line));
+        Encode::from_to($line, $VDR_ENCODING, $MY_ENCODING) if ($need_recode);
         main::Log(LOG_VDRCOM, sprintf("LOG_VDRCOM: read \"%s\"", $line));
         return ($line);
     } else {
@@ -6635,7 +6694,9 @@ sub readresponse {
         while (<$SOCKET>) {
             chomp;
             my $end = substr($_, 3, 1) ne "-";
-            push(@a, substr($_, 4, length($_)));
+            $_ = substr($_, 4, length($_));
+            Encode::from_to($_, $VDR_ENCODING, $MY_ENCODING) if ($need_recode);
+            push(@a, $_);
             last if ($end);
         }
     }

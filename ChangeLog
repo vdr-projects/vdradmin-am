@@ -1,3 +1,223 @@
+2008-12-13  tag v3_6_3
+
+2008-12-13  amair
+
+	* vdradmind.pl:
+
+	Replaced $0 by $EXENAME.
+
+2008-12-13  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Updated for release 3.6.3.
+
+2008-12-12  amair
+
+	* vdradmind.pl:
+
+	Move Template-Toolkit init after command line evaluation.
+
+2008-12-12  amair
+
+	* HISTORY:
+
+	Updated.
+
+2008-12-11  amair
+
+	* vdradmind.pl, template/default/prog_list.html,
+	  template/default/prog_list2.html, template/default/timeline.js,
+	  template/default/timer_list.html:
+
+	Added tooltips for previous/next arrow buttons to show the destination.
+
+2008-12-11  amair
+
+	* po/es.po:
+
+	Updated.
+
+2008-12-05  amair
+
+	* vdradmind.pl, template/default/config.html,
+	  template/default/epgsearch_new.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html,
+	  template/default/prog_timeline.html,
+	  template/default/timer_list.html,
+	  template/default/timer_new.html, template/default/vdr_cmds.html:
+
+	Fix problems with variables having quotes when used in '<input value="<?% var %?>'>.
+
+2008-12-03  amair
+
+	* install.sh, vdradmind.pl:
+
+	Changed process name to "vdradmind".
+
+2008-12-03  amair
+
+	* po/it.po:
+
+	Updated.
+
+2008-12-02  amair
+
+	* INSTALL, README, README.translators, install.sh, make.sh,
+	  vdradmind.pl, vdradmind.pl.1, po/cs.po, po/de.po, po/es.po,
+	  po/fi.po, po/fr.po, po/it.po, po/nl.po, po/ru.po,
+	  po/vdradmin.pot:
+
+	Changed executable's name from "vdradmind.pl" to "vdradmind".
+
+2008-12-02  amair
+
+	* po/nl.po:
+
+	Updated.
+
+2008-12-01  amair
+
+	* vdradmind.pl.1:
+
+	Updated.
+
+2008-12-01  amair
+
+	* tools/update-po:
+
+	Disable fuzzy matching.
+
+2008-12-01  amair
+
+	* vdradmind.pl:
+
+	Hide CVS folders from skin and template list.
+
+2008-12-01  amair
+
+	* template/default/epgsearch_new.html:
+
+	Initially hide content area to reduce flickering if JavaScript is used.
+
+2008-09-26  amair
+
+	* make.sh:
+
+	cs_CS should be cs_CZ.
+
+2008-09-26  amair
+
+	* po/de.po:
+
+	Change encoding to ISO-8859-15.
+
+2008-09-26  amair
+
+	* make.sh:
+
+	Fixed *.po to *.utf8.po recoding.
+
+2008-09-26  amair
+
+	* po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po, po/it.po,
+	  po/nl.po, po/ru.po, po/vdradmin.pot:
+
+	Added new translation strings.
+
+2008-09-26  amair
+
+	* template/default/navigation.html, template/default/tv.html:
+
+	Reworked open_tv() JavaScript function.
+
+2008-09-26  amair
+
+	* template/default/epgsearch_new.html:
+
+	When editing templates print "Name" instead of "Search Term".
+
+2008-09-24  amair
+
+	* template/default/navigation.html, template/default/rc.html,
+	  template/default/tv.html, template/default/default/fern_41.jpg,
+	  template/default/default/fern_42.jpg,
+	  template/default/default/fern_43.jpg,
+	  template/default/default/fern_44.jpg,
+	  template/default/default/fern_45.jpg,
+	  template/default/default/fern_46.jpg,
+	  template/default/default/fern_47.jpg,
+	  template/default/default/fern_48.jpg:
+
+	Added Play/Stop/FastForward/etc. buttons to remote controls (based on patch by L.Locke @vdr-portal.de).
+
+2008-09-19  amair
+
+	* vdradmind.pl, template/default/epgsearch_list.html,
+	  template/default/epgsearch_new.html:
+
+	Added: epgsearch templates can be created, modified and deleted.
+
+2008-09-10  amair
+
+	* vdradmind.pl:
+
+	Read used character encoding in SVDRP connections and recode result to the encoding used in the current locale.
+
+2008-08-04  amair
+
+	* po/it.po:
+
+	Updated.
+
+2008-07-16  amair
+
+	* po/it.po:
+
+	Updated.
+
+2008-07-09  amair
+
+	* template/default/library.js:
+
+	"_new" should be "_blank".
+
+2008-07-09  amair
+
+	* po/it.po:
+
+	Updated.
+
+2008-07-08  amair
+
+	* vdradmind.pl, po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po,
+	  po/it.po, po/nl.po, po/ru.po, po/vdradmin.pot,
+	  template/default/help_config.html, tools/tmplgettext,
+	  tools/update-po:
+
+	- Included missing translation.
+	- Fixed bugs in .po creating.
+
+2008-07-08  amair
+
+	* po/it.po:
+
+	Updated.
+
+2008-07-07  amair
+
+	* CREDITS, HISTORY, po/it.po, template/default/about.html:
+
+	Changed "Gringo" to "Diego Pierotto".
+
+2008-06-30  scop
+
+	* install.sh:
+
+	Drop dead EPGDATA.
+
 2008-06-30  tag v3_6_2
 
 2008-06-30  amair

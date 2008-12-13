@@ -38,12 +38,12 @@ to get a complete VDRAdmin-AM folder:
 
 4a) run locally (=no installation)
     First you have to configure VDRAdmin-AM. This only has to be done once.
-    $ ./vdradmind.pl --config
+    $ ./vdradmind --config
 
     Some questions about the configuration will be asked.
 
     Now you're done and you can run VDRAdmin-AM:
-    $ ./vdradmind.pl
+    $ ./vdradmind
 
 4b) install into system
     $ ./make.sh install
@@ -51,7 +51,7 @@ to get a complete VDRAdmin-AM folder:
     Some questions about the configuration will asked.
 
     Now you're done and you can run VDRAdmin-AM:
-    $ vdradmind.pl
+    $ vdradmind
 
 5)  If you want VDRAdmin-AM to run automatically on system boot, you have
     to add a startup script to the wanted runlevel. Please consult your
@@ -129,7 +129,7 @@ to get a complete VDRAdmin-AM folder:
   START = {
     [FLAG]
     FLAGS = I|O|R
-    PROGRAM = /path/to/vdradmind.pl --displaycall "Call from \$2"
+    PROGRAM = /path/to/vdradmind --displaycall "Call from \$2"
   }
 
   Restart isdnlog.

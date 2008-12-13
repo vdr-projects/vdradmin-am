@@ -5,18 +5,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-AM-3.6.2\n"
-"Report-Msgid-Bugs-To: Andreas Mair <mail@andreas.vdr-developer.org>\n"
-"POT-Creation-Date: 2008-06-30 08:26+0200\n"
+"Project-Id-Version: VDRAdmin-AM-3.6.2+cvs\n"
+"Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
+"POT-Creation-Date: 2008-12-02 07:48+0100\n"
 "PO-Revision-Date: 2007-07-26 14:49+0100\n"
 "Last-Translator: Andreas Mair <mail@andreas.vdr-developer.org>\n"
 "Language-Team: Andreas Mair <mail@andreas.vdr-developer.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "ISO-8859-1"
-msgstr "ISO-8859-1"
+msgstr "ISO-8859-15"
 
 msgid "What's On Now?"
 msgstr "Was läuft jetzt?"
@@ -479,6 +479,12 @@ msgstr "Neue Ausschlussliste anlegen"
 msgid "Edit Blacklist"
 msgstr "Ausschlussliste bearbeiten"
 
+msgid "Add New Template"
+msgstr "Neue Suchvorlage anlegen"
+
+msgid "Edit Template"
+msgstr "Suchvorlage bearbeiten"
+
 msgid "Add New Search"
 msgstr "Neuen Suche anlegen"
 
@@ -496,6 +502,9 @@ msgstr "Ergebnis ausblenden"
 
 msgid "Settings"
 msgstr "Einstellungen"
+
+msgid "Name:"
+msgstr "Name:"
 
 msgid "Search Term:"
 msgstr "Suche:"
@@ -661,6 +670,12 @@ msgstr "Settings für \"nur umschalten\""
 
 msgid "Switch ... Minutes Before Start:"
 msgstr "Umschalten ... Minuten vor Start:"
+
+msgid "Delete template"
+msgstr "Suchvorlage löschen"
+
+msgid "Delete this template?"
+msgstr "Diese Suchvorlage löschen?"
 
 msgid "Save as template"
 msgstr "Als Vorlage speichern"
@@ -986,6 +1001,9 @@ msgstr "<p>Hier können Sie zwei externe Suchen angeben, die in den EPG-Ansichten
 msgid "Some examples:"
 msgstr "Einige Beispiele:"
 
+msgid "Please change the hostname to your local needs!"
+msgstr "Bitte passen Sie den Rechnernamen an Ihre lokale Umgebung an!"
+
 msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
 msgstr "<p>Dieser Bereich ist <strong>nur</strong> für Experten, d.h. Sie wissen was Sie tun!</p>"
 
@@ -1308,8 +1326,8 @@ msgid "Config file written successfully."
 msgstr "Konfigurationsdatei wurde erfolgreich geschrieben."
 
 #, perl-format
-msgid "vdradmind.pl %s started with pid %d."
-msgstr "vdradmind.pl %s wurde mit der Prozeß-ID %d gestartet."
+msgid "%s %s started with pid %d."
+msgstr "%s %s wurde mit der Prozeß-ID %d gestartet."
 
 msgid "Not found"
 msgstr "Nicht gefunden"

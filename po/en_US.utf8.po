@@ -1,14 +1,27 @@
-# English translations for PACKAGE package.
-# Copyright (C) Andreas Mair <mail@andreas.vdr-developer.org>
+# Copyright (C) Andreas Mair <andreas@vdr-developer.org>
 # This file is distributed under the same license as the VDRAdmin-AM package.
-# Automatically generated, 2008.
+#
+# TRANSLATOR <EMAIL>, 2008
+#
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-AM 3.6.2\n"
-"Report-Msgid-Bugs-To: Andreas Mair <mail@andreas.vdr-developer.org>\n"
-"POT-Creation-Date: 2008-06-30 08:26+0200\n"
-"PO-Revision-Date: 2008-06-30 08:26+0200\n"
+"Project-Id-Version: VDRAdmin-AM 3.6.2+cvs\n"
+"Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
+"POT-Creation-Date: 2008-12-02 07:48+0100\n"
+"PO-Revision-Date: 2008-12-02 07:48+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -478,6 +491,12 @@ msgstr "Add New Blacklist"
 msgid "Edit Blacklist"
 msgstr "Edit Blacklist"
 
+msgid "Add New Template"
+msgstr "Add New Template"
+
+msgid "Edit Template"
+msgstr "Edit Template"
+
 msgid "Add New Search"
 msgstr "Add New Search"
 
@@ -495,6 +514,9 @@ msgstr "Hide results"
 
 msgid "Settings"
 msgstr "Settings"
+
+msgid "Name:"
+msgstr "Name:"
 
 msgid "Search Term:"
 msgstr "Search Term:"
@@ -660,6 +682,12 @@ msgstr "Settings for action \"switch only\""
 
 msgid "Switch ... Minutes Before Start:"
 msgstr "Switch ... Minutes Before Start:"
+
+msgid "Delete template"
+msgstr "Delete template"
+
+msgid "Delete this template?"
+msgstr "Delete this template?"
 
 msgid "Save as template"
 msgstr "Save as template"
@@ -985,6 +1013,9 @@ msgstr "<p>Here you can define two external searches that you can access in the 
 msgid "Some examples:"
 msgstr "Some examples:"
 
+msgid "Please change the hostname to your local needs!"
+msgstr "Please change the hostname to your local needs!"
+
 msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
 msgstr "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
 
@@ -1307,8 +1338,8 @@ msgid "Config file written successfully."
 msgstr "Config file written successfully."
 
 #, perl-format
-msgid "vdradmind.pl %s started with pid %d."
-msgstr "vdradmind.pl %s started with pid %d."
+msgid "%s %s started with pid %d."
+msgstr "%s %s started with pid %d."
 
 msgid "Not found"
 msgstr "Not found"

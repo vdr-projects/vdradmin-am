@@ -1,18 +1,19 @@
+# Vertaling van @VDRADMIN-AM@.po to @Nederlands@
 # translation of nl.po to
 # Copyright (C) Andreas Mair <mail@andreas.vdr-developer.org>
 # This file is distributed under the same license as the VDRAdmin-AM package.
 #
-# Roel <rl.koelewijn@home.nl>, 2005, 2006, 2007.
-# Roel Koelewijn <roel.koelewijn@gmail.com>, 2007.
 #
+# Roel <rl.koelewijn@home.nl>, 2005, 2006, 2007.
+# Roel Koelewijn <roel.koelewijn@gmail.com>, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version:  VDRAdmin-AM-3.6.2\n"
-"Report-Msgid-Bugs-To: Andreas Mair <mail@andreas.vdr-developer.org>\n"
-"POT-Creation-Date: 2008-06-30 08:26+0200\n"
-"PO-Revision-Date: 2008-05-01 13:50+0200\n"
-"Last-Translator: roel\n"
-"Language-Team:  <nl@li.org>\n"
+"Project-Id-Version: VDRAdmin-AM-3.6.3\n"
+"Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
+"POT-Creation-Date: 2008-12-02 07:48+0100\n"
+"PO-Revision-Date: 2008-12-01 19:49+0100\n"
+"Last-Translator: Roel Koelewijn <roel.koelewijn@gmail.com>\n"
+"Language-Team: Nederlands <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -480,6 +481,12 @@ msgstr "Zwarte lijsten toevoegen"
 msgid "Edit Blacklist"
 msgstr "Bewerk zwarte lijst"
 
+msgid "Add New Template"
+msgstr "Nieuw sjabloon toevoegen "
+
+msgid "Edit Template"
+msgstr "Sjabloon bewerken"
+
 msgid "Add New Search"
 msgstr "Voeg nieuw zoekpatroon toe"
 
@@ -497,6 +504,9 @@ msgstr "Verberg resultaten"
 
 msgid "Settings"
 msgstr "Instellingen"
+
+msgid "Name:"
+msgstr "Naam:"
 
 msgid "Search Term:"
 msgstr "Zoeken term: "
@@ -662,6 +672,12 @@ msgstr "Instellingen voor aktie \"wissel alleen\""
 
 msgid "Switch ... Minutes Before Start:"
 msgstr "Wissel ... minuten voor start:"
+
+msgid "Delete template"
+msgstr "Verwijder sjabloon"
+
+msgid "Delete this template?"
+msgstr "Dit sjabloon verwijderen? "
 
 msgid "Save as template"
 msgstr "Opslaan als sjabloon"
@@ -987,6 +1003,9 @@ msgstr "<p>Hier kunt u twee externe zoekopdrachten definiëren die u kunt benade
 msgid "Some examples:"
 msgstr "Enkele voorbeelden:"
 
+msgid "Please change the hostname to your local needs!"
+msgstr "Graag deze hostnaam naar uw lokale behoeften aanpassen!"
+
 msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
 msgstr "<p>Deze afdeling is voor deskundigen<strong>alleen</strong>, met andere woorden, als goed weet waar u mee bezig bent!</p>"
 
@@ -1309,8 +1328,8 @@ msgid "Config file written successfully."
 msgstr "Configuratie bestanden succesvol weggeschreven."
 
 #, perl-format
-msgid "vdradmind.pl %s started with pid %d."
-msgstr "vdradmind.pl %s gestart met pid %d."
+msgid "%s %s started with pid %d."
+msgstr "%s %s gestart met pid %d."
 
 msgid "Not found"
 msgstr "Niet gevonden"

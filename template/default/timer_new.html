@@ -104,7 +104,7 @@
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td valign="top" class="col_label"><h5><?% gettext('Day Of Recording:') %?></h5></td>
 				<td class="col_value">
-					<input type="text" name="dor" value="<?% dor %?>" size="20" />
+					<input type="text" name="dor" value="<?% dor | html %?>" size="20" />
 					<br />
 					<input onclick="cTimer(1)" type="checkbox" name="D0" value="1" id="wday_mon" /><label for="wday_mon"><?% gettext('Monday') %?></label>
 					<input onclick="cTimer(2)" type="checkbox" name="D1" value="1" id="wday_tue" /><label for="wday_tue"><?% gettext('Tuesday') %?></label>
@@ -119,9 +119,9 @@
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Start Time:') %?></h5></td>
 				<td class="col_value">
-					<input type="text" name="starth" value="<?% starth %?>" size="2" maxlength="2" />
+					<input type="text" name="starth" value="<?% starth | html %?>" size="2" maxlength="2" />
 					<b>&nbsp;:&nbsp;</b>
-					<input type="text" name="startm" value="<?% startm %?>" size="2" maxlength="2" />
+					<input type="text" name="startm" value="<?% startm | html %?>" size="2" maxlength="2" />
 					&nbsp;<?% gettext('o\'clock') %?>
 					<?% IF bstart %?>
 						(<?% gettext('Buffer:') %?>&nbsp;<?% bstart %?>&nbsp;<?% gettext('minutes') %?>)
@@ -132,9 +132,9 @@
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('End Time:') %?></h5></td>
 				<td class="col_value">
-					<input type="text" name="stoph" value="<?% stoph %?>" size="2" maxlength="2" />
+					<input type="text" name="stoph" value="<?% stoph | html %?>" size="2" maxlength="2" />
 					<b>&nbsp;:&nbsp;</b>
-					<input type="text" name="stopm" value="<?% stopm %?>" size="2" maxlength="2" />
+					<input type="text" name="stopm" value="<?% stopm | html %?>" size="2" maxlength="2" />
 					&nbsp;<?% gettext('o\'clock') %?>
 					<?% IF bstop %?>
 						(<?% gettext('Buffer:') %?>&nbsp;<?% bstop %?>&nbsp;<?% gettext('minutes') %?>)
@@ -149,12 +149,12 @@
 			<tr class="<?% tr_class %?>">
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Priority:') %?></h5></td>
-				<td class="col_value"><input type="text" name="prio" value="<?% prio %?>" size="2" maxlength="2" /></td>
+				<td class="col_value"><input type="text" name="prio" value="<?% prio | html %?>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="<?% tr_class %?>">
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Lifetime:') %?></h5></td>
-				<td class="col_value"><input type="text" name="lft" value="<?% lft %?>" size="2" maxlength="2" /></td>
+				<td class="col_value"><input type="text" name="lft" value="<?% lft | html %?>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="<?% tr_class %?>">
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>

@@ -148,7 +148,7 @@
 						<dt><?% gettext('Recordings Streaming:') %?></dt>
 						<dd><?% gettext('Enable or disable streaming of recordings.<br />Well actually this is no real "streaming", but you have to setup your workstation so that it can access VDR\'s recordings. You can use for example Samba or NFS for this. VDRAdmin-AM simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation\'s display.') %?></dd>
 						<dt><?% gettext('Path to VDR Recordings on your workstation:') %?></dt>
-						<dd><?% gettext('This is the path where your workstation can access VDR\'s recordings. This depends on your VDR and workstation setup, for example "\\vdr\videos" or "V:\" (on Windows) or "/mnt/videos" (on Linux).') %?></dd>
+						<dd><?% gettext('This is the path where your workstation can access VDR\'s recordings. This depends on your VDR and workstation setup, for example "\\\\vdr\\videos" or "V:\\" (on Windows) or "/mnt/videos" (on Linux).') %?></dd>
 						<dt><?% gettext('MIME type for live streaming:') %?></dt>
 						<dd><?% gettext('The MIME type to send when using live streaming. Defaults to "video/x-mpegurl".') %?></dd>
 						<dt><?% gettext('Suffix for live streaming:') %?></dt>
@@ -170,7 +170,7 @@
 							<dt>VideoDB: (<a href="http://videodb.sf.net">videodb.sf.net</a>)</dt>
 							<dd>
 								http://www.videodb.net/videodb/search.php?q=%TITLE%&engine=videodb&owner=Guest&fields%5B%5D=title<br />
-								Please change the hostname to your local needs!
+								<?% gettext('Please change the hostname to your local needs!') %?>
 							</dd>
 						</dl>
 				</div>

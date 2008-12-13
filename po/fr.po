@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.6.0\n"
-"Report-Msgid-Bugs-To: Andreas Mair <mail@andreas.vdr-developer.org>\n"
-"POT-Creation-Date: 2008-06-30 08:26+0200\n"
+"Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
+"POT-Creation-Date: 2008-12-02 07:48+0100\n"
 "PO-Revision-Date: 2007-08-23 10:45+0100\n"
 "Last-Translator: Trois Six <trois.six@free.fr>\n"
 "Language-Team: Trois Six <trois.six@free.fr>\n"
@@ -481,6 +481,14 @@ msgstr "Utiliser des \"listes noires\" :"
 msgid "Edit Blacklist"
 msgstr "Utiliser des \"listes noires\" :"
 
+#, fuzzy
+msgid "Add New Template"
+msgstr "Ajouter Nouvelle Auto-Programmation"
+
+#, fuzzy
+msgid "Edit Template"
+msgstr "Gabarit :"
+
 msgid "Add New Search"
 msgstr "Ajouter une Nouvelle Recherche"
 
@@ -498,6 +506,10 @@ msgstr "Cacher les résultats"
 
 msgid "Settings"
 msgstr "Paramètres"
+
+#, fuzzy
+msgid "Name:"
+msgstr "Nom"
 
 msgid "Search Term:"
 msgstr "Rechercher le Terme :"
@@ -613,8 +625,9 @@ msgstr "zapper uniquement"
 msgid "First day:"
 msgstr "Vendredi"
 
+#, fuzzy
 msgid "Last day:"
-msgstr ""
+msgstr "Vendredi"
 
 msgid "Auto delete:"
 msgstr ""
@@ -631,8 +644,9 @@ msgstr "Lundi"
 msgid "After ... recordings:"
 msgstr "Garder ... Enregistrements :"
 
+#, fuzzy
 msgid "After ... days after first recording:"
-msgstr ""
+msgstr "Garder ... Enregistrements :"
 
 msgid "Settings for action \"record\""
 msgstr "Paramètres pour action \"enregistrement\""
@@ -669,6 +683,14 @@ msgstr "Paramètres pour action \"zapper uniquement\""
 
 msgid "Switch ... Minutes Before Start:"
 msgstr "Zapper ... Minutes Avant le Début :"
+
+#, fuzzy
+msgid "Delete template"
+msgstr "Utiliser un modèle"
+
+#, fuzzy
+msgid "Delete this template?"
+msgstr "Supprimer Programmation ?"
 
 msgid "Save as template"
 msgstr "Enregistrer en tant que modèle"
@@ -993,6 +1015,9 @@ msgstr "<p>Ici vous pouvez définir deux recherches externes auxquelles vous pouv
 
 msgid "Some examples:"
 msgstr "Quelques exemples :"
+
+msgid "Please change the hostname to your local needs!"
+msgstr ""
 
 msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
 msgstr "<p>Cette section est pour les experts <strong>seulement</strong>. Vous devez savoir ce que vous faites!</p>"
@@ -1321,8 +1346,8 @@ msgid "Config file written successfully."
 msgstr "Fichier de configuration écrit avec succès."
 
 #, perl-format
-msgid "vdradmind.pl %s started with pid %d."
-msgstr "vdradmin.pl %s a démarré avec le pid %d."
+msgid "%s %s started with pid %d."
+msgstr "%s %s a démarré avec le pid %d."
 
 msgid "Not found"
 msgstr "Non trouvé"

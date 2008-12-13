@@ -1,18 +1,19 @@
+# Vertaling van @VDRADMIN-AM@.po to @Nederlands@
 # translation of nl.po to
 # Copyright (C) Andreas Mair <mail@andreas.vdr-developer.org>
 # This file is distributed under the same license as the VDRAdmin-AM package.
 #
-# Roel <rl.koelewijn@home.nl>, 2005, 2006, 2007.
-# Roel Koelewijn <roel.koelewijn@gmail.com>, 2007.
 #
+# Roel <rl.koelewijn@home.nl>, 2005, 2006, 2007.
+# Roel Koelewijn <roel.koelewijn@gmail.com>, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version:  VDRAdmin-AM-3.6.2\n"
-"Report-Msgid-Bugs-To: Andreas Mair <mail@andreas.vdr-developer.org>\n"
-"POT-Creation-Date: 2008-06-30 08:26+0200\n"
-"PO-Revision-Date: 2008-05-01 13:50+0200\n"
-"Last-Translator: roel\n"
-"Language-Team:  <nl@li.org>\n"
+"Project-Id-Version: VDRAdmin-AM-3.6.3\n"
+"Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
+"POT-Creation-Date: 2008-12-02 07:48+0100\n"
+"PO-Revision-Date: 2008-12-01 19:49+0100\n"
+"Last-Translator: Roel Koelewijn <roel.koelewijn@gmail.com>\n"
+"Language-Team: Nederlands <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -166,7 +167,7 @@ msgid "Lifetime:"
 msgstr "Levensduur:"
 
 msgid "The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by."
-msgstr "De <strong>gegarandeerde</strong> levensduur (in dagen) van een opname gecreëerd door deze timer <strong>0</strong> betekend dat deze opname automatisch verwijderd zal worden door een nieuwe timer met een hogere prioriteit.<strong>99</strong> betekend dat deze opname nooit automatisch verwijderd zal worden. Ieder nummer in het bereik van <strong>1...98</strong> betekend dat de opname niet automatisch verwijderd zal worden om plaats te maken voor een nieuwe opname, alleen als de levensduur van de opname voorbij is."
+msgstr "De <strong>gegarandeerde</strong> levensduur (in dagen) van een opname gecreÃ«erd door deze timer <strong>0</strong> betekend dat deze opname automatisch verwijderd zal worden door een nieuwe timer met een hogere prioriteit.<strong>99</strong> betekend dat deze opname nooit automatisch verwijderd zal worden. Ieder nummer in het bereik van <strong>1...98</strong> betekend dat de opname niet automatisch verwijderd zal worden om plaats te maken voor een nieuwe opname, alleen als de levensduur van de opname voorbij is."
 
 msgid "Title of Recording:"
 msgstr "Titel van opname:"
@@ -480,6 +481,12 @@ msgstr "Zwarte lijsten toevoegen"
 msgid "Edit Blacklist"
 msgstr "Bewerk zwarte lijst"
 
+msgid "Add New Template"
+msgstr "Nieuw sjabloon toevoegen "
+
+msgid "Edit Template"
+msgstr "Sjabloon bewerken"
+
 msgid "Add New Search"
 msgstr "Voeg nieuw zoekpatroon toe"
 
@@ -490,13 +497,16 @@ msgid "Small search pattern.\\nDo you really want to use it?"
 msgstr "Klein zoek patroon.\\nWilt u dit echt gebruiken?"
 
 msgid "You didn't select at least one of\\ntitle, subtitle or description.\\nDo you really want to use this search?"
-msgstr "U moet tenminste één \\ntitel, ondertitel of omschrijving selecteren. \\nWilt u deze zoek opdracht daadwerkelijk gebruiken?"
+msgstr "U moet tenminste Ã©Ã©n \\ntitel, ondertitel of omschrijving selecteren. \\nWilt u deze zoek opdracht daadwerkelijk gebruiken?"
 
 msgid "Hide results"
 msgstr "Verberg resultaten"
 
 msgid "Settings"
 msgstr "Instellingen"
+
+msgid "Name:"
+msgstr "Naam:"
 
 msgid "Search Term:"
 msgstr "Zoeken term: "
@@ -511,7 +521,7 @@ msgid "all words"
 msgstr "alle woorden"
 
 msgid "at least one word"
-msgstr "tenminste één woord"
+msgstr "tenminste Ã©Ã©n woord"
 
 msgid "match exactly"
 msgstr "exacte overeenkomst"
@@ -662,6 +672,12 @@ msgstr "Instellingen voor aktie \"wissel alleen\""
 
 msgid "Switch ... Minutes Before Start:"
 msgstr "Wissel ... minuten voor start:"
+
+msgid "Delete template"
+msgstr "Verwijder sjabloon"
+
+msgid "Delete this template?"
+msgstr "Dit sjabloon verwijderen? "
 
 msgid "Save as template"
 msgstr "Opslaan als sjabloon"
@@ -982,10 +998,13 @@ msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
 msgstr "De extensie voor opgenomen streaming. Standaard is  \"m3u\"."
 
 msgid "<p>Here you can define two external searches that you can access in the EPG views. You simply have to find the required URL and where the search pattern has to be located. %TITLE% will be substituted by the broadcast's EPG title.</p>"
-msgstr "<p>Hier kunt u twee externe zoekopdrachten definiëren die u kunt benaderen in de EPG. U moet alleen de benodigde URL zien te vinden en waar het zoekpatroon geplaatst moet worden . %TITLE% zal worden vervangen door uitzendings EPG titel.</"
+msgstr "<p>Hier kunt u twee externe zoekopdrachten definiÃ«ren die u kunt benaderen in de EPG. U moet alleen de benodigde URL zien te vinden en waar het zoekpatroon geplaatst moet worden . %TITLE% zal worden vervangen door uitzendings EPG titel.</"
 
 msgid "Some examples:"
 msgstr "Enkele voorbeelden:"
+
+msgid "Please change the hostname to your local needs!"
+msgstr "Graag deze hostnaam naar uw lokale behoeften aanpassen!"
 
 msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
 msgstr "<p>Deze afdeling is voor deskundigen<strong>alleen</strong>, met andere woorden, als goed weet waar u mee bezig bent!</p>"
@@ -1051,13 +1070,13 @@ msgid "This is the start and end time of the entry. It cannot be changed."
 msgstr "Dit is de start en eindtijd van de invoer. Dit kan niet veranderd worden."
 
 msgid "Change this string to give this EPG Entry a new title. It must consist of only one line of text."
-msgstr "Verander deze reeks om deze EPG invoer een nieuwe titel te geven.Het mag alleen bestaan uit één regel tekst."
+msgstr "Verander deze reeks om deze EPG invoer een nieuwe titel te geven.Het mag alleen bestaan uit Ã©Ã©n regel tekst."
 
 msgid "Change this string to give this EPG Entry a new subtitle. It must consist of only one line of text."
-msgstr "Verander deze reeks om deze EPG invoer een nieuwe subtitel te geven.Het mag alleen bestaan uit één regel tekst."
+msgstr "Verander deze reeks om deze EPG invoer een nieuwe subtitel te geven.Het mag alleen bestaan uit Ã©Ã©n regel tekst."
 
 msgid "Change the text in this field to edit the description of this entry. The text can consist of one or more lines."
-msgstr "Verander de tekst in dit veld om de omschrijving te veranderen van deze invoer. De tekst mag bestaan uit één of meer regels,."
+msgstr "Verander de tekst in dit veld om de omschrijving te veranderen van deze invoer. De tekst mag bestaan uit Ã©Ã©n of meer regels,."
 
 msgid "VPS (readonly)"
 msgstr "VPS (alleen lezen)"
@@ -1309,8 +1328,8 @@ msgid "Config file written successfully."
 msgstr "Configuratie bestanden succesvol weggeschreven."
 
 #, perl-format
-msgid "vdradmind.pl %s started with pid %d."
-msgstr "vdradmind.pl %s gestart met pid %d."
+msgid "%s %s started with pid %d."
+msgstr "%s %s gestart met pid %d."
 
 msgid "Not found"
 msgstr "Niet gevonden"

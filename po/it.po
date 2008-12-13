@@ -1,16 +1,16 @@
 # Copyright (C) Andreas Mair <mail@andreas.vdr-developer.org>
 # This file is distributed under the same license as the VDRAdmin-AM package.
 #
-# Gringo <vdr-italian@tiscali.it>, 2007
+# Diego Pierotto <vdr-italian@tiscali.it>, 2007
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-AM-3.6.2\n"
-"Report-Msgid-Bugs-To: Andreas Mair <mail@andreas.vdr-developer.org>\n"
-"POT-Creation-Date: 2008-06-30 08:26+0200\n"
-"PO-Revision-Date: 2008-04-17 02:36+0100\n"
+"Project-Id-Version: VDRAdmin-AM-3.6.3\n"
+"Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
+"POT-Creation-Date: 2008-12-03 08:28+0100\n"
+"PO-Revision-Date: 2008-12-03 00:49+0100\n"
 "Last-Translator: Diego Pierotto <vdr-italian@tiscali.it>\n"
-"Language-Team: Gringo <vdr-italian@tiscali.it>\n"
+"Language-Team: Diego Pierotto <vdr-italian@tiscali.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgid "What's On Now?"
 msgstr "In programmazione adesso"
 
 msgid "Channel group:"
-msgstr "Gruppo canale:"
+msgstr "Gruppo canali:"
 
 msgid "What's on:"
 msgstr "In programmazione:"
@@ -42,7 +42,7 @@ msgid "Channels"
 msgstr "Canali"
 
 msgid "Stream"
-msgstr "Flusso"
+msgstr "Trasmetti"
 
 msgid "TV select"
 msgstr "Seleziona TV"
@@ -108,7 +108,7 @@ msgid "Timer Active:"
 msgstr "Timer attivo:"
 
 msgid "Activate or deactivate this timer. Deactivated timers are still stored in the timer list so that they can be activated again, but they do not record anything meanwhile."
-msgstr "Attiva o disattiva questo timer. I timers disattivati sono salvati ancora nell'elenco dei timer in modo che tu possa attivarli ancora, ma non registrano niente nel frattempo."
+msgstr "Attiva o disattiva questo timer. I timer disattivati sono salvati sempre nell'elenco dei timer in modo che tu possa attivarli ancora, ma non registrano niente nel frattempo."
 
 msgid "AutoTimer Checking:"
 msgstr "Verifica timer automatici:"
@@ -117,13 +117,13 @@ msgid "Depending on how this timer has been programmed you have up to three poss
 msgstr "A seconda di come questo timer è stato programmato hai fino a 3 possibili impostazioni:"
 
 msgid "Transmission Identification"
-msgstr "Identificativo trasmissione"
+msgstr "Identificazione trasmissione"
 
 msgid "Monitor this timer using the identification provided in the EPG. Please note that this only works if the provided identification is a fix and unique value! This option is not available with timers programmed in VDR."
-msgstr "Monitora questo timer usando l'identificazione usata dall'EPG. Nota che questo funziona solo se l'identificazione fornita è un valore fisso ed unico! Questa opzione non è disponibile con i timers programmati in VDR."
+msgstr "Monitora questo timer utilizzando l'identificazione usata dall'EPG. Nota che questo funziona solo se l'identificazione fornita è un valore fisso ed unico! Questa opzione non è disponibile con i timer programmati in VDR."
 
 msgid "Monitor this timer using the start and stop time."
-msgstr "Monitora questo timer usando l'ora d'inizio e fine."
+msgstr "Monitora questo timer utilizzando l'ora di inizio e fine."
 
 msgid "off"
 msgstr "disattivo"
@@ -141,7 +141,7 @@ msgid "Day Of Recording:"
 msgstr "Giorno registrazione:"
 
 msgid "The day when the timer should get active. You can enter the day in two formats:<ul><li>Two digits (DD). This will use the current month and year.</li><li>ISO norm (YYYY-MM-DD). Program your timers as far in the future as you like.</li></ul>In case you want to program a repeating timer you can use the seven checkboxes below the text field. Check the box for each day you want the timer to get active."
-msgstr "Il giorno in cui il timer dovrebbe attivarsi. Puoi inserire il giorno in 2 formati: <ul><li>Due caratteri (GG). Questo userà il mese e l'anno corrente.</li><li>Modo ISO (AAAA-MM-GG). Programma i tuoi timers per il futuro come vuoi.</li></ul>Nel caso tu voglia programmare un timer ricorsivo puoi usare le 7 caselle sotto il campo di testo. Spunta la casella per ogni giorno che vuoi attivare il timer."
+msgstr "Il giorno in cui il timer dovrebbe attivarsi. Puoi inserire il giorno in 2 formati: <ul><li>Due caratteri (GG). Questo userà il mese e l'anno corrente.</li><li>Modo ISO (AAAA-MM-GG). Programma i tuoi timer per il futuro come vuoi.</li></ul>Nel caso tu voglia programmare un timer ricorsivo puoi usare le 7 caselle sotto il campo di testo. Spunta la casella per ogni giorno in cui vuoi attivare il timer."
 
 msgid "Start Time:"
 msgstr "Ora inizio:"
@@ -159,19 +159,19 @@ msgid "Priority:"
 msgstr "Priorità:"
 
 msgid "An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording."
-msgstr "Un valore integer nel range <strong>0...99</strong>, definisce la <strong>priorità</strong> di questo timer e delle registrazioni create da questo timer. <strong>0</strong> rappresenta il valore più basso, <strong>99</strong> il più alto. La priorità è usata per decidere quale timer inizierà nel caso ci siano 2 o più timers con la stessa esatta ora di <strong>avvio</strong>. Il primo timer nella lista con la priorità più alta verrà usato.<br /><br />Questo valore è salvato anche con la registrazione ed è usato più tardi per rimuoverla dal disco in modo da liberare spazio per nuove registrazioni. Se il disco è pieno e una nuova registrazione ha bisogno di spazio, una registrazione esistente con una priorità più bassa (e la cui <strong>durata</strong> è garantita) sarà rimossa.<br /><br />Se tutte le schede DVB disponibili sono attualmente occupate, un timer con una priorità più alta interromperà il timer con la priorità più bassa per poter iniziare la registrazione."
+msgstr "Un valore integer nel range <strong>0...99</strong>, definisce la <strong>priorità</strong> di questo timer e delle registrazioni create da questo timer. <strong>0</strong> rappresenta il valore più basso, <strong>99</strong> il più alto. La priorità è usata per decidere quale timer inizierà nel caso ci siano 2 o più timer con la stessa esatta ora di <strong>avvio</strong>. Verrà usato il primo timer nella lista con la priorità più alta.<br /><br />Questo valore è salvato anche con la registrazione ed è usato più tardi per rimuoverla dal disco in modo da liberare spazio per nuove registrazioni. Se il disco è pieno e una nuova registrazione ha bisogno di spazio, una registrazione esistente con una priorità più bassa (e la cui <strong>scadenza</strong> è garantita) sarà rimossa.<br /><br />Se tutte le schede DVB disponibili sono attualmente occupate, un timer con una priorità più alta interromperà il timer con la priorità più bassa per poter iniziare la registrazione."
 
 msgid "Lifetime:"
-msgstr "Durata:"
+msgstr "Scadenza:"
 
 msgid "The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by."
-msgstr "La durata <strong>garantita</strong> (in giorni) di una registrazione creata da questo timer. <strong>0</strong> significa che questa registrazione può essere automaticamente eliminata a qualsiasi ora da una nuova registrazione con priorità più alta. <strong>99</strong> significa che questa registrazione non sarà mai eliminata automaticamente. Qualsiasi numero nel range <strong>1...98</strong> significa che questa registrazione non può essere automaticamente eliminata in favore di una nuova registrazione, finché il numero di giorni impostato dall'ora di <strong>avvio</strong> della registrazione sarà passato."
+msgstr "La scadenza <strong>garantita</strong> (in giorni) di una registrazione creata da questo timer. <strong>0</strong> significa che questa registrazione può essere automaticamente eliminata a qualsiasi ora da una nuova registrazione con priorità più alta. <strong>99</strong> significa che questa registrazione non sarà mai eliminata automaticamente. Qualsiasi numero nel range <strong>1...98</strong> significa che questa registrazione non può essere automaticamente eliminata in favore di una nuova registrazione, finché il numero di giorni impostato dall'ora di <strong>avvio</strong> della registrazione sarà passato."
 
 msgid "Title of Recording:"
 msgstr "Titolo registrazione:"
 
 msgid "The <strong>file name</strong> this timer will give to a recording. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br /><br />The special keywords <strong>TITLE</strong> and <strong>EPISODE</strong>, if present, will be replaced by the title and episode information from the EPG data at the time of recording (if that data is available). If at the time of recording either of these cannot be determined, <strong>TITLE</strong> will default to the channel name, and <strong>EPISODE</strong> will default to a blank."
-msgstr "Il <strong>nome file</strong> che questo timer assegnerà alla registrazione. Se il nome conterrà sottodirectory, queste devono essere delimitate da '~' (dal momento che il carattere '/' può essere parte del nome di un programma).<br /><br />Le parole chiave speciali <strong>TITOLO</strong> ed <strong>EPISODIO</strong>, se presenti, saranno sostituite dalle informazioni del titolo e dell'episodio dei dati EPG all'ora di registrazione (se questi dati sono disponibili). Se all'ora di registrazione questi non possono essere determinati, il<strong>TITOLO</strong> predefinito sarà il nome canale, e l'<strong>EPISODIO</strong> predefinito sarà lasciato vuoto."
+msgstr "Il <strong>nome file</strong> che questo timer assegnerà alla registrazione. Se il nome conterrà sottodirectory, queste devono essere delimitate da '~' (dal momento che il carattere '/' può essere parte del nome di un programma).<br /><br />Le parole chiave speciali <strong>TITOLO</strong> ed <strong>EPISODIO</strong>, se presenti, saranno sostituite dalle informazioni del titolo e dell'episodio dei dati EPG all'ora di registrazione (se questi dati sono disponibili). Se all'ora di registrazione questi non possono essere determinati, il <strong>TITOLO</strong> predefinito sarà il nome canale, e l'<strong>EPISODIO</strong> predefinito sarà lasciato vuoto."
 
 msgid "Summary:"
 msgstr "Sommario:"
@@ -192,10 +192,10 @@ msgid "Active"
 msgstr "Attivo"
 
 msgid "Start"
-msgstr "Avvia"
+msgstr "Inizio"
 
 msgid "Stop"
-msgstr "Ferma"
+msgstr "Fine"
 
 msgid "Name"
 msgstr "Nome"
@@ -222,7 +222,7 @@ msgid "Delete Selected AutoTimers"
 msgstr "Elimina timer automatici selezionati"
 
 msgid "Delete all selected timers?"
-msgstr "Eliminare tutti i timers selezionati?"
+msgstr "Eliminare tutti i timer selezionati?"
 
 msgid "No AutoTimers defined!"
 msgstr "Nessun timer automatico definito!"
@@ -387,7 +387,7 @@ msgid "Italian:"
 msgstr "Italiano:"
 
 msgid "Information"
-msgstr "Informazione"
+msgstr "Informazioni"
 
 msgid "VDRAdmin-AM version:"
 msgstr "Versione VDRAdmin-AM:"
@@ -426,7 +426,7 @@ msgid "Activate or deactivate this AutoTimer. Deactivated AutoTimers are still s
 msgstr "Attiva o disattiva questo timer automatico. I timer automatici disattivati sono ancora salvati nell'elenco dei timer automatici in modo che possano ancora essere attivati, ma non registreranno niente nel frattempo. Sopra quello puoi impostare questo come \"solo una volta\" in modo che questo timer automatico si programmi solo alla prossima (unica!) trasmissione corrispondente."
 
 msgid "Choosing the right search items decides whether only the wanted broadcasts or broadcasts having similar names or even nothing gets recorded.<br />Case doesn't matter, \"X-Files\" matches anything \"x-files\" will match. You can set multiple search items by separating them with spaces. Only broadcasts will match if they contain <strong>all</strong> items.<br />You'd better only use letters and numbers for search items, as the EPG often miss colons, brackets and other characters.<br />Experts can also use regular expressions, but you have to get needed information from the VDRAdmin-AM sources (undocumented feature).<br /><br />You can exclude broadcasts so that they don't get recorded even if they would match an AutoTimer. Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, one event a line. This file must be located in your VDRAdmin-AM's configuration folder. If this string is found either in the EPG's <u>title</u> or in <u>title~subtitle</u>, this event will not be programmed by AutoTimer. So you can disable complete episodes (for example when using \"Enterprise\" as Blacklist-string) or only one episode (when using \"Enterprise~Azati Prime\" as Blacklist-string)."
-msgstr "Scegliendo i valori corretti di ricerca decidi se solo le trasmissioni volute o le trasmissioni che hanno nomi simili o anche nessuna sarà registrata.<br />Il maiuscolo non importa, \"X-Files\" corrisponde  a qualsiasi cosa \"x-files\" incontrerà. Puoi impostare valori di ricerca multipli separandoli con degli spazi. Le trasmissioni corrisponderanno solo se contengono <strong>tutti</strong> i valori.<br />Dovresti piuttosto usare lettere e numeri per la ricerca dei valori, visto che l'EPG spesso omette le virgole, parentesi e altri caratteri.<br />Gli esperti possono anche usare espressioni regolari, ma devi aver bisogno di più informazione dai sorgenti di VDRAdmin-AM (caratteristica non documentata).<br /><br />Puoi escludere le trasmissioni in modo che non siano registrate se corrispondessero a un timer automatico. Perciò devi inserire quei titoli nel file <i>vdradmind.bl</i>, un evento per riga. Questo file deve essere posizionato nella tua directory di configurazione di VDRAdmin-AM. Se questa stringa viene trovata sia nel <u>titolo</u> dell'EPG che nel <u>titolo~sottotitolo</u>, questo evento non sarà programmato dai timer automatici. Puoi così disabilitare episodi completi (per esempio quando usi \"Enterprise\" come stringa della lista nera) o solo un episodio (quando usi \"Enterprise~Azati Prime\" come stringa della lista nera)."
+msgstr "Scegliendo i valori corretti di ricerca decidi se solo le trasmissioni volute o le trasmissioni che hanno nomi simili o anche nessuna sarà registrata.<br />Il maiuscolo non importa, \"X-Files\" corrisponde  a qualsiasi cosa \"x-files\" incontrerà. Puoi impostare valori di ricerca multipli separandoli con degli spazi. Le trasmissioni corrisponderanno solo se contengono <strong>tutti</strong> i valori.<br />Dovresti piuttosto usare lettere e numeri per la ricerca dei valori, visto che l'EPG spesso omette le virgole, parentesi e altri caratteri.<br />Gli esperti possono anche usare espressioni regolari, ma devi aver bisogno di più informazione dai sorgenti di VDRAdmin-AM (caratteristica non documentata).<br /><br />Puoi escludere le trasmissioni in modo che non siano registrate se corrispondessero a un timer automatico. Perciò devi inserire quei titoli nel file <i>vdradmind.bl</i>, un evento per riga. Questo file deve essere posizionato nella tua directory di configurazione di VDRAdmin-AM. Se questa stringa viene trovata sia nel <u>titolo</u> dell'EPG che nel <u>titolo~sottotitolo</u>, questo evento non sarà programmato dai timer automatici. Puoi così disabilitare episodi completi (per esempio quando usi \"Enterprise\" come stringa della lista esclusioni) o solo un episodio (quando usi \"Enterprise~Azati Prime\" come stringa della lista nera)."
 
 msgid "Here you can define the EPG sections where VDRAdmin-AM should look for the search pattern."
 msgstr "Qui puoi definire le sezioni EPG dove VDRAdmin-AM dovrebbe guardare per la ricerca del valore."
@@ -444,10 +444,10 @@ msgid "A broadcast must end before the time entered here to match. The first tex
 msgstr "Una trasmissione deve finire prima che l'orario qui inserito corrisponda. Il primo campo di testo è per l' \"ora\", il secondo per i  \"minuti\"."
 
 msgid "Set this option to \"yes\" if all timers programed by this AutoTimer should have individual start/stop margins and enter the values in the next two text boxes."
-msgstr "Imposta questa opzione a \"sì\" se tutti i timers programmati da questo timer automatico dovrebbero avere margini individuali di avvio/chiusura e inserisci i valori nelle prossime 2 caselle di testo."
+msgstr "Imposta questa opzione come \"sì\" se tutti i timer programmati da questo timer automatico dovrebbero avere margini individuali di avvio/chiusura e inserisci i valori nelle prossime 2 caselle di testo."
 
 msgid "The number of minutes VDRAdmin-AM subtracts from the broadcasts start time found in the EPG."
-msgstr "Numero di minuti che VDRAdmin-AM sottrae dall'ora d'avvio delle trasmissioni trovate nell'EPG."
+msgstr "Numero di minuti che VDRAdmin-AM sottrae dall'ora di avvio delle trasmissioni trovate nell'EPG."
 
 msgid "The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in the EPG."
 msgstr "Numero di minuti che VDRAdmin-AM aggiunge all'ora di chiusura delle trasmissioni trovate nell'EPG."
@@ -465,7 +465,7 @@ msgid "Timer"
 msgstr "Timer"
 
 msgid "<p>Here you will find a listing of timers known to VDR.</p><p>On top you will find a chart showing a day's timers graphically. This provides an quick overview on what's going on at the specified day and helps you in finding conflicting timers. Moving the mouse cursor above any timer box will display a tooltip containing the timer's title, priority, lifetime and duration.</p><p>Below the chart you'll find the timers list showing you some information on the timers. You can change the list's sorting by clicking the columns heading.</p><p>For each timer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\", \"No\", \"VPS\" or \"Auto\" in the \"Active\" column.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the timer's title.</dd><dt>View its EPG entry</dt><dd>Timers that have set <span class=\"ref_label\">AutoTimer Checking</span> to \"Transmission Identification\" will show you the corresponding EPG entry if you click on the timer's title.</dd><dt>Edit the timer</dt><dd>You can edit a timer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To delete a timer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each timer's state is indicated by differently coloured boxes (in the chart view) or images (in the list view):<br /><span class=\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> Timer is OK and will record.<br /><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timer conflicts with other timers. That's not critical, as long as you have enough DVB cards for the parallel recordings.<br /><span class=\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align=\"middle\" /> Timer is critical and will most likely <strong>not</strong> record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is not active.</p><p>In addition to these functions you can add a new timer by clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at the top and you can delete a number of timers at once by checking the box in the last column of those timers and clicking <input type=\"submit\"  class=\"submit\" value=\"Delete Selected Timers\"/>.</p><p>You can <input type=\"submit\" class=\"submit\" value=\"activate\"/> and <input type=\"submit\" class=\"submit\" value=\"inactivate\"/> selected timers.</p>"
-msgstr "<p>Qui troverai un elenco dei timer noti a VDR.</p><p>In cima troverai un diagramma che mostra i timers giornalieri graficamente. Questo fornisce una vista veloce su cosa stia succedendo in un giorno specifico e ti aiuta a trovare i timers in conflitto. Spostando il cursore del mouse sopra ciascuna casella dei timer sarà visualizzato un dettaglio contenente il titolo del timer, la priorità, la scadenza e la durata.</p><p>Sotto il diagramma troverai l'elenco dei timer che ti mostrano alcune informazioni sui timers. Puoi modificare l'ordine della lista cliccando sull'intestazione delle colonne.</p><p>Per ciascun timer hai le seguenti opzioni:<dl><dt>Imposta lo stato</dt><dd>Cliccando su \"Sì\", \"No\", \"VPS\" o \"Auto\" nella colonna \"Attiva\".</dd><dt>Vedere velocemente la priorità e la durata</dt><dd>Puntando il cursore del mouse nel titolo del timer.</dd><dt>Vedi il valore EPG</dt><dd>I timers che hanno impostato <span class=\"ref_label\">Verifica timer automatici</span> per \"Identificazione Trasmissione\" ti mostreranno il valore EPG corrispondente se fai click sul titolo del timer.</dd><dt>Modifica il timer</dt><dd>Puoi modificare il timer cliccando <img src=\"bilder/edit.png\" alt=\"modifica\" />.</dd><dt>Elimina il timer</dt><dd>Per eliminare un timer fai click su <img src=\"bilder/delete.png\" alt=\"elimina\" />.</dd></dl></p><p>Lo stato di ciascun timer è indicato a seconda delle caselle colorate (vedi diagramma) o immagini (vedi elenco):<br /><span class=\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> Il timer è OK e registrerà.<br /><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Conflitti di timers con altri uguali. Questo non è critico, se tu hai abbastanza schede DVB per le registrazioni in parallelo.<br /><span class=\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align=\"middle\" /> Il timer è critico e molto probabilmente <strong>non</strong> registrerà.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Il timer non è attivo.</p><p>In aggiunta a queste funzioni puoi aggiungere un nuovo timer cliccando su <input type=\"submit\" class=\"submit\" value=\"Nuovo timer\"/> in cima e puoi eliminare un numero di timers alla volta cliccando nella casella dell'ultima colonna di quei timers e cliccando <input type=\"submit\"  class=\"submit\" value=\"Timer selezionati eliminati\"/>.</p><p>Puoi <input type=\"submit\" class=\"submit\" value=\"attivare\"/> e <input type=\"submit\" class=\"submit\" value=\"disattivare\"/> i timers selezionati.</p>"
+msgstr "<p>Qui troverai un elenco dei timer noti a VDR.</p><p>In cima troverai un diagramma che mostra i timers giornalieri graficamente. Questo fornisce una vista veloce su cosa stia succedendo in un giorno specifico e ti aiuta a trovare i timers in conflitto. Spostando il cursore del mouse sopra ciascuna casella dei timer sarà visualizzato un dettaglio contenente il titolo del timer, la priorità, la scadenza e la durata.</p><p>Sotto il diagramma troverai l'elenco dei timer che ti mostrano alcune informazioni sui timers. Puoi modificare l'ordine della lista cliccando sull'intestazione delle colonne.</p><p>Per ciascun timer hai le seguenti opzioni:<dl><dt>Impostare lo stato</dt><dd>Cliccando su \"Sì\", \"No\", \"VPS\" o \"Auto\" nella colonna \"Attiva\".</dd><dt>Vedere velocemente la priorità e la durata</dt><dd>Puntando il cursore del mouse nel titolo del timer.</dd><dt>Vedere il valore EPG</dt><dd>I timers che hanno impostato <span class=\"ref_label\">Verifica timer automatici</span> per \"Identificazione Trasmissione\" ti mostreranno il valore EPG corrispondente se fai click sul titolo del timer.</dd><dt>Modificare il timer</dt><dd>Puoi modificare il timer cliccando <img src=\"bilder/edit.png\" alt=\"modifica\" />.</dd><dt>Eliminare il timer</dt><dd>Per eliminare un timer fai click su <img src=\"bilder/delete.png\" alt=\"elimina\" />.</dd></dl></p><p>Lo stato di ciascun timer è indicato a seconda delle caselle colorate (vedi diagramma) o immagini (vedi elenco):<br /><span class=\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> Il timer è OK e registrerà.<br /><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Conflitti di timers con altri uguali. Questo non è critico, se tu hai abbastanza schede DVB per le registrazioni in parallelo.<br /><span class=\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align=\"middle\" /> Il timer è critico e molto probabilmente <strong>non</strong> registrerà.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Il timer non è attivo.</p><p>In aggiunta a queste funzioni puoi aggiungere un nuovo timer cliccando su <input type=\"submit\" class=\"submit\" value=\"Nuovo timer\"/> in cima e puoi eliminare un numero di timers alla volta cliccando nella casella dell'ultima colonna di quei timers e cliccando <input type=\"submit\"  class=\"submit\" value=\"Elimina timer selezionati\"/>.</p><p>Puoi <input type=\"submit\" class=\"submit\" value=\"attivare\"/> e <input type=\"submit\" class=\"submit\" value=\"disattivare\"/> i timers selezionati.</p>"
 
 msgid "Playing Today"
 msgstr "In esecuzione oggi"
@@ -474,10 +474,16 @@ msgid "starting at"
 msgstr "inizio alle"
 
 msgid "Add New Blacklist"
-msgstr "Aggiungi nuova lista nera"
+msgstr "Aggiungi nuova lista esclusione"
 
 msgid "Edit Blacklist"
-msgstr "Modifica lista nera"
+msgstr "Modifica lista esclusione"
+
+msgid "Add New Template"
+msgstr "Aggiungi nuovo modello"
+
+msgid "Edit Template"
+msgstr "Modifica modello"
 
 msgid "Add New Search"
 msgstr "Aggiungi nuova ricerca"
@@ -497,6 +503,9 @@ msgstr "Nascondi risultati"
 msgid "Settings"
 msgstr "Impostazioni"
 
+msgid "Name:"
+msgstr "Nome:"
+
 msgid "Search Term:"
 msgstr "Termine ricerca:"
 
@@ -513,16 +522,16 @@ msgid "at least one word"
 msgstr "almeno una parola"
 
 msgid "match exactly"
-msgstr "esatta corrispondenza"
+msgstr "corrispondenza esatta"
 
 msgid "regular expression"
 msgstr "espressione regolare"
 
 msgid "fuzzy"
-msgstr "da verificare"
+msgstr "imprecisa"
 
 msgid "Tolerance for \"fuzzy\":"
-msgstr "Tolleranza per \"da verificare\":"
+msgstr "Tolleranza per \"imprecisa\":"
 
 msgid "Match Case:"
 msgstr "Tipo corrispondenza:"
@@ -543,10 +552,10 @@ msgid "interval"
 msgstr "intervallo"
 
 msgid "channel group"
-msgstr "gruppo canale"
+msgstr "gruppo canali"
 
 msgid "only FTA"
-msgstr "solo FTA"
+msgstr "solo gratuiti"
 
 msgid "Range:"
 msgstr "Range:"
@@ -579,19 +588,19 @@ msgid "Use Day of Week:"
 msgstr "Utilizza giorno della settimana:"
 
 msgid "Use Blacklists:"
-msgstr "Utilizza lista nera:"
+msgstr "Utilizza lista esclusioni:"
 
 msgid "selection"
 msgstr "selezione"
 
 msgid "Use in Favorites Menu:"
-msgstr "Utilizza nel menu preferiti:"
+msgstr "Utilizza nel menu Preferiti:"
 
 msgid "Use as Search Timer:"
 msgstr "Utilizza come timer di ricerca:"
 
 msgid "yes"
-msgstr "Sì"
+msgstr "sì"
 
 msgid "user-defined"
 msgstr "definito dall'utente"
@@ -600,10 +609,10 @@ msgid "record"
 msgstr "registra"
 
 msgid "announce only"
-msgstr "annuncia soltanto"
+msgstr "solo annuncio"
 
 msgid "switch only"
-msgstr "sintonizza soltanto"
+msgstr "cambia soltanto"
 
 msgid "First day:"
 msgstr "Primo giorno:"
@@ -657,10 +666,16 @@ msgid "VPS:"
 msgstr "VPS:"
 
 msgid "Settings for action \"switch only\""
-msgstr "Impostazioni per azione \"sintonizza soltanto\""
+msgstr "Impostazioni per azione \"cambia soltanto\""
 
 msgid "Switch ... Minutes Before Start:"
-msgstr "Sintonizza ... minuti prima dell'inizio:"
+msgstr "Cambia ... minuti prima dell'inizio:"
+
+msgid "Delete template"
+msgstr "Elimina modello"
+
+msgid "Delete this template?"
+msgstr "Eliminare questo modello?"
 
 msgid "Save as template"
 msgstr "Salva come modello"
@@ -759,7 +774,7 @@ msgid "External Search"
 msgstr "Ricerca esterna"
 
 msgid "Channel Selections"
-msgstr "Selezione canali:"
+msgstr "Selezione canali"
 
 msgid "Skin:"
 msgstr "Stile interfaccia:"
@@ -783,7 +798,7 @@ msgid "Local net (no login required):"
 msgstr "Rete locale (nessun accesso richiesto):"
 
 msgid "Here you can specify an IP address or range that can login without providing login information. For example: \"192.168.0.0/24\" will include any IP starting with \"192.168.0\", \"192.168.0.123/32\" will only match \"192.168.0.123\"."
-msgstr "Qui puoi specificare un indirizzo IP o il range che può connettersi senza fornire informazioni d'accesso. Per esempio: \"192.168.0.0/24\" includerà qualunque IP che comincia con \"192.168.0\", \"192.168.0.123/32\" corrisponderà solo a \"192.168.0.123\"."
+msgstr "Qui puoi specificare un indirizzo IP o il range che può connettersi senza fornire informazioni di accesso. Per esempio: \"192.168.0.0/24\" includerà qualunque IP che comincia con \"192.168.0\", \"192.168.0.123/32\" corrisponderà solo a \"192.168.0.123\"."
 
 msgid "Language:"
 msgstr "Lingua:"
@@ -840,7 +855,7 @@ msgid "Guest Account:"
 msgstr "Account Guest:"
 
 msgid "If you want a user account having only limited privileges, this is for you. The guest user cannot modify anything, it's only allowed to view the EPG, timers, AutoTimers and recordings listings."
-msgstr "Se vuoi un account utente che abbia solo permessi limitati, questo è per te. L'utente guest non può modificare niente, può solo vedere l'EPG, i timer automatici e l'elenco delle registrazioni."
+msgstr "Se vuoi un account utente che abbia solo permessi limitati, questo è per te. L'utente guest non può modificare niente, può solo vedere l'EPG, i timer, i timer automatici e l'elenco delle registrazioni."
 
 msgid "Guest Username:"
 msgstr "Nome utente Guest:"
@@ -864,7 +879,7 @@ msgid "Times:"
 msgstr "Periodi:"
 
 msgid "A comma separated list of times in <strong>hh:mm</strong> format that appear in the selectbox placed at the top."
-msgstr "Un elenco di orari nel formato comma separated <strong>hh:mm</strong> che compare nel box di selezione posizionato in cima."
+msgstr "Un elenco di orari nel formato comma separated <strong>hh:mm</strong> che compare nella casella di selezione posizionata in cima."
 
 msgid "Tooltips:"
 msgstr "Dettagli:"
@@ -930,7 +945,7 @@ msgid "Add summary to new timers:"
 msgstr "Aggiungi sommario ai nuovi timer:"
 
 msgid "If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here."
-msgstr "Se non vuoi che VDRAdmin-AM aggiunga il sommario preso dall'EPG nei nuovi timers puoi disattivarlo qui."
+msgstr "Se non vuoi che VDRAdmin-AM aggiunga il sommario preso dall'EPG nei nuovi timer puoi disattivarlo qui."
 
 msgid "Live Streaming:"
 msgstr "Trasmissione dal vivo:"
@@ -942,10 +957,10 @@ msgid "HTTP Port of Streamdev (also possible 3000/ts):"
 msgstr "Porta HTTP di Streamdev (possibile anche 3000/ts):"
 
 msgid "Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use."
-msgstr "Qui devi impostare il numero di porta in cui il server streamdev di VDR ascolta per effettuare le connessioni. Puoi anche fornire il tipo di trasmissione che usi."
+msgstr "Qui devi impostare il numero di porta in cui il server streamdev di VDR ascolta per effettuare le connessioni. Puoi anche fornire il tipo di trasmissione che utilizzi."
 
 msgid "Recordings Streaming:"
-msgstr "Registrazioni trasmissioni:"
+msgstr "Trasmissione registrazioni:"
 
 msgid "Enable or disable streaming of recordings.<br />Well actually this is no real \"streaming\", but you have to setup your workstation so that it can access VDR's recordings. You can use for example Samba or NFS for this. VDRAdmin-AM simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation's display."
 msgstr "Abilita o disabilita la trasmissione delle registrazioni.<br />Anche se attualmente questa non è una vera \"trasmissione\", ma devi impostare il tuo pc affinché possa accedere alle registrazioni di VDR. Puoi usare per esempio Samba o NFS per questo. VDRAdmin-AM semplicemente genera una lista di esecuzione che contiene tutte le parti della registrazione e invia questo al tuo browser. Se il tuo browser e media player sono configurati correttamente vedrai la registrazione visualizzata sul tuo pc."
@@ -954,7 +969,7 @@ msgid "Path to VDR Recordings on your workstation:"
 msgstr "Percorso di registrazione VDR sul tuo pc:"
 
 msgid "This is the path where your workstation can access VDR's recordings. This depends on your VDR and workstation setup, for example \"\\\\vdr\\videos\" or \"V:\\\" (on Windows) or \"/mnt/videos\" (on Linux)."
-msgstr "Questo è il percorso dove il tuo pc può accedere alle registrazioni di VDR. Questo dipende dalle tue impostazioni di VDR e pc, per esempio \"\\\\vdr\\videos\" oppure \"V:\\\" (su Windows) o \"/mnt/videos\" (su Linux)."
+msgstr "Questo è il percorso in cui il tuo computer può accedere alle registrazioni di VDR. Questo dipende dalle impostazioni di VDR e del tuo pc, per esempio \"\\\\vdr\\videos\" oppure \"V:\\\" (su Windows) o \"/mnt/videos\" (su GNU/Linux)."
 
 msgid "MIME type for live streaming:"
 msgstr "Tipo MIME per trasmissione dal vivo:"
@@ -969,22 +984,25 @@ msgid "The suffix to use for live streaming. Defaults to \"m3u\"."
 msgstr "Suffisso da usare per le trasmissioni dal vivo. Il valore predefinito è \"m3u\". "
 
 msgid "MIME type for recordings streaming:"
-msgstr "Tipo MIME per registrazione trasmissioni:"
+msgstr "Tipo MIME per trasmissione registrazioni:"
 
 msgid "The MIME type to send when using recordings streaming. Defaults to \"video/x-mpegurl\"."
-msgstr "Il tipo MIME da inviare quando si usano le registrazioni della trasmissione. Il valore predefinito è \"video/x-mpegurl\"."
+msgstr "Il tipo MIME da inviare quando si utilizza la trasmissione delle registrazioni. Il valore predefinito è \"video/x-mpegurl\"."
 
 msgid "Suffix for recordings streaming:"
-msgstr "Suffisso per registrazione trasmissioni:"
+msgstr "Suffisso per trasmissione registrazioni:"
 
 msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
-msgstr "Suffisso da usare per registrare la trasmissione. Il valore predefinito è \"m3u\"."
+msgstr "Suffisso da usare per trasmettere la registrazione. Il valore predefinito è \"m3u\"."
 
 msgid "<p>Here you can define two external searches that you can access in the EPG views. You simply have to find the required URL and where the search pattern has to be located. %TITLE% will be substituted by the broadcast's EPG title.</p>"
 msgstr "<p>Qui puoi definire due ricerche esterne che possono accedere alle viste EPG. Devi semplicemente trovare l'URL richiesto e dove il parametro di ricerca deve essere posizionato. %TITLE% sarà sostituito dal titolo EPG della trasmissione.</p>"
 
 msgid "Some examples:"
 msgstr "Alcuni esempi:"
+
+msgid "Please change the hostname to your local needs!"
+msgstr "Cambia il nome server per adattarlo alle tue impostazioni"
 
 msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
 msgstr "<p>Questa sezione è per <strong>soli</strong> esperti, del tipo: sai cosa stai facendo!</p>"
@@ -993,13 +1011,13 @@ msgid "Update EPG data in background:"
 msgstr "Aggiorna i dati EPG in sottofondo:"
 
 msgid "If set to \"yes\" VDRAdmin-AM will periodically refresh its local EPG cache. Else the EPG will be refreshed if the user accesses any EPG view at the web interface and the timeout set at \"Update EPG every\" has been reached."
-msgstr "Se imposti a \"sì\" VDRAdmin-AM aggiornerà periodicamente la sua cache EPG locale. Inoltre l'EPG sarà aggiornato se l'utente accede a qualsiasi vista EPG nell'interfaccia web e la scadenza impostata in \"Aggiorna EPG ogni\" è stata raggiunta."
+msgstr "Se imposti \"sì\" VDRAdmin-AM aggiornerà periodicamente la sua cache EPG locale. Inoltre l'EPG sarà aggiornato se l'utente accede a qualsiasi vista EPG nell'interfaccia web e la scadenza impostata in \"Aggiorna EPG ogni\" è stata raggiunta."
 
 msgid "Update EPG every:"
 msgstr "Aggiorna EPG ogni:"
 
 msgid "The interval, the EPG data is refreshed from VDR and AutoTimer updates are performed (if AutoTimer feature is used)."
-msgstr "L'intervallo, i dati EPG sono aggiornati da VDR e gli aggiornamenti sono eseguiti da AutoTimer (se la funzione AutoTimer viene usata)."
+msgstr "L'intervallo, i dati EPG sono aggiornati da VDR e gli aggiornamenti sono eseguiti dai timer automatici (se la funzione AutoTimer viene usata)."
 
 msgid "<p>If you want to limit the number of channels used in some parts of VDRAdmin-AM, this is for you!</p><p>Use the radio buttons to activate or deactivate the wanted channels in the named menu.</p><p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;&gt;&gt;\"/>. If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click <input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
 msgstr "<p>Se vuoi limitare il numero di canali usati in alcune parti di VDRAdmin-AM, questo è per te!</p><p>Utilizza i pulsanti radio per attivare o disattivare i canali preferiti nel menu indicato.</p><p>Per aggiungere canali alla lista dei canali preferiti devi selezionarli nella casella di selezione del lato sinistro e cliccare <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;&gt;&gt;\"/>. Se vuoi rimuovere canali dalla lista dei canali preferiti devi selezionarli nella casella di selezione del lato destro e cliccare <input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
@@ -1008,10 +1026,10 @@ msgid "Show channels without EPG information:"
 msgstr "Mostra canali senza informazione EPG:"
 
 msgid "Usually channels that don't have EPG information are hidden in all EPG views. If you don't want them to be hidden you have to set this option to \"yes\"."
-msgstr "Di solito i canali che non hanno informazione EPG sono nascosti nelle viste EPG. Se non vuoi che siano nascosti devi impostare questa opzione a \"sì\"."
+msgstr "Di solito i canali che non hanno informazione EPG sono nascosti nelle viste EPG. Se non vuoi che siano nascosti devi impostare questa opzione come \"sì\"."
 
 msgid "<p>Here you will find a listing of automatic timers (AutoTimer) known to VDRAdmin-AM.</p><p>The list shows some information on AutoTimers. You can change the list's sorting by clicking the columns heading.</p><p>For each AutoTimer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each AutoTimer's state is indicated by differently coloured images:<br /><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> AutoTimer is OK and will automatically program matching broadcasts.<br /><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> AutoTimer is not active.</p><p>In addition to these functions you can add a new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value=\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at once by checking the box in the last column of those timers and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/>.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and check for matching AutoTimers.</p>"
-msgstr "<p>Qui troverai un elenco dei timer automatici (AutoTimer) noti a VDRAdmin-AM.</p><p>Questa lista mostra alcune informazioni sui timer automatici. Puoi cambiare l'ordinamento dell'elenco cliccando sul titolo della colonna.</p><p>Per ciascun timer automatico hai le seguenti opzioni:<dl><dt>Imposta lo stato</dt><dd>Clicca su \"Sì\" o \"No\" nella colonna \"Attivo\" per vedere l'attività.</dd><dt>Vedi velocemente la priorità e la durata</dt><dd>Puntando il cursore del mouse nel titolo del timer automatico.</dd><dt>Modifica il timer automatico</dt><dd>Puoi modificare un timer automatico cliccando <img src=\"bilder/edit.png\" alt=\"modifica\" />.</dd><dt>Elimina il timer automatico</dt><dd>Per eliminare un timer automatico fai click su <img src=\"bilder/delete.png\" alt=\"elimina\" />.</dd></dl></p><p>Lo stato di ciascun timer automatico è indicato con diverse immagini colorate:<br /><img src=\"bilder/poempl_gruen.png\" alt=\"attivo\" align=\"middle\" /> Il timer automatico è OK e programmerà automaticamente le trasmissioni corrispondenti.<br /><img src=\"bilder/poempl_grau.png\" alt=\"disattivo\" align=\"middle\" /> Il timer automatico non è attivo.</p><p>In aggiunta a queste funzionalità puoi aggiungere un nuovo timer automatico cliccando <input type=\"submit\" class=\"submit\" value=\"Nuovo timer automatico\"/> in cima e puoi eliminare un numero di timer automatici alla volta spuntando la casella nell'ultima colonna di quei timer e cliccando <input type=\"submit\" class=\"submit\" value=\"Elimina timer automatici selezionati\"/>.</p><p>Clicca <input type=\"submit\" class=\"submit\" value=\"Forza Aggiornamento\"/> per forzare VDRAdmin-AM a riconnettersi a VDR, raccogliere l'EPG attuale e verificare la corrispondenza dei timer automatici.</p>"
+msgstr "<p>Qui troverai un elenco dei timer automatici (AutoTimer) noti a VDRAdmin-AM.</p><p>Questa lista mostra alcune informazioni sui timer automatici. Puoi cambiare l'ordinamento dell'elenco cliccando sul titolo della colonna.</p><p>Per ciascun timer automatico hai le seguenti opzioni:<dl><dt>Imposta lo stato</dt><dd>Clicca su \"Sì\" o \"No\" nella colonna \"Attivo\" per vedere l'attività.</dd><dt>Vedi velocemente la priorità e la scadenza</dt><dd>Puntando il cursore del mouse nel titolo del timer automatico.</dd><dt>Modifica il timer automatico</dt><dd>Puoi modificare un timer automatico cliccando <img src=\"bilder/edit.png\" alt=\"modifica\" />.</dd><dt>Elimina il timer automatico</dt><dd>Per eliminare un timer automatico fai click su <img src=\"bilder/delete.png\" alt=\"elimina\" />.</dd></dl></p><p>Lo stato di ciascun timer automatico è indicato con diverse immagini colorate:<br /><img src=\"bilder/poempl_gruen.png\" alt=\"attivo\" align=\"middle\" /> Il timer automatico è OK e programmerà automaticamente le trasmissioni corrispondenti.<br /><img src=\"bilder/poempl_grau.png\" alt=\"disattivo\" align=\"middle\" /> Il timer automatico non è attivo.</p><p>In aggiunta a queste funzionalità puoi aggiungere un nuovo timer automatico cliccando <input type=\"submit\" class=\"submit\" value=\"Nuovo timer automatico\"/> in cima e puoi eliminare un numero di timer automatici alla volta spuntando la casella nell'ultima colonna di quei timer e cliccando <input type=\"submit\" class=\"submit\" value=\"Elimina timer automatici selezionati\"/>.</p><p>Clicca <input type=\"submit\" class=\"submit\" value=\"Forza Aggiornamento\"/> per forzare VDRAdmin-AM a riconnettersi a VDR, raccogliere l'EPG attuale e verificare la corrispondenza dei timer automatici.</p>"
 
 msgid "Your Browser does not support frames!"
 msgstr "Il tuo browser non supporta i frames!"
@@ -1020,7 +1038,7 @@ msgid "Rename Recording"
 msgstr "Rinomina registrazione"
 
 msgid "Original Name of Recording:"
-msgstr "Nome originale registrazione:"
+msgstr "Nome registrazione originale:"
 
 msgid "New Name of Recording:"
 msgstr "Nuovo nome registrazione:"
@@ -1032,7 +1050,7 @@ msgid "Rename"
 msgstr "Rinomina"
 
 msgid "<p>Here you will find a listing of recordings known to VDR. The headline will also show you VDR's total and free disk space.</p><p>The listing showing you some information on the recordings. You can change the list's sorting by clicking the columns heading. Above the list you'll see the navigation path. If you want to view the contents of previous folders you'll have to click on its name in that path.</p><p>Each row contains this information:<dl><dt>Date</dt><dd>The date when the recording has been done. In case of folders this will show the number of recordings the folder contains.</dd><dt>Time</dt><dd>The time when the recording has been done. In case of folders this will show the number of <strong>new</strong> recordings the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. Click it to show the recording's summary or descend into the folder.</dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> SVDRPort command which is no core VDR feature but is available through a patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete (<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)</dt><dd>This column is only shown if you activated and configured <span class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu\">Configuration</span> menu. You can watch the recording at your workstation.</dd></dl></p><p>In addition to these functions you can delete a number of recordings at once by checking the box in the last but one column of those recordings and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the VDR's configuration files and have entries in VDR's <span class=\"ref_file\">reccmds.conf</span> you can run those commands for the selected recording by selecting the wanted command in the select box locate next to <span class=\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class=\"submit\" value=\"Run\"/> button.</p><p>Use <input type=\"submit\" class=\"submit\" value=\"Refresh\"/> to force reloading of VDR's recordings listing.</p>"
-msgstr "<p>Qui troverai un elenco dei timer noti a VDR. L'intestazione mostrerà anche lo spazio disco totale e disponibile di VDR.</p><p>L'elenco mostra alcune informazioni sulle registrazioni. Puoi cambiare l'ordine della lista cliccando sull'intestazione della colonna. Sopra la lista vedrai il percorso di navigazione. Se vuoi vedere i contenuti delle cartelle precedenti dovrai cliccare sul suo nome in quel percorso.</p><p>Ciascuna riga contiene questa informazione:<dl><dt>Data</dt><dd>La data in cui la registrazione è stata effettuata. Nel caso di cartelle questo mostrerà il numero di registrazioni delle cartelle contenute.</dd><dt>Ora</dt><dd>L'ora in cui la registrazione è stata effettuata. Nel caso di cartelle questo mostrerà il numero di <strong>nuove</strong> registrazioni che la cartella contiene.</dd><dt>Nome</dt><dd>Il nome registrazione o della directory. Fai click per mostrare il sommario delle registrazioni oppure aprire la directory.</dd><dt>Rinomina (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rinomina una registrazione.<br /><h4>Nota:</h4>Questo funziona soltanto se VDR ha il comando SVDRPort <u>RENR</u>  che non è integrato ma disponibile attraverso una patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> o <span class=\"ref_file\">enAIO-v2.2+</span> che fornisce questo commando.</dd><dt>Elimina (<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Elimina una registrazione.</dd><dt>Trasmetti (<img src=\"bilder/stream.png\" alt=\"stream\" />)</dt><dd>Questa colonna è mostrata solo se hai attivato e configurato la <span class=\"ref_label\">Registrazione delle trasmissioni</span> nel menu di <span class=\"ref_menu\">Configurazione</span>. Puoi guardare la registrazione nel tuo pc.</dd></dl></p><p>In aggiunta a queste funzioni puoi eliminare un numero di registrazioni alla volta cliccando l'ultima casella ma solo una colonna di quelle registrazioni e cliccando <input type=\"submit\" class=\"submit\" value=\"Elimina registrazioni selezionate\"/>.</p><p>Se hai impostato il percorso dei files di configurazione di VDR e hai valori nel file <span class=\"ref_file\">reccmds.conf</span> di VDR puoi eseguire questi comandi per la registrazione selezionando il comando voluto nella casella di selezione posizionata vicino a <span class=\"ref_label\">Comandi:</span> e premendo il pulsante <input type=\"submit\" class=\"submit\" value=\"Esegui\"/>.</p><p>Utilizza <input type=\"submit\" class=\"submit\" value=\"Aggiorna\"/> per forzare il ricaricamento dell'elenco delle registrazioni di VDR.</p>"
+msgstr "<p>Qui troverai un elenco dei timer noti a VDR. L'intestazione mostrerà anche lo spazio disco totale e disponibile di VDR.</p><p>L'elenco mostra alcune informazioni sulle registrazioni. Puoi cambiare l'ordine della lista cliccando sull'intestazione della colonna. Sopra la lista vedrai il percorso di navigazione. Se vuoi vedere i contenuti delle directory precedenti dovrai cliccare sul suo nome in quel percorso.</p><p>Ciascuna riga contiene queste informazioni:<dl><dt>Data</dt><dd>La data in cui la registrazione è stata effettuata. Nel caso di directory questo mostrerà il numero di registrazioni delle directory contenute.</dd><dt>Ora</dt><dd>L'ora in cui la registrazione è stata effettuata. Nel caso di directory questo mostrerà il numero di <strong>nuove</strong> registrazioni che la directory contiene.</dd><dt>Nome</dt><dd>Il nome registrazione o della directory. Fai click per mostrare il sommario delle registrazioni oppure aprire la directory.</dd><dt>Rinomina (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rinomina una registrazione.<br /><h4>Nota:</h4>Questo funziona soltanto se VDR ha il comando SVDRPort <u>RENR</u>  che non è integrato ma disponibile attraverso una patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> o <span class=\"ref_file\">enAIO-v2.2+</span> che fornisce questo comando.</dd><dt>Elimina (<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Elimina una registrazione.</dd><dt>Trasmetti (<img src=\"bilder/stream.png\" alt=\"stream\" />)</dt><dd>Questa colonna è mostrata solo se hai attivato e configurato la <span class=\"ref_label\">Registrazione delle trasmissioni</span> nel menu di <span class=\"ref_menu\">Configurazione</span>. Puoi guardare la registrazione nel tuo pc.</dd></dl></p><p>In aggiunta a queste funzioni puoi eliminare un numero di registrazioni alla volta cliccando l'ultima casella ma solo una colonna di quelle registrazioni e cliccando <input type=\"submit\" class=\"submit\" value=\"Elimina registrazioni selezionate\"/>.</p><p>Se hai impostato il percorso dei files di configurazione di VDR e hai valori nel file <span class=\"ref_file\">reccmds.conf</span> di VDR puoi eseguire questi comandi per la registrazione selezionando il comando voluto nella casella di selezione posizionata vicino a <span class=\"ref_label\">Comandi:</span> e premendo il pulsante <input type=\"submit\" class=\"submit\" value=\"Esegui\"/>.</p><p>Utilizza <input type=\"submit\" class=\"submit\" value=\"Aggiorna\"/> per forzare a ricaricare l'elenco delle registrazioni di VDR.</p>"
 
 msgid "<p>Here you can edit the descriptive fields of an existing EPG entry.</p>"
 msgstr "<p>Qui puoi modificare i campi descrittivi di un valore EPG esistente.</p>"
@@ -1047,7 +1065,7 @@ msgid "Time (readonly)"
 msgstr "Ora (sola lettura)"
 
 msgid "This is the start and end time of the entry. It cannot be changed."
-msgstr "Questa è l'ora d'inizio e fine del valore. Non può essere modificato."
+msgstr "Questa è l'ora di inizio e fine del valore. Non può essere modificato."
 
 msgid "Change this string to give this EPG Entry a new title. It must consist of only one line of text."
 msgstr "Cambia questa stringa per assegnare un nuovo titolo al valore EPG. Deve essere composta da una sola riga di testo."
@@ -1119,7 +1137,7 @@ msgid "inactivate"
 msgstr "disattiva"
 
 msgid "selected timers"
-msgstr "timers selezionati"
+msgstr "timer selezionati"
 
 msgid "Delete Selected Timers"
 msgstr "Elimina timer selezionati"
@@ -1128,10 +1146,10 @@ msgid "No timers defined!"
 msgstr "Nessun timer definito!"
 
 msgid "EPG Search Blacklists"
-msgstr "Lista nera ricerca EPG"
+msgstr "Lista esclusione ricerca EPG"
 
 msgid "New Blacklist"
-msgstr "Nuova lista nera"
+msgstr "Nuova lista esclusione"
 
 msgid "Search pattern"
 msgstr "Cerca valore"
@@ -1143,13 +1161,13 @@ msgid "To"
 msgstr "A"
 
 msgid "Delete blacklist?"
-msgstr "Eliminare lista nera?"
+msgstr "Eliminare lista esclusione?"
 
 msgid "Delete Selected Blacklists"
-msgstr "Elimina liste nere selezionate"
+msgstr "Elimina liste esclusioni selezionate"
 
 msgid "Delete all selected blacklists?"
-msgstr "Eliminare tutte le liste nere selezionate?"
+msgstr "Eliminare tutte le liste esclusioni selezionate?"
 
 msgid "EPG search"
 msgstr "Ricerca EPG"
@@ -1308,8 +1326,8 @@ msgid "Config file written successfully."
 msgstr "File Config scritto manualmente."
 
 #, perl-format
-msgid "vdradmind.pl %s started with pid %d."
-msgstr "vdradmind.pl %s avviato con pid %d."
+msgid "%s %s started with pid %d."
+msgstr "%s %s avviato con pid %d."
 
 msgid "Not found"
 msgstr "Non trovato"
@@ -1390,7 +1408,7 @@ msgid "Playing on the %s"
 msgstr "In esecuzione il %s"
 
 msgid "next"
-msgstr "prossimo"
+msgstr "prossimi"
 
 msgid "What's on after"
 msgstr "In programmazione dopo"
@@ -1414,4 +1432,4 @@ msgid "Timers"
 msgstr "Timer"
 
 msgid "System default"
-msgstr "Predefiniti di sistema"
+msgstr "Predefinita di sistema"

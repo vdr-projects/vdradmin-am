@@ -37,7 +37,7 @@
 				<td class="col_value">
 					<select class="submit" name="TEMPLATE">
 <?% FOREACH template = TEMPLATELIST %?>
-						<option value="<?% template.name %?>" <?% IF template.aktemplate %?>selected="selected"<?% END %?>><?% template.name %?></option>
+						<option value="<?% template.name | html %?>" <?% IF template.aktemplate %?>selected="selected"<?% END %?>><?% template.name %?></option>
 <?% END %?>
 					</select>
 				</td>
@@ -50,7 +50,7 @@
 				<td class="col_value">
 					<select class="submit" name="SKIN">
 <?% FOREACH skin = SKINLIST %?>
-						<option value="<?% skin.name %?>" <?% IF skin.sel %?>selected="selected"<?% END %?>><?% skin.name %?></option>
+						<option value="<?% skin.name | html %?>" <?% IF skin.sel %?>selected="selected"<?% END %?>><?% skin.name %?></option>
 <?% END %?>
 					</select>
 				</td>
@@ -70,12 +70,12 @@
 			<tr class="<?% tr_class %?>">
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Number of channels to use:') %?></h5></td>
-				<td class="col_value"><input type="text" name="EPG_PRUNE" value="<?% config.EPG_PRUNE %?>" size="5" maxlength="25" /></td>
+				<td class="col_value"><input type="text" name="EPG_PRUNE" value="<?% config.EPG_PRUNE | html %?>" size="5" maxlength="25" /></td>
 			</tr>
 			<tr class="<?% tr_class %?>">
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Local net (no login required):') %?></h5></td>
-				<td class="col_value"><input type="text" name="LOCAL_NET" value="<?% config.LOCAL_NET %?>" size="20" maxlength="50" /></td>
+				<td class="col_value"><input type="text" name="LOCAL_NET" value="<?% config.LOCAL_NET | html %?>" size="20" maxlength="50" /></td>
 			</tr>
 			<tr class="<?% tr_class %?>">
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
@@ -88,7 +88,7 @@
 	<?% END %?>
 					</select>
 <?% ELSE %?>
-					<input type="text" name="LANG" value="<?% config.LANG %?>" size="20" maxlength="50" />
+					<input type="text" name="LANG" value="<?% config.LANG | html %?>" size="20" maxlength="50" />
 <?% END %?>
 				</td>
 			</tr>
@@ -108,19 +108,19 @@
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Number of DVB cards:') %?></h5></td>
-				<td class="col_value"><input type="text" name="RECORDINGS" value="<?% config.RECORDINGS %?>" size="2" /></td>
+				<td class="col_value"><input type="text" name="RECORDINGS" value="<?% config.RECORDINGS | html %?>" size="2" /></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Path to recordings:') %?></h5></td>
-				<td class="col_value"><input type="text" name="VIDEODIR" value="<?% config.VIDEODIR %?>" size="20" maxlength="256" /></td>
+				<td class="col_value"><input type="text" name="VIDEODIR" value="<?% config.VIDEODIR | html %?>" size="20" maxlength="256" /></td>
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Path to configuration files:') %?></h5></td>
-				<td class="col_value"><input type="text" name="VDRCONFDIR" value="<?% config.VDRCONFDIR %?>" size="20" maxlength="256" /></td>
+				<td class="col_value"><input type="text" name="VDRCONFDIR" value="<?% config.VDRCONFDIR | html %?>" size="20" maxlength="256" /></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Path to EPG images:') %?></h5></td>
-				<td class="col_value"><input type="text" name="EPGIMAGES" value="<?% config.EPGIMAGES %?>" size="20" maxlength="256" /></td>
+				<td class="col_value"><input type="text" name="EPGIMAGES" value="<?% config.EPGIMAGES | html %?>" size="20" maxlength="256" /></td>
 			</tr>
 		</table>
 
@@ -130,11 +130,11 @@
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Username:') %?></h5></td>
-				<td class="col_value"><input type="text" name="USERNAME" value="<?% config.USERNAME %?>" size="12" /></td>
+				<td class="col_value"><input type="text" name="USERNAME" value="<?% config.USERNAME | html %?>" size="12" /></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Password:') %?></h5></td>
-				<td class="col_value"><input type="password" name="PASSWORD" value="<?% config.PASSWORD %?>" size="12" /></td>
+				<td class="col_value"><input type="password" name="PASSWORD" value="<?% config.PASSWORD | html %?>" size="12" /></td>
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Guest Account:') %?></h5></td>
@@ -145,11 +145,11 @@
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Guest Username:') %?></h5></td>
-				<td class="col_value"><input type="text" name="USERNAME_GUEST" value="<?% config.USERNAME_GUEST %?>" size="12" /></td>
+				<td class="col_value"><input type="text" name="USERNAME_GUEST" value="<?% config.USERNAME_GUEST | html %?>" size="12" /></td>
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Guest Password:') %?></h5></td>
-				<td class="col_value"><input type="password" name="PASSWORD_GUEST" value="<?% config.PASSWORD_GUEST %?>" size="12" /></td>
+				<td class="col_value"><input type="password" name="PASSWORD_GUEST" value="<?% config.PASSWORD_GUEST | html %?>" size="12" /></td>
 			</tr>
 		</table>
 
@@ -159,11 +159,11 @@
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Hours:') %?></h5></td>
-				<td class="col_value"><input type="text" name="ZEITRAHMEN" value="<?% config.ZEITRAHMEN %?>" size="2" /></td>
+				<td class="col_value"><input type="text" name="ZEITRAHMEN" value="<?% config.ZEITRAHMEN | html %?>" size="2" /></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Times:') %?></h5></td>
-				<td class="col_value"><input type="text" name="TIMES" value="<?% config.TIMES %?>" size="20" />&nbsp;&nbsp;&nbsp;<?% gettext('Also used for other EPG views!') %?></td>
+				<td class="col_value"><input type="text" name="TIMES" value="<?% config.TIMES | html %?>" size="20" />&nbsp;&nbsp;&nbsp;<?% gettext('Also used for other EPG views!') %?></td>
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Tooltips:') %?></h5></td>
@@ -188,19 +188,19 @@
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Priority:') %?></h5></td>
-				<td class="col_value"><input type="text" name="AT_PRIORITY" value="<?% config.AT_PRIORITY %?>" size="2" maxlength="2" /></td>
+				<td class="col_value"><input type="text" name="AT_PRIORITY" value="<?% config.AT_PRIORITY | html %?>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Lifetime:') %?></h5></td>
-				<td class="col_value"><input type="text" name="AT_LIFETIME" value="<?% config.AT_LIFETIME %?>" size="2" maxlength="2" /></td>
+				<td class="col_value"><input type="text" name="AT_LIFETIME" value="<?% config.AT_LIFETIME | html %?>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Time Margin at Start:') %?></h5></td>
-				<td class="col_value"><input type="text" name="AT_MARGIN_BEGIN" value="<?% config.AT_MARGIN_BEGIN %?>" size="2" maxlength="2" /></td>
+				<td class="col_value"><input type="text" name="AT_MARGIN_BEGIN" value="<?% config.AT_MARGIN_BEGIN | html %?>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Time Margin at Stop:') %?></h5></td>
-				<td class="col_value"><input type="text" name="AT_MARGIN_END" value="<?% config.AT_MARGIN_END %?>" size="2" maxlength="2" /></td>
+				<td class="col_value"><input type="text" name="AT_MARGIN_END" value="<?% config.AT_MARGIN_END | html %?>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Send email after programming timer:') %?></h5></td>
@@ -211,23 +211,23 @@
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Send email as:') %?></h5></td>
-				<td class="col_value"><input type="text" name="MAIL_FROM" value="<?% config.MAIL_FROM %?>" size="20" maxlength="100" /></td>
+				<td class="col_value"><input type="text" name="MAIL_FROM" value="<?% config.MAIL_FROM | html %?>" size="20" maxlength="100" /></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Send email to:') %?></h5></td>
-				<td class="col_value"><input type="text" name="MAIL_TO" value="<?% config.MAIL_TO %?>" size="20" maxlength="100" /></td>
+				<td class="col_value"><input type="text" name="MAIL_TO" value="<?% config.MAIL_TO | html %?>" size="20" maxlength="100" /></td>
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Mail server:') %?></h5></td>
-				<td class="col_value"><input type="text" name="MAIL_SERVER" value="<?% config.MAIL_SERVER %?>" size="20" maxlength="100" /></td>
+				<td class="col_value"><input type="text" name="MAIL_SERVER" value="<?% config.MAIL_SERVER | html %?>" size="20" maxlength="100" /></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('SMTPAuth user:') %?></h5></td>
-				<td class="col_value"><input type="text" name="MAIL_AUTH_USER" value="<?% config.MAIL_AUTH_USER %?>" size="20" maxlength="100" /></td>
+				<td class="col_value"><input type="text" name="MAIL_AUTH_USER" value="<?% config.MAIL_AUTH_USER | html %?>" size="20" maxlength="100" /></td>
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('SMTPAuth password:') %?></h5></td>
-				<td class="col_value"><input type="password" name="MAIL_AUTH_PASS" value="<?% config.MAIL_AUTH_PASS %?>" size="20" maxlength="100" /></td>
+				<td class="col_value"><input type="password" name="MAIL_AUTH_PASS" value="<?% config.MAIL_AUTH_PASS | html %?>" size="20" maxlength="100" /></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Tooltips:') %?></h5></td>
@@ -245,19 +245,19 @@
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Priority:') %?></h5></td>
-				<td class="col_value"><input type="text" name="TM_PRIORITY" value="<?% config.TM_PRIORITY %?>" size="2" maxlength="2" /></td>
+				<td class="col_value"><input type="text" name="TM_PRIORITY" value="<?% config.TM_PRIORITY | html %?>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Lifetime:') %?></h5></td>
-				<td class="col_value"><input type="text" name="TM_LIFETIME" value="<?% config.TM_LIFETIME %?>" size="2" maxlength="2" /></td>
+				<td class="col_value"><input type="text" name="TM_LIFETIME" value="<?% config.TM_LIFETIME | html %?>" size="2" maxlength="2" /></td>
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Time Margin at Start:') %?></h5></td>
-				<td class="col_value"><input type="text" name="TM_MARGIN_BEGIN" value="<?% config.TM_MARGIN_BEGIN %?>" size="3" /> <?% gettext('minutes') %?></td>
+				<td class="col_value"><input type="text" name="TM_MARGIN_BEGIN" value="<?% config.TM_MARGIN_BEGIN | html %?>" size="3" /> <?% gettext('minutes') %?></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Time Margin at Stop:') %?></h5></td>
-				<td class="col_value"><input type="text" name="TM_MARGIN_END" value="<?% config.TM_MARGIN_END %?>" size="3" /> <?% gettext('minutes') %?></td>
+				<td class="col_value"><input type="text" name="TM_MARGIN_END" value="<?% config.TM_MARGIN_END | html %?>" size="3" /> <?% gettext('minutes') %?></td>
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Tooltips in timeline:') %?></h5></td>
@@ -289,7 +289,7 @@
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('HTTP Port of Streamdev (also possible 3000/ts):') %?></h5></td>
-				<td class="col_value"><input type="text" name="ST_STREAMDEV_PORT" value="<?% config.ST_STREAMDEV_PORT %?>" size="10" /></td>
+				<td class="col_value"><input type="text" name="ST_STREAMDEV_PORT" value="<?% config.ST_STREAMDEV_PORT | html %?>" size="10" /></td>
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Recordings Streaming:') %?></h5></td>
@@ -300,23 +300,23 @@
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Path to VDR Recordings on your workstation:') %?></h5></td>
-				<td class="col_value"><input type="text" name="ST_VIDEODIR" value="<?% config.ST_VIDEODIR %?>" size="20" maxlength="256" /></td>
+				<td class="col_value"><input type="text" name="ST_VIDEODIR" value="<?% config.ST_VIDEODIR | html %?>" size="20" maxlength="256" /></td>
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('MIME type for live streaming:') %?></h5></td>
-				<td class="col_value"><input type="text" name="TV_MIMETYPE" value="<?% config.TV_MIMETYPE %?>" size="20" maxlength="256" /></td>
+				<td class="col_value"><input type="text" name="TV_MIMETYPE" value="<?% config.TV_MIMETYPE | html %?>" size="20" maxlength="256" /></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Suffix for live streaming:') %?></h5></td>
-				<td class="col_value"><input type="text" name="TV_EXT" value="<?% config.TV_EXT %?>" size="4" maxlength="256" /></td>
+				<td class="col_value"><input type="text" name="TV_EXT" value="<?% config.TV_EXT | html %?>" size="4" maxlength="256" /></td>
 			</tr>
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('MIME type for recordings streaming:') %?></h5></td>
-				<td class="col_value"><input type="text" name="REC_MIMETYPE" value="<?% config.REC_MIMETYPE %?>" size="20" maxlength="256" /></td>
+				<td class="col_value"><input type="text" name="REC_MIMETYPE" value="<?% config.REC_MIMETYPE | html %?>" size="20" maxlength="256" /></td>
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Suffix for recordings streaming:') %?></h5></td>
-				<td class="col_value"><input type="text" name="REC_EXT" value="<?% config.REC_EXT %?>" size="4" maxlength="256" /></td>
+				<td class="col_value"><input type="text" name="REC_EXT" value="<?% config.REC_EXT | html %?>" size="4" maxlength="256" /></td>
 			</tr>
 <!-- not (yet?) supported 
 			<tr class="row_odd">
@@ -324,7 +324,7 @@
 				<td class="col_value">
 					<select class="submit" name="STREAMTYPE">
 <?% FOREACH streamtype = STREAMTYPELIST %?>
-						<option value="<?% streamtype.name %?>" <?% IF streamtype.sel %?>selected="selected"<?% END %?>><?% streamtype.name %?></option>
+						<option value="<?% streamtype.name | html %?>" <?% IF streamtype.sel %?>selected="selected"<?% END %?>><?% streamtype.name %?></option>
 <?% END %?>
 					</select>
 				</td>
@@ -345,10 +345,10 @@
 					<input type="radio" name="SRCH1_ACTIVE" value="0" id="srch1_active_no" <?% UNLESS config.SRCH1_ACTIVE %?>checked="checked"<?% END %?> /><label for="srch1_active_no"><?% gettext('No') %?></label>
 					<br />
 					<?% gettext('URL:') %?>
-					<input type="text" name="SRCH1_URL" value="<?% config.SRCH1_URL %?>" size="40" maxlength="256" />
+					<input type="text" name="SRCH1_URL" value="<?% config.SRCH1_URL | html %?>" size="40" maxlength="256" />
 					<br />
 					<?% gettext('Title:') %?>
-					<input type="text" name="SRCH1_TITLE" value="<?% config.SRCH1_TITLE %?>" size="40" maxlength="256" />
+					<input type="text" name="SRCH1_TITLE" value="<?% config.SRCH1_TITLE | html %?>" size="40" maxlength="256" />
 				</td>
 			</tr>
 			<tr class="row_even">
@@ -359,10 +359,10 @@
 					<input type="radio" name="SRCH2_ACTIVE" value="0" id="srch2_active_no" <?% UNLESS config.SRCH2_ACTIVE %?>checked="checked"<?% END %?> /><label for="srch2_active_no"><?% gettext('No') %?></label>
 					<br />
 					<?% gettext('URL:') %?>
-					<input type="text" name="SRCH2_URL" value="<?% config.SRCH2_URL %?>" size="40" maxlength="256" />
+					<input type="text" name="SRCH2_URL" value="<?% config.SRCH2_URL | html %?>" size="40" maxlength="256" />
 					<br />
 					<?% gettext('Title:') %?>
-					<input type="text" name="SRCH2_TITLE" value="<?% config.SRCH2_TITLE %?>" size="40" maxlength="256" />
+					<input type="text" name="SRCH2_TITLE" value="<?% config.SRCH2_TITLE | html %?>" size="40" maxlength="256" />
 				</td>
 			</tr>
 		</table>
@@ -380,7 +380,7 @@
 			</tr>
 			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Update EPG every:') %?></h5></td>
-				<td class="col_value"><input type="text" name="CACHE_TIMEOUT" value="<?% config.CACHE_TIMEOUT %?>" size="4" /> <?% gettext('minutes') %?></td>
+				<td class="col_value"><input type="text" name="CACHE_TIMEOUT" value="<?% config.CACHE_TIMEOUT | html %?>" size="4" /> <?% gettext('minutes') %?></td>
 			</tr>
 		</table>
 

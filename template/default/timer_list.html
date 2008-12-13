@@ -61,13 +61,13 @@
 				<tr class="heading">
 					<td><h2><?% title %?></h2></td>
 					<td class="col_navi">
-						<?% IF prevdayurl %?><a href="<?% prevdayurl %?>"><img src="bilder/pfeile_nachlinks.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachlinks_soft.png" border="0" alt="" /><?% END %?>
+						<?% IF prevdayurl %?><a href="<?% prevdayurl %?>" title="<?% prevdaytext %?>"><img src="bilder/pfeile_nachlinks.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachlinks_soft.png" border="0" alt="" /><?% END %?>
 						<select name="vdr_id" class="submit" onchange="window.open('<?% url %?>?aktion=timer_list&amp;timer=' + this.options[this.selectedIndex].value,'main')">
 	<?% FOREACH day = day_loop %?>
-							<option value="<?% day.sortfield %?>" <?% IF day.current %?>selected="selected"<?% END %?>><?% day.day %?></option>
+							<option value="<?% day.sortfield | html %?>" <?% IF day.current %?>selected="selected"<?% END %?>><?% day.day %?></option>
 	<?% END %?>
 						</select>
-						<?% IF nextdayurl %?><a href="<?% nextdayurl %?>"><img src="bilder/pfeile_nachrechts.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachrechts_soft.png" border="0" alt="" /><?% END %?>
+						<?% IF nextdayurl %?><a href="<?% nextdayurl %?>" title="<?% nextdaytext %?>"><img src="bilder/pfeile_nachrechts.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachrechts_soft.png" border="0" alt="" /><?% END %?>
 					</td>
 				</tr>
 				<tr class="row_even">

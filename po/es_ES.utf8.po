@@ -5,14 +5,14 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-AM-3.6.2\n"
-"Report-Msgid-Bugs-To: Andreas Mair <mail@andreas.vdr-developer.org>\n"
-"POT-Creation-Date: 2008-06-30 08:26+0200\n"
-"PO-Revision-Date: 2008-04-10 20:28+0100\n"
+"Project-Id-Version: VDRAdmin-AM-3.6.3\n"
+"Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
+"POT-Creation-Date: 2008-09-25 13:23+0200\n"
+"PO-Revision-Date: 2008-11-02 19:28+0100\n"
 "Last-Translator: r <r@g.c>\n"
 "Language-Team: rudiberto <r_jung@web.de>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-Country: SPAIN\n"
@@ -38,7 +38,7 @@ msgid "o'clock"
 msgstr "h."
 
 msgid "More Information"
-msgstr "m·s informaciÛn"
+msgstr "m√°s informaci√≥n"
 
 msgid "Channels"
 msgstr "EPG por emisoras"
@@ -53,7 +53,7 @@ msgid "Search for other show times"
 msgstr "buscar repeticiones"
 
 msgid "No Information"
-msgstr "No hay informaciÛn"
+msgstr "No hay informaci√≥n"
 
 msgid "Edit"
 msgstr "Modificar"
@@ -62,7 +62,7 @@ msgid "Record"
 msgstr "Grabar estreno"
 
 msgid "No EPG information available"
-msgstr "No hay informaciÛn de la EPG"
+msgstr "No hay informaci√≥n de la EPG"
 
 msgid "Edit EPG"
 msgstr "Modificar EPG"
@@ -77,10 +77,10 @@ msgid "Time"
 msgstr "hora"
 
 msgid "Title"
-msgstr "TÌtulo"
+msgstr "T√≠tulo"
 
 msgid "Subtitle"
-msgstr "SubtÌtulo"
+msgstr "Subt√≠tulo"
 
 msgid "Description"
 msgstr "Resumen"
@@ -101,37 +101,37 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 msgid "Edit Timer"
-msgstr "Modificar programaciÛn"
+msgstr "Modificar programaci√≥n"
 
 msgid "<p>Here you can edit a timer's settings.</p>"
-msgstr "<p>AquÌ se puede modificar ajustes de las programaciones.</p>"
+msgstr "<p>Aqu√≠ se puede modificar ajustes de las programaciones.</p>"
 
 msgid "Timer Active:"
-msgstr "ProgramaciÛn activada:"
+msgstr "Programaci√≥n activada:"
 
 msgid "Activate or deactivate this timer. Deactivated timers are still stored in the timer list so that they can be activated again, but they do not record anything meanwhile."
-msgstr "Activar o desactivar esta programaciÛn. Programaciones desactivadas se encuentran todavia en la lista de las programaciones. Asi se puede activarse m·s tarde. Pero significar· que no grabar· mientras estan desactivadas."
+msgstr "Activar o desactivar esta programaci√≥n. Programaciones desactivadas se encuentran todavia en la lista de las programaciones. Asi se puede activarse m√°s tarde. Pero significar√° que no grabar√° mientras estan desactivadas."
 
 msgid "AutoTimer Checking:"
 msgstr "Autovigilancia de las programaciones:"
 
 msgid "Depending on how this timer has been programmed you have up to three possible settings:"
-msgstr "Depende como se programado la programaciÛn tienes tres ajustes posibles:"
+msgstr "Depende como se programado la programaci√≥n tienes tres ajustes posibles:"
 
 msgid "Transmission Identification"
 msgstr "Identificador de la emisora"
 
 msgid "Monitor this timer using the identification provided in the EPG. Please note that this only works if the provided identification is a fix and unique value! This option is not available with timers programmed in VDR."
-msgstr "Monitorizar esta programaciÛn utilizando la identificaciÛn del EPG. °Ten en cuenta, que Èste sÛlo funccionar· si el identificador es un valor fijo y unique! Esta opcion no es valido para programaciones creados en VDR."
+msgstr "Monitorizar esta programaci√≥n utilizando la identificaci√≥n del EPG. ¬°Ten en cuenta, que √©ste s√≥lo funccionar√° si el identificador es un valor fijo y unique! Esta opcion no es valido para programaciones creados en VDR."
 
 msgid "Monitor this timer using the start and stop time."
-msgstr "Monitorizar esta programaciÛn utilizando hora de inicio y fin."
+msgstr "Monitorizar esta programaci√≥n utilizando hora de inicio y fin."
 
 msgid "off"
 msgstr "apagado"
 
 msgid "Do not monitor this timer."
-msgstr "Sin monitorizar esta programaciÛn."
+msgstr "Sin monitorizar esta programaci√≥n."
 
 msgid "Channel:"
 msgstr "Emisora:"
@@ -140,65 +140,65 @@ msgid "The channel to record."
 msgstr "La emisora para grabar:"
 
 msgid "Day Of Recording:"
-msgstr "DÌa de la grabaciÛn:"
+msgstr "D√≠a de la grabaci√≥n:"
 
 msgid "The day when the timer should get active. You can enter the day in two formats:<ul><li>Two digits (DD). This will use the current month and year.</li><li>ISO norm (YYYY-MM-DD). Program your timers as far in the future as you like.</li></ul>In case you want to program a repeating timer you can use the seven checkboxes below the text field. Check the box for each day you want the timer to get active."
 msgstr ""
-"El dia de la activaciÛn de la programaciÛn. Se puede verificar en dos formatos:<ul>\n"
-"<li>Dos digitos (DD). AsÌ se usar· mes y aÒo actual.</li>\n"
+"El dia de la activaci√≥n de la programaci√≥n. Se puede verificar en dos formatos:<ul>\n"
+"<li>Dos digitos (DD). As√≠ se usar√° mes y a√±o actual.</li>\n"
 "<li>Norma ISO (YYYY-MM-DD). Esta forma te permite crear programaciones para cualquier momento en el futuro.</li></ul>\n"
-"Para una programaciÛn repetitoria usa las 7 casillas abajo del texto. Cada uno marcar· el dia activado para la programaciÛn."
+"Para una programaci√≥n repetitoria usa las 7 casillas abajo del texto. Cada uno marcar√° el dia activado para la programaci√≥n."
 
 msgid "Start Time:"
 msgstr "Comienzo:"
 
 msgid "This is the time when the timer should start recording. The first text field is for \"hour\", the second for \"minute\"."
-msgstr "Esta es la hora cuando la programaciÛn iniciar· la grabaciÛn. El primer campo de texto es para \"hora\", el segundo para \"minutos\"."
+msgstr "Esta es la hora cuando la programaci√≥n iniciar√° la grabaci√≥n. El primer campo de texto es para \"hora\", el segundo para \"minutos\"."
 
 msgid "End Time:"
 msgstr "Fin:"
 
 msgid "This is the time when the timer should stop recording. The first text field is for \"hour\", the second for \"minute\"."
-msgstr "Esta es la hora cuando la programaciÛn acabar· la grabaciÛn. El primer campo de texto es para \"hora\", el segundo para \"minutos\"."
+msgstr "Esta es la hora cuando la programaci√≥n acabar√° la grabaci√≥n. El primer campo de texto es para \"hora\", el segundo para \"minutos\"."
 
 msgid "Priority:"
 msgstr "Prioridad:"
 
 msgid "An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording."
 msgstr ""
-"Un n˙mero en el rango <strong>0...99</strong>, establece la <strong>prioridad</strong> de esta programaciÛn y la grabaciÛn creada de la programaciÛn. <strong>0</strong> representa el valor m·s bajo, <strong>99</strong> lo mayor. La prioridad se usa para decidir cu·l de las programaciones se iniciaria a caso que hay dos o m·s en la misma hora de <strong>inicio</strong>. La primera en la lista con la prioridad m·s alta va a ser elegida.<br />\n"
-"<br />El valor se guardar· tambiÈn junto con la grabaciÛn para utilizarlo m·s tarde para decidir cu·l de las grabaciones guardadas se puede borrar del disco para liberar espacio para una nueva grabaciÛn, si hace falta. En Èste caso una grabaciÛn existente con la prioridad m·s baja (y  su <strong>duraciÛn</strong> garantizada ya caducada) remover·.<br />\n"
-"<br />Si todas las tarjetas DVB estan ocupadas una programaciÛn va a interumpir otra - si tiene una prioridad m·s baja - para iniciar su grabaciÛn."
+"Un n√∫mero en el rango <strong>0...99</strong>, establece la <strong>prioridad</strong> de esta programaci√≥n y la grabaci√≥n creada de la programaci√≥n. <strong>0</strong> representa el valor m√°s bajo, <strong>99</strong> lo mayor. La prioridad se usa para decidir cu√°l de las programaciones se iniciaria a caso que hay dos o m√°s en la misma hora de <strong>inicio</strong>. La primera en la lista con la prioridad m√°s alta va a ser elegida.<br />\n"
+"<br />El valor se guardar√° tambi√©n junto con la grabaci√≥n para utilizarlo m√°s tarde para decidir cu√°l de las grabaciones guardadas se puede borrar del disco para liberar espacio para una nueva grabaci√≥n, si hace falta. En √©ste caso una grabaci√≥n existente con la prioridad m√°s baja (y  su <strong>duraci√≥n</strong> garantizada ya caducada) remover√°.<br />\n"
+"<br />Si todas las tarjetas DVB estan ocupadas una programaci√≥n va a interumpir otra - si tiene una prioridad m√°s baja - para iniciar su grabaci√≥n."
 
 msgid "Lifetime:"
 msgstr "Durabilidad:"
 
 msgid "The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by."
-msgstr "La duraciÛn <strong>garantizada</strong> (en dias) de una grabaciÛn guardada de esta programaciÛn. <strong>0</strong> significa que se puede borrar autom·ticamente en cualquier momento por otra grabaciÛn con prioridad m·s alta. <strong>99</strong> significa que esta grabaciÛn autom·ticamente nunca va a ser borrada. Todos valores dem·s en el rango <strong>1...98</strong> significan que esta grabaciÛn solo va ser borrada autom·ticamente por otra grabaciÛn nueva, cuando se han pasado los dias ajustados y garantizados desde su <strong>dia de grabaciÛn</strong>."
+msgstr "La duraci√≥n <strong>garantizada</strong> (en dias) de una grabaci√≥n guardada de esta programaci√≥n. <strong>0</strong> significa que se puede borrar autom√°ticamente en cualquier momento por otra grabaci√≥n con prioridad m√°s alta. <strong>99</strong> significa que esta grabaci√≥n autom√°ticamente nunca va a ser borrada. Todos valores dem√°s en el rango <strong>1...98</strong> significan que esta grabaci√≥n solo va ser borrada autom√°ticamente por otra grabaci√≥n nueva, cuando se han pasado los dias ajustados y garantizados desde su <strong>dia de grabaci√≥n</strong>."
 
 msgid "Title of Recording:"
-msgstr "TÌtulo de la grabaciÛn:"
+msgstr "T√≠tulo de la grabaci√≥n:"
 
 msgid "The <strong>file name</strong> this timer will give to a recording. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br /><br />The special keywords <strong>TITLE</strong> and <strong>EPISODE</strong>, if present, will be replaced by the title and episode information from the EPG data at the time of recording (if that data is available). If at the time of recording either of these cannot be determined, <strong>TITLE</strong> will default to the channel name, and <strong>EPISODE</strong> will default to a blank."
 msgstr ""
-"El <strong>titulo</strong> que esta programciÛn va a dar a la grabaciÛn. Si la grabaciÛn la quieres agregar en una subcarpeta, tienes que seperar cada una con '~' (desde que el caracter '/' puede ser parte de programas regulares).<br />\n"
-"<br />Las palabras claves <strong>TÕTULO</strong> y <strong>EPISODIO</strong>, si existen, van a ser sustituidos con tÌtulo y episodio de los datos de la EPG en la hora de grabaciÛn; si no puede verificar esos datos, porque no se encuentra la informaciÛn en los datos\n"
-" <strong>TÕTULO</strong> se pone con el nombre del canal y <strong>EPISODIO</strong> se deja en blanco."
+"El <strong>titulo</strong> que esta programci√≥n va a dar a la grabaci√≥n. Si la grabaci√≥n la quieres agregar en una subcarpeta, tienes que seperar cada una con '~' (desde que el caracter '/' puede ser parte de programas regulares).<br />\n"
+"<br />Las palabras claves <strong>T√çTULO</strong> y <strong>EPISODIO</strong>, si existen, van a ser sustituidos con t√≠tulo y episodio de los datos de la EPG en la hora de grabaci√≥n; si no puede verificar esos datos, porque no se encuentra la informaci√≥n en los datos\n"
+" <strong>T√çTULO</strong> se pone con el nombre del canal y <strong>EPISODIO</strong> se deja en blanco."
 
 msgid "Summary:"
 msgstr "Resumen:"
 
 msgid "Arbitrary text that describes the recording made by this timer. If this field is not empty, its contents will be written into the <span class=\"ref_file\">summary.vdr</span> or <span class=\"ref_file\">info.vdr</span> file of the recording."
-msgstr "Un texto a tu gusto para describir la grabaciÛn realizada de una programaciÛn. Si este campo contiene algo, el texto va a ser escrito al fichero <span class=\"ref_file\">summary.vdr</span> o <span class=\"ref_file\">info.vdr</span> de la grabaciÛn."
+msgstr "Un texto a tu gusto para describir la grabaci√≥n realizada de una programaci√≥n. Si este campo contiene algo, el texto va a ser escrito al fichero <span class=\"ref_file\">summary.vdr</span> o <span class=\"ref_file\">info.vdr</span> de la grabaci√≥n."
 
 msgid "Go!"
-msgstr "°Venga!"
+msgstr "¬°Venga!"
 
 msgid "AutoTimer"
 msgstr "Autoprogramaciones"
 
 msgid "New AutoTimer"
-msgstr "AÒadir autoprogramaciÛn"
+msgstr "A√±adir autoprogramaci√≥n"
 
 msgid "Active"
 msgstr "Activada"
@@ -210,19 +210,19 @@ msgid "Stop"
 msgstr "Fin"
 
 msgid "Name"
-msgstr "TÌtulo"
+msgstr "T√≠tulo"
 
 msgid "Select all/none"
 msgstr "Seleccionar todas/ninguna"
 
 msgid "Yes"
-msgstr "SÌ"
+msgstr "S√≠"
 
 msgid "No"
 msgstr "No"
 
 msgid "Delete timer?"
-msgstr "øBorrar programaciÛn?"
+msgstr "¬øBorrar programaci√≥n?"
 
 msgid "Delete"
 msgstr "Borrar"
@@ -234,7 +234,7 @@ msgid "Delete Selected AutoTimers"
 msgstr "Borrar autoprogramaciones elegidas"
 
 msgid "Delete all selected timers?"
-msgstr "øEstas seguro de que deseas borrar las programaciones elegidas?"
+msgstr "¬øEstas seguro de que deseas borrar las programaciones elegidas?"
 
 msgid "No AutoTimers defined!"
 msgstr "No hay autoprogramaciones!"
@@ -252,28 +252,28 @@ msgid "unlimited"
 msgstr "sin limites"
 
 msgid "SVDRP commands:"
-msgstr "”rdenes de SVDRP:"
+msgstr "√ìrdenes de SVDRP:"
 
 msgid "Run"
 msgstr "Iniciar"
 
 msgid "Really run this command?"
-msgstr "øEjecutar el orden de verdad?"
+msgstr "¬øEjecutar el orden de verdad?"
 
 msgid "Commands defined in commands.conf:"
-msgstr "”rdenes definidos en commands.conf:"
+msgstr "√ìrdenes definidos en commands.conf:"
 
 msgid "Output"
 msgstr "Salida"
 
 msgid "Add New AutoTimer"
-msgstr "AÒadir autoprogramaciÛn"
+msgstr "A√±adir autoprogramaci√≥n"
 
 msgid "Edit AutoTimer"
-msgstr "Modificar autoprogramaciÛn"
+msgstr "Modificar autoprogramaci√≥n"
 
 msgid "AutoTimer Active:"
-msgstr "AutoprogramaciÛn activa:"
+msgstr "Autoprogramaci√≥n activa:"
 
 msgid "oneshot"
 msgstr "una vez"
@@ -285,7 +285,7 @@ msgid "Search in:"
 msgstr "Buscar en:"
 
 msgid "Search only on these days:"
-msgstr "Los dÌas para la b˙squeda:"
+msgstr "Los d√≠as para la b√∫squeda:"
 
 msgid "Monday"
 msgstr "Lunes"
@@ -294,7 +294,7 @@ msgid "Tuesday"
 msgstr "Martes"
 
 msgid "Wednesday"
-msgstr "MiÈrcoles"
+msgstr "Mi√©rcoles"
 
 msgid "Thursday"
 msgstr "Jueves"
@@ -303,7 +303,7 @@ msgid "Friday"
 msgstr "Viernes"
 
 msgid "Saturday"
-msgstr "S·bado"
+msgstr "S√°bado"
 
 msgid "Sunday"
 msgstr "Domingo"
@@ -312,7 +312,7 @@ msgid "all"
 msgstr "todos"
 
 msgid "Starts After:"
-msgstr "Empieza despuÈs de:"
+msgstr "Empieza despu√©s de:"
 
 msgid "Ends Before:"
 msgstr "Acaba antes de:"
@@ -321,13 +321,13 @@ msgid "Override Start/Stop Margins:"
 msgstr "Reemplazar los margenes de tiempo para Inicio/Fin:"
 
 msgid "Time Margin at Start:"
-msgstr "M·s tiempo al principio:"
+msgstr "M√°s tiempo al principio:"
 
 msgid "minutes"
 msgstr "minutos"
 
 msgid "Time Margin at Stop:"
-msgstr "M·s tiempo al final:"
+msgstr "M√°s tiempo al final:"
 
 msgid "Episode:"
 msgstr "Episodios:"
@@ -366,28 +366,28 @@ msgid "Original author (VDRAdmin):"
 msgstr "Autor original (VDRAdmin):"
 
 msgid "Translation Team"
-msgstr "Equipo de traducciÛn"
+msgstr "Equipo de traducci√≥n"
 
 msgid "English:"
-msgstr "InglÈs:"
+msgstr "Ingl√©s:"
 
 msgid "German:"
-msgstr "Alem·n:"
+msgstr "Alem√°n:"
 
 msgid "French:"
-msgstr "FrancÈs:"
+msgstr "Franc√©s:"
 
 msgid "At the moment unmaintained, former translations by:"
 msgstr "De momento no se actualiza, traducciones anteriores de:"
 
 msgid "Spanish:"
-msgstr "EspaÒol:"
+msgstr "Espa√±ol:"
 
 msgid "Finnish:"
-msgstr "FinlandÈs:"
+msgstr "Finland√©s:"
 
 msgid "Dutch:"
-msgstr "HolandÈs:"
+msgstr "Holand√©s:"
 
 msgid "Russian:"
 msgstr "Ruso:"
@@ -399,22 +399,22 @@ msgid "Italian:"
 msgstr "Italiano:"
 
 msgid "Information"
-msgstr "InformaciÛn"
+msgstr "Informaci√≥n"
 
 msgid "VDRAdmin-AM version:"
-msgstr "VersiÛn de VDRAdmin-AM:"
+msgstr "Versi√≥n de VDRAdmin-AM:"
 
 msgid "VDR version:"
-msgstr "VersiÛn de VDR:"
+msgstr "Versi√≥n de VDR:"
 
 msgid "Supported features in VDR:"
-msgstr "CaracterÌsticas respaldadas en VDR:"
+msgstr "Caracter√≠sticas respaldadas en VDR:"
 
 msgid "EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>)"
-msgstr "B˙squeda EPG (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>) (en alem·n de momento)"
+msgstr "B√∫squeda EPG (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>) (en alem√°n de momento)"
 
 msgid "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>)"
-msgstr "Flujo de LiveTV (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>) (en alem·n de momento)"
+msgstr "Flujo de LiveTV (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>) (en alem√°n de momento)"
 
 msgid "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
 msgstr "Renombrar grabaciones (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
@@ -423,47 +423,47 @@ msgid "Getting Help and Reporting Bugs"
 msgstr "Recibir ayuda y comentar \"Bugs\" (fallos)"
 
 msgid "If you need help please first try to use the online help you'll find on some pages. You can access it by clicking <img src=\"bilder/help.png\" alt=\"\" />."
-msgstr "Si hace falta ayuda, intenta primero \"Online Help\" (Ayuda en linea) que encontraras en algunas p·ginas. Tienes acceso haciendo clic encima de <img src=\"bilder/help.png\" alt=\"\" />."
+msgstr "Si hace falta ayuda, intenta primero \"Online Help\" (Ayuda en linea) que encontraras en algunas p√°ginas. Tienes acceso haciendo clic encima de <img src=\"bilder/help.png\" alt=\"\" />."
 
 msgid "If this doesn't provide the information you need you can try to get help at <a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> if you understand German language. Please use the announcement thread if possible, search for:"
-msgstr "Si no te sirve esta informaciÛn puedes intentar conseguir ayuda en la p·gina <a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> si entiendes alem·n (lo siento...). Para empezar alli aprovecha la funcciÛn \"suchen\" por:"
+msgstr "Si no te sirve esta informaci√≥n puedes intentar conseguir ayuda en la p√°gina <a href=\"http://www.vdrportal.de\" target=\"_blank\">VDR-Portal</a> si entiendes alem√°n (lo siento...). Para empezar alli aprovecha la funcci√≥n \"suchen\" por:"
 
 msgid "If you think you have found a bug please check that it's a new one and report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page.php\" target=\"_blank\">VDRAdmin-AM BugTracking system</a>."
-msgstr "Si crees, que has encontrado un fallo, aseg˙rate que sea un fallo desconocido y entonces comentalo en <a href=\"http://www.vdr-developer.org/mantisbt/main_page.php\" target=\"_blank\">VDRAdmin-AM BugTracking system (sistema de seguimiento de fallos)</a>."
+msgstr "Si crees, que has encontrado un fallo, aseg√∫rate que sea un fallo desconocido y entonces comentalo en <a href=\"http://www.vdr-developer.org/mantisbt/main_page.php\" target=\"_blank\">VDRAdmin-AM BugTracking system (sistema de seguimiento de fallos)</a>."
 
 msgid "<p>Here you can edit an automatic timer's (AutoTimer) settings.</p><p>AutoTimer is a key feature of VDRAdmin-AM. An AutoTimer consists of one or more search terms and some other settings, that are looked for regularly in the Electronic Program Guide (EPG). On match AutoTimer adds a timer in VDR automatically for that broadcast. That's very comfortable for irregularly broadcasted series or movies you don't want to miss.</p>"
 msgstr ""
-"<p>AquÌ se encuentra los ajustes de las autoprogramaciones.</p>\n"
-"<p>Autoprogramaciones son la herramienta basica del VDRAdmin-AM. Una autoprogramaciÛn busca por una o m·s palabras claves y unos ajustes m·s, por cu·les buscar· regularmente en la \"Electronic Program Guide\" (EPG, guia electronica del programa). SÌ lo encuentra aquellos variables ajustados anteriormente crear· autom·ticamente una programaciÛn en el VDR para el estreno encontrado. Bastante ˙til para estrenos irregulares, que te importan mucho.</p>"
+"<p>Aqu√≠ se encuentra los ajustes de las autoprogramaciones.</p>\n"
+"<p>Autoprogramaciones son la herramienta basica del VDRAdmin-AM. Una autoprogramaci√≥n busca por una o m√°s palabras claves y unos ajustes m√°s, por cu√°les buscar√° regularmente en la \"Electronic Program Guide\" (EPG, guia electronica del programa). S√≠ lo encuentra aquellos variables ajustados anteriormente crear√° autom√°ticamente una programaci√≥n en el VDR para el estreno encontrado. Bastante √∫til para estrenos irregulares, que te importan mucho.</p>"
 
 msgid "Activate or deactivate this AutoTimer. Deactivated AutoTimers are still stored in the AutoTimer list so that they can be activated again, but they do not record anything meanwhile. Above that you can set this to \"oneshot\" so this AutoTimer only programs the (one!) next matching broadcast."
-msgstr "Activar o desactivar Èsta programaciÛn. Programaciones desactivadas se encuentran todavia en la lista de las programaciones. Asi se puede activarse m·s tarde. Pero significar· que no grabar· mientras est· desactiva."
+msgstr "Activar o desactivar √©sta programaci√≥n. Programaciones desactivadas se encuentran todavia en la lista de las programaciones. Asi se puede activarse m√°s tarde. Pero significar√° que no grabar√° mientras est√° desactiva."
 
 msgid "Choosing the right search items decides whether only the wanted broadcasts or broadcasts having similar names or even nothing gets recorded.<br />Case doesn't matter, \"X-Files\" matches anything \"x-files\" will match. You can set multiple search items by separating them with spaces. Only broadcasts will match if they contain <strong>all</strong> items.<br />You'd better only use letters and numbers for search items, as the EPG often miss colons, brackets and other characters.<br />Experts can also use regular expressions, but you have to get needed information from the VDRAdmin-AM sources (undocumented feature).<br /><br />You can exclude broadcasts so that they don't get recorded even if they would match an AutoTimer. Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, one event a line. This file must be located in your VDRAdmin-AM's configuration folder. If this string is found either in the EPG's <u>title</u> or in <u>title~subtitle</u>, this event will not be programmed by AutoTimer. So you can disable complete episodes (for example when using \"Enterprise\" as Blacklist-string) or only one episode (when using \"Enterprise~Azati Prime\" as Blacklist-string)."
 msgstr ""
-"Las palabras claves bien elegidas importan mucho para grabar sÛlo el estreno querido o por ejemplo tambiÈn Èstos con palabras parecidas o con mala suerte nada por falta de coincidencia.<br />\n"
+"Las palabras claves bien elegidas importan mucho para grabar s√≥lo el estreno querido o por ejemplo tambi√©n √©stos con palabras parecidas o con mala suerte nada por falta de coincidencia.<br />\n"
 "Mayusculas o minusculas no importan para encontrar las palabras claves. Se puede usar varias palabras claves seperadas por espacios. <strong>Todas</strong> tienen que encontrarse en los campos deseados del estreno para un resultado exitoso.<br />\n"
-"Es muy recomendable, utilizar solo car·cteres normales o cifras como palabra clave, por que los car·cteres especiales no son muy comun en la EPG.<br />\n"
-"Para expertos hay la posibilidad de usar \"regular expressions\". Para esta funciÛn no documentada, tienes que investigar el codigo fuente del VDRAdmin-AM.<br />\n"
-"<br />Otra opciÛn es, excluir un estreno, que normalmente cumplirÌa los valores de b˙squeda, agregando su tÌtulo al fichero <i>vdradmind.bl</i>. Cada estreno se pone en una fila. Este archivo tiene que estar en la carpeta de configuraciÛn del VDRAdmin-AM. SÌ una fila coincide con <u>tÌtulo</u> o <u>tÌtulo~subtÌtulo</u> de la EPG del estreno, no se va a autoprogramar ese estreno. AsÌ se puede bloquear una serie completo (p.e. con \"Stargate\" como registro negro) o un episodio solÛ (p.e. \"Stargate~Revisiones\")."
+"Es muy recomendable, utilizar solo car√°cteres normales o cifras como palabra clave, por que los car√°cteres especiales no son muy comun en la EPG.<br />\n"
+"Para expertos hay la posibilidad de usar \"regular expressions\". Para esta funci√≥n no documentada, tienes que investigar el codigo fuente del VDRAdmin-AM.<br />\n"
+"<br />Otra opci√≥n es, excluir un estreno, que normalmente cumplir√≠a los valores de b√∫squeda, agregando su t√≠tulo al fichero <i>vdradmind.bl</i>. Cada estreno se pone en una fila. Este archivo tiene que estar en la carpeta de configuraci√≥n del VDRAdmin-AM. S√≠ una fila coincide con <u>t√≠tulo</u> o <u>t√≠tulo~subt√≠tulo</u> de la EPG del estreno, no se va a autoprogramar ese estreno. As√≠ se puede bloquear una serie completo (p.e. con \"Stargate\" como registro negro) o un episodio sol√≥ (p.e. \"Stargate~Revisiones\")."
 
 msgid "Here you can define the EPG sections where VDRAdmin-AM should look for the search pattern."
-msgstr "AquÌ se ajusta las secciones de la EPG (emisoras posibles) donde VDRAdmin-AM va a buscar por palabras claves."
+msgstr "Aqu√≠ se ajusta las secciones de la EPG (emisoras posibles) donde VDRAdmin-AM va a buscar por palabras claves."
 
 msgid "Use these checkboxes to limit searching for matching broadcasts to a set of weekdays."
-msgstr "Marca estos campos para especificar los dias de la semana, que quieres incluir para la b˙squeda."
+msgstr "Marca estos campos para especificar los dias de la semana, que quieres incluir para la b√∫squeda."
 
 msgid "The channel to look for matching broadcasts or \"all\" to search in all known or wanted channels. You can define the wanted channels for AutoTimer in \"Configuration\"."
-msgstr "La emisora para la b˙squeda o \"todas\" para buscar en todas cadenas conocidas o deseadas. Se puede establecer las emisoras deseadas para autoprogramaciones en \"Configuraciones\"."
+msgstr "La emisora para la b√∫squeda o \"todas\" para buscar en todas cadenas conocidas o deseadas. Se puede establecer las emisoras deseadas para autoprogramaciones en \"Configuraciones\"."
 
 msgid "A broadcast must start after the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
-msgstr "Un estreno tiene que empezar despuÈs de la hora establecida aquÌ. El primer campo es para \"hora\", el segundo para \"minutos\"."
+msgstr "Un estreno tiene que empezar despu√©s de la hora establecida aqu√≠. El primer campo es para \"hora\", el segundo para \"minutos\"."
 
 msgid "A broadcast must end before the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
-msgstr "Un estreno tiene que finalizar antes de la hora establecida aquÌ. El primer campo es para \"hora\", el segundo para \"minutos\"."
+msgstr "Un estreno tiene que finalizar antes de la hora establecida aqu√≠. El primer campo es para \"hora\", el segundo para \"minutos\"."
 
 msgid "Set this option to \"yes\" if all timers programed by this AutoTimer should have individual start/stop margins and enter the values in the next two text boxes."
-msgstr "Marca \"SÌ\"  para esta opciÛn, si quieres que todas las programaciones de la autoprogramaciÛn tengan margenes individuales para inicio/terminar. DespuÈs puedes poner los valores en los 2 siguientes campos de texto."
+msgstr "Marca \"S√≠\"  para esta opci√≥n, si quieres que todas las programaciones de la autoprogramaci√≥n tengan margenes individuales para inicio/terminar. Despu√©s puedes poner los valores en los 2 siguientes campos de texto."
 
 msgid "The number of minutes VDRAdmin-AM subtracts from the broadcasts start time found in the EPG."
 msgstr "La cantidad de minutos que VDRAdmin-AM va a quitar de la hora inicial del estreno encontrado en la EPG"
@@ -472,58 +472,58 @@ msgid "The number of minutes VDRAdmin-AM adds to the broadcasts stop time found 
 msgstr "La cantidad de minutos que VDRAdmin-AM va a quitar de la hora final del estreno encontrado en la EPG"
 
 msgid "Check this box if you want VDRAdmin-AM to append the broadcast's EPG subtitle to the recording's file name."
-msgstr "Marca este campo si VDRAdmin-AM debe aÒadir el subtÌtulo de la EPG del estreno al nombre de la grabaciÛn."
+msgstr "Marca este campo si VDRAdmin-AM debe a√±adir el subt√≠tulo de la EPG del estreno al nombre de la grabaci√≥n."
 
 msgid "If you enable this VDRAdmin-AM will track timers it has already programmed automatically. This is useful if want to deactivate or delete timers that have been programmed automatically in the timers listing."
-msgstr "Habilitando esta funcciÛn, VDRAdmin-AM va seguir programaciones programadas autom·ticamente. AsÌ se puede borrar o desactivar estas pragramaciones agregadas autom·ticamente de la lista de programaciones."
+msgstr "Habilitando esta funcci√≥n, VDRAdmin-AM va seguir programaciones programadas autom√°ticamente. As√≠ se puede borrar o desactivar estas pragramaciones agregadas autom√°ticamente de la lista de programaciones."
 
 msgid "The directory this AutoTimer will place the recordings in. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br />VDRAdmin-AM will append the matching broadcast's title and subtitle (if the \"Episode\" checkbox is marked) to the directory given here.<br /><br />You can also use the following keywords that are replaced in the final file name by the values supplied by for example <a href=\"http://tvmovie2vdr.vdr-developer.org\">tvm2vdr</a>:<ul><li>%Title% - will become the title of the event.</li><li>%Subtitle% - will become the subtitle of the event.</li><li>%Director% - will become the director of the event.</li><li>%Date% - will become the date of the recording.</li><li>%Category% - will become the category of the event (Spielfilm/Serie/...).</li><li>%Genre% - will become the genre of the event (Drama/Krimi/..).</li><li>%Year% - will become the year of production.</li><li>%Country% - will become the country of production.</li><li>%Originaltitle% - will become the original title of the event.</li><li>%FSK% - will become the FSK from the event.</li><li>%Episode% - will become the episode's title of the event.</li><li>%Rating% - will become the rating of the event from the EPG provider.</li></ul><h4>Note:</h4>If you use the above keywords it's in your own responsibility to supply the <strong>complete file name</strong> for the recordings! VDRAdmin-AM will not append anything to the resulting string."
 msgstr ""
-"AquÌ se establece la carpeta, donde la autoprogramaciÛn va a guardar su grabaciones. Si quieres crear subcarpetas hay que seperarlas con '~' (eso por que '/' puede ser parte del tÌtulo).<br />\n"
-"VDRAdmin-AM aÒadir· autom·ticamente el tÌtulo y el subtÌtulo (a caso que est· marcado \"Serie\").<br />\n"
-"<br />Adem·s es posible usar las siguientes palabras claves, que se sustituir·n en el tÌtulo final que se va a encontrar en p.e. <a href=\"http://tvmovie2vdr.vdr-developer.org\">tvm2vdr</a>:\n"
-"<ul><li>%Title% - el tÌtulo del estreno.</li>\n"
-"<li>%Subtitle% - el subtÌtulo del estreno.</li>\n"
+"Aqu√≠ se establece la carpeta, donde la autoprogramaci√≥n va a guardar su grabaciones. Si quieres crear subcarpetas hay que seperarlas con '~' (eso por que '/' puede ser parte del t√≠tulo).<br />\n"
+"VDRAdmin-AM a√±adir√° autom√°ticamente el t√≠tulo y el subt√≠tulo (a caso que est√° marcado \"Serie\").<br />\n"
+"<br />Adem√°s es posible usar las siguientes palabras claves, que se sustituir√°n en el t√≠tulo final que se va a encontrar en p.e. <a href=\"http://tvmovie2vdr.vdr-developer.org\">tvm2vdr</a>:\n"
+"<ul><li>%Title% - el t√≠tulo del estreno.</li>\n"
+"<li>%Subtitle% - el subt√≠tulo del estreno.</li>\n"
 "<li>%Director% - el director del estreno.</li>\n"
-"<li>%Date% - la fecha de la grabaciÛn.</li>\n"
-"<li>%Category% - la categoria de la grabaciÛn. (PelÌcula/serie/...).</li>\n"
-"<li>%Genre% - el geno de la grabaciÛn. (Drama/suspense/..).</li>\n"
-"<li>%Year% - el aÒo de la producciÛn.</li>\n"
-"<li>%Country% - el pais de la producciÛn.</li>\n"
-"<li>%Originaltitle% - el tÌtulo original del estreno.</li>\n"
+"<li>%Date% - la fecha de la grabaci√≥n.</li>\n"
+"<li>%Category% - la categoria de la grabaci√≥n. (Pel√≠cula/serie/...).</li>\n"
+"<li>%Genre% - el geno de la grabaci√≥n. (Drama/suspense/..).</li>\n"
+"<li>%Year% - el a√±o de la producci√≥n.</li>\n"
+"<li>%Country% - el pais de la producci√≥n.</li>\n"
+"<li>%Originaltitle% - el t√≠tulo original del estreno.</li>\n"
 "<li>%FSK% - el limte por edad del estreno.</li>\n"
-"<li>%Episode% - el tÌtulo del episodio de una serie.</li>\n"
-"<li>%Rating% - la valoraciÛn del estrono de la redacciÛn de la EPG.</li>\n"
+"<li>%Episode% - el t√≠tulo del episodio de una serie.</li>\n"
+"<li>%Rating% - la valoraci√≥n del estrono de la redacci√≥n de la EPG.</li>\n"
 "</ul>\n"
-"<h4>Advertencia:</h4>Si utilizas estas palabras claves queda a tu propia responsabilidad escribir el <strong>nombre completo</strong> de la grabaciÛn! VDRAdmin-AM no aÒadir· nada m·s."
+"<h4>Advertencia:</h4>Si utilizas estas palabras claves queda a tu propia responsabilidad escribir el <strong>nombre completo</strong> de la grabaci√≥n! VDRAdmin-AM no a√±adir√° nada m√°s."
 
 msgid "Timer"
 msgstr "Programaciones"
 
 msgid "<p>Here you will find a listing of timers known to VDR.</p><p>On top you will find a chart showing a day's timers graphically. This provides an quick overview on what's going on at the specified day and helps you in finding conflicting timers. Moving the mouse cursor above any timer box will display a tooltip containing the timer's title, priority, lifetime and duration.</p><p>Below the chart you'll find the timers list showing you some information on the timers. You can change the list's sorting by clicking the columns heading.</p><p>For each timer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\", \"No\", \"VPS\" or \"Auto\" in the \"Active\" column.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the timer's title.</dd><dt>View its EPG entry</dt><dd>Timers that have set <span class=\"ref_label\">AutoTimer Checking</span> to \"Transmission Identification\" will show you the corresponding EPG entry if you click on the timer's title.</dd><dt>Edit the timer</dt><dd>You can edit a timer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To delete a timer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each timer's state is indicated by differently coloured boxes (in the chart view) or images (in the list view):<br /><span class=\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> Timer is OK and will record.<br /><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timer conflicts with other timers. That's not critical, as long as you have enough DVB cards for the parallel recordings.<br /><span class=\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align=\"middle\" /> Timer is critical and will most likely <strong>not</strong> record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is not active.</p><p>In addition to these functions you can add a new timer by clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at the top and you can delete a number of timers at once by checking the box in the last column of those timers and clicking <input type=\"submit\"  class=\"submit\" value=\"Delete Selected Timers\"/>.</p><p>You can <input type=\"submit\" class=\"submit\" value=\"activate\"/> and <input type=\"submit\" class=\"submit\" value=\"inactivate\"/> selected timers.</p>"
 msgstr ""
-"<p>AquÌ encontrar·s una lista de programaciones conocidas para VDR.</p>\n"
-"<p>Arriba hay un diagrama mostrando graficamente las programaciones del dia. Te ofrece una vista r·pida del dia especificado y te ayuda encontrar programaciones conflictivas. Moviendo la flecha del ratÛn encima de cualquier programaciÛn ver·s el tÌtulo, la prioridad, la durabilidad y la duracion de la programaciÛn.</p>\n"
+"<p>Aqu√≠ encontrar√°s una lista de programaciones conocidas para VDR.</p>\n"
+"<p>Arriba hay un diagrama mostrando graficamente las programaciones del dia. Te ofrece una vista r√°pida del dia especificado y te ayuda encontrar programaciones conflictivas. Moviendo la flecha del rat√≥n encima de cualquier programaci√≥n ver√°s el t√≠tulo, la prioridad, la durabilidad y la duracion de la programaci√≥n.</p>\n"
 "<p>Abajo del diagrama encuentras la lista de programaciones visualizando unas informaciones de las programaciones. Se puede cambiar el orden de la lista con un clic en el tope de la columna correspondiente.</p>\n"
-"<p>Para cada programaciÛn tienes las siguientes opciones:<dl>\n"
+"<p>Para cada programaci√≥n tienes las siguientes opciones:<dl>\n"
 "<dt>Establecer su estado</dt>\n"
-"<dd>Hacer clic en \"SÌ\", \"No\", \"VPS\" o \"Auto\" en la columna \"Activa\".</dd>\n"
-"<dt>Vista r·pida de la prioridad y durabilidad</dt>\n"
-"<dd>Moviendo la flecha del ratÛn encima del tÌtulo de programaciÛn.</dd>\n"
+"<dd>Hacer clic en \"S√≠\", \"No\", \"VPS\" o \"Auto\" en la columna \"Activa\".</dd>\n"
+"<dt>Vista r√°pida de la prioridad y durabilidad</dt>\n"
+"<dd>Moviendo la flecha del rat√≥n encima del t√≠tulo de programaci√≥n.</dd>\n"
 "<dt>Vista de la entrada del EPG</dt>\n"
-"<dd>Programaciones con <span class=\"ref_label\">Autotest programaciÛn</span> para la \"IdentificaciÛn de la transmisiÛn\" enseÒar·n la entrada correspondiente del EPG si haces clic en el tÌtulo.</dd>\n"
+"<dd>Programaciones con <span class=\"ref_label\">Autotest programaci√≥n</span> para la \"Identificaci√≥n de la transmisi√≥n\" ense√±ar√°n la entrada correspondiente del EPG si haces clic en el t√≠tulo.</dd>\n"
 "\n"
-"<dt>Modificar programaciÛn</dt>\n"
-"<dd>Se puede editar una programaciÛn haciendo clic en <img src=\"bilder/edit.png\" alt=\"editar\" />.</dd>\n"
+"<dt>Modificar programaci√≥n</dt>\n"
+"<dd>Se puede editar una programaci√≥n haciendo clic en <img src=\"bilder/edit.png\" alt=\"editar\" />.</dd>\n"
 "\n"
-"<dt>Borrar la programaciÛn</dt>\n"
-"<dd>Se puede borrar una programaciÛn haciendo clic en <img src=\"bilder/delete.png\" alt=\"borrar\" />.</dd></dl></p>\n"
+"<dt>Borrar la programaci√≥n</dt>\n"
+"<dd>Se puede borrar una programaci√≥n haciendo clic en <img src=\"bilder/delete.png\" alt=\"borrar\" />.</dd></dl></p>\n"
 "\n"
-"<p>El estado de cualquiera  programaciÛn est· indicado por iconos de diferentes colores (la vista como diagrama) o imagenes (la vista como lista):<br />\n"
-"<span class=\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"activa\" align=\"middle\" /> OK para la programaciÛn y grabar·.<br /><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb.png\" alt=\"problema\" align=\"middle\" /> Conflictos con otras programaciones. …sto no produzca ning˙n problema, si hay bastantes tarjetas DVB para grabar en paralelo.<br />\n"
-"<span class=\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"imposible\" align=\"middle\" /> ProgramaciÛn crÌtica que probablemente <strong>no</strong> grabar·.<br />\n"
-"<span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.png\" alt=\"inactiva\" align=\"middle\" /> ProgramaciÛn inactiva.</p>\n"
-"<p>Adem·s puedes aÒadir una programaciÛn nueva cliqueando encima de <input type=\"submit\" class=\"submit\" value=\"AÒadir programaciÛn\"/> arriba y se puede borrar programaciones por lotes cliqueando encima <input type=\"submit\"  class=\"submit\" value=\"Borrar programaciones seleccionadas\"/> al final de la columna.</p>\n"
+"<p>El estado de cualquiera  programaci√≥n est√° indicado por iconos de diferentes colores (la vista como diagrama) o imagenes (la vista como lista):<br />\n"
+"<span class=\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"activa\" align=\"middle\" /> OK para la programaci√≥n y grabar√°.<br /><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb.png\" alt=\"problema\" align=\"middle\" /> Conflictos con otras programaciones. √âsto no produzca ning√∫n problema, si hay bastantes tarjetas DVB para grabar en paralelo.<br />\n"
+"<span class=\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"imposible\" align=\"middle\" /> Programaci√≥n cr√≠tica que probablemente <strong>no</strong> grabar√°.<br />\n"
+"<span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.png\" alt=\"inactiva\" align=\"middle\" /> Programaci√≥n inactiva.</p>\n"
+"<p>Adem√°s puedes a√±adir una programaci√≥n nueva cliqueando encima de <input type=\"submit\" class=\"submit\" value=\"A√±adir programaci√≥n\"/> arriba y se puede borrar programaciones por lotes cliqueando encima <input type=\"submit\"  class=\"submit\" value=\"Borrar programaciones seleccionadas\"/> al final de la columna.</p>\n"
 "<p>Se puede <input type=\"submit\" class=\"submit\" value=\"activar\"/> y <input type=\"submit\" class=\"submit\" value=\"desactivar\"/> programaciones seleccionadas.</p>"
 
 msgid "Playing Today"
@@ -538,17 +538,23 @@ msgstr "Agregar lista negra:"
 msgid "Edit Blacklist"
 msgstr "Editar lista negra"
 
+msgid "Add New Template"
+msgstr "A√±adir plantilla"
+
+msgid "Edit Template"
+msgstr "Editar plantilla:"
+
 msgid "Add New Search"
-msgstr "AÒadir b˙squeda"
+msgstr "A√±adir b√∫squeda"
 
 msgid "Edit Search"
-msgstr "Editar b˙squeda"
+msgstr "Editar b√∫squeda"
 
 msgid "Small search pattern.\\nDo you really want to use it?"
-msgstr "Esquema de b˙squeda limitada. \\nøEstas seguro que deseas utilizarlo?"
+msgstr "Esquema de b√∫squeda limitada. \\n¬øEstas seguro que deseas utilizarlo?"
 
 msgid "You didn't select at least one of\\ntitle, subtitle or description.\\nDo you really want to use this search?"
-msgstr "No has elegido ni\\ntitulo, subtitulo, or descripciÛn.\\nøQuieres realizar esta b˙squeda?"
+msgstr "No has elegido ni\\ntitulo, subtitulo, or descripci√≥n.\\n¬øQuieres realizar esta b√∫squeda?"
 
 msgid "Hide results"
 msgstr "Ocultar resultados"
@@ -556,11 +562,15 @@ msgstr "Ocultar resultados"
 msgid "Settings"
 msgstr "Propiedades"
 
+
+msgid "Name:"
+msgstr "Nombre:"
+
 msgid "Search Term:"
-msgstr "Concepto de b˙squeda:"
+msgstr "Concepto de b√∫squeda:"
 
 msgid "Search Mode:"
-msgstr "Modo de b˙squeda:"
+msgstr "Modo de b√∫squeda:"
 
 msgid "phrase"
 msgstr "frase"
@@ -575,7 +585,7 @@ msgid "match exactly"
 msgstr "coincidencia exata"
 
 msgid "regular expression"
-msgstr "expresiÛn regular"
+msgstr "expresi√≥n regular"
 
 msgid "fuzzy"
 msgstr "fuzzy"
@@ -587,10 +597,10 @@ msgid "Match Case:"
 msgstr "Caso de encuentro:"
 
 msgid "Use extended EPG info:"
-msgstr "Utiliza informaciÛn EPG extendida:"
+msgstr "Utiliza informaci√≥n EPG extendida:"
 
 msgid "Ignore missing categories?"
-msgstr "øIgnorar categorias ausentes?"
+msgstr "¬øIgnorar categorias ausentes?"
 
 msgid "Use Channel:"
 msgstr "Utiliza emisora:"
@@ -617,22 +627,22 @@ msgid "Use Time:"
 msgstr "Utiliza hora:"
 
 msgid "Start After:"
-msgstr "Inicia despuÈs de:"
+msgstr "Inicia despu√©s de:"
 
 msgid "Start Before:"
 msgstr "Inicia antes de:"
 
 msgid "Use Duration:"
-msgstr "Utiliza duraciÛn:"
+msgstr "Utiliza duraci√≥n:"
 
 msgid "Min. Duration:"
-msgstr "DuraciÛn min.:"
+msgstr "Duraci√≥n min.:"
 
 msgid "hh:mm"
 msgstr "hh:mm"
 
 msgid "Max. Duration:"
-msgstr "DuraciÛn max.:"
+msgstr "Duraci√≥n max.:"
 
 msgid "Use Day of Week:"
 msgstr "Utiliza dia de la semana:"
@@ -641,16 +651,16 @@ msgid "Use Blacklists:"
 msgstr "Utiliza lista negra:"
 
 msgid "selection"
-msgstr "selecciÛn"
+msgstr "selecci√≥n"
 
 msgid "Use in Favorites Menu:"
-msgstr "Utiliza men˙ de favoritas:"
+msgstr "Utiliza men√∫ de favoritas:"
 
 msgid "Use as Search Timer:"
-msgstr "Utiliza como programaciÛn de b˙squeda:"
+msgstr "Utiliza como programaci√≥n de b√∫squeda:"
 
 msgid "yes"
-msgstr "SÌ"
+msgstr "S√≠"
 
 msgid "user-defined"
 msgstr "personalizado"
@@ -668,7 +678,7 @@ msgid "First day:"
 msgstr "Primer dia:"
 
 msgid "Last day:"
-msgstr "‹ltimo dia:"
+msgstr "√último dia:"
 
 msgid "Auto delete:"
 msgstr "Borrar automaticamente:"
@@ -680,16 +690,16 @@ msgid "count days"
 msgstr "Cantidad de dias"
 
 msgid "After ... recordings:"
-msgstr "DespuÈs ... grabaciones:"
+msgstr "Despu√©s ... grabaciones:"
 
 msgid "After ... days after first recording:"
-msgstr "Despues de ... dias despues de la ˙ltima grabaciÛn:"
+msgstr "Despues de ... dias despues de la √∫ltima grabaci√≥n:"
 
 msgid "Settings for action \"record\""
-msgstr "Ajustes para acciÛn \"grabar\""
+msgstr "Ajustes para acci√≥n \"grabar\""
 
 msgid "Series Recording:"
-msgstr "GrabaciÛn en serie:"
+msgstr "Grabaci√≥n en serie:"
 
 msgid "Delete Recordings After ... Days:"
 msgstr "Borrar grabaciones despues de ... dias:"
@@ -721,11 +731,17 @@ msgstr "Ajustes para \"solo cambiar\""
 msgid "Switch ... Minutes Before Start:"
 msgstr "cambiar ... minutos antes del inicio:"
 
+msgid "Delete template"
+msgstr "Borrar plantilla:"
+
+msgid "Delete this template?"
+msgstr "¬øBorrar plantilla?"
+
 msgid "Save as template"
 msgstr "Guardar como plantilla:"
 
 msgid "Create New Timer"
-msgstr "AÒadir programaciÛn"
+msgstr "A√±adir programaci√≥n"
 
 msgid "Buffer:"
 msgstr "Almacenador intermediario:"
@@ -737,18 +753,18 @@ msgid "readonly"
 msgstr "solo leible"
 
 msgid "Timer has been set by AutoTimer pattern:"
-msgstr "ProgramaciÛn por cumplir ajustes de la autoprogramaciÛn:"
+msgstr "Programaci√≥n por cumplir ajustes de la autoprogramaci√≥n:"
 
 msgid "No Help Available"
 msgstr "No hay ayuda"
 
 msgid "<p>No help available yet. For adding or changing text please contact <a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>.</p>"
 msgstr ""
-"<p>Para esta funcciÛn no dispone ayuda hasta ahora. Para aÒadir o modificar un texto, escribe un e-mail a \n"
+"<p>Para esta funcci√≥n no dispone ayuda hasta ahora. Para a√±adir o modificar un texto, escribe un e-mail a \n"
 "<a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>.</p>"
 
 msgid "Error!"
-msgstr "°Error!"
+msgstr "¬°Error!"
 
 msgid "TV"
 msgstr "TV"
@@ -763,7 +779,7 @@ msgid "G"
 msgstr "C"
 
 msgid "Grab the picture!"
-msgstr "°Captura la imagen!"
+msgstr "¬°Captura la imagen!"
 
 msgid "Size:"
 msgstr "Dimensiones:"
@@ -772,13 +788,13 @@ msgid "Open in separate window"
 msgstr "Abrir en una ventana separada"
 
 msgid "Playing Today?"
-msgstr "øEstrenos hoy?"
+msgstr "¬øEstrenos hoy?"
 
 msgid "Timeline"
 msgstr "Tabla de tiempo"
 
 msgid "EPG Search"
-msgstr "B˙squeda EPG"
+msgstr "B√∫squeda EPG"
 
 msgid "Recordings"
 msgstr "Grabaciones"
@@ -787,7 +803,7 @@ msgid "Remote Control"
 msgstr "Mando a distancia"
 
 msgid "Watch TV"
-msgstr "TelevisiÛn"
+msgstr "Televisi√≥n"
 
 msgid "Commands"
 msgstr "Comandos:"
@@ -799,7 +815,7 @@ msgid "Search"
 msgstr "Buscar"
 
 msgid "<p>Here you can change general settings and base settings for timers, AutoTimers, channel selection and streaming parameters.</p>"
-msgstr "<p>En esta p·gina se ajusta las propiedades generales de las programaciones y de las autoprogramaciones, como las emisoras preferidas y adem·s los ajustes del flujo</p>"
+msgstr "<p>En esta p√°gina se ajusta las propiedades generales de las programaciones y de las autoprogramaciones, como las emisoras preferidas y adem√°s los ajustes del flujo</p>"
 
 msgid "General Settings"
 msgstr "Propiedades generales"
@@ -817,7 +833,7 @@ msgid "Expert"
 msgstr "Experto"
 
 msgid "External Search"
-msgstr "B˙squeda external"
+msgstr "B√∫squeda external"
 
 msgid "Channel Selections"
 msgstr "Emisoras preferidas"
@@ -829,34 +845,34 @@ msgid "The skin you want to use."
 msgstr "El piel deseado."
 
 msgid "Login Page:"
-msgstr "P·gina al inicio:"
+msgstr "P√°gina al inicio:"
 
 msgid "The page you want to see at first connect to VDRAdmin-AM."
-msgstr "La p·gina deseada al inicio del VDRAdmin-AM."
+msgstr "La p√°gina deseada al inicio del VDRAdmin-AM."
 
 msgid "Number of channels to use:"
 msgstr "Cantidad de emisoras en uso:"
 
 msgid "VDRAdmin-AM will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin-AM will read so that you can use this to reduce VDRAdmin-AM's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin-AM will use all available channels."
-msgstr "VDRAdmin-AM solo utilizar· tantas emisoras del VDR que se ajusta aquÌ y presentar· esta cantidad en cada campo, donde se puede elegir canales. AsÌ tambiÈn est· limitado la informaciÛn de la EPG que VDRAdmin-AM leer·, que va a reducir el consumo de memoria de VDRAdmin-AM y mejorar asÌ su rendimiento. <strong>0</strong> desactivar· esta funcciÛn y VDRAdmin-AM utilizar· todas las emisoras posibles."
+msgstr "VDRAdmin-AM solo utilizar√° tantas emisoras del VDR que se ajusta aqu√≠ y presentar√° esta cantidad en cada campo, donde se puede elegir canales. As√≠ tambi√©n est√° limitado la informaci√≥n de la EPG que VDRAdmin-AM leer√°, que va a reducir el consumo de memoria de VDRAdmin-AM y mejorar as√≠ su rendimiento. <strong>0</strong> desactivar√° esta funcci√≥n y VDRAdmin-AM utilizar√° todas las emisoras posibles."
 
 msgid "Local net (no login required):"
-msgstr "Red local (no requiere contraseÒa)"
+msgstr "Red local (no requiere contrase√±a)"
 
 msgid "Here you can specify an IP address or range that can login without providing login information. For example: \"192.168.0.0/24\" will include any IP starting with \"192.168.0\", \"192.168.0.123/32\" will only match \"192.168.0.123\"."
-msgstr "AquÌ se especifica una direcciÛn IP o rango para una conexiÛn sin necesidad de inicar una sesiÛn con contraseÒa. Por ejemplo: \"192.168.0.0/24\" incluye cada IP empezando en \"192.168.0\", \"192.168.0.123/32\" resultaria \"192.168.0.123\"."
+msgstr "Aqu√≠ se especifica una direcci√≥n IP o rango para una conexi√≥n sin necesidad de inicar una sesi√≥n con contrase√±a. Por ejemplo: \"192.168.0.0/24\" incluye cada IP empezando en \"192.168.0\", \"192.168.0.123/32\" resultaria \"192.168.0.123\"."
 
 msgid "Language:"
 msgstr "Idioma:"
 
 msgid "Here you can set the localization VDRAdmin-AM should use."
-msgstr "AquÌ se ajusta la localizaciÛn que VDRAdmin-AM utilice."
+msgstr "Aqu√≠ se ajusta la localizaci√≥n que VDRAdmin-AM utilice."
 
 msgid "Save settings on exit:"
 msgstr "Guardar los ajustes cuando sales:"
 
 msgid "With this option the settings will be saved if VDRAdmin-AM exits. This will also save settings not available on the \"Configuration\" menu like interval and size in TV, sorting in the lists and current view in \"What's on now\"."
-msgstr "Con esta opciÛn las propiedades van a ser guardados cuando VDRAdmin-AM se apaga. Asi guardar· tambiÈn las opciones invisibles del men˙ \"ConfiguraciÛn\" como intervalo y dimensiones del TV, orden de la lista y modo de vista en \"Se ve ahora\"."
+msgstr "Con esta opci√≥n las propiedades van a ser guardados cuando VDRAdmin-AM se apaga. Asi guardar√° tambi√©n las opciones invisibles del men√∫ \"Configuraci√≥n\" como intervalo y dimensiones del TV, orden de la lista y modo de vista en \"Se ve ahora\"."
 
 msgid "Top"
 msgstr "Al principio"
@@ -865,19 +881,19 @@ msgid "Number of DVB cards:"
 msgstr "Cantidad de tarjetas-DVB:"
 
 msgid "The number of DVB cards VDR can access. Depending on this value VDRAdmin-AM will calculate critical timers in the <span class=\"ref_menu\">Timer</span> menu."
-msgstr "La cantidad de tarjetas accesibles. Referiendose a este valor, VDRAdmin-AM calcular· programaciones crÌticas en el men˙ <span class=\"ref_menu\">Programaciones</span>"
+msgstr "La cantidad de tarjetas accesibles. Referiendose a este valor, VDRAdmin-AM calcular√° programaciones cr√≠ticas en el men√∫ <span class=\"ref_menu\">Programaciones</span>"
 
 msgid "Path to recordings:"
 msgstr "Ruta de las grabaciones:"
 
 msgid "The path to VDR's recordings. It's used so that VDRAdmin-AM can locate the recordings when using <span class=\"ref_label\">Recordings Streaming</span> and <span class=\"ref_file\">reccmds.conf</span> in the <span class=\"ref_menu\">Recordings</span> menu."
-msgstr "La ruta de las grabaciones. Necesario, para que VDRAdmin-AM pueda localizar las grabaciones para usar <span class=\"ref_label\">Flujo de grabaciones</span> y <span class=\"ref_file\">reccmds.conf</span> en el men˙ <span class=\"ref_menu\">Grabaciones</span>."
+msgstr "La ruta de las grabaciones. Necesario, para que VDRAdmin-AM pueda localizar las grabaciones para usar <span class=\"ref_label\">Flujo de grabaciones</span> y <span class=\"ref_file\">reccmds.conf</span> en el men√∫ <span class=\"ref_menu\">Grabaciones</span>."
 
 msgid "Path to configuration files:"
-msgstr "La ruta de los ficheros de configuraciÛn:"
+msgstr "La ruta de los ficheros de configuraci√≥n:"
 
 msgid "The path where VDR's configuration files are located. If this directory contains the file <span class=\"ref_file\">reccmds.conf</span> its content is shown in a selectbox in the <span class=\"ref_menu\">Recordings</span> menu."
-msgstr "La ruta de los ficheros de configuraciÛn del VDR. Si alli se encuentra el archivo <span class=\"ref_file\">reccmds.conf</span> su contenido ver·s en un campo de selecciÛn en el men˙ <span class=\"ref_menu\">Grabaciones</span>."
+msgstr "La ruta de los ficheros de configuraci√≥n del VDR. Si alli se encuentra el archivo <span class=\"ref_file\">reccmds.conf</span> su contenido ver√°s en un campo de selecci√≥n en el men√∫ <span class=\"ref_menu\">Grabaciones</span>."
 
 msgid "Path to EPG images:"
 msgstr "Ruta de las las imagenes de EPG:"
@@ -892,16 +908,16 @@ msgid "The username for the main user, i.e. the user having the most privileges.
 msgstr "El nombre del usuario, p.e. el usuario con todos privilegios."
 
 msgid "Password:"
-msgstr "ContraseÒa:"
+msgstr "Contrase√±a:"
 
 msgid "The main user's password."
-msgstr "La contraseÒa del usuario."
+msgstr "La contrase√±a del usuario."
 
 msgid "Guest Account:"
 msgstr "Acceso como invitado:"
 
 msgid "If you want a user account having only limited privileges, this is for you. The guest user cannot modify anything, it's only allowed to view the EPG, timers, AutoTimers and recordings listings."
-msgstr "Esta opciÛn te permite crear una cuenta limitada. La cuenta del invitado no permite modificar nada. Adem·s sÛlo va a ver EPG, programaciones, autoprogramaciones y grabaciones."
+msgstr "Esta opci√≥n te permite crear una cuenta limitada. La cuenta del invitado no permite modificar nada. Adem√°s s√≥lo va a ver EPG, programaciones, autoprogramaciones y grabaciones."
 
 msgid "Guest Username:"
 msgstr "Nombre como invitado:"
@@ -910,10 +926,10 @@ msgid "The username for the guest user."
 msgstr "Nombre del invitado."
 
 msgid "Guest Password:"
-msgstr "ContraseÒa como invitado:"
+msgstr "Contrase√±a como invitado:"
 
 msgid "The guest user's password."
-msgstr "ContraseÒa del invitado."
+msgstr "Contrase√±a del invitado."
 
 msgid "Hours:"
 msgstr "Rango de hora/s:"
@@ -925,37 +941,37 @@ msgid "Times:"
 msgstr "Horas:"
 
 msgid "A comma separated list of times in <strong>hh:mm</strong> format that appear in the selectbox placed at the top."
-msgstr "Una lista separada por coma con el formato <strong>hh:mm</strong>, que aparece en la lista de selecciÛn al principio de la p·gina."
+msgstr "Una lista separada por coma con el formato <strong>hh:mm</strong>, que aparece en la lista de selecci√≥n al principio de la p√°gina."
 
 msgid "Tooltips:"
 msgstr "Extremidades de herramienta:"
 
 msgid "Here you can (de-)activate the tooltips."
-msgstr "AquÌ se puede (des)activar las extremidades de herramienta."
+msgstr "Aqu√≠ se puede (des)activar las extremidades de herramienta."
 
 msgid "Active:"
 msgstr "Activada:"
 
 msgid "Activate or deactivate the AutoTimer function."
-msgstr "Activar o desactivar la funcciÛn autoprogramaciÛn"
+msgstr "Activar o desactivar la funcci√≥n autoprogramaci√≥n"
 
 msgid "Send email after programming timer:"
-msgstr "Mandar mensaje despuÈs de crear programaciÛn:"
+msgstr "Mandar mensaje despu√©s de crear programaci√≥n:"
 
 msgid "VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a timer has been programmed if you enable this feature."
-msgstr "VDRAdmin-AM mandar· un email, siempre cuando un evento cumple con una autoprogramaciÛn y una programaciÛn ha creado a caso lo que has habilitado esta posibilidad."
+msgstr "VDRAdmin-AM mandar√° un email, siempre cuando un evento cumple con una autoprogramaci√≥n y una programaci√≥n ha creado a caso lo que has habilitado esta posibilidad."
 
 msgid "Send email as:"
-msgstr "Mandar mensaje electrÛnico como:"
+msgstr "Mandar mensaje electr√≥nico como:"
 
 msgid "Here you set the sending email address of the generated email."
-msgstr "AquÌ se pone el remitente del mensaje generado."
+msgstr "Aqu√≠ se pone el remitente del mensaje generado."
 
 msgid "Send email to:"
-msgstr "Mandar mensaje electrÛnico a:"
+msgstr "Mandar mensaje electr√≥nico a:"
 
 msgid "The email address the email is sent to."
-msgstr "La direcciÛn a donde se manda el mensaje."
+msgstr "La direcci√≥n a donde se manda el mensaje."
 
 msgid "Mail server:"
 msgstr "Servidor de mensajes:"
@@ -967,43 +983,43 @@ msgid "SMTPAuth user:"
 msgstr "Usuario de SMPTAuth:"
 
 msgid "If you need to authenticate yourself at the outgoing mail server, you have to supply the username and the password below. Leaving this field empty will disable SMTPAuth."
-msgstr "Si hace falta autentificarse al servidor de mensajes saliente, hay que agregar el nombre del usuario y la contraseÒa abajo. Dejandolo vacio dehabilitar· SMPTAuth."
+msgstr "Si hace falta autentificarse al servidor de mensajes saliente, hay que agregar el nombre del usuario y la contrase√±a abajo. Dejandolo vacio dehabilitar√° SMPTAuth."
 
 msgid "SMTPAuth password:"
-msgstr "ContraseÒa de SMPTAuth:"
+msgstr "Contrase√±a de SMPTAuth:"
 
 msgid "The password for the SMTPAuth user."
-msgstr "ContraseÒa del usuario de SMPTAuth."
+msgstr "Contrase√±a del usuario de SMPTAuth."
 
 msgid "Tooltips in timeline:"
 msgstr "Extremidades de herramienta en la barra de tiempo:"
 
 msgid "Here you can (de-)activate the tooltips in the timeline."
-msgstr "AquÌ se puede (des)activar las extremidades de herramienta en la tabla de tiempo"
+msgstr "Aqu√≠ se puede (des)activar las extremidades de herramienta en la tabla de tiempo"
 
 msgid "Tooltips in list:"
 msgstr "Extremidades de herramienta en la lista:"
 
 msgid "Here you can (de-)activate the tooltips in the list."
-msgstr "AquÌ se puede (des)activar las extremidades de herramienta en la lista."
+msgstr "Aqu√≠ se puede (des)activar las extremidades de herramienta en la lista."
 
 msgid "Add summary to new timers:"
-msgstr "AÒadir resumen a programaciones creadas:"
+msgstr "A√±adir resumen a programaciones creadas:"
 
 msgid "If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here."
-msgstr "Si no quieres que VDR agrega el resumen creado autom·ticamente de la informaciÛn de la EPG a las programaciones nuevas, se puede deshablitar aquÌ."
+msgstr "Si no quieres que VDR agrega el resumen creado autom√°ticamente de la informaci√≥n de la EPG a las programaciones nuevas, se puede deshablitar aqu√≠."
 
 msgid "Live Streaming:"
 msgstr "Flujo en vivo:"
 
 msgid "Enable or disable live streaming using the <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
-msgstr "Habilitar o inhabilitar flujo en vivo utilizando el <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. Adem·s tienes que ajustar correctamente el <span class=\"ref_label\">puerto HTTP para flujo</span> m·s abajo."
+msgstr "Habilitar o inhabilitar flujo en vivo utilizando el <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. Adem√°s tienes que ajustar correctamente el <span class=\"ref_label\">puerto HTTP para flujo</span> m√°s abajo."
 
 msgid "HTTP Port of Streamdev (also possible 3000/ts):"
-msgstr "Puerto-HTTP para el flujo (3000/ts tambiÈn posible):"
+msgstr "Puerto-HTTP para el flujo (3000/ts tambi√©n posible):"
 
 msgid "Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use."
-msgstr "AquÌ se ajusta el numero del puerto del servidor del streamdev de VDR. Adem·s puedes elegir el tipo del flujo."
+msgstr "Aqu√≠ se ajusta el numero del puerto del servidor del streamdev de VDR. Adem√°s puedes elegir el tipo del flujo."
 
 msgid "Recordings Streaming:"
 msgstr "Flujo de grabaciones:"
@@ -1011,13 +1027,13 @@ msgstr "Flujo de grabaciones:"
 msgid "Enable or disable streaming of recordings.<br />Well actually this is no real \"streaming\", but you have to setup your workstation so that it can access VDR's recordings. You can use for example Samba or NFS for this. VDRAdmin-AM simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation's display."
 msgstr ""
 "Habilitar o deshabiltar el flujo de grabaciones.<br />\n"
-"Pues realmente no es un \"flujo\" de verdad, por que tienes que configurar tu ordenador para que tenga acceso a las grabaciones del VDR. Se puede usar Samba  o NFS. VDRAdmin-AM solo va a crear una lista de tÌtulos incluyendo todas las grabaciones y mandarlas al navegador. Si est· bien configurado el navegador y reproductor multimedia, ver·s las grabaciones en la pantalla del ordenador."
+"Pues realmente no es un \"flujo\" de verdad, por que tienes que configurar tu ordenador para que tenga acceso a las grabaciones del VDR. Se puede usar Samba  o NFS. VDRAdmin-AM solo va a crear una lista de t√≠tulos incluyendo todas las grabaciones y mandarlas al navegador. Si est√° bien configurado el navegador y reproductor multimedia, ver√°s las grabaciones en la pantalla del ordenador."
 
 msgid "Path to VDR Recordings on your workstation:"
 msgstr "La ruta de las grabaciones de VDR en tu ordenador"
 
 msgid "This is the path where your workstation can access VDR's recordings. This depends on your VDR and workstation setup, for example \"\\\\vdr\\videos\" or \"V:\\\" (on Windows) or \"/mnt/videos\" (on Linux)."
-msgstr "…sta es la ruta donde tu ordenador pude acceder al las grabaciones de VDR. Depende de la configuraciÛn de los dos, p.e. \"\\\\vdr\\videos\" o \"V:\\\" (en Windows) o \"/mnt/videos\" (en Linux)."
+msgstr "√âsta es la ruta donde tu ordenador pude acceder al las grabaciones de VDR. Depende de la configuraci√≥n de los dos, p.e. \"\\\\vdr\\videos\" o \"V:\\\" (en Windows) o \"/mnt/videos\" (en Linux)."
 
 msgid "MIME type for live streaming:"
 msgstr "Tipo MIME del flujo en vivo:"
@@ -1026,10 +1042,10 @@ msgid "The MIME type to send when using live streaming. Defaults to \"video/x-mp
 msgstr "Tipo MIME para mandar utilizando flujo en vivo. Por defecto \"video/x-mpegurl\"."
 
 msgid "Suffix for live streaming:"
-msgstr "ExtenciÛn para flujo en vivo:"
+msgstr "Extenci√≥n para flujo en vivo:"
 
 msgid "The suffix to use for live streaming. Defaults to \"m3u\"."
-msgstr "La extenciÛn para el uso de flujo en vivo. Por defecto  \"m3u\"."
+msgstr "La extenci√≥n para el uso de flujo en vivo. Por defecto  \"m3u\"."
 
 msgid "MIME type for recordings streaming:"
 msgstr "Tipo MIME para flujo de grabaciones:"
@@ -1038,114 +1054,117 @@ msgid "The MIME type to send when using recordings streaming. Defaults to \"vide
 msgstr "Tipo MIME para mandar mientras utilizando flujo de grabaciones. Por defecto \"video/x-mpegurl\"."
 
 msgid "Suffix for recordings streaming:"
-msgstr "ExtenciÛn para flujo de grabaciones:"
+msgstr "Extenci√≥n para flujo de grabaciones:"
 
 msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
-msgstr "La extenciÛn utilizado para flujos de grabaciones. Por defecto  \"m3u\"."
+msgstr "La extenci√≥n utilizado para flujos de grabaciones. Por defecto  \"m3u\"."
 
 msgid "<p>Here you can define two external searches that you can access in the EPG views. You simply have to find the required URL and where the search pattern has to be located. %TITLE% will be substituted by the broadcast's EPG title.</p>"
-msgstr "<p>Aqui se puede definir 2 b˙squedas externas que seran accesibles en las vistas de EPG. Solo hay que encontrar la URL necesario y el lugar del sistema de b˙squeda. %TITLE% se va a sustituir con el tÌtulo del EPG.</p>"
+msgstr "<p>Aqui se puede definir 2 b√∫squedas externas que seran accesibles en las vistas de EPG. Solo hay que encontrar la URL necesario y el lugar del sistema de b√∫squeda. %TITLE% se va a sustituir con el t√≠tulo del EPG.</p>"
 
 msgid "Some examples:"
 msgstr "Unos ejemplos:"
 
+msgid "Please change the hostname to your local needs!"
+msgstr "Adapta el nombre del host a tus necesidades locales!"
+
 msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
-msgstr "<p>Esta secciÛn es <strong>sÛlo</strong> para expertos, °es bastante importante saber que haces!</p>"
+msgstr "<p>Esta secci√≥n es <strong>s√≥lo</strong> para expertos, ¬°es bastante importante saber que haces!</p>"
 
 msgid "Update EPG data in background:"
 msgstr "Actualizar datos EPG en segundo plano"
 
 msgid "If set to \"yes\" VDRAdmin-AM will periodically refresh its local EPG cache. Else the EPG will be refreshed if the user accesses any EPG view at the web interface and the timeout set at \"Update EPG every\" has been reached."
-msgstr "Si esta activado con \"sÌ\"  VDRAdmin-AM actualizar· periodicamente su datos EPG local en segundo plano. En el otro caso solo se actualiza, cuando el usuario abre la vista de EPG en la pantilla del VDRAdmin y el periodo ajustado en \"Actualizar EPG cada\"  se ha caducado."
+msgstr "Si esta activado con \"s√≠\"  VDRAdmin-AM actualizar√° periodicamente su datos EPG local en segundo plano. En el otro caso solo se actualiza, cuando el usuario abre la vista de EPG en la pantilla del VDRAdmin y el periodo ajustado en \"Actualizar EPG cada\"  se ha caducado."
 
 msgid "Update EPG every:"
 msgstr "Actualizar datos EPG cada:"
 
 msgid "The interval, the EPG data is refreshed from VDR and AutoTimer updates are performed (if AutoTimer feature is used)."
-msgstr "El intervalo de b˙squeda que va a realizar VDRAdmin-AM para actualizar las autoprogramaciones (en caso de usar el autoprogramador)"
+msgstr "El intervalo de b√∫squeda que va a realizar VDRAdmin-AM para actualizar las autoprogramaciones (en caso de usar el autoprogramador)"
 
 msgid "<p>If you want to limit the number of channels used in some parts of VDRAdmin-AM, this is for you!</p><p>Use the radio buttons to activate or deactivate the wanted channels in the named menu.</p><p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;&gt;&gt;\"/>. If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click <input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
 msgstr ""
-"<p>AquÌ se puede limitar la cantidad de emisoras visibles en diferentes partes del VDRAdmin-AM!</p>\n"
+"<p>Aqu√≠ se puede limitar la cantidad de emisoras visibles en diferentes partes del VDRAdmin-AM!</p>\n"
 "<p>Usa los botones para activar o desactivar en el menu las emisoras deseadas.</p>\n"
-"<p>Emisoras se puede aÒadir seleccionando una o m·s en el campo izquierda (Elegir m·s que uno se permite con el botÛn \"CTRL\" apretando mientras haces clic en las emisoras). Al final haces clic en el botÛn <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;&gt;&gt;\"/>. Para desmarcar emisoras funcciona viceversa.</p>"
+"<p>Emisoras se puede a√±adir seleccionando una o m√°s en el campo izquierda (Elegir m√°s que uno se permite con el bot√≥n \"CTRL\" apretando mientras haces clic en las emisoras). Al final haces clic en el bot√≥n <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;&gt;&gt;\"/>. Para desmarcar emisoras funcciona viceversa.</p>"
 
 msgid "Show channels without EPG information:"
-msgstr "Mostrar emisoras sin informaciÛn EPG:"
+msgstr "Mostrar emisoras sin informaci√≥n EPG:"
 
 msgid "Usually channels that don't have EPG information are hidden in all EPG views. If you don't want them to be hidden you have to set this option to \"yes\"."
-msgstr "Normalmente no se ve las emisoras sin informaciÛn EPG. Si se pone esta opciÛn a \"si\" se muestra sin embargo."
+msgstr "Normalmente no se ve las emisoras sin informaci√≥n EPG. Si se pone esta opci√≥n a \"si\" se muestra sin embargo."
 
 msgid "<p>Here you will find a listing of automatic timers (AutoTimer) known to VDRAdmin-AM.</p><p>The list shows some information on AutoTimers. You can change the list's sorting by clicking the columns heading.</p><p>For each AutoTimer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each AutoTimer's state is indicated by differently coloured images:<br /><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> AutoTimer is OK and will automatically program matching broadcasts.<br /><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> AutoTimer is not active.</p><p>In addition to these functions you can add a new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value=\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at once by checking the box in the last column of those timers and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/>.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and check for matching AutoTimers.</p>"
 msgstr ""
 "<p>Aqui se encuentra una lista de todas las autoprogramaciones conocidas por VDRAdmin-AM.</p>\n"
-"<p>La lista contiene informaciones de las autoprogramaciones. Se puede cambiar el orden de la lista haciendo clic en los tÌtulos de las columnas.</p>\n"
+"<p>La lista contiene informaciones de las autoprogramaciones. Se puede cambiar el orden de la lista haciendo clic en los t√≠tulos de las columnas.</p>\n"
 "\n"
-"<p>Para cada autoprogramaciÛn hay las siguientes opciones:<dl>\n"
+"<p>Para cada autoprogramaci√≥n hay las siguientes opciones:<dl>\n"
 "<dt>Cambiar estado</dt>\n"
-"<dd>Haciendo clic en \"SÌ\" o \"No\" en la columna \"Activada\" se puede activar y desactivar.</dd>\n"
+"<dd>Haciendo clic en \"S√≠\" o \"No\" en la columna \"Activada\" se puede activar y desactivar.</dd>\n"
 "\n"
 "<dt>Vista rapida de prioridad y durabilidad</dt>\n"
-"<dd>Tienes que mover la flecha del ratÛn encima del nombre de la autoprogramaciÛn.</dd>\n"
+"<dd>Tienes que mover la flecha del rat√≥n encima del nombre de la autoprogramaci√≥n.</dd>\n"
 "\n"
-"<dt>Modificar autoprogramaciÛn</dt>\n"
-"<dd>Se realiza una ediciÛn haciendo clic en <img src=\"bilder/edit.png\" alt=\"editar\" />.</dd>\n"
+"<dt>Modificar autoprogramaci√≥n</dt>\n"
+"<dd>Se realiza una edici√≥n haciendo clic en <img src=\"bilder/edit.png\" alt=\"editar\" />.</dd>\n"
 "\n"
-"<dt>Borrar autoprogramaciÛn</dt>\n"
-"<dd>Para borrar una autoprogramaciÛn hay que hacer clic en <img src=\"bilder/delete.png\" alt=\"borrar\" />.</dd>\n"
+"<dt>Borrar autoprogramaci√≥n</dt>\n"
+"<dd>Para borrar una autoprogramaci√≥n hay que hacer clic en <img src=\"bilder/delete.png\" alt=\"borrar\" />.</dd>\n"
 "</dl></p>\n"
-"<p>El estado de una autoprogramaciÛn est· indicada por colores diferentes:<br />\n"
-"<img src=\"bilder/poempl_gruen.png\" alt=\"Activa\" align=\"middle\" /> La autoprogramaciÛn est· bien y va programar autom·ticamente estrenos coincidentes.<br />\n"
-"<img src=\"bilder/poempl_grau.png\" alt=\"inactiva\" align=\"middle\" /> La autoprogramaciÛn est· desactivada.</p>\n"
-"<p>Adem·s se puede aÒadir otra autoprogramaciÛn m·s, haciendo clic en <input type=\"submit\" class=\"submit\" value=\"AÒadir autoprogramaciÛn\"/> al tope. M·s abajo se encuentra el botÛn <input type=\"submit\" class=\"submit\" value=\"Borrar autoprogramaciones elegidas\"/>, cu·l hace posible borrar las autoprogramaciones marcadas en la lista por lotes.</p>\n"
-"<p>Con el botÛn <input type=\"submit\" class=\"submit\" value=\"Actualizar ahora\"/> arrancar·s una b˙squeda inmediatamente en los datos actuales de la EPG rÈcien actualizados.</p>"
+"<p>El estado de una autoprogramaci√≥n est√° indicada por colores diferentes:<br />\n"
+"<img src=\"bilder/poempl_gruen.png\" alt=\"Activa\" align=\"middle\" /> La autoprogramaci√≥n est√° bien y va programar autom√°ticamente estrenos coincidentes.<br />\n"
+"<img src=\"bilder/poempl_grau.png\" alt=\"inactiva\" align=\"middle\" /> La autoprogramaci√≥n est√° desactivada.</p>\n"
+"<p>Adem√°s se puede a√±adir otra autoprogramaci√≥n m√°s, haciendo clic en <input type=\"submit\" class=\"submit\" value=\"A√±adir autoprogramaci√≥n\"/> al tope. M√°s abajo se encuentra el bot√≥n <input type=\"submit\" class=\"submit\" value=\"Borrar autoprogramaciones elegidas\"/>, cu√°l hace posible borrar las autoprogramaciones marcadas en la lista por lotes.</p>\n"
+"<p>Con el bot√≥n <input type=\"submit\" class=\"submit\" value=\"Actualizar ahora\"/> arrancar√°s una b√∫squeda inmediatamente en los datos actuales de la EPG r√©cien actualizados.</p>"
 
 msgid "Your Browser does not support frames!"
-msgstr "°El navegador no respalda marcos!"
+msgstr "¬°El navegador no respalda marcos!"
 
 msgid "Rename Recording"
-msgstr "Renombrar grabaciÛn"
+msgstr "Renombrar grabaci√≥n"
 
 msgid "Original Name of Recording:"
-msgstr "TÌtulo actual de la grabaciÛn:"
+msgstr "T√≠tulo actual de la grabaci√≥n:"
 
 msgid "New Name of Recording:"
-msgstr "TÌtulo nuevo de la grabaciÛn:"
+msgstr "T√≠tulo nuevo de la grabaci√≥n:"
 
 msgid "Subtitle:"
-msgstr "SubtÌtulo:"
+msgstr "Subt√≠tulo:"
 
 msgid "Rename"
 msgstr "Renombrar"
 
 msgid "<p>Here you will find a listing of recordings known to VDR. The headline will also show you VDR's total and free disk space.</p><p>The listing showing you some information on the recordings. You can change the list's sorting by clicking the columns heading. Above the list you'll see the navigation path. If you want to view the contents of previous folders you'll have to click on its name in that path.</p><p>Each row contains this information:<dl><dt>Date</dt><dd>The date when the recording has been done. In case of folders this will show the number of recordings the folder contains.</dd><dt>Time</dt><dd>The time when the recording has been done. In case of folders this will show the number of <strong>new</strong> recordings the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. Click it to show the recording's summary or descend into the folder.</dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> SVDRPort command which is no core VDR feature but is available through a patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete (<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)</dt><dd>This column is only shown if you activated and configured <span class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu\">Configuration</span> menu. You can watch the recording at your workstation.</dd></dl></p><p>In addition to these functions you can delete a number of recordings at once by checking the box in the last but one column of those recordings and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the VDR's configuration files and have entries in VDR's <span class=\"ref_file\">reccmds.conf</span> you can run those commands for the selected recording by selecting the wanted command in the select box locate next to <span class=\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class=\"submit\" value=\"Run\"/> button.</p><p>Use <input type=\"submit\" class=\"submit\" value=\"Refresh\"/> to force reloading of VDR's recordings listing.</p>"
 msgstr ""
-"<p>AquÌ se ve una lista de todas las grabaciones disponibles en el VDR. En la fila encabezada se puede ver el espacio total y libre del VDR.</p>\n"
-"<p>Esta lista contiene algunas informaciones de las grabaciones. Se puede cambiar el orden de la lista haciendo clic en los tÌtulos de las columnas. Encima se ve la ruta de navegar. Si quieres ver el contenido de una carpeta visitado anteriormente, se puede hacer clic en el nombre de la carpeta en esa ruta.</p>\n"
+"<p>Aqu√≠ se ve una lista de todas las grabaciones disponibles en el VDR. En la fila encabezada se puede ver el espacio total y libre del VDR.</p>\n"
+"<p>Esta lista contiene algunas informaciones de las grabaciones. Se puede cambiar el orden de la lista haciendo clic en los t√≠tulos de las columnas. Encima se ve la ruta de navegar. Si quieres ver el contenido de una carpeta visitado anteriormente, se puede hacer clic en el nombre de la carpeta en esa ruta.</p>\n"
 "<p>Cada fila contiene las informaciones siguientes:<dl>\n"
 "\n"
 "<dt>Fecha</dt>\n"
-"<dd>La fecha cuando se lo realizÛ la grabaciÛn. Si es una carpeta se ve la cantidad de grabaciones dentro.</dd>\n"
+"<dd>La fecha cuando se lo realiz√≥ la grabaci√≥n. Si es una carpeta se ve la cantidad de grabaciones dentro.</dd>\n"
 "\n"
 "<dt>Hora</dt>\n"
-"<dd>La hora cuando se lo grabÛ. Si es una carpeta se ve la cantidad de grabaciones <strong>nuevas</strong>.</dd>\n"
+"<dd>La hora cuando se lo grab√≥. Si es una carpeta se ve la cantidad de grabaciones <strong>nuevas</strong>.</dd>\n"
 "\n"
 "<dt>Nombre</dt>\n"
-"<dd>El nombre de la carpeta o de la grabaciÛn. Se hace clic para ver el contenido o un res˙men de la grabaciÛn..</dd>\n"
+"<dd>El nombre de la carpeta o de la grabaci√≥n. Se hace clic para ver el contenido o un res√∫men de la grabaci√≥n..</dd>\n"
 "\n"
 "<dt>Renombrar (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt>\n"
-"<dd>Renombrar una grabaciÛn.<br /><h4>Advertencia:</h4>Solo funccionar· si tu VDR entiende el comando <u>RENR</u> del SVDRPuerto. A˙nque no es un orden estandar del VDR, se puede aÒadir un parche. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> y <span class=\"ref_file\">enAIO-v2.2+</span> te aÒadir· este orden.</dd>\n"
+"<dd>Renombrar una grabaci√≥n.<br /><h4>Advertencia:</h4>Solo funccionar√° si tu VDR entiende el comando <u>RENR</u> del SVDRPuerto. A√∫nque no es un orden estandar del VDR, se puede a√±adir un parche. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> y <span class=\"ref_file\">enAIO-v2.2+</span> te a√±adir√° este orden.</dd>\n"
 "\n"
 "<dt>Borrar (<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt>\n"
 "<dd>Borrar una grabacion.</dd>\n"
 "\n"
 "<dt>Flujo (<img src=\"bilder/stream.jpg\" alt=\"stream\" />)</dt>\n"
-"<dd>Esta columna solo se ve, si has activado y configurado <span class=\"ref_label\">Flujo de grabaciones</span> en la p·gina de <span class=\"ref_menu\">Configuraciones</span>. AsÌ entonces es posible ver las grabaciones en tu ordenador.</dd></dl></p>\n"
-"<p>Adem·s es posible borrar varias grabaciones por lotes, marcando la casilla de cada una deseada y  haciendo clic en <input type=\"submit\" class=\"submit\" value=\"Borrar grabaciones elegidas\"/></p>\n"
-"<p>Si has ajustado la ruta de los archivos de configuraciÛn y adem·s se encuntra ahi el fichero <span class=\"ref_file\">reccmds.conf</span>, se puede utilizar los Ûrdenes que contiene para las grabaciones elegidas. Hay que elegir el Ûrden deseado con el botÛn a lado de <span class=\"ref_label\">”rdenes:</span> y depuÈs hacer clic en <input type=\"submit\" class=\"submit\" value=\"Ejecutar\"/>.</p>/n<p>AsÌ se restaurar· la lista de grabaciones de VDR</p>"
+"<dd>Esta columna solo se ve, si has activado y configurado <span class=\"ref_label\">Flujo de grabaciones</span> en la p√°gina de <span class=\"ref_menu\">Configuraciones</span>. As√≠ entonces es posible ver las grabaciones en tu ordenador.</dd></dl></p>\n"
+"<p>Adem√°s es posible borrar varias grabaciones por lotes, marcando la casilla de cada una deseada y  haciendo clic en <input type=\"submit\" class=\"submit\" value=\"Borrar grabaciones elegidas\"/></p>\n"
+"<p>Si has ajustado la ruta de los archivos de configuraci√≥n y adem√°s se encuntra ahi el fichero <span class=\"ref_file\">reccmds.conf</span>, se puede utilizar los √≥rdenes que contiene para las grabaciones elegidas. Hay que elegir el √≥rden deseado con el bot√≥n a lado de <span class=\"ref_label\">√ìrdenes:</span> y depu√©s hacer clic en <input type=\"submit\" class=\"submit\" value=\"Ejecutar\"/>.</p>/n<p>As√≠ se restaurar√° la lista de grabaciones de VDR</p>"
 
 msgid "<p>Here you can edit the descriptive fields of an existing EPG entry.</p>"
-msgstr "<p>AquÌ se puede modificar la descripciÛn de una entrada EPG existente.</p>"
+msgstr "<p>Aqu√≠ se puede modificar la descripci√≥n de una entrada EPG existente.</p>"
 
 msgid "Channel (readonly)"
 msgstr "Emisora (solo lectura)"
@@ -1160,13 +1179,13 @@ msgid "This is the start and end time of the entry. It cannot be changed."
 msgstr "Eso es la hora de inicio y final de la entrada.  No se puede cambiar!"
 
 msgid "Change this string to give this EPG Entry a new title. It must consist of only one line of text."
-msgstr "El nuevo tÌtulo de solo una fila de la entrada de la EPG."
+msgstr "El nuevo t√≠tulo de solo una fila de la entrada de la EPG."
 
 msgid "Change this string to give this EPG Entry a new subtitle. It must consist of only one line of text."
-msgstr "El nuevo subtÌtulo monolineal de la entrada de la EPG."
+msgstr "El nuevo subt√≠tulo monolineal de la entrada de la EPG."
 
 msgid "Change the text in this field to edit the description of this entry. The text can consist of one or more lines."
-msgstr "Aqui se puede manipular la descripciÛn del EPG. (multifila posible)"
+msgstr "Aqui se puede manipular la descripci√≥n del EPG. (multifila posible)"
 
 msgid "VPS (readonly)"
 msgstr "VPS (solo lectura)"
@@ -1187,7 +1206,7 @@ msgid "If available this field shows the audio track(s). It cannot be changed."
 msgstr "Si disponible, muestra las pistas de audio. No se puede modificar."
 
 msgid "Duration:"
-msgstr "DuraciÛn:"
+msgstr "Duraci√≥n:"
 
 msgid "min"
 msgstr "min"
@@ -1199,25 +1218,25 @@ msgid "CA-System:"
 msgstr "Sistema CA:"
 
 msgid "New Timer"
-msgstr "AÒadir  programaciÛn"
+msgstr "A√±adir  programaci√≥n"
 
 msgid "Date"
 msgstr "Fecha"
 
 msgid "Edit timer status?"
-msgstr "øCambiar estado de la programaciÛn?"
+msgstr "¬øCambiar estado de la programaci√≥n?"
 
 msgid "This timer is inactive!"
-msgstr "°Esta programaciÛn est· desactivada!"
+msgstr "¬°Esta programaci√≥n est√° desactivada!"
 
 msgid "This timer is impossible!"
-msgstr "°Esta programaciÛn es imposible!"
+msgstr "¬°Esta programaci√≥n es imposible!"
 
 msgid "No more timers on other transponders possible!"
-msgstr "°No se puede aÒadir m·s programaciones!"
+msgstr "¬°No se puede a√±adir m√°s programaciones!"
 
 msgid "Timer OK."
-msgstr "Esta programaciÛn es v·lida."
+msgstr "Esta programaci√≥n es v√°lida."
 
 msgid "Auto"
 msgstr "Auto"
@@ -1238,7 +1257,7 @@ msgid "No timers defined!"
 msgstr "No hay programaciones!"
 
 msgid "EPG Search Blacklists"
-msgstr "Utiliza lista negra en b˙squeda de EPG:"
+msgstr "Utiliza lista negra en b√∫squeda de EPG:"
 
 msgid "New Blacklist"
 msgstr "Nueva lista negra"
@@ -1253,49 +1272,49 @@ msgid "To"
 msgstr "Al"
 
 msgid "Delete blacklist?"
-msgstr "øBorrar lista negra?"
+msgstr "¬øBorrar lista negra?"
 
 msgid "Delete Selected Blacklists"
 msgstr "Borrar listas negras elegidas"
 
 msgid "Delete all selected blacklists?"
-msgstr "øEstas seguro de que deseas borrar las listas negras elegidas?"
+msgstr "¬øEstas seguro de que deseas borrar las listas negras elegidas?"
 
 msgid "EPG search"
-msgstr "B˙squeda EPG"
+msgstr "B√∫squeda EPG"
 
 msgid "Use template"
 msgstr "Usar plantilla:"
 
 msgid "New Search"
-msgstr "B˙squeda nueva"
+msgstr "B√∫squeda nueva"
 
 msgid "Action"
-msgstr "AcciÛn"
+msgstr "Acci√≥n"
 
 msgid "Find"
 msgstr "Buscar"
 
 msgid "Show Favorites"
-msgstr "EnseÒar favoritas"
+msgstr "Ense√±ar favoritas"
 
 msgid "Delete Selected Searches"
-msgstr "Borrar b˙squedas elegidas"
+msgstr "Borrar b√∫squedas elegidas"
 
 msgid "Delete all selected searches?"
-msgstr "øEstas seguro de que deseas borrar las b˙squedas elegidas?"
+msgstr "¬øEstas seguro de que deseas borrar las b√∫squedas elegidas?"
 
 msgid "Execute Selected Searches"
-msgstr "Ejecutar b˙squedas elegidas"
+msgstr "Ejecutar b√∫squedas elegidas"
 
 msgid "Duration"
-msgstr "DuraciÛn:"
+msgstr "Duraci√≥n:"
 
 msgid "Template:"
 msgstr "Plantilla:"
 
 msgid "Also used for other EPG views!"
-msgstr "TambiÈn se usa para otras vistas de la EPG!"
+msgstr "Tambi√©n se usa para otras vistas de la EPG!"
 
 msgid "Bandwidth of Streams:"
 msgstr "Ancho de banda del flujo:"
@@ -1304,13 +1323,13 @@ msgid "URL:"
 msgstr "URL:"
 
 msgid "Title:"
-msgstr "TÌtulo:"
+msgstr "T√≠tulo:"
 
 msgid "User-defined search:"
-msgstr "B˙squeda personalizada:"
+msgstr "B√∫squeda personalizada:"
 
 msgid "In \"AutoTimer\"?"
-msgstr "øUsar en \"Autoprogramaciones\"?"
+msgstr "¬øUsar en \"Autoprogramaciones\"?"
 
 msgid "Apply"
 msgstr "Establecer"
@@ -1346,12 +1365,12 @@ msgid "You need JavaScript to use the timeline!"
 msgstr "JavaScript es necesario para aprovechar la barra de tiempo!"
 
 msgid "Authorization Required"
-msgstr "AutorizaciÛn requerida"
+msgstr "Autorizaci√≥n requerida"
 
 msgid "This server could not verify that you are authorized to access the document requested. Either you supplied the wrong credentials (e.g. bad password), or your browser doesn't understand how to supply the credentials required."
 msgstr ""
-"Este servidor no pudo verificar, t˙ permiso de acceso al documento requerido.<br>\n"
-"Posiblemente por entregar datos incorrectos (nombre del usuario o contraseÒa p.e.) o por que t˙ navegador no soporta la forma de acceso."
+"Este servidor no pudo verificar, t√∫ permiso de acceso al documento requerido.<br>\n"
+"Posiblemente por entregar datos incorrectos (nombre del usuario o contrase√±a p.e.) o por que t√∫ navegador no soporta la forma de acceso."
 
 msgid "Total:"
 msgstr "Espacio en el disco:"
@@ -1375,65 +1394,65 @@ msgid "Cut"
 msgstr "Cortar"
 
 msgid "Delete recording?"
-msgstr "øBorrar grabaciÛn?"
+msgstr "¬øBorrar grabaci√≥n?"
 
 msgid "Refresh"
 msgstr "Restaurar"
 
 msgid "Commands:"
-msgstr "”rdenes:"
+msgstr "√ìrdenes:"
 
 msgid "Delete Selected Recordings"
 msgstr "Borrar grabaciones elegidas"
 
 msgid "Delete all selected recordings?"
-msgstr "øEstas seguro de que deseas borrar las grabaciones elegidas?"
+msgstr "¬øEstas seguro de que deseas borrar las grabaciones elegidas?"
 
 msgid "No recordings available"
 msgstr "No hay grabaciones."
 
 msgid "What's your VDR hostname (e.g video.intra.net)?"
-msgstr "øCu·l es el nombre del sitio del VDR (p.e. video.intra.net)?"
+msgstr "¬øCu√°l es el nombre del sitio del VDR (p.e. video.intra.net)?"
 
 msgid "On which port does VDR listen to SVDRP queries?"
-msgstr "øCu·l puerto esta vigilando VDR para requeridas de SVDRP?"
+msgstr "¬øCu√°l puerto esta vigilando VDR para requeridas de SVDRP?"
 
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
-msgstr "øEn quÈ direcciÛn debe VDRAdmin-AM escuchar (0.0.0.0 para todas)?"
+msgstr "¬øEn qu√© direcci√≥n debe VDRAdmin-AM escuchar (0.0.0.0 para todas)?"
 
 msgid "On which port should VDRAdmin-AM listen?"
-msgstr "øQuÈ puerto debe VDRAdmin-AM esperar Ûrdenes?"
+msgstr "¬øQu√© puerto debe VDRAdmin-AM esperar √≥rdenes?"
 
 msgid "Username?"
-msgstr "øNombre del usuario?"
+msgstr "¬øNombre del usuario?"
 
 msgid "Password?"
-msgstr "øContraseÒa?"
+msgstr "¬øContrase√±a?"
 
 msgid "Where are your recordings stored?"
 msgstr "Introduce la ruta de las grabaciones:"
 
 msgid "Where are your VDR's configuration files located?"
-msgstr "Introduce la ruta de los archivos de configuraciÛn:"
+msgstr "Introduce la ruta de los archivos de configuraci√≥n:"
 
 msgid "Config file written successfully."
-msgstr "°Los archivos de configuraciÛn creados!"
+msgstr "¬°Los archivos de configuraci√≥n creados!"
 
 #, perl-format
-msgid "vdradmind.pl %s started with pid %d."
-msgstr "vdradmind.pl %s se ha iniciado con pid %d."
+msgid "%s %s started with pid %d."
+msgstr "%s %s se ha iniciado con pid %d."
 
 msgid "Not found"
 msgstr "No encontrado"
 
 msgid "The requested URL was not found on this server!"
-msgstr "°No encontrado la URL requerida, en el servidor!"
+msgstr "¬°No encontrado la URL requerida, en el servidor!"
 
 msgid "Forbidden"
 msgstr "Prohibido"
 
 msgid "You don't have permission to access this function!"
-msgstr "°No tienes permiso para Èsta funcciÛn!"
+msgstr "¬°No tienes permiso para √©sta funcci√≥n!"
 
 msgid "All channels"
 msgstr "Todas las emisoras"
@@ -1449,23 +1468,23 @@ msgstr "Emisoras de Radio"
 
 #, perl-format
 msgid "Access to file \"%s\" denied!"
-msgstr "°Acceso al archivo \"%s\" negado!"
+msgstr "¬°Acceso al archivo \"%s\" negado!"
 
 #, perl-format
 msgid "The URL \"%s\" was not found on this server!"
-msgstr "°No encontrado la URL %s  en el servidor!"
+msgstr "¬°No encontrado la URL %s  en el servidor!"
 
 msgid "Your favorites"
-msgstr "T˙s favoritos"
+msgstr "T√∫s favoritos"
 
 msgid "Search results"
-msgstr "Resultados de b˙squeda"
+msgstr "Resultados de b√∫squeda"
 
 msgid "Default"
 msgstr "Por defecto"
 
 msgid "--- no timer ---"
-msgstr "--- sin programaciÛn ---"
+msgstr "--- sin programaci√≥n ---"
 
 msgid "unknown"
 msgstr "desconocido"
@@ -1475,37 +1494,37 @@ msgstr "nada"
 
 #, perl-format
 msgid "Can't open file \"%s\"!"
-msgstr "°No se pudo abrir el archivo  \"%s\" !"
+msgstr "¬°No se pudo abrir el archivo  \"%s\" !"
 
 #, perl-format
 msgid "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and if VDR's svdrphosts.conf is configured correctly."
-msgstr "No se puede conectar a VDR a  %s:%s<br /><br />Compruebe si VDR est· en marcha y su svdrhosts.conf bien configurado."
+msgstr "No se puede conectar a VDR a  %s:%s<br /><br />Compruebe si VDR est√° en marcha y su svdrhosts.conf bien configurado."
 
 #, perl-format
 msgid "Error while sending command to VDR at %s"
-msgstr "Error mientras mandÛ el orden a %s "
+msgstr "Error mientras mand√≥ el orden a %s "
 
 msgid "Internal error:"
 msgstr "Error interno:"
 
 msgid "Lookup movie in the Internet-Movie-Database (IMDb)"
-msgstr "Buscar la pelÌcula en la base de datos de pelÌculas en Internet (IMDb)"
+msgstr "Buscar la pel√≠cula en la base de datos de pel√≠culas en Internet (IMDb)"
 
 msgid "Can't find EPG entry!"
 msgstr "No se encuentra el registro en la EPG!"
 
 msgid "Playing Tomorrow"
-msgstr "Estrenos maÒana"
+msgstr "Estrenos ma√±ana"
 
 #, perl-format
 msgid "Playing on the %s"
 msgstr "Estrenos en %s"
 
 msgid "next"
-msgstr "prÛximo"
+msgstr "pr√≥ximo"
 
 msgid "What's on after"
-msgstr "Se puede ver despuÈs:"
+msgstr "Se puede ver despu√©s:"
 
 msgid "What's on at"
 msgstr "Se puede ver a la/s:"

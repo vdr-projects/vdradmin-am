@@ -59,7 +59,7 @@
 						<span class="channel_name"><?% bc.progname %?></span>
 						<span class="date_long"><?% bc.longdate %?></span>
 					</td>
-					<td class="col_navi"><?% IF bc.prev_channel %?><a href="<?% bc.prev_channel %?>"><img src="bilder/pfeile_nachlinks.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachlinks_soft.png" border="0" alt="" /><?% END %?><?% IF bc.next_channel %?><a href="<?% bc.next_channel %?>"><img src="bilder/pfeile_nachrechts.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachrechts_soft.png" border="0" alt="" /><?% END %?></td>
+					<td class="col_navi"><?% IF bc.prev_channel %?><a href="<?% bc.prev_channel %?>" title="<?% bc.prev_channel_name %?>"><img src="bilder/pfeile_nachlinks.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachlinks_soft.png" border="0" alt="" /><?% END %?><?% IF bc.next_channel %?><a href="<?% bc.next_channel %?>" title="<?% bc.next_channel_name %?>"><img src="bilder/pfeile_nachrechts.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachrechts_soft.png" border="0" alt="" /><?% END %?></td>
 				</tr>
 		<?% ELSE %?>
 			<?% UNLESS bc.endd %?>

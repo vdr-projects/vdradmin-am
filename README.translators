@@ -38,7 +38,7 @@ The basic work flow for a translation looks like this:
    
 3) Now you can start translating. Keep in mind, that if you translate a message,
    you should use html entities [5], [6] for special characters. Any text that
-   origins from vdradmind.pl must not have html entities.
+   origins from vdradmind[.pl] must not have html entities.
    Beside the help texts, you will not need any formating tags.
    
    Messages marked as "fuzzy" indicate, that they may have been derived from
@@ -51,13 +51,13 @@ The basic work flow for a translation looks like this:
    your  <language code> to the "LANGS=" line. Running "./make.sh po" will then
 	 create a new *.mo-file from your changed *.po-file.
    
-   Please note, that you have to restart vdradmind.pl after any changes you 
+   Please note, that you have to restart vdradmind[.pl] after any changes you 
    make to the translation. In order to allow VDRAdmin-AM to select your language,
    you must have the appropriate locales installed on your system (see 
    "locale -a"). You should make sure, that the correct locale is selected
    with the LANG and LC_* environment variables.
 
-	 For example: LANG=de_DE ./vdradmind.pl
+	 For example: LANG=de_DE ./vdradmind
    
 5) If you are done, send the *.po-file to me:
 

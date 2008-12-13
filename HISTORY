@@ -4,6 +4,17 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2008-12-13: 3.6.3
+- Updated: Spanish translation (Submitted by Rüdiger Jung).
+- Changed: Process name to "vdradmind" (Based on patch submitted by Ville Skyttä).
+- Updated: Italian translation (Submitted by Diego Pierotto).
+- Changed executable's name from "vdradmind.pl" to "vdradmind".
+- Updated: Dutch translation (Submitted by Roel Koelewijn).
+- Added Play/Stop/FastForward/etc. buttons to remote controls (based on patch by L.Locke @vdr-portal.de).
+- Added: epgsearch templates can be created, modified and deleted.
+- Read used character encoding in SVDRP connections and recode result to the encoding used in the current locale.
+- Minor bugfixes and improvements.
+
 2008-06-30: 3.6.2
 - Changed: No need to set the VFAT option in VDRAdmin-AM any longer as both filename codings will be searched for.
 - Fixed: some bugs in tv.html.
@@ -14,7 +25,7 @@ VDR-Portal: amair
 - Updated: Dutch translation (Submitted by Roel Koelewijn).
 - Added: ST_STREAMDEV_HOST config option to set the name/ip to be used for streaming.
 - Fixed: m3u files for Xine (Reported by Robert C. Helling).
-- Updated: Italian translation (Submitted by Gringo).
+- Updated: Italian translation (Submitted by Diego Pierotto).
 - Updated: Spanish translation (Submitted by Rüdiger Jung).
 - Updated: Finnish translation (Submitted by Rolf Ahrenberg).
 - Changed: include UTF8 locales by default.
@@ -39,7 +50,7 @@ VDR-Portal: amair
 - Added: missing license information.
 - Changed: prog_timeline uses global channels array instead of copying it locally.
 - Fixed: Bug in prog_timeline introduced in 3.6.0beta (Reported by several users).
-- Updated: Italian translation (Submitted by Gringo)
+- Updated: Italian translation (Submitted by Diego Pierotto)
 - Updated: Spanish translation (Submitted by Rüdiger Jung).
 - Fixed: Channel range in epgsearch_new didn't work since 3.6.0beta (Reported by mblaster4711 @vdr-portal.de).
 
@@ -95,7 +106,7 @@ VDR-Portal: amair
 - Fixed: Canceling of "Do you really want to delete?" messages (Reported by KHG_AC @vdr-portal.de).
 
 2006-12-01: 3.5.1
-- Added: Italian translation (Submitted by Gringo).
+- Added: Italian translation (Submitted by Diego Pierotto).
 - Bugfixes.
 
 2006-11-24: 3.5.1beta

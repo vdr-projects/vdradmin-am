@@ -6,13 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: Andreas Mair <mail@andreas.vdr-developer.org>\n"
-"POT-Creation-Date: 2008-06-30 08:26+0200\n"
+"Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
+"POT-Creation-Date: 2008-12-02 07:48+0100\n"
 "PO-Revision-Date: 2006-10-27 15:42+0100\n"
 "Last-Translator: Oleg Roitburd <oleg@roitburd.de>\n"
 "Language-Team: Allrussian <LL.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-5\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 
@@ -485,6 +485,14 @@ msgstr "Использовать список запретов:"
 msgid "Edit Blacklist"
 msgstr "Использовать список запретов:"
 
+#, fuzzy
+msgid "Add New Template"
+msgstr "Создать новый Автотаймер"
+
+#, fuzzy
+msgid "Edit Template"
+msgstr "Шаблон:"
+
 msgid "Add New Search"
 msgstr "Создать новый поиск"
 
@@ -502,6 +510,10 @@ msgstr "Спрятать результаты"
 
 msgid "Settings"
 msgstr "Настройки"
+
+#, fuzzy
+msgid "Name:"
+msgstr "Имя"
 
 msgid "Search Term:"
 msgstr "Поиск по условию:"
@@ -617,8 +629,9 @@ msgstr "только переключится"
 msgid "First day:"
 msgstr "Пятница"
 
+#, fuzzy
 msgid "Last day:"
-msgstr ""
+msgstr "Пятница"
 
 msgid "Auto delete:"
 msgstr ""
@@ -635,8 +648,9 @@ msgstr "Понедельник"
 msgid "After ... recordings:"
 msgstr "Сохранить ... Записей"
 
+#, fuzzy
 msgid "After ... days after first recording:"
-msgstr ""
+msgstr "Сохранить ... Записей"
 
 msgid "Settings for action \"record\""
 msgstr "Настройки для \"записи\""
@@ -673,6 +687,14 @@ msgstr "Настройки для \"только переключится\""
 
 msgid "Switch ... Minutes Before Start:"
 msgstr "Переключится за ... минут до старта\""
+
+#, fuzzy
+msgid "Delete template"
+msgstr "Запомнить шаблон"
+
+#, fuzzy
+msgid "Delete this template?"
+msgstr "Удалить таймер?"
 
 msgid "Save as template"
 msgstr "Запомнить шаблон"
@@ -999,6 +1021,9 @@ msgstr ""
 msgid "Some examples:"
 msgstr ""
 
+msgid "Please change the hostname to your local needs!"
+msgstr ""
+
 msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
 msgstr "<p><p>Этот раздел <strong>только</strong> для экспертов, т.е. для тех кто знает что он делает!</p>"
 
@@ -1223,8 +1248,9 @@ msgstr ""
 msgid "Title:"
 msgstr "Заголовок"
 
+#, fuzzy
 msgid "User-defined search:"
-msgstr ""
+msgstr "Нет таймеров!"
 
 msgid "In \"AutoTimer\"?"
 msgstr "В \"Автотаймеры\"?"
@@ -1336,8 +1362,8 @@ msgid "Config file written successfully."
 msgstr "Файл конфигурации успешно записан."
 
 #, perl-format
-msgid "vdradmind.pl %s started with pid %d."
-msgstr "vdradmind.pl %s был запущен с PID-ом %d."
+msgid "%s %s started with pid %d."
+msgstr "%s %s был запущен с PID-ом %d."
 
 msgid "Not found"
 msgstr "Не найдено"

@@ -27,7 +27,7 @@
 				<td class="col_title">
 					<h1><?% title %?></h1>
 					<?% gettext('starting at') %?>
-					<input type="text" size="5" maxlength="5" value="<?% now %?>" name="time"/>&nbsp;
+					<input type="text" size="5" maxlength="5" value="<?% now | html %?>" name="time"/>&nbsp;
 					<?% gettext('o\'clock') %?>
 				</td>
 				<td class="col_navi">
@@ -38,18 +38,18 @@
 <?% END %?>
 						</select>
 <?% IF days.size() > 0 %?>
-					<?% IF prevdayurl %?><a href="<?% prevdayurl %?>"><img src="bilder/pfeile_nachlinks.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachlinks_soft.png" border="0" alt="" /><?% END %?>
+					<?% IF prevdayurl %?><a href="<?% prevdayurl %?>" title="<?% prevdaytext %?>"><img src="bilder/pfeile_nachlinks.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachlinks_soft.png" border="0" alt="" /><?% END %?>
 					<select name="days" size="1" onchange="window.open(this.options[this.selectedIndex].value,'main')"> <?% FOREACH d = days %?>
 						<option value="<?% d.id %?>" <?% IF d.sel %?>selected="selected"<?% END %?>><?% d.name %?></option>
 <?% END %?>
 					</select>&nbsp;
-					<?% IF nextdayurl %?><a href="<?% nextdayurl %?>"><img src="bilder/pfeile_nachrechts.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachrechts_soft.png" border="0" alt="" /><?% END %?>
+					<?% IF nextdayurl %?><a href="<?% nextdayurl %?>" title="<?% nextdaytext %?>"><img src="bilder/pfeile_nachrechts.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachrechts_soft.png" border="0" alt="" /><?% END %?>
 <?% END %?>
 				</td>
 			</tr>
 		</table>
 		<input type="hidden" name="aktion" value="prog_list2" />
-		<input type="hidden" name="day" value="<?% day %?>" />
+		<input type="hidden" name="day" value="<?% day | html %?>" />
 	</form>
 
 	<div id="content">

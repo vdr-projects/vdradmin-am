@@ -18,14 +18,13 @@ PIDFILE=${PIDFILE:-$DESTDIR/var/run/vdradmind.pid}
 VIDEODIR=${VIDEODIR:-/video}
 EPGIMAGES=${EPGIMAGES:-$VIDEODIR/epgimages}
 VDRCONF=${VDRCONF:-$VIDEODIR}
-EPGDATA=${EPGDATA:-$VIDEODIR/epg.data}
 
 function usage()
 {
 	echo ""
 	echo "usage: $(basename $0) [-c | -u | -p | -h]"
 	echo ""
-	echo -e "\t-c : Run \"vdradmind.pl -c\" after installation (=configure)."
+	echo -e "\t-c : Run \"vdradmind -c\" after installation (=configure)."
 	echo -e "\t-u : Perform uninstall."
 	echo -e "\t-p : List and optionally install required Perl modules."
 	echo -e "\t-h : This message."
@@ -36,11 +35,12 @@ function usage()
 function killRunningVDRAdmin()
 {
 	local KILLED=0
-	ps a | grep vdradmind.pl | grep perl | grep -v grep | while read PID UNWANTED
-	do
+	local PID=$(pidof vdradmind)
+	[ "$PID" ] || PID=$(ps a | grep vdradmind.pl | grep perl | grep -v grep | cut -d' ' -f1)
+	if [ "$PID" ]; then
 		KILLED=1
 		kill $PID
-	done
+	fi
 
 	return $KILLED
 }
@@ -133,7 +133,7 @@ function doInstall()
 
 	makeDir $LIBDIR 1 && cp -r template lib $LIBDIR || exit 1
   makeDir $DOCDIR && cp -r contrib COPYING CREDITS HISTORY INSTALL LGPL.txt README* REQUIREMENTS FAQ $DOCDIR || exit 1
-	makeDir $MANDIR && cp vdradmind.pl.1 $MANDIR || exit 1
+	makeDir $MANDIR && cp vdradmind.pl.1 $MANDIR/vdradmind.1 || exit 1
 	makeDir $ETCDIR || exit 1
 
 	(
@@ -152,7 +152,7 @@ function doInstall()
 			RESTART=1
   		echo "Killed running VDRAdmin-AM..."
   	fi
-  	sed <vdradmind.pl >$BINDIR/vdradmind.pl \
+  	sed <vdradmind.pl >$BINDIR/vdradmind \
   	    -e "s/^\(my \$SEARCH_FILES_IN_SYSTEM *=\) 0;/\1 1;/" \
   	    -e "s:/usr/share/vdradmin/lib:${LIBDIR}/lib:" \
   	    -e "s:/usr/share/vdradmin/template:${LIBDIR}/template:" \
@@ -162,20 +162,29 @@ function doInstall()
   	    -e "s:/usr/share/locale:${LOCDIR}:" \
   	    -e "s:\(\$CONFIG{VIDEODIR} *= \)\"/video\";:\1\"${VIDEODIR}\";:" \
   	    -e "s:\(\$CONFIG{EPGIMAGES} *= \)\"\$CONFIG{VIDEODIR}/epgimages\";:\1\"${EPGIMAGES}\";:" \
-				-e "s:\(\$CONFIG{VDRCONFDIR} *= \)\"\$CONFIG{VIDEODIR}\";:\1\"${VDRCONF}\";:" \
-				-e "s:\(\$CONFIG{EPG_FILENAME} *= \)\"\$CONFIG{VIDEODIR}/epg.data\";:\1\"${EPGDATA}\";:"
+				-e "s:\(\$CONFIG{VDRCONFDIR} *= \)\"\$CONFIG{VIDEODIR}\";:\1\"${VDRCONF}\";:"
 
-		chmod a+x  $BINDIR/vdradmind.pl
+		chmod a+x  $BINDIR/vdradmind
 
   	if [ "$CONFIG" ]; then
     	echo "Configuring VDRAdmin-AM..."
-    	$BINDIR/vdradmind.pl -c
+    	$BINDIR/vdradmind -c
   	fi
 
   	if [ "$RESTART" ]; then
   		echo "Restarting VDRAdmin-AM..."
-  		$BINDIR/vdradmind.pl
+  		$BINDIR/vdradmind
   	fi
+
+		echo ""
+		if [ -e $BINDIR/vdradmind.pl ]; then
+			echo "Removing ancient $BINDIR/vdradmind.pl"
+			rm -f $BINDIR/vdradmind.pl
+		fi
+		if [ -e $MANDIR/vdradmind.pl.1 ]; then
+			echo "Removing ancient $MANDIR/vdradmind.pl.1"
+			rm -f $MANDIR/vdradmind.pl.1
+		fi
 	else
 		echo "$BINDIR exists but is no directory!"
 		echo "Aborting..."
@@ -187,7 +196,7 @@ function doInstall()
 	echo "VDRAdmin-AM has been installed!"
 	echo ""
 	if [ -z "$RESTART" ]; then
-		echo "Run \"$BINDIR/vdradmind.pl\" to start VDRAdmin-AM."
+		echo "Run \"$BINDIR/vdradmind\" to start VDRAdmin-AM."
 		echo ""
 	fi
 	echo "NOTE:"
@@ -214,8 +223,14 @@ function doUninstall()
 	if [ -e $MANDIR/vdradmind.pl.1 ]; then
 		rm -f $MANDIR/vdradmind.pl.1
 	fi
+	if [ -e $MANDIR/vdradmind.1 ]; then
+		rm -f $MANDIR/vdradmind.1
+	fi
 	if [ -e $BINDIR/vdradmind.pl ]; then
 		rm -f $BINDIR/vdradmind.pl
+	fi
+	if [ -e $BINDIR/vdradmind ]; then
+		rm -f $BINDIR/vdradmind
 	fi
 	rm -f $LOCDIR/*/LC_MESSAGES/vdradmin.mo
 
