@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.6.0\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2008-12-02 07:48+0100\n"
+"POT-Creation-Date: 2008-12-18 08:25+0100\n"
 "PO-Revision-Date: 2007-08-23 10:45+0100\n"
 "Last-Translator: Trois Six <trois.six@free.fr>\n"
 "Language-Team: Trois Six <trois.six@free.fr>\n"
@@ -1447,6 +1447,14 @@ msgstr "Long aperçu"
 
 msgid "Schedule"
 msgstr "Programmateur"
+
+#, perl-format
+msgid "Can't write configuration file %s! Reason: %s"
+msgstr ""
+
+#, perl-format
+msgid "Configuration file %s not writeable! Configuration won't be saved!"
+msgstr ""
 
 msgid "Timers"
 msgstr "Programmations"

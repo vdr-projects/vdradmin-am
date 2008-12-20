@@ -23,6 +23,10 @@
 		</tr>
 	</table>
 
+<?% IF error_msg %?>
+		<div class="error"><?% error_msg %?></div>
+<?% END %?>
+
 	<form action="<?% url %?>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
 			<tr class="row_odd">

@@ -4,6 +4,12 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2008-12-20: 3.6.4
+- Added: Use ".update" in VDR's video directory to check if recordings cache needs to be refreshed.
+- Added: CACHE_REC_ENABLED option in vdradmind.conf to enable (1) or disable (0) recordings caching.
+- Changed: Encode.pm now is optional and no recoding will happen if it's missing.
+- Updated: Finnish translation (Ville Skyttä)
+
 2008-12-13: 3.6.3
 - Updated: Spanish translation (Submitted by Rüdiger Jung).
 - Changed: Process name to "vdradmind" (Based on patch submitted by Ville Skyttä).

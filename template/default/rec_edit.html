@@ -21,6 +21,10 @@
 			</tr>
 		</table>
 
+<?% IF error_msg %?>
+		<div class="error"><?% error_msg %?></div>
+<?% END %?>
+
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="group">
 			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Original Name of Recording:') %?></h5></td>

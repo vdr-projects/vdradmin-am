@@ -24,12 +24,14 @@
 
 require 5.004;
 
-my $VERSION = "3.6.3";
+use vars qw($PROCNAME);
+
+my $VERSION = "3.6.4";
 my $BASENAME;
 my $EXENAME;
-my $PROCNAME = "vdradmind";
 
 BEGIN {
+    $PROCNAME = "vdradmind";
     $0 =~ /(^.*\/)/;
     $EXENAME  = $0;
     $BASENAME = $1;
@@ -69,7 +71,9 @@ use MIME::Base64();
 use File::Temp ();
 use Shell qw(ps locale);
 use URI::Escape;
-use Encode;
+
+my $can_use_encode = 1;
+$can_use_encode = undef unless (eval { require Encode });
 
 my $InetSocketModule = 'IO::Socket::INET';
 my $can_use_net_smtp = 1;
@@ -127,6 +131,7 @@ $CONFIG{CACHE_TIMEOUT}        = 60;
 $CONFIG{CACHE_LASTUPDATE}     = 0;
 $CONFIG{CACHE_REC_TIMEOUT}    = 60;
 $CONFIG{CACHE_REC_LASTUPDATE} = 0;
+$CONFIG{CACHE_REC_ENABLED}    = 1;
 $CONFIG{AUTO_SAVE_CONFIG}     = 1;
 
 #
@@ -4829,7 +4834,7 @@ sub findVideoFiles {
     my @files = `find $CONFIG{VIDEODIR}/ -follow -regex "$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec/...\\.vdr" | sort -r`;
     foreach (@files) {
         chomp;
-        Log(LOG_DEBUG, "rec_stream: found ($_)\n");
+        Log(LOG_DEBUG, "findVideoFiles: found ($_)\n");
         $_ =~ s/$CONFIG{VIDEODIR}/$CONFIG{ST_VIDEODIR}/;
         $_ =~ s/\n//g;
         $data = $CONFIG{ST_URL} . "$_\n$data";
@@ -5693,7 +5698,14 @@ sub rec_list {
 sub ParseRecordings {
     my $parent = shift;
 
-    return if ((time() - $CONFIG{CACHE_REC_LASTUPDATE}) < ($CONFIG{CACHE_REC_TIMEOUT} * 60));
+    if ($CONFIG{CACHE_REC_ENABLED} != 0) {
+        if (-e "$CONFIG{VIDEODIR}/.update") {
+            my $mtime = (stat(_))[9];
+            return if ($mtime < $CONFIG{CACHE_REC_LASTUPDATE});
+        } else {
+            return if ((time() - $CONFIG{CACHE_REC_LASTUPDATE}) < ($CONFIG{CACHE_REC_TIMEOUT} * 60));
+        }
+    }
 
     undef @RECORDINGS;
     for my $recording (SendCMD("lstr")) {
@@ -6129,6 +6141,8 @@ sub rec_cut {
 # configuration
 #############################################################################
 sub config {
+    my $error_msg;
+
     unless ($q->param("save") || $q->param("apply") || $q->param("submit")) {
         undef %CONFIG_TEMP;
         for my $key (keys(%CONFIG)) {
@@ -6162,7 +6176,7 @@ sub config {
     }
 
     sub WriteConfig {
-        open(CONF, ">$CONFFILE") || print "Can't open $CONFFILE! ($!)\n";
+        open(CONF, ">$CONFFILE") || return sprintf(gettext("Can't write configuration file %s! Reason: %s") . "<br />", $CONFFILE, "$!");
         my $old_collate = setlocale(LC_COLLATE);
         setlocale(LC_COLLATE, "C");
         for my $key (sort(keys(%CONFIG))) {
@@ -6184,10 +6198,13 @@ sub config {
         }
     } elsif ($q->param("save")) {
         ApplyConfig();
-        WriteConfig();
+        $error_msg .= WriteConfig();
     } elsif ($q->param("apply")) {
         ApplyConfig();
     }
+
+    # vdradmind.conf writable?
+    $error_msg .= sprintf(gettext("Configuration file %s not writeable! Configuration won't be saved!") . "<br />", $CONFFILE) unless (-w $CONFFILE);
 
     #
     my @LOGINPAGES_DESCRIPTION = (gettext("What's On Now?"), gettext("Playing Today?"), gettext("Timeline"), gettext("Channels"), gettext("Timers"), gettext("Recordings"));
@@ -6271,7 +6288,8 @@ sub config {
                  MY_LOCALES        => \@my_locales,
                  url               => $MyURL,
                  help_url          => HelpURL("config"),
-                 config            => \%CONFIG_TEMP
+                 config            => \%CONFIG_TEMP,
+                 error_msg         => $error_msg
     };
     return showTemplate("config.html", $vars);
 }
@@ -6610,7 +6628,7 @@ sub myconnect {
         $VDRVERSION    = ($1 * 10000 + $2 * 100 + $3);
         $line =~ /^220.*VideoDiskRecorder (\d+)\.(\d+)\.(\d+).*; .*; (.*)\r|$/;
         $VDR_ENCODING = $4;
-        $need_recode = ($VDR_ENCODING and $VDR_ENCODING ne $MY_ENCODING) ? 1 : 0;
+        $need_recode = ($can_use_encode and $VDR_ENCODING and $VDR_ENCODING ne $MY_ENCODING) ? 1 : 0;
         getSupportedFeatures($this);
     }
 }

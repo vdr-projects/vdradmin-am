@@ -47,6 +47,10 @@
 		</table>
 	</form>
 
+<?% IF error_msg %?>
+		<div class="error"><?% error_msg %?></div>
+<?% END %?>
+
 	<div id="content">
 <?% IF at_timer_loop.size() > 0 %?>
 		<form action="<?% url %?>" method="get" name="FormName">

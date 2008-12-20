@@ -45,6 +45,10 @@
 		</table>
 		<input type="hidden" name="aktion" value="prog_summary" />
 
+<?% IF error_msg %?>
+		<div class="error"><?% error_msg %?></div>
+<?% END %?>
+
 <?% IF rows.size > 0 %?>
 		<table border="0" cellspacing="0" cellpadding="0" width="100%" class="list hilight" id="content">
 			<?%

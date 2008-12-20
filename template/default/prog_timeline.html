@@ -187,6 +187,10 @@
 			</tr>
 		</table>
 
+<?% IF error_msg %?>
+		<div class="error"><?% error_msg %?></div>
+<?% END %?>
+
 <?% IF shows.size() > 0 %?>
 		<script type="text/javascript" language="JavaScript1.2">
 			BuildContent();

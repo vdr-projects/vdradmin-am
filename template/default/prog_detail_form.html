@@ -26,6 +26,10 @@
 			</tr>
 		</table>
 
+<?% IF error_msg %?>
+		<div class="error"><?% error_msg %?></div>
+<?% END %?>
+
 		<div id="content">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
 				<?% tr_class = "row_odd" %?>

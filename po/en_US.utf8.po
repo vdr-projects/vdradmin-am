@@ -18,10 +18,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-AM 3.6.2+cvs\n"
+"Project-Id-Version: VDRAdmin-AM 3.6.3\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2008-12-02 07:48+0100\n"
-"PO-Revision-Date: 2008-12-02 07:48+0100\n"
+"POT-Creation-Date: 2008-12-18 08:25+0100\n"
+"PO-Revision-Date: 2008-12-18 08:25+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -1439,6 +1439,14 @@ msgstr "long view"
 
 msgid "Schedule"
 msgstr "Schedule"
+
+#, perl-format
+msgid "Can't write configuration file %s! Reason: %s"
+msgstr "Can't write configuration file %s! Reason: %s"
+
+#, perl-format
+msgid "Configuration file %s not writeable! Configuration won't be saved!"
+msgstr "Configuration file %s not writeable! Configuration won't be saved!"
 
 msgid "Timers"
 msgstr "Timers"

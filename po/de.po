@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.6.2+cvs\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2008-12-02 07:48+0100\n"
+"POT-Creation-Date: 2008-12-18 08:25+0100\n"
 "PO-Revision-Date: 2007-07-26 14:49+0100\n"
 "Last-Translator: Andreas Mair <mail@andreas.vdr-developer.org>\n"
 "Language-Team: Andreas Mair <mail@andreas.vdr-developer.org>\n"
@@ -1427,6 +1427,14 @@ msgstr "Ausführliche Ansicht"
 
 msgid "Schedule"
 msgstr "Übersicht"
+
+#, perl-format
+msgid "Can't write configuration file %s! Reason: %s"
+msgstr "Kann die Konfigurationsdatei %s nicht schreiben! Grund: %s"
+
+#, perl-format
+msgid "Configuration file %s not writeable! Configuration won't be saved!"
+msgstr "Die Konfigurationsdatei %s ist schreibgeschützt! Die Konfiguration wird nicht gesichert!"
 
 msgid "Timers"
 msgstr "Timer"

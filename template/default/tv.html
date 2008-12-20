@@ -108,6 +108,10 @@
 		</table>
 <?% END %?>
 
+<?% IF error_msg %?>
+		<div class="error"><?% error_msg %?></div>
+<?% END %?>
+
 		<table border="0" cellspacing="0" cellpadding="0" id="content">
 			<tr>
         <td id="sect_tv" style="width:<?% IF size == 'full' %?>780<?% ELSE %?><?% IF size == 'half' %?>400<?% ELSE %?>210<?% END %?><?% END %?>px;" align="center">

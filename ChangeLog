@@ -1,3 +1,118 @@
+2008-12-20  tag v3_6_4
+
+2008-12-20  amair
+
+	* HISTORY:
+
+	Fixed typo.
+
+2008-12-19  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Updated for release v3.6.4.
+
+2008-12-18  scop
+
+	* vdradmind.pl:
+
+	Debug log message fix.
+
+2008-12-18  scop
+
+	* po/fi.po:
+
+	Add some missing translations.
+
+2008-12-18  amair
+
+	* tools/update-po:
+
+	Added "--check-only" param to list the number of untranslated and fuzzy messages.
+
+2008-12-18  amair
+
+	* po/de.po:
+
+	Updated.
+
+2008-12-18  amair
+
+	* po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po, po/it.po,
+	  po/nl.po, po/ru.po, po/vdradmin.pot:
+
+	Added new messages.
+
+2008-12-17  amair
+
+	* HISTORY, vdradmind.pl:
+
+	- Added: Use ".update" in VDR's video directory to check if recordings cache needs to be refreshed.
+	- Added: CACHE_REC_ENABLED option in vdradmind.conf to enable (1) or disable (2) recordings caching.
+
+2008-12-16  amair
+
+	* vdradmind.pl:
+
+	- Display error message in configuration menu if config could not be saved.
+	- Display warning message in configuration menu if config file is not writable by current user.
+
+2008-12-16  amair
+
+	* template/default/at_timer_list.html,
+	  template/default/at_timer_new.html, template/default/config.html,
+	  template/default/epgsearch_config.html,
+	  template/default/epgsearch_list.html,
+	  template/default/epgsearch_new.html,
+	  template/default/prog_detail_form.html,
+	  template/default/prog_list.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html,
+	  template/default/prog_timeline.html,
+	  template/default/rec_edit.html, template/default/rec_list.html,
+	  template/default/timer_list.html,
+	  template/default/timer_new.html, template/default/tv.html,
+	  template/default/vdr_cmds.html:
+
+	Added block to show error messages.
+
+2008-12-16  amair
+
+	* install.sh:
+
+	Check for more required Perl modules.
+
+2008-12-16  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Encode.pm now is optional and no recoding will happen if it's missing.
+
+2008-12-13  scop
+
+	* po/fi.po:
+
+	More Finnish translation updates/additions.
+
+2008-12-13  scop
+
+	* vdradmind.pl:
+
+	Fix setting process name (top-level "my $PROCNAME" was not available in BEGIN).
+
+2008-12-13  scop
+
+	* template/default/about.html:
+
+	Mention myself as a Finnish translator.
+
+2008-12-13  scop
+
+	* HISTORY, po/fi.po:
+
+	Finnish translation updates.
+
 2008-12-13  tag v3_6_3
 
 2008-12-13  amair

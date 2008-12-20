@@ -52,6 +52,10 @@
 		<input type="hidden" name="day" value="<?% day | html %?>" />
 	</form>
 
+<?% IF error_msg %?>
+		<div class="error"><?% error_msg %?></div>
+<?% END %?>
+
 	<div id="content">
 <?% IF loop.size() > 0 %?>
 	<?% FOREACH bc = loop %?>
