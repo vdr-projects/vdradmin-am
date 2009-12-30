@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2008-12-18 08:25+0100\n"
+"POT-Creation-Date: 2009-12-30 13:26+0100\n"
 "PO-Revision-Date: 2006-09-23 13:14+0200\n"
 "Last-Translator: Karel Borkovec <her-ur@her-ur.org>\n"
 "Language-Team:  <cs@li.org>\n"
@@ -18,333 +18,6 @@ msgstr ""
 
 msgid "ISO-8859-1"
 msgstr "ISO-8859-2"
-
-msgid "What's On Now?"
-msgstr "Co bì¾í nyní?"
-
-#, fuzzy
-msgid "Channel group:"
-msgstr "Kanál"
-
-msgid "What's on:"
-msgstr "Co bì¾í:"
-
-msgid "at"
-msgstr "v"
-
-msgid "o'clock"
-msgstr "hodin"
-
-msgid "More Information"
-msgstr "Více informací"
-
-msgid "Channels"
-msgstr "Kanály"
-
-msgid "Stream"
-msgstr "Stream"
-
-msgid "TV select"
-msgstr "Naladit TV"
-
-msgid "Search for other show times"
-msgstr "Hledat jiné vysílací èasy"
-
-#, fuzzy
-msgid "No Information"
-msgstr "Více informací"
-
-msgid "Edit"
-msgstr "Upravit"
-
-msgid "Record"
-msgstr "Nahrávání"
-
-#, fuzzy
-msgid "No EPG information available"
-msgstr "®ádné informace"
-
-#, fuzzy
-msgid "Edit EPG"
-msgstr "Upravit"
-
-msgid "Help"
-msgstr "Nápovìda"
-
-msgid "Channel"
-msgstr "Kanál"
-
-msgid "Time"
-msgstr "Èas"
-
-msgid "Title"
-msgstr "Název"
-
-msgid "Subtitle"
-msgstr "Titulky"
-
-msgid "Description"
-msgstr "Popis"
-
-msgid "VPS"
-msgstr "VPS"
-
-#, fuzzy
-msgid "Video tracks"
-msgstr "Video stopy:"
-
-#, fuzzy
-msgid "Audio tracks"
-msgstr "Audio stopy:"
-
-msgid "Save"
-msgstr "Ulo¾it"
-
-msgid "Cancel"
-msgstr "Zru¹it"
-
-msgid "Edit Timer"
-msgstr "Upravit èasovaè"
-
-msgid "<p>Here you can edit a timer's settings.</p>"
-msgstr "<p>Zde mù¾ete upravit nastavení Èasovaèe.</p>"
-
-msgid "Timer Active:"
-msgstr "Èasovaè aktivní"
-
-msgid "Activate or deactivate this timer. Deactivated timers are still stored in the timer list so that they can be activated again, but they do not record anything meanwhile."
-msgstr ""
-
-msgid "AutoTimer Checking:"
-msgstr "Kontrola AutoÈasovaèù:"
-
-msgid "Depending on how this timer has been programmed you have up to three possible settings:"
-msgstr ""
-
-#, fuzzy
-msgid "Transmission Identification"
-msgstr "Identifikace"
-
-msgid "Monitor this timer using the identification provided in the EPG. Please note that this only works if the provided identification is a fix and unique value! This option is not available with timers programmed in VDR."
-msgstr ""
-
-msgid "Monitor this timer using the start and stop time."
-msgstr "Sledovat tento èasovaè pomocí zaèátku a konce nahrávání."
-
-msgid "off"
-msgstr "off"
-
-msgid "Do not monitor this timer."
-msgstr "Nesledovat tento Èasovaè."
-
-msgid "Channel:"
-msgstr "Kanál"
-
-msgid "The channel to record."
-msgstr "Kanál k nahrávání."
-
-msgid "Day Of Recording:"
-msgstr "Den nahrávání"
-
-msgid "The day when the timer should get active. You can enter the day in two formats:<ul><li>Two digits (DD). This will use the current month and year.</li><li>ISO norm (YYYY-MM-DD). Program your timers as far in the future as you like.</li></ul>In case you want to program a repeating timer you can use the seven checkboxes below the text field. Check the box for each day you want the timer to get active."
-msgstr ""
-
-msgid "Start Time:"
-msgstr "Zaèátek nahrávání:"
-
-msgid "This is the time when the timer should start recording. The first text field is for \"hour\", the second for \"minute\"."
-msgstr "Toto je èas kdy by VDR mìlo zaèít nahrávat. První textové pole je pro \"hodinu\" a druhé pro \"minutu\"."
-
-msgid "End Time:"
-msgstr "Konec èasu:"
-
-msgid "This is the time when the timer should stop recording. The first text field is for \"hour\", the second for \"minute\"."
-msgstr "Toto je èas kdy by VDR mìlo ukonèit nahrávání. První textové pole je pro \"hodinu\" a druhé pro \"minutu\"."
-
-msgid "Priority:"
-msgstr "Priorita:"
-
-msgid "An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording."
-msgstr "An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording."
-
-msgid "Lifetime:"
-msgstr ""
-
-msgid "The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by."
-msgstr "The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by."
-
-msgid "Title of Recording:"
-msgstr "Název nahrávky:"
-
-msgid "The <strong>file name</strong> this timer will give to a recording. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br /><br />The special keywords <strong>TITLE</strong> and <strong>EPISODE</strong>, if present, will be replaced by the title and episode information from the EPG data at the time of recording (if that data is available). If at the time of recording either of these cannot be determined, <strong>TITLE</strong> will default to the channel name, and <strong>EPISODE</strong> will default to a blank."
-msgstr ""
-
-msgid "Summary:"
-msgstr "Souhrn:"
-
-msgid "Arbitrary text that describes the recording made by this timer. If this field is not empty, its contents will be written into the <span class=\"ref_file\">summary.vdr</span> or <span class=\"ref_file\">info.vdr</span> file of the recording."
-msgstr "Libovolný text popisující nahrávku z èasovaèe. Jestli¾e pole není prázdné, tak text bude zapsán do souboru <span class=\"ref_file\">summary.vdr</span> nebo <span class=\"ref_file\">info.vdr</span>,"
-
-msgid "Go!"
-msgstr "Start!"
-
-msgid "AutoTimer"
-msgstr "Auto-Èasovaè"
-
-msgid "New AutoTimer"
-msgstr "Nové èasování"
-
-msgid "Active"
-msgstr "Aktivovat"
-
-msgid "Start"
-msgstr "Start"
-
-msgid "Stop"
-msgstr "Stop"
-
-msgid "Name"
-msgstr "Jméno"
-
-msgid "Select all/none"
-msgstr "Vybrat v¹e/Nic"
-
-msgid "Yes"
-msgstr "Ano"
-
-msgid "No"
-msgstr "Ne"
-
-msgid "Delete timer?"
-msgstr "Smazat èasovaè?"
-
-msgid "Delete"
-msgstr "Smazat"
-
-msgid "Force Update"
-msgstr "Vynutit úpravu"
-
-msgid "Delete Selected AutoTimers"
-msgstr "Smazat vybraný AutoÈasovaè?"
-
-msgid "Delete all selected timers?"
-msgstr "Vymazat v¹echny vybrané èasovaèe?"
-
-#, fuzzy
-msgid "No AutoTimers defined!"
-msgstr "Nové èasování"
-
-msgid "VDR Commands"
-msgstr "VDR pøíkazy"
-
-msgid "Export channels as playlist:"
-msgstr ""
-
-msgid "Number of lines to show:"
-msgstr "Poèet zobrazených øádkù:"
-
-msgid "unlimited"
-msgstr "neomezený"
-
-msgid "SVDRP commands:"
-msgstr "SVDRP pøíkazy:"
-
-msgid "Run"
-msgstr "Spustit"
-
-msgid "Really run this command?"
-msgstr "Opravdu spustit tento pøíkaz?"
-
-msgid "Commands defined in commands.conf:"
-msgstr "Pøíkazy definované v commands.conf:"
-
-msgid "Output"
-msgstr "Výstup"
-
-msgid "Add New AutoTimer"
-msgstr "Pøidat nový AutoÈasovaè"
-
-msgid "Edit AutoTimer"
-msgstr "Upravit AutoÈasovaè"
-
-msgid "AutoTimer Active:"
-msgstr "Aktivní AutoÈasovaè:"
-
-msgid "oneshot"
-msgstr ""
-
-msgid "Search Patterns:"
-msgstr "Vyhledávací znaky:"
-
-msgid "Search in:"
-msgstr "Hledat v:"
-
-msgid "Search only on these days:"
-msgstr "Hledat pouze v tyto dny:"
-
-msgid "Monday"
-msgstr "Pondìlí"
-
-msgid "Tuesday"
-msgstr "Úterý"
-
-msgid "Wednesday"
-msgstr "Støeda"
-
-msgid "Thursday"
-msgstr "Ètvrtek"
-
-msgid "Friday"
-msgstr "Pátek"
-
-msgid "Saturday"
-msgstr "Sobota"
-
-msgid "Sunday"
-msgstr "Nedìle"
-
-msgid "all"
-msgstr "v¹e"
-
-msgid "Starts After:"
-msgstr "Zaèátek po:"
-
-msgid "Ends Before:"
-msgstr "Konec pøed:"
-
-msgid "Override Start/Stop Margins:"
-msgstr ""
-
-msgid "Time Margin at Start:"
-msgstr ""
-
-msgid "minutes"
-msgstr "minuty"
-
-msgid "Time Margin at Stop:"
-msgstr ""
-
-msgid "Episode:"
-msgstr "Epizoda:"
-
-msgid "Remember programmed timers:"
-msgstr "Zapamatovat naprogramovaný èasovaè:"
-
-msgid "Directory:"
-msgstr "Slo¾ka:"
-
-msgid "Test"
-msgstr "Test:"
-
-msgid "Broadcasted"
-msgstr "Vysíláno"
-
-msgid "Stored in"
-msgstr "Ulo¾eno v:"
-
-#, fuzzy
-msgid "No matches found!"
-msgstr "Nefunguje"
 
 msgid "About"
 msgstr "O programu"
@@ -432,62 +105,443 @@ msgstr "Jestli¾e tato nápovìda neobsahuje informace, které potøebujete zkuste se
 msgid "If you think you have found a bug please check that it's a new one and report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page.php\" target=\"_blank\">VDRAdmin-AM BugTracking system</a>."
 msgstr "Pokud si myslíte, ¾e jste na¹el chybu, prosím zkontrolujte zda ji¾ není nahlá¹ena, popø. ji nahla¹te zde: <a href=\"http://www.vdr-developer.org/mantisbt/main_page.php\" target=\"_blank\">VDRAdmin-AM BugTracking system</a>."
 
-msgid "<p>Here you can edit an automatic timer's (AutoTimer) settings.</p><p>AutoTimer is a key feature of VDRAdmin-AM. An AutoTimer consists of one or more search terms and some other settings, that are looked for regularly in the Electronic Program Guide (EPG). On match AutoTimer adds a timer in VDR automatically for that broadcast. That's very comfortable for irregularly broadcasted series or movies you don't want to miss.</p>"
+msgid "AutoTimer"
+msgstr "Auto-Èasovaè"
+
+msgid "Priority:"
+msgstr "Priorita:"
+
+msgid "Lifetime:"
 msgstr ""
 
-msgid "Activate or deactivate this AutoTimer. Deactivated AutoTimers are still stored in the AutoTimer list so that they can be activated again, but they do not record anything meanwhile. Above that you can set this to \"oneshot\" so this AutoTimer only programs the (one!) next matching broadcast."
-msgstr ""
+msgid "New AutoTimer"
+msgstr "Nové èasování"
 
-msgid "Choosing the right search items decides whether only the wanted broadcasts or broadcasts having similar names or even nothing gets recorded.<br />Case doesn't matter, \"X-Files\" matches anything \"x-files\" will match. You can set multiple search items by separating them with spaces. Only broadcasts will match if they contain <strong>all</strong> items.<br />You'd better only use letters and numbers for search items, as the EPG often miss colons, brackets and other characters.<br />Experts can also use regular expressions, but you have to get needed information from the VDRAdmin-AM sources (undocumented feature).<br /><br />You can exclude broadcasts so that they don't get recorded even if they would match an AutoTimer. Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, one event a line. This file must be located in your VDRAdmin-AM's configuration folder. If this string is found either in the EPG's <u>title</u> or in <u>title~subtitle</u>, this event will not be programmed by AutoTimer. So you can disable complete episodes (for example when using \"Enterprise\" as Blacklist-string) or only one episode (when using \"Enterprise~Azati Prime\" as Blacklist-string)."
-msgstr ""
+msgid "Help"
+msgstr "Nápovìda"
+
+msgid "Active"
+msgstr "Aktivovat"
+
+msgid "Channel"
+msgstr "Kanál"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Stop"
+msgstr "Stop"
+
+msgid "Name"
+msgstr "Jméno"
+
+msgid "Select all/none"
+msgstr "Vybrat v¹e/Nic"
+
+msgid "Yes"
+msgstr "Ano"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "Edit"
+msgstr "Upravit"
+
+msgid "Delete timer?"
+msgstr "Smazat èasovaè?"
+
+msgid "Delete"
+msgstr "Smazat"
+
+msgid "Force Update"
+msgstr "Vynutit úpravu"
+
+msgid "Delete Selected AutoTimers"
+msgstr "Smazat vybraný AutoÈasovaè?"
+
+msgid "Delete all selected timers?"
+msgstr "Vymazat v¹echny vybrané èasovaèe?"
 
 #, fuzzy
-msgid "Here you can define the EPG sections where VDRAdmin-AM should look for the search pattern."
-msgstr "Zde mù¾ete nastavit jakou lokalizaci VDRAdmin-AM chcete pou¾ívat."
+msgid "No AutoTimers defined!"
+msgstr "Nové èasování"
 
-msgid "Use these checkboxes to limit searching for matching broadcasts to a set of weekdays."
+msgid "Add New AutoTimer"
+msgstr "Pøidat nový AutoÈasovaè"
+
+msgid "Edit AutoTimer"
+msgstr "Upravit AutoÈasovaè"
+
+msgid "AutoTimer Active:"
+msgstr "Aktivní AutoÈasovaè:"
+
+msgid "oneshot"
 msgstr ""
 
-msgid "The channel to look for matching broadcasts or \"all\" to search in all known or wanted channels. You can define the wanted channels for AutoTimer in \"Configuration\"."
+msgid "Search Patterns:"
+msgstr "Vyhledávací znaky:"
+
+msgid "Search in:"
+msgstr "Hledat v:"
+
+msgid "Title"
+msgstr "Název"
+
+msgid "Subtitle"
+msgstr "Titulky"
+
+msgid "Description"
+msgstr "Popis"
+
+msgid "Search only on these days:"
+msgstr "Hledat pouze v tyto dny:"
+
+msgid "Monday"
+msgstr "Pondìlí"
+
+msgid "Tuesday"
+msgstr "Úterý"
+
+msgid "Wednesday"
+msgstr "Støeda"
+
+msgid "Thursday"
+msgstr "Ètvrtek"
+
+msgid "Friday"
+msgstr "Pátek"
+
+msgid "Saturday"
+msgstr "Sobota"
+
+msgid "Sunday"
+msgstr "Nedìle"
+
+msgid "Channel:"
+msgstr "Kanál"
+
+msgid "all"
+msgstr "v¹e"
+
+msgid "Starts After:"
+msgstr "Zaèátek po:"
+
+msgid "o'clock"
+msgstr "hodin"
+
+msgid "Ends Before:"
+msgstr "Konec pøed:"
+
+msgid "Override Start/Stop Margins:"
 msgstr ""
+
+msgid "Time Margin at Start:"
+msgstr ""
+
+msgid "minutes"
+msgstr "minuty"
+
+msgid "Time Margin at Stop:"
+msgstr ""
+
+msgid "Episode:"
+msgstr "Epizoda:"
+
+msgid "Remember programmed timers:"
+msgstr "Zapamatovat naprogramovaný èasovaè:"
+
+msgid "Directory:"
+msgstr "Slo¾ka:"
+
+msgid "Save"
+msgstr "Ulo¾it"
+
+msgid "Test"
+msgstr "Test:"
+
+msgid "Cancel"
+msgstr "Zru¹it"
+
+msgid "Broadcasted"
+msgstr "Vysíláno"
+
+msgid "Stored in"
+msgstr "Ulo¾eno v:"
 
 #, fuzzy
-msgid "A broadcast must start after the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
-msgstr "Toto je èas kdy by VDR mìlo zaèít nahrávat. První textové pole je pro \"hodinu\" a druhé pro \"minutu\"."
+msgid "No matches found!"
+msgstr "Nefunguje"
 
-#, fuzzy
-msgid "A broadcast must end before the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
-msgstr "Toto je èas kdy by VDR mìlo zaèít nahrávat. První textové pole je pro \"hodinu\" a druhé pro \"minutu\"."
+msgid "Configuration"
+msgstr "Nastavení"
 
-msgid "Set this option to \"yes\" if all timers programed by this AutoTimer should have individual start/stop margins and enter the values in the next two text boxes."
+msgid "General Settings"
+msgstr "Obecné nastavení"
+
+msgid "Template:"
+msgstr "©ablona:"
+
+msgid "Skin:"
+msgstr "Skin:"
+
+msgid "Login Page:"
+msgstr "Úvodní strana:"
+
+msgid "Number of channels to use:"
+msgstr "Poèet kanálù k pou¾ití:"
+
+msgid "Local net (no login required):"
+msgstr "Lokální sí» (login není vy¾adován):"
+
+msgid "Language:"
+msgstr "Jazyk:"
+
+msgid "Save settings on exit:"
+msgstr "Ulo¾it nastavení pøi vypnutí:"
+
+msgid "VDR"
+msgstr "VDR"
+
+msgid "Number of DVB cards:"
+msgstr "Poèet DVB karet:"
+
+msgid "Path to recordings:"
+msgstr "Slo¾ka s nahrávkami:"
+
+msgid "Path to configuration files:"
+msgstr "Slo¾ka s konfiguraèními soubory:"
+
+msgid "Path to EPG images:"
+msgstr "Cesta k EPG souborùm:"
+
+msgid "Identification"
+msgstr "Identifikace"
+
+msgid "Username:"
+msgstr "U¾iv. jméno:"
+
+msgid "Password:"
+msgstr "Heslo:"
+
+msgid "Guest Account:"
+msgstr "Guest úèet:"
+
+msgid "Guest Username:"
+msgstr "Guest u¾iv. jméno:"
+
+msgid "Guest Password:"
+msgstr "Guest heslo:"
+
+msgid "Timeline"
+msgstr "Èasová pøímka"
+
+msgid "Hours:"
+msgstr "Hodiny:"
+
+msgid "Times:"
+msgstr "Èasy:"
+
+msgid "Also used for other EPG views!"
+msgstr "Pou¾ít pro ostatní EPG náhledy!"
+
+msgid "Tooltips:"
+msgstr "Tipy:"
+
+msgid "Active:"
+msgstr "Aktivní:"
+
+msgid "Send email after programming timer:"
+msgstr "Poslat email po nastavení èasovaèe:"
+
+msgid "Send email as:"
+msgstr "Odesílatel emailu:"
+
+msgid "Send email to:"
+msgstr "Komu:"
+
+msgid "Mail server:"
+msgstr "Po¹tovní server:"
+
+msgid "SMTPAuth user:"
+msgstr "SMTPAuth u¾ivatel:"
+
+msgid "SMTPAuth password:"
+msgstr "SMTPAuth heslo:"
+
+msgid "Track schedule changes by:"
 msgstr ""
 
-msgid "The number of minutes VDRAdmin-AM subtracts from the broadcasts start time found in the EPG."
+msgid "Broadcast time"
 msgstr ""
 
-msgid "The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in the EPG."
-msgstr ""
-
-msgid "Check this box if you want VDRAdmin-AM to append the broadcast's EPG subtitle to the recording's file name."
-msgstr ""
-
-msgid "If you enable this VDRAdmin-AM will track timers it has already programmed automatically. This is useful if want to deactivate or delete timers that have been programmed automatically in the timers listing."
-msgstr ""
-
-msgid "The directory this AutoTimer will place the recordings in. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br />VDRAdmin-AM will append the matching broadcast's title and subtitle (if the \"Episode\" checkbox is marked) to the directory given here.<br /><br />You can also use the following keywords that are replaced in the final file name by the values supplied by for example <a href=\"http://tvmovie2vdr.vdr-developer.org\">tvm2vdr</a>:<ul><li>%Title% - will become the title of the event.</li><li>%Subtitle% - will become the subtitle of the event.</li><li>%Director% - will become the director of the event.</li><li>%Date% - will become the date of the recording.</li><li>%Category% - will become the category of the event (Spielfilm/Serie/...).</li><li>%Genre% - will become the genre of the event (Drama/Krimi/..).</li><li>%Year% - will become the year of production.</li><li>%Country% - will become the country of production.</li><li>%Originaltitle% - will become the original title of the event.</li><li>%FSK% - will become the FSK from the event.</li><li>%Episode% - will become the episode's title of the event.</li><li>%Rating% - will become the rating of the event from the EPG provider.</li></ul><h4>Note:</h4>If you use the above keywords it's in your own responsibility to supply the <strong>complete file name</strong> for the recordings! VDRAdmin-AM will not append anything to the resulting string."
+msgid "Event id"
 msgstr ""
 
 msgid "Timer"
 msgstr "Èasovaè"
 
-msgid "<p>Here you will find a listing of timers known to VDR.</p><p>On top you will find a chart showing a day's timers graphically. This provides an quick overview on what's going on at the specified day and helps you in finding conflicting timers. Moving the mouse cursor above any timer box will display a tooltip containing the timer's title, priority, lifetime and duration.</p><p>Below the chart you'll find the timers list showing you some information on the timers. You can change the list's sorting by clicking the columns heading.</p><p>For each timer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\", \"No\", \"VPS\" or \"Auto\" in the \"Active\" column.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the timer's title.</dd><dt>View its EPG entry</dt><dd>Timers that have set <span class=\"ref_label\">AutoTimer Checking</span> to \"Transmission Identification\" will show you the corresponding EPG entry if you click on the timer's title.</dd><dt>Edit the timer</dt><dd>You can edit a timer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To delete a timer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each timer's state is indicated by differently coloured boxes (in the chart view) or images (in the list view):<br /><span class=\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> Timer is OK and will record.<br /><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timer conflicts with other timers. That's not critical, as long as you have enough DVB cards for the parallel recordings.<br /><span class=\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align=\"middle\" /> Timer is critical and will most likely <strong>not</strong> record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is not active.</p><p>In addition to these functions you can add a new timer by clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at the top and you can delete a number of timers at once by checking the box in the last column of those timers and clicking <input type=\"submit\"  class=\"submit\" value=\"Delete Selected Timers\"/>.</p><p>You can <input type=\"submit\" class=\"submit\" value=\"activate\"/> and <input type=\"submit\" class=\"submit\" value=\"inactivate\"/> selected timers.</p>"
+msgid "Tooltips in timeline:"
+msgstr "Tipy v èasové pøímce:"
+
+msgid "Tooltips in list:"
+msgstr "Tipy v seznamu:"
+
+msgid "Streaming"
+msgstr "Streamování"
+
+msgid "Live Streaming:"
+msgstr "Live Streamování:"
+
+msgid "HTTP Port of Streamdev (also possible 3000/ts):"
+msgstr "HTTP Port pro Streamdev (mo¾no 3000/ts):"
+
+msgid "Recordings Streaming:"
+msgstr "Nahrávání streamu:"
+
+msgid "Path to VDR Recordings on your workstation:"
+msgstr "Cesta ke slo¾ce s VDR nahrávkami na Va¹em PC:"
+
+msgid "MIME type for live streaming:"
+msgstr "MIME typ pro live streamování:"
+
+msgid "Suffix for live streaming:"
+msgstr "Pøípona pro live streamování:"
+
+msgid "MIME type for recordings streaming:"
+msgstr "MIME typ pro nahrávky streamu:"
+
+msgid "Suffix for recordings streaming:"
+msgstr "Pøípona pro nahrávky streamu:"
+
+msgid "Bandwidth of Streams:"
+msgstr "©íøka pásma pro streamy:"
+
+#, fuzzy
+msgid "External Search"
+msgstr "hledat"
+
+msgid "URL:"
 msgstr ""
 
-msgid "Playing Today"
-msgstr "Bì¾í dnes"
+#, fuzzy
+msgid "Title:"
+msgstr "Název"
 
-msgid "starting at"
-msgstr "zaèíná v"
+#, fuzzy
+msgid "User-defined search:"
+msgstr "®ádný èasovaè není definován!"
+
+msgid "Expert"
+msgstr "Expert:"
+
+msgid "Update EPG data in background:"
+msgstr ""
+
+msgid "Update EPG every:"
+msgstr ""
+
+msgid "Channel Selections"
+msgstr "Výbìr kanálù"
+
+msgid "Show channels without EPG information:"
+msgstr ""
+
+msgid "In \"AutoTimer\"?"
+msgstr "V \"AutoÈasovaèi\"?"
+
+msgid "Apply"
+msgstr "Pou¾ij"
+
+#, fuzzy
+msgid "EPG Search Blacklists"
+msgstr "hledat"
+
+#, fuzzy
+msgid "New Blacklist"
+msgstr "Pøidat nový AutoÈasovaè"
+
+#, fuzzy
+msgid "Search pattern"
+msgstr "Vyhledávací znaky:"
+
+msgid "From"
+msgstr ""
+
+#, fuzzy
+msgid "To"
+msgstr "Nahoru"
+
+#, fuzzy
+msgid "Delete blacklist?"
+msgstr "Smazat èasovaè?"
+
+#, fuzzy
+msgid "Delete Selected Blacklists"
+msgstr "Vymazat vybrané èasovaèe"
+
+#, fuzzy
+msgid "Delete all selected blacklists?"
+msgstr "Vymazat v¹echny vybrané èasovaèe?"
+
+#, fuzzy
+msgid "EPG search"
+msgstr "hledat"
+
+#, fuzzy
+msgid "EPG Search"
+msgstr "hledat"
+
+#, fuzzy
+msgid "Use template"
+msgstr "©ablona:"
+
+#, fuzzy
+msgid "New Search"
+msgstr "hledat"
+
+#, fuzzy
+msgid "Edit Template"
+msgstr "©ablona:"
+
+#, fuzzy
+msgid "Settings"
+msgstr "Obecné nastavení"
+
+#, fuzzy
+msgid "Action"
+msgstr "Aktivovat"
+
+#, fuzzy
+msgid "Find"
+msgstr "Pátek"
+
+msgid "Show Favorites"
+msgstr ""
+
+#, fuzzy
+msgid "Delete Selected Searches"
+msgstr "Vymazat vybrané èasovaèe"
+
+#, fuzzy
+msgid "Delete all selected searches?"
+msgstr "Vymazat v¹echny vybrané èasovaèe?"
+
+#, fuzzy
+msgid "Execute Selected Searches"
+msgstr "Vymazat vybrané èasovaèe"
+
+#, fuzzy
+msgid "Duration"
+msgstr "Délka:"
+
+msgid "More Information"
+msgstr "Více informací"
+
+msgid "Channels"
+msgstr "Kanály"
+
+msgid "Record"
+msgstr "Nahrávání"
 
 #, fuzzy
 msgid "Add New Blacklist"
@@ -500,10 +554,6 @@ msgstr "Pøidat nový AutoÈasovaè"
 #, fuzzy
 msgid "Add New Template"
 msgstr "Pøidat nový AutoÈasovaè"
-
-#, fuzzy
-msgid "Edit Template"
-msgstr "©ablona:"
 
 #, fuzzy
 msgid "Add New Search"
@@ -522,10 +572,6 @@ msgstr ""
 #, fuzzy
 msgid "Hide results"
 msgstr "Hledat v:"
-
-#, fuzzy
-msgid "Settings"
-msgstr "Obecné nastavení"
 
 #, fuzzy
 msgid "Name:"
@@ -738,138 +784,83 @@ msgstr "Smazat èasovaè?"
 msgid "Save as template"
 msgstr "©ablona:"
 
-msgid "Create New Timer"
-msgstr "Vytvoøit nový èasovaè"
-
-msgid "Buffer:"
-msgstr "Zásobník:"
-
-msgid "Use VPS:"
-msgstr "Pou¾ít VPS:"
-
-msgid "readonly"
-msgstr "Pouze pro ètení"
-
-msgid "Timer has been set by AutoTimer pattern:"
-msgstr "Èasovaè byl nastaven podle AutoÈasovaèe"
-
-msgid "No Help Available"
-msgstr "Nápovìda není dostupná"
-
-msgid "<p>No help available yet. For adding or changing text please contact <a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>.</p>"
-msgstr "<p>Nápovìda zatím není dostupná. Pro pøidání nebo zmìnu textu pi¹te prosím sem: <a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>. </p>"
+msgid "Run"
+msgstr "Spustit"
 
 msgid "Error!"
 msgstr "Chyba!"
 
-msgid "TV"
-msgstr "TV"
+msgid "<p>Here you will find a listing of automatic timers (AutoTimer) known to VDRAdmin-AM.</p><p>The list shows some information on AutoTimers. You can change the list's sorting by clicking the columns heading.</p><p>For each AutoTimer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each AutoTimer's state is indicated by differently coloured images:<br /><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> AutoTimer is OK and will automatically program matching broadcasts.<br /><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> AutoTimer is not active.</p><p>In addition to these functions you can add a new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value=\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at once by checking the box in the last column of those timers and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/>.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and check for matching AutoTimers.</p>"
+msgstr "<p>Seznam AutoÈasovaèù ve VDRAdmin-AM.</p><p>Seznam zobrazuje nìkteré informace, lze mìnit øazení polo¾ek dle hlavièek sloupcù.</p><p>Pro ka¾dý èasovaè máte k dispozici následující mo¾nosti:<dl><dt>Nastavení stavu</dt><dd>Kliknutím na \"Ano\" nebo \"Ne\"v \"Aktivním\" sloupci urèujícím aktivitu.</dd><dt>Rychlý pohled na prioritu a dobu trvání</dt><dd>Najetím kurzoru my¹i na název AutoÈasovaèe.</dd><dt>Upravení AutoÈasovaèe</dt><dd>Upravovat Autoèasovaè lze kliknutím na <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Smazání AutoÈasovaèe</dt><dd>Smazat AutoÈasovaè lze kliknutím na <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Ka¾dý stav Autoèasovaèe je indikován rùznì barevnými obrázky <br /><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" />Autoèasovaè je v poøádku a automaticky bude spu¹tìn.<br /><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" />AutoÈasovaè není aktivní.</p><p>Navíc k tìmto funkcím lze je¹tì pøidat nový AutoÈasovaè kliknutím na <input type=\"submit\" class=\"submit\" value=\"New AutoTimer\"/> nahoøe na stránce a také lze smazat více AutoÈasovaèù zároveò za¹krtnutím boxù v posledním sloupci a kliknutím na <input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/>.</p><p>Kliknìte zde <input type=\"submit\" class=\"submit\" value=\"Force Update\"/> k vynucení re-connectu k VDR, stáhnutí aktuálního EPG a kontroly AutoÈasovaèù.</p>"
 
-msgid "Interval:"
-msgstr "Interval:"
+msgid "<p>Here you can edit an automatic timer's (AutoTimer) settings.</p><p>AutoTimer is a key feature of VDRAdmin-AM. An AutoTimer consists of one or more search terms and some other settings, that are looked for regularly in the Electronic Program Guide (EPG). On match AutoTimer adds a timer in VDR automatically for that broadcast. That's very comfortable for irregularly broadcasted series or movies you don't want to miss.</p>"
+msgstr ""
 
-msgid "sec."
-msgstr "sec."
+msgid "Activate or deactivate this AutoTimer. Deactivated AutoTimers are still stored in the AutoTimer list so that they can be activated again, but they do not record anything meanwhile. Above that you can set this to \"oneshot\" so this AutoTimer only programs the (one!) next matching broadcast."
+msgstr ""
 
-msgid "G"
-msgstr "G"
-
-msgid "Grab the picture!"
-msgstr "Ulo¾ obrázek!"
-
-msgid "Size:"
-msgstr "Velikost:"
-
-msgid "Open in separate window"
-msgstr "Otevøi v samostatném oknì"
-
-msgid "Playing Today?"
-msgstr "Co pobì¾í dnes?"
-
-msgid "Timeline"
-msgstr "Èasová pøímka"
+msgid "Choosing the right search items decides whether only the wanted broadcasts or broadcasts having similar names or even nothing gets recorded.<br />Case doesn't matter, \"X-Files\" matches anything \"x-files\" will match. You can set multiple search items by separating them with spaces. Broadcasts will match only if they match <strong>all</strong> configured search items.<br />You'd better only use letters and numbers for search items, as the EPG often miss colons, brackets and other characters.<br />Experts can also use regular expressions, but you have to get needed information from the VDRAdmin-AM sources (undocumented feature).<br /><br />You can exclude broadcasts so that they don't get recorded even if they would match an AutoTimer. Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, one event a line. This file must be located in your VDRAdmin-AM's configuration folder. If this string is found either in the EPG's <u>title</u> or in <u>title~subtitle</u>, this event will not be programmed by AutoTimer. So you can disable complete episodes (for example when using \"Enterprise\" as blacklist string) or only one episode (when using \"Enterprise~Azati Prime\" as blacklist string)."
+msgstr ""
 
 #, fuzzy
-msgid "EPG Search"
-msgstr "hledat"
+msgid "Here you can define the EPG sections where VDRAdmin-AM should look for the search pattern."
+msgstr "Zde mù¾ete nastavit jakou lokalizaci VDRAdmin-AM chcete pou¾ívat."
 
-msgid "Recordings"
-msgstr "Nahrávky"
+msgid "Use these checkboxes to limit searching for matching broadcasts to a set of weekdays."
+msgstr ""
 
-msgid "Remote Control"
-msgstr "Dálkové ovládání"
-
-msgid "Watch TV"
-msgstr "Sleduj TV"
+msgid "The channel to look for matching broadcasts or \"all\" to search in all known or wanted channels. You can define the wanted channels for AutoTimer in \"Configuration\"."
+msgstr ""
 
 #, fuzzy
-msgid "Commands"
-msgstr "Pøíkazy:"
-
-msgid "Configuration"
-msgstr "Nastavení"
+msgid "A broadcast must start after the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
+msgstr "Toto je èas kdy by VDR mìlo zaèít nahrávat. První textové pole je pro \"hodinu\" a druhé pro \"minutu\"."
 
 #, fuzzy
-msgid "Search"
-msgstr "hledat"
+msgid "A broadcast must end before the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
+msgstr "Toto je èas kdy by VDR mìlo zaèít nahrávat. První textové pole je pro \"hodinu\" a druhé pro \"minutu\"."
+
+msgid "Set this option to \"yes\" if all timers programed by this AutoTimer should have individual start/stop margins and enter the values in the next two text boxes."
+msgstr ""
+
+msgid "The number of minutes VDRAdmin-AM subtracts from the broadcast's start time found in the EPG."
+msgstr ""
+
+msgid "The number of minutes VDRAdmin-AM adds to the broadcast's stop time found in the EPG."
+msgstr ""
+
+msgid "An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording."
+msgstr "An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording."
+
+msgid "The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by."
+msgstr "The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by."
+
+msgid "Check this box if you want VDRAdmin-AM to append the broadcast's EPG subtitle to the recording's file name."
+msgstr ""
+
+msgid "If you enable this VDRAdmin-AM will track timers it has already programmed automatically. This is useful if want to deactivate or delete timers that have been programmed automatically in the timers listing."
+msgstr ""
+
+msgid "The directory this AutoTimer will place the recordings in. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br />VDRAdmin-AM will append the matching broadcast's title and subtitle (if the \"Episode\" checkbox is marked) to the directory given here.<br /><br />You can also use the following keywords that are replaced in the final file name by the values supplied by for example <a href=\"http://tvmovie2vdr.vdr-developer.org\">tvm2vdr</a>:<ul><li>%Title% - will become the title of the event.</li><li>%Subtitle% - will become the subtitle of the event.</li><li>%Director% - will become the director of the event.</li><li>%Date% - will become the date of the recording.</li><li>%Category% - will become the category of the event (Spielfilm/Serie/...).</li><li>%Genre% - will become the genre of the event (Drama/Krimi/..).</li><li>%Year% - will become the year of production.</li><li>%Country% - will become the country of production.</li><li>%Originaltitle% - will become the original title of the event.</li><li>%FSK% - will become the FSK from the event.</li><li>%Episode% - will become the episode's title of the event.</li><li>%Rating% - will become the rating of the event from the EPG provider.</li></ul><h4>Note:</h4>If you use the above keywords it's in your own responsibility to supply the <strong>complete file name</strong> for the recordings! VDRAdmin-AM will not append anything to the resulting string."
+msgstr ""
 
 msgid "<p>Here you can change general settings and base settings for timers, AutoTimers, channel selection and streaming parameters.</p>"
 msgstr "<p>Zde mù¾ete zmìnit obecné nastavení a základní nastavení pro èasovaèe, AutoÈasovaèe, výbìr kanálù a parametry streamu.</p>"
 
-msgid "General Settings"
-msgstr "Obecné nastavení"
-
-msgid "VDR"
-msgstr "VDR"
-
-msgid "Identification"
-msgstr "Identifikace"
-
-msgid "Streaming"
-msgstr "Streamování"
-
-msgid "Expert"
-msgstr "Expert:"
-
-#, fuzzy
-msgid "External Search"
-msgstr "hledat"
-
-msgid "Channel Selections"
-msgstr "Výbìr kanálù"
-
-msgid "Skin:"
-msgstr "Skin:"
-
 msgid "The skin you want to use."
 msgstr "Skin, který chcete pou¾ít:"
-
-msgid "Login Page:"
-msgstr "Úvodní strana:"
 
 msgid "The page you want to see at first connect to VDRAdmin-AM."
 msgstr "Stránka, kterou chcete zobrazit jako první pøi spu¹tìní VDRAdmin-AM."
 
-msgid "Number of channels to use:"
-msgstr "Poèet kanálù k pou¾ití:"
-
 msgid "VDRAdmin-AM will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin-AM will read so that you can use this to reduce VDRAdmin-AM's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin-AM will use all available channels."
 msgstr "VDRAdmin-AM will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin-AM will read so that you can use this to reduce VDRAdmin-AM's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin-AM will use all available channels."
-
-msgid "Local net (no login required):"
-msgstr "Lokální sí» (login není vy¾adován):"
 
 msgid "Here you can specify an IP address or range that can login without providing login information. For example: \"192.168.0.0/24\" will include any IP starting with \"192.168.0\", \"192.168.0.123/32\" will only match \"192.168.0.123\"."
 msgstr "Zde mù¾ete zadat jednu nebo celý rozsah IP adres, které se budou moci pøihlásit bez pøihla¹ovacích údajù. Napø. \"192.168.0.0/24\" zahrnuje v¹echny IP z rozsahu \"192.168.0\", \"192.168.0.123/32\" vyhovuje pouze \"192.168.0.123\"."
 
-msgid "Language:"
-msgstr "Jazyk:"
-
 msgid "Here you can set the localization VDRAdmin-AM should use."
 msgstr "Zde mù¾ete nastavit jakou lokalizaci VDRAdmin-AM chcete pou¾ívat."
-
-msgid "Save settings on exit:"
-msgstr "Ulo¾it nastavení pøi vypnutí:"
 
 msgid "With this option the settings will be saved if VDRAdmin-AM exits. This will also save settings not available on the \"Configuration\" menu like interval and size in TV, sorting in the lists and current view in \"What's on now\"."
 msgstr ""
@@ -877,128 +868,65 @@ msgstr ""
 msgid "Top"
 msgstr "Nahoru"
 
-msgid "Number of DVB cards:"
-msgstr "Poèet DVB karet:"
-
 msgid "The number of DVB cards VDR can access. Depending on this value VDRAdmin-AM will calculate critical timers in the <span class=\"ref_menu\">Timer</span> menu."
 msgstr "Poèet DVB karet na které lze pøistupovat. Na této hodnotì závisí výpoèet kritických èasovaèù v <span class=\"ref_menu\">Èasovaè</span> menu."
-
-msgid "Path to recordings:"
-msgstr "Slo¾ka s nahrávkami:"
 
 msgid "The path to VDR's recordings. It's used so that VDRAdmin-AM can locate the recordings when using <span class=\"ref_label\">Recordings Streaming</span> and <span class=\"ref_file\">reccmds.conf</span> in the <span class=\"ref_menu\">Recordings</span> menu."
 msgstr "Cesta k VDR nahrávkám. Pou¾ito, aby mohl VDRAdmin-AM najít nahrávky, kdy¾ pou¾ívá <span class=\"ref_label\">Nahrávání Streamu</span> a <span class=\"ref_file\">reccmds.conf</span> v <span class=\"ref_menu\">Nahrávky</span> menu."
 
-msgid "Path to configuration files:"
-msgstr "Slo¾ka s konfiguraèními soubory:"
-
 msgid "The path where VDR's configuration files are located. If this directory contains the file <span class=\"ref_file\">reccmds.conf</span> its content is shown in a selectbox in the <span class=\"ref_menu\">Recordings</span> menu."
 msgstr "Cesta kde jsou ulo¾eny konfiguraèní soubory VDR. Pokud tato slo¾ka obsahuje soubor <span class=\"ref_file\">reccmds.conf</span>, jeho obsah je zobrazen v slectboxu v <span class=\"ref_menu\">Nahrávky</span> menu."
-
-msgid "Path to EPG images:"
-msgstr "Cesta k EPG souborùm:"
 
 msgid "The path where the EPG images are stored."
 msgstr "Cesta kde jsou ulo¾eny EPG data."
 
-msgid "Username:"
-msgstr "U¾iv. jméno:"
-
 msgid "The username for the main user, i.e. the user having the most privileges."
 msgstr "U¾ivatelské jméno hlavního u¾ivatele, toho který má nejvìt¹í práva."
-
-msgid "Password:"
-msgstr "Heslo:"
 
 msgid "The main user's password."
 msgstr "Heslo hlavního u¾ivatele."
 
-msgid "Guest Account:"
-msgstr "Guest úèet:"
-
 msgid "If you want a user account having only limited privileges, this is for you. The guest user cannot modify anything, it's only allowed to view the EPG, timers, AutoTimers and recordings listings."
 msgstr "Pokud chcete mít úèet u¾ivatele s limitovanými právy, je toto pro vás. Guest úèet nemù¾e nic mìnit, pouze si mù¾e prohlí¾et EPG, èasovaèe, AutoÈasovaèe a koukat na nahrávky."
-
-msgid "Guest Username:"
-msgstr "Guest u¾iv. jméno:"
 
 msgid "The username for the guest user."
 msgstr "U¾ivatelské jméno pro guest úèet."
 
-msgid "Guest Password:"
-msgstr "Guest heslo:"
-
 msgid "The guest user's password."
 msgstr "Guest heslo."
-
-msgid "Hours:"
-msgstr "Hodiny:"
 
 msgid "The number of hours to show in the timeline."
 msgstr "Poèet hodin zobrazovaných v èasové pøímce."
 
-msgid "Times:"
-msgstr "Èasy:"
-
 msgid "A comma separated list of times in <strong>hh:mm</strong> format that appear in the selectbox placed at the top."
 msgstr "Èárkou oddìlený seznam èasù v tomto formátu <strong>hh:mm</strong>, který se bude zobrazovat v selectboxu ve vrchní èásti stránky."
-
-msgid "Tooltips:"
-msgstr "Tipy:"
 
 msgid "Here you can (de-)activate the tooltips."
 msgstr "Tady mù¾ete (de-)aktivovat nástrojové tipy."
 
-msgid "Active:"
-msgstr "Aktivní:"
-
 msgid "Activate or deactivate the AutoTimer function."
 msgstr "Aktivace a Deaktivace funkce AutoÈasovaèe."
-
-msgid "Send email after programming timer:"
-msgstr "Poslat email po nastavení èasovaèe:"
 
 msgid "VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a timer has been programmed if you enable this feature."
 msgstr "VDRAdmin-AM vám za¹le e-mail kdykoli, kdy¾ se nastaví Èasovaè, atd... pokud aktivujete tuto vlastnost."
 
-msgid "Send email as:"
-msgstr "Odesílatel emailu:"
-
 msgid "Here you set the sending email address of the generated email."
 msgstr "Zde zapi¹te e-mailovou adresu ze které budou vygenerované e-maily odcházet."
-
-msgid "Send email to:"
-msgstr "Komu:"
 
 msgid "The email address the email is sent to."
 msgstr "Zde zapi¹te e-mailovou adresu na kterou se budou zasílat vygenerované e-maily."
 
-msgid "Mail server:"
-msgstr "Po¹tovní server:"
-
 msgid "The outgoing mail server."
 msgstr "Odchozí po¹tovní server."
-
-msgid "SMTPAuth user:"
-msgstr "SMTPAuth u¾ivatel:"
 
 msgid "If you need to authenticate yourself at the outgoing mail server, you have to supply the username and the password below. Leaving this field empty will disable SMTPAuth."
 msgstr "Pokud potøebujete pou¾ívat SMTP autentifikaci tak vyplòte jméno a heslo ní¾e. Vynechání znamená vypnutí této funkce."
 
-msgid "SMTPAuth password:"
-msgstr "SMTPAuth heslo:"
-
 msgid "The password for the SMTPAuth user."
 msgstr "Heslo pro SMTP autentifikaci."
 
-msgid "Tooltips in timeline:"
-msgstr "Tipy v èasové pøímce:"
-
 msgid "Here you can (de-)activate the tooltips in the timeline."
 msgstr "Zde mù¾ete (de-)aktivovat nástrojové tipy v èasové pøímce."
-
-msgid "Tooltips in list:"
-msgstr "Tipy v seznamu:"
 
 msgid "Here you can (de-)activate the tooltips in the list."
 msgstr "Zde mù¾ete (de-)aktivovat nástrojové tipy v seznamu."
@@ -1009,50 +937,26 @@ msgstr "Pøidat souhrn k novým èasovaèùm:"
 msgid "If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here."
 msgstr "Pokud nechcete aby VDRAdmin-AM pøidával souhrn EPG k novým Èasovaèùm, zde to mù¾ete vypnout."
 
-msgid "Live Streaming:"
-msgstr "Live Streamování:"
-
 msgid "Enable or disable live streaming using the <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
 msgstr "Zapnout nebo vypnout streamování za pou¾ití <a href=\"http://www.magoa.net/linux/\">streamdev pluginu</a>. Také musíte zadat správný <span class=\"ref_label\">HTTP Port pro Streamdev</span>"
-
-msgid "HTTP Port of Streamdev (also possible 3000/ts):"
-msgstr "HTTP Port pro Streamdev (mo¾no 3000/ts):"
 
 msgid "Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use."
 msgstr "Zde musíte zadat èíslo portu na kterém naslouchá Vá¹ streamdev server. Také mù¾ete zadat typ streamu, který by jste chtìli pou¾ít."
 
-msgid "Recordings Streaming:"
-msgstr "Nahrávání streamu:"
-
 msgid "Enable or disable streaming of recordings.<br />Well actually this is no real \"streaming\", but you have to setup your workstation so that it can access VDR's recordings. You can use for example Samba or NFS for this. VDRAdmin-AM simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation's display."
 msgstr ""
-
-msgid "Path to VDR Recordings on your workstation:"
-msgstr "Cesta ke slo¾ce s VDR nahrávkami na Va¹em PC:"
 
 msgid "This is the path where your workstation can access VDR's recordings. This depends on your VDR and workstation setup, for example \"\\\\vdr\\videos\" or \"V:\\\" (on Windows) or \"/mnt/videos\" (on Linux)."
 msgstr ""
 
-msgid "MIME type for live streaming:"
-msgstr "MIME typ pro live streamování:"
-
 msgid "The MIME type to send when using live streaming. Defaults to \"video/x-mpegurl\"."
 msgstr ""
-
-msgid "Suffix for live streaming:"
-msgstr "Pøípona pro live streamování:"
 
 msgid "The suffix to use for live streaming. Defaults to \"m3u\"."
 msgstr ""
 
-msgid "MIME type for recordings streaming:"
-msgstr "MIME typ pro nahrávky streamu:"
-
 msgid "The MIME type to send when using recordings streaming. Defaults to \"video/x-mpegurl\"."
 msgstr ""
-
-msgid "Suffix for recordings streaming:"
-msgstr "Pøípona pro nahrávky streamu:"
 
 #, fuzzy
 msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
@@ -1070,13 +974,7 @@ msgstr ""
 msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
 msgstr ""
 
-msgid "Update EPG data in background:"
-msgstr ""
-
 msgid "If set to \"yes\" VDRAdmin-AM will periodically refresh its local EPG cache. Else the EPG will be refreshed if the user accesses any EPG view at the web interface and the timeout set at \"Update EPG every\" has been reached."
-msgstr ""
-
-msgid "Update EPG every:"
 msgstr ""
 
 #, fuzzy
@@ -1086,35 +984,15 @@ msgstr "Interval, ve kterém budou kontrolována EPG data pro obnovu AutoÈasovaèù.
 msgid "<p>If you want to limit the number of channels used in some parts of VDRAdmin-AM, this is for you!</p><p>Use the radio buttons to activate or deactivate the wanted channels in the named menu.</p><p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;&gt;&gt;\"/>. If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click <input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
 msgstr ""
 
-msgid "Show channels without EPG information:"
-msgstr ""
-
 msgid "Usually channels that don't have EPG information are hidden in all EPG views. If you don't want them to be hidden you have to set this option to \"yes\"."
 msgstr ""
 
-msgid "<p>Here you will find a listing of automatic timers (AutoTimer) known to VDRAdmin-AM.</p><p>The list shows some information on AutoTimers. You can change the list's sorting by clicking the columns heading.</p><p>For each AutoTimer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each AutoTimer's state is indicated by differently coloured images:<br /><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> AutoTimer is OK and will automatically program matching broadcasts.<br /><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> AutoTimer is not active.</p><p>In addition to these functions you can add a new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value=\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at once by checking the box in the last column of those timers and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/>.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and check for matching AutoTimers.</p>"
-msgstr "<p>Seznam AutoÈasovaèù ve VDRAdmin-AM.</p><p>Seznam zobrazuje nìkteré informace, lze mìnit øazení polo¾ek dle hlavièek sloupcù.</p><p>Pro ka¾dý èasovaè máte k dispozici následující mo¾nosti:<dl><dt>Nastavení stavu</dt><dd>Kliknutím na \"Ano\" nebo \"Ne\"v \"Aktivním\" sloupci urèujícím aktivitu.</dd><dt>Rychlý pohled na prioritu a dobu trvání</dt><dd>Najetím kurzoru my¹i na název AutoÈasovaèe.</dd><dt>Upravení AutoÈasovaèe</dt><dd>Upravovat Autoèasovaè lze kliknutím na <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Smazání AutoÈasovaèe</dt><dd>Smazat AutoÈasovaè lze kliknutím na <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Ka¾dý stav Autoèasovaèe je indikován rùznì barevnými obrázky <br /><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" />Autoèasovaè je v poøádku a automaticky bude spu¹tìn.<br /><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" />AutoÈasovaè není aktivní.</p><p>Navíc k tìmto funkcím lze je¹tì pøidat nový AutoÈasovaè kliknutím na <input type=\"submit\" class=\"submit\" value=\"New AutoTimer\"/> nahoøe na stránce a také lze smazat více AutoÈasovaèù zároveò za¹krtnutím boxù v posledním sloupci a kliknutím na <input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/>.</p><p>Kliknìte zde <input type=\"submit\" class=\"submit\" value=\"Force Update\"/> k vynucení re-connectu k VDR, stáhnutí aktuálního EPG a kontroly AutoÈasovaèù.</p>"
+msgid "Edit Timer"
+msgstr "Upravit èasovaè"
 
-msgid "Your Browser does not support frames!"
-msgstr "Vá¹ prohlí¾eè nepodporuje rámy!"
-
-msgid "Rename Recording"
-msgstr "Pøejmenovat nahrávku"
-
-msgid "Original Name of Recording:"
-msgstr "Pùvodní jméno nahrávky:"
-
-msgid "New Name of Recording:"
-msgstr "Nové jméno nahrávky:"
-
-msgid "Subtitle:"
-msgstr "Titulky:"
-
-msgid "Rename"
-msgstr "Pøejmenovat"
-
-msgid "<p>Here you will find a listing of recordings known to VDR. The headline will also show you VDR's total and free disk space.</p><p>The listing showing you some information on the recordings. You can change the list's sorting by clicking the columns heading. Above the list you'll see the navigation path. If you want to view the contents of previous folders you'll have to click on its name in that path.</p><p>Each row contains this information:<dl><dt>Date</dt><dd>The date when the recording has been done. In case of folders this will show the number of recordings the folder contains.</dd><dt>Time</dt><dd>The time when the recording has been done. In case of folders this will show the number of <strong>new</strong> recordings the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. Click it to show the recording's summary or descend into the folder.</dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> SVDRPort command which is no core VDR feature but is available through a patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete (<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)</dt><dd>This column is only shown if you activated and configured <span class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu\">Configuration</span> menu. You can watch the recording at your workstation.</dd></dl></p><p>In addition to these functions you can delete a number of recordings at once by checking the box in the last but one column of those recordings and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the VDR's configuration files and have entries in VDR's <span class=\"ref_file\">reccmds.conf</span> you can run those commands for the selected recording by selecting the wanted command in the select box locate next to <span class=\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class=\"submit\" value=\"Run\"/> button.</p><p>Use <input type=\"submit\" class=\"submit\" value=\"Refresh\"/> to force reloading of VDR's recordings listing.</p>"
-msgstr ""
+#, fuzzy
+msgid "Edit EPG"
+msgstr "Upravit"
 
 #, fuzzy
 msgid "<p>Here you can edit the descriptive fields of an existing EPG entry.</p>"
@@ -1164,11 +1042,262 @@ msgstr "Audio stopy:"
 msgid "If available this field shows the audio track(s). It cannot be changed."
 msgstr ""
 
+msgid "No Help Available"
+msgstr "Nápovìda není dostupná"
+
+msgid "<p>No help available yet. For adding or changing text please contact <a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>.</p>"
+msgstr "<p>Nápovìda zatím není dostupná. Pro pøidání nebo zmìnu textu pi¹te prosím sem: <a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>. </p>"
+
+msgid "Recordings"
+msgstr "Nahrávky"
+
+msgid "<p>Here you will find a listing of recordings known to VDR. The headline will also show you VDR's total and free disk space.</p><p>The listing showing you some information on the recordings. You can change the list's sorting by clicking the columns heading. Above the list you'll see the navigation path. If you want to view the contents of previous folders you'll have to click on its name in that path.</p><p>Each row contains this information:<dl><dt>Date</dt><dd>The date when the recording has been done. In case of folders this will show the number of recordings the folder contains.</dd><dt>Time</dt><dd>The time when the recording has been done. In case of folders this will show the number of <strong>new</strong> recordings the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. Click it to show the recording's summary or descend into the folder.</dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> SVDRPort command which is no core VDR feature but is available through a patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete (<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)</dt><dd>This column is only shown if you activated and configured <span class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu\">Configuration</span> menu. You can watch the recording at your workstation.</dd></dl></p><p>In addition to these functions you can delete a number of recordings at once by checking the box in the last but one column of those recordings and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the VDR's configuration files and have entries in VDR's <span class=\"ref_file\">reccmds.conf</span> you can run those commands for the selected recording by selecting the wanted command in the select box locate next to <span class=\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class=\"submit\" value=\"Run\"/> button.</p><p>Use <input type=\"submit\" class=\"submit\" value=\"Refresh\"/> to force reloading of VDR's recordings listing.</p>"
+msgstr ""
+
+msgid "<p>Here you will find a listing of timers known to VDR.</p><p>On top you will find a chart showing a day's timers graphically. This provides an quick overview on what's going on at the specified day and helps you in finding conflicting timers. Moving the mouse cursor above any timer box will display a tooltip containing the timer's title, priority, lifetime and duration.</p><p>Below the chart you'll find the timers list showing you some information on the timers. You can change the list's sorting by clicking the columns heading.</p><p>For each timer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\", \"No\", \"VPS\" or \"Auto\" in the \"Active\" column.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the timer's title.</dd><dt>View its EPG entry</dt><dd>Timers that have set <span class=\"ref_label\">AutoTimer Checking</span> to \"Transmission Identification\" will show you the corresponding EPG entry if you click on the timer's title.</dd><dt>Edit the timer</dt><dd>You can edit a timer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To delete a timer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each timer's state is indicated by differently coloured boxes (in the chart view) or images (in the list view):<br /><span class=\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> Timer is OK and will record.<br /><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timer conflicts with other timers. That's not critical, as long as you have enough DVB cards for the parallel recordings.<br /><span class=\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align=\"middle\" /> Timer is critical and will most likely <strong>not</strong> record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is not active.</p><p>In addition to these functions you can add a new timer by clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at the top and you can delete a number of timers at once by checking the box in the last column of those timers and clicking <input type=\"submit\"  class=\"submit\" value=\"Delete Selected Timers\"/>.</p><p>You can <input type=\"submit\" class=\"submit\" value=\"activate\"/> and <input type=\"submit\" class=\"submit\" value=\"inactivate\"/> selected timers.</p>"
+msgstr ""
+
+msgid "<p>Here you can edit a timer's settings.</p>"
+msgstr "<p>Zde mù¾ete upravit nastavení Èasovaèe.</p>"
+
+msgid "Timer Active:"
+msgstr "Èasovaè aktivní"
+
+msgid "Activate or deactivate this timer. Deactivated timers are still stored in the timer list so that they can be activated again, but they do not record anything meanwhile."
+msgstr ""
+
+msgid "AutoTimer Checking:"
+msgstr "Kontrola AutoÈasovaèù:"
+
+msgid "Depending on how this timer has been programmed you have up to three possible settings:"
+msgstr ""
+
+#, fuzzy
+msgid "Transmission Identification"
+msgstr "Identifikace"
+
+msgid "Monitor this timer using the identification provided in the EPG. Please note that this only works if the provided identification is a fix and unique value! This option is not available with timers programmed in VDR."
+msgstr ""
+
+msgid "Time"
+msgstr "Èas"
+
+msgid "Monitor this timer using the start and stop time."
+msgstr "Sledovat tento èasovaè pomocí zaèátku a konce nahrávání."
+
+msgid "off"
+msgstr "off"
+
+msgid "Do not monitor this timer."
+msgstr "Nesledovat tento Èasovaè."
+
+msgid "The channel to record."
+msgstr "Kanál k nahrávání."
+
+msgid "Day Of Recording:"
+msgstr "Den nahrávání"
+
+msgid "The day when the timer should get active. You can enter the day in two formats:<ul><li>Two digits (DD). This will use the current month and year.</li><li>ISO norm (YYYY-MM-DD). Program your timers as far in the future as you like.</li></ul>In case you want to program a repeating timer you can use the seven checkboxes below the text field. Check the box for each day you want the timer to get active."
+msgstr ""
+
+msgid "Start Time:"
+msgstr "Zaèátek nahrávání:"
+
+msgid "This is the time when the timer should start recording. The first text field is for \"hour\", the second for \"minute\"."
+msgstr "Toto je èas kdy by VDR mìlo zaèít nahrávat. První textové pole je pro \"hodinu\" a druhé pro \"minutu\"."
+
+msgid "End Time:"
+msgstr "Konec èasu:"
+
+msgid "This is the time when the timer should stop recording. The first text field is for \"hour\", the second for \"minute\"."
+msgstr "Toto je èas kdy by VDR mìlo ukonèit nahrávání. První textové pole je pro \"hodinu\" a druhé pro \"minutu\"."
+
+msgid "Title of Recording:"
+msgstr "Název nahrávky:"
+
+msgid "The <strong>file name</strong> this timer will give to a recording. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br /><br />The special keywords <strong>TITLE</strong> and <strong>EPISODE</strong>, if present, will be replaced by the title and episode information from the EPG data at the time of recording (if that data is available). If at the time of recording either of these cannot be determined, <strong>TITLE</strong> will default to the channel name, and <strong>EPISODE</strong> will default to a blank."
+msgstr ""
+
+msgid "Summary:"
+msgstr "Souhrn:"
+
+msgid "Arbitrary text that describes the recording made by this timer. If this field is not empty, its contents will be written into the <span class=\"ref_file\">summary.vdr</span> or <span class=\"ref_file\">info.vdr</span> file of the recording."
+msgstr "Libovolný text popisující nahrávku z èasovaèe. Jestli¾e pole není prázdné, tak text bude zapsán do souboru <span class=\"ref_file\">summary.vdr</span> nebo <span class=\"ref_file\">info.vdr</span>,"
+
+msgid "Your Browser does not support frames!"
+msgstr "Vá¹ prohlí¾eè nepodporuje rámy!"
+
+msgid "What's On Now?"
+msgstr "Co bì¾í nyní?"
+
+msgid "Playing Today?"
+msgstr "Co pobì¾í dnes?"
+
+msgid "Remote Control"
+msgstr "Dálkové ovládání"
+
+msgid "Watch TV"
+msgstr "Sleduj TV"
+
+#, fuzzy
+msgid "Commands"
+msgstr "Pøíkazy:"
+
+#, fuzzy
+msgid "Search"
+msgstr "hledat"
+
+msgid "Authorization Required"
+msgstr "Autentifikace je nutná"
+
+msgid "This server could not verify that you are authorized to access the document requested. Either you supplied the wrong credentials (e.g. bad password), or your browser doesn't understand how to supply the credentials required."
+msgstr "Server nemohl rozpoznat, zda jste autorizován k pøístupu k tomuto dokumentu. Buï jste vlo¾il ¹patná údaje (napø. heslo) nebo Vá¹ prohlí¾eè nepodporuje pøedávání parametrù, které jsou vy¾adované."
+
+msgid "VPS"
+msgstr "VPS"
+
+msgid "close"
+msgstr "zavøít"
+
+msgid "view"
+msgstr "náhled"
+
+#, fuzzy
+msgid "search"
+msgstr "hledat"
+
+#, fuzzy
+msgid "edit"
+msgstr "Upravit"
+
+msgid "Video tracks:"
+msgstr "Video stopy:"
+
+msgid "Audio tracks:"
+msgstr "Audio stopy:"
+
+#, fuzzy
+msgid "Video tracks"
+msgstr "Video stopy:"
+
+#, fuzzy
+msgid "Audio tracks"
+msgstr "Audio stopy:"
+
+msgid "TV select"
+msgstr "Naladit TV"
+
+msgid "Stream"
+msgstr "Stream"
+
+#, fuzzy
+msgid "Channel group:"
+msgstr "Kanál"
+
+msgid "Go!"
+msgstr "Start!"
+
+msgid "Search for other show times"
+msgstr "Hledat jiné vysílací èasy"
+
+#, fuzzy
+msgid "No Information"
+msgstr "Více informací"
+
+#, fuzzy
+msgid "No EPG information available"
+msgstr "®ádné informace"
+
+msgid "Playing Today"
+msgstr "Bì¾í dnes"
+
+msgid "starting at"
+msgstr "zaèíná v"
+
+msgid "What's on:"
+msgstr "Co bì¾í:"
+
+msgid "at"
+msgstr "v"
+
+msgid "now"
+msgstr "nyní"
+
+msgid "to"
+msgstr "do"
+
 msgid "Duration:"
 msgstr "Délka:"
 
 msgid "min"
 msgstr "min"
+
+msgid "at:"
+msgstr "v:"
+
+msgid "You need JavaScript to use the timeline!"
+msgstr "K pou¾ívání èasové linie potøebujete JavaScript!"
+
+msgid "Rename Recording"
+msgstr "Pøejmenovat nahrávku"
+
+msgid "Original Name of Recording:"
+msgstr "Pùvodní jméno nahrávky:"
+
+msgid "New Name of Recording:"
+msgstr "Nové jméno nahrávky:"
+
+msgid "Subtitle:"
+msgstr "Titulky:"
+
+msgid "Rename"
+msgstr "Pøejmenovat"
+
+msgid "Total:"
+msgstr "Celkové:"
+
+msgid "h"
+msgstr "h"
+
+msgid "Free:"
+msgstr "Volno:"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Total"
+msgstr "Celkem"
+
+msgid "New"
+msgstr "Nový"
+
+msgid "Play"
+msgstr "Hrát"
+
+msgid "Cut"
+msgstr "Støihnout"
+
+msgid "Delete recording?"
+msgstr "Smazat nahrávku?"
+
+msgid "Refresh"
+msgstr "Obnovit"
+
+msgid "Commands:"
+msgstr "Pøíkazy:"
+
+msgid "Really run this command?"
+msgstr "Opravdu spustit tento pøíkaz?"
+
+msgid "Delete Selected Recordings"
+msgstr "Smazat oznaèené nahrávky"
+
+msgid "Delete all selected recordings?"
+msgstr "Smazat v¹echny oznaèené nahrávky?"
+
+#, fuzzy
+msgid "No recordings available"
+msgstr "Nápovìda není dostupná"
 
 msgid "Transponder:"
 msgstr "Transponder:"
@@ -1178,9 +1307,6 @@ msgstr "CA-System:"
 
 msgid "New Timer"
 msgstr "Nový èasovaè"
-
-msgid "Date"
-msgstr "Datum"
 
 msgid "Edit timer status?"
 msgstr "Upravit èasovaè?"
@@ -1215,179 +1341,62 @@ msgstr "Vymazat vybrané èasovaèe"
 msgid "No timers defined!"
 msgstr "®ádný èasovaè není definován!"
 
-#, fuzzy
-msgid "EPG Search Blacklists"
-msgstr "hledat"
+msgid "Create New Timer"
+msgstr "Vytvoøit nový èasovaè"
 
-#, fuzzy
-msgid "New Blacklist"
-msgstr "Pøidat nový AutoÈasovaè"
+msgid "Buffer:"
+msgstr "Zásobník:"
 
-#, fuzzy
-msgid "Search pattern"
-msgstr "Vyhledávací znaky:"
+msgid "Use VPS:"
+msgstr "Pou¾ít VPS:"
 
-msgid "From"
+msgid "readonly"
+msgstr "Pouze pro ètení"
+
+msgid "Timer has been set by AutoTimer pattern:"
+msgstr "Èasovaè byl nastaven podle AutoÈasovaèe"
+
+msgid "TV"
+msgstr "TV"
+
+msgid "Interval:"
+msgstr "Interval:"
+
+msgid "sec."
+msgstr "sec."
+
+msgid "G"
+msgstr "G"
+
+msgid "Grab the picture!"
+msgstr "Ulo¾ obrázek!"
+
+msgid "Size:"
+msgstr "Velikost:"
+
+msgid "Open in separate window"
+msgstr "Otevøi v samostatném oknì"
+
+msgid "VDR Commands"
+msgstr "VDR pøíkazy"
+
+msgid "Export channels as playlist:"
 msgstr ""
 
-#, fuzzy
-msgid "To"
-msgstr "Nahoru"
+msgid "Number of lines to show:"
+msgstr "Poèet zobrazených øádkù:"
 
-#, fuzzy
-msgid "Delete blacklist?"
-msgstr "Smazat èasovaè?"
+msgid "unlimited"
+msgstr "neomezený"
 
-#, fuzzy
-msgid "Delete Selected Blacklists"
-msgstr "Vymazat vybrané èasovaèe"
+msgid "SVDRP commands:"
+msgstr "SVDRP pøíkazy:"
 
-#, fuzzy
-msgid "Delete all selected blacklists?"
-msgstr "Vymazat v¹echny vybrané èasovaèe?"
+msgid "Commands defined in commands.conf:"
+msgstr "Pøíkazy definované v commands.conf:"
 
-#, fuzzy
-msgid "EPG search"
-msgstr "hledat"
-
-#, fuzzy
-msgid "Use template"
-msgstr "©ablona:"
-
-#, fuzzy
-msgid "New Search"
-msgstr "hledat"
-
-#, fuzzy
-msgid "Action"
-msgstr "Aktivovat"
-
-#, fuzzy
-msgid "Find"
-msgstr "Pátek"
-
-msgid "Show Favorites"
-msgstr ""
-
-#, fuzzy
-msgid "Delete Selected Searches"
-msgstr "Vymazat vybrané èasovaèe"
-
-#, fuzzy
-msgid "Delete all selected searches?"
-msgstr "Vymazat v¹echny vybrané èasovaèe?"
-
-#, fuzzy
-msgid "Execute Selected Searches"
-msgstr "Vymazat vybrané èasovaèe"
-
-#, fuzzy
-msgid "Duration"
-msgstr "Délka:"
-
-msgid "Template:"
-msgstr "©ablona:"
-
-msgid "Also used for other EPG views!"
-msgstr "Pou¾ít pro ostatní EPG náhledy!"
-
-msgid "Bandwidth of Streams:"
-msgstr "©íøka pásma pro streamy:"
-
-msgid "URL:"
-msgstr ""
-
-#, fuzzy
-msgid "Title:"
-msgstr "Název"
-
-#, fuzzy
-msgid "User-defined search:"
-msgstr "®ádný èasovaè není definován!"
-
-msgid "In \"AutoTimer\"?"
-msgstr "V \"AutoÈasovaèi\"?"
-
-msgid "Apply"
-msgstr "Pou¾ij"
-
-msgid "close"
-msgstr "zavøít"
-
-msgid "view"
-msgstr "náhled"
-
-#, fuzzy
-msgid "search"
-msgstr "hledat"
-
-#, fuzzy
-msgid "edit"
-msgstr "Upravit"
-
-msgid "Video tracks:"
-msgstr "Video stopy:"
-
-msgid "Audio tracks:"
-msgstr "Audio stopy:"
-
-msgid "now"
-msgstr "nyní"
-
-msgid "to"
-msgstr "do"
-
-msgid "at:"
-msgstr "v:"
-
-msgid "You need JavaScript to use the timeline!"
-msgstr "K pou¾ívání èasové linie potøebujete JavaScript!"
-
-msgid "Authorization Required"
-msgstr "Autentifikace je nutná"
-
-msgid "This server could not verify that you are authorized to access the document requested. Either you supplied the wrong credentials (e.g. bad password), or your browser doesn't understand how to supply the credentials required."
-msgstr "Server nemohl rozpoznat, zda jste autorizován k pøístupu k tomuto dokumentu. Buï jste vlo¾il ¹patná údaje (napø. heslo) nebo Vá¹ prohlí¾eè nepodporuje pøedávání parametrù, které jsou vy¾adované."
-
-msgid "Total:"
-msgstr "Celkové:"
-
-msgid "h"
-msgstr "h"
-
-msgid "Free:"
-msgstr "Volno:"
-
-msgid "Total"
-msgstr "Celkem"
-
-msgid "New"
-msgstr "Nový"
-
-msgid "Play"
-msgstr "Hrát"
-
-msgid "Cut"
-msgstr "Støihnout"
-
-msgid "Delete recording?"
-msgstr "Smazat nahrávku?"
-
-msgid "Refresh"
-msgstr "Obnovit"
-
-msgid "Commands:"
-msgstr "Pøíkazy:"
-
-msgid "Delete Selected Recordings"
-msgstr "Smazat oznaèené nahrávky"
-
-msgid "Delete all selected recordings?"
-msgstr "Smazat v¹echny oznaèené nahrávky?"
-
-#, fuzzy
-msgid "No recordings available"
-msgstr "Nápovìda není dostupná"
+msgid "Output"
+msgstr "Výstup"
 
 msgid "What's your VDR hostname (e.g video.intra.net)?"
 msgstr "Jaké je Va¹e VDR hostname?"

@@ -4,6 +4,36 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2009-12-30: 3.6.5
+- Changed: use HTTP::Date for HTTP date/time formatting (Ville Skyttä).
+- Improved: Create fewer SVDRP connections (Ville Skyttä).
+- Fixed: some jslint warnings in javascript files (Ville Skyttä).
+- Improved: Config file read/write error handling (Ville Skyttä).
+- Improved: Send Last-Modified header for static resources (Ville Skyttä).
+- Added: "-l" and "--log" parameter.
+- Changed: "-nf" option to "-n".
+- Changed: Logging.
+- Added: "--ssl" switch to accept https instead of http.
+- Added: Find VDR 1.7.2+ TS recordings.
+- Updated: Italian translation (Submitted by Diego Pierotto).
+- Fixed: epgsearch uses seconds in aux field of timers, not minutes (Reported by Rincewind99 @vdr-portal.de).
+- Fix bug #507 "EPGsearch custom categories no longer show".
+- Fixed: Saving the config showed error message "1".
+- Reworked: Spanish translation (Submitted by Manuel Gomez).
+- Fixed: failing check whether the process with our pid is a vdradmind (Ville Skyttä)
+- Fixed: always exit with status 1 from --kill if no processes were killed (Ville Skyttä)
+- Improved: pid file error handling (Ville Skyttä)
+- Added: autotimer schedule change tracking option in UI (Ville Skyttä)
+- Fixed: use text/javascript for JavaScript in HTTP headers (Ville Skyttä)
+- Updated: required Perl module documentation (Ville Skyttä)
+- Improved: template caching options (stat ttl, default cache dir is now /var/cache/vdradmin) (Ville Skyttä)
+- Improved: error message when binding the server socket fails (Ville Skyttä)
+- Improved: warn if log file cannot be written to (Ville Skyttä)
+- Fixed: don't try to delete pid file in non-daemon mode.
+- Improved: include reason in pid file deletion error message (Ville Skyttä).
+- Added: ability to log to syslog ("LOGFILE = syslog" in config) (Ville Skyttä).
+- Changed: non-daemon mode (-nf) always turns on logging to stderr (Ville Skyttä).
+
 2008-12-20: 3.6.4
 - Added: Use ".update" in VDR's video directory to check if recordings cache needs to be refreshed.
 - Added: CACHE_REC_ENABLED option in vdradmind.conf to enable (1) or disable (0) recordings caching.

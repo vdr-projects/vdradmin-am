@@ -19,9 +19,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-AM 3.6.3\n"
+"Project-Id-Version: VDRAdmin-AM 3.6.5\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2008-12-18 08:25+0100\n"
+"POT-Creation-Date: 2009-12-30 13:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,324 +30,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "ISO-8859-1"
-msgstr ""
-
-msgid "What's On Now?"
-msgstr ""
-
-msgid "Channel group:"
-msgstr ""
-
-msgid "What's on:"
-msgstr ""
-
-msgid "at"
-msgstr ""
-
-msgid "o'clock"
-msgstr ""
-
-msgid "More Information"
-msgstr ""
-
-msgid "Channels"
-msgstr ""
-
-msgid "Stream"
-msgstr ""
-
-msgid "TV select"
-msgstr ""
-
-msgid "Search for other show times"
-msgstr ""
-
-msgid "No Information"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "Record"
-msgstr ""
-
-msgid "No EPG information available"
-msgstr ""
-
-msgid "Edit EPG"
-msgstr ""
-
-msgid "Help"
-msgstr ""
-
-msgid "Channel"
-msgstr ""
-
-msgid "Time"
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Subtitle"
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "VPS"
-msgstr ""
-
-msgid "Video tracks"
-msgstr ""
-
-msgid "Audio tracks"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Edit Timer"
-msgstr ""
-
-msgid "<p>Here you can edit a timer's settings.</p>"
-msgstr ""
-
-msgid "Timer Active:"
-msgstr ""
-
-msgid "Activate or deactivate this timer. Deactivated timers are still stored in the timer list so that they can be activated again, but they do not record anything meanwhile."
-msgstr ""
-
-msgid "AutoTimer Checking:"
-msgstr ""
-
-msgid "Depending on how this timer has been programmed you have up to three possible settings:"
-msgstr ""
-
-msgid "Transmission Identification"
-msgstr ""
-
-msgid "Monitor this timer using the identification provided in the EPG. Please note that this only works if the provided identification is a fix and unique value! This option is not available with timers programmed in VDR."
-msgstr ""
-
-msgid "Monitor this timer using the start and stop time."
-msgstr ""
-
-msgid "off"
-msgstr ""
-
-msgid "Do not monitor this timer."
-msgstr ""
-
-msgid "Channel:"
-msgstr ""
-
-msgid "The channel to record."
-msgstr ""
-
-msgid "Day Of Recording:"
-msgstr ""
-
-msgid "The day when the timer should get active. You can enter the day in two formats:<ul><li>Two digits (DD). This will use the current month and year.</li><li>ISO norm (YYYY-MM-DD). Program your timers as far in the future as you like.</li></ul>In case you want to program a repeating timer you can use the seven checkboxes below the text field. Check the box for each day you want the timer to get active."
-msgstr ""
-
-msgid "Start Time:"
-msgstr ""
-
-msgid "This is the time when the timer should start recording. The first text field is for \"hour\", the second for \"minute\"."
-msgstr ""
-
-msgid "End Time:"
-msgstr ""
-
-msgid "This is the time when the timer should stop recording. The first text field is for \"hour\", the second for \"minute\"."
-msgstr ""
-
-msgid "Priority:"
-msgstr ""
-
-msgid "An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording."
-msgstr ""
-
-msgid "Lifetime:"
-msgstr ""
-
-msgid "The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by."
-msgstr ""
-
-msgid "Title of Recording:"
-msgstr ""
-
-msgid "The <strong>file name</strong> this timer will give to a recording. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br /><br />The special keywords <strong>TITLE</strong> and <strong>EPISODE</strong>, if present, will be replaced by the title and episode information from the EPG data at the time of recording (if that data is available). If at the time of recording either of these cannot be determined, <strong>TITLE</strong> will default to the channel name, and <strong>EPISODE</strong> will default to a blank."
-msgstr ""
-
-msgid "Summary:"
-msgstr ""
-
-msgid "Arbitrary text that describes the recording made by this timer. If this field is not empty, its contents will be written into the <span class=\"ref_file\">summary.vdr</span> or <span class=\"ref_file\">info.vdr</span> file of the recording."
-msgstr ""
-
-msgid "Go!"
-msgstr ""
-
-msgid "AutoTimer"
-msgstr ""
-
-msgid "New AutoTimer"
-msgstr ""
-
-msgid "Active"
-msgstr ""
-
-msgid "Start"
-msgstr ""
-
-msgid "Stop"
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
-msgid "Select all/none"
-msgstr ""
-
-msgid "Yes"
-msgstr ""
-
-msgid "No"
-msgstr ""
-
-msgid "Delete timer?"
-msgstr ""
-
-msgid "Delete"
-msgstr ""
-
-msgid "Force Update"
-msgstr ""
-
-msgid "Delete Selected AutoTimers"
-msgstr ""
-
-msgid "Delete all selected timers?"
-msgstr ""
-
-msgid "No AutoTimers defined!"
-msgstr ""
-
-msgid "VDR Commands"
-msgstr ""
-
-msgid "Export channels as playlist:"
-msgstr ""
-
-msgid "Number of lines to show:"
-msgstr ""
-
-msgid "unlimited"
-msgstr ""
-
-msgid "SVDRP commands:"
-msgstr ""
-
-msgid "Run"
-msgstr ""
-
-msgid "Really run this command?"
-msgstr ""
-
-msgid "Commands defined in commands.conf:"
-msgstr ""
-
-msgid "Output"
-msgstr ""
-
-msgid "Add New AutoTimer"
-msgstr ""
-
-msgid "Edit AutoTimer"
-msgstr ""
-
-msgid "AutoTimer Active:"
-msgstr ""
-
-msgid "oneshot"
-msgstr ""
-
-msgid "Search Patterns:"
-msgstr ""
-
-msgid "Search in:"
-msgstr ""
-
-msgid "Search only on these days:"
-msgstr ""
-
-msgid "Monday"
-msgstr ""
-
-msgid "Tuesday"
-msgstr ""
-
-msgid "Wednesday"
-msgstr ""
-
-msgid "Thursday"
-msgstr ""
-
-msgid "Friday"
-msgstr ""
-
-msgid "Saturday"
-msgstr ""
-
-msgid "Sunday"
-msgstr ""
-
-msgid "all"
-msgstr ""
-
-msgid "Starts After:"
-msgstr ""
-
-msgid "Ends Before:"
-msgstr ""
-
-msgid "Override Start/Stop Margins:"
-msgstr ""
-
-msgid "Time Margin at Start:"
-msgstr ""
-
-msgid "minutes"
-msgstr ""
-
-msgid "Time Margin at Stop:"
-msgstr ""
-
-msgid "Episode:"
-msgstr ""
-
-msgid "Remember programmed timers:"
-msgstr ""
-
-msgid "Directory:"
-msgstr ""
-
-msgid "Test"
-msgstr ""
-
-msgid "Broadcasted"
-msgstr ""
-
-msgid "Stored in"
-msgstr ""
-
-msgid "No matches found!"
 msgstr ""
 
 msgid "About"
@@ -431,58 +113,418 @@ msgstr ""
 msgid "If you think you have found a bug please check that it's a new one and report it in the <a href=\"http://www.vdr-developer.org/mantisbt/main_page.php\" target=\"_blank\">VDRAdmin-AM BugTracking system</a>."
 msgstr ""
 
-msgid "<p>Here you can edit an automatic timer's (AutoTimer) settings.</p><p>AutoTimer is a key feature of VDRAdmin-AM. An AutoTimer consists of one or more search terms and some other settings, that are looked for regularly in the Electronic Program Guide (EPG). On match AutoTimer adds a timer in VDR automatically for that broadcast. That's very comfortable for irregularly broadcasted series or movies you don't want to miss.</p>"
+msgid "AutoTimer"
 msgstr ""
 
-msgid "Activate or deactivate this AutoTimer. Deactivated AutoTimers are still stored in the AutoTimer list so that they can be activated again, but they do not record anything meanwhile. Above that you can set this to \"oneshot\" so this AutoTimer only programs the (one!) next matching broadcast."
+msgid "Priority:"
 msgstr ""
 
-msgid "Choosing the right search items decides whether only the wanted broadcasts or broadcasts having similar names or even nothing gets recorded.<br />Case doesn't matter, \"X-Files\" matches anything \"x-files\" will match. You can set multiple search items by separating them with spaces. Only broadcasts will match if they contain <strong>all</strong> items.<br />You'd better only use letters and numbers for search items, as the EPG often miss colons, brackets and other characters.<br />Experts can also use regular expressions, but you have to get needed information from the VDRAdmin-AM sources (undocumented feature).<br /><br />You can exclude broadcasts so that they don't get recorded even if they would match an AutoTimer. Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, one event a line. This file must be located in your VDRAdmin-AM's configuration folder. If this string is found either in the EPG's <u>title</u> or in <u>title~subtitle</u>, this event will not be programmed by AutoTimer. So you can disable complete episodes (for example when using \"Enterprise\" as Blacklist-string) or only one episode (when using \"Enterprise~Azati Prime\" as Blacklist-string)."
+msgid "Lifetime:"
 msgstr ""
 
-msgid "Here you can define the EPG sections where VDRAdmin-AM should look for the search pattern."
+msgid "New AutoTimer"
 msgstr ""
 
-msgid "Use these checkboxes to limit searching for matching broadcasts to a set of weekdays."
+msgid "Help"
 msgstr ""
 
-msgid "The channel to look for matching broadcasts or \"all\" to search in all known or wanted channels. You can define the wanted channels for AutoTimer in \"Configuration\"."
+msgid "Active"
 msgstr ""
 
-msgid "A broadcast must start after the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
+msgid "Channel"
 msgstr ""
 
-msgid "A broadcast must end before the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
+msgid "Start"
 msgstr ""
 
-msgid "Set this option to \"yes\" if all timers programed by this AutoTimer should have individual start/stop margins and enter the values in the next two text boxes."
+msgid "Stop"
 msgstr ""
 
-msgid "The number of minutes VDRAdmin-AM subtracts from the broadcasts start time found in the EPG."
+msgid "Name"
 msgstr ""
 
-msgid "The number of minutes VDRAdmin-AM adds to the broadcasts stop time found in the EPG."
+msgid "Select all/none"
 msgstr ""
 
-msgid "Check this box if you want VDRAdmin-AM to append the broadcast's EPG subtitle to the recording's file name."
+msgid "Yes"
 msgstr ""
 
-msgid "If you enable this VDRAdmin-AM will track timers it has already programmed automatically. This is useful if want to deactivate or delete timers that have been programmed automatically in the timers listing."
+msgid "No"
 msgstr ""
 
-msgid "The directory this AutoTimer will place the recordings in. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br />VDRAdmin-AM will append the matching broadcast's title and subtitle (if the \"Episode\" checkbox is marked) to the directory given here.<br /><br />You can also use the following keywords that are replaced in the final file name by the values supplied by for example <a href=\"http://tvmovie2vdr.vdr-developer.org\">tvm2vdr</a>:<ul><li>%Title% - will become the title of the event.</li><li>%Subtitle% - will become the subtitle of the event.</li><li>%Director% - will become the director of the event.</li><li>%Date% - will become the date of the recording.</li><li>%Category% - will become the category of the event (Spielfilm/Serie/...).</li><li>%Genre% - will become the genre of the event (Drama/Krimi/..).</li><li>%Year% - will become the year of production.</li><li>%Country% - will become the country of production.</li><li>%Originaltitle% - will become the original title of the event.</li><li>%FSK% - will become the FSK from the event.</li><li>%Episode% - will become the episode's title of the event.</li><li>%Rating% - will become the rating of the event from the EPG provider.</li></ul><h4>Note:</h4>If you use the above keywords it's in your own responsibility to supply the <strong>complete file name</strong> for the recordings! VDRAdmin-AM will not append anything to the resulting string."
+msgid "Edit"
+msgstr ""
+
+msgid "Delete timer?"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Force Update"
+msgstr ""
+
+msgid "Delete Selected AutoTimers"
+msgstr ""
+
+msgid "Delete all selected timers?"
+msgstr ""
+
+msgid "No AutoTimers defined!"
+msgstr ""
+
+msgid "Add New AutoTimer"
+msgstr ""
+
+msgid "Edit AutoTimer"
+msgstr ""
+
+msgid "AutoTimer Active:"
+msgstr ""
+
+msgid "oneshot"
+msgstr ""
+
+msgid "Search Patterns:"
+msgstr ""
+
+msgid "Search in:"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Subtitle"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Search only on these days:"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "Channel:"
+msgstr ""
+
+msgid "all"
+msgstr ""
+
+msgid "Starts After:"
+msgstr ""
+
+msgid "o'clock"
+msgstr ""
+
+msgid "Ends Before:"
+msgstr ""
+
+msgid "Override Start/Stop Margins:"
+msgstr ""
+
+msgid "Time Margin at Start:"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "Time Margin at Stop:"
+msgstr ""
+
+msgid "Episode:"
+msgstr ""
+
+msgid "Remember programmed timers:"
+msgstr ""
+
+msgid "Directory:"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Test"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Broadcasted"
+msgstr ""
+
+msgid "Stored in"
+msgstr ""
+
+msgid "No matches found!"
+msgstr ""
+
+msgid "Configuration"
+msgstr ""
+
+msgid "General Settings"
+msgstr ""
+
+msgid "Template:"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Login Page:"
+msgstr ""
+
+msgid "Number of channels to use:"
+msgstr ""
+
+msgid "Local net (no login required):"
+msgstr ""
+
+msgid "Language:"
+msgstr ""
+
+msgid "Save settings on exit:"
+msgstr ""
+
+msgid "VDR"
+msgstr ""
+
+msgid "Number of DVB cards:"
+msgstr ""
+
+msgid "Path to recordings:"
+msgstr ""
+
+msgid "Path to configuration files:"
+msgstr ""
+
+msgid "Path to EPG images:"
+msgstr ""
+
+msgid "Identification"
+msgstr ""
+
+msgid "Username:"
+msgstr ""
+
+msgid "Password:"
+msgstr ""
+
+msgid "Guest Account:"
+msgstr ""
+
+msgid "Guest Username:"
+msgstr ""
+
+msgid "Guest Password:"
+msgstr ""
+
+msgid "Timeline"
+msgstr ""
+
+msgid "Hours:"
+msgstr ""
+
+msgid "Times:"
+msgstr ""
+
+msgid "Also used for other EPG views!"
+msgstr ""
+
+msgid "Tooltips:"
+msgstr ""
+
+msgid "Active:"
+msgstr ""
+
+msgid "Send email after programming timer:"
+msgstr ""
+
+msgid "Send email as:"
+msgstr ""
+
+msgid "Send email to:"
+msgstr ""
+
+msgid "Mail server:"
+msgstr ""
+
+msgid "SMTPAuth user:"
+msgstr ""
+
+msgid "SMTPAuth password:"
+msgstr ""
+
+msgid "Track schedule changes by:"
+msgstr ""
+
+msgid "Broadcast time"
+msgstr ""
+
+msgid "Event id"
 msgstr ""
 
 msgid "Timer"
 msgstr ""
 
-msgid "<p>Here you will find a listing of timers known to VDR.</p><p>On top you will find a chart showing a day's timers graphically. This provides an quick overview on what's going on at the specified day and helps you in finding conflicting timers. Moving the mouse cursor above any timer box will display a tooltip containing the timer's title, priority, lifetime and duration.</p><p>Below the chart you'll find the timers list showing you some information on the timers. You can change the list's sorting by clicking the columns heading.</p><p>For each timer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\", \"No\", \"VPS\" or \"Auto\" in the \"Active\" column.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the timer's title.</dd><dt>View its EPG entry</dt><dd>Timers that have set <span class=\"ref_label\">AutoTimer Checking</span> to \"Transmission Identification\" will show you the corresponding EPG entry if you click on the timer's title.</dd><dt>Edit the timer</dt><dd>You can edit a timer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To delete a timer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each timer's state is indicated by differently coloured boxes (in the chart view) or images (in the list view):<br /><span class=\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> Timer is OK and will record.<br /><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timer conflicts with other timers. That's not critical, as long as you have enough DVB cards for the parallel recordings.<br /><span class=\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align=\"middle\" /> Timer is critical and will most likely <strong>not</strong> record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is not active.</p><p>In addition to these functions you can add a new timer by clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at the top and you can delete a number of timers at once by checking the box in the last column of those timers and clicking <input type=\"submit\"  class=\"submit\" value=\"Delete Selected Timers\"/>.</p><p>You can <input type=\"submit\" class=\"submit\" value=\"activate\"/> and <input type=\"submit\" class=\"submit\" value=\"inactivate\"/> selected timers.</p>"
+msgid "Tooltips in timeline:"
 msgstr ""
 
-msgid "Playing Today"
+msgid "Tooltips in list:"
 msgstr ""
 
-msgid "starting at"
+msgid "Streaming"
+msgstr ""
+
+msgid "Live Streaming:"
+msgstr ""
+
+msgid "HTTP Port of Streamdev (also possible 3000/ts):"
+msgstr ""
+
+msgid "Recordings Streaming:"
+msgstr ""
+
+msgid "Path to VDR Recordings on your workstation:"
+msgstr ""
+
+msgid "MIME type for live streaming:"
+msgstr ""
+
+msgid "Suffix for live streaming:"
+msgstr ""
+
+msgid "MIME type for recordings streaming:"
+msgstr ""
+
+msgid "Suffix for recordings streaming:"
+msgstr ""
+
+msgid "Bandwidth of Streams:"
+msgstr ""
+
+msgid "External Search"
+msgstr ""
+
+msgid "URL:"
+msgstr ""
+
+msgid "Title:"
+msgstr ""
+
+msgid "User-defined search:"
+msgstr ""
+
+msgid "Expert"
+msgstr ""
+
+msgid "Update EPG data in background:"
+msgstr ""
+
+msgid "Update EPG every:"
+msgstr ""
+
+msgid "Channel Selections"
+msgstr ""
+
+msgid "Show channels without EPG information:"
+msgstr ""
+
+msgid "In \"AutoTimer\"?"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "EPG Search Blacklists"
+msgstr ""
+
+msgid "New Blacklist"
+msgstr ""
+
+msgid "Search pattern"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "Delete blacklist?"
+msgstr ""
+
+msgid "Delete Selected Blacklists"
+msgstr ""
+
+msgid "Delete all selected blacklists?"
+msgstr ""
+
+msgid "EPG search"
+msgstr ""
+
+msgid "EPG Search"
+msgstr ""
+
+msgid "Use template"
+msgstr ""
+
+msgid "New Search"
+msgstr ""
+
+msgid "Edit Template"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Find"
+msgstr ""
+
+msgid "Show Favorites"
+msgstr ""
+
+msgid "Delete Selected Searches"
+msgstr ""
+
+msgid "Delete all selected searches?"
+msgstr ""
+
+msgid "Execute Selected Searches"
+msgstr ""
+
+msgid "Duration"
+msgstr ""
+
+msgid "More Information"
+msgstr ""
+
+msgid "Channels"
+msgstr ""
+
+msgid "Record"
 msgstr ""
 
 msgid "Add New Blacklist"
@@ -492,9 +534,6 @@ msgid "Edit Blacklist"
 msgstr ""
 
 msgid "Add New Template"
-msgstr ""
-
-msgid "Edit Template"
 msgstr ""
 
 msgid "Add New Search"
@@ -510,9 +549,6 @@ msgid "You didn't select at least one of\\ntitle, subtitle or description.\\nDo 
 msgstr ""
 
 msgid "Hide results"
-msgstr ""
-
-msgid "Settings"
 msgstr ""
 
 msgid "Name:"
@@ -692,133 +728,79 @@ msgstr ""
 msgid "Save as template"
 msgstr ""
 
-msgid "Create New Timer"
-msgstr ""
-
-msgid "Buffer:"
-msgstr ""
-
-msgid "Use VPS:"
-msgstr ""
-
-msgid "readonly"
-msgstr ""
-
-msgid "Timer has been set by AutoTimer pattern:"
-msgstr ""
-
-msgid "No Help Available"
-msgstr ""
-
-msgid "<p>No help available yet. For adding or changing text please contact <a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>.</p>"
+msgid "Run"
 msgstr ""
 
 msgid "Error!"
 msgstr ""
 
-msgid "TV"
+msgid "<p>Here you will find a listing of automatic timers (AutoTimer) known to VDRAdmin-AM.</p><p>The list shows some information on AutoTimers. You can change the list's sorting by clicking the columns heading.</p><p>For each AutoTimer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each AutoTimer's state is indicated by differently coloured images:<br /><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> AutoTimer is OK and will automatically program matching broadcasts.<br /><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> AutoTimer is not active.</p><p>In addition to these functions you can add a new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value=\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at once by checking the box in the last column of those timers and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/>.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and check for matching AutoTimers.</p>"
 msgstr ""
 
-msgid "Interval:"
+msgid "<p>Here you can edit an automatic timer's (AutoTimer) settings.</p><p>AutoTimer is a key feature of VDRAdmin-AM. An AutoTimer consists of one or more search terms and some other settings, that are looked for regularly in the Electronic Program Guide (EPG). On match AutoTimer adds a timer in VDR automatically for that broadcast. That's very comfortable for irregularly broadcasted series or movies you don't want to miss.</p>"
 msgstr ""
 
-msgid "sec."
+msgid "Activate or deactivate this AutoTimer. Deactivated AutoTimers are still stored in the AutoTimer list so that they can be activated again, but they do not record anything meanwhile. Above that you can set this to \"oneshot\" so this AutoTimer only programs the (one!) next matching broadcast."
 msgstr ""
 
-msgid "G"
+msgid "Choosing the right search items decides whether only the wanted broadcasts or broadcasts having similar names or even nothing gets recorded.<br />Case doesn't matter, \"X-Files\" matches anything \"x-files\" will match. You can set multiple search items by separating them with spaces. Broadcasts will match only if they match <strong>all</strong> configured search items.<br />You'd better only use letters and numbers for search items, as the EPG often miss colons, brackets and other characters.<br />Experts can also use regular expressions, but you have to get needed information from the VDRAdmin-AM sources (undocumented feature).<br /><br />You can exclude broadcasts so that they don't get recorded even if they would match an AutoTimer. Therefore you have to enter that titles into the file <i>vdradmind.bl</i>, one event a line. This file must be located in your VDRAdmin-AM's configuration folder. If this string is found either in the EPG's <u>title</u> or in <u>title~subtitle</u>, this event will not be programmed by AutoTimer. So you can disable complete episodes (for example when using \"Enterprise\" as blacklist string) or only one episode (when using \"Enterprise~Azati Prime\" as blacklist string)."
 msgstr ""
 
-msgid "Grab the picture!"
+msgid "Here you can define the EPG sections where VDRAdmin-AM should look for the search pattern."
 msgstr ""
 
-msgid "Size:"
+msgid "Use these checkboxes to limit searching for matching broadcasts to a set of weekdays."
 msgstr ""
 
-msgid "Open in separate window"
+msgid "The channel to look for matching broadcasts or \"all\" to search in all known or wanted channels. You can define the wanted channels for AutoTimer in \"Configuration\"."
 msgstr ""
 
-msgid "Playing Today?"
+msgid "A broadcast must start after the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
 msgstr ""
 
-msgid "Timeline"
+msgid "A broadcast must end before the time entered here to match. The first text field is for \"hour\", the second for \"minute\"."
 msgstr ""
 
-msgid "EPG Search"
+msgid "Set this option to \"yes\" if all timers programed by this AutoTimer should have individual start/stop margins and enter the values in the next two text boxes."
 msgstr ""
 
-msgid "Recordings"
+msgid "The number of minutes VDRAdmin-AM subtracts from the broadcast's start time found in the EPG."
 msgstr ""
 
-msgid "Remote Control"
+msgid "The number of minutes VDRAdmin-AM adds to the broadcast's stop time found in the EPG."
 msgstr ""
 
-msgid "Watch TV"
+msgid "An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording."
 msgstr ""
 
-msgid "Commands"
+msgid "The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by."
 msgstr ""
 
-msgid "Configuration"
+msgid "Check this box if you want VDRAdmin-AM to append the broadcast's EPG subtitle to the recording's file name."
 msgstr ""
 
-msgid "Search"
+msgid "If you enable this VDRAdmin-AM will track timers it has already programmed automatically. This is useful if want to deactivate or delete timers that have been programmed automatically in the timers listing."
+msgstr ""
+
+msgid "The directory this AutoTimer will place the recordings in. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br />VDRAdmin-AM will append the matching broadcast's title and subtitle (if the \"Episode\" checkbox is marked) to the directory given here.<br /><br />You can also use the following keywords that are replaced in the final file name by the values supplied by for example <a href=\"http://tvmovie2vdr.vdr-developer.org\">tvm2vdr</a>:<ul><li>%Title% - will become the title of the event.</li><li>%Subtitle% - will become the subtitle of the event.</li><li>%Director% - will become the director of the event.</li><li>%Date% - will become the date of the recording.</li><li>%Category% - will become the category of the event (Spielfilm/Serie/...).</li><li>%Genre% - will become the genre of the event (Drama/Krimi/..).</li><li>%Year% - will become the year of production.</li><li>%Country% - will become the country of production.</li><li>%Originaltitle% - will become the original title of the event.</li><li>%FSK% - will become the FSK from the event.</li><li>%Episode% - will become the episode's title of the event.</li><li>%Rating% - will become the rating of the event from the EPG provider.</li></ul><h4>Note:</h4>If you use the above keywords it's in your own responsibility to supply the <strong>complete file name</strong> for the recordings! VDRAdmin-AM will not append anything to the resulting string."
 msgstr ""
 
 msgid "<p>Here you can change general settings and base settings for timers, AutoTimers, channel selection and streaming parameters.</p>"
 msgstr ""
 
-msgid "General Settings"
-msgstr ""
-
-msgid "VDR"
-msgstr ""
-
-msgid "Identification"
-msgstr ""
-
-msgid "Streaming"
-msgstr ""
-
-msgid "Expert"
-msgstr ""
-
-msgid "External Search"
-msgstr ""
-
-msgid "Channel Selections"
-msgstr ""
-
-msgid "Skin:"
-msgstr ""
-
 msgid "The skin you want to use."
-msgstr ""
-
-msgid "Login Page:"
 msgstr ""
 
 msgid "The page you want to see at first connect to VDRAdmin-AM."
 msgstr ""
 
-msgid "Number of channels to use:"
-msgstr ""
-
 msgid "VDRAdmin-AM will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin-AM will read so that you can use this to reduce VDRAdmin-AM's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin-AM will use all available channels."
-msgstr ""
-
-msgid "Local net (no login required):"
 msgstr ""
 
 msgid "Here you can specify an IP address or range that can login without providing login information. For example: \"192.168.0.0/24\" will include any IP starting with \"192.168.0\", \"192.168.0.123/32\" will only match \"192.168.0.123\"."
 msgstr ""
 
-msgid "Language:"
-msgstr ""
-
 msgid "Here you can set the localization VDRAdmin-AM should use."
-msgstr ""
-
-msgid "Save settings on exit:"
 msgstr ""
 
 msgid "With this option the settings will be saved if VDRAdmin-AM exits. This will also save settings not available on the \"Configuration\" menu like interval and size in TV, sorting in the lists and current view in \"What's on now\"."
@@ -827,127 +809,64 @@ msgstr ""
 msgid "Top"
 msgstr ""
 
-msgid "Number of DVB cards:"
-msgstr ""
-
 msgid "The number of DVB cards VDR can access. Depending on this value VDRAdmin-AM will calculate critical timers in the <span class=\"ref_menu\">Timer</span> menu."
-msgstr ""
-
-msgid "Path to recordings:"
 msgstr ""
 
 msgid "The path to VDR's recordings. It's used so that VDRAdmin-AM can locate the recordings when using <span class=\"ref_label\">Recordings Streaming</span> and <span class=\"ref_file\">reccmds.conf</span> in the <span class=\"ref_menu\">Recordings</span> menu."
 msgstr ""
 
-msgid "Path to configuration files:"
-msgstr ""
-
 msgid "The path where VDR's configuration files are located. If this directory contains the file <span class=\"ref_file\">reccmds.conf</span> its content is shown in a selectbox in the <span class=\"ref_menu\">Recordings</span> menu."
-msgstr ""
-
-msgid "Path to EPG images:"
 msgstr ""
 
 msgid "The path where the EPG images are stored."
 msgstr ""
 
-msgid "Username:"
-msgstr ""
-
 msgid "The username for the main user, i.e. the user having the most privileges."
-msgstr ""
-
-msgid "Password:"
 msgstr ""
 
 msgid "The main user's password."
 msgstr ""
 
-msgid "Guest Account:"
-msgstr ""
-
 msgid "If you want a user account having only limited privileges, this is for you. The guest user cannot modify anything, it's only allowed to view the EPG, timers, AutoTimers and recordings listings."
-msgstr ""
-
-msgid "Guest Username:"
 msgstr ""
 
 msgid "The username for the guest user."
 msgstr ""
 
-msgid "Guest Password:"
-msgstr ""
-
 msgid "The guest user's password."
-msgstr ""
-
-msgid "Hours:"
 msgstr ""
 
 msgid "The number of hours to show in the timeline."
 msgstr ""
 
-msgid "Times:"
-msgstr ""
-
 msgid "A comma separated list of times in <strong>hh:mm</strong> format that appear in the selectbox placed at the top."
-msgstr ""
-
-msgid "Tooltips:"
 msgstr ""
 
 msgid "Here you can (de-)activate the tooltips."
 msgstr ""
 
-msgid "Active:"
-msgstr ""
-
 msgid "Activate or deactivate the AutoTimer function."
-msgstr ""
-
-msgid "Send email after programming timer:"
 msgstr ""
 
 msgid "VDRAdmin-AM will send an email whenever an event matches an AutoTimer and a timer has been programmed if you enable this feature."
 msgstr ""
 
-msgid "Send email as:"
-msgstr ""
-
 msgid "Here you set the sending email address of the generated email."
-msgstr ""
-
-msgid "Send email to:"
 msgstr ""
 
 msgid "The email address the email is sent to."
 msgstr ""
 
-msgid "Mail server:"
-msgstr ""
-
 msgid "The outgoing mail server."
-msgstr ""
-
-msgid "SMTPAuth user:"
 msgstr ""
 
 msgid "If you need to authenticate yourself at the outgoing mail server, you have to supply the username and the password below. Leaving this field empty will disable SMTPAuth."
 msgstr ""
 
-msgid "SMTPAuth password:"
-msgstr ""
-
 msgid "The password for the SMTPAuth user."
 msgstr ""
 
-msgid "Tooltips in timeline:"
-msgstr ""
-
 msgid "Here you can (de-)activate the tooltips in the timeline."
-msgstr ""
-
-msgid "Tooltips in list:"
 msgstr ""
 
 msgid "Here you can (de-)activate the tooltips in the list."
@@ -959,49 +878,25 @@ msgstr ""
 msgid "If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here."
 msgstr ""
 
-msgid "Live Streaming:"
-msgstr ""
-
 msgid "Enable or disable live streaming using the <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
-msgstr ""
-
-msgid "HTTP Port of Streamdev (also possible 3000/ts):"
 msgstr ""
 
 msgid "Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use."
 msgstr ""
 
-msgid "Recordings Streaming:"
-msgstr ""
-
 msgid "Enable or disable streaming of recordings.<br />Well actually this is no real \"streaming\", but you have to setup your workstation so that it can access VDR's recordings. You can use for example Samba or NFS for this. VDRAdmin-AM simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation's display."
-msgstr ""
-
-msgid "Path to VDR Recordings on your workstation:"
 msgstr ""
 
 msgid "This is the path where your workstation can access VDR's recordings. This depends on your VDR and workstation setup, for example \"\\\\vdr\\videos\" or \"V:\\\" (on Windows) or \"/mnt/videos\" (on Linux)."
 msgstr ""
 
-msgid "MIME type for live streaming:"
-msgstr ""
-
 msgid "The MIME type to send when using live streaming. Defaults to \"video/x-mpegurl\"."
-msgstr ""
-
-msgid "Suffix for live streaming:"
 msgstr ""
 
 msgid "The suffix to use for live streaming. Defaults to \"m3u\"."
 msgstr ""
 
-msgid "MIME type for recordings streaming:"
-msgstr ""
-
 msgid "The MIME type to send when using recordings streaming. Defaults to \"video/x-mpegurl\"."
-msgstr ""
-
-msgid "Suffix for recordings streaming:"
 msgstr ""
 
 msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
@@ -1019,13 +914,7 @@ msgstr ""
 msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what you are doing!</p>"
 msgstr ""
 
-msgid "Update EPG data in background:"
-msgstr ""
-
 msgid "If set to \"yes\" VDRAdmin-AM will periodically refresh its local EPG cache. Else the EPG will be refreshed if the user accesses any EPG view at the web interface and the timeout set at \"Update EPG every\" has been reached."
-msgstr ""
-
-msgid "Update EPG every:"
 msgstr ""
 
 msgid "The interval, the EPG data is refreshed from VDR and AutoTimer updates are performed (if AutoTimer feature is used)."
@@ -1034,34 +923,13 @@ msgstr ""
 msgid "<p>If you want to limit the number of channels used in some parts of VDRAdmin-AM, this is for you!</p><p>Use the radio buttons to activate or deactivate the wanted channels in the named menu.</p><p>To add channels to the list of wanted channels you have to select them in the left side selectbox and click <input type=\"submit\" class=\"submit\" value=\"&gt;&gt;&gt;&gt;&gt;\"/>. If you want to remove channels from the list of wanted channels you have to select them in the right side selectbox and click <input type=\"submit\" class=\"submit\" value=\"&lt;&lt;&lt;&lt;&lt;\"/>.</p>"
 msgstr ""
 
-msgid "Show channels without EPG information:"
-msgstr ""
-
 msgid "Usually channels that don't have EPG information are hidden in all EPG views. If you don't want them to be hidden you have to set this option to \"yes\"."
 msgstr ""
 
-msgid "<p>Here you will find a listing of automatic timers (AutoTimer) known to VDRAdmin-AM.</p><p>The list shows some information on AutoTimers. You can change the list's sorting by clicking the columns heading.</p><p>For each AutoTimer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\" or \"No\" in the \"Active\" column to toggle the activity.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the AutoTimer's title.</dd><dt>Edit the AutoTimer</dt><dd>You can edit an AutoTimer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the AutoTimer</dt><dd>To delete an AutoTimer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each AutoTimer's state is indicated by differently coloured images:<br /><img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> AutoTimer is OK and will automatically program matching broadcasts.<br /><img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> AutoTimer is not active.</p><p>In addition to these functions you can add a new AutoTimer by clicking <input type=\"submit\" class=\"submit\" value=\"New AutoTimer\"/> at the top and you can delete a number of AutoTimers at once by checking the box in the last column of those timers and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected AutoTimers\"/>.</p><p>Click <input type=\"submit\" class=\"submit\" value=\"Force Update\"/> to force VDRAdmin-AM to reconnect to VDR, fetch the current EPG and check for matching AutoTimers.</p>"
+msgid "Edit Timer"
 msgstr ""
 
-msgid "Your Browser does not support frames!"
-msgstr ""
-
-msgid "Rename Recording"
-msgstr ""
-
-msgid "Original Name of Recording:"
-msgstr ""
-
-msgid "New Name of Recording:"
-msgstr ""
-
-msgid "Subtitle:"
-msgstr ""
-
-msgid "Rename"
-msgstr ""
-
-msgid "<p>Here you will find a listing of recordings known to VDR. The headline will also show you VDR's total and free disk space.</p><p>The listing showing you some information on the recordings. You can change the list's sorting by clicking the columns heading. Above the list you'll see the navigation path. If you want to view the contents of previous folders you'll have to click on its name in that path.</p><p>Each row contains this information:<dl><dt>Date</dt><dd>The date when the recording has been done. In case of folders this will show the number of recordings the folder contains.</dd><dt>Time</dt><dd>The time when the recording has been done. In case of folders this will show the number of <strong>new</strong> recordings the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. Click it to show the recording's summary or descend into the folder.</dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> SVDRPort command which is no core VDR feature but is available through a patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete (<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)</dt><dd>This column is only shown if you activated and configured <span class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu\">Configuration</span> menu. You can watch the recording at your workstation.</dd></dl></p><p>In addition to these functions you can delete a number of recordings at once by checking the box in the last but one column of those recordings and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the VDR's configuration files and have entries in VDR's <span class=\"ref_file\">reccmds.conf</span> you can run those commands for the selected recording by selecting the wanted command in the select box locate next to <span class=\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class=\"submit\" value=\"Run\"/> button.</p><p>Use <input type=\"submit\" class=\"submit\" value=\"Refresh\"/> to force reloading of VDR's recordings listing.</p>"
+msgid "Edit EPG"
 msgstr ""
 
 msgid "<p>Here you can edit the descriptive fields of an existing EPG entry.</p>"
@@ -1106,10 +974,250 @@ msgstr ""
 msgid "If available this field shows the audio track(s). It cannot be changed."
 msgstr ""
 
+msgid "No Help Available"
+msgstr ""
+
+msgid "<p>No help available yet. For adding or changing text please contact <a href=\"mailto:mail@andreas.vdr-developer.org\">mail@andreas.vdr-developer.org</a>.</p>"
+msgstr ""
+
+msgid "Recordings"
+msgstr ""
+
+msgid "<p>Here you will find a listing of recordings known to VDR. The headline will also show you VDR's total and free disk space.</p><p>The listing showing you some information on the recordings. You can change the list's sorting by clicking the columns heading. Above the list you'll see the navigation path. If you want to view the contents of previous folders you'll have to click on its name in that path.</p><p>Each row contains this information:<dl><dt>Date</dt><dd>The date when the recording has been done. In case of folders this will show the number of recordings the folder contains.</dd><dt>Time</dt><dd>The time when the recording has been done. In case of folders this will show the number of <strong>new</strong> recordings the folder contains.</dd><dt>Name</dt><dd>The recording's or folder's name. Click it to show the recording's summary or descend into the folder.</dd><dt>Rename (<img src=\"bilder/edit.png\" alt=\"edit\" />)</dt><dd>Rename a recording.<br /><h4>Note:</h4>This only works if VDR has the <u>RENR</u> SVDRPort command which is no core VDR feature but is available through a patch. <span class=\"ref_file\">vdr-aio21_svdrprename.patch</span> or <span class=\"ref_file\">enAIO-v2.2+</span> provide this command.</dd><dt>Delete (<img src=\"bilder/delete.png\" alt=\"delete\" />)</dt><dd>Delete a recording.</dd><dt>Stream (<img src=\"bilder/stream.png\" alt=\"stream\" />)</dt><dd>This column is only shown if you activated and configured <span class=\"ref_label\">Recordings Streaming</span> in the <span class=\"ref_menu\">Configuration</span> menu. You can watch the recording at your workstation.</dd></dl></p><p>In addition to these functions you can delete a number of recordings at once by checking the box in the last but one column of those recordings and clicking <input type=\"submit\" class=\"submit\" value=\"Delete Selected Recordings\"/>.</p><p>If you've set the path the VDR's configuration files and have entries in VDR's <span class=\"ref_file\">reccmds.conf</span> you can run those commands for the selected recording by selecting the wanted command in the select box locate next to <span class=\"ref_label\">Commands:</span> and pressing the <input type=\"submit\" class=\"submit\" value=\"Run\"/> button.</p><p>Use <input type=\"submit\" class=\"submit\" value=\"Refresh\"/> to force reloading of VDR's recordings listing.</p>"
+msgstr ""
+
+msgid "<p>Here you will find a listing of timers known to VDR.</p><p>On top you will find a chart showing a day's timers graphically. This provides an quick overview on what's going on at the specified day and helps you in finding conflicting timers. Moving the mouse cursor above any timer box will display a tooltip containing the timer's title, priority, lifetime and duration.</p><p>Below the chart you'll find the timers list showing you some information on the timers. You can change the list's sorting by clicking the columns heading.</p><p>For each timer you have the following options:<dl><dt>Set its state</dt><dd>By clicking on \"Yes\", \"No\", \"VPS\" or \"Auto\" in the \"Active\" column.</dd><dt>Quickly view its priority and lifetime</dt><dd>By pointing the mouse cursor to the timer's title.</dd><dt>View its EPG entry</dt><dd>Timers that have set <span class=\"ref_label\">AutoTimer Checking</span> to \"Transmission Identification\" will show you the corresponding EPG entry if you click on the timer's title.</dd><dt>Edit the timer</dt><dd>You can edit a timer by clicking <img src=\"bilder/edit.png\" alt=\"edit\" />.</dd><dt>Delete the timer</dt><dd>To delete a timer you click <img src=\"bilder/delete.png\" alt=\"delete\" />.</dd></dl></p><p>Each timer's state is indicated by differently coloured boxes (in the chart view) or images (in the list view):<br /><span class=\"color_ok\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gruen.png\" alt=\"on\" align=\"middle\" /> Timer is OK and will record.<br /><span class=\"color_collision\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_gelb.png\" alt=\"problem\" align=\"middle\" /> Timer conflicts with other timers. That's not critical, as long as you have enough DVB cards for the parallel recordings.<br /><span class=\"color_conflict\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_rot.png\" alt=\"impossible\" align=\"middle\" /> Timer is critical and will most likely <strong>not</strong> record.<br /><span class=\"color_inactive\">&nbsp;&nbsp;&nbsp;</span> / <img src=\"bilder/poempl_grau.png\" alt=\"inactive\" align=\"middle\" /> Timer is not active.</p><p>In addition to these functions you can add a new timer by clicking <input type=\"submit\" class=\"submit\" value=\"New Timer\"/> at the top and you can delete a number of timers at once by checking the box in the last column of those timers and clicking <input type=\"submit\"  class=\"submit\" value=\"Delete Selected Timers\"/>.</p><p>You can <input type=\"submit\" class=\"submit\" value=\"activate\"/> and <input type=\"submit\" class=\"submit\" value=\"inactivate\"/> selected timers.</p>"
+msgstr ""
+
+msgid "<p>Here you can edit a timer's settings.</p>"
+msgstr ""
+
+msgid "Timer Active:"
+msgstr ""
+
+msgid "Activate or deactivate this timer. Deactivated timers are still stored in the timer list so that they can be activated again, but they do not record anything meanwhile."
+msgstr ""
+
+msgid "AutoTimer Checking:"
+msgstr ""
+
+msgid "Depending on how this timer has been programmed you have up to three possible settings:"
+msgstr ""
+
+msgid "Transmission Identification"
+msgstr ""
+
+msgid "Monitor this timer using the identification provided in the EPG. Please note that this only works if the provided identification is a fix and unique value! This option is not available with timers programmed in VDR."
+msgstr ""
+
+msgid "Time"
+msgstr ""
+
+msgid "Monitor this timer using the start and stop time."
+msgstr ""
+
+msgid "off"
+msgstr ""
+
+msgid "Do not monitor this timer."
+msgstr ""
+
+msgid "The channel to record."
+msgstr ""
+
+msgid "Day Of Recording:"
+msgstr ""
+
+msgid "The day when the timer should get active. You can enter the day in two formats:<ul><li>Two digits (DD). This will use the current month and year.</li><li>ISO norm (YYYY-MM-DD). Program your timers as far in the future as you like.</li></ul>In case you want to program a repeating timer you can use the seven checkboxes below the text field. Check the box for each day you want the timer to get active."
+msgstr ""
+
+msgid "Start Time:"
+msgstr ""
+
+msgid "This is the time when the timer should start recording. The first text field is for \"hour\", the second for \"minute\"."
+msgstr ""
+
+msgid "End Time:"
+msgstr ""
+
+msgid "This is the time when the timer should stop recording. The first text field is for \"hour\", the second for \"minute\"."
+msgstr ""
+
+msgid "Title of Recording:"
+msgstr ""
+
+msgid "The <strong>file name</strong> this timer will give to a recording. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br /><br />The special keywords <strong>TITLE</strong> and <strong>EPISODE</strong>, if present, will be replaced by the title and episode information from the EPG data at the time of recording (if that data is available). If at the time of recording either of these cannot be determined, <strong>TITLE</strong> will default to the channel name, and <strong>EPISODE</strong> will default to a blank."
+msgstr ""
+
+msgid "Summary:"
+msgstr ""
+
+msgid "Arbitrary text that describes the recording made by this timer. If this field is not empty, its contents will be written into the <span class=\"ref_file\">summary.vdr</span> or <span class=\"ref_file\">info.vdr</span> file of the recording."
+msgstr ""
+
+msgid "Your Browser does not support frames!"
+msgstr ""
+
+msgid "What's On Now?"
+msgstr ""
+
+msgid "Playing Today?"
+msgstr ""
+
+msgid "Remote Control"
+msgstr ""
+
+msgid "Watch TV"
+msgstr ""
+
+msgid "Commands"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Authorization Required"
+msgstr ""
+
+msgid "This server could not verify that you are authorized to access the document requested. Either you supplied the wrong credentials (e.g. bad password), or your browser doesn't understand how to supply the credentials required."
+msgstr ""
+
+msgid "VPS"
+msgstr ""
+
+msgid "close"
+msgstr ""
+
+msgid "view"
+msgstr ""
+
+msgid "search"
+msgstr ""
+
+msgid "edit"
+msgstr ""
+
+msgid "Video tracks:"
+msgstr ""
+
+msgid "Audio tracks:"
+msgstr ""
+
+msgid "Video tracks"
+msgstr ""
+
+msgid "Audio tracks"
+msgstr ""
+
+msgid "TV select"
+msgstr ""
+
+msgid "Stream"
+msgstr ""
+
+msgid "Channel group:"
+msgstr ""
+
+msgid "Go!"
+msgstr ""
+
+msgid "Search for other show times"
+msgstr ""
+
+msgid "No Information"
+msgstr ""
+
+msgid "No EPG information available"
+msgstr ""
+
+msgid "Playing Today"
+msgstr ""
+
+msgid "starting at"
+msgstr ""
+
+msgid "What's on:"
+msgstr ""
+
+msgid "at"
+msgstr ""
+
+msgid "now"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
 msgid "Duration:"
 msgstr ""
 
 msgid "min"
+msgstr ""
+
+msgid "at:"
+msgstr ""
+
+msgid "You need JavaScript to use the timeline!"
+msgstr ""
+
+msgid "Rename Recording"
+msgstr ""
+
+msgid "Original Name of Recording:"
+msgstr ""
+
+msgid "New Name of Recording:"
+msgstr ""
+
+msgid "Subtitle:"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Total:"
+msgstr ""
+
+msgid "h"
+msgstr ""
+
+msgid "Free:"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "Play"
+msgstr ""
+
+msgid "Cut"
+msgstr ""
+
+msgid "Delete recording?"
+msgstr ""
+
+msgid "Refresh"
+msgstr ""
+
+msgid "Commands:"
+msgstr ""
+
+msgid "Really run this command?"
+msgstr ""
+
+msgid "Delete Selected Recordings"
+msgstr ""
+
+msgid "Delete all selected recordings?"
+msgstr ""
+
+msgid "No recordings available"
 msgstr ""
 
 msgid "Transponder:"
@@ -1119,9 +1227,6 @@ msgid "CA-System:"
 msgstr ""
 
 msgid "New Timer"
-msgstr ""
-
-msgid "Date"
 msgstr ""
 
 msgid "Edit timer status?"
@@ -1157,157 +1262,61 @@ msgstr ""
 msgid "No timers defined!"
 msgstr ""
 
-msgid "EPG Search Blacklists"
+msgid "Create New Timer"
 msgstr ""
 
-msgid "New Blacklist"
+msgid "Buffer:"
 msgstr ""
 
-msgid "Search pattern"
+msgid "Use VPS:"
 msgstr ""
 
-msgid "From"
+msgid "readonly"
 msgstr ""
 
-msgid "To"
+msgid "Timer has been set by AutoTimer pattern:"
 msgstr ""
 
-msgid "Delete blacklist?"
+msgid "TV"
 msgstr ""
 
-msgid "Delete Selected Blacklists"
+msgid "Interval:"
 msgstr ""
 
-msgid "Delete all selected blacklists?"
+msgid "sec."
 msgstr ""
 
-msgid "EPG search"
+msgid "G"
 msgstr ""
 
-msgid "Use template"
+msgid "Grab the picture!"
 msgstr ""
 
-msgid "New Search"
+msgid "Size:"
 msgstr ""
 
-msgid "Action"
+msgid "Open in separate window"
 msgstr ""
 
-msgid "Find"
+msgid "VDR Commands"
 msgstr ""
 
-msgid "Show Favorites"
+msgid "Export channels as playlist:"
 msgstr ""
 
-msgid "Delete Selected Searches"
+msgid "Number of lines to show:"
 msgstr ""
 
-msgid "Delete all selected searches?"
+msgid "unlimited"
 msgstr ""
 
-msgid "Execute Selected Searches"
+msgid "SVDRP commands:"
 msgstr ""
 
-msgid "Duration"
+msgid "Commands defined in commands.conf:"
 msgstr ""
 
-msgid "Template:"
-msgstr ""
-
-msgid "Also used for other EPG views!"
-msgstr ""
-
-msgid "Bandwidth of Streams:"
-msgstr ""
-
-msgid "URL:"
-msgstr ""
-
-msgid "Title:"
-msgstr ""
-
-msgid "User-defined search:"
-msgstr ""
-
-msgid "In \"AutoTimer\"?"
-msgstr ""
-
-msgid "Apply"
-msgstr ""
-
-msgid "close"
-msgstr ""
-
-msgid "view"
-msgstr ""
-
-msgid "search"
-msgstr ""
-
-msgid "edit"
-msgstr ""
-
-msgid "Video tracks:"
-msgstr ""
-
-msgid "Audio tracks:"
-msgstr ""
-
-msgid "now"
-msgstr ""
-
-msgid "to"
-msgstr ""
-
-msgid "at:"
-msgstr ""
-
-msgid "You need JavaScript to use the timeline!"
-msgstr ""
-
-msgid "Authorization Required"
-msgstr ""
-
-msgid "This server could not verify that you are authorized to access the document requested. Either you supplied the wrong credentials (e.g. bad password), or your browser doesn't understand how to supply the credentials required."
-msgstr ""
-
-msgid "Total:"
-msgstr ""
-
-msgid "h"
-msgstr ""
-
-msgid "Free:"
-msgstr ""
-
-msgid "Total"
-msgstr ""
-
-msgid "New"
-msgstr ""
-
-msgid "Play"
-msgstr ""
-
-msgid "Cut"
-msgstr ""
-
-msgid "Delete recording?"
-msgstr ""
-
-msgid "Refresh"
-msgstr ""
-
-msgid "Commands:"
-msgstr ""
-
-msgid "Delete Selected Recordings"
-msgstr ""
-
-msgid "Delete all selected recordings?"
-msgstr ""
-
-msgid "No recordings available"
+msgid "Output"
 msgstr ""
 
 msgid "What's your VDR hostname (e.g video.intra.net)?"

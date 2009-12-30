@@ -1,3 +1,5 @@
+/*jslint browser: true */
+
 //
 // this is part of VDR Admin
 //
@@ -7,12 +9,16 @@ function open_help(url) {
 
 function del(message, suffix) {
 	check=confirm(message);
-	if(check) window.location.href=suffix;
+	if(check) {
+		window.location.href=suffix;
+	}
 }
 
 function change(message, suffix) {
 	check=confirm(message);
-	if(check) window.location.href=suffix;
+	if(check) {
+		window.location.href=suffix;
+	}
 }
 
 function mdel(but, message) {
@@ -37,7 +43,8 @@ function AllMessages(myform)
 {
 	for (var x = 0; x < myform.elements.length; x++) {
 		var y = myform.elements[x];
-		if (y.name != 'SELALL')
-				y.checked = myform.SELALL.checked;
+		if (y.name != 'SELALL') {
+			y.checked = myform.SELALL.checked;
+		}
 	}
 }

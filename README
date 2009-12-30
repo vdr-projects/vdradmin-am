@@ -36,25 +36,33 @@ GNU GENERAL PUBLIC LICENSE Version 2 (GPLv2) *only*.
 Requirements
 ------------
 
-- VDR (http://www.cadsoft.de/people/kls/vdr/)
+- VDR (http://www.tvdr.de/)
 - Some Perl modules (see "./install.sh -p"):
   - Required:
 	  - Template
-	  - Compress::Zlib
+	  - Template::Plugin::JavaScript
 	  - CGI
+	  - HTTP::Date
 	  - IO::Socket
 	  - Time::Local
 	  - MIME::Base64
 	  - File::Temp
 	  - URI::Escape
-    - Locale::gettext OR Locale::Messages
+	  - Locale::gettext OR Locale::Messages
 	- Optional:
+	  - Required for built-in HTTP response compression:
+	    - Compress::Zlib
 	  - Required for AutoTimer email notification:
 	    - Net::SMTP
 	    - Authen::SASL
 	  - Required for AutoTimer email notification and CRAM-MD5 authentication:
 	    - Digest::HMAC_MD5
-
+	  - Required for syslog logging:
+	    - Sys::Syslog
+	  - Required for IPv6 support:
+	    - IO::Socket::INET6
+	  - Required for SSL support (https):
+	    - IO::Socket::SSL
 
 Description
 -----------
@@ -71,8 +79,8 @@ See "INSTALL" file.
 Options
 -------
 
-	-nf, --nofork
-		don't fork.
+	-n, --nofork
+		don't fork, log to stderr.
 
 	-c,  --config
 		run configuration dialog.
@@ -85,6 +93,15 @@ Options
 
 	-p [name], --pid [name]
 		name of pidfile to use.
+
+  -6, --ipv6
+    use IPv6.
+
+  -s, --ssl
+    only accept https:// connections.
+
+	-l [level], --log [level]
+		set log level for this session [0 - 7].
 
 	-h, --help
 		print usage information.

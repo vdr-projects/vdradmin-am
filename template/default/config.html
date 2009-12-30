@@ -240,6 +240,13 @@
 					<input type="radio" name="AT_TOOLTIP" value="0" id="at_tooltip_no" <?% UNLESS config.AT_TOOLTIP %?>checked="checked"<?% END %?> /><label for="at_tooltip_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
+			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Track schedule changes by:') %?></h5></td>
+				<td class="col_value">
+					<input type="radio" name="NO_EVENTID" value="1" id="no_eventid_1" <?% IF config.NO_EVENTID %?>checked="checked"<?% END %?> /><label for="no_eventid_1"><?% gettext('Broadcast time') %?></label>
+					<input type="radio" name="NO_EVENTID" value="0" id="no_eventid_0" <?% UNLESS config.NO_EVENTID %?>checked="checked"<?% END %?> /><label for="no_eventid_0"><?% gettext('Event id') %?></label>
+				</td>
+			</tr>
 		</table>
 <?% END %?>
 

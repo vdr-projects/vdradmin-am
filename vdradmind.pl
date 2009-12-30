@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 # vim:et:sw=4:ts=4:
 #
-# VDRAdmin-AM 2005 - 2008 by Andreas Mair <mail@andreas.vdr-developer.org>
+# VDRAdmin-AM 2005 - 2010 by Andreas Mair <mail@andreas.vdr-developer.org>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@ require 5.004;
 
 use vars qw($PROCNAME);
 
-my $VERSION = "3.6.4";
+my $VERSION = "3.6.5";
 my $BASENAME;
 my $EXENAME;
 
@@ -63,14 +63,15 @@ require File::Temp;
 use locale;
 use Env qw(@PATH LANGUAGE LANG);
 use CGI qw(:no_debug);
+use HTTP::Date qw(time2str);
 use IO::Socket;
 use Template;
 use Time::Local qw(timelocal);
-use POSIX ":sys_wait_h", qw(strftime mktime locale_h);
-use MIME::Base64();
+use POSIX qw(:sys_wait_h strftime mktime locale_h);
+use MIME::Base64 ();
 use File::Temp ();
-use Shell qw(ps locale);
-use URI::Escape;
+use Shell qw(locale);
+use URI::Escape qw(uri_escape);
 
 my $can_use_encode = 1;
 $can_use_encode = undef unless (eval { require Encode });
@@ -112,17 +113,16 @@ my $CHAN_RADIO  = 3;
 sub true ()           { 1 }
 sub false ()          { 0 }
 sub CRLF ()           { "\r\n" }
-sub LOG_ACCESS ()     { 1 }
-sub LOG_SERVERCOM ()  { 2 }
-sub LOG_VDRCOM ()     { 4 }
-sub LOG_STATS ()      { 8 }
-sub LOG_AT ()         { 16 }
-sub LOG_CHECKTIMER () { 32 }
-sub LOG_FATALERROR () { 64 }
-sub LOG_DEBUG ()      { 32768 }
+# [ internal log level, syslog priority ]
+sub LOG_ALWAYS ()     { [ 0, "err"     ] }
+sub LOG_FATALERROR () { [ 0, "err"     ] }
+sub LOG_ERROR ()      { [ 3, "err"     ] }
+sub LOG_WARNING ()    { [ 4, "warning" ] }
+sub LOG_INFO ()       { [ 6, "info"    ] }
+sub LOG_DEBUG ()      { [ 7, "debug"   ] }
 
 my (%CONFIG, %CONFIG_TEMP);
-$CONFIG{LOGLEVEL}             = 81;                # 32799
+$CONFIG{LOGLEVEL}             = 4; #LOG_WARNING
 $CONFIG{LOGGING}              = 0;
 $CONFIG{LOGFILE}              = "vdradmind.log";
 $CONFIG{MOD_GZIP}             = 0;
@@ -256,7 +256,7 @@ my $EPGSEARCH_VERSION = 0;                  # Numeric epgsearch plugin version, 
 my %ERROR_MESSAGE;
 my $MY_ENCODING = '';
 
-my ($TEMPLATEDIR, $CONFFILE, $LOGDIR, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME, $ETCDIR, $USER_CSS);
+my ($TEMPLATEDIR, $CONFFILE, $LOGDIR, $LOGLEVEL, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME, $ETCDIR, $USER_CSS);
 if (!$SEARCH_FILES_IN_SYSTEM) {
     $ETCDIR        = "${BASENAME}";
     $TEMPLATEDIR   = "${BASENAME}template";
@@ -289,7 +289,6 @@ $UserCSS = "user.css" if (-e "$USER_CSS");
 
 my $USE_SHELL_GZIP = false;          # set on false to use the gzip library
 
-my ($DEBUG) = 0;
 my (%EPG, %CHAN, $q, $ACCEPT_GZIP, $SVDRP, $HOST, $low_time, @RECORDINGS);
 my (%mimehash) = (html => "text/html",
                   png  => "image/png",
@@ -297,7 +296,7 @@ my (%mimehash) = (html => "text/html",
                   jpg  => "image/jpeg",
                   css  => "text/css",
                   ico  => "image/x-icon",
-                  js   => "application/x-javascript",
+                  js   => "text/javascript",
                   swf  => "application/x-shockwave-flash"
 );
 my @LOGINPAGES = qw(prog_summary prog_list2 prog_timeline prog_list timer_list rec_list);
@@ -308,23 +307,30 @@ $SIG{HUP}  = \&HupSignal;
 $SIG{PIPE} = 'IGNORE';
 
 #
+my ($UseSSL, $UseIPv6);
 my $DAEMON = 1;
 for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
     $_ = $ARGV[$i];
     if (/^(-h|--help)/) {
+        $DAEMON = 0;
         print("Usage $EXENAME [OPTION]...\n");
         print("A perl client for the Linux Video Disk Recorder.\n\n");
-        print("  -nf       --nofork            don't fork\n");
-        print("  -c        --config            run configuration dialog\n");
-        print("  -d [dir]  --cfgdir [dir]      use [dir] for configuration files\n");
-        print("  -k        --kill              kill a forked vdradmind[.pl]\n");
-        print("  -p [name] --pid [name]        name of pidfile\n");
-#TODO        print("  -6        --ipv6              use IPv6\n");
-        print("  -h        --help              this message\n");
+        print("  -n         --nofork            don't fork, log to stderr\n");
+        print("  -c         --config            run configuration dialog\n");
+        print("  -d [dir]   --cfgdir [dir]      use [dir] for configuration files\n");
+        print("  -k         --kill              kill a forked vdradmind[.pl]\n");
+        print("  -p [name]  --pid [name]        name of pidfile (ignored with -n)\n");
+        print("  -6         --ipv6              use IPv6\n");
+        print("  -s         --ssl               only accept https:// connections\n");
+        print("  -l [level] --log [level]       set log level for this session [0 - 7]\n");
+        print("  -h         --help              this message\n");
         print("\nReport bugs to <mail\@andreas.vdr-developer.org>.\n");
         exit(0);
     }
-    if (/^(--nofork|-nf)/) { $DAEMON = 0; last; }
+    if (/^(--nofork|-n)/) {
+        $DAEMON = 0;
+        next;
+    }
     if (/^(--cfgdir|-d)/) {
         $ETCDIR        = $ARGV[ ++$i ];
         $CONFFILE      = "${ETCDIR}/vdradmind.conf";
@@ -335,6 +341,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         next;
     }
     if (/^(--config|-c)/) {
+        $DAEMON = 0;
         ReadConfig() if (-e $CONFFILE);
         LoadTranslation();
         $CONFIG{VDR_HOST}   = Question(gettext("What's your VDR hostname (e.g video.intra.net)?"),               $CONFIG{VDR_HOST});
@@ -346,15 +353,23 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         $CONFIG{VIDEODIR}   = Question(gettext("Where are your recordings stored?"),                             $CONFIG{VIDEODIR});
         $CONFIG{VDRCONFDIR} = Question(gettext("Where are your VDR's configuration files located?"),             $CONFIG{VDRCONFDIR});
 
-        WriteConfig();
+        (my $err = WriteConfig()) =~ s|<br\s*/?>$||gi;
+        if ($err) {
+            Log(LOG_ALWAYS, $err);
+            exit(1);
+        }
 
         print(gettext("Config file written successfully.") . "\n");
         exit(0);
     }
     if (/^(--kill|-k)/) {
-        exit(0) unless (-e $PIDFILE);
-        my $killed = kill(2, getPID($PIDFILE));
-        unlink($PIDFILE);
+        $DAEMON = 0;
+        exit(1) unless (-e $PIDFILE);
+        my $pid = getPID($PIDFILE);
+        my $killed = defined($pid) ? kill(2, $pid) : -1;
+        if ($killed > 0 && -e $PIDFILE) { # Not deleted by kill/Shutdown()?
+            unlink($PIDFILE) or Log(LOG_WARNING, "Can't delete pid file '$PIDFILE': $!");
+        }
         exit($killed > 0 ? 0 : 1);
     }
     if (/^(--pid|-p)/) {
@@ -362,14 +377,19 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         next;
     }
     if (/^(--ipv6|-6)/) {
-        if (eval { require IO::Socket::INET6 }) {
-            $InetSocketModule = 'IO::Socket::INET6';
-        } else {
-            print("ERROR: Can't load module IO::Socket::INET6!\n");
-        }
+        $UseIPv6 = 1;
+        next;
+    }
+    if (/^(--ssl|-s)/) {
+        $UseSSL = 1;
+        next;
+    }
+    if (/^(--log|-l)/) {
+        $LOGLEVEL = $ARGV[ ++$i ];
         next;
     }
     if (/^(--displaycall|-i)/) {
+        $DAEMON = 0;
         for (my $z = 0 ; $z < 5 ; $z++) {
             DisplayMessage($ARGV[ $i + 1 ]);
             sleep(3);
@@ -378,6 +398,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         exit(0);
     }
     if (/^(--message|-m)/) {
+        $DAEMON = 0;
         DisplayMessage($ARGV[ $i + 1 ]);
         CloseSocket();
         exit(0);
@@ -386,6 +407,14 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
 
         # Don't use user.css
         $UserCSS = undef;
+    }
+}
+
+if ($UseIPv6) {
+    if (eval { require IO::Socket::INET6 }) {
+        $InetSocketModule = 'IO::Socket::INET6';
+    } else {
+        die("ERROR: Can't load module IO::Socket::INET6! $!\n");
     }
 }
 
@@ -399,28 +428,49 @@ my $Xtemplate_vars = { usercss  => $UserCSS,
 };
 
 my $Xconfig = {
-    START_TAG    => '\<\?\%',        # Tagstyle
-    END_TAG      => '\%\?\>',        # Tagstyle
-    INCLUDE_PATH => $TEMPLATEDIR,    # or list ref
-    INTERPOLATE  => 0,               # expand "$var" in plain text
-    PRE_CHOMP    => 1,               # cleanup whitespace
-    POST_CHOMP   => 1,               # cleanup whitespace
-    EVAL_PERL    => 1,               # evaluate Perl code blocks
-    CACHE_SIZE   => 10000,           # Tuning for Templates
-    COMPILE_EXT  => 'cache',         # Tuning for Templates
-    COMPILE_DIR  => '/tmp',          # Tuning for Templates
+    START_TAG    => '\<\?\%',                   # tag style
+    END_TAG      => '\%\?\>',                   # tag style
+    INCLUDE_PATH => $TEMPLATEDIR,               # or list ref
+    INTERPOLATE  => 0,                          # expand "$var" in plain text
+    PRE_CHOMP    => 1,                          # cleanup whitespace
+    POST_CHOMP   => 1,                          # cleanup whitespace
+    EVAL_PERL    => 1,                          # evaluate Perl code blocks
+    COMPILE_EXT  => 'cache',                    # tuning for templates
+    COMPILE_DIR  => '/var/cache/vdradmin',      # tuning for templates
+    STAT_TTL     => 3600,                       # tuning for templates
     VARIABLES    => $Xtemplate_vars,
 
+    # Developer options:
+    #CACHE_SIZE   => 0,
+    #STAT_TTL     => 1,
     #DEBUG        => DEBUG_ALL,
 };
 
 # create Template object
-my $Xtemplate = Template->new($Xconfig);
+my $Xtemplate;
+eval {
+    $Xtemplate = Template->new($Xconfig);
+};
+if ($@) {
+    # Perhaps a cache dir problem, try without it
+    chomp(my $err = $@);
+    delete @$Xconfig{qw(COMPILE_DIR COMPILE_EXT)};
+    $Xtemplate = Template->new($Xconfig);
+    Log(LOG_WARNING, "Problem setting up dir for compiled templates, expect degraded performance: $err");
+}
 
 # ---- End new template section ----
 
 ReadConfig();
 LoadTranslation();
+
+if ($DAEMON && $CONFIG{LOGFILE} eq "syslog") {
+    require Sys::Syslog;
+    Sys::Syslog->import(qw(:standard));
+    openlog($PROCNAME, "cons,pid", "daemon");
+} else {
+    *closelog = sub {}; # for Shutdown()
+}
 
 if ($CONFIG{MOD_GZIP}) {
 
@@ -431,18 +481,15 @@ if ($CONFIG{MOD_GZIP}) {
 if (-e "$PIDFILE") {
     my $pid = getPID($PIDFILE);
     if ($pid) {
-        print("There's already a copy of this program running! (pid: $pid)\n");
-        my $found;
-        foreach (ps("ax")) {
-            $found = 1 if (/$pid\s.*\[$PROCNAME\].*/);
-        }
-        if ($found) {
-            print("If you feel this is an error, remove $PIDFILE!\n");
+        Log(LOG_ERROR, "There's already a copy of this program running! (pid: $pid)\n");
+        chomp(my $pidproc = `ps -p $pid -o comm=` || "");
+        if ($pidproc eq $PROCNAME) {
+            Log(LOG_ERROR, "If you feel this is an error, remove $PIDFILE!\n");
             exit(1);
         }
-        print("The pid $pid is not a running $PROCNAME process, so I'll start anyway.\n");
+        Log(LOG_ERROR, "The pid $pid is not a running $PROCNAME process, so I'll start anyway.\n");
     } else {
-        print("$PIDFILE exists, but is empty, so I'll start anyway.\n");
+        Log(LOG_ERROR, "$PIDFILE exists, but is empty or contains bogus data, so I'll start anyway.\n");
     }
 }
 
@@ -450,24 +497,44 @@ if ($DAEMON) {
     open(STDIN, "</dev/null");
     defined(my $pid = fork) or die "Cannot fork: $!\n";
     if ($pid) {
-        printf(gettext("%s %s started with pid %d.") . "\n", $EXENAME, $VERSION, $pid);
-        writePID($pid);
+        Log(LOG_ALWAYS, sprintf(gettext("%s %s started with pid %d."), $EXENAME, $VERSION, $pid));
+        writePID($PIDFILE, $pid);
         exit(0);
     }
+} else {
+    Log(LOG_ALWAYS, sprintf("%s %s started", $EXENAME, $VERSION));
 }
+
 $SIG{__DIE__} = \&SigDieHandler;
 
 my @reccmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/reccmds.conf");
 my @vdrcmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/commands.conf");
 
-my ($Socket) =
-  $InetSocketModule->new(Proto     => 'tcp',
-                         LocalPort => $CONFIG{SERVERPORT},
-                         LocalAddr => $CONFIG{SERVERHOST},
-                         Listen    => 10,
-                         Reuse     => 1
-  );
-die("can't start server: $!\n")            if (!$Socket);
+my ($Socket);
+if ($UseSSL) {
+    if (eval { require IO::Socket::SSL; }) {
+        $Socket = IO::Socket::SSL->new(Proto     => 'tcp',
+                                       LocalPort => $CONFIG{SERVERPORT},
+                                       LocalAddr => $CONFIG{SERVERHOST},
+                                       Listen    => 10,
+                                       Reuse     => 1
+        );
+    } else {
+        die("ERROR: Can't load module IO::Socket::SSL! $!\n");
+    }
+} else {
+    $Socket = $InetSocketModule->new(Proto     => 'tcp',
+                                     LocalPort => $CONFIG{SERVERPORT},
+                                     LocalAddr => $CONFIG{SERVERHOST},
+                                     Listen    => 10,
+                                     Reuse     => 1
+    );
+}
+if (!$Socket) {
+    my $host = $CONFIG{SERVERHOST} || '(SERVERHOST missing)';
+    my $port = $CONFIG{SERVERPORT} || '(SERVERPORT missing)';
+    die("Can't start server at $host:$port: $@\n");
+}
 $CONFIG{CACHE_LASTUPDATE} = 0;
 $CONFIG{CACHE_REC_LASTUPDATE} = 0;
 
@@ -489,13 +556,13 @@ $MyURL = "./vdradmin.pl";
 
 if ($CONFIG{CACHE_BG_UPDATE} == 1) {
     # Force Update at start
-    Log(LOG_DEBUG, "Updating EPG data at startup...");
+    Log(LOG_DEBUG, "[EPG] Updating EPG data at startup...");
     if (UptoDate(1) == 0) {
-        Log(LOG_DEBUG, "Updating EPG data at startup SUCCEEDED.");
-        Log(LOG_DEBUG, "Setting timeout to ". $CONFIG{CACHE_TIMEOUT} . "min");
+        Log(LOG_DEBUG, "[EPG] Updating EPG data at startup SUCCEEDED.");
+        Log(LOG_DEBUG, "[EPG] Setting timeout to " . $CONFIG{CACHE_TIMEOUT} . "min");
         $Socket->timeout($CONFIG{CACHE_TIMEOUT} * 60);
     } else {
-        Log(LOG_DEBUG, "Updating EPG data at startup FAILED, trying again in 60secs.");
+        Log(LOG_DEBUG, "[EPG] Updating EPG data at startup FAILED, trying again in 60secs.");
         # UptoDate() failed, set socket timeout to retry UptoDate() in a minute
         $Socket->timeout(60);
     }
@@ -508,15 +575,15 @@ while (true) {
 
     #
     if (!$Client) {
-        Log(LOG_DEBUG, "Updating EPG data in the background...");
+        Log(LOG_DEBUG, "[EPG] Updating EPG data in the background...");
         if (UptoDate(1) == 0) {
-            Log(LOG_DEBUG, "Updating EPG data in the background SUCCEEDED.");
+            Log(LOG_DEBUG, "[EPG] Updating EPG data in the background SUCCEEDED.");
             if ($CONFIG{CACHE_BG_UPDATE} || ($CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER})) {
-                Log(LOG_DEBUG, "Setting timeout to ". $CONFIG{CACHE_TIMEOUT} . "min");
+                Log(LOG_DEBUG, "[EPG] Setting timeout to " . $CONFIG{CACHE_TIMEOUT} . "min");
                 $Socket->timeout($CONFIG{CACHE_TIMEOUT} * 60);
             }
         } else {
-            Log(LOG_DEBUG, "Updating EPG data in the background FAILED, trying again in 60secs.");
+            Log(LOG_DEBUG, "[EPG] Updating EPG data in the background FAILED, trying again in 60secs.");
             $Socket->timeout(60);
         }
         next;
@@ -632,7 +699,7 @@ while (true) {
     } else {
         ($http_status, $bytes_transfered) = SendFile($Request);
     }
-    Log(LOG_ACCESS, access_log($Client->peerhost, $username, $raw_request, $http_status, $bytes_transfered, $Request, $http_useragent));
+    Log(LOG_INFO, "[ACCESS] " . access_log($Client->peerhost, $username, $raw_request, $http_status, $bytes_transfered, $Request, $http_useragent));
     close($Client);
     $SVDRP->close;
 
@@ -725,7 +792,6 @@ sub ChanTree { #TODO? save channel in each list as reference
     my (@CHANNELS_FULL, @CHANNELS_WANTED, @CHANNELS_TV, @CHANNELS_RADIO);
     $SVDRP->command("lstc");
     my ($DATA) = $SVDRP->readresponse;
-    CloseSocket();
     while ($_ = shift @$DATA) {
         chomp;
         my ($vdr_id, $temp) = split(/ /, $_, 2);
@@ -1044,7 +1110,6 @@ sub getElement {
 sub EPG_buildTree {
     $SVDRP->command("lste");
     my ($DATA) = $SVDRP->readresponse;
-    CloseSocket();
     my ($i, @events);
     my ($id, $bc) = (1, 0);
     $low_time = time;
@@ -1133,7 +1198,7 @@ sub EPG_buildTree {
             }
         }
     }
-    Log(LOG_STATS, "EPGTree: $id events, $bc broadcasters (lowtime $low_time)");
+    Log(LOG_INFO, "[EPG] EPGTree: $id events, $bc broadcasters (lowtime $low_time)");
 }
 
 #############################################################################
@@ -1169,7 +1234,7 @@ sub SendCMD {
     my $cmd = join("", @_);
 
     if (($VDRVERSION < 10336) && (length($cmd) > $VDR_MAX_SVDRP_LENGTH)) {
-        Log(LOG_FATALERROR, "SendCMD(): command is too long(" . length($cmd) . "): " . substr($cmd, 0, 10));
+        Log(LOG_FATALERROR, "[INT] SendCMD(): command is too long(" . length($cmd) . "): " . substr($cmd, 0, 10));
         return;
     }
 
@@ -1181,19 +1246,6 @@ sub SendCMD {
         push(@output, $_);
     }
     return (@output);
-}
-
-sub mygmtime() {    #TODO: unused
-    gmtime;
-}
-
-sub headerTime {
-    my $time = shift;
-    $time = time() if (!$time);
-    my @weekdays = ("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
-    my @months   = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
-
-    return (sprintf("%s, %s %s %s %02d:%02d:%02d GMT", $weekdays[ my_strfgmtime("%w", $time) ], my_strfgmtime("%d", $time), $months[ my_strfgmtime("%m", $time) - 1 ], my_strfgmtime("%Y", $time), my_strfgmtime("%H", $time), my_strfgmtime("%M", $time), my_strfgmtime("%S", $time)));
 }
 
 sub GZip {
@@ -1227,8 +1279,8 @@ sub LibGZip {
 }
 
 sub header {
-    my ($status, $ContentType, $data, $filename, $caching) = @_;
-    Log(LOG_STATS, "Template Error: " . $Xtemplate->error())
+    my ($status, $ContentType, $data, $filename, $caching, $lastmod) = @_;
+    Log(LOG_FATALERROR, "[INT] Template Error: " . $Xtemplate->error())
       if ($status >= 500);
     if ($ACCEPT_GZIP && $CONFIG{MOD_GZIP}) {
         if ($USE_SHELL_GZIP) {
@@ -1239,17 +1291,22 @@ sub header {
     }
 
     my $status_text = " OK" if ($status eq "200");
+    my $now = time();
 
     my $response = "HTTP/1.0 $status$status_text" . CRLF
-                 . "Date: " . headerTime() . CRLF;
+                 . "Date: " . time2str($now) . CRLF;
     if (!$caching || $ContentType =~ /text\/html/) {
         $response .= "Cache-Control: max-age=0" . CRLF
                   .  "Cache-Control: private" . CRLF
                   .  "Pragma: no-cache" . CRLF
                   .  "Expires: Thu, 01 Jan 1970 00:00:00 GMT" . CRLF;
     } else {
-        $response .= "Expires: " . headerTime(time() + 3600) . CRLF
+        $response .= "Expires: " . time2str($now + 3600) . CRLF
                   .  "Cache-Control: max-age=3600" . CRLF;
+    }
+    if ($lastmod) {
+        $lastmod = $now if ($lastmod > $now); # HTTP 1.1, 14.29
+        $response .= "Last-Modified: " . time2str($lastmod) . CRLF;
     }
     $response .= "Server: $SERVERVERSION" . CRLF
               .  "Connection: close" . CRLF;
@@ -1266,7 +1323,7 @@ sub header {
 sub headerForward {
     my $url = shift;
     my $header = "HTTP/1.0 302 Found" . CRLF
-               . "Date: " . headerTime() . CRLF
+               . "Date: " . time2str() . CRLF
                . "Server: $SERVERVERSION" . CRLF
                . "Connection: close" . CRLF
                . "Location: $url" . CRLF
@@ -1281,7 +1338,7 @@ sub headerNoAuth {
     $Xtemplate->process("$CONFIG{TEMPLATE}/noauth.html", $vars, \$data);
 
     my $header = "HTTP/1.0 401 Authorization Required" . CRLF
-               . "Date: " . headerTime() . CRLF
+               . "Date: " . time2str() . CRLF
                . "Server: $SERVERVERSION" . CRLF
                . "WWW-Authenticate: Basic realm=\"vdradmind\"" . CRLF
                . "Connection: close" . CRLF
@@ -1326,18 +1383,19 @@ sub SendFile {
     }
 
     if (-e $FileWithPath) {
-        if (-r $FileWithPath) {
+        if (-r _) {
+            my $lastmod = (stat(_))[9];
             $buf  = ReadFile($FileWithPath);
             $temp = $File;
             $temp =~ /([A-Za-z0-9]+)\.([A-Za-z0-9]+)/;
             if (!$mimehash{$2}) { die("can't find mime-type \'$2\'\n"); }
-            return (header("200", $mimehash{$2}, $buf, undef, 1));
+            return (header("200", $mimehash{$2}, $buf, undef, 1, $lastmod));
         } else {
-            Log(LOG_ACCESS, "Access denied: $File");
+            Log(LOG_FATALERROR, "[ACCESS] Access denied: $File");
             Error("403", gettext("Forbidden"), sprintf(gettext("Access to file \"%s\" denied!"), $File));
         }
     } else {
-        Log(LOG_ACCESS, "File not found: $File");
+        Log(LOG_FATALERROR, "[ACCESS] File not found: $File");
         Error("404", gettext("Not found"), sprintf(gettext("The URL \"%s\" was not found on this server!"), $File));
     }
 }
@@ -1476,7 +1534,7 @@ sub BlackList_Read {
 
 sub AutoTimer {
     return if (!$CONFIG{AT_FUNC} || !$FEATURES{AUTOTIMER});
-    Log(LOG_AT, "Auto Timer: Scanning for events...");
+    Log(LOG_INFO, "[AUTOTIMER] Scanning for events...");
     my ($search, $start, $stop) = @_;
     my @at_matches;
 
@@ -1539,7 +1597,7 @@ sub AutoTimer {
                 $DoneStr = sprintf('%s~%d~%s', $event->{title}, $event->{event_id}, ($event->{subtitle} ? $event->{subtitle} : ''),);
 
                 if (exists $DONE->{$DoneStr}) {
-                    Log(LOG_DEBUG, sprintf("Auto Timer: already done \"%s\"", $DoneStr));
+                    Log(LOG_DEBUG, sprintf("[AUTOTIMER] already done \"%s\"", $DoneStr));
                     next;
                 }
             }
@@ -1550,8 +1608,8 @@ sub AutoTimer {
                 my $BLStr = $event->{title};
                 $BLStr .= "~" . $event->{subtitle} if $event->{subtitle};
 
-                if ($blacklist{$BLStr} eq 1 || $blacklist{ $event->{title} } eq 1) {
-                    Log(LOG_DEBUG, sprintf("Auto Timer: blacklisted \"%s\"", $event->{title}));
+                if ($blacklist{$BLStr} || $blacklist{ $event->{title} }) {
+                    Log(LOG_DEBUG, sprintf("[AUTOTIMER] blacklisted \"%s\"", $event->{title}));
                     next;
                 }
             }
@@ -1578,10 +1636,10 @@ sub AutoTimer {
                 if ($at->{pattern} =~ /^\/(.*)\/(i?)$/) {
 
                     # We have a RegExp
-                    Log(LOG_DEBUG, sprintf("Auto Timer: Checking RegExp \"%s\"", $at->{pattern}));
+                    Log(LOG_DEBUG, sprintf("[AUTOTIMER] Checking RegExp \"%s\"", $at->{pattern}));
 
                     if ((!length($SearchStr)) || (!length($1))) {
-                        Log(LOG_DEBUG, "No search string or regexp, skipping!");
+                        Log(LOG_DEBUG, "[AUTOTIMER] No search string or RegExp, skipping!");
                         next;
                     }
 
@@ -1593,21 +1651,21 @@ sub AutoTimer {
                     } elsif (($2 ne "i") && ($SearchStr !~ /$1/)) {
                         next;
                     } else {
-                        Log(LOG_AT, sprintf("Auto Timer: RegExp \"%s\" matches \"%s\"", $at->{pattern}, $SearchStr));
+                        Log(LOG_DEBUG, sprintf("[AUTOTIMER] RegExp \"%s\" matches \"%s\"", $at->{pattern}, $SearchStr));
                     }
                 } else {
 
                     # We have a search pattern
-                    Log(LOG_DEBUG, sprintf("Auto Timer: Checking pattern \"%s\"", $at->{pattern}));
+                    Log(LOG_DEBUG, sprintf("[AUTOTIMER] Checking pattern \"%s\"", $at->{pattern}));
 
                     # Escape special characters within the search pattern
                     my $atpattern = $at->{pattern};
                     $atpattern =~ s/([\+\?\.\*\^\$\(\)\[\]\{\}\|\\])/\\$1/g;
 
-                    Log(LOG_DEBUG, sprintf("Auto Timer: Escaped pattern: \"%s\"", $atpattern));
+                    Log(LOG_DEBUG, sprintf("[AUTOTIMER] Escaped pattern: \"%s\"", $atpattern));
 
                     if ((!length($SearchStr)) || (!length($atpattern))) {
-                        Log(LOG_DEBUG, "No search string or pattern, skipping!");
+                        Log(LOG_DEBUG, "[AUTOTIMER] No search string or pattern, skipping!");
                         next;
                     }
 
@@ -1620,7 +1678,7 @@ sub AutoTimer {
                         if ($SearchStr !~ /$pattern/i) {
                             $fp = 0;
                         } else {
-                            Log(LOG_DEBUG, sprintf("Auto Timer: Found matching pattern: \"%s\"", $pattern));
+                            Log(LOG_DEBUG, sprintf("[AUTOTIMER] Found matching pattern: \"%s\"", $pattern));
                         }
                     }
                     next if (!$fp);
@@ -1628,44 +1686,44 @@ sub AutoTimer {
 
                 my $event_start = my_strftime("%H%M", $event->{start});
                 my $event_stop  = my_strftime("%H%M", $event->{stop});
-                Log(LOG_DEBUG, sprintf("Auto Timer: Comparing pattern \"%s\" (%s - %s) with event \"%s\" (%s - %s)", $at->{pattern}, $at->{start}, $at->{stop}, $event->{title}, $event_start, $event_stop));
+                Log(LOG_DEBUG, sprintf("[AUTOTIMER] Comparing pattern \"%s\" (%s - %s) with event \"%s\" (%s - %s)", $at->{pattern}, $at->{start}, $at->{stop}, $event->{title}, $event_start, $event_stop));
 
                 # Do we have a time slot?
                 if ($at->{start}) {    # We have a start time and possibly a stop time for the auto timer
-                                       # Do we have Midnight between AT start and stop time?
+                                       # Do we have midnight between AT start and stop time?
                     if (($at->{stop}) && ($at->{stop} < $at->{start})) {
 
-                        # The AT includes Midnight
-                        Log(LOG_DEBUG, "922: AT includes Midnight");
+                        # The AT includes midnight
+                        Log(LOG_DEBUG, "[AUTOTIMER] AT includes midnight");
 
-                        # Do we have Midnight between Event start and stop?
+                        # Do we have midnight between event start and stop?
                         if ($event_stop < $event_start) {
 
-                            # The event includes Midnight
-                            Log(LOG_DEBUG, "926: Event includes Midnight");
+                            # The event includes midnight
+                            Log(LOG_DEBUG, "[AUTOTIMER] Event includes midnight");
                             if ($event_start < $at->{start}) {
-                                Log(LOG_DEBUG, "924: Event starts before AT start");
+                                Log(LOG_DEBUG, "[AUTOTIMER] Event starts before AT start");
                                 next;
                             }
                             if ($event_stop > $at->{stop}) {
-                                Log(LOG_DEBUG, "932: Event ends after AT stop");
+                                Log(LOG_DEBUG, "[AUTOTIMER] Event ends after AT stop");
                                 next;
                             }
                         } else {
 
-                            # Normal event not spreading over Midnight
-                            Log(LOG_DEBUG, "937: Event does not include Midnight");
+                            # Normal event not spreading over midnight
+                            Log(LOG_DEBUG, "[AUTOTIMER] Event does not include midnight");
                             if ($event_start < $at->{start}) {
                                 if ($event_start > $at->{stop}) {
 
                                     # The event starts before AT start and after AT stop
-                                    Log(LOG_DEBUG, "941: Event starts before AT start and after AT stop");
+                                    Log(LOG_DEBUG, "[AUTOTIMER] Event starts before AT start and after AT stop");
                                     next;
                                 }
                                 if ($event_stop > $at->{stop}) {
 
                                     # The event ends after AT stop
-                                    Log(LOG_DEBUG, "946: Event ends after AT stop");
+                                    Log(LOG_DEBUG, "[AUTOTIMER] Event ends after AT stop");
                                     next;
                                 }
                             }
@@ -1673,7 +1731,7 @@ sub AutoTimer {
                     } else {
 
                         # Normal auto timer, not spreading over midnight
-                        Log(LOG_DEBUG, "953: AT does not include Midnight");
+                        Log(LOG_DEBUG, "[AUTOTIMER] AT does not include midnight");
 
                         # Is the event spreading over midnight?
                         if ($event_stop < $event_start) {
@@ -1682,7 +1740,7 @@ sub AutoTimer {
                             if ($at->{stop}) {
 
                                 # We have a AT stop time defined before midnight -- no match
-                                Log(LOG_DEBUG, "959: Event includes Midnight, Autotimer not");
+                                Log(LOG_DEBUG, "[AUTOTIMER] Event includes midnight, AT not");
                                 next;
                             }
                         } else {
@@ -1690,13 +1748,13 @@ sub AutoTimer {
                             # We have a normal event, nothing special
                             # Event must not start before AT start
                             if ($event_start < $at->{start}) {
-                                Log(LOG_DEBUG, "963: Event starts before AT start");
+                                Log(LOG_DEBUG, "[AUTOTIMER] Event starts before AT start");
                                 next;
                             }
 
                             # Event must not end after AT stop
                             if (($at->{stop}) && ($event_stop > $at->{stop})) {
-                                Log(LOG_DEBUG, "968: Event ends after AT stop");
+                                Log(LOG_DEBUG, "[AUTOTIMER] Event ends after AT stop");
                                 next;
                             }
                         }
@@ -1706,7 +1764,7 @@ sub AutoTimer {
                     # We have no AT start time
                     if ($at->{stop}) {
                         if ($event_stop > $at->{stop}) {
-                            Log(LOG_DEBUG, "977: Only AT stop time, Event stops after AT stop");
+                            Log(LOG_DEBUG, "[AUTOTIMER] Only AT stop time, event stops after AT stop");
                             next;
                         }
                     }
@@ -1715,11 +1773,11 @@ sub AutoTimer {
                 # Check if we should schedule any timers on this weekday
                 my %weekdays_map = (1 => 'wday_mon', 2 => 'wday_tue', 3 => 'wday_wed', 4 => 'wday_thu', 5 => 'wday_fri', 6 => 'wday_sat', 7 => 'wday_sun');
                 unless ($at->{weekdays}->{ $weekdays_map{ my_strftime("%u", $event->{start}) } }) {
-                    Log(LOG_DEBUG, "Event not valid for this weekday");
+                    Log(LOG_DEBUG, "[AUTOTIMER] Event not valid for this weekday");
                     next;
                 }
 
-                Log(LOG_AT, sprintf("Auto Timer: Found \"%s\"", $at->{pattern}));
+                Log(LOG_DEBUG, sprintf("[AUTOTIMER] Found \"%s\"", $at->{pattern}));
 
 #########################################################################################
 # 20050130: patch by macfly: parse extended EPG information provided by tvm2vdr.pl
@@ -1787,12 +1845,12 @@ sub AutoTimer {
                                         date      => my_strftime("%A, %x", $event->{start}),
                                         channel   => GetChannelDescByNumber($event->{vdr_id}) });
                 } else {
-                    Log(LOG_AT, sprintf("AutoTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
+                    Log(LOG_INFO, sprintf("[AUTOTIMER] Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
 
                     AT_ProgTimer(1, $event->{event_id}, $event->{vdr_id}, $event->{start}, $event->{stop}, $title, $event->{summary}, $at);
 
                     if ($at->{active} == 2) {
-                        Log(LOG_AT, sprintf("AutoTimer: Disabling one-shot Timer"));
+                        Log(LOG_INFO, "[AUTOTIMER] Disabling one-shot Timer");
                         $at->{active} = 0;
                         $oneshots = 1;
                     }
@@ -1802,18 +1860,17 @@ sub AutoTimer {
         }
     }
     if ($oneshots) {
-        Log(LOG_AT, sprintf("AutoTimer: saving because of one-shots triggered"));
+        Log(LOG_DEBUG, "[AUTOTIMER] Saving because of one-shots triggered");
         AT_Write(@at);
     }
 
-    Log(LOG_AT, "Auto Timer: Done.");
     unless ($dry_run) {
-        Log(LOG_AT, "Auto Timer: Purging done list... (lowtime $low_time)");
+        Log(LOG_DEBUG, "[AUTOTIMER] Purging done list... (lowtime $low_time)");
         for (keys %$DONE) { delete $DONE->{$_} if ($low_time > $DONE->{$_}) }
-        Log(LOG_AT, "Auto Timer: Save done list...");
+        Log(LOG_DEBUG, "[AUTOTIMER] Save done list...");
         &DONE_Write($DONE) if ($DONE);
     }
-    Log(LOG_AT, "Auto Timer: Done.");
+    Log(LOG_INFO, "[AUTOTIMER] Done.");
 
     if ($dry_run) {
         return @at_matches;
@@ -1869,7 +1926,7 @@ sub AT_ProgTimer {
             $autotimer = $AT_BY_TIME;
         }
 
-        Log(LOG_AT, sprintf("AT_ProgTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event_id, strftime("%Y%m%d-%H%M", localtime($start)), strftime("%Y%m%d-%H%M", localtime($stop))));
+        Log(LOG_DEBUG, sprintf("[AUTOTIMER] AT_ProgTimer: Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event_id, strftime("%Y%m%d-%H%M", localtime($start)), strftime("%Y%m%d-%H%M", localtime($stop))));
         ProgTimer(0,
             $active,
             $event_id,
@@ -1932,18 +1989,18 @@ sub AT_ProgTimer {
                     $smtp->dataend();
                     $smtp->quit();
                 } else {
-                    Log(LOG_FATALERROR, "SMTP failed! Please check your email settings.");
+                    Log(LOG_FATALERROR, "[MAIL] SMTP failed! Please check your email settings.");
                 }
             };
             if ($@) {
-                Log(LOG_FATALERROR, "Failed to send email! Please contact the author.");
+                Log(LOG_FATALERROR, "[MAIL] Failed to send email! Please contact the author.");
             }
         } elsif ($CONFIG{AT_SENDMAIL} == 1) {
             if (!$can_use_net_smtp) {
-                Log(LOG_FATALERROR, "Missing Perl module Net::SMTP. AutoTimer email notification disabled.");
+                Log(LOG_FATALERROR, "[MAIL] Missing Perl module Net::SMTP. AutoTimer email notification disabled.");
             }
             if ($CONFIG{MAIL_AUTH_USER} ne "" && !$can_use_smtpauth) {
-                Log(LOG_FATALERROR, "Missing Perl module Authen::SASL and/or Digest::HMAC_MD5. AutoTimer email notification disabled.");
+                Log(LOG_FATALERROR, "[MAIL] Missing Perl module Authen::SASL and/or Digest::HMAC_MD5. AutoTimer email notification disabled.");
             }
         }
     }
@@ -2012,14 +2069,14 @@ sub CheckTimers {
 
                 # look for matching event_id on the same channel -- it's unique
                 if ($timer->{event_id} == $event->{event_id}) {
-                    Log(LOG_CHECKTIMER, sprintf("CheckTimers: Checking timer \"%s\" (No. %s) for changes by Event-ID", $timer->{title}, $timer->{id}));
+                    Log(LOG_DEBUG, sprintf("[AUTOTIMER] CheckTimers: Checking timer \"%s\" (No. %s) for changes by Event-ID", $timer->{title}, $timer->{id}));
 
                     # update timer if the existing one differs from the EPG
                     # (don't check for changed title, as this will break autotimers' "directory" setting)
                     if (   ($timer->{start} != ($event->{start} - $timer->{bstart} * 60))
                         || ($timer->{stop} != ($event->{stop} + $timer->{bstop} * 60)))
                     {
-                        Log(LOG_CHECKTIMER, sprintf("CheckTimers: Timer \"%s\" (No. %s, Event-ID %s, %s - %s) differs from EPG: \"%s\", Event-ID %s, %s - %s)", $timer->{title}, $timer->{id}, $timer->{event_id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop})), $event->{title}, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
+                        Log(LOG_INFO, sprintf("[AUTOTIMER] CheckTimers: Timer \"%s\" (No. %s, Event-ID %s, %s - %s) differs from EPG: \"%s\", Event-ID %s, %s - %s)", $timer->{title}, $timer->{id}, $timer->{event_id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop})), $event->{title}, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
                         ProgTimer(
                             $timer->{id},
                             $timer->{active},
@@ -2036,7 +2093,6 @@ sub CheckTimers {
                             # leave summary untouched.
                             $timer->{summary},
                         );
-                        Log(LOG_CHECKTIMER, sprintf("CheckTimers: Timer %s updated.", $timer->{id}));
                     }
                 }
             }
@@ -2047,7 +2103,7 @@ sub CheckTimers {
 
             # We're checking only timers which don't record
             if ($timer->{start} > time()) {
-                Log(LOG_CHECKTIMER, sprintf("CheckTimers: Checking timer \"%s\" (No. %s) for changes by recording time", $timer->{title}, $timer->{id}));
+                Log(LOG_DEBUG, sprintf("[AUTOTIMER] CheckTimers: Checking timer \"%s\" (No. %s) for changes by recording time", $timer->{title}, $timer->{id}));
                 my @eventlist;
 
                 for my $event (@{ $EPG{ $timer->{vdr_id} } }) {
@@ -2092,7 +2148,7 @@ sub CheckTimers {
                     if (   ($timer->{start} > ($event->{start} - $timer->{bstart} * 60))
                         || ($timer->{stop} < ($event->{stop} + $timer->{bstop} * 60)))
                     {
-                        Log(LOG_CHECKTIMER, sprintf("CheckTimers: Timer \"%s\" (No. %s, Event-ID %s, %s - %s) differs from EPG: \"%s\", Event-ID %s, %s - %s)", $timer->{title}, $timer->{id}, $timer->{event_id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop})), $event->{title}, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
+                        Log(LOG_INFO, sprintf("[AUTOTIMER] CheckTimers: Timer \"%s\" (No. %s, Event-ID %s, %s - %s) differs from EPG: \"%s\", Event-ID %s, %s - %s)", $timer->{title}, $timer->{id}, $timer->{event_id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop})), $event->{title}, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
                         ProgTimer(
                             $timer->{id},
                             $timer->{active},
@@ -2109,11 +2165,10 @@ sub CheckTimers {
                             # leave summary untouched.
                             $timer->{summary},
                         );
-                        Log(LOG_CHECKTIMER, sprintf("CheckTimers: Timer %s updated.", $timer->{id}));
                     }
                 }
             } else {
-                Log(LOG_CHECKTIMER, sprintf("CheckTimers: Skipping Timer \"%s\" (No. %s, %s - %s)", $timer->{title}, $timer->{id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop}))));
+                Log(LOG_DEBUG, sprintf("[AUTOTIMER] CheckTimers: Skipping Timer \"%s\" (No. %s, %s - %s)", $timer->{title}, $timer->{id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop}))));
             }
         }
     }
@@ -2211,6 +2266,8 @@ sub epgsearch_edit {
     my $id = $q->param("id");
     my $do_test = $q->param("single_test");
     my $edit_template = $q->param("edit_template");
+    my $template_id;
+    $template_id = $q->param("template") if (defined $q->param("template"));
     $do_test = 0 if ($edit_template);
 
     my $search;
@@ -2232,8 +2289,8 @@ sub epgsearch_edit {
         @sel_bl = split(/\|/, $search->{sel_blacklists});
     } else {
         # new search
-        if (defined $q->param("template")) {
-            my @temp = GetEpgSearchTemplate($q->param("template"));
+        if (defined $template_id) {
+            my @temp = GetEpgSearchTemplate($template_id);
             $search = pop @temp;
             $search->{pattern} = "" unless ($edit_template); # don't want the template's name as search pattern
             @sel_bl = split(/\|/, $search->{sel_blacklists});
@@ -2291,8 +2348,8 @@ sub epgsearch_edit {
                  did_search    => $do_test,
                  matches       => (@matches ? \@matches : undef),
                  do_edit       => (defined $edit_template ? undef : (defined $id ? "1" : undef)),
-                 mode_template => $edit_template,
-                 template_id   => $q->param("template"),
+                 mode_template => (defined $edit_template ? "1" : undef),
+                 template_id   => $template_id,
                  extepg        => \@extepg,
                  epgs_settings => \%EPGSEARCH_SETTINGS
     };
@@ -3254,8 +3311,8 @@ sub append_timer_metadata {
         $aux .= "<epgsearch>";
         $aux .= "<eventid>$epg_id</eventid>" if ($epg_id);
         $aux .= "<update>$autotimer</update>" if (defined $autotimer);
-        $aux .= "<bstart>$bstart</bstart>" if ($bstart);
-        $aux .= "<bstop>$bstop</bstop>" if ($bstop);
+        $aux .= "<bstart>" . ($bstart * 60) . "</bstart>" if ($bstart);
+        $aux .= "<bstop>" . ($bstop * 60) . "</bstop>" if ($bstop);
         $aux .= "</epgsearch>";
     }
     return $aux;
@@ -3306,7 +3363,7 @@ sub ProgTimer {
     my $send_dor = $dor ? $dor : RemoveLeadingZero(strftime("%d", localtime($start)));
     my $send_summary = ($VDRVERSION >= 10336) ? $summary : substr($summary, 0, $VDR_MAX_SVDRP_LENGTH - 9 - length($send_cmd) - length($active) - length($channel) - length($send_dor) - 8 - length($prio) - length($lft) - length($title));
 
-    Log(LOG_AT, sprintf("ProgTimer: Programming Timer \"%s\" (Channel %s, Event-ID %s, %s - %s, Active %s)", $title, $channel, $event_id, my_strftime("%Y%m%d-%H%M", $start), my_strftime("%Y%m%d-%H%M", $stop), $active));
+    Log(LOG_DEBUG, sprintf("[SVDRP] ProgTimer: Programming Timer \"%s\" (Channel %s, Event-ID %s, %s - %s, Active %s)", $title, $channel, $event_id, my_strftime("%Y%m%d-%H%M", $start), my_strftime("%Y%m%d-%H%M", $stop), $active));
     my $return = SendCMD(sprintf("%s %s:%s:%s:%s:%s:%s:%s:%s:%s", $send_cmd, $active, $channel, $send_dor, strftime("%H%M", localtime($start)), strftime("%H%M", localtime($stop)), $prio, $lft, trim($title), $send_summary));
     return $return;
 }
@@ -3346,22 +3403,41 @@ sub SigDieHandler {
 
 sub Shutdown {
     CloseSocket();
-    WriteConfig() if ($CONFIG{AUTO_SAVE_CONFIG});
-    unlink($PIDFILE);
+    if ($CONFIG{AUTO_SAVE_CONFIG}) {
+        (my $err = WriteConfig()) =~ s|<br\s*/?>$||gi;
+        Log(LOG_ERROR, $err) if $err;
+    }
+    closelog();
+    if ($DAEMON) {
+        unlink($PIDFILE) or Log(LOG_WARNING, "Can't delete pid file '$PIDFILE': $!");
+    }
     exit(0);
 }
 
 sub getPID {
-    open(PID, shift);
-    $_ = <PID>;
-    close(PID);
-    return ($_);
+    my $pidfile = shift;
+    if (!open(PID, $pidfile)) {
+        Log(LOG_WARNING, "Can't open pid file '$pidfile' for reading: $!");
+        return undef;
+    }
+    chomp(my $pid = <PID> || "");
+    close(PID) or Log(LOG_WARNING, "Error closing pid file '$pidfile': $!");
+    if ($pid !~ /^\d+$/) {
+        Log(LOG_WARNING, "Ignoring bogus process id '$pid' in pid file '$pidfile'");
+        $pid = undef;
+    }
+    return $pid;
 }
 
 sub writePID {
-    open(FILE, ">$PIDFILE");
+    my $pidfile = shift;
+    if (!open(FILE, ">", $pidfile)) {
+        Log(LOG_ERROR, "Can't open pid file '$pidfile' for writing: $!");
+        return 0;
+    }
     print FILE shift;
-    close(FILE);
+    close(FILE) or Log(LOG_WARNING, "Error closing pid file '$pidfile': $!");
+    return 1;
 }
 
 sub HupSignal {
@@ -3370,50 +3446,60 @@ sub HupSignal {
 
 sub UptoDate {
     my $force = shift;
+    my $rv = 0;
     if (((time() - $CONFIG{CACHE_LASTUPDATE}) >= ($CONFIG{CACHE_TIMEOUT} * 60)) || $force) {
         OpenSocket();
-        Log(LOG_DEBUG, "Building channel tree...");
+        Log(LOG_INFO, "[EPG] Building channel tree...");
         ChanTree();
-        Log(LOG_DEBUG, "Finished building channel tree.");
+        Log(LOG_INFO, "[EPG] Finished building channel tree.");
         if (@{$CHAN{$CHAN_FULL}->{channels}}) {
-            Log(LOG_DEBUG, "Building EPG tree...");
+            Log(LOG_INFO, "[EPG] Building EPG tree...");
             EPG_buildTree();
-            Log(LOG_DEBUG, "Finished building EPG tree.");
-            CloseSocket();
+            Log(LOG_INFO, "[EPG] Finished building EPG tree.");
             $CONFIG{CACHE_LASTUPDATE} = time();
+
+            if ($CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER}) {
+                CheckTimers();
+                AutoTimer();
+            }
         } else {
-            CloseSocket();
-            return (1);
+            $rv = 1;
         }
-        if ($CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER}) {
-            CheckTimers();
-            AutoTimer();
-            CloseSocket();
-        }
+        CloseSocket();
     }
-    return (0);
+    return ($rv);
 }
 
 sub Log {
     if ($#_ >= 1) {
         my $level = shift;
         my $message = join("", @_);
-        print $message . "\n" if $DEBUG;
-        if ($CONFIG{LOGGING}) {
-            if ($CONFIG{LOGLEVEL} & $level) {
-                if ($CONFIG{LOGFILE} eq "stderr") {
-                    print STDERR sprintf("%s: %s\n", my_strftime("%x %X"), $message);
-                } elsif ($CONFIG{LOGFILE} eq "syslog") {
-                    print "Logging to syslog not yet supported!";
-                } else {
-                    open(LOGFILE, ">>" . "$LOGDIR/$CONFIG{LOGFILE}");
-                    print LOGFILE sprintf("%s: %s\n", my_strftime("%x %X"), $message);
+
+        # Logging is always on in non-daemon mode
+        return 1 unless ($CONFIG{LOGGING} || !$DAEMON);
+
+        my $my_loglevel = $CONFIG{LOGLEVEL};
+        $my_loglevel = $LOGLEVEL if $LOGLEVEL;
+        if ($my_loglevel >= shift @$level) {
+
+            # Always log to stderr in non-daemon mode
+            my $logfile = $DAEMON ? $CONFIG{LOGFILE} : "stderr";
+
+            if ($logfile eq "stderr") {
+                printf STDERR "%s: %s\n", my_strftime("%x %X"), $message;
+            } elsif ($logfile eq "syslog") {
+                syslog(shift @$level, '%s', $message);
+            } else {
+                if (open(LOGFILE, ">>", "$LOGDIR/$logfile")) {
+                    printf LOGFILE "%s: %s\n", my_strftime("%x %X"), $message;
                     close(LOGFILE);
+                } else {
+                    printf STDERR "%s: %s\n", my_strftime("%x %X"), "Could not open log file '$LOGDIR/$logfile' for writing: $!";
                 }
             }
         }
     } else {
-        Log(LOG_FATALERROR, "bogus Log() call");
+        Log(LOG_FATALERROR, "[INT] bogus Log() call");
     }
 }
 
@@ -3435,12 +3521,6 @@ sub my_strftime {
     my $format = shift;
     my $time   = shift;
     return (strftime($format, $time ? localtime($time) : localtime(time)));
-}
-
-sub my_strfgmtime {
-    my $format = shift;
-    my $time   = shift;
-    return (strftime($format, $time ? gmtime($time) : gmtime(time)));
 }
 
 sub GetFirstChannel {    #TODO: unused
@@ -3521,13 +3601,16 @@ sub ValidConfig {
 
 sub ReadConfig {
     if (-e $CONFFILE) {
-        open(CONF, $CONFFILE);
-        while (<CONF>) {
-            chomp;
-            my ($key, $value) = split(/ \= /, $_, 2);
-            $CONFIG{$key} = $value;
+        if (open(CONF, $CONFFILE)) {
+            while (<CONF>) {
+                chomp;
+                my ($key, $value) = split(/ \= /, $_, 2);
+                $CONFIG{$key} = $value;
+            }
+            close(CONF) or Log(LOG_WARNING, "Error closing conf file '$CONFFILE': $!");
+        } else {
+            Log(LOG_ERROR, "Can't open conf file '$CONFFILE' for reading: $!");
         }
-        close(CONF);
 
         ValidConfig();
 
@@ -3546,6 +3629,8 @@ sub ReadConfig {
         }
         #v3.6.2
         delete $CONFIG{VDRVFAT};
+        #v3.6.5
+        $CONFIG{LOGLEVEL} = 4 if ($CONFIG{LOGLEVEL} == 81);
 
     } else {
         print "$CONFFILE doesn't exist. Please run \"$EXENAME --config\"\n";
@@ -3867,11 +3952,11 @@ sub prog_detail_aktion {
             #printf "something went wrong during EPG update: $result\n";
             main::HTMLError(sprintf($ERROR_MESSAGE{send_command}, $CONFIG{VDR_HOST}));
         } else {
-            ($result) = SendCMD(sprintf ("C %s\nE %u %ld %d %X\nT %s\n%s%s%s%s%se\nc\n.\n", 
-                $channel_id, 
+            ($result) = SendCMD(sprintf ("C %s\nE %u %ld %d %X\nT %s\n%s%s%s%s%se\nc\n.\n",
+                $channel_id,
                 $event_id, $start, $duration, $table_id,
-                $title, 
-                $new_subtitle, 
+                $title,
+                $new_subtitle,
                 $new_description,
                 $new_video,
                 $new_audio,
@@ -3964,7 +4049,7 @@ sub prog_list {
         if (my_strftime("%d", $event->{start}) != $day) {
 
             # new day
-            push(@show, 
+            push(@show,
                  {  endd => 1,
                     next_channel => $next_channel ? "$MyURL?aktion=prog_list&amp;vdr_id=$next_channel" : undef,
                     prev_channel => $prev_channel ? "$MyURL?aktion=prog_list&amp;vdr_id=$prev_channel" : undef,
@@ -4314,7 +4399,7 @@ sub timer_list {
                         # Timer kollidieren zeitlich. Pruefen, ob die Timer evtl. auf
                         # gleichem Transponder oder CAM liegen und daher ohne Probleme
                         # aufgenommen werden koennen
-                        Log(LOG_DEBUG, sprintf("Kollission: %s (%s, %s) -- %s (%s, %s)\n", substr($timer[$ii]->{title}, 0, 15), $timer[$ii]->{vdr_id}, $timer[$ii]->{transponder}, $timer[$ii]->{ca}, substr($timer[$jj]->{title}, 0, 15), $timer[$jj]->{vdr_id}, $timer[$jj]->{transponder}, $timer[$jj]->{ca}));
+                        Log(LOG_DEBUG, sprintf("[TIMER] Collision: %s (%s, %s) -- %s (%s, %s)\n", substr($timer[$ii]->{title}, 0, 15), $timer[$ii]->{vdr_id}, $timer[$ii]->{transponder}, $timer[$ii]->{ca}, substr($timer[$jj]->{title}, 0, 15), $timer[$jj]->{vdr_id}, $timer[$jj]->{transponder}, $timer[$jj]->{ca}));
 
                         if (   $timer[$ii]->{vdr_id} != $timer[$jj]->{vdr_id}
                             && $timer[$ii]->{ca} == $timer[$jj]->{ca}
@@ -4323,7 +4408,7 @@ sub timer_list {
 
                             # Beide Timer laufen auf dem gleichen CAM auf verschiedenen
                             # Kanaelen, davon kann nur einer aufgenommen werden
-                            Log(LOG_DEBUG, "Beide Kanaele gleiches CAM");
+                            Log(LOG_DEBUG, "[TIMER] Both channels use same CAM");
                             #($timer[$ii]->{collision}) = $CONFIG{RECORDINGS}; #OLDIMPL
                             ($timer[$ii]->{collision})++; #NEWIMPL
 
@@ -4609,10 +4694,10 @@ sub timer_new_form {
                  event_id => $this_event->{event_id},
                  starth   => my_strftime("%H", $this_event->{start}),
                  startm   => my_strftime("%M", $this_event->{start}),
-                 bstart   => $this_event->{bstart},
+                 bstart   => ($this_event->{tool} == $TOOL_EPGSEARCH ? $this_event->{bstart} / 60 :$this_event->{bstart}),
                  stoph    => $this_event->{stop} ? my_strftime("%H", $this_event->{stop}) : "00",
                  stopm    => $this_event->{stop} ? my_strftime("%M", $this_event->{stop}) : "00",
-                 bstop    => $this_event->{bstop},
+                 bstop    => ($this_event->{tool} == $TOOL_EPGSEARCH ? $this_event->{bstop} / 60 : $this_event->{bstop}),
                  vps      => $this_event->{active} & 4,
                  dor      => ($this_event->{dor} && (length($this_event->{dor}) == 7 || length($this_event->{dor}) == 10 || length($this_event->{dor}) == 18)) ? $this_event->{dor} : my_strftime("%d", $this_event->{start}),
                  prio => $this_event->{prio} ne "" ? $this_event->{prio} : $CONFIG{TM_PRIORITY},
@@ -4826,15 +4911,19 @@ sub encode_RecTitle {
 }
 
 sub findVideoFiles {
+    # VDR < v1.7.2:  YYYY-MM-DD-hh[.:]mm.pr.lt.rec (pr=priority, lt=lifetime)
+    # VDR >= v1.7.2: YYYY-MM-DD-hh.mm.ch-ri.rec    (ch=channel, ri=resumeId)
+
     my ($minute, $hour, $day, $month, $title) = @_;
     my $data;
     $title =~ s/ /_/g;
     $title =~ s/~/\//g;
-    Log(LOG_DEBUG, "rec_stream: find $CONFIG{VIDEODIR}/ -follow -regex \"$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec/...\\.vdr\"");
-    my @files = `find $CONFIG{VIDEODIR}/ -follow -regex "$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec/...\\.vdr" | sort -r`;
+    Log(LOG_DEBUG, "[REC] rec_stream: find $CONFIG{VIDEODIR}/ -follow -regex \"$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\.\[0-9\]+\[.-\]\[0-9\]+\\.rec/\\(...\\.vdr\\|.....\\.ts\\)\"");
+    my @files = `find $CONFIG{VIDEODIR}/ -follow -regex "$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\.\[0-9\]+\[.-\]\[0-9\]+\\.rec/\\(...\\.vdr\\|.....\\.ts\\)" | sort -r`;
+
     foreach (@files) {
         chomp;
-        Log(LOG_DEBUG, "findVideoFiles: found ($_)\n");
+        Log(LOG_DEBUG, "[REC] findVideoFiles: found ($_)\n");
         $_ =~ s/$CONFIG{VIDEODIR}/$CONFIG{ST_VIDEODIR}/;
         $_ =~ s/\n//g;
         $data = $CONFIG{ST_URL} . "$_\n$data";
@@ -5313,7 +5402,7 @@ sub prog_timeline {
         $TIM->{$title} = $timer;
     }
 
-    my (@show, @shows, @temp);
+    my (@show, @temp);
     my $shows;
 
     foreach (@{$CHAN{$CONFIG{CHANNELS_WANTED_TIMELINE}}->{channels}}) {
@@ -5512,7 +5601,7 @@ sub prog_summary {
                    show_percent => undef,
                    title       => gettext("No EPG information available"),
                    progname    => CGI::escapeHTML($channel->{name}),
-                   vdr_id      => $channel->{vdr_id}, 
+                   vdr_id      => $channel->{vdr_id},
                    proglink    => sprintf("%s?aktion=prog_list&amp;vdr_id=%s", $MyURL, $channel->{vdr_id}),
                    switchurl   => sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $channel->{vdr_id}),
                    streamurl   => $FEATURES{STREAMDEV} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $channel->{vdr_id}, uri_escape($channel->{name})) : undef,
@@ -5585,7 +5674,6 @@ sub rec_list {
     $CONFIG{REC_SORTBY} = "name" if (!$CONFIG{REC_SORTBY});
 
     my $parent = $q->param("parent");
-    my $parent2;
     if (!$parent) {
         $parent = 0;
     } else {
@@ -6074,20 +6162,23 @@ sub recRunCmd {
             $folder = findVideoFolder($minute, $hour, $day, $month, encode_RecTitle($title, 1));
         }
         if ($folder) {
-            Log(LOG_DEBUG, "recRunCmd: executing ($cmd \"$folder\")");
+            Log(LOG_DEBUG, "[REC] recRunCmd: executing ($cmd \"$folder\")");
             `$cmd "$folder"`;
         }
     }
 }
 
 sub findVideoFolder {
+    # VDR < v1.7.2:  YYYY-MM-DD-hh[.:]mm.pr.lt.rec (pr=priority, lt=lifetime)
+    # VDR >= v1.7.2: YYYY-MM-DD-hh.mm.ch-ri.rec    (ch=channel, ri=resumeId)
+
     my ($minute, $hour, $day, $month, $title) = @_;
     my $folder;
 
     $title =~ s/ /_/g;
     $title =~ s/~/\//g;
-    $folder = `find $CONFIG{VIDEODIR}/ -follow -regex "$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec"`;
-    Log(LOG_DEBUG, "findVideoFolder: find $CONFIG{VIDEODIR}/ -follow -regex \"$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\...\\...\\.rec\"");
+    $folder = `find $CONFIG{VIDEODIR}/ -follow -regex "$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\.\[0-9\]+\[.-\]\[0-9\]+\\.rec"`;
+    Log(LOG_DEBUG, "[REC] findVideoFolder: find $CONFIG{VIDEODIR}/ -follow -regex \"$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\.\[0-9\]+\[.-\]\[0-9\]+\\.rec\"");
     chomp($folder) if ($folder);
 
     return $folder;
@@ -6184,6 +6275,7 @@ sub config {
         }
         setlocale(LC_COLLATE, $old_collate);
         close(CONF);
+        return "";
     }
 
     if ($q->param("submit")) {
@@ -6266,7 +6358,7 @@ sub config {
     }
 
     my @my_locales;
-    if (-f "/usr/bin/locale" && -x "/usr/bin/locale") {
+    if (-f "/usr/bin/locale" && -x _) {
         push(@my_locales, { id => "", name => gettext("System default"), cur => 0 });
         foreach my $loc (locale("-a")) {
             chomp $loc;
@@ -6423,7 +6515,7 @@ sub grab_picture {
         my $file = new File::Temp(TEMPLATE => "vdr-XXXXX", DIR => File::Spec->tmpdir(), UNLINK => 1, SUFFIX => ".jpg");
         chmod 0666, $file if (-e $file);
         SendCMD("grab $file jpeg 70 $width $height");
-        if (-e $file && -r $file) {
+        if (-e $file && -r _) {
             return (header("200", "image/jpeg", ReadFile($file)));
         } else {
             print "Expected $file does not exist.\n";
@@ -6481,7 +6573,7 @@ sub vdr_cmds {
                         { url => sprintf("%s%s?aktion=export_channels_m3u&amp;wanted=%d", $MyStreamBase, $CONFIG{TV_EXT}, $CHAN_WANTED), text => gettext('Selected channels') },
                         { url => sprintf("%s%s?aktion=export_channels_m3u&amp;wanted=%d", $MyStreamBase, $CONFIG{TV_EXT}, $CHAN_TV), text => gettext('TV channels') },
                         { url => sprintf("%s%s?aktion=export_channels_m3u&amp;wanted=%d", $MyStreamBase, $CONFIG{TV_EXT}, $CHAN_RADIO), text => gettext('Radio channels') }
-                      );   
+                      );
 
     my $vars = {
         url         => sprintf("%s?aktion=vdr_cmds", $MyURL),
@@ -6591,10 +6683,10 @@ package SVDRP;
 
 sub true ()       { main::true(); }
 sub false ()      { main::false(); }
-sub LOG_VDRCOM () { main::LOG_VDRCOM(); }
+sub LOG_DEBUG ()  { main::LOG_DEBUG(); }
 sub CRLF ()       { main::CRLF(); }
 
-my ($SOCKET, $EPGSOCKET, $query, $connected, $VDR_ENCODING, $need_recode);
+my ($SOCKET, $query, $connected, $VDR_ENCODING, $need_recode);
 
 sub new {
     my $invocant = shift;
@@ -6610,7 +6702,7 @@ sub new {
 
 sub myconnect {
     my $this = shift;
-    main::Log(LOG_VDRCOM, "LOG_VDRCOM: connect to $CONFIG{VDR_HOST}:$CONFIG{VDR_PORT}");
+    main::Log(LOG_DEBUG, "[SVDRP] Connecting to $CONFIG{VDR_HOST}:$CONFIG{VDR_PORT}");
 
     $SOCKET =
       $InetSocketModule->new(PeerAddr => $CONFIG{VDR_HOST},
@@ -6658,7 +6750,7 @@ sub getSupportedFeatures {
 sub close {
     my $this = shift;
     if ($connected) {
-        main::Log(LOG_VDRCOM, "LOG_VDRCOM: closing connection");
+        main::Log(LOG_DEBUG, "[SVDRP] Closing connection");
         command($this, "quit");
         readoneline($this);
         close $SOCKET if $SOCKET;
@@ -6674,7 +6766,7 @@ sub command {
         myconnect($this);
     }
 
-    main::Log(LOG_VDRCOM, sprintf("LOG_VDRCOM: send \"%s\"", $cmd));
+    main::Log(LOG_DEBUG, sprintf("[SVDRP] Sending \"%s\"", $cmd));
     $cmd = $cmd . CRLF;
     if ($SOCKET && $SOCKET->connected()) {
         my $result = send($SOCKET, $cmd, 0);
@@ -6698,7 +6790,7 @@ sub readoneline {
         }
         $line = substr($line, 4, length($line));
         Encode::from_to($line, $VDR_ENCODING, $MY_ENCODING) if ($need_recode);
-        main::Log(LOG_VDRCOM, sprintf("LOG_VDRCOM: read \"%s\"", $line));
+        main::Log(LOG_DEBUG, sprintf("[SVDRP] Read \"%s\"", $line));
         return ($line);
     } else {
         return undef;

@@ -1,3 +1,382 @@
+2009-12-30  tag v3_6_5
+
+2009-12-30  amair
+
+	* HISTORY, vdradmind.pl, template/default/about.html:
+
+	Updated for v3.6.5 release.
+
+2009-12-30  amair
+
+	* po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po, po/it.po,
+	  po/nl.po, po/ru.po, po/vdradmin.pot:
+
+	Updated.
+
+2009-12-30  scop
+
+	* HISTORY, README, install.sh, vdradmind.pl:
+
+	Use HTTP::Date for HTTP date/time formatting.
+
+2009-12-29  scop
+
+	* vdradmind.pl:
+
+	Remove unused variables flagged by perlcritic.
+
+2009-12-29  scop
+
+	* vdradmind.pl:
+
+	Fix numeric/string comparison issue flagged by perltidy.
+
+2009-12-29  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Create fewer SVDRP connections.
+
+2009-10-11  amair
+
+	* README:
+
+	Updated link to VDR homepage.
+
+2009-08-06  amair
+
+	* vdradmind.pl:
+
+	Removed $DEBUG (IMHO it's easier to use "-n" and "-l" for debugging).
+
+2009-08-05  scop
+
+	* vdradmind.pl, template/default/timeline.js:
+
+	Cosmetic: trim trailing whitespace.
+
+2009-08-05  scop
+
+	* template/default/library.js:
+
+	Add jslint settings, fix some warnings.
+
+2009-08-05  scop
+
+	* template/default/timeline.js:
+
+	Add jslint settings, fix more warnings.
+
+2009-08-05  scop
+
+	* HISTORY, template/default/timeline.js:
+
+	Get rid of jslint "used before defined" warnings (big diff, just reordering functions, no other changes).
+
+2009-08-05  scop
+
+	* vdradmind.pl:
+
+	Migrate log level config.
+
+2009-08-05  scop
+
+	* vdradmind.pl:
+
+	Add warning log level, set default to it, replace warn() calls with appropriate logging calls.
+
+2009-08-05  scop
+
+	* vdradmind.pl:
+
+	Use DAEMON instead of USER syslog facility.
+
+2009-08-05  scop
+
+	* vdradmind.pl:
+
+	Turn off daemon mode with -h|--help, -c|--config, -k|--kill, -i|--displaycall, and -m|--message (affects logging).
+
+2009-08-05  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Improve config file read/write error handling.
+
+2009-08-05  scop
+
+	* vdradmind.pl:
+
+	Drop dead code.
+
+2009-08-05  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Send Last-Modified header for static resources.
+
+2009-08-05  scop
+
+	* vdradmind.pl:
+
+	Avoid some unnecessary stat() calls.
+
+2009-08-05  scop
+
+	* vdradmind.pl:
+
+	Fix syslog priority string for errors ("err", not "error").
+
+2009-08-05  amair
+
+	* vdradmind.pl:
+
+	Don't stop reading parameters after "-n|--nofork".
+
+2009-08-05  amair
+
+	* HISTORY, README, vdradmind.pl:
+
+	Added "-l" and "--log" parameter.
+
+2009-08-05  amair
+
+	* HISTORY, README, vdradmind.pl, vdradmind.pl.1:
+
+	Changed "-nf" option to "-n".
+
+2009-08-05  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Reworked logging.
+
+2009-07-23  amair
+
+	* README:
+
+	Updated.
+
+2009-07-23  amair
+
+	* HISTORY, install.sh, vdradmind.pl:
+
+	Added "--ssl" switch to accept https instead of http.
+
+2009-07-23  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Find VDR 1.7.2+ TS recordings.
+
+2009-07-23  amair
+
+	* HISTORY:
+
+	Updated.
+
+2009-07-22  scop
+
+	* vdradmind.pl:
+
+	Note that -p is ignored with -nf.
+
+2009-07-22  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Make non-daemon mode always turn on logging to stderr.
+
+2009-07-22  scop
+
+	* HISTORY, README, install.sh, vdradmind.pl:
+
+	Add ability to log to syslog ("LOGFILE = syslog" in config).
+
+2009-07-22  scop
+
+	* vdradmind.pl:
+
+	Simplify Log() a bit further.
+
+2009-07-22  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Include reason in pid file deletion error message.
+
+2009-07-22  amair
+
+	* vdradmind.pl:
+
+	Delete pidfile only if running as daemon.
+
+2009-07-21  scop
+
+	* vdradmind.pl:
+
+	Log() code cleanups (3-argument open(), eliminate unnecessary sprintf()).
+
+2009-07-21  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Warn if log file cannot be written to.
+
+2009-07-21  scop
+
+	* HISTORY:
+
+	Typo fix.
+
+2009-07-21  scop
+
+	* .cvsignore:
+
+	Ignore log and pid files.
+
+2009-07-21  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Improve error message when binding the server socket fails.
+
+2009-07-21  scop
+
+	* vdradmind.pl:
+
+	Start without compiled template caching but warn if compile dir is not writable.
+
+2009-07-15  scop
+
+	* HISTORY, install.sh, vdradmind.pl:
+
+	Improve template caching defaults (remove useless CACHE_SIZE, set STAT_TTL to one hour, set CACHE_DIR to /var/cache/vdradmin).
+
+2009-07-15  scop
+
+	* HISTORY, README, install.sh:
+
+	Note that Template::Plugin::JavaScript is required.
+
+2009-07-15  scop
+
+	* README:
+
+	Note that Compress::Zlib is optional.
+
+2009-07-15  scop
+
+	* README:
+
+	Point to official VDR homepage URL, fix indentation.
+
+2009-07-15  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Use text/javascript for JavaScript in HTTP headers.
+
+2009-07-14  scop
+
+	* HISTORY, po/fi.po, po/vdradmin.pot, template/default/config.html:
+
+	Add autotimer schedule change tracking option in UI.
+
+2009-02-09  amair
+
+	* po/it.po:
+
+	Updated.
+
+2009-01-21  amair
+
+	* vdradmind.pl:
+
+	Fixed: epgsearch uses seconds in aux field of timers, not minutes.
+
+2009-01-21  amair
+
+	* vdradmind.pl:
+
+	Fix bug #507 "EPGsearch custom categories no longer show".
+
+2009-01-03  scop
+
+	* vdradmind.pl:
+
+	use() fine tuning.
+
+2009-01-03  scop
+
+	* vdradmind.pl:
+
+	Improve pid file deletion logic, avoid warning noise.
+
+2009-01-03  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Fixed: Saving the config showed error message "1".
+
+2009-01-03  amair
+
+	* CREDITS, template/default/about.html:
+
+	Added Manuel Gomez to list of translators.
+
+2008-12-31  scop
+
+	* vdradmind.pl:
+
+	Sanity check pid file contents on read.
+
+2008-12-31  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Improve pid file error handling.
+
+2008-12-31  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Always exit with status 1 from --kill if no processes were killed.
+
+2008-12-31  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Fix "is the process with this pid a vdradmind" logic (outputs of "ps ax" differ); now uses/requires POSIX compliant "ps".
+
+2008-12-31  amair
+
+	* po/es.po:
+
+	Reworked by Manuel Gomez.
+
+2008-12-25  scop
+
+	* po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po, po/it.po,
+	  po/nl.po, po/ru.po, po/vdradmin.pot,
+	  template/default/help_at_timer_new.html,
+	  template/default/help_config.html:
+
+	Some English message fixes.
+
+2008-12-25  scop
+
+	* po/.cvsignore:
+
+	Ignore *.mo.
+
+2008-12-25  amair
+
+	* po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po, po/it.po,
+	  po/nl.po, po/ru.po, po/vdradmin.pot, tools/tmplgettext:
+
+	Sort HTML templates alphanumeric so that the ordering of the messages in the .po files doesn't change.
+
 2008-12-20  tag v3_6_4
 
 2008-12-20  amair
