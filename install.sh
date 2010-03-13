@@ -1,5 +1,6 @@
 #!/bin/bash
-# Copyright (c) 2005/6 Andreas Mair
+# vim:noet:sw=4:ts=4:
+# Copyright (c) 2005-2010 Andreas Mair
 #
 #
 # Download and patchscript for VDRAdmin-AM
@@ -12,10 +13,10 @@ ETCDIR=${ETCDIR:-$DESTDIR/etc/vdradmin}
 DOCDIR=${DOCDIR:-$DESTDIR/usr/share/doc/vdradmin}
 BINDIR=${BINDIR:-$DESTDIR/usr/bin}
 LOCDIR=${LOCDIR:-$DESTDIR/usr/share/locale}
-MANDIR=${MANDIR:-$DESTDIR/usr/share/man/man1}
-LOGDIR=${LOGDIR:-$DESTDIR/var/log}
+MANDIR=${MANDIR:-$DESTDIR/usr/share/man}
+LOGDIR=${LOGDIR:-$DESTDIR/var/log/vdradmin}
 CACHEDIR=${CACHEDIR:-$DESTDIR/var/cache/vdradmin}
-PIDFILE=${PIDFILE:-$DESTDIR/var/run/vdradmind.pid}
+PIDFILE=${PIDFILE:-$DESTDIR/var/run/vdradmin/vdradmind.pid}
 VIDEODIR=${VIDEODIR:-/video}
 EPGIMAGES=${EPGIMAGES:-$VIDEODIR/epgimages}
 VDRCONF=${VDRCONF:-$VIDEODIR}
@@ -69,7 +70,6 @@ function checkPerlModule()
 	else
 		echo " found"
 	fi
-
 }
 
 function perlModules()
@@ -147,9 +147,9 @@ function doInstall()
 	perlModules
 
 	makeDir $LIBDIR 1 && cp -r template lib $LIBDIR || exit 1
-  makeDir $DOCDIR && cp -r contrib COPYING CREDITS HISTORY INSTALL LGPL.txt README* REQUIREMENTS FAQ $DOCDIR || exit 1
-	makeDir $MANDIR && cp vdradmind.pl.1 $MANDIR/vdradmind.1 || exit 1
-	makeDir $ETCDIR || exit 1
+	makeDir $BINDIR || exit 1
+	makeDir $DOCDIR && cp -r contrib COPYING CREDITS HISTORY INSTALL LGPL.txt README* REQUIREMENTS FAQ $DOCDIR || exit 1
+	makeDir $MANDIR/man8 && cp vdradmind.pl.1 $MANDIR/man8/vdradmind.8 || exit 1
 
 	(
 		cd locale
@@ -160,47 +160,48 @@ function doInstall()
 	)
 
 	local RESTART=
-	[ ! -e $BINDIR ] && mkdir -p $BINDIR
 	if [ -d $BINDIR ]; then
 		killRunningVDRAdmin
 		if [ $? -ne 0 ] ; then
 			RESTART=1
-  		echo "Killed running VDRAdmin-AM..."
-  	fi
-  	sed <vdradmind.pl >$BINDIR/vdradmind \
-  	    -e "s/^\(my \$SEARCH_FILES_IN_SYSTEM *=\) 0;/\1 1;/" \
-  	    -e "s:/usr/share/vdradmin/lib:${LIBDIR}/lib:" \
-  	    -e "s:/usr/share/vdradmin/template:${LIBDIR}/template:" \
-  	    -e "s:/var/log:${LOGDIR}:" \
-  	    -e "s:/var/cache/vdradmin:${CACHEDIR}:" \
-  	    -e "s:/var/run/vdradmind.pid:${PIDFILE}:" \
-  	    -e "s:\(\$ETCDIR *= \)\"/etc/vdradmin\";:\1\"${ETCDIR}\";:" \
-  	    -e "s:/usr/share/locale:${LOCDIR}:" \
-  	    -e "s:\(\$CONFIG{VIDEODIR} *= \)\"/video\";:\1\"${VIDEODIR}\";:" \
-  	    -e "s:\(\$CONFIG{EPGIMAGES} *= \)\"\$CONFIG{VIDEODIR}/epgimages\";:\1\"${EPGIMAGES}\";:" \
+			echo "Killed running VDRAdmin-AM..."
+		fi
+		sed <vdradmind.pl >$BINDIR/vdradmind \
+		    -e "s/^\(my \$SEARCH_FILES_IN_SYSTEM *=\) 0;/\1 1;/" \
+		    -e "s:/usr/share/vdradmin/lib:${LIBDIR}/lib:" \
+		    -e "s:/usr/share/vdradmin/template:${LIBDIR}/template:" \
+		   -e "s:/var/log/vdradmin:${LOGDIR}:" \
+		    -e "s:/var/cache/vdradmin:${CACHEDIR}:" \
+		    -e "s:/var/run/vdradmin/vdradmind.pid:${PIDFILE}:" \
+		    -e "s:\(\$ETCDIR *= \)\"/etc/vdradmin\";:\1\"${ETCDIR}\";:" \
+		    -e "s:/usr/share/locale:${LOCDIR}:" \
+		    -e "s:\(\$CONFIG{VIDEODIR} *= \)\"/video\";:\1\"${VIDEODIR}\";:" \
+		    -e "s:\(\$CONFIG{EPGIMAGES} *= \)\"\$CONFIG{VIDEODIR}/epgimages\";:\1\"${EPGIMAGES}\";:" \
 				-e "s:\(\$CONFIG{VDRCONFDIR} *= \)\"\$CONFIG{VIDEODIR}\";:\1\"${VDRCONF}\";:"
 
 		chmod a+x  $BINDIR/vdradmind
 
-  	if [ "$CONFIG" ]; then
-    	echo "Configuring VDRAdmin-AM..."
-    	$BINDIR/vdradmind -c
-  	fi
+		if [ "$CONFIG" ]; then
+			echo "Configuring VDRAdmin-AM..."
+			$BINDIR/vdradmind -c
+		fi
 
-  	if [ "$RESTART" ]; then
-  		echo "Restarting VDRAdmin-AM..."
-  		$BINDIR/vdradmind
-  	fi
+		if [ "$RESTART" ]; then
+			echo "Restarting VDRAdmin-AM..."
+			$BINDIR/vdradmind
+		fi
 
 		echo ""
 		if [ -e $BINDIR/vdradmind.pl ]; then
 			echo "Removing ancient $BINDIR/vdradmind.pl"
 			rm -f $BINDIR/vdradmind.pl
 		fi
-		if [ -e $MANDIR/vdradmind.pl.1 ]; then
-			echo "Removing ancient $MANDIR/vdradmind.pl.1"
-			rm -f $MANDIR/vdradmind.pl.1
-		fi
+		for man in man1/vdradmind.pl.1 man1/vdradmind.1; do
+			if [ -e $MANDIR/$man ]; then
+				echo "Removing ancient $MANDIR/$man"
+				rm -f $MANDIR/$man
+			fi
+		done
 	else
 		echo "$BINDIR exists but is no directory!"
 		echo "Aborting..."
@@ -220,6 +221,14 @@ function doInstall()
 	echo ""
 	echo "NOTE2:"
 	echo "If you would like VDRAdmin-AM to start at system's boot, please modify your system's init scripts."
+
+	local USED_DIRS="$(echo -e "$ETCDIR\n$LOGDIR\n$CACHEDIR\n$(dirname "$PIDFILE")" | sort -u)"
+	echo
+	echo "NOTE3:"
+	echo "VDRAdmin-AM needs to access some directories:"
+	echo "$USED_DIRS"
+	echo
+	echo "Please check that the user VDRAdmin-AM runs has enough permissions to access them!"
 	exit 0
 }
 
@@ -239,12 +248,11 @@ function doUninstall()
 	if [ -d $CACHEDIR ]; then
 		rm -rf $CACHEDIR
 	fi
-	if [ -e $MANDIR/vdradmind.pl.1 ]; then
-		rm -f $MANDIR/vdradmind.pl.1
-	fi
-	if [ -e $MANDIR/vdradmind.1 ]; then
-		rm -f $MANDIR/vdradmind.1
-	fi
+	for man in man1/vdradmind.pl.1 man1/vdradmind.1 man8/vdradmind.8; do
+		if [ -e $MANDIR/$man ]; then
+			rm -f $MANDIR/$man
+		fi
+	done
 	if [ -e $BINDIR/vdradmind.pl ]; then
 		rm -f $BINDIR/vdradmind.pl
 	fi

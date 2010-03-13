@@ -2,7 +2,7 @@
 <html id="scroller">
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<meta http-equiv="content-type" content="text/html;charset=<?% charset %?>" />
 	<title>VDRAdmin-AM - <?% gettext('Timer') %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<?% IF usercss %?>
@@ -304,7 +304,7 @@
 					</td>
 					<td class="col_name <?% IF timer.sortbyname %?>selected<?% END %?>">
 						<div <?% IF config.TM_TT_LIST %?>onmouseover="tip('VDR-<?% timer.id %?>'); return true;" onmouseout="untip(); return true;"<?% END %?>>
-							<?% IF timer.recording %?><img align="middle" src="bilder/rec.gif" border="0" alt="" />&nbsp;<?% END %?>
+							<?% IF timer.recording && timer.active %?><img align="middle" src="bilder/rec.gif" border="0" alt="" />&nbsp;<?% END %?>
 							<?% IF timer.infurl %?>
 								<a href="javascript:popup('<?% timer.infurl %?>', <?% config.GUI_POPUP_WIDTH %?>, <?% config.GUI_POPUP_HEIGHT %?>);"><?% timer.title %?></a>
 							<?% ELSE %?>

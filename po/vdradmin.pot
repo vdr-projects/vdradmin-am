@@ -19,18 +19,15 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-AM 3.6.5\n"
+"Project-Id-Version: VDRAdmin-AM 3.6.5+cvs\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2009-12-30 13:26+0100\n"
+"POT-Creation-Date: 2010-03-07 14:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid "ISO-8859-1"
-msgstr ""
 
 msgid "About"
 msgstr ""
@@ -92,10 +89,10 @@ msgstr ""
 msgid "Supported features in VDR:"
 msgstr ""
 
-msgid "EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgid "EPGSearch (<a href=\"http://winni.vdr-developer.org/epgsearch/index_eng.html\" target=\"_blank\">EPGSearch Plugin</a>)"
 msgstr ""
 
-msgid "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>)"
+msgid "LiveTV Streaming (<a href=\"http://streamdev.vdr-developer.org/\" target=\"_blank\">Streamdev Plugin</a>)"
 msgstr ""
 
 msgid "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
@@ -351,6 +348,18 @@ msgid "Also used for other EPG views!"
 msgstr ""
 
 msgid "Tooltips:"
+msgstr ""
+
+msgid "Electronic Program Guide (EPG)"
+msgstr ""
+
+msgid "Day begins at:"
+msgstr ""
+
+msgid "Show Subtitle:"
+msgstr ""
+
+msgid "Show Summary:"
 msgstr ""
 
 msgid "Active:"
@@ -656,10 +665,16 @@ msgstr ""
 msgid "record"
 msgstr ""
 
-msgid "announce only"
+msgid "announce by OSD"
 msgstr ""
 
 msgid "switch only"
+msgstr ""
+
+msgid "announce and switch"
+msgstr ""
+
+msgid "announce by mail"
 msgstr ""
 
 msgid "First day:"
@@ -710,6 +725,9 @@ msgstr ""
 msgid "Compare:"
 msgstr ""
 
+msgid "Minimal match of description in %:"
+msgstr ""
+
 msgid "VPS:"
 msgstr ""
 
@@ -717,6 +735,15 @@ msgid "Settings for action \"switch only\""
 msgstr ""
 
 msgid "Switch ... Minutes Before Start:"
+msgstr ""
+
+msgid "Unmute sound:"
+msgstr ""
+
+msgid "Settings for action \"announce and switch\""
+msgstr ""
+
+msgid "Ask ... Minutes Before Start:"
 msgstr ""
 
 msgid "Delete template"
@@ -845,6 +872,15 @@ msgstr ""
 msgid "Here you can (de-)activate the tooltips."
 msgstr ""
 
+msgid "The time after which events are shown on a new day. For example setting 03:00 means that today's schedule will include any event starting before 03:00 tomorrow. Applies only to the 'Playing Today?' list."
+msgstr ""
+
+msgid "Show the 'Subtitle' text for each event. Not all broadcasters use this field."
+msgstr ""
+
+msgid "Show the 'Summary' text for each event."
+msgstr ""
+
 msgid "Activate or deactivate the AutoTimer function."
 msgstr ""
 
@@ -878,7 +914,7 @@ msgstr ""
 msgid "If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here."
 msgstr ""
 
-msgid "Enable or disable live streaming using the <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
+msgid "Enable or disable live streaming using the <a href=\"http://streamdev.vdr-developer.org/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
 msgstr ""
 
 msgid "Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use."
@@ -1454,7 +1490,7 @@ msgid "Can't write configuration file %s! Reason: %s"
 msgstr ""
 
 #, perl-format
-msgid "Configuration file %s not writeable! Configuration won't be saved!"
+msgid "Configuration file %s not writable! Configuration won't be saved!"
 msgstr ""
 
 msgid "Timers"

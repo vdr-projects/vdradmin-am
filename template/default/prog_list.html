@@ -2,7 +2,7 @@
 <html id="scroller">
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<meta http-equiv="content-type" content="text/html;charset=<?% charset %?>" />
 	<title>VDRAdmin-AM - <?% gettext('Channels') %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<?% IF usercss %?>
@@ -94,8 +94,12 @@
 						<?% ELSE %?>
 							<span class="action info"><img src="bilder/info_button_disabled.png" border="0" alt="noinfo" title="<?% gettext('No Information') %?>" /></span>
 						<?% END %?>
-						<span class="action info"><a href="<?% bc.editurl %?>"><img src="bilder/edit.png" border="0" alt="edit" /></a></span>
-						<span class="action record"><a href="<?% bc.recurl %?>"><img src="bilder/rec_button.png" border="0" alt="record" title="<?% gettext('Record') %?>" /></a></span>
+            <span class="action info"><a href="<?% bc.editurl %?>"><img src="bilder/edit.png" border="0" alt="edit" /></a></span>
+						<?% UNLESS bc.timerset %?>
+              <span class="action record">
+							  <a href="<?% bc.recurl %?>"><img src="bilder/rec_button.png" border="0" alt="record" title="<?% gettext('Record') %?>" /></a>
+              </span>
+            <?% END %?>
 						<?% IF bc.srch1_url %?>
 							<span class="action imdb"><a href="<?% bc.srch1_url %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<?% bc.srch1_title %?>';return true" title="<?% bc.srch1_title %?>" /></a></span>
 						<?% END %?>

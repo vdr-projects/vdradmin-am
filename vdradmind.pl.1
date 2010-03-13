@@ -1,6 +1,6 @@
 .\" Man page for vdradmind 
 
-.TH vdradmind 1
+.TH vdradmind 8
 
 .SH NAME
 vdradmind \- Web-based administration tool for VDR
@@ -35,6 +35,24 @@ Kill a forked vdradmind.
 
 .IP "\-\-pid pidfile / -p pidfile" 
 Set the pidfile to use.
+
+.IP "\-\-ipv6 / \-6"
+use IPv6. [EXPERIMENTAL!]
+
+.IP "\-\-ssl / -s"
+only accept https:// connections.
+
+.B NOTE:
+this requires server-cert.pem and server-key.pem in the "certs" directory.
+
+You can create them for example like this:
+
+# openssl req -new -x509 -days 9999 -keyout server-rsa-key.pem -out server-cert.pem
+
+# openssl rsa -in server-rsa-key.pem > server-key.pem
+
+.IP	"\-\-log level / \-l level"
+set log level for this session [0 - 7].
 
 .IP "\-\-help / -h" 
 Display a short message about the options of vdradmind.

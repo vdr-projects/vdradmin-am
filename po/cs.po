@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2009-12-30 13:26+0100\n"
+"POT-Creation-Date: 2010-03-07 14:04+0100\n"
 "PO-Revision-Date: 2006-09-23 13:14+0200\n"
 "Last-Translator: Karel Borkovec <her-ur@her-ur.org>\n"
 "Language-Team:  <cs@li.org>\n"
@@ -15,9 +15,6 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
-
-msgid "ISO-8859-1"
-msgstr "ISO-8859-2"
 
 msgid "About"
 msgstr "O programu"
@@ -84,11 +81,11 @@ msgid "Supported features in VDR:"
 msgstr "Podporované vlastnosti ve VDR:"
 
 #, fuzzy
-msgid "EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>)"
-msgstr "TV streamování (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>)"
+msgid "EPGSearch (<a href=\"http://winni.vdr-developer.org/epgsearch/index_eng.html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgstr "TV streamování (<a href=\"http://streamdev.vdr-developer.org/\" target=\"_blank\">Streamdev Plugin</a>)"
 
-msgid "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>)"
-msgstr "TV streamování (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>)"
+msgid "LiveTV Streaming (<a href=\"http://streamdev.vdr-developer.org/\" target=\"_blank\">Streamdev Plugin</a>)"
+msgstr "TV streamování (<a href=\"http://streamdev.vdr-developer.org/\" target=\"_blank\">Streamdev Plugin</a>)"
 
 msgid "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
 msgstr "Pøejmenování nahrávek (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
@@ -346,6 +343,18 @@ msgstr "Pou¾ít pro ostatní EPG náhledy!"
 
 msgid "Tooltips:"
 msgstr "Tipy:"
+
+msgid "Electronic Program Guide (EPG)"
+msgstr ""
+
+msgid "Day begins at:"
+msgstr ""
+
+msgid "Show Subtitle:"
+msgstr ""
+
+msgid "Show Summary:"
+msgstr ""
 
 msgid "Active:"
 msgstr "Aktivní:"
@@ -698,10 +707,16 @@ msgstr "®ádný èasovaè není definován!"
 msgid "record"
 msgstr "nahrát"
 
-msgid "announce only"
+msgid "announce by OSD"
 msgstr ""
 
 msgid "switch only"
+msgstr ""
+
+msgid "announce and switch"
+msgstr ""
+
+msgid "announce by mail"
 msgstr ""
 
 #, fuzzy
@@ -762,6 +777,9 @@ msgstr ""
 msgid "Compare:"
 msgstr ""
 
+msgid "Minimal match of description in %:"
+msgstr ""
+
 #, fuzzy
 msgid "VPS:"
 msgstr "VPS"
@@ -770,6 +788,15 @@ msgid "Settings for action \"switch only\""
 msgstr ""
 
 msgid "Switch ... Minutes Before Start:"
+msgstr ""
+
+msgid "Unmute sound:"
+msgstr ""
+
+msgid "Settings for action \"announce and switch\""
+msgstr ""
+
+msgid "Ask ... Minutes Before Start:"
 msgstr ""
 
 #, fuzzy
@@ -904,6 +931,15 @@ msgstr "Èárkou oddìlený seznam èasù v tomto formátu <strong>hh:mm</strong>, kter
 msgid "Here you can (de-)activate the tooltips."
 msgstr "Tady mù¾ete (de-)aktivovat nástrojové tipy."
 
+msgid "The time after which events are shown on a new day. For example setting 03:00 means that today's schedule will include any event starting before 03:00 tomorrow. Applies only to the 'Playing Today?' list."
+msgstr ""
+
+msgid "Show the 'Subtitle' text for each event. Not all broadcasters use this field."
+msgstr ""
+
+msgid "Show the 'Summary' text for each event."
+msgstr ""
+
 msgid "Activate or deactivate the AutoTimer function."
 msgstr "Aktivace a Deaktivace funkce AutoÈasovaèe."
 
@@ -937,8 +973,8 @@ msgstr "Pøidat souhrn k novým èasovaèùm:"
 msgid "If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here."
 msgstr "Pokud nechcete aby VDRAdmin-AM pøidával souhrn EPG k novým Èasovaèùm, zde to mù¾ete vypnout."
 
-msgid "Enable or disable live streaming using the <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
-msgstr "Zapnout nebo vypnout streamování za pou¾ití <a href=\"http://www.magoa.net/linux/\">streamdev pluginu</a>. Také musíte zadat správný <span class=\"ref_label\">HTTP Port pro Streamdev</span>"
+msgid "Enable or disable live streaming using the <a href=\"http://streamdev.vdr-developer.org/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
+msgstr "Zapnout nebo vypnout streamování za pou¾ití <a href=\"http://streamdev.vdr-developer.org/\">streamdev pluginu</a>. Také musíte zadat správný <span class=\"ref_label\">HTTP Port pro Streamdev</span>"
 
 msgid "Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use."
 msgstr "Zde musíte zadat èíslo portu na kterém naslouchá Vá¹ streamdev server. Také mù¾ete zadat typ streamu, který by jste chtìli pou¾ít."
@@ -1541,7 +1577,7 @@ msgid "Can't write configuration file %s! Reason: %s"
 msgstr ""
 
 #, perl-format
-msgid "Configuration file %s not writeable! Configuration won't be saved!"
+msgid "Configuration file %s not writable! Configuration won't be saved!"
 msgstr ""
 
 msgid "Timers"
@@ -1549,3 +1585,6 @@ msgstr "Èasovaèe"
 
 msgid "System default"
 msgstr "Defaultní nastavení"
+
+#~ msgid "ISO-8859-1"
+#~ msgstr "ISO-8859-2"

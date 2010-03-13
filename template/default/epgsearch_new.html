@@ -2,7 +2,7 @@
 <html id="scroller">
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>"/>
+	<meta http-equiv="content-type" content="text/html;charset=<?% charset %?>"/>
 <?% IF mode_blacklist %?>
   <title>VDRAdmin-AM - <?% IF newtimer %?><?% gettext('Add New Blacklist') %?><?% ELSE %?><?% gettext('Edit Blacklist') %?><?% END %?></title>
 <?% ELSE %?>
@@ -37,6 +37,9 @@
 			changedHasAction(document.getElementById("has_action"));
 			changedAvoidRepeats(document.getElementById("avoid_repeats"));
 			changedAutoDelete(document.getElementById("select_autodelete"));
+	<?% IF features.EPGSEARCH_VERSION >= 925 %?>
+			changedCompDescr(document.getElementById("comp_descr"));
+	<?% END %?>
 <?% END %?>
 			document.getElementById("content").style.display = "block";
 		}
@@ -104,6 +107,7 @@
 				document.getElementById("set_action_timeframe").style.display = "none";
 				document.getElementById("action_record_settings").style.display = "none";
 				document.getElementById("action_switch_settings").style.display = "none";
+				document.getElementById("action_announce_switch_settings").style.display = "none";
 			}
 			else
 			{
@@ -126,19 +130,29 @@
 		{
 			switch (mySelect.options[mySelect.selectedIndex].value)
 			{
-				case "0":
+				case "0": // Record
 					document.getElementById("action_record_settings").style.display = "block";
 					document.getElementById("action_switch_settings").style.display = "none";
+					document.getElementById("action_announce_switch_settings").style.display = "none";
 					break;
 
-				case "1":
+				case "1": // Announce by OSD
+				case "4": // Announce by mail
 					document.getElementById("action_record_settings").style.display = "none";
 					document.getElementById("action_switch_settings").style.display = "none";
+					document.getElementById("action_announce_switch_settings").style.display = "none";
 					break;
 
-				case "2":
+				case "2": // Switch only
 					document.getElementById("action_record_settings").style.display = "none";
 					document.getElementById("action_switch_settings").style.display = "block";
+					document.getElementById("action_announce_switch_settings").style.display = "none";
+					break;
+
+				case "3": // Announce and switch
+					document.getElementById("action_record_settings").style.display = "none";
+					document.getElementById("action_switch_settings").style.display = "none";
+					document.getElementById("action_announce_switch_settings").style.display = "block";
 					break;
 			}
 		}
@@ -152,6 +166,13 @@
 		function changedAvoidRepeats(myCheckbox)
 		{
 			document.getElementById("avoid_repeats_settings").style.display = (myCheckbox.checked ? "block" : "none");
+		}
+
+		function changedCompDescr(myCheckbox)
+		{
+<?% IF features.EPGSEARCH_VERSION >= 925 %?>
+			document.getElementById("comp_descr_settings").style.display = (myCheckbox.checked ? "block" : "none");
+<?% END %?>
 		}
 
 		function checkSearchPattern()
@@ -492,8 +513,12 @@
 						<span id="set_action">
 							<select onchange="javascript:changedAction(this)" id="select_action" name="action">
 								<option value="0" <?% IF epgsearch.action == 0 %?>selected="selected"<?% END %?>><?% gettext('record') %?></option>
-								<option value="1" <?% IF epgsearch.action == 1 %?>selected="selected"<?% END %?>><?% gettext('announce only') %?></option>
+								<option value="1" <?% IF epgsearch.action == 1 %?>selected="selected"<?% END %?>><?% gettext('announce by OSD') %?></option>
 								<option value="2" <?% IF epgsearch.action == 2 %?>selected="selected"<?% END %?>><?% gettext('switch only') %?></option>
+<?% IF features.EPGSEARCH_VERSION >= 925 %?>
+								<option value="3" <?% IF epgsearch.action == 3 %?>selected="selected"<?% END %?>><?% gettext('announce and switch') %?></option>
+                <option value="4" <?% IF epgsearch.action == 4 %?>selected="selected"<?% END %?>><?% gettext('announce by mail') %?></option>
+ <?% END %?>
 							</select>
 						</span>
 						<div id="set_action_timeframe">
@@ -572,7 +597,12 @@
 											<div>
 												<input type="checkbox" name="comp_title" value="1" id="comp_title" <?% IF epgsearch.comp_title %?>checked="checked"<?% END %?> /><label for="comp_title"><?% gettext('Title') %?></label>
 												<input type="checkbox" name="comp_subtitle" value="1" id="comp_subtitle" <?% IF epgsearch.comp_subtitle %?>checked="checked"<?% END %?> /><label for="comp_subtitle"><?% gettext('Subtitle') %?></label>
-												<input type="checkbox" name="comp_descr" value="1" id="comp_descr" <?% IF epgsearch.comp_descr %?>checked="checked"<?% END %?> /><label for="comp_descr"><?% gettext('Description') %?></label>
+												<input type="checkbox" name="comp_descr" value="1" id="comp_descr" <?% IF epgsearch.comp_descr %?>checked="checked"<?% END %?> onclick="javascript:changedCompDescr(this)" /><label for="comp_descr"><?% gettext('Description') %?></label>
+<?% IF features.EPGSEARCH_VERSION >= 925 %?>
+												<div id="comp_descr_settings">
+													<label for="min_match"><?% gettext('Minimal match of description in %:') %?></label><input type="text" name="min_match" value="<?% epgsearch.min_match | html%?>" size="5" maxlength="3" id="min_match"/>
+												</div>
+<?% END %?>
 											</div>
 											<div>
 												<?% FOREACH ext = extepg %?>
@@ -632,8 +662,38 @@
 							<input type="text" name="switch_before" value="<?% epgsearch.switch_before | html %?>" size="2" maxlength="2" /> <?% gettext('minutes') %?>
 						</td>
 					</tr>
+<?% IF features.EPGSEARCH_VERSION >= 925 %?>
+					<tr class="row_even">
+						<td class="col_label"><h5><?% gettext('Unmute sound:') %?></h5></td>
+						<td class="col_value">
+							<input type="checkbox" name="unmute" value="1" id="unmute" <?% IF epgsearch.unmute %?>checked="checked"<?% END %?> />
+						</td>
+					</tr>
+<?% END %?>
 				</table>
 			</div>
+
+<?% IF features.EPGSEARCH_VERSION >= 925 %?>
+			<div id="action_announce_switch_settings">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="group">
+					<tr class="heading">
+						<td colspan="2"><h2><?% gettext('Settings for action "announce and switch"') %?></h2></td>
+					</tr>
+					<tr class="row_odd">
+						<td class="col_label"><h5><?% gettext('Ask ... Minutes Before Start:') %?></h5></td>
+						<td class="col_value">
+							<input type="text" name="switch_before" value="<?% epgsearch.switch_before | html %?>" size="2" maxlength="2" /> <?% gettext('minutes') %?>
+						</td>
+					</tr>
+					<tr class="row_even">
+						<td class="col_label"><h5><?% gettext('Unmute sound:') %?></h5></td>
+						<td class="col_value">
+							<input type="checkbox" name="unmute" value="1" id="unmute" <?% IF epgsearch.unmute %?>checked="checked"<?% END %?> />
+						</td>
+					</tr>
+				</table>
+			</div>
+<?% END %?>
 		</div>
 <?% END %?>
 

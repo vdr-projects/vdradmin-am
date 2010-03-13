@@ -5,22 +5,19 @@
 #
 #
 # Roel <rl.koelewijn@home.nl>, 2005, 2006, 2007.
-# Roel Koelewijn <roel.koelewijn@gmail.com>, 2007, 2008.
+# Roel Koelewijn <roel.koelewijn@gmail.com>, 2007, 2008, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: VDRAdmin-AM-3.6.3\n"
+"Project-Id-Version: VDRAdmin-AM-3.6.6\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2009-12-30 13:26+0100\n"
-"PO-Revision-Date: 2008-12-01 19:49+0100\n"
+"POT-Creation-Date: 2010-03-07 14:04+0100\n"
+"PO-Revision-Date: 2010-02-11 18:49+0100\n"
 "Last-Translator: Roel Koelewijn <roel.koelewijn@gmail.com>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-
-msgid "ISO-8859-1"
-msgstr "ISO-8859-1"
 
 msgid "About"
 msgstr "Over"
@@ -82,11 +79,11 @@ msgstr "VDR versie:"
 msgid "Supported features in VDR:"
 msgstr "Ondersteunde elementen in VDR"
 
-msgid "EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>)"
-msgstr "Autotimer(Vanaf versie 3.5 is de autotimer vervallen en<br> word nu gebruik gemaakt van de plugin \"EPG zoeken\" <a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgid "EPGSearch (<a href=\"http://winni.vdr-developer.org/epgsearch/index_eng.html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgstr "Autotimer(Vanaf versie 3.5 is de autotimer vervallen en<br> word nu gebruik gemaakt van de plugin \"EPG zoeken\" <a href=\"http://winni.vdr-developer.org/epgsearch/index_eng.html\" target=\"_blank\">EPGSearch Plugin</a>)"
 
-msgid "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>)"
-msgstr "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>)"
+msgid "LiveTV Streaming (<a href=\"http://streamdev.vdr-developer.org/\" target=\"_blank\">Streamdev Plugin</a>)"
+msgstr "LiveTV Streaming (<a href=\"http://streamdev.vdr-developer.org/\" target=\"_blank\">Streamdev Plugin</a>)"
 
 msgid "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
 msgstr "Hernoem opnames  (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
@@ -343,6 +340,18 @@ msgstr "Word ook gebruikt voor andere EPG"
 msgid "Tooltips:"
 msgstr "Handigheden:"
 
+msgid "Electronic Program Guide (EPG)"
+msgstr "Electronische Programma Gids (EPG)"
+
+msgid "Day begins at:"
+msgstr "Dag begint om:"
+
+msgid "Show Subtitle:"
+msgstr "Toon ondertitel:"
+
+msgid "Show Summary:"
+msgstr "Toon samenvatting:"
+
 msgid "Active:"
 msgstr "Aktief:"
 
@@ -365,13 +374,13 @@ msgid "SMTPAuth password:"
 msgstr "SMTPAuth Wachtwoord:"
 
 msgid "Track schedule changes by:"
-msgstr ""
+msgstr "Track schema veranderd door :"
 
 msgid "Broadcast time"
-msgstr ""
+msgstr "Uitzendtijd"
 
 msgid "Event id"
-msgstr ""
+msgstr "Evenement id"
 
 msgid "Timer"
 msgstr "Timer"
@@ -646,11 +655,17 @@ msgstr "Gebruikers gedefinieerd"
 msgid "record"
 msgstr "opnemen"
 
-msgid "announce only"
-msgstr "alleen bekendmaken"
+msgid "announce by OSD"
+msgstr "Aangekondigd door OSD"
 
 msgid "switch only"
 msgstr "alleen wisselen"
+
+msgid "announce and switch"
+msgstr "aankondigen en wisselen"
+
+msgid "announce by mail"
+msgstr "aankondigen per mail"
 
 msgid "First day:"
 msgstr "Eerste dag:"
@@ -700,6 +715,9 @@ msgstr "Alleen herhalingen binnen .. Dagen:"
 msgid "Compare:"
 msgstr "Vergelijken:"
 
+msgid "Minimal match of description in %:"
+msgstr ""
+
 msgid "VPS:"
 msgstr "VPS:"
 
@@ -708,6 +726,15 @@ msgstr "Instellingen voor aktie \"wissel alleen\""
 
 msgid "Switch ... Minutes Before Start:"
 msgstr "Wissel ... minuten voor start:"
+
+msgid "Unmute sound:"
+msgstr ""
+
+msgid "Settings for action \"announce and switch\""
+msgstr ""
+
+msgid "Ask ... Minutes Before Start:"
+msgstr ""
 
 msgid "Delete template"
 msgstr "Verwijder sjabloon"
@@ -835,6 +862,15 @@ msgstr "Een komma gescheiden lijst van tijden in <strong>uu:mm</strong> formaat 
 msgid "Here you can (de-)activate the tooltips."
 msgstr "Hier kunt u de handigheden (de)activeren."
 
+msgid "The time after which events are shown on a new day. For example setting 03:00 means that today's schedule will include any event starting before 03:00 tomorrow. Applies only to the 'Playing Today?' list."
+msgstr "De tijd waarna evenementen getoond worden op een nieuwe dag. Bijvoorbeeld, instelling 03:00 betekend dat het schema van vandaag bevat ieder evenement dat start voor morgen .03:00. Alleen van toepassing op de lijst 'Speelt vandaag?' "
+
+msgid "Show the 'Subtitle' text for each event. Not all broadcasters use this field."
+msgstr "Toon de 'ondertitel' tekst voor ieder evenement. Niet alle zenders gebruiken dit veld."
+
+msgid "Show the 'Summary' text for each event."
+msgstr "Toon de 'Omschrijving' tekst voor ieder evenement"
+
 msgid "Activate or deactivate the AutoTimer function."
 msgstr "Activeer of deactiveer de autotimer functie."
 
@@ -868,8 +904,8 @@ msgstr "Voeg beschrijving toe aan nieuwe timers:"
 msgid "If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here."
 msgstr "Als u niet wilt dat VDRAdmin-AM de programma informatie uit de EPG overneemt aan nieuwe timer dan kunt u dat hier uitzetten."
 
-msgid "Enable or disable live streaming using the <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
-msgstr "Activeer of deactiveer live streaming door gebruik te maken van de <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. U moet ook de juiste <span class=\"ref_label\">HTTP Poort voor Streamdev</span>instellen hieronder."
+msgid "Enable or disable live streaming using the <a href=\"http://streamdev.vdr-developer.org/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
+msgstr "Activeer of deactiveer live streaming door gebruik te maken van de <a href=\"http://streamdev.vdr-developer.org/\">streamdev plugin</a>. U moet ook de juiste <span class=\"ref_label\">HTTP Poort voor Streamdev</span>instellen hieronder."
 
 msgid "Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use."
 msgstr "Hier moet u het poort nummer instellen waar uw VDR's streamdev server naar luistert voor verbindingen. Tevens is het mogelijk de stream type in te stellen die u wilt gebruiken."
@@ -1441,14 +1477,17 @@ msgstr "Schema"
 
 #, perl-format
 msgid "Can't write configuration file %s! Reason: %s"
-msgstr ""
+msgstr "Kan niet schrijven naar configuratie bestand %s! Reden: %s"
 
 #, perl-format
-msgid "Configuration file %s not writeable! Configuration won't be saved!"
-msgstr ""
+msgid "Configuration file %s not writable! Configuration won't be saved!"
+msgstr "Configuratie bestand %s is niet schrijfbaar! Configuratie bestand word niet opgeslagen!"
 
 msgid "Timers"
 msgstr "Timers"
 
 msgid "System default"
 msgstr "Systeem standaard"
+
+#~ msgid "ISO-8859-1"
+#~ msgstr "ISO-8859-1"

@@ -11,14 +11,14 @@ TMPDIR=/tmp
 #
 function Usage()
 {
-	echo "Usage: $0 cvs"
+	echo "Usage: $0 <action>"
+	echo
+	echo "Available actions:"
 	echo "  cvs       - always use this after a \"cvs update \" or \"cvs checkout\""
 	echo "  install   - install VDRAdmin-AM"
 	echo "  uninstall - uninstall VDRAdmin-AM"
 	echo "  po        - convert .po files to .mo files"
 	echo "  dist      - create distribution archive"
-	echo "  utf8add   - generate utf8 locales from existing locales"
-	echo "  utf8clean - cleanup utf8 locales"
 	echo "  cl        - create ChangeLog file."
 	echo "  check     - check requirements"
 	exit 1
@@ -80,63 +80,6 @@ function do_dist()
 	mv $TMPDIR/$DIST_NAME.tar.bz2 .
 }
 
-# extract original character encoding
-#
-function getOrigEncoding()
-{
-	local ENC=$(grep 'msgstr "ISO-8859' $1)
-	# strip away "ISO-", because sometimes we need it as "iso"
-	ENC=${ENC/'msgstr "ISO-'/}
-	ENC=${ENC/'"'/}
-	echo $ENC
-}
-
-
-# cleanup utf8 locales
-#
-function do_utf8_clean()
-{
-	(cd po && rm -f *.utf8.po*)
-	[ -d locale ] && (cd locale && rm -rf *.utf8)
-}
-
-# generate utf8 locales
-#
-function do_utf8_generate()
-{
-	# start clean
-	do_utf8_clean
-
-	(	cd po
-		local filename
-		local encoding
-		local newfilename
-
-		# generate utf8 locales for existing translations
-		for file in *.po; do
-			[ -e $file ] || continue
-			filename=${file%.po}
-			encoding=iso$(getOrigEncoding $filename.po)
-			case $filename in
-				cs) newfilename=CZ;;
-				*)  newfilename=$(echo $filename | tr [:lower:] [:upper:])
-			esac
-			# convert
-			iconv -f $encoding -t utf-8 $filename.po > ${filename}_$newfilename.utf8.po
-		done
-
-		# generate us_US.utf8.po from POT template
-		msginit -i vdradmin.pot -o en_US.utf8.po -l en_US.utf8 --no-translator --no-wrap
-
-		# map ISO-8859-1 encoding to UTF-8 instead of the respective "old" encodings
-		for file in $(ls *.utf8.po); do
-			encoding=ISO-$(getOrigEncoding $file)
-    	sed -e 's:msgstr "'$encoding'":msgstr "UTF-8":g' -e 's#"Content-Type: text/plain; charset=.*#"Content-Type: text/plain; charset=UTF-8\\n"#g' $file > $file.tmp
-    	mv $file.tmp $file
-		done
-	)
-}
-
 # create ChangeLog file.
 #
 function do_cl()
@@ -176,24 +119,14 @@ do
 
 		local)
 			do_cvs
-			do_utf8_generate
 			do_po
 			;;
 
 		dist)
 			do_cvs
-			do_utf8_generate
 			do_po
 			do_cl
 			do_dist
-			;;
-
-		utf8add)
-			do_utf8_generate
-			;;
-
-		utf8clean)
-			do_utf8_clean
 			;;
 
 		cl)

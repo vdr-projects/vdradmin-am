@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="refresh" content="600; URL=vdradmin.pl?aktion=prog_summary" />
-	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<meta http-equiv="content-type" content="text/html;charset=<?% charset %?>" />
 	<title>VDRAdmin-AM - <?% gettext('What\'s On Now?') %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<?% IF usercss %?>
@@ -86,11 +86,18 @@
 							</a>
 						<?% END %?>
 					</div>
+          <div class="epg_subtitle">
+<?% IF config.EPG_SUBTITLE %?>
 					<?% IF broadcast.subtitle %?>
-						<div class="epg_subtitle"><?% broadcast.subtitle %?></div>
-					<?% ELSE %?>
-						<div class="epg_subtitle">&nbsp;</div>
+						<?% broadcast.subtitle %?>
 					<?% END %?>
+<?% END %?>
+<?% IF config.EPG_SUMMARY %?>
+					<?% IF broadcast.summary %?>
+						<?% broadcast.summary %?>
+					<?% END %?>
+<?% END %?>
+          </div>
 				</td>
 				<td class="col_channel">
 					<a id="<?% broadcast.anchor %?>" name="<?% broadcast.anchor %?>"></a>
@@ -113,7 +120,11 @@
 							<span class="action info"><img src="bilder/info_button_disabled.png" border="0" alt="noinfo" title="<?% gettext('No Information') %?>" /></span>
 						<?% END %?>
 						<span class="action edit"><a href="<?% broadcast.editurl %?>"><img src="bilder/edit.png" border="0" alt="<?% gettext('Edit') %?>" onmouseover="window.status='<?% gettext('Edit') %?>';return true" title="<?% gettext('Edit') %?>" /></a></span>
-						<span class="action record"><a href="<?% broadcast.recurl %?>"><img src="bilder/rec_button.png" border="0" alt="<?% gettext('Record') %?>" onmouseover="window.status='<?% gettext('Record') %?>';return true" title="<?% gettext('Record') %?>" /></a></span>
+						<?% UNLESS broadcast.timerset %?>
+              <span class="action record">
+							  <a href="<?% broadcast.recurl %?>"><img src="bilder/rec_button.png" border="0" alt="<?% gettext('Record') %?>" onmouseover="window.status='<?% gettext('Record') %?>';return true" title="<?% gettext('Record') %?>" /></a>
+  					  </span>
+  					<?% END %?>
 						<?% IF broadcast.srch1_url %?>
 							<span class="action imdb"><a href="<?% broadcast.srch1_url %?>" target="_blank"><img src="bilder/imdb.png" border="0" alt="IMDb" onmouseover="window.status='<?% broadcast.srch1_url %?>';return true" title="<?% broadcast.srch1_url %?>" /></a></span>
 						<?% END %?>

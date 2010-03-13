@@ -4,6 +4,35 @@ E-Mail:     mail AT andreas DOT vdr-developer DOT org
 VDR-Portal: amair
 -----------------------------------------------------------
 
+2010-03-13: 3.6.6
+- Added: Support new epgsearch v0.9.25-git settings "unmute" and "min. description match".
+- Changed: Log to syslog by default (if logging is enabled) (Ville Skyttä).
+- Changed: Fall back to stderr if setting up syslog fails (Ville Skyttä).
+- Changed: Get character encoding from configured locale or environment variables (Submitted by Tobias Grimm).
+- Fixed: Encode SVDRP commands sent to VDR if needed (Submitted by Tobias Grimm).
+- Updated: Italian translation (Submitted by Diego Pierotto).
+- Updated: Dutch translation (Submitted by Roel Koelewijn).
+- Updated: Spanish translation (Submitted by Manuel Gomez).
+- Improved: Default mail settings (Ville Skyttä).
+- Fixed: Check if "GUI_POPUP_WIDTH" and "GUI_POPUP_HEIGHT" are numeric and set them to the defaults if they are not (Reported by Jan).
+- Added: Support VDR 1.7.12+ commands.conf and reccmds.conf (means: skip lines ending in "{" and lines with only "}" in them). 
+- Added: check file and directory permissions on startup abort on error.
+- Changed: Default directory for PID file to /var/run/vdradmin.
+- Changed: Default directory for log file to /var/log/vdradmin.
+- Changed: Use "cache" directory in the current directory if $SEARCH_FILES_IN_SYSTEM is not set.
+- Changed: Hide "record" button in EPG lists there's already a timer for that broadcast (Based on patch by Dave Pickles).
+- Added: New options to show or hide a broadcast's subtitle and/or summary in EPG lists (Based on patch by Dave Pickles).
+- Added: New option to set a day's "start time" in "Playing today?" (Based on patch by Dave Pickles).
+- Changed: Minimum required epgsearch version now is 0.9.24.
+- Added: Support for new epgsearch search timer actions (Bug #557).
+- Changed: "--ipv6" only enables IPv6 for connections to VDRAdmin-AM, to also use IPv6 for SVDRP connection one can use "--ipv6-all" (if he really knows what he's doing!).
+- Fixed: Check encoding for every SVDRP connection (Submitted by Tobias Grimm).
+- Changed: Warn about missing key or certificate if --ssl is used.
+- Changed: Certificates for --ssl option must be located in $ETCDIR/certs.
+- Fixed: Resizing browser window in "Timeline" showed "file not found" (Reported by tag @vdr-portal.de).
+- Updated: Links to EPGSearch and Streamdev home pages (Ville Skyttä).
+- Updated: Finnish translation (Ville Skyttä).
+
 2009-12-30: 3.6.5
 - Changed: use HTTP::Date for HTTP date/time formatting (Ville Skyttä).
 - Improved: Create fewer SVDRP connections (Ville Skyttä).

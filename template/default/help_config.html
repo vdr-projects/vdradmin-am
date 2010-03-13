@@ -5,7 +5,7 @@
 <html id="scroller">
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<meta http-equiv="content-type" content="text/html;charset=<?% charset %?>" />
 	<title><?% gettext('Configuration') %?></title>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
@@ -27,7 +27,7 @@
 			<td>
 				<?% gettext('<p>Here you can change general settings and base settings for timers, AutoTimers, channel selection and streaming parameters.</p>') %?>
 				<div class="links">
-					[<a href="#general"><?% gettext('General Settings') %?></a>] [<a href="#vdr"><?% gettext('VDR') %?></a>] [<a href="#identification"><?% gettext('Identification') %?></a>] [<a href="#timeline"><?% gettext('Timeline') %?></a>] [<a href="#autotimer"><?% gettext('AutoTimer') %?></a>] [<a href="#timer"><?% gettext('Timer') %?></a>] [<a href="#streaming"><?% gettext('Streaming') %?></a>] [<a href="#expert"><?% gettext('Expert') %?></a>] [<a href="#ext_search"><?% gettext('External Search') %?></a>] [<a href="#channels"><?% gettext('Channel Selections') %?></a>]
+					[<a href="#general"><?% gettext('General Settings') %?></a>] [<a href="#vdr"><?% gettext('VDR') %?></a>] [<a href="#identification"><?% gettext('Identification') %?></a>] [<a href="#timeline"><?% gettext('Timeline') %?></a>] [<a href="#epg"><?% gettext('Electronic Program Guide (EPG)') %?></a>] [<a href="#autotimer"><?% gettext('AutoTimer') %?></a>] [<a href="#timer"><?% gettext('Timer') %?></a>] [<a href="#streaming"><?% gettext('Streaming') %?></a>] [<a href="#expert"><?% gettext('Expert') %?></a>] [<a href="#ext_search"><?% gettext('External Search') %?></a>] [<a href="#channels"><?% gettext('Channel Selections') %?></a>]
 				</div>
 				<div class="group"><a id="general" name="general"></a><h3><?% gettext('General Settings') %?></h3>
 					<dl>
@@ -89,6 +89,18 @@
 					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
 				</div>
 
+				<div class="group"><a id="epg" name="epg"></a><h3><?% gettext('Electronic Program Guide (EPG)') %?></h3>
+					<dl>
+						<dt><?% gettext('Day begins at:') %?></dt>
+						<dd><?% gettext('The time after which events are shown on a new day. For example setting 03:00 means that today\'s schedule will include any event starting before 03:00 tomorrow. Applies only to the \'Playing Today?\' list.') %?></dd>
+						<dt><?% gettext('Show Subtitle:') %?></dt>
+						<dd><?% gettext('Show the \'Subtitle\' text for each event. Not all broadcasters use this field.') %?></dd>
+						<dt><?% gettext('Show Summary:') %?></dt>
+						<dd><?% gettext('Show the \'Summary\' text for each event.') %?></dd>
+					</dl>
+					<div class="top_link">[<a href="#top"><?% gettext('Top') %?></a>]</div>
+				</div>
+
 				<div class="group"><a id="autotimer" name="autotimer"></a><h3><?% gettext('AutoTimer') %?></h3>
 					<dl>
 						<dt><?% gettext('Active:') %?></dt>
@@ -142,7 +154,7 @@
 				<div class="group"><a id="streaming" name="streaming"></a><h3><?% gettext('Streaming') %?></h3>
 					<dl>
 						<dt><?% gettext('Live Streaming:') %?></dt>
-						<dd><?% gettext('Enable or disable live streaming using the <a href="http://www.magoa.net/linux/">streamdev plugin</a>. You also have to set the correct <span class="ref_label">HTTP Port for Streamdev</span> below.') %?></dd>
+						<dd><?% gettext('Enable or disable live streaming using the <a href="http://streamdev.vdr-developer.org/">streamdev plugin</a>. You also have to set the correct <span class="ref_label">HTTP Port for Streamdev</span> below.') %?></dd>
 						<dt><?% gettext('HTTP Port of Streamdev (also possible 3000/ts):') %?></dt>
 						<dd><?% gettext('Here you have to set the port number your VDR\'s streamdev server listens for connections. Additionally you can also provide the stream type you like to use.') %?></dd>
 						<dt><?% gettext('Recordings Streaming:') %?></dt>

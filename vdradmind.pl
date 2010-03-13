@@ -26,7 +26,7 @@ require 5.004;
 
 use vars qw($PROCNAME);
 
-my $VERSION = "3.6.5";
+my $VERSION = "3.6.6";
 my $BASENAME;
 my $EXENAME;
 
@@ -77,6 +77,7 @@ my $can_use_encode = 1;
 $can_use_encode = undef unless (eval { require Encode });
 
 my $InetSocketModule = 'IO::Socket::INET';
+my $VdrSocketModule = 'IO::Socket::INET';
 my $can_use_net_smtp = 1;
 $can_use_net_smtp = undef unless (eval { require Net::SMTP });
 my $can_use_smtpauth = 1;
@@ -124,7 +125,7 @@ sub LOG_DEBUG ()      { [ 7, "debug"   ] }
 my (%CONFIG, %CONFIG_TEMP);
 $CONFIG{LOGLEVEL}             = 4; #LOG_WARNING
 $CONFIG{LOGGING}              = 0;
-$CONFIG{LOGFILE}              = "vdradmind.log";
+$CONFIG{LOGFILE}              = "syslog";
 $CONFIG{MOD_GZIP}             = 0;
 $CONFIG{CACHE_BG_UPDATE}      = 1;
 $CONFIG{CACHE_TIMEOUT}        = 60;
@@ -162,6 +163,11 @@ $CONFIG{PASSWORD_GUEST} = "guest";
 $CONFIG{ZEITRAHMEN} = 1;
 $CONFIG{TIMES}      = "18:00, 20:00, 21:00, 22:00";
 $CONFIG{TL_TOOLTIP} = 1;
+
+#
+$CONFIG{EPG_SUMMARY}      = 0;
+$CONFIG{EPG_SUBTITLE}     = 1;
+$CONFIG{EPG_START_TIME}   = "00:00";
 
 #
 $CONFIG{AT_OFFER}        = 0;
@@ -203,9 +209,9 @@ $CONFIG{NO_EVENTID_ON} = "";
 
 #
 $CONFIG{AT_SENDMAIL}    = 0;                       # set to 1 and set all the "MAIL_" things if you want email notification on new autotimers.
-$CONFIG{MAIL_FROM}      = "from\@address.tld";
-$CONFIG{MAIL_TO}        = "your\@email.address";
-$CONFIG{MAIL_SERVER}    = "your.email.server";
+chomp($CONFIG{MAIL_FROM} = 'autotimer@' . (`hostname -f 2>/dev/null` || "localhost.localdomain"));
+$CONFIG{MAIL_TO}        = "you\@example.org";
+$CONFIG{MAIL_SERVER}    = "localhost";
 $CONFIG{MAIL_AUTH_USER} = "";
 $CONFIG{MAIL_AUTH_PASS} = "";
 
@@ -244,22 +250,26 @@ $CONFIG{GUI_POPUP_HEIGHT} = 250;
 
 #
 my %FEATURES;
-$FEATURES{STREAMDEV}  = 0;
-$FEATURES{REC_RENAME} = 0;
-$FEATURES{AUTOTIMER}  = 0;
+$FEATURES{STREAMDEV}            = 0;  # streamdev plugin available?
+$FEATURES{REC_RENAME}           = 0;  # RENR patch available?
+$FEATURES{AUTOTIMER}            = 0;  # use autotimer feature?
+$FEATURES{MYVERSION_HR}         = "$VERSION";  # Human readable VDRAdmin-AM version, e.g. 3.6.5
+$FEATURES{VDRVERSION}           = 0;  # Numeric VDR version, e.g. 10344
+$FEATURES{VDRVERSION_HR}        = ''; # Human readable VDR version, e.g. 1.3.44
+$FEATURES{EPGSEARCH_VERSION}    = 0;  # Numeric epgsearch plugin version, e.g. 924
+$FEATURES{EPGSEARCH_VERSION_HR} = ''; # Human readable epgsearch plugin version, e.g. 0.9.24
 my %EPGSEARCH_SETTINGS;
 
 my $SERVERVERSION = "vdradmind/$VERSION";
-my $VDRVERSION    = 0;                      # Numeric VDR version, e.g. 10344
-my $VDRVERSION_HR;                          # Human readable VDR version, e.g. 1.3.44
-my $EPGSEARCH_VERSION = 0;                  # Numeric epgsearch plugin version, e.g. 918
 my %ERROR_MESSAGE;
 my $MY_ENCODING = '';
 
-my ($TEMPLATEDIR, $CONFFILE, $LOGDIR, $LOGLEVEL, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME, $ETCDIR, $USER_CSS);
+my ($TEMPLATEDIR, $TEMPLATECACHE, $CONFFILE, $LOGDIR, $LOGLEVEL, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME, $ETCDIR, $CERTSDIR, $USER_CSS);
 if (!$SEARCH_FILES_IN_SYSTEM) {
     $ETCDIR        = "${BASENAME}";
+    $CERTSDIR      = "${ETCDIR}/certs";
     $TEMPLATEDIR   = "${BASENAME}template";
+    $TEMPLATECACHE = "${BASENAME}cache";
     $CONFFILE      = "${BASENAME}vdradmind.conf";
     $LOGDIR        = "${BASENAME}";
     $PIDFILE       = "${BASENAME}vdradmind.pid";
@@ -270,9 +280,11 @@ if (!$SEARCH_FILES_IN_SYSTEM) {
     bindtextdomain("vdradmin", "${BASENAME}locale");
 } else {
     $ETCDIR        = "/etc/vdradmin";
+    $CERTSDIR      = "${ETCDIR}/certs";
     $TEMPLATEDIR   = "/usr/share/vdradmin/template";
-    $LOGDIR        = "/var/log";
-    $PIDFILE       = "/var/run/vdradmind.pid";
+    $TEMPLATECACHE = "/var/cache/vdradmin";
+    $LOGDIR        = "/var/log/vdradmin";
+    $PIDFILE       = "/var/run/vdradmin/vdradmind.pid";
     $CONFFILE      = "${ETCDIR}/vdradmind.conf";
     $AT_FILENAME   = "${ETCDIR}/vdradmind.at";
     $DONE_FILENAME = "${ETCDIR}/vdradmind.done";
@@ -376,6 +388,10 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         $PIDFILE = $ARGV[ ++$i ];
         next;
     }
+    if (/^(--ipv6-all)/) {
+        $UseIPv6 = 2;
+        next;
+    }
     if (/^(--ipv6|-6)/) {
         $UseIPv6 = 1;
         next;
@@ -410,18 +426,25 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
     }
 }
 
+check_permissions() or exit 1;
+
 if ($UseIPv6) {
     if (eval { require IO::Socket::INET6 }) {
         $InetSocketModule = 'IO::Socket::INET6';
+        $VdrSocketModule = 'IO::Socket::INET6' if ($UseIPv6 == 2);
     } else {
         die("ERROR: Can't load module IO::Socket::INET6! $!\n");
     }
 }
 
+ReadConfig();
+LoadTranslation();
+
 #use Template::Constants qw( :debug );
 # IMHO a better Template Modul ;-)
 # some useful options (see below for full list)
 my $Xtemplate_vars = { usercss  => $UserCSS,
+                       charset  => $MY_ENCODING,
                        gettext  => sub{ $_[0] =~ s/\n\s+//g; return gettext($_[0]); },
                        config   => \%CONFIG,
                        features => \%FEATURES
@@ -436,7 +459,7 @@ my $Xconfig = {
     POST_CHOMP   => 1,                          # cleanup whitespace
     EVAL_PERL    => 1,                          # evaluate Perl code blocks
     COMPILE_EXT  => 'cache',                    # tuning for templates
-    COMPILE_DIR  => '/var/cache/vdradmin',      # tuning for templates
+    COMPILE_DIR  => $TEMPLATECACHE,             # tuning for templates
     STAT_TTL     => 3600,                       # tuning for templates
     VARIABLES    => $Xtemplate_vars,
 
@@ -461,14 +484,19 @@ if ($@) {
 
 # ---- End new template section ----
 
-ReadConfig();
-LoadTranslation();
-
-if ($DAEMON && $CONFIG{LOGFILE} eq "syslog") {
-    require Sys::Syslog;
-    Sys::Syslog->import(qw(:standard));
-    openlog($PROCNAME, "cons,pid", "daemon");
-} else {
+my $LOG_TO_SYSLOG = 0;
+if ($DAEMON && $CONFIG{LOGGING} && $CONFIG{LOGFILE} eq "syslog") {
+    eval {
+        require Sys::Syslog;
+        Sys::Syslog->import(qw(:standard));
+        openlog($PROCNAME, "cons,pid", "daemon");
+    } and $LOG_TO_SYSLOG = 1;
+    if ($@) {
+        Log(LOG_WARNING,
+            "Error setting up syslog logging, falling back to stderr: $@");
+    }
+}
+if (!$LOG_TO_SYSLOG) {
     *closelog = sub {}; # for Shutdown()
 }
 
@@ -513,11 +541,27 @@ my @vdrcmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/commands.conf");
 my ($Socket);
 if ($UseSSL) {
     if (eval { require IO::Socket::SSL; }) {
-        $Socket = IO::Socket::SSL->new(Proto     => 'tcp',
-                                       LocalPort => $CONFIG{SERVERPORT},
-                                       LocalAddr => $CONFIG{SERVERHOST},
-                                       Listen    => 10,
-                                       Reuse     => 1
+        my $CERT_FILE = "$CERTSDIR/server-cert.pem";
+        die("ERROR: $CERT_FILE missing. Please create it!\n") unless (-e $CERT_FILE);
+
+        my $KEY_FILE = "$CERTSDIR/server-key.pem";
+        die("ERROR: $KEY_FILE missing. Please create it!\n") unless (-e $KEY_FILE);
+
+        my $CA_PATH = "$CERTSDIR/ca";
+        $CA_PATH = undef unless (-d $CA_PATH);
+
+        my $CA_FILE = "$CERTSDIR/my-ca.pem";
+        $CA_FILE = undef unless (-f $CA_FILE);
+
+        $Socket = IO::Socket::SSL->new(Proto         => 'tcp',
+                                       LocalPort     => $CONFIG{SERVERPORT},
+                                       LocalAddr     => $CONFIG{SERVERHOST},
+                                       Listen        => 10,
+                                       Reuse         => 1,
+                                       SSL_cert_file => "$CERT_FILE",
+                                       SSL_key_file  => "$KEY_FILE",
+                                       SSL_ca_file   => "$CA_FILE",
+                                       SSL_ca_path   => "$CA_PATH"
         );
     } else {
         die("ERROR: Can't load module IO::Socket::SSL! $!\n");
@@ -710,6 +754,82 @@ while (true) {
 
 #############################################################################
 #############################################################################
+sub check_permissions {
+    my $rc = 1;
+    check_rw_dir($ETCDIR) or $rc = 0;
+    check_rw_dir($CERTSDIR) if ($UseSSL);
+    check_rw_dir($TEMPLATECACHE) or $rc = 0;
+    check_rw_dir($LOGDIR) or $rc = 0;
+    check_rw_file($PIDFILE) or $rc = 0;
+    check_rw_file($CONFFILE) or $rc = 0;
+
+    if ($CONFIG{AT_FUNC} || $FEATURES{AUTOTIMER}) {
+        check_rw_file($AT_FILENAME) or $rc = 0;
+        check_rw_file($DONE_FILENAME) or $rc = 0;
+        check_rw_file($BL_FILENAME) or $rc = 0;
+    }
+
+    return $rc;
+}
+
+sub check_rw_dir {
+    my $dir = shift;
+
+#    print "Checking directory '$dir':\n";
+    if (-e "$dir") {
+        if (! -d _) {
+            print "ERROR: '$dir' is NOT a directory!\n";
+            return 0;
+        }
+        if (-r _) {
+#            print "directory '$dir' is readable!\n";
+        } else {
+            print "ERROR: directory '$dir' is NOT readable!\n";
+            return 0;
+        }
+        if (-w _) {
+#            print "directory '$dir' is writable!\n";
+        } else {
+            print "ERROR: directory '$dir' is NOT writable!\n";
+            return 0;
+        }
+    } else {
+        print "ERROR: directory '$dir' is missing!\n";
+        return 0;
+    }
+
+    return 1;
+}
+
+sub check_rw_file {
+    my $file = shift;
+
+#    print "Checking file '$file':\n";
+    if (-e "$file") {
+        if (-d _) {
+            print "ERROR: '$file' is a directory!\n";
+            return 0;
+        }
+        if (-r _) {
+#            print "file '$file' is readable!\n";
+        } else {
+            print "ERROR: file '$file' is NOT readable!\n";
+            return 0;
+        }
+        if (-w _) {
+#            print "file '$file' is writable!\n";
+        } else {
+            print "ERROR: file '$file' is NOT writable!\n";
+            return 0;
+        }
+    } else {
+        $file =~ /(^.*)\/[^\/]*$/;
+        return check_rw_dir($1);
+    }
+
+    return 1;
+}
+
 sub GetChannelDesc {    #TODO: unused
     my (%hash);
     for (@{$CHAN{$CHAN_FULL}->{channels}}) {
@@ -1180,7 +1300,7 @@ sub EPG_buildTree {
                             }
                         }
                     } elsif (/^c/) {
-                        if ($VDRVERSION < 10305) { # EPG is sorted by date since VDR 1.3.5
+                        if ($FEATURES{VDRVERSION} < 10305) { # EPG is sorted by date since VDR 1.3.5
                             my ($last) = 0;
                             my (@temp);
                             for (sort({ $a->{start} <=> $b->{start} } @events)) {
@@ -1233,7 +1353,7 @@ sub OpenSocket {
 sub SendCMD {
     my $cmd = join("", @_);
 
-    if (($VDRVERSION < 10336) && (length($cmd) > $VDR_MAX_SVDRP_LENGTH)) {
+    if (($FEATURES{VDRVERSION} < 10336) && (length($cmd) > $VDR_MAX_SVDRP_LENGTH)) {
         Log(LOG_FATALERROR, "[INT] SendCMD(): command is too long(" . length($cmd) . "): " . substr($cmd, 0, 10));
         return;
     }
@@ -1900,7 +2020,7 @@ sub AT_ProgTimer {
                 last;
             }
             if ($start_fmt eq my_strftime("%H%M", $_->{start})) {
-                if ($VDRVERSION < 10323) {
+                if ($FEATURES{VDRVERSION} < 10323) {
                     if ($_->{dor} == my_strftime("%d", $start)) {
                         $found = 1;
                         last;
@@ -1936,7 +2056,7 @@ sub AT_ProgTimer {
             $at->{prio} ne "" ? $at->{prio} : $CONFIG{AT_PRIORITY},
             $at->{lft} ne "" ? $at->{lft} : $CONFIG{AT_LIFETIME},
             $title,
-            append_timer_metadata($VDRVERSION < 10344 ? $summary : undef,
+            append_timer_metadata($FEATURES{VDRVERSION} < 10344 ? $summary : undef,
                 $event_id,
                 $autotimer,
                 $at->{buffers} ? ($at->{bstart} eq "" ? $CONFIG{AT_MARGIN_BEGIN} : $at->{bstart}) : $CONFIG{TM_MARGIN_BEGIN},
@@ -2180,7 +2300,7 @@ sub CheckTimers {
 sub epgsearch_list {
     return if (UptoDate() != 0);
 
-    if ($EPGSEARCH_VERSION < 923) {
+    if ($FEATURES{EPGSEARCH_VERSION} < 924) {
         HTMLError("Your version of epgsearch plugin is too old! You need at least v0.9.23!");
         return
     }
@@ -2601,6 +2721,8 @@ sub ExtractEpgSearchConf {
          $timer->{searchtimer_from},       #48 - useAsSearchTimerFrom (if "use as search timer?" = 2)
          $timer->{searchtimer_until},      #49 - useAsSearchTimerTil (if "use as search timer?" = 2)
          $timer->{ignore_missing_epgcats}, #50 - ignoreMissingEPGCats
+         $timer->{unmute},                 #51 - unmute sound if off when used as switch timer
+         $timer->{min_match},              #52 - the minimum required match in percent when descriptions are compared to avoid repeats (-> 33)
          $timer->{unused}) = split(/:/, $line);
 
         #format selected fields
@@ -2613,9 +2735,13 @@ sub ExtractEpgSearchConf {
             if ($timer->{action} == 0) {
                 $timer->{action_text} = gettext("record");
             } elsif ($timer->{action} == 1) {
-                $timer->{action_text} = gettext("announce only");
+                $timer->{action_text} = gettext("announce by OSD");
             } elsif ($timer->{action} == 2) {
                 $timer->{action_text} = gettext("switch only");
+            } elsif ($timer->{action} == 3) {
+                $timer->{action_text} = gettext("announce and switch");
+            } elsif ($timer->{action} == 4) {
+                $timer->{action_text} = gettext("announce by mail");
             } else {
                 $timer->{action_text} = gettext("unknown");
             }
@@ -2808,7 +2934,7 @@ sub epgsearch_Param2Line {
                . ($q->param("use_extepg") ? "1" : "0") . ":"
                . $extepg_info . ":"
                . $q->param("fuzzy_tolerance") . ":"
-               .  $q->param("ignore_missing_epgcats");
+               . $q->param("ignore_missing_epgcats");
     } else { # ! $mode_blacklist
         $cmd .= $q->param("has_action") . ":"
                . ($q->param("use_days") ? "1" : "0") . ":"
@@ -2845,6 +2971,11 @@ sub epgsearch_Param2Line {
                .  $searchtimer_from . ":"
                .  $searchtimer_until . ":"
                .  $q->param("ignore_missing_epgcats");
+
+        if ($FEATURES{EPGSEARCH_VERSION} >= 925) {
+            $cmd .= ":" . $q->param("unmute") . ":"
+                    . $q->param("min_match");
+        }
     }
 
     $cmd .= ":" . $q->param("unused") if ($q->param("unused"));
@@ -3290,10 +3421,10 @@ sub append_timer_metadata {
     if ($tool == $TOOL_AUTOTIMER) {
         # remove old autotimer info
         $aux =~ s/\|?<vdradmin-am>.*<\/vdradmin-am>//i if ($aux);
-        $aux = substr($aux, 0, 9000) if ($VDRVERSION < 10336 and length($aux) > 9000);
+        $aux = substr($aux, 0, 9000) if ($FEATURES{VDRVERSION} < 10336 and length($aux) > 9000);
 
         # add a new line if VDR<1.3.44 because then there might be a summary
-        $aux .= "|" if ($VDRVERSION < 10344 and length($aux));
+        $aux .= "|" if ($FEATURES{VDRVERSION} < 10344 and length($aux));
         $aux .= "<vdradmin-am>";
         $aux .= "<epgid>$epg_id</epgid>" if ($epg_id);
         $aux .= "<autotimer>$autotimer</autotimer>" if ($autotimer);
@@ -3304,10 +3435,10 @@ sub append_timer_metadata {
     } elsif ($tool == $TOOL_EPGSEARCH) {
         # remove old epgsearch info
         $aux =~ s/\|?<epgsearch>.*<\/epgsearch>//i if ($aux);
-        $aux = substr($aux, 0, 9000) if ($VDRVERSION < 10336 and length($aux) > 9000);
+        $aux = substr($aux, 0, 9000) if ($FEATURES{VDRVERSION} < 10336 and length($aux) > 9000);
 
         # add a new line if VDR<1.3.44 because then there might be a summary
-        $aux .= "|" if ($VDRVERSION < 10344 and length($aux));
+        $aux .= "|" if ($FEATURES{VDRVERSION} < 10344 and length($aux));
         $aux .= "<epgsearch>";
         $aux .= "<eventid>$epg_id</eventid>" if ($epg_id);
         $aux .= "<update>$autotimer</update>" if (defined $autotimer);
@@ -3341,8 +3472,13 @@ sub LoadTranslation {
     );
 
     setlocale(LC_ALL, $CONFIG{LANG});
-    $LANG = $CONFIG{LANG};
-    $MY_ENCODING = gettext("ISO-8859-1");
+    if (! $CONFIG{LANG} eq '') {
+        setlocale(LC_ALL, $CONFIG{LANG});
+        chomp($MY_ENCODING = `LC_ALL=$CONFIG{LANG} locale charmap`);
+    }
+    else {
+        chomp($MY_ENCODING = `locale charmap`);
+    }
     bind_textdomain_codeset("vdradmin", $MY_ENCODING) if($can_use_bind_textdomain_codeset);
     CGI::charset($MY_ENCODING);
 }
@@ -3361,7 +3497,7 @@ sub ProgTimer {
 
     my $send_cmd = $timer_id ? "modt $timer_id" : "newt";
     my $send_dor = $dor ? $dor : RemoveLeadingZero(strftime("%d", localtime($start)));
-    my $send_summary = ($VDRVERSION >= 10336) ? $summary : substr($summary, 0, $VDR_MAX_SVDRP_LENGTH - 9 - length($send_cmd) - length($active) - length($channel) - length($send_dor) - 8 - length($prio) - length($lft) - length($title));
+    my $send_summary = ($FEATURES{VDRVERSION} >= 10336) ? $summary : substr($summary, 0, $VDR_MAX_SVDRP_LENGTH - 9 - length($send_cmd) - length($active) - length($channel) - length($send_dor) - 8 - length($prio) - length($lft) - length($title));
 
     Log(LOG_DEBUG, sprintf("[SVDRP] ProgTimer: Programming Timer \"%s\" (Channel %s, Event-ID %s, %s - %s, Active %s)", $title, $channel, $event_id, my_strftime("%Y%m%d-%H%M", $start), my_strftime("%Y%m%d-%H%M", $stop), $active));
     my $return = SendCMD(sprintf("%s %s:%s:%s:%s:%s:%s:%s:%s:%s", $send_cmd, $active, $channel, $send_dor, strftime("%H%M", localtime($start)), strftime("%H%M", localtime($stop)), $prio, $lft, trim($title), $send_summary));
@@ -3472,11 +3608,11 @@ sub UptoDate {
 
 sub Log {
     if ($#_ >= 1) {
-        my $level = shift;
-        my $message = join("", @_);
-
         # Logging is always on in non-daemon mode
         return 1 unless ($CONFIG{LOGGING} || !$DAEMON);
+
+        my $level = shift;
+        chomp(my $message = join("", @_));
 
         my $my_loglevel = $CONFIG{LOGLEVEL};
         $my_loglevel = $LOGLEVEL if $LOGLEVEL;
@@ -3485,10 +3621,10 @@ sub Log {
             # Always log to stderr in non-daemon mode
             my $logfile = $DAEMON ? $CONFIG{LOGFILE} : "stderr";
 
-            if ($logfile eq "stderr") {
-                printf STDERR "%s: %s\n", my_strftime("%x %X"), $message;
-            } elsif ($logfile eq "syslog") {
+            if ($LOG_TO_SYSLOG) {
                 syslog(shift @$level, '%s', $message);
+            } elsif ($logfile eq "stderr" || $logfile eq "syslog") {
+                printf STDERR "%s: %s\n", my_strftime("%x %X"), $message;
             } else {
                 if (open(LOGFILE, ">>", "$LOGDIR/$logfile")) {
                     printf LOGFILE "%s: %s\n", my_strftime("%x %X"), $message;
@@ -3597,6 +3733,9 @@ sub ValidConfig {
             $CONFIG{AT_OFFER} = 1;
         }
     }
+
+    $CONFIG{GUI_POPUP_WIDTH} = 500 unless ($CONFIG{GUI_POPUP_WIDTH} =~ /\d+/);
+    $CONFIG{GUI_POPUP_HEIGHT} = 250 unless ($CONFIG{GUI_POPUP_HEIGHT} =~ /\d+/);
 }
 
 sub ReadConfig {
@@ -3768,6 +3907,8 @@ sub prog_detail {
 
     my ($channel_name, $title, $subtitle, $vps, $video, $audio, $start, $stop, $text, @epgimages);
 
+    my @timers = ParseTimer(0);
+
     if ($q->param("channel_id")) {
         $vdr_id = get_vdrid_from_channelid($q->param("channel_id"));
     }
@@ -3838,6 +3979,14 @@ sub prog_detail {
     $recurl  = sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $epg_id, $vdr_id, Encode_Referer($referer)) unless ($referer =~ "timer_list");
     $editurl = sprintf("%s?aktion=prog_detail_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $epg_id, $vdr_id, Encode_Referer($referer));
 
+    my $timerset = 0;
+    foreach my $timer (@timers) {
+      if (($timer->{vdr_id} == $vdr_id) && ($timer->{start} <= $start) && ($timer->{stop} >= $stop)) {
+        $timerset = 1;
+        last;
+      }
+    }
+
     my $now = time();
     my $vars = { title        => $displaytitle ? $displaytitle : gettext("Can't find EPG entry!"),
                  recurl       => $recurl,
@@ -3860,6 +4009,7 @@ sub prog_detail {
                  video        => $video,
                  vdr_id       => $vdr_id,
                  epg_id       => $epg_id,
+                 timerset     => $timerset,
     };
     return showTemplate("prog_detail.html", $vars);
 }
@@ -3994,6 +4144,7 @@ sub prog_list {
     }
 
     my $myself = Encode_Referer($MyURL . "?" . $Query);
+    my @timers = ParseTimer(0);
 
     #
     my (@channel, $current);
@@ -4086,12 +4237,32 @@ sub prog_list {
             $srch2_url =~ s/\%TITLE\%/$search_title/g;
         }
 
+        my $subtitle = "";
+        if ($CONFIG{EPG_SUBTITLE}) {
+            $subtitle = CGI::escapeHTML($event->{subtitle});
+        }
+        if ($CONFIG{EPG_SUMMARY}) {
+            if (length($subtitle)) {
+                $subtitle .= "<BR />";
+            }
+            $subtitle .= CGI::escapeHTML($event->{summary});
+            $subtitle =~ s/\|/<BR \/>/g;
+        }
+
+        my $timerset = 0;
+        foreach my $timer (@timers) {
+            if (($timer->{vdr_id} == $vdr_id) && ($timer->{start} <= $event->{start}) && ($timer->{stop} >= $event->{stop})) {
+                $timerset = 1;
+                last;
+            }
+        }
+
         push(@show,
              {  ssse     => $event->{start},
                 emit     => my_strftime("%H:%M", $event->{start}),
                 duration => my_strftime("%H:%M", $event->{stop}),
                 title    => CGI::escapeHTML($event->{title}),
-                subtitle => CGI::escapeHTML($event->{subtitle}),
+                subtitle => $subtitle,
                 recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
                 infurl   => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
                 editurl  => sprintf("%s?aktion=prog_detail_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
@@ -4101,7 +4272,8 @@ sub prog_list {
                 srch2_url    => $srch2_url,
                 srch2_title  => $srch2_url ? gettext($CONFIG{SRCH2_TITLE}) : undef,
                 newd     => 0,
-                anchor   => "id" . $event->{event_id}
+                anchor   => "id" . $event->{event_id},
+                timerset => $timerset
              }
         );
         $progname = $event->{progname};
@@ -4142,11 +4314,14 @@ sub prog_list2 {
     $day = $q->param("day") if ($q->param("day"));
     my $param_time  = $q->param("time");
     $CONFIG{CHANNELS_WANTED_PRG2} = $q->param("wanted_channels") if (defined $q->param("wanted_channels"));
+    my ($start_hour, $start_min)  = getSplittedTime($CONFIG{EPG_START_TIME});
+    my $day_start   = (($start_hour * 60) + $start_min) * 60;
 
     #
     my $vdr_id;
     my @channel;
     my $myself = Encode_Referer($MyURL . "?" . $Query);
+    my @timers = ParseTimer(0);
 
     for my $channel (@{$CHAN{$CONFIG{CHANNELS_WANTED_PRG2}}->{channels}}) {
 
@@ -4182,8 +4357,8 @@ sub prog_list2 {
             my $dayflag = 0;
 
             for my $event (@{ $EPG{$vdr_id} }) {
-                my $event_day      = my_strftime("%d.%m.", $event->{start});
-                my $event_day_long = my_strftime("%Y%m%d", $event->{start});
+                my $event_day      = my_strftime("%d.%m.", $event->{start}-$day_start);
+                my $event_day_long = my_strftime("%Y%m%d", $event->{start}-$day_start);
 
                 $hash_days{$event_day_long} = $event_day unless(exists $hash_days{$event_day_long});
 
@@ -4226,12 +4401,32 @@ sub prog_list2 {
                         $srch2_url =~ s/\%TITLE\%/$search_title/g;
                     }
 
+                    my $subtitle = "";
+                    if ($CONFIG{EPG_SUBTITLE}) {
+                        $subtitle = CGI::escapeHTML($event->{subtitle});
+                    }
+                    if ($CONFIG{EPG_SUMMARY}) {
+                        if (length($subtitle)) {
+                            $subtitle .= "<BR />";
+                        }
+                        $subtitle .= CGI::escapeHTML($event->{summary});
+                        $subtitle =~ s/\|/<BR \/>/g;
+                    }
+
+                    my $timerset = 0;
+                    foreach my $timer (@timers) {
+                        if (($timer->{vdr_id} == $vdr_id) && ($timer->{start} <= $event->{start}) && ($timer->{stop} >= $event->{stop})) {
+                            $timerset = 1;
+                            last;
+                        }
+                    }
+
                     push(@show,
                          {  ssse     => $event->{start},
                             emit     => my_strftime("%H:%M", $event->{start}),
                             duration => my_strftime("%H:%M", $event->{stop}),
                             title    => CGI::escapeHTML($event->{title}),
-                            subtitle => CGI::escapeHTML($event->{subtitle}),
+                            subtitle => $subtitle,
                             recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
                             infurl   => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
                             editurl  => sprintf("%s?aktion=prog_detail_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
@@ -4241,7 +4436,8 @@ sub prog_list2 {
                             srch2_url    => $srch2_url,
                             srch2_title  => $srch2_url ? gettext($CONFIG{SRCH2_TITLE}) : undef,
                             newd     => 0,
-                            anchor   => "id" . $event->{event_id}
+                            anchor   => "id" . $event->{event_id},
+                            timerset => $timerset
                          }
                     );
                     $progname = $event->{progname};
@@ -4341,7 +4537,7 @@ sub timer_list {
     for my $timer (ParseTimer(0)) {
 
         # VDR >= 1.3.24 reports if it's recording, so don't overwrite it here
-        if ($VDRVERSION < 10324 && $timer->{recording} == 0 && $timer->{startsse} < time() && $timer->{stopsse} > time() && ($timer->{active} & 1)) {
+        if ($FEATURES{VDRVERSION} < 10324 && $timer->{recording} == 0 && $timer->{startsse} < time() && $timer->{stopsse} > time() && ($timer->{active} & 1)) {
             $timer->{recording} = 1;
         }
         $timer->{active} = 0 unless ($timer->{active} & 1);
@@ -4661,7 +4857,7 @@ sub timer_new_form {
         }
 
         # Do NOT append EPG summary if VDR >= 10344 as this will be done by VDR itself
-        $this_event->{summary} = $this->{summary} if ($VDRVERSION < 10344);
+        $this_event->{summary} = $this->{summary} if ($FEATURES{VDRVERSION} < 10344);
         $this_event->{vdr_id} = $this->{vdr_id};
     } elsif ($timer_id) {    # edit existing timer
         $this_event = ParseTimer(0, $timer_id);
@@ -5474,6 +5670,8 @@ sub prog_summary {
     $CONFIG{PS_VIEW} = $view;
     $CONFIG{CHANNELS_WANTED_SUMMARY} = $q->param("wanted_channels") if (defined $q->param("wanted_channels"));
 
+    my @timers = ParseTimer(0);
+
     # zeitpunkt bestimmen
     my $event_time = getStartTime($time);
 
@@ -5561,6 +5759,15 @@ sub prog_summary {
                 }
                 my $myself = Encode_Referer($MyURL . "?" . $Query);
                 my $running = $event->{start} <= $now && $now <= $event->{stop};
+
+                my $timerset = 0;
+                foreach my $timer (@timers) {
+                  if (($timer->{vdr_id} == $event->{vdr_id}) && ($timer->{start} <= $event->{start}) && ($timer->{stop} >= $event->{stop})) {
+                    $timerset = 1;
+                    last;
+                  }
+                }
+
                 push(@show,
                     {  date        => my_strftime("%x",     $event->{start}),
                        longdate    => my_strftime("%A, %x", $event->{start}),
@@ -5588,7 +5795,8 @@ sub prog_summary {
                        srch1_title => $imdb_url ? gettext($CONFIG{SRCH1_TITLE}) : undef,
                        srch2_url   => $srch2_url,
                        srch2_title => $srch2_url ? gettext($CONFIG{SRCH2_TITLE}) : undef,
-                       anchor     => "id" . $event->{event_id}
+                       anchor     => "id" . $event->{event_id},
+                       timerset   =>  $timerset
                     }
                 );
                 last if (!$search);
@@ -5892,7 +6100,7 @@ sub ParseRecordings {
 
         #
         my $yearofrecording;
-        if ($VDRVERSION >= 10326) {
+        if ($FEATURES{VDRVERSION} >= 10326) {
 
             # let localtime() decide about the century
             $yearofrecording = substr($date, 6, 2);
@@ -5933,8 +6141,8 @@ sub ParseRecordings {
                 delurl        => $MyURL . "?aktion=rec_delete&amp;rec_delete=y&amp;id=$id",
                 editurl       => $FEATURES{REC_RENAME} ? $MyURL . "?aktion=rec_edit&amp;id=$id" : undef,
                 infurl        => $MyURL . "?aktion=rec_detail&amp;id=$id",
-                playurl       => $VDRVERSION >= 10331 ? $MyURL . "?aktion=rec_play&amp;id=$id" : undef, #TODO
-                cuturl        => $VDRVERSION >= 10331 ? $MyURL . "?aktion=rec_cut&amp;id=$id" : undef, #TODO
+                playurl       => $FEATURES{VDRVERSION} >= 10331 ? $MyURL . "?aktion=rec_play&amp;id=$id" : undef, #TODO
+                cuturl        => $FEATURES{VDRVERSION} >= 10331 ? $MyURL . "?aktion=rec_cut&amp;id=$id" : undef, #TODO
                 streamurl     => ($CONFIG{ST_FUNC} && $CONFIG{ST_REC_ON}) ? $MyStreamBase . $CONFIG{REC_EXT} . "?aktion=rec_stream&amp;id=$id" : undef
              }
         );
@@ -5978,7 +6186,7 @@ sub getRecInfo {
     chomp($title);
 
     my $vars;
-    if ($VDRVERSION >= 10325) {
+    if ($FEATURES{VDRVERSION} >= 10325) {
         $SVDRP->command("lstr $id");
         my ($channel_name, $subtitle, $text, $video, $audio);
         while ($_ = $SVDRP->readoneline) {
@@ -6296,7 +6504,7 @@ sub config {
     }
 
     # vdradmind.conf writable?
-    $error_msg .= sprintf(gettext("Configuration file %s not writeable! Configuration won't be saved!") . "<br />", $CONFFILE) unless (-w $CONFFILE);
+    $error_msg .= sprintf(gettext("Configuration file %s not writable! Configuration won't be saved!") . "<br />", $CONFFILE) unless (-w $CONFFILE);
 
     #
     my @LOGINPAGES_DESCRIPTION = (gettext("What's On Now?"), gettext("Playing Today?"), gettext("Timeline"), gettext("Channels"), gettext("Timers"), gettext("Recordings"));
@@ -6481,8 +6689,7 @@ sub show_help {
 # information
 #############################################################################
 sub about {
-    my $vars = { vdrversion => $VDRVERSION_HR,
-                 myversion  => $VERSION
+    my $vars = {
     };
     return showTemplate("about.html", $vars);
 }
@@ -6509,7 +6716,7 @@ sub grab_picture {
         ($width, $height) = ($maxwidth / 4, $maxheight / 4);
     }
 
-    if ($VDRVERSION < 10338) {
+    if ($FEATURES{VDRVERSION} < 10338) {
 
         # Grab using temporary file
         my $file = new File::Temp(TEMPLATE => "vdr-XXXXX", DIR => File::Spec->tmpdir(), UNLINK => 1, SUFFIX => ".jpg");
@@ -6553,6 +6760,8 @@ sub loadCommandsConf {
             s/^\s+//;
             s/\s+$//;
             next unless length;
+            next if (/{$/);
+            next if (/^}$/);
             my ($title, $cmd) = split(":", $_);
             push(@commands, { title => $title, cmd => $cmd, id => $id });
             $id = $id + 1;
@@ -6705,7 +6914,7 @@ sub myconnect {
     main::Log(LOG_DEBUG, "[SVDRP] Connecting to $CONFIG{VDR_HOST}:$CONFIG{VDR_PORT}");
 
     $SOCKET =
-      $InetSocketModule->new(PeerAddr => $CONFIG{VDR_HOST},
+      $VdrSocketModule->new(PeerAddr => $CONFIG{VDR_HOST},
                              PeerPort => $CONFIG{VDR_PORT},
                              Proto    => 'tcp'
       )
@@ -6714,25 +6923,26 @@ sub myconnect {
     $connected = true;
     my $line;
     $line = <$SOCKET>;
-    if (!$VDRVERSION) {
-        $line =~ /^220.*VideoDiskRecorder (\d+)\.(\d+)\.(\d+).*;/;
-        $VDRVERSION_HR = "$1.$2.$3";
-        $VDRVERSION    = ($1 * 10000 + $2 * 100 + $3);
-        $line =~ /^220.*VideoDiskRecorder (\d+)\.(\d+)\.(\d+).*; .*; (.*)\r|$/;
-        $VDR_ENCODING = $4;
-        $need_recode = ($can_use_encode and $VDR_ENCODING and $VDR_ENCODING ne $MY_ENCODING) ? 1 : 0;
+    if (!$FEATURES{VDRVERSION}) {
+        $line =~ /^220.*VideoDiskRecorder (\d+)\.(\d+)\.(\d+)([^;]*);/;
+        $FEATURES{VDRVERSION_HR} = "$1.$2.$3$4";
+        $FEATURES{VDRVERSION}    = ($1 * 10000 + $2 * 100 + $3);
         getSupportedFeatures($this);
     }
+    $line =~ /^220.*VideoDiskRecorder (\d+)\.(\d+)\.(\d+).*; .*; (.*)\r|$/;
+    $VDR_ENCODING = $4;
+    $need_recode = ($can_use_encode and $VDR_ENCODING and $VDR_ENCODING ne $MY_ENCODING) ? 1 : 0;
 }
 
 sub getSupportedFeatures {
     my $this = shift;
-    if ($VDRVERSION >= 10331) {
+    if ($FEATURES{VDRVERSION} >= 10331) {
         command($this, "plug");
         while ($_ = readoneline($this)) {
-            if ($_ =~ /^epgsearch v(\d+)\.(\d+)\.(\d+)/) {
+            if ($_ =~ /^epgsearch v(\d+)\.(\d+)\.(\d+)([^ ]*)/) {
                 $FEATURES{EPGSEARCH} = 1;
-                $EPGSEARCH_VERSION = ($1 * 10000 + $2 * 100 + $3);
+                $FEATURES{EPGSEARCH_VERSION}    = ($1 * 10000 + $2 * 100 + $3);
+                $FEATURES{EPGSEARCH_VERSION_HR} = "$1.$2.$3$4";
             }
             if ($_ =~ /^streamdev-server/) {
                 $FEATURES{STREAMDEV} = 1;
@@ -6769,6 +6979,7 @@ sub command {
     main::Log(LOG_DEBUG, sprintf("[SVDRP] Sending \"%s\"", $cmd));
     $cmd = $cmd . CRLF;
     if ($SOCKET && $SOCKET->connected()) {
+        Encode::from_to($cmd, $MY_ENCODING, $VDR_ENCODING) if ($need_recode);
         my $result = send($SOCKET, $cmd, 0);
         if ($result != length($cmd)) {
             main::HTMLError(sprintf($ERROR_MESSAGE{send_command}, $CONFIG{VDR_HOST}));

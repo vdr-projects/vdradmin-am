@@ -2,22 +2,19 @@
 # This file is distributed under the same license as the VDRAdmin-AM package.
 #
 # Rolf Ahrenberg, 2007
-# Ville Skytt‰, 2007
+# Ville Skytt‰, 2007-2010
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.6.2\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2009-12-30 13:26+0100\n"
-"PO-Revision-Date: 2009-07-14 22:34+0200\n"
+"POT-Creation-Date: 2010-03-07 14:04+0100\n"
+"PO-Revision-Date: 2010-03-02 18:50+0200\n"
 "Last-Translator: Ville Skytt‰ <ville.skytta@iki.fi>\n"
 "Language-Team: Suomi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid "ISO-8859-1"
-msgstr "ISO-8859-1"
 
 msgid "About"
 msgstr "Tietoja"
@@ -79,11 +76,11 @@ msgstr "VDR:n versio:"
 msgid "Supported features in VDR:"
 msgstr "VDR:n tuetut ominaisuudet:"
 
-msgid "EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>)"
-msgstr "Hakuajastimet (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch-laajennos</a>)"
+msgid "EPGSearch (<a href=\"http://winni.vdr-developer.org/epgsearch/index_eng.html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgstr "Hakuajastimet (<a href=\"http://winni.vdr-developer.org/epgsearch/index_eng.html\" target=\"_blank\">EPGSearch-laajennos</a>)"
 
-msgid "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>)"
-msgstr "Live-kuvan suoratoisto (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev-laajennos</a>)"
+msgid "LiveTV Streaming (<a href=\"http://streamdev.vdr-developer.org/\" target=\"_blank\">Streamdev Plugin</a>)"
+msgstr "Live-kuvan suoratoisto (<a href=\"http://streamdev.vdr-developer.org/\" target=\"_blank\">Streamdev-laajennos</a>)"
 
 msgid "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
 msgstr "Tallenteiden uudelleennime‰minen (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio-kokoelma</a>)"
@@ -339,6 +336,18 @@ msgstr "K‰ytet‰‰n myˆs muihin ohjelmaoppaan n‰kymiin!"
 
 msgid "Tooltips:"
 msgstr "Lis‰tietolaatikot:"
+
+msgid "Electronic Program Guide (EPG)"
+msgstr "Ohjelmaopas"
+
+msgid "Day begins at:"
+msgstr "P‰iv‰ alkaa:"
+
+msgid "Show Subtitle:"
+msgstr "N‰yt‰ jakson nimi:"
+
+msgid "Show Summary:"
+msgstr "N‰yt‰ kuvaus:"
 
 msgid "Active:"
 msgstr "K‰ytˆss‰:"
@@ -643,11 +652,17 @@ msgstr "M‰‰ritellyt"
 msgid "record"
 msgstr "Tallenna"
 
-msgid "announce only"
-msgstr "Muistutus"
+msgid "announce by OSD"
+msgstr "muistutus kuvaruutun‰ytˆlle"
 
 msgid "switch only"
 msgstr "Kanavanvaihto"
+
+msgid "announce and switch"
+msgstr "muistutus ja kanavanvaihto"
+
+msgid "announce by mail"
+msgstr "muistutus s‰hkˆpostitse"
 
 msgid "First day:"
 msgstr "Aloitusp‰iv‰:"
@@ -697,6 +712,9 @@ msgstr "Vain uusinnat ... p‰iv‰n sis‰ll‰:"
 msgid "Compare:"
 msgstr "Vertaa hakukentti‰:"
 
+msgid "Minimal match of description in %:"
+msgstr "Vaadittava kuvauksen yhdenmukaisuus [%]:"
+
 msgid "VPS:"
 msgstr "VPS-toiminto:"
 
@@ -705,6 +723,15 @@ msgstr "Kanavanvaihdon asetukset"
 
 msgid "Switch ... Minutes Before Start:"
 msgstr "Vaihda ... minuuttia ennen alkua:"
+
+msgid "Unmute sound:"
+msgstr "Ota mykistys pois p‰‰lt‰:"
+
+msgid "Settings for action \"announce and switch\""
+msgstr "Asetukset muistutukselle ja kanavanvaihdolle:"
+
+msgid "Ask ... Minutes Before Start:"
+msgstr "Kysy ... minuuttia ennen alkua:"
 
 msgid "Delete template"
 msgstr "Poista mallipohja"
@@ -764,7 +791,7 @@ msgid "The <strong>guaranteed</strong> lifetime (in days) of a recording created
 msgstr "T‰m‰n ajastimen tekemien tallenteiden <strong>taattu</strong> elinaika (p‰ivin‰). <strong>0</strong> tarkoittaa ett‰ tallenne saatetaan poistaa automaattisesti milloin tahansa korkeamman prioriteetin ajastimen tarvitessa lis‰‰ levytilaa. <strong>99</strong> tarkoittaa ett‰ tallennetta ei poisteta automaattisesti. Numero v‰lilt‰ <strong>1...98</strong> tarkoittaa p‰ivien m‰‰r‰‰, jonka pit‰‰ olla kulunut ajastimen <strong>alkuajankohdasta</strong> ennen kuin tallenne saatetaan poistaa automaattisesti uuden tallenteen tarvitessa levytilaa."
 
 msgid "Check this box if you want VDRAdmin-AM to append the broadcast's EPG subtitle to the recording's file name."
-msgstr ""
+msgstr "Valitse mik‰li haluat VDRAdmin-AM:n lis‰‰v‰n ohjelman jakson nimen tallenteen tiedostonimeen."
 
 msgid "If you enable this VDRAdmin-AM will track timers it has already programmed automatically. This is useful if want to deactivate or delete timers that have been programmed automatically in the timers listing."
 msgstr ""
@@ -832,6 +859,15 @@ msgstr ""
 msgid "Here you can (de-)activate the tooltips."
 msgstr ""
 
+msgid "The time after which events are shown on a new day. For example setting 03:00 means that today's schedule will include any event starting before 03:00 tomorrow. Applies only to the 'Playing Today?' list."
+msgstr ""
+
+msgid "Show the 'Subtitle' text for each event. Not all broadcasters use this field."
+msgstr ""
+
+msgid "Show the 'Summary' text for each event."
+msgstr ""
+
 msgid "Activate or deactivate the AutoTimer function."
 msgstr "Aktivoi tai deaktivoi hakuajastintoiminto."
 
@@ -865,7 +901,7 @@ msgstr "Lis‰‰ tallenteen kuvaus uusiin ajastimiin"
 msgid "If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here."
 msgstr ""
 
-msgid "Enable or disable live streaming using the <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
+msgid "Enable or disable live streaming using the <a href=\"http://streamdev.vdr-developer.org/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
 msgstr ""
 
 msgid "Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use."
@@ -878,13 +914,13 @@ msgid "This is the path where your workstation can access VDR's recordings. This
 msgstr ""
 
 msgid "The MIME type to send when using live streaming. Defaults to \"video/x-mpegurl\"."
-msgstr ""
+msgstr "Live-kuvan suoratoiston yhteydess‰ l‰hetett‰v‰ MIME-tyyppi, oletus \"video/x-mpegurl\"."
 
 msgid "The suffix to use for live streaming. Defaults to \"m3u\"."
 msgstr "Live-kuvan suoratoiston tiedostop‰‰te, oletus \"m3u\"."
 
 msgid "The MIME type to send when using recordings streaming. Defaults to \"video/x-mpegurl\"."
-msgstr ""
+msgstr "Tallenteiden suoratoiston yhteydess‰ l‰hetett‰v‰ MIME-tyyppi, oletus \"video/x-mpegurl\"."
 
 msgid "The suffix to use for recordings streaming. Defaults to \"m3u\"."
 msgstr "Tallenteiden suoratoiston tiedostop‰‰te, oletus \"m3u\"."
@@ -1441,7 +1477,7 @@ msgid "Can't write configuration file %s! Reason: %s"
 msgstr "Asetustiedoston %s kirjoittaminen ei onnistu: %s"
 
 #, perl-format
-msgid "Configuration file %s not writeable! Configuration won't be saved!"
+msgid "Configuration file %s not writable! Configuration won't be saved!"
 msgstr "Ei kirjoitusoikeutta asetustiedostoon %s, asetukset eiv‰t tallennu!"
 
 msgid "Timers"
@@ -1449,3 +1485,6 @@ msgstr "Ajastimet"
 
 msgid "System default"
 msgstr "Oletus"
+
+#~ msgid "ISO-8859-1"
+#~ msgstr "ISO-8859-1"

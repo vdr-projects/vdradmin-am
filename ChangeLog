@@ -1,3 +1,317 @@
+2010-03-13  tag v3_6_6
+
+2010-03-13  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Updated for release v3.6.6.
+
+2010-03-07  amair
+
+	* po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po, po/it.po,
+	  po/nl.po, po/ru.po, po/vdradmin.pot:
+
+	Updated.
+
+2010-03-02  scop
+
+	* po/fi.po:
+
+	Finnish translation update.
+
+2010-03-02  amair
+
+	* HISTORY, vdradmind.pl, template/default/epgsearch_new.html:
+
+	Added: Support new epgsearch v0.9.25-git settings "unmute" and "min. description match".
+
+2010-02-21  scop
+
+	* install.sh, vdradmind.pl.1:
+
+	Change man page section to 8.
+
+2010-02-21  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Log to syslog by default (if logging is enabled).
+
+2010-02-21  scop
+
+	* vdradmind.pl:
+
+	Remove extra trailing newlines from log messages.
+
+2010-02-21  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Fall back to stderr if setting up syslog fails.
+
+2010-02-21  scop
+
+	* vdradmind.pl:
+
+	Don't load Sys::Syslog when not logging.
+
+2010-02-21  scop
+
+	* vdradmind.pl:
+
+	Return earlier from Log() when not logging.
+
+2010-02-21  amair
+
+	* HISTORY, make.sh, vdradmind.pl, template/default/about.html,
+	  template/default/at_timer_list.html,
+	  template/default/at_timer_new.html, template/default/config.html,
+	  template/default/epgsearch_config.html,
+	  template/default/epgsearch_list.html,
+	  template/default/epgsearch_new.html, template/default/error.html,
+	  template/default/help_at_timer_list.html,
+	  template/default/help_at_timer_new.html,
+	  template/default/help_config.html,
+	  template/default/help_edit_epg.html,
+	  template/default/help_no.html,
+	  template/default/help_rec_list.html,
+	  template/default/help_timer_list.html,
+	  template/default/help_timer_new.html,
+	  template/default/index.html, template/default/navigation.html,
+	  template/default/noauth.html, template/default/noperm.html,
+	  template/default/prog_detail.html,
+	  template/default/prog_detail_form.html,
+	  template/default/prog_list.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html,
+	  template/default/prog_timeline.html, template/default/rc.html,
+	  template/default/rec_edit.html, template/default/rec_list.html,
+	  template/default/timer_list.html,
+	  template/default/timer_new.html, template/default/tv.html,
+	  template/default/vdr_cmds.html:
+
+	Get character encoding from configured locale or environment variables (Submitted by Tobias Grimm).
+
+2010-02-21  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Encode SVDRP commands sent to VDR if needed (Submitted by Tobias Grimm).
+
+2010-02-14  amair
+
+	* HISTORY, po/it.po:
+
+	Updated.
+
+2010-02-12  amair
+
+	* HISTORY, po/es.po, po/nl.po:
+
+	Updated.
+
+2010-02-06  scop
+
+	* vdradmind.pl:
+
+	Do not require write access to templatedir, it should not be needed.
+
+2010-02-06  scop
+
+	* HISTORY, vdradmind.pl:
+
+	Improve default mail settings.
+
+2010-02-05  scop
+
+	* po/.cvsignore:
+
+	Ignore *.utf8.po.
+
+2010-02-05  scop
+
+	* vdradmind.pl, po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po,
+	  po/it.po, po/nl.po, po/ru.po, po/vdradmin.pot:
+
+	Writeable -> writable spelling fix.
+
+2010-02-05  scop
+
+	* vdradmind.pl:
+
+	Trim trailing whitespace.
+
+2010-02-05  scop
+
+	* vdradmind.pl:
+
+	Fix CA file existence check; it's a file, not a dir.
+
+2010-02-03  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Check if "GUI_POPUP_WIDTH" and "GUI_POPUP_HEIGHT" are numeric and set them to the defaults if they are not (Reported by Jan).
+
+2010-02-01  scop
+
+	* po/fi.po:
+
+	̈́Finnish translation update.
+
+2010-02-01  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Support VDR 1.7.12+ commands.conf and reccmds.conf (means: skip lines ending in "{" and lines with only "}" in them).
+
+2010-01-31  amair
+
+	* HISTORY, install.sh, vdradmind.pl:
+
+	- Added: check file and directory permissions on startup abort on error.
+	- Changed: Default directory for PID file to /var/run/vdradmin.
+	- Changed: Default directory for log file to /var/log/vdradmin.
+
+2010-01-31  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Use "cache" directory in the current directory if $SEARCH_FILES_IN_SYSTEM is not set.
+
+2010-01-30  amair
+
+	* po/cs.po, po/de.po, po/es.po, po/fi.po, po/fr.po, po/it.po,
+	  po/nl.po, po/ru.po, po/vdradmin.pot:
+
+	Updated.
+
+2010-01-30  amair
+
+	* template/default/epgsearch_new.html:
+
+	Use new text as it changed in epgsearch.
+
+2010-01-30  amair
+
+	* vdradmind.pl:
+
+	Use new test as it changed in epgsearch.
+
+2010-01-30  amair
+
+	* template/default/help_config.html:
+
+	Sync text with text used in config.html.
+
+2010-01-30  amair
+
+	* HISTORY, vdradmind.pl, template/default/prog_detail.html,
+	  template/default/prog_list.html,
+	  template/default/prog_list2.html,
+	  template/default/prog_summary.html,
+	  template/default/prog_summary2.html:
+
+	Hide "record" button in EPG lists there's already a timer for that broadcast (Based on patch by Dave Pickles).
+
+2010-01-30  amair
+
+	* HISTORY, vdradmind.pl, template/default/config.html,
+	  template/default/help_config.html,
+	  template/default/prog_summary2.html:
+
+	New options to show or hide a broadcast's subtitle and/or summary in EPG lists and to set a day's "start time" in "Playing today?" (Based on patch by Dave Pickles).
+
+2010-01-30  amair
+
+	* HISTORY, vdradmind.pl, template/default/epgsearch_new.html:
+
+	- Set minimum required epgsearch version to 0.9.24.
+	- Hide epgsearch search timer actions that are not available in 0.9.24.
+
+2010-01-30  amair
+
+	* vdradmind.pl, template/default/about.html:
+
+	Moved *VERSION* variables to %FEATURES so that they are accessible in the  templates.
+
+2010-01-26  amair
+
+	* HISTORY, vdradmind.pl, template/default/epgsearch_new.html:
+
+	Support for new epgsearch search timer actions (Bug #557).
+
+2010-01-15  amair
+
+	* HISTORY, vdradmind.pl:
+
+	"--ipv6" only enables IPv6 for connections to VDRAdmin-AM, to also use IPv6 for SVDRP connection one can use "--ipv6-all" (if he really knows what he's doing!).
+
+2010-01-15  amair
+
+	* HISTORY, vdradmind.pl:
+
+	Check encoding for every SVDRP connection (Submitted by Tobias Grimm).
+
+2010-01-08  amair
+
+	* HISTORY, README, install.sh, vdradmind.pl, vdradmind.pl.1:
+
+	- Changed: Warn about missing key or certificate if --ssl is used.
+	- Changed: Certificates for --ssl option must be located in $ETCDIR/certs.
+
+2010-01-08  amair
+
+	* make.sh:
+
+	Fixed usage message.
+
+2010-01-08  amair
+
+	* install.sh:
+
+	doInstall: Create all required directories and display all created directories on exit.
+
+2010-01-08  amair
+
+	* HISTORY, template/default/prog_timeline.html:
+
+	Fixed: Resizing browser window in "Timelin" showed "file not found" (Reported by tag @vdr-portal.de).
+
+2010-01-08  amair
+
+	* template/default/timer_list.html:
+
+	Only show REC in timer list if timer is active and recording.
+
+2010-01-02  amair
+
+	* HISTORY, po/it.po:
+
+	Updated.
+
+2009-12-30  scop
+
+	* vdradmind.pl:
+
+	Set version to 3.6.5+cvs.
+
+2009-12-30  scop
+
+	* HISTORY, contrib/README.Streaming, po/cs.po, po/de.po, po/es.po,
+	  po/fi.po, po/fr.po, po/it.po, po/nl.po, po/ru.po,
+	  po/vdradmin.pot, template/default/about.html,
+	  template/default/help_config.html:
+
+	Update links to EPGSearch and Streamdev homepages.
+
+2009-12-30  scop
+
+	* HISTORY, po/fi.po:
+
+	Tiny Finnish translation update.
+
 2009-12-30  tag v3_6_5
 
 2009-12-30  amair

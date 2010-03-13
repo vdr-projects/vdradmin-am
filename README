@@ -95,10 +95,15 @@ Options
 		name of pidfile to use.
 
   -6, --ipv6
-    use IPv6.
+    use IPv6. [EXPERIMENTAL!]
 
   -s, --ssl
     only accept https:// connections.
+
+		NOTE: this requires server-cert.pem and server-key.pem in the "certs" directory.
+		      You can create them for example like this:
+		# openssl req -new -x509 -days 9999 -keyout server-rsa-key.pem -out server-cert.pem
+		# openssl rsa -in server-rsa-key.pem > server-key.pem
 
 	-l [level], --log [level]
 		set log level for this session [0 - 7].

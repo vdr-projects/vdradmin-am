@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.6.0\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2009-12-30 13:26+0100\n"
+"POT-Creation-Date: 2010-03-07 14:04+0100\n"
 "PO-Revision-Date: 2007-08-23 10:45+0100\n"
 "Last-Translator: Trois Six <trois.six@free.fr>\n"
 "Language-Team: Trois Six <trois.six@free.fr>\n"
@@ -16,9 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
-
-msgid "ISO-8859-1"
-msgstr "ISO-8859-1"
 
 msgid "About"
 msgstr "A propos"
@@ -80,11 +77,11 @@ msgstr "Version de VDR :"
 msgid "Supported features in VDR:"
 msgstr "Options supportées par VDR :"
 
-msgid "EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>)"
-msgstr "Plugin de Recherche dans les données EPG (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch</a>)"
+msgid "EPGSearch (<a href=\"http://winni.vdr-developer.org/epgsearch/index_eng.html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgstr "Plugin de Recherche dans les données EPG (<a href=\"http://winni.vdr-developer.org/epgsearch/index_eng.html\" target=\"_blank\">EPGSearch</a>)"
 
-msgid "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>)"
-msgstr "Plugin de Streaming Live (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev</a>)"
+msgid "LiveTV Streaming (<a href=\"http://streamdev.vdr-developer.org/\" target=\"_blank\">Streamdev Plugin</a>)"
+msgstr "Plugin de Streaming Live (<a href=\"http://streamdev.vdr-developer.org/\" target=\"_blank\">Streamdev</a>)"
 
 msgid "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
 msgstr "Renommer les Enregistrements (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Patch Liemikuutio</a>)"
@@ -340,6 +337,18 @@ msgstr "Aussi utilisé pour d'autres vues EPG !"
 
 msgid "Tooltips:"
 msgstr "Bulles d'aide :"
+
+msgid "Electronic Program Guide (EPG)"
+msgstr ""
+
+msgid "Day begins at:"
+msgstr ""
+
+msgid "Show Subtitle:"
+msgstr ""
+
+msgid "Show Summary:"
+msgstr ""
 
 msgid "Active:"
 msgstr "Active :"
@@ -656,11 +665,17 @@ msgstr "Recherches définies par l'utilisateur :"
 msgid "record"
 msgstr "enregistrer"
 
-msgid "announce only"
-msgstr "Annoncer seulement"
+msgid "announce by OSD"
+msgstr ""
 
 msgid "switch only"
 msgstr "zapper uniquement"
+
+msgid "announce and switch"
+msgstr ""
+
+msgid "announce by mail"
+msgstr ""
 
 #, fuzzy
 msgid "First day:"
@@ -716,6 +731,9 @@ msgstr "Se répète uniquement dans ... Jours :"
 msgid "Compare:"
 msgstr "Comparer :"
 
+msgid "Minimal match of description in %:"
+msgstr ""
+
 msgid "VPS:"
 msgstr "VPS :"
 
@@ -724,6 +742,15 @@ msgstr "Paramètres pour action \"zapper uniquement\""
 
 msgid "Switch ... Minutes Before Start:"
 msgstr "Zapper ... Minutes Avant le Début :"
+
+msgid "Unmute sound:"
+msgstr ""
+
+msgid "Settings for action \"announce and switch\""
+msgstr ""
+
+msgid "Ask ... Minutes Before Start:"
+msgstr ""
 
 #, fuzzy
 msgid "Delete template"
@@ -853,6 +880,15 @@ msgstr "Une liste d'horaires séparés par des virgules au format <strong>hh:mm</s
 msgid "Here you can (de-)activate the tooltips."
 msgstr "Ici vous (dés-)activer les bulles d'aide."
 
+msgid "The time after which events are shown on a new day. For example setting 03:00 means that today's schedule will include any event starting before 03:00 tomorrow. Applies only to the 'Playing Today?' list."
+msgstr ""
+
+msgid "Show the 'Subtitle' text for each event. Not all broadcasters use this field."
+msgstr ""
+
+msgid "Show the 'Summary' text for each event."
+msgstr ""
+
 msgid "Activate or deactivate the AutoTimer function."
 msgstr "Active ou désactive la fonction d'Auto-Programmation."
 
@@ -886,8 +922,8 @@ msgstr "Ajouter résumé dans les nouvelles programmations :"
 msgid "If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here."
 msgstr "Si vous ne voulez pas que VDRAdmin-AM ajoute le résumé de l'EPG dans les nouvelles programmations vous pouvez désactiver cette option."
 
-msgid "Enable or disable live streaming using the <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
-msgstr "Active ou Désactive la diffusion en directe en utilisant <a href=\"http://www.magoa.net/linux/\">le plugin streamdev</a>. Vous devez aussi définir le réglage correct du <span class=\"ref_label\">Port HTTP pour Streamdev</span> ci-dessous."
+msgid "Enable or disable live streaming using the <a href=\"http://streamdev.vdr-developer.org/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
+msgstr "Active ou Désactive la diffusion en directe en utilisant <a href=\"http://streamdev.vdr-developer.org/\">le plugin streamdev</a>. Vous devez aussi définir le réglage correct du <span class=\"ref_label\">Port HTTP pour Streamdev</span> ci-dessous."
 
 msgid "Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use."
 msgstr "Vous pouvez ici régler le numéro de port sur lequel le serveur streamdev de VDR sera à l'écoute pour toute connexion. Additionnellement vous pouvez aussi fournir le type de flux que vous désirez utiliser."
@@ -1462,7 +1498,7 @@ msgid "Can't write configuration file %s! Reason: %s"
 msgstr ""
 
 #, perl-format
-msgid "Configuration file %s not writeable! Configuration won't be saved!"
+msgid "Configuration file %s not writable! Configuration won't be saved!"
 msgstr ""
 
 msgid "Timers"
@@ -1470,3 +1506,6 @@ msgstr "Programmations"
 
 msgid "System default"
 msgstr "Par défaut"
+
+#~ msgid "ISO-8859-1"
+#~ msgstr "ISO-8859-1"

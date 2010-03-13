@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html id="scroller">
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<?% gettext('ISO-8859-1') %?>" />
+	<meta http-equiv="content-type" content="text/html;charset=<?% charset %?>" />
 	<title>VDRAdmin-AM - <?% gettext('Configuration') %?></title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<?% IF usercss %?>
@@ -174,6 +174,30 @@
 				<td class="col_value">
 					<input type="radio" name="TL_TOOLTIP" value="1" id="tl_tooltip_yes" <?% IF config.TL_TOOLTIP %?>checked="checked"<?% END %?> /><label for="tl_tooltip_yes"><?% gettext('Yes') %?></label>
 					<input type="radio" name="TL_TOOLTIP" value="0" id="tl_tooltip_no" <?% UNLESS config.TL_TOOLTIP %?>checked="checked"<?% END %?> /><label for="tl_tooltip_no"><?% gettext('No') %?></label>
+				</td>
+			</tr>
+		</table>
+
+		<table border="0" cellspacing="0" cellpadding="0" class="group">
+			<tr class="heading">
+				<td colspan="2"><h2><?% gettext('Electronic Program Guide (EPG)') %?></h2></td>
+			</tr>
+			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Day begins at:') %?></h5></td>
+				<td class="col_value"><input type="text" name="EPG_START_TIME" value="<?% config.EPG_START_TIME | html %?>" size="8" /></td>
+			</tr>
+			<tr class="row_even">
+				<td class="col_label"><h5><?% gettext('Show Subtitle:') %?></h5></td>
+				<td class="col_value">
+					<input type="radio" name="EPG_SUBTITLE" value="1" id="epg_subtitle_yes" <?% IF config.EPG_SUBTITLE %?>checked="checked"<?% END %?> /><label for="epg_subtitle_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="EPG_SUBTITLE" value="0" id="epg_subtitle_no" <?% UNLESS config.EPG_SUBTITLE %?>checked="checked"<?% END %?> /><label for="epg_subtitle_no"><?% gettext('No') %?></label>
+				</td>
+			</tr>
+			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Show Summary:') %?></h5></td>
+				<td class="col_value">
+					<input type="radio" name="EPG_SUMMARY" value="1" id="epg_summary_yes" <?% IF config.EPG_SUMMARY %?>checked="checked"<?% END %?> /><label for="epg_summary_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="EPG_SUMMARY" value="0" id="epg_summary_no" <?% UNLESS config.EPG_SUMMARY %?>checked="checked"<?% END %?> /><label for="epg_summary_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
 		</table>

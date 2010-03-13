@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2009-12-30 13:26+0100\n"
+"POT-Creation-Date: 2010-03-07 14:04+0100\n"
 "PO-Revision-Date: 2006-10-27 15:42+0100\n"
 "Last-Translator: Oleg Roitburd <oleg@roitburd.de>\n"
 "Language-Team: Allrussian <LL.org>\n"
@@ -15,9 +15,6 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-5\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
-
-msgid "ISO-8859-1"
-msgstr "ISO-8859-5"
 
 msgid "About"
 msgstr "O"
@@ -80,10 +77,10 @@ msgstr "Версия VDR:"
 msgid "Supported features in VDR:"
 msgstr "Поддерживаемые улучшения в VDR:"
 
-msgid "EPGSearch (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>)"
-msgstr "EPG Поиск (<a href=\"http://people.freenet.de/cwieninger/html/vdr-epg-search.html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgid "EPGSearch (<a href=\"http://winni.vdr-developer.org/epgsearch/index_eng.html\" target=\"_blank\">EPGSearch Plugin</a>)"
+msgstr "EPG Поиск (<a href=\"http://winni.vdr-developer.org/epgsearch/index_eng.html\" target=\"_blank\">EPGSearch Plugin</a>)"
 
-msgid "LiveTV Streaming (<a href=\"http://www.vdr-wiki.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>)"
+msgid "LiveTV Streaming (<a href=\"http://streamdev.vdr-developer.org/\" target=\"_blank\">Streamdev Plugin</a>)"
 msgstr "LiveTV Streaming (<a href=\"http://www.free-x.de/wiki/index.php/Streamdev-plugin\" target=\"_blank\">Streamdev Plugin</a>"
 
 msgid "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
@@ -340,6 +337,18 @@ msgstr "Также использовать для других EPG"
 
 msgid "Tooltips:"
 msgstr "Подсказки:"
+
+msgid "Electronic Program Guide (EPG)"
+msgstr ""
+
+msgid "Day begins at:"
+msgstr ""
+
+msgid "Show Subtitle:"
+msgstr ""
+
+msgid "Show Summary:"
+msgstr ""
 
 msgid "Active:"
 msgstr "Активировано:"
@@ -660,11 +669,17 @@ msgstr "Нет таймеров!"
 msgid "record"
 msgstr "записать"
 
-msgid "announce only"
-msgstr "только анонсы"
+msgid "announce by OSD"
+msgstr ""
 
 msgid "switch only"
 msgstr "только переключится"
+
+msgid "announce and switch"
+msgstr ""
+
+msgid "announce by mail"
+msgstr ""
 
 #, fuzzy
 msgid "First day:"
@@ -720,6 +735,9 @@ msgstr "Повторения только в течение ... Дней"
 msgid "Compare:"
 msgstr "Сравнить:"
 
+msgid "Minimal match of description in %:"
+msgstr ""
+
 msgid "VPS:"
 msgstr "VPS:"
 
@@ -728,6 +746,15 @@ msgstr "Настройки для \"только переключится\""
 
 msgid "Switch ... Minutes Before Start:"
 msgstr "Переключится за ... минут до старта\""
+
+msgid "Unmute sound:"
+msgstr ""
+
+msgid "Settings for action \"announce and switch\""
+msgstr ""
+
+msgid "Ask ... Minutes Before Start:"
+msgstr ""
 
 #, fuzzy
 msgid "Delete template"
@@ -857,6 +884,15 @@ msgstr "Список времЈн (через запятую если несколько)в формате <strong>hh:mm</str
 msgid "Here you can (de-)activate the tooltips."
 msgstr "Здесь Вы можете вкл. или выкл. подсказки."
 
+msgid "The time after which events are shown on a new day. For example setting 03:00 means that today's schedule will include any event starting before 03:00 tomorrow. Applies only to the 'Playing Today?' list."
+msgstr ""
+
+msgid "Show the 'Subtitle' text for each event. Not all broadcasters use this field."
+msgstr ""
+
+msgid "Show the 'Summary' text for each event."
+msgstr ""
+
 msgid "Activate or deactivate the AutoTimer function."
 msgstr "Активирует или деактивирует функцию Автотаймера."
 
@@ -890,8 +926,8 @@ msgstr "Использовать описание из EPG для новых таймеров:"
 msgid "If you don't want VDRAdmin-AM to add the summary taken from EPG to new timers you can switch it off here."
 msgstr "Если Вы не хотите, чтобы VDRAdmin-AM устанавливал описание передачи из EPG для нового таймера, тогда выключите это здесь."
 
-msgid "Enable or disable live streaming using the <a href=\"http://www.magoa.net/linux/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
-msgstr "Активирование или деактивирование трансляции LiveTV. Для этого Вам нужен  <a href=\"http://www.magoa.net/linux/\">streamdev модуль</a>. Кроме этого нужно установить <span class=\"ref_label\">Streamdev HTTP-порт</span>. "
+msgid "Enable or disable live streaming using the <a href=\"http://streamdev.vdr-developer.org/\">streamdev plugin</a>. You also have to set the correct <span class=\"ref_label\">HTTP Port for Streamdev</span> below."
+msgstr "Активирование или деактивирование трансляции LiveTV. Для этого Вам нужен  <a href=\"http://streamdev.vdr-developer.org/\">streamdev модуль</a>. Кроме этого нужно установить <span class=\"ref_label\">Streamdev HTTP-порт</span>. "
 
 msgid "Here you have to set the port number your VDR's streamdev server listens for connections. Additionally you can also provide the stream type you like to use."
 msgstr "Здесь Вы указываете номер порта Streamdev сервера в VDR. Вы можете указывать также используемый тип трансляции."
@@ -1485,7 +1521,7 @@ msgid "Can't write configuration file %s! Reason: %s"
 msgstr ""
 
 #, perl-format
-msgid "Configuration file %s not writeable! Configuration won't be saved!"
+msgid "Configuration file %s not writable! Configuration won't be saved!"
 msgstr ""
 
 msgid "Timers"
@@ -1493,3 +1529,6 @@ msgstr "Таймеры"
 
 msgid "System default"
 msgstr "Системный стандарт"
+
+#~ msgid "ISO-8859-1"
+#~ msgstr "ISO-8859-5"
