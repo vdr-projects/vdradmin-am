@@ -26,7 +26,7 @@ require 5.004;
 
 use vars qw($PROCNAME);
 
-my $VERSION = "3.6.6";
+my $VERSION = "3.6.7";
 my $BASENAME;
 my $EXENAME;
 
@@ -1507,7 +1507,7 @@ sub SendFile {
             my $lastmod = (stat(_))[9];
             $buf  = ReadFile($FileWithPath);
             $temp = $File;
-            $temp =~ /([A-Za-z0-9]+)\.([A-Za-z0-9]+)/;
+            $temp =~ /([A-Za-z0-9]+)\.([A-Za-z0-9]+)$/;
             if (!$mimehash{$2}) { die("can't find mime-type \'$2\'\n"); }
             return (header("200", $mimehash{$2}, $buf, undef, 1, $lastmod));
         } else {

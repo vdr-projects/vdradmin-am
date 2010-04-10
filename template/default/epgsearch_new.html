@@ -107,7 +107,9 @@
 				document.getElementById("set_action_timeframe").style.display = "none";
 				document.getElementById("action_record_settings").style.display = "none";
 				document.getElementById("action_switch_settings").style.display = "none";
+<?% IF features.EPGSEARCH_VERSION >= 925 %?>
 				document.getElementById("action_announce_switch_settings").style.display = "none";
+<?% END %?>
 			}
 			else
 			{
@@ -133,26 +135,34 @@
 				case "0": // Record
 					document.getElementById("action_record_settings").style.display = "block";
 					document.getElementById("action_switch_settings").style.display = "none";
+<?% IF features.EPGSEARCH_VERSION >= 925 %?>
 					document.getElementById("action_announce_switch_settings").style.display = "none";
+<?% END %?>
 					break;
 
 				case "1": // Announce by OSD
 				case "4": // Announce by mail
 					document.getElementById("action_record_settings").style.display = "none";
 					document.getElementById("action_switch_settings").style.display = "none";
+<?% IF features.EPGSEARCH_VERSION >= 925 %?>
 					document.getElementById("action_announce_switch_settings").style.display = "none";
+<?% END %?>
 					break;
 
 				case "2": // Switch only
 					document.getElementById("action_record_settings").style.display = "none";
 					document.getElementById("action_switch_settings").style.display = "block";
+<?% IF features.EPGSEARCH_VERSION >= 925 %?>
 					document.getElementById("action_announce_switch_settings").style.display = "none";
+<?% END %?>
 					break;
 
 				case "3": // Announce and switch
 					document.getElementById("action_record_settings").style.display = "none";
 					document.getElementById("action_switch_settings").style.display = "none";
+<?% IF features.EPGSEARCH_VERSION >= 925 %?>
 					document.getElementById("action_announce_switch_settings").style.display = "block";
+<?% END %?>
 					break;
 			}
 		}

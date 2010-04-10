@@ -1,3 +1,23 @@
+2010-04-10  tag v3_6_7
+
+2010-04-10  amair
+
+	* HISTORY, make.sh, vdradmind.pl, po/it.po:
+
+	Updated for release v3.6.7.
+
+2010-03-23  amair
+
+	* HISTORY, template/default/epgsearch_new.html:
+
+	Fixed: creating/editing of searches using EPGsearch v0.9.24 (Bug report #567).
+
+2010-03-17  amair
+
+	* make.sh:
+
+	Clear locales directory prior to creating PO files.
+
 2010-03-13  tag v3_6_6
 
 2010-03-13  amair
@@ -1977,8 +1997,7 @@
 
 2006-10-20  amair
 
-	* template/default/error.html,
-	  template/default/default/sauerei.gif:
+	* template/default/error.html:
 
 	Removed "sauerei.gif" on error page.
 
@@ -2428,8 +2447,7 @@
 
 2006-07-18  amair
 
-	* template/default/favicon.ico, template/default/index.html,
-	  template/default/default/favicon.ico:
+	* template/default/favicon.ico, template/default/index.html:
 
 	Moved favicon.ico from a template's skin folder to the template's main folder.
 
