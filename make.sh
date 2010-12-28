@@ -86,7 +86,7 @@ function do_dist()
 function do_cl()
 {
 	[ -x $CVS2CL ] || Error "Missing $CVS2CL (http://www.red-bean.com/cvs2cl/)"
-	$CVS2CL --FSF --separate-header --no-wrap --no-times --tagdates --follow branch_3_6 --log-opts "-d>2006-07-08"
+	$CVS2CL --FSF --separate-header --no-wrap --no-times --tagdates --log-opts "-d>2006-07-08"
 }
 
 # check requirements.
