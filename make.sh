@@ -47,16 +47,6 @@ function do_po()
 	done
 }
 
-# Setup things after CVS checkout or update.
-#
-function do_cvs()
-{
-	# Create missing symbolic links
-	[ -e uninstall.sh ] || ln -s install.sh uninstall.sh
-	[ -e README ] || ln -s INSTALL README
-	[ -e vdradmind ] || ln -s vdradmind.pl vdradmind
-}
-
 # Extract VDRAdmin-AM version from vdradmind.pl
 #
 function getVersion()
@@ -102,10 +92,6 @@ function do_check()
 while [ $1 ]
 do
 	case $1 in
-		cvs)
-			do_cvs
-			;;
-
 		install)
 			$INSTALL_SH -c
 			;;
@@ -119,12 +105,10 @@ do
 			;;
 
 		local)
-			do_cvs
 			do_po
 			;;
 
 		dist)
-			do_cvs
 			do_po
 			do_cl
 			do_dist
