@@ -1,15 +1,11 @@
 ***********************************************************
-*** Using CVS                                           ***
+*** Using Git                                           ***
 ***********************************************************
 
-If this is a CVS snapshot you have to perform some steps yourself
+If this is a Git snapshot you have to perform some steps yourself
 to get a complete VDRAdmin-AM folder:
 
-1) Always call "./make.sh cvs" after every "cvs checkout" or
-   "cvs update". At the moment this will only create some links
-	 but might do more in the future.
-
-2) The CVS checkout contains no locales (.mo files). You have
+1) The Git repository contains no locales (.mo files). You have
    create them yourself if you want to use a language other than
 	 English: ./make.sh po
 	 Please note that you need the "msgfmt" utility for this!

@@ -3,7 +3,6 @@
 LANGS="cs de es fr fi it nl ru"
 DIST_FILES="autotimer2searchtimer.pl ChangeLog COPYING CREDITS FAQ HISTORY INSTALL LGPL.txt README README.translators REQUIREMENTS contrib convert.pl install.sh lib locale make.sh template uninstall.sh vdradmind vdradmind.pl vdradmind.pl.1"
 INSTALL_SH=./install.sh
-CVS2CL="./cvs2cl.pl"	# get it at http://www.red-bean.com/cvs2cl/
 TMPDIR=/tmp
 
 
@@ -14,7 +13,6 @@ function Usage()
 	echo "Usage: $0 <action>"
 	echo
 	echo "Available actions:"
-	echo "  cvs       - always use this after a \"cvs update \" or \"cvs checkout\""
 	echo "  install   - install VDRAdmin-AM"
 	echo "  uninstall - uninstall VDRAdmin-AM"
 	echo "  po        - convert .po files to .mo files"
@@ -65,7 +63,7 @@ function do_dist()
 	cp -a po/*.po po/*.pot $TMPDIR/$DIST_NAME/po
 	(
 		cd $TMPDIR
-		tar --exclude CVS --exclude '.#*' --exclude '.nfs*' -cjf $DIST_NAME.tar.bz2 $DIST_NAME
+		tar --exclude '.#*' --exclude '.nfs*' -cjf $DIST_NAME.tar.bz2 $DIST_NAME
 		rm -rf $TMPDIR/$DIST_NAME
 	)
 	mv $TMPDIR/$DIST_NAME.tar.bz2 .
@@ -75,8 +73,7 @@ function do_dist()
 #
 function do_cl()
 {
-	[ -x $CVS2CL ] || Error "Missing $CVS2CL (http://www.red-bean.com/cvs2cl/)"
-	$CVS2CL --FSF --separate-header --no-wrap --no-times --tagdates --log-opts "-d>2006-07-08"
+	git log > ChangeLog
 }
 
 # check requirements.

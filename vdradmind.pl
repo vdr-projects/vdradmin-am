@@ -6525,7 +6525,6 @@ sub config {
     for my $dir (<$TEMPLATEDIR/*>) {
         next if (!-d $dir);
         $dir =~ s/.*\///g;
-        next if ($dir eq 'CVS');
         my $found = 0;
         for (@template) { ($found = 1) if ($1 && ($_->{name} eq $1)); }
         if (!$found) {
@@ -6556,7 +6555,7 @@ sub config {
     my @skinlist;
     foreach my $file (glob(sprintf("%s/%s/*", $TEMPLATEDIR, $CONFIG_TEMP{TEMPLATE}))) {
         my $name = (split('\/', $file))[-1];
-        next if ($name eq 'CVS' || $name eq 'js');
+        next if ($name eq 'js');
         push(@skinlist,
              {  name => $name,
                 sel  => ($CONFIG_TEMP{SKIN} eq $name ? 1 : 0)
