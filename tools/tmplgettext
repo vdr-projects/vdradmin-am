@@ -1,0 +1,164 @@
+#!/usr/bin/perl
+
+#
+# tmplgettext <regexp> <directories>
+#
+# Creates a gettext pot-template from any text template specified by <regexp>
+# in <directories> (recursivly)
+#
+# Any text matching /<%! (.*) !%>/ (even across multiple lines) will be 
+# interpreted as a translatable strings like in gettext("foo") or _("foo").
+#
+# e.g.: tmplgettext "^.*\.html$" ./templates >templates.pot
+#
+# Output goes to stdout.
+#
+# 04/2005 - Tobias Grimm <vdr@e-tobi.net>
+# 09/2006 - Andres Mair  <andreas@vdr-developer.de>
+#
+
+my $BASENAME;
+BEGIN {
+	$BASENAME = $1;
+	unshift(@INC, $BASENAME . "../tools/lib/");
+}
+
+use String::Escape qw(printable);
+use File::Find;
+use Env qw(VERSION MY_EMAIL PACKAGE);
+
+my $START_TAG = "<?% gettext('";
+my $END_TAG = "') %?>";
+
+my $filePattern = "";
+
+sub WritePotHeader
+{
+  my ($sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst) =
+    localtime(time);
+  
+  print "# Copyright (C) $MY_EMAIL
+# This file is distributed under the same license as the VDRAdmin-AM package.
+#
+# TRANSLATOR <EMAIL>, YEAR
+#
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+#, fuzzy
+msgid \"\"
+msgstr \"\"
+\"Project-Id-Version: $PACKAGE $VERSION\\n\"
+\"Report-Msgid-Bugs-To: $MY_EMAIL\\n\"\n";
+
+  # FIXME: Correctly set timezone
+
+  printf "\"POT-Creation-Date: %4d-%02d-%02d %02d:%02d+0100\"\n",
+    $year + 1900, $mon + 1, $mday, $hour, $min;
+
+  print "\"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n\"
+\"Last-Translator: FULL NAME <EMAIL@ADDRESS>\\n\"
+\"Language-Team: LANGUAGE <LL@li.org>\\n\"
+\"MIME-Version: 1.0\\n\"
+\"Content-Type: text/plain; charset=CHARSET\\n\"
+\"Content-Transfer-Encoding: 8bit\\n\"\n\n";
+}
+
+sub my_normalize {
+	my $text = shift;
+	$text =~ s/[\t\n]//g;
+	$text =~ s/\\'/\'/g;
+	$text =~ s/\\\\/\\/g;
+	return printable($text);
+}
+
+sub WritePotEntry 
+{
+    my ($fileName, $lineNumber, $msgid) = @_;
+    my $escapedMsgid = my_normalize($msgid);
+    
+#    print "#: $fileName:$lineNumber\n";
+    print "msgid \"$escapedMsgid\"\n";
+    print "msgstr \"\"\n\n";
+}
+
+sub ExtractMsgids
+{
+    my ($fileName, @fileContent) = @_;
+    my $text = "";
+    my $isTextStarted = 0;
+    my $lineCounter = 0;
+    my $textStartLine;
+    
+    foreach my $line (@fileContent)
+    {
+        my $lookAhead;
+        
+        $lineCounter++;
+
+        if ($isTextStarted)
+        {
+            $text = $text . "\n";
+        }
+        
+        for (my $index=0; $index < length($line); $index++)
+        {            
+            $lookAhead = substr($line, $index, length($START_TAG));
+            if ($lookAhead eq $START_TAG)
+            {
+                $index = $index + length($START_TAG); # skip whole tag
+                $isTextStarted = 1;
+                $textStartLine = $lineCounter;
+                $text = "";
+            }
+
+            if ($isTextStarted)
+            {
+                $lookAhead = substr($line, $index, length($END_TAG));
+                if ($lookAhead eq $END_TAG)
+                {
+                    $index = $index + length($END_TAG);  # skip whole tag
+                    if (length($text) > 0)
+                    {
+                        WritePotEntry($fileName, $textStartLine, $text);
+                    }
+                    $isTextStarted = 0;
+                } else {
+                    $text = $text . substr($line, $index, 1);
+								}
+            }
+        }
+    } 
+}
+
+sub ProcessFile
+{
+	  my $file = shift;
+    open(HTML, "< $file");
+    my @fileContent = <HTML>;
+    close(HTML);
+        
+    ExtractMsgids($file, @fileContent);
+}
+
+#
+# main()
+#
+
+$filePattern = shift(@ARGV);
+
+my @files = ();
+find({no_chdir => 1, wanted => sub {push (@files, $_) if ($_ =~ /$filePattern/);}}, @ARGV);
+
+WritePotHeader;
+ProcessFile $_ foreach (sort(@files));

@@ -1,0 +1,37 @@
+#!/bin/sh -e
+
+if [ "$1" = "--check-only" ]; then
+	for LANG in cs de es fi fr it nl ru; do
+		echo "$LANG: untranslated=$(msgattrib --untranslated po/$LANG.po | grep ^msgid | wc -l) fuzzy=$(msgattrib --fuzzy po/$LANG.po | grep ^msgid | wc -l)"
+	done
+	exit 0
+fi
+
+export MY_EMAIL="Andreas Mair <andreas@vdr-developer.org>"
+export VERSION="$(grep "^my \$VERSION = " vdradmind.pl | sed -e 's#.*\"\(.*\)\".*#\1#')"
+export PACKAGE="VDRAdmin-AM"
+
+pushd po/
+../tools/tmplgettext "^.*\.html$" ../template >tmp-html-x.pot
+msguniq --no-wrap tmp-html-x.pot >tmp-pl-x.pot
+
+xgettext --from-code=ISO-8859-1 --no-location --no-wrap -L Perl ../vdradmind.pl --copyright-holder "$MY_EMAIL" --package-name="$PACKAGE" --package-version="$VERSION" --msgid-bugs-address="$MY_EMAIL" -j -o tmp-pl-x.pot
+
+# Create vdradmin.pot
+# (don't know how to include our own introduction comment smarter)
+sed -n '0,/^#, fuzzy$/p' <tmp-html-x.pot >vdradmin.pot
+sed -e '0,/^#, fuzzy$/d' <tmp-pl-x.pot >>vdradmin.pot
+
+rm tmp-*.pot
+popd
+
+
+for LANG in cs de es fi fr it nl ru; do
+		echo -n "$LANG: "
+    if msgmerge --no-fuzzy-matching --no-wrap po/$LANG.po po/vdradmin.pot >temp.po ; then
+        mv -f temp.po po/$LANG.po
+				echo "    untranslated=$(msgattrib --untranslated po/$LANG.po | grep ^msgid | wc -l) fuzzy=$(msgattrib --fuzzy po/$LANG.po | grep ^msgid | wc -l)"
+    else
+        echo "error merging po/$LANG.po and po/vdradmin.pot"
+    fi
+done
