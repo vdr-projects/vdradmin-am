@@ -3704,7 +3704,7 @@ sub access_log {
     my $bytes_transfered = shift;
     my $request          = shift;
     my $useragent        = shift;
-    return sprintf("%s %s \"%s\" %s %s \"%s\" \"%s\"", $ip, $username, $rawrequest, $http_status ? $http_status : "-", $bytes_transfered ? $bytes_transfered : "-", $request, $useragent);
+    return sprintf("%s %s \"%s\" %s %s \"%s\" \"%s\"", $ip, defined($username) ? $username : "-", $rawrequest, $http_status ? $http_status : "-", $bytes_transfered ? $bytes_transfered : "-", $request, $useragent);
 }
 
 sub ValidConfig {
