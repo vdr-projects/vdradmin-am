@@ -6942,7 +6942,7 @@ sub myconnect {
         main::HTMLError(sprintf($ERROR_MESSAGE{connect_failed},
                                 $CONFIG{VDR_HOST}, $CONFIG{VDR_PORT},
                                 CGI::escapeHTML($connect_error)));
-        return;
+        return 0;
     }
 
     $connected = true;
@@ -6956,6 +6956,8 @@ sub myconnect {
     $line =~ /^220.*VideoDiskRecorder (\d+)\.(\d+)\.(\d+).*; .*; (.*)\r|$/;
     $VDR_ENCODING = $4;
     $need_recode = ($can_use_encode and $VDR_ENCODING and $VDR_ENCODING ne $MY_ENCODING) ? 1 : 0;
+
+    return 1;
 }
 
 sub getSupportedFeatures {
@@ -6997,7 +6999,7 @@ sub command {
     my $cmd  = join("", @_);
 
     if (!$connected) {
-        myconnect($this);
+        myconnect($this) or return;
     }
 
     main::Log(LOG_DEBUG, sprintf("[SVDRP] Sending \"%s\"", $cmd));
