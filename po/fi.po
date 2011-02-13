@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the VDRAdmin-AM package.
 #
 # Rolf Ahrenberg, 2007
-# Ville Skytt‰, 2007-2010
+# Ville Skytt‰, 2007-2011
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.6.2\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
 "POT-Creation-Date: 2010-03-07 14:04+0100\n"
-"PO-Revision-Date: 2010-03-02 18:50+0200\n"
+"PO-Revision-Date: 2011-02-13 19:50+0200\n"
 "Last-Translator: Ville Skytt‰ <ville.skytta@iki.fi>\n"
 "Language-Team: Finnish <vdr@linuxtv.org>\n"
 "Language: fi\n"
@@ -303,7 +303,7 @@ msgid "Path to configuration files:"
 msgstr "Asetustiedostojen polku:"
 
 msgid "Path to EPG images:"
-msgstr "Ohjelmisto-oppaan kuvapolku:"
+msgstr "Ohjelmaoppaan kuvapolku:"
 
 msgid "Identification"
 msgstr "K‰ytt‰j‰tunnistus"
@@ -539,11 +539,21 @@ msgstr "Lis‰‰ uusi hakuajastin"
 msgid "Edit Search"
 msgstr "Muokkaa hakuajastinta"
 
-msgid "Small search pattern.\\nDo you really want to use it?"
-msgstr "Hakuehdot ovat hyvin suppeat.\\nHaetaanko silti?"
+msgid ""
+"Small search pattern.\\n"
+"Do you really want to use it?"
+msgstr ""
+"Hakuehdot ovat hyvin suppeat.\\n"
+"Haetaanko silti?"
 
-msgid "You didn't select at least one of\\ntitle, subtitle or description.\\nDo you really want to use this search?"
-msgstr "Et valinnut otsikkoa, lyhytt‰ tai\\npitk‰‰ kuvausta hakuehdoksi.\\nHaluatko silti k‰ytt‰‰ hakua?"
+msgid ""
+"You didn't select at least one of\\n"
+"title, subtitle or description.\\n"
+"Do you really want to use this search?"
+msgstr ""
+"Et valinnut otsikkoa, lyhytt‰ tai\\n"
+"pitk‰‰ kuvausta hakuehdoksi.\\n"
+"Haluatko silti k‰ytt‰‰ hakua?"
 
 msgid "Hide results"
 msgstr "Piilota hakutulokset"
@@ -786,7 +796,7 @@ msgid "The number of minutes VDRAdmin-AM adds to the broadcast's stop time found
 msgstr "Minuuttim‰‰r‰ jonka verran ohjelmaoppaan tietojen ohjelman loppuajan j‰lkeen VDRAdmin-AM asettaa tallennuksen loppumaan."
 
 msgid "An integer in the range <strong>0...99</strong>, defining the <strong>priority</strong> of this timer and of recordings created by this timer. <strong>0</strong> represents the lowest value, <strong>99</strong> the highest. The priority is used to decide which timer shall be started in case there are two or more timers with the exact same <strong>start</strong> time. The first timer in the list with the highest priority will be used.<br /><br />This value is also stored with the recording and is later used to decide which recording to remove from disk in order to free space for a new recording. If the disk runs full and a new recording needs more space, an existing recording with the lowest priority (and which has exceeded its guaranteed <strong>lifetime</strong>) will be removed.<br /><br />If all available DVB cards are currently occupied, a timer with a higher priority will interrupt the timer with the lowest priority in order to start recording."
-msgstr "Kokonaisluku v‰lilt‰ <strong>0...99</strong> joka m‰‰ritt‰‰ t‰m‰n ajastimen ja sen tekemien tallennusten <strong>prioriteetin</strong>. <strong>0</strong> on alin prioriteetti, <strong>99</strong> ylin. Prioriteettiarvoa k‰ytet‰‰n p‰‰tt‰m‰‰n mik‰ ajastettu tallennus aloitetaan mik‰li asetettuna on kaksi tai useampia samaan aikaan <strong>alkamaan</strong> asetettuja ajastimia. Valinta kohdistuu ensimm‰iseen suurimmalla prioriteetilla olevista ajastimista.<br /><br />Prioriteettiarvo s‰ilytet‰‰n myˆs tallenteen mukana, ja sit‰ k‰ytet‰‰n myˆhemmin p‰‰tt‰m‰‰n mik‰ tallenne poistetaan mik‰li uutta varten pit‰‰ saada lis‰‰ levytilaa. Mik‰li levy t‰yttyy ja uusi tallenne tarvitsee lis‰‰ tilaa, pienimm‰ll‰ prioriteetilla merkitty tallenne (joka on ylitt‰nyt <strong>taatun</strong> elinaikanasa) poistetaan.<br /><br />Mik‰li kaikki DVB-kortit ovat k‰ytˆss‰, korkeamman prioriteetin ajastin keskeytt‰‰ tarvittaessa k‰ynniss‰ olevan alimman prioriteetin tallennuksen."
+msgstr "Kokonaisluku v‰lilt‰ <strong>0...99</strong> joka m‰‰ritt‰‰ t‰m‰n ajastimen ja sen tekemien tallennusten <strong>prioriteetin</strong>. <strong>0</strong> on alin prioriteetti, <strong>99</strong> ylin. Prioriteettiarvoa k‰ytet‰‰n p‰‰tt‰m‰‰n mik‰ ajastettu tallennus aloitetaan mik‰li asetettuna on kaksi tai useampia samaan aikaan <strong>alkamaan</strong> asetettuja ajastimia. Valinta kohdistuu ensimm‰iseen suurimmalla prioriteetilla olevista ajastimista.<br /><br />Prioriteettiarvo s‰ilytet‰‰n myˆs tallenteen mukana, ja sit‰ k‰ytet‰‰n myˆhemmin p‰‰tt‰m‰‰n mik‰ tallenne poistetaan mik‰li uutta varten pit‰‰ saada lis‰‰ levytilaa. Mik‰li levy t‰yttyy ja uusi tallenne tarvitsee lis‰‰ tilaa, pienimm‰ll‰ prioriteetilla merkitty tallenne (joka on ylitt‰nyt <strong>taatun</strong> elinaikansa) poistetaan.<br /><br />Mik‰li kaikki DVB-kortit ovat k‰ytˆss‰, korkeamman prioriteetin ajastin keskeytt‰‰ tarvittaessa k‰ynniss‰ olevan alimman prioriteetin tallennuksen."
 
 msgid "The <strong>guaranteed</strong> lifetime (in days) of a recording created by this timer. <strong>0</strong> means that this recording may be automatically deleted at any time by a new recording with higher priority. <strong>99</strong> means that this recording will never be automatically deleted. Any number in the range <strong>1...98</strong> means that this recording may not be automatically deleted in favour of a new recording, until the given number of days since the <strong>start</strong> time of the recording has passed by."
 msgstr "T‰m‰n ajastimen tekemien tallenteiden <strong>taattu</strong> elinaika (p‰ivin‰). <strong>0</strong> tarkoittaa ett‰ tallenne saatetaan poistaa automaattisesti milloin tahansa korkeamman prioriteetin ajastimen tarvitessa lis‰‰ levytilaa. <strong>99</strong> tarkoittaa ett‰ tallennetta ei poisteta automaattisesti. Numero v‰lilt‰ <strong>1...98</strong> tarkoittaa p‰ivien m‰‰r‰‰, jonka pit‰‰ olla kulunut ajastimen <strong>alkuajankohdasta</strong> ennen kuin tallenne saatetaan poistaa automaattisesti uuden tallenteen tarvitessa levytilaa."
@@ -855,7 +865,7 @@ msgid "The number of hours to show in the timeline."
 msgstr "Aikajanalla n‰ytett‰vien tuntien lukum‰‰r‰."
 
 msgid "A comma separated list of times in <strong>hh:mm</strong> format that appear in the selectbox placed at the top."
-msgstr ""
+msgstr "Pilkulla erotettu lista ajoista <strong>hh:mm</strong> -muodossa jotka n‰ytet‰‰n yl‰laidan alasvetovalikossa."
 
 msgid "Here you can (de-)activate the tooltips."
 msgstr ""
@@ -939,7 +949,7 @@ msgid "<p>This section is for experts <strong>only</strong>, i.e. you know what 
 msgstr "<p>T‰m‰ osio on <strong>vain</strong> asiantuntijoille jotka tiet‰v‰t mit‰ ovat tekem‰ss‰!</p>"
 
 msgid "If set to \"yes\" VDRAdmin-AM will periodically refresh its local EPG cache. Else the EPG will be refreshed if the user accesses any EPG view at the web interface and the timeout set at \"Update EPG every\" has been reached."
-msgstr ""
+msgstr "Mik‰li kyll‰, VDRAdmin-AM p‰ivitt‰‰ ohjelmaopasv‰limuistiaan taustalla.  Mik‰li ei, ohjelmaoppaan tiedot p‰ivitet‰‰n web-k‰yttˆliittym‰n ohjelmaopasn‰kym‰‰ avattaessa jos m‰‰ritelty ohjelmaoppaan p‰ivitysv‰li on kulunut edellisest‰ p‰ivityksest‰."
 
 msgid "The interval, the EPG data is refreshed from VDR and AutoTimer updates are performed (if AutoTimer feature is used)."
 msgstr "Aika jonka v‰lein ohjelmaoppaan tiedot p‰ivitet‰‰n VDR:st‰ ja hakuajastimien p‰ivitykset tehd‰‰n (mik‰li hakuajastintoiminto on k‰ytˆss‰)."
@@ -1032,7 +1042,7 @@ msgid "Transmission Identification"
 msgstr "L‰hetteen tunniste"
 
 msgid "Monitor this timer using the identification provided in the EPG. Please note that this only works if the provided identification is a fix and unique value! This option is not available with timers programmed in VDR."
-msgstr "Tarkista ajastinta ohjelmisto-oppaan sis‰lt‰m‰n ohjelmatunnisteen perusteella. T‰m‰ tarkistustapa toimii vain mik‰li ohjelmisto-oppaan ohjelmatunniste on vakio ja uniikki. T‰m‰ valinta ei ole k‰ytett‰viss‰ VDR:st‰ tehtyjen ajastimien kohdalla."
+msgstr "Tarkista ajastinta ohjelmaoppaan sis‰lt‰m‰n ohjelmatunnisteen perusteella. T‰m‰ tarkistustapa toimii vain mik‰li ohjelmaoppaan ohjelmatunniste on vakio ja uniikki. T‰m‰ valinta ei ole k‰ytett‰viss‰ VDR:st‰ tehtyjen ajastimien kohdalla."
 
 msgid "Time"
 msgstr "Aika"
@@ -1071,7 +1081,7 @@ msgid "Title of Recording:"
 msgstr "Tallenteen nimi:"
 
 msgid "The <strong>file name</strong> this timer will give to a recording. If the name shall contain subdirectories, these have to be delimited by '~' (since the '/' character may be part of a regular programme name).<br /><br />The special keywords <strong>TITLE</strong> and <strong>EPISODE</strong>, if present, will be replaced by the title and episode information from the EPG data at the time of recording (if that data is available). If at the time of recording either of these cannot be determined, <strong>TITLE</strong> will default to the channel name, and <strong>EPISODE</strong> will default to a blank."
-msgstr "Ajastimen tekemien tallenteiden <strong>tiedostonimi</strong>. Hakemistoerottimena k‰ytet‰‰n '~':a (koska '/' saattaa esiinty‰ ohjelmien nimiss‰).<br /><br />Avainsanat <strong>TITLE</strong> ja <strong>EPISODE</strong> korvataan ohjelmisto-oppaan otsikko- ja jaksotiedoilla mik‰li ne ovat saatavilla tallennuksen alkaessa. Jos eiv‰t, <strong>TITLE</strong>:n oletus on kanavan nimi ja <strong>EPISODE</strong>:n tyhj‰."
+msgstr "Ajastimen tekemien tallenteiden <strong>tiedostonimi</strong>. Hakemistoerottimena k‰ytet‰‰n '~':a (koska '/' saattaa esiinty‰ ohjelmien nimiss‰).<br /><br />Avainsanat <strong>TITLE</strong> ja <strong>EPISODE</strong> korvataan ohjelmaoppaan otsikko- ja jaksotiedoilla mik‰li ne ovat saatavilla tallennuksen alkaessa. Jos eiv‰t, <strong>TITLE</strong>:n oletus on kanavan nimi ja <strong>EPISODE</strong>:n tyhj‰."
 
 msgid "Summary:"
 msgstr "Lis‰tiedot:"
@@ -1350,16 +1360,16 @@ msgid "On which port does VDR listen to SVDRP queries?"
 msgstr "Anna VDR-koneesi k‰ytt‰m‰ SVDRP-portti:"
 
 msgid "On which address should VDRAdmin-AM listen (0.0.0.0 for any)?"
-msgstr "Anna VDRAdmin-AM k‰ytt‰m‰ osoiteavaruus (0.0.0.0 ei rajoituksia):"
+msgstr "Anna osoiteavaruus VDRAdmin-AM:lle (0.0.0.0 = ei rajoituksia):"
 
 msgid "On which port should VDRAdmin-AM listen?"
-msgstr "Anna VDRAdmin-AM k‰ytt‰m‰ portti:"
+msgstr "Anna portti VDRAdmin-AM:lle:"
 
 msgid "Username?"
-msgstr "Anna k‰ytt‰j‰tunnus VDRAdmin-AM varten:"
+msgstr "Anna k‰ytt‰j‰tunnus VDRAdmin-AM:lle:"
 
 msgid "Password?"
-msgstr "Anna salasana VDRAdmin-AM varten:"
+msgstr "Anna salasana VDRAdmin-AM:lle:"
 
 msgid "Where are your recordings stored?"
 msgstr "Anna VDR-koneesi tallennehakemiston polku:"
@@ -1430,7 +1440,7 @@ msgstr "Tiedoston \"%s\" avaus ei onnistu!"
 
 #, perl-format
 msgid "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and if VDR's svdrphosts.conf is configured correctly."
-msgstr "Yhteydenotto VDR:‰‰n (%s:%s) ep‰onnistui!<br /><br />Varmista VDR:n p‰‰ll‰olo ja svdrphosts.conf-tiedoston oikeellisuus."
+msgstr "Yhteydenotto VDR:‰‰n (%s:%s) ep‰onnistui!<br /><br />Varmista ett‰ VDR on k‰ynniss‰ ja svdrphosts.conf-tiedoston oikeellisuus."
 
 #, perl-format
 msgid "Error while sending command to VDR at %s"
