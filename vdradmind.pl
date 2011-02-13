@@ -674,6 +674,8 @@ while (true) {
         }
     }
 
+    my ($http_status, $bytes_transfered);
+
     # authenticate
     #print("Username: $username / Password: $password\n");
     my $checkpass = defined($username) && defined($password);
@@ -682,14 +684,14 @@ while (true) {
     } elsif (($checkpass && $CONFIG{USERNAME_GUEST} eq $username && $CONFIG{PASSWORD_GUEST} eq $password) && $CONFIG{GUEST_ACCOUNT}) {
         $Guest = 1;
     } else {
-        headerNoAuth();
+        ($http_status, $bytes_transfered) = headerNoAuth();
+        Log(LOG_INFO, "[ACCESS] " . access_log($Client->peerhost, $username, $raw_request, $http_status, $bytes_transfered, $Request, $http_useragent));
         close($Client);
         next;
     }
 
     # serve request
     $SVDRP = SVDRP->new;
-    my ($http_status, $bytes_transfered);
     $MyURL = "." . $Request;
     if ($Request eq "/vdradmin.pl" || $Request eq "/vdradmin." . $CONFIG{TV_EXT} || $Request eq "/vdradmin." . $CONFIG{REC_EXT}) {
         $q = CGI->new($Query);
