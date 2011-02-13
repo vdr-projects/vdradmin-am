@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.6.6\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2010-03-07 14:04+0100\n"
+"POT-Creation-Date: 2011-02-13 21:52+0200\n"
 "PO-Revision-Date: 2010-02-11 22:46+0100\n"
 "Last-Translator: Manuel Gomez  <mgrojo@gmail.com>\n"
 "Language-Team: Spanish <r_jung@web.de>\n"
@@ -1542,8 +1542,8 @@ msgid "Can't open file \"%s\"!"
 msgstr "¡No se pudo abrir el archivo  \"%s\" !"
 
 #, perl-format
-msgid "Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and if VDR's svdrphosts.conf is configured correctly."
-msgstr "No se puede conectar a VDR a  %s:%s<br /><br />Compruebe si VDR está en marcha y su svdrhosts.conf bien configurado."
+msgid "Can't connect to VDR at %s:%s: %s<br /><br />Please check if VDR is running and if VDR's svdrphosts.conf is configured correctly."
+msgstr "No se puede conectar a VDR a %s:%s: %s<br /><br />Compruebe si VDR está en marcha y su svdrhosts.conf bien configurado."
 
 #, perl-format
 msgid "Error while sending command to VDR at %s"

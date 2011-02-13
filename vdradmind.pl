@@ -3469,7 +3469,7 @@ sub LoadTranslation {
                       forbidden_long => gettext("You don't have permission to access this function!"),
                       forbidden_file => gettext("Access to file \"%s\" denied!"),
                       cant_open      => gettext("Can't open file \"%s\"!"),
-                      connect_failed => gettext("Can't connect to VDR at %s:%s<br /><br />Please check if VDR is running and if VDR's svdrphosts.conf is configured correctly."),
+                      connect_failed => gettext("Can't connect to VDR at %s:%s: %s<br /><br />Please check if VDR is running and if VDR's svdrphosts.conf is configured correctly."),
                       send_command   => gettext("Error while sending command to VDR at %s"),
     );
 
@@ -6914,16 +6914,39 @@ sub myconnect {
     my $this = shift;
     main::Log(LOG_DEBUG, "[SVDRP] Connecting to $CONFIG{VDR_HOST}:$CONFIG{VDR_PORT}");
 
+    my $connect_error = undef;
     $SOCKET =
       $VdrSocketModule->new(PeerAddr => $CONFIG{VDR_HOST},
                              PeerPort => $CONFIG{VDR_PORT},
                              Proto    => 'tcp'
-      )
-      || main::HTMLError(sprintf($ERROR_MESSAGE{connect_failed}, $CONFIG{VDR_HOST}, $CONFIG{VDR_PORT})) && return;
+      );
+    my $line;
+    if ($SOCKET) {
+        chomp($line = <$SOCKET>);
+        main::Log(LOG_DEBUG, sprintf("[SVDRP] Read \"%s\"", $line));
+        if ($line =~ /access\s+denied/i) {
+            # Blocked by svdrphosts.conf - VDR will close the connection
+            $this->close();
+            $connect_error = $line;
+        }
+    }
+    else {
+        $connect_error = "$@";
+    }
+
+    if (defined($connect_error)) {
+        main::Log(main::LOG_WARNING, sprintf("Connection to %s:%s failed: %s",
+                                             $CONFIG{VDR_HOST},
+                                             $CONFIG{VDR_PORT},
+                                             $connect_error));
+        main::HTMLError(sprintf($ERROR_MESSAGE{connect_failed},
+                                $CONFIG{VDR_HOST}, $CONFIG{VDR_PORT},
+                                CGI::escapeHTML($connect_error)));
+        return;
+    }
 
     $connected = true;
-    my $line;
-    $line = <$SOCKET>;
+
     if (!$FEATURES{VDRVERSION}) {
         $line =~ /^220.*VideoDiskRecorder (\d+)\.(\d+)\.(\d+)([^;]*);/;
         $FEATURES{VDRVERSION_HR} = "$1.$2.$3$4";
