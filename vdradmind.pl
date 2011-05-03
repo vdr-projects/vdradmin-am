@@ -137,7 +137,7 @@ $CONFIG{AUTO_SAVE_CONFIG}     = 1;
 
 #
 $CONFIG{VDR_HOST}   = "localhost";
-$CONFIG{VDR_PORT}   = 2001;
+$CONFIG{VDR_PORT}   = 2001; # will be set to 6419 in initial --config if locally installed VDR is >= 1.7.15
 $CONFIG{SERVERHOST} = "0.0.0.0";
 $CONFIG{SERVERPORT} = 8001;
 $CONFIG{LOCAL_NET}  = "0.0.0.0/32";
@@ -354,7 +354,13 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
     }
     if (/^(--config|-c)/) {
         $DAEMON = 0;
-        ReadConfig() if (-e $CONFFILE);
+        if (-e $CONFFILE) {
+            ReadConfig();
+        } elsif ($CONFIG{VDR_PORT} == 2001 &&
+                 `vdr --version 2>/dev/null` =~ /^vdr\s+.*?(\d+)\.(\d+)\.(\d+)/mi) {
+            my $vdrversion = $1 * 10000 + $2 * 100 + $3;
+            $CONFIG{VDR_PORT} = 6419 if ($vdrversion >= 10715);
+        }
         LoadTranslation();
         $CONFIG{VDR_HOST}   = Question(gettext("What's your VDR hostname (e.g video.intra.net)?"),               $CONFIG{VDR_HOST});
         $CONFIG{VDR_PORT}   = Question(gettext("On which port does VDR listen to SVDRP queries?"),               $CONFIG{VDR_PORT});
