@@ -71,6 +71,7 @@ use POSIX qw(:sys_wait_h strftime mktime locale_h);
 use MIME::Base64 ();
 use File::Temp ();
 use Shell qw(locale);
+use URI ();
 use URI::Escape qw(uri_escape);
 
 my $can_use_encode = 1;
@@ -5156,26 +5157,24 @@ sub getReferer {
 sub live_stream {
     my $channel = $q->param("channel");
     my $progname = $q->param("progname");
-    my ($data, $ifconfig, $ip);
 
+    my $url;
     if ($CONFIG{ST_STREAMDEV_HOST}) {
-        $ip = $CONFIG{ST_STREAMDEV_HOST};
+        $url = URI->new("http://$CONFIG{ST_STREAMDEV_HOST}");
     } else {
         if ($CONFIG{VDR_HOST} =~ /^localhost(\.localdomain)?|127\.0\.0\.1$/i) {
-            $ifconfig = `/sbin/ifconfig eth0`;
-            if ($ifconfig =~ /inet.+:(\d+\.\d+\.\d+\.\d+)\s+Bcast/) {
-                $ip = $1;
-            } else {
-                $ip = `hostname`;
-            }
+            $url = URI->new($q->url(-base => 1));
+            $url->scheme("http");
         } else {
-            $ip = $CONFIG{VDR_HOST};
+            $url = URI->new("http://$CONFIG{VDR_HOST}");
         }
     }
-    chomp($ip);
-    $data = "";
+    $url->port($CONFIG{ST_STREAMDEV_PORT});
+    $url->path($channel);
+
+    my $data = "";
     $data .= "#EXTINF:0,$progname\n" if ($progname);
-    $data .= "http://$ip:$CONFIG{ST_STREAMDEV_PORT}/$channel\n";
+    $data .= "$url\n";
     return (header("200", $CONFIG{TV_MIMETYPE}, $data));
 }
 
@@ -6838,26 +6837,24 @@ sub run_svdrpcmd {
 sub export_channels_m3u {
     my $wanted = $q->param("wanted");
     my @filenames = ( 'vdr_full_channels', 'vdr_selected_channels', 'vdr_tv_channels', 'vdr_radio_channels' );
-    my ($ip, $ifconfig);
+
+    my $url;
     if ($CONFIG{ST_STREAMDEV_HOST}) {
-        $ip = $CONFIG{ST_STREAMDEV_HOST};
+        $url = URI->new("http://$CONFIG{ST_STREAMDEV_HOST}");
     } else {
         if ($CONFIG{VDR_HOST} =~ /^localhost(\.localdomain)?|127\.0\.0\.1$/i) {
-            $ifconfig = `/sbin/ifconfig eth0`;
-            if ($ifconfig =~ /inet.+:(\d+\.\d+\.\d+\.\d+)\s+Bcast/) {
-                $ip = $1;
-            } else {
-                $ip = `hostname`;
-            }
+            $url = URI->new($q->url(-base => 1));
+            $url->scheme("http");
         } else {
-            $ip = $CONFIG{VDR_HOST};
+            $url = URI->new("http://$CONFIG{VDR_HOST}");
         }
     }
-    chomp($ip);
+    $url->port($CONFIG{ST_STREAMDEV_PORT});
 
     my $data = "";
     foreach (sort({ $a->{vdr_id} <=> $b->{vdr_id} } (@{$CHAN{$wanted}->{channels}}))) {
-        $data .= sprintf("#EXTINF:0,%s\nhttp://%s:%s/%s\n", $_->{name}, $ip, $CONFIG{ST_STREAMDEV_PORT}, $_->{uniq_id});
+        $url->path($_->{uniq_id});
+        $data .= sprintf("#EXTINF:0,%s\n%s\n", $_->{name}, $url);
     }
     return (header("200", $CONFIG{TV_MIMETYPE}, $data, sprintf("%s.%s", $filenames[$wanted], $CONFIG{TV_EXT}) ));
 }

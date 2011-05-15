@@ -86,6 +86,7 @@ function perlModules()
 	checkPerlModule Time::Local
 	checkPerlModule MIME::Base64
 	checkPerlModule File::Temp
+	checkPerlModule URI
 	checkPerlModule URI::Escape
 
 
