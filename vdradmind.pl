@@ -5161,7 +5161,7 @@ sub live_stream {
     if ($CONFIG{ST_STREAMDEV_HOST}) {
         $ip = $CONFIG{ST_STREAMDEV_HOST};
     } else {
-        if ($CONFIG{VDR_HOST} eq "localhost") {
+        if ($CONFIG{VDR_HOST} =~ /^localhost(\.localdomain)?|127\.0\.0\.1$/i) {
             $ifconfig = `/sbin/ifconfig eth0`;
             if ($ifconfig =~ /inet.+:(\d+\.\d+\.\d+\.\d+)\s+Bcast/) {
                 $ip = $1;
@@ -6842,7 +6842,7 @@ sub export_channels_m3u {
     if ($CONFIG{ST_STREAMDEV_HOST}) {
         $ip = $CONFIG{ST_STREAMDEV_HOST};
     } else {
-        if ($CONFIG{VDR_HOST} eq "localhost") {
+        if ($CONFIG{VDR_HOST} =~ /^localhost(\.localdomain)?|127\.0\.0\.1$/i) {
             $ifconfig = `/sbin/ifconfig eth0`;
             if ($ifconfig =~ /inet.+:(\d+\.\d+\.\d+\.\d+)\s+Bcast/) {
                 $ip = $1;
