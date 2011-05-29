@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.6.0\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2011-02-13 21:52+0200\n"
+"POT-Creation-Date: 2011-05-29 12:02+0300\n"
 "PO-Revision-Date: 2007-08-23 10:45+0100\n"
 "Last-Translator: Trois Six <trois.six@free.fr>\n"
 "Language-Team: French <trois.six@free.fr>\n"
@@ -833,7 +833,7 @@ msgstr "La page que vous désirez voir à la première connexion à VDRAdmin-AM.
 msgid "VDRAdmin-AM will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin-AM will read so that you can use this to reduce VDRAdmin-AM's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin-AM will use all available channels."
 msgstr "VDRAdmin-AM va charger le présent nombre de chaînes de VDR et ne montrer que celles qui ont les champs qui peuvent être sélectionnés. Cela limite aussi les Informations EPG. VDRAdmin-AM ne va lire que ce dont il a besoin, ce qui va réduire la consommation mémoire et augmenter la performance. <strong>0</strong> désactive cette option et VDRAdmin-AM va utiliser toutes les chaînes."
 
-msgid "Here you can specify an IP address or range that can login without providing login information. For example: \"192.168.0.0/24\" will include any IP starting with \"192.168.0\", \"192.168.0.123/32\" will only match \"192.168.0.123\"."
+msgid "Here you can specify subnets from which access to VDRAdmin-AM does not require logging in. For example: \"192.168.0.0/24\" will include any IP starting with \"192.168.0\", \"192.168.0.123/32\" will only match \"192.168.0.123\". Multiple subnets can be specified by separating them with spaces or commas."
 msgstr "Vous pouvez spécifier ici une adresse IP ou une plage pour laquelle aucune authentification ne sera demandée. Par exemple : \"192.168.0.0/24\" inclura toute adresse commençant par \"192.168.0\", \"192.168.0.123/32\" inclura seulement \"192.168.0.123\"."
 
 msgid "Here you can set the localization VDRAdmin-AM should use."

@@ -79,7 +79,7 @@
 			<tr class="<?% tr_class %?>">
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>
 				<td class="col_label"><h5><?% gettext('Local net (no login required):') %?></h5></td>
-				<td class="col_value"><input type="text" name="LOCAL_NET" value="<?% config.LOCAL_NET | html %?>" size="20" maxlength="50" /></td>
+				<td class="col_value"><input type="text" name="LOCAL_NET" value="<?% config.LOCAL_NET | html %?>" size="20" maxlength="256" /></td>
 			</tr>
 			<tr class="<?% tr_class %?>">
 				<?% tr_class = (tr_class == "row_odd" ? "row_even" : "row_odd") %?>

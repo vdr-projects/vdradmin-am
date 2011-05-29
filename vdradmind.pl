@@ -6864,29 +6864,28 @@ sub export_channels_m3u {
 #############################################################################
 
 sub subnetcheck { #TODO: IPv6 support
-    my $ip  = $_[0];
-    my $net = $_[1];
+    my $ip   = $_[0];
+    my $nets = $_[1];
     my ($ip1, $ip2, $ip3, $ip4, $net_base, $net_range, $net_base1, $net_base2, $net_base3, $net_base4, $bin_ip, $bin_net);
 
     ($ip1, $ip2, $ip3, $ip4) = split(/\./, $ip);
-    ($net_base, $net_range) = split(/\//, $net);
-    ($net_base1, $net_base2, $net_base3, $net_base4) = split(/\./, $net_base);
-
-    $bin_ip = unpack("B*", pack("C", $ip1));
+    $bin_ip  = unpack("B*", pack("C", $ip1));
     $bin_ip .= unpack("B*", pack("C", $ip2));
     $bin_ip .= unpack("B*", pack("C", $ip3));
     $bin_ip .= unpack("B*", pack("C", $ip4));
 
-    $bin_net = unpack("B*", pack("C", $net_base1));
-    $bin_net .= unpack("B*", pack("C", $net_base2));
-    $bin_net .= unpack("B*", pack("C", $net_base3));
-    $bin_net .= unpack("B*", pack("C", $net_base4));
+    for my $net (split(/[\s,]+/, $nets)) {
+        ($net_base, $net_range) = split(/\//, $net);
+        ($net_base1, $net_base2, $net_base3, $net_base4) = split(/\./, $net_base);
 
-    if (substr($bin_ip, 0, $net_range) eq substr($bin_net, 0, $net_range)) {
-        return 1;
-    } else {
-        return 0;
+        $bin_net  = unpack("B*", pack("C", $net_base1));
+        $bin_net .= unpack("B*", pack("C", $net_base2));
+        $bin_net .= unpack("B*", pack("C", $net_base3));
+        $bin_net .= unpack("B*", pack("C", $net_base4));
+
+        return 1 if substr($bin_ip, 0, $net_range) eq substr($bin_net, 0, $net_range);
     }
+    return 0;
 }
 
 #############################################################################

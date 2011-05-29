@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
-"POT-Creation-Date: 2011-02-13 21:52+0200\n"
+"POT-Creation-Date: 2011-05-29 12:02+0300\n"
 "PO-Revision-Date: 2006-10-27 15:42+0100\n"
 "Last-Translator: Oleg Roitburd <oleg@roitburd.de>\n"
 "Language-Team: Russian <LL@li.org>\n"
@@ -837,7 +837,7 @@ msgstr "Страница, которую Вы хотите увидеть при
 msgid "VDRAdmin-AM will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin-AM will read so that you can use this to reduce VDRAdmin-AM's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin-AM will use all available channels."
 msgstr "VDRAdmin-AM загрузит из VDR только указанное здесь число каналов и покажет их во всех местах выбора канала.Тем самым ограничивается и EPG информация, которую будет читать VDRAdmin-AM, что значительно повышает скорость обработки.<strong>0</strong> выключает эту функцию и VDRAdmin-AM использует все доступные каналы."
 
-msgid "Here you can specify an IP address or range that can login without providing login information. For example: \"192.168.0.0/24\" will include any IP starting with \"192.168.0\", \"192.168.0.123/32\" will only match \"192.168.0.123\"."
+msgid "Here you can specify subnets from which access to VDRAdmin-AM does not require logging in. For example: \"192.168.0.0/24\" will include any IP starting with \"192.168.0\", \"192.168.0.123/32\" will only match \"192.168.0.123\". Multiple subnets can be specified by separating them with spaces or commas."
 msgstr "Здесь Вы можете определить IP адрес или IP маску , откуда можно войти без ввода данных пользователя.Например: \"192.168.0.0/24\" содержит каждый IP, который начинается с \"192.168.0\".\"192.168.0.123/32\" содержит только этот IP \"192.168.0.123\"."
 
 msgid "Here you can set the localization VDRAdmin-AM should use."
