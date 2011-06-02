@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.6.2\n"
 "Report-Msgid-Bugs-To: Andreas Mair <andreas@vdr-developer.org>\n"
 "POT-Creation-Date: 2011-05-29 12:27+0300\n"
-"PO-Revision-Date: 2011-05-29 12:10+0200\n"
+"PO-Revision-Date: 2011-06-02 23:45+0200\n"
 "Last-Translator: Ville Skyttä <ville.skytta@iki.fi>\n"
 "Language-Team: Finnish <vdr@linuxtv.org>\n"
 "Language: fi\n"
@@ -828,13 +828,13 @@ msgid "The number of DVB cards VDR can access. Depending on this value VDRAdmin-
 msgstr "VDR:n käyttämien DVB-korttien lukumäärä. VDRAdmin-AM käyttää tätä lukua laskiessaan ajastimien toteutumisen mahdollisuutta <span class=\"ref_menu\">Ajastimet</span>-näkymässä."
 
 msgid "The path to VDR's recordings. It's used so that VDRAdmin-AM can locate the recordings when using <span class=\"ref_label\">Recordings Streaming</span> and <span class=\"ref_file\">reccmds.conf</span> in the <span class=\"ref_menu\">Recordings</span> menu."
-msgstr ""
+msgstr "Polku josta VDR:n tallenteet löytyvät. VDRAdmin-AM tarvitsee tätä polkua löytämään tallenteet <span class=\"ref_label\">tallenteiden suoratoistoa</span> ja <span class=\"ref_file\">reccmds.conf</span>:ia varten <span class=\"ref_menu\">tallenteet</span>-valikossa."
 
 msgid "The path where VDR's configuration files are located. If this directory contains the file <span class=\"ref_file\">reccmds.conf</span> its content is shown in a selectbox in the <span class=\"ref_menu\">Recordings</span> menu."
 msgstr "Polku jossa VDR:n asetustiedostot sijaitsevat. Mikäli tämän polun osoittamassa hakemistossa on tiedosto <span class=\"ref_file\">reccmds.conf</span>, sen sisältämät komennot näytetään alasvetovalikossa <span class=\"ref_menu\">Tallenteet</span>-näkymässä."
 
 msgid "The path where the EPG images are stored."
-msgstr ""
+msgstr "Polku josta ohjelmaopasnäkymän käyttämät kuvat löytyvät."
 
 msgid "The username for the main user, i.e. the user having the most privileges."
 msgstr "Pääkäyttäjän, ts. käyttäjän jolla on kaikki käyttöoikeudet, salasana."
@@ -861,7 +861,7 @@ msgid "Here you can (de-)activate the tooltips."
 msgstr ""
 
 msgid "The time after which events are shown on a new day. For example setting 03:00 means that today's schedule will include any event starting before 03:00 tomorrow. Applies only to the 'Playing Today?' list."
-msgstr ""
+msgstr "Kellonaika jota edeltävät ohjelmat näytetään edellisen päivän tiedoissa. Esimerkiksi asetus 03:00 tarkoittaa että tämän päivän ohjelmistossa näytetään ohjelmat jotka alkavat ennen klo 03:00 huomenna. Vaikuttaa ainoastaan 'Tänään'-listaan."
 
 msgid "Show the 'Subtitle' text for each event. Not all broadcasters use this field."
 msgstr ""
