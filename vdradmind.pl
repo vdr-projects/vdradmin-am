@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 # vim:et:sw=4:ts=4:
 #
-# VDRAdmin-AM 2005 - 2010 by Andreas Mair <mail@andreas.vdr-developer.org>
+# VDRAdmin-AM 2005 - 2011 by Andreas Mair <mail@andreas.vdr-developer.org>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@ require 5.004;
 
 use vars qw($PROCNAME);
 
-my $VERSION = "3.6.7";
+my $VERSION = "3.6.8";
 my $BASENAME;
 my $EXENAME;
 

@@ -5,7 +5,7 @@
 If this is a Git snapshot you have to perform some steps yourself
 to get a complete VDRAdmin-AM folder:
 
-1) The Git repository contains no locales (.mo files). You have
+1) The Git repository contains no locales (.mo files). You have to
    create them yourself if you want to use a language other than
 	 English: ./make.sh po
 	 Please note that you need the "msgfmt" utility for this!
