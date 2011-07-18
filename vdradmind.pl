@@ -70,7 +70,6 @@ use Time::Local qw(timelocal);
 use POSIX qw(:sys_wait_h strftime mktime locale_h);
 use MIME::Base64 ();
 use File::Temp ();
-use Shell qw(locale);
 use URI ();
 use URI::Escape qw(uri_escape);
 
@@ -6574,7 +6573,7 @@ sub config {
     my @my_locales;
     if (-f "/usr/bin/locale" && -x _) {
         push(@my_locales, { id => "", name => gettext("System default"), cur => 0 });
-        foreach my $loc (locale("-a")) {
+        foreach my $loc (`locale -a`) {
             chomp $loc;
             push(@my_locales,
                  {  id   => $loc,
