@@ -46,7 +46,7 @@ if (eval { require Locale::gettext }) {
 } elsif (eval { require Locale::Messages }) {
     $localemod = 'Locale::Messages';
 } else {
-    die("Locale::gettext or Locale::Messages is required!\n");
+    die("Locale::gettext or Locale::Messages is required: $@");
 }
 my $can_use_bind_textdomain_codeset = 1;
 eval {
@@ -439,7 +439,7 @@ if ($UseIPv6) {
         $InetSocketModule = 'IO::Socket::INET6';
         $VdrSocketModule = 'IO::Socket::INET6' if ($UseIPv6 == 2);
     } else {
-        die("ERROR: Can't load module IO::Socket::INET6! $!\n");
+        die("ERROR: Can't load module IO::Socket::INET6: $@");
     }
 }
 
@@ -570,7 +570,7 @@ if ($UseSSL) {
                                        SSL_ca_path   => "$CA_PATH"
         );
     } else {
-        die("ERROR: Can't load module IO::Socket::SSL! $!\n");
+        die("ERROR: Can't load module IO::Socket::SSL: $@");
     }
 } else {
     $Socket = $InetSocketModule->new(Proto     => 'tcp',
