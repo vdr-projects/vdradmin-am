@@ -3623,7 +3623,7 @@ sub Log {
         chomp(my $message = join("", @_));
 
         my $my_loglevel = $CONFIG{LOGLEVEL};
-        $my_loglevel = $LOGLEVEL if $LOGLEVEL;
+        $my_loglevel = $LOGLEVEL if defined $LOGLEVEL;
         if ($my_loglevel >= shift @$level) {
 
             # Always log to stderr in non-daemon mode
