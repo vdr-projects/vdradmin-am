@@ -264,7 +264,7 @@ my $SERVERVERSION = "vdradmind/$VERSION";
 my %ERROR_MESSAGE;
 my $MY_ENCODING = '';
 
-my ($TEMPLATEDIR, $TEMPLATECACHE, $CONFFILE, $LOGDIR, $LOGLEVEL, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME, $ETCDIR, $CERTSDIR, $USER_CSS);
+my ($TEMPLATEDIR, $TEMPLATECACHE, $CONFFILE, $LOGGING, $LOGDIR, $LOGFILE, $LOGLEVEL, $PIDFILE, $AT_FILENAME, $DONE_FILENAME, $BL_FILENAME, $ETCDIR, $CERTSDIR, $USER_CSS);
 if (!$SEARCH_FILES_IN_SYSTEM) {
     $ETCDIR        = "${BASENAME}";
     $CERTSDIR      = "${ETCDIR}/certs";
@@ -327,7 +327,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         $DAEMON = 0;
         print("Usage $EXENAME [OPTION]...\n");
         print("A perl client for the Linux Video Disk Recorder.\n\n");
-        print("  -n         --nofork            don't fork, log to stderr\n");
+        print("  -n         --nofork            don't fork\n");
         print("  -c         --config            run configuration dialog\n");
         print("  -d [dir]   --cfgdir [dir]      use [dir] for configuration files\n");
         print("  -k         --kill              kill a forked vdradmind[.pl]\n");
@@ -335,6 +335,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         print("  -6         --ipv6              use IPv6\n");
         print("  -s         --ssl               only accept https:// connections\n");
         print("  -l [level] --log [level]       set log level for this session [0 - 7]\n");
+        print("  -L [file]  --logfile [file]    set log file for this session\n");
         print("  -h         --help              this message\n");
         print("\nReport bugs to <mail\@andreas.vdr-developer.org>.\n");
         exit(0);
@@ -408,6 +409,17 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
     }
     if (/^(--log|-l)/) {
         $LOGLEVEL = $ARGV[ ++$i ];
+        $LOGGING = 1;
+        next;
+    }
+    if (/^(--logfile|-L)/) {
+        $LOGFILE = $ARGV[ ++$i ];
+        if ($LOGFILE =~ m|/|) {
+            ($LOGDIR, $LOGFILE) = $LOGFILE =~ m|^(.+)/([^/]*)$|;
+        } else {
+            $LOGDIR = ".";
+        }
+        $LOGGING = 1;
         next;
     }
     if (/^(--displaycall|-i)/) {
@@ -444,6 +456,10 @@ if ($UseIPv6) {
 }
 
 ReadConfig();
+
+$LOGGING ||= $CONFIG{LOGGING};
+$LOGFILE ||= $CONFIG{LOGFILE};
+
 LoadTranslation();
 
 #use Template::Constants qw( :debug );
@@ -491,7 +507,7 @@ if ($@) {
 # ---- End new template section ----
 
 my $LOG_TO_SYSLOG = 0;
-if ($DAEMON && $CONFIG{LOGGING} && $CONFIG{LOGFILE} eq "syslog") {
+if ($LOGGING && $LOGFILE eq "syslog") {
     eval {
         require Sys::Syslog;
         Sys::Syslog->import(qw(:standard));
@@ -3616,8 +3632,7 @@ sub UptoDate {
 
 sub Log {
     if ($#_ >= 1) {
-        # Logging is always on in non-daemon mode
-        return 1 unless ($CONFIG{LOGGING} || !$DAEMON);
+        return 1 unless $LOGGING;
 
         my $level = shift;
         chomp(my $message = join("", @_));
@@ -3626,19 +3641,16 @@ sub Log {
         $my_loglevel = $LOGLEVEL if defined $LOGLEVEL;
         if ($my_loglevel >= shift @$level) {
 
-            # Always log to stderr in non-daemon mode
-            my $logfile = $DAEMON ? $CONFIG{LOGFILE} : "stderr";
-
             if ($LOG_TO_SYSLOG) {
                 syslog(shift @$level, '%s', $message);
-            } elsif ($logfile eq "stderr" || $logfile eq "syslog") {
+            } elsif ($LOGFILE eq "stderr" || $LOGFILE eq "syslog") {
                 printf STDERR "%s: %s\n", my_strftime("%x %X"), $message;
             } else {
-                if (open(LOGFILE, ">>", "$LOGDIR/$logfile")) {
+                if (open(LOGFILE, ">>", "$LOGDIR/$LOGFILE")) {
                     printf LOGFILE "%s: %s\n", my_strftime("%x %X"), $message;
                     close(LOGFILE);
                 } else {
-                    printf STDERR "%s: %s\n", my_strftime("%x %X"), "Could not open log file '$LOGDIR/$logfile' for writing: $!";
+                    printf STDERR "%s: %s\n", my_strftime("%x %X"), "Could not open log file '$LOGDIR/$LOGFILE' for writing: $!";
                 }
             }
         }

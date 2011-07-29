@@ -7,6 +7,9 @@ VDR-Portal: amair
 201x-xx-xx: x.x.x
 - Fixed: --log 0 command line argument (Ville Skyttä).
 - Improved: Startup error messages on module load failures (Ville Skyttä).
+- Added: -L/--logfile command line arg for overriding config (Ville Skyttä).
+- Changed: Honor config logging options with --nofork (Ville Skyttä).
+- Changed: Specifying -L or -l turns logging on (Ville Skyttä).
 
 2011-06-03: 3.6.8
 - Updated: Dutch translation (Submitted by Roel Koelewijn).
