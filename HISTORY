@@ -10,6 +10,7 @@ VDR-Portal: amair
 - Added: -L/--logfile command line arg for overriding config (Ville Skyttä).
 - Changed: Honor config logging options with --nofork (Ville Skyttä).
 - Changed: Specifying -L or -l turns logging on (Ville Skyttä).
+- Improved: Do not require pid dir when not running as daemon (Ville Skyttä).
 
 2011-06-03: 3.6.8
 - Updated: Dutch translation (Submitted by Roel Koelewijn).
