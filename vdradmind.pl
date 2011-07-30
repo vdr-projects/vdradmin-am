@@ -149,7 +149,7 @@ $CONFIG{EPGIMAGES}  = "$CONFIG{VIDEODIR}/epgimages";
 $CONFIG{TEMPLATE}   = "default";
 $CONFIG{SKIN}       = "default";
 $CONFIG{LOGINPAGE}  = 0;
-$CONFIG{RECORDINGS} = 1;
+{ my @a = </dev/dvb/adapter[0-9]>; $CONFIG{RECORDINGS} = scalar(@a) || 1; }
 $CONFIG{LANG}       = "";
 
 #
