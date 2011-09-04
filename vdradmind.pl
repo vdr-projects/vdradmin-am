@@ -5076,7 +5076,11 @@ sub rec_stream {
     my $c;
 
     for (SendCMD("lstr")) {
-        ($i, $date, $time, $title) = split(/ +/, $_, 4);
+        if ($FEATURES{VDRVERSION} < 10721) {
+            ($i, $date, $time, $title) = split(/ +/, $_, 4);
+        } else {
+            ($i, $date, $time, undef, $title) = split(/ +/, $_, 5);
+        }
         last if ($id == $i);
     }
     $time = substr($time, 0, 5);    # needed for wareagel-patch
@@ -6027,13 +6031,21 @@ sub ParseRecordings {
         next if (length($recording) == 0);
         last if ($recording =~ /^No recordings available/);
 
-        my ($new);
-        my ($id, $date, $time, $name) = split(/ +/, $recording, 4);
-
-        #
-        if (length($time) > 5) {
-            $new = 1;
-            $time = substr($time, 0, 5);
+        my ($id, $date, $time, $length, $name, $new);
+        if ($FEATURES{VDRVERSION} < 10721) {
+            # id date time* name
+            ($id, $date, $time, $name) = split(/ +/, $recording, 4);
+            if (length($time) > 5) {
+                $new = 1;
+                $time = substr($time, 0, 5);
+            }
+        } else {
+            # id date time length* name
+            ($id, $date, $time, $length, $name) = split(/ +/, $recording, 5);
+            if ($length =~ /^(\d+:\d+)\D/) {
+                $new = 1;
+                $length = $1;
+            }
         }
 
         #
