@@ -2994,7 +2994,7 @@ sub epgsearch_Param2Line {
                .  $q->param("del_after_days") . ":"
                .  $searchtimer_from . ":"
                .  $searchtimer_until . ":"
-               .  $q->param("ignore_missing_epgcats");
+               .  ($q->param("ignore_missing_epgcats") ? "1" : "0");
 
         if ($FEATURES{EPGSEARCH_VERSION} >= 925) {
             $cmd .= ":" . $q->param("unmute") . ":"
