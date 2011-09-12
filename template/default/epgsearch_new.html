@@ -351,7 +351,7 @@
 					<td class="col_value">
 						<input type="checkbox" name="use_extepg" value="1" id="use_extepg" <?% IF epgsearch.use_extepg %?>checked="checked"<?% END %?> onclick="javascript:changedUseExtEpg(this)" /><br/>
 						<div id="set_ignore_missing_epgcats">
-							<input type="checkbox" name="ignore_missing_epgcats" value="1" <?% IF epgsearch.ignore_missing_epgcats %?>checked="checked"<?% END %?>> <?% gettext('Ignore missing categories?') %?>
+							<input type="checkbox" name="ignore_missing_epgcats" value="1" id="ignore_missing_epgcats"<?% IF epgsearch.ignore_missing_epgcats %?>checked="checked"<?% END %?>> <label for="ignore_missing_epgcats"><?% gettext('Ignore missing categories?') %?></label>
 						</div><br/>
 						<div id="use_extepg_settings">
 							<?% FOREACH ext = extepg %?>
