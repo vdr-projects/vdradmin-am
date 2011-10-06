@@ -301,7 +301,7 @@ $UserCSS = "user.css" if (-e "$USER_CSS");
 
 my $USE_SHELL_GZIP = false;          # set on false to use the gzip library
 
-my (%EPG, %CHAN, $q, $ACCEPT_GZIP, $SVDRP, $HOST, $low_time, @RECORDINGS);
+my (%EPG, %CHAN, $q, $ACCEPT_GZIP, $SVDRP, $low_time, @RECORDINGS);
 my (%mimehash) = (html => "text/html",
                   png  => "image/png",
                   gif  => "image/gif",
@@ -671,6 +671,7 @@ while (true) {
     }
 
     $Request =~ s/^\/\/*/\//;
+    local $ENV{HTTP_HOST};
 
     # parse header
     my ($username, $password, $http_useragent);
@@ -681,7 +682,7 @@ while (true) {
             $Referer = $1;
         }
         if ($line =~ /Host: (.*)/) {
-            $HOST = $1;
+            $ENV{HTTP_HOST} = $1;
         }
         if ($line =~ /Authorization: basic (.*)/i) {
             ($username, $password) = split(":", MIME::Base64::decode_base64($1), 2);
