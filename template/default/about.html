@@ -122,17 +122,13 @@
 				<?% ELSE %?>
 					<img src="bilder/poempl_rot.png" alt="" align="middle" border="0"/>
 				<?% END %?>
-        &nbsp;<?% gettext('EPGSearch (<a href="http://winni.vdr-developer.org/epgsearch/index_eng.html" target="_blank">EPGSearch Plugin</a>)') %?>
-				<?% IF features.EPGSEARCH %?>
-          &nbsp;v<?% features.EPGSEARCH_VERSION_HR %?>
-				<?% END %?>
-        <br />
+				&nbsp;<?% gettext('EPGSearch') %?> (<?% gettext('<a href="http://winni.vdr-developer.org/epgsearch/index_eng.html" target="_blank">EPGSearch Plugin</a>') %?><?% IF features.EPGSEARCH_VERSION_HR %?>&nbsp;v<?% features.EPGSEARCH_VERSION_HR %?><?% END %?>)<br />
 				<?% IF features.STREAMDEV %?>
 					<img src="bilder/poempl_gruen.png" alt="" align="middle" border="0"/>
 				<?% ELSE %?>
 					<img src="bilder/poempl_rot.png" alt="" align="middle" border="0"/>
 				<?% END %?>
-				&nbsp;<?% gettext('LiveTV Streaming (<a href="http://streamdev.vdr-developer.org/" target="_blank">Streamdev Plugin</a>)') %?><br />
+				&nbsp;<?% gettext('LiveTV Streaming') %?> (<?% gettext('<a href="http://streamdev.vdr-developer.org/" target="_blank">Streamdev Plugin</a>') %?><?% IF features.STREAMDEV_VERSION_HR %?>&nbsp;v<?% features.STREAMDEV_VERSION_HR %?><?% END %?>)<br />
 				<?% IF features.REC_RENAME %?>
 					<img src="bilder/poempl_gruen.png" alt="" align="middle" border="0"/>
 				<?% ELSE %?>
