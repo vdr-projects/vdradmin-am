@@ -327,34 +327,38 @@
 				<td class="col_value"><input type="text" name="ST_STREAMDEV_PORT" value="<?% config.ST_STREAMDEV_PORT | html %?>" size="10" /></td>
 			</tr>
 			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('HTTP Port of Xineliboutput (e.g. 37890):') %?></h5></td>
+				<td class="col_value"><input type="text" name="ST_XINELIB_PORT" value="<?% config.ST_XINELIB_PORT | html %?>" size="10" /></td>
+			</tr>
+			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Recordings Streaming:') %?></h5></td>
 				<td class="col_value">
 					<input type="radio" name="ST_REC_ON" value="1" id="rec_yes" <?% IF config.ST_REC_ON %?>checked="checked"<?% END %?> /><label for="rec_yes"><?% gettext('Yes') %?></label>
 					<input type="radio" name="ST_REC_ON" value="0" id="rec_no" <?% UNLESS config.ST_REC_ON %?>checked="checked"<?% END %?> /><label for="rec_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
-			<tr class="row_even">
+			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Path to VDR Recordings on your workstation:') %?></h5></td>
 				<td class="col_value"><input type="text" name="ST_VIDEODIR" value="<?% config.ST_VIDEODIR | html %?>" size="20" maxlength="256" /></td>
 			</tr>
-			<tr class="row_odd">
+			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('MIME type for live streaming:') %?></h5></td>
 				<td class="col_value"><input type="text" name="TV_MIMETYPE" value="<?% config.TV_MIMETYPE | html %?>" size="20" maxlength="256" /></td>
 			</tr>
-			<tr class="row_even">
+			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Suffix for live streaming:') %?></h5></td>
 				<td class="col_value"><input type="text" name="TV_EXT" value="<?% config.TV_EXT | html %?>" size="4" maxlength="256" /></td>
 			</tr>
-			<tr class="row_odd">
+			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('MIME type for recordings streaming:') %?></h5></td>
 				<td class="col_value"><input type="text" name="REC_MIMETYPE" value="<?% config.REC_MIMETYPE | html %?>" size="20" maxlength="256" /></td>
 			</tr>
-			<tr class="row_even">
+			<tr class="row_odd">
 				<td class="col_label"><h5><?% gettext('Suffix for recordings streaming:') %?></h5></td>
 				<td class="col_value"><input type="text" name="REC_EXT" value="<?% config.REC_EXT | html %?>" size="4" maxlength="256" /></td>
 			</tr>
 <!-- not (yet?) supported 
-			<tr class="row_odd">
+			<tr class="row_even">
 				<td class="col_label"><h5><?% gettext('Bandwidth of Streams:') %?></h5></td>
 				<td class="col_value">
 					<select class="submit" name="STREAMTYPE">

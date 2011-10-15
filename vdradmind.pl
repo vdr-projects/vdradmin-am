@@ -198,8 +198,9 @@ $CONFIG{ST_FUNC}           = 1;
 $CONFIG{ST_REC_ON}         = 0;
 $CONFIG{ST_LIVE_ON}        = 1;
 $CONFIG{ST_URL}            = "";
-$CONFIG{ST_STREAMDEV_HOST} = "";
+$CONFIG{ST_STREAMDEV_HOST} = ""; # streamdev/xineliboutput host
 $CONFIG{ST_STREAMDEV_PORT} = 3000;
+$CONFIG{ST_XINELIB_PORT}   = 37890;
 $CONFIG{ST_VIDEODIR}       = "";
 
 #
@@ -251,6 +252,7 @@ $CONFIG{GUI_POPUP_HEIGHT} = 250;
 #
 my %FEATURES;
 $FEATURES{STREAMDEV}            = 0;  # streamdev plugin available?
+$FEATURES{XINELIB}              = 0;  # xineliboutput plugin available?
 $FEATURES{REC_RENAME}           = 0;  # RENR patch available?
 $FEATURES{AUTOTIMER}            = 0;  # use autotimer feature?
 $FEATURES{MYVERSION_HR}         = "$VERSION";  # Human readable VDRAdmin-AM version, e.g. 3.6.5
@@ -4312,8 +4314,8 @@ sub prog_list {
                  chanloop       => \@channel,
                  progname       => $channel_name,
                  switchurl      => "$MyURL?aktion=prog_switch&amp;channel=$vdr_id",
-                 streamurl      => $FEATURES{STREAMDEV} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $vdr_id, uri_escape($channel_name)) : undef,
-                 stream_live_on => $FEATURES{STREAMDEV} && $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
+                 streamurl      => $FEATURES{LIVESTREAM} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $vdr_id, uri_escape($channel_name)) : undef,
+                 stream_live_on => $FEATURES{LIVESTREAM} && $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
                  toolbarurl     => "$MyURL?aktion=toolbar",
                  ch_groups      => getChannelGroups($MyURL . "?aktion=prog_list&amp;vdr_id=$vdr_id", $CONFIG{CHANNELS_WANTED_PRG})
     };
@@ -4396,7 +4398,7 @@ sub prog_list2 {
                          {  channel_name => $event->{channel_name},
                             longdate  => my_strftime("%A, %x", $event->{start}),
                             newd      => 1,
-                            streamurl => $FEATURES{STREAMDEV} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $event->{vdr_id}, uri_escape($event->{channel_name})) : undef,
+                            streamurl => $FEATURES{LIVESTREAM} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $event->{vdr_id}, uri_escape($event->{channel_name})) : undef,
                             switchurl => "$MyURL?aktion=prog_switch&amp;channel=" . $event->{vdr_id},
                             proglink  => "$MyURL?aktion=prog_list&amp;vdr_id=" . $event->{vdr_id}
                          }
@@ -4471,7 +4473,7 @@ sub prog_list2 {
                 {  channel_name => $_->{name},
                    longdate  => '',
                    newd      => 1,
-                   streamurl => $FEATURES{STREAMDEV} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $vdr_id, uri_escape($_->{name})) : undef,
+                   streamurl => $FEATURES{LIVESTREAM} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $vdr_id, uri_escape($_->{name})) : undef,
                    switchurl => "$MyURL?aktion=prog_switch&amp;channel=" . $vdr_id,
                    proglink  => "$MyURL?aktion=prog_list&amp;vdr_id=" . $vdr_id
                 }
@@ -4527,7 +4529,7 @@ sub prog_list2 {
         chanloop       => \@channel,
         progname       => GetChannelDescByNumber($vdr_id),
         switchurl      => "$MyURL?aktion=prog_switch&amp;channel=" . $vdr_id,
-        stream_live_on => $FEATURES{STREAMDEV} && $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
+        stream_live_on => $FEATURES{LIVESTREAM} && $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON},
         prevdayurl     => $prev_day ? "$MyURL?aktion=prog_list2&amp;day=" . $prev_day . ($param_time ? "&amp;time=$param_time" : "") : undef,
         nextdayurl     => $next_day ? "$MyURL?aktion=prog_list2&amp;day=" . $next_day . ($param_time ? "&amp;time=$param_time" : "") : undef,
         prevdaytext    => $prev_day_name,
@@ -5177,16 +5179,20 @@ sub live_stream {
     my $url;
     if ($CONFIG{ST_STREAMDEV_HOST}) {
         $url = URI->new("http://$CONFIG{ST_STREAMDEV_HOST}");
+    } elsif ($CONFIG{VDR_HOST} =~ /^localhost(\.localdomain)?|127\.0\.0\.1$/i) {
+        $url = URI->new($q->url(-base => 1));
+        $url->scheme("http");
     } else {
-        if ($CONFIG{VDR_HOST} =~ /^localhost(\.localdomain)?|127\.0\.0\.1$/i) {
-            $url = URI->new($q->url(-base => 1));
-            $url->scheme("http");
-        } else {
-            $url = URI->new("http://$CONFIG{VDR_HOST}");
-        }
+        $url = URI->new("http://$CONFIG{VDR_HOST}");
     }
-    $url->port($CONFIG{ST_STREAMDEV_PORT});
-    $url->path($channel);
+    if ($FEATURES{STREAMDEV}) {
+        $url->port($CONFIG{ST_STREAMDEV_PORT});
+        $url->path($channel);
+    } elsif ($FEATURES{XINELIB}) {
+        $url->port($CONFIG{ST_XINELIB_PORT});
+        # No channel support in xineliboutput URLs, need to switch here
+        SendCMD("chan $channel") if $channel;
+    }
 
     my $data = "";
     $data .= "#EXTINF:0,$progname\n" if ($progname);
@@ -5808,8 +5814,8 @@ sub prog_summary {
                        vdr_id      => $event->{vdr_id},
                        proglink  => sprintf("%s?aktion=prog_list&amp;vdr_id=%s",      $MyURL,        $event->{vdr_id}),
                        switchurl => $running ? sprintf("%s?aktion=prog_switch&amp;channel=%s",   $MyURL,        $event->{vdr_id}) : undef,
-                       streamurl => $FEATURES{STREAMDEV} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $event->{vdr_id}, uri_escape($event->{channel_name})) : undef,
-                       stream_live_on => $FEATURES{STREAMDEV} && $running ? $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON} : undef,
+                       streamurl => $FEATURES{LIVESTREAM} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $event->{vdr_id}, uri_escape($event->{channel_name})) : undef,
+                       stream_live_on => $FEATURES{LIVESTREAM} && $running ? $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON} : undef,
                        infurl => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
                        editurl    => sprintf("%s?aktion=prog_detail_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
                        recurl     => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
@@ -5835,8 +5841,8 @@ sub prog_summary {
                    vdr_id      => $channel->{vdr_id},
                    proglink    => sprintf("%s?aktion=prog_list&amp;vdr_id=%s", $MyURL, $channel->{vdr_id}),
                    switchurl   => sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $channel->{vdr_id}),
-                   streamurl   => $FEATURES{STREAMDEV} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $channel->{vdr_id}, uri_escape($channel->{name})) : undef,
-                   stream_live_on => $FEATURES{STREAMDEV} ? $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON} : undef,
+                   streamurl   => $FEATURES{LIVESTREAM} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $channel->{vdr_id}, uri_escape($channel->{name})) : undef,
+                   stream_live_on => $FEATURES{LIVESTREAM} ? $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON} : undef,
                    anchor     => "id" . $channel->{vdr_id}
                 }
             );
@@ -7000,8 +7006,13 @@ sub getSupportedFeatures {
                 $FEATURES{STREAMDEV} = 1;
                 $FEATURES{STREAMDEV_VERSION_HR} = $1;
             }
+            elsif (/^xineliboutput(?:\s+v(\S+))?/) {
+                $FEATURES{XINELIB} = 1;
+                $FEATURES{XINELIB_VERSION_HR} = $1;
+            }
         }
     }
+    $FEATURES{LIVESTREAM} = $FEATURES{STREAMDEV} || $FEATURES{XINELIB};
     command($this, "help");
     while ($_ = readoneline($this)) {
         if ($_ =~ /\sRENR\s/) {
