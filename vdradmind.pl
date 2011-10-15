@@ -6991,12 +6991,12 @@ sub getSupportedFeatures {
     if ($FEATURES{VDRVERSION} >= 10331) {
         command($this, "plug");
         while ($_ = readoneline($this)) {
-            if ($_ =~ /^epgsearch v(\d+)\.(\d+)\.(\d+)([^ ]*)/) {
+            if (/^epgsearch v(\d+)\.(\d+)\.(\d+)([^ ]*)/) {
                 $FEATURES{EPGSEARCH} = 1;
                 $FEATURES{EPGSEARCH_VERSION}    = ($1 * 10000 + $2 * 100 + $3);
                 $FEATURES{EPGSEARCH_VERSION_HR} = "$1.$2.$3$4";
             }
-            if ($_ =~ /^streamdev-server(?:\s+v(\S+))?/) {
+            elsif (/^streamdev-server(?:\s+v(\S+))?/) {
                 $FEATURES{STREAMDEV} = 1;
                 $FEATURES{STREAMDEV_VERSION_HR} = $1;
             }
