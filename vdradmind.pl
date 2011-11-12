@@ -253,7 +253,7 @@ $CONFIG{GUI_POPUP_HEIGHT} = 250;
 my %FEATURES;
 $FEATURES{STREAMDEV}            = 0;  # streamdev plugin available?
 $FEATURES{XINELIB}              = 0;  # xineliboutput plugin available?
-$FEATURES{REC_RENAME}           = 0;  # RENR patch available?
+$FEATURES{REC_RENAME}           = 0;  # RENR/MOVR patch available?
 $FEATURES{AUTOTIMER}            = 0;  # use autotimer feature?
 $FEATURES{MYVERSION_HR}         = "$VERSION";  # Human readable VDRAdmin-AM version, e.g. 3.6.5
 $FEATURES{VDRVERSION}           = 0;  # Numeric VDR version, e.g. 10344
@@ -6442,7 +6442,7 @@ sub rec_rename {
     my ($id) = $q->param('id');
     my ($nn) = $q->param('nn');
     if ($id && $q->param("save")) {
-        SendCMD("RENR $id $nn");
+        SendCMD("$FEATURES{REC_RENAME} $id $nn");
         CloseSocket();
 
         # Re-read recording's list
@@ -7015,8 +7015,8 @@ sub getSupportedFeatures {
     $FEATURES{LIVESTREAM} = $FEATURES{STREAMDEV} || $FEATURES{XINELIB};
     command($this, "help");
     while ($_ = readoneline($this)) {
-        if ($_ =~ /\sRENR\s/) {
-            $FEATURES{REC_RENAME} = 1;
+        if ($_ =~ /\s(RENR|MOVR)\s/) {
+            $FEATURES{REC_RENAME} = $1;
         }
     }
 }
