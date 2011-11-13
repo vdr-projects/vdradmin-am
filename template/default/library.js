@@ -8,16 +8,16 @@ function open_help(url) {
 }
 
 function del(message, suffix) {
-	check=confirm(message);
-	if(check) {
-		window.location.href=suffix;
+	check = confirm(message);
+	if (check) {
+		window.location.href = suffix;
 	}
 }
 
 function change(message, suffix) {
-	check=confirm(message);
-	if(check) {
-		window.location.href=suffix;
+	check = confirm(message);
+	if (check) {
+		window.location.href = suffix;
 	}
 }
 
@@ -25,7 +25,7 @@ function mdel(but, message) {
 	return confirm(message);
 }
 
-function callurl( url ) {
+function callurl(url) {
 	image = new Image();
 	Now = new Date();
 	image.src = url + "&rand=" + Now.getTime();
@@ -39,8 +39,7 @@ function toolbar(URL) {
 	window.open(URL, '_blank', 'width=200, height=50');
 }
 
-function AllMessages(myform)
-{
+function AllMessages(myform) {
 	for (var x = 0; x < myform.elements.length; x++) {
 		var y = myform.elements[x];
 		if (y.name != 'SELALL') {
