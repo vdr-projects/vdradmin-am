@@ -77,7 +77,6 @@ function perlModules()
 	echo ""
 	echo "*** Required ***"
 	checkPerlModule locale
-	checkPerlModule Env
 	checkPerlModule Template
 	checkPerlModule Template::Plugin::JavaScript
 	checkPerlModule CGI

@@ -61,7 +61,6 @@ if ($@) {
 require File::Temp;
 
 use locale;
-use Env qw(@PATH LANGUAGE LANG);
 use CGI qw(:no_debug);
 use HTTP::Date qw(time2str);
 use IO::Socket;
@@ -87,7 +86,7 @@ $can_use_smtpauth = undef unless (eval { require Authen::SASL });
 
 # Some users have problems if the LANGUAGE env variable is set
 # so it's cleared here.
-$LANGUAGE = "";
+$ENV{LANGUAGE} = "";
 
 $SIG{CHLD} = sub { wait };
 
