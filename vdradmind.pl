@@ -1283,23 +1283,23 @@ sub EPG_buildTree {
                             # if(/^S (.*)/) { $subtitle = $1; $subtitle =~ s/\|/<br \/>/sig }
                             # if(/^D (.*)/) { $summary = $1;  $summary =~ s/\|/<br \/>/sig }
                             if (/^T (.*)/) { $title    = $1; }
-                            if (/^S (.*)/) { $subtitle = $1; }
-                            if (/^D (.*)/) { $summary  = $1; }
-                            if (/^X 1 ([^ ]*) (.*)/) {
+                            elsif (/^S (.*)/) { $subtitle = $1; }
+                            elsif (/^D (.*)/) { $summary  = $1; }
+                            elsif (/^X 1 ([^ ]*) (.*)/) {
                                 push (@video_raw, sprintf "X 1 $1 $2");
                                 my ($lang, $format) = split(" ", $2, 2);
                                 $video .= ", " if($video);
                                 $video .= $format;
                                 $video .= " (" . $lang . ")";
                             }
-                            if (/^X 2 ([^ ]*) (.*)/) {
+                            elsif (/^X 2 ([^ ]*) (.*)/) {
                                 push (@audio_raw, sprintf "X 2 $1 $2");
                                 my ($lang, $descr) = split(" ", $2, 2);
                                 $audio .= ", " if ($audio);
                                 $audio .= ($descr ? $descr . " (" . $lang . ")" : $lang);
                             }
-                            if (/^V (.*)/) { $vps  = $1; }
-                            if (/^e/)      {
+                            elsif (/^V (.*)/) { $vps  = $1; }
+                            elsif (/^e/)      {
 
                                 #
                                 $low_time = $time if ($time < $low_time);
@@ -6261,23 +6261,23 @@ sub getRecInfo {
         $SVDRP->command("lstr $id");
         my ($channel_name, $subtitle, $text, $video, $audio);
         while ($_ = $SVDRP->readoneline) {
-            if(/^C (.*)/) { $channel_name = get_name_from_uniqid($1); }
-            #if(/^E (.*)/) { $epg = $1; }
-            if (/^T (.*)/) { $title    = $1; }
-            if (/^S (.*)/) { $subtitle = $1; }
-            if (/^D (.*)/) { $text     = $1; }
-            if(/^X 1 [^ ]* (.*)/) {
+            if (/^C (.*)/) { $channel_name = get_name_from_uniqid($1); }
+            #elsif (/^E (.*)/) { $epg = $1; }
+            elsif (/^T (.*)/) { $title    = $1; }
+            elsif (/^S (.*)/) { $subtitle = $1; }
+            elsif (/^D (.*)/) { $text     = $1; }
+            elsif (/^X 1 [^ ]* (.*)/) {
                 my ($lang, $format) = split(" ", $1, 2);
                 $video .= ", " if($video);
                 $video .= $format;
                 $video .= " (" . $lang . ")";
             }
-            if(/^X 2 [^ ]* (.*)/) {
+            elsif (/^X 2 [^ ]* (.*)/) {
                 my ($lang, $descr) = split(" ", $1, 2);
                 $audio .= ", " if ($audio);
                 $audio .= ($descr ? $descr. " (" . $lang . ")"  : $lang);
             }
-            #if(/^V (.*)/) { $vps = $1; }
+            #elsif (/^V (.*)/) { $vps = $1; }
         }
 
         my $displaytext     = CGI::escapeHTML($text) || "";
