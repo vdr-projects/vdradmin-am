@@ -1448,7 +1448,7 @@ sub header {
                   .  "Expires: Thu, 01 Jan 1970 00:00:00 GMT" . CRLF;
     } else {
         $response .= "Expires: " . time2str($now + 3600) . CRLF
-                  .  "Cache-Control: max-age=3600" . CRLF;
+                  .  "Cache-Control: public, max-age=3600" . CRLF;
     }
     if ($lastmod) {
         $lastmod = $now if ($lastmod > $now); # HTTP 1.1, 14.29
