@@ -63,6 +63,12 @@
 								<div class="epg_subtitle"><?% subtitle %?></div>
 							<?% END %?>
 							<div class="epg_summary"><?% text %?></div>
+							<?% IF length %?>
+								<div class="epg_length">
+									<h4><?% gettext('Length') %?>:</h4>&nbsp;
+									<?% length %?>
+								</div>
+							<?% END %?>
 							<?% IF video %?>
 								<div class="epg_video">
 									<h4><?% gettext('Video tracks:') %?></h4>&nbsp;

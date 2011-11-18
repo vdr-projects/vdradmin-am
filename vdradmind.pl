@@ -5988,6 +5988,18 @@ sub rec_list {
                                  lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
                                  $a->{sse} <=> $b->{sse} } @recordings);
         }
+    } elsif ($CONFIG{REC_SORTBY} eq "length") {
+        if ($CONFIG{REC_DESC}) {
+            @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
+                                 $b->{lengthmin} <=> $a->{lengthmin} ||
+                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "")
+                               } @recordings);
+        } else {
+            @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
+                                 $a->{lengthmin} <=> $b->{lengthmin} ||
+                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "")
+                               } @recordings);
+        }
     }
     my $toggle_desc = ($CONFIG{REC_DESC} ? 0 : 1);
 
@@ -5999,9 +6011,11 @@ sub rec_list {
     my $vars = { recloop       => \@recordings,
                  sortbydateurl => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=date&amp;parent=$parent&amp;desc=" . (($CONFIG{REC_SORTBY} eq "date") ? $toggle_desc : $CONFIG{REC_DESC}),
                  sortbytimeurl => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=time&amp;parent=$parent&amp;desc=" . (($CONFIG{REC_SORTBY} eq "time") ? $toggle_desc : $CONFIG{REC_DESC}),
+                 sortbylengthurl => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=length&amp;parent=$parent&amp;desc=" . (($CONFIG{REC_SORTBY} eq "length") ? $toggle_desc : $CONFIG{REC_DESC}),
                  sortbynameurl => "$MyURL?aktion=rec_list&amp;parent=$parent&amp;sortby=name&amp;parent=$parent&amp;desc=" . (($CONFIG{REC_SORTBY} eq "name") ? $toggle_desc : $CONFIG{REC_DESC}),
                  sortbydate => ($CONFIG{REC_SORTBY} eq "date") ? 1 : 0,
                  sortbytime => ($CONFIG{REC_SORTBY} eq "time") ? 1 : 0,
+                 sortbylength => ($CONFIG{REC_SORTBY} eq "length") ? 1 : 0,
                  sortbyname => ($CONFIG{REC_SORTBY} eq "name") ? 1 : 0,
                  desc       => $CONFIG{REC_DESC} ? "desc" : "asc",
                  disk_total    => $total,
@@ -6128,6 +6142,7 @@ sub ParseRecordings {
                         isfolder     => 1,
                         date         => 0,
                         time         => 0,
+                        lengthmin    => 0,
                         infurl       => sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, $recording_id)
                      }
                 );
@@ -6159,6 +6174,13 @@ sub ParseRecordings {
             }
         }    # endif
 
+        my $lengthmin = 0;
+        if ($length =~ /^(\d+):(\d{1,2})$/) {
+            $lengthmin = $1 * 60 + $2;
+        } elsif ($length =~ /^\d+/) {
+            $lengthmin = $length;
+        }
+
         my $name_js = $name;
         $name_js =~ s/\'/\\\'/g;
         $name_js =~ s/\"/\&quot;/g;
@@ -6166,6 +6188,8 @@ sub ParseRecordings {
              {  sse => timelocal(undef, substr($time, 3, 2), substr($time, 0, 2), substr($date, 0, 2), (substr($date, 3, 2) - 1), $yearofrecording),
                 date          => $date,
                 time          => $time,
+                length        => $length,
+                lengthmin     => $lengthmin,
                 name          => CGI::escapeHTML($name),
                 name_js       => $name_js,
                 serie         => $serie,
@@ -6185,6 +6209,10 @@ sub ParseRecordings {
     }
 
     countRecordings(0);
+    for (@RECORDINGS) {
+        $_->{length} ||=
+            sprintf("%d:%02d", $_->{lengthmin} / 60, $_->{lengthmin} % 60);
+    }
 
     $CONFIG{CACHE_REC_LASTUPDATE} = time();
 }
@@ -6200,10 +6228,12 @@ sub countRecordings {
                 if ($folder) {
                     $folder->{date} += $_->{date};
                     $folder->{time} += $_->{time} if ($_->{time});
+                    $folder->{lengthmin} += $_->{lengthmin};
                 }
             } elsif ($folder) {
                 $folder->{date}++;
                 $folder->{time}++ if ($_->{new});
+                $folder->{lengthmin} += $_->{lengthmin};
             }
         }
     }
@@ -6214,12 +6244,17 @@ sub getRecInfo {
     my $ref = shift;
     my $rename = shift;
 
-    my ($i, $title);
+    my ($i, $length, $title);
     for (SendCMD("lstr")) {
-        ($i, undef, undef, $title) = split(/ +/, $_, 4);
+        if ($FEATURES{VDRVERSION} < 10721) {
+            ($i, undef, undef, $title) = split(/ +/, $_, 4);
+        } else {
+            ($i, undef, undef, $length, $title) = split(/ +/, $_, 5);
+        }
         last if ($id == $i);
     }
     chomp($title);
+    $length =~ s/\*+$//;
 
     my $vars;
     if ($FEATURES{VDRVERSION} >= 10325) {
@@ -6287,6 +6322,7 @@ sub getRecInfo {
                   id       => $id,
                   video    => $video,
                   audio    => $audio,
+                  length   => $length,
                   referer  => $ref || undef
         };
     } else {

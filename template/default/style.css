@@ -203,7 +203,8 @@ body.help .heading {
 .col_start,
 .col_stop,
 .col_date,
-.col_time {
+.col_time,
+.col_length {
 	padding-left: 3px;
 	padding-right: 3px;
 	white-space: nowrap;
@@ -405,14 +406,16 @@ body.help .heading {
 	display: block;
 }
 #prog_detail .epg_video h4,
-#prog_detail .epg_audio h4 {
+#prog_detail .epg_audio h4,
+#prog_detail .epg_length h4 {
 	margin: 0;
 	font-size: 10px;
 	font-weight: bold;
 	display: inline;
 }
 #prog_detail .epg_video h5,
-#prog_detail .epg_audio h5 {
+#prog_detail .epg_audio h5,
+#prog_detail .epg_length h5 {
 	margin-left: 1em;
 	display: inline;
 	font-size: 10px;
@@ -478,6 +481,10 @@ body.help .heading {
 .col_time {
 	width: 76px;
 	text-align: left;
+}
+.col_length {
+	width: 76px;
+	text-align: right;
 }
 .col_edit,
 .col_delete,

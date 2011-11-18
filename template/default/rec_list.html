@@ -74,6 +74,19 @@
 							</a>
 						</h2>
 					</td>
+					<?% IF features.VDRVERSION >= 10721 %?>
+					<td class="col_length <?% IF sortbylength %?>selected<?% END %?>">
+						<h2>
+							<a href="<?% sortbylengthurl %?>"><?% gettext('Length') %?>
+								<?% IF sortbylength %?>
+									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
+								<?% ELSE %?>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								<?% END %?>
+							</a>
+						</h2>
+					</td>
+					<?% END %?>
 					<td class="col_name <?% IF sortbyname %?>selected<?% END %?>">
 						<h2>
 							<a href="<?% sortbynameurl %?>"><?% gettext('Name') %?>
@@ -101,6 +114,11 @@
 						<span class="new"><?% gettext('New') %?></span>
 						<?% END %?>
 					</td>
+					<?% IF features.VDRVERSION >= 10721 %?>
+					<td class="col_length <?% IF rec.sortbylength %?>selected<?% END %?>">
+						<span class="length"><?% rec.length %?></span>
+					</td>
+					<?% END %?>
 					<td class="col_name <?% IF rec.sortbyname %?>selected<?% END %?>">
 						<?% IF rec.isfolder %?>
 							<a href="<?% rec.infurl %?>"><img align="middle" src="bilder/folder_video.png" border="0" alt="" />&nbsp;<?% rec.name %?></a>
