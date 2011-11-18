@@ -1276,8 +1276,8 @@ sub EPG_buildTree {
                 while($_ = shift @$DATA) {
                     if (/^E/) {
                         my ($garbish, $event_id, $time, $duration) = split(/[ \t]+/);
-                        my ($title, $subtitle, $summary, $vps, $video, $audio, @video_raw, @audio_raw);
-                        @video_raw = @audio_raw = ();
+                        my ($title, $subtitle, $summary, $vps, $video, $audio, $subs, @video_raw, @audio_raw, @subs_raw);
+                        @video_raw = @audio_raw = @subs_raw = ();
                         while($_ = shift @$DATA) {
                             # if(/^T (.*)/) { $title = $1;    $title =~ s/\|/<br \/>/sig }
                             # if(/^S (.*)/) { $subtitle = $1; $subtitle =~ s/\|/<br \/>/sig }
@@ -1298,6 +1298,12 @@ sub EPG_buildTree {
                                 $audio .= ", " if ($audio);
                                 $audio .= ($descr ? $descr . " (" . $lang . ")" : $lang);
                             }
+                            elsif (/^X 3 ([^ ]*) (.*)/) {
+                                push (@subs_raw, sprintf "X 3 $1 $2");
+                                my ($lang, $descr) = split(" ", $2, 2);
+                                $subs .= ", " if ($subs);
+                                $subs .= ($descr ? $descr . " (" . $lang . ")" : $lang);
+                            }
                             elsif (/^V (.*)/) { $vps  = $1; }
                             elsif (/^e/)      {
 
@@ -1317,8 +1323,10 @@ sub EPG_buildTree {
                                         event_id     => $event_id,
                                         video        => $video,
                                         audio        => $audio,
+                                        subs         => $subs,
                                         video_raw    => \@video_raw,
                                         audio_raw    => \@audio_raw,
+                                        subs_raw     => \@subs_raw,
                                      }
                                 );
                                 $id++;
@@ -6259,7 +6267,7 @@ sub getRecInfo {
     my $vars;
     if ($FEATURES{VDRVERSION} >= 10325) {
         $SVDRP->command("lstr $id");
-        my ($channel_name, $subtitle, $text, $video, $audio);
+        my ($channel_name, $subtitle, $text, $video, $audio, $subs);
         while ($_ = $SVDRP->readoneline) {
             if (/^C (.*)/) { $channel_name = get_name_from_uniqid($1); }
             #elsif (/^E (.*)/) { $epg = $1; }
@@ -6276,6 +6284,11 @@ sub getRecInfo {
                 my ($lang, $descr) = split(" ", $1, 2);
                 $audio .= ", " if ($audio);
                 $audio .= ($descr ? $descr. " (" . $lang . ")"  : $lang);
+            }
+            elsif(/^X 3 [^ ]* (.*)/) {
+                my ($lang, $descr) = split(" ", $1, 2);
+                $subs .= ", " if ($subs);
+                $subs .= ($descr ? $descr. " (" . $lang . ")"  : $lang);
             }
             #elsif (/^V (.*)/) { $vps = $1; }
         }
@@ -6322,6 +6335,7 @@ sub getRecInfo {
                   id       => $id,
                   video    => $video,
                   audio    => $audio,
+                  subs     => $subs,
                   length   => $length,
                   referer  => $ref || undef
         };

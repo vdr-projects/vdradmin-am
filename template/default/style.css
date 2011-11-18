@@ -407,7 +407,8 @@ body.help .heading {
 }
 #prog_detail .epg_video h4,
 #prog_detail .epg_audio h4,
-#prog_detail .epg_length h4 {
+#prog_detail .epg_length h4,
+#prog_detail .epg_subs h4 {
 	margin: 0;
 	font-size: 10px;
 	font-weight: bold;
@@ -415,7 +416,8 @@ body.help .heading {
 }
 #prog_detail .epg_video h5,
 #prog_detail .epg_audio h5,
-#prog_detail .epg_length h5 {
+#prog_detail .epg_length h5,
+#prog_detail .epg_subs h5 {
 	margin-left: 1em;
 	display: inline;
 	font-size: 10px;
