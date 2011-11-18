@@ -1,0 +1,6 @@
+((css-mode  . ((indent-tabs-mode  . t)
+               (css-indent-offset . 8)))
+ (html-mode . ((indent-tabs-mode  . t)
+               (sgml-basic-offset . 8)))
+ (js-mode   . ((indent-tabs-mode  . t)
+               (js-indent-level   . 8))))
