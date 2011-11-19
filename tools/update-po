@@ -7,7 +7,7 @@ if [ "$1" = "--check-only" ]; then
 	exit 0
 fi
 
-export MY_EMAIL="Andreas Mair <andreas@vdr-developer.org>"
+export MY_EMAIL="Andreas Mair <amair.sob@googlemail.com>"
 export VERSION="$(grep "^my \$VERSION = " vdradmind.pl | sed -e 's#.*\"\(.*\)\".*#\1#')"
 export PACKAGE="VDRAdmin-AM"
 

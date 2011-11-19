@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 # vim:et:sw=4:ts=4:
 #
-# VDRAdmin-AM 2005 - 2011 by Andreas Mair <mail@andreas.vdr-developer.org>
+# VDRAdmin-AM 2005 - 2011 by Andreas Mair <amair.sob@googlemail.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -338,7 +338,6 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         print("  -l [level] --log [level]       set log level for this session [0 - 7]\n");
         print("  -L [file]  --logfile [file]    set log file for this session\n");
         print("  -h         --help              this message\n");
-        print("\nReport bugs to <mail\@andreas.vdr-developer.org>.\n");
         exit(0);
     }
     if (/^(--nofork|-n)/) {
