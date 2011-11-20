@@ -26,7 +26,7 @@ require 5.004;
 
 use vars qw($PROCNAME);
 
-my $VERSION = "3.6.8";
+my $VERSION = "3.6.9";
 my $BASENAME;
 my $EXENAME;
 
