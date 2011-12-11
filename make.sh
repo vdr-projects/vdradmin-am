@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LANGS="cs de es fr fi it nl ru"
+LANGS="cs de es fr fi hu it nl ru"
 DIST_FILES="autotimer2searchtimer.pl ChangeLog COPYING CREDITS FAQ HISTORY INSTALL LGPL.txt README README.translators REQUIREMENTS contrib convert.pl install.sh lib locale make.sh template uninstall.sh vdradmind vdradmind.pl vdradmind.pl.1"
 INSTALL_SH=./install.sh
 TMPDIR=/tmp

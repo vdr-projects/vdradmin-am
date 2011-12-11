@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 if [ "$1" = "--check-only" ]; then
-	for LANG in cs de es fi fr it nl ru; do
+	for LANG in cs de es fi fr hu it nl ru; do
 		echo "$LANG: untranslated=$(msgattrib --untranslated po/$LANG.po | grep ^msgid | wc -l) fuzzy=$(msgattrib --fuzzy po/$LANG.po | grep ^msgid | wc -l)"
 	done
 	exit 0
@@ -26,7 +26,7 @@ rm tmp-*.pot
 popd
 
 
-for LANG in cs de es fi fr it nl ru; do
+for LANG in cs de es fi fr hu it nl ru; do
 		echo -n "$LANG: "
     if msgmerge --no-fuzzy-matching --no-wrap po/$LANG.po po/vdradmin.pot >temp.po ; then
         mv -f temp.po po/$LANG.po

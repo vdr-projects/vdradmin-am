@@ -96,7 +96,7 @@ use strict;
 
 my $SEARCH_FILES_IN_SYSTEM    = 0;
 my $VDR_MAX_SVDRP_LENGTH      = 10000;                        # validate this value
-my $SUPPORTED_LOCALE_PREFIXES = "^(cs|de|en|es|fi|fr|it|nl|ru)_";
+my $SUPPORTED_LOCALE_PREFIXES = "^(cs|de|en|es|fi|fr|hu|it|nl|ru)_";
 
 my $TOOL_AUTOTIMER = 0;
 my $TOOL_EPGSEARCH = 1;
