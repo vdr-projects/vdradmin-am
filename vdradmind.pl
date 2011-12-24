@@ -6438,7 +6438,11 @@ sub recRunCmd {
     my ($day,    $month, $hour, $minute, $newtitle, $c, $folder);
 
     for (SendCMD("lstr")) {
-        ($rec_id, $date, $time, $title) = split(/ +/, $_, 4);
+        if ($FEATURES{VDRVERSION} < 10721) {
+            ($rec_id, $date, $time, $title) = split(/ +/, $_, 4);
+        } else {
+            ($rec_id, $date, $time, undef, $title) = split(/ +/, $_, 5);
+        }
         last if ($rec_id == $id);
     }
 
