@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: VDRAdmin-AM-3.6.6\n"
 "Report-Msgid-Bugs-To: Andreas Mair <amair.sob@googlemail.com>\n"
 "POT-Creation-Date: 2011-12-11 09:03+0100\n"
-"PO-Revision-Date: 2011-11-18 23:42+0200\n"
-"Last-Translator: Ville Skyttä <ville.skytta@iki.fi>\n"
+"PO-Revision-Date: 2012-05-03 20:19+0100\n"
+"Last-Translator: Diego Pierotto <vdr-italian@tiscali.it>\n"
 "Language-Team: Italian <vdr-italian@tiscali.it>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -68,7 +68,7 @@ msgid "Italian:"
 msgstr "Italiano:"
 
 msgid "Hungarian:"
-msgstr ""
+msgstr "Ungherese:"
 
 msgid "Information"
 msgstr "Informazioni"
@@ -95,7 +95,7 @@ msgid "<a href=\"http://streamdev.vdr-developer.org/\" target=\"_blank\">Streamd
 msgstr "<a href=\"http://streamdev.vdr-developer.org/\" target=\"_blank\">Plugin Streamdev</a>"
 
 msgid "<a href=\"http://sourceforge.net/projects/xineliboutput/\" target=\"_blank\">Xineliboutput Plugin</a>"
-msgstr ""
+msgstr "<a href=\"http://sourceforge.net/projects/xineliboutput/\" target=\"_blank\">Plugin Xineliboutput</a>"
 
 msgid "Rename Recordings (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Liemikuutio Patch</a>)"
 msgstr "Rinomina registrazioni (<a href=\"http://www.saunalahti.fi/~rahrenbe/vdr/patches/\" target=\"_blank\">Patch di Liemikuutio</a>)"
@@ -413,7 +413,7 @@ msgid "HTTP Port of Streamdev (also possible 3000/ts):"
 msgstr "Porta HTTP di Streamdev (possibile anche 3000/ts):"
 
 msgid "HTTP Port of Xineliboutput (e.g. 37890):"
-msgstr ""
+msgstr "Porta HTTP di Xineliboutput (es. 37890):"
 
 msgid "Recordings Streaming:"
 msgstr "Trasmissione registrazioni:"
@@ -556,11 +556,21 @@ msgstr "Aggiungi nuova ricerca"
 msgid "Edit Search"
 msgstr "Modifica ricerca"
 
-msgid "Small search pattern.\\nDo you really want to use it?"
-msgstr "Valore piccola ricerca.\\nSei sicuro di usarla?"
+msgid ""
+"Small search pattern.\\n"
+"Do you really want to use it?"
+msgstr ""
+"Valore piccola ricerca.\\n"
+"Sei sicuro di usarla?"
 
-msgid "You didn't select at least one of\\ntitle, subtitle or description.\\nDo you really want to use this search?"
-msgstr "Non hai selezionato almeno uno tra\\ntitolo, sottotitolo o descrizione.\\nSei sicuro di usare questa ricerca?"
+msgid ""
+"You didn't select at least one of\\n"
+"title, subtitle or description.\\n"
+"Do you really want to use this search?"
+msgstr ""
+"Non hai selezionato almeno uno tra\\n"
+"titolo, sottotitolo o descrizione.\\n"
+"Sei sicuro di usare questa ricerca?"
 
 msgid "Hide results"
 msgstr "Nascondi risultati"
@@ -829,9 +839,8 @@ msgstr "La pagina che vuoi vedere alla prima connessione a VDRAdmin-AM."
 msgid "VDRAdmin-AM will load the given number of channels from VDR and present only those in any fields where channels can be selected. This also limits the EPG information VDRAdmin-AM will read so that you can use this to reduce VDRAdmin-AM's memory consumption and increase its performance. <strong>0</strong> turns this feature off and VDRAdmin-AM will use all available channels."
 msgstr "VDRAdmin-AM caricherà il numero di canali fornito da VDR e mostrerà solo quelli in qualunque campo dove i canali possano essere selezionati. Questo limita anche l'informazione EPG che VDRAdmin-AM leggerà in modo che tu possa usarla per ridurre l'uso di memoria di VDRAdmin-AM ed incrementare le sue performance. <strong>0</strong> disattiva questa opzione e VDRAdmin-AM userà tutti i canali disponibili."
 
-#, fuzzy
 msgid "Here you can specify subnets from which access to VDRAdmin-AM does not require logging in. For example: \"192.168.0.0/24\" will include any IP starting with \"192.168.0.\", \"192.168.0.123/32\" will only match \"192.168.0.123\". Multiple subnets can be specified by separating them with spaces or commas."
-msgstr "Qui puoi specificare un indirizzo IP o il range che può connettersi senza fornire informazioni di accesso. Per esempio: \"192.168.0.0/24\" includerà qualunque IP che comincia con \"192.168.0.\", \"192.168.0.123/32\" corrisponderà solo a \"192.168.0.123\"."
+msgstr "Qui puoi specificare le sotto reti per le quali VDRAdmin-AM non chiederà l'accesso. Per esempio: \"192.168.0.0/24\" includerà qualunque IP che comincia con \"192.168.0.\", \"192.168.0.123/32\" corrisponderà solo a \"192.168.0.123\". Possono essere specificate multiple sotto reti separate con spazi e virgole."
 
 msgid "Here you can set the localization VDRAdmin-AM should use."
 msgstr "Qui puoi impostare la lingua che VDRAdmin-AM dovrebbe usare."
@@ -1140,7 +1149,7 @@ msgid "edit"
 msgstr "modifica"
 
 msgid "Length"
-msgstr ""
+msgstr "Durata"
 
 msgid "Video tracks:"
 msgstr "Tracce video:"
@@ -1510,3 +1519,4 @@ msgstr "Timer"
 
 msgid "System default"
 msgstr "Predefinita di sistema"
+
