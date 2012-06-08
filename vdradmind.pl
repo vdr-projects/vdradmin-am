@@ -2185,7 +2185,7 @@ sub PackStatus {    #TODO: unused
         # (positive) int will remain, then shift the int 16 bits to the left and
         # add active  -- result is a 31 bit (always positive) int.
         # The 32nd bit is the minus sign, and due the (binary) smallest value
-        # is the (int) lowest possible number, we have to substract the lowest
+        # is the (int) lowest possible number, we have to subtract the lowest
         # value + 1 from the 31 bit value -- result is the signed 32 bit int equal
         # to the (unsigned) 32 bit int.
         return ($active | (($event_id & 0x7FFF) << 16)) - 0x80000000;
