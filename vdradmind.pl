@@ -614,7 +614,7 @@ my @TRUSTED_USER = (
     @GUEST_USER, qw(prog_detail_form prog_detail_aktion at_timer_edit at_timer_new at_timer_save at_timer_test at_timer_delete
       epgsearch_upds epgsearch_edit epgsearch_save epgsearch_save_template epgsearch_delete_template epgsearch_delete epgsearch_toggle timer_new_form timer_add timer_delete timer_toggle rec_delete rec_rename rec_edit
       config prog_switch rc_show rc_hitk grab_picture at_timer_toggle tv_show tv_switch
-      live_stream rec_stream rec_play rec_cut force_update vdr_cmds export_channels_m3u epgsearch_config epgsearch_bl_edit epgsearch_bl_save epgsearch_bl_delete)
+      live_stream rec_stream rec_stream_folder rec_play rec_cut force_update vdr_cmds export_channels_m3u epgsearch_config epgsearch_bl_edit epgsearch_bl_save epgsearch_bl_delete)
 );
 my $MyStreamBase = "./vdradmin.";
 
@@ -5119,6 +5119,69 @@ sub rec_stream {
     return (header("200", $CONFIG{REC_MIMETYPE}, $data));
 }
 
+
+sub rec_stream_folder {
+
+    # return prog_summary();
+
+    my $parent = $q->param("parent");
+    if (!$parent) {
+        $parent = 0;
+    } else {
+        $parent = uri_escape($parent);
+    }
+
+    ParseRecordings($parent);
+    my @recordings = @RECORDINGS;
+
+    # sort by date
+    @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
+                         lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
+                         $a->{sse} <=> $b->{sse} } @recordings);
+
+    my $folder_data;
+
+    for my $recording (@recordings) {
+
+        if (!$recording->{isfolder}  &&
+             $recording->{parent} eq $parent) {
+  
+            # inplace playlist
+            my ($id) = $recording->{recording_id};
+            my ($i, $title, $newtitle);
+            my $data;
+            my ($date, $time, $day, $month, $hour, $minute);
+        
+
+            $date = $recording->{date};
+            $time = $recording->{time};
+            $title = $recording->{name};
+
+            if (length($title) > 0) {
+                $title = CGI::unescape($parent) . "~" . $title;
+            }
+
+
+            chomp($title);
+            ($day,  $month)  = split(/\./, $date);
+            ($hour, $minute) = split(/:/,  $time);
+
+            # VFAT off
+            $data = findVideoFiles($minute, $hour, $day, $month, encode_RecTitle($title, 0));
+            unless ($data) {
+                # VFAT on
+                $data = findVideoFiles($minute, $hour, $day, $month, encode_RecTitle($title, 1));
+            }
+        
+            $data = dma_encode_rec_stream_url($data);
+            
+            $folder_data = $folder_data . $data . "\n";
+        }
+    }
+
+    return (header("200", $CONFIG{TV_MIMETYPE}, $folder_data, sprintf("vdradmin.%s", $CONFIG{TV_EXT}) ));
+}
+
 sub encode_RecTitle {
     my ($title, $use_vfat) = @_;
     my ($c, $i, $newtitle);
@@ -6046,6 +6109,7 @@ sub rec_list {
                  help_url      => HelpURL("rec_list"),
                  reccmds       => \@reccmds,
                  stream_rec_on => $CONFIG{ST_FUNC} && $CONFIG{ST_REC_ON},
+                 streamfolderurl => ($CONFIG{ST_FUNC} && $CONFIG{ST_REC_ON}) ? "$MyURL?aktion=rec_stream_folder&amp;parent=$parent" : undef,
                  referer       => "&amp;referer=$referer"
     };
     return showTemplate("rec_list.html", $vars);
@@ -6161,7 +6225,8 @@ sub ParseRecordings {
                         date         => 0,
                         time         => 0,
                         lengthmin    => 0,
-                        infurl       => sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, $recording_id)
+                        infurl       => sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, $recording_id),
+                        streamurl    => "$MyURL?aktion=rec_stream_folder&amp;parent=$recording_id"
                      }
                 );
             }

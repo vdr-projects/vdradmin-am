@@ -141,6 +141,10 @@
 							<?% IF rec.streamurl %?>
 								<span class="action stream"><a href="<?% rec.streamurl %?>"><img src="bilder/stream.png" alt="stream" title="<?% gettext('Stream') %?>" border="0" /></a></span>
 							<?% END %?>
+						<?% ELSE %?>
+							<?% IF rec.streamurl %?>
+								<span class="action stream"><a href="<?% rec.streamurl %?>"><img src="bilder/stream.png" alt="stream" title="<?% gettext('Stream') %?>" border="0" /></a></span>
+							<?% END %?>
 						<?% END %?>
 					</td>
 					<td class="col_checkbox">
@@ -164,6 +168,14 @@
 		<?% END %?>				
 						</select>
 						<input type="submit" class="submit" name="rec_runcmd" value="<?% gettext('Run') %?>" onclick="return confirm('<?% gettext('Really run this command?') %?>')" />
+					</td>
+	<?% END %?>
+	<?% IF streamfolderurl %?>
+					<td align="right">
+						<a href="<?% streamfolderurl %?>">
+							<?% gettext('stream all recordings') %?>
+							<img src="bilder/stream.png" alt="stream" title="<?% gettext('Stream') %?>" border="0" />
+						</a>
 					</td>
 	<?% END %?>
 					<td align="right">
