@@ -5077,6 +5077,16 @@ sub timer_delete {
     return (headerForward(RedirectToReferer("$MyURL?aktion=timer_list")));
 }
 
+sub encode_rec_stream_url {
+    my ($data) = @_;
+
+    if (substr($data, 0, 4) == "http") {
+        $data =~ s/#/%23/g;
+    }
+
+    return $data;
+}
+
 sub rec_stream {
     my ($id) = $q->param('id');
     my ($i, $title, $newtitle);
@@ -5104,6 +5114,7 @@ sub rec_stream {
             # VFAT on
             $data = findVideoFiles($minute, $hour, $day, $month, encode_RecTitle($title, 1));
         }
+        $data = encode_rec_stream_url($data);
     }
     return (header("200", $CONFIG{REC_MIMETYPE}, $data));
 }
