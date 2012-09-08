@@ -6053,11 +6053,13 @@ sub rec_list {
         if ($CONFIG{REC_DESC}) {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
                                  lc($b->{isfolder} ? $b->{name} : "") cmp lc($a->{isfolder} ? $a->{name} : "") ||
-                                 lc($b->{name}) cmp lc($a->{name}) } @recordings);
+                                 lc($b->{name}) cmp lc($a->{name}) ||
+                                 $b->{sse} <=> $a->{sse} } @recordings);
         } else {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
                                  lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
-                                 lc($a->{name}) cmp lc($b->{name}) } @recordings);
+                                 lc($a->{name}) cmp lc($b->{name}) ||
+                                 $a->{sse} <=> $b->{sse} } @recordings);
         }
     } elsif ($CONFIG{REC_SORTBY} eq "date") {
         if ($CONFIG{REC_DESC}) {
