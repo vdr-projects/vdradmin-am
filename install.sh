@@ -1,6 +1,6 @@
 #!/bin/bash
 # vim:noet:sw=4:ts=4:
-# Copyright (c) 2005-2011 Andreas Mair
+# Copyright (c) 2005-2014 Andreas Mair
 #
 #
 # Download and patchscript for VDRAdmin-AM
