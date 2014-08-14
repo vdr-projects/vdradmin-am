@@ -7,16 +7,16 @@
 # (based on install.sh Copyright (c) 2003 Frank (xpix) Herrmann)
 
 PATH=$PATH:/sbin:/bin:/usr/sbin:/usr/bin
-DESTDIR=${DESTDIR}
-LIBDIR=${LIBDIR:-$DESTDIR/usr/share/vdradmin}
-ETCDIR=${ETCDIR:-$DESTDIR/etc/vdradmin}
-DOCDIR=${DOCDIR:-$DESTDIR/usr/share/doc/vdradmin}
-BINDIR=${BINDIR:-$DESTDIR/usr/bin}
-LOCDIR=${LOCDIR:-$DESTDIR/usr/share/locale}
-MANDIR=${MANDIR:-$DESTDIR/usr/share/man}
-LOGDIR=${LOGDIR:-$DESTDIR/var/log/vdradmin}
-CACHEDIR=${CACHEDIR:-$DESTDIR/var/cache/vdradmin}
-PIDFILE=${PIDFILE:-$DESTDIR/var/run/vdradmin/vdradmind.pid}
+PREFIX=${PREFIX}
+LIBDIR=${LIBDIR:-$PREFIX/usr/share/vdradmin}
+ETCDIR=${ETCDIR:-$PREFIX/etc/vdradmin}
+DOCDIR=${DOCDIR:-$PREFIX/usr/share/doc/vdradmin}
+BINDIR=${BINDIR:-$PREFIX/usr/bin}
+LOCDIR=${LOCDIR:-$PREFIX/usr/share/locale}
+MANDIR=${MANDIR:-$PREFIX/usr/share/man}
+LOGDIR=${LOGDIR:-$PREFIX/var/log/vdradmin}
+CACHEDIR=${CACHEDIR:-$PREFIX/var/cache/vdradmin}
+PIDFILE=${PIDFILE:-$PREFIX/var/run/vdradmin/vdradmind.pid}
 VIDEODIR=${VIDEODIR:-/video}
 EPGIMAGES=${EPGIMAGES:-$VIDEODIR/epgimages}
 VDRCONF=${VDRCONF:-$VIDEODIR}
