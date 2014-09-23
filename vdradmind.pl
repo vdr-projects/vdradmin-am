@@ -203,6 +203,7 @@ $CONFIG{ST_STREAMDEV_HOST} = ""; # streamdev/xineliboutput host
 $CONFIG{ST_STREAMDEV_PORT} = 3000;
 $CONFIG{ST_XINELIB_PORT}   = 37890;
 $CONFIG{ST_VIDEODIR}       = "";
+$CONFIG{ST_DIRECT_LINKS_ON} = 0;
 
 #
 $CONFIG{EPG_PRUNE}     = 0;
@@ -5313,18 +5314,23 @@ sub live_stream {
         $url = URI->new("http://$CONFIG{VDR_HOST}");
     }
     if ($FEATURES{STREAMDEV}) {
-        $url->port($CONFIG{ST_STREAMDEV_PORT});
-        $url->path($channel);
+        my ($port, $rest) = split(/\//, $CONFIG{ST_STREAMDEV_PORT}, 2);
+        $url->port($port);
+        $url->path($rest . "/" . $channel);
     } elsif ($FEATURES{XINELIB}) {
         $url->port($CONFIG{ST_XINELIB_PORT});
         # No channel support in xineliboutput URLs, need to switch here
         SendCMD("chan $channel") if $channel;
     }
 
-    my $data = "";
-    $data .= "#EXTINF:0,$progname\n" if ($progname);
-    $data .= "$url\n";
-    return (header("200", $CONFIG{TV_MIMETYPE}, $data));
+    if ($CONFIG{ST_DIRECT_LINKS_ON} && $FEATURES{STREAMDEV}) {
+        return headerForward($url);
+    } else {
+        my $data = "";
+        $data .= "#EXTINF:0,$progname\n" if ($progname);
+        $data .= "$url\n";
+        return (header("200", $CONFIG{TV_MIMETYPE}, $data));
+    }
 }
 
 #############################################################################
