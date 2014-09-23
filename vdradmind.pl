@@ -109,6 +109,8 @@ my $CHAN_FULL   = 0;
 my $CHAN_WANTED = 1;
 my $CHAN_TV     = 2;
 my $CHAN_RADIO  = 3;
+# Channel groups start with this number (to be sorted like strings)
+my $CHAN_GROUPS = 40;
 
 sub true ()           { 1 }
 sub false ()          { 0 }
@@ -935,11 +937,31 @@ sub MHz {
 sub ChanTree { #TODO? save channel in each list as reference
     undef(%CHAN);
     my (@CHANNELS_FULL, @CHANNELS_WANTED, @CHANNELS_TV, @CHANNELS_RADIO);
-    $SVDRP->command("lstc");
+    my $group_name = "";
+    my $group_number = $CHAN_GROUPS - 1;
+    if (!$FEATURES{VDRVERSION}) {
+        # first connection - have to get version
+        $SVDRP->command("help");
+        $SVDRP->readresponse;
+    }
+    my $use_groups = ($FEATURES{VDRVERSION} >= 10600);
+    if ($use_groups) {
+        $SVDRP->command("lstc :groups");
+    } else {
+        $SVDRP->command("lstc");
+    }
     my ($DATA) = $SVDRP->readresponse;
     while ($_ = shift @$DATA) {
         chomp;
         my ($vdr_id, $temp) = split(/ /, $_, 2);
+        if ($use_groups && $temp =~ /^:(.*)/) {
+            # :group_name
+            $group_name = $1;
+            $group_number += 1;
+            $CHAN{$group_number}->{title}    = $group_name;
+            $CHAN{$group_number}->{channels} = [];
+            next;
+        }
         my ($name, $frequency, $polarization, $source, $symbolrate, $vpid, $apid, $tpid, $ca, $service_id, $nid, $tid, $rid) = split(/\:/, $temp);
         $name =~ /(^[^,;]*).*/;    #TODO?
         $name = $1;
@@ -1026,6 +1048,26 @@ sub ChanTree { #TODO? save channel in each list as reference
                    tid          => $tid,
                    rid          => $rid,
                    uniq_id      => $uniq_id
+                 }
+            );
+        }
+        if ($use_groups && $group_name) {
+            push(@{$CHAN{$group_number}->{channels}},
+                 {  vdr_id       => $vdr_id,
+                    name         => $name,
+                    frequency    => MHz($frequency),
+                    polarization => $polarization,
+                    source       => $source,
+                    symbolrate   => $symbolrate,
+                    vpid         => $vpid,
+                    apid         => $apid,
+                    tpid         => $tpid,
+                    ca           => $ca,
+                    service_id   => $service_id,
+                    nid          => $nid,
+                    tid          => $tid,
+                    rid          => $rid,
+                    uniq_id      => $uniq_id
                  }
             );
         }
