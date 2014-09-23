@@ -1044,6 +1044,11 @@ sub ChanTree { #TODO? save channel in each list as reference
         $CHAN{$CHAN_RADIO}->{title}    = gettext('Radio channels');
         $CHAN{$CHAN_RADIO}->{channels} = \@CHANNELS_RADIO;
     }
+
+    # Sort channel lists by channel name
+    foreach my $idx (keys(%CHAN)) {
+        @{$CHAN{$idx}->{channels}} = sort {$a->{name} cmp $b->{name}} @{$CHAN{$idx}->{channels}}
+    }
 }
 
 sub getChannelGroups {
