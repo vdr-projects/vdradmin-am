@@ -69,6 +69,7 @@ use Time::Local qw(timelocal);
 use POSIX qw(:sys_wait_h strftime mktime locale_h);
 use MIME::Base64 ();
 use File::Temp ();
+use File::Find ();
 use URI ();
 use URI::Escape qw(uri_escape);
 
@@ -5269,10 +5270,18 @@ sub findVideoFiles {
     my $data;
     $title =~ s/ /_/g;
     $title =~ s/~/\//g;
-    Log(LOG_DEBUG, "[REC] rec_stream: find $CONFIG{VIDEODIR}/ -follow -regex \"$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\.\[0-9\]+\[.-\]\[0-9\]+\\.rec/\\(...\\.vdr\\|.....\\.ts\\)\"");
-    my @files = `find $CONFIG{VIDEODIR}/ -follow -regex "$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\.\[0-9\]+\[.-\]\[0-9\]+\\.rec/\\(...\\.vdr\\|.....\\.ts\\)" | sort -r`;
+    $title = quotemeta $title;
 
-    foreach (@files) {
+    my $re_compiled = qr"$CONFIG{VIDEODIR}/$title\_*/(_/)?\d{4}-$month-$day\.$hour[.:]$minute\.\d+[-.]\d+\.rec/\d{3}(\.vdr|\d{2}\.ts)";
+
+    sub find_files {
+        my ($dir, $regex) = @_;
+        my @arr = ();
+        File::Find::find({ wanted => sub {push(@arr, $File::Find::name) if $File::Find::name =~ $regex}, follow => 1, no_chdir => 1}, $dir);
+        return @arr;
+    }
+    
+    foreach (find_files($CONFIG{VIDEODIR}, $re_compiled)) {
         chomp;
         Log(LOG_DEBUG, "[REC] findVideoFiles: found ($_)\n");
         $_ =~ s/$CONFIG{VIDEODIR}/$CONFIG{ST_VIDEODIR}/;
