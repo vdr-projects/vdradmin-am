@@ -160,6 +160,7 @@ $CONFIG{PASSWORD}       = "linvdr";
 $CONFIG{GUEST_ACCOUNT}  = 0;
 $CONFIG{USERNAME_GUEST} = "guest";
 $CONFIG{PASSWORD_GUEST} = "guest";
+$CONFIG{LOCAL_NET_ONLY}  = 0;
 
 #
 $CONFIG{ZEITRAHMEN} = 1;
@@ -660,6 +661,11 @@ while (true) {
     }
 
     my $peer        = $Client->peerhost;
+    if ($CONFIG{LOCAL_NET_ONLY} && !subnetcheck($peer, $CONFIG{LOCAL_NET})) {
+        close($Client);
+        next;
+    }
+    
     my @Request     = ParseRequest($Client);
     my $raw_request = $Request[0];
 

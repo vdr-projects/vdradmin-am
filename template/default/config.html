@@ -155,6 +155,13 @@
 				<td class="col_label"><h5><?% gettext('Guest Password:') %?></h5></td>
 				<td class="col_value"><input type="password" name="PASSWORD_GUEST" value="<?% config.PASSWORD_GUEST | html %?>" size="12" /></td>
 			</tr>
+			<tr class="row_even">
+				<td class="col_label"><h5><?% gettext('Only allow connections from local net:') %?></h5></td>
+				<td class="col_value">
+					<input type="radio" name="LOCAL_NET_ONLY" value="1" id="local_net_only_yes" <?% IF config.LOCAL_NET_ONLY %?>checked="checked"<?% END %?> /><label for="guest_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="LOCAL_NET_ONLY" value="0" id="local_net_only_no" <?% UNLESS config.LOCAL_NET_ONLY %?>checked="checked"<?% END %?> /><label for="guest_no"><?% gettext('No') %?></label>
+				</td>
+			</tr>
 		</table>
 
 		<table border="0" cellspacing="0" cellpadding="0" class="group">
