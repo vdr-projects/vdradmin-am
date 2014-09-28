@@ -1270,6 +1270,17 @@ sub rtrim($)
     return $string;
 }
 
+# quotemeta() for $MY_ENCODING byte strings (with zero utf8 flag)
+sub my_quotemeta
+{
+    my $str = shift;
+    if ($can_use_encode) {
+        $str = Encode::decode($MY_ENCODING, $str);
+        return Encode::encode($MY_ENCODING, quotemeta($str));
+    } else {
+        return quotemeta($str);
+    }
+}
 #############################################################################
 # EPG functions
 #############################################################################
@@ -4083,7 +4094,7 @@ sub prog_detail {
                  stop         => my_strftime("%H:%M", $stop),
                  text         => $displaytext ? $displaytext : undef,
                  date         => $title ? my_strftime("%A, %x", $start) : undef,
-                 find_title   => $title ? uri_escape("/^" . quotemeta($title . "~" . ($subtitle ? $subtitle : "") . "~") . "/i") : undef,
+                 find_title   => $title ? uri_escape("/^" . my_quotemeta($title . "~" . ($subtitle ? $subtitle : "") . "~") . "/i") : undef,
                  srch1_url    => $imdb_url,
                  srch1_title  => $imdb_url ? gettext($CONFIG{SRCH1_TITLE}) : undef,
                  srch2_url    => $srch2_url,
@@ -4350,7 +4361,7 @@ sub prog_list {
                 recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
                 infurl   => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
                 editurl  => sprintf("%s?aktion=prog_detail_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
-                find_title => uri_escape("/^" . quotemeta($event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~") . "/i"),
+                find_title => uri_escape("/^" . my_quotemeta($event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~") . "/i"),
                 srch1_url    => $imdb_url,
                 srch1_title  => $imdb_url ? gettext($CONFIG{SRCH1_TITLE}) : undef,
                 srch2_url    => $srch2_url,
@@ -4514,7 +4525,7 @@ sub prog_list2 {
                             recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
                             infurl   => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
                             editurl  => sprintf("%s?aktion=prog_detail_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
-                            find_title => uri_escape("/^" . quotemeta($event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~") . "/i"),
+                            find_title => uri_escape("/^" . my_quotemeta($event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~") . "/i"),
                             srch1_url    => $imdb_url,
                             srch1_title  => $imdb_url ? gettext($CONFIG{SRCH1_TITLE}) : undef,
                             srch2_url    => $srch2_url,
@@ -5853,13 +5864,45 @@ sub prog_summary {
     my $event_time = getStartTime($time);
 
     my $pattern;
-    my $mode;
+    my $is_regex = 0;
+    my @search_words = ();
     if ($search) {
-        if ($search =~ /^\/(.*)\/(i?)$/) {
+        $pattern = $search;
+        $pattern = Encode::decode($MY_ENCODING, $pattern) if $can_use_encode;
+        if ($pattern =~ /^\/(.*)\/(i?)$/) {
             $pattern = $1;
-            $mode    = $2;
+            my $mode = $2;
+            $is_regex = 1;
+            $pattern = ($mode eq "i")? qr/$pattern/i : qr/$pattern/;
         } else {
-            $search =~ s/([\+\?\.\*\^\$\(\)\[\]\{\}\|\\])/\\$1/g;
+            for my $word (split(/ +/, $pattern)) {
+                if ($word) {
+                    if ($can_use_encode) {
+                        # case-insensitive search for 'abc' from fastest to slowest:
+                        # (?>a|A)(?>b|B)(?>c|C) on byte strings
+                        # [aA][bB][cC] on unicode strings
+                        # substr() + uc()/lc() on unicode strings
+                        # /abc/i on unicode strings
+                        my @pat = ();
+                        for my $ch (split(//, quotemeta($word))) {
+                            if (uc($ch) ne lc($ch)) {
+                                push(@pat, "(?>");
+                                push(@pat, lc($ch));
+                                push(@pat, "|");
+                                push(@pat, uc($ch));
+                                push(@pat, ")");
+                            } else {
+                                push(@pat, $ch);
+                            }
+                        }
+                        my $word_pattern = Encode::encode($MY_ENCODING, join("", @pat));
+                        push(@search_words, qr/$word_pattern/);
+                    } else {
+                        my $word_pattern = quotemeta($word);
+                        push(@search_words, qr/$word_pattern/i);
+                    }
+                }
+            }
         }
     }
 
@@ -5874,33 +5917,21 @@ sub prog_summary {
                     next if($next && $event_time >= $event->{start});
                 } else {
                     my ($found);
-                    if ($pattern) {
-
+                    if ($is_regex) {
                         # We have a RegExp
                         next if (!defined($pattern));
-                        next if (!length($pattern));
                         my $SearchStr = $event->{title} . "~" . ($event->{subtitle} || "") . "~" . ($event->{summary} || "");
+                        $SearchStr = Encode::decode($MY_ENCODING, $SearchStr) if $can_use_encode;
+                        $found = ($SearchStr =~ /$pattern/);
 
-                        # Shall we search case insensitive?
-                        if (($mode eq "i") && ($SearchStr !~ /$pattern/i)) {
-                            next;
-                        } elsif (($mode ne "i") && ($SearchStr !~ /$pattern/)) {
-                            next;
-                        } else {
-                            $found = 1;
-                        }
                     } else {
-                        next if (!length($search));
-                        for my $word (split(/ +/, $search)) {
-                            $found = 0;
-                            for my $section (qw(title subtitle summary)) {
-                                next unless ($event->{$section});
-                                if ($event->{$section} =~ /$word/i) {
-                                    $found = 1;
-                                    last;
-                                }
+                        $found = 1;
+                        my $SearchStr = join(" ", $event->{title}, ($event->{subtitle} || ""), ($event->{summary} || ""));
+                        for my $pat (@search_words) {
+                            if ($SearchStr !~ /$pat/) {
+                                $found = 0;
+                                last;
                             }
-                            last unless ($found);
                         }
                     }
                     next unless ($found);
@@ -5967,7 +5998,7 @@ sub prog_summary {
                        infurl => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
                        editurl    => sprintf("%s?aktion=prog_detail_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
                        recurl     => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
-                       find_title => uri_escape("/^" . quotemeta($event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~") . "/i"),
+                       find_title => uri_escape("/^" . my_quotemeta($event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~") . "/i"),
                        srch1_url   => $imdb_url,
                        srch1_title => $imdb_url ? gettext($CONFIG{SRCH1_TITLE}) : undef,
                        srch2_url   => $srch2_url,
