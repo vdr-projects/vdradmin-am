@@ -794,7 +794,8 @@ sub check_permissions {
     check_rw_dir($ETCDIR) or $rc = 0;
     check_rw_dir($CERTSDIR) if ($UseSSL);
     check_rw_dir($TEMPLATECACHE) or $rc = 0;
-    check_rw_dir($LOGDIR) or $rc = 0;
+    # Don't check permissions when logging to syslog
+    !$LOGFILE or $LOGFILE eq "syslog" or check_rw_dir($LOGDIR) or $rc = 0;
     check_rw_file($PIDFILE) or $rc = 0 if $DAEMON;
     check_rw_file($CONFFILE) or $rc = 0;
 
