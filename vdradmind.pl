@@ -4159,9 +4159,9 @@ sub prog_detail_aktion {
         my $channel_id  = get_channelid_from_vdrid($vdr_id);
         my $start       = $q->param("start");
         my $duration    = $q->param("duration");
-        my $title       = CGI::unescapeHTML($q->param("title"));
-        my $subtitle    = CGI::unescapeHTML($q->param("subtitle"));
-        my $description = CGI::unescapeHTML($q->param("description"));
+        my $title       = CGI::unescapeHTML(scalar $q->param("title"));
+        my $subtitle    = CGI::unescapeHTML(scalar $q->param("subtitle"));
+        my $description = CGI::unescapeHTML(scalar $q->param("description"));
         my $vps         = $q->param("vps");
         my $table_id    = 0;    # must be zero for external epg data
 
@@ -5115,7 +5115,7 @@ sub timer_add {
 }
 
 sub timer_delete {
-    my ($timer_id) = $q->param('timer_id');
+    my $timer_id = $q->param('timer_id');
     if ($timer_id) {
         my ($result) = SendCMD("delt $timer_id");
         if ($result =~ /Timer "$timer_id" is recording/i) {
@@ -5155,7 +5155,7 @@ sub encode_rec_stream_url {
 }
 
 sub rec_stream {
-    my ($id) = $q->param('id');
+    my $id = $q->param('id');
     my ($i, $title, $newtitle);
     my $data;
     my ($date, $time, $day, $month, $hour, $minute);
@@ -5771,7 +5771,7 @@ sub prog_timeline {
             $border -= $border % 1800;
         }
     }
-    my $event_time = getStartTime($q->param("time"), undef, $border);
+    my $event_time = getStartTime(scalar $q->param("time"), undef, $border);
     my $event_time_to;
 
     # calculate start time of the 30 min interval to avoid gaps at the beginning
@@ -6569,13 +6569,13 @@ sub getRecInfo {
 }
 
 sub rec_detail {
-    my $vars = getRecInfo($q->param('id'));
+    my $vars = getRecInfo(scalar $q->param('id'));
 
     return showTemplate("prog_detail.html", $vars);
 }
 
 sub rec_delete {
-    my ($id) = $q->param('id');
+    my $id = $q->param('id');
 
     if ($q->param("rec_delete")) {
         if ($id) {
@@ -6664,13 +6664,13 @@ sub rec_edit {
     # determine referer (redirect to where we come from)
     my $ref = getReferer();
 
-    my $vars = getRecInfo($q->param("id"), $ref ? Encode_Referer($ref) : undef, "renr");
+    my $vars = getRecInfo(scalar $q->param("id"), $ref ? Encode_Referer($ref) : undef, "renr");
     return showTemplate("rec_edit.html", $vars);
 }
 
 sub rec_rename {
-    my ($id) = $q->param('id');
-    my ($nn) = $q->param('nn');
+    my $id = $q->param('id');
+    my $nn = $q->param('nn');
     if ($id && $q->param("save")) {
         SendCMD("$FEATURES{REC_RENAME} $id $nn");
         CloseSocket();
@@ -7086,7 +7086,7 @@ sub run_svdrpcmd {
     return unless ($id);
     my $counter = 1;
     my @output;
-    for (SendCMD($q->param("svdrp_cmd"))) {
+    for (SendCMD(scalar $q->param("svdrp_cmd"))) {
         push(@output, { line => $_ });
         last if ($max_lines > 0 && $counter >= $max_lines);
         $counter++;
