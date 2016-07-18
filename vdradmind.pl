@@ -329,7 +329,7 @@ my ($UseSSL, $UseIPv6);
 my $DAEMON = 1;
 for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
     $_ = $ARGV[$i];
-    if (/^(-h|--help)/) {
+    if (/^(-h|--help)$/) {
         $DAEMON = 0;
         print("Usage $EXENAME [OPTION]...\n");
         print("A perl client for the Linux Video Disk Recorder.\n\n");
@@ -345,11 +345,11 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         print("  -h         --help              this message\n");
         exit(0);
     }
-    if (/^(--nofork|-n)/) {
+    if (/^(--nofork|-n)$/) {
         $DAEMON = 0;
         next;
     }
-    if (/^(--cfgdir|-d)/) {
+    if (/^(--cfgdir|-d)$/) {
         $ETCDIR        = $ARGV[ ++$i ];
         $CONFFILE      = "${ETCDIR}/vdradmind.conf";
         $AT_FILENAME   = "${ETCDIR}/vdradmind.at";
@@ -358,7 +358,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         $USER_CSS      = "${ETCDIR}/user.css";
         next;
     }
-    if (/^(--config|-c)/) {
+    if (/^(--config|-c)$/) {
         $DAEMON = 0;
         if (-e $CONFFILE) {
             ReadConfig();
@@ -386,7 +386,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         print(gettext("Config file written successfully.") . "\n");
         exit(0);
     }
-    if (/^(--kill|-k)/) {
+    if (/^(--kill|-k)$/) {
         $DAEMON = 0;
         exit(1) unless (-e $PIDFILE);
         my $pid = getPID($PIDFILE);
@@ -396,28 +396,28 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         }
         exit($killed > 0 ? 0 : 1);
     }
-    if (/^(--pid|-p)/) {
+    if (/^(--pid|-p)$/) {
         $PIDFILE = $ARGV[ ++$i ];
         next;
     }
-    if (/^(--ipv6-all)/) {
+    if (/^(--ipv6-all)$/) {
         $UseIPv6 = 2;
         next;
     }
-    if (/^(--ipv6|-6)/) {
+    if (/^(--ipv6|-6)$/) {
         $UseIPv6 = 1;
         next;
     }
-    if (/^(--ssl|-s)/) {
+    if (/^(--ssl|-s)$/) {
         $UseSSL = 1;
         next;
     }
-    if (/^(--log|-l)/) {
+    if (/^(--log|-l)$/) {
         $LOGLEVEL = $ARGV[ ++$i ];
         $LOGGING = 1;
         next;
     }
-    if (/^(--logfile|-L)/) {
+    if (/^(--logfile|-L)$/) {
         $LOGFILE = $ARGV[ ++$i ];
         if ($LOGFILE =~ m|/|) {
             ($LOGDIR, $LOGFILE) = $LOGFILE =~ m|^(.+)/([^/]*)$|;
@@ -427,7 +427,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         $LOGGING = 1;
         next;
     }
-    if (/^(--displaycall|-i)/) {
+    if (/^(--displaycall|-i)$/) {
         $DAEMON = 0;
         for (my $z = 0 ; $z < 5 ; $z++) {
             DisplayMessage($ARGV[ $i + 1 ]);
@@ -436,13 +436,13 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         CloseSocket();
         exit(0);
     }
-    if (/^(--message|-m)/) {
+    if (/^(--message|-m)$/) {
         $DAEMON = 0;
         DisplayMessage($ARGV[ $i + 1 ]);
         CloseSocket();
         exit(0);
     }
-    if (/^-u/) {
+    if (/^-u$/) {
 
         # Don't use user.css
         $UserCSS = undef;
