@@ -3579,6 +3579,7 @@ sub LoadTranslation {
     else {
         chomp($MY_ENCODING = `locale charmap`);
     }
+    $MY_ENCODING = "UTF-8" unless ($MY_ENCODING);
     bind_textdomain_codeset("vdradmin", $MY_ENCODING) if($can_use_bind_textdomain_codeset);
     CGI::charset($MY_ENCODING);
 }
