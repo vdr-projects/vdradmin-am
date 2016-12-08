@@ -72,6 +72,7 @@ use File::Temp ();
 use File::Find ();
 use URI ();
 use URI::Escape qw(uri_escape);
+use HTTP::Tiny;
 
 my $can_use_encode = 1;
 $can_use_encode = undef unless (eval { require Encode });
@@ -206,6 +207,7 @@ $CONFIG{ST_STREAMDEV_PORT} = 3000;
 $CONFIG{ST_XINELIB_PORT}   = 37890;
 $CONFIG{ST_VIDEODIR}       = "";
 $CONFIG{ST_DIRECT_LINKS_ON} = 0;
+$CONFIG{ST_REC_STREAMDEV} = 1;
 
 #
 $CONFIG{EPG_PRUNE}     = 0;
@@ -665,7 +667,7 @@ while (true) {
         close($Client);
         next;
     }
-    
+
     my @Request     = ParseRequest($Client);
     my $raw_request = $Request[0];
 
@@ -4656,7 +4658,7 @@ sub timer_list {
         $timer->{sortfield} = $timer->{cdesc} . $timer->{startsse};
         $timer->{infurl}    = $timer->{event_id} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $timer->{event_id}, $timer->{vdr_id}, $myself) : undef,
 
-          $timer->{start}   = my_strftime("%H:%M", $timer->{start});
+        $timer->{start}   = my_strftime("%H:%M", $timer->{start});
         $timer->{stop}      = my_strftime("%H:%M", $timer->{stop});
         $timer->{sortbyactive}  = 1 if ($CONFIG{TM_SORTBY} eq "active");
         $timer->{sortbychannel} = 1 if ($CONFIG{TM_SORTBY} eq "channel");
@@ -5145,22 +5147,42 @@ sub timer_delete {
     return (headerForward(RedirectToReferer("$MyURL?aktion=timer_list")));
 }
 
-sub encode_rec_stream_url {
-    my ($data) = @_;
+sub getRecordingsPlaylist {
+    my @playlist = ();
 
-    if (substr($data, 0, 4) == "http") {
-        $data =~ s/#/%23/g;
+    my $response = HTTP::Tiny->new()->get(streamdevURI()->as_string() . "/recordings.m3u");
+
+    if ($response->{success}) {
+        my $content_charset = "UTF-8";
+        # Content-Type: audio/x-mpegurl; charset=UTF-8
+        if ($response->{headers}->{'content-type'}
+                && $response->{headers}->{'content-type'} =~ /[ ;]+charset=([^ ;]+)/) {
+            $content_charset = $1;
+        }
+        Encode::from_to($response->{content}, $content_charset, $MY_ENCODING);
+        my $extinf = 1;
+        my $rec;
+        foreach my $line (split(/[ \r]*\n/, $response->{content})) {
+            if ($extinf && $line =~ /^#EXTINF:-1,(\d+)\s+(\d\d\.\d\d\.\d\d)\s+(\d\d:\d\d)\s+(.*)$/) {
+                $extinf = 0;
+                $rec = {id => $1, date => $2, time => $3, title => $4, url => undef};
+            }
+            if (!$extinf && $line =~ /^http/) {
+                $extinf = 1;
+                $rec->{url} = $line;
+                push(@playlist, $rec);
+                $rec = undef;
+            }
+        }
     }
-
-    return $data;
+    return @playlist;
 }
 
 sub rec_stream {
     my $id = $q->param('id');
     my ($i, $title, $newtitle);
     my $data;
-    my ($date, $time, $day, $month, $hour, $minute);
-    my $c;
+    my ($date, $time);
 
     for (SendCMD("lstr")) {
         if ($FEATURES{VDRVERSION} < 10721) {
@@ -5172,17 +5194,30 @@ sub rec_stream {
     }
     $time = substr($time, 0, 5);    # needed for wareagel-patch
     if ($id == $i) {
-        chomp($title);
-        ($day,  $month)  = split(/\./, $date);
-        ($hour, $minute) = split(/:/,  $time);
-
-        # VFAT off
-        $data = findVideoFiles($minute, $hour, $day, $month, encode_RecTitle($title, 0));
-        unless ($data) {
+        my @urls = ();
+        $title =~ s/[ ~]+$//;
+        if ($CONFIG{ST_REC_STREAMDEV} && $FEATURES{STREAMDEV}) {
+            foreach my $r (getRecordingsPlaylist()) {
+                if ($date eq $r->{date} && $time eq $r->{time} && $title eq $r->{title}) {
+                    push (@urls, $r->{url});
+                }
+            }
+            if ($CONFIG{ST_DIRECT_LINKS_ON} && @urls) {
+                return headerForward($urls[0]->{url});
+            }
+        } else {
+            # VFAT off
+            @urls = findVideoFiles($date, $time, encode_RecTitle($title, 0));
             # VFAT on
-            $data = findVideoFiles($minute, $hour, $day, $month, encode_RecTitle($title, 1));
+            @urls = findVideoFiles($date, $time, encode_RecTitle($title, 1)) unless (@urls);
         }
-        $data = encode_rec_stream_url($data);
+        if (@urls) {
+            $data = "#EXTM3U\n";
+            foreach my $url (@urls) {
+                $data .= sprintf("#EXTINF:-1,%s %s  %s\n%s\n",
+                                $date, $time, $title, $url);
+            }
+        }
     }
     return (header("200", $CONFIG{REC_MIMETYPE}, $data));
 }
@@ -5208,42 +5243,49 @@ sub rec_stream_folder {
                          $a->{sse} <=> $b->{sse} } @recordings);
 
     my $folder_data;
+    my @streamdev_recordings;
+
+    if ($CONFIG{ST_REC_STREAMDEV} && $FEATURES{STREAMDEV}) {
+        @streamdev_recordings = getRecordingsPlaylist();
+    }
 
     for my $recording (@recordings) {
 
         if (!$recording->{isfolder}  &&
              $recording->{parent} eq $parent) {
-  
+
             # inplace playlist
             my ($id) = $recording->{recording_id};
             my ($i, $title, $newtitle);
-            my $data;
-            my ($date, $time, $day, $month, $hour, $minute);
-        
+            my ($date, $time);
 
             $date = $recording->{date};
             $time = $recording->{time};
             $title = $recording->{name};
 
-            if (length($title) > 0) {
-                $title = CGI::unescape($parent) . "~" . $title;
-            }
-
-
-            chomp($title);
-            ($day,  $month)  = split(/\./, $date);
-            ($hour, $minute) = split(/:/,  $time);
-
-            # VFAT off
-            $data = findVideoFiles($minute, $hour, $day, $month, encode_RecTitle($title, 0));
-            unless ($data) {
+            my @urls = ();
+            $title = CGI::unescape($parent) . "~" . $title if ($parent);
+            $title =~ s/[ ~]+$//;
+            if ($CONFIG{ST_REC_STREAMDEV} && $FEATURES{STREAMDEV}) {
+                #$title = $parent_orig if ($parent_orig && !$title);
+                foreach my $r (@streamdev_recordings) {
+                    if ($date eq $r->{date} && $time eq $r->{time} && $title eq $r->{title}) {
+                        push (@urls, $r->{url});
+                    }
+                }
+            } else {
+                # VFAT off
+                @urls = findVideoFiles($date, $time, encode_RecTitle($title, 0));
                 # VFAT on
-                $data = findVideoFiles($minute, $hour, $day, $month, encode_RecTitle($title, 1));
+                @urls = findVideoFiles($date, $time, encode_RecTitle($title, 1)) unless (@urls);
             }
-        
-            $data = dma_encode_rec_stream_url($data);
-            
-            $folder_data = $folder_data . $data . "\n";
+            if (@urls) {
+                $folder_data = "#EXTM3U\n" unless ($folder_data);
+                foreach my $url (@urls) {
+                    $folder_data .= sprintf("#EXTINF:-1,%s %s  %s\n%s\n",
+                                    $date, $time, $title, $url);
+                }
+            }
         }
     }
 
@@ -5285,13 +5327,18 @@ sub findVideoFiles {
     # VDR < v1.7.2:  YYYY-MM-DD-hh[.:]mm.pr.lt.rec (pr=priority, lt=lifetime)
     # VDR >= v1.7.2: YYYY-MM-DD-hh.mm.ch-ri.rec    (ch=channel, ri=resumeId)
 
-    my ($minute, $hour, $day, $month, $title) = @_;
-    my $data;
+    my ($date, $time, $title) = @_;  # DD.MM.YY and hh:mm
+
+    my ($year, $month, $day, $hour, $minute);
+    ($day, $month, $year) = ($1, $2, $3) if ($date =~ /(\d\d).(\d\d).(\d\d)/);
+    ($hour, $minute) = ($1, $2) if ($time =~ /(\d\d):(\d\d)/);
+    return () unless (defined($day) && defined($hour));
+
     $title =~ s/ /_/g;
     $title =~ s/~/\//g;
     $title = quotemeta $title;
 
-    my $re_compiled = qr"$CONFIG{VIDEODIR}/$title\_*/(_/)?\d{4}-$month-$day\.$hour[.:]$minute\.\d+[-.]\d+\.rec/\d{3}(\.vdr|\d{2}\.ts)";
+    my $re_compiled = qr"$CONFIG{VIDEODIR}/$title\_*/(_/)?\d{2}$year-$month-$day\.$hour[.:]$minute\.\d+[-.]\d+\.rec/\d{3}(\.vdr|\d{2}\.ts)";
 
     sub find_files {
         my ($dir, $regex) = @_;
@@ -5299,15 +5346,18 @@ sub findVideoFiles {
         File::Find::find({ wanted => sub {push(@arr, $File::Find::name) if $File::Find::name =~ $regex}, follow => 1, no_chdir => 1}, $dir);
         return @arr;
     }
-    
-    foreach (find_files($CONFIG{VIDEODIR}, $re_compiled)) {
+
+    my @ret = ();
+    foreach my $path (sort(find_files($CONFIG{VIDEODIR}, $re_compiled))) {
         chomp;
-        Log(LOG_DEBUG, "[REC] findVideoFiles: found ($_)\n");
-        $_ =~ s/$CONFIG{VIDEODIR}/$CONFIG{ST_VIDEODIR}/;
-        $_ =~ s/\n//g;
-        $data = $CONFIG{ST_URL} . "$_\n$data";
+        Log(LOG_DEBUG, "[REC] findVideoFiles: found ($path)\n");
+        $path =~ s/$CONFIG{VIDEODIR}/$CONFIG{ST_VIDEODIR}/;
+        $path =~ s/\n//g;
+        $path = $CONFIG{ST_URL} . $path;
+        $path =~ s/#/%23/g if ($path =~ /^http/);
+        push(@ret, $path)
     }
-    return $data;
+    return @ret;
 }
 
 sub getReferer {
@@ -5328,11 +5378,9 @@ sub getReferer {
 #############################################################################
 # live streaming
 #############################################################################
-sub live_stream {
-    my $channel = $q->param("channel");
-    my $progname = $q->param("progname");
-
+sub streamdevURI {
     my $url;
+
     if ($CONFIG{ST_STREAMDEV_HOST}) {
         $url = URI->new("http://$CONFIG{ST_STREAMDEV_HOST}");
     } elsif ($CONFIG{VDR_HOST} =~ /^localhost(\.localdomain)?|127\.0\.0\.1$/i) {
@@ -5344,7 +5392,20 @@ sub live_stream {
     if ($FEATURES{STREAMDEV}) {
         my ($port, $rest) = split(/\//, $CONFIG{ST_STREAMDEV_PORT}, 2);
         $url->port($port);
-        $url->path($rest . "/" . $channel);
+        $url->path($rest);
+    } elsif ($FEATURES{XINELIB}) {
+        $url->port($CONFIG{ST_XINELIB_PORT});
+    }
+    return $url;
+}
+
+sub live_stream {
+    my $channel = $q->param("channel");
+    my $progname = $q->param("progname");
+
+    my $url = streamdevURI();
+    if ($FEATURES{STREAMDEV}) {
+        $url->path($url->path() . "/" . $channel);
     } elsif ($FEATURES{XINELIB}) {
         $url->port($CONFIG{ST_XINELIB_PORT});
         # No channel support in xineliboutput URLs, need to switch here
@@ -7099,18 +7160,7 @@ sub export_channels_m3u {
     my $wanted = $q->param("wanted");
     my @filenames = ( 'vdr_full_channels', 'vdr_selected_channels', 'vdr_tv_channels', 'vdr_radio_channels' );
 
-    my $url;
-    if ($CONFIG{ST_STREAMDEV_HOST}) {
-        $url = URI->new("http://$CONFIG{ST_STREAMDEV_HOST}");
-    } else {
-        if ($CONFIG{VDR_HOST} =~ /^localhost(\.localdomain)?|127\.0\.0\.1$/i) {
-            $url = URI->new($q->url(-base => 1));
-            $url->scheme("http");
-        } else {
-            $url = URI->new("http://$CONFIG{VDR_HOST}");
-        }
-    }
-    $url->port($CONFIG{ST_STREAMDEV_PORT});
+    my $url = streamdevURI();
 
     my $data = "";
     foreach (sort({ $a->{vdr_id} <=> $b->{vdr_id} } (@{$CHAN{$wanted}->{channels}}))) {

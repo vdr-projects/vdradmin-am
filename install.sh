@@ -88,6 +88,7 @@ function perlModules()
 	checkPerlModule File::Find
 	checkPerlModule URI
 	checkPerlModule URI::Escape
+	checkPerlModule HTTP::Tiny
 
 
 	echo ""
