@@ -73,6 +73,7 @@ use File::Find ();
 use URI ();
 use URI::Escape qw(uri_escape);
 use HTTP::Tiny;
+use IO::Select;
 
 my $can_use_encode = 1;
 $can_use_encode = undef unless (eval { require Encode });
@@ -137,6 +138,7 @@ $CONFIG{CACHE_REC_TIMEOUT}    = 60;
 $CONFIG{CACHE_REC_LASTUPDATE} = 0;
 $CONFIG{CACHE_REC_ENABLED}    = 1;
 $CONFIG{AUTO_SAVE_CONFIG}     = 1;
+$CONFIG{HTTP_KEEPALIVE_TIMEOUT} = 10;
 
 #
 $CONFIG{VDR_HOST}   = "localhost";
@@ -562,14 +564,10 @@ if ($DAEMON) {
     Log(LOG_ALWAYS, sprintf("%s %s started", $EXENAME, $VERSION));
 }
 
-$SIG{__DIE__} = \&SigDieHandler;
+my ($Daemon, $Client, $Request);
 
-my @reccmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/reccmds.conf");
-my @vdrcmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/commands.conf");
-
-my ($Socket);
 if ($UseSSL) {
-    if (eval { require IO::Socket::SSL; }) {
+    if (eval { require HTTP::Daemon::SSL; }) {
         my $CERT_FILE = "$CERTSDIR/server-cert.pem";
         die("ERROR: $CERT_FILE missing. Please create it!\n") unless (-e $CERT_FILE);
 
@@ -582,39 +580,49 @@ if ($UseSSL) {
         my $CA_FILE = "$CERTSDIR/my-ca.pem";
         $CA_FILE = undef unless (-f $CA_FILE);
 
-        $Socket = IO::Socket::SSL->new(Proto         => 'tcp',
-                                       LocalPort     => $CONFIG{SERVERPORT},
-                                       LocalAddr     => $CONFIG{SERVERHOST},
-                                       Listen        => 10,
-                                       Reuse         => 1,
-                                       SSL_cert_file => "$CERT_FILE",
-                                       SSL_key_file  => "$KEY_FILE",
-                                       SSL_ca_file   => "$CA_FILE",
-                                       SSL_ca_path   => "$CA_PATH"
+        $Daemon = HTTP::Daemon::SSL->new(
+            LocalPort     => $CONFIG{SERVERPORT},
+            LocalAddr     => $CONFIG{SERVERHOST},
+            Listen        => 10,
+            Reuse         => 1,
+            SSL_cert_file => "$CERT_FILE",
+            SSL_key_file  => "$KEY_FILE",
+            SSL_ca_file   => "$CA_FILE",
+            SSL_ca_path   => "$CA_PATH"
         );
+        *{HTTP::Daemon::SSL::product_tokens} = sub {return $SERVERVERSION;};
     } else {
-        die("ERROR: Can't load module IO::Socket::SSL: $@");
+        die("ERROR: Can't load module HTTP::Daemon::SSL: $@");
     }
 } else {
-    $Socket = $InetSocketModule->new(Proto     => 'tcp',
-                                     LocalPort => $CONFIG{SERVERPORT},
-                                     LocalAddr => $CONFIG{SERVERHOST},
-                                     Listen    => 10,
-                                     Reuse     => 1
-    );
+    if (eval { require HTTP::Daemon; }) {
+        $Daemon = HTTP::Daemon->new(
+            LocalPort => $CONFIG{SERVERPORT},
+            LocalAddr => $CONFIG{SERVERHOST},
+            Listen    => 10,
+            Reuse     => 1
+        );
+        *{HTTP::Daemon::product_tokens} = sub {return $SERVERVERSION;};
+    } else {
+        die("ERROR: Can't load module HTTP::Daemon: $@");
+    }
 }
-if (!$Socket) {
+
+if (!$Daemon) {
     my $host = $CONFIG{SERVERHOST} || '(SERVERHOST missing)';
     my $port = $CONFIG{SERVERPORT} || '(SERVERPORT missing)';
     die("Can't start server at $host:$port: $@\n");
 }
-$CONFIG{CACHE_LASTUPDATE} = 0;
-$CONFIG{CACHE_REC_LASTUPDATE} = 0;
+
+$SIG{__DIE__} = \&SigDieHandler;
+
+my @reccmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/reccmds.conf");
+my @vdrcmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/commands.conf");
 
 ##
 # Mainloop
 ##
-my ($Client, $MyURL, $Referer, $Request, $Query, $Guest);
+my ($MyURL, $Referer, $Query, $Guest);
 my @GUEST_USER = qw(prog_detail prog_list prog_list2 prog_timeline timer_list at_timer_list epgsearch_list
   prog_summary rec_list rec_detail show_top toolbar show_help about);
 my @TRUSTED_USER = (
@@ -627,102 +635,150 @@ my $MyStreamBase = "./vdradmin.";
 
 $MyURL = "./vdradmin.pl";
 
-if ($CONFIG{CACHE_BG_UPDATE} == 1) {
-    # Force Update at start
-    Log(LOG_DEBUG, "[EPG] Updating EPG data at startup...");
-    if (UptoDate(1) == 0) {
-        Log(LOG_DEBUG, "[EPG] Updating EPG data at startup SUCCEEDED.");
-        Log(LOG_DEBUG, "[EPG] Setting timeout to " . $CONFIG{CACHE_TIMEOUT} . "min");
-        $Socket->timeout($CONFIG{CACHE_TIMEOUT} * 60);
-    } else {
-        Log(LOG_DEBUG, "[EPG] Updating EPG data at startup FAILED, trying again in 60secs.");
-        # UptoDate() failed, set socket timeout to retry UptoDate() in a minute
-        $Socket->timeout(60);
-    }
-} else {
-    $Socket->timeout($CONFIG{CACHE_TIMEOUT} * 60) if ($CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER});
-}
+my @Connections = ();
+
+$CONFIG{CACHE_LASTUPDATE} = 0;
+$CONFIG{CACHE_REC_LASTUPDATE} = 0;
 
 while (true) {
-    $Client = $Socket->accept();
 
-    #
-    if (!$Client) {
-        Log(LOG_DEBUG, "[EPG] Updating EPG data in the background...");
-        if (UptoDate(1) == 0) {
-            Log(LOG_DEBUG, "[EPG] Updating EPG data in the background SUCCEEDED.");
-            if ($CONFIG{CACHE_BG_UPDATE} || ($CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER})) {
-                Log(LOG_DEBUG, "[EPG] Setting timeout to " . $CONFIG{CACHE_TIMEOUT} . "min");
-                $Socket->timeout($CONFIG{CACHE_TIMEOUT} * 60);
-            }
-        } else {
+    @Connections = grep {$_->{socket}->connected} @Connections;
+    my $fd_set = '';
+    vec($fd_set, $Daemon->fileno, 1) = 1;
+    foreach my $c (@Connections) {
+        vec($fd_set, $c->{socket}->fileno, 1) = 1;
+    }
+
+    my $n_ready = select($fd_set, undef, undef, 2);
+    Log(LOG_DEBUG, sprintf("[DAEMON] select() -> %s", printVec($fd_set))) if $n_ready > 0;
+
+    my $now = time();
+
+    # update EPG
+    if ($n_ready == 0
+            && ($CONFIG{CACHE_BG_UPDATE} == 1
+                || $CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER}
+            )) {
+        if (UptoDate() != 0) {
             Log(LOG_DEBUG, "[EPG] Updating EPG data in the background FAILED, trying again in 60secs.");
-            $Socket->timeout(60);
+            $CONFIG{CACHE_LASTUPDATE} = $now + 60 - $CONFIG{CACHE_TIMEOUT} * 60;
+        }
+    }
+
+    if (vec($fd_set, $Daemon->fileno, 1)) {
+        my $con = $Daemon->accept();
+        if ($con) {
+            Log(LOG_DEBUG, sprintf("[DAEMON] accepted fd=%d, peer=%s", $con->fileno, $con->peerhost));
+            push(@Connections, {socket => $con, ttl => undef});
         }
         next;
     }
+    my @new = ();
+    my $found = undef;
+    foreach my $c (@Connections) {
+        if (vec($fd_set, $c->{socket}->fileno, 1)) {
+            $c->{ttl} = undef;
+            if (!$found) {
+                $found = $c;
+                # don't copy
+            } else {
+                push(@new, $c);
+            }
+        } else {
+            # no incoming data
+            if ($c->{ttl} && $now >= $c->{ttl}) {
+                Log(LOG_DEBUG, sprintf("[CLIENT(%d)] keep-alive timeout\n", $c->{socket}->fileno));
+                close($c->{socket});
+            } else {
+                $c->{ttl} = $now + $CONFIG{HTTP_KEEPALIVE_TIMEOUT} unless $c->{ttl};
+                push(@new, $c);
+            }
+        }
+    }
+    @Connections = @new;
+    next unless $found;
+    # move to the end
+    push(@Connections, $found);
+    $Client = $found->{socket};
+    undef $found;
 
-    my $peer        = $Client->peerhost;
-    if ($CONFIG{LOCAL_NET_ONLY} && !subnetcheck($peer, $CONFIG{LOCAL_NET})) {
-        close($Client);
+    if ($CONFIG{LOCAL_NET_ONLY} && !subnetcheck($Client->peerhost, $CONFIG{LOCAL_NET})) {
+        closeClient();
         next;
     }
 
-    my @Request     = ParseRequest($Client);
-    my $raw_request = $Request[0];
+    $Client->timeout(2);
+    my $req = $Client->get_request();
+    if ($req) {
+        processRequest($req);
+    } else {
+        Log(LOG_DEBUG, sprintf("[CLIENT(%d)] get_request() failed: %s", $Client->fileno, $Client->reason));
+        closeClient();
+    }
+
+}
+
+#############################################################################
+#############################################################################
+
+sub printVec {
+    my $vec = shift;
+    my @fdarr = ();
+    for (my $i = 0; $i < length($vec) * 8; $i++) {
+        push(@fdarr, $i) if (vec($vec, $i, 1));
+    }
+    return join(',', @fdarr);
+}
+
+sub closeClient {
+    if ($Client) {
+        Log(LOG_DEBUG, sprintf("CLIENT(%d)] close()", $Client->fileno));
+        @Connections = grep {$_->{socket} != $Client} @Connections;
+        close($Client);
+        undef $Client;
+    }
+}
+
+sub processRequest {
+    my $req = shift;
 
     $ACCEPT_GZIP = 0;
 
     #print("REQUEST: $raw_request\n");
-    if ($raw_request =~ /^GET (\/[\w\.\/-\:]*)([\?[\w=&\.\+\%-\:\!\@\~\#]*]*)[\#\d ]+HTTP\/1.\d$/) {
-        ($Request, $Query) = ($1, $2 ? substr($2, 1, length($2)) : undef);
+    my $raw_request = $1 if ($req->as_string =~ /^([^\r\n]++)\r*\n/);
+    Log(LOG_DEBUG, sprintf("[CLIENT(%d)] $raw_request\n", $Client->fileno));
+    if ($req->uri =~ /(\/[\w\.\/-\:]*)(?:\?([\w=&\.\+\%-\:\!\@\~\#]+))?$/) {
+        ($Request, $Query) = ($1, $2);
     } else {
         Error("404", gettext("Not found"), gettext("The requested URL was not found on this server!"));
-        close($Client);
-        next;
+        return;
     }
 
-    $Request =~ s/^\/\/*/\//;
+    $Request =~ s|^/+|/|;
     local $ENV{HTTP_HOST};
 
     # parse header
     my ($username, $password, $http_useragent);
-    for my $line (@Request) {
-
-        #print(">" . $line . "\n");
-        if ($line =~ /Referer: (.*)/) {
-            $Referer = $1;
-        }
-        if ($line =~ /Host: (.*)/) {
-            $ENV{HTTP_HOST} = $1;
-        }
-        if ($line =~ /Authorization: basic (.*)/i) {
-            ($username, $password) = split(":", MIME::Base64::decode_base64($1), 2);
-        }
-        if ($line =~ /User-Agent: (.*)/i) {
-            $http_useragent = $1;
-        }
-        if ($line =~ /Accept-Encoding: (.*)/i) {
-            if ($1 =~ /gzip/) {
-                $ACCEPT_GZIP = 1;
-            }
-        }
-    }
+    $Referer = $req->header("Referer");
+    $ENV{HTTP_HOST} = $req->header("Host");
+    ($username, $password) = split(":", MIME::Base64::decode_base64($1), 2) if ($req->header("Authorization") =~ /basic (.*)/i);
+    $http_useragent = $req->header("User-Agent");
+    $ACCEPT_GZIP = 1 if ($req->header("Accept-Encoding") =~ /gzip/);
 
     my ($http_status, $bytes_transfered);
 
     # authenticate
     #print("Username: $username / Password: $password\n");
     my $checkpass = defined($username) && defined($password);
-    if (($checkpass && $CONFIG{USERNAME} eq $username && $CONFIG{PASSWORD} eq $password) || subnetcheck($peer, $CONFIG{LOCAL_NET})) {
+    if (($checkpass && $CONFIG{USERNAME} eq $username && $CONFIG{PASSWORD} eq $password)
+            || subnetcheck($Client->peerhost, $CONFIG{LOCAL_NET})) {
         $Guest = 0;
     } elsif (($checkpass && $CONFIG{USERNAME_GUEST} eq $username && $CONFIG{PASSWORD_GUEST} eq $password) && $CONFIG{GUEST_ACCOUNT}) {
         $Guest = 1;
     } else {
         ($http_status, $bytes_transfered) = headerNoAuth();
         Log(LOG_INFO, "[ACCESS] " . access_log($Client->peerhost, $username, $raw_request, $http_status, $bytes_transfered, $Request, $http_useragent));
-        close($Client);
-        next;
+        return;
     }
 
     # serve request
@@ -781,16 +837,9 @@ while (true) {
         ($http_status, $bytes_transfered) = SendFile($Request);
     }
     Log(LOG_INFO, "[ACCESS] " . access_log($Client->peerhost, $username, $raw_request, $http_status, $bytes_transfered, $Request, $http_useragent));
-    close($Client);
     $SVDRP->close;
-
-    if ($CONFIG{CACHE_BG_UPDATE} || ($CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER})) {
-        $Socket->timeout($CONFIG{CACHE_TIMEOUT} * 60 - (time() - $CONFIG{CACHE_LASTUPDATE}));
-    }
 }
 
-#############################################################################
-#############################################################################
 sub check_permissions {
     my $rc = 1;
     check_rw_dir($ETCDIR) or $rc = 0;
@@ -1512,61 +1561,57 @@ sub header {
         }
     }
 
-    my $status_text = " OK" if ($status eq "200");
+    my $status_text = "OK" if ($status eq "200");
     my $now = time();
+    my $resp = HTTP::Response->new($status, $status_text);
 
-    my $response = "HTTP/1.0 $status$status_text" . CRLF
-                 . "Date: " . time2str($now) . CRLF;
+    $resp->header('Date' => time2str($now));
     if (!$caching || $ContentType =~ /text\/html/) {
-        $response .= "Cache-Control: max-age=0" . CRLF
-                  .  "Cache-Control: private" . CRLF
-                  .  "Pragma: no-cache" . CRLF
-                  .  "Expires: Thu, 01 Jan 1970 00:00:00 GMT" . CRLF;
+        $resp->header('Cache-Control' => "max-age=0");
+        $resp->header('Cache-Control' => "private");
+        $resp->header('Pragma' => "no-cache");
+        $resp->header('Expires' => "Thu, 01 Jan 1970 00:00:00 GMT");
     } else {
-        $response .= "Expires: " . time2str($now + 3600) . CRLF
-                  .  "Cache-Control: public, max-age=3600" . CRLF;
+        $resp->header('Expires' => time2str($now + 3600));
+        $resp->header('Cache-Control' => "public, max-age=3600");
     }
     if ($lastmod) {
         $lastmod = $now if ($lastmod > $now); # HTTP 1.1, 14.29
-        $response .= "Last-Modified: " . time2str($lastmod) . CRLF;
+        $resp->header('Last-Modified' => time2str($lastmod));
     }
-    $response .= "Server: $SERVERVERSION" . CRLF
-              .  "Connection: close" . CRLF;
-    $response .= "Content-Length: " . length($data) . CRLF  if ($data);
-    $response .= "Content-encoding: gzip" . CRLF if ($CONFIG{MOD_GZIP} && $ACCEPT_GZIP);
-    $response .= "Content-type: $ContentType" . CRLF if ($ContentType);
-    $response .= "Content-Disposition: attachment; filename=$filename" . CRLF if ($filename);
-    $response .= CRLF;
-    $response .= $data if ($data);
-    PrintToClient($response);
+    $resp->header('Content-encoding' => "gzip") if ($CONFIG{MOD_GZIP} && $ACCEPT_GZIP);
+    $resp->header('Content-type' => $ContentType) if ($ContentType);
+    $resp->header('Content-Disposition' => "attachment; filename=$filename") if ($filename);
+    $resp->content($data) if ($data);
+
+    $Client->send_response($resp);
     return ($status, length($data));
 }
 
 sub headerForward {
     my $url = shift;
-    my $header = "HTTP/1.0 302 Found" . CRLF
-               . "Date: " . time2str() . CRLF
-               . "Server: $SERVERVERSION" . CRLF
-               . "Connection: close" . CRLF
-               . "Location: $url" . CRLF
-               . "Content-type: text/html" . CRLF . CRLF;
-    PrintToClient($header);
-    return (302, 0);
+    Log(LOG_DEBUG, "[FORWARD] " . $url);
+    my $resp = HTTP::Response->new(302, "Found");
+
+    $resp->header('Date' => time2str());
+    $resp->header('Location' => $url);
+    $resp->header('Content-type' => 'text/plain');
+    my $data = "302 Found";
+    $resp->content($data);
+
+    $Client->send_response($resp);
+    return (302, length($data));
 }
 
 sub headerNoAuth {
-    my $vars;
-    my $data;
-    $Xtemplate->process("$CONFIG{TEMPLATE}/noauth.html", $vars, \$data);
+    my $resp = HTTP::Response->new(401, "Authorization Required");
+    $resp->header('Date' => time2str());
+    $resp->header('WWW-Authenticate' => "Basic realm=\"vdradmind\"");
+    $resp->header('Content-type' => "text/plain");
+    my $data = "401 Authorization Required";
+    $resp->content($data);
 
-    my $header = "HTTP/1.0 401 Authorization Required" . CRLF
-               . "Date: " . time2str() . CRLF
-               . "Server: $SERVERVERSION" . CRLF
-               . "WWW-Authenticate: Basic realm=\"vdradmind\"" . CRLF
-               . "Connection: close" . CRLF
-               . "Content-type: text/html" . CRLF;
-    $header .= "Content-Length: " . length($data) . CRLF if ($data);
-    PrintToClient($header, CRLF, $data);
+    $Client->send_response($resp);
     return (401, length($data));
 }
 
@@ -4922,7 +4967,7 @@ sub timer_toggle {
             CloseSocket();
         }
     }
-    return (headerForward(RedirectToReferer("$MyURL?aktion=timer_list")));
+    return RedirectToReferer("$MyURL?aktion=timer_list");
 }
 
 sub timer_new_form {
@@ -5144,7 +5189,7 @@ sub timer_delete {
         }
         CloseSocket();
     }
-    return (headerForward(RedirectToReferer("$MyURL?aktion=timer_list")));
+    return RedirectToReferer("$MyURL?aktion=timer_list");
 }
 
 sub getRecordingsPlaylist {
@@ -5532,7 +5577,7 @@ sub at_timer_toggle {
     }
     AT_Write(@at);
 
-    return (headerForward(RedirectToReferer("$MyURL?aktion=at_timer_list")));
+    return RedirectToReferer("$MyURL?aktion=at_timer_list");
 }
 
 sub at_timer_edit {
@@ -6668,7 +6713,7 @@ sub rec_delete {
         # Re-read recording's list
         $CONFIG{CACHE_REC_LASTUPDATE} = 0;
     }
-    return (headerForward(RedirectToReferer("$MyURL?aktion=rec_list&sortby=" . $q->param("sortby") . "&desc=" . $q->param("desc"))));
+    return RedirectToReferer("$MyURL?aktion=rec_list&sortby=" . $q->param("sortby") . "&desc=" . $q->param("desc"));
 }
 
 sub recRunCmd {
@@ -7254,7 +7299,8 @@ sub myconnect {
                                              $connect_error));
         main::HTMLError(sprintf($ERROR_MESSAGE{connect_failed},
                                 $CONFIG{VDR_HOST}, $CONFIG{VDR_PORT},
-                                CGI::escapeHTML($connect_error)));
+                                CGI::escapeHTML($connect_error)))
+                        if $Client && $Client->connected;
         return 0;
     }
 

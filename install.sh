@@ -89,6 +89,7 @@ function perlModules()
 	checkPerlModule URI
 	checkPerlModule URI::Escape
 	checkPerlModule HTTP::Tiny
+	checkPerlModule HTTP::Daemon
 
 
 	echo ""
@@ -107,7 +108,7 @@ function perlModules()
 	echo "* Required for IPv6 support"
 	checkPerlModule IO::Socket::INET6
 	echo "* Required for SSL support (https)"
-	checkPerlModule IO::Socket::SSL
+	checkPerlModule HTTP::Daemon::SSL
 	echo "* Required if you want to use gzip'ed HTTP responses"
 	checkPerlModule Compress::Zlib
 	echo "* Required if you want to log to syslog"
