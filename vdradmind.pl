@@ -1335,6 +1335,23 @@ sub my_quotemeta
         return quotemeta($str);
     }
 }
+
+# case-insensitive compare on byte strings
+sub ciCmp {
+    my ($a, $b) = @_;
+    if (utf8::is_utf8($a)) {
+        $a = lc($a);
+    } elsif ($can_use_encode) {
+        $a = lc(Encode::decode($MY_ENCODING, $a));
+    }
+    if (utf8::is_utf8($b)) {
+        $b = lc($b);
+    } elsif ($can_use_encode) {
+        $b = lc(Encode::decode($MY_ENCODING, $b));
+    }
+    return $a cmp $b;
+}
+
 #############################################################################
 # EPG functions
 #############################################################################
@@ -4876,15 +4893,15 @@ sub timer_list {
         }
     } elsif ($CONFIG{TM_SORTBY} eq "channel") {
         if ($CONFIG{TM_DESC}) {
-            @timer = sort({ lc($b->{cdesc}) cmp lc($a->{cdesc}) } @timer);
+            @timer = sort({ ciCmp($b->{cdesc}, $a->{cdesc}) } @timer);
         } else {
-            @timer = sort({ lc($a->{cdesc}) cmp lc($b->{cdesc}) } @timer);
+            @timer = sort({ ciCmp($a->{cdesc}, $b->{cdesc}) } @timer);
         }
     } elsif ($CONFIG{TM_SORTBY} eq "name") {
         if ($CONFIG{TM_DESC}) {
-            @timer = sort({ lc($b->{title}) cmp lc($a->{title}) } @timer);
+            @timer = sort({ ciCmp($b->{title}, $a->{title}) } @timer);
         } else {
-            @timer = sort({ lc($a->{title}) cmp lc($b->{title}) } @timer);
+            @timer = sort({ ciCmp($a->{title}, $b->{title}) } @timer);
         }
     } elsif ($CONFIG{TM_SORTBY} eq "start") {
         if ($CONFIG{TM_DESC}) {
@@ -4907,7 +4924,7 @@ sub timer_list {
     }
     my $toggle_desc = ($CONFIG{TM_DESC} ? 0 : 1);
     @timer2 = @timer;
-    @timer2 = sort({ lc($a->{sortfield}) cmp lc($b->{sortfield}) } @timer2);
+    @timer2 = sort({ ciCmp($a->{sortfield}, $b->{sortfield}) } @timer2);
 
     my $vars = { sortbydayurl     => "$MyURL?aktion=timer_list&amp;sortby=day&amp;desc=" .     (($CONFIG{TM_SORTBY} eq "day")     ? $toggle_desc : $CONFIG{TM_DESC}),
                  sortbychannelurl => "$MyURL?aktion=timer_list&amp;sortby=channel&amp;desc=" . (($CONFIG{TM_SORTBY} eq "channel") ? $toggle_desc : $CONFIG{TM_DESC}),
@@ -5286,7 +5303,7 @@ sub rec_stream_folder {
 
     # sort by date
     @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                         lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
+                         ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "") ||
                          $a->{sse} <=> $b->{sse} } @recordings);
 
     my $folder_data;
@@ -6251,45 +6268,45 @@ sub rec_list {
     if ($CONFIG{REC_SORTBY} eq "time") {
         if ($CONFIG{REC_DESC}) {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "") ||
                                  $b->{time} <=> $a->{time} } @recordings);
         } else {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "") ||
                                  $a->{time} <=> $b->{time} } @recordings);
         }
     } elsif ($CONFIG{REC_SORTBY} eq "name") {
         if ($CONFIG{REC_DESC}) {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                                 lc($b->{isfolder} ? $b->{name} : "") cmp lc($a->{isfolder} ? $a->{name} : "") ||
-                                 lc($b->{name}) cmp lc($a->{name}) ||
+                                 ciCmp($b->{isfolder} ? $b->{name} : "", $a->{isfolder} ? $a->{name} : "") ||
+                                 ciCmp($b->{name}, $a->{name}) ||
                                  $b->{sse} <=> $a->{sse} } @recordings);
         } else {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
-                                 lc($a->{name}) cmp lc($b->{name}) ||
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "") ||
+                                 ciCmp($a->{name}, $b->{name}) ||
                                  $a->{sse} <=> $b->{sse} } @recordings);
         }
     } elsif ($CONFIG{REC_SORTBY} eq "date") {
         if ($CONFIG{REC_DESC}) {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "") ||
                                  $b->{sse} <=> $a->{sse} } @recordings);
         } else {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "") ||
                                  $a->{sse} <=> $b->{sse} } @recordings);
         }
     } elsif ($CONFIG{REC_SORTBY} eq "length") {
         if ($CONFIG{REC_DESC}) {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
                                  $b->{lengthmin} <=> $a->{lengthmin} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "")
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "")
                                } @recordings);
         } else {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
                                  $a->{lengthmin} <=> $b->{lengthmin} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "")
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "")
                                } @recordings);
         }
     }
