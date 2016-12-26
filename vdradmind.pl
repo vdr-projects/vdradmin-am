@@ -1352,6 +1352,15 @@ sub ciCmp {
     return $a cmp $b;
 }
 
+sub my_truncate {
+    my ($text, $len) = @_;
+    my $decode = !utf8::is_utf8($text) && $can_use_encode;
+    $text = Encode::decode($MY_ENCODING, $text) if ($decode);
+    $text = substr($text, 0, $len - 3) . "..." if (length($text) >= $len);
+    $text = Encode::encode($MY_ENCODING, $text) if ($decode);
+    return $text;
+}
+
 #############################################################################
 # EPG functions
 #############################################################################
@@ -4953,7 +4962,8 @@ sub timer_list {
                  prevdayurl    => $prev_day ? sprintf("%s?aktion=timer_list&amp;active=0&amp;timer=%s", $MyURL, $prev_day) : undef,
                  nextdayurl    => $next_day ? sprintf("%s?aktion=timer_list&amp;active=0&amp;timer=%s", $MyURL, $next_day) : undef,
                  prevdaytext   => $prev_day_name,
-                 nextdaytext   => $next_day_name
+                 nextdaytext   => $next_day_name,
+                 my_truncate   => \&my_truncate
     };
     return showTemplate("timer_list.html", $vars);
 }
