@@ -6717,10 +6717,18 @@ sub rec_delete {
         if ($id) {
             SendCMD("delr $id");
         } else {
+            my @id_arr = ();
             for ($q->param) {
                 if (/xxxx_(.*)/) {
-                    SendCMD("delr $1");
+                    push (@id_arr, $1);
                 }
+            }
+            # VDR 2.3.x workaround:
+            # delete starting with the largest id and proceed to the smallest.
+            # In this case, ids won't change while removing items from the list.
+            @id_arr = sort {$b <=> $a} @id_arr;
+            for my $del_id (@id_arr) {
+                SendCMD("delr $del_id");
             }
         }
         CloseSocket();
