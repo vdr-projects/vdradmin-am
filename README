@@ -47,8 +47,11 @@ Requirements
 	  - Time::Local
 	  - MIME::Base64
 	  - File::Temp
+	  - File::Find
 	  - URI
 	  - URI::Escape
+	  - HTTP::Tiny
+	  - HTTP::Daemon
 	  - Locale::gettext OR Locale::Messages
 	- Optional:
 	  - Required for built-in HTTP response compression:
@@ -63,7 +66,7 @@ Requirements
 	  - Required for IPv6 support:
 	    - IO::Socket::INET6
 	  - Required for SSL support (https):
-	    - IO::Socket::SSL
+	    - HTTP::Daemon::SSL
 
 Description
 -----------
