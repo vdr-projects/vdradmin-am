@@ -6002,16 +6002,25 @@ sub prog_summary {
 
     my $pattern;
     my $is_regex = 0;
+    my $ignore_case = 0;
     my @search_words = ();
     if ($search) {
         $pattern = $search;
-        $pattern = Encode::decode($MY_ENCODING, $pattern) if $can_use_encode;
         if ($pattern =~ /^\/(.*)\/(i?)$/) {
             $pattern = $1;
             my $mode = $2;
             $is_regex = 1;
-            $pattern = ($mode eq "i")? qr/$pattern/i : qr/$pattern/;
+            if ($mode eq "i") {
+                $pattern = Encode::decode($MY_ENCODING, $pattern) if $can_use_encode;
+                $pattern = qr/$pattern/i;
+                Log(LOG_DEBUG, "[SEARCH] REGEX:" . Encode::encode($MY_ENCODING, $pattern) . "\n");
+                $ignore_case = 1;
+            } else {
+                $pattern = qr/$pattern/;
+                Log(LOG_DEBUG, "[SEARCH] REGEX:" . $pattern . "\n");
+            }
         } else {
+            $pattern = Encode::decode($MY_ENCODING, $pattern) if $can_use_encode;
             for my $word (split(/ +/, $pattern)) {
                 if ($word) {
                     if ($can_use_encode) {
@@ -6021,25 +6030,39 @@ sub prog_summary {
                         # substr() + uc()/lc() on unicode strings
                         # /abc/i on unicode strings
                         my @pat = ();
+                        my $prefix;
                         for my $ch (split(//, quotemeta($word))) {
                             if (uc($ch) ne lc($ch)) {
-                                push(@pat, "(?>");
-                                push(@pat, lc($ch));
-                                push(@pat, "|");
-                                push(@pat, uc($ch));
-                                push(@pat, ")");
+                                if (!@pat && !defined($prefix)) {
+                                    # first character
+                                    $prefix = $ch;
+                                } else {
+                                    push(@pat, "(?>");
+                                    push(@pat, lc($ch));
+                                    push(@pat, "|");
+                                    push(@pat, uc($ch));
+                                    push(@pat, ")");
+                                }
                             } else {
                                 push(@pat, $ch);
                             }
                         }
-                        my $word_pattern = Encode::encode($MY_ENCODING, join("", @pat));
-                        push(@search_words, qr/$word_pattern/);
+                        if (defined($prefix)) {
+                            my $word_pat1 = Encode::encode($MY_ENCODING, join("", uc($prefix), @pat));
+                            my $word_pat2 = Encode::encode($MY_ENCODING, join("", lc($prefix), @pat));
+                            push(@search_words, [qr/$word_pat1/, qr/$word_pat2/]);
+                        } else {
+                            my $word_pat = Encode::encode($MY_ENCODING, join("", @pat));
+                            push(@search_words, [qr/$word_pat/, undef]);
+                        }
+
                     } else {
-                        my $word_pattern = quotemeta($word);
-                        push(@search_words, qr/$word_pattern/i);
+                        my $word_pat = quotemeta($word);
+                        push(@search_words, [qr/$word_pat/, undef]);
                     }
                 }
             }
+            Log(LOG_DEBUG, "[SEARCH] PATTERNS:" . join("&&", map {$_->[0] . "||" . ($_->[1] || "NULL")} @search_words) . "\n");
         }
     }
 
@@ -6057,15 +6080,17 @@ sub prog_summary {
                     if ($is_regex) {
                         # We have a RegExp
                         next if (!defined($pattern));
-                        my $SearchStr = $event->{title} . "~" . ($event->{subtitle} || "") . "~" . ($event->{summary} || "");
-                        $SearchStr = Encode::decode($MY_ENCODING, $SearchStr) if $can_use_encode;
+                        my $SearchStr = join("~", $event->{title}, ($event->{subtitle} || ""), ($event->{summary} || ""));
+                        if ($ignore_case) {
+                            $SearchStr = Encode::decode($MY_ENCODING, $SearchStr) if $can_use_encode;
+                        }
                         $found = ($SearchStr =~ /$pattern/);
 
                     } else {
                         $found = 1;
                         my $SearchStr = join(" ", $event->{title}, ($event->{subtitle} || ""), ($event->{summary} || ""));
                         for my $pat (@search_words) {
-                            if ($SearchStr !~ /$pat/) {
+                            if ($SearchStr !~ /$pat->[0]/ && (!defined($pat->[1]) || $SearchStr !~ /$pat->[1]/)) {
                                 $found = 0;
                                 last;
                             }
