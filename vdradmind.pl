@@ -1400,60 +1400,91 @@ sub getElement {
 
 sub EPG_buildTree {
     $SVDRP->command("lste");
-    my ($DATA) = $SVDRP->readresponse;
     my ($i, @events);
     my ($id, $bc) = (1, 0);
     $low_time = time;
     undef(%EPG);
-    while($_ = shift @$DATA) {
-        if (/^C ([^ ]+) *(.*)/) {
+    my $to_charset = $MY_ENCODING;
+    my $from_charset = $SVDRP->encoding;
+    my $recode = ($can_use_encode && $from_charset && $to_charset && ($from_charset ne $to_charset))? 1 : 0;
+    my $SOCK = $SVDRP->socket;
+    while($_ = <$SOCK>) {
+        Encode::from_to($_, $from_charset, $to_charset) if ($recode);
+        if (/^... /) {
+            last;
+        }
+        if (/^...-C ([^ ]+) *(.*)/) {
             undef(@events);
             my ($channel_id, $channel_name) = ($1, $2);
             my $vdr_id = get_vdrid_from_channelid($channel_id);
             if ($CONFIG{EPG_PRUNE} > 0 && $vdr_id > $CONFIG{EPG_PRUNE}) {
 
                 # diesen channel nicht einlesen
-                while($_ = shift @$DATA) {
-                    last if (/^c/);
+                while($_ = <$SOCK>) {
+                    Encode::from_to($_, $from_charset, $to_charset) if ($recode);
+                    last if (/^...-c/);
                 }
             } else {
                 $bc++;
-                while($_ = shift @$DATA) {
-                    if (/^E/) {
-                        my ($garbish, $event_id, $time, $duration) = split(/[ \t]+/);
+                while($_ = <$SOCK>) {
+                    Encode::from_to($_, $from_charset, $to_charset) if ($recode);
+                    if (/^...-E/) {
+                        #my ($garbish, $event_id, $time, $duration) = split(/[ \t]+/);
+                        my ($garbish, $event_id, $time, $duration) = split(/ /);
                         my ($title, $subtitle, $summary, $vps, $video, $audio, $subs, @video_raw, @audio_raw, @subs_raw);
                         @video_raw = @audio_raw = @subs_raw = ();
-                        while($_ = shift @$DATA) {
+                        while($_ = <$SOCK>) {
+                            Encode::from_to($_, $from_charset, $to_charset) if ($recode);
                             # if(/^T (.*)/) { $title = $1;    $title =~ s/\|/<br \/>/sig }
                             # if(/^S (.*)/) { $subtitle = $1; $subtitle =~ s/\|/<br \/>/sig }
                             # if(/^D (.*)/) { $summary = $1;  $summary =~ s/\|/<br \/>/sig }
-                            if (/^T (.*)/) { $title    = $1; }
-                            elsif (/^S (.*)/) { $subtitle = $1; }
-                            elsif (/^D (.*)/) { $summary  = $1; }
-                            elsif (/^X 1 ([^ ]*) (.*)/) {
+                            if (/^...-T (.*)/) { $title    = $1; }
+                            elsif (/^...-S (.*)/) { $subtitle = $1; }
+                            elsif (/^...-D (.*)/) { $summary  = $1; }
+                            elsif (/^...-X 1 ([^ ]*) (.*)/) {
                                 push (@video_raw, sprintf "X 1 $1 $2");
                                 my ($lang, $format) = split(" ", $2, 2);
                                 $video .= ", " if($video);
                                 $video .= $format;
                                 $video .= " (" . $lang . ")";
                             }
-                            elsif (/^X 2 ([^ ]*) (.*)/) {
+                            elsif (/^...-X 2 ([^ ]*) (.*)/) {
                                 push (@audio_raw, sprintf "X 2 $1 $2");
                                 my ($lang, $descr) = split(" ", $2, 2);
                                 $audio .= ", " if ($audio);
                                 $audio .= ($descr ? $descr . " (" . $lang . ")" : $lang);
                             }
-                            elsif (/^X 3 ([^ ]*) (.*)/) {
+                            elsif (/^...-X 3 ([^ ]*) (.*)/) {
                                 push (@subs_raw, sprintf "X 3 $1 $2");
                                 my ($lang, $descr) = split(" ", $2, 2);
                                 $subs .= ", " if ($subs);
                                 $subs .= ($descr ? $descr . " (" . $lang . ")" : $lang);
                             }
-                            elsif (/^V (.*)/) { $vps  = $1; }
-                            elsif (/^e/)      {
+                            elsif (/^...-V (.*)/) { $vps  = $1; }
+                            elsif (/^...-e/)      {
 
                                 #
                                 $low_time = $time if ($time < $low_time);
+                                #push(@events,
+                                #     {  channel_name => $channel_name,
+                                #        start        => $time,
+                                #        stop         => $time + $duration,
+                                #        duration     => $duration,
+                                #        title        => $title,
+                                #        subtitle     => $subtitle,
+                                #        summary      => $summary,
+                                #        vps          => $vps,
+                                #        id           => $id,
+                                #        vdr_id       => $vdr_id,
+                                #        event_id     => $event_id,
+                                #        video        => $video,
+                                #        audio        => $audio,
+                                #        subs         => $subs,
+                                #        video_raw    => \@video_raw,
+                                #        audio_raw    => \@audio_raw,
+                                #        subs_raw     => \@subs_raw,
+                                #     }
+                                #);
                                 push(@events,
                                      {  channel_name => $channel_name,
                                         start        => $time,
@@ -1478,7 +1509,7 @@ sub EPG_buildTree {
                                 last;
                             }
                         }
-                    } elsif (/^c/) {
+                    } elsif (/^...-c/) {
                         if ($FEATURES{VDRVERSION} < 10305) { # EPG is sorted by date since VDR 1.3.5
                             my ($last) = 0;
                             my (@temp);
@@ -7475,6 +7506,14 @@ sub readresponse {
         }
     }
     return \@a;
+}
+
+sub socket {
+    return $SOCKET;
+}
+
+sub encoding {
+    return $VDR_ENCODING;
 }
 
 #
