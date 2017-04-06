@@ -1429,6 +1429,7 @@ sub EPG_buildTree {
     my $recode = ($can_use_encode && $from_charset && $to_charset && ($from_charset ne $to_charset))? 1 : 0;
     my $SOCK = $SVDRP->socket;
     while($_ = <$SOCK>) {
+        chomp;
         Encode::from_to($_, $from_charset, $to_charset) if ($recode);
         if (/^... /) {
             last;
@@ -1443,45 +1444,48 @@ sub EPG_buildTree {
                 while($_ = <$SOCK>) {
                     Encode::from_to($_, $from_charset, $to_charset) if ($recode);
                     last if (/^...-c/);
+                    last if (/^... /);
                 }
             } else {
                 $bc++;
                 while($_ = <$SOCK>) {
                     Encode::from_to($_, $from_charset, $to_charset) if ($recode);
-                    if (/^...-E/) {
-                        #my ($garbish, $event_id, $time, $duration) = split(/[ \t]+/);
-                        my ($garbish, $event_id, $time, $duration) = split(/ /);
+                    my $tok = substr($_, 3, 2);
+                    my $rest = substr($_, 6);
+                    if ($tok eq "-E") {
+                        # no need for chomp here - split() will take care
+                        my ($event_id, $time, $duration) = split(/ /, $rest, 4);
                         my ($title, $subtitle, $summary, $vps, $video, $audio, $subs, @video_raw, @audio_raw, @subs_raw);
                         @video_raw = @audio_raw = @subs_raw = ();
                         while($_ = <$SOCK>) {
+                            chomp;
                             Encode::from_to($_, $from_charset, $to_charset) if ($recode);
-                            # if(/^T (.*)/) { $title = $1;    $title =~ s/\|/<br \/>/sig }
-                            # if(/^S (.*)/) { $subtitle = $1; $subtitle =~ s/\|/<br \/>/sig }
-                            # if(/^D (.*)/) { $summary = $1;  $summary =~ s/\|/<br \/>/sig }
-                            if (/^...-T (.*)/) { $title    = $1; }
-                            elsif (/^...-S (.*)/) { $subtitle = $1; }
-                            elsif (/^...-D (.*)/) { $summary  = $1; }
-                            elsif (/^...-X 1 ([^ ]*) (.*)/) {
-                                push (@video_raw, sprintf "X 1 $1 $2");
-                                my ($lang, $format) = split(" ", $2, 2);
-                                $video .= ", " if($video);
-                                $video .= $format;
-                                $video .= " (" . $lang . ")";
+                            $tok = substr($_, 3, 2);
+                            $rest = substr($_, 6);
+                            if ($tok eq "-T") { $title    = $rest }
+                            elsif ($tok eq "-S") { $subtitle = $rest; }
+                            elsif ($tok eq "-D") { $summary  = $rest; }
+                            elsif ($tok eq "-X") {
+                                my ($what, $garbage, $lang, $descr) = split(/ /, $rest, 4);
+                                if ($what eq "1") {
+                                    push (@video_raw, join(" ", "X", $rest));
+                                    $video .= ", " if($video);
+                                    $video .= $descr;
+                                    $video .= " (" . $lang . ")";
+                                }
+                                elsif ($what eq "2") {
+                                    push (@audio_raw, join(" ", "X", $rest));
+                                    $audio .= ", " if ($audio);
+                                    $audio .= ($descr ? $descr . " (" . $lang . ")" : $lang);
+                                }
+                                elsif ($what eq "3") {
+                                    push (@subs_raw, join(" ", "X", $rest));
+                                    $subs .= ", " if ($subs);
+                                    $subs .= ($descr ? $descr . " (" . $lang . ")" : $lang);
+                                }
                             }
-                            elsif (/^...-X 2 ([^ ]*) (.*)/) {
-                                push (@audio_raw, sprintf "X 2 $1 $2");
-                                my ($lang, $descr) = split(" ", $2, 2);
-                                $audio .= ", " if ($audio);
-                                $audio .= ($descr ? $descr . " (" . $lang . ")" : $lang);
-                            }
-                            elsif (/^...-X 3 ([^ ]*) (.*)/) {
-                                push (@subs_raw, sprintf "X 3 $1 $2");
-                                my ($lang, $descr) = split(" ", $2, 2);
-                                $subs .= ", " if ($subs);
-                                $subs .= ($descr ? $descr . " (" . $lang . ")" : $lang);
-                            }
-                            elsif (/^...-V (.*)/) { $vps  = $1; }
-                            elsif (/^...-e/)      {
+                            elsif ($tok eq "-V") { $vps  = $rest; }
+                            elsif ($tok eq "-e") {
 
                                 #
                                 $low_time = $time if ($time < $low_time);
@@ -1508,8 +1512,12 @@ sub EPG_buildTree {
                                 $id++;
                                 last;
                             }
+                            elsif ($tok =~ /^ /) {
+                                last;
+                            }
                         }
-                    } elsif (/^...-c/) {
+                    }
+                    elsif ($tok eq "-c") {
                         if ($FEATURES{VDRVERSION} < 10305) { # EPG is sorted by date since VDR 1.3.5
                             my ($last) = 0;
                             my (@temp);
@@ -1522,6 +1530,9 @@ sub EPG_buildTree {
                         } else {
                             $EPG{$vdr_id} = [@events];
                         }
+                        last;
+                    }
+                    elsif ($tok =~ /^ /) {
                         last;
                     }
                 }
