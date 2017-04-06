@@ -331,7 +331,7 @@ $UserCSS = "user.css" if (-e "$USER_CSS");
 
 my $USE_SHELL_GZIP = false;          # set on false to use the gzip library
 
-my (%EPG, %CHAN, $q, $ACCEPT_GZIP, $SVDRP, $low_time, @RECORDINGS);
+my (%EPG, %CHAN, %CHAN_TABLES, $q, $ACCEPT_GZIP, $SVDRP, $low_time, @RECORDINGS);
 my (%mimehash) = (html => "text/html",
                   png  => "image/png",
                   gif  => "image/gif",
@@ -1016,11 +1016,13 @@ sub MHz {
     return (int($frequency));
 }
 
-sub ChanTree { #TODO? save channel in each list as reference
+sub ChanTree {
     undef(%CHAN);
+    undef(%CHAN_TABLES);
     my (@CHANNELS_FULL, @CHANNELS_WANTED, @CHANNELS_TV, @CHANNELS_RADIO);
     my $group_name = "";
     my $group_number = $CHAN_GROUPS - 1;
+
     if (!$FEATURES{VDRVERSION}) {
         # first connection - have to get version
         $SVDRP->command("help");
@@ -1049,8 +1051,9 @@ sub ChanTree { #TODO? save channel in each list as reference
         $name = $1;
         my $uniq_id = $source . "-" . $nid . "-" . ($nid || $tid ? $tid : $frequency) . "-" . $service_id;
         $uniq_id .= "-" . $rid if ($rid != 0);
-        push(@CHANNELS_FULL,
-             {  vdr_id       => $vdr_id,
+
+        my $chan_ref = {
+                vdr_id       => $vdr_id,
                 name         => $name,
                 frequency    => MHz($frequency),
                 polarization => $polarization,
@@ -1065,93 +1068,27 @@ sub ChanTree { #TODO? save channel in each list as reference
                 tid          => $tid,
                 rid          => $rid,
                 uniq_id      => $uniq_id
-             }
-        );
+            };
+
+        push(@CHANNELS_FULL, $chan_ref);
+        $CHAN_TABLES{by_channel_id}->{$uniq_id} = $chan_ref;
 
         if ($CONFIG{CHANNELS_WANTED}) {
             for my $n (split(",", $CONFIG{CHANNELS_WANTED})) {
                 if ($n eq $vdr_id) {
-                    push(@CHANNELS_WANTED,
-                        {  vdr_id       => $vdr_id,
-                           name         => $name,
-                           frequency    => MHz($frequency),
-                           polarization => $polarization,
-                           source       => $source,
-                           symbolrate   => $symbolrate,
-                           vpid         => $vpid,
-                           apid         => $apid,
-                           tpid         => $tpid,
-                           ca           => $ca,
-                           service_id   => $service_id,
-                           nid          => $nid,
-                           tid          => $tid,
-                           rid          => $rid,
-                           uniq_id      => $uniq_id
-                        }
-                    );
+                    push(@CHANNELS_WANTED, $chan_ref);
                     last;
                 }
             }
         }
 
         if ($vpid) {
-            push(@CHANNELS_TV,
-                {  vdr_id       => $vdr_id,
-                   name         => $name,
-                   frequency    => MHz($frequency),
-                   polarization => $polarization,
-                   source       => $source,
-                   symbolrate   => $symbolrate,
-                   vpid         => $vpid,
-                   apid         => $apid,
-                   tpid         => $tpid,
-                   ca           => $ca,
-                   service_id   => $service_id,
-                   nid          => $nid,
-                   tid          => $tid,
-                   rid          => $rid,
-                   uniq_id      => $uniq_id
-                 }
-            );
+            push(@CHANNELS_TV, $chan_ref);
         } elsif ($apid) {
-            push(@CHANNELS_RADIO,
-                {  vdr_id       => $vdr_id,
-                   name         => $name,
-                   frequency    => MHz($frequency),
-                   polarization => $polarization,
-                   source       => $source,
-                   symbolrate   => $symbolrate,
-                   vpid         => $vpid,
-                   apid         => $apid,
-                   tpid         => $tpid,
-                   ca           => $ca,
-                   service_id   => $service_id,
-                   nid          => $nid,
-                   tid          => $tid,
-                   rid          => $rid,
-                   uniq_id      => $uniq_id
-                 }
-            );
+            push(@CHANNELS_RADIO, $chan_ref);
         }
         if ($use_groups && $group_name) {
-            push(@{$CHAN{$group_number}->{channels}},
-                 {  vdr_id       => $vdr_id,
-                    name         => $name,
-                    frequency    => MHz($frequency),
-                    polarization => $polarization,
-                    source       => $source,
-                    symbolrate   => $symbolrate,
-                    vpid         => $vpid,
-                    apid         => $apid,
-                    tpid         => $tpid,
-                    ca           => $ca,
-                    service_id   => $service_id,
-                    nid          => $nid,
-                    tid          => $tid,
-                    rid          => $rid,
-                    uniq_id      => $uniq_id
-                 }
-            );
+            push(@{$CHAN{$group_number}->{channels}}, $chan_ref);
         }
     }
     $CHAN{$CHAN_FULL}->{title}    = gettext('All channels');
@@ -1199,27 +1136,8 @@ sub get_vdrid_from_channelid {
                 return ($channel->{vdr_id});
             }
         }
-    } elsif ($channel_id =~ /^(.*)-(.*)-(.*)-(.*)-(.*)$/) {
-        for my $channel (@{$CHAN{$CHAN_FULL}->{channels}}) {
-            if (   $channel->{source} eq $1
-                && $channel->{nid} == $2
-                && ($channel->{nid} ? $channel->{tid} : $channel->{frequency}) == $3
-                && $channel->{service_id} == $4
-                && $channel->{rid} == $5)
-            {
-                return ($channel->{vdr_id});
-            }
-        }
-    } elsif ($channel_id =~ /^(.*)-(.*)-(.*)-(.*)$/) {
-        for my $channel (@{$CHAN{$CHAN_FULL}->{channels}}) {
-            if (   $channel->{source} eq $1
-                && $channel->{nid} == $2
-                && ($channel->{nid} || $channel->{tid} ? $channel->{tid} : $channel->{frequency}) == $3
-                && $channel->{service_id} == $4)
-            {
-                return ($channel->{vdr_id});
-            }
-        }
+    } elsif (my $channel = $CHAN_TABLES{by_channel_id}->{$channel_id}) {
+        return ($channel->{vdr_id});
     } else {
         print "Can't find channel_id $channel_id\n";
     }
