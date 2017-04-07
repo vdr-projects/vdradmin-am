@@ -38,12 +38,7 @@ use constant {
     EV_ID           => 8,
     EV_VDR_ID       => 9,
     EV_EVENT_ID     => 10,
-    EV_VIDEO        => 11,
-    EV_AUDIO        => 12,
-    EV_SUBS         => 13,
-    EV_VIDEO_RAW    => 14,
-    EV_AUDIO_RAW    => 15,
-    EV_SUBS_RAW     => 16,
+    EV_STREAM_INFO  => 11,
 };
 
 my $VERSION = "3.6.10";
@@ -1373,8 +1368,8 @@ sub EPG_buildTree {
                     if ($tok eq "-E") {
                         # no need for chomp here - split() will take care
                         my ($event_id, $time, $duration) = split(/ /, $rest, 4);
-                        my ($title, $subtitle, $summary, $vps, $video, $audio, $subs, @video_raw, @audio_raw, @subs_raw);
-                        @video_raw = @audio_raw = @subs_raw = ();
+                        my ($title, $subtitle, $summary, $vps);
+                        my @stream_info = ();
                         while($_ = <$SOCK>) {
                             chomp;
                             Encode::from_to($_, $from_charset, $to_charset) if ($recode);
@@ -1383,28 +1378,9 @@ sub EPG_buildTree {
                             if ($tok eq "-T") { $title    = $rest }
                             elsif ($tok eq "-S") { $subtitle = $rest; }
                             elsif ($tok eq "-D") { $summary  = $rest; }
-                            elsif ($tok eq "-X") {
-                                my ($what, $garbage, $lang, $descr) = split(/ /, $rest, 4);
-                                if ($what eq "1") {
-                                    push (@video_raw, join(" ", "X", $rest));
-                                    $video .= ", " if($video);
-                                    $video .= $descr;
-                                    $video .= " (" . $lang . ")";
-                                }
-                                elsif ($what eq "2") {
-                                    push (@audio_raw, join(" ", "X", $rest));
-                                    $audio .= ", " if ($audio);
-                                    $audio .= ($descr ? $descr . " (" . $lang . ")" : $lang);
-                                }
-                                elsif ($what eq "3") {
-                                    push (@subs_raw, join(" ", "X", $rest));
-                                    $subs .= ", " if ($subs);
-                                    $subs .= ($descr ? $descr . " (" . $lang . ")" : $lang);
-                                }
-                            }
+                            elsif ($tok eq "-X") { push(@stream_info, $rest); }
                             elsif ($tok eq "-V") { $vps  = $rest; }
                             elsif ($tok eq "-e") {
-
                                 #
                                 $low_time = $time if ($time < $low_time);
                                 push(@events,
@@ -1419,12 +1395,7 @@ sub EPG_buildTree {
                                         $id,                # EV_ID
                                         $vdr_id,            # EV_VDR_ID
                                         $event_id,          # EV_EVENT_ID
-                                        $video,             # EV_VIDEO
-                                        $audio,             # EV_AUDIO
-                                        $subs,              # EV_SUBS
-                                        \@video_raw,        # EV_VIDEO_RAW
-                                        \@audio_raw,        # EV_AUDIO_RAW
-                                        \@subs_raw,         # EV_SUBS_RAW
+                                        join("\n", @stream_info),  # EV_STREAM_INFO
                                      ]
                                 );
                                 $id++;
@@ -1458,6 +1429,48 @@ sub EPG_buildTree {
         }
     }
     Log(LOG_INFO, "[EPG] EPGTree: $id events, $bc broadcasters (lowtime $low_time)");
+}
+
+sub getEventStreamInfo {
+    my ($event, $type, $raw) = @_;
+
+    my $type_re = qr/^$type/;
+    my @streams = grep { /$type_re/ } split("\n", $event->[EV_STREAM_INFO]);
+    if ($raw) {
+        if (wantarray) {
+            return map { "X " . $_ } @streams;
+        } else {
+            return join("\n", map { "X " . $_ } @streams);
+        }
+    } else {
+        my @out = ();
+        for my $s (@streams) {
+            my ($what, $garbage, $lang, $descr) = split(/ /, $s, 4);
+            if ($what eq "1") { $what = "MPEG2: "; }
+            elsif ($what eq "2") { $what = "MP2: "; }
+            elsif ($what eq "4") { $what = "AC3: "; }
+            elsif ($what eq "5") { $what = "H.264: "; }
+            elsif ($what eq "6") { $what = "HEAAC: "; }
+            else { $what = "" };
+            push(@out, $what . ($descr ? $descr . " (" . $lang . ")" : $lang));
+        }
+        return wantarray? @out : join(", ", @out);
+    }
+}
+
+sub getEventVideo {
+    my ($event, $raw) = @_;
+    return getEventStreamInfo($event, "[15]", $raw);
+}
+
+sub getEventAudio {
+    my ($event, $raw) = @_;
+    return getEventStreamInfo($event, "[246]", $raw);
+}
+
+sub getEventSubs {
+    my ($event, $raw) = @_;
+    return getEventStreamInfo($event, "3", $raw);
 }
 
 #############################################################################
@@ -4045,19 +4058,19 @@ sub prog_detail {
         $vdr_id = get_vdrid_from_channelid($q->param("channel_id"));
     }
     if ($vdr_id && $epg_id) {
-        for (@{ $EPG{$vdr_id} }) {
+        for my $event (@{ $EPG{$vdr_id} }) {
 
-            #if($_->[EV_ID] == $epg_id) { #XXX
-            if ($_->[EV_EVENT_ID] == $epg_id) {
-                $channel_name = $_->[EV_CHANNEL_NAME];
-                $title        = $_->[EV_TITLE];
-                $subtitle     = $_->[EV_SUBTITLE];
-                $start        = $_->[EV_START];
-                $stop         = $_->[EV_STOP];
-                $text         = $_->[EV_SUMMARY];
-                $vps          = $_->[EV_VPS];
-                $video        = $_->[EV_VIDEO];
-                $audio        = $_->[EV_AUDIO];
+            #if($event->[EV_ID] == $epg_id) { #XXX
+            if ($event->[EV_EVENT_ID] == $epg_id) {
+                $channel_name = $event->[EV_CHANNEL_NAME];
+                $title        = $event->[EV_TITLE];
+                $subtitle     = $event->[EV_SUBTITLE];
+                $start        = $event->[EV_START];
+                $stop         = $event->[EV_STOP];
+                $text         = $event->[EV_SUMMARY];
+                $vps          = $event->[EV_VPS];
+                $video        = getEventVideo($event);
+                $audio        = getEventAudio($event);
 
                 # find epgimages
                 if ($CONFIG{EPGIMAGES} && -d $CONFIG{EPGIMAGES}) {
@@ -4178,8 +4191,8 @@ sub prog_detail_form {
                   subtitle     => $displaysubtitle,
                   description  => $displaydescription,
                   vps          => $event->[EV_VPS] ? my_strftime("%A, %x %H:%M", $event->[EV_VPS]) : undef,
-                  video        => $event->[EV_VIDEO],
-                  audio        => $event->[EV_AUDIO],
+                  video        => getEventVideo($event),
+                  audio        => getEventAudio($event),
                   referer      => $ref ? Encode_Referer($ref) : undef,
                   help_url     => HelpURL("edit_epg")
         }
@@ -4223,9 +4236,9 @@ sub prog_detail_aktion {
             $new_description = sprintf ("D %s\n", $description);
         }
 
-        $new_video = join ("\n", @{$event->[EV_VIDEO_RAW]});
+        $new_video = getEventVideo($event, 1);
         $new_video .= "\n" if ($new_video);
-        $new_audio = join ("\n", @{$event->[EV_AUDIO_RAW]});
+        $new_audio = getEventAudio($event, 1);
         $new_audio .= "\n" if ($new_audio);
         $new_vps = sprintf ("V %s\n", $event->[EV_VPS]) if ($event->[EV_VPS]);
 
