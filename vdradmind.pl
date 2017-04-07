@@ -30,15 +30,14 @@ use constant {
     EV_CHANNEL_NAME => 0,
     EV_START        => 1,
     EV_STOP         => 2,
-    EV_DURATION     => 3,
-    EV_TITLE        => 4,
-    EV_SUBTITLE     => 5,
-    EV_SUMMARY      => 6,
-    EV_VPS          => 7,
-    EV_ID           => 8,
-    EV_VDR_ID       => 9,
-    EV_EVENT_ID     => 10,
-    EV_STREAM_INFO  => 11,
+    EV_TITLE        => 3,
+    EV_SUBTITLE     => 4,
+    EV_SUMMARY      => 5,
+    EV_VPS          => 6,
+    EV_ID           => 7,
+    EV_VDR_ID       => 8,
+    EV_EVENT_ID     => 9,
+    EV_STREAM_INFO  => 10,
 };
 
 my $VERSION = "3.6.10";
@@ -1387,7 +1386,6 @@ sub EPG_buildTree {
                                      [  $channel_name,      # EV_CHANNEL_NAME
                                         $time,              # EV_START
                                         $time + $duration,  # EV_STOP
-                                        $duration,          # EV_DURATION
                                         $title,             # EV_TITLE
                                         $subtitle,          # EV_SUBTITLE
                                         $summary,           # EV_SUMMARY
@@ -4184,7 +4182,7 @@ sub prog_detail_form {
                   channel_name => $event->[EV_CHANNEL_NAME],
                   start_hr     => sprintf("%s - %s", my_strftime("%A, %x %H:%M", $event->[EV_START]), my_strftime("%H:%M", $event->[EV_STOP])),
                   start        => $event->[EV_START],
-                  duration     => $event->[EV_DURATION],
+                  duration     => $event->[EV_STOP] - $event->[EV_START],
                   #table_id     => $event->{table_id},
                   #version      => $event->{version},
                   title        => $displaytitle,
