@@ -7106,8 +7106,8 @@ sub grab_picture {
     $CONFIG{TV_SIZE}     = $q->param("size")     if($q->param("size"));
     $CONFIG{TV_SIZE}     = "half" unless($CONFIG{TV_SIZE});
 
-    my $maxwidth  = 768;
-    my $maxheight = 576;
+    my $maxwidth  = 960;
+    my $maxheight = 540;
     my ($width, $height);
     if ($CONFIG{TV_SIZE} eq "full") {
         ($width, $height) = ($maxwidth, $maxheight);
