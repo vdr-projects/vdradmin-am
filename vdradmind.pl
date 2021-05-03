@@ -1101,7 +1101,7 @@ sub ChanTree {
     }
 
     # Temporarly disabled, because channellist also gets sorted by names. This causes duplicate channels appear side-by-side
-    # Sort channel lists by channel name 
+    # Sort channel lists by channel name
     #foreach my $idx (keys(%CHAN)) {
     #    @{$CHAN{$idx}->{channels}} = sort {$a->{name} cmp $b->{name}} @{$CHAN{$idx}->{channels}}
     #}
@@ -1165,7 +1165,7 @@ sub get_name_from_uniqid {
 #            return $_->{name} if ($_->{uniq_id} eq $uniq_id);
 #        }
 
-        # Es darf nach Spec nur eine Ãœbereinstimmung geben
+        # Es darf nach Spec nur eine Übereinstimmung geben
         if (scalar(@C) == 1) {
             return $C[0]->{name};
         }
@@ -1179,7 +1179,7 @@ sub get_name_from_vdrid {
         # Kanalliste nach identischer vdr_id durchsuchen
         my @C = grep($_->{vdr_id} == $vdr_id, @{$CHAN{$CHAN_FULL}->{channels}});
 
-        # Es darf nach Spec nur eine Ãœbereinstimmung geben
+        # Es darf nach Spec nur eine Übereinstimmung geben
         if (scalar(@C) == 1) {
             return $C[0]->{name};
         }
@@ -1193,7 +1193,7 @@ sub get_channel_from_vdrid {
         # Kanalliste nach identischer vdr_id durchsuchen
         my @C = grep($_->{vdr_id} == $vdr_id, @{$CHAN{$CHAN_FULL}->{channels}});
 
-        # Es darf nach Spec nur eine Ãœbereinstimmung geben
+        # Es darf nach Spec nur eine Übereinstimmung geben
         if (scalar(@C) == 1) {
             return $C[0];
         }
@@ -1207,7 +1207,7 @@ sub get_transponder_from_vdrid {
         # Kanalliste nach identischer vdr_id durchsuchen
         my @C = grep($_->{vdr_id} == $vdr_id, @{$CHAN{$CHAN_FULL}->{channels}});
 
-        # Es darf nach Spec nur eine Ãœbereinstimmung geben
+        # Es darf nach Spec nur eine Übereinstimmung geben
         if (scalar(@C) == 1) {
             return ("$C[0]->{source}-$C[0]->{frequency}-$C[0]->{polarization}");
         }
@@ -1221,7 +1221,7 @@ sub get_ca_from_vdrid {
         # Kanalliste nach identischer vdr_id durchsuchen
         my @C = grep($_->{vdr_id} == $vdr_id, @{$CHAN{$CHAN_FULL}->{channels}});
 
-        # Es darf nach Spec nur eine Ãœbereinstimmung geben
+        # Es darf nach Spec nur eine Übereinstimmung geben
         if (scalar(@C) == 1) {
             return ($C[0]->{ca});
         }
@@ -3032,7 +3032,7 @@ sub epgsearch_Param2Line {
         $directory =~ s/:/\|/g;
     }
 
-    #TODO: $searchtimer_from & $searchtimer_until auf korrektes Format prÃ¼fen
+    #TODO: $searchtimer_from & $searchtimer_until auf korrektes Format prüfen
     my $searchtimer_from = $q->param("searchtimer_from");
     if ($searchtimer_from) {
         $searchtimer_from = my_mktime("0", "0", substr($searchtimer_from, 8, 2), substr($searchtimer_from, 5, 2) - 1, substr($searchtimer_from, 0, 4));
@@ -5343,7 +5343,7 @@ sub encode_RecTitle {
         # VFAT on
         for ($i = 0 ; $i < length($title) ; $i++) {
             $c = substr($title, $i, 1);
-            unless ($c =~ /[Ã¶Ã¤Ã¼ÃŸÃ–Ã„ÃœA-Za-z0123456789_!@\$%&()+,.\-;=~ ]/) {
+            unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&()+,.\-;=~ ]/) {
                 $newtitle .= sprintf("#%02X", ord($c));
             } else {
                 $newtitle .= $c;
