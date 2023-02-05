@@ -1,0 +1,33 @@
+[Unit]
+Description=vdradmin-am, the web-based administration tool for VDR
+Documentation=man:vdradmind(8)
+Documentation=file:///usr/share/doc/vdradmin/README
+
+After=vdr.service
+After=network.target
+
+ConditionPathExists=/etc/vdradmin
+ConditionPathExists=/etc/vdradmin/vdradmind.conf
+
+
+[Service]
+EnvironmentFile=-/etc/sysconfig/vdradmin
+
+PIDFile=/var/lib/vdradmin/vdradmind.pid
+
+Nice=10
+
+Type=forking
+
+User=vdradmin
+Group=vdradmin
+
+ExecStart=/usr/sbin/vdradmind --pid /var/lib/vdradmin/vdradmind.pid --cfgdir /etc/vdradmin $OPTS
+
+ExecStop=/usr/sbin/vdradmind --pid /var/lib/vdradmin/vdradmind.pid $OPTS --kill 
+
+Restart=on-failure
+
+
+[Install]
+WantedBy=multi-user.target
