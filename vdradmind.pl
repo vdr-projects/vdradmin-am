@@ -409,6 +409,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         exit(1) unless (-e $PIDFILE);
         my $pid = getPID($PIDFILE);
         my $killed = defined($pid) ? kill(2, $pid) : -1;
+        sleep(1);
         if ($killed > 0 && -e $PIDFILE) { # Not deleted by kill/Shutdown()?
             unlink($PIDFILE) or Log(LOG_WARNING, "Can't delete pid file '$PIDFILE': $!");
         }
@@ -598,6 +599,8 @@ if ($UseSSL) {
             LocalPort     => $CONFIG{SERVERPORT},
             LocalAddr     => $CONFIG{SERVERHOST},
             Listen        => 10,
+            ReuseAddr     => 1,
+            ReusePort     => 1,
             Reuse         => 1,
             SSL_cert_file => "$CERT_FILE",
             SSL_key_file  => "$KEY_FILE",
@@ -614,6 +617,8 @@ if ($UseSSL) {
             LocalPort => $CONFIG{SERVERPORT},
             LocalAddr => $CONFIG{SERVERHOST},
             Listen    => 10,
+            ReuseAddr => 1,
+            ReusePort => 1,
             Reuse     => 1
         );
         *{HTTP::Daemon::product_tokens} = sub {return $SERVERVERSION;};
