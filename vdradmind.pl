@@ -1100,7 +1100,7 @@ sub ChanTree {
         $CHAN{$CHAN_RADIO}->{channels} = \@CHANNELS_RADIO;
     }
 
-    # Temporarly disabled, because channellist also gets sortd ba names. this couses duplicate channels appear side-by-side
+    # Temporarly disabled, because channellist also gets sorted by names. This causes duplicate channels appear side-by-side
     # Sort channel lists by channel name 
     #foreach my $idx (keys(%CHAN)) {
     #    @{$CHAN{$idx}->{channels}} = sort {$a->{name} cmp $b->{name}} @{$CHAN{$idx}->{channels}}
