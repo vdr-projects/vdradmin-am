@@ -26,7 +26,21 @@ require 5.004;
 
 use vars qw($PROCNAME);
 
-my $VERSION = "3.6.10";
+use constant {
+    EV_CHANNEL_NAME => 0,
+    EV_START        => 1,
+    EV_STOP         => 2,
+    EV_TITLE        => 3,
+    EV_SUBTITLE     => 4,
+    EV_SUMMARY      => 5,
+    EV_VPS          => 6,
+    EV_ID           => 7,
+    EV_VDR_ID       => 8,
+    EV_EVENT_ID     => 9,
+    EV_STREAM_INFO  => 10,
+};
+
+my $VERSION = "3.6.10-glenvt18";
 my $BASENAME;
 my $EXENAME;
 
@@ -69,8 +83,11 @@ use Time::Local qw(timelocal);
 use POSIX qw(:sys_wait_h strftime mktime locale_h);
 use MIME::Base64 ();
 use File::Temp ();
+use File::Find ();
 use URI ();
 use URI::Escape qw(uri_escape);
+use HTTP::Tiny;
+use IO::Select;
 
 my $can_use_encode = 1;
 $can_use_encode = undef unless (eval { require Encode });
@@ -109,6 +126,8 @@ my $CHAN_FULL   = 0;
 my $CHAN_WANTED = 1;
 my $CHAN_TV     = 2;
 my $CHAN_RADIO  = 3;
+# Channel groups start with this number (to be sorted like strings)
+my $CHAN_GROUPS = 40;
 
 sub true ()           { 1 }
 sub false ()          { 0 }
@@ -131,8 +150,9 @@ $CONFIG{CACHE_TIMEOUT}        = 60;
 $CONFIG{CACHE_LASTUPDATE}     = 0;
 $CONFIG{CACHE_REC_TIMEOUT}    = 60;
 $CONFIG{CACHE_REC_LASTUPDATE} = 0;
-$CONFIG{CACHE_REC_ENABLED}    = 1;
+$CONFIG{CACHE_REC_ENABLED}    = 0;
 $CONFIG{AUTO_SAVE_CONFIG}     = 1;
+$CONFIG{HTTP_KEEPALIVE_TIMEOUT} = 10;
 
 #
 $CONFIG{VDR_HOST}   = "localhost";
@@ -157,6 +177,7 @@ $CONFIG{PASSWORD}       = "linvdr";
 $CONFIG{GUEST_ACCOUNT}  = 0;
 $CONFIG{USERNAME_GUEST} = "guest";
 $CONFIG{PASSWORD_GUEST} = "guest";
+$CONFIG{LOCAL_NET_ONLY}  = 0;
 
 #
 $CONFIG{ZEITRAHMEN} = 1;
@@ -201,6 +222,8 @@ $CONFIG{ST_STREAMDEV_HOST} = ""; # streamdev/xineliboutput host
 $CONFIG{ST_STREAMDEV_PORT} = 3000;
 $CONFIG{ST_XINELIB_PORT}   = 37890;
 $CONFIG{ST_VIDEODIR}       = "";
+$CONFIG{ST_DIRECT_LINKS_ON} = 0;
+$CONFIG{ST_REC_STREAMDEV} = 1;
 
 #
 $CONFIG{EPG_PRUNE}     = 0;
@@ -302,7 +325,7 @@ $UserCSS = "user.css" if (-e "$USER_CSS");
 
 my $USE_SHELL_GZIP = false;          # set on false to use the gzip library
 
-my (%EPG, %CHAN, $q, $ACCEPT_GZIP, $SVDRP, $low_time, @RECORDINGS);
+my (%EPG, %CHAN, %CHAN_TABLES, $q, $ACCEPT_GZIP, $SVDRP, $low_time, @RECORDINGS);
 my (%mimehash) = (html => "text/html",
                   png  => "image/png",
                   gif  => "image/gif",
@@ -324,7 +347,7 @@ my ($UseSSL, $UseIPv6);
 my $DAEMON = 1;
 for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
     $_ = $ARGV[$i];
-    if (/^(-h|--help)/) {
+    if (/^(-h|--help)$/) {
         $DAEMON = 0;
         print("Usage $EXENAME [OPTION]...\n");
         print("A perl client for the Linux Video Disk Recorder.\n\n");
@@ -340,11 +363,11 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         print("  -h         --help              this message\n");
         exit(0);
     }
-    if (/^(--nofork|-n)/) {
+    if (/^(--nofork|-n)$/) {
         $DAEMON = 0;
         next;
     }
-    if (/^(--cfgdir|-d)/) {
+    if (/^(--cfgdir|-d)$/) {
         $ETCDIR        = $ARGV[ ++$i ];
         $CONFFILE      = "${ETCDIR}/vdradmind.conf";
         $AT_FILENAME   = "${ETCDIR}/vdradmind.at";
@@ -353,7 +376,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         $USER_CSS      = "${ETCDIR}/user.css";
         next;
     }
-    if (/^(--config|-c)/) {
+    if (/^(--config|-c)$/) {
         $DAEMON = 0;
         if (-e $CONFFILE) {
             ReadConfig();
@@ -381,7 +404,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         print(gettext("Config file written successfully.") . "\n");
         exit(0);
     }
-    if (/^(--kill|-k)/) {
+    if (/^(--kill|-k)$/) {
         $DAEMON = 0;
         exit(1) unless (-e $PIDFILE);
         my $pid = getPID($PIDFILE);
@@ -391,28 +414,28 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         }
         exit($killed > 0 ? 0 : 1);
     }
-    if (/^(--pid|-p)/) {
+    if (/^(--pid|-p)$/) {
         $PIDFILE = $ARGV[ ++$i ];
         next;
     }
-    if (/^(--ipv6-all)/) {
+    if (/^(--ipv6-all)$/) {
         $UseIPv6 = 2;
         next;
     }
-    if (/^(--ipv6|-6)/) {
+    if (/^(--ipv6|-6)$/) {
         $UseIPv6 = 1;
         next;
     }
-    if (/^(--ssl|-s)/) {
+    if (/^(--ssl|-s)$/) {
         $UseSSL = 1;
         next;
     }
-    if (/^(--log|-l)/) {
+    if (/^(--log|-l)$/) {
         $LOGLEVEL = $ARGV[ ++$i ];
         $LOGGING = 1;
         next;
     }
-    if (/^(--logfile|-L)/) {
+    if (/^(--logfile|-L)$/) {
         $LOGFILE = $ARGV[ ++$i ];
         if ($LOGFILE =~ m|/|) {
             ($LOGDIR, $LOGFILE) = $LOGFILE =~ m|^(.+)/([^/]*)$|;
@@ -422,7 +445,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         $LOGGING = 1;
         next;
     }
-    if (/^(--displaycall|-i)/) {
+    if (/^(--displaycall|-i)$/) {
         $DAEMON = 0;
         for (my $z = 0 ; $z < 5 ; $z++) {
             DisplayMessage($ARGV[ $i + 1 ]);
@@ -431,13 +454,13 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         CloseSocket();
         exit(0);
     }
-    if (/^(--message|-m)/) {
+    if (/^(--message|-m)$/) {
         $DAEMON = 0;
         DisplayMessage($ARGV[ $i + 1 ]);
         CloseSocket();
         exit(0);
     }
-    if (/^-u/) {
+    if (/^-u$/) {
 
         # Don't use user.css
         $UserCSS = undef;
@@ -555,14 +578,10 @@ if ($DAEMON) {
     Log(LOG_ALWAYS, sprintf("%s %s started", $EXENAME, $VERSION));
 }
 
-$SIG{__DIE__} = \&SigDieHandler;
+my ($Daemon, $Client, $Request);
 
-my @reccmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/reccmds.conf");
-my @vdrcmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/commands.conf");
-
-my ($Socket);
 if ($UseSSL) {
-    if (eval { require IO::Socket::SSL; }) {
+    if (eval { require HTTP::Daemon::SSL; }) {
         my $CERT_FILE = "$CERTSDIR/server-cert.pem";
         die("ERROR: $CERT_FILE missing. Please create it!\n") unless (-e $CERT_FILE);
 
@@ -575,39 +594,49 @@ if ($UseSSL) {
         my $CA_FILE = "$CERTSDIR/my-ca.pem";
         $CA_FILE = undef unless (-f $CA_FILE);
 
-        $Socket = IO::Socket::SSL->new(Proto         => 'tcp',
-                                       LocalPort     => $CONFIG{SERVERPORT},
-                                       LocalAddr     => $CONFIG{SERVERHOST},
-                                       Listen        => 10,
-                                       Reuse         => 1,
-                                       SSL_cert_file => "$CERT_FILE",
-                                       SSL_key_file  => "$KEY_FILE",
-                                       SSL_ca_file   => "$CA_FILE",
-                                       SSL_ca_path   => "$CA_PATH"
+        $Daemon = HTTP::Daemon::SSL->new(
+            LocalPort     => $CONFIG{SERVERPORT},
+            LocalAddr     => $CONFIG{SERVERHOST},
+            Listen        => 10,
+            Reuse         => 1,
+            SSL_cert_file => "$CERT_FILE",
+            SSL_key_file  => "$KEY_FILE",
+            SSL_ca_file   => "$CA_FILE",
+            SSL_ca_path   => "$CA_PATH"
         );
+        *{HTTP::Daemon::SSL::product_tokens} = sub {return $SERVERVERSION;};
     } else {
-        die("ERROR: Can't load module IO::Socket::SSL: $@");
+        die("ERROR: Can't load module HTTP::Daemon::SSL: $@");
     }
 } else {
-    $Socket = $InetSocketModule->new(Proto     => 'tcp',
-                                     LocalPort => $CONFIG{SERVERPORT},
-                                     LocalAddr => $CONFIG{SERVERHOST},
-                                     Listen    => 10,
-                                     Reuse     => 1
-    );
+    if (eval { require HTTP::Daemon; }) {
+        $Daemon = HTTP::Daemon->new(
+            LocalPort => $CONFIG{SERVERPORT},
+            LocalAddr => $CONFIG{SERVERHOST},
+            Listen    => 10,
+            Reuse     => 1
+        );
+        *{HTTP::Daemon::product_tokens} = sub {return $SERVERVERSION;};
+    } else {
+        die("ERROR: Can't load module HTTP::Daemon: $@");
+    }
 }
-if (!$Socket) {
+
+if (!$Daemon) {
     my $host = $CONFIG{SERVERHOST} || '(SERVERHOST missing)';
     my $port = $CONFIG{SERVERPORT} || '(SERVERPORT missing)';
     die("Can't start server at $host:$port: $@\n");
 }
-$CONFIG{CACHE_LASTUPDATE} = 0;
-$CONFIG{CACHE_REC_LASTUPDATE} = 0;
+
+$SIG{__DIE__} = \&SigDieHandler;
+
+my @reccmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/reccmds.conf");
+my @vdrcmds = loadCommandsConf("$CONFIG{VDRCONFDIR}/commands.conf");
 
 ##
 # Mainloop
 ##
-my ($Client, $MyURL, $Referer, $Request, $Query, $Guest);
+my ($MyURL, $Referer, $Query, $Guest);
 my @GUEST_USER = qw(prog_detail prog_list prog_list2 prog_timeline timer_list at_timer_list epgsearch_list
   prog_summary rec_list rec_detail show_top toolbar show_help about);
 my @TRUSTED_USER = (
@@ -620,97 +649,150 @@ my $MyStreamBase = "./vdradmin.";
 
 $MyURL = "./vdradmin.pl";
 
-if ($CONFIG{CACHE_BG_UPDATE} == 1) {
-    # Force Update at start
-    Log(LOG_DEBUG, "[EPG] Updating EPG data at startup...");
-    if (UptoDate(1) == 0) {
-        Log(LOG_DEBUG, "[EPG] Updating EPG data at startup SUCCEEDED.");
-        Log(LOG_DEBUG, "[EPG] Setting timeout to " . $CONFIG{CACHE_TIMEOUT} . "min");
-        $Socket->timeout($CONFIG{CACHE_TIMEOUT} * 60);
-    } else {
-        Log(LOG_DEBUG, "[EPG] Updating EPG data at startup FAILED, trying again in 60secs.");
-        # UptoDate() failed, set socket timeout to retry UptoDate() in a minute
-        $Socket->timeout(60);
-    }
-} else {
-    $Socket->timeout($CONFIG{CACHE_TIMEOUT} * 60) if ($CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER});
-}
+my @Connections = ();
+
+$CONFIG{CACHE_LASTUPDATE} = 0;
+$CONFIG{CACHE_REC_LASTUPDATE} = 0;
 
 while (true) {
-    $Client = $Socket->accept();
 
-    #
-    if (!$Client) {
-        Log(LOG_DEBUG, "[EPG] Updating EPG data in the background...");
-        if (UptoDate(1) == 0) {
-            Log(LOG_DEBUG, "[EPG] Updating EPG data in the background SUCCEEDED.");
-            if ($CONFIG{CACHE_BG_UPDATE} || ($CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER})) {
-                Log(LOG_DEBUG, "[EPG] Setting timeout to " . $CONFIG{CACHE_TIMEOUT} . "min");
-                $Socket->timeout($CONFIG{CACHE_TIMEOUT} * 60);
-            }
-        } else {
+    @Connections = grep {$_->{socket}->connected} @Connections;
+    my $fd_set = '';
+    vec($fd_set, $Daemon->fileno, 1) = 1;
+    foreach my $c (@Connections) {
+        vec($fd_set, $c->{socket}->fileno, 1) = 1;
+    }
+
+    my $n_ready = select($fd_set, undef, undef, 2);
+    Log(LOG_DEBUG, sprintf("[DAEMON] select() -> %s", printVec($fd_set))) if $n_ready > 0;
+
+    my $now = time();
+
+    # update EPG
+    if ($n_ready == 0
+            && ($CONFIG{CACHE_BG_UPDATE} == 1
+                || $CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER}
+            )) {
+        if (UptoDate() != 0) {
             Log(LOG_DEBUG, "[EPG] Updating EPG data in the background FAILED, trying again in 60secs.");
-            $Socket->timeout(60);
+            $CONFIG{CACHE_LASTUPDATE} = $now + 60 - $CONFIG{CACHE_TIMEOUT} * 60;
+        }
+    }
+
+    if (vec($fd_set, $Daemon->fileno, 1)) {
+        my $con = $Daemon->accept();
+        if ($con) {
+            Log(LOG_DEBUG, sprintf("[DAEMON] accepted fd=%d, peer=%s", $con->fileno, $con->peerhost));
+            push(@Connections, {socket => $con, ttl => undef});
         }
         next;
     }
+    my @new = ();
+    my $found = undef;
+    foreach my $c (@Connections) {
+        if (vec($fd_set, $c->{socket}->fileno, 1)) {
+            $c->{ttl} = undef;
+            if (!$found) {
+                $found = $c;
+                # don't copy
+            } else {
+                push(@new, $c);
+            }
+        } else {
+            # no incoming data
+            if ($c->{ttl} && $now >= $c->{ttl}) {
+                Log(LOG_DEBUG, sprintf("[CLIENT(%d)] keep-alive timeout\n", $c->{socket}->fileno));
+                close($c->{socket});
+            } else {
+                $c->{ttl} = $now + $CONFIG{HTTP_KEEPALIVE_TIMEOUT} unless $c->{ttl};
+                push(@new, $c);
+            }
+        }
+    }
+    @Connections = @new;
+    next unless $found;
+    # move to the end
+    push(@Connections, $found);
+    $Client = $found->{socket};
+    undef $found;
 
-    my $peer        = $Client->peerhost;
-    my @Request     = ParseRequest($Client);
-    my $raw_request = $Request[0];
+    if ($CONFIG{LOCAL_NET_ONLY} && !subnetcheck($Client->peerhost, $CONFIG{LOCAL_NET})) {
+        closeClient();
+        next;
+    }
+
+    $Client->timeout(2);
+    my $req = $Client->get_request();
+    if ($req) {
+        processRequest($req);
+    } else {
+        Log(LOG_DEBUG, sprintf("[CLIENT(%d)] get_request() failed: %s", $Client->fileno, $Client->reason));
+        closeClient();
+    }
+
+}
+
+#############################################################################
+#############################################################################
+
+sub printVec {
+    my $vec = shift;
+    my @fdarr = ();
+    for (my $i = 0; $i < length($vec) * 8; $i++) {
+        push(@fdarr, $i) if (vec($vec, $i, 1));
+    }
+    return join(',', @fdarr);
+}
+
+sub closeClient {
+    if ($Client) {
+        Log(LOG_DEBUG, sprintf("CLIENT(%d)] close()", $Client->fileno));
+        @Connections = grep {$_->{socket} != $Client} @Connections;
+        close($Client);
+        undef $Client;
+    }
+}
+
+sub processRequest {
+    my $req = shift;
 
     $ACCEPT_GZIP = 0;
 
     #print("REQUEST: $raw_request\n");
-    if ($raw_request =~ /^GET (\/[\w\.\/-\:]*)([\?[\w=&\.\+\%-\:\!\@\~\#]*]*)[\#\d ]+HTTP\/1.\d$/) {
-        ($Request, $Query) = ($1, $2 ? substr($2, 1, length($2)) : undef);
+    my $raw_request = $1 if ($req->as_string =~ /^([^\r\n]++)\r*\n/);
+    Log(LOG_DEBUG, sprintf("[CLIENT(%d)] $raw_request\n", $Client->fileno));
+    if ($req->uri =~ /(\/[\w\.\/-\:]*)(?:\?([\w=&\.\+\%-\:\!\@\~\#]+))?$/) {
+        ($Request, $Query) = ($1, $2);
     } else {
         Error("404", gettext("Not found"), gettext("The requested URL was not found on this server!"));
-        close($Client);
-        next;
+        return;
     }
 
-    $Request =~ s/^\/\/*/\//;
+    $Request =~ s|^/+|/|;
     local $ENV{HTTP_HOST};
 
     # parse header
     my ($username, $password, $http_useragent);
-    for my $line (@Request) {
-
-        #print(">" . $line . "\n");
-        if ($line =~ /Referer: (.*)/) {
-            $Referer = $1;
-        }
-        if ($line =~ /Host: (.*)/) {
-            $ENV{HTTP_HOST} = $1;
-        }
-        if ($line =~ /Authorization: basic (.*)/i) {
-            ($username, $password) = split(":", MIME::Base64::decode_base64($1), 2);
-        }
-        if ($line =~ /User-Agent: (.*)/i) {
-            $http_useragent = $1;
-        }
-        if ($line =~ /Accept-Encoding: (.*)/i) {
-            if ($1 =~ /gzip/) {
-                $ACCEPT_GZIP = 1;
-            }
-        }
-    }
+    $Referer = $req->header("Referer");
+    $ENV{HTTP_HOST} = $req->header("Host");
+    ($username, $password) = split(":", MIME::Base64::decode_base64($1), 2) if ($req->header("Authorization") =~ /basic (.*)/i);
+    $http_useragent = $req->header("User-Agent");
+    $ACCEPT_GZIP = 1 if ($req->header("Accept-Encoding") =~ /gzip/);
 
     my ($http_status, $bytes_transfered);
 
     # authenticate
     #print("Username: $username / Password: $password\n");
     my $checkpass = defined($username) && defined($password);
-    if (($checkpass && $CONFIG{USERNAME} eq $username && $CONFIG{PASSWORD} eq $password) || subnetcheck($peer, $CONFIG{LOCAL_NET})) {
+    if (($checkpass && $CONFIG{USERNAME} eq $username && $CONFIG{PASSWORD} eq $password)
+            || subnetcheck($Client->peerhost, $CONFIG{LOCAL_NET})) {
         $Guest = 0;
     } elsif (($checkpass && $CONFIG{USERNAME_GUEST} eq $username && $CONFIG{PASSWORD_GUEST} eq $password) && $CONFIG{GUEST_ACCOUNT}) {
         $Guest = 1;
     } else {
         ($http_status, $bytes_transfered) = headerNoAuth();
         Log(LOG_INFO, "[ACCESS] " . access_log($Client->peerhost, $username, $raw_request, $http_status, $bytes_transfered, $Request, $http_useragent));
-        close($Client);
-        next;
+        return;
     }
 
     # serve request
@@ -769,22 +851,18 @@ while (true) {
         ($http_status, $bytes_transfered) = SendFile($Request);
     }
     Log(LOG_INFO, "[ACCESS] " . access_log($Client->peerhost, $username, $raw_request, $http_status, $bytes_transfered, $Request, $http_useragent));
-    close($Client);
     $SVDRP->close;
-
-    if ($CONFIG{CACHE_BG_UPDATE} || ($CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER})) {
-        $Socket->timeout($CONFIG{CACHE_TIMEOUT} * 60 - (time() - $CONFIG{CACHE_LASTUPDATE}));
-    }
 }
 
-#############################################################################
-#############################################################################
 sub check_permissions {
     my $rc = 1;
     check_rw_dir($ETCDIR) or $rc = 0;
     check_rw_dir($CERTSDIR) if ($UseSSL);
     check_rw_dir($TEMPLATECACHE) or $rc = 0;
-    check_rw_dir($LOGDIR) or $rc = 0;
+    # Don't check permissions when logging to syslog or stderr
+    !$LOGFILE
+        or $LOGFILE eq "syslog" or $LOGFILE eq "stderr"
+        or check_rw_dir($LOGDIR) or $rc = 0;
     check_rw_file($PIDFILE) or $rc = 0 if $DAEMON;
     check_rw_file($CONFFILE) or $rc = 0;
 
@@ -932,21 +1010,44 @@ sub MHz {
     return (int($frequency));
 }
 
-sub ChanTree { #TODO? save channel in each list as reference
+sub ChanTree {
     undef(%CHAN);
+    undef(%CHAN_TABLES);
     my (@CHANNELS_FULL, @CHANNELS_WANTED, @CHANNELS_TV, @CHANNELS_RADIO);
-    $SVDRP->command("lstc");
+    my $group_name = "";
+    my $group_number = $CHAN_GROUPS - 1;
+
+    if (!$FEATURES{VDRVERSION}) {
+        # first connection - have to get version
+        $SVDRP->command("help");
+        $SVDRP->readresponse;
+    }
+    my $use_groups = ($FEATURES{VDRVERSION} >= 10600);
+    if ($use_groups) {
+        $SVDRP->command("lstc :groups");
+    } else {
+        $SVDRP->command("lstc");
+    }
     my ($DATA) = $SVDRP->readresponse;
     while ($_ = shift @$DATA) {
         chomp;
         my ($vdr_id, $temp) = split(/ /, $_, 2);
+        if ($use_groups && $temp =~ /^:(.*)/) {
+            # :group_name
+            $group_name = $1;
+            $group_number += 1;
+            $CHAN{$group_number}->{title}    = $group_name;
+            $CHAN{$group_number}->{channels} = [];
+            next;
+        }
         my ($name, $frequency, $polarization, $source, $symbolrate, $vpid, $apid, $tpid, $ca, $service_id, $nid, $tid, $rid) = split(/\:/, $temp);
         $name =~ /(^[^,;]*).*/;    #TODO?
         $name = $1;
         my $uniq_id = $source . "-" . $nid . "-" . ($nid || $tid ? $tid : $frequency) . "-" . $service_id;
         $uniq_id .= "-" . $rid if ($rid != 0);
-        push(@CHANNELS_FULL,
-             {  vdr_id       => $vdr_id,
+
+        my $chan_ref = {
+                vdr_id       => $vdr_id,
                 name         => $name,
                 frequency    => MHz($frequency),
                 polarization => $polarization,
@@ -961,73 +1062,27 @@ sub ChanTree { #TODO? save channel in each list as reference
                 tid          => $tid,
                 rid          => $rid,
                 uniq_id      => $uniq_id
-             }
-        );
+            };
+
+        push(@CHANNELS_FULL, $chan_ref);
+        $CHAN_TABLES{by_channel_id}->{$uniq_id} = $chan_ref;
 
         if ($CONFIG{CHANNELS_WANTED}) {
             for my $n (split(",", $CONFIG{CHANNELS_WANTED})) {
                 if ($n eq $vdr_id) {
-                    push(@CHANNELS_WANTED,
-                        {  vdr_id       => $vdr_id,
-                           name         => $name,
-                           frequency    => MHz($frequency),
-                           polarization => $polarization,
-                           source       => $source,
-                           symbolrate   => $symbolrate,
-                           vpid         => $vpid,
-                           apid         => $apid,
-                           tpid         => $tpid,
-                           ca           => $ca,
-                           service_id   => $service_id,
-                           nid          => $nid,
-                           tid          => $tid,
-                           rid          => $rid,
-                           uniq_id      => $uniq_id
-                        }
-                    );
+                    push(@CHANNELS_WANTED, $chan_ref);
                     last;
                 }
             }
         }
 
         if ($vpid) {
-            push(@CHANNELS_TV,
-                {  vdr_id       => $vdr_id,
-                   name         => $name,
-                   frequency    => MHz($frequency),
-                   polarization => $polarization,
-                   source       => $source,
-                   symbolrate   => $symbolrate,
-                   vpid         => $vpid,
-                   apid         => $apid,
-                   tpid         => $tpid,
-                   ca           => $ca,
-                   service_id   => $service_id,
-                   nid          => $nid,
-                   tid          => $tid,
-                   rid          => $rid,
-                   uniq_id      => $uniq_id
-                 }
-            );
+            push(@CHANNELS_TV, $chan_ref);
         } elsif ($apid) {
-            push(@CHANNELS_RADIO,
-                {  vdr_id       => $vdr_id,
-                   name         => $name,
-                   frequency    => MHz($frequency),
-                   polarization => $polarization,
-                   source       => $source,
-                   symbolrate   => $symbolrate,
-                   vpid         => $vpid,
-                   apid         => $apid,
-                   tpid         => $tpid,
-                   ca           => $ca,
-                   service_id   => $service_id,
-                   nid          => $nid,
-                   tid          => $tid,
-                   rid          => $rid,
-                   uniq_id      => $uniq_id
-                 }
-            );
+            push(@CHANNELS_RADIO, $chan_ref);
+        }
+        if ($use_groups && $group_name) {
+            push(@{$CHAN{$group_number}->{channels}}, $chan_ref);
         }
     }
     $CHAN{$CHAN_FULL}->{title}    = gettext('All channels');
@@ -1043,6 +1098,11 @@ sub ChanTree { #TODO? save channel in each list as reference
     if (@CHANNELS_RADIO) {
         $CHAN{$CHAN_RADIO}->{title}    = gettext('Radio channels');
         $CHAN{$CHAN_RADIO}->{channels} = \@CHANNELS_RADIO;
+    }
+
+    # Sort channel lists by channel name
+    foreach my $idx (keys(%CHAN)) {
+        @{$CHAN{$idx}->{channels}} = sort {$a->{name} cmp $b->{name}} @{$CHAN{$idx}->{channels}}
     }
 }
 
@@ -1070,27 +1130,8 @@ sub get_vdrid_from_channelid {
                 return ($channel->{vdr_id});
             }
         }
-    } elsif ($channel_id =~ /^(.*)-(.*)-(.*)-(.*)-(.*)$/) {
-        for my $channel (@{$CHAN{$CHAN_FULL}->{channels}}) {
-            if (   $channel->{source} eq $1
-                && $channel->{nid} == $2
-                && ($channel->{nid} ? $channel->{tid} : $channel->{frequency}) == $3
-                && $channel->{service_id} == $4
-                && $channel->{rid} == $5)
-            {
-                return ($channel->{vdr_id});
-            }
-        }
-    } elsif ($channel_id =~ /^(.*)-(.*)-(.*)-(.*)$/) {
-        for my $channel (@{$CHAN{$CHAN_FULL}->{channels}}) {
-            if (   $channel->{source} eq $1
-                && $channel->{nid} == $2
-                && ($channel->{nid} || $channel->{tid} ? $channel->{tid} : $channel->{frequency}) == $3
-                && $channel->{service_id} == $4)
-            {
-                return ($channel->{vdr_id});
-            }
-        }
+    } elsif (my $channel = $CHAN_TABLES{by_channel_id}->{$channel_id}) {
+        return ($channel->{vdr_id});
     } else {
         print "Can't find channel_id $channel_id\n";
     }
@@ -1215,6 +1256,43 @@ sub rtrim($)
     return $string;
 }
 
+# quotemeta() for $MY_ENCODING byte strings (with zero utf8 flag)
+sub my_quotemeta
+{
+    my $str = shift;
+    if ($can_use_encode) {
+        $str = Encode::decode($MY_ENCODING, $str);
+        return Encode::encode($MY_ENCODING, quotemeta($str));
+    } else {
+        return quotemeta($str);
+    }
+}
+
+# case-insensitive compare on byte strings
+sub ciCmp {
+    my ($a, $b) = @_;
+    if (utf8::is_utf8($a)) {
+        $a = lc($a);
+    } elsif ($can_use_encode) {
+        $a = lc(Encode::decode($MY_ENCODING, $a));
+    }
+    if (utf8::is_utf8($b)) {
+        $b = lc($b);
+    } elsif ($can_use_encode) {
+        $b = lc(Encode::decode($MY_ENCODING, $b));
+    }
+    return $a cmp $b;
+}
+
+sub my_truncate {
+    my ($text, $len) = @_;
+    my $decode = !utf8::is_utf8($text) && $can_use_encode;
+    $text = Encode::decode($MY_ENCODING, $text) if ($decode);
+    $text = substr($text, 0, $len - 3) . "..." if (length($text) >= $len);
+    $text = Encode::encode($MY_ENCODING, $text) if ($decode);
+    return $text;
+}
+
 #############################################################################
 # EPG functions
 #############################################################################
@@ -1226,7 +1304,7 @@ sub EPG_getEntry {
         for (@{ $EPG{$vdr_id} }) {
 
             #if($_->{id} == $epg_id) {
-            if ($_->{event_id} == $epg_id) {
+            if ($_->[EV_EVENT_ID] == $epg_id) {
                 return ($_);
             }
         }
@@ -1254,92 +1332,86 @@ sub getElement {
 
 sub EPG_buildTree {
     $SVDRP->command("lste");
-    my ($DATA) = $SVDRP->readresponse;
     my ($i, @events);
     my ($id, $bc) = (1, 0);
     $low_time = time;
     undef(%EPG);
-    while($_ = shift @$DATA) {
-        if (/^C ([^ ]+) *(.*)/) {
+    my $to_charset = $MY_ENCODING;
+    my $from_charset = $SVDRP->encoding;
+    my $recode = ($can_use_encode && $from_charset && $to_charset && ($from_charset ne $to_charset))? 1 : 0;
+    my $SOCK = $SVDRP->socket;
+    while($_ = <$SOCK>) {
+        chomp;
+        Encode::from_to($_, $from_charset, $to_charset) if ($recode);
+        if (/^... /) {
+            last;
+        }
+        if (/^...-C ([^ ]+) *(.*)/) {
             undef(@events);
             my ($channel_id, $channel_name) = ($1, $2);
             my $vdr_id = get_vdrid_from_channelid($channel_id);
             if ($CONFIG{EPG_PRUNE} > 0 && $vdr_id > $CONFIG{EPG_PRUNE}) {
 
                 # diesen channel nicht einlesen
-                while($_ = shift @$DATA) {
-                    last if (/^c/);
+                while($_ = <$SOCK>) {
+                    Encode::from_to($_, $from_charset, $to_charset) if ($recode);
+                    last if (/^...-c/);
+                    last if (/^... /);
                 }
             } else {
                 $bc++;
-                while($_ = shift @$DATA) {
-                    if (/^E/) {
-                        my ($garbish, $event_id, $time, $duration) = split(/[ \t]+/);
-                        my ($title, $subtitle, $summary, $vps, $video, $audio, $subs, @video_raw, @audio_raw, @subs_raw);
-                        @video_raw = @audio_raw = @subs_raw = ();
-                        while($_ = shift @$DATA) {
-                            # if(/^T (.*)/) { $title = $1;    $title =~ s/\|/<br \/>/sig }
-                            # if(/^S (.*)/) { $subtitle = $1; $subtitle =~ s/\|/<br \/>/sig }
-                            # if(/^D (.*)/) { $summary = $1;  $summary =~ s/\|/<br \/>/sig }
-                            if (/^T (.*)/) { $title    = $1; }
-                            elsif (/^S (.*)/) { $subtitle = $1; }
-                            elsif (/^D (.*)/) { $summary  = $1; }
-                            elsif (/^X 1 ([^ ]*) (.*)/) {
-                                push (@video_raw, sprintf "X 1 $1 $2");
-                                my ($lang, $format) = split(" ", $2, 2);
-                                $video .= ", " if($video);
-                                $video .= $format;
-                                $video .= " (" . $lang . ")";
-                            }
-                            elsif (/^X 2 ([^ ]*) (.*)/) {
-                                push (@audio_raw, sprintf "X 2 $1 $2");
-                                my ($lang, $descr) = split(" ", $2, 2);
-                                $audio .= ", " if ($audio);
-                                $audio .= ($descr ? $descr . " (" . $lang . ")" : $lang);
-                            }
-                            elsif (/^X 3 ([^ ]*) (.*)/) {
-                                push (@subs_raw, sprintf "X 3 $1 $2");
-                                my ($lang, $descr) = split(" ", $2, 2);
-                                $subs .= ", " if ($subs);
-                                $subs .= ($descr ? $descr . " (" . $lang . ")" : $lang);
-                            }
-                            elsif (/^V (.*)/) { $vps  = $1; }
-                            elsif (/^e/)      {
-
+                while($_ = <$SOCK>) {
+                    Encode::from_to($_, $from_charset, $to_charset) if ($recode);
+                    my $tok = substr($_, 3, 2);
+                    my $rest = substr($_, 6);
+                    if ($tok eq "-E") {
+                        # no need for chomp here - split() will take care
+                        my ($event_id, $time, $duration) = split(/ /, $rest, 4);
+                        my ($title, $subtitle, $summary, $vps);
+                        my @stream_info = ();
+                        while($_ = <$SOCK>) {
+                            chomp;
+                            Encode::from_to($_, $from_charset, $to_charset) if ($recode);
+                            $tok = substr($_, 3, 2);
+                            $rest = substr($_, 6);
+                            if ($tok eq "-T") { $title    = $rest }
+                            elsif ($tok eq "-S") { $subtitle = $rest; }
+                            elsif ($tok eq "-D") { $summary  = $rest; }
+                            elsif ($tok eq "-X") { push(@stream_info, $rest); }
+                            elsif ($tok eq "-V") { $vps  = $rest; }
+                            elsif ($tok eq "-e") {
                                 #
                                 $low_time = $time if ($time < $low_time);
                                 push(@events,
-                                     {  channel_name => $channel_name,
-                                        start        => $time,
-                                        stop         => $time + $duration,
-                                        duration     => $duration,
-                                        title        => $title,
-                                        subtitle     => $subtitle,
-                                        summary      => $summary,
-                                        vps          => $vps,
-                                        id           => $id,
-                                        vdr_id       => $vdr_id,
-                                        event_id     => $event_id,
-                                        video        => $video,
-                                        audio        => $audio,
-                                        subs         => $subs,
-                                        video_raw    => \@video_raw,
-                                        audio_raw    => \@audio_raw,
-                                        subs_raw     => \@subs_raw,
-                                     }
+                                     [  $channel_name,      # EV_CHANNEL_NAME
+                                        $time,              # EV_START
+                                        $time + $duration,  # EV_STOP
+                                        $title,             # EV_TITLE
+                                        $subtitle,          # EV_SUBTITLE
+                                        $summary,           # EV_SUMMARY
+                                        $vps,               # EV_VPS
+                                        $id,                # EV_ID
+                                        $vdr_id,            # EV_VDR_ID
+                                        $event_id,          # EV_EVENT_ID
+                                        join("\n", @stream_info),  # EV_STREAM_INFO
+                                     ]
                                 );
                                 $id++;
                                 last;
                             }
+                            elsif ($tok =~ /^ /) {
+                                last;
+                            }
                         }
-                    } elsif (/^c/) {
+                    }
+                    elsif ($tok eq "-c") {
                         if ($FEATURES{VDRVERSION} < 10305) { # EPG is sorted by date since VDR 1.3.5
                             my ($last) = 0;
                             my (@temp);
-                            for (sort({ $a->{start} <=> $b->{start} } @events)) {
-                                next if ($last == $_->{start});
+                            for (sort({ $a->[EV_START] <=> $b->[EV_START] } @events)) {
+                                next if ($last == $_->[EV_START]);
                                 push(@temp, $_);
-                                $last = $_->{start};
+                                $last = $_->[EV_START];
                             }
                             $EPG{$vdr_id} = [@temp];
                         } else {
@@ -1347,11 +1419,56 @@ sub EPG_buildTree {
                         }
                         last;
                     }
+                    elsif ($tok =~ /^ /) {
+                        last;
+                    }
                 }
             }
         }
     }
     Log(LOG_INFO, "[EPG] EPGTree: $id events, $bc broadcasters (lowtime $low_time)");
+}
+
+sub getEventStreamInfo {
+    my ($event, $type, $raw) = @_;
+
+    my $type_re = qr/^$type/;
+    my @streams = grep { /$type_re/ } split("\n", $event->[EV_STREAM_INFO]);
+    if ($raw) {
+        if (wantarray) {
+            return map { "X " . $_ } @streams;
+        } else {
+            return join("\n", map { "X " . $_ } @streams);
+        }
+    } else {
+        my @out = ();
+        for my $s (@streams) {
+            my ($what, $garbage, $lang, $descr) = split(/ /, $s, 4);
+            if ($what eq "1") { $what = "MPEG2: "; }
+            elsif ($what eq "2") { $what = "MP2: "; }
+            elsif ($what eq "4") { $what = "AC3: "; }
+            elsif ($what eq "5") { $what = "H.264: "; }
+            elsif ($what eq "6") { $what = "HEAAC: "; }
+            else { $what = "" };
+            push(@out, $what . ($descr ? $descr . " (" . $lang . ")" : $lang));
+        }
+        return wantarray? @out : join(", ", @out);
+    }
+}
+
+sub getEventVideo {
+    my ($event, $raw) = @_;
+    return getEventStreamInfo($event, "[15]", $raw);
+}
+
+sub getEventAudio {
+    my ($event, $raw) = @_;
+    return getEventStreamInfo($event, "[246]", $raw);
+}
+
+sub getEventSubs {
+    my ($event, $raw) = @_;
+    return getEventStreamInfo($event, "3", $raw);
 }
 
 #############################################################################
@@ -1443,61 +1560,57 @@ sub header {
         }
     }
 
-    my $status_text = " OK" if ($status eq "200");
+    my $status_text = "OK" if ($status eq "200");
     my $now = time();
+    my $resp = HTTP::Response->new($status, $status_text);
 
-    my $response = "HTTP/1.0 $status$status_text" . CRLF
-                 . "Date: " . time2str($now) . CRLF;
+    $resp->header('Date' => time2str($now));
     if (!$caching || $ContentType =~ /text\/html/) {
-        $response .= "Cache-Control: max-age=0" . CRLF
-                  .  "Cache-Control: private" . CRLF
-                  .  "Pragma: no-cache" . CRLF
-                  .  "Expires: Thu, 01 Jan 1970 00:00:00 GMT" . CRLF;
+        $resp->header('Cache-Control' => "max-age=0");
+        $resp->header('Cache-Control' => "private");
+        $resp->header('Pragma' => "no-cache");
+        $resp->header('Expires' => "Thu, 01 Jan 1970 00:00:00 GMT");
     } else {
-        $response .= "Expires: " . time2str($now + 3600) . CRLF
-                  .  "Cache-Control: public, max-age=3600" . CRLF;
+        $resp->header('Expires' => time2str($now + 3600));
+        $resp->header('Cache-Control' => "public, max-age=3600");
     }
     if ($lastmod) {
         $lastmod = $now if ($lastmod > $now); # HTTP 1.1, 14.29
-        $response .= "Last-Modified: " . time2str($lastmod) . CRLF;
+        $resp->header('Last-Modified' => time2str($lastmod));
     }
-    $response .= "Server: $SERVERVERSION" . CRLF
-              .  "Connection: close" . CRLF;
-    $response .= "Content-Length: " . length($data) . CRLF  if ($data);
-    $response .= "Content-encoding: gzip" . CRLF if ($CONFIG{MOD_GZIP} && $ACCEPT_GZIP);
-    $response .= "Content-type: $ContentType" . CRLF if ($ContentType);
-    $response .= "Content-Disposition: attachment; filename=$filename" . CRLF if ($filename);
-    $response .= CRLF;
-    $response .= $data if ($data);
-    PrintToClient($response);
+    $resp->header('Content-encoding' => "gzip") if ($CONFIG{MOD_GZIP} && $ACCEPT_GZIP);
+    $resp->header('Content-type' => $ContentType) if ($ContentType);
+    $resp->header('Content-Disposition' => "attachment; filename=$filename") if ($filename);
+    $resp->content($data) if ($data);
+
+    $Client->send_response($resp);
     return ($status, length($data));
 }
 
 sub headerForward {
     my $url = shift;
-    my $header = "HTTP/1.0 302 Found" . CRLF
-               . "Date: " . time2str() . CRLF
-               . "Server: $SERVERVERSION" . CRLF
-               . "Connection: close" . CRLF
-               . "Location: $url" . CRLF
-               . "Content-type: text/html" . CRLF . CRLF;
-    PrintToClient($header);
-    return (302, 0);
+    Log(LOG_DEBUG, "[FORWARD] " . $url);
+    my $resp = HTTP::Response->new(302, "Found");
+
+    $resp->header('Date' => time2str());
+    $resp->header('Location' => $url);
+    $resp->header('Content-type' => 'text/plain');
+    my $data = "302 Found";
+    $resp->content($data);
+
+    $Client->send_response($resp);
+    return (302, length($data));
 }
 
 sub headerNoAuth {
-    my $vars;
-    my $data;
-    $Xtemplate->process("$CONFIG{TEMPLATE}/noauth.html", $vars, \$data);
+    my $resp = HTTP::Response->new(401, "Authorization Required");
+    $resp->header('Date' => time2str());
+    $resp->header('WWW-Authenticate' => "Basic realm=\"vdradmind\"");
+    $resp->header('Content-type' => "text/plain");
+    my $data = "401 Authorization Required";
+    $resp->content($data);
 
-    my $header = "HTTP/1.0 401 Authorization Required" . CRLF
-               . "Date: " . time2str() . CRLF
-               . "Server: $SERVERVERSION" . CRLF
-               . "WWW-Authenticate: Basic realm=\"vdradmind\"" . CRLF
-               . "Connection: close" . CRLF
-               . "Content-type: text/html" . CRLF;
-    $header .= "Content-Length: " . length($data) . CRLF if ($data);
-    PrintToClient($header, CRLF, $data);
+    $Client->send_response($resp);
     return (401, length($data));
 }
 
@@ -1731,23 +1844,23 @@ sub AutoTimer {
         for my $event (@{ $EPG{$sender} }) {
 
             # Event in the past?
-            next if ($event->{stop} < $date_now);
+            next if ($event->[EV_STOP] < $date_now);
 
             # Ein Timer der schon programmmiert wurde kann
             # ignoriert werden
             #TODO: $timer not initialized
-#        next if($event->{event_id} == $timer->{event_id});
+#        next if($event->[EV_EVENT_ID] == $timer->{event_id});
 
             # Wenn CHANNELS_WANTED_AUTOTIMER dann next wenn der Kanal
             # nicht in der WantedList steht
             if ($CONFIG{CHANNELS_WANTED_AUTOTIMER}) {
-                next unless defined $wanted->{ $event->{vdr_id} };
+                next unless defined $wanted->{ $event->[EV_VDR_ID] };
             }
 
             # Hamwa schon gehabt?
             my $DoneStr;
             unless ($dry_run) {
-                $DoneStr = sprintf('%s~%d~%s', $event->{title}, $event->{event_id}, ($event->{subtitle} ? $event->{subtitle} : ''),);
+                $DoneStr = sprintf('%s~%d~%s', $event->[EV_TITLE], $event->[EV_EVENT_ID], ($event->[EV_SUBTITLE] ? $event->[EV_SUBTITLE] : ''),);
 
                 if (exists $DONE->{$DoneStr}) {
                     Log(LOG_DEBUG, sprintf("[AUTOTIMER] already done \"%s\"", $DoneStr));
@@ -1758,30 +1871,30 @@ sub AutoTimer {
             if (%blacklist) {
 
                 # Wollen wir nicht haben.
-                my $BLStr = $event->{title};
-                $BLStr .= "~" . $event->{subtitle} if $event->{subtitle};
+                my $BLStr = $event->[EV_TITLE];
+                $BLStr .= "~" . $event->[EV_SUBTITLE] if $event->[EV_SUBTITLE];
 
-                if ($blacklist{$BLStr} || $blacklist{ $event->{title} }) {
-                    Log(LOG_DEBUG, sprintf("[AUTOTIMER] blacklisted \"%s\"", $event->{title}));
+                if ($blacklist{$BLStr} || $blacklist{ $event->[EV_TITLE] }) {
+                    Log(LOG_DEBUG, sprintf("[AUTOTIMER] blacklisted \"%s\"", $event->[EV_TITLE]));
                     next;
                 }
             }
 
             for my $at (@at) {
                 next if (!$at->{active}   && !$dry_run);
-                next if (($at->{channel}) && ($at->{channel} != $event->{vdr_id}));
+                next if (($at->{channel}) && ($at->{channel} != $event->[EV_VDR_ID]));
 
-                #print("AT: " . $at->{channel} . " - " . $at->{pattern} . " --- " . $event->{vdr_id} . " - " . $event->{title} . "\n");
+                #print("AT: " . $at->{channel} . " - " . $at->{pattern} . " --- " . $event->[EV_VDR_ID] . " - " . $event->[EV_TITLE] . "\n");
 
                 my $SearchStr;
                 if ($at->{section} & 1) {
-                    $SearchStr = $event->{title};
+                    $SearchStr = $event->[EV_TITLE];
                 }
-                if (($at->{section} & 2) && defined($event->{subtitle})) {
-                    $SearchStr .= "~" . $event->{subtitle};
+                if (($at->{section} & 2) && defined($event->[EV_SUBTITLE])) {
+                    $SearchStr .= "~" . $event->[EV_SUBTITLE];
                 }
                 if ($at->{section} & 4) {
-                    $SearchStr .= "~" . $event->{summary};
+                    $SearchStr .= "~" . $event->[EV_SUMMARY];
                 }
 
                 # Regular Expressions are surrounded by slashes -- everything else
@@ -1837,9 +1950,9 @@ sub AutoTimer {
                     next if (!$fp);
                 }
 
-                my $event_start = my_strftime("%H%M", $event->{start});
-                my $event_stop  = my_strftime("%H%M", $event->{stop});
-                Log(LOG_DEBUG, sprintf("[AUTOTIMER] Comparing pattern \"%s\" (%s - %s) with event \"%s\" (%s - %s)", $at->{pattern}, $at->{start}, $at->{stop}, $event->{title}, $event_start, $event_stop));
+                my $event_start = my_strftime("%H%M", $event->[EV_START]);
+                my $event_stop  = my_strftime("%H%M", $event->[EV_STOP]);
+                Log(LOG_DEBUG, sprintf("[AUTOTIMER] Comparing pattern \"%s\" (%s - %s) with event \"%s\" (%s - %s)", $at->{pattern}, $at->{start}, $at->{stop}, $event->[EV_TITLE], $event_start, $event_stop));
 
                 # Do we have a time slot?
                 if ($at->{start}) {    # We have a start time and possibly a stop time for the auto timer
@@ -1925,7 +2038,7 @@ sub AutoTimer {
 
                 # Check if we should schedule any timers on this weekday
                 my %weekdays_map = (1 => 'wday_mon', 2 => 'wday_tue', 3 => 'wday_wed', 4 => 'wday_thu', 5 => 'wday_fri', 6 => 'wday_sat', 7 => 'wday_sun');
-                unless ($at->{weekdays}->{ $weekdays_map{ my_strftime("%u", $event->{start}) } }) {
+                unless ($at->{weekdays}->{ $weekdays_map{ my_strftime("%u", $event->[EV_START]) } }) {
                     Log(LOG_DEBUG, "[AUTOTIMER] Event not valid for this weekday");
                     next;
                 }
@@ -1946,31 +2059,31 @@ sub AutoTimer {
 
                 if ($directory && $directory =~ /\%.*\%/) {
                     $title = $directory;
-                    $at_details{'title'} = $event->{title};
-                    $at_details{'subtitle'} = $event->{subtitle} ? $event->{subtitle} : my_strftime("%Y-%m-%d", $event->{start});
-                    $at_details{'date'} = my_strftime("%Y-%m-%d", $event->{start});
-                    $at_details{'regie'}         = $1 if $event->{summary} =~ m/\|Director: (.*?)\|/;
-                    $at_details{'category'}      = $1 if $event->{summary} =~ m/\|Category: (.*?)\|/;
-                    $at_details{'genre'}         = $1 if $event->{summary} =~ m/\|Genre: (.*?)\|/;
-                    $at_details{'year'}          = $1 if $event->{summary} =~ m/\|Year: (.*?)\|/;
-                    $at_details{'country'}       = $1 if $event->{summary} =~ m/\|Country: (.*?)\|/;
-                    $at_details{'originaltitle'} = $1 if $event->{summary} =~ m/\|Originaltitle: (.*?)\|/;
-                    $at_details{'fsk'}           = $1 if $event->{summary} =~ m/\|FSK: (.*?)\|/;
-                    $at_details{'episode'}       = $1 if $event->{summary} =~ m/\|Episode: (.*?)\|/;
-                    $at_details{'rating'}        = $1 if $event->{summary} =~ m/\|Rating: (.*?)\|/;
+                    $at_details{'title'} = $event->[EV_TITLE];
+                    $at_details{'subtitle'} = $event->[EV_SUBTITLE] ? $event->[EV_SUBTITLE] : my_strftime("%Y-%m-%d", $event->[EV_START]);
+                    $at_details{'date'} = my_strftime("%Y-%m-%d", $event->[EV_START]);
+                    $at_details{'regie'}         = $1 if $event->[EV_SUMMARY] =~ m/\|Director: (.*?)\|/;
+                    $at_details{'category'}      = $1 if $event->[EV_SUMMARY] =~ m/\|Category: (.*?)\|/;
+                    $at_details{'genre'}         = $1 if $event->[EV_SUMMARY] =~ m/\|Genre: (.*?)\|/;
+                    $at_details{'year'}          = $1 if $event->[EV_SUMMARY] =~ m/\|Year: (.*?)\|/;
+                    $at_details{'country'}       = $1 if $event->[EV_SUMMARY] =~ m/\|Country: (.*?)\|/;
+                    $at_details{'originaltitle'} = $1 if $event->[EV_SUMMARY] =~ m/\|Originaltitle: (.*?)\|/;
+                    $at_details{'fsk'}           = $1 if $event->[EV_SUMMARY] =~ m/\|FSK: (.*?)\|/;
+                    $at_details{'episode'}       = $1 if $event->[EV_SUMMARY] =~ m/\|Episode: (.*?)\|/;
+                    $at_details{'rating'}        = $1 if $event->[EV_SUMMARY] =~ m/\|Rating: (.*?)\|/;
                     $title =~ s/%([\w_-]+)%/$at_details{lc($1)}/sieg;
 
-                    #$title .= "~" . $event->{title};
+                    #$title .= "~" . $event->[EV_TITLE];
                 } else {
-                    $title = $event->{title};
+                    $title = $event->[EV_TITLE];
                     if ($directory) {
                         $title = $directory . "~" . $title;
                     }
                     if ($at->{episode}) {
-                        if ($event->{subtitle}) {
-                            $title .= "~" . $event->{subtitle};
+                        if ($event->[EV_SUBTITLE]) {
+                            $title .= "~" . $event->[EV_SUBTITLE];
                         } else {
-                            $title .= "~" . my_strftime("%Y-%m-%d", $event->{start});
+                            $title .= "~" . my_strftime("%Y-%m-%d", $event->[EV_START]);
                         }
                     }
                 }
@@ -1988,26 +2101,26 @@ sub AutoTimer {
 
                 if ($dry_run) {
 
-                    #printf("AT found: (%s) (%s) (%s) (%s) (%s) (%s)\n", $event->{title}, $title, $event->{subtitle}, $directory, $event->{start}, $event->{stop});
-                    push(@at_matches, { otitle    => $event->{title},
+                    #printf("AT found: (%s) (%s) (%s) (%s) (%s) (%s)\n", $event->[EV_TITLE], $title, $event->[EV_SUBTITLE], $directory, $event->[EV_START], $event->[EV_STOP]);
+                    push(@at_matches, { otitle    => $event->[EV_TITLE],
                                         title     => $title,
-                                        subtitle  => $event->{subtitle} ? $event->{subtitle} : "",
+                                        subtitle  => $event->[EV_SUBTITLE] ? $event->[EV_SUBTITLE] : "",
                                         directory => $directory,
-                                        start     => my_strftime("%H:%M", $event->{start}),
-                                        stop      => my_strftime("%H:%M", $event->{stop}),
-                                        date      => my_strftime("%A, %x", $event->{start}),
-                                        channel   => GetChannelDescByNumber($event->{vdr_id}) });
+                                        start     => my_strftime("%H:%M", $event->[EV_START]),
+                                        stop      => my_strftime("%H:%M", $event->[EV_STOP]),
+                                        date      => my_strftime("%A, %x", $event->[EV_START]),
+                                        channel   => GetChannelDescByNumber($event->[EV_VDR_ID]) });
                 } else {
-                    Log(LOG_INFO, sprintf("[AUTOTIMER] Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
+                    Log(LOG_INFO, sprintf("[AUTOTIMER] Programming Timer \"%s\" (Event-ID %s, %s - %s)", $title, $event->[EV_EVENT_ID], strftime("%Y%m%d-%H%M", localtime($event->[EV_START])), strftime("%Y%m%d-%H%M", localtime($event->[EV_STOP]))));
 
-                    AT_ProgTimer(1, $event->{event_id}, $event->{vdr_id}, $event->{start}, $event->{stop}, $title, $event->{summary}, $at);
+                    AT_ProgTimer(1, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $event->[EV_START], $event->[EV_STOP], $title, $event->[EV_SUMMARY], $at);
 
                     if ($at->{active} == 2) {
                         Log(LOG_INFO, "[AUTOTIMER] Disabling one-shot Timer");
                         $at->{active} = 0;
                         $oneshots = 1;
                     }
-                    $DONE->{$DoneStr} = $event->{stop} if ($at->{done});
+                    $DONE->{$DoneStr} = $event->[EV_STOP] if ($at->{done});
                 }
             }
         }
@@ -2221,22 +2334,22 @@ sub CheckTimers {
             for $event (@{ $EPG{ $timer->{vdr_id} } }) {
 
                 # look for matching event_id on the same channel -- it's unique
-                if ($timer->{event_id} == $event->{event_id}) {
+                if ($timer->{event_id} == $event->[EV_EVENT_ID]) {
                     Log(LOG_DEBUG, sprintf("[AUTOTIMER] CheckTimers: Checking timer \"%s\" (No. %s) for changes by Event-ID", $timer->{title}, $timer->{id}));
 
                     # update timer if the existing one differs from the EPG
                     # (don't check for changed title, as this will break autotimers' "directory" setting)
-                    if (   ($timer->{start} != ($event->{start} - $timer->{bstart} * 60))
-                        || ($timer->{stop} != ($event->{stop} + $timer->{bstop} * 60)))
+                    if (   ($timer->{start} != ($event->[EV_START] - $timer->{bstart} * 60))
+                        || ($timer->{stop} != ($event->[EV_STOP] + $timer->{bstop} * 60)))
                     {
-                        Log(LOG_INFO, sprintf("[AUTOTIMER] CheckTimers: Timer \"%s\" (No. %s, Event-ID %s, %s - %s) differs from EPG: \"%s\", Event-ID %s, %s - %s)", $timer->{title}, $timer->{id}, $timer->{event_id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop})), $event->{title}, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
+                        Log(LOG_INFO, sprintf("[AUTOTIMER] CheckTimers: Timer \"%s\" (No. %s, Event-ID %s, %s - %s) differs from EPG: \"%s\", Event-ID %s, %s - %s)", $timer->{title}, $timer->{id}, $timer->{event_id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop})), $event->[EV_TITLE], $event->[EV_EVENT_ID], strftime("%Y%m%d-%H%M", localtime($event->[EV_START])), strftime("%Y%m%d-%H%M", localtime($event->[EV_STOP]))));
                         ProgTimer(
                             $timer->{id},
                             $timer->{active},
                             $timer->{event_id},
                             $timer->{vdr_id},
-                            $event->{start} - $timer->{bstart} * 60,
-                            $event->{stop} + $timer->{bstop} * 60,
+                            $event->[EV_START] - $timer->{bstart} * 60,
+                            $event->[EV_STOP] + $timer->{bstop} * 60,
                             $timer->{prio},
                             $timer->{lft},
 
@@ -2262,7 +2375,7 @@ sub CheckTimers {
                 for my $event (@{ $EPG{ $timer->{vdr_id} } }) {
 
                     # look for events within the margins of the current timer
-                    if (($event->{start} < $timer->{stop}) && ($event->{stop} > $timer->{start})) {
+                    if (($event->[EV_START] < $timer->{stop}) && ($event->[EV_STOP] > $timer->{start})) {
                         push @eventlist, $event;
                     }
                 }
@@ -2278,37 +2391,37 @@ sub CheckTimers {
                     for (my $i = 0 ; $i < scalar(@eventlist) ; $i++) {
                         my ($start, $stop);
 
-                        if ($eventlist[$i]->{start} < $timer->{start}) {
+                        if ($eventlist[$i]->[EV_START] < $timer->{start}) {
                             $start = $timer->{start};
                         } else {
-                            $start = $eventlist[$i]->{start};
+                            $start = $eventlist[$i]->[EV_START];
                         }
-                        if ($eventlist[$i]->{stop} > $timer->{stop}) {
+                        if ($eventlist[$i]->[EV_STOP] > $timer->{stop}) {
                             $stop = $timer->{stop};
                         } else {
-                            $stop = $eventlist[$i]->{stop};
+                            $stop = $eventlist[$i]->[EV_STOP];
                         }
 
-                        my $wight = ($stop - $start) / ($eventlist[$i]->{stop} - $eventlist[$i]->{start});
+                        my $wight = ($stop - $start) / ($eventlist[$i]->[EV_STOP] - $eventlist[$i]->[EV_START]);
 
-                        if ($wight > $maxwight && (($eventlist[$i]->{stop} - $eventlist[$i]->{start}) / $origlen) >= 0.9) {
+                        if ($wight > $maxwight && (($eventlist[$i]->[EV_STOP] - $eventlist[$i]->[EV_START]) / $origlen) >= 0.9) {
                             $maxwight = $wight;
                             $event    = $eventlist[$i];
                         }
                     }
 
                     # update timer if the existing one differs from the EPG
-                    if (   ($timer->{start} > ($event->{start} - $timer->{bstart} * 60))
-                        || ($timer->{stop} < ($event->{stop} + $timer->{bstop} * 60)))
+                    if (   ($timer->{start} > ($event->[EV_START] - $timer->{bstart} * 60))
+                        || ($timer->{stop} < ($event->[EV_STOP] + $timer->{bstop} * 60)))
                     {
-                        Log(LOG_INFO, sprintf("[AUTOTIMER] CheckTimers: Timer \"%s\" (No. %s, Event-ID %s, %s - %s) differs from EPG: \"%s\", Event-ID %s, %s - %s)", $timer->{title}, $timer->{id}, $timer->{event_id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop})), $event->{title}, $event->{event_id}, strftime("%Y%m%d-%H%M", localtime($event->{start})), strftime("%Y%m%d-%H%M", localtime($event->{stop}))));
+                        Log(LOG_INFO, sprintf("[AUTOTIMER] CheckTimers: Timer \"%s\" (No. %s, Event-ID %s, %s - %s) differs from EPG: \"%s\", Event-ID %s, %s - %s)", $timer->{title}, $timer->{id}, $timer->{event_id}, strftime("%Y%m%d-%H%M", localtime($timer->{start})), strftime("%Y%m%d-%H%M", localtime($timer->{stop})), $event->[EV_TITLE], $event->[EV_EVENT_ID], strftime("%Y%m%d-%H%M", localtime($event->[EV_START])), strftime("%Y%m%d-%H%M", localtime($event->[EV_STOP]))));
                         ProgTimer(
                             $timer->{id},
                             $timer->{active},
                             0,
                             $timer->{vdr_id},
-                            $timer->{start} > ($event->{start} - $timer->{bstart} * 60) ? $event->{start} - $timer->{bstart} * 60 : $timer->{start},
-                            $timer->{stop} < ($event->{stop} + $timer->{bstop} * 60) ? $event->{stop} + $timer->{bstop} * 60 : $timer->{stop},
+                            $timer->{start} > ($event->[EV_START] - $timer->{bstart} * 60) ? $event->[EV_START] - $timer->{bstart} * 60 : $timer->{start},
+                            $timer->{stop} < ($event->[EV_STOP] + $timer->{bstop} * 60) ? $event->[EV_STOP] + $timer->{bstop} * 60 : $timer->{stop},
                             $timer->{prio},
                             $timer->{lft},
 
@@ -3512,6 +3625,7 @@ sub LoadTranslation {
     else {
         chomp($MY_ENCODING = `locale charmap`);
     }
+    $MY_ENCODING = "UTF-8" unless ($MY_ENCODING);
     bind_textdomain_codeset("vdradmin", $MY_ENCODING) if($can_use_bind_textdomain_codeset);
     CGI::charset($MY_ENCODING);
 }
@@ -3942,19 +4056,19 @@ sub prog_detail {
         $vdr_id = get_vdrid_from_channelid($q->param("channel_id"));
     }
     if ($vdr_id && $epg_id) {
-        for (@{ $EPG{$vdr_id} }) {
+        for my $event (@{ $EPG{$vdr_id} }) {
 
-            #if($_->{id} == $epg_id) { #XXX
-            if ($_->{event_id} == $epg_id) {
-                $channel_name = $_->{channel_name};
-                $title        = $_->{title};
-                $subtitle     = $_->{subtitle};
-                $start        = $_->{start};
-                $stop         = $_->{stop};
-                $text         = $_->{summary};
-                $vps          = $_->{vps};
-                $video        = $_->{video};
-                $audio        = $_->{audio};
+            #if($event->[EV_ID] == $epg_id) { #XXX
+            if ($event->[EV_EVENT_ID] == $epg_id) {
+                $channel_name = $event->[EV_CHANNEL_NAME];
+                $title        = $event->[EV_TITLE];
+                $subtitle     = $event->[EV_SUBTITLE];
+                $start        = $event->[EV_START];
+                $stop         = $event->[EV_STOP];
+                $text         = $event->[EV_SUMMARY];
+                $vps          = $event->[EV_VPS];
+                $video        = getEventVideo($event);
+                $audio        = getEventAudio($event);
 
                 # find epgimages
                 if ($CONFIG{EPGIMAGES} && -d $CONFIG{EPGIMAGES}) {
@@ -4028,7 +4142,7 @@ sub prog_detail {
                  stop         => my_strftime("%H:%M", $stop),
                  text         => $displaytext ? $displaytext : undef,
                  date         => $title ? my_strftime("%A, %x", $start) : undef,
-                 find_title   => $title ? uri_escape("/^" . quotemeta($title . "~" . ($subtitle ? $subtitle : "") . "~") . "/i") : undef,
+                 find_title   => $title ? uri_escape("/^" . my_quotemeta($title . "~" . ($subtitle ? $subtitle : "") . "~") . "/") : undef,
                  srch1_url    => $imdb_url,
                  srch1_title  => $imdb_url ? gettext($CONFIG{SRCH1_TITLE}) : undef,
                  srch2_url    => $srch2_url,
@@ -4055,28 +4169,28 @@ sub prog_detail_form {
     my $vars;
     if ($epg_id) {
         my $event = EPG_getEntry($vdr_id, $epg_id);
-        my $displaytitle       = CGI::escapeHTML($event->{title});
-        my $displaysubtitle    = CGI::escapeHTML($event->{subtitle});
-        my $displaydescription = CGI::escapeHTML($event->{summary});
+        my $displaytitle       = CGI::escapeHTML($event->[EV_TITLE]);
+        my $displaysubtitle    = CGI::escapeHTML($event->[EV_SUBTITLE]);
+        my $displaydescription = CGI::escapeHTML($event->[EV_SUMMARY]);
         if ($displaydescription) {
             $displaydescription =~ s/\|/\n/g;
         }
 
         $vars = { url          => $MyURL,
-                  vdr_id       => $event->{vdr_id},
-                  epg_id       => $event->{event_id},
-                  channel_name => $event->{channel_name},
-                  start_hr     => sprintf("%s - %s", my_strftime("%A, %x %H:%M", $event->{start}), my_strftime("%H:%M", $event->{stop})),
-                  start        => $event->{start},
-                  duration     => $event->{duration},
-                  table_id     => $event->{table_id},
-                  version      => $event->{version},
+                  vdr_id       => $event->[EV_VDR_ID],
+                  epg_id       => $event->[EV_EVENT_ID],
+                  channel_name => $event->[EV_CHANNEL_NAME],
+                  start_hr     => sprintf("%s - %s", my_strftime("%A, %x %H:%M", $event->[EV_START]), my_strftime("%H:%M", $event->[EV_STOP])),
+                  start        => $event->[EV_START],
+                  duration     => $event->[EV_STOP] - $event->[EV_START],
+                  #table_id     => $event->{table_id},
+                  #version      => $event->{version},
                   title        => $displaytitle,
                   subtitle     => $displaysubtitle,
                   description  => $displaydescription,
-                  vps          => $event->{vps} ? my_strftime("%A, %x %H:%M", $event->{vps}) : undef,
-                  video        => $event->{video},
-                  audio        => $event->{audio},
+                  vps          => $event->[EV_VPS] ? my_strftime("%A, %x %H:%M", $event->[EV_VPS]) : undef,
+                  video        => getEventVideo($event),
+                  audio        => getEventAudio($event),
                   referer      => $ref ? Encode_Referer($ref) : undef,
                   help_url     => HelpURL("edit_epg")
         }
@@ -4092,9 +4206,9 @@ sub prog_detail_aktion {
         my $channel_id  = get_channelid_from_vdrid($vdr_id);
         my $start       = $q->param("start");
         my $duration    = $q->param("duration");
-        my $title       = CGI::unescapeHTML($q->param("title"));
-        my $subtitle    = CGI::unescapeHTML($q->param("subtitle"));
-        my $description = CGI::unescapeHTML($q->param("description"));
+        my $title       = CGI::unescapeHTML(scalar $q->param("title"));
+        my $subtitle    = CGI::unescapeHTML(scalar $q->param("subtitle"));
+        my $description = CGI::unescapeHTML(scalar $q->param("description"));
         my $vps         = $q->param("vps");
         my $table_id    = 0;    # must be zero for external epg data
 
@@ -4105,7 +4219,7 @@ sub prog_detail_aktion {
             $title =~ s/\r\n//g;
             $title =~ s/\n//g;
         } else {
-            $title = $event->{title};
+            $title = $event->[EV_TITLE];
         }
 
         if ($subtitle) {
@@ -4120,11 +4234,11 @@ sub prog_detail_aktion {
             $new_description = sprintf ("D %s\n", $description);
         }
 
-        $new_video = join ("\n", @{$event->{video_raw}});
+        $new_video = getEventVideo($event, 1);
         $new_video .= "\n" if ($new_video);
-        $new_audio = join ("\n", @{$event->{audio_raw}});
+        $new_audio = getEventAudio($event, 1);
         $new_audio .= "\n" if ($new_audio);
-        $new_vps = sprintf ("V %s\n", $event->{vps}) if ($event->{vps});
+        $new_vps = sprintf ("V %s\n", $event->[EV_VPS]) if ($event->[EV_VPS]);
 
         my ($result) = SendCMD("pute");
         if ($result !~ /Enter EPG data/i) {
@@ -4145,9 +4259,9 @@ sub prog_detail_aktion {
                 main::HTMLError(sprintf($ERROR_MESSAGE{send_command}, $CONFIG{VDR_HOST}));
             } else {
                 # don't reread complete epg, just change the cache
-                $event->{title} = $title;
-                $event->{subtitle} = $subtitle;
-                $event->{summary} = $description;
+                $event->[EV_TITLE] = $title;
+                $event->[EV_SUBTITLE] = $subtitle;
+                $event->[EV_SUMMARY] = $description;
             }
         }
     }
@@ -4223,10 +4337,10 @@ sub prog_list {
     }
 
     #
-    my (@show, $progname, $cnumber);
+    my (@show);
     my $day = 0;
     for my $event (@{ $EPG{$vdr_id} }) {
-        if (my_strftime("%d", $event->{start}) != $day) {
+        if (my_strftime("%d", $event->[EV_START]) != $day) {
 
             # new day
             push(@show,
@@ -4238,8 +4352,8 @@ sub prog_list {
                  }
             ) if (scalar(@show) > 0);
             push(@show,
-                 {  progname => $event->{channel_name},
-                    longdate => my_strftime("%A, %x", $event->{start}),
+                 {  progname => $event->[EV_CHANNEL_NAME],
+                    longdate => my_strftime("%A, %x", $event->[EV_START]),
                     newd  => 1,
                     next_channel => $next_channel ? "$MyURL?aktion=prog_list&amp;vdr_id=$next_channel" : undef,
                     prev_channel => $prev_channel ? "$MyURL?aktion=prog_list&amp;vdr_id=$prev_channel" : undef,
@@ -4247,10 +4361,10 @@ sub prog_list {
                     prev_channel_name => $prev_channel_name,
                  }
             );
-            $day = strftime("%d", localtime($event->{start}));
+            $day = strftime("%d", localtime($event->[EV_START]));
         }
 
-        my $search_title = $event->{title};
+        my $search_title = $event->[EV_TITLE];
         $search_title =~ s/^.*\~\%*([^\~]*)$/$1/;
         $search_title =  uri_escape($search_title);
 
@@ -4268,45 +4382,43 @@ sub prog_list {
 
         my $subtitle = "";
         if ($CONFIG{EPG_SUBTITLE}) {
-            $subtitle = CGI::escapeHTML($event->{subtitle});
+            $subtitle = CGI::escapeHTML($event->[EV_SUBTITLE]);
         }
         if ($CONFIG{EPG_SUMMARY}) {
             if (length($subtitle)) {
                 $subtitle .= "<BR />";
             }
-            $subtitle .= CGI::escapeHTML($event->{summary});
+            $subtitle .= CGI::escapeHTML($event->[EV_SUMMARY]);
             $subtitle =~ s/\|/<BR \/>/g;
         }
 
         my $timerset = 0;
         foreach my $timer (@timers) {
-            if (($timer->{vdr_id} == $vdr_id) && ($timer->{start} <= $event->{start}) && ($timer->{stop} >= $event->{stop})) {
+            if (($timer->{vdr_id} == $vdr_id) && ($timer->{start} <= $event->[EV_START]) && ($timer->{stop} >= $event->[EV_STOP])) {
                 $timerset = 1;
                 last;
             }
         }
 
         push(@show,
-             {  ssse     => $event->{start},
-                emit     => my_strftime("%H:%M", $event->{start}),
-                duration => my_strftime("%H:%M", $event->{stop}),
-                title    => CGI::escapeHTML($event->{title}),
+             {  ssse     => $event->[EV_START],
+                emit     => my_strftime("%H:%M", $event->[EV_START]),
+                duration => my_strftime("%H:%M", $event->[EV_STOP]),
+                title    => CGI::escapeHTML($event->[EV_TITLE]),
                 subtitle => $subtitle,
-                recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
-                infurl   => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
-                editurl  => sprintf("%s?aktion=prog_detail_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
-                find_title => uri_escape("/^" . quotemeta($event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~") . "/i"),
+                recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $myself),
+                infurl   => $event->[EV_SUMMARY] ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $myself) : undef,
+                editurl  => sprintf("%s?aktion=prog_detail_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $myself),
+                find_title => uri_escape("/^" . my_quotemeta($event->[EV_TITLE] . "~" . ($event->[EV_SUBTITLE] ? $event->[EV_SUBTITLE] : "") . "~") . "/"),
                 srch1_url    => $imdb_url,
                 srch1_title  => $imdb_url ? gettext($CONFIG{SRCH1_TITLE}) : undef,
                 srch2_url    => $srch2_url,
                 srch2_title  => $srch2_url ? gettext($CONFIG{SRCH2_TITLE}) : undef,
                 newd     => 0,
-                anchor   => "id" . $event->{event_id},
+                anchor   => "id" . $event->[EV_EVENT_ID],
                 timerset => $timerset
              }
         );
-        $progname = $event->{progname};
-        $cnumber  = $event->{cnumber};
     }
     if (scalar(@show)) {
         push(@show, { endd => 1 });
@@ -4364,7 +4476,7 @@ sub prog_list2 {
         }
     }
 
-    my (@show, $progname, $cnumber, %hash_days);
+    my (@show, %hash_days);
 
     my ($hour, $minute) = getSplittedTime($param_time);
     my $border;
@@ -4386,12 +4498,12 @@ sub prog_list2 {
             my $dayflag = 0;
 
             for my $event (@{ $EPG{$vdr_id} }) {
-                my $event_day      = my_strftime("%d.%m.", $event->{start}-$day_start);
-                my $event_day_long = my_strftime("%Y%m%d", $event->{start}-$day_start);
+                my $event_day      = my_strftime("%d.%m.", $event->[EV_START]-$day_start);
+                my $event_day_long = my_strftime("%Y%m%d", $event->[EV_START]-$day_start);
 
                 $hash_days{$event_day_long} = $event_day unless(exists $hash_days{$event_day_long});
 
-                # print("EVENT: " . $event->{title} . " - "  . $event_day . "\n");
+                # print("EVENT: " . $event->[EV_TITLE] . " - "  . $event_day . "\n");
                 if ($event_day_long == $day) {
                     $dayflag = 1 if ($dayflag == 0);
                 } else {
@@ -4399,14 +4511,14 @@ sub prog_list2 {
                     $dayflag = 0;
                 }
 
-                if ($dayflag == 1 && $time < $event->{stop}) {
+                if ($dayflag == 1 && $time < $event->[EV_STOP]) {
                     push(@show,
-                         {  channel_name => $event->{channel_name},
-                            longdate  => my_strftime("%A, %x", $event->{start}),
+                         {  channel_name => $event->[EV_CHANNEL_NAME],
+                            longdate  => my_strftime("%A, %x", $event->[EV_START]),
                             newd      => 1,
-                            streamurl => $FEATURES{LIVESTREAM} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $event->{vdr_id}, uri_escape($event->{channel_name})) : undef,
-                            switchurl => "$MyURL?aktion=prog_switch&amp;channel=" . $event->{vdr_id},
-                            proglink  => "$MyURL?aktion=prog_list&amp;vdr_id=" . $event->{vdr_id}
+                            streamurl => $FEATURES{LIVESTREAM} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $event->[EV_VDR_ID], uri_escape($event->[EV_CHANNEL_NAME])) : undef,
+                            switchurl => "$MyURL?aktion=prog_switch&amp;channel=" . $event->[EV_VDR_ID],
+                            proglink  => "$MyURL?aktion=prog_list&amp;vdr_id=" . $event->[EV_VDR_ID]
                          }
                     );
 
@@ -4414,7 +4526,7 @@ sub prog_list2 {
                 }
 
                 if ($dayflag == 2) {
-                    my $search_title = $event->{title};
+                    my $search_title = $event->[EV_TITLE];
                     $search_title =~ s/^.*\~\%*([^\~]*)$/$1/;
                     $search_title =  uri_escape($search_title);
 
@@ -4432,45 +4544,43 @@ sub prog_list2 {
 
                     my $subtitle = "";
                     if ($CONFIG{EPG_SUBTITLE}) {
-                        $subtitle = CGI::escapeHTML($event->{subtitle});
+                        $subtitle = CGI::escapeHTML($event->[EV_SUBTITLE]);
                     }
                     if ($CONFIG{EPG_SUMMARY}) {
                         if (length($subtitle)) {
                             $subtitle .= "<BR />";
                         }
-                        $subtitle .= CGI::escapeHTML($event->{summary});
+                        $subtitle .= CGI::escapeHTML($event->[EV_SUMMARY]);
                         $subtitle =~ s/\|/<BR \/>/g;
                     }
 
                     my $timerset = 0;
                     foreach my $timer (@timers) {
-                        if (($timer->{vdr_id} == $vdr_id) && ($timer->{start} <= $event->{start}) && ($timer->{stop} >= $event->{stop})) {
+                        if (($timer->{vdr_id} == $vdr_id) && ($timer->{start} <= $event->[EV_START]) && ($timer->{stop} >= $event->[EV_STOP])) {
                             $timerset = 1;
                             last;
                         }
                     }
 
                     push(@show,
-                         {  ssse     => $event->{start},
-                            emit     => my_strftime("%H:%M", $event->{start}),
-                            duration => my_strftime("%H:%M", $event->{stop}),
-                            title    => CGI::escapeHTML($event->{title}),
+                         {  ssse     => $event->[EV_START],
+                            emit     => my_strftime("%H:%M", $event->[EV_START]),
+                            duration => my_strftime("%H:%M", $event->[EV_STOP]),
+                            title    => CGI::escapeHTML($event->[EV_TITLE]),
                             subtitle => $subtitle,
-                            recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
-                            infurl   => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
-                            editurl  => sprintf("%s?aktion=prog_detail_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
-                            find_title => uri_escape("/^" . quotemeta($event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~") . "/i"),
+                            recurl   => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $myself),
+                            infurl   => $event->[EV_SUMMARY] ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $myself) : undef,
+                            editurl  => sprintf("%s?aktion=prog_detail_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $myself),
+                            find_title => uri_escape("/^" . my_quotemeta($event->[EV_TITLE] . "~" . ($event->[EV_SUBTITLE] ? $event->[EV_SUBTITLE] : "") . "~") . "/"),
                             srch1_url    => $imdb_url,
                             srch1_title  => $imdb_url ? gettext($CONFIG{SRCH1_TITLE}) : undef,
                             srch2_url    => $srch2_url,
                             srch2_title  => $srch2_url ? gettext($CONFIG{SRCH2_TITLE}) : undef,
                             newd     => 0,
-                            anchor   => "id" . $event->{event_id},
+                            anchor   => "id" . $event->[EV_EVENT_ID],
                             timerset => $timerset
                          }
                     );
-                    $progname = $event->{progname};
-                    $cnumber  = $event->{cnumber};
                 }
             }
             push(@show, { endd => 1 });
@@ -4588,7 +4698,7 @@ sub timer_list {
         $timer->{sortfield} = $timer->{cdesc} . $timer->{startsse};
         $timer->{infurl}    = $timer->{event_id} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $timer->{event_id}, $timer->{vdr_id}, $myself) : undef,
 
-          $timer->{start}   = my_strftime("%H:%M", $timer->{start});
+        $timer->{start}   = my_strftime("%H:%M", $timer->{start});
         $timer->{stop}      = my_strftime("%H:%M", $timer->{stop});
         $timer->{sortbyactive}  = 1 if ($CONFIG{TM_SORTBY} eq "active");
         $timer->{sortbychannel} = 1 if ($CONFIG{TM_SORTBY} eq "channel");
@@ -4759,15 +4869,15 @@ sub timer_list {
         }
     } elsif ($CONFIG{TM_SORTBY} eq "channel") {
         if ($CONFIG{TM_DESC}) {
-            @timer = sort({ lc($b->{cdesc}) cmp lc($a->{cdesc}) } @timer);
+            @timer = sort({ ciCmp($b->{cdesc}, $a->{cdesc}) } @timer);
         } else {
-            @timer = sort({ lc($a->{cdesc}) cmp lc($b->{cdesc}) } @timer);
+            @timer = sort({ ciCmp($a->{cdesc}, $b->{cdesc}) } @timer);
         }
     } elsif ($CONFIG{TM_SORTBY} eq "name") {
         if ($CONFIG{TM_DESC}) {
-            @timer = sort({ lc($b->{title}) cmp lc($a->{title}) } @timer);
+            @timer = sort({ ciCmp($b->{title}, $a->{title}) } @timer);
         } else {
-            @timer = sort({ lc($a->{title}) cmp lc($b->{title}) } @timer);
+            @timer = sort({ ciCmp($a->{title}, $b->{title}) } @timer);
         }
     } elsif ($CONFIG{TM_SORTBY} eq "start") {
         if ($CONFIG{TM_DESC}) {
@@ -4790,7 +4900,7 @@ sub timer_list {
     }
     my $toggle_desc = ($CONFIG{TM_DESC} ? 0 : 1);
     @timer2 = @timer;
-    @timer2 = sort({ lc($a->{sortfield}) cmp lc($b->{sortfield}) } @timer2);
+    @timer2 = sort({ ciCmp($a->{sortfield}, $b->{sortfield}) } @timer2);
 
     my $vars = { sortbydayurl     => "$MyURL?aktion=timer_list&amp;sortby=day&amp;desc=" .     (($CONFIG{TM_SORTBY} eq "day")     ? $toggle_desc : $CONFIG{TM_DESC}),
                  sortbychannelurl => "$MyURL?aktion=timer_list&amp;sortby=channel&amp;desc=" . (($CONFIG{TM_SORTBY} eq "channel") ? $toggle_desc : $CONFIG{TM_DESC}),
@@ -4819,7 +4929,8 @@ sub timer_list {
                  prevdayurl    => $prev_day ? sprintf("%s?aktion=timer_list&amp;active=0&amp;timer=%s", $MyURL, $prev_day) : undef,
                  nextdayurl    => $next_day ? sprintf("%s?aktion=timer_list&amp;active=0&amp;timer=%s", $MyURL, $next_day) : undef,
                  prevdaytext   => $prev_day_name,
-                 nextdaytext   => $next_day_name
+                 nextdaytext   => $next_day_name,
+                 my_truncate   => \&my_truncate
     };
     return showTemplate("timer_list.html", $vars);
 }
@@ -4852,7 +4963,7 @@ sub timer_toggle {
             CloseSocket();
         }
     }
-    return (headerForward(RedirectToReferer("$MyURL?aktion=timer_list")));
+    return RedirectToReferer("$MyURL?aktion=timer_list");
 }
 
 sub timer_new_form {
@@ -4870,11 +4981,15 @@ sub timer_new_form {
     if ($epg_id) {    # new timer
         my $this = EPG_getEntry($vdr_id, $epg_id);
         $this_event->{active}   = 1;
-        $this_event->{event_id} = $this->{event_id};
-        $this_event->{start}    = $this->{start} - ($CONFIG{TM_MARGIN_BEGIN} * 60);
-        $this_event->{stop}     = $this->{stop} + ($CONFIG{TM_MARGIN_END} * 60);
-        $this_event->{dor}      = $this->{dor};
-        $this_event->{title}    = $this->{title};
+        $this_event->{event_id} = $this->[EV_EVENT_ID];
+        $this_event->{start}    = $this->[EV_START] - ($CONFIG{TM_MARGIN_BEGIN} * 60);
+        $this_event->{stop}     = $this->[EV_STOP] + ($CONFIG{TM_MARGIN_END} * 60);
+        #$this_event->{dor}      = $this->{dor};
+        $this_event->{title}    = $this->[EV_TITLE];
+        # Do NOT append EPG summary if VDR >= 10344 as this will be done by VDR itself
+        $this_event->{summary} = $this->[EV_SUMMARY] if ($FEATURES{VDRVERSION} < 10344);
+        $this_event->{vdr_id} = $this->[EV_VDR_ID];
+
         if ($FEATURES{EPGSEARCH}) {
             $this_event->{tool}      = $TOOL_EPGSEARCH;
             $this_event->{at_epg}    = 1;
@@ -4885,9 +5000,6 @@ sub timer_new_form {
             $this_event->{autotimer} = $this_event->{at_epg} ? $AT_BY_EVENT_ID : $AT_BY_TIME;
         }
 
-        # Do NOT append EPG summary if VDR >= 10344 as this will be done by VDR itself
-        $this_event->{summary} = $this->{summary} if ($FEATURES{VDRVERSION} < 10344);
-        $this_event->{vdr_id} = $this->{vdr_id};
     } elsif ($timer_id) {    # edit existing timer
         $this_event = ParseTimer(0, $timer_id);
         if (($this_event->{tool} == $TOOL_EPGSEARCH) && $this_event->{pattern}) {
@@ -5048,7 +5160,7 @@ sub timer_add {
 }
 
 sub timer_delete {
-    my ($timer_id) = $q->param('timer_id');
+    my $timer_id = $q->param('timer_id');
     if ($timer_id) {
         my ($result) = SendCMD("delt $timer_id");
         if ($result =~ /Timer "$timer_id" is recording/i) {
@@ -5074,25 +5186,45 @@ sub timer_delete {
         }
         CloseSocket();
     }
-    return (headerForward(RedirectToReferer("$MyURL?aktion=timer_list")));
+    return RedirectToReferer("$MyURL?aktion=timer_list");
 }
 
-sub encode_rec_stream_url {
-    my ($data) = @_;
+sub getRecordingsPlaylist {
+    my @playlist = ();
 
-    if (substr($data, 0, 4) == "http") {
-        $data =~ s/#/%23/g;
+    my $response = HTTP::Tiny->new()->get(streamdevURI()->as_string() . "/recordings.m3u");
+
+    if ($response->{success}) {
+        my $content_charset = "UTF-8";
+        # Content-Type: audio/x-mpegurl; charset=UTF-8
+        if ($response->{headers}->{'content-type'}
+                && $response->{headers}->{'content-type'} =~ /[ ;]+charset=([^ ;]+)/) {
+            $content_charset = $1;
+        }
+        Encode::from_to($response->{content}, $content_charset, $MY_ENCODING);
+        my $extinf = 1;
+        my $rec;
+        foreach my $line (split(/[ \r]*\n/, $response->{content})) {
+            if ($extinf && $line =~ /^#EXTINF:-1,(\d+)\s+(\d\d\.\d\d\.\d\d)\s+(\d\d:\d\d)\s+(.*)$/) {
+                $extinf = 0;
+                $rec = {id => $1, date => $2, time => $3, title => $4, url => undef};
+            }
+            if (!$extinf && $line =~ /^http/) {
+                $extinf = 1;
+                $rec->{url} = $line;
+                push(@playlist, $rec);
+                $rec = undef;
+            }
+        }
     }
-
-    return $data;
+    return @playlist;
 }
 
 sub rec_stream {
-    my ($id) = $q->param('id');
+    my $id = $q->param('id');
     my ($i, $title, $newtitle);
     my $data;
-    my ($date, $time, $day, $month, $hour, $minute);
-    my $c;
+    my ($date, $time);
 
     for (SendCMD("lstr")) {
         if ($FEATURES{VDRVERSION} < 10721) {
@@ -5104,17 +5236,30 @@ sub rec_stream {
     }
     $time = substr($time, 0, 5);    # needed for wareagel-patch
     if ($id == $i) {
-        chomp($title);
-        ($day,  $month)  = split(/\./, $date);
-        ($hour, $minute) = split(/:/,  $time);
-
-        # VFAT off
-        $data = findVideoFiles($minute, $hour, $day, $month, encode_RecTitle($title, 0));
-        unless ($data) {
+        my @urls = ();
+        $title =~ s/[ ~]+$//;
+        if ($CONFIG{ST_REC_STREAMDEV} && $FEATURES{STREAMDEV}) {
+            foreach my $r (getRecordingsPlaylist()) {
+                if ($date eq $r->{date} && $time eq $r->{time} && $title eq $r->{title}) {
+                    push (@urls, $r->{url});
+                }
+            }
+            if ($CONFIG{ST_DIRECT_LINKS_ON} && @urls) {
+                return headerForward($urls[0]->{url});
+            }
+        } else {
+            # VFAT off
+            @urls = findVideoFiles($date, $time, encode_RecTitle($title, 0));
             # VFAT on
-            $data = findVideoFiles($minute, $hour, $day, $month, encode_RecTitle($title, 1));
+            @urls = findVideoFiles($date, $time, encode_RecTitle($title, 1)) unless (@urls);
         }
-        $data = encode_rec_stream_url($data);
+        if (@urls) {
+            $data = "#EXTM3U\n";
+            foreach my $url (@urls) {
+                $data .= sprintf("#EXTINF:-1,%s %s  %s\n%s\n",
+                                $date, $time, $title, $url);
+            }
+        }
     }
     return (header("200", $CONFIG{REC_MIMETYPE}, $data));
 }
@@ -5136,46 +5281,53 @@ sub rec_stream_folder {
 
     # sort by date
     @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                         lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
+                         ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "") ||
                          $a->{sse} <=> $b->{sse} } @recordings);
 
     my $folder_data;
+    my @streamdev_recordings;
+
+    if ($CONFIG{ST_REC_STREAMDEV} && $FEATURES{STREAMDEV}) {
+        @streamdev_recordings = getRecordingsPlaylist();
+    }
 
     for my $recording (@recordings) {
 
         if (!$recording->{isfolder}  &&
              $recording->{parent} eq $parent) {
-  
+
             # inplace playlist
             my ($id) = $recording->{recording_id};
             my ($i, $title, $newtitle);
-            my $data;
-            my ($date, $time, $day, $month, $hour, $minute);
-        
+            my ($date, $time);
 
             $date = $recording->{date};
             $time = $recording->{time};
             $title = $recording->{name};
 
-            if (length($title) > 0) {
-                $title = CGI::unescape($parent) . "~" . $title;
-            }
-
-
-            chomp($title);
-            ($day,  $month)  = split(/\./, $date);
-            ($hour, $minute) = split(/:/,  $time);
-
-            # VFAT off
-            $data = findVideoFiles($minute, $hour, $day, $month, encode_RecTitle($title, 0));
-            unless ($data) {
+            my @urls = ();
+            $title = CGI::unescape($parent) . "~" . $title if ($parent);
+            $title =~ s/[ ~]+$//;
+            if ($CONFIG{ST_REC_STREAMDEV} && $FEATURES{STREAMDEV}) {
+                #$title = $parent_orig if ($parent_orig && !$title);
+                foreach my $r (@streamdev_recordings) {
+                    if ($date eq $r->{date} && $time eq $r->{time} && $title eq $r->{title}) {
+                        push (@urls, $r->{url});
+                    }
+                }
+            } else {
+                # VFAT off
+                @urls = findVideoFiles($date, $time, encode_RecTitle($title, 0));
                 # VFAT on
-                $data = findVideoFiles($minute, $hour, $day, $month, encode_RecTitle($title, 1));
+                @urls = findVideoFiles($date, $time, encode_RecTitle($title, 1)) unless (@urls);
             }
-        
-            $data = dma_encode_rec_stream_url($data);
-            
-            $folder_data = $folder_data . $data . "\n";
+            if (@urls) {
+                $folder_data = "#EXTM3U\n" unless ($folder_data);
+                foreach my $url (@urls) {
+                    $folder_data .= sprintf("#EXTINF:-1,%s %s  %s\n%s\n",
+                                    $date, $time, $title, $url);
+                }
+            }
         }
     }
 
@@ -5217,21 +5369,37 @@ sub findVideoFiles {
     # VDR < v1.7.2:  YYYY-MM-DD-hh[.:]mm.pr.lt.rec (pr=priority, lt=lifetime)
     # VDR >= v1.7.2: YYYY-MM-DD-hh.mm.ch-ri.rec    (ch=channel, ri=resumeId)
 
-    my ($minute, $hour, $day, $month, $title) = @_;
-    my $data;
+    my ($date, $time, $title) = @_;  # DD.MM.YY and hh:mm
+
+    my ($year, $month, $day, $hour, $minute);
+    ($day, $month, $year) = ($1, $2, $3) if ($date =~ /(\d\d).(\d\d).(\d\d)/);
+    ($hour, $minute) = ($1, $2) if ($time =~ /(\d\d):(\d\d)/);
+    return () unless (defined($day) && defined($hour));
+
     $title =~ s/ /_/g;
     $title =~ s/~/\//g;
-    Log(LOG_DEBUG, "[REC] rec_stream: find $CONFIG{VIDEODIR}/ -follow -regex \"$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\.\[0-9\]+\[.-\]\[0-9\]+\\.rec/\\(...\\.vdr\\|.....\\.ts\\)\"");
-    my @files = `find $CONFIG{VIDEODIR}/ -follow -regex "$CONFIG{VIDEODIR}/$title\_*/\\(\_/\\)?....-$month-$day\\.$hour.$minute\\.\[0-9\]+\[.-\]\[0-9\]+\\.rec/\\(...\\.vdr\\|.....\\.ts\\)" | sort -r`;
+    $title = quotemeta $title;
 
-    foreach (@files) {
-        chomp;
-        Log(LOG_DEBUG, "[REC] findVideoFiles: found ($_)\n");
-        $_ =~ s/$CONFIG{VIDEODIR}/$CONFIG{ST_VIDEODIR}/;
-        $_ =~ s/\n//g;
-        $data = $CONFIG{ST_URL} . "$_\n$data";
+    my $re_compiled = qr"$CONFIG{VIDEODIR}/$title\_*/(_/)?\d{2}$year-$month-$day\.$hour[.:]$minute\.\d+[-.]\d+\.rec/\d{3}(\.vdr|\d{2}\.ts)";
+
+    sub find_files {
+        my ($dir, $regex) = @_;
+        my @arr = ();
+        File::Find::find({ wanted => sub {push(@arr, $File::Find::name) if $File::Find::name =~ $regex}, follow => 1, no_chdir => 1}, $dir);
+        return @arr;
     }
-    return $data;
+
+    my @ret = ();
+    foreach my $path (sort(find_files($CONFIG{VIDEODIR}, $re_compiled))) {
+        chomp;
+        Log(LOG_DEBUG, "[REC] findVideoFiles: found ($path)\n");
+        $path =~ s/$CONFIG{VIDEODIR}/$CONFIG{ST_VIDEODIR}/;
+        $path =~ s/\n//g;
+        $path = $CONFIG{ST_URL} . $path;
+        $path =~ s/#/%23/g if ($path =~ /^http/);
+        push(@ret, $path)
+    }
+    return @ret;
 }
 
 sub getReferer {
@@ -5252,11 +5420,9 @@ sub getReferer {
 #############################################################################
 # live streaming
 #############################################################################
-sub live_stream {
-    my $channel = $q->param("channel");
-    my $progname = $q->param("progname");
-
+sub streamdevURI {
     my $url;
+
     if ($CONFIG{ST_STREAMDEV_HOST}) {
         $url = URI->new("http://$CONFIG{ST_STREAMDEV_HOST}");
     } elsif ($CONFIG{VDR_HOST} =~ /^localhost(\.localdomain)?|127\.0\.0\.1$/i) {
@@ -5266,18 +5432,36 @@ sub live_stream {
         $url = URI->new("http://$CONFIG{VDR_HOST}");
     }
     if ($FEATURES{STREAMDEV}) {
-        $url->port($CONFIG{ST_STREAMDEV_PORT});
-        $url->path($channel);
+        my ($port, $rest) = split(/\//, $CONFIG{ST_STREAMDEV_PORT}, 2);
+        $url->port($port);
+        $url->path($rest);
+    } elsif ($FEATURES{XINELIB}) {
+        $url->port($CONFIG{ST_XINELIB_PORT});
+    }
+    return $url;
+}
+
+sub live_stream {
+    my $channel = $q->param("channel");
+    my $progname = $q->param("progname");
+
+    my $url = streamdevURI();
+    if ($FEATURES{STREAMDEV}) {
+        $url->path($url->path() . "/" . $channel);
     } elsif ($FEATURES{XINELIB}) {
         $url->port($CONFIG{ST_XINELIB_PORT});
         # No channel support in xineliboutput URLs, need to switch here
         SendCMD("chan $channel") if $channel;
     }
 
-    my $data = "";
-    $data .= "#EXTINF:0,$progname\n" if ($progname);
-    $data .= "$url\n";
-    return (header("200", $CONFIG{TV_MIMETYPE}, $data));
+    if ($CONFIG{ST_DIRECT_LINKS_ON} && $FEATURES{STREAMDEV}) {
+        return headerForward($url);
+    } else {
+        my $data = "";
+        $data .= "#EXTINF:0,$progname\n" if ($progname);
+        $data .= "$url\n";
+        return (header("200", $CONFIG{TV_MIMETYPE}, $data));
+    }
 }
 
 #############################################################################
@@ -5390,7 +5574,7 @@ sub at_timer_toggle {
     }
     AT_Write(@at);
 
-    return (headerForward(RedirectToReferer("$MyURL?aktion=at_timer_list")));
+    return RedirectToReferer("$MyURL?aktion=at_timer_list");
 }
 
 sub at_timer_edit {
@@ -5691,7 +5875,7 @@ sub prog_timeline {
             $border -= $border % 1800;
         }
     }
-    my $event_time = getStartTime($q->param("time"), undef, $border);
+    my $event_time = getStartTime(scalar $q->param("time"), undef, $border);
     my $event_time_to;
 
     # calculate start time of the 30 min interval to avoid gaps at the beginning
@@ -5712,25 +5896,25 @@ sub prog_timeline {
 
     foreach (@{$CHAN{$CONFIG{CHANNELS_WANTED_TIMELINE}}->{channels}}) {
         if (ChannelHasEPG($_->{vdr_id})) {
-            foreach my $event (sort { $a->{start} <=> $b->{start} } @{ $EPG{$_->{vdr_id}} }) {    # Events durchgehen
-                next if ($event->{stop} <= $start_time or $event->{start} >= $event_time_to);
+            foreach my $event (sort { $a->[EV_START] <=> $b->[EV_START] } @{ $EPG{$_->{vdr_id}} }) {    # Events durchgehen
+                next if ($event->[EV_STOP] <= $start_time or $event->[EV_START] >= $event_time_to);
 
-                my $progname = $event->{channel_name};
+                my $progname = $event->[EV_CHANNEL_NAME];
                 $progname =~ s/\"/\&quot;/g;
                 push(@show,
-                     {  start    => $event->{start},
-                        stop     => $event->{stop},
-                        title    => $event->{title},
-#                        subtitle => (($event->{subtitle} && length($event->{subtitle}) > 30) ? substr($event->{subtitle}, 0, 30) . "..." : $event->{subtitle}),
+                     {  start    => $event->[EV_START],
+                        stop     => $event->[EV_STOP],
+                        title    => $event->[EV_TITLE],
+#                        subtitle => (($event->[EV_SUBTITLE] && length($event->[EV_SUBTITLE]) > 30) ? substr($event->[EV_SUBTITLE], 0, 30) . "..." : $event->[EV_SUBTITLE]),
                         progname => $progname,
-                        summary  => $event->{summary},
-                        vdr_id   => $event->{vdr_id},
-                        proglink  => sprintf("%s?aktion=prog_list&amp;vdr_id=%s",    $MyURL, $event->{vdr_id}),
-#                        switchurl => sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $event->{vdr_id}),
-#                        infurl => ($event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef),
-#                        recurl => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
-                        anchor => $event->{event_id},
-                        timer => (defined $TIM->{ $event->{title} } && $TIM->{ $event->{title} }->{vdr_id} == $event->{vdr_id} && $TIM->{ $event->{title} }->{active} ? 1 : 0), #TODO
+                        summary  => $event->[EV_SUMMARY],
+                        vdr_id   => $event->[EV_VDR_ID],
+                        proglink  => sprintf("%s?aktion=prog_list&amp;vdr_id=%s",    $MyURL, $event->[EV_VDR_ID]),
+#                        switchurl => sprintf("%s?aktion=prog_switch&amp;channel=%s", $MyURL, $event->[EV_VDR_ID]),
+#                        infurl => ($event->[EV_SUMMARY] ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $myself) : undef),
+#                        recurl => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $myself),
+                        anchor => $event->[EV_EVENT_ID],
+                        timer => (defined $TIM->{ $event->[EV_TITLE] } && $TIM->{ $event->[EV_TITLE] }->{vdr_id} == $event->[EV_VDR_ID] && $TIM->{ $event->[EV_TITLE] }->{active} ? 1 : 0), #TODO
                      }
                 );
             }
@@ -5785,13 +5969,68 @@ sub prog_summary {
     my $event_time = getStartTime($time);
 
     my $pattern;
-    my $mode;
+    my $is_regex = 0;
+    my $ignore_case = 0;
+    my @search_words = ();
     if ($search) {
-        if ($search =~ /^\/(.*)\/(i?)$/) {
+        $pattern = $search;
+        if ($pattern =~ /^\/(.*)\/(i?)$/) {
             $pattern = $1;
-            $mode    = $2;
+            my $mode = $2;
+            $is_regex = 1;
+            if ($mode eq "i") {
+                $pattern = Encode::decode($MY_ENCODING, $pattern) if $can_use_encode;
+                $pattern = qr/$pattern/i;
+                Log(LOG_DEBUG, "[SEARCH] REGEX:" . Encode::encode($MY_ENCODING, $pattern) . "\n");
+                $ignore_case = 1;
+            } else {
+                $pattern = qr/$pattern/;
+                Log(LOG_DEBUG, "[SEARCH] REGEX:" . $pattern . "\n");
+            }
         } else {
-            $search =~ s/([\+\?\.\*\^\$\(\)\[\]\{\}\|\\])/\\$1/g;
+            $pattern = Encode::decode($MY_ENCODING, $pattern) if $can_use_encode;
+            for my $word (split(/ +/, $pattern)) {
+                if ($word) {
+                    if ($can_use_encode) {
+                        # case-insensitive search for 'abc' from fastest to slowest:
+                        # (?>a|A)(?>b|B)(?>c|C) on byte strings
+                        # [aA][bB][cC] on unicode strings
+                        # substr() + uc()/lc() on unicode strings
+                        # /abc/i on unicode strings
+                        my @pat = ();
+                        my $prefix;
+                        for my $ch (split(//, quotemeta($word))) {
+                            if (uc($ch) ne lc($ch)) {
+                                if (!@pat && !defined($prefix)) {
+                                    # first character
+                                    $prefix = $ch;
+                                } else {
+                                    push(@pat, "(?>");
+                                    push(@pat, lc($ch));
+                                    push(@pat, "|");
+                                    push(@pat, uc($ch));
+                                    push(@pat, ")");
+                                }
+                            } else {
+                                push(@pat, $ch);
+                            }
+                        }
+                        if (defined($prefix)) {
+                            my $word_pat1 = Encode::encode($MY_ENCODING, join("", uc($prefix), @pat));
+                            my $word_pat2 = Encode::encode($MY_ENCODING, join("", lc($prefix), @pat));
+                            push(@search_words, [qr/$word_pat1/, qr/$word_pat2/]);
+                        } else {
+                            my $word_pat = Encode::encode($MY_ENCODING, join("", @pat));
+                            push(@search_words, [qr/$word_pat/, undef]);
+                        }
+
+                    } else {
+                        my $word_pat = quotemeta($word);
+                        push(@search_words, [qr/$word_pat/, undef]);
+                    }
+                }
+            }
+            Log(LOG_DEBUG, "[SEARCH] PATTERNS:" . join("&&", map {$_->[0] . "||" . ($_->[1] || "NULL")} @search_words) . "\n");
         }
     }
 
@@ -5800,49 +6039,39 @@ sub prog_summary {
     for my $channel ($search ? @{$CHAN{$CHAN_FULL}->{channels}} : @{$CHAN{$CONFIG{CHANNELS_WANTED_SUMMARY}}->{channels}}) {
         if (ChannelHasEPG($channel->{vdr_id})) {
             for my $event (@{ $EPG{$channel->{vdr_id}} }) {
-                next if ($event->{stop} <= $now);
+                next if ($event->[EV_STOP] <= $now);
                 if (!$search) {
-                    next if(!$next && $event_time >= $event->{stop});
-                    next if($next && $event_time >= $event->{start});
+                    next if(!$next && $event_time >= $event->[EV_STOP]);
+                    next if($next && $event_time >= $event->[EV_START]);
                 } else {
                     my ($found);
-                    if ($pattern) {
-
+                    if ($is_regex) {
                         # We have a RegExp
                         next if (!defined($pattern));
-                        next if (!length($pattern));
-                        my $SearchStr = $event->{title} . "~" . ($event->{subtitle} || "") . "~" . ($event->{summary} || "");
-
-                        # Shall we search case insensitive?
-                        if (($mode eq "i") && ($SearchStr !~ /$pattern/i)) {
-                            next;
-                        } elsif (($mode ne "i") && ($SearchStr !~ /$pattern/)) {
-                            next;
-                        } else {
-                            $found = 1;
+                        my $SearchStr = join("~", $event->[EV_TITLE], ($event->[EV_SUBTITLE] || ""), ($event->[EV_SUMMARY] || ""));
+                        if ($ignore_case) {
+                            $SearchStr = Encode::decode($MY_ENCODING, $SearchStr) if $can_use_encode;
                         }
+                        $found = ($SearchStr =~ /$pattern/);
+
                     } else {
-                        next if (!length($search));
-                        for my $word (split(/ +/, $search)) {
-                            $found = 0;
-                            for my $section (qw(title subtitle summary)) {
-                                next unless ($event->{$section});
-                                if ($event->{$section} =~ /$word/i) {
-                                    $found = 1;
-                                    last;
-                                }
+                        $found = 1;
+                        my $SearchStr = join(" ", $event->[EV_TITLE], ($event->[EV_SUBTITLE] || ""), ($event->[EV_SUMMARY] || ""));
+                        for my $pat (@search_words) {
+                            if ($SearchStr !~ /$pat->[0]/ && (!defined($pat->[1]) || $SearchStr !~ /$pat->[1]/)) {
+                                $found = 0;
+                                last;
                             }
-                            last unless ($found);
                         }
                     }
                     next unless ($found);
                 }
 
-                my $displaytext     = CGI::escapeHTML($event->{summary}) || "";
-                my $displaytitle    = CGI::escapeHTML($event->{title});
-                my $displaysubtitle = CGI::escapeHTML($event->{subtitle});
+                my $displaytext     = CGI::escapeHTML($event->[EV_SUMMARY]) || "";
+                my $displaytitle    = CGI::escapeHTML($event->[EV_TITLE]);
+                my $displaysubtitle = CGI::escapeHTML($event->[EV_SUBTITLE]);
 
-                my $search_title = $event->{title};
+                my $search_title = $event->[EV_TITLE];
                 $search_title =~ s/^.*\~\%*([^\~]*)$/$1/;
                 $search_title =  uri_escape($search_title);
 
@@ -5867,44 +6096,44 @@ sub prog_summary {
                     $displaysubtitle =~ s/\|/<br \/>\n/g;
                 }
                 my $myself = Encode_Referer($MyURL . "?" . $Query);
-                my $running = $event->{start} <= $now && $now <= $event->{stop};
+                my $running = $event->[EV_START] <= $now && $now <= $event->[EV_STOP];
 
                 my $timerset = 0;
                 foreach my $timer (@timers) {
-                  if (($timer->{vdr_id} == $event->{vdr_id}) && ($timer->{start} <= $event->{start}) && ($timer->{stop} >= $event->{stop})) {
+                  if (($timer->{vdr_id} == $event->[EV_VDR_ID]) && ($timer->{start} <= $event->[EV_START]) && ($timer->{stop} >= $event->[EV_STOP])) {
                     $timerset = 1;
                     last;
                   }
                 }
 
                 push(@show,
-                    {  date        => my_strftime("%x",     $event->{start}),
-                       longdate    => my_strftime("%A, %x", $event->{start}),
-                       start       => my_strftime("%H:%M",  $event->{start}),
-                       stop        => my_strftime("%H:%M",  $event->{stop}),
-                       event_start => $event->{start},
-                       show_percent => $event->{start} <= $now && $now <= $event->{stop} ? "1" : undef,
-                       percent     => $event->{stop} > $event->{start} ? int(($now - $event->{start}) / ($event->{stop} - $event->{start}) * 100) : 0,
-                       elapsed_min => int(($now - $event->{start}) / 60),
-                       length_min  => int(($event->{stop} - $event->{start}) / 60),
+                    {  date        => my_strftime("%x",     $event->[EV_START]),
+                       longdate    => my_strftime("%A, %x", $event->[EV_START]),
+                       start       => my_strftime("%H:%M",  $event->[EV_START]),
+                       stop        => my_strftime("%H:%M",  $event->[EV_STOP]),
+                       event_start => $event->[EV_START],
+                       show_percent => $event->[EV_START] <= $now && $now <= $event->[EV_STOP] ? "1" : undef,
+                       percent     => $event->[EV_STOP] > $event->[EV_START] ? int(($now - $event->[EV_START]) / ($event->[EV_STOP] - $event->[EV_START]) * 100) : 0,
+                       elapsed_min => int(($now - $event->[EV_START]) / 60),
+                       length_min  => int(($event->[EV_STOP] - $event->[EV_START]) / 60),
                        title       => $displaytitle,
                        subtitle    => $displaysubtitle,
-                       progname    => CGI::escapeHTML($event->{channel_name}),
+                       progname    => CGI::escapeHTML($event->[EV_CHANNEL_NAME]),
                        summary     => $displaytext,
-                       vdr_id      => $event->{vdr_id},
-                       proglink  => sprintf("%s?aktion=prog_list&amp;vdr_id=%s",      $MyURL,        $event->{vdr_id}),
-                       switchurl => $running ? sprintf("%s?aktion=prog_switch&amp;channel=%s",   $MyURL,        $event->{vdr_id}) : undef,
-                       streamurl => $FEATURES{LIVESTREAM} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $event->{vdr_id}, uri_escape($event->{channel_name})) : undef,
+                       vdr_id      => $event->[EV_VDR_ID],
+                       proglink  => sprintf("%s?aktion=prog_list&amp;vdr_id=%s",      $MyURL,        $event->[EV_VDR_ID]),
+                       switchurl => $running ? sprintf("%s?aktion=prog_switch&amp;channel=%s",   $MyURL,        $event->[EV_VDR_ID]) : undef,
+                       streamurl => $FEATURES{LIVESTREAM} ? sprintf("%s%s?aktion=live_stream&amp;channel=%s&amp;progname=%s", $MyStreamBase, $CONFIG{TV_EXT}, $event->[EV_VDR_ID], uri_escape($event->[EV_CHANNEL_NAME])) : undef,
                        stream_live_on => $FEATURES{LIVESTREAM} && $running ? $CONFIG{ST_FUNC} && $CONFIG{ST_LIVE_ON} : undef,
-                       infurl => $event->{summary} ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself) : undef,
-                       editurl    => sprintf("%s?aktion=prog_detail_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
-                       recurl     => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->{event_id}, $event->{vdr_id}, $myself),
-                       find_title => uri_escape("/^" . quotemeta($event->{title} . "~" . ($event->{subtitle} ? $event->{subtitle} : "") . "~") . "/i"),
+                       infurl => $event->[EV_SUMMARY] ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $myself) : undef,
+                       editurl    => sprintf("%s?aktion=prog_detail_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $myself),
+                       recurl     => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $myself),
+                       find_title => uri_escape("/^" . my_quotemeta($event->[EV_TITLE] . "~" . ($event->[EV_SUBTITLE] ? $event->[EV_SUBTITLE] : "") . "~") . "/"),
                        srch1_url   => $imdb_url,
                        srch1_title => $imdb_url ? gettext($CONFIG{SRCH1_TITLE}) : undef,
                        srch2_url   => $srch2_url,
                        srch2_title => $srch2_url ? gettext($CONFIG{SRCH2_TITLE}) : undef,
-                       anchor     => "id" . $event->{event_id},
+                       anchor     => "id" . $event->[EV_EVENT_ID],
                        timerset   =>  $timerset
                     }
                 );
@@ -6042,45 +6271,45 @@ sub rec_list {
     if ($CONFIG{REC_SORTBY} eq "time") {
         if ($CONFIG{REC_DESC}) {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "") ||
                                  $b->{time} <=> $a->{time} } @recordings);
         } else {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "") ||
                                  $a->{time} <=> $b->{time} } @recordings);
         }
     } elsif ($CONFIG{REC_SORTBY} eq "name") {
         if ($CONFIG{REC_DESC}) {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                                 lc($b->{isfolder} ? $b->{name} : "") cmp lc($a->{isfolder} ? $a->{name} : "") ||
-                                 lc($b->{name}) cmp lc($a->{name}) ||
+                                 ciCmp($b->{isfolder} ? $b->{name} : "", $a->{isfolder} ? $a->{name} : "") ||
+                                 ciCmp($b->{name}, $a->{name}) ||
                                  $b->{sse} <=> $a->{sse} } @recordings);
         } else {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
-                                 lc($a->{name}) cmp lc($b->{name}) ||
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "") ||
+                                 ciCmp($a->{name}, $b->{name}) ||
                                  $a->{sse} <=> $b->{sse} } @recordings);
         }
     } elsif ($CONFIG{REC_SORTBY} eq "date") {
         if ($CONFIG{REC_DESC}) {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "") ||
                                  $b->{sse} <=> $a->{sse} } @recordings);
         } else {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "") ||
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "") ||
                                  $a->{sse} <=> $b->{sse} } @recordings);
         }
     } elsif ($CONFIG{REC_SORTBY} eq "length") {
         if ($CONFIG{REC_DESC}) {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
                                  $b->{lengthmin} <=> $a->{lengthmin} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "")
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "")
                                } @recordings);
         } else {
             @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
                                  $a->{lengthmin} <=> $b->{lengthmin} ||
-                                 lc($b->{isfolder} ? $a->{name} : "") cmp lc($a->{isfolder} ? $b->{name} : "")
+                                 ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "")
                                } @recordings);
         }
     }
@@ -6469,22 +6698,30 @@ sub getRecInfo {
 }
 
 sub rec_detail {
-    my $vars = getRecInfo($q->param('id'));
+    my $vars = getRecInfo(scalar $q->param('id'));
 
     return showTemplate("prog_detail.html", $vars);
 }
 
 sub rec_delete {
-    my ($id) = $q->param('id');
+    my $id = $q->param('id');
 
     if ($q->param("rec_delete")) {
         if ($id) {
             SendCMD("delr $id");
         } else {
+            my @id_arr = ();
             for ($q->param) {
                 if (/xxxx_(.*)/) {
-                    SendCMD("delr $1");
+                    push (@id_arr, $1);
                 }
+            }
+            # VDR 2.3.x workaround:
+            # delete starting with the largest id and proceed to the smallest.
+            # In this case, ids won't change while removing items from the list.
+            @id_arr = sort {$b <=> $a} @id_arr;
+            for my $del_id (@id_arr) {
+                SendCMD("delr $del_id");
             }
         }
         CloseSocket();
@@ -6506,7 +6743,7 @@ sub rec_delete {
         # Re-read recording's list
         $CONFIG{CACHE_REC_LASTUPDATE} = 0;
     }
-    return (headerForward(RedirectToReferer("$MyURL?aktion=rec_list&sortby=" . $q->param("sortby") . "&desc=" . $q->param("desc"))));
+    return RedirectToReferer("$MyURL?aktion=rec_list&sortby=" . $q->param("sortby") . "&desc=" . $q->param("desc"));
 }
 
 sub recRunCmd {
@@ -6564,13 +6801,13 @@ sub rec_edit {
     # determine referer (redirect to where we come from)
     my $ref = getReferer();
 
-    my $vars = getRecInfo($q->param("id"), $ref ? Encode_Referer($ref) : undef, "renr");
+    my $vars = getRecInfo(scalar $q->param("id"), $ref ? Encode_Referer($ref) : undef, "renr");
     return showTemplate("rec_edit.html", $vars);
 }
 
 sub rec_rename {
-    my ($id) = $q->param('id');
-    my ($nn) = $q->param('nn');
+    my $id = $q->param('id');
+    my $nn = $q->param('nn');
     if ($id && $q->param("save")) {
         SendCMD("$FEATURES{REC_RENAME} $id $nn");
         CloseSocket();
@@ -6869,8 +7106,8 @@ sub grab_picture {
     $CONFIG{TV_SIZE}     = $q->param("size")     if($q->param("size"));
     $CONFIG{TV_SIZE}     = "half" unless($CONFIG{TV_SIZE});
 
-    my $maxwidth  = 768;
-    my $maxheight = 576;
+    my $maxwidth  = 960;
+    my $maxheight = 540;
     my ($width, $height);
     if ($CONFIG{TV_SIZE} eq "full") {
         ($width, $height) = ($maxwidth, $maxheight);
@@ -6986,7 +7223,7 @@ sub run_svdrpcmd {
     return unless ($id);
     my $counter = 1;
     my @output;
-    for (SendCMD($q->param("svdrp_cmd"))) {
+    for (SendCMD(scalar $q->param("svdrp_cmd"))) {
         push(@output, { line => $_ });
         last if ($max_lines > 0 && $counter >= $max_lines);
         $counter++;
@@ -6998,18 +7235,7 @@ sub export_channels_m3u {
     my $wanted = $q->param("wanted");
     my @filenames = ( 'vdr_full_channels', 'vdr_selected_channels', 'vdr_tv_channels', 'vdr_radio_channels' );
 
-    my $url;
-    if ($CONFIG{ST_STREAMDEV_HOST}) {
-        $url = URI->new("http://$CONFIG{ST_STREAMDEV_HOST}");
-    } else {
-        if ($CONFIG{VDR_HOST} =~ /^localhost(\.localdomain)?|127\.0\.0\.1$/i) {
-            $url = URI->new($q->url(-base => 1));
-            $url->scheme("http");
-        } else {
-            $url = URI->new("http://$CONFIG{VDR_HOST}");
-        }
-    }
-    $url->port($CONFIG{ST_STREAMDEV_PORT});
+    my $url = streamdevURI();
 
     my $data = "";
     foreach (sort({ $a->{vdr_id} <=> $b->{vdr_id} } (@{$CHAN{$wanted}->{channels}}))) {
@@ -7103,7 +7329,8 @@ sub myconnect {
                                              $connect_error));
         main::HTMLError(sprintf($ERROR_MESSAGE{connect_failed},
                                 $CONFIG{VDR_HOST}, $CONFIG{VDR_PORT},
-                                CGI::escapeHTML($connect_error)));
+                                CGI::escapeHTML($connect_error)))
+                        if $Client && $Client->connected;
         return 0;
     }
 
@@ -7216,6 +7443,14 @@ sub readresponse {
         }
     }
     return \@a;
+}
+
+sub socket {
+    return $SOCKET;
+}
+
+sub encoding {
+    return $VDR_ENCODING;
 }
 
 #
