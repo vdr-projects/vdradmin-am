@@ -126,6 +126,7 @@ do
 			Error "Unknown command \"$1\""
 			;;
 	esac
+	[ $? -ne 0 ] && exit 1
 	shift
 done
 	

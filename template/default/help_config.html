@@ -158,7 +158,9 @@
 						<dt><?% gettext('HTTP Port of Streamdev (also possible 3000/ts):') %?></dt>
 						<dd><?% gettext('Here you have to set the port number your VDR\'s streamdev server listens for connections. Additionally you can also provide the stream type you like to use.') %?></dd>
 						<dt><?% gettext('Recordings Streaming:') %?></dt>
-						<dd><?% gettext('Enable or disable streaming of recordings.<br />Well actually this is no real "streaming", but you have to setup your workstation so that it can access VDR\'s recordings. You can use for example Samba or NFS for this. VDRAdmin-AM simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation\'s display.') %?></dd>
+						<dd><?% gettext('Enable or disable streaming of recordings.') %?></dd>
+						<dt><?% gettext('Stream recordinds with Streamdev if possible') %?></dt>
+						<dd><?% gettext('Use streamdev plugin to stream recordings.<br />If disabled or streamdev plugin is not running, there is no real "streaming", but you have to setup your workstation so that it can access VDR\'s recordings. You can use for example Samba or NFS for this.<br />VDRAdmin-AM simply generates a playlist that contains all parts of the recording and sends this to your browser. If your browser and media player are configured correctly you will see the recording on your workstation\'s display.') %?></dd>
 						<dt><?% gettext('Path to VDR Recordings on your workstation:') %?></dt>
 						<dd><?% gettext('This is the path where your workstation can access VDR\'s recordings. This depends on your VDR and workstation setup, for example "\\\\vdr\\videos" or "V:\\" (on Windows) or "/mnt/videos" (on Linux).') %?></dd>
 						<dt><?% gettext('MIME type for live streaming:') %?></dt>

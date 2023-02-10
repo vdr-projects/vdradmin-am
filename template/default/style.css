@@ -494,7 +494,6 @@ body.help .heading {
 .col_checkbox {
 	text-align: center;
 	width: 16px;
-	max-width: 16px;
 }
 
 #heading {
@@ -787,6 +786,7 @@ select.channels {
 }
 #navigation input {
 	width: 140px;
+	box-sizing: border-box;
 }
 
 /* message boxes */
