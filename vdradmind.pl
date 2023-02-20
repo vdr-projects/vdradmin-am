@@ -3856,7 +3856,7 @@ sub ValidConfig {
     $CONFIG{REC_MIMETYPE} = "video/x-mpegurl" if (!$CONFIG{REC_MIMETYPE});
     $CONFIG{REC_EXT}      = "m3u"             if (!$CONFIG{REC_EXT});
     $CONFIG{SRCH1_ACTIVE} = 1 unless (defined $CONFIG{SRCH1_ACTIVE});
-    $CONFIG{SRCH1_URL}    = "http://akas.imdb.com/Tsearch?title=\%TITLE\%" unless (defined $CONFIG{SRCH1_URL});
+    $CONFIG{SRCH1_URL}    = "https://www.imdb.com/find/?q=\%TITLE\%" unless (defined $CONFIG{SRCH1_URL});
     $CONFIG{SRCH1_TITLE}  = gettext("Lookup movie in the Internet-Movie-Database (IMDb)") unless (defined $CONFIG{SRCH1_TITLE});
 
     if ($CONFIG{AT_OFFER} == 2) {
