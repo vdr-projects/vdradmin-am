@@ -41,7 +41,7 @@
 			tmpImage.src = "<?% url %?>&size=" + size + "&interval=" + interval + "&rand=" + Before.getTime();
 			//TODO: wait until (tmpImage.complete == true)?
 			document.Bild.src = tmpImage.src;
-      document.getElementById('sect_tv').style.width = (size == 'full' ? 780 : (size == 'half' ? 400 : 210)) + "px";
+      document.getElementById('sect_tv').style.width = (size == 'full' ? 1920 : (size == 'half' ? 960 : 480)) + "px";
 			if(interval > 0) {
 				After = new Date();
 				wait_sec = (interval * 1000) - (After - Before);
@@ -68,8 +68,8 @@
 		}
 
 		function tv_open() {
-			width = (size == 'full' ? 780 : (size == 'half' ? 400 : 210)) + 350;
-			height = (size == 'full' ? 576 : 525) + 60;
+			width = (size == 'full' ? 1920 : (size == 'half' ? 960 : 480)) + 350;
+			height = (size == 'full' ? 1080 : 520) + 60;
 	 		window.open("./vdradmin.pl?aktion=tv_show&new_win=1&full_tv=1", "vdradminTV", "width=" + width + ", height=" + height + ", resizable=yes, scrollbars=no, status=no, toolbar=no, menubar=no, location=no");
 		}
 		//-->

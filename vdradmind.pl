@@ -1105,10 +1105,11 @@ sub ChanTree {
         $CHAN{$CHAN_RADIO}->{channels} = \@CHANNELS_RADIO;
     }
 
+    # Temporarly disabled, because channellist also gets sorted by names. This causes duplicate channels appear side-by-side
     # Sort channel lists by channel name
-    foreach my $idx (keys(%CHAN)) {
-        @{$CHAN{$idx}->{channels}} = sort {$a->{name} cmp $b->{name}} @{$CHAN{$idx}->{channels}}
-    }
+    #foreach my $idx (keys(%CHAN)) {
+    #    @{$CHAN{$idx}->{channels}} = sort {$a->{name} cmp $b->{name}} @{$CHAN{$idx}->{channels}}
+    #}
 }
 
 sub getChannelGroups {
@@ -7111,8 +7112,8 @@ sub grab_picture {
     $CONFIG{TV_SIZE}     = $q->param("size")     if($q->param("size"));
     $CONFIG{TV_SIZE}     = "half" unless($CONFIG{TV_SIZE});
 
-    my $maxwidth  = 960;
-    my $maxheight = 540;
+    my $maxwidth  = 1920;  # FullHD
+    my $maxheight = 1080;
     my ($width, $height);
     if ($CONFIG{TV_SIZE} eq "full") {
         ($width, $height) = ($maxwidth, $maxheight);
