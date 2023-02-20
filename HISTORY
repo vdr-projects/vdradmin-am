@@ -1,3 +1,7 @@
+- Fixed: restart issues related to PID file cleanup and socket ressage (https://github.com/vdr-projects/vdradmin-am/pull/5)
+- Fixed: 'ST_DIRECT_LINKS_ON = 1' resulting in problem providing the URL (https://github.com/vdr-projects/vdradmin-am/pull/4)
+- Fixed: outdated/broken IMDb URL (https://github.com/vdr-projects/vdradmin-am/pull/3)
+
 2014-08-05: 3.6.10
 - Improved: Optimized images to reduze their size. (Submitted by Ville Skyttä)
 - Improved: Sort recordings secondarily by date when sorting by name. Makes the ordering stabler for multiple recordings with the same name. (Submitted by Olli Lammi)
