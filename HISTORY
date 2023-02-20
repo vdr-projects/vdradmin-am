@@ -1,6 +1,8 @@
 - Fixed: restart issues related to PID file cleanup and socket ressage (https://github.com/vdr-projects/vdradmin-am/pull/5)
 - Fixed: 'ST_DIRECT_LINKS_ON = 1' resulting in problem providing the URL (https://github.com/vdr-projects/vdradmin-am/pull/4)
 - Fixed: outdated/broken IMDb URL (https://github.com/vdr-projects/vdradmin-am/pull/3)
+- Adjust: adapt values to FullHD (Affects webif tv preview) (https://github.com/vdr-projects/vdradmin-am/pull/8)
+- Fixed: do not sort channellist because same channels appear side by side (https://github.com/vdr-projects/vdradmin-am/pull/8)
 
 2014-08-05: 3.6.10
 - Improved: Optimized images to reduze their size. (Submitted by Ville Skyttä)
