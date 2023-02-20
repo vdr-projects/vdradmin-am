@@ -5245,7 +5245,7 @@ sub rec_stream {
                 }
             }
             if ($CONFIG{ST_DIRECT_LINKS_ON} && @urls) {
-                return headerForward($urls[0]->{url});
+                return headerForward($urls[0]);
             }
         } else {
             # VFAT off
