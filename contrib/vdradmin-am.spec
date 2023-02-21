@@ -220,10 +220,10 @@ fi
 
 if [ "$1" = "0" ]; then
 	if getent passwd %{vdradmin_user} >/dev/null; then
-        	userdel %{vdradmin_user} || true
+		userdel %{vdradmin_user} || true
 	fi
 	if getent group %{vdradmin_group} >/dev/null; then
-        	groupdel %{vdradmin_group} || true
+		groupdel %{vdradmin_group} || true
 	fi
 fi
 

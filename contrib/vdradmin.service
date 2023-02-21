@@ -24,7 +24,7 @@ Group=vdradmin
 
 ExecStart=/usr/sbin/vdradmind --pid /var/lib/vdradmin/vdradmind.pid --cfgdir /etc/vdradmin $OPTS
 
-ExecStop=/usr/sbin/vdradmind --pid /var/lib/vdradmin/vdradmind.pid $OPTS --kill 
+ExecStop=/usr/sbin/vdradmind --pid /var/lib/vdradmin/vdradmind.pid $OPTS --kill
 
 Restart=on-failure
 
