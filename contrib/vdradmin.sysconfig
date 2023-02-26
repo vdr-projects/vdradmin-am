@@ -1,0 +1,5 @@
+# Options for vdradmin systemd unit
+# installed at /etc/sysconfig/vdradmin by the RPM
+
+# enable logging with level 5 (notice)
+OPTS="--log 5"
