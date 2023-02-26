@@ -18,8 +18,17 @@
 %global vdradmin_user  vdradmin
 %global vdradmin_group vdradmin
 
-%define ver 3.6.10
-%define rel 5.1
+%if 0%{?version:1}
+%define ver %{version}
+%else
+%define ver 3.6.11
+%endif
+
+%if 0%{?release:1}
+%define rel %{release}
+%else
+%define rel 6.0
+%endif
 
 Name: vdradmin-am
 BuildArch: noarch
@@ -56,6 +65,7 @@ Requires:  perl(HTTP::Daemon::SSL)
 Requires:  perl(Compress::Zlib)
 Requires:  perl(Sys::Syslog)
 Requires:  perl(Regexp::IPv6)
+Requires:  perl(File::Temp)
 
 
 
@@ -105,10 +115,17 @@ the Linux Video Disk Recorder (vdr)
 
 
 %install
-PREFIX=$RPM_BUILD_ROOT ./install.sh
+export PREFIX=$RPM_BUILD_ROOT
+export DESTDIR=$RPM_BUILD_ROOT
+
+# run included installer
+./install.sh
 
 # remove PREFIX implanted by ./install.sh into vdradmin
 perl -pi -e "s#$RPM_BUILD_ROOT##g" $RPM_BUILD_ROOT/usr/bin/vdradmind
+
+# remove packaged File::Temp (available by base repo) to avoid sudden dependency to VMS::Stdio
+rm $RPM_BUILD_ROOT/usr/share/vdradmin/lib/File/Temp.pm
 
 # move to sbin
 install -d $RPM_BUILD_ROOT/usr/sbin
@@ -123,17 +140,7 @@ install -d $RPM_BUILD_ROOT/var/log/vdradmin
 install -d $RPM_BUILD_ROOT/var/lib/vdradmin
 install -d $RPM_BUILD_ROOT/usr/lib/systemd/system
 
-install contrib/vdradmin.service $RPM_BUILD_ROOT/usr/lib/systemd/system/
-
-# support tools from package
-install -d $RPM_BUILD_ROOT/usr/share/vdradmin
-for file in convert.pl autotimer2searchtimer.pl; do
-	install -m 755 $file $RPM_BUILD_ROOT/usr/share/vdradmin/
-done
-
-# extra support tools
-install -m 755 contrib/at2epgsearch $RPM_BUILD_ROOT/usr/share/vdradmin/
-perl -pi -e "s#vdradmin-am#vdradmin#g" $RPM_BUILD_ROOT/usr/share/vdradmin/at2epgsearch
+install -m 644 contrib/vdradmin.service $RPM_BUILD_ROOT/usr/lib/systemd/system/
 
 
 # create adjusted default config with random password
@@ -246,10 +253,6 @@ fi
 
 %config(noreplace) %attr(0640,vdradmin,video) /etc/vdradmin/vdradmind.conf
 
-%attr(0755,root,root) /usr/share/vdradmin/at2epgsearch
-%attr(0755,root,root) /usr/share/vdradmin/autotimer2searchtimer.pl
-%attr(0755,root,root) /usr/share/vdradmin/convert.pl
-
 /usr/lib/systemd/system/
 
 %dir %doc /usr/share/doc
@@ -260,6 +263,12 @@ fi
 
 
 %changelog
+* Sun Feb 26 2023 Peter Bieringer <pb@bieringer.de> - 3.6.11-6.0
+- Do not package "autotimer" tools for now
+- Add DESTDIR support
+- Fix permissions of unit file
+- Remove included /usr/share/vdradmin/lib/File/Temp.pm (supplied by base repo)
+
 * Fri Feb 03 2023 Peter Bieringer <pb@bieringer.de> - 3.6.10-5.1
 - Create spec based on converted from vdradmin-am_3.6.10-4.1_all.deb by alien version 8.95
 - Extend/adjust spec and file locations
