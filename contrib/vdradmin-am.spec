@@ -27,7 +27,7 @@
 %if 0%{?release:1}
 %define rel %{release}
 %else
-%define rel 6.0
+%define rel 6.1
 %endif
 
 Name: vdradmin-am
@@ -66,6 +66,7 @@ Requires:  perl(Compress::Zlib)
 Requires:  perl(Sys::Syslog)
 Requires:  perl(Regexp::IPv6)
 Requires:  perl(File::Temp)
+Requires:  gettext
 
 BuildRequires:  perl(locale)
 BuildRequires:  perl(Template)
@@ -92,6 +93,7 @@ BuildRequires:  perl(Compress::Zlib)
 BuildRequires:  perl(Sys::Syslog)
 BuildRequires:  perl(Regexp::IPv6)
 BuildRequires:  perl(File::Temp)
+BuildRequires:  gettext
 
 
 %if 0%{?gitcommit:1}
@@ -288,6 +290,9 @@ fi
 
 
 %changelog
+* Wed Mar 01 2023 Peter Bieringer <pb@bieringer.de> - 3.6.11-6.1
+- Add missing 'gettext' requirement
+
 * Sun Feb 26 2023 Peter Bieringer <pb@bieringer.de> - 3.6.11-6.0
 - Do not package "autotimer" tools for now
 - Add DESTDIR support
