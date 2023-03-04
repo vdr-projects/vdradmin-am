@@ -7475,3 +7475,4 @@ sub encoding {
 # End:
 
 # EOF
+# vim: tabstop=4 smartindent shiftwidth=4 expandtab
