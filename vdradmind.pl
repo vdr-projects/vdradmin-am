@@ -85,7 +85,7 @@ use MIME::Base64 ();
 use File::Temp ();
 use File::Find ();
 use URI ();
-use URI::Escape qw(uri_escape);
+use URI::Escape qw(uri_escape uri_unescape);
 use HTTP::Tiny;
 use IO::Select;
 
@@ -6238,27 +6238,20 @@ sub rec_list {
 
     # create path array
     my @path;
-    my $fuse    = 0;
-    my $rparent = $parent;
+    my @split_parent = split("~", $parent);
 
-    # printf("PATH: (%s)\n", $parent);
-    while ($rparent) {
-        for my $recording (@RECORDINGS) {
-            if ($recording->{recording_id} eq $rparent) {
-                push(@path,
-                     {  name => $recording->{name},
-                        url  => ($recording->{recording_id} ne $parent) ? sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, $recording->{recording_id}) : ""
-                     }
-                );
-                $rparent = $recording->{parent};
-                last;
+    my $last = 1;
+    while ((scalar(@split_parent) > 0) && ($parent ne "0")) {
+        push(@path,
+            {  name => uri_unescape($split_parent[-1]),
+               url  => ($last == 0) ? sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, join("~", @split_parent)) : ""
             }
-        }
-        $fuse++;
-        last if ($fuse > 100);
-    }
+        );
+        pop(@split_parent);
+        $last = 0;
+    };
     push(@path,
-         {  name => gettext("Schedule"),
+         {  name => gettext("Recordings"),
             url  => ($parent ne 0) ? sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, 0) : ""
          }
     );
