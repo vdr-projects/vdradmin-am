@@ -1517,10 +1517,12 @@ sub SendCMD {
     OpenSocket() if (!$SVDRP);
 
     my @output;
+    Log(LOG_DEBUG, "[SendCMD] send: $cmd");
     $SVDRP->command($cmd);
     while ($_ = $SVDRP->readoneline) {
         push(@output, $_);
     }
+    Log(LOG_DEBUG, "[SendCMD] all data received of: $cmd");
     return (@output);
 }
 
@@ -6354,6 +6356,7 @@ sub rec_list {
 
 sub ParseRecordings {
     my $parent = shift;
+    Log(LOG_DEBUG, "[ParseRecordings] start parent: $parent");
 
     if ($CONFIG{CACHE_REC_ENABLED} != 0) {
         if (-e "$CONFIG{VIDEODIR}/.update") {
@@ -6527,6 +6530,7 @@ sub ParseRecordings {
              }
         );
     }
+    Log(LOG_DEBUG, "[ParseRecordings] end 'lstr'");
 
     countRecordings(0);
     for (@RECORDINGS) {
@@ -6535,6 +6539,7 @@ sub ParseRecordings {
     }
 
     $CONFIG{CACHE_REC_LASTUPDATE} = time();
+    Log(LOG_DEBUG, "[ParseRecordings] end");
 }
 
 sub countRecordings {
