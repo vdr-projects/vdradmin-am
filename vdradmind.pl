@@ -141,7 +141,7 @@ sub LOG_INFO ()       { [ 6, "info"    ] }
 sub LOG_DEBUG ()      { [ 7, "debug"   ] }
 
 my (%CONFIG, %CONFIG_TEMP);
-$CONFIG{LOGLEVEL}             = 4; #LOG_WARNING
+$CONFIG{LOGLEVEL}             = 5; #LOG_NOTICE
 $CONFIG{LOGGING}              = 0;
 $CONFIG{LOGFILE}              = "syslog";
 $CONFIG{MOD_GZIP}             = 0;
