@@ -133,15 +133,15 @@ sub true ()           { 1 }
 sub false ()          { 0 }
 sub CRLF ()           { "\r\n" }
 # [ internal log level, syslog priority ]
-sub LOG_ALWAYS ()     { [ 0, "err"     ] }
-sub LOG_FATALERROR () { [ 0, "err"     ] }
+sub LOG_FATALERROR () { [ 2, "crit"    ] }
 sub LOG_ERROR ()      { [ 3, "err"     ] }
 sub LOG_WARNING ()    { [ 4, "warning" ] }
+sub LOG_NOTICE ()     { [ 5, "notice"  ] }
 sub LOG_INFO ()       { [ 6, "info"    ] }
 sub LOG_DEBUG ()      { [ 7, "debug"   ] }
 
 my (%CONFIG, %CONFIG_TEMP);
-$CONFIG{LOGLEVEL}             = 4; #LOG_WARNING
+$CONFIG{LOGLEVEL}             = 5; #LOG_NOTICE
 $CONFIG{LOGGING}              = 0;
 $CONFIG{LOGFILE}              = "syslog";
 $CONFIG{MOD_GZIP}             = 0;
@@ -398,7 +398,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
 
         (my $err = WriteConfig()) =~ s|<br\s*/?>$||gi;
         if ($err) {
-            Log(LOG_ALWAYS, $err);
+            Log(LOG_ERROR, $err);
             exit(1);
         }
 
@@ -572,12 +572,12 @@ if ($DAEMON) {
     open(STDIN, "</dev/null");
     defined(my $pid = fork) or die "Cannot fork: $!\n";
     if ($pid) {
-        Log(LOG_ALWAYS, sprintf(gettext("%s %s started with pid %d."), $EXENAME, $VERSION, $pid));
+        Log(LOG_NOTICE, sprintf(gettext("%s %s started with pid %d."), $EXENAME, $VERSION, $pid));
         writePID($PIDFILE, $pid);
         exit(0);
     }
 } else {
-    Log(LOG_ALWAYS, sprintf("%s %s started", $EXENAME, $VERSION));
+    Log(LOG_NOTICE, sprintf("%s %s started", $EXENAME, $VERSION));
 }
 
 my ($Daemon, $Client, $Request);
