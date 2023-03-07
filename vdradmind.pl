@@ -6904,19 +6904,28 @@ sub config {
     }
 
     my @selected_channels;
+    my @not_selected_channels;
     for my $channel (@{$CHAN{$CHAN_FULL}->{channels}}) {
         my $found = 0;
         for (split(",", $CONFIG_TEMP{CHANNELS_WANTED})) {
             if ($_ eq $channel->{vdr_id}) {
                 $found = 1;
+                last;
             }
         }
-        next unless $found;
-        push(@selected_channels,
-                {   name   => $channel->{name},
-                    vdr_id => $channel->{vdr_id}
-                }
-        );
+        if ($found) {
+            push(@selected_channels,
+                    {   name   => $channel->{name},
+                        vdr_id => $channel->{vdr_id}
+                    }
+            );
+        } else {
+            push(@not_selected_channels,
+                    {   name   => $channel->{name},
+                        vdr_id => $channel->{vdr_id}
+                    }
+            );
+        };
     }
 
     my @skinlist;
@@ -6947,7 +6956,7 @@ sub config {
     }
 
     my $vars = { TEMPLATELIST      => \@template,
-                 ALL_CHANNELS      => \@{$CHAN{$CHAN_FULL}->{channels}},
+                 ALL_CHANNELS      => \@not_selected_channels,
                  SELECTED_CHANNELS => \@selected_channels,
                  LOGINPAGES        => \@loginpages,
                  SKINLIST          => \@skinlist,
