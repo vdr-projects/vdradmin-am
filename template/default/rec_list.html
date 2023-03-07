@@ -137,7 +137,7 @@
 							<?% IF rec.editurl %?>
 								<span class="action edit"><a href="<?% rec.editurl %?><?% rec.referer %?>"><img src="bilder/edit.png" alt="rename" title="<?% gettext('Rename') %?>" border="0" /></a></span>
 							<?% END %?>
-							<span class="action delete"><a href="javascript:del('<?% gettext('Delete recording?') %?>\n\n&quot;<?% rec.name_js %?>&quot;', '<?% rec.delurl %?>');"><img src="bilder/delete.png" alt="delete" title="<?% gettext('Delete') %?>" border="0" /></a></span>
+							<span class="action delete"><a href="javascript:del('<?% gettext('Delete recording?') %?>\n\n&quot;<?% rec.name_js %?>&quot;\n<?% rec.date %?>&nbsp;<?% rec.time %?>&nbsp;<?% rec.length %?>', '<?% rec.delurl %?>');"><img src="bilder/delete.png" alt="delete" title="<?% gettext('Delete') %?>" border="0" /></a></span>
 							<?% IF rec.streamurl %?>
 								<span class="action stream"><a href="<?% rec.streamurl %?>"><img src="bilder/stream.png" alt="stream" title="<?% gettext('Stream') %?>" border="0" /></a></span>
 							<?% END %?>
