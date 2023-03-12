@@ -21,7 +21,7 @@
 %if 0%{?version:1}
 %define ver %{version}
 %else
-%define ver 3.6.11
+%define ver 3.6.12
 %endif
 
 %if 0%{?release:1}
@@ -290,6 +290,9 @@ fi
 
 
 %changelog
+* Wed Mar 12 2023 Peter Bieringer <pb@bieringer.de> - 3.6.12-6.1
+- Release 3.6.12
+
 * Wed Mar 01 2023 Peter Bieringer <pb@bieringer.de> - 3.6.11-6.1
 - Add missing 'gettext' requirement
 
