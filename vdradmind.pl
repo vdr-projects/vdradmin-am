@@ -6007,7 +6007,7 @@ sub prog_summary {
                         # /abc/i on unicode strings
                         my @pat = ();
                         my $prefix;
-                        for my $ch (split(//, quotemeta($word))) {
+                        for my $ch (split(//, $word)) {
                             if (uc($ch) ne lc($ch)) {
                                 if (!@pat && !defined($prefix)) {
                                     # first character
