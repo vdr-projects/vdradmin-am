@@ -268,7 +268,7 @@ $CONFIG{PS_VIEW} = "ext";
 $CONFIG{CMD_LINES} = 20;
 
 #
-$CONFIG{GUI_POPUP_WIDTH} = 500;
+$CONFIG{GUI_POPUP_WIDTH} = 550;
 $CONFIG{GUI_POPUP_HEIGHT} = 250;
 
 #
@@ -953,6 +953,20 @@ sub GetChannelDescByNumber {
         for (@{$CHAN{$CHAN_FULL}->{channels}}) {
             if ($_->{vdr_id} == $vdr_id) {
                 return ($_->{name});
+            }
+        }
+    } else {
+        return (0);
+    }
+}
+
+sub GetChannelUniqIdByNumber {
+    my $vdr_id = shift;
+
+    if ($vdr_id) {
+        for (@{$CHAN{$CHAN_FULL}->{channels}}) {
+            if ($_->{vdr_id} == $vdr_id) {
+                return ($_->{uniq_id});
             }
         }
     } else {
@@ -1653,6 +1667,7 @@ sub SendFile {
         $FileWithPath = "$USER_CSS";
     } elsif ($File =~ "^epg/") {
         $File =~ s/^epg\///;
+        $File =~ tr/:/-/;
         $FileWithPath = $CONFIG{EPGIMAGES} . "/" . $File;
     }
 
@@ -3885,7 +3900,7 @@ sub ValidConfig {
         }
     }
 
-    $CONFIG{GUI_POPUP_WIDTH} = 500 unless ($CONFIG{GUI_POPUP_WIDTH} =~ /\d+/);
+    $CONFIG{GUI_POPUP_WIDTH} = 550 unless ($CONFIG{GUI_POPUP_WIDTH} =~ /\d+/);
     $CONFIG{GUI_POPUP_HEIGHT} = 250 unless ($CONFIG{GUI_POPUP_HEIGHT} =~ /\d+/);
 }
 
@@ -4080,8 +4095,10 @@ sub prog_detail {
 
                 # find epgimages
                 if ($CONFIG{EPGIMAGES} && -d $CONFIG{EPGIMAGES}) {
-                    for my $epgimage (<$CONFIG{EPGIMAGES}/$epg_id\[\._\]*>) {
+                    my $uniq_id = GetChannelUniqIdByNumber($vdr_id);
+                    for my $epgimage (<$CONFIG{EPGIMAGES}/${uniq_id}_${epg_id}\[\._\]*>) {
                         $epgimage =~ s/.*\///g;
+                        $epgimage =~ tr/-/:/;
                         push(@epgimages, { image => "epg/" . $epgimage });
                     }
                 }
