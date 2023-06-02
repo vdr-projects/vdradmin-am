@@ -269,7 +269,7 @@ $CONFIG{CMD_LINES} = 20;
 
 #
 $CONFIG{GUI_POPUP_WIDTH} = 550;
-$CONFIG{GUI_POPUP_HEIGHT} = 250;
+$CONFIG{GUI_POPUP_HEIGHT} = 550;
 
 #
 my %FEATURES;
@@ -3901,7 +3901,7 @@ sub ValidConfig {
     }
 
     $CONFIG{GUI_POPUP_WIDTH} = 550 unless ($CONFIG{GUI_POPUP_WIDTH} =~ /\d+/);
-    $CONFIG{GUI_POPUP_HEIGHT} = 250 unless ($CONFIG{GUI_POPUP_HEIGHT} =~ /\d+/);
+    $CONFIG{GUI_POPUP_HEIGHT} = 550 unless ($CONFIG{GUI_POPUP_HEIGHT} =~ /\d+/);
 }
 
 sub ReadConfig {
