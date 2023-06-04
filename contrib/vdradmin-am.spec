@@ -21,7 +21,7 @@
 %if 0%{?version:1}
 %define ver %{version}
 %else
-%define ver 3.6.12
+%define ver 3.6.13
 %endif
 
 %if 0%{?release:1}
@@ -290,6 +290,9 @@ fi
 
 
 %changelog
+* Sun Jun 04 2023 Peter Bieringer <pb@bieringer.de> - 3.6.13-6.1
+- Release 3.6.13
+
 * Wed Mar 12 2023 Peter Bieringer <pb@bieringer.de> - 3.6.12-6.1
 - Release 3.6.12
 
