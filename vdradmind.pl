@@ -3638,6 +3638,7 @@ sub LoadTranslation {
                       cant_open      => gettext("Can't open file \"%s\"!"),
                       connect_failed => gettext("Can't connect to VDR at %s:%s: %s<br /><br />Please check if VDR is running and if VDR's svdrphosts.conf is configured correctly."),
                       send_command   => gettext("Error while sending command to VDR at %s"),
+                      delete_failed  => gettext("Error deleting record: %s"),
     );
 
     setlocale(LC_ALL, $CONFIG{LANG});
