@@ -3638,6 +3638,7 @@ sub LoadTranslation {
                       cant_open      => gettext("Can't open file \"%s\"!"),
                       connect_failed => gettext("Can't connect to VDR at %s:%s: %s<br /><br />Please check if VDR is running and if VDR's svdrphosts.conf is configured correctly."),
                       send_command   => gettext("Error while sending command to VDR at %s"),
+                      delete_failed  => gettext("Error deleting record: %s"),
     );
 
     setlocale(LC_ALL, $CONFIG{LANG});
@@ -6561,7 +6562,7 @@ sub getRecInfo {
     if ($FEATURES{VDRVERSION} >= 10325) {
         $SVDRP->command("lstr $id");
         my ($channel_name, $subtitle, $text, $video, $audio, $subs);
-        while ($_ = $SVDRP->readoneline) {
+        while ($_ = $SVDRP->readoneline(1)) {
             if (/^C (.*)/) { $channel_name = get_name_from_uniqid($1); }
             #elsif (/^E (.*)/) { $epg = $1; }
             elsif (/^T (.*)/) { $title    = $1; }
@@ -6692,10 +6693,11 @@ sub rec_detail {
 
 sub rec_delete {
     my $id = $q->param('id');
+    my @result;
 
     if ($q->param("rec_delete")) {
         if ($id) {
-            SendCMD("delr $id");
+            @result = SendCMD("delr $id");
         } else {
             my @id_arr = ();
             for ($q->param) {
@@ -6708,10 +6710,15 @@ sub rec_delete {
             # In this case, ids won't change while removing items from the list.
             @id_arr = sort {$b <=> $a} @id_arr;
             for my $del_id (@id_arr) {
-                SendCMD("delr $del_id");
+                @result = SendCMD("delr $del_id");
+                last if ($result[0] !~ /^Recording .* deleted$/o);
             }
         }
         CloseSocket();
+        Log(LOG_DEBUG, "[rec_delete] result: @result");
+        if ($result[0] !~ /^Recording .* deleted$/o) {
+            main::HTMLError(sprintf($ERROR_MESSAGE{delete_failed}, @result));
+        };
 
     } elsif ($q->param("rec_runcmd")) {
         if ($id) {
@@ -7399,7 +7406,7 @@ sub command {
     }
 }
 
-sub readoneline {
+sub readoneline(;$) {
     my $this = shift;
     my $line;
 
@@ -7411,7 +7418,7 @@ sub readoneline {
         }
         $line = substr($line, 4, length($line));
         Encode::from_to($line, $VDR_ENCODING, $MY_ENCODING) if ($need_recode);
-        main::Log(LOG_DEBUG, sprintf("[SVDRP] Read \"%s\"", $line));
+        main::Log(LOG_DEBUG, sprintf("[SVDRP] Read \"%s\"", $line)) unless (defined $this);
         return ($line);
     } else {
         return undef;
