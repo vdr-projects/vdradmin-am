@@ -6692,10 +6692,11 @@ sub rec_detail {
 
 sub rec_delete {
     my $id = $q->param('id');
+    my @result;
 
     if ($q->param("rec_delete")) {
         if ($id) {
-            SendCMD("delr $id");
+            @result = SendCMD("delr $id");
         } else {
             my @id_arr = ();
             for ($q->param) {
@@ -6708,10 +6709,15 @@ sub rec_delete {
             # In this case, ids won't change while removing items from the list.
             @id_arr = sort {$b <=> $a} @id_arr;
             for my $del_id (@id_arr) {
-                SendCMD("delr $del_id");
+                @result = SendCMD("delr $del_id");
+                last if ($result[0] !~ /^Recording .* deleted$/o);
             }
         }
         CloseSocket();
+        Log(LOG_DEBUG, "[rec_delete] result: @result");
+        if ($result[0] !~ /^Recording .* deleted$/o) {
+            main::HTMLError(sprintf($ERROR_MESSAGE{delete_failed}, @result));
+        };
 
     } elsif ($q->param("rec_runcmd")) {
         if ($id) {
