@@ -6562,7 +6562,7 @@ sub getRecInfo {
     if ($FEATURES{VDRVERSION} >= 10325) {
         $SVDRP->command("lstr $id");
         my ($channel_name, $subtitle, $text, $video, $audio, $subs);
-        while ($_ = $SVDRP->readoneline) {
+        while ($_ = $SVDRP->readoneline(1)) {
             if (/^C (.*)/) { $channel_name = get_name_from_uniqid($1); }
             #elsif (/^E (.*)/) { $epg = $1; }
             elsif (/^T (.*)/) { $title    = $1; }
@@ -7406,7 +7406,7 @@ sub command {
     }
 }
 
-sub readoneline {
+sub readoneline(;$) {
     my $this = shift;
     my $line;
 
@@ -7418,7 +7418,7 @@ sub readoneline {
         }
         $line = substr($line, 4, length($line));
         Encode::from_to($line, $VDR_ENCODING, $MY_ENCODING) if ($need_recode);
-        main::Log(LOG_DEBUG, sprintf("[SVDRP] Read \"%s\"", $line));
+        main::Log(LOG_DEBUG, sprintf("[SVDRP] Read \"%s\"", $line)) unless (defined $this);
         return ($line);
     } else {
         return undef;
