@@ -7307,6 +7307,7 @@ sub myconnect {
     my $line;
     if ($SOCKET) {
         chomp($line = <$SOCKET>);
+        chop($line);
         main::Log(LOG_DEBUG, sprintf("[SVDRP] Read \"%s\"", $line));
         if ($line =~ /access\s+denied/i) {
             # Blocked by svdrphosts.conf - VDR will close the connection
