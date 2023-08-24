@@ -1,3 +1,49 @@
+2023-07-07:
+- Improvement: catch error during "delete record"
+- Adjust: suppress debug log output for "list record"
+- Fixed: logging of initial response reporting "blob" in systemd
+
+2023-06-02: 3.6.13
+- Improvement: increase height of EPG images
+
+2023-06-01:
+- Fixed: search text with umlauts (https://github.com/vdr-projects/vdradmin-am/issues/18)
+- Improvement: display EPG images with filename including channel ID (https://github.com/vdr-projects/vdradmin-am/issues/19)
+
+2023-03-12: 3.6.12
+- Fixed: log levels (https://github.com/vdr-projects/vdradmin-am/pull/16)
+- Adjust: config/channelselection: remove selected channels from available list (https://github.com/vdr-projects/vdradmin-am/pull/17)
+- Improvement: insert date/time/length to delete confirmation (https://github.com/vdr-projects/vdradmin-am/pull/15)
+- Improvement: major speed-up display of recording list (https://github.com/vdr-projects/vdradmin-am/pull/14)
+
+2023-02-26: 3.6.11
+- Fixed: restart issues related to PID file cleanup and socket ressage (https://github.com/vdr-projects/vdradmin-am/pull/5)
+- Fixed: 'ST_DIRECT_LINKS_ON = 1' resulting in problem providing the URL (https://github.com/vdr-projects/vdradmin-am/pull/4)
+- Fixed: outdated/broken IMDb URL (https://github.com/vdr-projects/vdradmin-am/pull/3)
+- Adjust: adapt values to FullHD (Affects webif tv preview) (https://github.com/vdr-projects/vdradmin-am/pull/8)
+- Fixed: do not sort channellist because same channels appear side by side (https://github.com/vdr-projects/vdradmin-am/pull/8)
+- Added: systemd/sysconfig and RPM spec file
+
+2023-02-10: 3.6.10-glenvt18
+- Adjust: templates
+- Adjust: change from IO::Socket to HTTP::Daemon
+- Adjust: change preview aspect ratio to 16:9
+- Improved: EPG parser
+- Adjust: disable recordings caching by default
+- Fixed: deleting multiple recordings with >= VDR-2.3.2
+- Fixed: truncation of channel names in the timer table
+- Fixed: sorting of timers and recordings
+- Fixed: don't check $LOGDIR permissions when logging to syslog or stderr
+- Fixed: CSS issues with firefox
+- Added: add an option to stream recordings with streamdev
+- Fixed: some CGI::param vulnerability warnings
+- Added: config option to restrict access to local nets only
+- Fixed: recording files search
+- Added: option to use direct links to live streams
+- Adjust: use channel groups from VDR
+- Adjust: sort channel lists by channel name
+- Adjust: renamed DESTDIR environment variable to PREFIX
+
 2014-08-05: 3.6.10
 - Improved: Optimized images to reduze their size. (Submitted by Ville Skyttä)
 - Improved: Sort recordings secondarily by date when sorting by name. Makes the ordering stabler for multiple recordings with the same name. (Submitted by Olli Lammi)

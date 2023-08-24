@@ -40,7 +40,7 @@ use constant {
     EV_STREAM_INFO  => 10,
 };
 
-my $VERSION = "3.6.10-glenvt18";
+my $VERSION = "3.6.13";
 my $BASENAME;
 my $EXENAME;
 
@@ -85,7 +85,7 @@ use MIME::Base64 ();
 use File::Temp ();
 use File::Find ();
 use URI ();
-use URI::Escape qw(uri_escape);
+use URI::Escape qw(uri_escape uri_unescape);
 use HTTP::Tiny;
 use IO::Select;
 
@@ -133,15 +133,15 @@ sub true ()           { 1 }
 sub false ()          { 0 }
 sub CRLF ()           { "\r\n" }
 # [ internal log level, syslog priority ]
-sub LOG_ALWAYS ()     { [ 0, "err"     ] }
-sub LOG_FATALERROR () { [ 0, "err"     ] }
+sub LOG_FATALERROR () { [ 2, "crit"    ] }
 sub LOG_ERROR ()      { [ 3, "err"     ] }
 sub LOG_WARNING ()    { [ 4, "warning" ] }
+sub LOG_NOTICE ()     { [ 5, "notice"  ] }
 sub LOG_INFO ()       { [ 6, "info"    ] }
 sub LOG_DEBUG ()      { [ 7, "debug"   ] }
 
 my (%CONFIG, %CONFIG_TEMP);
-$CONFIG{LOGLEVEL}             = 4; #LOG_WARNING
+$CONFIG{LOGLEVEL}             = 5; #LOG_NOTICE
 $CONFIG{LOGGING}              = 0;
 $CONFIG{LOGFILE}              = "syslog";
 $CONFIG{MOD_GZIP}             = 0;
@@ -268,8 +268,8 @@ $CONFIG{PS_VIEW} = "ext";
 $CONFIG{CMD_LINES} = 20;
 
 #
-$CONFIG{GUI_POPUP_WIDTH} = 500;
-$CONFIG{GUI_POPUP_HEIGHT} = 250;
+$CONFIG{GUI_POPUP_WIDTH} = 550;
+$CONFIG{GUI_POPUP_HEIGHT} = 550;
 
 #
 my %FEATURES;
@@ -326,6 +326,7 @@ $UserCSS = "user.css" if (-e "$USER_CSS");
 my $USE_SHELL_GZIP = false;          # set on false to use the gzip library
 
 my (%EPG, %CHAN, %CHAN_TABLES, $q, $ACCEPT_GZIP, $SVDRP, $low_time, @RECORDINGS);
+my (%RECORDING_FOLDERS, %RECORDING_BY_ID);
 my (%mimehash) = (html => "text/html",
                   png  => "image/png",
                   gif  => "image/gif",
@@ -397,7 +398,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
 
         (my $err = WriteConfig()) =~ s|<br\s*/?>$||gi;
         if ($err) {
-            Log(LOG_ALWAYS, $err);
+            Log(LOG_ERROR, $err);
             exit(1);
         }
 
@@ -409,6 +410,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         exit(1) unless (-e $PIDFILE);
         my $pid = getPID($PIDFILE);
         my $killed = defined($pid) ? kill(2, $pid) : -1;
+        sleep(1);
         if ($killed > 0 && -e $PIDFILE) { # Not deleted by kill/Shutdown()?
             unlink($PIDFILE) or Log(LOG_WARNING, "Can't delete pid file '$PIDFILE': $!");
         }
@@ -570,12 +572,12 @@ if ($DAEMON) {
     open(STDIN, "</dev/null");
     defined(my $pid = fork) or die "Cannot fork: $!\n";
     if ($pid) {
-        Log(LOG_ALWAYS, sprintf(gettext("%s %s started with pid %d."), $EXENAME, $VERSION, $pid));
+        Log(LOG_NOTICE, sprintf(gettext("%s %s started with pid %d."), $EXENAME, $VERSION, $pid));
         writePID($PIDFILE, $pid);
         exit(0);
     }
 } else {
-    Log(LOG_ALWAYS, sprintf("%s %s started", $EXENAME, $VERSION));
+    Log(LOG_NOTICE, sprintf("%s %s started", $EXENAME, $VERSION));
 }
 
 my ($Daemon, $Client, $Request);
@@ -598,6 +600,8 @@ if ($UseSSL) {
             LocalPort     => $CONFIG{SERVERPORT},
             LocalAddr     => $CONFIG{SERVERHOST},
             Listen        => 10,
+            ReuseAddr     => 1,
+            ReusePort     => 1,
             Reuse         => 1,
             SSL_cert_file => "$CERT_FILE",
             SSL_key_file  => "$KEY_FILE",
@@ -614,6 +618,8 @@ if ($UseSSL) {
             LocalPort => $CONFIG{SERVERPORT},
             LocalAddr => $CONFIG{SERVERHOST},
             Listen    => 10,
+            ReuseAddr => 1,
+            ReusePort => 1,
             Reuse     => 1
         );
         *{HTTP::Daemon::product_tokens} = sub {return $SERVERVERSION;};
@@ -652,7 +658,6 @@ $MyURL = "./vdradmin.pl";
 my @Connections = ();
 
 $CONFIG{CACHE_LASTUPDATE} = 0;
-$CONFIG{CACHE_REC_LASTUPDATE} = 0;
 
 while (true) {
 
@@ -948,6 +953,20 @@ sub GetChannelDescByNumber {
         for (@{$CHAN{$CHAN_FULL}->{channels}}) {
             if ($_->{vdr_id} == $vdr_id) {
                 return ($_->{name});
+            }
+        }
+    } else {
+        return (0);
+    }
+}
+
+sub GetChannelUniqIdByNumber {
+    my $vdr_id = shift;
+
+    if ($vdr_id) {
+        for (@{$CHAN{$CHAN_FULL}->{channels}}) {
+            if ($_->{vdr_id} == $vdr_id) {
+                return ($_->{uniq_id});
             }
         }
     } else {
@@ -1512,10 +1531,12 @@ sub SendCMD {
     OpenSocket() if (!$SVDRP);
 
     my @output;
+    Log(LOG_DEBUG, "[SendCMD] send: $cmd");
     $SVDRP->command($cmd);
     while ($_ = $SVDRP->readoneline) {
         push(@output, $_);
     }
+    Log(LOG_DEBUG, "[SendCMD] all data received of: $cmd");
     return (@output);
 }
 
@@ -1646,6 +1667,7 @@ sub SendFile {
         $FileWithPath = "$USER_CSS";
     } elsif ($File =~ "^epg/") {
         $File =~ s/^epg\///;
+        $File =~ tr/:/-/;
         $FileWithPath = $CONFIG{EPGIMAGES} . "/" . $File;
     }
 
@@ -3616,6 +3638,7 @@ sub LoadTranslation {
                       cant_open      => gettext("Can't open file \"%s\"!"),
                       connect_failed => gettext("Can't connect to VDR at %s:%s: %s<br /><br />Please check if VDR is running and if VDR's svdrphosts.conf is configured correctly."),
                       send_command   => gettext("Error while sending command to VDR at %s"),
+                      delete_failed  => gettext("Error deleting record: %s"),
     );
 
     setlocale(LC_ALL, $CONFIG{LANG});
@@ -3857,7 +3880,7 @@ sub ValidConfig {
     $CONFIG{REC_MIMETYPE} = "video/x-mpegurl" if (!$CONFIG{REC_MIMETYPE});
     $CONFIG{REC_EXT}      = "m3u"             if (!$CONFIG{REC_EXT});
     $CONFIG{SRCH1_ACTIVE} = 1 unless (defined $CONFIG{SRCH1_ACTIVE});
-    $CONFIG{SRCH1_URL}    = "http://akas.imdb.com/Tsearch?title=\%TITLE\%" unless (defined $CONFIG{SRCH1_URL});
+    $CONFIG{SRCH1_URL}    = "https://www.imdb.com/find/?q=\%TITLE\%" unless (defined $CONFIG{SRCH1_URL});
     $CONFIG{SRCH1_TITLE}  = gettext("Lookup movie in the Internet-Movie-Database (IMDb)") unless (defined $CONFIG{SRCH1_TITLE});
 
     if ($CONFIG{AT_OFFER} == 2) {
@@ -3878,8 +3901,8 @@ sub ValidConfig {
         }
     }
 
-    $CONFIG{GUI_POPUP_WIDTH} = 500 unless ($CONFIG{GUI_POPUP_WIDTH} =~ /\d+/);
-    $CONFIG{GUI_POPUP_HEIGHT} = 250 unless ($CONFIG{GUI_POPUP_HEIGHT} =~ /\d+/);
+    $CONFIG{GUI_POPUP_WIDTH} = 550 unless ($CONFIG{GUI_POPUP_WIDTH} =~ /\d+/);
+    $CONFIG{GUI_POPUP_HEIGHT} = 550 unless ($CONFIG{GUI_POPUP_HEIGHT} =~ /\d+/);
 }
 
 sub ReadConfig {
@@ -4073,8 +4096,10 @@ sub prog_detail {
 
                 # find epgimages
                 if ($CONFIG{EPGIMAGES} && -d $CONFIG{EPGIMAGES}) {
-                    for my $epgimage (<$CONFIG{EPGIMAGES}/$epg_id\[\._\]*>) {
+                    my $uniq_id = GetChannelUniqIdByNumber($vdr_id);
+                    for my $epgimage (<$CONFIG{EPGIMAGES}/${uniq_id}_${epg_id}\[\._\]*>) {
                         $epgimage =~ s/.*\///g;
+                        $epgimage =~ tr/-/:/;
                         push(@epgimages, { image => "epg/" . $epgimage });
                     }
                 }
@@ -5246,7 +5271,7 @@ sub rec_stream {
                 }
             }
             if ($CONFIG{ST_DIRECT_LINKS_ON} && @urls) {
-                return headerForward($urls[0]->{url});
+                return headerForward($urls[0]);
             }
         } else {
             # VFAT off
@@ -6000,7 +6025,7 @@ sub prog_summary {
                         # /abc/i on unicode strings
                         my @pat = ();
                         my $prefix;
-                        for my $ch (split(//, quotemeta($word))) {
+                        for my $ch (split(//, $word)) {
                             if (uc($ch) ne lc($ch)) {
                                 if (!@pat && !defined($prefix)) {
                                     # first character
@@ -6227,46 +6252,30 @@ sub rec_list {
         $parent = uri_escape($parent);
     }
 
-    ParseRecordings($parent);
+    ParseRecordings($parent); # returns by parent filtered list
 
     # create path array
     my @path;
-    my $fuse    = 0;
-    my $rparent = $parent;
+    my @split_parent = split("~", $parent);
 
-    # printf("PATH: (%s)\n", $parent);
-    while ($rparent) {
-        for my $recording (@RECORDINGS) {
-            if ($recording->{recording_id} eq $rparent) {
-                push(@path,
-                     {  name => $recording->{name},
-                        url  => ($recording->{recording_id} ne $parent) ? sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, $recording->{recording_id}) : ""
-                     }
-                );
-                $rparent = $recording->{parent};
-                last;
+    my $last = 1;
+    while ((scalar(@split_parent) > 0) && ($parent ne "0")) {
+        push(@path,
+            {  name => uri_unescape($split_parent[-1]),
+               url  => ($last == 0) ? sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, join("~", @split_parent)) : ""
             }
-        }
-        $fuse++;
-        last if ($fuse > 100);
-    }
+        );
+        pop(@split_parent);
+        $last = 0;
+    };
     push(@path,
-         {  name => gettext("Schedule"),
+         {  name => gettext("Recordings"),
             url  => ($parent ne 0) ? sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, 0) : ""
          }
     );
     @path = reverse(@path);
 
-    # filter
-    if (defined($parent)) {
-        for my $recording (@RECORDINGS) {
-            if ($recording->{parent} eq $parent) {
-                push(@recordings, $recording);
-            }
-        }
-    } else {
-        @recordings = @RECORDINGS;
-    }
+    @recordings = @RECORDINGS;
 
     #
     if ($CONFIG{REC_SORTBY} eq "time") {
@@ -6348,18 +6357,15 @@ sub rec_list {
 }
 
 sub ParseRecordings {
-    my $parent = shift;
+    my $parent_select = shift;
+    Log(LOG_DEBUG, "[ParseRecordings] start parent: $parent_select");
 
-    if ($CONFIG{CACHE_REC_ENABLED} != 0) {
-        if (-e "$CONFIG{VIDEODIR}/.update") {
-            my $mtime = (stat(_))[9];
-            return if ($mtime < $CONFIG{CACHE_REC_LASTUPDATE});
-        } else {
-            return if ((time() - $CONFIG{CACHE_REC_LASTUPDATE}) < ($CONFIG{CACHE_REC_TIMEOUT} * 60));
-        }
-    }
+    # clear global lists
+    @RECORDINGS = ();
+    %RECORDING_FOLDERS = {};
+    %RECORDING_BY_ID =  {};
 
-    undef @RECORDINGS;
+    Log(LOG_DEBUG, "[ParseRecordings] begin 'lstr'");
     for my $recording (SendCMD("lstr")) {
         chomp($recording);
         next if (length($recording) == 0);
@@ -6382,89 +6388,99 @@ sub ParseRecordings {
             }
         }
 
-        #
-        my (@tmp, @tmp2, $serie, $episode, $parent);
-        @tmp  = split("~", $name);
-        @tmp2 = @tmp;
+        my @path = split("~", $name);
+        my $rec_name = pop(@path);
+        my $rparent;
 
-#    if($name =~ /~/) {
-#        @tmp2 = split(" ", $name, 2);
-#        if(scalar(@tmp2) > 1) {
-#            if(ord(substr($tmp2[0], length($tmp2[0])-1, 1)) == 180) {
-#                @tmp = split("~", $tmp2[1]);
-#                $name = "$tmp2[0] $tmp[scalar(@tmp) - 1]";
-#            } else {
-#                @tmp = split("~", $name);
-#                $name = $tmp[scalar(@tmp) - 1];
-#            }
-#        } else {
-#            @tmp = split("~", $name);
-#            $name = $tmp[scalar(@tmp) - 1];
-#        }
-#        $parent  = uri_escape(join("~",@tmp[0, scalar(@tmp) - 2]));
-#    }
-        $name = pop(@tmp);
-        if (@tmp) {
-            $parent = uri_escape(join("~", @tmp));
+        if (@path) {
+            $rparent = uri_escape(join("~", @path));
         } else {
-            $parent = 0;
+            $rparent = 0;
+        };
+
+        my $lengthmin = 0;
+        if ($length =~ /^(\d+):(\d{1,2})$/) {
+            $lengthmin = $1 * 60 + $2;
+        } elsif ($length =~ /^\d+/) {
+            $lengthmin = $length;
         }
 
-        # printf("PARENT: (%s) (%s) (%s)\n", scalar(@tmp), $parent, $name);
+        # store recording in hash
+        $RECORDING_BY_ID{$id}->{'name'}      = $rec_name;
+        $RECORDING_BY_ID{$id}->{'date'}      = $date;
+        $RECORDING_BY_ID{$id}->{'time'}      = $time;
+        $RECORDING_BY_ID{$id}->{'length'}    = $length;
+        $RECORDING_BY_ID{$id}->{'rec_name'}  = $rec_name;
+        $RECORDING_BY_ID{$id}->{'parent'}    = $rparent;
+        $RECORDING_BY_ID{$id}->{'new'}       = $new;
+        $RECORDING_BY_ID{$id}->{'lengthmin'} = $lengthmin;
 
-        # create subfolders
-        pop(@tmp2);    # don't want the recording's name
-        while (@tmp2) {
-            my $recording_id = uri_escape(join("~", @tmp2));
-            my $recording_name = pop(@tmp2);
-            my $parent;
-            if (@tmp2) {
-                $parent = uri_escape(join("~", @tmp2));
-            } else {
-                $parent = 0;
-            }
+        # create folder tree
+        my $parent;
+        if (@path) {
+            while (scalar(@path) > 0) {
+		        $name = pop(@path);
+                if (scalar(@path) > 0) {
+		            $parent = uri_escape(join("~", @path));
+                } else {
+                    $parent = '#ROOT#';
+                };
+                $RECORDING_FOLDERS{$parent}->{$name}->{'count'}++;
+                $RECORDING_FOLDERS{$parent}->{$name}->{'new'}++ if ($new);
+                $RECORDING_FOLDERS{$parent}->{$name}->{'lengthmin'} += $lengthmin;
+	        };
+        };
+    };
 
-#        printf("SUB: (%s) (%s) (%s)\n", $recording_name, $recording_id, $parent);
-#    }
-#    for(my $i = 0; $i < scalar(@tmp) - 1; $i++) {
-#    my $recording_id;
-#    my $recording_name = $tmp[$i];
-#    my $parent;
-#    printf("REC: (%s) (%s) (%s)\n", $i, join("~",@tmp[0, $i]), join("~",@tmp[0, $i - 1]));
-#    $recording_id = uri_escape(join("~",@tmp[0, $i]));
-#    $parent;
-#    if($i != 0) {
-#        $parent = uri_escape(join("~",@tmp[0, $i - 1]));
-#    } else {
-#        $parent = 0;
-#    }
+    # Create folder list
+    my $folder_entries;
+    if ($parent_select eq "0" ) {
+        $folder_entries = $RECORDING_FOLDERS{'#ROOT#'};
+    } elsif (defined $RECORDING_FOLDERS{$parent_select}) {
+        $folder_entries = $RECORDING_FOLDERS{$parent_select};
+    };
 
-            my $found = 0;
-            for my $recording (@RECORDINGS) {
-                next if (!$recording->{isfolder});
-                if ($recording->{recording_id} eq $recording_id && $recording->{parent} eq $parent) {
-                    $found = 1;
-                }
-            }
-            if (!$found) {
+    ## Folders
+    if (scalar(keys %$folder_entries) > 0) {
+        foreach my $name (sort keys %$folder_entries) {
+            my $folder = $folder_entries->{$name};
+            my $parent = $parent_select;
+            my $path = ($parent eq "0") ? uri_escape($name) : $parent . "~" . uri_escape($name);
+            Log(LOG_DEBUG, sprintf("FOLDERLIST entry='%s' path='%s' parent='%s'", $name, $path, $parent));
+            push(@RECORDINGS,
+                 {  name         => CGI::escapeHTML($name),
+                    recording_id => $name,
+                    parent       => $parent,
+                    isfolder     => 1,
+                    date         => $folder->{'count'},
+                    time         => (defined $folder->{'new'}) ? $folder->{'new'} : 0,
+                    lengthmin    => $folder->{'lengthmin'},
+                    infurl       => sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, $path),
+                    streamurl    => "$MyURL?aktion=rec_stream_folder&amp;parent=" . $path
+                 }
+            );
+        };
+    };
 
-                # printf("RECLIST %s: (%s) (%s)\n",$recording_name, $recording_id, $parent);
-                push(@RECORDINGS,
-                     {  name         => CGI::escapeHTML($recording_name),
-                        recording_id => $recording_id,
-                        parent       => $parent,
-                        isfolder     => 1,
-                        date         => 0,
-                        time         => 0,
-                        lengthmin    => 0,
-                        infurl       => sprintf("%s?aktion=rec_list&amp;parent=%s", $MyURL, $recording_id),
-                        streamurl    => "$MyURL?aktion=rec_stream_folder&amp;parent=$recording_id"
-                     }
-                );
-            }
-        }
+    # Records
+    for my $id (keys %RECORDING_BY_ID) {
+        my ($date, $time, $length, $name, $rec_name, $serie, $episode, $new);
+        my ($lengthmin, $parent);
 
-        #
+        $parent    = $RECORDING_BY_ID{$id}->{'parent'};
+
+        next if ($parent_select ne $parent); # skip adding entries to list which are not selected
+
+        $name      = $RECORDING_BY_ID{$id}->{'name'};
+        $date      = $RECORDING_BY_ID{$id}->{'date'};
+        $time      = $RECORDING_BY_ID{$id}->{'time'};
+        $length    = $RECORDING_BY_ID{$id}->{'length'};
+        $rec_name  = $RECORDING_BY_ID{$id}->{'rec_name'};
+        $new       = $RECORDING_BY_ID{$id}->{'new'};
+        $lengthmin = $RECORDING_BY_ID{$id}->{'lengthmin'};
+
+        Log(LOG_DEBUG, sprintf("RECLIST rec_name='%s' id=%s parent='%s'",$rec_name, $id, $parent));
+
         my $yearofrecording;
         if ($FEATURES{VDRVERSION} >= 10326) {
 
@@ -6488,13 +6504,6 @@ sub ParseRecordings {
                 $yearofrecording = my_strftime("%Y");
             }
         }    # endif
-
-        my $lengthmin = 0;
-        if ($length =~ /^(\d+):(\d{1,2})$/) {
-            $lengthmin = $1 * 60 + $2;
-        } elsif ($length =~ /^\d+/) {
-            $lengthmin = $length;
-        }
 
         my $name_js = $name;
         $name_js =~ s/\'/\\\'/g;
@@ -6522,36 +6531,14 @@ sub ParseRecordings {
              }
         );
     }
+    Log(LOG_DEBUG, "[ParseRecordings] end 'lstr'");
 
-    countRecordings(0);
     for (@RECORDINGS) {
         $_->{length} ||=
             sprintf("%d:%02d", $_->{lengthmin} / 60, $_->{lengthmin} % 60);
     }
 
-    $CONFIG{CACHE_REC_LASTUPDATE} = time();
-}
-
-sub countRecordings {
-    my $parent = shift;
-    my $folder = shift;
-
-    for (@RECORDINGS) {
-        if ($_->{parent} eq $parent) {
-            if ($_->{isfolder}) {
-                countRecordings($_->{recording_id}, $_);
-                if ($folder) {
-                    $folder->{date} += $_->{date};
-                    $folder->{time} += $_->{time} if ($_->{time});
-                    $folder->{lengthmin} += $_->{lengthmin};
-                }
-            } elsif ($folder) {
-                $folder->{date}++;
-                $folder->{time}++ if ($_->{new});
-                $folder->{lengthmin} += $_->{lengthmin};
-            }
-        }
-    }
+    Log(LOG_DEBUG, "[ParseRecordings] end");
 }
 
 sub getRecInfo {
@@ -6575,7 +6562,7 @@ sub getRecInfo {
     if ($FEATURES{VDRVERSION} >= 10325) {
         $SVDRP->command("lstr $id");
         my ($channel_name, $subtitle, $text, $video, $audio, $subs);
-        while ($_ = $SVDRP->readoneline) {
+        while ($_ = $SVDRP->readoneline(1)) {
             if (/^C (.*)/) { $channel_name = get_name_from_uniqid($1); }
             #elsif (/^E (.*)/) { $epg = $1; }
             elsif (/^T (.*)/) { $title    = $1; }
@@ -6706,10 +6693,11 @@ sub rec_detail {
 
 sub rec_delete {
     my $id = $q->param('id');
+    my @result;
 
     if ($q->param("rec_delete")) {
         if ($id) {
-            SendCMD("delr $id");
+            @result = SendCMD("delr $id");
         } else {
             my @id_arr = ();
             for ($q->param) {
@@ -6722,13 +6710,16 @@ sub rec_delete {
             # In this case, ids won't change while removing items from the list.
             @id_arr = sort {$b <=> $a} @id_arr;
             for my $del_id (@id_arr) {
-                SendCMD("delr $del_id");
+                @result = SendCMD("delr $del_id");
+                last if ($result[0] !~ /^Recording .* deleted$/o);
             }
         }
         CloseSocket();
+        Log(LOG_DEBUG, "[rec_delete] result: @result");
+        if ($result[0] !~ /^Recording .* deleted$/o) {
+            main::HTMLError(sprintf($ERROR_MESSAGE{delete_failed}, @result));
+        };
 
-        # Re-read recording's list
-        $CONFIG{CACHE_REC_LASTUPDATE} = 0;
     } elsif ($q->param("rec_runcmd")) {
         if ($id) {
             recRunCmd($q->param("rec_cmd"), $id);
@@ -6741,8 +6732,6 @@ sub rec_delete {
         }
     } elsif ($q->param("rec_update")) {
 
-        # Re-read recording's list
-        $CONFIG{CACHE_REC_LASTUPDATE} = 0;
     }
     return RedirectToReferer("$MyURL?aktion=rec_list&sortby=" . $q->param("sortby") . "&desc=" . $q->param("desc"));
 }
@@ -6812,9 +6801,6 @@ sub rec_rename {
     if ($id && $q->param("save")) {
         SendCMD("$FEATURES{REC_RENAME} $id $nn");
         CloseSocket();
-
-        # Re-read recording's list
-        $CONFIG{CACHE_REC_LASTUPDATE} = 0;
     }
 
     my $ref = getReferer();
@@ -6942,19 +6928,28 @@ sub config {
     }
 
     my @selected_channels;
+    my @not_selected_channels;
     for my $channel (@{$CHAN{$CHAN_FULL}->{channels}}) {
         my $found = 0;
         for (split(",", $CONFIG_TEMP{CHANNELS_WANTED})) {
             if ($_ eq $channel->{vdr_id}) {
                 $found = 1;
+                last;
             }
         }
-        next unless $found;
-        push(@selected_channels,
-                {   name   => $channel->{name},
-                    vdr_id => $channel->{vdr_id}
-                }
-        );
+        if ($found) {
+            push(@selected_channels,
+                    {   name   => $channel->{name},
+                        vdr_id => $channel->{vdr_id}
+                    }
+            );
+        } else {
+            push(@not_selected_channels,
+                    {   name   => $channel->{name},
+                        vdr_id => $channel->{vdr_id}
+                    }
+            );
+        };
     }
 
     my @skinlist;
@@ -6985,7 +6980,7 @@ sub config {
     }
 
     my $vars = { TEMPLATELIST      => \@template,
-                 ALL_CHANNELS      => \@{$CHAN{$CHAN_FULL}->{channels}},
+                 ALL_CHANNELS      => \@not_selected_channels,
                  SELECTED_CHANNELS => \@selected_channels,
                  LOGINPAGES        => \@loginpages,
                  SKINLIST          => \@skinlist,
@@ -7312,6 +7307,7 @@ sub myconnect {
     my $line;
     if ($SOCKET) {
         chomp($line = <$SOCKET>);
+        chop($line);
         main::Log(LOG_DEBUG, sprintf("[SVDRP] Read \"%s\"", $line));
         if ($line =~ /access\s+denied/i) {
             # Blocked by svdrphosts.conf - VDR will close the connection
@@ -7411,7 +7407,7 @@ sub command {
     }
 }
 
-sub readoneline {
+sub readoneline(;$) {
     my $this = shift;
     my $line;
 
@@ -7423,7 +7419,7 @@ sub readoneline {
         }
         $line = substr($line, 4, length($line));
         Encode::from_to($line, $VDR_ENCODING, $MY_ENCODING) if ($need_recode);
-        main::Log(LOG_DEBUG, sprintf("[SVDRP] Read \"%s\"", $line));
+        main::Log(LOG_DEBUG, sprintf("[SVDRP] Read \"%s\"", $line)) unless (defined $this);
         return ($line);
     } else {
         return undef;
@@ -7465,3 +7461,4 @@ sub encoding {
 # End:
 
 # EOF
+# vim: tabstop=4 smartindent shiftwidth=4 expandtab
