@@ -5403,7 +5403,7 @@ sub encode_RecTitle {
         # VFAT on
         for ($i = 0 ; $i < length($title) ; $i++) {
             $c = substr($title, $i, 1);
-            unless ($c =~ /[�������A-Za-z0123456789_!@\$%&()+,.\-;=~ ]/) {
+            unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&()+,.\-;=~ ]/) {
                 $newtitle .= sprintf("#%02X", ord($c));
             } else {
                 $newtitle .= $c;
