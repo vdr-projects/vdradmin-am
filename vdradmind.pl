@@ -40,7 +40,7 @@ use constant {
     EV_STREAM_INFO  => 10,
 };
 
-my $VERSION = "3.6.13";
+my $VERSION = "3.6.14";
 my $BASENAME;
 my $EXENAME;
 
@@ -117,6 +117,7 @@ my $SUPPORTED_LOCALE_PREFIXES = "^(cs|de|en|es|fi|fr|hu|it|nl|ru)_";
 
 my $TOOL_AUTOTIMER = 0;
 my $TOOL_EPGSEARCH = 1;
+my $TOOL_TVSCRAPER = 2; # TVScraper plugin also adds timer to improve recordings
 
 my $AT_BY_EVENT_ID = 2;
 my $AT_BY_TIME     = 1;
@@ -1184,7 +1185,7 @@ sub get_name_from_uniqid {
 #            return $_->{name} if ($_->{uniq_id} eq $uniq_id);
 #        }
 
-        # Es darf nach Spec nur eine Übereinstimmung geben
+        # Es darf nach Spec nur eine ï¿½bereinstimmung geben
         if (scalar(@C) == 1) {
             return $C[0]->{name};
         }
@@ -1198,7 +1199,7 @@ sub get_name_from_vdrid {
         # Kanalliste nach identischer vdr_id durchsuchen
         my @C = grep($_->{vdr_id} == $vdr_id, @{$CHAN{$CHAN_FULL}->{channels}});
 
-        # Es darf nach Spec nur eine Übereinstimmung geben
+        # Es darf nach Spec nur eine ï¿½bereinstimmung geben
         if (scalar(@C) == 1) {
             return $C[0]->{name};
         }
@@ -1212,7 +1213,7 @@ sub get_channel_from_vdrid {
         # Kanalliste nach identischer vdr_id durchsuchen
         my @C = grep($_->{vdr_id} == $vdr_id, @{$CHAN{$CHAN_FULL}->{channels}});
 
-        # Es darf nach Spec nur eine Übereinstimmung geben
+        # Es darf nach Spec nur eine ï¿½bereinstimmung geben
         if (scalar(@C) == 1) {
             return $C[0];
         }
@@ -1226,7 +1227,7 @@ sub get_transponder_from_vdrid {
         # Kanalliste nach identischer vdr_id durchsuchen
         my @C = grep($_->{vdr_id} == $vdr_id, @{$CHAN{$CHAN_FULL}->{channels}});
 
-        # Es darf nach Spec nur eine Übereinstimmung geben
+        # Es darf nach Spec nur eine ï¿½bereinstimmung geben
         if (scalar(@C) == 1) {
             return ("$C[0]->{source}-$C[0]->{frequency}-$C[0]->{polarization}");
         }
@@ -1240,7 +1241,7 @@ sub get_ca_from_vdrid {
         # Kanalliste nach identischer vdr_id durchsuchen
         my @C = grep($_->{vdr_id} == $vdr_id, @{$CHAN{$CHAN_FULL}->{channels}});
 
-        # Es darf nach Spec nur eine Übereinstimmung geben
+        # Es darf nach Spec nur eine ï¿½bereinstimmung geben
         if (scalar(@C) == 1) {
             return ($C[0]->{ca});
         }
@@ -3054,7 +3055,7 @@ sub epgsearch_Param2Line {
         $directory =~ s/:/\|/g;
     }
 
-    #TODO: $searchtimer_from & $searchtimer_until auf korrektes Format prüfen
+    #TODO: $searchtimer_from & $searchtimer_until auf korrektes Format prï¿½fen
     my $searchtimer_from = $q->param("searchtimer_from");
     if ($searchtimer_from) {
         $searchtimer_from = my_mktime("0", "0", substr($searchtimer_from, 8, 2), substr($searchtimer_from, 5, 2) - 1, substr($searchtimer_from, 0, 4));
@@ -3565,23 +3566,57 @@ sub ParseTimer {
 # extract our own metadata from a timer's aux field.
 sub extract_timer_metadata {
     my $aux = shift;
-    return unless ($aux =~ /<vdradmin-am>(.*)<\/vdradmin-am>|<epgsearch>(.*)<\/epgsearch>/i);
-    if ($1) { # VDRAdmin-AM AutoTimer
-        $aux = $1;
-        my $epg_id    = $1 if ($aux =~ /<epgid>(.*)<\/epgid>/i);
-        my $autotimer = $1 if ($aux =~ /<autotimer>(.*)<\/autotimer>/i);
-        my $bstart    = $1 if ($aux =~ /<bstart>(.*)<\/bstart>/i);
-        my $bstop     = $1 if ($aux =~ /<bstop>(.*)<\/bstop>/i);
-        my $pattern   = $1 if ($aux =~ /<pattern>(.*)<\/pattern>/i);
-        return ($autotimer, $epg_id, $bstart, $bstop, $pattern, $TOOL_AUTOTIMER);
-    } elsif ($2) { # EPGSearch
-        $aux = $2;
-        my $epg_id    = $1 if ($aux =~ /<eventid>(.*)<\/eventid>/i);
-        my $autotimer = $1 if ($aux =~ /<update>(.*)<\/update>/i);
-        my $bstart    = $1 if ($aux =~ /<bstart>(.*)<\/bstart>/i);
-        my $bstop     = $1 if ($aux =~ /<bstop>(.*)<\/bstop>/i);
-        return ($autotimer, $epg_id, $bstart, $bstop, undef, $TOOL_EPGSEARCH);
+    return unless defined $aux;
+
+    unless ($aux =~ /<vdradmin-am>(.*)<\/vdradmin-am>|<epgsearch>(.*)<\/epgsearch>|<tvscraper>(.*)<\/tvscraper>/i) {
+        return;
     }
+
+    if (defined $1) { # VDRAdmin-AM AutoTimer
+        $aux = $1;
+        my $epg_id    = ($aux =~ /<epgid>(.*)<\/epgid>/i) ? $1 : undef;
+        my $autotimer = ($aux =~ /<autotimer>(.*)<\/autotimer>/i) ? $1 : undef;
+        my $bstart    = ($aux =~ /<bstart>(.*)<\/bstart>/i) ? $1 : undef;
+        my $bstop     = ($aux =~ /<bstop>(.*)<\/bstop>/i) ? $1 : undef;
+        my $pattern   = ($aux =~ /<pattern>(.*)<\/pattern>/i) ? $1 : undef;
+        return ($autotimer, $epg_id, $bstart, $bstop, $pattern, $TOOL_AUTOTIMER);
+    } elsif (defined $2) { # EPGSearch
+        $aux = $2;
+        #* Fields differ in newer EPGSearch. Sample from EPGSearch 2.4.4:
+        #<epgsearch>
+        #  <channel>27 - INPLUS</channel>
+        #  <searchtimer>Extraordinary</searchtimer>
+        #  <start>1754037420</start>
+        #  <stop>1754040240</stop>
+        #  <s-id>1121</s-id>
+        #  <eventid>19800</eventid>
+        #</epgsearch>
+        if ($aux =~ /<searchtimer>(.*)<\/searchtimer>/i) {
+            my $pattern = $1;
+            my $epg_id  = ($aux =~ /<eventid>(.*)<\/eventid>/i) ? $1 : undef;
+            my $bstart  = ($aux =~ /<start>(.*)<\/start>/i) ? $1 : undef;
+            my $bstop   = ($aux =~ /<stop>(.*)<\/stop>/i) ? $1 : undef;
+            return (undef, $epg_id, $bstart, $bstop, $pattern, $TOOL_EPGSEARCH);
+        } else { # EPGSearch old version
+            my $epg_id    = ($aux =~ /<eventid>(.*)<\/eventid>/i) ? $1 : undef;
+            my $autotimer = ($aux =~ /<update>(.*)<\/update>/i) ? $1 : undef;
+            my $bstart    = ($aux =~ /<bstart>(.*)<\/bstart>/i) ? $1 : undef;
+            my $bstop     = ($aux =~ /<bstop>(.*)<\/bstop>/i) ? $1 : undef;
+            return ($autotimer, $epg_id, $bstart, $bstop, undef, $TOOL_EPGSEARCH);
+        }
+    } elsif (defined $3) { # TVScraper
+        # Fields are <causedBy> and <reason>
+        # causedBy: Path to the recording that caused this timer to be created
+        # reason:
+        #  "improve": SD->HD or errors in the recording
+        #  "collection": Recording belongs to a collection and the timer to another TV show in the same collection
+        #  "TV show, missing episode": Recording belongs to a TV show and the timer to another episode in the same TV show
+        $aux = $3;
+        my $pattern = ($aux =~ /<reason>(.*)<\/reason>/i) ? "TVScraper: $1" : undef;
+        return (undef, undef, undef, undef, $pattern, $TOOL_TVSCRAPER);
+    }
+
+    return; # In case none of the conditions are met
 }
 
 sub append_timer_metadata {
@@ -5368,7 +5403,7 @@ sub encode_RecTitle {
         # VFAT on
         for ($i = 0 ; $i < length($title) ; $i++) {
             $c = substr($title, $i, 1);
-            unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&()+,.\-;=~ ]/) {
+            unless ($c =~ /[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½A-Za-z0123456789_!@\$%&()+,.\-;=~ ]/) {
                 $newtitle .= sprintf("#%02X", ord($c));
             } else {
                 $newtitle .= $c;

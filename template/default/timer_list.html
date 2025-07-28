@@ -1,37 +1,45 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html id="scroller">
 
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=<?% charset %?>" />
-	<title>VDRAdmin-AM - <?% gettext('Timer') %?></title>
+	<title>VDRAdmin-AM -
+		<?% gettext('Timer') %?>
+	</title>
 	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<?% IF usercss %?>
-		<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
+	<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
 	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<?% IF config.TM_TT_TIMELINE || config.TM_TT_LIST %?>
-		<script type="text/javascript" language="JavaScript1.2" src="infobox.js"></script>
+	<script type="text/javascript" language="JavaScript1.2" src="infobox.js"></script>
 	<?% END %?>
 	<style type="text/css">
-		.prgtable { border-left-width:1px; border-left-style:solid; border-right-width:1px; border-right-style:solid; }
+		.prgtable {
+			border-left-width: 1px;
+			border-left-style: solid;
+			border-right-width: 1px;
+			border-right-style: solid;
+		}
 	</style>
 </head>
 
 <body id="timer_list">
-<?% IF config.TM_TT_TIMELINE || config.TM_TT_LIST %?>
+	<?% IF config.TM_TT_TIMELINE || config.TM_TT_LIST %?>
 	<div id="infodiv" style="position:absolute; visibility:hidden; z-index:20; top:0px; left:0px;"></div>
 	<script language="JavaScript" type="text/javascript">
 	<?%
-		FOREACH timer = timers2;
+			FOREACH timer = timers2;
 	%?>
-		maketip("VDR-<?% timer.id %?>", "<?% timer.title %?>", "<?% gettext('Priority:') %?> <?% timer.prio %?><br /><?% gettext('Lifetime:') %?> <?% timer.lft %?><br /><?% gettext('Duration:') %?> <?% timer.start %?> - <?% timer.stop %?> (<?% timer.duration %?><?% gettext('min') %?>)<br /><?% gettext('Transponder:') %?> <?% timer.transponder %?><br /><?% gettext('CA-System:') %?> <?% timer.ca %?>" );
+			maketip("VDR-<?% timer.id %?>", "<?% timer.title %?>", "<?% gettext('Priority:') %?> <?% timer.prio %?><br /><?% gettext('Lifetime:') %?> <?% timer.lft %?><br /><?% gettext('Duration:') %?> <?% timer.start %?> - <?% timer.stop %?> (<?% timer.duration %?><?% gettext('min') %?>)<br /><?% gettext('Transponder:') %?> <?% timer.transponder %?><br /><?% gettext('CA-System:') %?> <?% timer.ca %?>");
 	<?%
-  	END;
+			END;
 	%?>
 	</script>
-<?% END %?>
+	<?% END %?>
 
-<?%
+	<?%
 	datumold="";
 	senderold="";
 	faktor=2.2;
@@ -40,46 +48,68 @@
 	<form action="<?% url %?>" method="get" name="FormName0">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
-				<td class="col_title"><h1><?% gettext('Timer') %?></h1></td>
+				<td class="col_title">
+					<h1>
+						<?% gettext('Timer') %?>
+					</h1>
+				</td>
 				<td class="col_other">
-					<input type="submit" class="submit" value="<?% gettext('New Timer') %?>" name="new_timer"/>
-					<input type="hidden" name="aktion" value="timer_new_form"/>
+					<input type="submit" class="submit" value="<?% gettext('New Timer') %?>" name="new_timer" />
+					<input type="hidden" name="aktion" value="timer_new_form" />
 				</td>
-<?% IF help_url %?> 
+				<?% IF help_url %?>
 				<td class="col_help">
-					<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help" title="<?% gettext('Help') %?>" /></a>
+					<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help"
+							title="<?% gettext('Help') %?>" /></a>
 				</td>
-<?% END %?>
+				<?% END %?>
 			</tr>
 		</table>
 	</form>
 
-<?% IF error_msg %?>
-		<div class="error"><?% error_msg %?></div>
-<?% END %?>
+	<?% IF error_msg %?>
+	<div class="error">
+		<?% error_msg %?>
+	</div>
+	<?% END %?>
 
 	<div id="content">
-<?% IF timers.size() > 0 %?>
+		<?% IF timers.size() > 0 %?>
 		<form action="<?% url %?>" method="get" name="FormName1">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
 				<tr class="heading">
-					<td><h2><?% title %?></h2></td>
+					<td>
+						<h2>
+							<?% title %?>
+						</h2>
+					</td>
 					<td class="col_navi">
-						<?% IF prevdayurl %?><a href="<?% prevdayurl %?>" title="<?% prevdaytext %?>"><img src="bilder/pfeile_nachlinks.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachlinks_soft.png" border="0" alt="" /><?% END %?>
-						<select name="vdr_id" class="submit" onchange="window.open('<?% url %?>?aktion=timer_list&amp;timer=' + this.options[this.selectedIndex].value,'main')">
-	<?% FOREACH day = day_loop %?>
-							<option value="<?% day.sortfield | html %?>" <?% IF day.current %?>selected="selected"<?% END %?>><?% day.day %?></option>
-	<?% END %?>
+						<?% IF prevdayurl %?><a href="<?% prevdayurl %?>" title="<?% prevdaytext %?>"><img
+								src="bilder/pfeile_nachlinks.png" border="0" alt="" /></a>
+						<?% ELSE %?><img src="bilder/pfeile_nachlinks_soft.png" border="0" alt="" />
+						<?% END %?>
+						<select name="vdr_id" class="submit"
+							onchange="window.open('<?% url %?>?aktion=timer_list&amp;timer=' + this.options[this.selectedIndex].value,'main')">
+							<?% FOREACH day = day_loop %?>
+							<option value="<?% day.sortfield | html %?>" <?% IF day.current %?>selected="selected"
+								<?% END %?>>
+								<?% day.day %?>
+							</option>
+							<?% END %?>
 						</select>
-						<?% IF nextdayurl %?><a href="<?% nextdayurl %?>" title="<?% nextdaytext %?>"><img src="bilder/pfeile_nachrechts.png" border="0" alt="" /></a><?% ELSE %?><img src="bilder/pfeile_nachrechts_soft.png" border="0" alt="" /><?% END %?>
+						<?% IF nextdayurl %?><a href="<?% nextdayurl %?>" title="<?% nextdaytext %?>"><img
+								src="bilder/pfeile_nachrechts.png" border="0" alt="" /></a>
+						<?% ELSE %?><img src="bilder/pfeile_nachrechts_soft.png" border="0" alt="" />
+						<?% END %?>
 					</td>
 				</tr>
 				<tr class="row_even">
 					<td colspan="2" align="center">
 						<table cellspacing="0" cellpadding="0" border="0">
 							<tr>
-								<td class="color1" height="20" width="100"><img src="bilder/spacer.gif" width="100" height="1" border="0" alt="" /><br />&nbsp;</td>
-	<?%
+								<td class="color1" height="20" width="100"><img src="bilder/spacer.gif" width="100"
+										height="1" border="0" alt="" /><br />&nbsp;</td>
+								<?%
 		stunde=0;
 		pos=0;
 		WHILE stunde<24;
@@ -87,15 +117,19 @@
 			ende=((stunde * 60 / faktor) +0.5 ) | format('%i');
 	%?>
 
-								<td class="<?% (stunde % 2) == 1 ? 'color2' : 'color1' %?>" align="center"><img src="bilder/spacer.gif" width="<?% ende-pos %?>" height="1" border="0" alt="" /><br /><?% stunde - 1 %?></td>
-	<?%
+								<td class="<?% (stunde % 2) == 1 ? 'color2' : 'color1' %?>" align="center"><img
+										src="bilder/spacer.gif" width="<?% ende-pos %?>" height="1" border="0"
+										alt="" /><br />
+									<?% stunde - 1 %?>
+								</td>
+								<?%
 			pos=ende;
 		END;
 	%?>
 							</tr>
 						</table>
 
-	<?%
+						<?%
 		programm=0;
 		sender="";
 		tablaenge=((1440 / faktor) + 0.5 ) | format('%i');
@@ -105,9 +139,13 @@
 	%?>
 						<table cellspacing="0" cellpadding="0" border="0" class="timers">
 							<tr>
-								<td class="<?% (programm % 2) == 0 ? 'color2' : 'color1' %?>" height="20" width="100"><img src="bilder/spacer.gif" width="100" height="1" border="0" alt="" /><br /><a href="<?% timer.proglink %?>"><b><?% my_truncate(sender, 11) %?></b></a></td>
+								<td class="<?% (programm % 2) == 0 ? 'color2' : 'color1' %?>" height="20" width="100">
+									<img src="bilder/spacer.gif" width="100" height="1" border="0" alt="" /><br /><a
+										href="<?% timer.proglink %?>"><b>
+											<?% my_truncate(sender, 11) %?>
+										</b></a></td>
 
-	<?%
+								<?%
 				pos=0;
 				FOREACH sendung = timers;
 					IF sendung.cdesc == sender && sendung.starttime <= current && sendung.stoptime >= current;
@@ -138,35 +176,49 @@
 
 						IF start>pos;
 	%?>
-								<td class="<?% (programm % 2) == 0 ? 'color2' : 'color1' %?>"><img src="bilder/spacer.gif" width="<?% start-pos %?>" height="1" border="0" alt="" /><br /></td>
+								<td class="<?% (programm % 2) == 0 ? 'color2' : 'color1' %?>"><img
+										src="bilder/spacer.gif" width="<?% start-pos %?>" height="1" border="0"
+										alt="" /><br /></td>
 
-	<?%
+								<?%
 							pos=start;
 						END;
 						IF ende - pos < 2;
 	%?>
-								<td class="<?% td_class %?>"><span <?% IF config.TM_TT_TIMELINE %?>onmouseover="tip('VDR-<?% sendung.id %?>'); return true;" onmouseout="untip(); return true;"<?% END %?>><img src="bilder/spacer.gif" width="<?% ende - pos %?>" height="20" border="0" alt="" /></span></td>
+								<td class="<?% td_class %?>"><span <?% IF config.TM_TT_TIMELINE
+										%?>onmouseover="tip('VDR-
+										<?% sendung.id %?>'); return true;" onmouseout="untip(); return true;"
+										<?% END %?>><img src="bilder/spacer.gif" width="<?% ende - pos %?>" height="20"
+											border="0" alt="" />
+									</span></td>
 
-	<?%
+								<?%
 						ELSE;
 	%?>
-								<td class="<?% td_class %?> prgtable"><span <?% IF config.TM_TT_TIMELINE %?>onmouseover="tip('VDR-<?% sendung.id %?>'); return true;" onmouseout="untip(); return true;"<?% END %?>><img src="bilder/spacer.gif" width="<?% ende - pos - 2 %?>" height="20" border="0" alt="" /></span></td>
+								<td class="<?% td_class %?> prgtable"><span <?% IF config.TM_TT_TIMELINE
+										%?>onmouseover="tip('VDR-
+										<?% sendung.id %?>'); return true;" onmouseout="untip(); return true;"
+										<?% END %?>><img src="bilder/spacer.gif" width="<?% ende - pos - 2 %?>"
+											height="20" border="0" alt="" />
+									</span></td>
 
-	<?%
+								<?%
 						END;
 						pos=ende;
 					END;
 				END;
 				IF pos<tablaenge;
 	%?>
-								<td class="<?% (programm % 2) == 0 ? 'color2' : 'color1' %?>"><img src="bilder/spacer.gif" width="<?% tablaenge - pos %?>" height="1" border="0" alt="" /><br /></td>
+								<td class="<?% (programm % 2) == 0 ? 'color2' : 'color1' %?>"><img
+										src="bilder/spacer.gif" width="<?% tablaenge - pos %?>" height="1" border="0"
+										alt="" /><br /></td>
 
-	<?%
+								<?%
 				END;
 	%?>
 							</tr>
 						</table>
-	<?%
+						<?%
 				programm=programm+1;
 			END;
 	  END;
@@ -194,154 +246,220 @@
 				<tr class="heading">
 					<td class="col_active <?% IF sortbyactive %?>selected<?% END %?>">
 						<h2>
-							<a href="<?% sortbyactiveurl %?>"><?% gettext('Active') %?>
+							<a href="<?% sortbyactiveurl %?>">
+								<?% gettext('Active') %?>
 								<?% IF sortbyactive %?>
-									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
+								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
 								<?% ELSE %?>
-									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
 								<?% END %?>
 							</a>
 						</h2>
 					</td>
 					<td class="col_channel <?% IF sortbychannel %?>selected<?% END %?>">
 						<h2>
-							<a href="<?% sortbychannelurl %?>"><?% gettext('Channel') %?>
+							<a href="<?% sortbychannelurl %?>">
+								<?% gettext('Channel') %?>
 								<?% IF sortbychannel %?>
-									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
+								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
 								<?% ELSE %?>
-									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
 								<?% END %?>
 							</a>
 						</h2>
 					</td>
 					<td class="col_date <?% IF sortbyday %?>selected<?% END %?>">
 						<h2>
-							<a href="<?% sortbydayurl %?>"><?% gettext('Date') %?>
+							<a href="<?% sortbydayurl %?>">
+								<?% gettext('Date') %?>
 								<?% IF sortbyday %?>
-									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
+								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
 								<?% ELSE %?>
-									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
 								<?% END %?>
 							</a>
 						</h2>
 					</td>
 					<td class="col_start <?% IF sortbystart %?>selected<?% END %?>">
 						<h2>
-							<a href="<?% sortbystarturl %?>"><?% gettext('Start') %?>
+							<a href="<?% sortbystarturl %?>">
+								<?% gettext('Start') %?>
 								<?% IF sortbystart %?>
-									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
+								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
 								<?% ELSE %?>
-									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
 								<?% END %?>
 							</a>
 						</h2>
 					</td>
 					<td class="col_stop <?% IF sortbystop %?>selected<?% END %?>">
 						<h2>
-							<a href="<?% sortbystopurl %?>"><?% gettext('Stop') %?>
+							<a href="<?% sortbystopurl %?>">
+								<?% gettext('Stop') %?>
 								<?% IF sortbystop %?>
-									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
+								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
 								<?% ELSE %?>
-									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
 								<?% END %?>
 							</a>
 						</h2>
 					</td>
 					<td class="col_name <?% IF sortbyname %?>selected<?% END %?>">
 						<h2>
-							<a href="<?% sortbynameurl %?>"><?% gettext('Name') %?>
+							<a href="<?% sortbynameurl %?>">
+								<?% gettext('Name') %?>
 								<?% IF sortbyname %?>
-									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
+								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
 								<?% ELSE %?>
-									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								<?% END %?>
+							</a>
+						</h2>
+					</td>
+					<td class="col_pattern <?% IF sortbypattern %?>selected<?% END %?>">
+						<h2>
+							<a href="<?% sortbypatternurl %?>">
+								<?% gettext('Search pattern') %?>
+								<?% IF sortbypattern %?>
+								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
+								<?% ELSE %?>
+								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
 								<?% END %?>
 							</a>
 						</h2>
 					</td>
 					<td class="col_edit"></td>
 					<td class="col_delete"></td>
-					<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL" onclick="AllMessages(this.form);" title="<?% gettext('Select all/none') %?>" /></td>
+					<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL"
+							onclick="AllMessages(this.form);" title="<?% gettext('Select all/none') %?>" /></td>
 				</tr>
 
-	<?% FOREACH timer = timer_loop %?>
+
+				<?% FOREACH timer = timer_loop %?>
 				<tr class="<?% IF loop.count() % 2 == 0 %?>row_even<?% ELSE %?>row_odd<?% END %?>">
 					<td class="col_active <?% IF timer.sortbyactive %?>selected<?% END %?>">
 						<div>
-							<a href="javascript:change('<?% gettext('Edit timer status?') %?>','<?% timer.toggleurl %?>&amp;timer=<?% timer.current %?>');">
-							<?% IF timer.active % 32768 == 0 %?>
-								<img src="bilder/poempl_grau.png" alt="inactive" title="<?% gettext('This timer is inactive!') %?>" align="middle" border="0" />
-							<?% ELSE %?>
-								<?% IF timer.critical %?>
-									<img src="bilder/poempl_rot.png" alt="impossible" title="<?% gettext('This timer is impossible!') %?>" align="middle" border="0" />
+							<a
+								href="javascript:change('<?% gettext('Edit timer status?') %?>','<?% timer.toggleurl %?>&amp;timer=<?% timer.current %?>');">
+								<?% IF timer.active % 32768 == 0 %?>
+								<img src="bilder/poempl_grau.png" alt="inactive"
+									title="<?% gettext('This timer is inactive!') %?>" align="middle" border="0" />
 								<?% ELSE %?>
-									<?% IF timer.collision %?>
-										<img src="bilder/poempl_gelb.png" alt="nomore" title="<?% gettext('No more timers on other transponders possible!') %?>" align="middle" border="0" />
-									<?% ELSE %?>
-										<?% IF timer.active %?>
-											<img src="bilder/poempl_gruen.png" alt="possible" title="<?% gettext('Timer OK.') %?>" align="middle" border="0" />
-										<?% END %?>
-									<?% END %?>
+								<?% IF timer.critical %?>
+								<img src="bilder/poempl_rot.png" alt="impossible"
+									title="<?% gettext('This timer is impossible!') %?>" align="middle" border="0" />
+								<?% ELSE %?>
+								<?% IF timer.collision %?>
+								<img src="bilder/poempl_gelb.png" alt="nomore"
+									title="<?% gettext('No more timers on other transponders possible!') %?>"
+									align="middle" border="0" />
+								<?% ELSE %?>
+								<?% IF timer.active %?>
+								<img src="bilder/poempl_gruen.png" alt="possible" title="<?% gettext('Timer OK.') %?>"
+									align="middle" border="0" />
 								<?% END %?>
-							<?% END %?>
-								<?% IF timer.active == 1  %?><?% gettext('Yes') %?><?% END %?>
-								<?% IF timer.active == 0 %?><?% gettext('No') %?><?% END %?>
-								<?% IF timer.active == 5 %?><?% gettext('VPS') %?><?% END %?>
-								<?% IF timer.autotimer %?>(<?% gettext('Auto') %?>)<?% END %?>
+								<?% END %?>
+								<?% END %?>
+								<?% END %?>
+								<?% IF timer.active == 1  %?>
+								<?% gettext('Yes') %?>
+								<?% END %?>
+								<?% IF timer.active == 0 %?>
+								<?% gettext('No') %?>
+								<?% END %?>
+								<?% IF timer.active == 5 %?>
+								<?% gettext('VPS') %?>
+								<?% END %?>
+								<?% IF timer.autotimer %?>(
+								<?% gettext('Auto') %?>)
+								<?% END %?>
 							</a>
 						</div>
 					</td>
 					<td class="col_channel <?% IF timer.sortbychannel %?>selected<?% END %?>">
-						<div><a href="<?% timer.proglink %?>"><?% timer.cdesc %?></a></div>
+						<div><a href="<?% timer.proglink %?>">
+								<?% timer.cdesc %?>
+							</a></div>
 					</td>
 					<td class="col_date <?% IF timer.sortbyday %?>selected<?% END %?>">
-						<div><?% timer.dor %?></div>
+						<div>
+							<?% timer.dor %?>
+						</div>
 					</td>
 					<td class="col_start <?% IF timer.sortbystart %?>selected<?% END %?>">
-						<div><?% timer.start %?></div>
+						<div>
+							<?% timer.start %?>
+						</div>
 					</td>
 					<td class="col_stop <?% IF timer.sortbystop %?>selected<?% END %?>">
-						<div><?% timer.stop %?></div>
+						<div>
+							<?% timer.stop %?>
+						</div>
 					</td>
 					<td class="col_name <?% IF timer.sortbyname %?>selected<?% END %?>">
-						<div <?% IF config.TM_TT_LIST %?>onmouseover="tip('VDR-<?% timer.id %?>'); return true;" onmouseout="untip(); return true;"<?% END %?>>
-							<?% IF timer.recording && timer.active %?><img align="middle" src="bilder/rec.gif" border="0" alt="" />&nbsp;<?% END %?>
+						<div <?% IF config.TM_TT_LIST %?>onmouseover="tip('VDR-
+							<?% timer.id %?>'); return true;" onmouseout="untip(); return true;"
+							<?% END %?>>
+							<?% IF timer.recording && timer.active %?><img align="middle" src="bilder/rec.gif"
+								border="0" alt="" />&nbsp;
+							<?% END %?>
 							<?% IF timer.infurl %?>
-								<a href="javascript:popup('<?% timer.infurl %?>', <?% config.GUI_POPUP_WIDTH %?>, <?% config.GUI_POPUP_HEIGHT %?>);"><?% timer.title %?></a>
-							<?% ELSE %?>
+							<a
+								href="javascript:popup('<?% timer.infurl %?>', <?% config.GUI_POPUP_WIDTH %?>, <?% config.GUI_POPUP_HEIGHT %?>);">
 								<?% timer.title %?>
+							</a>
+							<?% ELSE %?>
+							<?% timer.title %?>
 							<?% END %?>
 						</div>
 					</td>
+					<td class="col_pattern">
+						<div>
+							<?% IF timer.pattern %?><?% timer.pattern | html %?><?% END %?>
+						</div>
+					</td>
 					<td class="col_edit">
-						<div><a href="<?% timer.modurl %?>"><img src="bilder/edit.png" alt="edit" title="<?% gettext('Edit') %?>" border="0" /></a></div>
+						<div><a href="<?% timer.modurl %?>"><img src="bilder/edit.png" alt="edit"
+									title="<?% gettext('Edit') %?>" border="0" /></a></div>
 					</td>
 					<td class="col_delete">
-						<div><a href="javascript:del('<?% gettext('Delete timer?') %?>\n\n&quot;<?% timer.title_js %?>&quot;','<?% timer.delurl %?>');"><img src="bilder/delete.png" alt="delete" title="<?% gettext('Delete') %?>" border="0" /></a></div>
+						<div><a
+href="javascript:del('<?% gettext('Delete timer?') %?>\n\n<?% timer.title_js %?>','<?% timer.delurl %?>');"><img
+									src="bilder/delete.png" alt="delete" title="<?% gettext('Delete') %?>"
+									border="0" /></a></div>
 					</td>
 					<td class="col_checkbox">
 						<div><input type="checkbox" name="xxxx_<?% timer.id %?>" /></div>
 					</td>
 				</tr>
-	<?% END %?>
+				<?% END %?>
 			</table>
 
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
 				<tr>
 					<td align="left">
-						<input type="submit" class="submit" name="timer_active" value="<?% gettext('activate') %?>" onclick="return confirm('<?% gettext('Edit timer status?') %?>');" />
-						<input type="submit" class="submit" name="timer_inactive" value="<?% gettext('inactivate') %?>" onclick="return confirm('<?% gettext('Edit timer status?') %?>');" />
-						&nbsp;<?% gettext('selected timers') %?>
+						<input type="submit" class="submit" name="timer_active" value="<?% gettext('activate') %?>"
+							onclick="return confirm('<?% gettext('Edit timer status?') %?>');" />
+						<input type="submit" class="submit" name="timer_inactive" value="<?% gettext('inactivate') %?>"
+							onclick="return confirm('<?% gettext('Edit timer status?') %?>');" />
+						&nbsp;
+						<?% gettext('selected timers') %?>
 					</td>
 					<td align="right">
-						<input type="submit" class="submit" name="timer_delete" value="<?% gettext('Delete Selected Timers') %?>" onclick="return mdel(this, '<?% gettext('Delete all selected timers?') %?>');" />
+						<input type="submit" class="submit" name="timer_delete"
+							value="<?% gettext('Delete Selected Timers') %?>"
+							onclick="return mdel(this, '<?% gettext('Delete all selected timers?') %?>');" />
 					</td>
 				</tr>
 			</table>
 			<input type="hidden" name="aktion" value="timer_aktion" />
 		</form>
-<?% ELSE %?>
-		<div class="warning"><?% gettext('No timers defined!') %?></div>
-<?% END %?>
+		<?% ELSE %?>
+		<div class="warning">
+			<?% gettext('No timers defined!') %?>
+		</div>
+		<?% END %?>
 	</div>
 </body>
+
 </html>

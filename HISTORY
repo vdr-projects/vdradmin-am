@@ -1,3 +1,7 @@
+2025-07-28: 3.6.14
+- Enhanced the timer list display by adding a new column for search patterns.
+   Supports EPGSearch 'searchtimer' and TVScraper 'reason' fields
+
 2023-07-07:
 - Improvement: catch error during "delete record"
 - Adjust: suppress debug log output for "list record"
@@ -45,11 +49,11 @@
 - Adjust: renamed DESTDIR environment variable to PREFIX
 
 2014-08-05: 3.6.10
-- Improved: Optimized images to reduze their size. (Submitted by Ville Skyttä)
+- Improved: Optimized images to reduze their size. (Submitted by Ville Skyttï¿½)
 - Improved: Sort recordings secondarily by date when sorting by name. Makes the ordering stabler for multiple recordings with the same name. (Submitted by Olli Lammi)
 - Added: streaming of recordings folders (Submitted by Daniel Matzke).
-- Added: Hungarian translation (Submitted by István Füley).
-- Fixed LSTR when executing recording commands on VDR >= 1.7.21 (Submitted by David Rütti)
+- Added: Hungarian translation (Submitted by Istvï¿½n Fï¿½ley).
+- Fixed LSTR when executing recording commands on VDR >= 1.7.21 (Submitted by David Rï¿½tti)
 - Updated: Italian translation (thanks to Diego Pierotto).
 - Updated: Finnish translation.
 
@@ -94,7 +98,7 @@
 - Updated: Spanish translation (Submitted by Manuel Gomez).
 - Improved: Default mail settings.
 - Fixed: Check if "GUI_POPUP_WIDTH" and "GUI_POPUP_HEIGHT" are numeric and set them to the defaults if they are not (Reported by Jan).
-- Added: Support VDR 1.7.12+ commands.conf and reccmds.conf (means: skip lines ending in "{" and lines with only "}" in them). 
+- Added: Support VDR 1.7.12+ commands.conf and reccmds.conf (means: skip lines ending in "{" and lines with only "}" in them).
 - Added: check file and directory permissions on startup abort on error.
 - Changed: Default directory for PID file to /var/run/vdradmin.
 - Changed: Default directory for log file to /var/log/vdradmin.
@@ -149,8 +153,8 @@
 - Updated: Finnish translation
 
 2008-12-13: 3.6.3
-- Updated: Spanish translation (Submitted by Rüdiger Jung).
-- Changed: Process name to "vdradmind" (Based on patch submitted by Ville Skyttä).
+- Updated: Spanish translation (Submitted by Rï¿½diger Jung).
+- Changed: Process name to "vdradmind" (Based on patch submitted by Ville Skyttï¿½).
 - Updated: Italian translation (Submitted by Diego Pierotto).
 - Changed executable's name from "vdradmind.pl" to "vdradmind".
 - Updated: Dutch translation (Submitted by Roel Koelewijn).
@@ -170,7 +174,7 @@
 - Added: ST_STREAMDEV_HOST config option to set the name/ip to be used for streaming.
 - Fixed: m3u files for Xine (Reported by Robert C. Helling).
 - Updated: Italian translation (Submitted by Diego Pierotto).
-- Updated: Spanish translation (Submitted by Rüdiger Jung).
+- Updated: Spanish translation (Submitted by Rï¿½diger Jung).
 - Updated: Finnish translation (Submitted by Rolf Ahrenberg).
 - Changed: include UTF8 locales by default.
 - Introduced new config options "GUI_POPUP_WIDTH" and "GUI_POPUP_HEIGHT" for setting the prog_detail's window size (Requested by Viking @vdr-portal.de).
@@ -195,13 +199,13 @@
 - Changed: prog_timeline uses global channels array instead of copying it locally.
 - Fixed: Bug in prog_timeline introduced in 3.6.0beta (Reported by several users).
 - Updated: Italian translation (Submitted by Diego Pierotto)
-- Updated: Spanish translation (Submitted by Rüdiger Jung).
+- Updated: Spanish translation (Submitted by Rï¿½diger Jung).
 - Fixed: Channel range in epgsearch_new didn't work since 3.6.0beta (Reported by mblaster4711 @vdr-portal.de).
 
 2007-08-27: 3.6.0rc
 - Updated: French translation (Submitted by Trois Six).
 - Updated: Dutch translation (Submitted by Roel Koelewijn).
-- Updated: Finnish translation (Submitted by Ville Skyttä & Rolf Ahrenberg).
+- Updated: Finnish translation (Submitted by Ville Skyttï¿½ & Rolf Ahrenberg).
 - Reworked: configuration part: selected channels work again and settings are only applied if "save" or "apply" is pressed in config menu.
 - Fixed: initialisation of CHANNEL_WANTED_<area> config options.
 
@@ -229,7 +233,7 @@
 - Added: New "--pid" vdradmind.pl to set the used pidfile.
 - Added: extended information in m3u file used for livetv streaming (Submitted by Samuli Sorvakko).
 - Changed: IMDb search URL can be modified.
-- Added: Optional user defined external search (Based on suggestion by Axel Röhken).
+- Added: Optional user defined external search (Based on suggestion by Axel Rï¿½hken).
 - Fixed: Saving of wrong timer if repeating timers have no day set (= "-------").
 - Added: Record button to epgsearch result list if no timer is set.
 - Added: Support for epgsearch's timer checking.
@@ -385,7 +389,7 @@
 - Changed: request full "from" email address for sending emails instead of domain only (Requested by siryoda).
 - Changed: no red background for inactive timers in prog_timeline (Requested by Zimbo).
 - Changed: result of a search is ordered by the event's start time instead of channel id (Suggested by scorp).
-- Fixed: crashes when sending emails (Thanks to Ville Skyttä for hints and siryoda for testing).
+- Fixed: crashes when sending emails (Thanks to Ville Skyttï¿½ for hints and siryoda for testing).
 - Fixed: error page sets charset correct.
 - Added: russian translation (Thanks to Oleg Roitburd and Allrussian-forum translation team)
 - Fixed: lots of perl warnings.
@@ -410,7 +414,7 @@
 - Moved "help" menu into "about" menu.
 - Added VDR's "commands.conf" conntent to select box in navigation menu.
 - Changed defaults for "autotimer checking" in timers as they had been in v3.4.3.
-- New button on remote controls: Mute (Requested by Rüdiger Jung and Hardy Flor).
+- New button on remote controls: Mute (Requested by Rï¿½diger Jung and Hardy Flor).
 - Timeline in timer_list will show timers of current day even if a timer starts the day before (Reported by Hardy Flor).
 
 2006-03-08: 3.4.4beta
@@ -446,7 +450,7 @@
 - Hide "Record" button if prog_detail is opened from timer_list.
 - After clicking "Record" in prog_detail and leaving timer_new return to page where prog_detail has been opened (Reported by Ferdinand Grassmann).
 - Timers were re-programmed every CheckTimers() call if setup option "do not add summary to timers" is active (Reported by Ferdinand Grassmann).
-- Dropped sendEmail dependency. Now uses Net::SMTP modules (Patch by Ville Skyttä).
+- Dropped sendEmail dependency. Now uses Net::SMTP modules (Patch by Ville Skyttï¿½).
 - Don't show EPG images for other events (Fixed by Ferdinand Grassmann).
 - Changed GRAB so that it doesn't use temporary files for VDR >=1.3.38.
 - VPS for timers (Requested by reibuehl).
@@ -494,8 +498,8 @@
 - Channel select box in TV.
 - "Test" button in AutoTimer edit for showing results of current settings (Requested by Hardy Flor).
 - Link from channel name in prog_list2 and timer_list to prog_list.
-- Bring popups to the front (e.g. help, prog_detail...) (Based on a patch submitted by Ville Skyttä).
-- Reuse existing TV, RC and help windows (Based on a patch submitted by Ville Skyttä).
+- Bring popups to the front (e.g. help, prog_detail...) (Based on a patch submitted by Ville Skyttï¿½).
+- Reuse existing TV, RC and help windows (Based on a patch submitted by Ville Skyttï¿½).
 - Send vdradmin.m3u when streaming.
 - Tooltips in timer_list, prog_timeline and at_timer_list can be deactivated (Requested by Hardy Flor).
 - Fixed wrong HTML tags in rec_detail (Reported by foobar42).
@@ -512,18 +516,18 @@
 - Fixed some more HTMLtidy warnings.
 
 2005-09-23: 0.97-am3.4
-- Send valid "Expires" header (Submitted by Ville Skyttä).
-- Open failure of vdradmind.done reported wrong filename (Submitted by Ville Skyttä).
-- Deliver validated HTML (Reported by Ville Skyttä).
+- Send valid "Expires" header (Submitted by Ville Skyttï¿½).
+- Open failure of vdradmind.done reported wrong filename (Submitted by Ville Skyttï¿½).
+- Deliver validated HTML (Reported by Ville Skyttï¿½).
 - Display name of recordings/timers... that will be deleted (Requested by Richard Lithvall).
 - Channels list in AutoTimer only shows selected channels if selective channels are active for AT.
 - Added "chmod" for grabbed images of TV so that everyone can read/write the file (Submitted by Udo Richter).
 - Added "-d" argument to set the configuration folder (Submitted by Rene Bredlau).
 - Fixed handling for recording on February, 29th for VDR >=1.3.26 (Submitted by Rene Bredlau).
-- Alternativly use Locale::Messages if Locale::gettext not found (Submitted by Ville Skyttä).
-- Fixed "send command" error message (Submitted by Ville Skyttä).
+- Alternativly use Locale::Messages if Locale::gettext not found (Submitted by Ville Skyttï¿½).
+- Fixed "send command" error message (Submitted by Ville Skyttï¿½).
 - Display free disk size as float instead of integer (Submitted by Hardy Flor).
-- Step forward/backward a day in "Playing today" (Requested by Tüddelkopp)
+- Step forward/backward a day in "Playing today" (Requested by Tï¿½ddelkopp)
 - Enable/disable selective channels in "Playing today" (Requested by Reiner Buehl)
 - Added images in prog_detail; needs external tool that provides these images; must be configured first! (Requested by several people)
 - Fixed display of login page (Reported by DrSat)
@@ -585,13 +589,13 @@
 - Use configured Streamdev port for live streaming.
 - Added warning when using EPG_DIRECT.
 - Updated INSTALL file.
-- Renamed i18n Español to Spanish (Requested by Ruediger Jung).
+- Renamed i18n Espaï¿½ol to Spanish (Requested by Ruediger Jung).
 - Fixed ":" & "|" handling in timer's title and summary (Thanks to Der_Pit for pointing me to that).
 - Added "Select all" to timer/autotimer/recordings list.
 - Exchanged priority and lifetime textfields in config.html to match order used at other places (Requested by Ruediger Jung).
 - Added vdradmin-0.95-0.9pre5-email.diff (Author: blafasel) patch: send email on timers added by AutoTimer (needs sendEmail available here: http://caspian.dotconf.net/menu/Software/SendEmail/).
 - Fixed timer add/edit where date got set wrong in case it has been entered as "yyyy-mm-dd".
-- Fixed problems when using MOD_GZIP (Thanks Ville Skyttä).
+- Fixed problems when using MOD_GZIP (Thanks Ville Skyttï¿½).
 - Fixed Makefile once again (Thanks Zzam for pointing me to this).
 - Added patches submitted by stefan.h (Thanks!):
   -> New config option EPG_PRUNE. You can set a channel number up to which VDRAdmin will read EPG. Might reduce memory usage and read-in time. Set to "0" to read all channels.
@@ -602,12 +606,12 @@
 - Reworked updating of channels and EPG from VDR.
 - Fixed displaying of repeating timers.
 - Fixed Makefile to set "$SEARCH_FILES_IN_SYSTEM = 1" on install.
-- Added Spanish i18n (Submitted by Rüdiger Jung)
+- Added Spanish i18n (Submitted by Rï¿½diger Jung)
 - Updated French i18n (Submitted by "Trois Six",  "map" and "lobotomise")
 - Fixed some buttons to work with long translations.
 - Extracted text from templates and moved them to i18n.pl file and moved the i18n.pl files to new folders i18n/$language, resulting in a single template with two skins (bilder & copper). Makes translations and template modification a lot more easier.
 
-Included patches submitted by Ville Skyttä:
+Included patches submitted by Ville Skyttï¿½:
 - vdradmin-01-req-zlib.patch: Make Compress::Zlib really optional.
 - vdradmin-02-defaultconfig.patch: Use preset values from %CONFIG as defaults in --config.
 - vdradmin-03-errstr.patch: Fix error string output.
@@ -690,7 +694,7 @@ This is mainly the lastest vdradmin (v0.97) with different patches applied:
 - Included vdradmin-0.96-rename.diff which also needs an applied "vdr-aio21_svdrprename.patch" or enAIO-v2.2 patch (Author: slime).
 
 My own changes:
-- Included missing "Was läuft heute?" template (found at www.vdr-portal.de).
+- Included missing "Was lï¿½uft heute?" template (found at www.vdr-portal.de).
 - Fixed some rendering problems with "New Timer" and "New Autotimer" on KDE's Konqueror.
 - Beautified recordings listing (at least in my eyes ;-)
 - Added "Size" selectbox to TV template.

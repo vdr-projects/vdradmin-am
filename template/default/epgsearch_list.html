@@ -1,77 +1,92 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html id="scroller">
 <?% USE JavaScript, HTML %?>
+
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=<?% charset %?>"/>
-	<title>VDRAdmin-AM - <?% gettext('EPG search') %?></title>
-	<link href="style.css" rel="stylesheet" media="screen" type="text/css"/>
+	<meta http-equiv="content-type" content="text/html;charset=<?% charset %?>" />
+	<title>VDRAdmin-AM -
+		<?% gettext('EPG search') %?>
+	</title>
+	<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
 	<?% IF usercss %?>
-		<link href="user.css" rel="stylesheet" media="screen" type="text/css"/>
+	<link href="user.css" rel="stylesheet" media="screen" type="text/css" />
 	<?% END %?>
 	<script type="text/javascript" language="JavaScript1.2" src="library.js"></script>
 	<?% IF config.AT_TOOLTIP %?>
-		<script type="text/javascript" language="JavaScript1.2" src="infobox.js"></script>
+	<script type="text/javascript" language="JavaScript1.2" src="infobox.js"></script>
 	<?% END %?>
 </head>
 
 <body id="epgsearch_list">
-<?% UNLESS did_search %?>
+	<?% UNLESS did_search %?>
 	<form action="<?% url %?>" method="get" name="FormName0">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_title">
-					<h1><?% gettext('EPG Search') %?></h1>
+					<h1>
+						<?% gettext('EPG Search') %?>
+					</h1>
 				</td>
 				<td class="col_other">
 					<?% IF templates.size() > 0 %?>
-						<?% gettext('Use template') %?>
-						<select name="template">
-							<?% FOREACH templ = templates %?>
-								<option value="<?% templ.id %?>" <?% IF templ.sel %?>selected="selected"<?% END %?>><?% templ.pattern %?></option>
-							<?% END %?>
-						</select>
+					<?% gettext('Use template') %?>
+					<select name="template">
+						<?% FOREACH templ = templates %?>
+						<option value="<?% templ.id %?>" <?% IF templ.sel %?>selected="selected"
+							<?% END %?>>
+							<?% templ.pattern %?>
+						</option>
+						<?% END %?>
+					</select>
 					<?% END %?>
 					<input type="submit" class="submit" name="new_search" value="<?% gettext('New Search') %?>" />
 					<input type="submit" class="submit" name="edit_template" value="<?% gettext('Edit Template') %?>" />
 					<input type="hidden" name="aktion" value="epgsearch_edit" />
 				</td>
 				<td class="col_help">
-<?% IF config_url %?>
-          <a href="<?% config_url %?>"><img src="bilder/configure.png" border="0" alt="settings" title="<?% gettext('Settings') %?>"/></a>
-<?% END %?>
-<?% IF help_url %?>
-					<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help" title="<?% gettext('Help') %?>"/></a>
-<?% END %?>
+					<?% IF config_url %?>
+					<a href="<?% config_url %?>"><img src="bilder/configure.png" border="0" alt="settings"
+							title="<?% gettext('Settings') %?>" /></a>
+					<?% END %?>
+					<?% IF help_url %?>
+					<a href="javascript:open_help('<?% help_url %?>');"><img src="bilder/help.png" border="0" alt="help"
+							title="<?% gettext('Help') %?>" /></a>
+					<?% END %?>
 				</td>
 			</tr>
 		</table>
 	</form>
 
-<?% IF error_msg %?>
-		<div class="error"><?% error_msg %?></div>
-<?% END %?>
+	<?% IF error_msg %?>
+	<div class="error">
+		<?% error_msg %?>
+	</div>
+	<?% END %?>
 
 	<form action="<?% url %?>" method="get" name="FormName">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="content" class="list hilight">
 			<tr class="heading">
 				<td class="col_active <?% IF sortbyactive %?>selected<?% END %?>">
 					<h2>
-						<a href="<?% sortbyactiveurl %?>"><?% gettext('Active') %?>
+						<a href="<?% sortbyactiveurl %?>">
+							<?% gettext('Active') %?>
 							<?% IF sortbyactive %?>
-								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0"/>
+							<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
 							<?% ELSE %?>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
+							<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
 							<?% END %?>
 						</a>
 					</h2>
 				</td>
 				<td class="col_action <?% IF sortbyaction %?>selected<?% END %?>">
 					<h2>
-						<a href="<?% sortbyactionurl %?>"><?% gettext('Action') %?>
+						<a href="<?% sortbyactionurl %?>">
+							<?% gettext('Action') %?>
 							<?% IF sortbyaction %?>
-								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0"/>
+							<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
 							<?% ELSE %?>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
+							<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
 							<?% END %?>
 						</a>
 					</h2>
@@ -120,78 +135,103 @@
 				</td>
 				<td class="col_name <?% IF sortbypattern %?>selected<?% END %?>">
 					<h2>
-						<a href="<?% sortbypatternurl %?>"><?% gettext('Search pattern') %?>
+						<a href="<?% sortbypatternurl %?>">
+							<?% gettext('Search pattern') %?>
 							<?% IF sortbypattern %?>
-								<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0"/>
+							<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
 							<?% ELSE %?>
-								<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0"/>
+							<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
 							<?% END %?>
 						</a>
 					</h2>
 				</td>
 				<td class="col_buttons"></td>
-				<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL" onclick="AllMessages(this.form);" title="<?% gettext('Select all/none') %?>"/></td>
+				<td class="col_checkbox"><input type="checkbox" name="SELALL" value="SELALL"
+						onclick="AllMessages(this.form);" title="<?% gettext('Select all/none') %?>" /></td>
 			</tr>
 
-<?% FOREACH searches %?>
+			<?% FOREACH searches %?>
 			<tr class="<?% IF loop.count % 2 == 0 %?>row_even<?% ELSE %?>row_odd<?% END %?>">
 				<td class="col_active <?% IF sortbyactive %?>selected<?% END %?>">
 					<div>
 						<?% IF has_action %?>
-							<a href="<?% toggleurl %?>"><img src="bilder/poempl_gruen.png" alt="" align="middle" border="0"/> <?% gettext('Yes') %?></a>
+						<a href="<?% toggleurl %?>"><img src="bilder/poempl_gruen.png" alt="" align="middle"
+								border="0" />
+							<?% gettext('Yes') %?>
+						</a>
 						<?% ELSE %?>
-							<a href="<?% toggleurl %?>"><img src="bilder/poempl_grau.png" alt="" align="middle" border="0"/> <?% gettext('No') %?></a>
+						<a href="<?% toggleurl %?>"><img src="bilder/poempl_grau.png" alt="" align="middle"
+								border="0" />
+							<?% gettext('No') %?>
+						</a>
 						<?% END %?>
 					</div>
 				</td>
 				<td class="col_active <?% IF sortbyactive %?>selected<?% END %?>">
-					<div><?% action_text %?></div>
+					<div>
+						<?% action_text %?>
+					</div>
 				</td>
 				<td class="col_channel <?% IF sortbychannel %?>selected<?% END %?>">
 					<div>
 						<?% SWITCH use_channel %?>
 						<?% CASE 1 %?>
-							<?% channel_from_name %?><?% IF channel_from_name != channel_to_name %?> - <?% channel_to_name %?><?% END %?>
+						<?% channel_from_name %?>
+						<?% IF channel_from_name != channel_to_name %?> -
+						<?% channel_to_name %?>
+						<?% END %?>
 						<?% CASE 2 %?>
-							<?% channels %?>
+						<?% channels %?>
 						<?% CASE %?>
-							-
+						-
 						<?% END %?>
 					</div>
 				</td>
 				<td class="col_start <?% IF sortbystart %?>selected<?% END %?>">
 					<div>
-						<?% IF time_start %?><?% time_start %?><?% ELSE %?>--:--<?% END %?>
+						<?% IF time_start %?>
+						<?% time_start %?>
+						<?% ELSE %?>--:--
+						<?% END %?>
 					</div>
 				</td>
 				<td class="col_stop <?% IF sortbystop %?>selected<?% END %?>">
 					<div>
-						<?% IF time_stop %?><?% time_stop %?><?% ELSE %?>--:--<?% END %?>
+						<?% IF time_stop %?>
+						<?% time_stop %?>
+						<?% ELSE %?>--:--
+						<?% END %?>
 					</div>
 				</td>
 				<td class="col_name <?% IF sortbypattern %?>selected<?% END %?>">
 					<div>
-						<a href="<?% modurl %?>" title="<?% gettext('Edit') %?>"><?% pattern | html %?></a>
+						<a href="<?% modurl %?>" title="<?% gettext('Edit') %?>">
+							<?% pattern | html %?>
+						</a>
 					</div>
 				</td>
 				<td class="col_buttons">
 					<span class="action find">
-						<a href="<?% findurl %?>"><img src="bilder/find.png" alt="find" border="0" title="<?% gettext('Find') %?>"/></a>
+						<a href="<?% findurl %?>"><img src="bilder/find.png" alt="find" border="0"
+								title="<?% gettext('Find') %?>" /></a>
 					</span>
 					<span class="action edit">
-						<a href="<?% modurl %?>"><img src="bilder/edit.png" alt="edit" border="0" title="<?% gettext('Edit') %?>"/></a>
+						<a href="<?% modurl %?>"><img src="bilder/edit.png" alt="edit" border="0"
+								title="<?% gettext('Edit') %?>" /></a>
 					</span>
 					<span class="action delete">
-						<a href="javascript:del('<?% gettext('Delete timer?') %?>\n\n&quot;<?% pattern | js %?>&quot;', '<?% delurl %?>');"><img src="bilder/delete.png" alt="delete" border="0" title="<?% gettext('Delete') %?>"/></a>
+						<a
+							href="javascript:del('<?% gettext('Delete timer?') %?>\n\n&quot;<?% pattern | js %?>&quot;', '<?% delurl %?>');"><img
+								src="bilder/delete.png" alt="delete" border="0" title="<?% gettext('Delete') %?>" /></a>
 					</span>
 				</td>
 				<td class="col_checkbox">
 					<div>
-						<input type="checkbox" name="xxxx_<?% id %?>"/>
+						<input type="checkbox" name="xxxx_<?% id %?>" />
 					</div>
 				</td>
 			</tr>
-<?% END %?>
+			<?% END %?>
 		</table>
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="buttons">
@@ -201,30 +241,35 @@
 					<input type="submit" class="submit" name="upds" value="<?% gettext('Force Update') %?>" />
 				</td>
 				<td align="right">
-					<input type="submit" class="submit" name="delete" value="<?% gettext('Delete Selected Searches') %?>" onclick="return mdel(this, '<?% gettext('Delete all selected searches?') %?>');" />
-					<input type="submit" class="submit" name="execute" value="<?% gettext('Execute Selected Searches') %?>" />
+					<input type="submit" class="submit" name="delete"
+						value="<?% gettext('Delete Selected Searches') %?>"
+						onclick="return mdel(this, '<?% gettext('Delete all selected searches?') %?>');" />
+					<input type="submit" class="submit" name="execute"
+						value="<?% gettext('Execute Selected Searches') %?>" />
 				</td>
 			</tr>
 		</table>
-		<input type="hidden" name="aktion" value="epgsearch_aktion"/>
+		<input type="hidden" name="aktion" value="epgsearch_aktion" />
 
 	</form>
-<?% END %?>
+	<?% END %?>
 
-<?% IF did_search %?>
+	<?% IF did_search %?>
 	<form action="<?% url %?>" method="get" name="FormName0">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="heading">
 			<tr>
 				<td class="col_title">
-					<h1><?% title %?></h1>
+					<h1>
+						<?% title %?>
+					</h1>
 				</td>
 			</tr>
 		</table>
 	</form>
 
 	<?% IF matches.size() > 0 %?>
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list" id="content">
-			<!--
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list" id="content">
+		<!--
 			<tr class="heading">
 				<td class="col_duration"><h2><?% gettext('Duration') %?></h2></td>
 				<td class="col_center"><h2><?% gettext('Title') %?></h2></td>
@@ -233,51 +278,65 @@
 				<td class="col_buttons"></td>
 			</tr>
 			-->
-			<?% FOREACH matches;
+		<?% FOREACH matches;
 				IF olddate != date;
 					olddate = date; %?>
-					<tr class="newday">
-						<td colspan="5"><span class="date_long"><?% date %?></span></td>
-					</tr>
+		<tr class="newday">
+			<td colspan="5"><span class="date_long">
+					<?% date %?>
+				</span></td>
+		</tr>
+		<?% END %?>
+		<tr class="<?% IF loop.count % 2 == 0 %?>row_even<?% ELSE %?>row_odd<?% END %?>">
+			<td class="col_duration">
+				<span class="time_duration"><span class="time_start">
+						<?% start %?>
+					</span> - <span class="time_stop">
+						<?% stop %?>
+					</span></span>
+			</td>
+			<td class="col_center">
+				<div class="epg_title">
+					<?% IF infurl %?>
+					<a href="javascript:popup('<?% infurl %?>', <?% config.GUI_POPUP_WIDTH %?>, <?% config.GUI_POPUP_HEIGHT %?>);"
+						title="<?% gettext('More Information') %?>">
+						<?% END %?>
+						<?% title %?>
+						<?% IF infurl %?>
+					</a>
+					<?% END %?>
+				</div>
+				<?% IF subtitle %?>
+				<div class="epg_subtitle">
+					<?% subtitle %?>
+				</div>
+				<?% ELSE %?>
+				<div class="epg_subtitle">&nbsp;</div>
 				<?% END %?>
-				<tr class="<?% IF loop.count % 2 == 0 %?>row_even<?% ELSE %?>row_odd<?% END %?>">
-					<td class="col_duration">
-						<span class="time_duration"><span class="time_start"><?% start %?></span> - <span class="time_stop"><?% stop %?></span></span>
-					</td>
-					<td class="col_center">
-						<div class="epg_title">
-							<?% IF infurl %?>
-								<a href="javascript:popup('<?% infurl %?>', <?% config.GUI_POPUP_WIDTH %?>, <?% config.GUI_POPUP_HEIGHT %?>);" title="<?% gettext('More Information') %?>">
-							<?% END %?>
-							<?% title %?>
-							<?% IF infurl %?>
-								</a>
-							<?% END %?>
-						</div>
-						<?% IF subtitle %?>
-							<div class="epg_subtitle"><?% subtitle %?></div>
-						<?% ELSE %?>
-							<div class="epg_subtitle">&nbsp;</div>
-						<?% END %?>
-					</td>
-					<td class="col_channel">
-						<div class="channel_name"><a href="<?% proglink %?>" title="<?% gettext('Channels') %?>"><?% channel %?></a></div>
-					</td>
-					<td class="col_folder">
-						<?% folder %?>
-					</td>
-					<td class="col_folder">
-						<?% IF recurl %?>
-							<span class="action record"><a href="<?% recurl %?>"><img src="bilder/rec_button.png" border="0" alt="record" title="<?% gettext('Record') %?>" /></a></span>
-						<?% END %?>
-					</td>
-				</tr>
-			<?% END %?>
-		</table>
+			</td>
+			<td class="col_channel">
+				<div class="channel_name"><a href="<?% proglink %?>" title="<?% gettext('Channels') %?>">
+						<?% channel %?>
+					</a></div>
+			</td>
+			<td class="col_folder">
+				<?% folder %?>
+			</td>
+			<td class="col_folder">
+				<?% IF recurl %?>
+				<span class="action record"><a href="<?% recurl %?>"><img src="bilder/rec_button.png" border="0"
+							alt="record" title="<?% gettext('Record') %?>" /></a></span>
+				<?% END %?>
+			</td>
+		</tr>
+		<?% END %?>
+	</table>
 	<?% ELSE %?>
-		<div class="warning"><?% gettext('No matches found!') %?></div>
+	<div class="warning">
+		<?% gettext('No matches found!') %?>
+	</div>
 	<?% END %?>
-<?% END %?>
+	<?% END %?>
 </body>
 
 </html>
