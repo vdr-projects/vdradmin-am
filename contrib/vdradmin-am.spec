@@ -21,7 +21,7 @@
 %if 0%{?version:1}
 %define ver %{version}
 %else
-%define ver 3.6.13
+%define ver 3.6.14
 %endif
 
 %if 0%{?release:1}
