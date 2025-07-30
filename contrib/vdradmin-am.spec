@@ -143,7 +143,6 @@ the Linux Video Disk Recorder (vdr)
 
 %install
 export PREFIX=$RPM_BUILD_ROOT
-export DESTDIR=$RPM_BUILD_ROOT
 
 # run included installer
 ./install.sh
