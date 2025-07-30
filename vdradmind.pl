@@ -40,7 +40,7 @@ use constant {
     EV_STREAM_INFO  => 10,
 };
 
-my $VERSION = "3.6.13";
+my $VERSION = "3.6.14";
 my $BASENAME;
 my $EXENAME;
 
@@ -112,11 +112,12 @@ use strict;
 #use warnings;
 
 my $SEARCH_FILES_IN_SYSTEM    = 0;
-my $VDR_MAX_SVDRP_LENGTH      = 10000;                        # validate this value
+my $VDR_MAX_SVDRP_LENGTH      = 10000;  # Validate this value
 my $SUPPORTED_LOCALE_PREFIXES = "^(cs|de|en|es|fi|fr|hu|it|nl|ru)_";
 
 my $TOOL_AUTOTIMER = 0;
 my $TOOL_EPGSEARCH = 1;
+my $TOOL_TVSCRAPER = 2;  # TVScraper plugin also adds timer to improve recordings
 
 my $AT_BY_EVENT_ID = 2;
 my $AT_BY_TIME     = 1;
@@ -141,7 +142,7 @@ sub LOG_INFO ()       { [ 6, "info"    ] }
 sub LOG_DEBUG ()      { [ 7, "debug"   ] }
 
 my (%CONFIG, %CONFIG_TEMP);
-$CONFIG{LOGLEVEL}             = 5; #LOG_NOTICE
+$CONFIG{LOGLEVEL}             = 5;  # LOG_NOTICE
 $CONFIG{LOGGING}              = 0;
 $CONFIG{LOGFILE}              = "syslog";
 $CONFIG{MOD_GZIP}             = 0;
@@ -156,7 +157,7 @@ $CONFIG{HTTP_KEEPALIVE_TIMEOUT} = 10;
 
 #
 $CONFIG{VDR_HOST}   = "localhost";
-$CONFIG{VDR_PORT}   = 2001; # will be set to 6419 in initial --config if locally installed VDR is >= 1.7.15
+$CONFIG{VDR_PORT}   = 2001;  # Will be set to 6419 in initial --config if locally installed VDR is >= 1.7.15
 $CONFIG{SERVERHOST} = "0.0.0.0";
 $CONFIG{SERVERPORT} = 8001;
 $CONFIG{LOCAL_NET}  = "0.0.0.0/32";
@@ -218,7 +219,7 @@ $CONFIG{ST_FUNC}           = 1;
 $CONFIG{ST_REC_ON}         = 0;
 $CONFIG{ST_LIVE_ON}        = 1;
 $CONFIG{ST_URL}            = "";
-$CONFIG{ST_STREAMDEV_HOST} = ""; # streamdev/xineliboutput host
+$CONFIG{ST_STREAMDEV_HOST} = "";  # streamdev/xineliboutput host
 $CONFIG{ST_STREAMDEV_PORT} = 3000;
 $CONFIG{ST_XINELIB_PORT}   = 37890;
 $CONFIG{ST_VIDEODIR}       = "";
@@ -231,7 +232,7 @@ $CONFIG{NO_EVENTID}    = 0;
 $CONFIG{NO_EVENTID_ON} = "";
 
 #
-$CONFIG{AT_SENDMAIL}    = 0;                       # set to 1 and set all the "MAIL_" things if you want email notification on new autotimers.
+$CONFIG{AT_SENDMAIL}    = 0;  # Set to 1 and set all the "MAIL_" things if you want email notification on new autotimers.
 chomp($CONFIG{MAIL_FROM} = 'autotimer@' . (`hostname -f 2>/dev/null` || "localhost.localdomain"));
 $CONFIG{MAIL_TO}        = "you\@example.org";
 $CONFIG{MAIL_SERVER}    = "localhost";
@@ -276,7 +277,7 @@ my %FEATURES;
 $FEATURES{STREAMDEV}            = 0;  # streamdev plugin available?
 $FEATURES{XINELIB}              = 0;  # xineliboutput plugin available?
 $FEATURES{REC_RENAME}           = 0;  # RENR/MOVR patch available?
-$FEATURES{AUTOTIMER}            = 0;  # use autotimer feature?
+$FEATURES{AUTOTIMER}            = 0;  # Use autotimer feature?
 $FEATURES{MYVERSION_HR}         = "$VERSION";  # Human readable VDRAdmin-AM version, e.g. 3.6.5
 $FEATURES{VDRVERSION}           = 0;  # Numeric VDR version, e.g. 10344
 $FEATURES{VDRVERSION_HR}        = ''; # Human readable VDR version, e.g. 1.3.44
@@ -323,7 +324,7 @@ textdomain("vdradmin");
 my $UserCSS;
 $UserCSS = "user.css" if (-e "$USER_CSS");
 
-my $USE_SHELL_GZIP = false;          # set on false to use the gzip library
+my $USE_SHELL_GZIP = false;  # Set to false to use the gzip library
 
 my (%EPG, %CHAN, %CHAN_TABLES, $q, $ACCEPT_GZIP, $SVDRP, $low_time, @RECORDINGS);
 my (%RECORDING_FOLDERS, %RECORDING_BY_ID);
@@ -411,7 +412,7 @@ for (my $i = 0 ; $i < scalar(@ARGV) ; $i++) {
         my $pid = getPID($PIDFILE);
         my $killed = defined($pid) ? kill(2, $pid) : -1;
         sleep(1);
-        if ($killed > 0 && -e $PIDFILE) { # Not deleted by kill/Shutdown()?
+        if ($killed > 0 && -e $PIDFILE) {  # Not deleted by kill/Shutdown()?
             unlink($PIDFILE) or Log(LOG_WARNING, "Can't delete pid file '$PIDFILE': $!");
         }
         exit($killed > 0 ? 0 : 1);
@@ -498,16 +499,16 @@ my $Xtemplate_vars = { usercss  => $UserCSS,
 };
 
 my $Xconfig = {
-    START_TAG    => '\<\?\%',                   # tag style
-    END_TAG      => '\%\?\>',                   # tag style
-    INCLUDE_PATH => $TEMPLATEDIR,               # or list ref
-    INTERPOLATE  => 0,                          # expand "$var" in plain text
-    PRE_CHOMP    => 1,                          # cleanup whitespace
-    POST_CHOMP   => 1,                          # cleanup whitespace
-    EVAL_PERL    => 1,                          # evaluate Perl code blocks
-    COMPILE_EXT  => 'cache',                    # tuning for templates
-    COMPILE_DIR  => $TEMPLATECACHE,             # tuning for templates
-    STAT_TTL     => 3600,                       # tuning for templates
+    START_TAG    => '\<\?\%',                   # Tag style
+    END_TAG      => '\%\?\>',                   # Tag style
+    INCLUDE_PATH => $TEMPLATEDIR,               # Or list ref
+    INTERPOLATE  => 0,                          # Expand "$var" in plain text
+    PRE_CHOMP    => 1,                          # Cleanup whitespace
+    POST_CHOMP   => 1,                          # Cleanup whitespace
+    EVAL_PERL    => 1,                          # Evaluate Perl code blocks
+    COMPILE_EXT  => 'cache',                    # Tuning for templates
+    COMPILE_DIR  => $TEMPLATECACHE,             # Tuning for templates
+    STAT_TTL     => 3600,                       # Tuning for templates
     VARIABLES    => $Xtemplate_vars,
 
     # Developer options:
@@ -516,7 +517,7 @@ my $Xconfig = {
     #DEBUG        => DEBUG_ALL,
 };
 
-# create Template object
+# Create Template object
 my $Xtemplate;
 eval {
     $Xtemplate = Template->new($Xconfig);
@@ -544,7 +545,7 @@ if ($LOGGING && $LOGFILE eq "syslog") {
     }
 }
 if (!$LOG_TO_SYSLOG) {
-    *closelog = sub {}; # for Shutdown()
+    *closelog = sub {};  # For Shutdown()
 }
 
 if ($CONFIG{MOD_GZIP}) {
@@ -673,7 +674,7 @@ while (true) {
 
     my $now = time();
 
-    # update EPG
+    # Update EPG
     if ($n_ready == 0
             && ($CONFIG{CACHE_BG_UPDATE} == 1
                 || $CONFIG{AT_FUNC} && $FEATURES{AUTOTIMER}
@@ -699,12 +700,12 @@ while (true) {
             $c->{ttl} = undef;
             if (!$found) {
                 $found = $c;
-                # don't copy
+                # Don't copy
             } else {
                 push(@new, $c);
             }
         } else {
-            # no incoming data
+            # No incoming data
             if ($c->{ttl} && $now >= $c->{ttl}) {
                 Log(LOG_DEBUG, sprintf("[CLIENT(%d)] keep-alive timeout\n", $c->{socket}->fileno));
                 close($c->{socket});
@@ -716,7 +717,7 @@ while (true) {
     }
     @Connections = @new;
     next unless $found;
-    # move to the end
+    # Move to the end
     push(@Connections, $found);
     $Client = $found->{socket};
     undef $found;
@@ -776,7 +777,7 @@ sub processRequest {
     $Request =~ s|^/+|/|;
     local $ENV{HTTP_HOST};
 
-    # parse header
+    # Parse header
     my ($username, $password, $http_useragent);
     $Referer = $req->header("Referer");
     $ENV{HTTP_HOST} = $req->header("Host");
@@ -786,7 +787,7 @@ sub processRequest {
 
     my ($http_status, $bytes_transfered);
 
-    # authenticate
+    # Authenticate
     #print("Username: $username / Password: $password\n");
     my $checkpass = defined($username) && defined($password);
     if (($checkpass && $CONFIG{USERNAME} eq $username && $CONFIG{PASSWORD} eq $password)
@@ -800,7 +801,7 @@ sub processRequest {
         return;
     }
 
-    # serve request
+    # Serve request
     $SVDRP = SVDRP->new;
     $MyURL = "." . $Request;
     if ($Request eq "/vdradmin.pl" || $Request eq "/vdradmin." . $CONFIG{TV_EXT} || $Request eq "/vdradmin." . $CONFIG{REC_EXT}) {
@@ -938,7 +939,7 @@ sub check_rw_file {
     return 1;
 }
 
-sub GetChannelDesc {    #TODO: unused
+sub GetChannelDesc {    # TODO: unused
     my (%hash);
     for (@{$CHAN{$CHAN_FULL}->{channels}}) {
         $hash{ $_->{id} } = $_->{name};
@@ -991,7 +992,7 @@ sub ReadFile {
     return ($buf);
 }
 
-sub GetChannelID {    #TODO: unused
+sub GetChannelID {    # TODO: unused
     my ($sid) = $_[0];
     for (@{$CHAN{$CHAN_FULL}->{channels}}) {
         if ($_->{id} == $sid) {
@@ -1000,7 +1001,7 @@ sub GetChannelID {    #TODO: unused
     }
 }
 
-sub EURL {            #TODO: unused
+sub EURL {            # TODO: unused
     my ($text) = @_;
     $text =~ s/([^0-9a-zA-Z])/sprintf("%%%2.2x", ord($1))/ge;
     return ($text);
@@ -1013,7 +1014,7 @@ sub HTMLError {
     return showTemplate("error.html", $vars);
 }
 
-sub FillInZero {    #TODO: unused
+sub FillInZero {    # TODO: unused
     my ($str, $length) = @_;
     while (length($str) < $length) {
         $str = "0$str";
@@ -1037,7 +1038,7 @@ sub ChanTree {
     my $group_number = $CHAN_GROUPS - 1;
 
     if (!$FEATURES{VDRVERSION}) {
-        # first connection - have to get version
+        # First connection - have to get version
         $SVDRP->command("help");
         $SVDRP->readresponse;
     }
@@ -1060,7 +1061,7 @@ sub ChanTree {
             next;
         }
         my ($name, $frequency, $polarization, $source, $symbolrate, $vpid, $apid, $tpid, $ca, $service_id, $nid, $tid, $rid) = split(/\:/, $temp);
-        $name =~ /(^[^,;]*).*/;    #TODO?
+        $name =~ /(^[^,;]*).*/;    # TODO?
         $name = $1;
         my $uniq_id = $source . "-" . $nid . "-" . ($nid || $tid ? $tid : $frequency) . "-" . $service_id;
         $uniq_id .= "-" . $rid if ($rid != 0);
@@ -1119,7 +1120,7 @@ sub ChanTree {
         $CHAN{$CHAN_RADIO}->{channels} = \@CHANNELS_RADIO;
     }
 
-    # Temporarly disabled, because channellist also gets sorted by names. This causes duplicate channels appear side-by-side
+    # Temporarily disabled, because channellist also gets sorted by names. This causes duplicate channels appear side-by-side
     # Sort channel lists by channel name
     #foreach my $idx (keys(%CHAN)) {
     #    @{$CHAN{$idx}->{channels}} = sort {$a->{name} cmp $b->{name}} @{$CHAN{$idx}->{channels}}
@@ -1144,7 +1145,7 @@ sub getChannelGroups {
 
 sub get_vdrid_from_channelid {
     my $channel_id = shift;
-    if ($channel_id =~ /^(\d*)$/) {    # vdr 1.0.x & >= vdr 1.1.15
+    if ($channel_id =~ /^(\d*)$/) {  # vdr 1.0.x & >= vdr 1.1.15
         for my $channel (@{$CHAN{$CHAN_FULL}->{channels}}) {
             if ($channel->{service_id} == $1) {
                 return ($channel->{vdr_id});
@@ -1177,14 +1178,14 @@ sub get_name_from_uniqid {
     my $uniq_id = shift;
     if ($uniq_id) {
 
-        # Kanalliste nach identischer vdr_id durchsuchen
+        # Search channel list for identical vdr_id
         my @C = grep($_->{uniq_id} eq $uniq_id, @{$CHAN{$CHAN_FULL}->{channels}});
 #        foreach (@{$CHAN{$CHAN_FULL}->{channels}}) {
 #            printf("(%s) ($uniq_id)\n", $_->{uniq_id});
 #            return $_->{name} if ($_->{uniq_id} eq $uniq_id);
 #        }
 
-        # Es darf nach Spec nur eine Übereinstimmung geben
+        # There should be only one match according to the spec
         if (scalar(@C) == 1) {
             return $C[0]->{name};
         }
@@ -1195,10 +1196,10 @@ sub get_name_from_vdrid {
     my $vdr_id = shift;
     if ($vdr_id) {
 
-        # Kanalliste nach identischer vdr_id durchsuchen
+        # Search channel list for identical vdr_id
         my @C = grep($_->{vdr_id} == $vdr_id, @{$CHAN{$CHAN_FULL}->{channels}});
 
-        # Es darf nach Spec nur eine Übereinstimmung geben
+        # There should be only one match according to the spec
         if (scalar(@C) == 1) {
             return $C[0]->{name};
         }
@@ -1209,10 +1210,10 @@ sub get_channel_from_vdrid {
     my $vdr_id = shift;
     if ($vdr_id) {
 
-        # Kanalliste nach identischer vdr_id durchsuchen
+        # Search channel list for identical vdr_id
         my @C = grep($_->{vdr_id} == $vdr_id, @{$CHAN{$CHAN_FULL}->{channels}});
 
-        # Es darf nach Spec nur eine Übereinstimmung geben
+        # There should be only one match according to the spec
         if (scalar(@C) == 1) {
             return $C[0];
         }
@@ -1223,10 +1224,10 @@ sub get_transponder_from_vdrid {
     my $vdr_id = shift;
     if ($vdr_id) {
 
-        # Kanalliste nach identischer vdr_id durchsuchen
+        # Search channel list for identical vdr_id
         my @C = grep($_->{vdr_id} == $vdr_id, @{$CHAN{$CHAN_FULL}->{channels}});
 
-        # Es darf nach Spec nur eine Übereinstimmung geben
+        # There should be only one match according to the spec
         if (scalar(@C) == 1) {
             return ("$C[0]->{source}-$C[0]->{frequency}-$C[0]->{polarization}");
         }
@@ -1237,10 +1238,10 @@ sub get_ca_from_vdrid {
     my $vdr_id = shift;
     if ($vdr_id) {
 
-        # Kanalliste nach identischer vdr_id durchsuchen
+        # Search channel list for identical vdr_id
         my @C = grep($_->{vdr_id} == $vdr_id, @{$CHAN{$CHAN_FULL}->{channels}});
 
-        # Es darf nach Spec nur eine Übereinstimmung geben
+        # There should be only one match according to the spec
         if (scalar(@C) == 1) {
             return ($C[0]->{ca});
         }
@@ -1251,7 +1252,7 @@ sub get_ca_from_vdrid {
 # common helpers
 #############################################################################
 
-# remove spaces around string
+# Remove spaces around string
 sub trim($)
 {
     my $string = shift;
@@ -1260,7 +1261,7 @@ sub trim($)
     return $string;
 }
 
-# remove leading whitespaces from string
+# Remove leading whitespaces from string
 sub ltrim($)
 {
     my $string = shift;
@@ -1268,7 +1269,7 @@ sub ltrim($)
     return $string;
 }
 
-# remove trailing whitespaces from string
+# Remove trailing whitespaces from string
 sub rtrim($)
 {
     my $string = shift;
@@ -1276,7 +1277,7 @@ sub rtrim($)
     return $string;
 }
 
-# quotemeta() for $MY_ENCODING byte strings (with zero utf8 flag)
+# quotemeta() for $MY_ENCODING byte strings (With zero utf8 flag)
 sub my_quotemeta
 {
     my $str = shift;
@@ -1288,7 +1289,7 @@ sub my_quotemeta
     }
 }
 
-# case-insensitive compare on byte strings
+# Case-insensitive compare on byte strings
 sub ciCmp {
     my ($a, $b) = @_;
     if (utf8::is_utf8($a)) {
@@ -1331,7 +1332,7 @@ sub EPG_getEntry {
     }
 }
 
-sub getNumberOfElements {    #TODO: unused
+sub getNumberOfElements {  # TODO: Unused
     my $ref = shift;
     if ($ref) {
         return (@{$ref});
@@ -1372,7 +1373,7 @@ sub EPG_buildTree {
             my $vdr_id = get_vdrid_from_channelid($channel_id);
             if ($CONFIG{EPG_PRUNE} > 0 && $vdr_id > $CONFIG{EPG_PRUNE}) {
 
-                # diesen channel nicht einlesen
+                # Do not read this channel
                 while($_ = <$SOCK>) {
                     Encode::from_to($_, $from_charset, $to_charset) if ($recode);
                     last if (/^...-c/);
@@ -1385,7 +1386,7 @@ sub EPG_buildTree {
                     my $tok = substr($_, 3, 2);
                     my $rest = substr($_, 6);
                     if ($tok eq "-E") {
-                        # no need for chomp here - split() will take care
+                        # No need for chomp here - split() will take care
                         my ($event_id, $time, $duration) = split(/ /, $rest, 4);
                         my ($title, $subtitle, $summary, $vps);
                         my @stream_info = ();
@@ -1425,7 +1426,7 @@ sub EPG_buildTree {
                         }
                     }
                     elsif ($tok eq "-c") {
-                        if ($FEATURES{VDRVERSION} < 10305) { # EPG is sorted by date since VDR 1.3.5
+                        if ($FEATURES{VDRVERSION} < 10305) {  # EPG is sorted by date since VDR 1.3.5
                             my ($last) = 0;
                             my (@temp);
                             for (sort({ $a->[EV_START] <=> $b->[EV_START] } @events)) {
@@ -1597,7 +1598,7 @@ sub header {
         $resp->header('Cache-Control' => "public, max-age=3600");
     }
     if ($lastmod) {
-        $lastmod = $now if ($lastmod > $now); # HTTP 1.1, 14.29
+        $lastmod = $now if ($lastmod > $now);  # HTTP 1.1, 14.29
         $resp->header('Last-Modified' => time2str($lastmod));
     }
     $resp->header('Content-encoding' => "gzip") if ($CONFIG{MOD_GZIP} && $ACCEPT_GZIP);
@@ -1690,16 +1691,16 @@ sub SendFile {
 }
 
 #############################################################################
-# autotimer functions
+# Autotimer functions
 #############################################################################
 sub can_do_eventid_autotimer {
 
-    # check if we may use Event-IDs in general or not
+    # Check if we may use Event-IDs in general or not
     return 0 if ($CONFIG{NO_EVENTID} == 1);
 
     my $vdr_id = shift;
 
-    # check if the current channel is on the Event-ID-blacklist
+    # Check if the current channel is on the Event-ID-blacklist
     for my $n (split(",", $CONFIG{NO_EVENTID_ON})) {
         return 0 if ($n == $vdr_id);
     }
@@ -1839,18 +1840,17 @@ sub AutoTimer {
     $DONE = &DONE_Read unless ($DONE);
     my %blacklist = &BlackList_Read;
 
-    # Merken der wanted Channels (geht schneller
-    # bevor das immer wieder in der unteren Schleife gemacht wird).
+    # Remember the wanted channels (faster than doing it repeatedly in the loop below).
     my $wanted;
     for my $n (split(",", $CONFIG{CHANNELS_WANTED})) {
         $wanted->{$n} = 1;
     }
 
-    # Die Timerliste holen
-    #TODO: is this really needed? Timers will be checked in AT_ProgTimer...
+    # Get the timer list
+    # TODO: Is this really needed? Timers will be checked in AT_ProgTimer...
 #  my $timer;
 #  foreach my $t (ParseTimer(0)){
-##TODO: what's the 2nd "%s" for?
+# TODO: What's the 2nd "%s" for?
 #    my $key = sprintf('%d:%s:%s',
 #    $t->{vdr_id},
 #    $t->{title},
@@ -1869,18 +1869,16 @@ sub AutoTimer {
             # Event in the past?
             next if ($event->[EV_STOP] < $date_now);
 
-            # Ein Timer der schon programmmiert wurde kann
-            # ignoriert werden
-            #TODO: $timer not initialized
-#        next if($event->[EV_EVENT_ID] == $timer->{event_id});
+            # A timer that has already been programmed can be ignored
+            # TODO: $timer not initialized
+            #next if($event->[EV_EVENT_ID] == $timer->{event_id});
 
-            # Wenn CHANNELS_WANTED_AUTOTIMER dann next wenn der Kanal
-            # nicht in der WantedList steht
+            # If CHANNELS_WANTED_AUTOTIMER is set, skip if the channel is not in the wanted list
             if ($CONFIG{CHANNELS_WANTED_AUTOTIMER}) {
                 next unless defined $wanted->{ $event->[EV_VDR_ID] };
             }
 
-            # Hamwa schon gehabt?
+            # We had this already?
             my $DoneStr;
             unless ($dry_run) {
                 $DoneStr = sprintf('%s~%d~%s', $event->[EV_TITLE], $event->[EV_EVENT_ID], ($event->[EV_SUBTITLE] ? $event->[EV_SUBTITLE] : ''),);
@@ -1892,8 +1890,7 @@ sub AutoTimer {
             }
 
             if (%blacklist) {
-
-                # Wollen wir nicht haben.
+                # We do not want this
                 my $BLStr = $event->[EV_TITLE];
                 $BLStr .= "~" . $event->[EV_SUBTITLE] if $event->[EV_SUBTITLE];
 
@@ -1920,8 +1917,7 @@ sub AutoTimer {
                     $SearchStr .= "~" . $event->[EV_SUMMARY];
                 }
 
-                # Regular Expressions are surrounded by slashes -- everything else
-                # are search patterns
+                # Regular Expressions are surrounded by slashes -- everything else are search patterns
                 if ($at->{pattern} =~ /^\/(.*)\/(i?)$/) {
 
                     # We have a RegExp
@@ -1958,12 +1954,12 @@ sub AutoTimer {
                         next;
                     }
 
-                    # split search pattern at spaces into single sub-patterns, and
+                    # Split search pattern at spaces into single sub-patterns, and
                     # test for all of them (logical "and")
                     my $fp = 1;
                     for my $pattern (split(/ +/, $atpattern)) {
 
-                        # search for each sub-pattern, case insensitive
+                        # Search for each sub-pattern, case insensitive
                         if ($SearchStr !~ /$pattern/i) {
                             $fp = 0;
                         } else {
@@ -1978,8 +1974,8 @@ sub AutoTimer {
                 Log(LOG_DEBUG, sprintf("[AUTOTIMER] Comparing pattern \"%s\" (%s - %s) with event \"%s\" (%s - %s)", $at->{pattern}, $at->{start}, $at->{stop}, $event->[EV_TITLE], $event_start, $event_stop));
 
                 # Do we have a time slot?
-                if ($at->{start}) {    # We have a start time and possibly a stop time for the auto timer
-                                       # Do we have midnight between AT start and stop time?
+                if ($at->{start}) {  # We have a start time and possibly a stop time for the auto timer
+                                     # Do we have midnight between AT start and stop time?
                     if (($at->{stop}) && ($at->{stop} < $at->{start})) {
 
                         # The AT includes midnight
@@ -2069,7 +2065,7 @@ sub AutoTimer {
                 Log(LOG_DEBUG, sprintf("[AUTOTIMER] Found \"%s\"", $at->{pattern}));
 
 #########################################################################################
-# 20050130: patch by macfly: parse extended EPG information provided by tvm2vdr.pl
+# 20050130: Patch by macfly: Parse extended EPG information provided by tvm2vdr.pl
 #########################################################################################
 
                 my $title;
@@ -2111,15 +2107,15 @@ sub AutoTimer {
                     }
                 }
 
-                # gemaess vdr.5 alle : durch | ersetzen.
+    # According to vdr.5 replace all : with |.
                 $title =~ s#:#|#g;
 
-                # sind irgendwelche Tags verwendet worden, die leer waren und die doppelte Verzeichnisse erzeugten?
+    # Were any tags used that were empty and caused duplicate directories?
                 $title =~ s#~+#~#g;
                 $title =~ s#^~##;
 
 #########################################################################################
-# 20050130: patch by macfly: parse extended EPG information provided by tvm2vdr.pl
+# 20050130: Patch by macfly: Parse extended EPG information provided by tvm2vdr.pl
 #########################################################################################
 
                 if ($dry_run) {
@@ -2204,8 +2200,7 @@ sub AT_ProgTimer {
         }
     }
 
-    # we will only programm new timers, CheckTimers is responsible for
-    # updating existing timers
+    # We will only programm new timers, CheckTimers is responsible for updating existing timers
     if (!$found) {
         $title =~ s/\|/\:/g;
 
@@ -2238,10 +2233,10 @@ sub AT_ProgTimer {
         if ($CONFIG{AT_SENDMAIL} == 1 && $can_use_net_smtp && ($CONFIG{MAIL_AUTH_USER} eq "" || $can_use_smtpauth)) {
             my $sum = $summary;
 
-            # remove all HTML-Tags from text
+            # Remove all HTML-Tags from text
             $sum =~ s/\<[^\>]+\>/ /g;
 
-            # linefeeds
+            # Linefeeds
             $sum =~ s/\|/\n/g;
             my $dat  = strftime("%A, %x", localtime($start));
             my $strt = strftime("%H:%M",  localtime($start));
@@ -2262,7 +2257,7 @@ sub AT_ProgTimer {
                     my $qptitle = my_encode_qp($title);
                     $smtp->datasend("Subject: AUTOTIMER: New timer created for $qptitle\n");
                     $smtp->datasend("From: VDRAdmin-AM AutoTimer <$CONFIG{MAIL_FROM}>\n");
-                    $smtp->datasend("Auto-Submitted: auto-generated\n"); # RFC 3834
+                    $smtp->datasend("Auto-Submitted: auto-generated\n");  # RFC 3834
                     $smtp->datasend("MIME-Version: 1.0\n");
                     $smtp->datasend("Content-Type: text/plain; charset=iso-8859-1\n");
                     $smtp->datasend("Content-Transfer-Encoding: 8bit\n");
@@ -2306,20 +2301,19 @@ sub my_encode_qp {
     return $title;
 }
 
-sub PackStatus {    #TODO: unused
-                    # make a 32 bit signed int with high 16 Bit as event_id and low 16 Bit as
-                    # active value
+sub PackStatus {  # TODO: Unused
+    # Make a 32 bit signed int with high 16 Bit as event_id and low 16 Bit as active value
     my ($active, $event_id) = @_;
 
-    # we must generate a 32 bit signed int, due perl knows no overflow at 32 bit,
+    # We must generate a 32 bit signed int, due perl knows no overflow at 32 bit,
     # we have to do the overflow manually:
 
-    # is the 16th bit set? then the signed 32 bit int is negative!
+    # Is the 16th bit set? Then the signed 32 bit int is negative!
     if ($event_id & 0x8000) {
 
-        # strip the first bit (by & 0x7FFF) of the event_id, so a 15 bit
+        # Strip the first bit (by & 0x7FFF) of the event_id, so a 15 bit
         # (positive) int will remain, then shift the int 16 bits to the left and
-        # add active  -- result is a 31 bit (always positive) int.
+        # add active -- result is a 31 bit (always positive) int.
         # The 32nd bit is the minus sign, and due the (binary) smallest value
         # is the (int) lowest possible number, we have to subtract the lowest
         # value + 1 from the 31 bit value -- result is the signed 32 bit int equal
@@ -2330,17 +2324,17 @@ sub PackStatus {    #TODO: unused
     }
 }
 
-sub UnpackActive {    #TODO: unused
+sub UnpackActive {  # TODO: Unused
     my ($tmstatus) = @_;
 
-    # strip the first 16 bit
+    # Strip the first 16 bit
     return ($tmstatus & 0xFFFF);
 }
 
-sub UnpackEvent_id {    #TODO: unused
+sub UnpackEvent_id {  # TODO: Unused
     my ($tmstatus) = @_;
 
-    # remove the lower 16 bit by shifting the value 16 bits to the right
+    # Remove the lower 16 bit by shifting the value 16 bits to the right
     return $tmstatus >> 16;
 }
 
@@ -2352,15 +2346,15 @@ sub CheckTimers {
 
         next unless $timer->{autotimer};
 
-        # match by event_id
+        # Match by event_id
         if ($timer->{autotimer} == $AT_BY_EVENT_ID) {
             for $event (@{ $EPG{ $timer->{vdr_id} } }) {
 
-                # look for matching event_id on the same channel -- it's unique
+                # Look for matching event_id on the same channel -- it's unique
                 if ($timer->{event_id} == $event->[EV_EVENT_ID]) {
                     Log(LOG_DEBUG, sprintf("[AUTOTIMER] CheckTimers: Checking timer \"%s\" (No. %s) for changes by Event-ID", $timer->{title}, $timer->{id}));
 
-                    # update timer if the existing one differs from the EPG
+                    # Update timer if the existing one differs from the EPG
                     # (don't check for changed title, as this will break autotimers' "directory" setting)
                     if (   ($timer->{start} != ($event->[EV_START] - $timer->{bstart} * 60))
                         || ($timer->{stop} != ($event->[EV_STOP] + $timer->{bstop} * 60)))
@@ -2376,10 +2370,10 @@ sub CheckTimers {
                             $timer->{prio},
                             $timer->{lft},
 
-                            # don't update title as this may differ from what has been set by the user
+                            # Don't update title as this may differ from what has been set by the user
                             $timer->{title},
 
-                            # leave summary untouched.
+                            # Leave summary untouched.
                             $timer->{summary},
                         );
                     }
@@ -2387,7 +2381,7 @@ sub CheckTimers {
             }
         }
 
-        # match by channel number and start/stop time
+        # Match by channel number and start/stop time
         elsif ($timer->{autotimer} == $AT_BY_TIME) {
 
             # We're checking only timers which don't record
@@ -2397,14 +2391,14 @@ sub CheckTimers {
 
                 for my $event (@{ $EPG{ $timer->{vdr_id} } }) {
 
-                    # look for events within the margins of the current timer
+                    # Look for events within the margins of the current timer
                     if (($event->[EV_START] < $timer->{stop}) && ($event->[EV_STOP] > $timer->{start})) {
                         push @eventlist, $event;
                     }
                 }
 
-                # now we have all events in eventlist that touch the old timer margins
-                # check for each event how probable it is matching the old timer
+                # Now we have all events in eventlist that touch the old timer margins
+                # Check for each event how probable it is matching the old timer
                 if (scalar(@eventlist) > 0) {
                     my $origlen = ($timer->{stop} - $timer->{bstop} * 60) - ($timer->{start} + $timer->{bstart} * 60);
                     next unless($origlen);
@@ -2433,7 +2427,7 @@ sub CheckTimers {
                         }
                     }
 
-                    # update timer if the existing one differs from the EPG
+                    # Update timer if the existing one differs from the EPG
                     if (   ($timer->{start} > ($event->[EV_START] - $timer->{bstart} * 60))
                         || ($timer->{stop} < ($event->[EV_STOP] + $timer->{bstop} * 60)))
                     {
@@ -2448,10 +2442,10 @@ sub CheckTimers {
                             $timer->{prio},
                             $timer->{lft},
 
-                            # don't touch the title since we're not too sure about the event
+                            # Don't touch the title since we're not too sure about the event
                             $timer->{title},
 
-                            # leave summary untouched.
+                            # Leave summary untouched.
                             $timer->{summary},
                         );
                     }
@@ -2464,7 +2458,7 @@ sub CheckTimers {
 }
 
 #############################################################################
-# epgsearch
+# EPGSearch
 #############################################################################
 sub epgsearch_list {
     return if (UptoDate() != 0);
@@ -2566,25 +2560,25 @@ sub epgsearch_edit {
     my @sel_bl;
 
     if ($do_test) {
-        # test search
+        # Test search
         my $temp = epgsearch_Param2Line();
         $search = ExtractEpgSearchConf(($id ? $id : "0") . ":" . $temp);
         @sel_bl = $q->param("sel_blacklists");
         @matches = EpgSearchQuery("plug epgsearch qrys 0:" . $temp);
     } elsif (defined $id) {
-        # edit search
+        # Edit search
         my @temp = ParseEpgSearch($id);
         $search = pop @temp;
         @sel_bl = split(/\|/, $search->{sel_blacklists});
     } else {
-        # new search
+        # New search
         if (defined $template_id) {
             my @temp = GetEpgSearchTemplate($template_id);
             $search = pop @temp;
-            $search->{pattern} = "" unless ($edit_template); # don't want the template's name as search pattern
+            $search->{pattern} = "" unless ($edit_template);  # Don't want the template's name as search pattern
             @sel_bl = split(/\|/, $search->{sel_blacklists});
         } else {
-            #TODO: defaults for PRIO, LFT, BUFFER START/STOP
+            # TODO: Defaults for PRIO, LFT, BUFFER START/STOP
             $search->{use_title}    = 1;
             $search->{use_subtitle} = 1;
             $search->{use_descr}    = 1;
@@ -2786,8 +2780,8 @@ sub EpgSearchQuery {
         chomp;
         next if (length($_) == 0);
         last if(/^no results$/);
-#        Suchtimer-ID : Event-ID : Title : Subtitle : Event-Begin : Event-Ende :
-#        Kanalnummer : Timer-Start : Timer-Ende : Timer-File : hat/bekommt Timer
+#        Searchtimer-ID : Event-ID : Title : Subtitle : Event-Start : Event-End :
+#        Channelnumber : Timer-Start : Timer-End : Timer-File : Has/Becomes timer
         my ($es_id, $event_id, $title, $subtitle, $estart, $estop, $chan, $tstart, $tstop, $tdir, $has_timer) = split(/:/);
         if ($title) {
             $title =~ s/\|/:/g;
@@ -2822,79 +2816,78 @@ sub ExtractEpgSearchConf {
     my $line = shift;
 
     my $timer;
-        ($timer->{id},               # 1 - unique search timer id
-         $timer->{pattern},          # 2 - the search term
-         $timer->{use_time},         # 3 - use time? 0/1
-         $timer->{time_start},       # 4 - start time in HHMM
-         $timer->{time_stop},        # 5 - stop time in HHMM
-         $timer->{use_channel},      # 6 - use channel? 0 = no,  1 = Intervall, 2 = Channel group, 3 = FTA only
-         $timer->{channels},         # 7 - if 'use channel' = 1 then channel id[|channel id] in vdr format,
+        ($timer->{id},               # 1 - Unique search timer id
+         $timer->{pattern},          # 2 - The search term
+         $timer->{use_time},         # 3 - Use time? 0/1
+         $timer->{time_start},       # 4 - Start time in HHMM
+         $timer->{time_stop},        # 5 - Stop time in HHMM
+         $timer->{use_channel},      # 6 - Use channel? 0 = no,  1 = Intervall, 2 = Channel group, 3 = FTA only
+         $timer->{channels},         # 7 - If 'use channel' = 1 then channel id[|channel id] in vdr format,
                                      #     one entry or min/max entry separated with |, if 'use channel' = 2
                                      #     then the channel group name
-         $timer->{matchcase},        # 8 - match case? 0/1
-         $timer->{mode},             # 9 - search mode:
-                                     #      0 - the whole term must appear as substring
-                                     #      1 - all single terms (delimiters are blank,',', ';', '|' or '~')
+         $timer->{matchcase},        # 8 - Match case? 0/1
+         $timer->{mode},             # 9 - Search mode:
+                                     #      0 - The whole term must appear as substring
+                                     #      1 - All single terms (delimiters are blank,',', ';', '|' or '~')
                                      #          must exist as substrings.
-                                     #      2 - at least one term (delimiters are blank, ',', ';', '|' or '~')
+                                     #      2 - At least one term (delimiters are blank, ',', ';', '|' or '~')
                                      #          must exist as substring.
-                                     #      3 - matches exactly
-                                     #      4 - regular expression
-         $timer->{use_title},        #10 - use title? 0/1
-         $timer->{use_subtitle},     #11 - use subtitle? 0/1
-         $timer->{use_descr},        #12 - use description? 0/1
-         $timer->{use_duration},     #13 - use duration? 0/1
-         $timer->{min_duration},     #14 - min duration in minutes
-         $timer->{max_duration},     #15 - max duration in minutes
-         $timer->{has_action},       #16 - use as search timer? 0/1
-         $timer->{use_days},         #17 - use day of week? 0/1
-         $timer->{which_days},       #18 - day of week (0 = sunday, 1 = monday...)
-         $timer->{is_series},        #19 - use series recording? 0/1
-         $timer->{directory},        #20 - directory for recording
-         $timer->{prio},             #21 - priority of recording
-         $timer->{lft},              #22 - lifetime of recording
-         $timer->{bstart},           #23 - time margin for start in minutes
-         $timer->{bstop},            #24 - time margin for stop in minutes
-         $timer->{use_vps},          #25 - use VPS? 0/1
-         $timer->{action},           #26 - action:
-                                     #      0 = create a timer
-                                     #      1 = announce only via OSD (no timer)
-                                     #      2 = switch only (no timer)
-         $timer->{use_extepg},       #27 - use extended EPG info? 0/1  #TODO
-         $timer->{extepg_infos},     #28 - extended EPG info values. This entry has the following format #TODO
+                                     #      3 - Matches exactly
+                                     #      4 - Regular expression
+         $timer->{use_title},        #10 - Use title? 0/1
+         $timer->{use_subtitle},     #11 - Use subtitle? 0/1
+         $timer->{use_descr},        #12 - Use description? 0/1
+         $timer->{use_duration},     #13 - Use duration? 0/1
+         $timer->{min_duration},     #14 - Min duration in minutes
+         $timer->{max_duration},     #15 - Max duration in minutes
+         $timer->{has_action},       #16 - Use as search timer? 0/1
+         $timer->{use_days},         #17 - Use day of week? 0/1
+         $timer->{which_days},       #18 - Day of week (0 = sunday, 1 = monday...)
+         $timer->{is_series},        #19 - Use series recording? 0/1
+         $timer->{directory},        #20 - Directory for recording
+         $timer->{prio},             #21 - Priority of recording
+         $timer->{lft},              #22 - Lifetime of recording
+         $timer->{bstart},           #23 - Time margin for start in minutes
+         $timer->{bstop},            #24 - Time margin for stop in minutes
+         $timer->{use_vps},          #25 - Use VPS? 0/1
+         $timer->{action},           #26 - Action:
+                                     #      0 = Create a timer
+                                     #      1 = Announce only via OSD (no timer)
+                                     #      2 = Switch only (no timer)
+         $timer->{use_extepg},       #27 - Use extended EPG info? 0/1  # TODO
+         $timer->{extepg_infos},     #28 - Extended EPG info values. This entry has the following format # TODO
                                      #     (delimiter is '|' for each category, '#' separates id and value):
-                                     #     1 - the id of the extended EPG info category as specified in
+                                     #     1 - The id of the extended EPG info category as specified in
                                      #         epgsearchcats.conf
-                                     #     2 - the value of the extended EPG info category
+                                     #     2 - The value of the extended EPG info category
                                      #         (a ':' will be tranlated to "!^colon^!", e.g. in "16:9")
-         $timer->{avoid_repeats},    #29 - avoid repeats? 0/1
-         $timer->{allowed_repeats},  #30 - allowed repeats
-         $timer->{comp_title},       #31 - compare title when testing for a repeat? 0/1
-         $timer->{comp_subtitle},    #32 - compare subtitle when testing for a repeat? 0/1
-         $timer->{comp_descr},       #33 - compare description when testing for a repeat? 0/1
-         $timer->{comp_extepg_info}, #34 - compare extended EPG info when testing for a repeat? #TODO
+         $timer->{avoid_repeats},    #29 - Avoid repeats? 0/1
+         $timer->{allowed_repeats},  #30 - Allowed repeats
+         $timer->{comp_title},       #31 - Compare title when testing for a repeat? 0/1
+         $timer->{comp_descr},       #33 - Compare description when testing for a repeat? 0/1
+         $timer->{comp_extepg_info}, #34 - Compare extended EPG info when testing for a repeat? # TODO
                                      #     This entry is a bit field of the category ids.
-         $timer->{repeats_in_days},  #35 - accepts repeats only within x days
-         $timer->{delete_after},     #36 - delete a recording automatically after x days
-         $timer->{keep_recordings},  #37 - but keep this number of recordings anyway
-         $timer->{switch_before},    #38 - minutes before switch (if action = 2)
-         $timer->{pause},            #39 - pause if x recordings already exist
-         $timer->{use_blacklists},   #40 - blacklist usage mode (0 none, 1 selection, 2 all)
-         $timer->{sel_blacklists},   #41 - selected blacklist IDs separated with '|'
-         $timer->{fuzzy_tolerance},  #42 - fuzzy tolerance value for fuzzy searching
-         $timer->{use_for_fav},      #43 - use this search in favorites menu (0 no, 1 yes)
-         $timer->{results_menu},           #44 - menu to display results
-         $timer->{autodelete},             #45 - delMode ( 0 = no autodelete, 1 = after x recordings, 2 = after y days after 1. recording)
-         $timer->{del_after_recs},         #46 - delAfterCountRecs (x recordings)
-         $timer->{del_after_days},         #47 - delAfterDaysOfFirstRec (y days)
-         $timer->{searchtimer_from},       #48 - useAsSearchTimerFrom (if "use as search timer?" = 2)
-         $timer->{searchtimer_until},      #49 - useAsSearchTimerTil (if "use as search timer?" = 2)
-         $timer->{ignore_missing_epgcats}, #50 - ignoreMissingEPGCats
-         $timer->{unmute},                 #51 - unmute sound if off when used as switch timer
-         $timer->{min_match},              #52 - the minimum required match in percent when descriptions are compared to avoid repeats (-> 33)
+         $timer->{repeats_in_days},  #35 - Accepts repeats only within x days
+         $timer->{delete_after},     #36 - Delete a recording automatically after x days
+         $timer->{keep_recordings},  #37 - But keep this number of recordings anyway
+         $timer->{switch_before},    #38 - Minutes before switch (if action = 2)
+         $timer->{pause},            #39 - Pause if x recordings already exist
+         $timer->{use_blacklists},   #40 - Blacklist usage mode (0 none, 1 selection, 2 all)
+         $timer->{sel_blacklists},   #41 - Selected blacklist IDs separated with '|'
+         $timer->{fuzzy_tolerance},  #42 - Fuzzy tolerance value for fuzzy searching
+         $timer->{use_for_fav},      #43 - Use this search in favorites menu (0 no, 1 yes)
+         $timer->{results_menu},           #44 - Menu to display results
+         $timer->{autodelete},             #45 - DelMode ( 0 = no autodelete, 1 = after x recordings, 2 = after y days after 1. recording)
+         $timer->{del_after_recs},         #46 - DelAfterCountRecs (x recordings)
+         $timer->{del_after_days},         #47 - DelAfterDaysOfFirstRec (y days)
+         $timer->{searchtimer_from},       #48 - UseAsSearchTimerFrom (if "use as search timer?" = 2)
+         $timer->{searchtimer_until},      #49 - UseAsSearchTimerTil (if "use as search timer?" = 2)
+         $timer->{ignore_missing_epgcats}, #50 - IgnoreMissingEPGCats
+         $timer->{unmute},                 #51 - Unmute sound if off when used as switch timer
+         $timer->{min_match},              #52 - The minimum required match in percent when descriptions are compared to avoid repeats (-> 33)
          $timer->{unused}) = split(/:/, $line);
 
-        #format selected fields
+        # Format selected fields
         $timer->{time_start} =~ s/(\d\d)(\d\d)/$1:$2/ if($timer->{time_start});
         $timer->{time_stop} =~ s/(\d\d)(\d\d)/$1:$2/ if($timer->{time_stop});
         $timer->{min_duration} =~ s/(\d\d)(\d\d)/$1:$2/ if($timer->{min_duration});
@@ -2923,7 +2916,7 @@ sub ExtractEpgSearchConf {
             $timer->{channel_to} = $timer->{channel_from} unless ($timer->{channel_to});
             $timer->{channel_from_name} = get_name_from_uniqid($timer->{channel_from});
             $timer->{channel_to_name} = get_name_from_uniqid($timer->{channel_to});
-            #TODO: links to channels
+            # TODO: Links to channels
         }
 
         if ($timer->{use_days}) {
@@ -2971,7 +2964,7 @@ sub validTime {
     return unless ($t);
     my ($h, $m) = split(/:/, $t);
     $h = "0" . $h if (length($h) == 1);
-    if (length($h) > 2) {  #TODO: $m defined?
+    if (length($h) > 2) {  # TODO: $m defined?
         $m = substr($h, -2);
         $h = substr($h, 0, -2);
     }
@@ -3054,7 +3047,7 @@ sub epgsearch_Param2Line {
         $directory =~ s/:/\|/g;
     }
 
-    #TODO: $searchtimer_from & $searchtimer_until auf korrektes Format prüfen
+    # TODO: Check $searchtimer_from & $searchtimer_until for validity
     my $searchtimer_from = $q->param("searchtimer_from");
     if ($searchtimer_from) {
         $searchtimer_from = my_mktime("0", "0", substr($searchtimer_from, 8, 2), substr($searchtimer_from, 5, 2) - 1, substr($searchtimer_from, 0, 4));
@@ -3123,7 +3116,7 @@ sub epgsearch_Param2Line {
                . ($q->param("comp_title") ? "1" : "0") . ":"
                . ($q->param("comp_subtitle") ? "1" : "0") . ":"
                . ($q->param("comp_descr") ? "1" : "0") . ":"
-               . ($q->param("comp_extepg_info") ? "1" : "0") . ":"    #TODO
+               . ($q->param("comp_extepg_info") ? "1" : "0") . ":"  # TODO
                . $q->param("repeats_in_days") . ":"
                . $q->param("delete_after") . ":"
                . $q->param("keep_recordings") . ":"
@@ -3148,7 +3141,7 @@ sub epgsearch_Param2Line {
     }
 
     $cmd .= ":" . $q->param("unused") if ($q->param("unused"));
-#print("CMD: $cmd\n");
+    #print("CMD: $cmd\n");
     return $cmd;
 }
 
@@ -3241,11 +3234,11 @@ sub epgsearch_bl_edit {
     my @ch_groups;
 
     if (defined $id) {
-        # edit blacklist
+        # Edit blacklist
         my @temp = ParseEpgSearchBlacklists($id);
         $blacklist = pop @temp;
     } else {
-        # new blacklist
+        # New blacklist
         $blacklist->{use_title}    = 1;
         $blacklist->{use_subtitle} = 1;
         $blacklist->{use_descr}    = 1;
@@ -3307,44 +3300,44 @@ sub ExtractEpgSearchBlacklistConf {
     my $line = shift;
 
     my $timer;
-        ($timer->{id},               # 1 - unique search timer id
-         $timer->{pattern},          # 2 - the search term
-         $timer->{use_time},         # 3 - use time? 0/1
-         $timer->{time_start},       # 4 - start time in HHMM
-         $timer->{time_stop},        # 5 - stop time in HHMM
-         $timer->{use_channel},      # 6 - use channel? 0 = no,  1 = Intervall, 2 = Channel group, 3 = FTA only
-         $timer->{channels},         # 7 - if 'use channel' = 1 then channel id[|channel id] in vdr format,
+        ($timer->{id},               # 1 - Unique search timer id
+         $timer->{pattern},          # 2 - The search term
+         $timer->{use_time},         # 3 - Use time? 0/1
+         $timer->{time_start},       # 4 - Start time in HHMM
+         $timer->{time_stop},        # 5 - Stop time in HHMM
+         $timer->{use_channel},      # 6 - Use channel? 0 = no,  1 = Intervall, 2 = Channel group, 3 = FTA only
+         $timer->{channels},         # 7 - If 'use channel' = 1 then channel id[|channel id] in vdr format,
                                      #     one entry or min/max entry separated with |, if 'use channel' = 2
                                      #     then the channel group name
-         $timer->{matchcase},        # 8 - match case? 0/1
-         $timer->{mode},             # 9 - search mode:
-                                     #      0 - the whole term must appear as substring
-                                     #      1 - all single terms (delimiters are blank,',', ';', '|' or '~')
+         $timer->{matchcase},        # 8 - Match case? 0/1
+         $timer->{mode},             # 9 - Search mode:
+                                     #      0 - The whole term must appear as substring
+                                     #      1 - All single terms (delimiters are blank,',', ';', '|' or '~')
                                      #          must exist as substrings.
-                                     #      2 - at least one term (delimiters are blank, ',', ';', '|' or '~')
+                                     #      2 - At least one term (delimiters are blank, ',', ';', '|' or '~')
                                      #          must exist as substring.
-                                     #      3 - matches exactly
-                                     #      4 - regular expression
-         $timer->{use_title},        #10 - use title? 0/1
-         $timer->{use_subtitle},     #11 - use subtitle? 0/1
-         $timer->{use_descr},        #12 - use description? 0/1
-         $timer->{use_duration},     #13 - use duration? 0/1
-         $timer->{min_duration},     #14 - min duration in minutes
-         $timer->{max_duration},     #15 - max duration in minutes
-         $timer->{use_days},         #16 - use day of week? 0/1
-         $timer->{which_days},       #17 - day of week (0 = sunday, 1 = monday...)
-         $timer->{use_extepg},       #18 - use extended EPG info? 0/1  #TODO
-         $timer->{extepg_infos},     #19 - extended EPG info values. This entry has the following format #TODO
+                                     #      3 - Matches exactly
+                                     #      4 - Regular expression
+         $timer->{use_title},        #10 - Use title? 0/1
+         $timer->{use_subtitle},     #11 - Use subtitle? 0/1
+         $timer->{use_descr},        #12 - Use description? 0/1
+         $timer->{use_duration},     #13 - Use duration? 0/1
+         $timer->{min_duration},     #14 - Min duration in minutes
+         $timer->{max_duration},     #15 - Max duration in minutes
+         $timer->{use_days},         #16 - Use day of week? 0/1
+         $timer->{which_days},       #17 - Day of week (0 = sunday, 1 = monday...)
+         $timer->{use_extepg},       #18 - Use extended EPG info? 0/1  # TODO
+         $timer->{extepg_infos},     #19 - Extended EPG info values. This entry has the following format  # TODO
                                      #     (delimiter is '|' for each category, '#' separates id and value):
-                                     #     1 - the id of the extended EPG info category as specified in
+                                     #     1 - The id of the extended EPG info category as specified in
                                      #         epgsearchcats.conf
-                                     #     2 - the value of the extended EPG info category
+                                     #     2 - The value of the extended EPG info category
                                      #         (a ':' will be tranlated to "!^colon^!", e.g. in "16:9")
-         $timer->{fuzzy_tolerance},  #20 - fuzzy tolerance value for fuzzy searching
-         $timer->{ignore_missing_epgcats}, #21 - ignoreMissingEPGCats
+         $timer->{fuzzy_tolerance},  #20 - Fuzzy tolerance value for fuzzy searching
+         $timer->{ignore_missing_epgcats}, #21 - IgnoreMissingEPGCats
          $timer->{unused}) = split(/:/, $line);
 
-        #format selected fields
+        # Format selected fields
         $timer->{time_start} =~ s/(\d\d)(\d\d)/$1:$2/ if($timer->{time_start});
         $timer->{time_stop} =~ s/(\d\d)(\d\d)/$1:$2/ if($timer->{time_stop});
         $timer->{min_duration} =~ s/(\d\d)(\d\d)/$1:$2/ if($timer->{min_duration});
@@ -3355,7 +3348,7 @@ sub ExtractEpgSearchBlacklistConf {
             $timer->{channel_to} = $timer->{channel_from} unless ($timer->{channel_to});
             $timer->{channel_from_name} = get_name_from_uniqid($timer->{channel_from});
             $timer->{channel_to_name} = get_name_from_uniqid($timer->{channel_to});
-            #TODO: links to channels
+            # TODO: Links to channels
         }
 
         if ($timer->{use_days}) {
@@ -3388,7 +3381,7 @@ sub ExtractEpgSearchBlacklistConf {
 }
 
 #############################################################################
-# regulary timers
+# Regulary timers
 #############################################################################
 sub my_mktime {
     my $sec  = 0;
@@ -3403,7 +3396,7 @@ sub my_mktime {
 }
 
 sub ParseTimer {
-    my $pc    = shift;    #TODO: what's this supposed to do?
+    my $pc    = shift;    # TODO: What's this supposed to do?
     my $tid   = shift;
     my $entry = 1;
 
@@ -3424,7 +3417,7 @@ sub ParseTimer {
         $recording = 1 if (($active & 8) == 8);
         $active    = 1 if ($active == 3 || $active == 9);
 
-        #$active = 1 if(($active & 1) == 1); #TODO
+        #$active = 1 if(($active & 1) == 1);  # TODO
 
         # replace "|" by ":" in timer's title (man vdr.5)
         $title =~ s/\|/\:/g;
@@ -3432,11 +3425,11 @@ sub ParseTimer {
         $title_js =~ s/\'/\\\'/g;
         $title_js =~ s/\"/&quot;/g;
 
-        if (length($dor) == 7) {    # repeating timer
+        if (length($dor) == 7) {  # Repeating timer
             $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), my_strftime("%d"), (my_strftime("%m") - 1), my_strftime("%Y"));
             $stopsse  = my_mktime(substr($stop,  2, 2), substr($stop,  0, 2), my_strftime("%d"), (my_strftime("%m") - 1), my_strftime("%Y"));
             if ($stopsse < $startsse) {
-                $stopsse += 86400;    # +1day
+                $stopsse += 86400;  # +1 day
             }
             $weekday = ((localtime(time))[6] + 6) % 7;
             $perrec = join("", substr($dor, $weekday), substr($dor, 0, $weekday));
@@ -3452,22 +3445,22 @@ sub ParseTimer {
             }
             $startsse += $off;
             $stopsse  += $off;
-        } elsif (length($dor) == 18) {    # first-day timer
+        } elsif (length($dor) == 18) {  # First-day timer
             $dor =~ /.{7}\@(\d\d\d\d)-(\d\d)-(\d\d)/;
             $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), $3, ($2 - 1), $1);
 
             # 31 + 1 = ??
             $stopsse = my_mktime(substr($stop, 2, 2), substr($stop, 0, 2), $stop > $start ? $3 : $3 + 1, ($2 - 1), $1);
-        } else {                          # regular timer
-            if ($dor =~ /(\d\d\d\d)-(\d\d)-(\d\d)/) {    # vdr >= 1.3.23
+        } else {  # Regular timer
+            if ($dor =~ /(\d\d\d\d)-(\d\d)-(\d\d)/) {  # vdr >= 1.3.23
                 $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), $3, ($2 - 1), $1);
                 $stopsse = my_mktime(substr($stop, 2, 2), substr($stop, 0, 2), $stop > $start ? $3 : $3 + 1, ($2 - 1), $1);
-            } else {                                     # vdr < 1.3.23
+            } else {  # vdr < 1.3.23
                 next unless($start || $stop);
                 $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), $dor, (my_strftime("%m") - 1), my_strftime("%Y"));
                 $stopsse = my_mktime(substr($stop, 2, 2), substr($stop, 0, 2), $stop > $start ? $dor : $dor + 1, (my_strftime("%m") - 1), my_strftime("%Y"));
 
-                # move timers which have expired one month into the future
+                # Move timers which have expired one month into the future
                 if (length($dor) != 7 && $stopsse < time) {
                     $startsse = my_mktime(substr($start, 2, 2), substr($start, 0, 2), $dor, (my_strftime("%m") % 12), (my_strftime("%Y") + (my_strftime("%m") == 12 ? 1 : 0)));
                     $stopsse = my_mktime(substr($stop, 2, 2), substr($stop, 0, 2), $stop > $start ? $dor : $dor + 1, (my_strftime("%m") % 12), (my_strftime("%Y") + (my_strftime("%m") == 12 ? 1 : 0)));
@@ -3475,8 +3468,8 @@ sub ParseTimer {
             }
         }
 
-        if ($CONFIG{RECORDINGS} && length($dor) == 7) {    # repeating timer
-                                                           # generate repeating timer entries for up to 28 days
+        if ($CONFIG{RECORDINGS} && length($dor) == 7) {  # Repeating timer
+                                                         # Generate repeating timer entries for up to 28 days
             $first = 1;
             for ($weekday += $off / 86400, $off = 0 ; $off < 28 ; $off++) {
                 $perrec = join("", substr($dor, ($weekday + $off) % 7), substr($dor, 0, ($weekday + $off) % 7));
@@ -3492,7 +3485,7 @@ sub ParseTimer {
                       startsse    => $startsse + $off * 86400,
                       stopsse     => $stopsse + $off * 86400,
                       active      => $active,
-                      recording   => $first ? $recording : 0,                                         # only the first might record
+                      recording   => $first ? $recording : 0,  # Only the first might record
                       event_id    => $event_id,
                       cdesc       => get_name_from_vdrid($vdr_id),
                       transponder => get_transponder_from_vdrid($vdr_id),
@@ -3549,7 +3542,7 @@ sub ParseTimer {
             );
         }
 
-        # save index of entry with specific timer id for later use
+        # Save index of entry with specific timer id for later use
         if ($tid && $tid == $id) {
             $entry = $length;
         }
@@ -3562,37 +3555,71 @@ sub ParseTimer {
     }
 }
 
-# extract our own metadata from a timer's aux field.
+# Extract our own metadata from a timer's aux field.
 sub extract_timer_metadata {
     my $aux = shift;
-    return unless ($aux =~ /<vdradmin-am>(.*)<\/vdradmin-am>|<epgsearch>(.*)<\/epgsearch>/i);
-    if ($1) { # VDRAdmin-AM AutoTimer
-        $aux = $1;
-        my $epg_id    = $1 if ($aux =~ /<epgid>(.*)<\/epgid>/i);
-        my $autotimer = $1 if ($aux =~ /<autotimer>(.*)<\/autotimer>/i);
-        my $bstart    = $1 if ($aux =~ /<bstart>(.*)<\/bstart>/i);
-        my $bstop     = $1 if ($aux =~ /<bstop>(.*)<\/bstop>/i);
-        my $pattern   = $1 if ($aux =~ /<pattern>(.*)<\/pattern>/i);
-        return ($autotimer, $epg_id, $bstart, $bstop, $pattern, $TOOL_AUTOTIMER);
-    } elsif ($2) { # EPGSearch
-        $aux = $2;
-        my $epg_id    = $1 if ($aux =~ /<eventid>(.*)<\/eventid>/i);
-        my $autotimer = $1 if ($aux =~ /<update>(.*)<\/update>/i);
-        my $bstart    = $1 if ($aux =~ /<bstart>(.*)<\/bstart>/i);
-        my $bstop     = $1 if ($aux =~ /<bstop>(.*)<\/bstop>/i);
-        return ($autotimer, $epg_id, $bstart, $bstop, undef, $TOOL_EPGSEARCH);
+    return unless defined $aux;
+
+    unless ($aux =~ /<vdradmin-am>(.*)<\/vdradmin-am>|<epgsearch>(.*)<\/epgsearch>|<tvscraper>(.*)<\/tvscraper>/i) {
+        return;
     }
+
+    if (defined $1) {  # VDRAdmin-AM AutoTimer
+        $aux = $1;
+        my $epg_id    = ($aux =~ /<epgid>(.*)<\/epgid>/i) ? $1 : undef;
+        my $autotimer = ($aux =~ /<autotimer>(.*)<\/autotimer>/i) ? $1 : undef;
+        my $bstart    = ($aux =~ /<bstart>(.*)<\/bstart>/i) ? $1 : undef;
+        my $bstop     = ($aux =~ /<bstop>(.*)<\/bstop>/i) ? $1 : undef;
+        my $pattern   = ($aux =~ /<pattern>(.*)<\/pattern>/i) ? $1 : undef;
+        return ($autotimer, $epg_id, $bstart, $bstop, $pattern, $TOOL_AUTOTIMER);
+    } elsif (defined $2) {  # EPGSearch
+        $aux = $2;
+        #* Fields differ in newer EPGSearch. Sample from EPGSearch 2.4.4:
+        #<epgsearch>
+        #  <channel>27 - INPLUS</channel>
+        #  <searchtimer>Extraordinary</searchtimer>
+        #  <start>1754037420</start>
+        #  <stop>1754040240</stop>
+        #  <s-id>1121</s-id>
+        #  <eventid>19800</eventid>
+        #</epgsearch>
+        if ($aux =~ /<searchtimer>(.*)<\/searchtimer>/i) {
+            my $pattern = $1;
+            my $epg_id  = ($aux =~ /<eventid>(.*)<\/eventid>/i) ? $1 : undef;
+            my $bstart  = ($aux =~ /<start>(.*)<\/start>/i) ? $1 : undef;
+            my $bstop   = ($aux =~ /<stop>(.*)<\/stop>/i) ? $1 : undef;
+            return (undef, $epg_id, $bstart, $bstop, $pattern, $TOOL_EPGSEARCH);
+        } else {  # EPGSearch old version
+            my $epg_id    = ($aux =~ /<eventid>(.*)<\/eventid>/i) ? $1 : undef;
+            my $autotimer = ($aux =~ /<update>(.*)<\/update>/i) ? $1 : undef;
+            my $bstart    = ($aux =~ /<bstart>(.*)<\/bstart>/i) ? $1 : undef;
+            my $bstop     = ($aux =~ /<bstop>(.*)<\/bstop>/i) ? $1 : undef;
+            return ($autotimer, $epg_id, $bstart, $bstop, undef, $TOOL_EPGSEARCH);
+        }
+    } elsif (defined $3) {  # TVScraper
+        # Fields are <causedBy> and <reason>
+        # causedBy: Path to the recording that caused this timer to be created
+        # reason:
+        #  "improve": SD->HD or errors in the recording
+        #  "collection": Recording belongs to a collection and the timer to another TV show in the same collection
+        #  "TV show, missing episode": Recording belongs to a TV show and the timer to another episode in the same TV show
+        $aux = $3;
+        my $pattern = ($aux =~ /<reason>(.*)<\/reason>/i) ? "TVScraper: $1" : undef;
+        return (undef, undef, undef, undef, $pattern, $TOOL_TVSCRAPER);
+    }
+
+    return;  # In case none of the conditions are met
 }
 
 sub append_timer_metadata {
     my ($aux, $epg_id, $autotimer, $bstart, $bstop, $pattern, $tool) = @_;
 
     if ($tool == $TOOL_AUTOTIMER) {
-        # remove old autotimer info
+        # Remove old autotimer info
         $aux =~ s/\|?<vdradmin-am>.*<\/vdradmin-am>//i if ($aux);
         $aux = substr($aux, 0, 9000) if ($FEATURES{VDRVERSION} < 10336 and length($aux) > 9000);
 
-        # add a new line if VDR<1.3.44 because then there might be a summary
+        # Add a new line if VDR<1.3.44 because then there might be a summary
         $aux .= "|" if ($FEATURES{VDRVERSION} < 10344 and length($aux));
         $aux .= "<vdradmin-am>";
         $aux .= "<epgid>$epg_id</epgid>" if ($epg_id);
@@ -3602,11 +3629,11 @@ sub append_timer_metadata {
         $aux .= "<pattern>$pattern</pattern>" if ($pattern);
         $aux .= "</vdradmin-am>";
     } elsif ($tool == $TOOL_EPGSEARCH) {
-        # remove old epgsearch info
+        # Remove old epgsearch info
         $aux =~ s/\|?<epgsearch>.*<\/epgsearch>//i if ($aux);
         $aux = substr($aux, 0, 9000) if ($FEATURES{VDRVERSION} < 10336 and length($aux) > 9000);
 
-        # add a new line if VDR<1.3.44 because then there might be a summary
+        # Add a new line if VDR<1.3.44 because then there might be a summary
         $aux .= "|" if ($FEATURES{VDRVERSION} < 10344 and length($aux));
         $aux .= "<epgsearch>";
         $aux .= "<eventid>$epg_id</eventid>" if ($epg_id);
@@ -3664,7 +3691,7 @@ sub ProgTimer {
     # $start and $stop are expected as seconds since 00:00:00 1970-01-01 UTC.
     my ($timer_id, $active, $event_id, $channel, $start, $stop, $prio, $lft, $title, $summary, $dor) = @_;
 
-    $title =~ s/\:/|/g;    # replace ":" by "|" in timer's title (man vdr.5)
+    $title =~ s/\:/|/g;  # Replace ":" by "|" in timer's title (man vdr.5)
 
     my $send_cmd = $timer_id ? "modt $timer_id" : "newt";
     my $send_dor = $dor ? $dor : RemoveLeadingZero(strftime("%d", localtime($start)));
@@ -3684,7 +3711,7 @@ sub RedirectToReferer {
     }
 }
 
-sub salt {    #TODO: unused
+sub salt {  # TODO: Unused
     $_ = $_[0];
     my $string;
     my ($offset1, $offset2);
@@ -3826,7 +3853,7 @@ sub my_strftime {
     return (strftime($format, $time ? localtime($time) : localtime(time)));
 }
 
-sub GetFirstChannel {    #TODO: unused
+sub GetFirstChannel {  # TODO: Unused
     return ($CHAN{$CHAN_FULL}->{channels}[0]->{service_id});
 }
 
@@ -3851,13 +3878,13 @@ sub Decode_Referer {
     return ($ref);
 }
 
-sub encode_ref {    #TODO: unused
+sub encode_ref {  # TODO: Unused
     my ($tmp) = $_[0]->url(-relative => 1, -query => 1);
     my (undef, $query) = split(/\?/, $tmp, 2);
     return (MIME::Base64::encode_base64($query, ""));
 }
 
-sub decode_ref {    #TODO: unused
+sub decode_ref {  # TODO: Unused
     return (MIME::Base64::decode_base64($_[0]));
 }
 
@@ -3920,22 +3947,22 @@ sub ReadConfig {
 
         ValidConfig();
 
-        #Migrate settings
-        #v3.4.5
+        # Migrate settings
+        # v3.4.5
         $CONFIG{MAIL_FROM} = "autotimer@" . $CONFIG{MAIL_FROMDOMAIN} if ($CONFIG{MAIL_FROM} =~ /from\@address.tld/);
-        #v3.4.6beta
+        # v3.4.6beta
         $CONFIG{SKIN} = "default" if(($CONFIG{SKIN} eq "bilder") || ($CONFIG{SKIN} eq "copper") || ($CONFIG{SKIN} eq "default.png"));
-        #v3.5.3
+        # v3.5.3
         delete $CONFIG{EPG_DIRECT};
         delete $CONFIG{EPG_FILENAME};
-        #v3.5.4rc
+        # v3.5.4rc
         if (defined $CONFIG{AT_TIMEOUT}) {
             $CONFIG{CACHE_TIMEOUT} = $CONFIG{AT_TIMEOUT} if ($CONFIG{AT_TIMEOUT} < $CONFIG{CACHE_TIMEOUT});
             delete $CONFIG{AT_TIMEOUT};
         }
-        #v3.6.2
+        # v3.6.2
         delete $CONFIG{VDRVFAT};
-        #v3.6.5
+        # v3.6.5
         $CONFIG{LOGLEVEL} = 4 if ($CONFIG{LOGLEVEL} == 81);
 
     } else {
@@ -4037,7 +4064,7 @@ sub VideoDiskFree {
 }
 
 #############################################################################
-# frontend
+# Frontend
 #############################################################################
 sub show_index {
     return if (UptoDate() != 0);
@@ -4094,7 +4121,7 @@ sub prog_detail {
                 $video        = getEventVideo($event);
                 $audio        = getEventAudio($event);
 
-                # find epgimages
+                # Find epgimages
                 if ($CONFIG{EPGIMAGES} && -d $CONFIG{EPGIMAGES}) {
                     my $uniq_id = GetChannelUniqIdByNumber($vdr_id);
                     for my $epgimage (<$CONFIG{EPGIMAGES}/${uniq_id}_${epg_id}\[\._\]*>) {
@@ -4186,7 +4213,7 @@ sub prog_detail {
 
 sub prog_detail_form {
 
-    # determine referer (redirect to where we come from)
+    # Determine referer (Redirect to where we come from)
     my $ref = getReferer();
 
     my $vdr_id = $q->param("vdr_id");
@@ -4236,7 +4263,7 @@ sub prog_detail_aktion {
         my $subtitle    = CGI::unescapeHTML(scalar $q->param("subtitle"));
         my $description = CGI::unescapeHTML(scalar $q->param("description"));
         my $vps         = $q->param("vps");
-        my $table_id    = 0;    # must be zero for external epg data
+        my $table_id    = 0;  # Must be zero for external epg data
 
         my ($new_subtitle, $new_description, $new_video, $new_audio, $new_vps) = ("","","","","");
         my $event = EPG_getEntry($vdr_id, $event_id);
@@ -4284,7 +4311,7 @@ sub prog_detail_aktion {
                 #printf "something went wrong during EPG update: %s\n", $result;
                 main::HTMLError(sprintf($ERROR_MESSAGE{send_command}, $CONFIG{VDR_HOST}));
             } else {
-                # don't reread complete epg, just change the cache
+                # Don't reread complete epg, just change the cache
                 $event->[EV_TITLE] = $title;
                 $event->[EV_SUBTITLE] = $subtitle;
                 $event->[EV_SUMMARY] = $description;
@@ -4300,7 +4327,7 @@ sub prog_detail_aktion {
     }
 }
 #############################################################################
-# program listing
+# Program listing
 #############################################################################
 sub prog_list {
     return if (UptoDate() != 0);
@@ -4319,9 +4346,9 @@ sub prog_list {
     my (@channel, $current);
     for my $channel (@{$CHAN{$CONFIG{CHANNELS_WANTED_PRG}}->{channels}}) {
 
-        # skip channels without EPG data
+        # Skip channels without EPG data
         if ($CONFIG{CHANNELS_WITHOUT_EPG} || ChannelHasEPG($channel->{vdr_id})) {
-            # called without vdr_id, redirect to the first available channel
+            # Called without vdr_id, redirect to the first available channel
             $vdr_id = $channel->{vdr_id} if(!$vdr_id);
             $current = 1 if ($vdr_id == $channel->{vdr_id});
             push(@channel,
@@ -4347,7 +4374,7 @@ sub prog_list {
         }
     }
 
-    # find the next/prev channel
+    # Find the next/prev channel
     my $ci = 0;
     for (my $i = 0 ; $i <= $#channel ; $i++) {
         ($ci = $i) if ($vdr_id == $channel[$i]->{vdr_id});
@@ -4368,7 +4395,7 @@ sub prog_list {
     for my $event (@{ $EPG{$vdr_id} }) {
         if (my_strftime("%d", $event->[EV_START]) != $day) {
 
-            # new day
+            # New day
             push(@show,
                  {  endd => 1,
                     next_channel => $next_channel ? "$MyURL?aktion=prog_list&amp;vdr_id=$next_channel" : undef,
@@ -4467,7 +4494,7 @@ sub prog_list {
 }
 
 #############################################################################
-# program listing 2
+# Program listing 2
 # "What's up today" extension.
 #
 # Contributed by Thomas Blon, 6. Mar 2004
@@ -4492,7 +4519,7 @@ sub prog_list2 {
 
     for my $channel (@{$CHAN{$CONFIG{CHANNELS_WANTED_PRG2}}->{channels}}) {
 
-        # skip channels without EPG data
+        # Skip channels without EPG data
         if ($CONFIG{CHANNELS_WITHOUT_EPG} || ChannelHasEPG($channel->{vdr_id})) {
             push(@channel,
                  {  name   => $channel->{name},
@@ -4508,10 +4535,10 @@ sub prog_list2 {
     my $border;
     $border = timelocal(0, $minute, $hour, substr($day, 6, 2), substr($day, 4, 2) - 1, substr($day, 0, 4)) if($day);
     my $time = getStartTime($param_time ? $param_time : undef, undef, $border);
-    foreach (@channel) {    # loop through all channels
+    foreach (@channel) {  # Loop through all channels
         $vdr_id = $_->{vdr_id};
 
-        # find the next/prev channel
+        # Find the next/prev channel
         my $ci = 0;
         for (my $i = 0 ; $i <= $#channel ; $i++) {
             ($ci = $i) if ($vdr_id == $channel[$i]->{vdr_id});
@@ -4627,7 +4654,7 @@ sub prog_list2 {
             );
             push(@show, { endd => 1 });
         }
-    }    # end: for $vdr_id
+    }  # End: for $vdr_id
 
     my @days;
     foreach (keys %hash_days) {
@@ -4660,7 +4687,6 @@ sub prog_list2 {
         }
     }
 
-    #
     my $vars = {
         title => $day == $current_day ? gettext("Playing Today") : ($day == $current_day + 1 ? gettext("Playing Tomorrow") : sprintf(gettext("Playing on the %s"), $hash_days{$day})),
         now            => my_strftime("%H:%M", $time),
@@ -4683,7 +4709,7 @@ sub prog_list2 {
 }
 
 #############################################################################
-# regular timers
+# Regular timers
 #############################################################################
 sub timer_list {
     return if (UptoDate() != 0);
@@ -4709,8 +4735,8 @@ sub timer_list {
 
         $timer->{delurl}    = $MyURL . "?aktion=timer_delete&amp;timer_id=" . $timer->{id},
         $timer->{modurl}    = $MyURL . "?aktion=timer_new_form&amp;timer_id=" . $timer->{id},
-        $timer->{toggleurl} = sprintf("%s?aktion=timer_toggle&amp;active=%s&amp;id=%s", $MyURL, ($timer->{active} & 1) ? 0 : 1, $timer->{id}), #TODO: nur id?
-        $timer->{dor}       = my_strftime("%a %d.%m", $timer->{startsse});    #TODO: localize date
+        $timer->{toggleurl} = sprintf("%s?aktion=timer_toggle&amp;active=%s&amp;id=%s", $MyURL, ($timer->{active} & 1) ? 0 : 1, $timer->{id}),  # TODO: nur id?
+        $timer->{dor}       = my_strftime("%a %d.%m", $timer->{startsse});  # TODO: localize date
 
         $timer->{title} = CGI::escapeHTML($timer->{title});
         $TagAnfang      = my_mktime(0, 0, my_strftime("%d", $timer->{start}), my_strftime("%m", $timer->{start}), my_strftime("%Y", $timer->{start}));
@@ -4747,7 +4773,7 @@ sub timer_list {
                 $last = $ii;
             }
 
-            # Liste der benutzten Transponder
+            # List of used transponders
             my @Transponder = $timer[$ii]->{transponder};
             $timer[$ii]->{collision} = 0;
 
@@ -4757,9 +4783,9 @@ sub timer_list {
                 {
                     if ($timer[$ii]->{active} && $timer[$jj]->{active}) {
 
-                        # Timer kollidieren zeitlich. Pruefen, ob die Timer evtl. auf
-                        # gleichem Transponder oder CAM liegen und daher ohne Probleme
-                        # aufgenommen werden koennen
+    # Timers collide in time. Check if the timers are possibly on
+    # the same transponder or CAM and therefore can be recorded
+    # without problems
                         Log(LOG_DEBUG, sprintf("[TIMER] Collision: %s (%s, %s) -- %s (%s, %s)\n", substr($timer[$ii]->{title}, 0, 15), $timer[$ii]->{vdr_id}, $timer[$ii]->{transponder}, $timer[$ii]->{ca}, substr($timer[$jj]->{title}, 0, 15), $timer[$jj]->{vdr_id}, $timer[$jj]->{transponder}, $timer[$jj]->{ca}));
 
                         if (   $timer[$ii]->{vdr_id} != $timer[$jj]->{vdr_id}
@@ -4767,18 +4793,17 @@ sub timer_list {
                             && $timer[$ii]->{ca} >= 100)
                         {
 
-                            # Beide Timer laufen auf dem gleichen CAM auf verschiedenen
-                            # Kanaelen, davon kann nur einer aufgenommen werden
+    # Both timers run on the same CAM on different channels, only one of them can be recorded
                             Log(LOG_DEBUG, "[TIMER] Both channels use same CAM");
                             #($timer[$ii]->{collision}) = $CONFIG{RECORDINGS}; #OLDIMPL
                             ($timer[$ii]->{collision})++; #NEWIMPL
 
-                            # Nur Kosmetik: Transponderliste vervollstaendigen
+    # Just cosmetics: Complete the transponder list
                             push(@Transponder, $timer[$jj]->{transponder});
                         } else {
 
-                            # "grep" prueft die Bedingung fuer jedes Element, daher den
-                            # Transponder vorher zwischenspeichern -- ist effizienter
+                            # "grep" checks the condition for each element, so store the
+                            # transponder beforehand -- it's more efficient
                             my $t = $timer[$jj]->{transponder};
                             if (scalar(grep($_ eq $t, @Transponder)) == 0) {
                                 ($timer[$ii]->{collision})++;
@@ -4815,7 +4840,6 @@ sub timer_list {
         }
     }
 
-    #
     my ($ii, $jj, $kk, $current, $title);
 
     for ($ii = 0 ; $ii < @timer ; $ii++) {
@@ -5004,7 +5028,7 @@ sub timer_new_form {
     }
 
     my $this_event;
-    if ($epg_id) {    # new timer
+    if ($epg_id) {  # New timer
         my $this = EPG_getEntry($vdr_id, $epg_id);
         $this_event->{active}   = 1;
         $this_event->{event_id} = $this->[EV_EVENT_ID];
@@ -5026,14 +5050,14 @@ sub timer_new_form {
             $this_event->{autotimer} = $this_event->{at_epg} ? $AT_BY_EVENT_ID : $AT_BY_TIME;
         }
 
-    } elsif ($timer_id) {    # edit existing timer
+    } elsif ($timer_id) {  # Edit existing timer
         $this_event = ParseTimer(0, $timer_id);
         if (($this_event->{tool} == $TOOL_EPGSEARCH) && $this_event->{pattern}) {
             $this_event->{hide_at_check} = 1;
         }
         $this_event->{at_epg}    = $this_event->{event_id} ? 1 : 0;
         $this_event->{autotimer} = 0 unless($this_event->{autotimer});
-    } else {                 # none of the above
+    } else {  # None of the above
         $this_event->{start}  = time();
         $this_event->{stop}   = 0;
         $this_event->{active} = 1;
@@ -5046,7 +5070,7 @@ sub timer_new_form {
         push(@channels, $channel);
     }
 
-    # determine referer (redirect to where we come from)
+    # Determine referer (Redirect to where we come from)
     my $ref = getReferer();
 
     my $displaysummary = $this_event->{summary};
@@ -5137,7 +5161,7 @@ sub timer_add {
         if (length($q->param("summary")) > 0) {
             $data->{summary} = $q->param("summary");
 
-            #$data->{summary} =~ s/\://g;    # summary may have colons (man vdr.5)
+            #$data->{summary} =~ s/\://g; # Summary may have colons (man vdr.5)
             $data->{summary} =~ s/\r//g;
             $data->{summary} =~ s/\n/|/g;
         }
@@ -5145,7 +5169,7 @@ sub timer_add {
         my $dor = $data->{dor};
         if (length($data->{dor}) == 7 || length($data->{dor}) == 10 || length($data->{dor}) == 18) {
 
-            # dummy
+            # Dummy
             $dor = 1;
         }
         $data->{startsse} = my_mktime(substr($data->{start}, 2, 2), substr($data->{start}, 0, 2), $dor, (my_strftime("%m") - 1), my_strftime("%Y"));
@@ -5260,7 +5284,7 @@ sub rec_stream {
         }
         last if ($id == $i);
     }
-    $time = substr($time, 0, 5);    # needed for wareagel-patch
+    $time = substr($time, 0, 5);  # Needed for wareagel-patch
     if ($id == $i) {
         my @urls = ();
         $title =~ s/[ ~]+$//;
@@ -5305,7 +5329,7 @@ sub rec_stream_folder {
     ParseRecordings($parent);
     my @recordings = @RECORDINGS;
 
-    # sort by date
+    # Sort by date
     @recordings = sort({ $b->{isfolder} <=> $a->{isfolder} ||
                          ciCmp($b->{isfolder} ? $a->{name} : "", $a->{isfolder} ? $b->{name} : "") ||
                          $a->{sse} <=> $b->{sse} } @recordings);
@@ -5322,7 +5346,7 @@ sub rec_stream_folder {
         if (!$recording->{isfolder}  &&
              $recording->{parent} eq $parent) {
 
-            # inplace playlist
+            # Inplace playlist
             my ($id) = $recording->{recording_id};
             my ($i, $title, $newtitle);
             my ($date, $time);
@@ -5368,7 +5392,7 @@ sub encode_RecTitle {
         # VFAT on
         for ($i = 0 ; $i < length($title) ; $i++) {
             $c = substr($title, $i, 1);
-            unless ($c =~ /[öäüßÖÄÜA-Za-z0123456789_!@\$%&()+,.\-;=~ ]/) {
+            unless ($c =~ /[Ã¶Ã¤Ã¼ÃŸÃ–Ã„ÃœA-Za-z0123456789_!@\$%&()+,.\-;=~ ]/) {
                 $newtitle .= sprintf("#%02X", ord($c));
             } else {
                 $newtitle .= $c;
@@ -5444,7 +5468,7 @@ sub getReferer {
 }
 
 #############################################################################
-# live streaming
+# Live streaming
 #############################################################################
 sub streamdevURI {
     my $url;
@@ -5491,7 +5515,7 @@ sub live_stream {
 }
 
 #############################################################################
-# automatic timers
+# Automatic timers
 #############################################################################
 sub at_timer_list {
     return if (UptoDate() != 0);
@@ -5608,7 +5632,6 @@ sub at_timer_edit {
 
     my @at = AT_Read();
 
-    #
     my @chans;
     for my $chan (@{$CHAN{$CONFIG{CHANNELS_WANTED_AUTOTIMER}}->{channels}}) {
         if ($chan->{vdr_id}) {
@@ -5819,7 +5842,7 @@ sub at_timer_test {
         url      => $MyURL,
         channels => \@chans,
 
-        #TODO    $q->Vars,
+        # TODO    $q->Vars,
         active      => $q->param("active"),
         pattern     => $pattern,
         title       => $q->param("title") ? $q->param("title") : 0,
@@ -5883,7 +5906,7 @@ sub getStartTime {
 }
 
 #############################################################################
-# timeline
+# Timeline
 #############################################################################
 sub prog_timeline {
     return if (UptoDate() != 0);
@@ -5891,7 +5914,7 @@ sub prog_timeline {
     my $myself = Encode_Referer($MyURL . "?" . $Query);
     $CONFIG{CHANNELS_WANTED_TIMELINE} = $q->param("wanted_channels") if (defined $q->param("wanted_channels"));
 
-    # zeitpunkt bestimmen
+    # Determine time point
     my $border;
     if ($q->param("time")) {
         if ($q->param("frame")) {
@@ -5904,12 +5927,12 @@ sub prog_timeline {
     my $event_time = getStartTime(scalar $q->param("time"), undef, $border);
     my $event_time_to;
 
-    # calculate start time of the 30 min interval to avoid gaps at the beginning
+    # Calculate start time of the 30 min interval to avoid gaps at the beginning
     my $start_time = $event_time - $event_time % 1800;
 
     $event_time_to = $start_time + ($CONFIG{ZEITRAHMEN} * 3600);
 
-    # Timer parsen, und erstmal alle rausschmeissen die nicht in der Zeitzone liegen
+    # Parse timers and remove those that don't fall into the time zone
     my $TIM;
     for my $timer (ParseTimer(0)) {
         next if ($timer->{stopsse} <= $start_time or $timer->{startsse} >= $event_time_to);
@@ -5922,7 +5945,7 @@ sub prog_timeline {
 
     foreach (@{$CHAN{$CONFIG{CHANNELS_WANTED_TIMELINE}}->{channels}}) {
         if (ChannelHasEPG($_->{vdr_id})) {
-            foreach my $event (sort { $a->[EV_START] <=> $b->[EV_START] } @{ $EPG{$_->{vdr_id}} }) {    # Events durchgehen
+            foreach my $event (sort { $a->[EV_START] <=> $b->[EV_START] } @{ $EPG{$_->{vdr_id}} }) {  # Go thru the events
                 next if ($event->[EV_STOP] <= $start_time or $event->[EV_START] >= $event_time_to);
 
                 my $progname = $event->[EV_CHANNEL_NAME];
@@ -5940,7 +5963,7 @@ sub prog_timeline {
 #                        infurl => ($event->[EV_SUMMARY] ? sprintf("%s?aktion=prog_detail&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $myself) : undef),
 #                        recurl => sprintf("%s?aktion=timer_new_form&amp;epg_id=%s&amp;vdr_id=%s&amp;referer=%s", $MyURL, $event->[EV_EVENT_ID], $event->[EV_VDR_ID], $myself),
                         anchor => $event->[EV_EVENT_ID],
-                        timer => (defined $TIM->{ $event->[EV_TITLE] } && $TIM->{ $event->[EV_TITLE] }->{vdr_id} == $event->[EV_VDR_ID] && $TIM->{ $event->[EV_TITLE] }->{active} ? 1 : 0), #TODO
+                        timer => (defined $TIM->{ $event->[EV_TITLE] } && $TIM->{ $event->[EV_TITLE] }->{vdr_id} == $event->[EV_VDR_ID] && $TIM->{ $event->[EV_TITLE] }->{active} ? 1 : 0),  # TODO
                      }
                 );
             }
@@ -5958,7 +5981,7 @@ sub prog_timeline {
             );
         }
 
-        # needed for vdr 1.0.x, dunno why
+        # Needed for vdr 1.0.x, dunno why
 #        @show = sort({ $a->{vdr_id} <=> $b->{vdr_id} } @show);
         push(@{ $shows->{ $_->{vdr_id} } }, @show) if @show;
         undef @show;
@@ -5977,7 +6000,7 @@ sub prog_timeline {
 }
 
 #############################################################################
-# summary
+# Summary
 #############################################################################
 sub prog_summary {
     return if (UptoDate() != 0);
@@ -5991,7 +6014,7 @@ sub prog_summary {
 
     my @timers = ParseTimer(0);
 
-    # zeitpunkt bestimmen
+    # Determine time point
     my $event_time = getStartTime($time);
 
     my $pattern;
@@ -6018,7 +6041,7 @@ sub prog_summary {
             for my $word (split(/ +/, $pattern)) {
                 if ($word) {
                     if ($can_use_encode) {
-                        # case-insensitive search for 'abc' from fastest to slowest:
+                        # Case-insensitive search for 'abc' from fastest to slowest:
                         # (?>a|A)(?>b|B)(?>c|C) on byte strings
                         # [aA][bB][cC] on unicode strings
                         # substr() + uc()/lc() on unicode strings
@@ -6028,7 +6051,7 @@ sub prog_summary {
                         for my $ch (split(//, $word)) {
                             if (uc($ch) ne lc($ch)) {
                                 if (!@pat && !defined($prefix)) {
-                                    # first character
+                                    # First character
                                     $prefix = $ch;
                                 } else {
                                     push(@pat, "(?>");
@@ -6165,7 +6188,7 @@ sub prog_summary {
                 );
                 last if (!$search);
             }
-        } elsif (!$search && $CONFIG{CHANNELS_WITHOUT_EPG}) { # no EPG
+        } elsif (!$search && $CONFIG{CHANNELS_WITHOUT_EPG}) {  # No EPG
             push(@show,
                 {  date        => my_strftime("%x",     $event_time),
                    longdate    => my_strftime("%A, %x", $event_time),
@@ -6185,10 +6208,10 @@ sub prog_summary {
     }
 
     if ($search) {
-        # sort by event's start time and with equal start time sort by channel id
+        # Sort by event's start time and with equal start time sort by channel id
         @show = sort({ $a->{event_start} <=> $b->{event_start} || $a->{vdr_id} <=> $b->{vdr_id} } @show);
     } else {
-        # sort by channel id
+        # Sort by channel id
         @show = sort({ $a->{vdr_id} <=> $b->{vdr_id} } @show);
     }
 
@@ -6219,7 +6242,6 @@ sub prog_summary {
         }
     }
 
-    #
     my $label = $next ? gettext("What's on after") : gettext("What's on at");
     my $vars = { rows    => \@show,
                  now     => $displayed_time,
@@ -6236,7 +6258,7 @@ sub prog_summary {
 }
 
 #############################################################################
-# recordings
+# Recordings
 #############################################################################
 sub rec_list {
     my @recordings;
@@ -6252,9 +6274,9 @@ sub rec_list {
         $parent = uri_escape($parent);
     }
 
-    ParseRecordings($parent); # returns by parent filtered list
+    ParseRecordings($parent);  # Returns by parent filtered list
 
-    # create path array
+    # Create path array
     my @path;
     my @split_parent = split("~", $parent);
 
@@ -6360,7 +6382,7 @@ sub ParseRecordings {
     my $parent_select = shift;
     Log(LOG_DEBUG, "[ParseRecordings] start parent: $parent_select");
 
-    # clear global lists
+    # Clear global lists
     @RECORDINGS = ();
     %RECORDING_FOLDERS = {};
     %RECORDING_BY_ID =  {};
@@ -6405,7 +6427,7 @@ sub ParseRecordings {
             $lengthmin = $length;
         }
 
-        # store recording in hash
+        # Store recording in hash
         $RECORDING_BY_ID{$id}->{'name'}      = $rec_name;
         $RECORDING_BY_ID{$id}->{'date'}      = $date;
         $RECORDING_BY_ID{$id}->{'time'}      = $time;
@@ -6415,7 +6437,7 @@ sub ParseRecordings {
         $RECORDING_BY_ID{$id}->{'new'}       = $new;
         $RECORDING_BY_ID{$id}->{'lengthmin'} = $lengthmin;
 
-        # create folder tree
+        # Create folder tree
         my $parent;
         if (@path) {
             while (scalar(@path) > 0) {
@@ -6440,7 +6462,7 @@ sub ParseRecordings {
         $folder_entries = $RECORDING_FOLDERS{$parent_select};
     };
 
-    ## Folders
+    # Folders
     if (scalar(keys %$folder_entries) > 0) {
         foreach my $name (sort keys %$folder_entries) {
             my $folder = $folder_entries->{$name};
@@ -6469,7 +6491,7 @@ sub ParseRecordings {
 
         $parent    = $RECORDING_BY_ID{$id}->{'parent'};
 
-        next if ($parent_select ne $parent); # skip adding entries to list which are not selected
+        next if ($parent_select ne $parent);  # Skip adding entries to list which are not selected
 
         $name      = $RECORDING_BY_ID{$id}->{'name'};
         $date      = $RECORDING_BY_ID{$id}->{'date'};
@@ -6484,10 +6506,10 @@ sub ParseRecordings {
         my $yearofrecording;
         if ($FEATURES{VDRVERSION} >= 10326) {
 
-            # let localtime() decide about the century
+            # Let localtime() decide about the century
             $yearofrecording = substr($date, 6, 2);
 
-            # alternatively decide about the century ourself
+            # Alternatively decide about the century ourself
             #    my $shortyear = substr($date,6,2);
             #    if ($shortyear > 70) {
             #        $yearofrecording = "19" . $shortyear;
@@ -6496,14 +6518,14 @@ sub ParseRecordings {
             #    }
         } else {
 
-            # old way of vdradmin to handle the date while vdr did not report the year
+            # Old way of vdradmin to handle the date while vdr did not report the year
             # current year was assumed.
             if ($date eq "29.02") {
                 $yearofrecording = "2004";
             } else {
                 $yearofrecording = my_strftime("%Y");
             }
-        }    # endif
+        }  # endif
 
         my $name_js = $name;
         $name_js =~ s/\'/\\\'/g;
@@ -6525,8 +6547,8 @@ sub ParseRecordings {
                 delurl        => $MyURL . "?aktion=rec_delete&amp;rec_delete=y&amp;id=$id",
                 editurl       => $FEATURES{REC_RENAME} ? $MyURL . "?aktion=rec_edit&amp;id=$id" : undef,
                 infurl        => $MyURL . "?aktion=rec_detail&amp;id=$id",
-                playurl       => $FEATURES{VDRVERSION} >= 10331 ? $MyURL . "?aktion=rec_play&amp;id=$id" : undef, #TODO
-                cuturl        => $FEATURES{VDRVERSION} >= 10331 ? $MyURL . "?aktion=rec_cut&amp;id=$id" : undef, #TODO
+                playurl       => $FEATURES{VDRVERSION} >= 10331 ? $MyURL . "?aktion=rec_play&amp;id=$id" : undef,  # TODO
+                cuturl        => $FEATURES{VDRVERSION} >= 10331 ? $MyURL . "?aktion=rec_cut&amp;id=$id" : undef,  # TODO
                 streamurl     => ($CONFIG{ST_FUNC} && $CONFIG{ST_REC_ON}) ? $MyStreamBase . $CONFIG{REC_EXT} . "?aktion=rec_stream&amp;id=$id" : undef
              }
         );
@@ -6706,7 +6728,7 @@ sub rec_delete {
                 }
             }
             # VDR 2.3.x workaround:
-            # delete starting with the largest id and proceed to the smallest.
+            # Delete starting with the largest id and proceed to the smallest.
             # In this case, ids won't change while removing items from the list.
             @id_arr = sort {$b <=> $a} @id_arr;
             for my $del_id (@id_arr) {
@@ -6751,7 +6773,7 @@ sub recRunCmd {
         last if ($rec_id == $id);
     }
 
-    $time = substr($time, 0, 5);    # needed for wareagel-patch
+    $time = substr($time, 0, 5);  # Needed for wareagel-patch
     if ($rec_id == $id) {
         chomp($title);
         ($day,  $month)  = split(/\./, $date);
@@ -6788,7 +6810,7 @@ sub findVideoFolder {
 
 sub rec_edit {
 
-    # determine referer (redirect to where we come from)
+    # Determine referer (Redirect to where we come from)
     my $ref = getReferer();
 
     my $vars = getRecInfo(scalar $q->param("id"), $ref ? Encode_Referer($ref) : undef, "renr");
@@ -6828,7 +6850,7 @@ sub rec_cut {
 }
 
 #############################################################################
-# configuration
+# Configuration
 #############################################################################
 sub config {
     my $error_msg;
@@ -6894,10 +6916,9 @@ sub config {
         ApplyConfig();
     }
 
-    # vdradmind.conf writable?
+    # Is vdradmind.conf writable?
     $error_msg .= sprintf(gettext("Configuration file %s not writable! Configuration won't be saved!") . "<br />", $CONFFILE) unless (-w $CONFFILE);
 
-    #
     my @LOGINPAGES_DESCRIPTION = (gettext("What's On Now?"), gettext("Playing Today?"), gettext("Timeline"), gettext("Channels"), gettext("Timers"), gettext("Recordings"));
     my (@loginpages);
     my $i = 0;
@@ -6911,7 +6932,6 @@ sub config {
         $i++;
     }
 
-    #
     my @template;
     for my $dir (<$TEMPLATEDIR/*>) {
         next if (!-d $dir);
@@ -6994,7 +7014,7 @@ sub config {
 }
 
 #############################################################################
-# remote control
+# Remote control
 #############################################################################
 sub rc_show {
     $CONFIG{CHANNELS_WANTED_WATCHTV} = $q->param("wanted_channels") if (defined $q->param("wanted_channels"));
@@ -7030,7 +7050,7 @@ sub rc_hitk {
     }
     SendCMD("hitk $key");
 
-    #XXX
+    # XXX
     SendFile("bilder/spacer.gif");
 }
 
@@ -7085,7 +7105,7 @@ sub show_help {
 }
 
 #############################################################################
-# information
+# Information
 #############################################################################
 sub about {
     my $vars = {
@@ -7094,7 +7114,7 @@ sub about {
 }
 
 #############################################################################
-# experimental
+# Experimental
 #############################################################################
 sub grab_picture {
     $CONFIG{TV_INTERVAL} = $q->param("interval") if($q->param("interval"));
@@ -7120,7 +7140,7 @@ sub grab_picture {
         # Grab using temporary file
         my $file = new File::Temp(TEMPLATE => "vdr-XXXXX", DIR => File::Spec->tmpdir(), UNLINK => 1, SUFFIX => ".jpg");
         chmod 0666, $file if (-e $file);
-        SendCMD("grab $file jpeg 70 $width $height");
+        SendCMD("grab $file jpeg 80 $width $height");
         if (-e $file && -r _) {
             return (header("200", "image/jpeg", ReadFile($file)));
         } else {
@@ -7135,7 +7155,7 @@ sub grab_picture {
         }
     } else {
         my $image;
-        for (SendCMD("grab .jpg 70 $width $height")) {
+        for (SendCMD("grab .jpg 80 $width $height")) { # TODO: Adjustable image quality
             $image .= $_ unless (/Grabbed image/);
         }
         return SendFile("bilder/noise.gif") if ($image =~ /Grab image failed/);
@@ -7245,7 +7265,7 @@ sub export_channels_m3u {
 # Authentication
 #############################################################################
 
-sub subnetcheck { #TODO: IPv6 support
+sub subnetcheck { # TODO: IPv6 support
     my $ip   = $_[0];
     my $nets = $_[1];
     my ($ip1, $ip2, $ip3, $ip4, $net_base, $net_range, $net_base1, $net_base2, $net_base3, $net_base4, $bin_ip, $bin_net);
@@ -7271,7 +7291,7 @@ sub subnetcheck { #TODO: IPv6 support
 }
 
 #############################################################################
-# communication with vdr
+# Communication with vdr
 #############################################################################
 package SVDRP;
 

@@ -458,7 +458,7 @@ body.help .heading {
 	width: 100px;
 	vertical-align: top;
 }
-	
+
 .col_name,
 #content .col_title * {
 	padding-left: 3px;
@@ -472,7 +472,7 @@ body.help .heading {
 	text-align: center;
 }
 .col_active {
-	width: 90px;
+	width: 75px;
 }
 .col_channel {
 	width: 120px;
@@ -481,11 +481,11 @@ body.help .heading {
 .col_stop,
 .col_date,
 .col_time {
-	width: 76px;
+	width: 75px;
 	text-align: left;
 }
 .col_length {
-	width: 76px;
+	width: 75px;
 	text-align: right;
 }
 .col_edit,
@@ -494,6 +494,11 @@ body.help .heading {
 .col_checkbox {
 	text-align: center;
 	width: 16px;
+}
+.col_pattern {
+	padding-left: 3px;
+    padding-right: 3px;
+	min-width: 120px;
 }
 
 #heading {
