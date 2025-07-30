@@ -115,7 +115,7 @@ Source0:        https://github.com/%{fork_account}/%{name}/archive/%{fork_branch
 %if 0%{?gitcommit:1}
 Source0:        https://github.com/vdr-projects/%{name}/archive/%{gitcommit}/%{name}-%{gitshortcommit}.tar.gz
 %else
-Source0:        https://github.com/vdr-projects/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/vdr-projects/%{name}/archive/v%{version}/%{name}-v%{version}.tar.gz
 %endif
 %endif
 
@@ -290,7 +290,7 @@ fi
 
 
 %changelog
-* Wed Jul 30 2023 Peter Bieringer <pb@bieringer.de> - 3.6.14-6.1
+* Wed Jul 30 2025 Peter Bieringer <pb@bieringer.de> - 3.6.14-6.1
 - Release 3.6.14
 
 * Sun Jun 04 2023 Peter Bieringer <pb@bieringer.de> - 3.6.13-6.1
