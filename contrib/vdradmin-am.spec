@@ -290,10 +290,13 @@ fi
 
 
 %changelog
+* Wed Jul 30 2023 Peter Bieringer <pb@bieringer.de> - 3.6.14-6.1
+- Release 3.6.14
+
 * Sun Jun 04 2023 Peter Bieringer <pb@bieringer.de> - 3.6.13-6.1
 - Release 3.6.13
 
-* Wed Mar 12 2023 Peter Bieringer <pb@bieringer.de> - 3.6.12-6.1
+* Sun Mar 12 2023 Peter Bieringer <pb@bieringer.de> - 3.6.12-6.1
 - Release 3.6.12
 
 * Wed Mar 01 2023 Peter Bieringer <pb@bieringer.de> - 3.6.11-6.1
