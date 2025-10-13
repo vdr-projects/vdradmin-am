@@ -3155,7 +3155,7 @@ sub epgsearch_Param2Line {
         if ($FEATURES{EPGSEARCH_VERSION} >= 925) {
             $cmd .= ":"
                  . $q->param("unmute") . ":"
-                 . $q->param("min_match");
+                 . $q->param("min_match") . ":"
                  # TODO From what verion is the following?
                  . $q->param("content_descriptors") . ":"  #53 - HEX representation of the content descriptors, each descriptor ID is represented with 2 chars
                  . $q->param("date_compare");              #54 - Compare date when testing for a repeat? (0=no, 1=same day, 2=same week, 3=same month)
