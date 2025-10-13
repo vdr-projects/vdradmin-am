@@ -1848,19 +1848,19 @@ sub AutoTimer {
 
     # Get the timer list
     # TODO: Is this really needed? Timers will be checked in AT_ProgTimer...
-#  my $timer;
-#  foreach my $t (ParseTimer(0)){
-# TODO: What's the 2nd "%s" for?
-#    my $key = sprintf('%d:%s:%s',
-#    $t->{vdr_id},
-#    $t->{title},
-#    ""
-#    );
-#    $timer->{$key} = $t;
-#printf("Timer: %s / %s / %s\n", $key, $timer->{event_id}, $t);
-#  }
-#print("TIMER\n") if($timer);
-#/TODO
+    #  my $timer;
+    #  foreach my $t (ParseTimer(0)){
+    # TODO: What's the 2nd "%s" for?
+    #    my $key = sprintf('%d:%s:%s',
+    #    $t->{vdr_id},
+    #    $t->{title},
+    #    ""
+    #    );
+    #    $timer->{$key} = $t;
+    #printf("Timer: %s / %s / %s\n", $key, $timer->{event_id}, $t);
+    #  }
+    #print("TIMER\n") if($timer);
+    #/TODO
 
     my $date_now = time();
     for my $sender (keys(%EPG)) {
@@ -2864,6 +2864,7 @@ sub ExtractEpgSearchConf {
          $timer->{avoid_repeats},    #29 - Avoid repeats? 0/1
          $timer->{allowed_repeats},  #30 - Allowed repeats
          $timer->{comp_title},       #31 - Compare title when testing for a repeat? 0/1
+         $timer->{comp_subtitle},    #32 - Compare subtitle when testing for a repeat? 0/1
          $timer->{comp_descr},       #33 - Compare description when testing for a repeat? 0/1
          $timer->{comp_extepg_info}, #34 - Compare extended EPG info when testing for a repeat? # TODO
                                      #     This entry is a bit field of the category ids.
@@ -2872,6 +2873,7 @@ sub ExtractEpgSearchConf {
          $timer->{keep_recordings},  #37 - But keep this number of recordings anyway
          $timer->{switch_before},    #38 - Minutes before switch (if action = 2)
          $timer->{pause},            #39 - Pause if x recordings already exist
+         # TODO 0 = only global, 1 = selection, 2 = all, 3 = none
          $timer->{use_blacklists},   #40 - Blacklist usage mode (0 none, 1 selection, 2 all)
          $timer->{sel_blacklists},   #41 - Selected blacklist IDs separated with '|'
          $timer->{fuzzy_tolerance},  #42 - Fuzzy tolerance value for fuzzy searching
@@ -2885,6 +2887,9 @@ sub ExtractEpgSearchConf {
          $timer->{ignore_missing_epgcats}, #50 - IgnoreMissingEPGCats
          $timer->{unmute},                 #51 - Unmute sound if off when used as switch timer
          $timer->{min_match},              #52 - The minimum required match in percent when descriptions are compared to avoid repeats (-> 33)
+         # TODO Not implemented yet:
+         $timer->{content_descriptors},    #53 - HEX representation of the content descriptors, each descriptor ID is represented with 2 chars
+         $timer->{date_compare},           #54 - Compare date when testing for a repeat? (0=no, 1=same day, 2=same week, 3=same month)
          $timer->{unused}) = split(/:/, $line);
 
         # Format selected fields
@@ -2955,6 +2960,11 @@ sub ExtractEpgSearchConf {
         }
         if ($timer->{searchtimer_until}) {
             $timer->{searchtimer_until} = my_strftime("%Y-%m-%d", $timer->{searchtimer_until});
+        }
+
+        if ($timer->{content_descriptors}) {  #53 - HEX representation of the content descriptors, each descriptor ID is represented with 2 chars
+            $timer->{content_descriptors} =~ s/\|/:/g;
+            $timer->{content_descriptors} =~ s/\!\^pipe\^\!/\|/g;
         }
     return $timer;
 }
@@ -3057,6 +3067,13 @@ sub epgsearch_Param2Line {
         $searchtimer_until = my_mktime("0", "0", substr($searchtimer_until, 8, 2), substr($searchtimer_until, 5, 2) - 1, substr($searchtimer_until, 0, 4));
     }
 
+    #53 - HEX representation of the content descriptors, each descriptor ID is represented with 2 chars
+    my $content_descriptors = $q->param("content_descriptors");
+    if ($content_descriptors) {
+        $content_descriptors =~ s/\|/\!\^pipe\^\!/g;
+        $content_descriptors =~ s/:/\|/g;
+    }
+
     my $extepg_info;
     for ($q->param) {
         if (/extepg_([0-9]+)_data_text/) {
@@ -3096,7 +3113,8 @@ sub epgsearch_Param2Line {
                . ($q->param("use_extepg") ? "1" : "0") . ":"
                . $extepg_info . ":"
                . $q->param("fuzzy_tolerance") . ":"
-               . $q->param("ignore_missing_epgcats");
+               . $q->param("ignore_missing_epgcats") . ":"
+               . ($q->param("use_as_global_list") ? "1" : "0");
     } else { # ! $mode_blacklist
         $cmd .= $q->param("has_action") . ":"
                . ($q->param("use_days") ? "1" : "0") . ":"
@@ -3135,8 +3153,12 @@ sub epgsearch_Param2Line {
                .  ($q->param("ignore_missing_epgcats") ? "1" : "0");
 
         if ($FEATURES{EPGSEARCH_VERSION} >= 925) {
-            $cmd .= ":" . $q->param("unmute") . ":"
-                    . $q->param("min_match");
+            $cmd .= ":"
+                 . $q->param("unmute") . ":"
+                 . $q->param("min_match");
+                 # TODO From what verion is the following?
+                 . $q->param("content_descriptors") . ":"  #53 - HEX representation of the content descriptors, each descriptor ID is represented with 2 chars
+                 . $q->param("date_compare");              #54 - Compare date when testing for a repeat? (0=no, 1=same day, 2=same week, 3=same month)
         }
     }
 
@@ -3335,6 +3357,7 @@ sub ExtractEpgSearchBlacklistConf {
                                      #         (a ':' will be tranlated to "!^colon^!", e.g. in "16:9")
          $timer->{fuzzy_tolerance},  #20 - Fuzzy tolerance value for fuzzy searching
          $timer->{ignore_missing_epgcats}, #21 - IgnoreMissingEPGCats
+         $timer->{use_as_global_list},     #22 - Use as global blacklist? 0/1  # TODO
          $timer->{unused}) = split(/:/, $line);
 
         # Format selected fields
