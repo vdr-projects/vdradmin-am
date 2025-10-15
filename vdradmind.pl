@@ -213,6 +213,8 @@ $CONFIG{TM_TT_TIMELINE}  = 1;
 $CONFIG{TM_TT_LIST}      = 1;
 $CONFIG{TM_SORTBY}       = "day";
 $CONFIG{TM_DESC}         = 0;
+$CONFIG{TM_LIST_PRIORITY}= 0;	# show timer's priority in timerlist
+$CONFIG{TM_LIST_LIFETIME}= 0;	# show timer's lifetime in timerlist
 
 #
 $CONFIG{ST_FUNC}           = 1;
@@ -4717,6 +4719,8 @@ sub timer_list {
     $CONFIG{TM_DESC} = ($q->param("desc") ? 1 : 0) if (defined($q->param("desc")));
     $CONFIG{TM_SORTBY} = $q->param("sortby") if (defined($q->param("sortby")));
     $CONFIG{TM_SORTBY} = "day" if (!$CONFIG{TM_SORTBY});
+    $CONFIG{TM_SORTBY} = "day" if (($CONFIG{TM_SORTBY} eq "prio") && (! $CONFIG{TM_LIST_PRIORITY}));
+    $CONFIG{TM_SORTBY} = "day" if (($CONFIG{TM_SORTBY} eq "lft") && (! $CONFIG{TM_LIST_LIFETIME}));
 
     #
     my @timer;
@@ -4757,6 +4761,8 @@ sub timer_list {
         $timer->{sortbyname}    = 1 if ($CONFIG{TM_SORTBY} eq "name");
         $timer->{sortbystart}   = 1 if ($CONFIG{TM_SORTBY} eq "start");
         $timer->{sortbystop}    = 1 if ($CONFIG{TM_SORTBY} eq "stop");
+        $timer->{sortbyprio}    = 1 if ($CONFIG{TM_SORTBY} eq "prio");
+        $timer->{sortbylft}     = 1 if ($CONFIG{TM_SORTBY} eq "lft");
         $timer->{sortbyday}     = 1 if ($CONFIG{TM_SORTBY} eq "day");
 
         $timer->{transponder} = get_transponder_from_vdrid($timer->{vdr_id});
@@ -4941,6 +4947,18 @@ sub timer_list {
         } else {
             @timer = sort({ $a->{stop} <=> $b->{stop} } @timer);
         }
+    } elsif ($CONFIG{TM_SORTBY} eq "prio") {
+        if ($CONFIG{TM_DESC}) {
+            @timer = sort({ $b->{prio} <=> $a->{prio} } @timer);
+        } else {
+            @timer = sort({ $a->{prio} <=> $b->{prio} } @timer);
+        }
+    } elsif ($CONFIG{TM_SORTBY} eq "lft") {
+        if ($CONFIG{TM_DESC}) {
+            @timer = sort({ $b->{lft} <=> $a->{lft} } @timer);
+        } else {
+            @timer = sort({ $a->{lft} <=> $b->{lft} } @timer);
+        }
     } elsif ($CONFIG{TM_SORTBY} eq "day") {
         if ($CONFIG{TM_DESC}) {
             @timer = sort({ $b->{startsse} <=> $a->{startsse} } @timer);
@@ -4958,13 +4976,19 @@ sub timer_list {
                  sortbyactiveurl  => "$MyURL?aktion=timer_list&amp;sortby=active&amp;desc=" .  (($CONFIG{TM_SORTBY} eq "active")  ? $toggle_desc : $CONFIG{TM_DESC}),
                  sortbystarturl   => "$MyURL?aktion=timer_list&amp;sortby=start&amp;desc=" .   (($CONFIG{TM_SORTBY} eq "start")   ? $toggle_desc : $CONFIG{TM_DESC}),
                  sortbystopurl    => "$MyURL?aktion=timer_list&amp;sortby=stop&amp;desc=" .    (($CONFIG{TM_SORTBY} eq "stop")    ? $toggle_desc : $CONFIG{TM_DESC}),
+                 sortbypriourl    => "$MyURL?aktion=timer_list&amp;sortby=prio&amp;desc=" .    (($CONFIG{TM_SORTBY} eq "prio")    ? $toggle_desc : $CONFIG{TM_DESC}),
+                 sortbylfturl     => "$MyURL?aktion=timer_list&amp;sortby=lft&amp;desc=" .     (($CONFIG{TM_SORTBY} eq "lft")     ? $toggle_desc : $CONFIG{TM_DESC}),
                  sortbyday     => ($CONFIG{TM_SORTBY} eq "day")     ? 1 : 0,
                  sortbychannel => ($CONFIG{TM_SORTBY} eq "channel") ? 1 : 0,
                  sortbyname    => ($CONFIG{TM_SORTBY} eq "name")    ? 1 : 0,
                  sortbyactive  => ($CONFIG{TM_SORTBY} eq "active")  ? 1 : 0,
                  sortbystart   => ($CONFIG{TM_SORTBY} eq "start")   ? 1 : 0,
                  sortbystop    => ($CONFIG{TM_SORTBY} eq "stop")    ? 1 : 0,
+                 sortbyprio    => ($CONFIG{TM_SORTBY} eq "prio")    ? 1 : 0,
+                 sortbylft     => ($CONFIG{TM_SORTBY} eq "lft")     ? 1 : 0,
                  sortby        => $CONFIG{TM_SORTBY},
+                 showprio      => $CONFIG{TM_LIST_PRIORITY},
+                 showlft       => $CONFIG{TM_LIST_LIFETIME},
                  desc          => $CONFIG{TM_DESC} ? "desc" : "asc",
                  timer_loop    => \@timer,
                  timers        => \@timer2,

@@ -304,6 +304,32 @@
 							</a>
 						</h2>
 					</td>
+				<?% IF showprio %?>
+					<td class="col_prio <?% IF sortbyprio %?>selected<?% END %?>">
+						<h2>
+							<a href="<?% sortbypriourl %?>"><?% gettext('Priority') %?>
+								<?% IF sortbyprio %?>
+									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
+								<?% ELSE %?>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								<?% END %?>
+							</a>
+						</h2>
+					</td>
+				<?% END %?>
+				<?% IF showlft %?>
+					<td class="col_lft <?% IF sortbylft %?>selected<?% END %?>">
+						<h2>
+							<a href="<?% sortbylfturl %?>"><?% gettext('Lifetime') %?>
+								<?% IF sortbylft %?>
+									<img src="bilder/sortiert_<?% desc %?>.gif" alt="" width="9" height="11" border="0" />
+								<?% ELSE %?>
+									<img src="bilder/spacer.gif" alt="" width="9" height="11" border="0" />
+								<?% END %?>
+							</a>
+						</h2>
+					</td>
+				<?% END %?>
 					<td class="col_name <?% IF sortbyname %?>selected<?% END %?>">
 						<h2>
 							<a href="<?% sortbynameurl %?>">
@@ -396,6 +422,16 @@
 							<?% timer.stop %?>
 						</div>
 					</td>
+				<?% IF showprio %?>
+					<td class="col_prio <?% IF timer.sortbyprio %?>selected<?% END %?>">
+						<div><?% timer.prio %?></div>
+					</td>
+				<?% END %?>
+				<?% IF showlft %?>
+					<td class="col_lft <?% IF timer.sortbylft %?>selected<?% END %?>">
+						<div><?% timer.lft %?></div>
+					</td>
+				<?% END %?>
 					<td class="col_name <?% IF timer.sortbyname %?>selected<?% END %?>">
 						<div <?% IF config.TM_TT_LIST %?>onmouseover="tip('VDR-
 							<?% timer.id %?>'); return true;" onmouseout="untip(); return true;"

@@ -315,6 +315,20 @@
 					<input type="radio" name="TM_TT_LIST" value="0" id="tm_tl_list_no" <?% UNLESS config.TM_TT_LIST %?>checked="checked"<?% END %?> /><label for="tm_tl_list_no"><?% gettext('No') %?></label>
 				</td>
 			</tr>
+			<tr class="row_odd">
+				<td class="col_label"><h5><?% gettext('Show priority in timer list:') %?></h5></td>
+				<td class="col_value">
+					<input type="radio" name="TM_LIST_PRIORITY" value="1" id="tm_list_priority_yes" <?% IF config.TM_LIST_PRIORITY %?>checked="checked"<?% END %?> /><label for="tm_list_priority_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="TM_LIST_PRIORITY" value="0" id="tm_list_priority_no" <?% UNLESS config.TM_LIST_PRIORITY %?>checked="checked"<?% END %?> /><label for="tm_list_priority_no"><?% gettext('No') %?></label>
+				</td>
+			</tr>
+			<tr class="row_even">
+				<td class="col_label"><h5><?% gettext('Show lifetime in timer list:') %?></h5></td>
+				<td class="col_value">
+					<input type="radio" name="TM_LIST_LIFETIME" value="1" id="tm_list_lifetime_yes" <?% IF config.TM_LIST_LIFETIME %?>checked="checked"<?% END %?> /><label for="tm_list_lifetime_yes"><?% gettext('Yes') %?></label>
+					<input type="radio" name="TM_LIST_LIFETIME" value="0" id="tm_list_lifetime_no" <?% UNLESS config.TM_LIST_LIFETIME %?>checked="checked"<?% END %?> /><label for="tm_list_lifetime_no"><?% gettext('No') %?></label>
+				</td>
+			</tr>
 		</table>
 
 <?% IF config.ST_FUNC %?>
