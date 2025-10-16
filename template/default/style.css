@@ -479,9 +479,14 @@ body.help .heading {
 }
 .col_start,
 .col_stop,
+.col_prio,
 .col_date,
 .col_time {
 	width: 75px;
+	text-align: left;
+}
+.col_lft {
+	width: 85px;
 	text-align: left;
 }
 .col_length {
