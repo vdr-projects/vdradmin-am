@@ -27,7 +27,7 @@
 %if 0%{?release:1}
 %define rel %{release}
 %else
-%define rel 6.1
+%define rel 6.2
 %endif
 
 Name: vdradmin-am
@@ -95,6 +95,8 @@ BuildRequires:  perl(Regexp::IPv6)
 BuildRequires:  perl(File::Temp)
 BuildRequires:  gettext
 
+Provides: user(%vdradmin_user)
+Provides: group(%vdradmin_group)
 
 %if 0%{?gitcommit:1}
 %global gitshortcommit %(c=%{gitcommit}; echo ${c:0:7})
@@ -289,6 +291,9 @@ fi
 
 
 %changelog
+* Wed Nov 12 2025 Peter Bieringer <pb@bieringer.de> - 3.6.14-6.2
+- Add explicit "Provide" for generated user and group (Fedora >= 43)
+
 * Wed Jul 30 2025 Peter Bieringer <pb@bieringer.de> - 3.6.14-6.1
 - Release 3.6.14
 
