@@ -21,7 +21,7 @@
 %if 0%{?version:1}
 %define ver %{version}
 %else
-%define ver 3.6.14
+%define ver 3.6.15
 %endif
 
 %if 0%{?release:1}
@@ -291,6 +291,9 @@ fi
 
 
 %changelog
+* Wed Nov 12 2025 Peter Bieringer <pb@bieringer.de> - 3.6.15-6.2
+- Release 3.6.15
+
 * Wed Nov 12 2025 Peter Bieringer <pb@bieringer.de> - 3.6.14-6.2
 - Add explicit "Provide" for generated user and group (Fedora >= 43)
 
