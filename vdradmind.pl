@@ -40,7 +40,7 @@ use constant {
     EV_STREAM_INFO  => 10,
 };
 
-my $VERSION = "3.6.14";
+my $VERSION = "3.6.15";
 my $BASENAME;
 my $EXENAME;
 
